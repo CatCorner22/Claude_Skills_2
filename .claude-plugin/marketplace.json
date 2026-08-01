@@ -108,6 +108,12 @@
       "source": "./plugins/public-sector-treasury-skills",
       "description": "Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.",
       "category": "finance"
+    },
+    {
+      "name": "deep-research-skills",
+      "source": "./plugins/deep-research-skills",
+      "description": "True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.",
+      "category": "research"
     }
   ]
 }

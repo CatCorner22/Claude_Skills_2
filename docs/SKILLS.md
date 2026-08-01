@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **116 skills across 17 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **117 skills across 18 plugins.**
 
 ## How to trigger a skill
 
@@ -39,6 +39,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`coding-agent-skills`](#coding-agent-skills) (9) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, and authoring Agent Skills.
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
+- [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 
 ## `cash-management-skills`
 
@@ -1069,4 +1070,18 @@ Install: `/plugin install public-sector-treasury-skills@treasury-analyst-skills`
 **What it does:** Manages unclaimed property from stale outstanding checks and dormant balances through the escheatment lifecycle: identifying dormancy, statutory due-diligence letters, reissue-versus-report decisions, state holder reporting and remittance cycles, record-keeping, and reducing future escheatment at the source through payee data quality and e-payments. Use when handling stale or uncashed checks, preparing an unclaimed-property holder report, responding to a state inquiry or audit, or designing the escheatment process.
 
 **Triggers:** `unclaimed property`, `escheatment`, `stale checks`, `dormant`, `due diligence letter`, `state report unclaimed`, `outstanding check aging`, `remit to state`, `holder report`
+
+## `deep-research-skills`
+
+True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
+
+Install: `/plugin install deep-research-skills@treasury-analyst-skills`
+
+### `deep-research-skills:medical-research-detective`
+
+**Invoke:** `/deep-research-skills:medical-research-detective` — or just describe the task.
+
+**What it does:** Investigates health questions like a detective across published medical literature — long multi- database searches (PubMed, Europe PMC, Cochrane, Google Scholar), connecting dots between seemingly unrelated symptoms, drugs, labs, and exposures to surface overlooked common causes, filtering sources by country of origin, and triple-checking every citation so nothing is fabricated. Produces a graded case file: ranked hypotheses, evidence for and against, questions and tests for a clinician, red flags, and gaps. Research only — never diagnosis, dosing, or treatment advice. Use for a puzzling symptom cluster, a suspected drug or nutrient interaction, a condition that resists explanation, a second-opinion literature review, or verifying a medical claim or citation.
+
+**Triggers:** `medical research`, `research my symptoms`, `connect these symptoms`, `what could link`, `overlooked cause`, `deep dive on this condition`, `PubMed`, `Google Scholar`, `medical literature`, `drug interaction research`, `verify this study`, `check this citation`
 

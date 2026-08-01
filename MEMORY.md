@@ -49,10 +49,16 @@ Never store secrets, credentials, account numbers, or client data here.
   (user-stated for BSL_MATCHING_ENGINE, 2026-07-18)
 
 ## Project State & Decisions
-- FACT: Library state: 116 skills across 17 plugins plus plugin subagents; `validate.sh`
+- FACT: Library state: 117 skills across 18 plugins plus plugin subagents; `validate.sh`
   clean. Public-sector layer: `public-sector-treasury-skills` (8) — GASB funds, public funds
   investing, escheatment, merchant/PCI, NACHA, bond post-issuance, treasurer reporting, CTP prep.
-  (updated 2026-07-22)
+  Newest plugin: `deep-research-skills` (1) — non-work-domain research, first skill
+  `medical-research-detective`. (updated 2026-08-01)
+- PREFERENCE: The user wants research skills that go far past baseline search — explicit
+  methodology (hypothesis-before-search, cross-silo dot-connection, disconfirmation), source
+  provenance control, and mechanical citation verification. They pre-empt the "not medical advice"
+  caveat themselves and want the tool to be genuinely more valuable, not more hedged. (stated
+  2026-08-01 building medical-research-detective)
 - RULE: Every skill conforms to `coding-agent-skills:writing-agent-skills` — name == folder,
   third-person description ending in `Triggers:`, fixed section order (When to use → Do it →
   Why/learn → Common mistakes → Tailor → References), body < 500 lines, evals in
@@ -190,6 +196,16 @@ Never store secrets, credentials, account numbers, or client data here.
   last), BAI2 16/88-record + CAMT/MT940 parsing to fuel matches. Boundary vs
   fusion-cm-production-troubleshooting (design/optimize vs diagnose prod incident) and
   fusion-cash-management-module (design vs operate). Plugin 0.4.0→0.5.0.
+- 2026-08-01 — medical-research-detective (18th plugin `deep-research-skills`; library at 117).
+  First non-work-domain skill. Core: 7-stage pipeline, 8 hypothesis generators, cross-silo bridge
+  searching, disconfirmation pass, GRADE-lite grading, country-provenance quarantine tier, and a
+  citation triple-check (exists / metadata matches / actually supports the claim). Two stdlib-only
+  scripts with the network layer isolated behind a swappable fetcher so all logic is unit-tested
+  offline (30/30 and 25/25 self-tests). LESSON: the egress proxy blocks the citation APIs
+  (api.crossref.org 403; NCBI/EuropePMC/doi.org unreachable) — so live verification cannot be
+  demoed in this sandbox; scripts correctly exit 2 and refuse to report a false pass. PATTERN:
+  when the network is policy-blocked, isolate the fetch layer and test the pure logic against
+  stub payloads rather than skipping verification. Merged/retired: none.
 - 2026-07-22 — assertion-evidence-deck (user-drafted "Assertion-Evidence Deck — Complete Skill
   Reference" → data-analytics-bi-skills, sibling to dashboard-design; library at 116). Eighth
   external-spec adaptation: SKILL.md re-ordered into the house do+teach sections; Parts 2–5 became
