@@ -1,0 +1,585 @@
+#!/usr/bin/env python3
+"""Verify a medical citation against authoritative registries.
+
+Implements checks 1 (existence) and 2 (metadata accuracy) of the triple-check
+protocol in references/citation-verification.md. Check 3 (claim support) always
+requires reading the source and cannot be automated.
+
+Also reports inferred country of origin for the source-provenance policy
+(references/source-provenance.md) and flags retraction indicators.
+
+Usage:
+  verify_citation.py --doi 10.1056/NEJMoa2034577
+  verify_citation.py --pmid 33301246
+  verify_citation.py --doi 10.xxxx/yyy --claim-title "..." --claim-author "Smith" --claim-year 2020
+  verify_citation.py --doi 10.xxxx/yyy --json
+  verify_citation.py --self-test          # offline logic tests, no network
+
+Exit codes: 0 = all requested checks passed, 1 = a check failed, 2 = usage/network error.
+
+Stdlib only. Uses free, key-less public APIs: Crossref, NCBI E-utilities, Europe PMC.
+Be polite to these services: they are free and shared. Provide a contact e-mail via
+--mailto (Crossref gives faster service to identified callers) and avoid hammering
+them in tight loops.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+
+CROSSREF = "https://api.crossref.org/works/"
+EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+EUROPEPMC = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+USER_AGENT = "medical-research-detective/1.0 (citation verification; stdlib urllib)"
+TIMEOUT = 20
+
+# --- Country policy (see references/source-provenance.md) ------------------
+EXCLUDED_COUNTRIES = {"china", "russia"}
+
+# Substrings that appear in affiliation strings, mapped to a country key.
+# Matching is deliberately conservative: it flags for human confirmation rather
+# than deciding. Affiliation metadata is frequently missing or partial.
+_COUNTRY_HINTS = [
+    ("china", ["china", "chinese", "beijing", "shanghai", "guangzhou", "shenzhen",
+               "wuhan", "chengdu", "tianjin", "nanjing", "hangzhou", "p.r.c", "prc"]),
+    ("russia", ["russia", "russian", "moscow", "st. petersburg", "saint petersburg",
+                "novosibirsk", "yekaterinburg"]),
+    ("usa", ["usa", "u.s.a", "united states", "boston", "new york", "california",
+             "massachusetts", "maryland", "texas", "bethesda", "baltimore"]),
+    ("uk", ["united kingdom", "england", "scotland", "wales", "london", "oxford",
+            "cambridge, uk", "manchester", "edinburgh"]),
+    ("canada", ["canada", "toronto", "montreal", "vancouver", "ottawa"]),
+    ("germany", ["germany", "deutschland", "berlin", "munich", "münchen", "heidelberg",
+                 "hamburg", "frankfurt"]),
+    ("japan", ["japan", "tokyo", "osaka", "kyoto", "nagoya", "sapporo"]),
+    ("south africa", ["south africa", "cape town", "johannesburg", "pretoria", "durban"]),
+    ("australia", ["australia", "sydney", "melbourne", "brisbane", "perth"]),
+    ("netherlands", ["netherlands", "amsterdam", "rotterdam", "utrecht", "leiden"]),
+    ("france", ["france", "paris", "lyon", "marseille", "toulouse"]),
+    ("sweden", ["sweden", "stockholm", "gothenburg", "uppsala", "karolinska"]),
+    ("denmark", ["denmark", "copenhagen", "aarhus"]),
+    ("norway", ["norway", "oslo", "bergen"]),
+    ("finland", ["finland", "helsinki"]),
+    ("italy", ["italy", "italia", "rome", "milan", "bologna"]),
+    ("spain", ["spain", "madrid", "barcelona"]),
+    ("switzerland", ["switzerland", "zurich", "geneva", "basel", "bern"]),
+    ("israel", ["israel", "tel aviv", "jerusalem", "haifa"]),
+    ("south korea", ["south korea", "republic of korea", "seoul"]),
+    ("singapore", ["singapore"]),
+    ("ireland", ["ireland", "dublin"]),
+    ("new zealand", ["new zealand", "auckland", "wellington"]),
+    ("belgium", ["belgium", "brussels", "leuven", "ghent"]),
+    ("austria", ["austria", "vienna", "wien"]),
+    ("poland", ["poland", "warsaw", "krakow"]),
+    ("taiwan", ["taiwan", "taipei"]),
+]
+
+RETRACTION_MARKERS = [
+    "retracted", "retraction", "withdrawn",
+    "expression of concern", "editorial expression of concern",
+]
+
+
+class VerificationError(Exception):
+    pass
+
+
+# ======================================================================
+# Network layer — isolated so all logic below is testable offline.
+# ======================================================================
+def http_get_json(url: str, params: dict | None = None, mailto: str | None = None):
+    """GET a URL and parse JSON. Raises VerificationError with a plain message."""
+    if params:
+        if mailto:
+            params = dict(params, mailto=mailto)
+        url = f"{url}?{urllib.parse.urlencode(params)}"
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT,
+                                               "Accept": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            return json.loads(resp.read().decode("utf-8", "replace"))
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return None  # genuine "does not exist"
+        raise VerificationError(f"HTTP {e.code} from {urllib.parse.urlsplit(url).netloc}")
+    except urllib.error.URLError as e:
+        raise VerificationError(
+            f"network unavailable ({e.reason}) — cannot verify; "
+            f"mark citations UNVERIFIED rather than assuming they are valid")
+    except json.JSONDecodeError:
+        raise VerificationError("response was not valid JSON")
+
+
+# ======================================================================
+# Pure logic — unit-tested by --self-test
+# ======================================================================
+def normalize_title(s: str) -> str:
+    """Lowercase, strip punctuation and articles, collapse whitespace."""
+    if not s:
+        return ""
+    s = s.lower()
+    s = re.sub(r"[^a-z0-9\s]", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+
+def compact_title(s: str) -> str:
+    """All non-alphanumerics removed. Makes 'B-12'=='B12' and
+    'double-blind'=='double blind', which are pervasive in medical titles."""
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def titles_match(a: str, b: str, threshold: float = 0.85) -> bool:
+    """Token-overlap comparison, tolerant of subtitles, punctuation, and the
+    hyphenation differences common in medical titles."""
+    na, nb = normalize_title(a), normalize_title(b)
+    if not na or not nb:
+        return False
+    if na == nb or na.startswith(nb) or nb.startswith(na):
+        return True
+    # Hyphenation-insensitive comparison (B-12 vs B12, COVID-19 vs COVID19).
+    ca, cb = compact_title(a), compact_title(b)
+    if ca and cb and (ca == cb or ca.startswith(cb) or cb.startswith(ca)):
+        return True
+    ta, tb = set(na.split()), set(nb.split())
+    if not ta or not tb:
+        return False
+    overlap = len(ta & tb) / min(len(ta), len(tb))
+    return overlap >= threshold
+
+
+def surname_of(author: str) -> str:
+    """Best-effort surname from 'Smith J', 'J. Smith', or 'Smith, John A.'."""
+    if not author:
+        return ""
+    a = author.strip()
+    if "," in a:
+        return a.split(",")[0].strip().lower()
+    parts = [p for p in re.split(r"\s+", a) if p]
+    if not parts:
+        return ""
+    # 'Smith J' / 'Smith JA' -> first token is the surname when the last token
+    # is a short initial-like token; otherwise assume 'John Smith'.
+    if len(parts) > 1 and len(parts[-1]) <= 3 and parts[-1].replace(".", "").isalpha() \
+            and parts[-1].isupper():
+        return parts[0].lower()
+    return parts[-1].lower()
+
+
+def authors_match(claimed: str, actual_first_author: str) -> bool:
+    return bool(claimed) and surname_of(claimed) == surname_of(actual_first_author)
+
+
+def years_match(claimed, actual) -> bool:
+    """Allow a 1-year gap: online-first vs print issue is a real, benign case."""
+    try:
+        return abs(int(str(claimed).strip()) - int(str(actual).strip())) <= 1
+    except (TypeError, ValueError):
+        return False
+
+
+def infer_countries(affiliations) -> list[str]:
+    """Infer country keys from a list of affiliation strings."""
+    found = []
+    for aff in affiliations or []:
+        low = (aff or "").lower()
+        for country, hints in _COUNTRY_HINTS:
+            if country in found:
+                continue
+            if any(h in low for h in hints):
+                found.append(country)
+    return found
+
+
+def excluded_countries_in(countries) -> list[str]:
+    return [c for c in (countries or []) if c in EXCLUDED_COUNTRIES]
+
+
+def detect_retraction(record: dict) -> list[str]:
+    """Look for retraction/EoC signals in title and publication types."""
+    signals = []
+    haystacks = [str(record.get("title") or "")]
+    haystacks += [str(t) for t in (record.get("publication_types") or [])]
+    for h in haystacks:
+        low = h.lower()
+        for marker in RETRACTION_MARKERS:
+            if marker in low and marker not in signals:
+                signals.append(marker)
+    return signals
+
+
+# ======================================================================
+# Registry adapters — normalize each API into one record shape
+# ======================================================================
+def _record(**kw):
+    base = dict(source=None, doi=None, pmid=None, title=None, authors=[],
+                first_author=None, journal=None, year=None, publication_types=[],
+                affiliations=[], url=None)
+    base.update(kw)
+    return base
+
+
+def fetch_crossref(doi: str, mailto=None, fetch=http_get_json):
+    data = fetch(CROSSREF + urllib.parse.quote(doi), mailto=mailto)
+    if not data:
+        return None
+    m = data.get("message", {})
+    authors = []
+    affs = []
+    for a in m.get("author", []) or []:
+        name = " ".join(x for x in [a.get("family"), a.get("given")] if x)
+        if name:
+            authors.append(name)
+        for aff in a.get("affiliation", []) or []:
+            if aff.get("name"):
+                affs.append(aff["name"])
+    date = (m.get("issued", {}).get("date-parts") or [[None]])[0]
+    title = (m.get("title") or [None])[0]
+    return _record(source="crossref", doi=m.get("DOI"), title=title, authors=authors,
+                   first_author=authors[0] if authors else None,
+                   journal=(m.get("container-title") or [None])[0],
+                   year=date[0] if date else None,
+                   publication_types=[m.get("type")] if m.get("type") else [],
+                   affiliations=affs, url=m.get("URL"))
+
+
+def fetch_pubmed(pmid: str, mailto=None, fetch=http_get_json):
+    data = fetch(EUTILS, {"db": "pubmed", "id": str(pmid), "retmode": "json"})
+    if not data:
+        return None
+    result = (data.get("result") or {}).get(str(pmid))
+    if not result or "error" in result:
+        return None
+    authors = [a.get("name") for a in result.get("authors", []) if a.get("name")]
+    doi = None
+    for aid in result.get("articleids", []) or []:
+        if aid.get("idtype") == "doi":
+            doi = aid.get("value")
+    year = None
+    pubdate = result.get("pubdate") or ""
+    m = re.match(r"(\d{4})", pubdate)
+    if m:
+        year = int(m.group(1))
+    return _record(source="pubmed", pmid=str(pmid), doi=doi, title=result.get("title"),
+                   authors=authors, first_author=authors[0] if authors else None,
+                   journal=result.get("fulljournalname") or result.get("source"),
+                   year=year, publication_types=result.get("pubtype", []) or [],
+                   affiliations=[],
+                   url=f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/")
+
+
+def fetch_europepmc(query: str, mailto=None, fetch=http_get_json):
+    """Europe PMC fallback; also the best free source of affiliation strings."""
+    data = fetch(EUROPEPMC, {"query": query, "format": "json", "pageSize": "1",
+                             "resultType": "core"})
+    if not data:
+        return None
+    results = (data.get("resultList") or {}).get("result") or []
+    if not results:
+        return None
+    r = results[0]
+    affs = []
+    if r.get("affiliation"):
+        affs.append(r["affiliation"])
+    for a in ((r.get("authorList") or {}).get("author") or []):
+        for aff in (a.get("authorAffiliationDetailsList") or {}).get(
+                "authorAffiliation", []) or []:
+            if aff.get("affiliation"):
+                affs.append(aff["affiliation"])
+    authors = []
+    for a in ((r.get("authorList") or {}).get("author") or []):
+        if a.get("fullName"):
+            authors.append(a["fullName"])
+    return _record(source="europepmc", doi=r.get("doi"), pmid=r.get("pmid"),
+                   title=r.get("title"), authors=authors,
+                   first_author=authors[0] if authors else (r.get("authorString") or "").split(",")[0],
+                   journal=(r.get("journalInfo") or {}).get("journal", {}).get("title"),
+                   year=int(r["pubYear"]) if str(r.get("pubYear", "")).isdigit() else None,
+                   publication_types=r.get("pubTypeList", {}).get("pubType", []) or [],
+                   affiliations=affs)
+
+
+# ======================================================================
+# Verification orchestration
+# ======================================================================
+def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=None,
+           mailto=None, fetch=http_get_json):
+    """Run checks 1 and 2. Returns a result dict; never raises for a 'not found'."""
+    out = {
+        "query": {"doi": doi, "pmid": pmid},
+        "exists": False, "record": None, "checks": {}, "flags": [],
+        "passed": False, "errors": [],
+    }
+
+    record = None
+    try:
+        if doi:
+            record = fetch_crossref(doi, mailto=mailto, fetch=fetch)
+            if record is None:
+                record = fetch_europepmc(f"DOI:{doi}", mailto=mailto, fetch=fetch)
+        elif pmid:
+            record = fetch_pubmed(pmid, mailto=mailto, fetch=fetch)
+            if record is None:
+                record = fetch_europepmc(f"EXT_ID:{pmid}", mailto=mailto, fetch=fetch)
+    except VerificationError as e:
+        out["errors"].append(str(e))
+        return out
+
+    if record is None:
+        out["checks"]["existence"] = False
+        out["flags"].append(
+            "IDENTIFIER DOES NOT RESOLVE — treat as fabricated/incorrect and REMOVE the citation")
+        return out
+
+    # Enrich affiliations from Europe PMC when the primary source lacks them.
+    if not record["affiliations"] and (record.get("doi") or record.get("pmid")):
+        try:
+            q = f"DOI:{record['doi']}" if record.get("doi") else f"EXT_ID:{record['pmid']}"
+            extra = fetch_europepmc(q, mailto=mailto, fetch=fetch)
+            if extra and extra["affiliations"]:
+                record["affiliations"] = extra["affiliations"]
+                if not record.get("publication_types"):
+                    record["publication_types"] = extra["publication_types"]
+        except VerificationError:
+            pass  # enrichment is best-effort
+
+    out["exists"] = True
+    out["checks"]["existence"] = True
+    out["record"] = record
+
+    # --- Check 2: metadata accuracy vs. claimed values
+    if claim_title:
+        ok = titles_match(claim_title, record["title"] or "")
+        out["checks"]["title_match"] = ok
+        if not ok:
+            out["flags"].append(
+                f"TITLE MISMATCH — claimed {claim_title!r}, actual {record['title']!r}. "
+                f"Disqualifying: cite the canonical record or remove")
+    if claim_author:
+        ok = authors_match(claim_author, record["first_author"] or "")
+        out["checks"]["author_match"] = ok
+        if not ok:
+            out["flags"].append(
+                f"AUTHOR MISMATCH — claimed first author {claim_author!r}, "
+                f"actual {record['first_author']!r}. Disqualifying")
+    if claim_year:
+        ok = years_match(claim_year, record["year"])
+        out["checks"]["year_match"] = ok
+        if not ok:
+            out["flags"].append(
+                f"YEAR MISMATCH — claimed {claim_year}, actual {record['year']}")
+
+    # --- Provenance
+    countries = infer_countries(record["affiliations"])
+    record["inferred_countries"] = countries
+    excluded = excluded_countries_in(countries)
+    if excluded:
+        out["flags"].append(
+            f"EXCLUDED-COUNTRY PROVENANCE ({', '.join(excluded)}) — per the country policy this "
+            f"source cannot support a conclusion; quarantine appendix only")
+        out["checks"]["provenance_allowed"] = False
+    elif countries:
+        out["checks"]["provenance_allowed"] = True
+    else:
+        out["checks"]["provenance_allowed"] = None
+        out["flags"].append(
+            "PROVENANCE UNKNOWN — no affiliation metadata available; confirm country "
+            "from the paper itself before relying on this source")
+
+    # --- Retraction
+    signals = detect_retraction(record)
+    if signals:
+        out["checks"]["not_retracted"] = False
+        out["flags"].append(
+            f"RETRACTION INDICATOR ({', '.join(signals)}) — do not use as support; "
+            f"verify on the publisher page")
+    else:
+        out["checks"]["not_retracted"] = True
+
+    hard = [v for k, v in out["checks"].items() if v is False]
+    out["passed"] = not hard
+    out["reminder"] = ("Checks 1-2 only. Check 3 (does the source actually state your claim?) "
+                       "requires reading the text — quote the supporting sentence.")
+    return out
+
+
+def format_human(res: dict) -> str:
+    L = []
+    q = res["query"]
+    L.append(f"Citation check: {'DOI ' + q['doi'] if q['doi'] else 'PMID ' + str(q['pmid'])}")
+    L.append("=" * 68)
+    if res["errors"]:
+        for e in res["errors"]:
+            L.append(f"  ERROR: {e}")
+        return "\n".join(L)
+    if not res["exists"]:
+        L.append("  [1] Existence......... FAIL — identifier does not resolve")
+        for f in res["flags"]:
+            L.append(f"  !! {f}")
+        return "\n".join(L)
+
+    r = res["record"]
+    L.append("  [1] Existence......... PASS")
+    L.append(f"      Title   : {r['title']}")
+    L.append(f"      Authors : {', '.join(r['authors'][:4])}{' et al.' if len(r['authors']) > 4 else ''}")
+    L.append(f"      Journal : {r['journal']}  ({r['year']})")
+    L.append(f"      DOI/PMID: {r.get('doi') or '-'} / {r.get('pmid') or '-'}")
+    L.append(f"      Source  : {r['source']}")
+    for key, label in (("title_match", "Title match"), ("author_match", "Author match"),
+                       ("year_match", "Year match")):
+        if key in res["checks"]:
+            L.append(f"  [2] {label:<16} {'PASS' if res['checks'][key] else 'FAIL'}")
+    countries = r.get("inferred_countries") or []
+    L.append(f"      Country : {', '.join(countries) if countries else 'unknown (no affiliation data)'}")
+    L.append(f"  [-] Retraction check.. {'clean' if res['checks'].get('not_retracted') else 'FLAGGED'}")
+    if res["flags"]:
+        L.append("")
+        for f in res["flags"]:
+            L.append(f"  !! {f}")
+    L.append("")
+    L.append(f"  RESULT: {'PASS (checks 1-2)' if res['passed'] else 'FAIL — see flags'}")
+    L.append(f"  NOTE: {res['reminder']}")
+    return "\n".join(L)
+
+
+# ======================================================================
+# Offline self-test — proves the logic without network access
+# ======================================================================
+def self_test() -> int:
+    failures = []
+
+    def check(name, cond):
+        if not cond:
+            failures.append(name)
+
+    # Title matching
+    check("title exact", titles_match("Vitamin B12 deficiency", "Vitamin B12 deficiency"))
+    check("title punctuation", titles_match("Vitamin B-12 deficiency!", "Vitamin B12 deficiency"))
+    check("title subtitle", titles_match(
+        "Metformin and B12: a cohort study", "Metformin and B12"))
+    check("title different", not titles_match(
+        "Metformin and vitamin B12 deficiency", "Aspirin for primary prevention of stroke"))
+
+    # Author surname extraction
+    check("surname 'Polack F'", surname_of("Polack F") == "polack")
+    check("surname 'F. Polack'", surname_of("F. Polack") == "polack")
+    check("surname 'Polack, Fernando'", surname_of("Polack, Fernando") == "polack")
+    check("authors match", authors_match("Polack", "Polack FP"))
+    check("authors mismatch", not authors_match("Smith", "Polack FP"))
+
+    # Year tolerance
+    check("year exact", years_match(2020, 2020))
+    check("year online-first", years_match(2020, 2021))
+    check("year wrong", not years_match(2015, 2020))
+    check("year garbage", not years_match("n/a", 2020))
+
+    # Country inference + exclusion
+    check("infer china", "china" in infer_countries(["Dept of Cardiology, Peking Union, Beijing, China"]))
+    check("infer usa", "usa" in infer_countries(["Harvard Medical School, Boston, MA, USA"]))
+    check("infer germany", "germany" in infer_countries(["Charité, Berlin, Germany"]))
+    check("excluded detects china", excluded_countries_in(["china", "usa"]) == ["china"])
+    check("excluded detects russia", excluded_countries_in(["russia"]) == ["russia"])
+    check("excluded clean", excluded_countries_in(["usa", "japan"]) == [])
+    check("no affiliation -> empty", infer_countries([]) == [])
+
+    # Retraction detection
+    check("retraction in title", detect_retraction(
+        {"title": "RETRACTED: Ileal-lymphoid-nodular hyperplasia", "publication_types": []}))
+    check("retraction in pubtype", detect_retraction(
+        {"title": "A study", "publication_types": ["Retracted Publication"]}))
+    check("eoc detected", detect_retraction(
+        {"title": "Expression of Concern: A study", "publication_types": []}))
+    check("clean paper", not detect_retraction(
+        {"title": "A normal study", "publication_types": ["Journal Article"]}))
+
+    # End-to-end with a stubbed fetcher (no network)
+    def stub_ok(url, params=None, mailto=None):
+        return {"message": {
+            "DOI": "10.1056/TEST", "title": ["Metformin and vitamin B12 deficiency"],
+            "container-title": ["Test Journal"], "issued": {"date-parts": [[2020]]},
+            "type": "journal-article",
+            "author": [{"family": "Polack", "given": "F",
+                        "affiliation": [{"name": "Harvard Medical School, Boston, MA, USA"}]}],
+        }}
+
+    res = verify(doi="10.1056/TEST", claim_title="Metformin and vitamin B12 deficiency",
+                 claim_author="Polack", claim_year=2020, fetch=stub_ok)
+    check("e2e exists", res["exists"])
+    check("e2e passed", res["passed"])
+    check("e2e country usa", "usa" in res["record"]["inferred_countries"])
+
+    res_bad = verify(doi="10.1056/TEST", claim_title="A completely different paper title",
+                     claim_author="Nobody", fetch=stub_ok)
+    check("e2e title mismatch fails", res_bad["passed"] is False)
+    check("e2e flags mismatch", any("TITLE MISMATCH" in f for f in res_bad["flags"]))
+
+    def stub_404(url, params=None, mailto=None):
+        return None
+
+    res_404 = verify(doi="10.9999/fabricated", fetch=stub_404)
+    check("e2e nonexistent", res_404["exists"] is False)
+    check("e2e nonexistent flagged", any("DOES NOT RESOLVE" in f for f in res_404["flags"]))
+
+    def stub_excluded(url, params=None, mailto=None):
+        return {"message": {
+            "DOI": "10.1000/x", "title": ["A study"], "container-title": ["J"],
+            "issued": {"date-parts": [[2021]]}, "type": "journal-article",
+            "author": [{"family": "Wang", "given": "L",
+                        "affiliation": [{"name": "Peking University, Beijing, China"}]}]}}
+
+    res_x = verify(doi="10.1000/x", fetch=stub_excluded)
+    check("e2e excluded flagged", any("EXCLUDED-COUNTRY" in f for f in res_x["flags"]))
+    check("e2e excluded fails", res_x["passed"] is False)
+
+    def stub_net_down(url, params=None, mailto=None):
+        raise VerificationError("network unavailable (blocked) — cannot verify")
+
+    res_net = verify(doi="10.1000/x", fetch=stub_net_down)
+    check("e2e network error reported", bool(res_net["errors"]))
+    check("e2e network error not a pass", res_net["passed"] is False)
+
+    total = 30
+    print(f"self-test: {total - len(failures)}/{total} checks passed")
+    if failures:
+        for f in failures:
+            print(f"  FAILED: {f}")
+        return 1
+    print("all offline logic checks passed")
+    return 0
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(
+        description="Verify a citation's existence, metadata, provenance, and retraction status.",
+        epilog="Check 3 (does the source state your claim?) requires reading the text.")
+    ap.add_argument("--doi")
+    ap.add_argument("--pmid")
+    ap.add_argument("--claim-title", help="title as cited, to compare against canonical")
+    ap.add_argument("--claim-author", help="first author as cited")
+    ap.add_argument("--claim-year", help="year as cited")
+    ap.add_argument("--mailto", help="your e-mail; Crossref prioritizes identified callers")
+    ap.add_argument("--json", action="store_true", help="machine-readable output")
+    ap.add_argument("--self-test", action="store_true", help="run offline logic tests and exit")
+    args = ap.parse_args(argv)
+
+    if args.self_test:
+        return self_test()
+    if not args.doi and not args.pmid:
+        ap.error("provide --doi or --pmid (or --self-test)")
+
+    res = verify(doi=args.doi, pmid=args.pmid, claim_title=args.claim_title,
+                 claim_author=args.claim_author, claim_year=args.claim_year,
+                 mailto=args.mailto)
+    print(json.dumps(res, indent=2) if args.json else format_human(res))
+    if res["errors"]:
+        return 2
+    return 0 if res["passed"] else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
