@@ -1,5 +1,10 @@
 # Treasury Analyst Skills
 
+> **New in this PR:** Curve Hero dental notes benchmark + Dental Notes Standardizer app  
+> See [`Curve-Hero-Clinical-Notes-Benchmark.md`](Curve-Hero-Clinical-Notes-Benchmark.md), [`CURVE_HERO_CLINICAL_NOTES.md`](CURVE_HERO_CLINICAL_NOTES.md), and `src/` (Vite + React notes app). Run with `npm install && npm run dev`.
+
+---
+
 A growing personal library of [Claude Code Agent Skills](https://code.claude.com/docs/en/skills)
 that make Claude a sharper partner for cash management, Oracle Fusion Cloud Financials and OTBI
 reporting, accounting, banking, finance, business-intelligence analytics, practical data tooling,

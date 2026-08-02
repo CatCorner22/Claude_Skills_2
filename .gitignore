@@ -22,3 +22,9 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Node / dental notes standardizer
+node_modules
+dist
+*.local
+tsconfig.tsbuildinfo
