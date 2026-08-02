@@ -6,13 +6,12 @@ description: >-
   andon, poka-yoke, standard work) translated to code and pipelines, DMAIC/DMADV with
   begin-with-the-end-in-mind backward design, co-design with real users, and hybrid project
   management — then builds to a full-stack standard: UI vocabulary and patterns synced to a
-  reference product (Curve Hero design language included), beautiful WCAG 2.2 AA accessible
-  design, stability and redundancy engineering, and adversarial testing before release. Use
-  when building or improving software with lean/six sigma rigor, or making an app feel native
-  to Curve Hero users. Triggers: lean six sigma software, DMAIC software, Toyota production
-  system for software, Deming for software, standardize and measure, begin with the end in
-  mind, curve hero, adversarial release gauntlet, WCAG-conformant app build, stability and
-  redundancy, co-design the UI.
+  reference product such as Curve Hero, beautiful WCAG 2.2 AA accessible design, stability
+  and redundancy engineering, and adversarial testing before release. Use when building or
+  improving software with lean/six sigma rigor. Triggers: lean six sigma software, DMAIC
+  software, Toyota production system for software, Deming for software, standardize and
+  measure, begin with the end in mind, adversarial release gauntlet, WCAG-conformant app
+  build, stability and redundancy, co-design the UI.
 ---
 
 # Lean Six Sigma for software
@@ -23,12 +22,16 @@ description: >-
 - Improving an existing software process (slow releases, defect leakage, abandoned features)
   with DMAIC instead of vibes.
 - Making a product's UI feel native to users of a reference product — vocabulary, fields, and
-  patterns synced (Curve Hero support built in: `references/curve-hero-design-language.md`).
+  patterns synced; the sync-audit method and the pre-built Curve Hero map live in
+  `continuous-improvement-skills:curve-hero-design-language` (load it for that step, return
+  here for the build).
 - Installing engineering standards: accessibility, stability/redundancy, full-stack quality
   gates, adversarial test gauntlets.
 - Not for: facilitating the improvement workshop itself →
   `continuous-improvement-skills:kaizen-and-codesign`; generic DMAIC on non-software processes
-  → `continuous-improvement-skills:dmaic-problem-solving`; pure code-level minimalism →
+  → `continuous-improvement-skills:dmaic-problem-solving`; Curve Hero terminology or
+  vocabulary-only questions, or a standalone sync audit →
+  `continuous-improvement-skills:curve-hero-design-language`; pure code-level minimalism →
   `full-stack-dev-skills:lean-code-principles`; deep single-layer builds → the
   `full-stack-dev-skills` skill for that layer.
 
@@ -46,12 +49,12 @@ description: >-
    watching task completion, and keep them as the standing panel after ship. Method in
    `references/dmaic-codesign-and-pm.md` §5.
 3. **Sync the UI to the reference product.** When the software must feel native to users of an
-   existing product, run the sync audit: inventory that product's modules, screen names, field
-   labels, statuses, and phrases; build a terminology map (their term → your screen); mirror
-   interaction patterns users already know; and keep one term per concept everywhere. The
-   Curve Hero design language — patterns like the Sidekick panel, modules like the Scheduler,
-   its field and workflow vocabulary, and its cloud practice-management conventions — is
-   pre-mapped in `references/curve-hero-design-language.md` with provenance caveats.
+   existing product, run the sync audit — inventory, vocabulary harvest, terminology map,
+   pattern mirroring, live-tenant verification, standardization — and keep one term per
+   concept everywhere. The method and the pre-built Curve Hero design-language map (the
+   Sidekick panel, modules like the Scheduler, field and workflow vocabulary, provenance
+   caveats) are `continuous-improvement-skills:curve-hero-design-language`; load that skill
+   for this step.
 4. **Design beautiful, accessible, dense-but-calm UI from tokens.** Build on the design system
    in `references/accessible-ui-design-system.md`: token-driven color/type/spacing, WCAG 2.2
    AA engineered in (contrast, focus, keyboard, target size, redundant-entry elimination),
@@ -139,7 +142,6 @@ or patient data.
 ## References
 - references/deming-and-tps.md — Deming's system (SoPK, PDSA, variation, the points that matter) and the TPS→software translation table
 - references/dmaic-codesign-and-pm.md — DMAIC/DMADV for software, CTQs and delivery metrics, co-design method, hybrid PM artifacts
-- references/curve-hero-design-language.md — Curve Hero's modules, vocabulary, and patterns; the UI sync-audit method for any reference product
 - references/accessible-ui-design-system.md — tokens, WCAG 2.2 AA engineering, density, forms, components, testing checklist
 - references/full-stack-standards.md — the advanced-but-well-accepted stack as standard work, with Definition of Done
 - references/adversarial-testing.md — property-based, fuzzing, mutation, chaos, STRIDE, hostile-UX sweep, the gauntlet checklist

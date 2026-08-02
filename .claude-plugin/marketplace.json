@@ -76,7 +76,7 @@
     {
       "name": "continuous-improvement-skills",
       "source": "./plugins/continuous-improvement-skills",
-      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, and kaizen.",
+      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, and the Curve Hero design-language / UI sync-audit map.",
       "category": "operations"
     },
     {
@@ -94,7 +94,7 @@
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, and authoring Agent Skills.",
+      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, Chicken Little).",
       "category": "development"
     },
     {

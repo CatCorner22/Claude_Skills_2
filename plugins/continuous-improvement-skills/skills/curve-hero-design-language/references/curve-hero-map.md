@@ -1,46 +1,21 @@
-# Curve Hero design language (and the UI sync-audit method)
+# The Curve Hero map — platform, shell, modules, vocabulary, term map
 
-How to make software feel native to users of **Curve Hero** — Curve Dental's cloud
-practice-management platform — by mirroring its vocabulary, field labels, and interaction
-patterns. §1 gives the reusable sync-audit method for *any* reference product; §2–§7 are the
-pre-built Curve Hero map.
+The pre-built design-language map of Curve Hero, applied through the sync-audit method in
+SKILL.md.
 
 > **Provenance & verification.** Compiled 2026-08 from Curve Dental's public marketing pages,
 > support-center and Curve Community guide titles/snippets, and dental-industry press.
 > curvedental.com and its support sites block automated reads, so many terms rest on search
 > snippets rather than full pages. Everything in §7 is explicitly unverified. Before shipping
-> a synced UI, verify labels in a live Curve Hero tenant (§1 step 5) and record corrections in
-> `your-environment.md`.
+> a synced UI, verify labels in a live Curve Hero tenant (SKILL.md step 5) and record
+> corrections in `your-environment.md`.
 >
 > **Scope of "sync."** Mirror *vocabulary, field semantics, and interaction patterns* so users'
 > habits transfer. Do **not** copy branding, logos, trade dress, trademarked names (Curve®,
 > Curve SuperHero™, GRO™, SmartSync™…), or proprietary visuals into your product.
 
-Contents: §1 The sync-audit method · §2 Platform map · §3 Shell & navigation · §4 Modules ·
-§5 Field & workflow vocabulary · §6 Term map (say this, not that) · §7 Unverified — check in
-product · §8 Design lessons to carry over
-
-## §1 The UI sync-audit method (works for any reference product)
-
-1. **Inventory the surface.** Screenshot every screen your users touch in the reference
-   product; list modules, screen names, tabs, panels, buttons, and column headers verbatim
-   (capitalization included).
-2. **Harvest the vocabulary.** Build a term list from three sources: the UI itself, the
-   vendor's help guides (guide titles are label-rich), and the words users *say* at the gemba.
-   Where they conflict, users win for concepts, the UI wins for labels.
-3. **Build the terminology map.** Three columns: concept → reference product's term → your
-   product's term (usually identical). Mark conflicts with your existing vocabulary and decide
-   once — **one term per concept, everywhere** (a half-synced app is worse than an unsynced
-   one).
-4. **Mirror the patterns, not the pixels.** Identify the interaction habits users have
-   trained: where patient context lives, how scheduling works, what color codes mean, what a
-   status list looks like. Reproduce the *behavioral contract* in your own design system
-   (see `accessible-ui-design-system.md`) — and fix accessibility gaps rather than cloning them.
-5. **Verify in the live product.** Every term marked uncertain gets checked in a real tenant
-   or with a daily user; date-stamp the audit (cloud products rename things without notice).
-6. **Standardize.** The terminology map becomes part of your design system's content-style
-   layer; new screens are reviewed against it (a wrong label is a lint error, not a taste
-   issue).
+Contents: §2 Platform map · §3 Shell & navigation · §4 Modules · §5 Field & workflow
+vocabulary · §6 Term map (say this, not that) · §7 Unverified — check in product
 
 ## §2 Platform map (what's what in the Curve family)
 
@@ -214,22 +189,3 @@ Plans*.
 - No "Deposit Slip" report found for Curve (Dentrix Ascend has one) — assume payment/deposit
   reporting lives in Financial Reports / Curve Pay reconciliation until verified.
 - Whether a named bulk statement run exists (only per-statement electronic sending verified).
-
-## §8 Design lessons to carry over (patterns, in your own design system)
-
-1. **Persistent patient/entity context** — one always-visible panel carrying identity,
-   alerts, money, and to-dos, doubling as navigation. Users stop re-orienting per screen.
-2. **Status = configurable object, not enum** — Curve makes confirmation types tenant-defined
-   (name + color). Build status lists as admin-managed data.
-3. **Color-coded status + Legend** — mirror the legend pattern but add non-color redundancy
-   (icon/text) to meet WCAG 1.4.1, which color-only grids fail.
-4. **Drag-and-drop with an alternative** — Curve leans on drag-and-drop scheduling; provide
-   the keyboard/menu alternative WCAG 2.5.7 requires.
-5. **Guide-title = label discipline** — help articles named exactly after UI actions
-   ("Adding a Patient Payment"). Name your docs after your labels; it keeps both honest.
-6. **Verb-phrase permissions** — permissions named as the action they allow (*Check Out
-   Appointment*) are self-documenting; adopt the convention.
-7. **The system is an actor** — automated entries attributed by name ("Curve Hero") in
-   Created/Modified by. Give your automation a visible identity in audit trails.
-8. **Low-friction patient-facing auth** — secure tokenized link + DOB beats a password portal
-   for episodic users; pair with WCAG 3.3.8 (no cognitive tests).

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "continuous-improvement-skills",
-  "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, and Lean Six Sigma applied to software delivery.",
-  "version": "0.2.0"
+  "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, and the Curve Hero design-language / UI sync-audit map.",
+  "version": "0.3.0"
 }

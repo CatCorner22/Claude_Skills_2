@@ -6,7 +6,7 @@ data — sanitize to structure.
 
 ## Your reference product for UI sync
 - Product whose design language your software should mirror (default here: Curve Hero — see
-  `curve-hero-design-language.md`):
+  the `continuous-improvement-skills:curve-hero-design-language` skill):
 - Where you can screenshot/observe it (test tenant, sandbox, help center):
 - Terms your team uses that differ from the reference product's:
 
