@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "oracle-fusion-finance-skills",
+  "description": "Functional Oracle Fusion Cloud Financials: GL and journals, FBDI data loading, AP invoice-to-pay, AR and collections, the Cash Management module, period close, plus the fusion-treasury-architect subagent and its consult skill for configuration-specific guidance.",
+  "version": "0.5.0"
+}

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "oracle-otbi-skills",
+  "description": "Build OTBI reports and analyses in Oracle Fusion Cloud, with deep Cash Management subject-area coverage.",
+  "version": "0.1.0"
+}

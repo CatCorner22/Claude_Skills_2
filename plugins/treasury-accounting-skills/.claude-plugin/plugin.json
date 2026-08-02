@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "treasury-accounting-skills",
+  "description": "Advanced treasury and accounting operations pack: debt facilities and covenant compliance, hedging and derivatives, investment policy compliance, accruals and prepaids, intercompany accounting, and audit readiness.",
+  "version": "0.1.0"
+}

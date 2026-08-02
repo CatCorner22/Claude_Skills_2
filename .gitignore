@@ -1,5 +1,30 @@
+# Never commit raw or real environment data — only sanitized, structural examples belong in git.
+# Tailoring files that hold real client/bank/COA data use the .private/.local suffix and stay local.
+*.private.md
+*.private.*
+**/references/*.local.*
+**/references/your-environment.private.md
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python tooling (skills may bundle scripts)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / dental notes standardizer
 node_modules
 dist
-.DS_Store
 *.local
 tsconfig.tsbuildinfo

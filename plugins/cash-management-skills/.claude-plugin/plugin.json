@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "cash-management-skills",
+  "description": "Treasury cash operations: cash positioning, bank reconciliation, forecasting, liquidity, controls, and intercompany netting.",
+  "version": "0.1.0"
+}

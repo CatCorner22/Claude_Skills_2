@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "accounting-skills",
+  "description": "Double-entry accounting, journal entries, chart of accounts, month-end close, reconciliations, and financial statements.",
+  "version": "0.1.0"
+}

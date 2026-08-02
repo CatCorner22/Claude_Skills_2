@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "board-of-advisors-skills",
+  "description": "Multi-agent Board of Advisors code review swarm: five read-only specialist subagents (performance, accuracy, structure, clarity, robustness) plus a board-chair synthesizer, orchestrated by the board-review skill to produce a ranked, goal-preserving optimization report.",
+  "version": "1.0.0"
+}

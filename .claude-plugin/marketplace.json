@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "treasury-analyst-skills",
+  "owner": {
+    "name": "blakereaganlaw-droid",
+    "email": "blakereaganlaw@gmail.com"
+  },
+  "description": "A growing personal library of Claude Code Agent Skills for cash management, Oracle OTBI reporting, accounting, banking, finance, BI/analytics, machine learning, continuous improvement, and coding/agents. Every skill both does the task and teaches the reasoning.",
+  "plugins": [
+    {
+      "name": "cash-management-skills",
+      "source": "./plugins/cash-management-skills",
+      "description": "Treasury cash operations: cash positioning, bank reconciliation, forecasting, liquidity, controls, and intercompany netting.",
+      "category": "finance"
+    },
+    {
+      "name": "oracle-otbi-skills",
+      "source": "./plugins/oracle-otbi-skills",
+      "description": "Build OTBI reports and analyses in Oracle Fusion Cloud, with deep Cash Management subject-area coverage.",
+      "category": "reporting"
+    },
+    {
+      "name": "sponsored-projects-ar-skills",
+      "source": "./plugins/sponsored-projects-ar-skills",
+      "description": "Sponsored projects/awards/grants receivables analysis across Oracle Fusion Receivables + PPM: master router, PPM-to-AR domain knowledge, unbilled/billed AR reconciliation, KPIs and trend forecasts, reporting outputs, and federal compliance (Uniform Guidance, federal billing/cash management, effort reporting).",
+      "category": "finance"
+    },
+    {
+      "name": "oracle-fusion-finance-skills",
+      "source": "./plugins/oracle-fusion-finance-skills",
+      "description": "Functional Oracle Fusion Cloud Financials: GL and journals, FBDI data loading, AP invoice-to-pay, AR and collections, the Cash Management module, period close, plus the fusion-treasury-architect subagent and its consult skill for configuration-specific guidance.",
+      "category": "finance"
+    },
+    {
+      "name": "banking-skills",
+      "source": "./plugins/banking-skills",
+      "description": "Payment rails, bank account structures, statement formats, bank-fee analysis, connectivity, and KYC/AML basics.",
+      "category": "finance"
+    },
+    {
+      "name": "accounting-skills",
+      "source": "./plugins/accounting-skills",
+      "description": "Double-entry accounting, journal entries, chart of accounts, month-end close, reconciliations, and financial statements.",
+      "category": "finance"
+    },
+    {
+      "name": "finance-skills",
+      "source": "./plugins/finance-skills",
+      "description": "Corporate and treasury finance: time value of money, working capital, ratios, short-term investing, FX risk, and capital budgeting.",
+      "category": "finance"
+    },
+    {
+      "name": "treasury-accounting-skills",
+      "source": "./plugins/treasury-accounting-skills",
+      "description": "Advanced treasury and accounting operations: debt facilities and covenant compliance, hedging and derivatives, investment policy compliance, accruals and prepaids, intercompany accounting, and audit readiness.",
+      "category": "finance"
+    },
+    {
+      "name": "data-analytics-bi-skills",
+      "source": "./plugins/data-analytics-bi-skills",
+      "description": "SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.",
+      "category": "data"
+    },
+    {
+      "name": "data-tools-skills",
+      "source": "./plugins/data-tools-skills",
+      "description": "Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.",
+      "category": "data"
+    },
+    {
+      "name": "machine-learning-skills",
+      "source": "./plugins/machine-learning-skills",
+      "description": "Framing ML problems, time-series forecasting, supervised modeling, evaluation, feature engineering, and anomaly detection.",
+      "category": "data"
+    },
+    {
+      "name": "continuous-improvement-skills",
+      "source": "./plugins/continuous-improvement-skills",
+      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, and kaizen.",
+      "category": "operations"
+    },
+    {
+      "name": "board-of-advisors-skills",
+      "source": "./plugins/board-of-advisors-skills",
+      "description": "Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.",
+      "category": "development"
+    },
+    {
+      "name": "full-stack-dev-skills",
+      "source": "./plugins/full-stack-dev-skills",
+      "description": "Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, and deployment.",
+      "category": "development"
+    },
+    {
+      "name": "coding-agent-skills",
+      "source": "./plugins/coding-agent-skills",
+      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, and authoring Agent Skills.",
+      "category": "development"
+    },
+    {
+      "name": "metacognition-skills",
+      "source": "./plugins/metacognition-skills",
+      "description": "Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.",
+      "category": "development"
+    },
+    {
+      "name": "public-sector-treasury-skills",
+      "source": "./plugins/public-sector-treasury-skills",
+      "description": "Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.",
+      "category": "finance"
+    },
+    {
+      "name": "deep-research-skills",
+      "source": "./plugins/deep-research-skills",
+      "description": "True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.",
+      "category": "research"
+    }
+  ]
+}

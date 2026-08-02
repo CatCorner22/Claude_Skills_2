@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "sponsored-projects-ar-skills",
+  "description": "Sponsored projects/awards/grants receivables analysis across Oracle Fusion Receivables + PPM: a master router, PPM-to-AR domain knowledge, unbilled/billed AR reconciliation, KPIs and trend forecasts, reporting outputs, and federal compliance (Uniform Guidance, federal billing/cash management, effort reporting).",
+  "version": "1.0.0"
+}

@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FusionCash Architect</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --ink:#1a2233; --muted:#5b6b86; --line:#e2e8f2;
+    --brand:#1f3a8a; --brand2:#2563eb; --accent:#0e7490;
+    --good:#15803d; --goodbg:#dcfce7; --warn:#b45309; --warnbg:#fef3c7;
+    --bad:#b91c1c; --badbg:#fee2e2; --low:#475569; --lowbg:#eef2f7;
+    --chip11:#1d4ed8; --chip1m:#b45309; --chipmm:#b91c1c; --chiprev:#6d28d9;
+    --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0e131f; --panel:#151c2c; --ink:#e6ebf5; --muted:#9aa8c2; --line:#26304a;
+      --brand:#93b4ff; --brand2:#6ea0ff; --accent:#5eead4;
+      --good:#4ade80; --goodbg:#0f2e1c; --warn:#fbbf24; --warnbg:#3a2c07;
+      --bad:#f87171; --badbg:#3a1414; --low:#94a3b8; --lowbg:#1c2438;
+      --chip11:#93b4ff; --chip1m:#fbbf24; --chipmm:#f87171; --chiprev:#c4b5fd;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  code,kbd,pre,.mono{font-family:"SF Mono",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace}
+  header.top{background:linear-gradient(135deg,#0b1b45,#1f3a8a 60%,#2563eb);color:#fff;
+    padding:26px 22px 20px;}
+  header.top h1{margin:0;font-size:26px;letter-spacing:.2px}
+  header.top p{margin:6px 0 0;color:#c9d6f5;max-width:70ch;font-size:14px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 18px 60px}
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--bg);
+    display:flex;gap:6px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
+  nav.tabs button{border:1px solid var(--line);background:var(--panel);color:var(--muted);
+    padding:9px 14px;border-radius:9px;cursor:pointer;font-weight:600;font-size:14px}
+  nav.tabs button.active{background:var(--brand2);border-color:var(--brand2);color:#fff}
+  section.page{display:none;padding-top:22px}
+  section.page.active{display:block}
+  h2.mod{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);margin:0 0 18px;font-size:14px}
+  .grid{display:grid;gap:16px}
+  .cards4{grid-template-columns:repeat(4,1fr)}
+  .cards2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.cards4{grid-template-columns:repeat(2,1fr)}.cards2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;box-shadow:var(--shadow)}
+  .stat .n{font-size:30px;font-weight:800;color:var(--brand2)}
+  .stat.alert .n{color:var(--bad)}
+  .stat .lbl{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+  .stat .base{color:var(--muted);font-size:11px;margin-top:6px}
+  .healthwrap{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+  .ring{--pct:0;--col:var(--bad);width:132px;height:132px;border-radius:50%;flex:none;
+    background:conic-gradient(var(--col) calc(var(--pct)*1%),var(--line) 0);
+    display:grid;place-items:center}
+  .ring .inner{width:104px;height:104px;border-radius:50%;background:var(--panel);
+    display:grid;place-items:center;text-align:center}
+  .ring .score{font-size:30px;font-weight:800;line-height:1}
+  .ring .grade{font-size:13px;color:var(--muted)}
+  .comp{margin:7px 0}
+  .comp .row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px}
+  .bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:var(--brand2);border-radius:6px}
+  .finding{border-left:4px solid var(--low);background:var(--lowbg);border-radius:0 10px 10px 0;
+    padding:10px 14px;margin:10px 0}
+  .finding.high{border-color:var(--bad);background:var(--badbg)}
+  .finding.medium{border-color:var(--warn);background:var(--warnbg)}
+  .finding.low{border-color:var(--low);background:var(--lowbg)}
+  .finding .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  .finding .txt{margin-top:3px;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .scroll{overflow-x:auto}
+  .distrib .d{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:13px}
+  .distrib .d .name{width:70px;font-weight:600}
+  .distrib .d .track{flex:1;background:var(--line);border-radius:6px;height:16px;overflow:hidden}
+  .distrib .d .track > i{display:block;height:100%;background:var(--accent)}
+  .distrib .d .v{width:70px;text-align:right;color:var(--muted)}
+  .chip{display:inline-block;padding:1px 8px;border-radius:20px;font-size:12px;font-weight:700;
+    border:1px solid currentColor}
+  .chip.c11{color:var(--chip11)} .chip.c1m{color:var(--chip1m)}
+  .chip.cmm{color:var(--chipmm)} .chip.crev{color:var(--chiprev)} .chip.cq{color:var(--muted)}
+  .flow{list-style:none;margin:0;padding:0}
+  .flow li{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:11px 14px;margin:0 0 10px;display:grid;grid-template-columns:78px 1fr 200px;gap:12px;align-items:center}
+  .flow li.viol{border-color:var(--warn);box-shadow:0 0 0 1px var(--warn) inset}
+  .flow li .seq{font-weight:800;color:var(--muted)}
+  .flow li .rule{font-weight:600}
+  .flow li .tol{font-size:12.5px;color:var(--muted)}
+  .flow li .violnote{grid-column:1/-1;font-size:12.5px;color:var(--warn);margin-top:2px}
+  .flow .arrow{text-align:center;color:var(--muted);margin:-4px 0 6px;font-size:12px}
+  @media(max-width:700px){.flow li{grid-template-columns:1fr}}
+  label.fld{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+  input[type=text],textarea,select{width:100%;padding:9px 11px;border:1px solid var(--line);
+    border-radius:9px;background:var(--panel);color:var(--ink);font-size:14px}
+  textarea{min-height:80px;resize:vertical}
+  .mono textarea,textarea.mono,input.mono{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace}
+  .btn{background:var(--brand2);color:#fff;border:none;border-radius:9px;padding:10px 18px;
+    font-weight:700;cursor:pointer;font-size:14px;margin-top:12px}
+  .verdict{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:18px;
+    padding:8px 16px;border-radius:10px;margin-top:12px}
+  .verdict.t{background:var(--goodbg);color:var(--good)}
+  .verdict.f{background:var(--badbg);color:var(--bad)}
+  .verdict.e{background:var(--warnbg);color:var(--warn);font-size:14px;font-weight:600}
+  .out{background:var(--lowbg);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-top:10px}
+  .out .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .out .val{font-size:18px;font-weight:800;word-break:break-all}
+  .steps{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:12.5px}
+  .note{color:var(--muted);font-size:12.5px;margin-top:8px}
+  .callout{background:var(--lowbg);border:1px solid var(--line);border-left:4px solid var(--brand2);
+    border-radius:0 10px 10px 0;padding:11px 14px;font-size:13.5px;margin:14px 0}
+  .foot{color:var(--muted);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>FusionCash Architect</h1>
+  <p>Turns your five Oracle Fusion Cash Management configuration extracts into a health score,
+     a rule-precedence waterfall, and local simulators for Advanced Criteria SQL and bank-string
+     parse rules — so you catch problems here instead of in a failed AutoRecon job.</p>
+</header>
+<div class="wrap">
+  <nav class="tabs" id="tabs">
+    <button data-tab="dash" class="active">Dashboard</button>
+    <button data-tab="flow">Ruleset Flow</button>
+    <button data-tab="crit">Criteria Simulator</button>
+    <button data-tab="parse">Parse Sandbox</button>
+  </nav>
+
+  <!-- ================= MODULE 1: DASHBOARD ================= -->
+  <section class="page dash active" id="page-dash">
+    <h2 class="mod">Configuration health &amp; SLA / GL audit</h2>
+    <p class="sub">Counts are computed live from the uploaded extracts. The grey line on each card is
+       the earlier baseline from the design document, so you can see how the config has moved.</p>
+    <div class="grid cards4" id="statcards"></div>
+
+    <div class="grid cards2" style="margin-top:16px">
+      <div class="card">
+        <h3 style="margin:0 0 12px">Health Score <span class="note" style="margin:0">(Oracle best-practice weighting)</span></h3>
+        <div class="healthwrap">
+          <div class="ring" id="ring"><div class="inner">
+            <div><div class="score" id="scoreN">–</div><div class="grade" id="gradeN"></div></div>
+          </div></div>
+          <div style="flex:1;min-width:220px" id="components"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 12px">TCR distribution by transaction type</h3>
+        <div class="distrib" id="tcrDist"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 style="margin:0 0 6px">Findings &amp; remediations</h3>
+      <div id="findings"></div>
+    </div>
+
+    <div class="grid cards2" style="margin-top:16px">
+      <div class="card">
+        <h3 style="margin:0 0 8px">SLA &amp; GL audit</h3>
+        <p class="note" style="margin:0 0 10px">Natural-account segment (2nd segment of the GL string) used on
+           TCR Cash vs Offset lines. Cash and clearing should be distinct accounts.</p>
+        <div class="scroll"><table id="glTable"></table></div>
+        <div id="glAnoms"></div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 8px">Data mapping — bank accounts</h3>
+        <p class="note" style="margin:0 0 10px">TCRs configured per bank account (top by volume).</p>
+        <div class="scroll"><table id="baTable"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE 2: RULESET FLOW ================= -->
+  <section class="page" id="page-flow">
+    <h2 class="mod">Reconciliation ruleset flow visualizer</h2>
+    <p class="sub">Oracle shows rulesets as a flat table. Here each ruleset is a top-to-bottom waterfall in
+       execution order, so rule precedence is visible.</p>
+    <label class="fld" for="rsSelect">Ruleset</label>
+    <select id="rsSelect"></select>
+    <div class="callout"><b>Why order matters:</b> rules run in sequence and each matched bank line leaves the
+       pool. A precise <span class="chip c11">1:1</span> rule must run before a broad
+       <span class="chip c1m">1:M</span> rule, or the broad rule can consume transactions the exact rule
+       should have matched. Highlighted rows are precedence inversions to review.</div>
+    <ul class="flow" id="flow"></ul>
+  </section>
+
+  <!-- ================= MODULE 3: CRITERIA SIMULATOR ================= -->
+  <section class="page" id="page-crit">
+    <h2 class="mod">Advanced Criteria builder &amp; SQL simulator</h2>
+    <p class="sub">Write or load an Advanced Criteria expression, provide sample field values, and get a
+       True/False result — locally, without running an AutoRecon job. Comparisons are case-sensitive,
+       matching Oracle.</p>
+    <label class="fld" for="critExamples">Load a real baseline rule</label>
+    <select id="critExamples"></select>
+    <label class="fld" for="critExpr">Advanced Criteria expression</label>
+    <textarea id="critExpr" class="mono" spellcheck="false"></textarea>
+    <div id="critFields"></div>
+    <div id="critVerdict"></div>
+    <div class="note">Supported: <span class="mono">s.FIELD / t.FIELD</span> references,
+       <span class="mono">LIKE</span> / <span class="mono">NOT LIKE</span> (with <span class="mono">%</span>
+       and <span class="mono">_</span> wildcards), <span class="mono">=</span>,
+       <span class="mono">&lt;&gt;</span>, <span class="mono">IN (…)</span>, <span class="mono">AND</span>,
+       <span class="mono">OR</span>, <span class="mono">NOT</span>, <span class="mono">||</span> concatenation,
+       and parentheses.</div>
+  </section>
+
+  <!-- ================= MODULE 4: PARSE SANDBOX ================= -->
+  <section class="page" id="page-parse">
+    <h2 class="mod">Bank string parsing sandbox</h2>
+    <p class="sub">Paste a raw statement string, apply a parse rule, and see exactly what lands in
+       <span class="mono">RECON_REFERENCE</span>. Literal characters in a rule are delimiters/anchors and are
+       not copied to the target — only captured groups are.</p>
+    <label class="fld" for="parseExamples">Load a real baseline pattern</label>
+    <select id="parseExamples"></select>
+    <label class="fld" for="parseRule">Parse rule</label>
+    <input type="text" id="parseRule" class="mono" spellcheck="false">
+    <label class="fld" for="parseSrc">Source string (raw BAI2 / MT940 88-record text)</label>
+    <input type="text" id="parseSrc" class="mono" spellcheck="false">
+    <div id="parseOut"></div>
+    <div class="note">Tokens: <span class="mono">(X~)</span> capture to next delimiter/end ·
+       <span class="mono">(a-b)</span> positions a…b · <span class="mono">(N)/(NN)</span> numeric ·
+       <span class="mono">(A)</span> alpha · <span class="mono">(X)</span> any. A leading-zero ladder
+       (<span class="mono">0000000000(N)</span>, <span class="mono">000000000(NN)</span>, …) strips leading
+       zeros; sequence order decides which rule fires first.</div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+const DATA = __DATA_JSON__;
+
+/* ---------- tiny helpers ---------- */
+const $ = s => document.querySelector(s);
+const el = (t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e;};
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const chipClass = t => ({'1:1':'c11','1:M':'c1m','M:1':'c1m','M:M':'cmm','REVERSAL':'crev'}[t]||'cq');
+
+/* ---------- tabs ---------- */
+$('#tabs').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); $('#page-'+b.dataset.tab).classList.add('active');
+});
+
+/* ================= MODULE 1 ================= */
+function renderDash(){
+  const c=DATA.counts, base=DATA.baseline_pdf;
+  const cards=[
+    {n:c.tcr_rows,l:'Transaction Creation Rules',b:base.tcrs,alert:true},
+    {n:c.matching_rules,l:'Matching Rules',b:base.matching},
+    {n:c.rulesets,l:'Recon Rulesets',b:base.recon_sequences},
+    {n:c.parse_rows,l:'Bank Parse Rules',b:base.parse},
+  ];
+  $('#statcards').innerHTML='';
+  cards.forEach(x=>{
+    const card=el('div','card stat'+(x.alert?' alert':''));
+    card.innerHTML=`<div class="n">${x.n.toLocaleString()}</div><div class="lbl">${x.l}</div>
+      <div class="base">design-doc baseline: ${x.b.toLocaleString()}</div>`;
+    $('#statcards').appendChild(card);
+  });
+
+  // health ring + components
+  const h=DATA.health;
+  $('#scoreN').textContent=h.score;
+  $('#gradeN').textContent='Grade '+h.grade+' / 100';
+  const col=h.score>=80?'var(--good)':h.score>=60?'var(--warn)':'var(--bad)';
+  const ring=$('#ring'); ring.style.setProperty('--pct',h.score); ring.style.setProperty('--col',col);
+  const maxes={tcr_volume:30,tcr_type:25,sequencing:20,tolerance:15,gl_integrity:10};
+  const labels={tcr_volume:'TCR volume discipline',tcr_type:'TCR type discipline',
+    sequencing:'Rule sequencing',tolerance:'Tolerance discipline',gl_integrity:'GL mapping integrity'};
+  const comp=$('#components'); comp.innerHTML='';
+  Object.keys(maxes).forEach(k=>{
+    const v=h.components[k]??0, m=maxes[k], pct=Math.round(v/m*100);
+    const d=el('div','comp');
+    d.innerHTML=`<div class="row"><span>${labels[k]}</span><span>${v} / ${m}</span></div>
+      <div class="bar"><i style="width:${pct}%;background:${pct>=80?'var(--good)':pct>=50?'var(--warn)':'var(--bad)'}"></i></div>`;
+    comp.appendChild(d);
+  });
+
+  // findings
+  const f=$('#findings'); f.innerHTML='';
+  if(!h.findings.length) f.appendChild(el('p','note','No best-practice deviations detected.'));
+  h.findings.forEach(x=>{
+    const d=el('div','finding '+x.severity);
+    d.innerHTML=`<div class="tag">${esc(x.severity)} · ${esc(x.principle)}</div><div class="txt">${esc(x.text)}</div>`;
+    f.appendChild(d);
+  });
+
+  // tcr distribution
+  const dist=$('#tcrDist'); dist.innerHTML='';
+  const entries=Object.entries(DATA.tcr_types); const max=Math.max(1,...entries.map(e=>e[1]));
+  entries.forEach(([k,v])=>{
+    const d=el('div','d');
+    d.innerHTML=`<span class="name">${esc(k)}</span><span class="track"><i style="width:${Math.round(v/max*100)}%"></i></span><span class="v">${v.toLocaleString()}</span>`;
+    dist.appendChild(d);
+  });
+
+  // GL audit
+  const gl=DATA.gl_audit;
+  const cashE=Object.entries(gl.cash_accounts), offE=Object.entries(gl.offset_accounts);
+  let rows='<tr><th>Cash natural acct</th><th>#</th><th>Offset natural acct</th><th>#</th></tr>';
+  const n=Math.max(cashE.length,offE.length);
+  for(let i=0;i<Math.min(n,8);i++){
+    const cA=cashE[i]||['',''], oA=offE[i]||['',''];
+    rows+=`<tr><td class="mono">${esc(cA[0])}</td><td>${cA[1]||''}</td><td class="mono">${esc(oA[0])}</td><td>${oA[1]||''}</td></tr>`;
+  }
+  $('#glTable').innerHTML=rows;
+  const ga=$('#glAnoms'); ga.innerHTML='';
+  if(gl.anomalies.length){
+    ga.appendChild(el('div','note','Anomalies: '+gl.anomalies.length));
+    gl.anomalies.slice(0,5).forEach(a=>ga.appendChild(el('div','finding medium',
+      `<div class="txt">${esc(a.rule)} — ${esc(a.issue)}</div>`)));
+  } else ga.appendChild(el('p','note','No GL mapping anomalies detected.'));
+
+  // bank accounts
+  let br='<tr><th>Bank account</th><th>TCRs</th><th>Top types</th></tr>';
+  DATA.bank_accounts.slice(0,12).forEach(b=>{
+    const types=Object.entries(b.types).sort((a,c)=>c[1]-a[1]).slice(0,3)
+      .map(([t,v])=>`${esc(t)} ${v}`).join(', ');
+    br+=`<tr><td>${esc(b.name)}</td><td>${b.tcrs}</td><td class="note" style="margin:0">${types}</td></tr>`;
+  });
+  $('#baTable').innerHTML=br;
+}
+
+/* ================= MODULE 2 ================= */
+function renderFlow(){
+  const sel=$('#rsSelect'); sel.innerHTML='';
+  DATA.waterfalls.forEach((w,i)=>{
+    const o=el('option'); o.value=i;
+    o.textContent=`${w.ruleset} (${w.steps.length} steps${w.violations?', '+w.violations+' inversions':''})`;
+    sel.appendChild(o);
+  });
+  sel.onchange=()=>drawFlow(+sel.value);
+  drawFlow(0);
+}
+function drawFlow(i){
+  const w=DATA.waterfalls[i]; const ul=$('#flow'); ul.innerHTML='';
+  w.steps.forEach((s,idx)=>{
+    if(idx>0) ul.appendChild(el('div','arrow','↓'));
+    const li=el('li',s.precedence_violation?'viol':'');
+    li.innerHTML=`<div class="seq">Seq ${esc(s.sequence)}</div>
+      <div><div class="rule">${esc(s.matching_rule)}</div>
+        <span class="chip ${chipClass(s.match_type)}">${esc(s.match_type)}</span></div>
+      <div class="tol">${esc(s.tolerance_rule||'—')}</div>
+      ${s.precedence_violation?'<div class="violnote">⚠ precedence inversion: this more-precise '+esc(s.match_type)+' rule runs after a broader rule sequenced above it — review for overlap.</div>':''}`;
+    ul.appendChild(li);
+  });
+}
+
+/* ================= MODULE 3: criteria engine (mirrors simulate.py) ================= */
+const KEYWORDS=new Set(['AND','OR','NOT','LIKE','IN']);
+function tokenize(s){
+  const re=/(\s+)|('(?:[^']|'')*')|(\|\|)|(<>|!=|=)|([(),])|([A-Za-z_][A-Za-z0-9_.]*)/y;
+  const toks=[]; let i=0;
+  while(i<s.length){
+    re.lastIndex=i; const m=re.exec(s);
+    if(!m||m.index!==i) throw new Error("unexpected character '"+s[i]+"' at position "+i);
+    i=re.lastIndex;
+    if(m[1]!=null) continue;
+    if(m[2]!=null) toks.push({k:'str',v:m[2]});
+    else if(m[3]!=null) toks.push({k:'concat',v:'||'});
+    else if(m[4]!=null) toks.push({k:'op',v:m[4]});
+    else if(m[5]!=null) toks.push({k:'punct',v:m[5]});
+    else{const u=m[6].toUpperCase(); toks.push(KEYWORDS.has(u)?{k:u,v:u}:{k:'ident',v:m[6]});}
+  }
+  toks.push({k:'eof',v:''}); return toks;
+}
+function Parser(toks){this.t=toks;this.p=0;}
+Parser.prototype.peek=function(){return this.t[this.p];};
+Parser.prototype.next=function(){return this.t[this.p++];};
+Parser.prototype.parse=function(){const n=this.pOr(); if(this.peek().k!=='eof') throw new Error("unexpected trailing input near '"+this.peek().v+"'"); return n;};
+Parser.prototype.pOr=function(){let l=this.pAnd(); while(this.peek().k==='OR'){this.next(); l=['or',l,this.pAnd()];} return l;};
+Parser.prototype.pAnd=function(){let l=this.pNot(); while(this.peek().k==='AND'){this.next(); l=['and',l,this.pNot()];} return l;};
+Parser.prototype.pNot=function(){if(this.peek().k==='NOT'){this.next(); return ['not',this.pNot()];} return this.pFactor();};
+Parser.prototype.pFactor=function(){
+  const t=this.peek();
+  if(t.k==='punct'&&t.v==='('){this.next(); const n=this.pOr(); const c=this.next();
+    if(!(c.k==='punct'&&c.v===')')) throw new Error("unbalanced parenthesis: expected ')'"); return n;}
+  return this.pCmp();
+};
+Parser.prototype.pCmp=function(){
+  const l=this.pOperand(); const t=this.peek();
+  if(t.k==='LIKE'){this.next(); return ['like',l,this.pOperand(),false];}
+  if(t.k==='NOT'){this.next(); const k=this.next(); if(k.k!=='LIKE') throw new Error('expected LIKE after NOT'); return ['like',l,this.pOperand(),true];}
+  if(t.k==='op'){this.next(); return ['cmp',t.v,l,this.pOperand()];}
+  if(t.k==='IN'){this.next(); const o=this.next(); if(!(o.k==='punct'&&o.v==='(')) throw new Error("expected '(' after IN");
+    const items=[this.pOperand()]; while(this.peek().k==='punct'&&this.peek().v===','){this.next(); items.push(this.pOperand());}
+    const c=this.next(); if(!(c.k==='punct'&&c.v===')')) throw new Error('unbalanced parenthesis in IN list'); return ['in',l,items];}
+  return ['truthy',l];
+};
+Parser.prototype.pOperand=function(){const parts=[this.pAtom()]; while(this.peek().k==='concat'){this.next(); parts.push(this.pAtom());}
+  return parts.length===1?parts[0]:['concat',parts];};
+Parser.prototype.pAtom=function(){
+  const t=this.next();
+  if(t.k==='str') return ['str',unquote(t.v)];
+  if(t.k==='ident') return ['field',t.v];
+  if(t.k==='punct'&&t.v==='('){const inner=this.pOperand(); const c=this.next();
+    if(!(c.k==='punct'&&c.v===')')) throw new Error('unbalanced parenthesis in operand'); return inner;}
+  throw new Error("expected a field or string, found '"+(t.v||t.k)+"'");
+};
+function unquote(s){return s.slice(1,-1).replace(/''/g,"'");}
+function likeToRe(p){let out='^'; for(const ch of p){ if(ch==='%')out+='[\\s\\S]*'; else if(ch==='_')out+='[\\s\\S]'; else out+=ch.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); } return new RegExp(out+'$');}
+function fieldsIn(n,acc){const t=n[0];
+  if(t==='field')acc.add(n[1]);
+  else if(t==='concat')n[1].forEach(p=>fieldsIn(p,acc));
+  else if(t==='or'||t==='and'){fieldsIn(n[1],acc);fieldsIn(n[2],acc);}
+  else if(t==='not'||t==='truthy')fieldsIn(n[1],acc);
+  else if(t==='like'){fieldsIn(n[1],acc);fieldsIn(n[2],acc);}
+  else if(t==='cmp'){fieldsIn(n[2],acc);fieldsIn(n[3],acc);}
+  else if(t==='in'){fieldsIn(n[1],acc);n[2].forEach(x=>fieldsIn(x,acc));}
+}
+function evalOperand(n,vals){const t=n[0];
+  if(t==='field')return String(vals[n[1]]??'');
+  if(t==='str')return n[1];
+  if(t==='concat')return n[1].map(p=>evalOperand(p,vals)).join('');
+  throw new Error('not an operand');
+}
+function evalNode(n,vals){const t=n[0];
+  if(t==='or')return evalNode(n[1],vals)||evalNode(n[2],vals);
+  if(t==='and')return evalNode(n[1],vals)&&evalNode(n[2],vals);
+  if(t==='not')return !evalNode(n[1],vals);
+  if(t==='like'){const m=likeToRe(evalOperand(n[2],vals)).test(evalOperand(n[1],vals)); return n[3]?!m:m;}
+  if(t==='cmp'){const a=evalOperand(n[2],vals),b=evalOperand(n[3],vals); return n[1]==='='?a===b:a!==b;}
+  if(t==='in'){const a=evalOperand(n[1],vals); return n[2].some(x=>a===evalOperand(x,vals));}
+  if(t==='truthy')return !!evalOperand(n[1],vals);
+  throw new Error('cannot evaluate');
+}
+function critState(){return {vals:{}};}
+let CRIT=critState();
+function renderCritFields(){
+  const expr=$('#critExpr').value; const box=$('#critFields'); box.innerHTML='';
+  let ast;
+  try{ast=new Parser(tokenize(expr)).parse();}
+  catch(e){ $('#critVerdict').innerHTML=`<div class="verdict e">Syntax: ${esc(e.message)}</div>`; return; }
+  const acc=new Set(); fieldsIn(ast,acc); const fields=[...acc].sort();
+  fields.forEach(f=>{
+    box.appendChild(el('label','fld',esc(f)));
+    const inp=el('input'); inp.type='text'; inp.className='mono'; inp.value=CRIT.vals[f]??'';
+    inp.oninput=()=>{CRIT.vals[f]=inp.value; runCrit(ast);};
+    box.appendChild(inp);
+  });
+  runCrit(ast);
+}
+function runCrit(ast){
+  try{
+    const r=evalNode(ast,CRIT.vals);
+    $('#critVerdict').innerHTML=`<div class="verdict ${r?'t':'f'}">${r?'✓ TRUE — this rule would match':'✗ FALSE — no match'}</div>`;
+  }catch(e){ $('#critVerdict').innerHTML=`<div class="verdict e">${esc(e.message)}</div>`; }
+}
+function renderCrit(){
+  const sel=$('#critExamples'); sel.innerHTML='';
+  DATA.criteria_examples.forEach((x,i)=>{const o=el('option'); o.value=i; o.textContent=x.name||('rule '+(i+1)); sel.appendChild(o);});
+  sel.onchange=()=>{const x=DATA.criteria_examples[+sel.value]; $('#critExpr').value=x.criteria;
+    CRIT=critState(); if(x.sample) CRIT.vals=Object.assign({},x.sample); renderCritFields();};
+  $('#critExpr').oninput=()=>renderCritFields();
+  if(DATA.criteria_examples.length){const x=DATA.criteria_examples[0]; $('#critExpr').value=x.criteria;
+    if(x.sample)CRIT.vals=Object.assign({},x.sample);}
+  renderCritFields();
+}
+
+/* ================= MODULE 4: parse engine (mirrors simulate.py) ================= */
+function lexRule(rule){
+  const segs=[]; let pos=0; const re=/\(([^)]*)\)/g; let m;
+  while((m=re.exec(rule))){
+    if(m.index>pos) segs.push({kind:'lit',text:rule.slice(pos,m.index)});
+    const inner=m[1].trim();
+    if(inner==='X~') segs.push({kind:'all'});
+    else if(/^\d+-\d+$/.test(inner)){const g=inner.split('-'); segs.push({kind:'pos',a:+g[0],b:+g[1]});}
+    else if(/^[NAX]+$/.test(inner)) segs.push({kind:'class',cls:inner});
+    else segs.push({kind:'unknown',text:'('+inner+')'});
+    pos=re.lastIndex;
+  }
+  if(pos<rule.length) segs.push({kind:'lit',text:rule.slice(pos)});
+  return segs;
+}
+const CLS={N:c=>/[0-9]/.test(c),A:c=>/[A-Za-z]/.test(c),X:()=>true};
+function simulateParse(rule,src){
+  if(!rule.trim()) return {output:'',matched:false,steps:[],error:'empty parse rule'};
+  const segs=lexRule(rule);
+  const bad=segs.filter(s=>s.kind==='unknown');
+  if(bad.length) return {output:'',matched:false,steps:[],error:'unsupported parse token(s): '+bad.map(s=>s.text).join(', ')};
+  const out=[],steps=[]; let cur=0; const n=src.length;
+  for(let i=0;i<segs.length;i++){
+    const s=segs[i], nx=segs[i+1];
+    if(s.kind==='lit'){
+      if(nx&&nx.kind==='all'){
+        const f=src.indexOf(s.text,cur);
+        if(f<0) return {output:'',matched:false,steps,error:"delimiter '"+s.text+"' not found in source"};
+        cur=f+s.text.length; steps.push("anchor '"+s.text+"' → cursor at "+cur);
+      }else{
+        if(src.substr(cur,s.text.length)!==s.text)
+          return {output:'',matched:false,steps,error:"literal '"+s.text+"' does not match source at position "+(cur+1)};
+        cur+=s.text.length; steps.push("literal '"+s.text+"' consumed → cursor at "+cur);
+      }
+    }else if(s.kind==='all'){
+      let end=n;
+      if(nx&&nx.kind==='lit'){const stop=src.indexOf(nx.text,cur); if(stop>=0)end=stop;}
+      const cap=src.slice(cur,end); out.push(cap); cur=end; steps.push("(X~) captured '"+cap+"'");
+    }else if(s.kind==='pos'){
+      const cap=src.slice(s.a-1,s.b); out.push(cap); cur=Math.max(cur,s.b);
+      steps.push("("+s.a+"-"+s.b+") captured '"+cap+"'"+(s.b>n?' (truncated)':''));
+    }else if(s.kind==='class'){
+      const cnt=s.cls.length, chunk=src.substr(cur,cnt);
+      if(chunk.length<cnt) return {output:'',matched:false,steps,error:'('+s.cls+') needs '+cnt+' chars but only '+chunk.length+' remain at position '+(cur+1)};
+      for(let j=0;j<cnt;j++) if(!CLS[s.cls[j]](chunk[j]))
+        return {output:'',matched:false,steps,error:'('+s.cls+') expected '+s.cls[j]+"-class char but found '"+chunk[j]+"' at position "+(cur+1)};
+      out.push(chunk); cur+=cnt; steps.push("("+s.cls+") captured '"+chunk+"'");
+    }
+  }
+  if(!out.length) steps.push('no capture group — target would be empty');
+  return {output:out.join(''),matched:true,steps,error:null};
+}
+function runParse(){
+  const r=simulateParse($('#parseRule').value,$('#parseSrc').value); const box=$('#parseOut');
+  let h='';
+  if(r.error) h+=`<div class="verdict e">${esc(r.error)}</div>`;
+  else h+=`<div class="out"><div class="lbl">RECON_REFERENCE →</div><div class="val">${r.output?esc(r.output):'<span style="color:var(--muted)">(empty)</span>'}</div></div>`;
+  if(r.steps.length) h+='<ul class="steps">'+r.steps.map(s=>`<li>${esc(s)}</li>`).join('')+'</ul>';
+  box.innerHTML=h;
+}
+function renderParse(){
+  const sel=$('#parseExamples'); sel.innerHTML='';
+  DATA.parse_examples.forEach((x,i)=>{const o=el('option'); o.value=i; o.textContent=x.label; sel.appendChild(o);});
+  sel.onchange=()=>{const x=DATA.parse_examples[+sel.value]; $('#parseRule').value=x.rule; $('#parseSrc').value=x.sample; runParse();};
+  $('#parseRule').oninput=runParse; $('#parseSrc').oninput=runParse;
+  if(DATA.parse_examples.length){const x=DATA.parse_examples[0]; $('#parseRule').value=x.rule; $('#parseSrc').value=x.sample;}
+  runParse();
+}
+
+/* ---------- boot ---------- */
+renderDash(); renderFlow(); renderCrit(); renderParse();
+$('#foot').innerHTML='FusionCash Architect · '+esc(DATA.generated_note)+
+  ' · runs entirely in your browser — no data leaves this file.';
+</script>
+</body>
+</html>

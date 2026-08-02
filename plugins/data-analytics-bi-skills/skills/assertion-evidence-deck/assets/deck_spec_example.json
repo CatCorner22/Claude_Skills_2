@@ -1,0 +1,72 @@
+{
+  "_comment": "Worked example for build_deck.py. All numbers here are ILLUSTRATIVE, not real configuration data. Replace with figures from your source ledger. Build: python scripts/build_deck.py assets/deck_spec_example.json -o example.pptx --brand ut",
+  "font": "Calibri",
+  "brand": "ut",
+  "slides": [
+    {
+      "kind": "title",
+      "headline": "Reconciliation remediation: findings and the ask",
+      "subtitle": "Controller readout — illustrative example deck"
+    },
+    {
+      "kind": "flow",
+      "headline": "Bank lines and subledger transactions meet at matching; whatever fails to pair stays unreconciled",
+      "steps": ["Bank file", "Parse rules", "TCR / ECT", "Matching + tolerance", "Reconciled", "Unreconciled"],
+      "source": "Source: illustrative process map",
+      "notes": "Scuba: BAI2/CAMT/MT940 in; parse rules populate fields; TCRs create ECTs; matching rules plus the reconciliation rule set pair bank lines to system transactions from AR/AP."
+    },
+    {
+      "kind": "magnitude",
+      "headline": "The estate spans dozens of accounts and thousands of monthly lines",
+      "numbers": [
+        {"value": "31", "label": "bank accounts in scope"},
+        {"value": "4", "label": "active rule sets"},
+        {"value": "12k", "label": "statement lines / month"}
+      ],
+      "source": "Source: illustrative figures — replace from your exports",
+      "notes": "Scuba: state the run window and the account scope when these are real."
+    },
+    {
+      "kind": "chart",
+      "headline": "Two merchant codes absorb most transaction creation rules",
+      "chart": {
+        "type": "bar",
+        "categories": ["Code A", "Code B", "Code C", "Code D", "Other"],
+        "series": [{"name": "TCRs", "values": [42, 34, 9, 6, 5]}]
+      },
+      "source": "Source: illustrative distribution",
+      "notes": "Scuba: rule concentration strands real subledger activity as ECTs outside the normal match path."
+    },
+    {
+      "kind": "two_column",
+      "headline": "A single 30-day tolerance lets a match pass on amount and fail on date",
+      "left": {"title": "Configured now", "items": ["Date window plus or minus 15 days", "Amount tolerance disabled", "Applies to every account"]},
+      "right": {"title": "Should be", "items": ["Window sized to real settlement lag", "Amount tolerance enabled", "Scoped per rule set"]},
+      "source": "Source: illustrative tolerance comparison",
+      "notes": "Scuba: a cent-exact candidate posting 22 days later is excluded; one 14 days later passes and is flagged Date Match = N."
+    },
+    {
+      "kind": "table",
+      "headline": "Three figures remain unavailable until the results export includes rule attribution",
+      "columns": ["Figure needed", "Blocker", "What unblocks it"],
+      "rows": [
+        ["Auto-reconciliation rate", "no rule attribution in export", "add attribution column to the run"],
+        ["Per-account match rate", "single-account export only", "run across all 31 accounts"],
+        ["Review aging", "no timestamp captured", "enable review timestamps"]
+      ],
+      "emphasize_column": 0,
+      "source": "Source: open items list, illustrative",
+      "notes": "Scuba: state each gap as a claim and name the action that closes it."
+    },
+    {
+      "kind": "summary",
+      "headline": "Fixing rule concentration and tolerance will raise the auto-match rate and restore date integrity",
+      "points": [
+        "Migrate subledger-suspect TCRs into AP AutoMatch and AR Lockbox",
+        "Size the tolerance window to real settlement lag and enable amount tolerance",
+        "Ask: approve the process change and the results-export attribution"
+      ],
+      "notes": "Restate the main claim in the same words used earlier."
+    }
+  ]
+}
