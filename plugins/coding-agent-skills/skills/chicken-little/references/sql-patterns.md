@@ -1,11 +1,15 @@
 # Practical SQL patterns (Fusion Financials)
 
-Preserved from the source spec (Chicken Little v2026.2).
+Preserved from the source spec (Chicken Little v2026.2), with scoping and accuracy fixes.
+
+Contents: §1 Open AP invoices · §2 AP validation status · §3 AR aging · §4 Receipt status
+(Ghost Receipts) · §5 Unposted GL journals · §6 CoA lookup · §7 XLA headers (Orphan
+Distributions) · §8 AP holds (Invoice Black Hole)
 
 **Access caveat**: in pure SaaS Fusion Cloud, direct SQL against base tables is frequently
-restricted. Prefer OTBI subject areas, BI Publisher, REST APIs, FBDI, or data extracts /
-Autonomous Data Platform. These patterns remain invaluable for understanding the model,
-designing custom analytics, troubleshooting, and working with extracts or ADP.
+restricted. Prefer OTBI subject areas, BI Publisher, REST APIs, FBDI, or data extracts to
+Autonomous Data Warehouse (ADW) via BICC. These patterns remain invaluable for understanding
+the model, designing custom analytics, troubleshooting, and working with extracts or ADW.
 
 Always filter by `ORG_ID` / business unit and `LEDGER_ID` for multi-org correctness and
 security. Pair results with Polars or DuckDB for statistical work and control charts in the
@@ -29,6 +33,7 @@ JOIN poz_suppliers ps ON aia.vendor_id = ps.vendor_id
 JOIN hz_parties hp ON ps.party_id = hp.party_id
 WHERE aia.payment_status_flag IN ('N', 'P')
   AND aia.cancelled_date IS NULL
+  AND aia.org_id = :org_id            -- always scope multi-org tables
 ORDER BY aia.invoice_date;
 ```
 
@@ -36,13 +41,15 @@ ORDER BY aia.invoice_date;
 
 ```sql
 SELECT
+  aia.invoice_id,                   -- group on the PK: INVOICE_NUM is only unique per supplier+BU
   aia.invoice_num,
   aida.match_status_flag,           -- 'A' Validated, 'N'/NULL Never, 'T' Needs revalidation, 'S' Stopped
   COUNT(*) AS distribution_count,
   SUM(aida.amount) AS total_dist_amount
 FROM ap_invoices_all aia
 JOIN ap_invoice_distributions_all aida ON aia.invoice_id = aida.invoice_id
-GROUP BY aia.invoice_num, aida.match_status_flag
+WHERE aia.org_id = :org_id
+GROUP BY aia.invoice_id, aia.invoice_num, aida.match_status_flag
 ORDER BY aia.invoice_num;
 ```
 
@@ -66,7 +73,8 @@ SELECT
 FROM ar_payment_schedules_all apsa
 WHERE apsa.status = 'OP'
   AND apsa.class IN ('INV', 'DM', 'CB')
-ORDER BY aging_bucket, apsa.due_date;
+  AND apsa.org_id = :org_id
+ORDER BY TRUNC(SYSDATE) - apsa.due_date, apsa.due_date;  -- numeric age: 'Current' first, '90+' last
 ```
 
 ## 4. AR cash receipt status distribution (Ghost Receipts radar)
@@ -77,6 +85,8 @@ SELECT
   COUNT(*) AS receipt_count,
   SUM(amount) AS total_amount
 FROM ar_cash_receipts_all
+WHERE org_id = :org_id
+  AND receipt_date >= :from_date    -- bound the window; whole-table scans mislead and crawl
 GROUP BY status
 ORDER BY status;
 ```
@@ -102,14 +112,18 @@ ORDER BY gjh.period_name, gjh.creation_date;
 ## 6. Chart of accounts combinations lookup
 
 ```sql
+-- CONCATENATED_SEGMENTS lives on the GL_CODE_COMBINATIONS_KFV flex view,
+-- NOT on the GL_CODE_COMBINATIONS base table (a Fusion-vs-EBS difference).
+-- If the KFV is unavailable in your access path, select SEGMENT1..SEGMENTn
+-- from the base table and concatenate them yourself.
 SELECT
   code_combination_id,
-  concatenated_segments,
+  concatenated_segments,            -- KFV-only column
   segment1, segment2, segment3,     -- adjust to your CoA structure
   enabled_flag,
   summary_flag,
   chart_of_accounts_id
-FROM gl_code_combinations
+FROM gl_code_combinations_kfv
 WHERE enabled_flag = 'Y'
   AND chart_of_accounts_id = :coa_id;
 ```
@@ -121,12 +135,16 @@ SELECT
   ae_header_id,
   application_id,                   -- 200 = Payables, 222 = Receivables, 101 = GL
   accounting_date,
-  gl_transfer_status_code,
+  accounting_entry_status_code,     -- D=Draft, F=Final, I=Invalid, N=Incomplete
+  gl_transfer_status_code,          -- Y=Transferred, S=Selected, N/NT=Not transferred
   event_type_code,
   ledger_id
 FROM xla_ae_headers
 WHERE application_id = 200
+  AND ledger_id = :ledger_id
   AND accounting_date BETWEEN :start_date AND :end_date;
+-- Orphan hunt: Final-but-untransferred headers (status F, transfer <> Y) older than the
+-- close window, then compare against GL_IMPORT_REFERENCES for the missing linkage.
 ```
 
 ## 8. LSS-friendly: AP invoices still on hold (Invoice Black Hole / cycle-time analysis)
@@ -143,6 +161,7 @@ SELECT
 FROM ap_invoices_all aia
 JOIN ap_holds_all ah ON aia.invoice_id = ah.invoice_id
 WHERE ah.release_lookup_code IS NULL   -- still on hold
+  AND aia.org_id = :org_id
 ORDER BY days_open DESC;
 ```
 

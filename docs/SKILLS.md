@@ -767,7 +767,7 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **What it does:** Runs software projects as Lean Six Sigma operations — Deming's standardize-and-measure discipline (PDSA, variation, quality built in), Toyota Production System practice (jidoka, andon, poka-yoke, standard work) translated to code and pipelines, DMAIC/DMADV with begin-with-the-end-in-mind backward design, co-design with real users, and hybrid project management — then builds to a full-stack standard: UI vocabulary and patterns synced to a reference product (Curve Hero design language included), beautiful WCAG 2.2 AA accessible design, stability and redundancy engineering, and adversarial testing before release. Use when building or improving software with lean/six sigma rigor, or making an app feel native to Curve Hero users.
 
-**Triggers:** `lean six sigma software`, `DMAIC software`, `Toyota production system`, `Deming`, `PDSA`, `standardize and measure`, `begin with the end in mind`, `curve hero`, `adversarial testing`, `accessible UI`, `WCAG`, `stability redundancy`, `co-design`
+**Triggers:** `lean six sigma software`, `DMAIC software`, `Toyota production system for software`, `Deming for software`, `standardize and measure`, `begin with the end in mind`, `curve hero`, `adversarial release gauntlet`, `WCAG-conformant app build`, `stability and redundancy`, `co-design the UI`
 
 ### `continuous-improvement-skills:root-cause-analysis`
 
@@ -919,7 +919,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:chicken-little` — or just describe the task.
 
-**What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the 2026 toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name, or wants one persona that combines production code, process statistics, PM discipline, and Fusion Financials accuracy.
+**What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the modern toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name.
 
 **Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions. metadata: version: "2026.2" author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard`
 

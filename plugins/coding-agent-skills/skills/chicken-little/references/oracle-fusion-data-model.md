@@ -36,7 +36,8 @@ Contents: §1 Architecture & nomenclature · §2 CoA & GL · §3 Payables · §4
 - **Key tables**:
   - `GL_CODE_COMBINATIONS` — account combinations. PK `CODE_COMBINATION_ID`. Notable:
     `SEGMENT1`…`SEGMENTn`, `CHART_OF_ACCOUNTS_ID`, `ENABLED_FLAG`, `SUMMARY_FLAG`,
-    `CONCATENATED_SEGMENTS`, `ACCOUNT_TYPE`.
+    `ACCOUNT_TYPE`. `CONCATENATED_SEGMENTS` is **not** on this base table in Fusion — it
+    comes from the `GL_CODE_COMBINATIONS_KFV` flex view (an EBS-to-Fusion difference).
   - `GL_LEDGERS` — ledger definitions (Primary, Secondary, Reporting): currency, calendar, CoA.
   - `GL_JE_BATCHES` — journal batches; status commonly `U` (Unposted), `P` (Posted), plus
     process/error states.
@@ -60,8 +61,10 @@ Contents: §1 Architecture & nomenclature · §2 CoA & GL · §3 Payables · §4
     `INVOICE_AMOUNT`, `INVOICE_TYPE_LOOKUP_CODE` (STANDARD, CREDIT, PREPAYMENT, DEBIT…),
     `ORG_ID`, `GL_DATE`, `INVOICE_DATE`. Status/flag columns:
     - `PAYMENT_STATUS_FLAG`: `Y` fully paid · `N` unpaid · `P` partially paid.
-    - `WFAPPROVAL_STATUS` (approval workflow), `APPROVAL_STATUS`, `APPROVAL_READY_FLAG`,
-      `APPROVAL_ITERATION`.
+    - `WFAPPROVAL_STATUS` (approval workflow); `APPROVAL_STATUS` (the *validation* status —
+      APPROVED = validated, NEEDS REAPPROVAL, NEVER APPROVED — a different lifecycle from the
+      workflow state; distribution `MATCH_STATUS_FLAG` remains authoritative);
+      `APPROVAL_READY_FLAG`, `APPROVAL_ITERATION`.
     - Cancellation via `CANCELLED_DATE` and related flags.
   - `AP_INVOICE_LINES_ALL` — lines: `LINE_NUMBER`, `LINE_TYPE_LOOKUP_CODE`, amounts, PO refs.
   - `AP_INVOICE_DISTRIBUTIONS_ALL` — accounting distributions; **the reliable place to read
@@ -105,8 +108,10 @@ Contents: §1 Architecture & nomenclature · §2 CoA & GL · §3 Payables · §4
 
 ## §5 Subledger Accounting (XLA) & cross-module patterns
 
-- `XLA_AE_HEADERS` — subledger journal headers: `ACCOUNTING_ENTRY_STATUS_CODE` (Draft, Final,
-  Incomplete, Invalid…) and `GL_TRANSFER_STATUS_CODE` (Not transferred, Selected, Transferred).
+- `XLA_AE_HEADERS` — subledger journal headers. The status columns store letter codes, not the
+  display words: `ACCOUNTING_ENTRY_STATUS_CODE` `D`=Draft, `F`=Final, `I`=Invalid,
+  `N`=Incomplete; `GL_TRANSFER_STATUS_CODE` `Y`=Transferred, `S`=Selected, `N`/`NT`=Not
+  transferred (verify `N` vs `NT` in your release).
 - `XLA_AE_LINES` — accounting lines: `CODE_COMBINATION_ID`, accounted amounts/currency.
 - Linkage: subledger document → XLA transaction entity/event → AE header/lines → (optionally)
   GL import references → GL journals/balances.
@@ -129,10 +134,11 @@ Contents: §1 Architecture & nomenclature · §2 CoA & GL · §3 Payables · §4
 - Integrate PM: implementations, migrations, and remediations get phases, risks, RACI, and
   success criteria.
 - **SaaS access reality**: direct SQL to base tables is frequently restricted in pure SaaS
-  Fusion. Prefer OTBI subject areas (Payables Invoices – Transactions Real Time, Receivables –
-  Transactions Real Time, General Ledger – Journals / Account Balance Real Time…), BI Publisher,
-  REST APIs, FBDI, or extracts / Autonomous Data Platform — while keeping base-table knowledge
-  for understanding, troubleshooting, custom extensions, and reconciliation logic
+  Fusion. Prefer OTBI subject areas (exact catalog names: "Payables Invoices - Transactions
+  Real Time", "Receivables - Transactions Real Time", "General Ledger - Journals Real Time",
+  "General Ledger - Balances Real Time"), BI Publisher, REST APIs, FBDI, or BICC extracts to
+  Autonomous Data Warehouse (ADW) — while keeping base-table knowledge for understanding,
+  troubleshooting, custom extensions, and reconciliation logic
   (→ `oracle-otbi-skills:otbi-report-building`).
 - If a rare status, newer feature, or instance-specific configuration is involved: state the
   assumption, recommend verification in the current environment or official docs.

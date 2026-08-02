@@ -24,6 +24,15 @@ Expected: a non-software process improvement —
 domain support) handles it. If lean-six-sigma-for-software loads on generic DMAIC asks with no
 software delivery component, tighten the description.
 
+## 2b. Near-miss (greedy-token guard)
+> "Help me plan a co-design workshop with the front-desk team to improve our patient-intake
+> process — PDSA cycles on the paper workflow, no app involved."
+
+Expected: `continuous-improvement-skills:kaizen-and-codesign` owns facilitation of co-design
+sessions and the generic PDSA-on-a-process ask. If lean-six-sigma-for-software loads here, its
+"co-design"/"Deming"/"PDSA" trigger surface has grown too greedy — the skill's triggers are
+deliberately software-qualified ("co-design the UI", "Deming for software delivery").
+
 ## 3. Quality rubric
 A good response:
 - **Does the task:** produces the charter/end-state definition with numbers; a co-design plan

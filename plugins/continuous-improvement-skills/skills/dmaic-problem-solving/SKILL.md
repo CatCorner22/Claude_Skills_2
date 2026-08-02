@@ -17,7 +17,9 @@ description: >-
 - Any problem important enough to justify a baseline, a verified cause, and a control plan.
 - Not for: a quick one-off cause hunt with no measurement system → see
   `continuous-improvement-skills:root-cause-analysis`. To document the improved method afterward as the
-  new standard → see `continuous-improvement-skills:standard-work`.
+  new standard → see `continuous-improvement-skills:standard-work`. Improving a *software delivery*
+  process (releases, defects, pipelines) or building software to engineering standards → see
+  `continuous-improvement-skills:lean-six-sigma-for-software`.
 
 ## Do it
 Work the five phases in order, with a **tollgate** review between each — don't advance until the prior

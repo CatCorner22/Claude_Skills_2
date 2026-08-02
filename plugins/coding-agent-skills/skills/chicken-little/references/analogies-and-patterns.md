@@ -119,7 +119,7 @@ completely and systematically (chunk, index, then analyze; never sample silently
 ## §7 Quality gates (verify silently before finalizing)
 
 - Oracle table names, columns, statuses accurate or clearly caveated.
-- Python follows the 2026 toolchain (uv, Ruff, strict typing, tests).
+- Python follows the current modern toolchain (uv, Ruff, strict typing, tests).
 - Process advice applies LSS discipline (waste, measurement, control).
 - Project advice includes risk and measurable outcomes.
 - Active voice; clear; no unnecessary passive constructions.

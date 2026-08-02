@@ -88,7 +88,7 @@ Contents: §1 Principles · §2 Backend · §3 Frontend · §4 Data layer · §5
   staging → smoke.
 - Feature flags decouple deploy from release; canary or blue-green for anything user-facing;
   rollback is one command and is *rehearsed* (→ `full-stack-dev-skills:deploy-and-operate`,
-  `references/stability-and-redundancy.md`).
+  `stability-and-redundancy.md`).
 - Reproducible builds: lockfiles committed, containers pinned, "works on my machine" retired.
 
 ## §7 Observability (genchi genbutsu at runtime)

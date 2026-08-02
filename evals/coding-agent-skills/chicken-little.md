@@ -21,6 +21,15 @@ Expected: a plain coding task with no multi-domain need and no persona request �
 `full-stack-dev-skills:elite-python-engineer` (or no persona skill at all) handles it. If
 chicken-little loads on generic Python asks, the description is over-triggering.
 
+## 2b. Near-miss (vocabulary-overlap guard)
+> "Some supplier invoices are stuck in validation with holds on them — walk me through
+> releasing the holds in Oracle Fusion."
+
+Expected: a single-domain Fusion AP operations ask — no statistics, no build, no persona name —
+routed to `oracle-fusion-finance-skills:fusion-ap-invoice-to-pay`. It shares "stuck invoices"
+surface vocabulary with the positive trigger; chicken-little should load only on the persona's
+name or a genuinely multi-domain ask.
+
 ## 3. Quality rubric
 A good response:
 - **Does the task:** delivers complete, typed, runnable code on the 2026 toolchain; exact Fusion

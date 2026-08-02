@@ -10,8 +10,9 @@ description: >-
   design, stability and redundancy engineering, and adversarial testing before release. Use
   when building or improving software with lean/six sigma rigor, or making an app feel native
   to Curve Hero users. Triggers: lean six sigma software, DMAIC software, Toyota production
-  system, Deming, PDSA, standardize and measure, begin with the end in mind, curve hero,
-  adversarial testing, accessible UI, WCAG, stability redundancy, co-design.
+  system for software, Deming for software, standardize and measure, begin with the end in
+  mind, curve hero, adversarial release gauntlet, WCAG-conformant app build, stability and
+  redundancy, co-design the UI.
 ---
 
 # Lean Six Sigma for software
@@ -48,9 +49,9 @@ description: >-
    existing product, run the sync audit: inventory that product's modules, screen names, field
    labels, statuses, and phrases; build a terminology map (their term → your screen); mirror
    interaction patterns users already know; and keep one term per concept everywhere. The
-   Curve Hero design language — modules like the Sidekick and Scheduler, its field and
-   workflow vocabulary, and its cloud practice-management patterns — is pre-mapped in
-   `references/curve-hero-design-language.md` with provenance caveats.
+   Curve Hero design language — patterns like the Sidekick panel, modules like the Scheduler,
+   its field and workflow vocabulary, and its cloud practice-management conventions — is
+   pre-mapped in `references/curve-hero-design-language.md` with provenance caveats.
 4. **Design beautiful, accessible, dense-but-calm UI from tokens.** Build on the design system
    in `references/accessible-ui-design-system.md`: token-driven color/type/spacing, WCAG 2.2
    AA engineered in (contrast, focus, keyboard, target size, redundant-entry elimination),
@@ -59,8 +60,8 @@ description: >-
 5. **Build to standard work.** The full-stack standard in
    `references/full-stack-standards.md`: strict types end to end (poka-yoke), contract-first
    APIs, constraint-enforcing database, golden-path templates, 12-factor config, observability
-   wired from day one. Deviations get an ADR — that's kaizen input. Depth per layer:
-   `full-stack-dev-skills:*`.
+   wired from day one. Deviations get an ADR — that's kaizen input. Depth per layer: the
+   matching `full-stack-dev-skills` skill for that layer.
 6. **Measure the process while you build.** Instrument the value stream (lead time, deploy
    frequency, change failure rate, defect escape rate) and control-chart it; distinguish
    special-cause signals from common-cause noise before reacting (Deming's two mistakes —
@@ -73,7 +74,8 @@ description: >-
    `references/adversarial-testing.md`.
 8. **Engineer stability and redundancy to the SLO.** Timeouts, retries with jitter, idempotency
    keys, circuit breakers, queues as shock absorbers; layered redundancy from tested backups
-   up to multi-AZ as the error budget justifies — and no further (excess redundancy is muda);
+   up through zone — and, only when the SLO genuinely demands surviving a regional event,
+   region — as the error budget justifies, and no further (excess redundancy is muda);
    deploy ≠ release (flags, canaries, rehearsed rollback); degrade honestly. Patterns in
    `references/stability-and-redundancy.md`. Verify the claims with fault injection — an
    untested failover is scenery.

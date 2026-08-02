@@ -43,7 +43,7 @@ framework hunt for counterexamples and shrink them to minimal repro:
 
 - **Fuzzing** feeds massive volumes of random/mutated input to anything that parses external
   data (file importers, API payload handlers, string parsers): coverage-guided fuzzers
-  (AFL++ actively developed; libFuzzer works but is maintenance-only; Atheris for Python;
+  (AFL++/libFuzzer lineage — check maintenance status when choosing; Atheris for Python;
   Jazzer for JVM; OSS-Fuzz as the hosted pattern), or pragmatic in-process fuzzing with
   Hypothesis strategies over bytes. For HTTP APIs, **schemathesis** fuzzes directly from your
   OpenAPI contract — cheap and vicious.
@@ -81,12 +81,12 @@ The literal adversary. Minimum bar for anything networked:
   iterating IDs" (IDOR), "I replay the payment webhook", "I upload a 2 GB 'CSV'", "I inject
   `'; DROP` into the search box", "I brute-force the login".
 - Automated layers in CI: SAST (Semgrep/CodeQL-class), dependency + container audit
-  (pip-audit/npm audit/Trivy-class — and pin CI actions by digest; the 2026 trivy-action
-  compromise is the cautionary tale), secret scanning (gitleaks-class), DAST (ZAP — formerly
-  OWASP ZAP, now ZAP by Checkmarx) against staging.
-- Map to **OWASP** (Top 10 — the 2025 edition adds Software Supply Chain Failures; API Top 10;
-  LLM Top 10 if the product embeds a model; ASVS 5.0 for depth) — and test authorization *per
-  resource*, the perennial number-one real-world hole.
+  (pip-audit/npm audit/Trivy-class — and pin CI actions by digest; supply-chain compromises of
+  popular security actions themselves are the standing cautionary tale), secret scanning
+  (gitleaks-class), DAST (ZAP-class, formerly OWASP ZAP) against staging.
+- Map to the current **OWASP** editions (Top 10 — the 2025 revision added Software Supply
+  Chain Failures; API Top 10; LLM Top 10 if the product embeds a model; ASVS for depth) — and
+  test authorization *per resource*, the perennial number-one real-world hole.
 - Human red-team review for high-stakes flows (money movement, auth, PHI/PII): one session,
   attacker hat, no politeness.
 
