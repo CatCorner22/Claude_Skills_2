@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **117 skills across 18 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **119 skills across 18 plugins.**
 
 ## How to trigger a skill
 
@@ -33,10 +33,10 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`data-analytics-bi-skills`](#data-analytics-bi-skills) (8) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
 - [`data-tools-skills`](#data-tools-skills) (6) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
 - [`machine-learning-skills`](#machine-learning-skills) (6) — Framing ML problems, time-series forecasting, supervised modeling, evaluation, feature engineering, and anomaly detection.
-- [`continuous-improvement-skills`](#continuous-improvement-skills) (6) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, and kaizen.
+- [`continuous-improvement-skills`](#continuous-improvement-skills) (7) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, and kaizen.
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (10) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, and deployment.
-- [`coding-agent-skills`](#coding-agent-skills) (9) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, and authoring Agent Skills.
+- [`coding-agent-skills`](#coding-agent-skills) (10) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, and authoring Agent Skills.
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
@@ -761,6 +761,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Triggers:** `kaizen`, `kaizen event`, `co-design`, `participatory design`, `improvement workshop`, `gemba`, `facilitation`, `continuous improvement event`
 
+### `continuous-improvement-skills:lean-six-sigma-for-software`
+
+**Invoke:** `/continuous-improvement-skills:lean-six-sigma-for-software` — or just describe the task.
+
+**What it does:** Runs software projects as Lean Six Sigma operations — Deming's standardize-and-measure discipline (PDSA, variation, quality built in), Toyota Production System practice (jidoka, andon, poka-yoke, standard work) translated to code and pipelines, DMAIC/DMADV with begin-with-the-end-in-mind backward design, co-design with real users, and hybrid project management — then builds to a full-stack standard: UI vocabulary and patterns synced to a reference product (Curve Hero design language included), beautiful WCAG 2.2 AA accessible design, stability and redundancy engineering, and adversarial testing before release. Use when building or improving software with lean/six sigma rigor, or making an app feel native to Curve Hero users.
+
+**Triggers:** `lean six sigma software`, `DMAIC software`, `Toyota production system`, `Deming`, `PDSA`, `standardize and measure`, `begin with the end in mind`, `curve hero`, `adversarial testing`, `accessible UI`, `WCAG`, `stability redundancy`, `co-design`
+
 ### `continuous-improvement-skills:root-cause-analysis`
 
 **Invoke:** `/continuous-improvement-skills:root-cause-analysis` — or just describe the task.
@@ -906,6 +914,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Designs reliable autonomous and multi-step agent workflows — deciding agent vs deterministic script, decomposing a task into steps and subtasks, defining tools and their contracts, adding verification, guardrails, and checkpoints, handling failure and human-in-the-loop review, and evaluating the workflow against real cases. Use when building an agent, an automation pipeline, or a multi-step LLM workflow.
 
 **Triggers:** `agent`, `autonomous agent`, `agentic workflow`, `tool use`, `orchestration`, `multi-step`, `pipeline`, `human in the loop`, `guardrails`
+
+### `coding-agent-skills:chicken-little`
+
+**Invoke:** `/coding-agent-skills:chicken-little` — or just describe the task.
+
+**What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the 2026 toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name, or wants one persona that combines production code, process statistics, PM discipline, and Fusion Financials accuracy.
+
+**Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions. metadata: version: "2026.2" author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard`
 
 ### `coding-agent-skills:git-and-code-review`
 
