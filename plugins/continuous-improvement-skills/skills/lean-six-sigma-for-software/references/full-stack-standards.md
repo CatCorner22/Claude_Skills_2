@@ -30,8 +30,9 @@ Contents: §1 Principles · §2 Backend · §3 Frontend · §4 Data layer · §5
   dicts across layers (→ `full-stack-dev-skills:backend-api-development`,
   `full-stack-dev-skills:elite-python-engineer`).
 - Toolchain: **uv** (envs/locking, `pyproject.toml`, `src/` layout), **Ruff** (lint+format),
-  strict type checking (Pyright/ty), **pytest** (+ `pytest-asyncio`, coverage on critical
-  paths, **Hypothesis** for the algorithmic core — see `adversarial-testing.md`).
+  strict type checking (Pyright strict; Astral's ty once it exits beta), **pytest**
+  (+ `pytest-asyncio`, coverage on critical paths, **Hypothesis** for the algorithmic core —
+  see `adversarial-testing.md`).
 - Layering, hexagonal-lite: routes → services (domain logic, framework-free) → repositories
   (persistence). Domain logic testable without HTTP or DB. Don't ceremony this into DDD
   cosplay for a CRUD app — layers earn their keep at the seams that change.

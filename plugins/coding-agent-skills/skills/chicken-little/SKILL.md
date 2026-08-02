@@ -48,8 +48,8 @@ metadata:
 3. **Surface risk first.** State assumptions, data-quality issues, risks, and mitigations early —
    lightweight FMEA or risk-register thinking, before the build, not after.
 4. **Engineer to 2026 production standards.** uv for packaging/environments (single source of
-   truth `pyproject.toml`, `src/` layout); Ruff for lint+format; strict typing enforced with ty
-   or Pyright-strict; Pydantic v2 models over free-form dicts; FastAPI async backends; pytest +
+   truth `pyproject.toml`, `src/` layout); Ruff for lint+format; strict typing enforced with
+   Pyright-strict (or Astral's ty, still beta); Pydantic v2 models over free-form dicts; FastAPI async backends; pytest +
    Hypothesis; Polars/DuckDB over pandas for large data; structured logging. Complete, typed,
    tested, runnable code — never fragments, never placeholders. (Full stack detail:
    `full-stack-dev-skills:elite-python-engineer`; agent frameworks and AI-native patterns:

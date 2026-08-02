@@ -68,16 +68,20 @@ product · §8 Design lessons to carry over
   treatment). Recare text color-codes by status.
 - **More menu** — "three horizontal lines above the Sidekick"; opens Administration, Playbook
   Dashboards, and other non-patient areas.
-- **Administration** — settings area (via More menu): Scheduling drop-down ("Tags and recare
-  types", "Appointment confirmations"), Roles, charting colors, **Get My Data** (export).
+- **Administration** — settings area (via More menu), organized in domain-grouped drop-downs:
+  **User management** ("Roles and permissions"), **Patient management** ("Patient Profile
+  Settings"), **Scheduling** ("Tags and recare types", "Appointment confirmations"),
+  **Charting management** ("Charting settings"), plus **Get My Data** (self-service export).
 - **Search** — type-ahead patient search box + **Advanced Search** (filter by birth date,
   status…); opens the patient's **Profile**.
 - **Dashboards** — **SnapShot** (support-doc capitalization; the morning-huddle day view:
   Appointment Time, color-coded Appointment Status with an **Appt Status** drop-down +
-  **Legend** dialog, Recare icon with count, **Tx icon** for unscheduled treatment plans) and
-  **Playbook Dashboards** (**KPI Dental Dashboard** — AR, Collections, Production, New
-  Patients, Recare, Treatment Plan Value; **Practice Review Dashboard**; **Who's On Deck
-  Dashboard**), gated by the **Reporting** role.
+  **Legend** dialog, Recare icon with count, **Tx icon** for unscheduled treatment plans, plus
+  Benefits Advisor, Forms, Provider, and Clinic columns) and **Playbook Dashboards** (**KPI
+  Dental Dashboard** — AR, Collections, Production, New Patients, Recare, Treatment Plan
+  Value; **Practice Review Dashboard**; **Who's On Deck Dashboard**), gated by the
+  **Reporting** role. One blog names "Curve Business Intelligence" as the Playbook umbrella
+  (single-sourced — see §7).
 
 ## §4 Modules (Curve's own names)
 
@@ -112,9 +116,21 @@ folders per patient + letter composer; bulk letters via mail merge in Reports) �
 - **Invoice-based ledger**: checking out a visit finalizes an **Invoice**; payments,
   **itemized adjustments** (incl. automatic **PPO Write-off Adjustment**), predeterminations,
   and claim rows attach to invoices. Ledger can be locked/unlocked. Automated system
-  transactions show "Curve Hero" in the Created/Modified by column.
+  transactions show "Curve Hero" in the Created/Modified by column. A **More billing
+  options** menu holds secondary actions.
 - Adding a Patient Payment: **Payment amount** auto-populates with the patient balance and
-  applies **top-down** to line items with an amount owing.
+  applies **top-down** to line items with an amount owing; the **Payment from** drop-down
+  lists the responsible party and any **Custom Payers**; credits live as **Account Credit**
+  ("Payments from Account Credit"), shareable across family members under one RP.
+- **Fee guide** — the in-product term (marketing sometimes says "fee schedule"): assigned to
+  a patient or an insurance plan; treatment plans can "select a different fee guide."
+- Aging is phrased as **days owing** ("Insurance 0-30 days owing" … "over 90 days owing") and
+  split **Responsible Party vs Insurance**: **Responsible Party Aging Summary**, **Insurance
+  Aging Summary**, **Overall Aging Summary (Patient+Insurance)**; outstanding-balance hunts
+  filter the **Ins Total Owing / Patient Total Owing** report columns.
+- Financial reports: **Production Summary** (per-code production only) and **Period Summary**
+  (production + collections = Payments + Payments from Account Credit) — Curve's stand-ins
+  for a legacy "day sheet."
 - **Statement** (customizable; electronic with secure pay link), **Predetermination** (from
   Charting or the Scheduler appointment; **Advanced Claim window** for attachments; **Prior
   Authorization Number** field takes the carrier's DCN), **EOB**, **Carrier** (the insurance
@@ -126,6 +142,9 @@ folders per patient + letter composer; bulk letters via mail merge in Reports) �
 **Clinical**
 - Odontogram color semantics (defaults, customizable): **red = planned**, **blue = completed
   by the practice**, **green = completed by another practice**.
+- **Templated Notes** (clinical note templates; "Add Templated Note" via right-click on a
+  visit in the treatment plan) and one-tap **quick buttons** for clinical entry; appointment
+  tags sync with clinical quick buttons.
 - Perio: **Pocket Depth (PD)**, **Gingival Margin** (= Recession in Curve), **CAL** (auto =
   PD + GM, never manually entered), Bleeding, Calculus, Suppuration, Plaque, Mobility,
   Furcation; default PD alert −4mm/+1mm.
@@ -137,9 +156,21 @@ folders per patient + letter composer; bulk letters via mail merge in Reports) �
   for in-office completion; patients access forms via secure link + **date of birth** (not a
   password).
 
+**Documents & engagement**
+- Files and Letters: a **New** button (upper left) creates a folder, uploads a file, or
+  creates letters; rows follow strict naming ("Treatment Plan - Accepted - [YYYY-MM-DD]";
+  completed forms save as "[Form Name] - [YYYY-MM-DD] [HH:MM].pdf"); double-click opens the
+  PDF in a new tab.
+- Curve GRO campaign types: **Reminder Campaigns** (auto text/email on appointment
+  add/update), **Review Campaigns** (online-review links), **Recare Campaigns** (upcoming/
+  overdue recare); **text-to-pay** (patient replies "Pay" to a balance text).
+- Verified appointment statuses so far: *checked in, missed, cancelled* (full list
+  unverified — see §7).
+
 **Permissions read as verb phrases** (a reliable proxy for on-screen verbs): *Check Out
 Appointment, Edit Line Items on Checkout, Send Predeterminations, Manage Kiosk, Generate Get
-My Data, Manage Default Folders*.
+My Data, Manage Default Folders, Create / Edit / Reschedule Appointment, Manage Insurance
+Plans*.
 
 ## §6 Term map — say this, not that
 
@@ -156,6 +187,11 @@ My Data, Manage Default Folders*.
 | Follow-up task queue | **Smart Action List** (GRO) | Task list, worklist |
 | Pre-treatment insurance estimate | **Predetermination** | Pre-auth (except the **Prior Authorization Number** claim field) |
 | Data export | **Get My Data** | Backup, dump |
+| Daily production/collections report | **Production Summary / Period Summary** | Day sheet (Dentrix/Eaglesoft) |
+| Outstanding-balance hunt | **Ins Total Owing / Patient Total Owing** filters | Money Finder (Eaglesoft) |
+| Family account view | **Profile** + Responsible party / family members | Family file (Dentrix) |
+| Price list | **Fee guide** (in-app) | Fee schedule (only in marketing copy) |
+| Overdue AR phrasing | **days owing** buckets | Past due |
 
 ## §7 Unverified — check in a live tenant before relying on it
 
@@ -170,8 +206,14 @@ My Data, Manage Default Folders*.
   Text Input/Checkbox/Dropdown.
 - Copay/coinsurance field labels in coverage setup (deductible + plan maximum confirmed).
 - Relationship between "Curve Hero Mobile" and "Curve Mobile" doc names; Curve Go's exact
-  audience.
+  audience (registration uses a Curve Hero login + six-digit access code, suggesting staff).
 - SnapShot ("SnapShot" in docs, "Snapshot" in marketing) — prefer the doc form.
+- "Curve Business Intelligence" as the Playbook umbrella name — single blog source;
+  elsewhere it's "Business Analytics."
+- **Insights Reports** — a distinct zendesk article title; contents unverified.
+- No "Deposit Slip" report found for Curve (Dentrix Ascend has one) — assume payment/deposit
+  reporting lives in Financial Reports / Curve Pay reconciliation until verified.
+- Whether a named bulk statement run exists (only per-statement electronic sending verified).
 
 ## §8 Design lessons to carry over (patterns, in your own design system)
 
