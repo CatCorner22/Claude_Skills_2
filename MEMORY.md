@@ -49,11 +49,20 @@ Never store secrets, credentials, account numbers, or client data here.
   (user-stated for BSL_MATCHING_ENGINE, 2026-07-18)
 
 ## Project State & Decisions
-- FACT: Library state: 117 skills across 18 plugins plus plugin subagents; `validate.sh`
+- FACT: Library state: 119 skills across 18 plugins plus plugin subagents; `validate.sh`
   clean. Public-sector layer: `public-sector-treasury-skills` (8) — GASB funds, public funds
   investing, escheatment, merchant/PCI, NACHA, bond post-issuance, treasurer reporting, CTP prep.
   Newest plugin: `deep-research-skills` (1) — non-work-domain research, first skill
-  `medical-research-detective`. (updated 2026-08-01)
+  `medical-research-detective`. Newest skills: `continuous-improvement-skills:
+  lean-six-sigma-for-software` (Deming/TPS/DMAIC + Curve Hero UI sync + WCAG 2.2 AA design
+  system + adversarial testing + stability/redundancy) and `coding-agent-skills:chicken-little`
+  (multi-domain persona, loads on its name). (updated 2026-08-02)
+- FACT: Curve Hero is Curve Dental's cloud dental practice-management platform. The user wants
+  UI work synced to it as a **design/UX reference only** (their words via question: the skill
+  itself is the deliverable; no data integration). Curve-specific vocabulary differs from other
+  dental PMSs: Recare (not recall), Responsible Party/RP (not guarantor), checkout finalizes an
+  Invoice (no "walkout"), Carrier, Operatory, Sidekick, SnapShot, fee guide, "days owing"
+  aging. (researched + gap-checked 2026-08-02; provenance-marked in the skill's reference)
 - PREFERENCE: The user wants research skills that go far past baseline search — explicit
   methodology (hypothesis-before-search, cross-silo dot-connection, disconfirmation), source
   provenance control, and mechanical citation verification. They pre-empt the "not medical advice"
@@ -114,6 +123,17 @@ Never store secrets, credentials, account numbers, or client data here.
 - RULE: Never pass reference-bearing Oracle/bank exports through pandas or an Excel resave —
   float coercion turns `0006789599` into `6789599.0` and destroys join keys; the recon engines
   ban pandas entirely for this reason. (source: OG_Recon README, engine-enforced)
+- LESSON: curvedental.com, curvedental.zendesk.com, and community.curvedental.com all block
+  automated fetches (403) — research them via WebSearch snippets, provenance-mark every term,
+  and keep an explicit unverified list for live-tenant confirmation. (2026-08-02)
+- RULE: House standard bans time-anchored claims in skills ("2026 toolchain", "X is current",
+  "still beta") — phrase durably: historical facts ("the 2025 revision added…"), conditionals
+  ("once it exits beta"), or verify-current caveats. Caught by review on both new skills.
+  (2026-08-02)
+- LESSON: In Fusion, `CONCATENATED_SEGMENTS` lives on the `GL_CODE_COMBINATIONS_KFV` flex view,
+  NOT the `GL_CODE_COMBINATIONS` base table (an EBS reflex that survives in specs); XLA status
+  columns store letter codes (D/F/I/N; Y/S/N), not display words. Verify user-spec Oracle facts
+  against Fusion docs even when the spec reads authoritative. (review finding, 2026-08-02)
 - LESSON: LibreOffice/soffice is broken in this cloud sandbox — `--convert-to pdf` fails with
   "source file could not be loaded" on ANY .pptx, even a trivial one, sandbox on or off. So the
   pptx skill's "render to images and look" step can't run here. Verify generated decks structurally
@@ -142,6 +162,17 @@ Never store secrets, credentials, account numbers, or client data here.
 ---
 
 ## Crystallization log
+- 2026-08-02 — lean-six-sigma-for-software (119th skill) + chicken-little (ninth external-spec
+  adaptation). Added: 2 facts (library state; Curve Hero as design/UX reference + its
+  vocabulary), 3 lessons/rules (Curve sites block fetches → snippet research with provenance;
+  no time-anchored claims in skills; Fusion KFV/XLA-code gotchas in user specs). Method that
+  worked: research fan-out (2 vocab angles + 2 fact verifiers) → gap-critic (caught cross-PMS
+  vocabulary contamination: walkout/recall/guarantor aren't Curve terms) → author → 5-lens
+  adversarial review (caught 1 blocker: CONCATENATED_SEGMENTS not on the Fusion base table;
+  plus greedy triggers, time-anchoring, unscoped SQL). Routing hygiene: bare
+  Deming/PDSA/co-design triggers removed in favor of software-qualified forms; added a
+  Not-for hand-off from dmaic-problem-solving; both evals got a second, closer near-miss.
+  Merged/retired: none. Flagged: no contradictions.
 - 2026-07-18 — Initial pass over the full library-build session. Added: 4 core facts,
   5 preferences, 4 project rules/facts, 2 open questions, 5 lessons/avoidance rules,
   3 patterns/methods. Merged: none (first pass). Retired: none. Flagged: no contradictions.
