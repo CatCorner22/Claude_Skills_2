@@ -125,6 +125,11 @@ Never store secrets, credentials, account numbers, or client data here.
 - RULE: Never pass reference-bearing Oracle/bank exports through pandas or an Excel resave —
   float coercion turns `0006789599` into `6789599.0` and destroys join keys; the recon engines
   ban pandas entirely for this reason. (source: OG_Recon README, engine-enforced)
+- LESSON: add_repo cannot cross owners within one session (v1): a session whose sources are
+  under `blakereaganlaw-droid` cannot attach `CatCorner22/*` repos even though it is the same
+  renamed account — and the old owner name no longer resolves for repos created after the
+  rename. Working in a CatCorner22-only repo needs a session started with it as the initial
+  source. (hit 2026-08-02 attaching dental)
 - LESSON: "make X a loaded skill" requests require checking `claude plugin list` (installed
   snapshot versions) against repo plugin.json versions — installed copies are version-pinned
   snapshots under ~/.claude/plugins/cache and silently lag the repo until a version bump +
@@ -176,8 +181,10 @@ Never store secrets, credentials, account numbers, or client data here.
   owner per bare token). Plugin 0.2.0→0.3.0; marketplace.json description drift fixed for
   both plugins; installed copies refreshed to load curve-hero + chicken-little. Added: 1
   lesson (installed snapshots lag repo — check `claude plugin list`, not repo content).
-  Companion: CatCorner22/dental wired to consume the marketplace (design doc + settings).
-  Merged/retired: LSS references/curve-hero-design-language.md.
+  Companion: CatCorner22/dental wiring PREPARED but not committed — add_repo rejects
+  cross-owner adds (session tier = blakereaganlaw-droid; dental resolves only under the
+  renamed CatCorner22), so the design doc + .claude/settings.json were delivered to the user
+  as a ready-to-commit zip instead. Merged/retired: LSS references/curve-hero-design-language.md.
 - 2026-08-02 — lean-six-sigma-for-software (119th skill) + chicken-little (ninth external-spec
   adaptation). Added: 2 facts (library state; Curve Hero as design/UX reference + its
   vocabulary), 3 lessons/rules (Curve sites block fetches → snippet research with provenance;
