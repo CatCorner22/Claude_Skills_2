@@ -54,9 +54,11 @@ Never store secrets, credentials, account numbers, or client data here.
   investing, escheatment, merchant/PCI, NACHA, bond post-issuance, treasurer reporting, CTP prep.
   Newest plugin: `deep-research-skills` (1) — non-work-domain research, first skill
   `medical-research-detective`. Newest skills: `continuous-improvement-skills:
-  lean-six-sigma-for-software` (Deming/TPS/DMAIC + Curve Hero UI sync + WCAG 2.2 AA design
-  system + adversarial testing + stability/redundancy) and `coding-agent-skills:chicken-little`
-  (multi-domain persona, loads on its name). (updated 2026-08-02)
+  lean-six-sigma-for-software` (Deming/TPS/DMAIC + WCAG 2.2 AA design system + adversarial
+  testing + stability/redundancy), `coding-agent-skills:chicken-little` (multi-domain persona,
+  loads on its name), and `continuous-improvement-skills:curve-hero-design-language` (promoted
+  from LSS's reference to a standalone sibling skill — owns the bare "curve hero" trigger;
+  LSS cross-links to it and keeps only prose mention). (updated 2026-08-02)
 - FACT: Curve Hero is Curve Dental's cloud dental practice-management platform. The user wants
   UI work synced to it as a **design/UX reference only** (their words via question: the skill
   itself is the deliverable; no data integration). Curve-specific vocabulary differs from other
@@ -123,6 +125,10 @@ Never store secrets, credentials, account numbers, or client data here.
 - RULE: Never pass reference-bearing Oracle/bank exports through pandas or an Excel resave —
   float coercion turns `0006789599` into `6789599.0` and destroys join keys; the recon engines
   ban pandas entirely for this reason. (source: OG_Recon README, engine-enforced)
+- LESSON: "make X a loaded skill" requests require checking `claude plugin list` (installed
+  snapshot versions) against repo plugin.json versions — installed copies are version-pinned
+  snapshots under ~/.claude/plugins/cache and silently lag the repo until a version bump +
+  `claude plugin update`. Repo content alone proves nothing about what's loaded. (2026-08-02)
 - LESSON: curvedental.com, curvedental.zendesk.com, and community.curvedental.com all block
   automated fetches (403) — research them via WebSearch snippets, provenance-mark every term,
   and keep an explicit unverified list for live-tenant confirmation. (2026-08-02)
@@ -162,6 +168,16 @@ Never store secrets, credentials, account numbers, or client data here.
 ---
 
 ## Crystallization log
+- 2026-08-02 (2) — curve-hero-design-language (promoted LSS's reference to a standalone
+  sibling in continuous-improvement-skills; library at 120). Split: §1 sync-audit method →
+  Do-it, §2–§7 map verbatim → references/curve-hero-map.md, §8 lessons → Why/learn; single
+  source of truth — LSS copy deleted, five dangling cross-links rewritten to plugin:skill
+  form (grep-verified zero remaining). Bare "curve hero" trigger moved to the new skill (one
+  owner per bare token). Plugin 0.2.0→0.3.0; marketplace.json description drift fixed for
+  both plugins; installed copies refreshed to load curve-hero + chicken-little. Added: 1
+  lesson (installed snapshots lag repo — check `claude plugin list`, not repo content).
+  Companion: CatCorner22/dental wired to consume the marketplace (design doc + settings).
+  Merged/retired: LSS references/curve-hero-design-language.md.
 - 2026-08-02 — lean-six-sigma-for-software (119th skill) + chicken-little (ninth external-spec
   adaptation). Added: 2 facts (library state; Curve Hero as design/UX reference + its
   vocabulary), 3 lessons/rules (Curve sites block fetches → snippet research with provenance;
