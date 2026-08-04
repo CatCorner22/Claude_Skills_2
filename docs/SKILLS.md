@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **120 skills across 18 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **121 skills across 19 plugins.**
 
 ## How to trigger a skill
 
@@ -40,6 +40,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
+- [`writing-skills`](#writing-skills) (1) — Plain-language and clarity writing built on Ken Adams's drafting principles: plain-grade accessible writing at a 5th-8th grade reading level, with room for companion styles (smart brevity).
 
 ## `cash-management-skills`
 
@@ -1108,4 +1109,18 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 **What it does:** Investigates health questions like a detective across published medical literature — long multi- database searches (PubMed, Europe PMC, Cochrane, Google Scholar), connecting dots between seemingly unrelated symptoms, drugs, labs, and exposures to surface overlooked common causes, filtering sources by country of origin, and triple-checking every citation so nothing is fabricated. Produces a graded case file: ranked hypotheses, evidence for and against, questions and tests for a clinician, red flags, and gaps. Research only — never diagnosis, dosing, or treatment advice. Use for a puzzling symptom cluster, a suspected drug or nutrient interaction, a condition that resists explanation, a second-opinion literature review, or verifying a medical claim or citation.
 
 **Triggers:** `medical research`, `research my symptoms`, `connect these symptoms`, `what could link`, `overlooked cause`, `deep dive on this condition`, `PubMed`, `Google Scholar`, `medical literature`, `drug interaction research`, `verify this study`, `check this citation`
+
+## `writing-skills`
+
+Plain-language and clarity writing built on Ken Adams's drafting principles: plain-grade accessible writing at a 5th-8th grade reading level, with room for companion styles (smart brevity).
+
+Install: `/plugin install writing-skills@treasury-analyst-skills`
+
+### `writing-skills:adams-plain-grade`
+
+**Invoke:** `/writing-skills:adams-plain-grade` — or just describe the task.
+
+**What it does:** Writes and edits to Ken Adams clarity principles at a 5th-grade reading level (US Southeast), falling back to 8th grade only when precision demands it — short active sentences, everyday concrete words, one idea per sentence, technical terms explained in place, and a hard rejection of litigated "tested language," archaisms, doublets, and ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by name, or wants plain English, patient or client materials, easy-read text, or writing for low-literacy audiences.
+
+**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `5th grade reading level`, `easy to read`, `easy-read`, `patient materials`, `low literacy`, `simplest accurate version. metadata: version: "1.0.0" source: "Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04)"`
 

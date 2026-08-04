@@ -52,8 +52,11 @@ Never store secrets, credentials, account numbers, or client data here.
 - FACT: Library state: 119 skills across 18 plugins plus plugin subagents; `validate.sh`
   clean. Public-sector layer: `public-sector-treasury-skills` (8) — GASB funds, public funds
   investing, escheatment, merchant/PCI, NACHA, bond post-issuance, treasurer reporting, CTP prep.
-  Newest plugin: `deep-research-skills` (1) — non-work-domain research, first skill
-  `medical-research-detective`. Newest skills: `continuous-improvement-skills:
+  Newest plugin: `writing-skills` (1) — plain-language/clarity writing, first skill
+  `adams-plain-grade` (Ken Adams clarity at 5th-grade reading level, 8th-grade fallback,
+  rejects litigated "tested language"; designed for a companion `adams-smart-brevity` the
+  user may supply later). Prior newest: `deep-research-skills` (1) — non-work-domain
+  research, first skill `medical-research-detective`. Newest skills: `continuous-improvement-skills:
   lean-six-sigma-for-software` (Deming/TPS/DMAIC + WCAG 2.2 AA design system + adversarial
   testing + stability/redundancy), `coding-agent-skills:chicken-little` (multi-domain persona,
   loads on its name), and `continuous-improvement-skills:curve-hero-design-language` (promoted
@@ -173,6 +176,15 @@ Never store secrets, credentials, account numbers, or client data here.
 ---
 
 ## Crystallization log
+- 2026-08-04 — adams-plain-grade (19th plugin `writing-skills`; library at 121). Tenth
+  external-spec adaptation. Core preserved: the litigated-language axiom, 5th-grade target
+  with 8th-grade precision fallback (never higher), meaning-always-wins rule, Adams rules,
+  read-aloud test, self-check. Spec's grade tables/checklist → references/
+  grade-targets-and-checks.md; spec metadata kept under `metadata:`. The spec cites a
+  companion `adams-smart-brevity` not provided — per the script-wizard lesson, referenced in
+  prose only (no plugin:skill link to a nonexistent skill) and the user invited to supply it;
+  the new plugin is its ready home. User intent: manual activation — triggers kept to
+  on-name + explicit plain-language asks. Merged/retired: none.
 - 2026-08-02 (2) — curve-hero-design-language (promoted LSS's reference to a standalone
   sibling in continuous-improvement-skills; library at 120). Split: §1 sync-audit method →
   Do-it, §2–§7 map verbatim → references/curve-hero-map.md, §8 lessons → Why/learn; single

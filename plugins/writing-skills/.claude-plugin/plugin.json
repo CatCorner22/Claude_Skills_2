@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "writing-skills",
+  "description": "Plain-language and clarity writing built on Ken Adams's drafting principles: plain-grade accessible writing at a 5th-8th grade reading level, with room for companion styles (smart brevity).",
+  "version": "0.1.0"
+}
