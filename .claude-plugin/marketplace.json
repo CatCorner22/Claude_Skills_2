@@ -114,6 +114,12 @@
       "source": "./plugins/deep-research-skills",
       "description": "True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.",
       "category": "research"
+    },
+    {
+      "name": "writing-skills",
+      "source": "./plugins/writing-skills",
+      "description": "Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated \"tested language\" and ambiguity.",
+      "category": "writing"
     }
   ]
 }
