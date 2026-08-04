@@ -118,7 +118,7 @@
     {
       "name": "writing-skills",
       "source": "./plugins/writing-skills",
-      "description": "Plain-language and clarity writing built on Ken Adams's drafting principles: plain-grade accessible writing at a 5th-8th grade reading level, with room for companion styles (smart brevity).",
+      "description": "Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated \"tested language\" and ambiguity.",
       "category": "writing"
     }
   ]

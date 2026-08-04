@@ -16,17 +16,17 @@ the patient can do next — is exactly preserved, not softened.
 > engineering audience."
 
 Expected: professional/technical internal writing for a jargon-fluent audience — no
-plain-grade constraint applies (this is the companion adams-smart-brevity territory, not in
-this library). Loading adams-plain-grade here means the description over-triggers on generic
-writing asks.
+plain-grade constraint applies; `writing-skills:adams-smart-brevity` owns this register.
+Loading adams-plain-grade here means the audience boundary between the two Adams skills is
+failing.
 
 ## 2b. Near-miss (precision-drafting guard)
 > "Tighten the indemnification clause in this vendor contract — I want it precise and
 > enforceable."
 
-Expected: contract-drafting precision work. The Adams/MSCD clarity discipline is relevant
-there, but the 5th-grade targets are not — this skill should stay unloaded rather than
-push grade-level constraints onto operative legal drafting.
+Expected: contract-drafting precision work — `writing-skills:adams-smart-brevity` owns it
+(same Adams discipline, professional register, contract-language categories). This skill
+should stay unloaded rather than push grade-level constraints onto operative legal drafting.
 
 ## 3. Quality rubric
 - **Does**: main point first; short active sentences; everyday concrete words; one idea per

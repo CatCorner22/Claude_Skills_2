@@ -26,10 +26,10 @@ version that still keeps the exact meaning.
 - Requests for "plain English," "simple," "5th grade," "easy to read," or low-literacy
   audiences.
 - Rewriting dense prose down to an accessible grade without losing exact meaning.
-- Not for: professional, technical, or internal writing where the audience handles jargon —
-  that is the companion adams-smart-brevity style (not yet in this library; both share the
-  same Adams core). Precision contract drafting or clause review — keep the Adams/MSCD
-  discipline there, but the grade targets here don't apply.
+- Not for: professional, technical, or internal writing where the audience handles jargon →
+  `writing-skills:adams-smart-brevity` (the companion skill; both share the same Adams
+  core). Precision contract drafting or clause review → also
+  `writing-skills:adams-smart-brevity` — the grade targets here don't apply there.
 
 ## Do it
 1. **Find the one most important point.** Say it first, in the simplest true sentence.

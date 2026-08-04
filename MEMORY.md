@@ -52,11 +52,12 @@ Never store secrets, credentials, account numbers, or client data here.
 - FACT: Library state: 119 skills across 18 plugins plus plugin subagents; `validate.sh`
   clean. Public-sector layer: `public-sector-treasury-skills` (8) — GASB funds, public funds
   investing, escheatment, merchant/PCI, NACHA, bond post-issuance, treasurer reporting, CTP prep.
-  Newest plugin: `writing-skills` (1) — plain-language/clarity writing, first skill
-  `adams-plain-grade` (Ken Adams clarity at 5th-grade reading level, 8th-grade fallback,
-  rejects litigated "tested language"; designed for a companion `adams-smart-brevity` the
-  user may supply later). Prior newest: `deep-research-skills` (1) — non-work-domain
-  research, first skill `medical-research-detective`. Newest skills: `continuous-improvement-skills:
+  Newest plugin: `writing-skills` (2) — Ken Adams clarity writing in two registers, both
+  rejecting litigated "tested language": `adams-smart-brevity` (Adams + Axios Smart Brevity
+  for professional/technical/legal/clinical writing; broad auto-apply triggers by user
+  design) and `adams-plain-grade` (5th-grade accessible register, 8th-grade precision
+  fallback; manual activation by user design). Audience is the router between them. Prior
+  newest: `deep-research-skills` (1) — `medical-research-detective`. Newest skills: `continuous-improvement-skills:
   lean-six-sigma-for-software` (Deming/TPS/DMAIC + WCAG 2.2 AA design system + adversarial
   testing + stability/redundancy), `coding-agent-skills:chicken-little` (multi-domain persona,
   loads on its name), and `continuous-improvement-skills:curve-hero-design-language` (promoted
@@ -176,6 +177,20 @@ Never store secrets, credentials, account numbers, or client data here.
 ---
 
 ## Crystallization log
+- 2026-08-04 (2) — adams-smart-brevity (writing-skills at 2 skills; library at 122).
+  Eleventh external-spec adaptation; the companion the plain-grade spec cited arrived one
+  turn later — the script-wizard lesson holds (cited-but-missing artifacts usually exist;
+  build the seam, invite the original). Core preserved: the litigated-language axiom,
+  Adams + Smart Brevity as composable layers (sentence meaning vs document attention),
+  point-first + why-it-matters, forbidden-pattern list, contract-language categories, dual
+  self-audit, clinical-note rules (controlled vocabulary, findings-to-plan, no template
+  clones), intellectual-honesty rule. Spec's broad auto-apply trigger intent kept, EXCEPT
+  bare "report"/"reports" qualified to "report writing" — collision scan showed five Oracle/
+  treasury reporting skills claim that token. Spec's "Smile Notes Litigation Avoidance
+  Pass" not in library → prose mention only (same pattern as before). plain-grade's prose
+  references upgraded to real `writing-skills:adams-smart-brevity` cross-links; plugin
+  0.1.0→0.2.0. FACT: the user runs "Smile Notes" clinical documentation (dental) with a
+  litigation-avoidance pass — a future skill candidate. Merged/retired: none.
 - 2026-08-04 — adams-plain-grade (19th plugin `writing-skills`; library at 121). Tenth
   external-spec adaptation. Core preserved: the litigated-language axiom, 5th-grade target
   with 8th-grade precision fallback (never higher), meaning-always-wins rule, Adams rules,
