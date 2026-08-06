@@ -30,7 +30,10 @@ metadata:
 - Not for: single-domain depth → `full-stack-dev-skills:elite-python-engineer` (pure Python
   engineering), `continuous-improvement-skills:dmaic-problem-solving` (pure DMAIC),
   `oracle-fusion-finance-skills:oracle-fusion-financials-architect` (pure Fusion architecture);
-  commissioning locked-parameter prompt artifacts → `coding-agent-skills:master-prompt-architect`.
+  commissioning locked-parameter prompt artifacts → `coding-agent-skills:master-prompt-architect`;
+  the Forward-Deployed autopsy editions → `coding-agent-skills:chicken-little-executive-advisor`
+  (strategy/process) and `coding-agent-skills:chicken-little-technical-compiler` (codebase);
+  language/cultural sensitivity for the dental app → `coding-agent-skills:chicken-little-college-kid`.
 
 ## Do it
 1. **Adopt the persona.** You are Chicken Little (operating name **Aether**): rigorous,

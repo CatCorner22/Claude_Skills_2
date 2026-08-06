@@ -56,8 +56,14 @@ Never store secrets, credentials, account numbers, or client data here.
   rejecting litigated "tested language": `adams-smart-brevity` (Adams + Axios Smart Brevity
   for professional/technical/legal/clinical writing; broad auto-apply triggers by user
   design) and `adams-plain-grade` (5th-grade accessible register, 8th-grade precision
-  fallback; manual activation by user design). Audience is the router between them. Prior
-  newest: `deep-research-skills` (1) — `medical-research-detective`. Newest skills: `continuous-improvement-skills:
+  fallback; manual activation by user design). Audience is the router between them.
+- FACT: The Chicken Little family (coding-agent-skills) has four members with disjoint
+  routing: `chicken-little` (Aether, multi-domain engineer, loads on name),
+  `chicken-little-executive-advisor` (strategy/process autopsy, "deploy advisor"),
+  `chicken-little-technical-compiler` (codebase autopsy, "deploy compiler"),
+  `chicken-little-college-kid` (dental-app language/cultural sensitivity). The
+  Forward-Deployed editions carry engage/stand-down session semantics and exact output
+  templates. (2026-08-05) Newest skills: `continuous-improvement-skills:
   lean-six-sigma-for-software` (Deming/TPS/DMAIC + WCAG 2.2 AA design system + adversarial
   testing + stability/redundancy), `coding-agent-skills:chicken-little` (multi-domain persona,
   loads on its name), and `continuous-improvement-skills:curve-hero-design-language` (promoted
@@ -177,6 +183,21 @@ Never store secrets, credentials, account numbers, or client data here.
 ---
 
 ## Crystallization log
+- 2026-08-05 — six-skill wave (12th–17th external-spec adaptations; library at 128 across
+  19 plugins): `project-command-center` (CI plugin — Van Riper preserve-the-possibility-
+  of-failure doctrine, intervention logs, nested OODA, stat discipline, AI assurance,
+  Chicken Little pass; the spec arrived already house-quality), three Chicken Little
+  editions (executive-advisor, technical-compiler, college-kid — exact autopsy/output
+  templates preserved verbatim in SKILL.md as the fragile core), `bespoke-llm-architect`
+  (ML plugin; renamed from -skills suffix; kept `disable-model-invocation: true`), and
+  `ui-and-ux-inspection` (full-stack plugin; procedure + remediation patterns verbatim
+  one level deep). Method: 2 subagents (largest/most mechanical specs) + 4 authored
+  directly; both truncated uploads (college-kid implementation notes; bespoke self-audit
+  protocol) got marked seams with reconstructed-from-stated-principles fallbacks and an
+  invitation for the originals. Trigger hygiene: no bare "report"/"review"/"WCAG"
+  claims; persona editions never claim bare "chicken little". Plugins bumped:
+  coding-agent 0.6.0, continuous-improvement 0.4.0, machine-learning 0.2.0, full-stack
+  0.2.0. Merged/retired: none. Flagged: no contradictions.
 - 2026-08-04 (2) — adams-smart-brevity (writing-skills at 2 skills; library at 122).
   Eleventh external-spec adaptation; the companion the plain-grade spec cited arrived one
   turn later — the script-wizard lesson holds (cited-but-missing artifacts usually exist;
