@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **122 skills across 19 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **128 skills across 19 plugins.**
 
 ## How to trigger a skill
 
@@ -32,11 +32,11 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`treasury-accounting-skills`](#treasury-accounting-skills) (6) — Advanced treasury and accounting operations: debt facilities and covenant compliance, hedging and derivatives, investment policy compliance, accruals and prepaids, intercompany accounting, and audit readiness.
 - [`data-analytics-bi-skills`](#data-analytics-bi-skills) (8) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
 - [`data-tools-skills`](#data-tools-skills) (6) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
-- [`machine-learning-skills`](#machine-learning-skills) (6) — Framing ML problems, time-series forecasting, supervised modeling, evaluation, feature engineering, and anomaly detection.
-- [`continuous-improvement-skills`](#continuous-improvement-skills) (8) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, and the Curve Hero design-language / UI sync-audit map.
+- [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
+- [`continuous-improvement-skills`](#continuous-improvement-skills) (9) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, the Curve Hero design-language / UI sync-audit map, and the project-command doctrine (Van Riper red-teaming, OODA, intervention logs).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
-- [`full-stack-dev-skills`](#full-stack-dev-skills) (10) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, and deployment.
-- [`coding-agent-skills`](#coding-agent-skills) (10) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, Chicken Little).
+- [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings.
+- [`coding-agent-skills`](#coding-agent-skills) (13) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, and the Chicken Little family: engineer, executive advisor, technical compiler, college kid).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
@@ -680,7 +680,7 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 ## `machine-learning-skills`
 
-Framing ML problems, time-series forecasting, supervised modeling, evaluation, feature engineering, and anomaly detection.
+Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
 
 Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
@@ -691,6 +691,14 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 **What it does:** Detects anomalies and outliers in transactions or time series using statistical and unsupervised methods — z-score and robust z (median/MAD), IQR, time-series residual anomalies, and multivariate models (isolation forest, local outlier factor, clustering) — with thresholds tuned to the precision/recall trade-off under scarce labels, and attention to alert fatigue. Use when flagging unusual activity such as reconciliation breaks, fee spikes, duplicate or out-of-pattern payments, or possible fraud.
 
 **Triggers:** `anomaly detection`, `anomaly`, `outlier`, `outlier detection`, `unusual transaction`, `fraud detection`, `isolation forest`, `local outlier factor`, `LOF`, `z-score`, `novelty detection`, `unusual activity`
+
+### `machine-learning-skills:bespoke-llm-architect`
+
+**Invoke:** `/machine-learning-skills:bespoke-llm-architect` — or just describe the task.
+
+**What it does:** Designs, implements, trains, evaluates, and hardens bespoke LLMs and related ML systems as a self-auditing architect — parameters locked before drafting, an efficiency hierarchy that climbs only when justified (prompting + RAG → PEFT → continued pre-training → full fine-tune → from-scratch last), evidence-based modern techniques cited by name (hybrid Mamba-Transformer-MoE, GRPO/RLVR, DoRA/QLoRA, YaRN/LongRoPE, conformal prediction), and safety and alignment designed in, not bolted on. Use when the user asks for it by name or wants a custom/bespoke LLM designed, fine-tuned, evaluated, or hardened.
+
+**Triggers:** `bespoke llm`, `custom llm`, `build an llm`, `fine-tune a model`, `train a model`, `llm architecture design`, `PEFT`, `QLoRA`, `GRPO`, `self-auditing architect`, `hybrid mamba`, `mixture of experts`
 
 ### `machine-learning-skills:feature-engineering`
 
@@ -734,7 +742,7 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 ## `continuous-improvement-skills`
 
-Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, and the Curve Hero design-language / UI sync-audit map.
+Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, the Curve Hero design-language / UI sync-audit map, and the project-command doctrine (Van Riper red-teaming, OODA, intervention logs).
 
 Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
@@ -778,6 +786,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Triggers:** `lean six sigma software`, `DMAIC software`, `Toyota production system for software`, `Deming for software`, `standardize and measure`, `begin with the end in mind`, `adversarial release gauntlet`, `WCAG-conformant app build`, `stability and redundancy`, `co-design the UI`
 
+### `continuous-improvement-skills:project-command-center`
+
+**Invoke:** `/continuous-improvement-skills:project-command-center` — or just describe the task.
+
+**What it does:** Adaptive project command doctrine for planning, requirements, architecture, implementation, debugging, code review, release preparation, incident response, statistical interpretation, technical writing, and AI-system review — Van Riper red-teaming (preserve the possibility of failure, log interventions, separate continuation from validation), nested OODA loops, Toyota-style flow, co-design with feedback closure, Smart Brevity updates, contract-drafting writing discipline, absolute-vs-relative risk and full confusion-matrix statistics, constrained-agency AI assurance, and the Chicken Little constructive-paranoia pass. Use when planning or reviewing projects, auditing experiments or benchmarks, evaluating risk claims or diagnostic metrics, or preparing releases.
+
+**Triggers:** `project command`, `red team the plan`, `preserve the possibility of failure`, `intervention log`, `OODA`, `audit this benchmark`, `relative risk claim`, `confusion matrix`, `release readiness`, `constructive paranoia`, `now next later watch. metadata: version: "1.0.0" source: "Adapted from the user's project-command-center spec (2026-08-05)"`
+
 ### `continuous-improvement-skills:root-cause-analysis`
 
 **Invoke:** `/continuous-improvement-skills:root-cause-analysis` — or just describe the task.
@@ -818,7 +834,7 @@ Install: `/plugin install board-of-advisors-skills@treasury-analyst-skills`
 
 ## `full-stack-dev-skills`
 
-Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, and deployment.
+Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings.
 
 Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
@@ -902,9 +918,17 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **Triggers:** `testing strategy`, `what to test`, `pytest setup`, `test the API`, `mock or not`, `brittle tests`, `slow test suite`, `playwright e2e`, `test coverage target`, `regression test`, `test pyramid`, `integration vs unit`
 
+### `full-stack-dev-skills:ui-and-ux-inspection`
+
+**Invoke:** `/full-stack-dev-skills:ui-and-ux-inspection` — or just describe the task.
+
+**What it does:** Inspects a bespoke web application for usability, cognitive-load, accessibility, interaction, workflow, performance, and privacy defects — tracing critical user processes backward from successful end states, separating observed evidence from inference, and producing reproducible severity- and confidence-rated findings with affected routes, remediation, and verification tests (a ui-ux-inspection.md report plus machine-readable ui-ux-findings.json). Use when the user asks to inspect or audit a web interface; review its UX, UI, forms, navigation, tables, or cognitive load; simplify a workflow; analyze screenshots or routes; generate Playwright or accessibility tests; compare an implementation with design heuristics; or create a remediation backlog.
+
+**Triggers:** `inspect the UI`, `UX audit`, `usability review`, `accessibility audit`, `cognitive load`, `form review`, `navigation review`, `simplify a workflow`, `remediation backlog`, `playwright accessibility tests`, `heuristic evaluation. metadata: version: "1.0.0" source: >- Adapted from the user's ui-and-ux-inspection spec (2026-08-04)`, `itself distilled from their report 'Eye Tracking`, `Web-App Usability`, `and Cognitive Design'`
+
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, Chicken Little).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, and the Chicken Little family: engineer, executive advisor, technical compiler, college kid).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -931,6 +955,30 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the modern toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name.
 
 **Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions. metadata: version: "2026.2" author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard`
+
+### `coding-agent-skills:chicken-little-college-kid`
+
+**Invoke:** `/coding-agent-skills:chicken-little-college-kid` — or just describe the task.
+
+**What it does:** Acts as "Chicken Little, College Kid" — a calm, professional language- and cultural-sensitivity persona for a family dental practice web app: flags potentially loaded phrases with practical alternatives (sensitivity varies by audience), recommends but never requires gender-neutral wording in generic system text, and provides cultural-humility guidance for patient care — ISO country and language intake fields with an interpreter flag, non-US-born/non-English staff notifications with quick-reference cards, Southern US idiom explanations, and cross-cultural communication patterns framed strictly as starting points to confirm with each patient. Use when writing or reviewing patient- or staff-facing copy, intake forms, chatbot scripts, or preparing the team for a specific patient's visit.
+
+**Triggers:** `college kid`, `chicken little college kid`, `inclusive language check`, `loaded phrase`, `cultural sensitivity note`, `patient communication culture`, `intake form languages`, `interpreter flag. metadata: version: "1.0.0" source: >- Adapted from the user's "Chicken Little`, `College Kid" persona spec (upload truncated in its final Cursor implementation-notes list; the seam is marked in references/cultural-guidance.md — supply the remainder to complete it)`
+
+### `coding-agent-skills:chicken-little-executive-advisor`
+
+**Invoke:** `/coding-agent-skills:chicken-little-executive-advisor` — or just describe the task.
+
+**What it does:** Acts as Forward-Deployed Chicken Little (Executive Edition) — an anxious but rigorously realistic polymath advisor (corporate strategy, Lean Six Sigma, TPS, UI/UX, statistics, co-design) who is violently pro-user and professionally adversarial to their blind spots: runs a fixed strategic-and-operational autopsy (meta-cognitive AI-leverage intercept, downstream-blocker ultimatum, TPS waste audit, human-friction scan, current-vs-future-state lock-in forecast, MSCD linguistic-failure table, proactive pivot), refuses to move past an unresolved blocker, and interrupts manual work whenever an automated or agentic path exists. Use when the user says "deploy advisor" or asks for an adversarial strategic autopsy of a business model, project, process, or design.
+
+**Triggers:** `deploy advisor`, `deploy_advisor`, `executive chicken little`, `activate executive chicken little`, `strategic autopsy`, `operational autopsy`, `red team my business`, `blocker protocol`, `stand down. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"`
+
+### `coding-agent-skills:chicken-little-technical-compiler`
+
+**Invoke:** `/coding-agent-skills:chicken-little-technical-compiler` — or just describe the task.
+
+**What it does:** Acts as Forward-Deployed Chicken Little (Technical Compiler Edition) — an adversarial systems auditor, technical architect, and probabilistic risk assessor who stress-tests codebases, system architectures, and logic workflows before they collapse under real-world pressure: runs a fixed architectural autopsy (load-bearing pillars, the Jenga cascading-failure analysis of the one unpinned dependency, a fragility table with statistical likelihood and remediation difficulty, compute-bleed inefficiencies, a proactive pivot to the modern alternative, and mandated actions split critical vs strategic), written to strict MSCD precision — zero passive voice, actors and logic explicit. Use when the user says "deploy compiler" or asks for an adversarial codebase or architecture autopsy.
+
+**Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"`
 
 ### `coding-agent-skills:git-and-code-review`
 

@@ -70,13 +70,13 @@
     {
       "name": "machine-learning-skills",
       "source": "./plugins/machine-learning-skills",
-      "description": "Framing ML problems, time-series forecasting, supervised modeling, evaluation, feature engineering, and anomaly detection.",
+      "description": "Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).",
       "category": "data"
     },
     {
       "name": "continuous-improvement-skills",
       "source": "./plugins/continuous-improvement-skills",
-      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, and the Curve Hero design-language / UI sync-audit map.",
+      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, the Curve Hero design-language / UI sync-audit map, and the project-command doctrine (Van Riper red-teaming, OODA, intervention logs).",
       "category": "operations"
     },
     {
@@ -88,13 +88,13 @@
     {
       "name": "full-stack-dev-skills",
       "source": "./plugins/full-stack-dev-skills",
-      "description": "Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, and deployment.",
+      "description": "Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings.",
       "category": "development"
     },
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, Chicken Little).",
+      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, and the Chicken Little family: engineer, executive advisor, technical compiler, college kid).",
       "category": "development"
     },
     {
