@@ -182,7 +182,33 @@ Never store secrets, credentials, account numbers, or client data here.
 
 ---
 
+- FACT: The cross-industry KSA study lives at `docs/research/cross-industry-ksa-study.md`
+  (+ Mermaid synergy map alongside). 19 candidates scored; top tier (8): checklist-design,
+  fmea, competing-hypotheses-analysis, reference-class-forecasting, bowtie-barrier-analysis,
+  principled-negotiation, theory-of-constraints, sbar-structured-communication. Proposed
+  waves: A extends continuous-improvement-skills; B founds `safety-and-reliability-skills`;
+  C founds `decision-science-skills` (safety/HRO and decision science currently have NO home
+  plugin). Status: awaiting the user's picks — no skills built from it yet. (2026-08-08)
+- RULE: Additional reserved/hot trigger tokens found by the study's collision scans: the
+  Heuer method never abbreviates to the banking acronym; "CRM" = customer relationship
+  management in the dental context; "pooling" = cash pooling; bare "setup" = Oracle config;
+  bare "constraint" = database; bare "checklist" (96 artifact files) and bare "handoff"
+  (17 files) never trigger alone. (2026-08-08)
+
 ## Crystallization log
+- 2026-08-08 — Cross-industry KSA study (docs/research/; study-only wave, no skills built).
+  Method that worked: coverage-map recon (gap greps + mount-point cheat sheet with file
+  anchors) → 5 parallel research lanes with a fixed candidate schema and provenance marks →
+  main-session verification of every top-tier mount point by opening the named file →
+  6-dimension scoring with old×new leverage double-weighted. Key intellectual products: the
+  7+1 combination-pattern taxonomy (instrument-a-loop, formalize-an-improvisation,
+  barrier-analysis-transfer, template-injection, lens-swap, adversary-injection,
+  math-backfill, + artifact-without-mechanism as the failure predictor — Ontario checklist
+  null result vs WHO trial); the thesis "the LLM supplies the mechanism, the human supplies
+  adjudication and authority"; Gage R&R attribute agreement as LLM-as-judge rigor; the
+  cash-forecasting MAPE/bias file is a ready-made reference class. Lanes honestly cut work
+  measurement (Taylorism) and demoted human-factors/commander's-intent/HAZOP to fold-ins.
+  Merged/retired: none. Flagged: no contradictions.
 - 2026-08-05 — six-skill wave (12th–17th external-spec adaptations; library at 128 across
   19 plugins): `project-command-center` (CI plugin — Van Riper preserve-the-possibility-
   of-failure doctrine, intervention logs, nested OODA, stat discipline, AI assurance,
