@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **147 skills across 21 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **148 skills across 21 plugins.**
 
 ## How to trigger a skill
 
@@ -41,7 +41,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (2) — Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated "tested language" and ambiguity.
-- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (4) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, and reliability engineering math (Weibull, MTBF, availability).
+- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (5) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
 - [`decision-science-skills`](#decision-science-skills) (6) — Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).
 
 ## `cash-management-skills`
@@ -1256,7 +1256,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 ## `safety-and-reliability-skills`
 
-High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, and reliability engineering math (Weibull, MTBF, availability).
+High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
 
 Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
@@ -1291,6 +1291,14 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 **What it does:** Structures high-stakes workplace communication with the protocols high-hazard industries run on: SBAR for escalations (Situation, Background, Assessment, Recommendation with a deadline), I-PASS for transferring work (criticality, problem summary, action list, if-then contingencies, receiver read-back), closed-loop confirmation for critical instructions, and PACE graded assertiveness (Probe, Alert, Challenge, Emergency) for questioning a decision upward — drafting phrase ladders for the specific relationship and roleplaying the hard conversation first. Use when escalating an issue to a manager or treasurer, transitioning work for coverage or shift change, giving instructions that must not be misheard, or preparing to challenge a superior's call such as a suspicious approved payment.
 
 **Triggers:** `SBAR`, `escalate this to`, `structured handoff`, `transition this work`, `coverage notes`, `read-back`, `closed-loop communication`, `graded assertiveness`, `PACE`, `speak up to the boss`
+
+### `safety-and-reliability-skills:weight-of-the-books`
+
+**Invoke:** `/safety-and-reliability-skills:weight-of-the-books` — or just describe the task.
+
+**What it does:** Prevents the sinking-library failure — a design that never accounted for the load it exists to carry — with a design-basis load review before commitment: name every payload (data volumes, rates, users, documents, weight), quantify each at day one, at peak, on the growth curve, and at the special-collections outlier (the biggest single lot ever swallowed), trace every load to a named component with stated capacity, apply written safety factors with margin-exhaustion dates, and require acceptance tests to run LOADED at design and peak values — an empty-building inspection proves nothing. Output: a one-page signed Load Manifest, re-reviewed on every payload change. Use when sizing or design-reviewing a system, feature, migration, or process against its real volumes.
+
+**Triggers:** `weight of the books`, `sinking library`, `design load`, `load basis`, `load manifest`, `will it hold at real volumes`, `size it for production`, `test loaded not empty`, `special collections case. metadata: version: "1.0.0" source: >- Commissioned by the user on the campus legend of a university library designed without accounting for the weight of its books`, `unoccupied for years until retrofitted. Assumed true as commissioned; the legend is told of many campuses`, `and the lesson stands either way`
 
 ## `decision-science-skills`
 
