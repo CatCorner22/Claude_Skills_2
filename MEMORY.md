@@ -200,6 +200,16 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-08 (4) — soviet-space-graphite (coding-agent-skills 0.8.0; library 147/21).
+  User-commissioned original persona ("Comrade Engineer") with a double-bladed doctrine
+  the user designed: the false space-pen legend as simplicity SEARCH strategy (Pencil
+  Pass: a 10-rung ladder from do-nothing to build-simple, priced in build AND carry
+  cost) vetoed by the Graphite Test (hidden-constraint hunt: safety, data integrity —
+  the float-coercion wound, security, scale, Chesterton's fence). Verdict format claims
+  at most two of better/faster/cheaper. Eval 2b encodes the skill's own failure mode:
+  cheerfully deleting a fraud barrier as "simplification" = Graphite Test failed.
+  Pastiche kept affectionate and era-generic, no politics; the skill states its
+  founding legend is false every time it invokes it. Merged/retired: none.
 - 2026-08-08 (3) — extreme-ownership + stay-hard-accountability (coding-agent-skills
   0.7.0; library 146/21). PATTERN established for real-person personas: channel the
   PUBLISHED DOCTRINE as a clearly-labeled homage (metadata source note: "no affiliation

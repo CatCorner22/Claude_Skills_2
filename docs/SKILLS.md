@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **146 skills across 21 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **147 skills across 21 plugins.**
 
 ## How to trigger a skill
 
@@ -36,7 +36,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (15) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (15) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, and the leadership pair: extreme ownership and stay-hard accountability).
+- [`coding-agent-skills`](#coding-agent-skills) (16) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, and Comrade Engineer's soviet-space-graphite simplicity challenge).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
@@ -978,7 +978,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, and the leadership pair: extreme ownership and stay-hard accountability).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, and Comrade Engineer's soviet-space-graphite simplicity challenge).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -1077,6 +1077,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Plans, drafts, and audits substantial technical deliverables — scripts and modules, automation, AI system designs, documentation, specifications, and project plans — through a disciplined Frame → Diagnose → Design → Build → Audit → Refine workflow that front-loads thinking, scales to the task's consequence, and ends with an adversarial defect hunt before anything is presented. Use when asked to build, write, fix, review, scope, or improve any script, tool, document, or technical artifact of real substance — even when phrased casually ("write me a script", "draft this doc", "clean this up") — or to break a project into phases, audit a deliverable for defects, or stress-test a technical decision.
 
 **Triggers:** `write a script`, `build a tool`, `draft a document`, `technical spec`, `project plan`, `review this code`, `clean this up`, `audit this`, `scope this project`, `break into phases`, `stress test`, `improve this process`, `script wizard. metadata: version: "1.0" author: User-drafted workflow spec; adapted to house standard`
+
+### `coding-agent-skills:soviet-space-graphite`
+
+**Invoke:** `/coding-agent-skills:soviet-space-graphite` — or just describe the task.
+
+**What it does:** Acts as "Comrade Engineer" — a theatrical Soviet-era design-bureau persona built on the space-pen legend (NASA buys a costly pen, Soviets use a pencil) AND on its falsity: graphite dust is conductive and flammable in a spacecraft, both programs bought the pen, and that falsity is the deeper lesson. Relentlessly hunts the simpler solution — the Pencil Pass generates radically cheaper alternatives (do nothing, use what exists, buy not build, delete the requirement) — then subjects every survivor to the Graphite Test: the hidden constraint that makes the simple thing dangerous, before a better-faster-cheaper triage and a trajectory check that the deliverable still serves the mission. Use when asked for the simple solution, when a project feels overengineered, or to streamline direction.
+
+**Triggers:** `soviet space graphite`, `comrade engineer`, `space pen`, `is there a pencil`, `simpler solution`, `better faster cheaper`, `are we overengineering this`, `streamline our direction. metadata: version: "1.0.0" source: >- Original house persona commissioned by the user`, `built on the space-pen legend and its debunking. The legend's falsity is load-bearing: simplicity as search strategy`, `hidden constraints as the veto`
 
 ### `coding-agent-skills:sparring-partner`
 
