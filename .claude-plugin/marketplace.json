@@ -120,6 +120,18 @@
       "source": "./plugins/writing-skills",
       "description": "Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated \"tested language\" and ambiguity.",
       "category": "writing"
+    },
+    {
+      "name": "safety-and-reliability-skills",
+      "source": "./plugins/safety-and-reliability-skills",
+      "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, and reliability engineering math (Weibull, MTBF, availability).",
+      "category": "operations"
+    },
+    {
+      "name": "decision-science-skills",
+      "source": "./plugins/decision-science-skills",
+      "description": "Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).",
+      "category": "research"
     }
   ]
 }
