@@ -185,10 +185,14 @@ Never store secrets, credentials, account numbers, or client data here.
 - FACT: The cross-industry KSA study lives at `docs/research/cross-industry-ksa-study.md`
   (+ Mermaid synergy map alongside). 19 candidates scored; top tier (8): checklist-design,
   fmea, competing-hypotheses-analysis, reference-class-forecasting, bowtie-barrier-analysis,
-  principled-negotiation, theory-of-constraints, sbar-structured-communication. Proposed
-  waves: A extends continuous-improvement-skills; B founds `safety-and-reliability-skills`;
-  C founds `decision-science-skills` (safety/HRO and decision science currently have NO home
-  plugin). Status: awaiting the user's picks — no skills built from it yet. (2026-08-08)
+  principled-negotiation, theory-of-constraints, sbar-structured-communication. Status:
+  ALL WAVES BUILT (user approved 2026-08-08): Wave A extended continuous-improvement-skills
+  to 0.5.0 (+6 IE skills); Wave B founded `safety-and-reliability-skills` 0.1.0 (4 skills);
+  Wave C founded `decision-science-skills` 0.1.0 (6 skills); Wave D retrofitted
+  human-factors references into ui-and-ux-inspection (full-stack-dev 0.3.0) and Reason's
+  error taxonomy into root-cause-analysis. Library at 144 skills / 21 plugins. Tier-2/3
+  long tail (SMED, queueing, service-recovery, hoshin, TRIZ, 5S…) remains available in the
+  study's §6 table for future picks. (2026-08-08)
 - RULE: Additional reserved/hot trigger tokens found by the study's collision scans: the
   Heuer method never abbreviates to the banking acronym; "CRM" = customer relationship
   management in the dental context; "pooling" = cash pooling; bare "setup" = Oracle config;
@@ -196,6 +200,18 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-08 (2) — KSA build, all waves (16 skills + 2 retrofits + 2 new plugins; library
+  144/21). Method: 7 parallel authoring agents, each carrying its study dossier (procedure,
+  evidence with provenance marks, verified mounts, P8 human gate, reserved-token
+  constraints) + fixed sibling names so cross-links resolved during parallel authoring;
+  incremental unit commits as each agent finished (stop-hook-friendly, shared-branch-safe);
+  one agent self-fixed its over-length description before the sweep. PATTERN: pre-fixing
+  all skill NAMES before fan-out is what makes parallel cross-linking safe. LESSON: I
+  chained a fetch-inspect with a push once mid-wave — rule violation, no harm (tip was own
+  commit, plain fast-forward), separated every subsequent push. P8 discipline encoded in
+  every risk-bearing skill's Do-it (ratings adjudicated, anti-sycophancy in challenger
+  roles, LLM red cell = scenario generator only). Merged/retired: none. Flagged: no
+  contradictions.
 - 2026-08-08 — Cross-industry KSA study (docs/research/; study-only wave, no skills built).
   Method that worked: coverage-map recon (gap greps + mount-point cheat sheet with file
   anchors) → 5 parallel research lanes with a fixed candidate schema and provenance marks →

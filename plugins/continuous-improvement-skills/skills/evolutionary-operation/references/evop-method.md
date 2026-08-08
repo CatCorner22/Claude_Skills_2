@@ -68,7 +68,7 @@ Match-rate observations over three cycles (one day per point, randomized order):
 
 Effect of **T** per cycle = mean(points 2, 4) − mean(points 1, 3): 0.70, 0.75, 0.95 → mean **+0.80**.
 Effect of **W** per cycle = mean(points 3, 4) − mean(points 1, 2): 0.60, 0.35, 0.65 → mean **+0.53**.
-Interaction per cycle = mean(points 1, 4) − mean(points 2, 3): −0.05, +0.05, −0.15 → mean −0.05.
+Interaction per cycle = mean(points 1, 4) − mean(points 2, 3): 0.00, +0.05, −0.15 → mean −0.03.
 
 Guard readings stayed inside the bound at every point (worst: 0.031% at point 4, vs 0.05% limit)
 — but note the *trend*: false-match rate rises with T. The guard is closest to its cliff exactly
@@ -83,9 +83,9 @@ Each cycle yields one estimate of each effect, so after n cycles you have n repl
 - rule of thumb: act only when |effect| > **2 × SE** (≈ 95% two-sided for the shop floor; with n
   as small as 3, a t-critical near 4.3 is the honest bar — say which one you used).
 
-For the example: T effect 0.80, s ≈ 0.132, SE ≈ 0.076 → 0.80 ≫ 2×0.076: **signal**. W effect
-0.53, s ≈ 0.165, SE ≈ 0.095 → clears 2×SE, but not the small-n t bar — run more cycles before
-leaning on W. Interaction −0.05: noise.
+For the example: T effect 0.80, s ≈ 0.13, SE ≈ 0.076 → 0.80 ≫ 2×0.076: **signal**. W effect
+0.53, s ≈ 0.16, SE ≈ 0.093 → clears 2×SE and barely clears the small-n t bar (4.3 × 0.093 ≈
+0.40) — real, but run more cycles before leaning on W. Interaction −0.03: noise.
 
 Historical note: classic EVOP worksheets estimated s from *ranges* (range × a d₂-style constant)
 so plant crews could run it without computing variances. With an LLM keeping the ledger, compute

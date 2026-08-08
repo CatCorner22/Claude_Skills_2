@@ -76,7 +76,7 @@
     {
       "name": "continuous-improvement-skills",
       "source": "./plugins/continuous-improvement-skills",
-      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, the Curve Hero design-language / UI sync-audit map, and the project-command doctrine (Van Riper red-teaming, OODA, intervention logs).",
+      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).",
       "category": "operations"
     },
     {
@@ -88,7 +88,7 @@
     {
       "name": "full-stack-dev-skills",
       "source": "./plugins/full-stack-dev-skills",
-      "description": "Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings.",
+      "description": "Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).",
       "category": "development"
     },
     {
