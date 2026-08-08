@@ -68,7 +68,9 @@ reminder to "be more careful" — reminders decay, error-proofing doesn't.
 - Anchoring on the first cause → use the 6M fishbone to force breadth before you converge.
 - Skipping verification → you countermeasure a guess. Confirm the cause changes the effect first.
 - Spreading effort across every defect → use Pareto; fix the vital few first.
-- Blaming a person → almost always a process/system let the error through. Fix the system.
+- Blaming a person → almost always a process/system let the error through. Fix the system (classify
+  the error type first — slip, lapse, mistake, or violation each needs a different countermeasure:
+  see `references/human-error-taxonomy.md`).
 
 ## Tailor to your environment
 Record your real recurring problems and data sources in `references/your-environment.md` (use
@@ -79,4 +81,6 @@ sanitize to structure only.
 
 ## References
 - references/tools-and-templates.md — 5 Whys worksheet, 6M fishbone prompts, Pareto tally, verification test
+- references/human-error-taxonomy.md — Reason's slip/lapse/mistake/violation taxonomy on Rasmussen's
+  skill–rule–knowledge levels, the countermeasure mapping, and a classification worked example
 - references/your-environment.md — your defect categories, data sources, and sign-offs (add when supplied)
