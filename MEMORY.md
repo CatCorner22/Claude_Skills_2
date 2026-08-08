@@ -182,7 +182,70 @@ Never store secrets, credentials, account numbers, or client data here.
 
 ---
 
+- FACT: The cross-industry KSA study lives at `docs/research/cross-industry-ksa-study.md`
+  (+ Mermaid synergy map alongside). 19 candidates scored; top tier (8): checklist-design,
+  fmea, competing-hypotheses-analysis, reference-class-forecasting, bowtie-barrier-analysis,
+  principled-negotiation, theory-of-constraints, sbar-structured-communication. Status:
+  ALL WAVES BUILT (user approved 2026-08-08): Wave A extended continuous-improvement-skills
+  to 0.5.0 (+6 IE skills); Wave B founded `safety-and-reliability-skills` 0.1.0 (4 skills);
+  Wave C founded `decision-science-skills` 0.1.0 (6 skills); Wave D retrofitted
+  human-factors references into ui-and-ux-inspection (full-stack-dev 0.3.0) and Reason's
+  error taxonomy into root-cause-analysis. Library at 144 skills / 21 plugins. Tier-2/3
+  long tail (SMED, queueing, service-recovery, hoshin, TRIZ, 5S…) remains available in the
+  study's §6 table for future picks. (2026-08-08)
+- RULE: Additional reserved/hot trigger tokens found by the study's collision scans: the
+  Heuer method never abbreviates to the banking acronym; "CRM" = customer relationship
+  management in the dental context; "pooling" = cash pooling; bare "setup" = Oracle config;
+  bare "constraint" = database; bare "checklist" (96 artifact files) and bare "handoff"
+  (17 files) never trigger alone. (2026-08-08)
+
 ## Crystallization log
+- 2026-08-08 (4) — soviet-space-graphite (coding-agent-skills 0.8.0; library 147/21).
+  User-commissioned original persona ("Comrade Engineer") with a double-bladed doctrine
+  the user designed: the false space-pen legend as simplicity SEARCH strategy (Pencil
+  Pass: a 10-rung ladder from do-nothing to build-simple, priced in build AND carry
+  cost) vetoed by the Graphite Test (hidden-constraint hunt: safety, data integrity —
+  the float-coercion wound, security, scale, Chesterton's fence). Verdict format claims
+  at most two of better/faster/cheaper. Eval 2b encodes the skill's own failure mode:
+  cheerfully deleting a fraud barrier as "simplification" = Graphite Test failed.
+  Pastiche kept affectionate and era-generic, no politics; the skill states its
+  founding legend is false every time it invokes it. Merged/retired: none.
+- 2026-08-08 (3) — extreme-ownership + stay-hard-accountability (coding-agent-skills
+  0.7.0; library 146/21). PATTERN established for real-person personas: channel the
+  PUBLISHED DOCTRINE as a clearly-labeled homage (metadata source note: "no affiliation
+  or endorsement; channels the books' frameworks, does not impersonate the author"),
+  persona operating names ("The Commander", "The Mirror"), the person's name only in
+  triggers (users ask for "jocko"/"goggins") — never as the skill name. Both personas
+  guard the same two lines: intensity at the work never at people's worth, and effort
+  aims at controllables while system problems get system fixes (the Deming
+  reconciliation). Pair routing: extreme-ownership leads the TEAM, stay-hard drives the
+  SELF; cookie jar wired to reference-class-forecasting as a personal reference class;
+  stay-hard hard-scoped away from health/fitness advice. Merged/retired: none.
+- 2026-08-08 (2) — KSA build, all waves (16 skills + 2 retrofits + 2 new plugins; library
+  144/21). Method: 7 parallel authoring agents, each carrying its study dossier (procedure,
+  evidence with provenance marks, verified mounts, P8 human gate, reserved-token
+  constraints) + fixed sibling names so cross-links resolved during parallel authoring;
+  incremental unit commits as each agent finished (stop-hook-friendly, shared-branch-safe);
+  one agent self-fixed its over-length description before the sweep. PATTERN: pre-fixing
+  all skill NAMES before fan-out is what makes parallel cross-linking safe. LESSON: I
+  chained a fetch-inspect with a push once mid-wave — rule violation, no harm (tip was own
+  commit, plain fast-forward), separated every subsequent push. P8 discipline encoded in
+  every risk-bearing skill's Do-it (ratings adjudicated, anti-sycophancy in challenger
+  roles, LLM red cell = scenario generator only). Merged/retired: none. Flagged: no
+  contradictions.
+- 2026-08-08 — Cross-industry KSA study (docs/research/; study-only wave, no skills built).
+  Method that worked: coverage-map recon (gap greps + mount-point cheat sheet with file
+  anchors) → 5 parallel research lanes with a fixed candidate schema and provenance marks →
+  main-session verification of every top-tier mount point by opening the named file →
+  6-dimension scoring with old×new leverage double-weighted. Key intellectual products: the
+  7+1 combination-pattern taxonomy (instrument-a-loop, formalize-an-improvisation,
+  barrier-analysis-transfer, template-injection, lens-swap, adversary-injection,
+  math-backfill, + artifact-without-mechanism as the failure predictor — Ontario checklist
+  null result vs WHO trial); the thesis "the LLM supplies the mechanism, the human supplies
+  adjudication and authority"; Gage R&R attribute agreement as LLM-as-judge rigor; the
+  cash-forecasting MAPE/bias file is a ready-made reference class. Lanes honestly cut work
+  measurement (Taylorism) and demoted human-factors/commander's-intent/HAZOP to fold-ins.
+  Merged/retired: none. Flagged: no contradictions.
 - 2026-08-05 — six-skill wave (12th–17th external-spec adaptations; library at 128 across
   19 plugins): `project-command-center` (CI plugin — Van Riper preserve-the-possibility-
   of-failure doctrine, intervention logs, nested OODA, stat discipline, AI assurance,

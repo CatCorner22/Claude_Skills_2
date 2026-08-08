@@ -143,4 +143,7 @@ references/your-environment.private.md — git-ignored, never committed.
   (preflight → privacy inspection)
 - references/remediation-patterns.md — the ten remediation pattern groups, verbatim
 - references/finding-schema.md — canonical JSON schema for ui-ux-findings.json
+- references/human-factors-instruments.md — Fitts's law and NASA-TLX as design-heuristic
+  instruments for tap-target and cognitive-load findings: the math, administration
+  discipline, finding-schema mapping, and honest limits
 - references/your-environment.md — fill-in: routes, processes, accounts, browsers, budgets

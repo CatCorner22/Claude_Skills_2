@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **128 skills across 19 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **147 skills across 21 plugins.**
 
 ## How to trigger a skill
 
@@ -33,14 +33,16 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`data-analytics-bi-skills`](#data-analytics-bi-skills) (8) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
 - [`data-tools-skills`](#data-tools-skills) (6) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
 - [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
-- [`continuous-improvement-skills`](#continuous-improvement-skills) (9) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, the Curve Hero design-language / UI sync-audit map, and the project-command doctrine (Van Riper red-teaming, OODA, intervention logs).
+- [`continuous-improvement-skills`](#continuous-improvement-skills) (15) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
-- [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings.
-- [`coding-agent-skills`](#coding-agent-skills) (13) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, and the Chicken Little family: engineer, executive advisor, technical compiler, college kid).
+- [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
+- [`coding-agent-skills`](#coding-agent-skills) (16) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, and Comrade Engineer's soviet-space-graphite simplicity challenge).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (2) — Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated "tested language" and ambiguity.
+- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (4) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, and reliability engineering math (Weibull, MTBF, availability).
+- [`decision-science-skills`](#decision-science-skills) (6) — Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).
 
 ## `cash-management-skills`
 
@@ -742,7 +744,7 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 ## `continuous-improvement-skills`
 
-Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma applied to software delivery, the Curve Hero design-language / UI sync-audit map, and the project-command doctrine (Van Riper red-teaming, OODA, intervention logs).
+Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).
 
 Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
@@ -762,6 +764,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Triggers:** `curve hero`, `curve dental`, `sidekick`, `recare`, `design language`, `terminology map`, `sync the UI`, `feel native to`, `reference product vocabulary`, `dental practice management software UI`
 
+### `continuous-improvement-skills:design-of-experiments`
+
+**Invoke:** `/continuous-improvement-skills:design-of-experiments` — or just describe the task.
+
+**What it does:** Designs and analyzes efficient multi-factor experiments — full and fractional two-level factorials and Plackett-Burman arrays, randomized run order, replication, main effects and interactions with resolution and aliasing explained in plain words, and Taguchi robustness against noise factors — so many factors are tested at once instead of one at a time. Use when deciding which of many candidate factors actually matter, tuning settings such as reconciliation tolerances or prompt-model-temperature combinations, or replacing slow one-factor-at-a-time trials with a designed test.
+
+**Triggers:** `design of experiments`, `DOE`, `factorial`, `fractional factorial`, `which factors actually matter`, `orthogonal array`, `Taguchi`, `robust design`, `one-factor-at-a-time is too slow`
+
 ### `continuous-improvement-skills:dmaic-problem-solving`
 
 **Invoke:** `/continuous-improvement-skills:dmaic-problem-solving` — or just describe the task.
@@ -769,6 +779,22 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 **What it does:** Runs a Six Sigma DMAIC cycle — Define, Measure, Analyze, Improve, Control — to structure a data-driven improvement project that measures and confirms cause before changing anything. Use when structuring an improvement project, reducing defects or variation with rigor, or translating voice of the customer into CTQs and a charter.
 
 **Triggers:** `DMAIC`, `six sigma`, `define measure analyze improve control`, `process improvement project`, `reduce defects`, `reduce variation`, `CTQ`
+
+### `continuous-improvement-skills:evolutionary-operation`
+
+**Invoke:** `/continuous-improvement-skills:evolutionary-operation` — or just describe the task.
+
+**What it does:** Runs Box's Evolutionary Operation (EVOP): continuous improvement performed by the live production process itself — a tiny factorial pattern of settings for 2–3 process factors, perturbed within owner-approved safe operating limits around the current operating point, cycled on live production until factor effects separate from experimental error, then the operating center shifts toward the winner and the cycle repeats indefinitely. Output never leaves spec and the process never stops. Fits any tuned production process — reconciliation matching-rule tolerances, cash-forecast model parameters, collections dunning cadence — where offline experimentation is not an option. Use when tuning a running process without taking it down, or choosing among settings using live output.
+
+**Triggers:** `EVOP`, `evolutionary operation`, `tune the matching rules`, `can't take it offline to test`, `keep improving in production`, `which tolerance is best`, `improve without stopping the process`
+
+### `continuous-improvement-skills:fmea`
+
+**Invoke:** `/continuous-improvement-skills:fmea` — or just describe the task.
+
+**What it does:** Runs a Failure Mode and Effects Analysis — structuring a process or design into steps, chaining each failure mode to its effects and causes, rating Severity, Occurrence, and Detection on anchored 1–10 scales, and prioritizing action by the Action Priority table rather than raw RPN multiplication — then keeps the register living by re-rating after actions and incidents. Use when anticipating and ranking what could go wrong before it fails: ordering reconciliation break types for investigation, design-reviewing an auto-match rule set before go-live, or choosing what to test hardest.
+
+**Triggers:** `FMEA`, `failure modes`, `failure mode and effects analysis`, `severity occurrence detection`, `action priority`, `RPN`, `risk priority number`, `rank what could go wrong`
 
 ### `continuous-improvement-skills:kaizen-and-codesign`
 
@@ -786,6 +812,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Triggers:** `lean six sigma software`, `DMAIC software`, `Toyota production system for software`, `Deming for software`, `standardize and measure`, `begin with the end in mind`, `adversarial release gauntlet`, `WCAG-conformant app build`, `stability and redundancy`, `co-design the UI`
 
+### `continuous-improvement-skills:measurement-systems-analysis`
+
+**Invoke:** `/continuous-improvement-skills:measurement-systems-analysis` — or just describe the task.
+
+**What it does:** Answers two questions no metric-driven decision should skip: can this measurement be trusted, and is the process behind it capable? Part A runs Gage R&R — a crossed study (10 parts × 3 operators × 3 trials, blind and randomized) decomposed by ANOVA into repeatability, reproducibility, and part-to-part variation, judged on %GRR and distinct categories — plus attribute agreement studies for pass/fail judgments, including LLM-as-judge scoring, where agreement across judges and repeated runs is measured before any eval score is trusted. Part B computes process capability, Cp and Cpk against spec limits, only after stability is confirmed on a control chart. Use when validating a metric or gauge, measuring inter-rater or judge agreement, or judging a stable process against its spec limits.
+
+**Triggers:** `gage R&R`, `measurement systems analysis`, `can I trust this metric`, `repeatability and reproducibility`, `inter-rater agreement`, `attribute agreement`, `LLM judge agreement`, `process capability`, `Cp`, `Cpk`, `capability study`
+
 ### `continuous-improvement-skills:project-command-center`
 
 **Invoke:** `/continuous-improvement-skills:project-command-center` — or just describe the task.
@@ -793,6 +827,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 **What it does:** Adaptive project command doctrine for planning, requirements, architecture, implementation, debugging, code review, release preparation, incident response, statistical interpretation, technical writing, and AI-system review — Van Riper red-teaming (preserve the possibility of failure, log interventions, separate continuation from validation), nested OODA loops, Toyota-style flow, co-design with feedback closure, Smart Brevity updates, contract-drafting writing discipline, absolute-vs-relative risk and full confusion-matrix statistics, constrained-agency AI assurance, and the Chicken Little constructive-paranoia pass. Use when planning or reviewing projects, auditing experiments or benchmarks, evaluating risk claims or diagnostic metrics, or preparing releases.
 
 **Triggers:** `project command`, `red team the plan`, `preserve the possibility of failure`, `intervention log`, `OODA`, `audit this benchmark`, `relative risk claim`, `confusion matrix`, `release readiness`, `constructive paranoia`, `now next later watch. metadata: version: "1.0.0" source: "Adapted from the user's project-command-center spec (2026-08-05)"`
+
+### `continuous-improvement-skills:qfd-house-of-quality`
+
+**Invoke:** `/continuous-improvement-skills:qfd-house-of-quality` — or just describe the task.
+
+**What it does:** Builds a Quality Function Deployment House of Quality — translating weighted customer needs (the WHATs, e.g. what a co-design session heard from users) into measurable technical characteristics (the HOWs) through a relationship matrix, a correlation roof that exposes engineering tradeoffs, computed importance scores, competitive benchmarks, and targets, then cascading each level's HOWs into the next matrix's WHATs. It is the translation bridge between the customer input that kaizen-and-codesign produces and the CTQs that lean-six-sigma-for-software consumes. Use when translating customer needs into engineering specs, prioritizing features or requirements against weighted needs, or deciding what to build first with a defensible matrix.
+
+**Triggers:** `house of quality`, `QFD`, `quality function deployment`, `translate customer needs to specs`, `requirements matrix`, `what should we build first`, `voice of customer to CTQ`, `customer needs to engineering characteristics`
 
 ### `continuous-improvement-skills:root-cause-analysis`
 
@@ -809,6 +851,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 **What it does:** Documents the current best-known method for a repeatable task as standard work (an SOP) — capturing sequence, timing, and the key points and reasons — with takt/cycle context and visual management, so the process is stable enough to improve. Use when documenting, standardizing, or stabilizing a process, or writing an SOP or work instruction.
 
 **Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize`, `visual management`
+
+### `continuous-improvement-skills:theory-of-constraints`
+
+**Invoke:** `/continuous-improvement-skills:theory-of-constraints` — or just describe the task.
+
+**What it does:** Applies Goldratt's Theory of Constraints — the five focusing steps (identify, exploit, subordinate, elevate, repeat), drum-buffer-rope scheduling, and throughput accounting — to find the one step that limits a whole system's output and manage everything else to its pace. Use when one task or resource gates an entire process (a month-end close calendar, an AR collections pipeline, a team's WIP), when speeding up busy non-bottlenecks isn't moving the end date, or when deciding whether added capacity is worth the spend.
+
+**Triggers:** `bottleneck`, `theory of constraints`, `five focusing steps`, `drum-buffer-rope`, `exploit the constraint`, `everything is waiting on X`, `the whole close waits on one task`, `throughput accounting`
 
 ### `continuous-improvement-skills:value-stream-mapping`
 
@@ -834,7 +884,7 @@ Install: `/plugin install board-of-advisors-skills@treasury-analyst-skills`
 
 ## `full-stack-dev-skills`
 
-Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings.
+Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
 
 Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
@@ -928,7 +978,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, and the Chicken Little family: engineer, executive advisor, technical compiler, college kid).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, and Comrade Engineer's soviet-space-graphite simplicity challenge).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -980,6 +1030,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"`
 
+### `coding-agent-skills:extreme-ownership`
+
+**Invoke:** `/coding-agent-skills:extreme-ownership` — or just describe the task.
+
+**What it does:** Acts as "The Commander" — a theatrical leadership persona channeling Jocko Willink's published Extreme Ownership doctrine (an homage to the published work, not the person): total ownership of every outcome with zero excuse-making, the four Laws of Combat applied to projects — Cover and Move (cross-functional mutual support), Simple (plans the most junior teammate can repeat back), Prioritize and Execute (detach, assess, make a call), Decentralized Command (intent so people act without permission) — Dichotomy of Leadership balance checks, leading up and down the chain, and disciplined blameless debriefs. Calm, direct, "Good." at every setback. Use when the user asks for Jocko or wants ownership discipline on a project: blame-language rewrites, cross-team dependency briefs, triage under overload, delegation briefs.
+
+**Triggers:** `jocko`, `extreme ownership`, `laws of combat`, `cover and move`, `prioritize and execute`, `decentralized command`, `discipline equals freedom`, `own this project. metadata: version: "1.0.0" source: >- Homage persona built on the published leadership doctrine of Jocko Willink and Leif Babin (Extreme Ownership; The Dichotomy of Leadership). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
+
 ### `coding-agent-skills:git-and-code-review`
 
 **Invoke:** `/coding-agent-skills:git-and-code-review` — or just describe the task.
@@ -1020,6 +1078,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Triggers:** `write a script`, `build a tool`, `draft a document`, `technical spec`, `project plan`, `review this code`, `clean this up`, `audit this`, `scope this project`, `break into phases`, `stress test`, `improve this process`, `script wizard. metadata: version: "1.0" author: User-drafted workflow spec; adapted to house standard`
 
+### `coding-agent-skills:soviet-space-graphite`
+
+**Invoke:** `/coding-agent-skills:soviet-space-graphite` — or just describe the task.
+
+**What it does:** Acts as "Comrade Engineer" — a theatrical Soviet-era design-bureau persona built on the space-pen legend (NASA buys a costly pen, Soviets use a pencil) AND on its falsity: graphite dust is conductive and flammable in a spacecraft, both programs bought the pen, and that falsity is the deeper lesson. Relentlessly hunts the simpler solution — the Pencil Pass generates radically cheaper alternatives (do nothing, use what exists, buy not build, delete the requirement) — then subjects every survivor to the Graphite Test: the hidden constraint that makes the simple thing dangerous, before a better-faster-cheaper triage and a trajectory check that the deliverable still serves the mission. Use when asked for the simple solution, when a project feels overengineered, or to streamline direction.
+
+**Triggers:** `soviet space graphite`, `comrade engineer`, `space pen`, `is there a pencil`, `simpler solution`, `better faster cheaper`, `are we overengineering this`, `streamline our direction. metadata: version: "1.0.0" source: >- Original house persona commissioned by the user`, `built on the space-pen legend and its debunking. The legend's falsity is load-bearing: simplicity as search strategy`, `hidden constraints as the veto`
+
 ### `coding-agent-skills:sparring-partner`
 
 **Invoke:** `/coding-agent-skills:sparring-partner` — or just describe the task.
@@ -1027,6 +1093,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Acts as a rigorous, constructive sparring partner that evaluates the user's submitted work — projects, deliverables, scripts, code, plans, writing, any work product — combining the eye of a battle-tested principal engineer, a meticulous editor, a skeptical stakeholder, and a demanding coach who wants the user to win. Delivers structured, direct, evidence-based feedback: a verdict, specific strengths, sparring feedback (clarify / reconsider / deepen / fix / risks), probing questions, and a prioritized action plan — never sycophantic, always pairing criticism with why it matters and a path forward. Use when the user submits work for critique, pressure-testing, or red-teaming.
 
 **Triggers:** `sparring partner`, `spar with this`, `review this`, `critique my`, `evaluate my`, `feedback on`, `pressure test`, `red team`, `tear this apart`, `be honest about`, `sparring review`, `how good is this. metadata: version: "1.0" author: User-drafted persona spec; adapted to house standard`
+
+### `coding-agent-skills:stay-hard-accountability`
+
+**Invoke:** `/coding-agent-skills:stay-hard-accountability` — or just describe the task.
+
+**What it does:** Acts as "The Mirror" — a theatrical hard-accountability persona channeling David Goggins's published Can't Hurt Me doctrine (an homage to the published work, not the person): the Accountability Mirror (the real status in plain words, no softeners), the 40% Rule (the first "we're done" is roughly 40% of true capacity — challenged with evidence, never bravado), the Cookie Jar (a logged bank of past hard wins drawn on mid-crisis), callusing the mind (scheduled deliberate discomfort — the avoided task first), and finishing what was started. Intense, no-excuses voice kept professional; effort aimed at controllables, system problems still get system fixes. Use when the user asks for Goggins or wants the mirror held up: watermelon status reports (green outside, red inside), stalled grind-phase projects, avoided backlogs, honest capacity conversations.
+
+**Triggers:** `goggins`, `stay hard`, `accountability mirror`, `40% rule`, `forty percent rule`, `cookie jar`, `callus the mind`, `stop making excuses`, `hold up the mirror. metadata: version: "1.0.0" source: >- Homage persona built on the published doctrine of David Goggins (Can't Hurt Me; Never Finished). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
 
 ### `coding-agent-skills:writing-agent-skills`
 
@@ -1179,4 +1253,96 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 **What it does:** Applies Ken Adams clarity principles plus Axios Smart Brevity to technical, legal, professional, clinical, and documentation writing — rejects the "tested language" myth (litigated language is bad language), eliminates archaisms, doublets, ambiguity, and lawyerisms, and structures everything for scanning: the one most important point first, "why it matters" second, short active sentences, bullets and bold, nothing non-essential. Use for drafting, editing, or reviewing documents, contract language, clinical notes, emails, report writing, code comments, or any request for clear, brief, precise, or litigation-resistant language.
 
 **Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing. metadata: version: "1.0.0" source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"`
+
+## `safety-and-reliability-skills`
+
+High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, and reliability engineering math (Weibull, MTBF, availability).
+
+Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
+
+### `safety-and-reliability-skills:bowtie-barrier-analysis`
+
+**Invoke:** `/safety-and-reliability-skills:bowtie-barrier-analysis` — or just describe the task.
+
+**What it does:** Maps the defenses around a standing hazard as a bowtie: names the top event where control is lost, generates threat lines by running HAZOP guidewords (no, more, less, reverse, as well as, part of, other than) over the process, places independent preventive barriers on each threat line and mitigative/recovery barriers on each consequence, attaches escalation factors that degrade barriers, and gives every barrier an owner plus an assurance test — policing the policy-as-barrier error throughout. Use when mapping what stands between a hazard and a loss (unauthorized payment released, fraudulent instruction accepted, clinical harm), turning a flat control list into a defense architecture, or auditing whether a claimed control is a real barrier.
+
+**Triggers:** `bowtie`, `barrier analysis`, `top event`, `lines of defense`, `what stops this from happening`, `escalation factor`, `HAZOP`, `guideword`
+
+### `safety-and-reliability-skills:checklist-design`
+
+**Invoke:** `/safety-and-reliability-skills:checklist-design` — or just describe the task.
+
+**What it does:** Designs checklists that actually get used — selecting only killer items (steps that cause serious harm if missed AND are skipped in practice), choosing read-do vs. do-confirm format, anchoring the card to a natural pause point, holding it to 5–9 imperative items on one page, and field-testing it in the real workflow — and diagnoses why an existing checklist is ignored or produced no improvement. Use when designing a wire-release, sterilization, patient-handoff, or close-task checklist, cutting a bloated one down, or fixing one that people skip; running an existing checklist stays with the skill that owns that process.
+
+**Triggers:** `design a checklist`, `read-do`, `do-confirm`, `killer items`, `pause point`, `our checklist isn't working`, `people skip the checklist`, `checklist too long`, `redesign the checklist`
+
+### `safety-and-reliability-skills:reliability-engineering`
+
+**Invoke:** `/safety-and-reliability-skills:reliability-engineering` — or just describe the task.
+
+**What it does:** Applies reliability-engineering math to systems and processes: fits a Weibull distribution to failure times (censored units handled honestly), reads the shape parameter beta to choose burn-in vs run-to-failure vs scheduled replacement, computes MTBF, MTTR, and availability, converts an SLO target into an allowed-downtime budget, works series/parallel system arithmetic — parallel credit only with demonstrated independent failover — and forecasts from two or three failures with Weibayes. Use when a failure log needs quantifying (Oracle interface or bank-feed failures, job aborts, recon breaks, equipment), when sizing redundancy against an uptime target, or when setting a replacement or renewal schedule.
+
+**Triggers:** `Weibull`, `bathtub curve`, `MTBF`, `MTTR`, `availability math`, `downtime budget`, `series parallel reliability`, `burn-in`, `failure rate fit`, `how much downtime does our SLO allow`
+
+### `safety-and-reliability-skills:sbar-structured-communication`
+
+**Invoke:** `/safety-and-reliability-skills:sbar-structured-communication` — or just describe the task.
+
+**What it does:** Structures high-stakes workplace communication with the protocols high-hazard industries run on: SBAR for escalations (Situation, Background, Assessment, Recommendation with a deadline), I-PASS for transferring work (criticality, problem summary, action list, if-then contingencies, receiver read-back), closed-loop confirmation for critical instructions, and PACE graded assertiveness (Probe, Alert, Challenge, Emergency) for questioning a decision upward — drafting phrase ladders for the specific relationship and roleplaying the hard conversation first. Use when escalating an issue to a manager or treasurer, transitioning work for coverage or shift change, giving instructions that must not be misheard, or preparing to challenge a superior's call such as a suspicious approved payment.
+
+**Triggers:** `SBAR`, `escalate this to`, `structured handoff`, `transition this work`, `coverage notes`, `read-back`, `closed-loop communication`, `graded assertiveness`, `PACE`, `speak up to the boss`
+
+## `decision-science-skills`
+
+Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).
+
+Install: `/plugin install decision-science-skills@treasury-analyst-skills`
+
+### `decision-science-skills:after-action-review`
+
+**Invoke:** `/decision-science-skills:after-action-review` — or just describe the task.
+
+**What it does:** Facilitates the Army's four-question after-action review (AAR): a blameless, rank-free team debrief asking what was SUPPOSED to happen, what ACTUALLY happened (ground truth before interpretation), WHY the difference, and what to SUSTAIN and IMPROVE — roughly a quarter of the time on each of the first two questions and half on causes and fixes. The LLM reconstructs the what-actually-happened timeline from logs, emails, and tickets, keeps discussion on the four rails, and converts sustain/improve items into standard-work updates; it facilitates and never adjudicates blame. Use after a project milestone, a month-end close, a reconciliation incident or break, or an Oracle go-live. Owns team and event debriefs — an assistant's own self-retrospective belongs to reflective-learner instead.
+
+**Triggers:** `after-action review`, `AAR`, `hot wash`, `team debrief`, `sustain and improve`, `what should we do differently next close`
+
+### `decision-science-skills:competing-hypotheses-analysis`
+
+**Invoke:** `/decision-science-skills:competing-hypotheses-analysis` — or just describe the task.
+
+**What it does:** Weighs rival explanations against the same body of evidence using Heuer's structured competing-hypotheses method from intelligence analysis: brainstorm the full hypothesis set including unlikely and deception hypotheses, list the significant evidence, build the hypothesis matrix (hypotheses across the top, evidence down the side), drop non-diagnostic evidence, judge by disconfirmation — the winner is the hypothesis with the least evidence against it — sensitivity-check the load-bearing items, report the relative likelihood of every hypothesis, and name the future observations that would change the answer. Use when several plausible causes compete: a reconciliation break that resists the standard pass, an incident with multiple suspects, any analysis at risk of confirmation bias.
+
+**Triggers:** `competing hypotheses`, `hypothesis matrix`, `which explanation fits the evidence`, `diagnostic evidence`, `rule out causes`, `weigh rival explanations`, `why is this break really happening`
+
+### `decision-science-skills:pre-mortem`
+
+**Invoke:** `/decision-science-skills:pre-mortem` — or just describe the task.
+
+**What it does:** Runs Gary Klein's pre-mortem — the prospective-hindsight exercise — on a plan before commitment: declare that the plan has already failed outright, have every participant silently and independently write reasons why, round-robin the reasons until exhausted, rank them, and strengthen the plan against the top items with named owners. Includes a solo-analyst variant where the LLM generates a heterogeneous set of failure narratives (technical, political, data, timing) and writes each stakeholder's reason for the human to rank. Use before committing to an Oracle configuration change, a reconciliation-engine go-live, an FBDI load, a dental-app release, or any plan the team is about to lock in.
+
+**Triggers:** `premortem`, `pre-mortem`, `assume it failed`, `what could sink this`, `before we go live`, `prospective hindsight`
+
+### `decision-science-skills:principled-negotiation`
+
+**Invoke:** `/decision-science-skills:principled-negotiation` — or just describe the task.
+
+**What it does:** Prepares and runs a negotiation with a two-layer method — Fisher/Ury strategy (map the interests behind each side's positions, build your BATNA and estimate theirs, assemble objective criteria, invent options for mutual gain) plus Voss conversation tactics (accusation audit, mirrors, labels, calibrated how/what questions) — drafting BATNA trees, interest maps, criteria tables, and question banks, and roleplaying the counterpart for rehearsal, while the human sets the walk-away line and makes every concession decision. Use when preparing for, rehearsing, or debriefing a negotiation over a bank fee increase (banking-skills:bank-fee-analysis builds the benchmark case; this skill runs the ask), processor markup, an insurance-carrier fee schedule, or a vendor or carrier contract renewal or dispute.
+
+**Triggers:** `BATNA`, `prepare for a negotiation`, `push back on this fee increase`, `renegotiate the contract`, `calibrated questions`, `tactical empathy`, `accusation audit`, `talk them down`
+
+### `decision-science-skills:reference-class-forecasting`
+
+**Invoke:** `/decision-science-skills:reference-class-forecasting` — or just describe the task.
+
+**What it does:** Applies the outside view (Kahneman/Tversky's planning fallacy; Flyvbjerg's reference-class method) to discipline any material estimate: identify a reference class of comparable past cases, establish its outcome distribution, anchor on that base rate, adjust only with explicit written justification — or apply a required uplift at a chosen certainty level (P80-style) — then log the prediction and score it against actuals. Counters optimism bias and strategic misrepresentation, and guards against tampering (reworking the rule after every miss). Turns an existing variance history, such as per-driver MAPE and signed bias, into next-cycle base-rate anchors; it feeds estimation loops, never builds the models. Use when an estimate rests only on its own story or a plan looks optimistic.
+
+**Triggers:** `outside view`, `reference class`, `base-rate anchor`, `base rate`, `optimism bias`, `planning fallacy`, `how long do projects like this actually take`, `uplift the estimate`
+
+### `decision-science-skills:tabletop-wargaming`
+
+**Invoke:** `/decision-science-skills:tabletop-wargaming` — or just describe the task.
+
+**What it does:** Designs and runs a multi-party tabletop exercise with an adversary and adjudication, in the lineage Kriegsspiel → Army course-of-action analysis (action / reaction / counteraction) → CISA-style tabletop packages: define objectives and scenario (a BEC payment-fraud drill, a bank-connectivity outage on payroll day, ransomware during close), write the blue team's commander's intent (purpose, key tasks, end state), assign blue players, a red cell, and a white-cell facilitator/adjudicator, play turns driven by pre-scripted and adaptive injects, adjudicate plausibility, capture decisions and gaps, and hand off to an after-action review. The LLM plays red and white cell strictly as a scenario generator — humans adjudicate every consequential outcome. Use when rehearsing an incident-response, fraud, continuity, or cutover plan against an adaptive adversary.
+
+**Triggers:** `tabletop exercise`, `wargame the plan`, `run a drill`, `incident simulation`, `inject`, `BCP exercise`, `commander's intent`
 
