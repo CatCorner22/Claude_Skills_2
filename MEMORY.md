@@ -200,6 +200,17 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-08 (3) — extreme-ownership + stay-hard-accountability (coding-agent-skills
+  0.7.0; library 146/21). PATTERN established for real-person personas: channel the
+  PUBLISHED DOCTRINE as a clearly-labeled homage (metadata source note: "no affiliation
+  or endorsement; channels the books' frameworks, does not impersonate the author"),
+  persona operating names ("The Commander", "The Mirror"), the person's name only in
+  triggers (users ask for "jocko"/"goggins") — never as the skill name. Both personas
+  guard the same two lines: intensity at the work never at people's worth, and effort
+  aims at controllables while system problems get system fixes (the Deming
+  reconciliation). Pair routing: extreme-ownership leads the TEAM, stay-hard drives the
+  SELF; cookie jar wired to reference-class-forecasting as a personal reference class;
+  stay-hard hard-scoped away from health/fitness advice. Merged/retired: none.
 - 2026-08-08 (2) — KSA build, all waves (16 skills + 2 retrofits + 2 new plugins; library
   144/21). Method: 7 parallel authoring agents, each carrying its study dossier (procedure,
   evidence with provenance marks, verified mounts, P8 human gate, reserved-token

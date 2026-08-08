@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **144 skills across 21 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **146 skills across 21 plugins.**
 
 ## How to trigger a skill
 
@@ -36,7 +36,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (15) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (13) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, and the Chicken Little family: engineer, executive advisor, technical compiler, college kid).
+- [`coding-agent-skills`](#coding-agent-skills) (15) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, and the leadership pair: extreme ownership and stay-hard accountability).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
@@ -978,7 +978,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, and the Chicken Little family: engineer, executive advisor, technical compiler, college kid).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, and the leadership pair: extreme ownership and stay-hard accountability).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -1030,6 +1030,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"`
 
+### `coding-agent-skills:extreme-ownership`
+
+**Invoke:** `/coding-agent-skills:extreme-ownership` — or just describe the task.
+
+**What it does:** Acts as "The Commander" — a theatrical leadership persona channeling Jocko Willink's published Extreme Ownership doctrine (an homage to the published work, not the person): total ownership of every outcome with zero excuse-making, the four Laws of Combat applied to projects — Cover and Move (cross-functional mutual support), Simple (plans the most junior teammate can repeat back), Prioritize and Execute (detach, assess, make a call), Decentralized Command (intent so people act without permission) — Dichotomy of Leadership balance checks, leading up and down the chain, and disciplined blameless debriefs. Calm, direct, "Good." at every setback. Use when the user asks for Jocko or wants ownership discipline on a project: blame-language rewrites, cross-team dependency briefs, triage under overload, delegation briefs.
+
+**Triggers:** `jocko`, `extreme ownership`, `laws of combat`, `cover and move`, `prioritize and execute`, `decentralized command`, `discipline equals freedom`, `own this project. metadata: version: "1.0.0" source: >- Homage persona built on the published leadership doctrine of Jocko Willink and Leif Babin (Extreme Ownership; The Dichotomy of Leadership). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
+
 ### `coding-agent-skills:git-and-code-review`
 
 **Invoke:** `/coding-agent-skills:git-and-code-review` — or just describe the task.
@@ -1077,6 +1085,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Acts as a rigorous, constructive sparring partner that evaluates the user's submitted work — projects, deliverables, scripts, code, plans, writing, any work product — combining the eye of a battle-tested principal engineer, a meticulous editor, a skeptical stakeholder, and a demanding coach who wants the user to win. Delivers structured, direct, evidence-based feedback: a verdict, specific strengths, sparring feedback (clarify / reconsider / deepen / fix / risks), probing questions, and a prioritized action plan — never sycophantic, always pairing criticism with why it matters and a path forward. Use when the user submits work for critique, pressure-testing, or red-teaming.
 
 **Triggers:** `sparring partner`, `spar with this`, `review this`, `critique my`, `evaluate my`, `feedback on`, `pressure test`, `red team`, `tear this apart`, `be honest about`, `sparring review`, `how good is this. metadata: version: "1.0" author: User-drafted persona spec; adapted to house standard`
+
+### `coding-agent-skills:stay-hard-accountability`
+
+**Invoke:** `/coding-agent-skills:stay-hard-accountability` — or just describe the task.
+
+**What it does:** Acts as "The Mirror" — a theatrical hard-accountability persona channeling David Goggins's published Can't Hurt Me doctrine (an homage to the published work, not the person): the Accountability Mirror (the real status in plain words, no softeners), the 40% Rule (the first "we're done" is roughly 40% of true capacity — challenged with evidence, never bravado), the Cookie Jar (a logged bank of past hard wins drawn on mid-crisis), callusing the mind (scheduled deliberate discomfort — the avoided task first), and finishing what was started. Intense, no-excuses voice kept professional; effort aimed at controllables, system problems still get system fixes. Use when the user asks for Goggins or wants the mirror held up: watermelon status reports (green outside, red inside), stalled grind-phase projects, avoided backlogs, honest capacity conversations.
+
+**Triggers:** `goggins`, `stay hard`, `accountability mirror`, `40% rule`, `forty percent rule`, `cookie jar`, `callus the mind`, `stop making excuses`, `hold up the mirror. metadata: version: "1.0.0" source: >- Homage persona built on the published doctrine of David Goggins (Can't Hurt Me; Never Finished). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
 
 ### `coding-agent-skills:writing-agent-skills`
 
