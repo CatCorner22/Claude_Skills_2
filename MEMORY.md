@@ -200,6 +200,18 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-08 (5) — weight-of-the-books (safety-and-reliability 0.2.0; library 148/21).
+  User-commissioned on the UT sinking-library legend (assumed true as given; held
+  honestly as told-of-many-campuses). The failure class: category omission of the
+  payload the system exists to carry; countermeasure: the signed one-page Load Manifest
+  (four numbers per load — day-1/PEAK/growth/special-lot — every load traced to a
+  bearer with capacity, written factors WITH floors, exhaustion dates, loaded tests,
+  one-way doors). LESSON (review-earned): the 3-lens adversarial workflow caught my own
+  dimensionally-invalid exhaustion formula (factor ÷ growth-rate is not a date; correct:
+  t = ln(F/F_floor)/ln(1+g)) AND a false seam claim (the adversarial gauntlet contains
+  zero load-test content — fuzzing is not soaking) AND the "special collections case"
+  trigger colliding with the AR-collections domain. Review catches author math, not
+  just style — keep running it on quantitative skills. Merged/retired: none.
 - 2026-08-08 (4) — soviet-space-graphite (coding-agent-skills 0.8.0; library 147/21).
   User-commissioned original persona ("Comrade Engineer") with a double-bladed doctrine
   the user designed: the false space-pen legend as simplicity SEARCH strategy (Pencil

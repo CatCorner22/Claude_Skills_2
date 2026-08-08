@@ -2,8 +2,7 @@
 
 ## 1. Positive trigger (should load the skill)
 > "We're designing the new statement-archive service. It looked fine in the demo with a
-> week of test data. Before we commit the schema — will it hold at real volumes? Run the
-> weight of the books."
+> week of test data. Before we commit the schema — will it hold at real volumes?"
 
 Expected: skill loads; builds the payload inventory (daily lines, retention horizon —
 the archive carries every year kept, not a day's feed; the backfile conversion as a
@@ -26,9 +25,10 @@ artifact; if it loads on a general assume-it-failed ask, the seam is failing.
 > "The archive service has failed four times since go-live — here are the failure
 > timestamps; what's the MTBF and should we schedule replacements?"
 
-Expected: `safety-and-reliability-skills:reliability-engineering` owns math on observed
-failures (Weibull, MTBF). Weight-of-the-books is the before-commitment review; after
-failures exist, the reliability skill takes over.
+Expected: `safety-and-reliability-skills:reliability-engineering` owns failure-data and
+availability math (Weibull, MTBF, replacement scheduling). Weight-of-the-books catches
+payload omission in the design basis; once observed failures need quantifying, the
+reliability skill is the right tool.
 
 ## 3. Quality rubric
 - **Does**: complete payload inventory (the zero-load test for completeness); four

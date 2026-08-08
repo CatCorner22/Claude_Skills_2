@@ -11,8 +11,8 @@ description: >-
   one-page signed Load Manifest, re-reviewed on every payload change. Use when sizing or
   design-reviewing a system, feature, migration, or process against its real volumes.
   Triggers: weight of the books, sinking library, design load, load basis, load manifest,
-  will it hold at real volumes, size it for production, test loaded not empty, special
-  collections case.
+  will it hold at real volumes, size it for production, test loaded not empty, biggest
+  single lot, special-collections outlier.
 metadata:
   version: "1.0.0"
   source: >-
@@ -38,11 +38,15 @@ artifact, before commitment.
   collection, a growth inflection.
 - Not for: imagining all the ways a plan fails → `decision-science-skills:pre-mortem`
   (this skill quantifies ONE failure class — payload omission — with an artifact);
-  scoring failure modes broadly → `continuous-improvement-skills:fmea`; reliability math
-  on observed failures → `safety-and-reliability-skills:reliability-engineering` (that
-  skill is after failures exist; this one is before); the adversarial test gauntlet
-  itself → `continuous-improvement-skills:lean-six-sigma-for-software` (its
-  adversarial-testing reference executes the loaded tests this skill demands).
+  scoring failure modes broadly → `continuous-improvement-skills:fmea`; failure-data and
+  availability/redundancy math → `safety-and-reliability-skills:reliability-engineering`
+  (that skill quantifies failures and sizes redundancy; this one catches payload
+  omission in the design basis); the hostile-input gauntlet (fuzzing, property tests,
+  chaos) → `continuous-improvement-skills:lean-six-sigma-for-software` — it complements
+  but does not include loaded testing; the loaded-test patterns live in this skill's own
+  references/load-manifest-method.md §4; full adversarial architecture autopsy →
+  `coding-agent-skills:chicken-little-technical-compiler` (this skill quantifies only
+  the payload and its bearers).
 
 ## Do it
 1. **Name the payload.** What does this thing exist to carry? Books, not floors: data
@@ -67,10 +71,13 @@ artifact, before commitment.
    it, the design has omitted it. Chains count: the load lands on every component in its
    path, and the path's capacity is its weakest member.
 4. **Apply explicit margin.** Safety factor = stated capacity ÷ design load, chosen
-   deliberately per load (structural engineering publishes its factors; pick yours and
-   write them down — a margin that isn't written down is a hope). Then date the margin:
-   given the growth curve, when does each factor fall below its floor? "The building is
-   full in 2031" is a design output, and so is what happens then.
+   deliberately per load with a written floor (structural engineering publishes its
+   factors; pick yours and write them down — a margin that isn't written down is a
+   hope). Compute the factor for each governing case — peak, the special lot, and the
+   coinciding case — and record the minimum. Then date the margin: the exhaustion date
+   is when projected load reaches capacity ÷ floor (formulas in
+   references/load-manifest-method.md §3). "The building is full in year N" is a design
+   output, and so is what happens then.
 5. **Test loaded, not empty.** The acceptance plan must exercise design load, peak load,
    and the special-collections lot with realistic payload — an empty-building inspection
    proves the paint, not the purpose. Soak at sustained peak; replay the largest real
