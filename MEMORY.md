@@ -200,6 +200,18 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-08 (6) — the-challenger (decision-science 0.2.0; library 149/21).
+  User-commissioned revision review against momentum/sunk-cost timeline lock-in;
+  anchored on the documented Challenger launch-decision record (Rogers Commission,
+  Vaughan's normalization of deviance, the burden inversion) — held SOBERLY, grave
+  register, no theatrics: seven people died; borrow lessons, never drama. Core
+  mechanics: triggers installed at plan time (reviews fire on triggers, not courage),
+  zero-basing with sunk costs excluded by construction + the Grove walk-out question,
+  burden-of-proof placement said aloud, deviance scan against first-sighting language,
+  ≥3 options before comparison, dissent restated before deciding, decision log with
+  next trigger. Key seam crystallized: The Mirror governs EFFORT on the chosen plan,
+  The Challenger governs whether the plan still deserves it — quitting the plan ≠
+  quitting the work; partner skills, not exits from each other. Merged/retired: none.
 - 2026-08-08 (5) — weight-of-the-books (safety-and-reliability 0.2.0; library 148/21).
   User-commissioned on the UT sinking-library legend (assumed true as given; held
   honestly as told-of-many-campuses). The failure class: category omission of the

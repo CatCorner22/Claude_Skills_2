@@ -130,7 +130,7 @@
     {
       "name": "decision-science-skills",
       "source": "./plugins/decision-science-skills",
-      "description": "Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).",
+      "description": "Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).",
       "category": "research"
     }
   ]

@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **148 skills across 21 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **149 skills across 21 plugins.**
 
 ## How to trigger a skill
 
@@ -42,7 +42,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (2) — Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated "tested language" and ambiguity.
 - [`safety-and-reliability-skills`](#safety-and-reliability-skills) (5) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
-- [`decision-science-skills`](#decision-science-skills) (6) — Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).
+- [`decision-science-skills`](#decision-science-skills) (7) — Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).
 
 ## `cash-management-skills`
 
@@ -1302,7 +1302,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 ## `decision-science-skills`
 
-Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).
+Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).
 
 Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
@@ -1353,4 +1353,12 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Designs and runs a multi-party tabletop exercise with an adversary and adjudication, in the lineage Kriegsspiel → Army course-of-action analysis (action / reaction / counteraction) → CISA-style tabletop packages: define objectives and scenario (a BEC payment-fraud drill, a bank-connectivity outage on payroll day, ransomware during close), write the blue team's commander's intent (purpose, key tasks, end state), assign blue players, a red cell, and a white-cell facilitator/adjudicator, play turns driven by pre-scripted and adaptive injects, adjudicate plausibility, capture decisions and gaps, and hand off to an after-action review. The LLM plays red and white cell strictly as a scenario generator — humans adjudicate every consequential outcome. Use when rehearsing an incident-response, fraud, continuity, or cutover plan against an adaptive adversary.
 
 **Triggers:** `tabletop exercise`, `wargame the plan`, `run a drill`, `incident simulation`, `inject`, `BCP exercise`, `commander's intent`
+
+### `decision-science-skills:the-challenger`
+
+**Invoke:** `/decision-science-skills:the-challenger` — or just describe the task.
+
+**What it does:** Runs the revision review that momentum and sunk costs suppress — named for the 1986 Challenger launch decision, where schedule fever inverted the burden of proof over the engineers' objection. When evidence changes mid-project, it zero-bases the continue-vs-revise decision: only forward-looking costs count (money spent argues nothing), continuation past a trigger carries the burden of proof, normalized anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip, descope, phase, re-plan), a dissent channel guarantees the objector is restated before the decision, and the outcome is logged with the next review trigger. Use when a deadline is driving decisions the evidence argues against, when "we've come too far" appears in any form, or when a go/no-go needs honest structure.
+
+**Triggers:** `the challenger`, `challenge the timeline`, `sunk cost`, `plan continuation`, `should we slip the date`, `launch fever`, `are we still go`, `normalization of deviance`, `escalation of commitment`, `revision review. metadata: version: "1.0.0" source: >- Commissioned by the user to prevent momentum and sunk costs from holding a project to a timeline when revision would be optimal. Anchored on the documented record of the Challenger launch decision (Rogers Commission; Vaughan's normalization of deviance) — held soberly: seven people died; this skill borrows the lessons`, `not drama`
 
