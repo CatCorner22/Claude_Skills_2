@@ -128,6 +128,12 @@
       "category": "operations"
     },
     {
+      "name": "math-foundations-skills",
+      "source": "./plugins/math-foundations-skills",
+      "description": "Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).",
+      "category": "data"
+    },
+    {
       "name": "decision-science-skills",
       "source": "./plugins/decision-science-skills",
       "description": "Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).",
