@@ -94,7 +94,7 @@
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, and Comrade Engineer's soviet-space-graphite simplicity challenge).",
+      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).",
       "category": "development"
     },
     {
@@ -124,13 +124,19 @@
     {
       "name": "safety-and-reliability-skills",
       "source": "./plugins/safety-and-reliability-skills",
-      "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, and reliability engineering math (Weibull, MTBF, availability).",
+      "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).",
       "category": "operations"
+    },
+    {
+      "name": "math-foundations-skills",
+      "source": "./plugins/math-foundations-skills",
+      "description": "Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).",
+      "category": "data"
     },
     {
       "name": "decision-science-skills",
       "source": "./plugins/decision-science-skills",
-      "description": "Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, and principled negotiation (Fisher/Ury + Voss).",
+      "description": "Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).",
       "category": "research"
     }
   ]
