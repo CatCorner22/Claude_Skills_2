@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "writing-skills",
-  "description": "Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated \"tested language\" and ambiguity.",
-  "version": "0.2.0"
+  "description": "Three writing registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) — both rejecting litigated \"tested language\" and ambiguity — plus gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask.",
+  "version": "0.3.0"
 }

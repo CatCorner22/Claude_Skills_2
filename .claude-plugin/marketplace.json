@@ -118,7 +118,7 @@
     {
       "name": "writing-skills",
       "source": "./plugins/writing-skills",
-      "description": "Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated \"tested language\" and ambiguity.",
+      "description": "Three writing registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing), adams-plain-grade (5th-8th grade accessible register), and gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask).",
       "category": "writing"
     },
     {
