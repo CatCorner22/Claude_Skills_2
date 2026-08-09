@@ -207,6 +207,15 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-09 (2) — core-skills synergy proposal (docs/research/core-skills-synergy-proposal.md;
+  study only, nothing built). Fresh gap analysis of the general layer: 13 candidates
+  ranked, 6 top-tier (systems-thinking, spaced-retrieval-learning, meeting-design,
+  feedback-that-lands, deliberate-practice, structured-ideation), with two proposed new
+  plugins (learning-skills, collaboration-skills) and honest fold-ins/cuts
+  (mental-models catalog, PKM, decision-journal). Verified free trigger surface:
+  systems thinking, feedback loop, spaced repetition, SBI, brainwriting, meeting
+  agenda, habit. Doc pools the two existing shelves (KSA tier-2/3 tail; held epic
+  shortlist) so all unbuilt research is findable in one place. Awaiting user picks.
 - 2026-08-09 — math-foundations-skills plugin (6 skills, 0.1.0) + the-foreman
   (coding-agent 0.9.0); library 156/22. First build wave under the no-more-Oracle
   directive — all seven skills domain-neutral by design. Math foundations: number
