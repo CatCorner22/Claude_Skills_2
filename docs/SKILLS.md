@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **149 skills across 21 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **156 skills across 22 plugins.**
 
 ## How to trigger a skill
 
@@ -36,12 +36,13 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (15) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (16) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, and Comrade Engineer's soviet-space-graphite simplicity challenge).
+- [`coding-agent-skills`](#coding-agent-skills) (17) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (2) — Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated "tested language" and ambiguity.
 - [`safety-and-reliability-skills`](#safety-and-reliability-skills) (5) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
+- [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
 - [`decision-science-skills`](#decision-science-skills) (7) — Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).
 
 ## `cash-management-skills`
@@ -978,7 +979,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, and Comrade Engineer's soviet-space-graphite simplicity challenge).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -1101,6 +1102,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Acts as "The Mirror" — a theatrical hard-accountability persona channeling David Goggins's published Can't Hurt Me doctrine (an homage to the published work, not the person): the Accountability Mirror (the real status in plain words, no softeners), the 40% Rule (the first "we're done" is roughly 40% of true capacity — challenged with evidence, never bravado), the Cookie Jar (a logged bank of past hard wins drawn on mid-crisis), callusing the mind (scheduled deliberate discomfort — the avoided task first), and finishing what was started. Intense, no-excuses voice kept professional; effort aimed at controllables, system problems still get system fixes. Use when the user asks for Goggins or wants the mirror held up: watermelon status reports (green outside, red inside), stalled grind-phase projects, avoided backlogs, honest capacity conversations.
 
 **Triggers:** `goggins`, `stay hard`, `accountability mirror`, `40% rule`, `forty percent rule`, `cookie jar`, `callus the mind`, `stop making excuses`, `hold up the mirror. metadata: version: "1.0.0" source: >- Homage persona built on the published doctrine of David Goggins (Can't Hurt Me; Never Finished). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
+
+### `coding-agent-skills:the-foreman`
+
+**Invoke:** `/coding-agent-skills:the-foreman` — or just describe the task.
+
+**What it does:** Runs a can-do site inspection on a project before it moves forward — finding what is insufficiently built and turning every gap into a buildable fix. Modeled on two real construction controls: the draw inspection (verify claimed completion against actual built state before releasing the next phase) and the punch list that gates handover. The Foreman walks the site claim by claim, sorts findings into load-bearing deficiencies versus punch items, always answers "can we fix it?" with a sequenced plan, and says plainly whether the next phase can start — real praise for what is solid, no blame for what is not, and no releasing the draw over an unsafe structure. Use before building a next phase on top of existing work, when something feels half-built, or when "done" needs verifying.
+
+**Triggers:** `bob the builder`, `deploy the foreman`, `punch list`, `site inspection`, `draw inspection`, `half-built`, `insufficiently built`, `is this ready to build on`, `can we fix it`, `before we move forward`, `unfinished work check. metadata: version: "1.0.0" source: >- Commissioned by the user as a positive can-do build-completeness inspector`, `in affectionate homage to the spirit of the Bob the Builder children's series (no affiliation with or endorsement by its rights holders; the persona channels an optimistic construction ethos and does not reproduce the character). The mechanism is real construction practice: progress-draw inspections and the punch list`
 
 ### `coding-agent-skills:writing-agent-skills`
 
@@ -1299,6 +1308,60 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 **What it does:** Prevents the sinking-library failure — a design that never accounted for the load it exists to carry — with a design-basis load review before commitment: name every payload (data volumes, rates, users, documents, weight), quantify each at day one, at peak, on the growth curve, and at the special-collections outlier (the biggest single lot ever swallowed), trace every load to a named component with stated capacity, apply written safety factors with margin-exhaustion dates, and require acceptance tests to run LOADED at design and peak values — an empty-building inspection proves nothing. Output: a one-page signed Load Manifest, re-reviewed on every payload change. Use when sizing or design-reviewing a system, feature, migration, or process against its real volumes.
 
 **Triggers:** `weight of the books`, `sinking library`, `design load`, `load basis`, `load manifest`, `will it hold at real volumes`, `size it for production`, `test loaded not empty`, `biggest single lot`, `special-collections outlier. metadata: version: "1.0.0" source: >- Commissioned by the user on the campus legend of a university library designed without accounting for the weight of its books`, `unoccupied for years until retrofitted. Assumed true as commissioned; the legend is told of many campuses`, `and the lesson stands either way`
+
+## `math-foundations-skills`
+
+Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
+
+Install: `/plugin install math-foundations-skills@treasury-analyst-skills`
+
+### `math-foundations-skills:algebra-and-formulas`
+
+**Invoke:** `/math-foundations-skills:algebra-and-formulas` — or just describe the task.
+
+**What it does:** Translates word problems into symbols (name the unknown in words, define every quantity, state the relation that holds), solves linear equations step by step with the balance principle, rearranges formulas to isolate any variable (simple interest, breakeven quantity, rate formulas), verifies every solution by substituting back, handles inequalities and the sign flips they demand, solves two-unknown systems by substitution, and reads or debugs spreadsheet formulas as algebra — operator precedence, parentheses discipline, the hidden order-of-operations error. Use when a stated problem needs translating into math, a formula needs solving or rearranging for a different variable, or a spreadsheet formula returns a number that looks wrong.
+
+**Triggers:** `solve for x`, `rearrange the formula`, `algebra`, `linear equations`, `word problem`, `isolate the variable`, `breakeven`, `two unknowns`, `order of operations`, `PEMDAS`
+
+### `math-foundations-skills:exponential-growth-and-logs`
+
+**Invoke:** `/math-foundations-skills:exponential-growth-and-logs` — or just describe the task.
+
+**What it does:** Does the math of anything that grows or shrinks by a roughly constant percent per period — growth-factor form (up r% means ×(1+r); n periods means ×(1+r)^n), CAGR from two endpoints, doubling time exactly (ln 2/ln(1+r)) and via the rule of 72 with its accuracy range, halving time for decay, solving how-long-until-it-reaches-X with logs (t = ln(target/current)/ln(1+r)), honest log scales, and averaging growth rates with the geometric mean, not the arithmetic. Teaches why percent changes multiply, not add, why +10% then −10% ends below the start, and why linear intuition underestimates exponential runaway. Use when a quantity changes by a percent each period — revenue, users, prices, data volumes — and the question is a rate, a horizon, or a fair per-period figure; not for discounting money across dates or fitting trend models to history.
+
+**Triggers:** `exponential growth`, `CAGR`, `doubling time`, `rule of 72`, `logarithm`, `log scale`, `growth rate math`, `geometric average`, `how long until it doubles`, `decay rate`
+
+### `math-foundations-skills:number-sense-and-estimation`
+
+**Invoke:** `/math-foundations-skills:number-sense-and-estimation` — or just describe the task.
+
+**What it does:** Does trustworthy mental math and back-of-the-envelope figuring: decomposes hard arithmetic into easy pieces (10% and 1% benchmarks, compensation, round-then-correct), keeps only honest digits (significant figures, spotting spurious calculator and spreadsheet precision), works in orders of magnitude and scientific notation, builds Fermi estimates by decompose → bound → triangulate (an optimistic and a pessimistic bound that bracket the answer), and gut-checks any computed number — sign, magnitude, units, an independent rough re-derivation — before trusting it. Use when a rough number is needed fast, before accepting the output of a long calculation or model, or when a figure smells wrong.
+
+**Triggers:** `mental math`, `Fermi estimate`, `back-of-the-envelope`, `order of magnitude`, `rough number`, `ballpark`, `does this number make sense`, `significant figures`, `rounding`, `quick math`, `eyeball the math`
+
+### `math-foundations-skills:percentages-and-proportions`
+
+**Invoke:** `/math-foundations-skills:percentages-and-proportions` — or just describe the task.
+
+**What it does:** Does percent arithmetic without falling into its classic traps: percent of, percent change vs percent difference, the asymmetry of gains and losses (down 50% needs up 100% to get back), percentage points vs percent, basis points, markup vs margin, per-unit rates and per-1,000 normalization, index numbers and rebasing, weighted averages when a plain average of rates would mislead, and mix effects where a total moves opposite to every subgroup. Names the base first — percent OF WHAT — because most percent errors are base errors, and successive changes multiply rather than add. Use when computing or checking a percent change, comparing rates across groups of different sizes, converting markup to margin, quoting basis points, or when a percent-based claim looks off.
+
+**Triggers:** `percent change`, `percentage points`, `percent vs percentage points`, `basis points`, `weighted average`, `markup vs margin`, `proportion`, `per capita`, `rate per`, `of what base`, `index and rebase`
+
+### `math-foundations-skills:probability-fundamentals`
+
+**Invoke:** `/math-foundations-skills:probability-fundamentals` — or just describe the task.
+
+**What it does:** Computes probabilities with the core rules — complement, addition with the overlap subtracted, multiplication for independent events — and teaches frequency vs degree-of-belief readings, mutually exclusive vs independent (near-opposites), conditional probability and why P(A|B) differs from P(B|A) (the prosecutor's fallacy), Bayes' theorem via natural frequencies (out-of-10,000 tables) so rare-condition screening results read right, expected value and when it misleads (ruin risk, one-shot decisions), plus inoculations against base-rate neglect, the gambler's fallacy, the conjunction fallacy, and hot-hand overreads. Use for any chance-of-X question, combining event probabilities, or interpreting a positive test, screen, or alarm; not for sample-to-population inference (confidence intervals, p-values).
+
+**Triggers:** `probability`, `odds`, `chance of`, `conditional probability`, `Bayes`, `Bayes' theorem`, `expected value`, `independent events`, `mutually exclusive`, `base rate neglect`, `likelihood of both`, `what are the odds`
+
+### `math-foundations-skills:units-and-dimensional-analysis`
+
+**Invoke:** `/math-foundations-skills:units-and-dimensional-analysis` — or just describe the task.
+
+**What it does:** Converts quantities across units with the factor-label method — conversion factors written as fractions so units cancel visibly — chains multi-step conversions (time, volume, currency as a unit, per-unit rates), annualizes and de-annualizes (×12 for flows; compound-growth rates route to the sibling exponential-growth skill), and dimension-checks any formula before trusting it: write the units of every term, and if the two sides disagree the formula is wrong no matter how plausible its numbers look. Treats per-unit rates (cost per unit, items per hour) as first-class quantities that multiply and divide, and catches the classic traps — per-month vs per-year mixups, thousands vs millions scale errors, percent as a dimensionless unit. Use when converting units, checking whether a formula's units balance, or annualizing a monthly figure.
+
+**Triggers:** `unit conversion`, `convert units`, `dimensional analysis`, `units don't match`, `per unit`, `annualize`, `factor-label`, `cancel the units`, `unit check`, `thousands vs millions`
 
 ## `decision-science-skills`
 

@@ -207,6 +207,24 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-09 — math-foundations-skills plugin (6 skills, 0.1.0) + the-foreman
+  (coding-agent 0.9.0); library 156/22. First build wave under the no-more-Oracle
+  directive — all seven skills domain-neutral by design. Math foundations: number
+  sense/Fermi, percentages/proportions (mix effects, weighted means), algebra/formulas,
+  units/dimensional analysis (weight-of-the-books formula catch now cited in-library as
+  the canonical dimensional-check example), exponential growth/logs (CAGR, rule of 72),
+  probability fundamentals (Bayes via natural frequencies). Method: 3 parallel agents ×
+  2 skills, every worked number recomputed by script before writing; an authoring agent
+  caught a "base rate" trigger collision itself (reference-class-forecasting owns it)
+  and claimed "base rate neglect" instead — the collision-scan-in-brief pattern works.
+  PATTERN extended: fictional trademarked characters get the real-person homage
+  treatment (character name in triggers only — "bob the builder"; mechanism-named
+  skill; metadata no-affiliation note; persona operating name "The Foreman" joins The
+  Mirror/The Commander/The Challenger). The Foreman's mechanism is real construction
+  practice: draw inspection (verify claimed completion before releasing the next
+  phase), punch list, substantial completion; register seam vs Chicken Little =
+  same defects, opposite emotional economics; duality with soviet-space-graphite =
+  build less vs finish what you build. Merged/retired: none.
 - 2026-08-08 (7) — epic-wave research complete and HELD; standing directive recorded.
   Three research lanes (historical societies, fiction-derived frameworks, bio/physical
   analogies) returned ranked, provenance-marked candidate reports — preserved verbatim in
