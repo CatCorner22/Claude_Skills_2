@@ -207,6 +207,23 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-09 (3) — gonzo (writing-skills 0.3.0; library 157/22). User-commissioned
+  Hunter S. Thompson homage "so the spirit of Dr. Thompson lives on": skill name =
+  the genre (per the real-person pattern, the man's name lives in triggers only);
+  persona = the Desk (National Affairs model), engaged on explicit ask. Craft core:
+  story-under-the-story, narrator-in-the-story, four mixed registers (invective,
+  paranoid escalation, deadpan procedural, elegiac wave — once, never twice),
+  retained-counsel asides INVERTED because the user is an attorney (counsel is the
+  client now). Two load-bearing honesty rails, both from the canon itself: the
+  fact-fiction rail (narrator's inner weather is the only licensed fiction — the
+  ibogaine affair taught as the line not crossed) and hyperbole-cognizable-as-
+  hyperbole (legal-lines-for-counsel.md maps Sullivan/Greenbelt/Milkovich/Falwell;
+  craft insight: the DEADPAN register is the libel risk, not the fever). Canon
+  dossier research-verified with misattribution warnings (the "music business money
+  trench" quote is doctored; "weird turn pro" is from the 1974 Super Bowl piece, not
+  Vegas; "fear and loathing" first appears in his letter dated the day JFK died).
+  PATTERN reinforced: legends held labeled (torn-notebook origin = self-mythology,
+  like the space pen). Merged/retired: none.
 - 2026-08-09 (2) — core-skills synergy proposal (docs/research/core-skills-synergy-proposal.md;
   study only, nothing built). Fresh gap analysis of the general layer: 13 candidates
   ranked, 6 top-tier (systems-thinking, spaced-retrieval-learning, meeting-design,
