@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **156 skills across 22 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **157 skills across 22 plugins.**
 
 ## How to trigger a skill
 
@@ -40,7 +40,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
-- [`writing-skills`](#writing-skills) (2) — Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated "tested language" and ambiguity.
+- [`writing-skills`](#writing-skills) (3) — Three writing registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing), adams-plain-grade (5th-8th grade accessible register), and gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask).
 - [`safety-and-reliability-skills`](#safety-and-reliability-skills) (5) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
 - [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
 - [`decision-science-skills`](#decision-science-skills) (7) — Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).
@@ -1243,7 +1243,7 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
 ## `writing-skills`
 
-Ken Adams clarity writing, two registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register). Both reject litigated "tested language" and ambiguity.
+Three writing registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing), adams-plain-grade (5th-8th grade accessible register), and gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask).
 
 Install: `/plugin install writing-skills@treasury-analyst-skills`
 
@@ -1262,6 +1262,14 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 **What it does:** Applies Ken Adams clarity principles plus Axios Smart Brevity to technical, legal, professional, clinical, and documentation writing — rejects the "tested language" myth (litigated language is bad language), eliminates archaisms, doublets, ambiguity, and lawyerisms, and structures everything for scanning: the one most important point first, "why it matters" second, short active sentences, bullets and bold, nothing non-essential. Use for drafting, editing, or reviewing documents, contract language, clinical notes, emails, report writing, code comments, or any request for clear, brief, precise, or litigation-resistant language.
 
 **Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing. metadata: version: "1.0.0" source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"`
+
+### `writing-skills:gonzo`
+
+**Invoke:** `/writing-skills:gonzo` — or just describe the task.
+
+**What it does:** Files gonzo dispatches — Hunter S. Thompson-style participatory commentary on social events, news, culture, or any submitted topic — on explicit request. Channels the published gonzo craft as a labeled homage: the narrator rides inside the story, the ostensible subject gives way to the story under the story, and the copy mixes four registers (high-velocity invective, paranoid escalation, deadpan procedural, and the elegiac wave passage that drops the mask). Savage about power, ideas, and events — never inventing facts about real people; the narrator's inner weather is the only licensed fiction — and hyperbole stays legally cognizable as hyperbole, with the rhetorical-hyperbole doctrine mapped for counsel. Use when the user asks for the gonzo treatment, weird-mode commentary, or a Thompson-flavored read on anything they submit.
+
+**Triggers:** `gonzo`, `get gonzo`, `get weird`, `hunter s. thompson`, `thompson treatment`, `fear and loathing take`, `gonzo commentary`, `savage take`, `gonzo dispatch`, `ride shotgun on this. metadata: version: "1.0.0" source: >- Commissioned by the user so the spirit of Dr. Thompson's work lives on in their own endeavors. A labeled homage to the published gonzo style (Hell's Angels through the letters volumes) — no affiliation with or endorsement by the Thompson estate; the skill channels the craft of the genre he founded`, `quotes only briefly with attribution`, `and does not reproduce copyrighted passages or impersonate the man. The user is an attorney`, `which the skill considers extremely gonzo of them`
 
 ## `safety-and-reliability-skills`
 
