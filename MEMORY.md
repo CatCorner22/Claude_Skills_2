@@ -207,6 +207,23 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-10 — core-skills waves 1+2 built (9 skills; 2 new plugins; library 166/24).
+  User go-ahead "Proceed" on the synergy proposal; all domain-neutral. NEW
+  learning-skills 0.1.0 (spaced-retrieval-learning, deliberate-practice,
+  habit-design) and collaboration-skills 0.1.0 (meeting-design, feedback-that-lands);
+  decision-science 0.3.0 (+systems-thinking), continuous-improvement 0.6.0
+  (+structured-ideation, +priority-and-wip — placed as lean-for-one-person beside
+  theory-of-constraints), writing-skills 0.4.0 (+explanation-design). Method: 4
+  parallel agents with per-skill dossiers from the proposal doc; unit commits per
+  completion; honest-attribution rules enforced in-brief (10,000-hour rule corrected,
+  Feynman technique labeled posthumously distilled, Fogg/Clear as practitioner
+  synthesis, "21 days" folklore rejected, no invented statistics). Cross-plugin
+  seams established: habit-design ↔ standard-work ("a habit is personal standard
+  work"), priority-and-wip ↔ TOC ("the constraint is your attention"),
+  feedback-that-lands ↔ the-foreman (praise specificity), systems-thinking ↔ RCA
+  ("when the chain bites its own tail"). Concurrent-authoring race note: agents
+  citing a sibling authored in parallel keep the link and flag it; session owner
+  validates last — worked cleanly twice. Merged/retired: none.
 - 2026-08-09 (3) — gonzo (writing-skills 0.3.0; library 157/22). User-commissioned
   Hunter S. Thompson homage "so the spirit of Dr. Thompson lives on": skill name =
   the genre (per the real-person pattern, the man's name lives in triggers only);
