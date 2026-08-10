@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "decision-science-skills",
-  "description": "Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress), and systems-thinking (stocks/flows, feedback loops, delays, archetypes, leverage points).",
-  "version": "0.3.0"
+  "description": "Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), the-challenger revision review, systems-thinking (stocks/flows, loops, leverage points), plus the fiction-anchored set — minority-report (the precog scenario cell: structurally different futures, the one-variable turn, the dissenting scenario always filed), no-win-drills (Kobayashi Maru least-worst training with the physics-vs-policy audit), ulysses-pact (calm-state self-binding with unbinding criteria), and rashomon-effect (reconciling contradictory good-faith accounts).",
+  "version": "0.4.0"
 }

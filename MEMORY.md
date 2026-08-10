@@ -207,6 +207,28 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-10 (2) — fiction wave built (7 skills; library 173/24). User-commissioned
+  "skills from science fiction and other fiction," naming Minority Report precognition
+  explicitly — this request RE-AIMED the held epic-wave fiction lane (lane 2 consumed;
+  bio + historical lanes remain HELD). Flagship `decision-science-skills:
+  minority-report` (main-session authored): Shell-lineage scenario cell, the
+  one-variable turn, Merton reflexivity, and the honesty core from the source story —
+  the dissenting scenario is ALWAYS filed at full strength; precrime moral held
+  (forecast to choose, never convict the unhappened). Plus: no-win-drills (Kobayashi
+  Maru, physics-vs-policy audit, Kirk-move declaration), ulysses-pact (clinical-term
+  name, unbinding criteria, quote-never-scold enforcement), disarming-elicitation
+  (Columbo triple anchor + ethics rail: evidence-not-license), break-glass-playbooks
+  (Seldon crisis; watched tripwires, sealed moves, expiring authority, drills),
+  rashomon-effect (attribution corrected: plot from "In a Grove" 1922 not "Rashōmon"
+  1915; Heider 1988 named the effect; good-faith divergence is the default
+  hypothesis; Wixted&Wells nuance kept honest), rule-stress-testing (Asimov's six
+  story-level failure modes as a rule-conflict taxonomy mapped to QuickCheck, legal
+  canons, malicious compliance, Goodhart; Laws cited as fiction-catalog never
+  engineering standard — EPSRC set-aside; First Law always quoted WITH inaction
+  clause). Bumps: decision-science 0.4.0, collaboration 0.2.0, safety-and-reliability
+  0.3.0, coding-agent 0.10.0. PATTERN held 3rd time: research-verify new fiction
+  anchors before authoring; misattribution warnings are load-bearing content.
+  Merged/retired: none.
 - 2026-08-10 — core-skills waves 1+2 built (9 skills; 2 new plugins; library 166/24).
   User go-ahead "Proceed" on the synergy proposal; all domain-neutral. NEW
   learning-skills 0.1.0 (spaced-retrieval-learning, deliberate-practice,

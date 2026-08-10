@@ -94,7 +94,7 @@
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).",
+      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).",
       "category": "development"
     },
     {
@@ -124,7 +124,7 @@
     {
       "name": "safety-and-reliability-skills",
       "source": "./plugins/safety-and-reliability-skills",
-      "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).",
+      "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).",
       "category": "operations"
     },
     {
@@ -136,7 +136,7 @@
     {
       "name": "collaboration-skills",
       "source": "./plugins/collaboration-skills",
-      "description": "Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).",
+      "description": "Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail).",
       "category": "operations"
     },
     {
@@ -148,7 +148,7 @@
     {
       "name": "decision-science-skills",
       "source": "./plugins/decision-science-skills",
-      "description": "Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, and systems-thinking (feedback loops, archetypes, leverage points).",
+      "description": "Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.",
       "category": "research"
     }
   ]

@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **166 skills across 24 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **173 skills across 24 plugins.**
 
 ## How to trigger a skill
 
@@ -36,16 +36,16 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (17) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (17) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
+- [`coding-agent-skills`](#coding-agent-skills) (18) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (4) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
-- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (5) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
+- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (6) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).
 - [`learning-skills`](#learning-skills) (3) — Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
-- [`collaboration-skills`](#collaboration-skills) (2) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).
+- [`collaboration-skills`](#collaboration-skills) (3) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail).
 - [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
-- [`decision-science-skills`](#decision-science-skills) (8) — Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, and systems-thinking (feedback loops, archetypes, leverage points).
+- [`decision-science-skills`](#decision-science-skills) (12) — Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
 
 ## `cash-management-skills`
 
@@ -997,7 +997,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -1088,6 +1088,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Writes clean, reproducible Python for data work and automation — virtual environments and pinned dependencies, script vs notebook structure, pandas essentials (load, select, filter, groupby, merge, write), small functions, and basic error handling and logging. Use when scripting an analysis, automating a repetitive task, cleaning up messy analysis code, or setting up a Python project so it runs the same way twice.
 
 **Triggers:** `python`, `pandas`, `script`, `automate`, `virtualenv`, `notebook`, `dataframe`, `read csv`, `python for analysis`
+
+### `coding-agent-skills:rule-stress-testing`
+
+**Invoke:** `/coding-agent-skills:rule-stress-testing` — or just describe the task.
+
+**What it does:** Stress-tests any rule set (agent guardrails, CLAUDE.md, team policies, contract clauses, house git rules) by generating the situations where rules conflict, gap, or perversely instantiate: inventories rules and their unstated precedence, extracts load-bearing undefined terms, runs the six failure modes cataloged in Asimov's robot stories (conflict equilibrium, term widening, redundancy loss/literal compliance, scope creep/precedence inversion, definitional capture, information partitioning), adds Goodhart and malicious-compliance passes, classifies findings, proposes fixes in legal-canon vocabulary (specific-over-general, ambiguity against the drafter, term definitions), then re-tests the fixed set, since patches breed new conflicts. Use when hardening rules before they meet reality or hunting what breaks them.
+
+**Triggers:** `three laws`, `rule conflict`, `stress test the rules`, `loophole hunt`, `what breaks this policy`, `clause conflict`, `conflicting rules`, `malicious compliance`, `specification gaming. metadata: version: "1.0.0" source: >- Commissioned by the user`, `inspired by Isaac Asimov's robot stories — homage in triggers and teaching only; no affiliation. The stories are cited as fiction that catalogs rule-failure modes`, `never as an engineering standard. The mechanism is documented practice: property-based testing (QuickCheck lineage)`, `red-teaming`, `Goodhart's Law and AI specification-gaming research`, `work-to-rule`, `and the legal canons of construction`
 
 ### `coding-agent-skills:script-wizard`
 
@@ -1299,7 +1307,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 ## `safety-and-reliability-skills`
 
-High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
+High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).
 
 Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
@@ -1310,6 +1318,14 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 **What it does:** Maps the defenses around a standing hazard as a bowtie: names the top event where control is lost, generates threat lines by running HAZOP guidewords (no, more, less, reverse, as well as, part of, other than) over the process, places independent preventive barriers on each threat line and mitigative/recovery barriers on each consequence, attaches escalation factors that degrade barriers, and gives every barrier an owner plus an assurance test — policing the policy-as-barrier error throughout. Use when mapping what stands between a hazard and a loss (unauthorized payment released, fraudulent instruction accepted, clinical harm), turning a flat control list into a defense architecture, or auditing whether a claimed control is a real barrier.
 
 **Triggers:** `bowtie`, `barrier analysis`, `top event`, `lines of defense`, `what stops this from happening`, `escalation factor`, `HAZOP`, `guideword`
+
+### `safety-and-reliability-skills:break-glass-playbooks`
+
+**Invoke:** `/safety-and-reliability-skills:break-glass-playbooks` — or just describe the task.
+
+**What it does:** Arms each foreseeable crisis with a break-glass playbook, channeling documented break-glass emergency-access procedures (HIPAA; NIST/CIS-mapped testing) and regulator-mandated contingency plans with early-warning indicators and graduated triggers: define the tripwire as a number a named person watches on a stated cadence, pre-author the first ten moves at calm-headed quality, pre-grant emergency authority with automatic expiry and full logging, name the comms tree and the decision chair, drill the unsealing on a schedule, and re-arm after every firing. Converts pre-mortem failure modes into tripwire-plus-playbook pairs, red-checks each tripwire for measurability, drafts the sealed instructions, and simulates the unsealing drill. Use when a crisis is foreseeable but the team would be scrambling if it hit.
+
+**Triggers:** `break glass`, `break-glass`, `seldon crisis`, `what do we do when X hits`, `emergency access`, `runbook`, `kill switch`, `tripwire`, `covenant trip`, `we'd be scrambling`, `sealed instructions. metadata: version: "1.0.0" source: >- Homage to Asimov's Foundation — pre-recorded guidance that unseals when predicted crises arrive — an homage only`, `no affiliation with the estate or rights holders. The skill channels the documented practices: break-glass emergency-access procedures (Yale's HIPAA procedure; NIST SP 800-53 / CIS-mapped testing requirements) and regulator-mandated contingency plans built on early-warning indicators`, `graduated triggers`, `and pre-approved action menus`
 
 ### `safety-and-reliability-skills:checklist-design`
 
@@ -1375,9 +1391,17 @@ Install: `/plugin install learning-skills@treasury-analyst-skills`
 
 ## `collaboration-skills`
 
-Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).
+Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail).
 
 Install: `/plugin install collaboration-skills@treasury-analyst-skills`
+
+### `collaboration-skills:disarming-elicitation`
+
+**Invoke:** `/collaboration-skills:disarming-elicitation` — or just describe the task.
+
+**What it does:** Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed doorknob phenomenon (the key disclosure arrives as the interview seems over): lower the stakes so the expert educates rather than defends, restate their words slightly wrong so correction does the teaching, hold contradictions as the interviewer's own confusion, let silence work, then ask one casual question after the formal close. Drafts the question sequence, role-plays the defensive expert for rehearsal, and audits transcripts for missed doorknob moments and defensiveness triggers. Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction.
+
+**Triggers:** `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, `the users can't articulate what they do`, `expert won't open up`, `walkthrough with the process owner`, `doorknob question`, `one more thing. metadata: version: "1.0.0" source: >- Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo`, `NBC) — an homage only`, `no affiliation with the series or its rights holders. The skill channels the documented practices the persona inspired: the clinical-training approach in motivational interviewing named for the character`, `the FBI elicitation brochure's feigned-ignorance technique`, `and the peer-reviewed AAFP doorknob phenomenon`
 
 ### `collaboration-skills:feedback-that-lands`
 
@@ -1451,7 +1475,7 @@ Install: `/plugin install math-foundations-skills@treasury-analyst-skills`
 
 ## `decision-science-skills`
 
-Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, and systems-thinking (feedback loops, archetypes, leverage points).
+Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
 
 Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
@@ -1471,6 +1495,22 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Triggers:** `competing hypotheses`, `hypothesis matrix`, `which explanation fits the evidence`, `diagnostic evidence`, `rule out causes`, `weigh rival explanations`, `why is this break really happening`
 
+### `decision-science-skills:minority-report`
+
+**Invoke:** `/decision-science-skills:minority-report` — or just describe the task.
+
+**What it does:** Runs a precognition cell over any decision: builds three to five named, internally coherent, structurally different future scenarios (Shell-lineage scenario planning — never best/expected/worst on one axis), turns one variable at a time to find which single change flips the outcome ranking, and always files the minority report — the dissenting future given full voice, because suppressing it is the failure the namesake story is about. Adds the reflexivity check (acting on a forecast changes the futures it forecast), probabilities only via reference-class base rates with honest bands, and ends with per-scenario tripwires and a decision log. Scenarios are rehearsals, not predictions — the human owns the choice. Use when weighing future outcomes, testing what happens if a variable changes, or deciding under uncertainty.
+
+**Triggers:** `precog`, `precognition`, `minority report`, `run the scenarios`, `future outcomes`, `what happens if X changes`, `scenario planning`, `branch the futures. metadata: version: "1.0.0" source: >- Commissioned by the user`, `inspired by the precogs of Minority Report (Philip K. Dick's story and the film — homage in triggers and teaching only; no affiliation). The mechanism is documented practice: Shell-lineage scenario planning (Wack/Schwartz)`, `sensitivity analysis`, `and Merton's reflexivity. The name is also the pre-existing parliamentary term — a dissenting committee report — which is exactly the artifact this skill refuses to suppress`
+
+### `decision-science-skills:no-win-drills`
+
+**Invoke:** `/decision-science-skills:no-win-drills` — or just describe the task.
+
+**What it does:** Runs a no-win drill — a simulation with the winning move removed, as practiced in emergency-medicine patient-death scenarios and EMS stress training — and grades the decision process, never the outcome: the LLM generates a situation guaranteeing no clean exit (humans designing their own drills leave doors open), plays the escalating environment, then debriefs loss-minimization, explicit ordering of what to save, communication under futility, and the emotional response. Carries the Kirk blade held honestly (Conti & Caroland, IEEE Security & Privacy): sort physics constraints from policy constraints — reframing is legitimate when it changes policy transparently and owns the consequences, cheating when hidden — and it flags any quiet mid-drill redefinition of success. Use when every option costs and someone must practice choosing least-worst.
+
+**Triggers:** `kobayashi maru`, `no-win`, `every option is bad`, `least-worst`, `damage control drill`, `degraded mode`, `can't win this one`, `loss triage. metadata: version: "1.0.0" source: >- Homage to Star Trek's Kobayashi Maru`, `the Starfleet Academy simulation that cannot be won (the name lives in triggers only; no affiliation with or endorsement by the franchise's rights holders). The skill channels the documented training practices`, `not the fiction: no-win simulation in medical education (Annals of Emergency Medicine patient-death study; EMS Kobayashi Maru stress-training concept) and sanctioned adversarial reframing in cyber education (Conti & Caroland`, `"Embracing the Kobayashi Maru`, `" IEEE Security & Privacy — West Point / US Cyber Command)`
+
 ### `decision-science-skills:pre-mortem`
 
 **Invoke:** `/decision-science-skills:pre-mortem` — or just describe the task.
@@ -1486,6 +1526,14 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Prepares and runs a negotiation with a two-layer method — Fisher/Ury strategy (map the interests behind each side's positions, build your BATNA and estimate theirs, assemble objective criteria, invent options for mutual gain) plus Voss conversation tactics (accusation audit, mirrors, labels, calibrated how/what questions) — drafting BATNA trees, interest maps, criteria tables, and question banks, and roleplaying the counterpart for rehearsal, while the human sets the walk-away line and makes every concession decision. Use when preparing for, rehearsing, or debriefing a negotiation over a bank fee increase (banking-skills:bank-fee-analysis builds the benchmark case; this skill runs the ask), processor markup, an insurance-carrier fee schedule, or a vendor or carrier contract renewal or dispute.
 
 **Triggers:** `BATNA`, `prepare for a negotiation`, `push back on this fee increase`, `renegotiate the contract`, `calibrated questions`, `tactical empathy`, `accusation audit`, `talk them down`
+
+### `decision-science-skills:rashomon-effect`
+
+**Invoke:** `/decision-science-skills:rashomon-effect` — or just describe the task.
+
+**What it does:** Reconciles contradictory good-faith accounts of one event (witness statements, incident write-ups, contested post-mortems) using Rashomon-effect scholarship and eyewitness-memory science: takes each account whole (cognitive-interview moves) before comparing, splits accounts into observations, interpretations, and stakes, maps who could see what from where, finds the invariant core, sorts each divergence into perspective, memory, or stake artifact vs genuine contradiction, weights initial uncontaminated statements over late rehearsed ones, adjudicates genuine contradictions only against physical evidence, never confidence or seniority, and writes a reconciled account marking confidence, filing unresolved forks instead of dropping them. Good faith is the default; bad faith must be earned with evidence. Use when accounts of one event conflict.
+
+**Triggers:** `rashomon`, `conflicting accounts`, `witnesses disagree`, `everyone remembers it differently`, `whose story is right`, `reconcile the statements`, `contradictory testimony. metadata: version: "1.0.0" source: >- Commissioned by the user`, `named for the Rashomon effect — the scholarly term (Karl G. Heider`, `American Anthropologist`, `1988) that honors Kurosawa's film Rashomon (1950)`, `whose testimony plot comes from Akutagawa's "In a Grove" (1922) and whose title and frame come from Akutagawa's "Rashōmon" (1915). Homage in triggers and teaching only; no affiliation. The mechanism is documented professional method: the cognitive interview (Fisher & Geiselman)`, `eyewitness-memory research (Loftus; Wixted & Wells)`, `triangulation (Denzin)`, `and standard jury instructions on honest disagreement`
 
 ### `decision-science-skills:reference-class-forecasting`
 
@@ -1518,4 +1566,12 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Runs the revision review that momentum and sunk costs suppress — named for the 1986 Challenger launch decision, where schedule fever inverted the burden of proof over the engineers' objection. When evidence changes mid-project, it zero-bases the continue-vs-revise decision: only forward-looking costs count (money spent argues nothing), continuation past a trigger carries the burden of proof, normalized anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip, descope, phase, re-plan), a dissent channel guarantees the objector is restated before the decision, and the outcome is logged with the next review trigger. Use when a deadline is driving decisions the evidence argues against, when "we've come too far" appears in any form, or when a go/no-go needs honest structure.
 
 **Triggers:** `the challenger`, `challenge the timeline`, `sunk cost`, `plan continuation`, `should we slip the date`, `launch fever`, `are we still go`, `normalization of deviance`, `escalation of commitment`, `revision review. metadata: version: "1.0.0" source: >- Commissioned by the user to prevent momentum and sunk costs from holding a project to a timeline when revision would be optimal. Anchored on the documented record of the Challenger launch decision (Rogers Commission; Vaughan's normalization of deviance) — held soberly: seven people died; this skill borrows the lessons`, `not drama`
+
+### `decision-science-skills:ulysses-pact`
+
+**Invoke:** `/decision-science-skills:ulysses-pact` — or just describe the task.
+
+**What it does:** Writes a Ulysses pact — the self-binding commitment device psychiatry formalizes as the Ulysses contract in advance directives: in a calm state, identify where future judgment predictably degrades (deadline pressure, sunk-cost fog, market panic, the 11pm production incident, the angry-email urge); write hard rules with required second signatures, cooling-off periods, and pre-committed defaults; pre-decide the unbinding criteria that legitimately release the pact so it is never a straitjacket; register it where the future self will hit it; and enforce by quoting the user's own words and reasons back, never scolding. Pacts carry review dates and are renegotiated in calm state, never under fire. Use when someone keeps overriding their own rules under pressure or wants to bind a future decision against a foreseen worse self.
+
+**Triggers:** `ulysses pact`, `self-binding`, `commitment device`, `stop us from overriding`, `we broke our own rule again`, `bind my future self`, `cooling-off rule`, `no force-push after midnight. metadata: version: "1.0.0" source: >- Named for Odysseus lashed to the mast (public domain; "Ulysses pact" / "Ulysses contract" is the established clinical term). Channels the documented practices: psychiatric advance directives as legally instantiated Ulysses contracts [peer-reviewed`, `PubMed/PMC-sourced] and commitment devices from behavioral economics — not the myth`
 
