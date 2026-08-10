@@ -128,6 +128,18 @@
       "category": "operations"
     },
     {
+      "name": "learning-skills",
+      "source": "./plugins/learning-skills",
+      "description": "Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).",
+      "category": "research"
+    },
+    {
+      "name": "collaboration-skills",
+      "source": "./plugins/collaboration-skills",
+      "description": "Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).",
+      "category": "operations"
+    },
+    {
       "name": "math-foundations-skills",
       "source": "./plugins/math-foundations-skills",
       "description": "Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).",
