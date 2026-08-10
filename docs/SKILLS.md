@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **157 skills across 22 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **166 skills across 24 plugins.**
 
 ## How to trigger a skill
 
@@ -33,17 +33,19 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`data-analytics-bi-skills`](#data-analytics-bi-skills) (8) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
 - [`data-tools-skills`](#data-tools-skills) (6) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
 - [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
-- [`continuous-improvement-skills`](#continuous-improvement-skills) (15) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).
+- [`continuous-improvement-skills`](#continuous-improvement-skills) (17) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
 - [`coding-agent-skills`](#coding-agent-skills) (17) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
-- [`writing-skills`](#writing-skills) (3) — Three writing registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing), adams-plain-grade (5th-8th grade accessible register), and gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask).
+- [`writing-skills`](#writing-skills) (4) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
 - [`safety-and-reliability-skills`](#safety-and-reliability-skills) (5) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
+- [`learning-skills`](#learning-skills) (3) — Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
+- [`collaboration-skills`](#collaboration-skills) (2) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).
 - [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
-- [`decision-science-skills`](#decision-science-skills) (7) — Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).
+- [`decision-science-skills`](#decision-science-skills) (8) — Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, and systems-thinking (feedback loops, archetypes, leverage points).
 
 ## `cash-management-skills`
 
@@ -745,7 +747,7 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 ## `continuous-improvement-skills`
 
-Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, and the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD).
+Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 
 Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
@@ -821,6 +823,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Triggers:** `gage R&R`, `measurement systems analysis`, `can I trust this metric`, `repeatability and reproducibility`, `inter-rater agreement`, `attribute agreement`, `LLM judge agreement`, `process capability`, `Cp`, `Cpk`, `capability study`
 
+### `continuous-improvement-skills:priority-and-wip`
+
+**Invoke:** `/continuous-improvement-skills:priority-and-wip` — or just describe the task.
+
+**What it does:** Applies personal lean to an overloaded individual workload: put every current commitment on one visible personal kanban (to-do / doing / done — nothing hidden in inboxes or memory), cap "doing" with a hard WIP limit of two or three and finish before starting, triage incoming work with an honestly held urgent/important split (Eisenhower lineage), timebox deep work and batch shallow work, renegotiate or decline explicitly when the week is over capacity, and prune stale commitments in a weekly review. Teaches the Little's Law intuition — at fixed throughput, more WIP means proportionally longer cycle time, so starting more makes everything finish later — this is theory of constraints for one person, where attention is the limiting resource. Use when someone is juggling too many open tasks, everything feels urgent, or nothing seems to finish.
+
+**Triggers:** `WIP limit`, `personal kanban`, `timeboxing`, `too many priorities`, `drowning in tasks`, `context switching`, `Eisenhower matrix`, `finish before starting`
+
 ### `continuous-improvement-skills:project-command-center`
 
 **Invoke:** `/continuous-improvement-skills:project-command-center` — or just describe the task.
@@ -852,6 +862,14 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 **What it does:** Documents the current best-known method for a repeatable task as standard work (an SOP) — capturing sequence, timing, and the key points and reasons — with takt/cycle context and visual management, so the process is stable enough to improve. Use when documenting, standardizing, or stabilizing a process, or writing an SOP or work instruction.
 
 **Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize`, `visual management`
+
+### `continuous-improvement-skills:structured-ideation`
+
+**Invoke:** `/continuous-improvement-skills:structured-ideation` — or just describe the task.
+
+**What it does:** Runs structured idea-generation sessions that separate divergence from convergence and never let the room do both at once: brainwriting (6-3-5 silent rounds) as the default over open brainstorming, quantity targets with judgment deferred, SCAMPER prompts and creative constraints when the well runs dry, and convergence by explicit criteria (effort/impact matrix, weighted scoring) instead of applause volume — with the LLM as anonymity engine, fatigue-proof idea partner, and wild-card generator of deliberately distant analogies. Grounded in why interacting groups underproduce (production blocking and evaluation apprehension — Diehl & Stroebe) and why silent writing fixes it. Use when a person or team needs many options for a defined problem, an idea session is stalling or dominated by a few voices, or a raw pile of ideas needs honest narrowing.
+
+**Triggers:** `brainstorm better`, `brainwriting`, `SCAMPER`, `generate options`, `out of ideas`, `ideation session`, `diverge and converge`, `six three five`
 
 ### `continuous-improvement-skills:theory-of-constraints`
 
@@ -1243,7 +1261,7 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
 ## `writing-skills`
 
-Three writing registers: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing), adams-plain-grade (5th-8th grade accessible register), and gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask).
+Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
 
 Install: `/plugin install writing-skills@treasury-analyst-skills`
 
@@ -1262,6 +1280,14 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 **What it does:** Applies Ken Adams clarity principles plus Axios Smart Brevity to technical, legal, professional, clinical, and documentation writing — rejects the "tested language" myth (litigated language is bad language), eliminates archaisms, doublets, ambiguity, and lawyerisms, and structures everything for scanning: the one most important point first, "why it matters" second, short active sentences, bullets and bold, nothing non-essential. Use for drafting, editing, or reviewing documents, contract language, clinical notes, emails, report writing, code comments, or any request for clear, brief, precise, or litigation-resistant language.
 
 **Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing. metadata: version: "1.0.0" source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"`
+
+### `writing-skills:explanation-design`
+
+**Invoke:** `/writing-skills:explanation-design` — or just describe the task.
+
+**What it does:** Designs an explanation for a named audience instead of transcribing the author's understanding: writes the one-sentence audience model first, chooses the entry analogy deliberately with its break-points marked, orders material concrete-first (worked example → general principle → boundary cases, never definition-first), runs the Feynman loop (distilled from accounts of Feynman's practice, not a protocol he wrote) to find the author's own gaps, strips curse-of-knowledge tells (Pinker's framing: undefined abbreviations, "simply," skipped steps), and verifies with teach-back. The assistant plays the smart newcomer, flags jargon and hand-waves, drafts analogies with breaks marked, and simulates the teach-back. Use when a concept must land with someone who doesn't already know it — onboarding, newcomer docs, or "why does nobody get this?".
+
+**Triggers:** `explain it well`, `Feynman technique`, `analogy for`, `teach this concept`, `curse of knowledge`, `make this intuitive`, `teach-back`, `explain to a newcomer`
 
 ### `writing-skills:gonzo`
 
@@ -1316,6 +1342,58 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 **What it does:** Prevents the sinking-library failure — a design that never accounted for the load it exists to carry — with a design-basis load review before commitment: name every payload (data volumes, rates, users, documents, weight), quantify each at day one, at peak, on the growth curve, and at the special-collections outlier (the biggest single lot ever swallowed), trace every load to a named component with stated capacity, apply written safety factors with margin-exhaustion dates, and require acceptance tests to run LOADED at design and peak values — an empty-building inspection proves nothing. Output: a one-page signed Load Manifest, re-reviewed on every payload change. Use when sizing or design-reviewing a system, feature, migration, or process against its real volumes.
 
 **Triggers:** `weight of the books`, `sinking library`, `design load`, `load basis`, `load manifest`, `will it hold at real volumes`, `size it for production`, `test loaded not empty`, `biggest single lot`, `special-collections outlier. metadata: version: "1.0.0" source: >- Commissioned by the user on the campus legend of a university library designed without accounting for the weight of its books`, `unoccupied for years until retrofitted. Assumed true as commissioned; the legend is told of many campuses`, `and the lesson stands either way`
+
+## `learning-skills`
+
+Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
+
+Install: `/plugin install learning-skills@treasury-analyst-skills`
+
+### `learning-skills:deliberate-practice`
+
+**Invoke:** `/learning-skills:deliberate-practice` — or just describe the task.
+
+**What it does:** Designs and runs practice sessions with one specific target at the edge of current ability: the assistant builds the drill — a debugging kata, a negotiation roleplay, a writing constraint exercise, a cross-examination rehearsal — plays the environment or opponent, gives immediate feedback that names the gap, and raises difficulty only on demonstrated competence, logging the target → attempt → feedback → next-target chain. Honestly distinguishes purposeful practice (self-designed) from deliberate practice (expert-designed training) per Ericsson, and corrects the 10,000-hour popularization. Use when the user wants to get better at a performable skill — debugging, writing, negotiating, arguing, presenting — rather than critique a finished piece of work.
+
+**Triggers:** `deliberate practice`, `practice drill`, `kata`, `rehearse with me`, `get better at`, `practice session`, `play the opponent`
+
+### `learning-skills:habit-design`
+
+**Invoke:** `/learning-skills:habit-design` — or just describe the task.
+
+**What it does:** Designs one habit at a time as cue → routine → reward: writes an implementation intention ("when X happens, I will Y" — Gollwitzer's well-replicated effect), stacks the routine onto an existing stable habit, engineers friction so the good path gets one step shorter and the bad path one step longer, starts below the failure threshold and scales only after stability, tracks presence rather than streaks (a missed day is data, not a moral event), and schedules a renegotiation date so the habit is kept, resized, or retired deliberately. Use when the user wants a repeated behavior to run without willpower, keeps forgetting a recurring task, or wants a personal routine built or repaired.
+
+**Triggers:** `habit`, `implementation intention`, `habit stacking`, `make it automatic`, `build a routine`, `stop doing X every time`, `keep forgetting to`
+
+### `learning-skills:spaced-retrieval-learning`
+
+**Invoke:** `/learning-skills:spaced-retrieval-learning` — or just describe the task.
+
+**What it does:** Turns any material — a document, a skill, a codebase, an exam syllabus — into retrieval practice: the assistant authors recall questions at graded difficulty, quizzes the user without showing answers first, grades each attempt against the source, and schedules re-asks at expanding intervals, interleaving related topics and retrieving until correct across multiple sessions (successive relearning). Tracks what keeps failing and turns it into focused remedial material. Built on the testing effect (Roediger & Karpicke), spacing over massing (Cepeda), and desirable difficulties (Bjork). Use when the user wants material to stick — for an exam, a new domain, a standard they keep re-looking-up — or asks to be quizzed rather than lectured.
+
+**Triggers:** `spaced repetition`, `retrieval practice`, `quiz me`, `make this stick`, `study plan`, `flashcards`, `help me remember this`, `test me on`
+
+## `collaboration-skills`
+
+Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).
+
+Install: `/plugin install collaboration-skills@treasury-analyst-skills`
+
+### `collaboration-skills:feedback-that-lands`
+
+**Invoke:** `/collaboration-skills:feedback-that-lands` — or just describe the task.
+
+**What it does:** Structures workplace feedback so it lands, giving and receiving with equal weight. Giving: Situation-Behavior-Impact (the Center for Creative Leadership's model) — the specific situation, the observed behavior (never inferred character or motive), impact as the speaker's own experience; one topic per conversation; requests framed forward (Marshall Goldsmith's feedforward); praise as specific as criticism. Receiving: separate data from delivery, name the firing trigger (truth, relationship, identity — Stone & Heen) before responding, ask for the behavior behind a vague label, close the loop. Drafts the SBI script from a messy vent, rehearses as the receiver (even a defensive one), and audits performance notes or review comments for character-language. Use for hard conversations about a person's work behavior, in either direction.
+
+**Triggers:** `give feedback`, `SBI`, `feedback conversation`, `they got defensive`, `receiving feedback`, `performance conversation`, `code review tone`, `hard conversation with a teammate`
+
+### `collaboration-skills:meeting-design`
+
+**Invoke:** `/collaboration-skills:meeting-design` — or just describe the task.
+
+**What it does:** Designs meetings that produce decisions instead of discussion. Tests whether the meeting should exist (does it produce a decision or a commitment? status flows async); writes the agenda as a list of decisions to make, each with a timebox and a decision rule named before discussion opens (single owner, consent, consult-then-decide, or vote); sends pre-reads ahead with silent reading at the start (documented Amazon practice) instead of live walkthroughs; parks tangents visibly, calls the decision at the timebox, gives every action an owner and a date, and closes by reading back decisions and commitments. Drafts the decision-list agenda from a stated purpose, red-checks an agenda for non-decisions, turns a transcript into a decision log, and audits recurring meetings nobody has re-justified. Use when planning, tightening, or questioning any meeting.
+
+**Triggers:** `meeting agenda`, `run this meeting`, `too many meetings`, `this should be an email`, `action items`, `decision protocol`, `pre-read`, `standing meeting audit`
 
 ## `math-foundations-skills`
 
@@ -1373,7 +1451,7 @@ Install: `/plugin install math-foundations-skills@treasury-analyst-skills`
 
 ## `decision-science-skills`
 
-Structured-judgment methods from intelligence, military, and forecasting practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), and the-challenger revision review (zero-based continue-vs-revise decisions that momentum and sunk costs suppress).
+Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, and systems-thinking (feedback loops, archetypes, leverage points).
 
 Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
@@ -1416,6 +1494,14 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Applies the outside view (Kahneman/Tversky's planning fallacy; Flyvbjerg's reference-class method) to discipline any material estimate: identify a reference class of comparable past cases, establish its outcome distribution, anchor on that base rate, adjust only with explicit written justification — or apply a required uplift at a chosen certainty level (P80-style) — then log the prediction and score it against actuals. Counters optimism bias and strategic misrepresentation, and guards against tampering (reworking the rule after every miss). Turns an existing variance history, such as per-driver MAPE and signed bias, into next-cycle base-rate anchors; it feeds estimation loops, never builds the models. Use when an estimate rests only on its own story or a plan looks optimistic.
 
 **Triggers:** `outside view`, `reference class`, `base-rate anchor`, `base rate`, `optimism bias`, `planning fallacy`, `how long do projects like this actually take`, `uplift the estimate`
+
+### `decision-science-skills:systems-thinking`
+
+**Invoke:** `/decision-science-skills:systems-thinking` — or just describe the task.
+
+**What it does:** Maps the feedback structure behind a recurring mess: identifies the stocks (accumulations) and flows (rates) in the user's description, drafts the causal-loop diagram from their prose — nodes, signed links, loop polarity, rendered as Mermaid for the human to correct — classifies loops as reinforcing or balancing, finds the delays that produce oscillation and overshoot, checks the classic archetypes (fixes-that-fail, shifting-the-burden, limits-to-growth, escalation), locates interventions on a simplified Meadows leverage ladder, anticipates policy resistance, and names what to measure to see whether the loop actually moved. Use when a problem keeps coming back after being fixed, a fix bred new problems elsewhere, growth stalled against an unseen limit, or two sides keep escalating.
+
+**Triggers:** `systems thinking`, `feedback loop`, `stock and flow`, `leverage point`, `unintended consequences`, `vicious cycle`, `virtuous cycle`, `second-order effects`, `the problem keeps coming back`, `policy resistance`
 
 ### `decision-science-skills:tabletop-wargaming`
 
