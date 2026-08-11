@@ -195,8 +195,8 @@ Moves that follow:
   rules), position currency (named co-designer in the go-live note).
 - **Finance director (keep satisfied)**: one page, pre-empting their one real concern
   (does the queue change how intake costs are allocated?) — not weekly updates.
-- **Legal untold** is the map's loudest finding: high power, interest currently low
-  only because they don't know. Brief them before they discover it — surprise converts.
+- **Legal untold** is the map's loudest finding: high power, interest low only because
+  they don't know. Brief them before they discover it — surprise converts.
 - **RACI extract** (rows = workstreams): Routing rules — A: ops manager, R: IT
   platform owner, C: claims lead + team leads, I: intake staff. Cost allocation note —
   A: finance director, R: analyst, C: ops manager, I: COO. Go-live comms — A: ops
