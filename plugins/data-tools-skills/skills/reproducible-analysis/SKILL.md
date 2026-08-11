@@ -5,8 +5,8 @@ description: >-
   spanning spreadsheets, notebooks, SQL, and scripts. Defines reproducible (same data
   + code) vs replicable (new data or implementation) — the ACM used the terms
   backwards for seven years — then climbs the practice ladder: pin environments and
-  record random seeds, make the rerun one command instead of a click sequence, keep
-  lineage one-directional (raw → cleaned → derived, raw never edited), write literate
+  record random seeds, make the rerun one command instead of clicks, keep lineage
+  one-directional (raw → cleaned → derived, raw never edited), write literate
   analysis with code and narrative together, apply FAIR principles at working level,
   and verify by fresh-clone rerun plus a second person re-deriving the headline
   number. Python environment mechanics stay with
