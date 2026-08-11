@@ -1,6 +1,8 @@
 # Your Excel automation environment (sanitized template)
 
-Fill in your setup. Real report files belong in `references/*.local.*` (git-ignored).
+Wire in your current role here — this file is what makes the skill yours, and it repoints when
+you change jobs. Fill in your setup; real report files belong in `references/*.local.*`
+(git-ignored), never in this committed file.
 
 - **Scripted reports:** <report → script → schedule>
 - **Templates:** <template file per report; who maintains styling>

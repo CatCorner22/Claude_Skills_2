@@ -1,13 +1,15 @@
 # Your A3 practice (sanitized template)
 
-Fill this in with your real setup. If any value is sensitive (real people, systems, numbers, or client
-situations), keep it in `your-environment.private.md` instead — that suffix is git-ignored. Commit only
-sanitized, structural examples.
+Wire in your current role here. The A3 is domain-neutral by design — it carries a problem
+story for an analyst, an attorney, an ops manager, or a developer equally well, and it moves
+with you to whatever job you hold next. Keep this committed file **structural**: roles,
+rituals, and source kinds. Real people, systems, numbers, or client situations belong in
+`your-environment.private.md` — that suffix is git-ignored and never committed.
 
-- **A3 template / tooling:** <this layout, a company A3 form, a slide/doc template, a whiteboard photo>
-- **Typical A3 topics:** <e.g. cut duplicate payments, speed a close task, reduce a recon backlog>
-- **Audience / review ritual:** <who you walk the A3 with; the meeting/cadence where it's reviewed>
-- **Current-condition data sources:** <where the facts and small visual come from — reports, ERP, logs>
-- **Root-cause practice:** <how you verify causes here before writing countermeasures>
-- **Where A3s live and get revisited:** <storage; how Check/Act results get filled in later>
-- **Standardization link:** <how a successful A3 turns into standard work / an SOP>
+- **A3 template / tooling:** <this layout, a company A3 form, a doc/slide template, a whiteboard photo>
+- **Typical A3 topics:** <e.g. speed a recurring task, cut an error type, clear a backlog, fix a handoff>
+- **Audience / review ritual:** <who you walk the A3 with, in what order (the nemawashi round), and the meeting/cadence where it's confirmed>
+- **Current-condition data sources:** <where the facts and the small visual come from — system reports, logs, ticket exports, manual tallies>
+- **Root-cause practice:** <how causes get verified here before countermeasures are written>
+- **Where A3s live and get revisited:** <storage; how box 7's actual results get filled in later>
+- **Standardization link:** <how a successful A3 becomes standard work / an SOP>
