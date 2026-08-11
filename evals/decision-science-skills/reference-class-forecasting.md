@@ -16,12 +16,13 @@ unadjusted P50 anchor before discussing specifics; distinguishes the run of same
 prediction with a confidence level and a review date for later scoring.
 
 ## 2. Near-miss (should NOT load this skill)
-> "Build me a rolling 13-week direct-method cash forecast from AR collections, AP runs, payroll,
-> and debt service."
+> "Build me a rolling 13-week cash forecast model in Excel — input sheets for AR collections,
+> AP runs, payroll, and debt service, with check cells and scenario toggles."
 
-Expected: `cash-management-skills:cash-forecasting` owns building the projection — drivers,
-calendars, and the model itself. This skill only feeds such a model with base-rate anchors and
-uplifts. If this skill loads on a model-building request, its description is over-triggering.
+Expected: `data-analytics-bi-skills:spreadsheet-modeling` owns building the model workbook —
+structure, formulas, checks, and scenarios. This skill only feeds such a model with base-rate
+anchors and uplifts. If this skill loads on a model-building request, its description is
+over-triggering.
 
 ## 2b. Near-miss (closer — should NOT load this skill)
 > "Our daily transaction-volume series has trend and weekly seasonality — fit a SARIMA model,

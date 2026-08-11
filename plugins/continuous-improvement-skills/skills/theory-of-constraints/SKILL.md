@@ -20,8 +20,8 @@ description: >-
 - The natural next step after a value-stream map: the VSM *finds* the bottleneck (its
   environment template even asks for known waits/bottlenecks); this skill says what to *do* with
   it — see `continuous-improvement-skills:value-stream-mapping`.
-- Compressing the month-end close: the constraint task sets the close duration, so the calendar is
-  subordinated to it and everything else pre-staged — see `accounting-skills:month-end-close`.
+- Compressing a month-end close: the constraint task sets the close duration, so the calendar is
+  subordinated to it and everything else pre-staged.
 - Deciding whether to buy capacity (people, software, a second shift) — or whether the existing
   capacity is simply being wasted.
 - Not for: mapping the whole stream end to end to see where time goes → see

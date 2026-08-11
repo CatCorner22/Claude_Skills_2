@@ -26,18 +26,19 @@ Green Book; Department for Transport uplift tables) [snippet-only].
 ## When to use
 - A material estimate that so far rests only on its own story: project cost or duration, a
   feature-delivery date, a next-cycle number for a cash driver.
-- Turning a variance history you already keep into next-cycle anchors. The canonical mount:
-  `cash-management-skills:cash-forecasting` already measures per-driver MAPE and signed bias (its
-  `references/forecast-model-and-accuracy.md` defines both) — that history IS a ready-made
-  reference class. This skill closes a loop the library already runs: per-driver base-rate anchors
-  and uplifts for tuition receipts, payroll, grant drawdowns.
+- Turning a variance history you already keep into next-cycle anchors. Any rolling operational
+  forecast (cash, pipeline, capacity) that measures per-driver MAPE and signed bias has a
+  ready-made reference class sitting in its accuracy file — this skill turns that history into
+  per-driver base-rate anchors and uplifts.
 - Software/project estimation from a delivery history (e.g., a feature-delivery reference class
   for an app build).
 - Sanity-checking someone else's optimistic plan or business case.
-- Not for: building the estimate's underlying model itself — direct-method cash projections belong
-  to `cash-management-skills:cash-forecasting`, and statistical/ML series models to
-  `machine-learning-skills:time-series-forecasting`. This skill FEEDS those loops with base rates
-  and uplifts; it never replaces them.
+- Not for: building the estimate's underlying model itself — statistical/ML series models belong
+  to `machine-learning-skills:time-series-forecasting`, spreadsheet model craft to
+  `data-analytics-bi-skills:spreadsheet-modeling`, and direct-method cash projections are a
+  treasury forecasting workflow (archived: `cash-management-skills:cash-forecasting`, restorable
+  from `archive/`). This skill FEEDS those loops with base rates and uplifts; it never replaces
+  them.
 
 ## Do it
 Full class-selection heuristics, uplift math, and a worked cash-driver example are in
@@ -112,8 +113,8 @@ classified common-cause vs. special-cause before it is allowed to change anythin
 - Logging predictions but never scoring them → set the review date when logging; an unscored
   journal is a diary.
 - Using this skill to build the projection itself → the model belongs to
-  `cash-management-skills:cash-forecasting` or `machine-learning-skills:time-series-forecasting`;
-  this skill supplies their anchors and uplifts.
+  `machine-learning-skills:time-series-forecasting` (statistical/ML series) or to the operational
+  forecasting process that owns the projection; this skill supplies their anchors and uplifts.
 
 ## Tailor to your environment
 Record your setup in `references/your-environment.md`: where each variance history lives, the

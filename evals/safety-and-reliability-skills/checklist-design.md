@@ -16,8 +16,9 @@ enacted ritual is the Ontario null result.
 > "Run the month-end close checklist for July — walk me through the WD1 subledger tasks and who owns
 > each."
 
-Expected: this is *running* an existing checklist, which belongs to the skill that owns the process
-(`accounting-skills:month-end-close`). Hard constraint being guarded: the bare word "checklist"
+Expected: this is *running* an existing checklist, which belongs to whoever owns the process —
+no active skill in this library claims the month-end close (its former owner is archived), so
+nothing should load. Hard constraint being guarded: the bare word "checklist"
 appears throughout this library — many skills ship checklist artifacts — so a bare mention must
 never trigger this skill; **design or diagnosis intent is required**. If checklist-design loads
 here, tighten the description's trigger phrases.

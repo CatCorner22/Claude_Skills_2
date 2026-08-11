@@ -28,8 +28,7 @@ description toward live/in-production language.
 > help me figure out what happened and fix production."
 
 Expected: an incident diagnosis, not continuous improvement by perturbation —
-`oracle-fusion-finance-skills:fusion-cm-production-troubleshooting` (and
-`continuous-improvement-skills:root-cause-analysis` for the cause hunt) own it. EVOP's own
+`continuous-improvement-skills:root-cause-analysis` owns the cause hunt. EVOP's own
 stopping rule says a process upset halts experimentation. If evolutionary-operation loads on any
 "improve the match rate" phrasing without the tune-while-running intent, its triggers are too
 greedy.

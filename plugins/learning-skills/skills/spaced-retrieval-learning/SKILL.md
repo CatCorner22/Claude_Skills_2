@@ -29,9 +29,10 @@ questions, withholding answers, grading, and bookkeeping the schedule.
 - The user asks to be quizzed, wants flashcard-style drilling, or wants a study plan with
   actual sessions rather than a reading list.
 - Something keeps being re-looked-up and the user wants it in their head instead.
-- Not for: CTP exam domain content → see `public-sector-treasury-skills:ctp-exam-prep` —
-  that skill owns the treasury material and blueprint weighting; this one owns the method.
-  They pair naturally: run its question bank on this skill's schedule.
+- Not for: exam *domain content* — e.g. CTP treasury material and blueprint weighting
+  (archived: `public-sector-treasury-skills:ctp-exam-prep`, restorable from `archive/`);
+  this skill owns the method, not the material. A domain or exam-prep source pairs
+  naturally: run its question bank on this skill's schedule.
 - Not for: machine learning in the model-training sense → see the `machine-learning-skills`
   plugin (start at `machine-learning-skills:ml-project-framing`).
 - Not for: building a *performable* skill (debugging, negotiating, writing under pressure) →

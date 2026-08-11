@@ -13,8 +13,8 @@ target reference; and advises layout hierarchy and context.
 > prompts?"
 
 Expected: this is building the OTBI report artifact, not designing what the dashboard should show —
-the `oracle-otbi-skills:otbi-report-building` skill should handle it. If this design skill loads as
-primary, tighten the description / cross-links.
+tool-mechanics that no active skill in this library owns, so nothing should load as primary. If this
+design skill loads as primary, tighten the description / cross-links.
 
 ## 3. Quality rubric
 A good response:

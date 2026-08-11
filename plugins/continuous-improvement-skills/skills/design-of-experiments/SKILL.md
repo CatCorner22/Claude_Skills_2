@@ -19,10 +19,9 @@ description: >-
   and how they interact — in far fewer runs than trying one factor at a time. The method runs from
   Fisher's agricultural work at Rothamsted through Box's industrial statistics at ICI to Taguchi's
   robust design `[snippet-only]`.
-- Tuning an auto-reconciliation configuration: tolerance and matching-rule settings are the
-  factors, auto-match rate is the response — see
-  `oracle-fusion-finance-skills:fusion-auto-reconciliation-design`. For *ongoing* small-step
-  tuning of live settings after go-live, the sibling is
+- Tuning a rule-driven system configuration — e.g. an auto-reconciliation engine, where tolerance
+  and matching-rule settings are the factors and auto-match rate is the response. For *ongoing*
+  small-step tuning of live settings after go-live, the sibling is
   `continuous-improvement-skills:evolutionary-operation`.
 - Prompt engineering: instruction style × few-shot count × output format × model or temperature is
   a factorial this assistant can design *and run itself* against an eval set — see

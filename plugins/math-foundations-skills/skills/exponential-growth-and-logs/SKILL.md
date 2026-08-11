@@ -30,9 +30,9 @@ averages, honest charts — and teaches the intuition that linear thinking gets 
   "how long until it reaches X."
 - Averaging a series of period growth rates or returns into one fair per-period figure.
 - Choosing or reading a log-scale chart for a fast-changing series.
-- Not for: valuing money across time — PV/FV/NPV/IRR and discount rates → see
-  `finance-skills:time-value-of-money` (same (1+r)^n machinery, but the question there
-  is worth, not size).
+- Not for: valuing money across time — PV/FV/NPV/IRR and discount rates are
+  time-value-of-money work (archived: `finance-skills:time-value-of-money`, restorable from `archive/`);
+  same (1+r)^n machinery, but the question there is worth, not size.
 - Not for: fitting trend or seasonality models to a history → see
   `machine-learning-skills:time-series-forecasting`.
 - Not for: sizing a system against projected load to an exhaustion date → see

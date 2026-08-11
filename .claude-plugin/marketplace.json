@@ -5,56 +5,8 @@
     "name": "blakereaganlaw-droid",
     "email": "blakereaganlaw@gmail.com"
   },
-  "description": "A growing personal library of Claude Code Agent Skills for cash management, Oracle OTBI reporting, accounting, banking, finance, BI/analytics, machine learning, continuous improvement, and coding/agents. Every skill both does the task and teaches the reasoning.",
+  "description": "A career-portable library of Claude Code Agent Skills: decision science, safety and reliability, writing and communication, collaboration, data analytics and BI, machine learning, coding agents and personas, learning science, math foundations, continuous improvement, and deep research. Every skill both does the task and teaches the reasoning. Domain-specific finance/Oracle plugins are preserved in archive/ (see archive/README.md).",
   "plugins": [
-    {
-      "name": "cash-management-skills",
-      "source": "./plugins/cash-management-skills",
-      "description": "Treasury cash operations: cash positioning, bank reconciliation, forecasting, liquidity, controls, and intercompany netting.",
-      "category": "finance"
-    },
-    {
-      "name": "oracle-otbi-skills",
-      "source": "./plugins/oracle-otbi-skills",
-      "description": "Build OTBI reports and analyses in Oracle Fusion Cloud, with deep Cash Management subject-area coverage.",
-      "category": "reporting"
-    },
-    {
-      "name": "sponsored-projects-ar-skills",
-      "source": "./plugins/sponsored-projects-ar-skills",
-      "description": "Sponsored projects/awards/grants receivables analysis across Oracle Fusion Receivables + PPM: master router, PPM-to-AR domain knowledge, unbilled/billed AR reconciliation, KPIs and trend forecasts, reporting outputs, and federal compliance (Uniform Guidance, federal billing/cash management, effort reporting).",
-      "category": "finance"
-    },
-    {
-      "name": "oracle-fusion-finance-skills",
-      "source": "./plugins/oracle-fusion-finance-skills",
-      "description": "Functional Oracle Fusion Cloud Financials: GL and journals, FBDI data loading, AP invoice-to-pay, AR and collections, the Cash Management module, period close, plus the fusion-treasury-architect subagent and its consult skill for configuration-specific guidance.",
-      "category": "finance"
-    },
-    {
-      "name": "banking-skills",
-      "source": "./plugins/banking-skills",
-      "description": "Payment rails, bank account structures, statement formats, bank-fee analysis, connectivity, and KYC/AML basics.",
-      "category": "finance"
-    },
-    {
-      "name": "accounting-skills",
-      "source": "./plugins/accounting-skills",
-      "description": "Double-entry accounting, journal entries, chart of accounts, month-end close, reconciliations, and financial statements.",
-      "category": "finance"
-    },
-    {
-      "name": "finance-skills",
-      "source": "./plugins/finance-skills",
-      "description": "Corporate and treasury finance: time value of money, working capital, ratios, short-term investing, FX risk, and capital budgeting.",
-      "category": "finance"
-    },
-    {
-      "name": "treasury-accounting-skills",
-      "source": "./plugins/treasury-accounting-skills",
-      "description": "Advanced treasury and accounting operations: debt facilities and covenant compliance, hedging and derivatives, investment policy compliance, accruals and prepaids, intercompany accounting, and audit readiness.",
-      "category": "finance"
-    },
     {
       "name": "data-analytics-bi-skills",
       "source": "./plugins/data-analytics-bi-skills",
@@ -104,12 +56,6 @@
       "category": "development"
     },
     {
-      "name": "public-sector-treasury-skills",
-      "source": "./plugins/public-sector-treasury-skills",
-      "description": "Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.",
-      "category": "finance"
-    },
-    {
       "name": "deep-research-skills",
       "source": "./plugins/deep-research-skills",
       "description": "True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.",
@@ -148,7 +94,7 @@
     {
       "name": "decision-science-skills",
       "source": "./plugins/decision-science-skills",
-      "description": "Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.",
+      "description": "Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set \u2014 minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.",
       "category": "research"
     }
   ]

@@ -12,8 +12,9 @@ sensitivity on the growth driver.
 > "What method should I use to forecast next quarter's operating cash flow — direct or indirect — and
 > how do I handle seasonality in the drivers?"
 
-Expected: this is forecasting methodology, not spreadsheet construction — the
-`cash-management-skills:cash-forecasting` skill should handle it. If this modeling skill loads as
+Expected: this is forecasting methodology, not spreadsheet construction — the statistical side
+(seasonality, model choice, validation) belongs to `machine-learning-skills:time-series-forecasting`;
+the direct-vs-indirect treasury framing has no active owner. If this modeling skill loads as
 primary, tighten the description / cross-links.
 
 ## 3. Quality rubric

@@ -20,8 +20,9 @@ description: >-
 - Redesigning an existing checklist that has grown too long, serves auditors instead of the crew, or
   gets skipped under pressure.
 - Diagnosing why a mandated checklist produced no measurable improvement.
-- **Not for:** *running* an existing checklist — that belongs to the skill that owns the process
-  (e.g. `accounting-skills:month-end-close` runs its own close checklist). Not for documenting a full
+- **Not for:** *running* an existing checklist — that belongs to whoever owns the process
+  (e.g. a month-end close checklist is run by the close process's owner, not redesigned here;
+  the close itself was owned by the archived `accounting-skills:month-end-close`, restorable from `archive/`). Not for documenting a full
   method with sequence, timing, and key points → see `continuous-improvement-skills:standard-work`.
 - A bare mention of "checklist" is not a trigger: this skill is for *designing or diagnosing* one.
 
@@ -89,9 +90,9 @@ the team enacts — a checklist nobody rehearses is Ontario.
 ## Tailor to your environment
 Record your redesign targets and live checklists in `references/your-environment.md`; anything
 naming real people, accounts, or incidents goes in `your-environment.private.md` (git-ignored).
-Known mounts in this library: the close checklist at `accounting-skills:month-end-close` →
-`references/close-checklist.md` is a prime redesign target (which close tasks are killer items at
-which pause points?); many library skills ship checklist artifacts that were never designed to this
+Known mounts: a month-end close checklist is a prime redesign target (which close tasks are killer
+items at which pause points?) — one lived at the archived `accounting-skills:month-end-close` → `references/close-checklist.md` (restorable from `archive/`);
+many library skills ship checklist artifacts that were never designed to this
 discipline — candidates for a killer-item pass; a treasury wire release wants a do-confirm card at
 the "before send" pause point; dental clinical workflows (instrument sterilization, patient handoff)
 want read-do cards. Capture your pause points, callers, and skip-data source.

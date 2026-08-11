@@ -12,6 +12,8 @@ description: >-
   claim or citation. Triggers: medical research, research my symptoms, connect these symptoms,
   what could link, overlooked cause, deep dive on this condition, PubMed, Google Scholar, medical
   literature, drug interaction research, verify this study, check this citation.
+metadata:
+  version: "1.1.0"
 ---
 
 # Medical research detective
@@ -54,7 +56,10 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    depletion/inhibition → downstream finding); temporal reasoning (what changed just before onset);
    "great imitators" and commonly-missed conditions; and the base-rate check (common things are
    common — a common disease presenting oddly beats a rare disease presenting typically). Aim for at
-   least 5–8 candidate explanations, including the boring ones.
+   least 5–8 candidate explanations, including the boring ones. This is the medical edition of a
+   domain-general discipline: `decision-science-skills:competing-hypotheses-analysis` owns the full
+   hypothesis-matrix method (judge by disconfirmation, never by accumulation), and the base-rate
+   check is `math-foundations-skills:probability-fundamentals` applied to disease frequency.
 
 3. **Build an explicit search strategy.** For each hypothesis, write the PICO-style question, then
    the query: MeSH terms plus free-text synonyms (drug generic *and* brand, symptom lay term *and*
@@ -90,7 +95,8 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    confidence grades and evidence for *and* against, the dot-connections with their strength, the
    questions and candidate tests to bring to a clinician, red flags, open gaps and what would close
    them, the excluded-sources appendix, and the full verified reference list. Lead with what a
-   non-specialist can act on; keep the technical grading beneath it.
+   non-specialist can act on; keep the technical grading beneath it (audience-first structure is
+   `writing-skills:explanation-design`'s method — concrete first, curse-of-knowledge stripped).
 
 ## Why / learn
 The reason ordinary search fails on hard cases is **specialty siloing**: the cardiology literature

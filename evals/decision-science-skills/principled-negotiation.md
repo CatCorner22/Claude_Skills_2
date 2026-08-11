@@ -7,8 +7,8 @@
 
 Expected: skill loads; builds the full prep pack — interest map (theirs marked as
 inference), BATNA tree with a costed strongest branch and improvement actions, the
-objective-criteria table carrying the `banking-skills:bank-fee-analysis` benchmark output
-in, accusation audit, calibrated-question bank, concession plan with reciprocals — then
+objective-criteria table carrying the user's account-analysis benchmark tables in,
+accusation audit, calibrated-question bank, concession plan with reciprocals — then
 roleplays the banker across cooperative / hardliner / evasive passes. Asks the human to
 set the walk-away line before any rehearsal close; never proposes sending the ask itself.
 
@@ -16,10 +16,10 @@ set the walk-away line before any rehearsal close; never proposes sending the as
 > "Our bank fees look high. Decode this account analysis statement, map the lines to AFP
 > service codes, and benchmark the unit prices so I can see what we're overpaying."
 
-Expected: `banking-skills:bank-fee-analysis` — computing what the fees should be is the
-case-building step, not the ask. That skill produces the benchmark tables; this skill
-consumes them. If principled-negotiation loads on statement-decoding language, its
-description is claiming the fee domain instead of the negotiation method.
+Expected: no skill loads — computing what the fees should be is the case-building
+analysis step, handled as plain assistance, not the ask. Principled-negotiation consumes
+benchmark tables; it does not produce them. If it loads on statement-decoding language,
+its description is claiming the fee domain instead of the negotiation method.
 
 ## 2b. Near-miss (adjacent-conversation guard)
 > "A patient is furious about a surprise bill and left a one-star review — help me plan

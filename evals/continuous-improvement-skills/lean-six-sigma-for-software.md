@@ -21,9 +21,8 @@ standardization step.
 > entries and spreadsheet handoffs, no software build involved."
 
 Expected: a non-software process improvement —
-`continuous-improvement-skills:dmaic-problem-solving` (with `accounting-skills:month-end-close`
-domain support) handles it. If lean-six-sigma-for-software loads on generic DMAIC asks with no
-software delivery component, tighten the description.
+`continuous-improvement-skills:dmaic-problem-solving` handles it. If lean-six-sigma-for-software
+loads on generic DMAIC asks with no software delivery component, tighten the description.
 
 ## 2b. Near-miss (greedy-token guard)
 > "Help me plan a co-design workshop with the front-desk team to improve our patient-intake

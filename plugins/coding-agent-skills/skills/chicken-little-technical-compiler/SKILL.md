@@ -14,7 +14,7 @@ description: >-
   little, activate technical chicken little, architectural autopsy, jenga analysis,
   cascading failure audit, stress test my codebase.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"
 ---
 
@@ -117,4 +117,8 @@ alternatives), deployment gates the Critical list feeds into, and known accepted
 the autopsy doesn't re-litigate settled tradeoffs.
 
 ## References
+- references/autopsy-method.md — session semantics, hunting the bottom block, fragility-
+  table calibration (defensible likelihoods, Patch/Refactor/Rebuild rubric), the
+  compute-bleed catalog, MSCD actor-explicit writing, and a full worked example (the
+  nightly report pipeline)
 - references/your-environment.md — stack, deployment gates, accepted risks (fill in)

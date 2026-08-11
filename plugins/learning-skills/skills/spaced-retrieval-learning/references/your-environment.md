@@ -24,5 +24,6 @@ and never committed.
 - Question banks: <where authored sets live; one file per material set>
 
 ## Hand-offs
-- CTP domain material and blueprint weighting: `public-sector-treasury-skills:ctp-exam-prep`
+- Exam or domain material and blueprint weighting: <wire in your current role's exam-prep
+  skill or study source here>
 - Skills to *perform* rather than recall: `learning-skills:deliberate-practice`

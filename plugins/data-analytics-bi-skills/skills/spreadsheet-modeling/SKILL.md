@@ -16,9 +16,11 @@ description: >-
 - Building a financial or operational model in Excel or Google Sheets (budget, forecast, pricing, ROI).
 - Reviewing or auditing an inherited model for structure, hardcoding, and formula errors.
 - Adding sensitivity/what-if analysis or scenario toggles to an existing model.
-- Not for: the forecasting *methodology* (drivers, seasonality, direct vs. indirect method) behind a
-  cash model → see `cash-management-skills:cash-forecasting`. This skill is the modeling craft; that
-  one is the method.
+- Not for: the forecasting *methodology* behind the numbers. Statistical method — seasonality, model
+  choice, backtesting → see `machine-learning-skills:time-series-forecasting`; the treasury
+  direct-vs-indirect framing is a cash-forecasting method question
+  (archived: `cash-management-skills:cash-forecasting`, restorable from `archive/`). This skill is
+  the modeling craft, not the method.
 
 ## Do it
 1. **Separate inputs, calculations, and outputs.** Put assumptions in one clearly marked zone (or
@@ -76,8 +78,8 @@ Record your conventions in `references/your-environment.md` (keep sensitive mate
 assumptions, rates, client figures — in `your-environment.private.md`, which is git-ignored). Capture
 your input-cell color/format standard, your sheet-structure convention (inputs/calcs/outputs), your
 standard check cells, your named-range conventions, and your review/sign-off process. This skill then
-applies its generic structure to your house style. For the forecasting logic that feeds a cash model,
-use `cash-management-skills:cash-forecasting`.
+applies its generic structure to your house style; wire any domain forecasting method the model
+depends on into the same file.
 
 ## References
 - references/model-structure.md — input/calc/output layout, check-cell patterns, named ranges, and data-table sensitivity

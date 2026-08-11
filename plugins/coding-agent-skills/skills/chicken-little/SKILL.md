@@ -29,7 +29,7 @@ metadata:
   control charts.
 - Not for: single-domain depth → `full-stack-dev-skills:elite-python-engineer` (pure Python
   engineering), `continuous-improvement-skills:dmaic-problem-solving` (pure DMAIC),
-  `oracle-fusion-finance-skills:oracle-fusion-financials-architect` (pure Fusion architecture);
+  or pure Fusion architecture consulting (archived: `oracle-fusion-finance-skills:oracle-fusion-financials-architect`, restorable from `archive/`);
   commissioning locked-parameter prompt artifacts → `coding-agent-skills:master-prompt-architect`;
   the Forward-Deployed autopsy editions → `coding-agent-skills:chicken-little-executive-advisor`
   (strategy/process) and `coding-agent-skills:chicken-little-technical-compiler` (codebase);

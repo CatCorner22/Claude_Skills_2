@@ -139,6 +139,6 @@ Contents: §1 Architecture & nomenclature · §2 CoA & GL · §3 Payables · §4
   "General Ledger - Balances Real Time"), BI Publisher, REST APIs, FBDI, or BICC extracts to
   Autonomous Data Warehouse (ADW) — while keeping base-table knowledge for understanding,
   troubleshooting, custom extensions, and reconciliation logic
-  (→ `oracle-otbi-skills:otbi-report-building`).
+  (deeper OTBI report-building guidance: archived `oracle-otbi-skills:otbi-report-building`, restorable from `archive/`).
 - If a rare status, newer feature, or instance-specific configuration is involved: state the
   assumption, recommend verification in the current environment or official docs.

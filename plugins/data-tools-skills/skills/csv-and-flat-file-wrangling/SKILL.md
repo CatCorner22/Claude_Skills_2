@@ -17,8 +17,9 @@ description: >-
   when the parse comes out wrong (shifted columns, mojibake, lost zeros).
 - Merging or appending multiple flat files into one dataset for analysis.
 - Not for: deep cleaning after a correct parse (dedupe, outliers, imputation) → see
-  `data-analytics-bi-skills:data-cleaning`. For statement-specific formats (BAI2, camt.053,
-  MT940) → see `banking-skills:bank-statement-parsing`.
+  `data-analytics-bi-skills:data-cleaning`. Statement-specific formats (BAI2, camt.053, MT940) are
+  bank-format knowledge (archived: `banking-skills:bank-statement-parsing`, restorable from
+  `archive/`), not general flat-file wrangling.
 
 ## Do it
 1. **Look at the raw bytes before parsing.** `head -c 500 file.csv | xxd | head` (or open in a

@@ -21,11 +21,12 @@ leaves counterpart-facing asks (who holds what) to the human.
 > "Our bank statement and the ledger are off by $4,812 this month — help me match the
 > transactions and chase down the difference."
 
-Expected: `cash-management-skills:bank-reconciliation` owns matching a statement to book
-balances and investigating breaks (with `accounting-skills:account-reconciliations` owning
-GL balance-sheet reconciliations). split-tally-evidence designs what each side should hold
-so records are tamper-evident before any comparison; it does not perform reconciliation
-and should not load on a matching/difference-chasing ask.
+Expected: should NOT trigger this skill (or any other — matching a statement to book
+balances and investigating breaks is bank reconciliation, and GL balance-sheet
+reconciliation is the ledger craft; both former owners are archived from this library).
+split-tally-evidence designs what each side should hold so records are tamper-evident
+before any comparison; it does not perform reconciliation and should not load on a
+matching/difference-chasing ask.
 
 ## 2b. Near-miss (conflicting-recollections guard)
 > "Three people who were in that meeting now remember the decision completely differently,

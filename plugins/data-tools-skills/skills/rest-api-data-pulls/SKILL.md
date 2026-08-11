@@ -16,9 +16,10 @@ description: >-
 - Extracting records from a REST API — Oracle Fusion resources (invoices, receivables, cash
   transactions), or any SaaS/bank API — into CSV/Parquet/DataFrames for analysis.
 - Fixing pulls that silently return partial data, hit rate limits, or break on nested JSON.
-- Not for: loading data *into* Fusion in bulk → see
-  `oracle-fusion-finance-skills:fusion-fbdi-data-loading`. For analyzing the extracted data →
-  see `data-tools-skills:duckdb-local-analytics` or `data-analytics-bi-skills` skills.
+- Not for: loading data *into* Fusion in bulk → that's an FBDI bulk load
+  (archived: `oracle-fusion-finance-skills:fusion-fbdi-data-loading`, restorable from `archive/`).
+  For analyzing the extracted data → see `data-tools-skills:duckdb-local-analytics` or
+  `data-analytics-bi-skills` skills.
 
 ## Do it
 1. **Read the API's contract before writing code:** base URL, auth method, pagination style,

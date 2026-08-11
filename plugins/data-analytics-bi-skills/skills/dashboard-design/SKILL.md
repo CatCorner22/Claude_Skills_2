@@ -15,9 +15,10 @@ description: >-
 - Designing a new dashboard, report, or scorecard, or reworking one that isn't driving decisions.
 - Defining a KPI/metric properly (what it counts, its target and direction) or auditing a shaky one.
 - Choosing the right chart for a specific question, or reducing clutter on a busy view.
-- Not for: building the actual report artifact in Oracle Fusion (subject areas, layouts, prompts) →
-  see `oracle-otbi-skills:otbi-report-building`. For chart color palettes and encoding craft → use the
-  built-in `dataviz` skill.
+- Not for: building the actual report artifact in a BI tool — e.g. an Oracle OTBI analysis with its
+  subject areas, layouts, and prompts → that's an OTBI report build
+  (archived: `oracle-otbi-skills:otbi-report-building`, restorable from `archive/`). For chart color
+  palettes and encoding craft → use the built-in `dataviz` skill.
 
 ## Do it
 1. **Start from the decision and the audience, not the data.** Name who reads this, the decision they
@@ -75,8 +76,9 @@ Record your setup in `references/your-environment.md` (keep sensitive material �
 client names, actual figures — in `your-environment.private.md`, which is git-ignored). Capture your
 BI tool (Power BI, Tableau, Oracle OTBI, Looker), your audiences and the decisions each dashboard
 serves, your standard KPI definitions and targets, and any branding/layout conventions. This skill
-then applies its generic design logic to your real reports. To build the artifact in Oracle Fusion,
-hand off to `oracle-otbi-skills:otbi-report-building`; for color and encoding, use `dataviz`.
+then applies its generic design logic to your real reports. To build the artifact, follow your BI
+tool's own build path (wire tool-specific build notes into this file); for color and encoding, use
+`dataviz`.
 
 ## References
 - references/chart-selection.md — chart-by-question decision table and the KPI definition template

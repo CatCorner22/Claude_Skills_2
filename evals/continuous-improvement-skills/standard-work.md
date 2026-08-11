@@ -13,9 +13,11 @@ cadence; frames the SOP as a living baseline for improvement.
 > "Help me build the month-end close calendar — sequence all the tasks across the team with owners and
 > business-day offsets."
 
-Expected: this is sequencing a whole multi-task close, which `accounting-skills:month-end-close` handles;
-standard work documents *one* repeatable task's method. If standard-work loads instead, tighten the
-cross-links. (Standardizing one close task's method, though, is a legitimate standard-work use.)
+Expected: this is sequencing a whole multi-task close calendar — a scheduling task, not documenting
+one repeatable task's method — so standard-work should NOT load (if the ask were which close task
+gates the calendar, `continuous-improvement-skills:theory-of-constraints` would be the neighbor).
+If standard-work loads instead, tighten the cross-links. (Standardizing one close task's method,
+though, is a legitimate standard-work use.)
 
 ## 3. Quality rubric
 A good response:

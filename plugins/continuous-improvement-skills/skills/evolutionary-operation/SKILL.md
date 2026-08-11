@@ -18,10 +18,8 @@ description: >-
 
 ## When to use
 - Tuning a production process you cannot stop to experiment on: a reconciliation engine's
-  matching-rule tolerances (rule design itself lives in
-  `oracle-fusion-finance-skills:fusion-auto-reconciliation-design`), the model parameters behind
-  `cash-management-skills:cash-forecasting`, or the dunning cadence in
-  `sponsored-projects-ar-skills:sponsored-ar-aging-collections`.
+  matching-rule tolerances, the parameters behind a live forecasting model, or the dunning
+  cadence of a collections pipeline.
 - Making investigation the process's *normal operating mode* — always-on, small-step improvement
   rather than a one-off study.
 - Not for: designed experiments run offline in dedicated bursts with bold factor settings → see

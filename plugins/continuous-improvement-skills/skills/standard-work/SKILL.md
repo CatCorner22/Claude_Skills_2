@@ -15,9 +15,9 @@ description: >-
   payment run) so everyone does it the same, correct way.
 - Stabilizing a process that varies by who does it, before you try to improve it.
 - Writing an SOP or work instruction that people will actually use.
-- Not for: sequencing a whole multi-task close on a calendar → see
-  `accounting-skills:month-end-close`. To propose and align on a specific improvement → see
-  `continuous-improvement-skills:a3-thinking`.
+- Not for: sequencing a whole multi-task close on a calendar → that's a month-end-close calendar
+  build (archived: `accounting-skills:month-end-close`, restorable from `archive/`). To propose
+  and align on a specific improvement → see `continuous-improvement-skills:a3-thinking`.
 
 ## Do it
 1. **Pick one repeatable task and its trigger.** Name where it starts, where it ends, and what event

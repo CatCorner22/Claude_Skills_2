@@ -16,8 +16,9 @@ description: >-
 - Translating a business question into an analytical query (aggregations, trends, rankings, cohorts) against a warehouse or database.
 - Adding window functions (running totals, moving averages, rank, period-over-period) or restructuring a query with CTEs.
 - Reviewing a query for correctness (grain, join fan-out, filter placement) or making a slow one faster.
-- Not for: choosing between OTBI/BI Publisher and hand-written SQL in Oracle Fusion → see
-  `oracle-otbi-skills:otbi-subject-area-selection`. For profiling a dataset before you query it → see
+- Not for: choosing between OTBI/BI Publisher and hand-written SQL in Oracle Fusion → that's an OTBI
+  subject-area choice (archived: `oracle-otbi-skills:otbi-subject-area-selection`, restorable from
+  `archive/`). For profiling a dataset before you query it → see
   `data-analytics-bi-skills:exploratory-data-analysis`.
 
 ## Do it
@@ -77,9 +78,9 @@ Record your setup in `references/your-environment.md` (keep anything sensitive �
 real table/column names, sample data — in `your-environment.private.md`, which is git-ignored). Note
 your **SQL dialect** (Postgres, Snowflake, BigQuery, Oracle, SQL Server — they differ on `QUALIFY`,
 date functions, and `LIMIT`/`FETCH`), your core tables and their grain, standard join keys, and any
-naming or partitioning conventions. This skill then maps its generic steps onto your schema. In
-Oracle Fusion, prefer the subject-area/OTBI path where it exists — see
-`oracle-otbi-skills:otbi-subject-area-selection`.
+naming or partitioning conventions. This skill then maps its generic steps onto your schema. If
+your platform offers a governed reporting layer (like Oracle Fusion's OTBI subject areas), note here
+when to prefer it over hand-written SQL.
 
 ## References
 - references/query-patterns.md — window-function, QUALIFY, date, and sargability patterns with dialect notes

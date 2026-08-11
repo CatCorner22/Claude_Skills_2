@@ -14,7 +14,7 @@ description: >-
   chicken little, strategic autopsy, operational autopsy, red team my business, blocker
   protocol, stand down.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"
 ---
 
@@ -132,5 +132,9 @@ names real alternatives), your organization's lock-in sensitivities, and any sta
 constraints the sentinel should assume without re-asking.
 
 ## References
+- references/autopsy-method.md — session semantics, the evidence bar per template
+  section, the competency stack unpacked (TPS wastes in knowledge work, the fallacy
+  hunt, one-way doors, MSCD ambiguity types), a full worked example (the client-intake
+  portal), and firing calibration
 - references/your-environment.md — tool stack, standing constraints, lock-in
   sensitivities (fill in)

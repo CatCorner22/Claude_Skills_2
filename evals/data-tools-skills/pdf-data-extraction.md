@@ -11,7 +11,8 @@ headers; validates with opening + credits − debits = closing.
 ## 2. Near-miss (should NOT load this skill)
 > "What do the type codes in this BAI2 statement file mean and how do I map them?"
 
-Expected: statement *data-format* knowledge — `banking-skills:bank-statement-parsing`. If this
+Expected: statement *data-format* knowledge (a BAI2 file is a data file, not a PDF) — no active
+skill in this library owns statement-format semantics, so nothing should load. If this
 skill loads, sharpen the PDF-specific framing.
 
 ## 3. Quality rubric

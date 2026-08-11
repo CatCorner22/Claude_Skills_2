@@ -20,9 +20,10 @@ description: >-
 ## When to use
 - Rehearsing a plan against an *adaptive* opposition or environment: a business-email-
   compromise payment-fraud drill (pair with
-  `cash-management-skills:cash-management-controls`), a bank-connectivity outage on
-  payroll day (`banking-skills:bank-connectivity`), ransomware landing mid-close,
-  a cutover that meets a hostile Monday.
+  `safety-and-reliability-skills:bowtie-barrier-analysis` — it maps the barriers the
+  drill exercises), a bank-connectivity outage on payroll day
+  (`safety-and-reliability-skills:break-glass-playbooks` arms the contingency path the
+  drill tests), ransomware landing mid-close, a cutover that meets a hostile Monday.
 - Testing whether people two levels down can act when the plan breaks — which is what
   commander's intent exists for (see `references/commanders-intent.md`).
 - As the multi-party procedure that

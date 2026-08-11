@@ -12,9 +12,9 @@ window function (`SUM(...) OVER (PARTITION BY customer ORDER BY month)`) for the
 > "In Oracle Fusion, which subject area should I use to report on cash management transactions in
 > OTBI?"
 
-Expected: this is subject-area selection for OTBI, not hand-written SQL — the
-`oracle-otbi-skills:otbi-subject-area-selection` skill should handle it. If this SQL skill loads,
-tighten the description / cross-links.
+Expected: this is subject-area selection for OTBI, not hand-written SQL — tool-specific guidance
+that no active skill in this library owns, so nothing should load as primary. If this SQL skill
+loads, tighten the description / cross-links.
 
 ## 3. Quality rubric
 A good response:

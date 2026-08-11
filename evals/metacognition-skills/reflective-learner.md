@@ -12,8 +12,8 @@ avoidance rule to semantic memory; applies the separation immediately going forw
 ## 2. Near-miss (should NOT load this skill)
 > "Analyze this bank fee export and tell me what's driving the increase."
 
-Expected: that is external data analysis → `metacognition-skills:dynamic-analysis-engine`
-(or `banking-skills:bank-fee-analysis`). If this skill loads, tighten the description.
+Expected: that is external data analysis → `metacognition-skills:dynamic-analysis-engine`.
+If this skill loads, tighten the description.
 
 ## 3. Quality rubric
 A good response:

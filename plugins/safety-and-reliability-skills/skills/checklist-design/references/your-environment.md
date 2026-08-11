@@ -5,8 +5,8 @@ specifics), keep it in `your-environment.private.md` instead — that suffix is 
 only sanitized, structural examples.
 
 - **Checklists in force today:** <name, owner, format (read-do / do-confirm), where it lives>
-- **Redesign targets:** <e.g. the month-end close checklist in
-  accounting-skills:month-end-close/references/close-checklist.md; a wire-release card at the
+- **Redesign targets:** <wire in your current role's candidates — e.g. your month-end close
+  checklist wherever it lives in your systems; a wire-release card at the
   "before send" pause point; sterilization / patient-handoff cards>
 - **Pause points that already exist:** <where the team naturally stops — release screens, approval
   gates, handoffs>

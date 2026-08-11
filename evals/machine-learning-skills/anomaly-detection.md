@@ -13,9 +13,10 @@ investigation, not a verdict, plus managing alert fatigue.
 ## 2. Near-miss (should NOT load this skill)
 > "Match this month's bank statement to the GL and tell me which items are still outstanding."
 
-Expected: this is mechanical reconciliation, not statistical anomaly detection. The
-`cash-management-skills:bank-reconciliation` skill should handle it (this skill would only *rank* the
-resulting breaks by unusualness). If this anomaly skill loads as the primary, tighten the description / cross-links.
+Expected: this is mechanical reconciliation, not statistical anomaly detection — it should NOT
+trigger any skill in this library (bank-to-ledger reconciliation's former owner is archived);
+this skill would only *rank* the resulting breaks by unusualness. If this anomaly skill loads as
+the primary, tighten the description / cross-links.
 
 ## 3. Quality rubric
 A good response:

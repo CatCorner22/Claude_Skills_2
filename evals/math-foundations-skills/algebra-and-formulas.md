@@ -32,9 +32,10 @@ workbook-construction request, its description is over-triggering.
 > "Walk me through the accounting equation — if assets go up and liabilities are
 > unchanged, which side is the debit?"
 
-Expected: `accounting-skills:double-entry-fundamentals` loads instead. "Equation" and
-"which side" sound algebraic, but the accounting equation, debits/credits, and normal
-balances are that skill's scope; this one owns solve-for-x, not A = L + E.
+Expected: should NOT trigger this skill (or any other in this library — the double-entry
+bookkeeping owner is archived). "Equation" and "which side" sound algebraic, but the
+accounting equation, debits/credits, and normal balances are bookkeeping scope; this
+skill owns solve-for-x, not A = L + E.
 
 ## 3. Quality rubric
 A good response:
@@ -54,7 +55,7 @@ A good response:
   invisible parentheses.
 - **Stays honest:** flags an unsolvable or contradictory setup as a fact about the
   problem instead of forcing an answer; routes workbook architecture to
-  `data-analytics-bi-skills:spreadsheet-modeling` and accounting-equation questions to
-  `accounting-skills:double-entry-fundamentals` rather than absorbing them; recommends
+  `data-analytics-bi-skills:spreadsheet-modeling` and declines accounting-equation
+  questions as bookkeeping (debits/credits), not algebra, rather than absorbing them; recommends
   the sibling unit check on rearranged formulas instead of claiming algebra alone
   proves correctness; and never presents an unchecked number as checked.

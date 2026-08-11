@@ -13,14 +13,14 @@ increase"), converts to basis points (1 pp = 100 bp), and teaches why the base i
 of the disagreement. Bonus: it asks whether the denominator (traffic) shifted between
 periods before certifying the improvement.
 
-## 2. Near-miss (should load the ADJACENT skill instead)
+## 2. Near-miss (should NOT load this skill)
 > "Here's the balance sheet and income statement. Compute the current ratio, quick ratio,
 > debt-to-equity, and ROE, and tell me whether the company looks healthy."
 
-Expected: `finance-skills:financial-ratios` loads instead. Liquidity, leverage, and
-profitability measures read as company diagnostics — with benchmarks, trends, and DuPont —
-are financial statement analysis, not percent arithmetic. If percentages-and-proportions
-loads here, its description is over-triggering.
+Expected: should NOT trigger this skill. Liquidity, leverage, and profitability measures
+read as company diagnostics — with benchmarks, trends, and DuPont — are financial
+statement analysis (whose former owner is archived from this library), not percent
+arithmetic. If percentages-and-proportions loads here, its description is over-triggering.
 
 ## 2b. Near-miss (closer — should also NOT load this skill)
 > "Revenue went from $2M to $3.5M over four years. What's the annualized rate, and how long
@@ -48,6 +48,7 @@ A good response:
 - **Stays honest:** every worked number is recomputable from its shown arithmetic; percent
   changes from tiny, zero, or negative bases are declined in favor of absolute changes;
   a spectacular percent claim triggers "what's the base?" rather than amplification; and the
-  answer routes company-health ratio work to `finance-skills:financial-ratios`, dataset
-  summaries to `data-analytics-bi-skills:descriptive-statistics`, and CAGR/doubling-time asks
-  to `math-foundations-skills:exponential-growth-and-logs` rather than absorbing them.
+  answer declines company-health ratio work as financial-statement analysis (not percent
+  arithmetic), routes dataset summaries to `data-analytics-bi-skills:descriptive-statistics`,
+  and CAGR/doubling-time asks to `math-foundations-skills:exponential-growth-and-logs`
+  rather than absorbing them.

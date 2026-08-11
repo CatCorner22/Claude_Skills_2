@@ -28,6 +28,22 @@
 - `license`, `metadata`: portable extras from the open spec. Put a `version` inside `metadata`
   if you want per-skill versioning (there is no standard top-level `version` for a skill).
 
+### The `metadata` house convention (adopted 2026-08; apply to new and touched skills)
+New skills, and existing skills whenever they get a substantive revision, carry:
+
+```yaml
+metadata:
+  version: "1.0.0"          # bump minor on content revision, patch on typo-grade fixes
+  source: >-                # OPTIONAL — only when the skill is built from external research
+    One or two sentences naming the research dossier or external spec the skill was built
+    from, plus the provenance-mark legend if claims carry marks ([snippet-only] etc.).
+```
+
+Do not mass-retrofit untouched skills — the convention rides along with real edits so
+diffs stay reviewable. `metadata:` is a bare key on its own line; both `scripts/validate.sh`
+and `scripts/gen-catalog.py` handle it (the catalog parser bug that leaked bare keys into
+descriptions was fixed 2026-08-11 — keep the key bare, no inline value).
+
 ## Claude-Code-only fields (use only for skills that will never run outside Claude Code)
 `argument-hint`, `arguments`, `disable-model-invocation`, `user-invocable`, `allowed-tools`,
 `disallowed-tools`, `model`, `effort`, `context: fork`, `agent`, `paths`, `hooks`, `shell`.

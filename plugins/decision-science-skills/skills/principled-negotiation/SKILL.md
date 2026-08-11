@@ -8,9 +8,9 @@ description: >-
   trees, interest maps, criteria tables, and question banks, and roleplaying the
   counterpart for rehearsal, while the human sets the walk-away line and makes every
   concession decision. Use when preparing for, rehearsing, or debriefing a negotiation
-  over a bank fee increase (banking-skills:bank-fee-analysis builds the benchmark case;
-  this skill runs the ask), processor markup, an insurance-carrier fee schedule, or a
-  vendor or carrier contract renewal or dispute. Triggers: BATNA, prepare for a
+  over a fee or price increase (a benchmarking analysis builds the case; this skill runs
+  the ask), a processor or carrier fee schedule, or a vendor contract renewal or
+  dispute. Triggers: BATNA, prepare for a
   negotiation, push back on this fee increase, renegotiate the contract, calibrated
   questions, tactical empathy, accusation audit, talk them down.
 ---
@@ -19,16 +19,16 @@ description: >-
 
 ## When to use
 - Preparing for, rehearsing, or debriefing a negotiation: a bank fee increase, merchant
-  processor markup (`public-sector-treasury-skills:merchant-services-and-pci` shows why
-  the markup is the only negotiable layer), an insurance-carrier fee schedule, a vendor
-  or carrier contract renewal or dispute.
+  processor markup (the processor's markup is the only layer open to negotiation —
+  interchange and network fees are set upstream), an insurance-carrier fee schedule, a
+  vendor or carrier contract renewal or dispute.
 - Building the prep pack almost nobody writes: interest map, BATNA tree,
   objective-criteria table, accusation audit, calibrated-question bank — then roleplaying
   the counterpart before the real conversation.
-- Not for: computing what the fees *should* be → see `banking-skills:bank-fee-analysis`.
-  It decodes the account-analysis statement into AFP-coded benchmark tables and levers —
-  that skill builds the case, this skill runs the ask (the seam is stated here because
-  the method lives here).
+- Not for: computing what the fees *should* be → that is a fee-benchmarking analysis
+  (archived: `banking-skills:bank-fee-analysis`, restorable from `archive/`) — decoding
+  the account-analysis statement into benchmark tables and levers builds the case; this
+  skill runs the ask.
 - Not for: patient-complaint or service-recovery conversations → that is service
   recovery, a different discipline; this library does not yet carry a skill for it.
 
@@ -45,9 +45,9 @@ description: >-
    (get a live competing quote) raises your power more than any line you say. Estimate
    theirs too: what losing you costs them is your leverage map.
 3. **Assemble objective criteria.** Benchmarks, market rates, precedent, published price
-   schedules, your own historical pricing. For bank fees, `banking-skills:bank-fee-analysis`
-   produces exactly these tables — AFP-coded unit-price benchmarks, volume × price
-   drivers, the ECR trade-off — so run it first and carry its output in.
+   schedules, your own historical pricing. Whatever analysis benchmarks the disputed
+   prices produces exactly these tables (for bank fees: AFP-coded unit-price benchmarks,
+   volume × price drivers, the ECR trade-off) — run it first and carry its output in.
 4. **Draft the accusation audit.** List every negative thing they might think or say
    about your side ("you probably think we're a small account", "you think we're just
    shopping you") and plan to name the worst ones yourself, first. Named objections
@@ -117,7 +117,7 @@ walk-away line is a leaked one.
 
 ## References
 - references/negotiation-prep-and-tactics.md — the full prep template, tactic catalog
-  with example lines, the bank-fee-increase worked example wired to
-  `banking-skills:bank-fee-analysis` outputs, and the ethics line (honest tactics only)
+  with example lines, the bank-fee-increase worked example built from account-analysis
+  benchmark outputs, and the ethics line (honest tactics only)
 - references/your-environment.md — your counterparties, authority chain, and criteria
   sources (fill in; sensitive detail goes in the git-ignored .private variant)
