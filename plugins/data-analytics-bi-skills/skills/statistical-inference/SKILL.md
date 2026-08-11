@@ -20,6 +20,11 @@ description: >-
   `data-analytics-bi-skills:descriptive-statistics`. For scoring a predictive model's performance →
   see `machine-learning-skills:model-evaluation`. For framing the whole improvement project
   around the analysis → see `continuous-improvement-skills:dmaic-problem-solving`.
+- Not for: designing and operating the experiment itself — randomization unit, minimum detectable
+  effect sizing, sample-ratio checks, peeking discipline, guardrail metrics → see
+  `data-analytics-bi-skills:ab-test-design` (this skill owns the analysis once the data is in);
+  claiming causation from observational (non-randomized) data →
+  `data-analytics-bi-skills:causal-inference`.
 
 ## Do it
 1. **State the population claim and hypotheses first — before seeing results.** Write the null `H₀`
