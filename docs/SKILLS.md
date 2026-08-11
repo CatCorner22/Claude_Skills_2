@@ -1,6 +1,6 @@
 # Treasury Analyst Skills — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **173 skills across 24 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **181 skills across 24 plugins.**
 
 ## How to trigger a skill
 
@@ -36,16 +36,16 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (17) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (18) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
+- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (4) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
-- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (6) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).
+- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (10) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).
 - [`learning-skills`](#learning-skills) (3) — Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
 - [`collaboration-skills`](#collaboration-skills) (3) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail).
 - [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
-- [`decision-science-skills`](#decision-science-skills) (12) — Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
+- [`decision-science-skills`](#decision-science-skills) (14) — Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
 
 ## `cash-management-skills`
 
@@ -1049,6 +1049,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"`
 
+### `coding-agent-skills:defect-epidemiology`
+
+**Invoke:** `/coding-agent-skills:defect-epidemiology` — or just describe the task.
+
+**What it does:** Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread: fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history transmission tree), dispositions every contact as patched, not-applicable, or accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared snippet) so reinfection stops at the source, computes the pattern's R0, and quarantines high-R0 sources with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009 (inconsistent clone edits cause real faults). Use when a found bug's pattern may live elsewhere, or the same bug keeps coming back.
+
+**Triggers:** `contact tracing`, `patient zero`, `code clone`, `copy-paste bug`, `everywhere else this appears`, `outbreak`, `this bug again`, `trace the clones`, `quarantine the template`
+
 ### `coding-agent-skills:extreme-ownership`
 
 **Invoke:** `/coding-agent-skills:extreme-ownership` — or just describe the task.
@@ -1104,6 +1112,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Plans, drafts, and audits substantial technical deliverables — scripts and modules, automation, AI system designs, documentation, specifications, and project plans — through a disciplined Frame → Diagnose → Design → Build → Audit → Refine workflow that front-loads thinking, scales to the task's consequence, and ends with an adversarial defect hunt before anything is presented. Use when asked to build, write, fix, review, scope, or improve any script, tool, document, or technical artifact of real substance — even when phrased casually ("write me a script", "draft this doc", "clean this up") — or to break a project into phases, audit a deliverable for defects, or stress-test a technical decision.
 
 **Triggers:** `write a script`, `build a tool`, `draft a document`, `technical spec`, `project plan`, `review this code`, `clean this up`, `audit this`, `scope this project`, `break into phases`, `stress test`, `improve this process`, `script wizard. metadata: version: "1.0" author: User-drafted workflow spec; adapted to house standard`
+
+### `coding-agent-skills:software-archaeology`
+
+**Invoke:** `/coding-agent-skills:software-archaeology` — or just describe the task.
+
+**What it does:** Excavates an accreted system — codebase, config, rules, or documents — before demolition or refactoring: harvests dating evidence (timestamps, commit history, style eras), builds Harris-matrix DAG (superposition of layers), clusters into named eras, classifies as living/fill/rubble with evidence, removes rubble via reversible scream test (disable, wait, see who screams, rollback ready), files site report. Chesterton's fence systematized for a whole site. Use when a mature system must be understood, pruned, or safely demolished, or when nobody knows which parts are alive.
+
+**Triggers:** `software archaeology`, `excavate`, `dig into this legacy`, `harris matrix`, `stratigraphy`, `which of these are dead`, `scream test`, `who wrote this and why`, `safe to delete`
 
 ### `coding-agent-skills:soviet-space-graphite`
 
@@ -1335,6 +1351,22 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Triggers:** `design a checklist`, `read-do`, `do-confirm`, `killer items`, `pause point`, `our checklist isn't working`, `people skip the checklist`, `checklist too long`, `redesign the checklist`
 
+### `safety-and-reliability-skills:detection-system-tuning`
+
+**Invoke:** `/safety-and-reliability-skills:detection-system-tuning` — or just describe the task.
+
+**What it does:** Tunes detection systems — monitors, exception queues, spam filters, code-review bots, compliance screens — along the immune system's axis: between autoimmunity (false matches that desensitize operators) and immunodeficiency (missed threats). Measures each rule's empirical false-positive rate, recalibrates defaults before adding detectors, layers cheap screens ahead of costly investigation, gates human paging on danger signals, maintains expiring tolerance lists for verified-benign patterns, converts every true incident into a permanent detector, simulates threshold changes against historical firings before going live. Use when queues drown operators, real signals get buried, or systems need tuning.
+
+**Triggers:** `alarm fatigue`, `detection tuning`, `autoimmunity`, `immune system`, `too many false matches`, `exception queue drowning`, `tune the alerts`, `memory cell`, `everything is an exception`, `nobody looks at the alerts anymore. metadata: version: "1.0.0" source: >- Built from the library's biological-systems research dossier (docs/research/epic-wave-held-research.md`, `Lane 3 top pick). The mechanism is the documented artificial-immune-systems engineering literature (negative selection`, `clonal selection`, `danger theory) plus quantified alarm-fatigue evidence; all external claims carry their provenance marks ([snippet-only] = cross-checked search snippets). The fire-ecology fuel-load section is folded in per the same dossier's verdict`
+
+### `safety-and-reliability-skills:rebuild-rehearsal`
+
+**Invoke:** `/safety-and-reliability-skills:rebuild-rehearsal` — or just describe the task.
+
+**What it does:** Keeps critical capabilities alive by rehearsing the rebuild on a cadence shorter than anyone's tenure, channeling the Ise Grand Shrine's Shikinen Sengu (rebuilt in full every 20 years since 690 CE; carpenters learn, lead, then teach; and a ~120-year lapse after the Ōnin War proving the cycle needs a funding owner): census what lives only in heads, pick a real rebuild unit (restore from backup, recreate the deliverable from raw inputs, rebuild the environment from docs alone), rotate learn-lead-teach so last time's apprentice leads, harvest every exposed gap into the docs, and name who funds the cycle. The assistant simulates the rebuild, interrogates the docs for gaps, and plays the newcomer with only the written record. Use when knowledge lives in one head or docs have never been proven by use.
+
+**Triggers:** `rebuild drill`, `restore drill`, `if she left tomorrow`, `are the docs enough to recreate this`, `it only lives in his head`, `bus factor`, `knowledge refresh`, `could a newcomer run this`, `disaster recovery rehearsal`
+
 ### `safety-and-reliability-skills:reliability-engineering`
 
 **Invoke:** `/safety-and-reliability-skills:reliability-engineering` — or just describe the task.
@@ -1350,6 +1382,22 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 **What it does:** Structures high-stakes workplace communication with the protocols high-hazard industries run on: SBAR for escalations (Situation, Background, Assessment, Recommendation with a deadline), I-PASS for transferring work (criticality, problem summary, action list, if-then contingencies, receiver read-back), closed-loop confirmation for critical instructions, and PACE graded assertiveness (Probe, Alert, Challenge, Emergency) for questioning a decision upward — drafting phrase ladders for the specific relationship and roleplaying the hard conversation first. Use when escalating an issue to a manager or treasurer, transitioning work for coverage or shift change, giving instructions that must not be misheard, or preparing to challenge a superior's call such as a suspicious approved payment.
 
 **Triggers:** `SBAR`, `escalate this to`, `structured handoff`, `transition this work`, `coverage notes`, `read-back`, `closed-loop communication`, `graded assertiveness`, `PACE`, `speak up to the boss`
+
+### `safety-and-reliability-skills:sortition-review`
+
+**Invoke:** `/safety-and-reliability-skills:sortition-review` — or just describe the task.
+
+**What it does:** Designs selection-by-lot oversight channeling Athenian euthynai (every magistrate, generals included, faced scheduled end-of-term review by allotted reviewers: universal, never suspicion-triggered) and the 1268 Venetian doge protocol (ten alternating rounds of lot and vote, blind draws, 529 years): define the reviewable population, set a universal floor with no exemptions, draw items by verifiable lot (pre-committed seed, dice in the open), rotate reviewer pairs by lot too, make end-of-role handover review the default so departure carries no stigma, size the draw to real attention (the assistant first-passes every drawn item, the human adjudicates), and publish the rule, never the draw. Use when selection must be unriggable, review must carry no accusation, or the same person always checks the same people.
+
+**Triggers:** `sortition`, `review by lot`, `spot-check by lot`, `they know which ones get looked at`, `same person always reviews`, `rotate reviewers`, `end-of-term handover`, `draw at random`, `unriggable selection`
+
+### `safety-and-reliability-skills:split-tally-evidence`
+
+**Invoke:** `/safety-and-reliability-skills:split-tally-evidence` — or just describe the task.
+
+**What it does:** Designs tamper-evident records on the split tally-stick principle (English Exchequer, ~650 years): notched stick split lengthwise into stock and foil, wood grain self- authenticating. Halves each record between adverse parties so verification is rejoining two halves neither can alter alone. Inventories records one party could rewrite, designs the split for each (counterpart-held confirmations, hash-anchored exports, signed receipts, append-only logs with external anchors), schedules verification as rejoining ritual, proves by attempted alteration, adds second keeper who independently re-derives critical numbers. Use when records must survive disputes or when evidence needs designing rather than hoping.
+
+**Triggers:** `tally stick`, `split tally`, `tamper-evident`, `who holds the other copy`, `could someone alter this after the fact`, `does our half fit their half`, `hash anchor`, `dual custody`, `evidence design. metadata: version: "1.0.0" source: >- Built from the library's operational-wisdom research dossier (docs/research/epic-wave-held-research.md`, `Lane 1 entry 2: split tally sticks`, `English Exchequer`, `12th c.–1826)`, `with the khipu independent-parallel-derivation angle folded in per the same dossier's verdict. All external claims carry their provenance marks ([snippet-only] = cross-checked search snippets)`
 
 ### `safety-and-reliability-skills:weight-of-the-books`
 
@@ -1543,6 +1591,14 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Triggers:** `outside view`, `reference class`, `base-rate anchor`, `base rate`, `optimism bias`, `planning fallacy`, `how long do projects like this actually take`, `uplift the estimate`
 
+### `decision-science-skills:skin-in-the-game`
+
+**Invoke:** `/decision-science-skills:skin-in-the-game` — or just describe the task.
+
+**What it does:** Designs consequence symmetry for decisions that transfer risk: maps who creates a risk versus who eats the loss when the tail lands (Hammurabi §229–233, the oldest written rule against transferring hidden tail risk — Taleb's Skin in the Game framing), drafts a graduated symmetry table (harm class → who bears what), converts diffuse "reviewed by team" approvals into named-owner attestations, puts real defect-liability and warranty terms into vendor and contractor agreements, then checks the new consequence for perverse incentives such as over-caution and concealment. Consequence design binds decision-makers with power, never punishment-washing onto the powerless. Use when a sign-off carries no consequence, a vendor will not stand behind its work, or accountability needs structure instead of exhortation.
+
+**Triggers:** `skin in the game`, `who signs their name to this`, `who eats the loss`, `accountability without consequence`, `attestation`, `vendor won't stand behind it`, `hammurabi`, `consequence mapping. metadata: version: "1.0.0" source: >- Built from the library's operational-wisdom research lane (docs/research/epic-wave-held-research.md`, `Lane 1 entry 5). The stele text of Hammurabi §229–233 is real and graduated; the "Roman engineer under the arch" companion story is modern folklore`, `earliest traced to a USENET signature line around 2004 (Kiwi Hellenist) — this skill teaches both`, `labeled. The modern framing is Nassim Nicholas Taleb's Skin in the Game (2018)`, `cited as his. All external claims [snippet-only] provenance`, `cross-checked`
+
 ### `decision-science-skills:systems-thinking`
 
 **Invoke:** `/decision-science-skills:systems-thinking` — or just describe the task.
@@ -1574,4 +1630,12 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Writes a Ulysses pact — the self-binding commitment device psychiatry formalizes as the Ulysses contract in advance directives: in a calm state, identify where future judgment predictably degrades (deadline pressure, sunk-cost fog, market panic, the 11pm production incident, the angry-email urge); write hard rules with required second signatures, cooling-off periods, and pre-committed defaults; pre-decide the unbinding criteria that legitimately release the pact so it is never a straitjacket; register it where the future self will hit it; and enforce by quoting the user's own words and reasons back, never scolding. Pacts carry review dates and are renegotiated in calm state, never under fire. Use when someone keeps overriding their own rules under pressure or wants to bind a future decision against a foreseen worse self.
 
 **Triggers:** `ulysses pact`, `self-binding`, `commitment device`, `stop us from overriding`, `we broke our own rule again`, `bind my future self`, `cooling-off rule`, `no force-push after midnight. metadata: version: "1.0.0" source: >- Named for Odysseus lashed to the mast (public domain; "Ulysses pact" / "Ulysses contract" is the established clinical term). Channels the documented practices: psychiatric advance directives as legally instantiated Ulysses contracts [peer-reviewed`, `PubMed/PMC-sourced] and commitment devices from behavioral economics — not the myth`
+
+### `decision-science-skills:weak-signal-navigation`
+
+**Invoke:** `/decision-science-skills:weak-signal-navigation` — or just describe the task.
+
+**What it does:** Estimates a current position or state when the usual instrument — a dashboard, tracker, status report, or data feed — is down, stale, or untrusted, by fusing many weak independent cues (last known-good state, scheduled events that must have fired, historical rhythms, side channels, absence of expected noise) into a continuously re-estimated belief with a stated confidence band; narrates which cue the position leans on hardest, updates as cues arrive, and defines what will confirm or deny the belief when the instruments return (the method of Polynesian/Micronesian wayfinding and etak — Hokule'a, Mau Piailug, Hutchins' distributed-cognition analysis). Use when a decision needs the position anyway and the authoritative number is missing or disbelieved.
+
+**Triggers:** `wayfinding`, `weak signals`, `estimate blind`, `the dashboard is down`, `I don't trust this number`, `navigate without instruments`, `what would we expect to see`, `position without the data`, `dead reckoning. metadata: version: "1.0.0" source: >- Built from the library's operational-wisdom research lane (docs/research/epic-wave-held-research.md`, `Lane 1 entry 1). The mechanism is documented practice`, `not legend: the 1976 Hokule'a voyage navigated by Mau Piailug`, `the etak technique recorded by David Lewis (We`, `the Navigators)`, `and Edwin Hutchins' distributed-cognition analysis — all [snippet-only] provenance`, `cross-checked across independent sources`
 

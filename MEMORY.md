@@ -518,3 +518,24 @@ Never store secrets, credentials, account numbers, or client data here.
   ladder). Diverged from the PDF's React/FastAPI/PostgreSQL stack to a self-contained offline
   file for verifiability + privacy. Delivered locally (HTML + source zip), not committed.
   Merged/retired: none. Flagged: no contradictions.
+- 2026-08-11 — epic-wave closure: held-lanes wave completed (8 skills; library 181/24).
+  **All three epic-wave research lanes consumed.** User directive 2026-08-08 "Please create all
+  and point to general use. I would eventually get another job" re-aimed the held research
+  (biological + historical/operational-wisdom lanes) from domain-specific mounts to career-
+  portable general-use library assets. BIOLOGICAL LANE (4 skills): detection-system-tuning
+  (immune autoimmunity↔immunodeficiency axis; disposition audit; danger-signal gate), 
+  rebuild-rehearsal (Ise Shrine; structural continuity through periodic renewal),
+  sortition-review (Athenian/Venetian lottery; breaks patronage, distributes know-how),
+  split-tally-evidence (English Exchequer; tamper-evident half-records). HISTORICAL LANE
+  (4 skills): weak-signal-navigation (Polynesian wayfinding; signal-detection + noise floors),
+  skin-in-the-game (Hammurabi §229–233 + risk-transfer; consequence design = governance),
+  software-archaeology (Harris matrix; excavate before demolishing; scream test),
+  defect-epidemiology (contact-tracing method; incident → permanent detector). All domain-
+  neutral (analyst/attorney/ops/developer examples throughout); all career-portable with
+  "wire in your role here" stubs so library repoints on job change. Parallel authoring:
+  4 agents (ae1940fda6d9dd6fa, a00ee6c7fd24c3125, a0f6f0cecb53b68e0, aedb1e205066a72d6)
+  verified cross-links, domain-neutral design, references/evals before delivery. Bumps:
+  decision-science 0.4.0→0.5.0, safety-and-reliability 0.3.0→0.4.0, coding-agent 0.10.0→
+  0.11.0. Validation 0 errors/0 warnings. Catalog regenerated to 181 skills / 24 plugins.
+  Merged/retired: none. Flagged: no contradictions. **EPIC WAVE COMPLETE** — user's original
+  request scoped, fiction lane built, research holds consumed, general-use library shipped.
