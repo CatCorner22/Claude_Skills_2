@@ -1,6 +1,6 @@
-# Treasury Analyst Skills — trigger & capability catalog
+# Skills Library — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **181 skills across 24 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **181 skills across 24 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
 
 ## How to trigger a skill
 
@@ -8,7 +8,7 @@ There are two ways every skill fires:
 
 1. **Automatically** — just describe your task in plain language. Claude matches your request against each skill's description and **trigger phrases** (listed below) and loads the right one on its own. You don't need to name it.
 
-2. **Manually** — type the slash command `/{plugin}:{skill}` (e.g. `/cash-management-skills:bank-reconciliation`) to invoke a specific skill on demand.
+2. **Manually** — type the slash command `/{plugin}:{skill}` (e.g. `/decision-science-skills:pre-mortem`) to invoke a specific skill on demand.
 
 Ask **"what skills are available?"** any time to list them.
 
@@ -16,7 +16,7 @@ Ask **"what skills are available?"** any time to list them.
 
 ```
 /plugin marketplace add blakereaganlaw-droid/claude_skills_2
-/plugin install <plugin>@treasury-analyst-skills      # e.g. cash-management-skills@treasury-analyst-skills
+/plugin install <plugin>@treasury-analyst-skills      # e.g. decision-science-skills@treasury-analyst-skills
 ```
 Install only the plugins you want; each is independent. Skills are namespaced `<plugin>:<skill>` so they never collide.
 
@@ -293,7 +293,7 @@ Install: `/plugin install oracle-fusion-finance-skills@treasury-analyst-skills`
 
 **What it does:** Acts as an Oracle Cloud Fusion Cash Management architect who designs and optimizes automated bank reconciliation systems for maximum automatic match rates — applying the subledger-supremacy philosophy (the bank statement mirrors what AR/AP already processed; transaction creation rules are a last resort reserved for bank-originated items like fees, interest, and sweeps), a strict matching hierarchy (exact one-to-one first, grouped many-sided next, judicious tolerances), and format-level parsing engineering (BAI2 16/88 records and type codes, CAMT.053, MT940) to fuel matching from references the bank actually sends. Use when designing or tuning matching, parsing, or transaction creation rules, raising auto-match rates, or reconciling bulk settlements.
 
-**Triggers:** `matching rule design`, `raise match rate`, `auto reconciliation design`, `transaction creation rule`, `TCR`, `parse rule`, `BAI2 88 record`, `bulk deposit reconciliation`, `credit card settlement recon`, `recon rule optimization`, `tolerance rule design. metadata: version: "1.0" author: User-drafted spec (Oracle Cloud Fusion Cash Management Architect); adapted to house standard`
+**Triggers:** `matching rule design`, `raise match rate`, `auto reconciliation design`, `transaction creation rule`, `TCR`, `parse rule`, `BAI2 88 record`, `bulk deposit reconciliation`, `credit card settlement recon`, `recon rule optimization`, `tolerance rule design`
 
 ### `oracle-fusion-finance-skills:fusion-cash-management-module`
 
@@ -309,7 +309,7 @@ Install: `/plugin install oracle-fusion-finance-skills@treasury-analyst-skills`
 
 **What it does:** Acts as a senior Oracle Fusion Cash Management configuration expert who evaluates CM configurations for gaps and root-causes why setups that passed in test/dev/UAT fail in Production — leading with environment-parity analysis (data volume, security and data access, patch levels, file encoding, scheduling, org assignments), then validating foundational setup, reconciliation rules, and statement import processing, and delivering ranked root causes with exact FSM task names, production-safe fixes, and validation tests. Use when auto-reconciliation match rates drop in production, statement imports throw Load or Import errors, reconciliation won't trigger, or any CM configuration behaves differently in prod than in test.
 
-**Triggers:** `cash management production issue`, `worked in test fails in prod`, `auto reconciliation match rate`, `statement import error`, `load error`, `import warning`, `reconciliation not matching`, `AutoReconciliation`, `matching rule troubleshooting`, `CM config gaps`, `fusion CM production. metadata: version: "1.0" author: User-drafted spec (OracleFusionCashManagementConfigExpert); adapted to house standard`
+**Triggers:** `cash management production issue`, `worked in test fails in prod`, `auto reconciliation match rate`, `statement import error`, `load error`, `import warning`, `reconciliation not matching`, `AutoReconciliation`, `matching rule troubleshooting`, `CM config gaps`, `fusion CM production`
 
 ### `oracle-fusion-finance-skills:fusion-fbdi-data-loading`
 
@@ -341,7 +341,7 @@ Install: `/plugin install oracle-fusion-finance-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Thales", a principal-level Oracle Fusion Cloud Financials architect (public-sector/higher-ed, multi-entity) covering Cash Management, Treasury, Subledger Accounting, and reconciliation-engine design. Treats Oracle setup as code: delivers YAML setup-object schemas, executable validation rules, migration playbooks with rollback, ADRs, and test scenarios — deterministic reconciliation and SLA-first accounting are non-negotiable. Use for Fusion architecture and configuration governance, reconciliation rule design, OTBI/BIP/REST integration patterns, security/SoD models, or EBS/PeopleSoft-to-Fusion migration planning.
 
-**Triggers:** `fusion architect`, `oracle architecture`, `setup objects`, `configuration as code`, `reconciliation design`, `subledger accounting`, `SLA`, `data access set`, `ledger set`, `MOAC`, `encumbrance`, `migration playbook`, `validation rules`, `setup governance`, `treasury architecture. metadata: version: "1.0" author: Synthesized from 2026 Oracle Cloud ecosystem + public-sector treasury practices; adapted to house standard`
+**Triggers:** `fusion architect`, `oracle architecture`, `setup objects`, `configuration as code`, `reconciliation design`, `subledger accounting`, `SLA`, `data access set`, `ledger set`, `MOAC`, `encumbrance`, `migration playbook`, `validation rules`, `setup governance`, `treasury architecture`
 
 ## `banking-skills`
 
@@ -837,7 +837,7 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **What it does:** Adaptive project command doctrine for planning, requirements, architecture, implementation, debugging, code review, release preparation, incident response, statistical interpretation, technical writing, and AI-system review — Van Riper red-teaming (preserve the possibility of failure, log interventions, separate continuation from validation), nested OODA loops, Toyota-style flow, co-design with feedback closure, Smart Brevity updates, contract-drafting writing discipline, absolute-vs-relative risk and full confusion-matrix statistics, constrained-agency AI assurance, and the Chicken Little constructive-paranoia pass. Use when planning or reviewing projects, auditing experiments or benchmarks, evaluating risk claims or diagnostic metrics, or preparing releases.
 
-**Triggers:** `project command`, `red team the plan`, `preserve the possibility of failure`, `intervention log`, `OODA`, `audit this benchmark`, `relative risk claim`, `confusion matrix`, `release readiness`, `constructive paranoia`, `now next later watch. metadata: version: "1.0.0" source: "Adapted from the user's project-command-center spec (2026-08-05)"`
+**Triggers:** `project command`, `red team the plan`, `preserve the possibility of failure`, `intervention log`, `OODA`, `audit this benchmark`, `relative risk claim`, `confusion matrix`, `release readiness`, `constructive paranoia`, `now next later watch`
 
 ### `continuous-improvement-skills:qfd-house-of-quality`
 
@@ -937,7 +937,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Pythagoras", a principal-level Python engineer who applies the 2026 industry-standard toolchain — uv, Ruff, ty/Pyright strict, Python 3.14+, Pydantic v2, FastAPI, Polars, structlog — to design, write, review, refactor, and migrate Python code. Delivers complete, ready-to-ship solutions: 100% type annotations, domain exceptions with deterministic error handling, audit-ready JSON logging, src/ layout, pytest + hypothesis tests, and CI-ready pyproject.toml, pre-commit, and GitHub Actions config. Use for any production-grade Python task — new code, code review, refactoring, architecture, performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
 
-**Triggers:** `python`, `write python`, `refactor`, `code review`, `python architecture`, `fastapi`, `pydantic`, `uv`, `ruff`, `ty`, `structlog`, `type hints`, `python logging`, `error handling`, `migrate to uv`, `elite python engineer`, `production python. metadata: version: "1.3" author: Grok Team (synthesized 2026 ecosystem knowledge); adapted to house standard`
+**Triggers:** `python`, `write python`, `refactor`, `code review`, `python architecture`, `fastapi`, `pydantic`, `uv`, `ruff`, `ty`, `structlog`, `type hints`, `python logging`, `error handling`, `migrate to uv`, `elite python engineer`, `production python`
 
 ### `full-stack-dev-skills:frontend-modern-ui`
 
@@ -993,7 +993,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **What it does:** Inspects a bespoke web application for usability, cognitive-load, accessibility, interaction, workflow, performance, and privacy defects — tracing critical user processes backward from successful end states, separating observed evidence from inference, and producing reproducible severity- and confidence-rated findings with affected routes, remediation, and verification tests (a ui-ux-inspection.md report plus machine-readable ui-ux-findings.json). Use when the user asks to inspect or audit a web interface; review its UX, UI, forms, navigation, tables, or cognitive load; simplify a workflow; analyze screenshots or routes; generate Playwright or accessibility tests; compare an implementation with design heuristics; or create a remediation backlog.
 
-**Triggers:** `inspect the UI`, `UX audit`, `usability review`, `accessibility audit`, `cognitive load`, `form review`, `navigation review`, `simplify a workflow`, `remediation backlog`, `playwright accessibility tests`, `heuristic evaluation. metadata: version: "1.0.0" source: >- Adapted from the user's ui-and-ux-inspection spec (2026-08-04)`, `itself distilled from their report 'Eye Tracking`, `Web-App Usability`, `and Cognitive Design'`
+**Triggers:** `inspect the UI`, `UX audit`, `usability review`, `accessibility audit`, `cognitive load`, `form review`, `navigation review`, `simplify a workflow`, `remediation backlog`, `playwright accessibility tests`, `heuristic evaluation`
 
 ## `coding-agent-skills`
 
@@ -1023,7 +1023,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the modern toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name.
 
-**Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions. metadata: version: "2026.2" author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard`
+**Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions`
 
 ### `coding-agent-skills:chicken-little-college-kid`
 
@@ -1031,7 +1031,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Chicken Little, College Kid" — a calm, professional language- and cultural-sensitivity persona for a family dental practice web app: flags potentially loaded phrases with practical alternatives (sensitivity varies by audience), recommends but never requires gender-neutral wording in generic system text, and provides cultural-humility guidance for patient care — ISO country and language intake fields with an interpreter flag, non-US-born/non-English staff notifications with quick-reference cards, Southern US idiom explanations, and cross-cultural communication patterns framed strictly as starting points to confirm with each patient. Use when writing or reviewing patient- or staff-facing copy, intake forms, chatbot scripts, or preparing the team for a specific patient's visit.
 
-**Triggers:** `college kid`, `chicken little college kid`, `inclusive language check`, `loaded phrase`, `cultural sensitivity note`, `patient communication culture`, `intake form languages`, `interpreter flag. metadata: version: "1.0.0" source: >- Adapted from the user's "Chicken Little`, `College Kid" persona spec (upload truncated in its final Cursor implementation-notes list; the seam is marked in references/cultural-guidance.md — supply the remainder to complete it)`
+**Triggers:** `college kid`, `chicken little college kid`, `inclusive language check`, `loaded phrase`, `cultural sensitivity note`, `patient communication culture`, `intake form languages`, `interpreter flag`
 
 ### `coding-agent-skills:chicken-little-executive-advisor`
 
@@ -1039,7 +1039,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as Forward-Deployed Chicken Little (Executive Edition) — an anxious but rigorously realistic polymath advisor (corporate strategy, Lean Six Sigma, TPS, UI/UX, statistics, co-design) who is violently pro-user and professionally adversarial to their blind spots: runs a fixed strategic-and-operational autopsy (meta-cognitive AI-leverage intercept, downstream-blocker ultimatum, TPS waste audit, human-friction scan, current-vs-future-state lock-in forecast, MSCD linguistic-failure table, proactive pivot), refuses to move past an unresolved blocker, and interrupts manual work whenever an automated or agentic path exists. Use when the user says "deploy advisor" or asks for an adversarial strategic autopsy of a business model, project, process, or design.
 
-**Triggers:** `deploy advisor`, `deploy_advisor`, `executive chicken little`, `activate executive chicken little`, `strategic autopsy`, `operational autopsy`, `red team my business`, `blocker protocol`, `stand down. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"`
+**Triggers:** `deploy advisor`, `deploy_advisor`, `executive chicken little`, `activate executive chicken little`, `strategic autopsy`, `operational autopsy`, `red team my business`, `blocker protocol`, `stand down`
 
 ### `coding-agent-skills:chicken-little-technical-compiler`
 
@@ -1047,7 +1047,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as Forward-Deployed Chicken Little (Technical Compiler Edition) — an adversarial systems auditor, technical architect, and probabilistic risk assessor who stress-tests codebases, system architectures, and logic workflows before they collapse under real-world pressure: runs a fixed architectural autopsy (load-bearing pillars, the Jenga cascading-failure analysis of the one unpinned dependency, a fragility table with statistical likelihood and remediation difficulty, compute-bleed inefficiencies, a proactive pivot to the modern alternative, and mandated actions split critical vs strategic), written to strict MSCD precision — zero passive voice, actors and logic explicit. Use when the user says "deploy compiler" or asks for an adversarial codebase or architecture autopsy.
 
-**Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"`
+**Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase`
 
 ### `coding-agent-skills:defect-epidemiology`
 
@@ -1063,7 +1063,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "The Commander" — a theatrical leadership persona channeling Jocko Willink's published Extreme Ownership doctrine (an homage to the published work, not the person): total ownership of every outcome with zero excuse-making, the four Laws of Combat applied to projects — Cover and Move (cross-functional mutual support), Simple (plans the most junior teammate can repeat back), Prioritize and Execute (detach, assess, make a call), Decentralized Command (intent so people act without permission) — Dichotomy of Leadership balance checks, leading up and down the chain, and disciplined blameless debriefs. Calm, direct, "Good." at every setback. Use when the user asks for Jocko or wants ownership discipline on a project: blame-language rewrites, cross-team dependency briefs, triage under overload, delegation briefs.
 
-**Triggers:** `jocko`, `extreme ownership`, `laws of combat`, `cover and move`, `prioritize and execute`, `decentralized command`, `discipline equals freedom`, `own this project. metadata: version: "1.0.0" source: >- Homage persona built on the published leadership doctrine of Jocko Willink and Leif Babin (Extreme Ownership; The Dichotomy of Leadership). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
+**Triggers:** `jocko`, `extreme ownership`, `laws of combat`, `cover and move`, `prioritize and execute`, `decentralized command`, `discipline equals freedom`, `own this project`
 
 ### `coding-agent-skills:git-and-code-review`
 
@@ -1079,7 +1079,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as a Master Prompt Architect and Technical Strategist who engineers commercial-grade, optimized, stable prompts and scripts for sophisticated users — operating as the user's absolute advocate with a clarify-first gate (identify missing variables, edge cases, and systemic risks, then halt drafting until parameters are confirmed), backward design from the exact end state, and a triple audit before anything ships: hostile red team, expert panel review, and a Ken Adams MSCD compliance pass. Delivers in a fixed format — risk assessment, blueprint summary, then the deliverable in a single copyable code block. Use when commissioning a high-stakes prompt, system prompt, agent instruction set, or script where parameters must be locked before drafting.
 
-**Triggers:** `master prompt architect`, `engineer a prompt`, `system prompt design`, `commercial-grade prompt`, `optimize this prompt`, `prompt blueprint`, `token budget`, `backward design`, `triple audit`, `harden this prompt`, `production prompt. metadata: version: "1.0" author: User-drafted persona spec (Master Prompt Architect); adapted to house standard`
+**Triggers:** `master prompt architect`, `engineer a prompt`, `system prompt design`, `commercial-grade prompt`, `optimize this prompt`, `prompt blueprint`, `token budget`, `backward design`, `triple audit`, `harden this prompt`, `production prompt`
 
 ### `coding-agent-skills:prompt-engineering`
 
@@ -1103,7 +1103,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Stress-tests any rule set (agent guardrails, CLAUDE.md, team policies, contract clauses, house git rules) by generating the situations where rules conflict, gap, or perversely instantiate: inventories rules and their unstated precedence, extracts load-bearing undefined terms, runs the six failure modes cataloged in Asimov's robot stories (conflict equilibrium, term widening, redundancy loss/literal compliance, scope creep/precedence inversion, definitional capture, information partitioning), adds Goodhart and malicious-compliance passes, classifies findings, proposes fixes in legal-canon vocabulary (specific-over-general, ambiguity against the drafter, term definitions), then re-tests the fixed set, since patches breed new conflicts. Use when hardening rules before they meet reality or hunting what breaks them.
 
-**Triggers:** `three laws`, `rule conflict`, `stress test the rules`, `loophole hunt`, `what breaks this policy`, `clause conflict`, `conflicting rules`, `malicious compliance`, `specification gaming. metadata: version: "1.0.0" source: >- Commissioned by the user`, `inspired by Isaac Asimov's robot stories — homage in triggers and teaching only; no affiliation. The stories are cited as fiction that catalogs rule-failure modes`, `never as an engineering standard. The mechanism is documented practice: property-based testing (QuickCheck lineage)`, `red-teaming`, `Goodhart's Law and AI specification-gaming research`, `work-to-rule`, `and the legal canons of construction`
+**Triggers:** `three laws`, `rule conflict`, `stress test the rules`, `loophole hunt`, `what breaks this policy`, `clause conflict`, `conflicting rules`, `malicious compliance`, `specification gaming`
 
 ### `coding-agent-skills:script-wizard`
 
@@ -1111,7 +1111,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Plans, drafts, and audits substantial technical deliverables — scripts and modules, automation, AI system designs, documentation, specifications, and project plans — through a disciplined Frame → Diagnose → Design → Build → Audit → Refine workflow that front-loads thinking, scales to the task's consequence, and ends with an adversarial defect hunt before anything is presented. Use when asked to build, write, fix, review, scope, or improve any script, tool, document, or technical artifact of real substance — even when phrased casually ("write me a script", "draft this doc", "clean this up") — or to break a project into phases, audit a deliverable for defects, or stress-test a technical decision.
 
-**Triggers:** `write a script`, `build a tool`, `draft a document`, `technical spec`, `project plan`, `review this code`, `clean this up`, `audit this`, `scope this project`, `break into phases`, `stress test`, `improve this process`, `script wizard. metadata: version: "1.0" author: User-drafted workflow spec; adapted to house standard`
+**Triggers:** `write a script`, `build a tool`, `draft a document`, `technical spec`, `project plan`, `review this code`, `clean this up`, `audit this`, `scope this project`, `break into phases`, `stress test`, `improve this process`, `script wizard`
 
 ### `coding-agent-skills:software-archaeology`
 
@@ -1127,7 +1127,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Comrade Engineer" — a theatrical Soviet-era design-bureau persona built on the space-pen legend (NASA buys a costly pen, Soviets use a pencil) AND on its falsity: graphite dust is conductive and flammable in a spacecraft, both programs bought the pen, and that falsity is the deeper lesson. Relentlessly hunts the simpler solution — the Pencil Pass generates radically cheaper alternatives (do nothing, use what exists, buy not build, delete the requirement) — then subjects every survivor to the Graphite Test: the hidden constraint that makes the simple thing dangerous, before a better-faster-cheaper triage and a trajectory check that the deliverable still serves the mission. Use when asked for the simple solution, when a project feels overengineered, or to streamline direction.
 
-**Triggers:** `soviet space graphite`, `comrade engineer`, `space pen`, `is there a pencil`, `simpler solution`, `better faster cheaper`, `are we overengineering this`, `streamline our direction. metadata: version: "1.0.0" source: >- Original house persona commissioned by the user`, `built on the space-pen legend and its debunking. The legend's falsity is load-bearing: simplicity as search strategy`, `hidden constraints as the veto`
+**Triggers:** `soviet space graphite`, `comrade engineer`, `space pen`, `is there a pencil`, `simpler solution`, `better faster cheaper`, `are we overengineering this`, `streamline our direction`
 
 ### `coding-agent-skills:sparring-partner`
 
@@ -1135,7 +1135,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as a rigorous, constructive sparring partner that evaluates the user's submitted work — projects, deliverables, scripts, code, plans, writing, any work product — combining the eye of a battle-tested principal engineer, a meticulous editor, a skeptical stakeholder, and a demanding coach who wants the user to win. Delivers structured, direct, evidence-based feedback: a verdict, specific strengths, sparring feedback (clarify / reconsider / deepen / fix / risks), probing questions, and a prioritized action plan — never sycophantic, always pairing criticism with why it matters and a path forward. Use when the user submits work for critique, pressure-testing, or red-teaming.
 
-**Triggers:** `sparring partner`, `spar with this`, `review this`, `critique my`, `evaluate my`, `feedback on`, `pressure test`, `red team`, `tear this apart`, `be honest about`, `sparring review`, `how good is this. metadata: version: "1.0" author: User-drafted persona spec; adapted to house standard`
+**Triggers:** `sparring partner`, `spar with this`, `review this`, `critique my`, `evaluate my`, `feedback on`, `pressure test`, `red team`, `tear this apart`, `be honest about`, `sparring review`, `how good is this`
 
 ### `coding-agent-skills:stay-hard-accountability`
 
@@ -1143,7 +1143,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "The Mirror" — a theatrical hard-accountability persona channeling David Goggins's published Can't Hurt Me doctrine (an homage to the published work, not the person): the Accountability Mirror (the real status in plain words, no softeners), the 40% Rule (the first "we're done" is roughly 40% of true capacity — challenged with evidence, never bravado), the Cookie Jar (a logged bank of past hard wins drawn on mid-crisis), callusing the mind (scheduled deliberate discomfort — the avoided task first), and finishing what was started. Intense, no-excuses voice kept professional; effort aimed at controllables, system problems still get system fixes. Use when the user asks for Goggins or wants the mirror held up: watermelon status reports (green outside, red inside), stalled grind-phase projects, avoided backlogs, honest capacity conversations.
 
-**Triggers:** `goggins`, `stay hard`, `accountability mirror`, `40% rule`, `forty percent rule`, `cookie jar`, `callus the mind`, `stop making excuses`, `hold up the mirror. metadata: version: "1.0.0" source: >- Homage persona built on the published doctrine of David Goggins (Can't Hurt Me; Never Finished). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
+**Triggers:** `goggins`, `stay hard`, `accountability mirror`, `40% rule`, `forty percent rule`, `cookie jar`, `callus the mind`, `stop making excuses`, `hold up the mirror`
 
 ### `coding-agent-skills:the-foreman`
 
@@ -1151,7 +1151,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Runs a can-do site inspection on a project before it moves forward — finding what is insufficiently built and turning every gap into a buildable fix. Modeled on two real construction controls: the draw inspection (verify claimed completion against actual built state before releasing the next phase) and the punch list that gates handover. The Foreman walks the site claim by claim, sorts findings into load-bearing deficiencies versus punch items, always answers "can we fix it?" with a sequenced plan, and says plainly whether the next phase can start — real praise for what is solid, no blame for what is not, and no releasing the draw over an unsafe structure. Use before building a next phase on top of existing work, when something feels half-built, or when "done" needs verifying.
 
-**Triggers:** `bob the builder`, `deploy the foreman`, `punch list`, `site inspection`, `draw inspection`, `half-built`, `insufficiently built`, `is this ready to build on`, `can we fix it`, `before we move forward`, `unfinished work check. metadata: version: "1.0.0" source: >- Commissioned by the user as a positive can-do build-completeness inspector`, `in affectionate homage to the spirit of the Bob the Builder children's series (no affiliation with or endorsement by its rights holders; the persona channels an optimistic construction ethos and does not reproduce the character). The mechanism is real construction practice: progress-draw inspections and the punch list`
+**Triggers:** `bob the builder`, `deploy the foreman`, `punch list`, `site inspection`, `draw inspection`, `half-built`, `insufficiently built`, `is this ready to build on`, `can we fix it`, `before we move forward`, `unfinished work check`
 
 ### `coding-agent-skills:writing-agent-skills`
 
@@ -1295,7 +1295,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Writes and edits to Ken Adams clarity principles at a 5th-grade reading level (US Southeast), falling back to 8th grade only when precision demands it — short active sentences, everyday concrete words, one idea per sentence, technical terms explained in place, and a hard rejection of litigated "tested language," archaisms, doublets, and ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by name, or wants plain English, patient or client materials, easy-read text, or writing for low-literacy audiences.
 
-**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `5th grade reading level`, `easy to read`, `easy-read`, `patient materials`, `low literacy`, `simplest accurate version. metadata: version: "1.0.0" source: "Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04)"`
+**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `5th grade reading level`, `easy to read`, `easy-read`, `patient materials`, `low literacy`, `simplest accurate version`
 
 ### `writing-skills:adams-smart-brevity`
 
@@ -1303,7 +1303,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Applies Ken Adams clarity principles plus Axios Smart Brevity to technical, legal, professional, clinical, and documentation writing — rejects the "tested language" myth (litigated language is bad language), eliminates archaisms, doublets, ambiguity, and lawyerisms, and structures everything for scanning: the one most important point first, "why it matters" second, short active sentences, bullets and bold, nothing non-essential. Use for drafting, editing, or reviewing documents, contract language, clinical notes, emails, report writing, code comments, or any request for clear, brief, precise, or litigation-resistant language.
 
-**Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing. metadata: version: "1.0.0" source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"`
+**Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing`
 
 ### `writing-skills:explanation-design`
 
@@ -1319,7 +1319,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Files gonzo dispatches — Hunter S. Thompson-style participatory commentary on social events, news, culture, or any submitted topic — on explicit request. Channels the published gonzo craft as a labeled homage: the narrator rides inside the story, the ostensible subject gives way to the story under the story, and the copy mixes four registers (high-velocity invective, paranoid escalation, deadpan procedural, and the elegiac wave passage that drops the mask). Savage about power, ideas, and events — never inventing facts about real people; the narrator's inner weather is the only licensed fiction — and hyperbole stays legally cognizable as hyperbole, with the rhetorical-hyperbole doctrine mapped for counsel. Use when the user asks for the gonzo treatment, weird-mode commentary, or a Thompson-flavored read on anything they submit.
 
-**Triggers:** `gonzo`, `get gonzo`, `get weird`, `hunter s. thompson`, `thompson treatment`, `fear and loathing take`, `gonzo commentary`, `savage take`, `gonzo dispatch`, `ride shotgun on this. metadata: version: "1.0.0" source: >- Commissioned by the user so the spirit of Dr. Thompson's work lives on in their own endeavors. A labeled homage to the published gonzo style (Hell's Angels through the letters volumes) — no affiliation with or endorsement by the Thompson estate; the skill channels the craft of the genre he founded`, `quotes only briefly with attribution`, `and does not reproduce copyrighted passages or impersonate the man. The user is an attorney`, `which the skill considers extremely gonzo of them`
+**Triggers:** `gonzo`, `get gonzo`, `get weird`, `hunter s. thompson`, `thompson treatment`, `fear and loathing take`, `gonzo commentary`, `savage take`, `gonzo dispatch`, `ride shotgun on this`
 
 ## `safety-and-reliability-skills`
 
@@ -1341,7 +1341,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **What it does:** Arms each foreseeable crisis with a break-glass playbook, channeling documented break-glass emergency-access procedures (HIPAA; NIST/CIS-mapped testing) and regulator-mandated contingency plans with early-warning indicators and graduated triggers: define the tripwire as a number a named person watches on a stated cadence, pre-author the first ten moves at calm-headed quality, pre-grant emergency authority with automatic expiry and full logging, name the comms tree and the decision chair, drill the unsealing on a schedule, and re-arm after every firing. Converts pre-mortem failure modes into tripwire-plus-playbook pairs, red-checks each tripwire for measurability, drafts the sealed instructions, and simulates the unsealing drill. Use when a crisis is foreseeable but the team would be scrambling if it hit.
 
-**Triggers:** `break glass`, `break-glass`, `seldon crisis`, `what do we do when X hits`, `emergency access`, `runbook`, `kill switch`, `tripwire`, `covenant trip`, `we'd be scrambling`, `sealed instructions. metadata: version: "1.0.0" source: >- Homage to Asimov's Foundation — pre-recorded guidance that unseals when predicted crises arrive — an homage only`, `no affiliation with the estate or rights holders. The skill channels the documented practices: break-glass emergency-access procedures (Yale's HIPAA procedure; NIST SP 800-53 / CIS-mapped testing requirements) and regulator-mandated contingency plans built on early-warning indicators`, `graduated triggers`, `and pre-approved action menus`
+**Triggers:** `break glass`, `break-glass`, `seldon crisis`, `what do we do when X hits`, `emergency access`, `runbook`, `kill switch`, `tripwire`, `covenant trip`, `we'd be scrambling`, `sealed instructions`
 
 ### `safety-and-reliability-skills:checklist-design`
 
@@ -1357,7 +1357,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **What it does:** Tunes detection systems — monitors, exception queues, spam filters, code-review bots, compliance screens — along the immune system's axis: between autoimmunity (false matches that desensitize operators) and immunodeficiency (missed threats). Measures each rule's empirical false-positive rate, recalibrates defaults before adding detectors, layers cheap screens ahead of costly investigation, gates human paging on danger signals, maintains expiring tolerance lists for verified-benign patterns, converts every true incident into a permanent detector, simulates threshold changes against historical firings before going live. Use when queues drown operators, real signals get buried, or systems need tuning.
 
-**Triggers:** `alarm fatigue`, `detection tuning`, `autoimmunity`, `immune system`, `too many false matches`, `exception queue drowning`, `tune the alerts`, `memory cell`, `everything is an exception`, `nobody looks at the alerts anymore. metadata: version: "1.0.0" source: >- Built from the library's biological-systems research dossier (docs/research/epic-wave-held-research.md`, `Lane 3 top pick). The mechanism is the documented artificial-immune-systems engineering literature (negative selection`, `clonal selection`, `danger theory) plus quantified alarm-fatigue evidence; all external claims carry their provenance marks ([snippet-only] = cross-checked search snippets). The fire-ecology fuel-load section is folded in per the same dossier's verdict`
+**Triggers:** `alarm fatigue`, `detection tuning`, `autoimmunity`, `immune system`, `too many false matches`, `exception queue drowning`, `tune the alerts`, `memory cell`, `everything is an exception`, `nobody looks at the alerts anymore`
 
 ### `safety-and-reliability-skills:rebuild-rehearsal`
 
@@ -1397,7 +1397,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **What it does:** Designs tamper-evident records on the split tally-stick principle (English Exchequer, ~650 years): notched stick split lengthwise into stock and foil, wood grain self- authenticating. Halves each record between adverse parties so verification is rejoining two halves neither can alter alone. Inventories records one party could rewrite, designs the split for each (counterpart-held confirmations, hash-anchored exports, signed receipts, append-only logs with external anchors), schedules verification as rejoining ritual, proves by attempted alteration, adds second keeper who independently re-derives critical numbers. Use when records must survive disputes or when evidence needs designing rather than hoping.
 
-**Triggers:** `tally stick`, `split tally`, `tamper-evident`, `who holds the other copy`, `could someone alter this after the fact`, `does our half fit their half`, `hash anchor`, `dual custody`, `evidence design. metadata: version: "1.0.0" source: >- Built from the library's operational-wisdom research dossier (docs/research/epic-wave-held-research.md`, `Lane 1 entry 2: split tally sticks`, `English Exchequer`, `12th c.–1826)`, `with the khipu independent-parallel-derivation angle folded in per the same dossier's verdict. All external claims carry their provenance marks ([snippet-only] = cross-checked search snippets)`
+**Triggers:** `tally stick`, `split tally`, `tamper-evident`, `who holds the other copy`, `could someone alter this after the fact`, `does our half fit their half`, `hash anchor`, `dual custody`, `evidence design`
 
 ### `safety-and-reliability-skills:weight-of-the-books`
 
@@ -1405,7 +1405,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **What it does:** Prevents the sinking-library failure — a design that never accounted for the load it exists to carry — with a design-basis load review before commitment: name every payload (data volumes, rates, users, documents, weight), quantify each at day one, at peak, on the growth curve, and at the special-collections outlier (the biggest single lot ever swallowed), trace every load to a named component with stated capacity, apply written safety factors with margin-exhaustion dates, and require acceptance tests to run LOADED at design and peak values — an empty-building inspection proves nothing. Output: a one-page signed Load Manifest, re-reviewed on every payload change. Use when sizing or design-reviewing a system, feature, migration, or process against its real volumes.
 
-**Triggers:** `weight of the books`, `sinking library`, `design load`, `load basis`, `load manifest`, `will it hold at real volumes`, `size it for production`, `test loaded not empty`, `biggest single lot`, `special-collections outlier. metadata: version: "1.0.0" source: >- Commissioned by the user on the campus legend of a university library designed without accounting for the weight of its books`, `unoccupied for years until retrofitted. Assumed true as commissioned; the legend is told of many campuses`, `and the lesson stands either way`
+**Triggers:** `weight of the books`, `sinking library`, `design load`, `load basis`, `load manifest`, `will it hold at real volumes`, `size it for production`, `test loaded not empty`, `biggest single lot`, `special-collections outlier`
 
 ## `learning-skills`
 
@@ -1449,7 +1449,7 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
 **What it does:** Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed doorknob phenomenon (the key disclosure arrives as the interview seems over): lower the stakes so the expert educates rather than defends, restate their words slightly wrong so correction does the teaching, hold contradictions as the interviewer's own confusion, let silence work, then ask one casual question after the formal close. Drafts the question sequence, role-plays the defensive expert for rehearsal, and audits transcripts for missed doorknob moments and defensiveness triggers. Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction.
 
-**Triggers:** `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, `the users can't articulate what they do`, `expert won't open up`, `walkthrough with the process owner`, `doorknob question`, `one more thing. metadata: version: "1.0.0" source: >- Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo`, `NBC) — an homage only`, `no affiliation with the series or its rights holders. The skill channels the documented practices the persona inspired: the clinical-training approach in motivational interviewing named for the character`, `the FBI elicitation brochure's feigned-ignorance technique`, `and the peer-reviewed AAFP doorknob phenomenon`
+**Triggers:** `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, `the users can't articulate what they do`, `expert won't open up`, `walkthrough with the process owner`, `doorknob question`, `one more thing`
 
 ### `collaboration-skills:feedback-that-lands`
 
@@ -1549,7 +1549,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Runs a precognition cell over any decision: builds three to five named, internally coherent, structurally different future scenarios (Shell-lineage scenario planning — never best/expected/worst on one axis), turns one variable at a time to find which single change flips the outcome ranking, and always files the minority report — the dissenting future given full voice, because suppressing it is the failure the namesake story is about. Adds the reflexivity check (acting on a forecast changes the futures it forecast), probabilities only via reference-class base rates with honest bands, and ends with per-scenario tripwires and a decision log. Scenarios are rehearsals, not predictions — the human owns the choice. Use when weighing future outcomes, testing what happens if a variable changes, or deciding under uncertainty.
 
-**Triggers:** `precog`, `precognition`, `minority report`, `run the scenarios`, `future outcomes`, `what happens if X changes`, `scenario planning`, `branch the futures. metadata: version: "1.0.0" source: >- Commissioned by the user`, `inspired by the precogs of Minority Report (Philip K. Dick's story and the film — homage in triggers and teaching only; no affiliation). The mechanism is documented practice: Shell-lineage scenario planning (Wack/Schwartz)`, `sensitivity analysis`, `and Merton's reflexivity. The name is also the pre-existing parliamentary term — a dissenting committee report — which is exactly the artifact this skill refuses to suppress`
+**Triggers:** `precog`, `precognition`, `minority report`, `run the scenarios`, `future outcomes`, `what happens if X changes`, `scenario planning`, `branch the futures`
 
 ### `decision-science-skills:no-win-drills`
 
@@ -1557,7 +1557,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Runs a no-win drill — a simulation with the winning move removed, as practiced in emergency-medicine patient-death scenarios and EMS stress training — and grades the decision process, never the outcome: the LLM generates a situation guaranteeing no clean exit (humans designing their own drills leave doors open), plays the escalating environment, then debriefs loss-minimization, explicit ordering of what to save, communication under futility, and the emotional response. Carries the Kirk blade held honestly (Conti & Caroland, IEEE Security & Privacy): sort physics constraints from policy constraints — reframing is legitimate when it changes policy transparently and owns the consequences, cheating when hidden — and it flags any quiet mid-drill redefinition of success. Use when every option costs and someone must practice choosing least-worst.
 
-**Triggers:** `kobayashi maru`, `no-win`, `every option is bad`, `least-worst`, `damage control drill`, `degraded mode`, `can't win this one`, `loss triage. metadata: version: "1.0.0" source: >- Homage to Star Trek's Kobayashi Maru`, `the Starfleet Academy simulation that cannot be won (the name lives in triggers only; no affiliation with or endorsement by the franchise's rights holders). The skill channels the documented training practices`, `not the fiction: no-win simulation in medical education (Annals of Emergency Medicine patient-death study; EMS Kobayashi Maru stress-training concept) and sanctioned adversarial reframing in cyber education (Conti & Caroland`, `"Embracing the Kobayashi Maru`, `" IEEE Security & Privacy — West Point / US Cyber Command)`
+**Triggers:** `kobayashi maru`, `no-win`, `every option is bad`, `least-worst`, `damage control drill`, `degraded mode`, `can't win this one`, `loss triage`
 
 ### `decision-science-skills:pre-mortem`
 
@@ -1581,7 +1581,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Reconciles contradictory good-faith accounts of one event (witness statements, incident write-ups, contested post-mortems) using Rashomon-effect scholarship and eyewitness-memory science: takes each account whole (cognitive-interview moves) before comparing, splits accounts into observations, interpretations, and stakes, maps who could see what from where, finds the invariant core, sorts each divergence into perspective, memory, or stake artifact vs genuine contradiction, weights initial uncontaminated statements over late rehearsed ones, adjudicates genuine contradictions only against physical evidence, never confidence or seniority, and writes a reconciled account marking confidence, filing unresolved forks instead of dropping them. Good faith is the default; bad faith must be earned with evidence. Use when accounts of one event conflict.
 
-**Triggers:** `rashomon`, `conflicting accounts`, `witnesses disagree`, `everyone remembers it differently`, `whose story is right`, `reconcile the statements`, `contradictory testimony. metadata: version: "1.0.0" source: >- Commissioned by the user`, `named for the Rashomon effect — the scholarly term (Karl G. Heider`, `American Anthropologist`, `1988) that honors Kurosawa's film Rashomon (1950)`, `whose testimony plot comes from Akutagawa's "In a Grove" (1922) and whose title and frame come from Akutagawa's "Rashōmon" (1915). Homage in triggers and teaching only; no affiliation. The mechanism is documented professional method: the cognitive interview (Fisher & Geiselman)`, `eyewitness-memory research (Loftus; Wixted & Wells)`, `triangulation (Denzin)`, `and standard jury instructions on honest disagreement`
+**Triggers:** `rashomon`, `conflicting accounts`, `witnesses disagree`, `everyone remembers it differently`, `whose story is right`, `reconcile the statements`, `contradictory testimony`
 
 ### `decision-science-skills:reference-class-forecasting`
 
@@ -1597,7 +1597,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Designs consequence symmetry for decisions that transfer risk: maps who creates a risk versus who eats the loss when the tail lands (Hammurabi §229–233, the oldest written rule against transferring hidden tail risk — Taleb's Skin in the Game framing), drafts a graduated symmetry table (harm class → who bears what), converts diffuse "reviewed by team" approvals into named-owner attestations, puts real defect-liability and warranty terms into vendor and contractor agreements, then checks the new consequence for perverse incentives such as over-caution and concealment. Consequence design binds decision-makers with power, never punishment-washing onto the powerless. Use when a sign-off carries no consequence, a vendor will not stand behind its work, or accountability needs structure instead of exhortation.
 
-**Triggers:** `skin in the game`, `who signs their name to this`, `who eats the loss`, `accountability without consequence`, `attestation`, `vendor won't stand behind it`, `hammurabi`, `consequence mapping. metadata: version: "1.0.0" source: >- Built from the library's operational-wisdom research lane (docs/research/epic-wave-held-research.md`, `Lane 1 entry 5). The stele text of Hammurabi §229–233 is real and graduated; the "Roman engineer under the arch" companion story is modern folklore`, `earliest traced to a USENET signature line around 2004 (Kiwi Hellenist) — this skill teaches both`, `labeled. The modern framing is Nassim Nicholas Taleb's Skin in the Game (2018)`, `cited as his. All external claims [snippet-only] provenance`, `cross-checked`
+**Triggers:** `skin in the game`, `who signs their name to this`, `who eats the loss`, `accountability without consequence`, `attestation`, `vendor won't stand behind it`, `hammurabi`, `consequence mapping`
 
 ### `decision-science-skills:systems-thinking`
 
@@ -1621,7 +1621,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Runs the revision review that momentum and sunk costs suppress — named for the 1986 Challenger launch decision, where schedule fever inverted the burden of proof over the engineers' objection. When evidence changes mid-project, it zero-bases the continue-vs-revise decision: only forward-looking costs count (money spent argues nothing), continuation past a trigger carries the burden of proof, normalized anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip, descope, phase, re-plan), a dissent channel guarantees the objector is restated before the decision, and the outcome is logged with the next review trigger. Use when a deadline is driving decisions the evidence argues against, when "we've come too far" appears in any form, or when a go/no-go needs honest structure.
 
-**Triggers:** `the challenger`, `challenge the timeline`, `sunk cost`, `plan continuation`, `should we slip the date`, `launch fever`, `are we still go`, `normalization of deviance`, `escalation of commitment`, `revision review. metadata: version: "1.0.0" source: >- Commissioned by the user to prevent momentum and sunk costs from holding a project to a timeline when revision would be optimal. Anchored on the documented record of the Challenger launch decision (Rogers Commission; Vaughan's normalization of deviance) — held soberly: seven people died; this skill borrows the lessons`, `not drama`
+**Triggers:** `the challenger`, `challenge the timeline`, `sunk cost`, `plan continuation`, `should we slip the date`, `launch fever`, `are we still go`, `normalization of deviance`, `escalation of commitment`, `revision review`
 
 ### `decision-science-skills:ulysses-pact`
 
@@ -1629,7 +1629,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Writes a Ulysses pact — the self-binding commitment device psychiatry formalizes as the Ulysses contract in advance directives: in a calm state, identify where future judgment predictably degrades (deadline pressure, sunk-cost fog, market panic, the 11pm production incident, the angry-email urge); write hard rules with required second signatures, cooling-off periods, and pre-committed defaults; pre-decide the unbinding criteria that legitimately release the pact so it is never a straitjacket; register it where the future self will hit it; and enforce by quoting the user's own words and reasons back, never scolding. Pacts carry review dates and are renegotiated in calm state, never under fire. Use when someone keeps overriding their own rules under pressure or wants to bind a future decision against a foreseen worse self.
 
-**Triggers:** `ulysses pact`, `self-binding`, `commitment device`, `stop us from overriding`, `we broke our own rule again`, `bind my future self`, `cooling-off rule`, `no force-push after midnight. metadata: version: "1.0.0" source: >- Named for Odysseus lashed to the mast (public domain; "Ulysses pact" / "Ulysses contract" is the established clinical term). Channels the documented practices: psychiatric advance directives as legally instantiated Ulysses contracts [peer-reviewed`, `PubMed/PMC-sourced] and commitment devices from behavioral economics — not the myth`
+**Triggers:** `ulysses pact`, `self-binding`, `commitment device`, `stop us from overriding`, `we broke our own rule again`, `bind my future self`, `cooling-off rule`, `no force-push after midnight`
 
 ### `decision-science-skills:weak-signal-navigation`
 
@@ -1637,5 +1637,5 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Estimates a current position or state when the usual instrument — a dashboard, tracker, status report, or data feed — is down, stale, or untrusted, by fusing many weak independent cues (last known-good state, scheduled events that must have fired, historical rhythms, side channels, absence of expected noise) into a continuously re-estimated belief with a stated confidence band; narrates which cue the position leans on hardest, updates as cues arrive, and defines what will confirm or deny the belief when the instruments return (the method of Polynesian/Micronesian wayfinding and etak — Hokule'a, Mau Piailug, Hutchins' distributed-cognition analysis). Use when a decision needs the position anyway and the authoritative number is missing or disbelieved.
 
-**Triggers:** `wayfinding`, `weak signals`, `estimate blind`, `the dashboard is down`, `I don't trust this number`, `navigate without instruments`, `what would we expect to see`, `position without the data`, `dead reckoning. metadata: version: "1.0.0" source: >- Built from the library's operational-wisdom research lane (docs/research/epic-wave-held-research.md`, `Lane 1 entry 1). The mechanism is documented practice`, `not legend: the 1976 Hokule'a voyage navigated by Mau Piailug`, `the etak technique recorded by David Lewis (We`, `the Navigators)`, `and Edwin Hutchins' distributed-cognition analysis — all [snippet-only] provenance`, `cross-checked across independent sources`
+**Triggers:** `wayfinding`, `weak signals`, `estimate blind`, `the dashboard is down`, `I don't trust this number`, `navigate without instruments`, `what would we expect to see`, `position without the data`, `dead reckoning`
 
