@@ -1,6 +1,6 @@
 # Skills Library — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **115 skills across 15 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **123 skills across 15 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
 
 ## How to trigger a skill
 
@@ -22,29 +22,37 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 
 ## Plugins
 
-- [`data-analytics-bi-skills`](#data-analytics-bi-skills) (8) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
-- [`data-tools-skills`](#data-tools-skills) (6) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
+- [`data-analytics-bi-skills`](#data-analytics-bi-skills) (11) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
+- [`data-tools-skills`](#data-tools-skills) (7) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
 - [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (17) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
+- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
-- [`writing-skills`](#writing-skills) (4) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
-- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (10) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).
+- [`writing-skills`](#writing-skills) (5) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
+- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (10) — High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).
 - [`learning-skills`](#learning-skills) (3) — Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
-- [`collaboration-skills`](#collaboration-skills) (3) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail).
+- [`collaboration-skills`](#collaboration-skills) (5) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).
 - [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
-- [`decision-science-skills`](#decision-science-skills) (14) — Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
+- [`decision-science-skills`](#decision-science-skills) (15) — Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
 
 Archived plugins (delisted, preserved, restorable) are documented in [archive/README.md](../archive/README.md) and indexed in [INDEX.md](INDEX.md).
 
 ## `data-analytics-bi-skills`
 
-SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
+SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
 
 Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
+
+### `data-analytics-bi-skills:ab-test-design`
+
+**Invoke:** `/data-analytics-bi-skills:ab-test-design` — or just describe the task.
+
+**What it does:** Designs trustworthy online controlled experiments — the design-and-operations half of A/B testing, before any data arrives: randomization unit choice and interference, minimum detectable effect (MDE) sizing, sample ratio mismatch (SRM) as the first validity check, the peeking problem and pre-committed stopping rules, guardrail metrics plus an overall evaluation criterion (OEC), A/A tests, novelty and primacy effects, and Twyman's law. Analysis of a finished test (p-values, significance) belongs to data-analytics-bi-skills:statistical-inference; offline multi-factor factorial studies belong to continuous-improvement-skills:design-of-experiments. Use when planning a live variant test of a page, form, letter, cadence, or process.
+
+**Triggers:** `design an A/B test`, `online experiment design`, `online controlled experiment`, `sample ratio mismatch`, `SRM`, `peeking`, `minimum detectable effect`, `MDE`, `guardrail metric`, `A/A test`, `overall evaluation criterion`, `OEC`, `Twyman's law`, `novelty effect`
 
 ### `data-analytics-bi-skills:assertion-evidence-deck`
 
@@ -54,21 +62,29 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Triggers:** `build a deck`, `make slides`, `PowerPoint`, `briefing`, `leadership update`, `Controller update`, `readout`, `TED-style technical talk`, `sentence-headline slides`, `snorkel vs scuba`, `turn this report into slides`, `audit my deck`
 
+### `data-analytics-bi-skills:causal-inference`
+
+**Invoke:** `/data-analytics-bi-skills:causal-inference` — or just describe the task.
+
+**What it does:** Establishes whether X actually caused Y when there was no experiment — draws the causal DAG first (confounders, mediators, colliders; backdoor thinking in plain language), then names what identifies the effect: randomization when available (that path belongs to continuous-improvement-skills:design-of-experiments), otherwise the quasi-experimental toolkit — difference-in-differences, instrumental variables, regression discontinuity — each with its key assumption in plain terms. Applies Hill's considerations as viewpoints, never a checklist, plus the humility rail: what observational data cannot rule out. Association tests belong to data-analytics-bi-skills:statistical-inference. Use when a policy, change, or exposure is claimed to have caused an outcome.
+
+**Triggers:** `causal inference`, `correlation vs causation`, `correlation is not causation`, `does X cause Y`, `confounder`, `confounding`, `collider bias`, `difference-in-differences`, `instrumental variable`, `regression discontinuity`, `natural experiment`
+
 ### `data-analytics-bi-skills:dashboard-design`
 
 **Invoke:** `/data-analytics-bi-skills:dashboard-design` — or just describe the task.
 
-**What it does:** Designs decision-driving BI dashboards and reports — defining robust KPIs (numerator, denominator, target, direction), choosing the right chart for the question being asked, and laying out for the audience and the decision. Use when building a report, dashboard, or scorecard, defining a KPI or metric, choosing a chart type, or cutting clutter from an existing view.
+**What it does:** Designs decision-driving BI dashboards, reports, and scorecards on the Few, Tufte, and Cleveland & McGill canon: works backward from the reader's decision, defines each KPI rigorously (numerator, denominator, target, direction, timeframe, grain), picks the chart from the analytical question — position and length encodings before angle or area — builds a top-left, headline-then-support hierarchy, cuts non-data ink, gives every number context against target or prior period, and keeps the default view answering the main question with zero clicks. Use when building a report, dashboard, or scorecard, defining a KPI or metric, choosing a chart type, or cutting clutter from an existing view.
 
-**Triggers:** `dashboard`, `KPI`, `metric`, `scorecard`, `chart choice`, `which chart`, `visualization`, `report layout`, `drill-down`, `report design`, `vanity metric`, `chart type`
+**Triggers:** `dashboard`, `KPI`, `metric`, `scorecard`, `chart choice`, `which chart`, `visualization`, `report layout`, `drill-down`, `report design`, `vanity metric`, `chart type`, `executive dashboard`, `KPI definition`, `data-ink`, `bullet graph`, `dashboard clutter`, `wall of numbers`
 
 ### `data-analytics-bi-skills:data-cleaning`
 
 **Invoke:** `/data-analytics-bi-skills:data-cleaning` — or just describe the task.
 
-**What it does:** Cleans and reshapes messy data into an analysis-ready, tidy form — handling missing values, type and format coercion, deduplication, category standardization, and join hygiene — with validation at each step and a reproducible, non-destructive workflow. Use when preparing, wrangling, or fixing data before analysis or reporting.
+**What it does:** Cleans and reshapes messy extracts into analysis-ready form on Wickham's tidy-data principles (variable per column, observation per row, value per cell): coerces types and formats (dates-as-text, currency strings, units), standardizes categories through an explicit reusable mapping table, handles missing values per column by missingness mechanism (MCAR/MAR/MNAR) with a was_missing flag on anything imputed, deduplicates on a defined key with a survivor rule, checks join cardinality so fan-out can't multiply rows, and validates counts and control totals in a scripted, non-destructive pipeline that never overwrites the raw source. Use when preparing, wrangling, or fixing data before analysis or reporting.
 
-**Triggers:** `data cleaning`, `data wrangling`, `data prep`, `data preparation`, `missing values`, `impute`, `deduplicate`, `remove duplicates`, `standardize`, `normalize categories`, `tidy data`, `reshape`, `pivot`, `join hygiene`, `fan-out`, `data quality fix`
+**Triggers:** `data cleaning`, `data wrangling`, `data prep`, `data preparation`, `missing values`, `impute`, `deduplicate`, `remove duplicates`, `standardize`, `normalize categories`, `tidy data`, `reshape`, `pivot`, `join hygiene`, `fan-out`, `data quality fix`, `dirty data`, `unpivot`, `inconsistent categories`
 
 ### `data-analytics-bi-skills:descriptive-statistics`
 
@@ -82,17 +98,17 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:exploratory-data-analysis` — or just describe the task.
 
-**What it does:** Profiles a dataset before any modeling or reporting — its shape, column types, grain, distributions, missingness, outliers, and relationships — so you understand and can trust the data before drawing conclusions from it. Use when first inspecting a new dataset, sizing up data quality, or deciding what needs fixing before analysis.
+**What it does:** Profiles a dataset before any modeling or reporting, in the Tukey (1977) tradition of looking at the data before summarizing it: establishes shape and grain (what one row represents, tested by key uniqueness), checks column types against meaning, quantifies and classifies missingness per column, goes univariate first (mean vs. median for skew, SD/IQR, histograms) then bivariate (correlation, cross-tabs, group-by), flags outliers (IQR fence, z-score) and investigates before deleting, plots before trusting summaries (Anscombe's quartet), and ends in a data-quality memo handed to cleaning. Use when first inspecting a new dataset, sizing up data quality, or deciding what needs fixing before analysis.
 
-**Triggers:** `EDA`, `exploratory data analysis`, `data profiling`, `profile the data`, `first look at data`, `distribution`, `summary statistics`, `central tendency`, `spread`, `outliers`, `correlation`, `cross-tab`, `missing data`, `data quality check`, `get to know the data`
+**Triggers:** `EDA`, `exploratory data analysis`, `data profiling`, `profile the data`, `first look at data`, `distribution`, `summary statistics`, `central tendency`, `spread`, `outliers`, `correlation`, `cross-tab`, `missing data`, `data quality check`, `get to know the data`, `what does one row represent`, `Anscombe`
 
 ### `data-analytics-bi-skills:spreadsheet-modeling`
 
 **Invoke:** `/data-analytics-bi-skills:spreadsheet-modeling` — or just describe the task.
 
-**What it does:** Builds and audits transparent, reliable spreadsheet models (Excel/Google Sheets) — a clean input/calculation/output separation, consistent one-formula-per-row logic, named ranges, check cells and control totals, no constants hardcoded inside formulas, and sensitivity/what-if analysis. Use when building a financial or operational spreadsheet model, or reviewing/auditing one for errors.
+**What it does:** Builds and audits transparent, reliable spreadsheet models (Excel/Google Sheets) using FAST-style structured-modeling conventions: one-directional inputs → calculations → outputs separation, one consistent formula per row filled across, no constants hardcoded inside formulas, named ranges for readable logic, check cells and control totals with a single OK/ERROR flag, assumptions documented with source and units, and one/two-way data tables and scenario toggles for sensitivity. Grounded in the EuSpRIG spreadsheet-error field-audit record: errors are the norm, so auditability is the design goal. Use when building a financial or operational model (budget, forecast, pricing, ROI), or reviewing/auditing an inherited workbook.
 
-**Triggers:** `Excel model`, `spreadsheet model`, `financial model`, `named ranges`, `check cell`, `control total`, `model audit`, `sensitivity analysis`, `what-if`, `data table`, `hardcoded formula`, `model review`
+**Triggers:** `Excel model`, `spreadsheet model`, `financial model`, `named ranges`, `check cell`, `control total`, `model audit`, `sensitivity analysis`, `what-if`, `data table`, `hardcoded formula`, `model review`, `scenario toggle`, `spreadsheet error`, `one formula per row`
 
 ### `data-analytics-bi-skills:sql-for-analysts`
 
@@ -110,9 +126,17 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Triggers:** `hypothesis test`, `p-value`, `statistical significance`, `confidence interval`, `t-test`, `chi-square`, `ANOVA`, `effect size`, `sampling`, `sampling distribution`, `type I error`, `type II error`, `statistical power`, `A/B test`, `significance level`, `null hypothesis`
 
+### `data-analytics-bi-skills:survey-and-sampling-design`
+
+**Invoke:** `/data-analytics-bi-skills:survey-and-sampling-design` — or just describe the task.
+
+**What it does:** Designs the survey instrument and the sampling plan BEFORE any data exists, organized by total survey error (Groves): chooses among simple random, stratified, cluster, and convenience designs and names what each does to inference; sizes the sample for a proportion in plain terms; plans the nonresponse follow-up so the Literary Digest failure (Squire 1988: nonresponse, not just frame bias, sank a 2.4-million-ballot poll) stays a cautionary tale; audits every question for double-barreled, leading, acquiescence, and order effects (Schuman & Presser); and schedules contacts with Dillman's tailored-design discipline. Use when writing a questionnaire, sizing a sample, or reviewing a survey before launch — client satisfaction, process pain, user research, or litigation-adjacent surveys.
+
+**Triggers:** `survey design`, `questionnaire`, `sample size`, `sampling plan`, `response rate`, `nonresponse bias`, `stratified sampling`, `quota sampling`, `convenience sample`, `question wording`, `Likert`, `margin of error`
+
 ## `data-tools-skills`
 
-Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
+Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
 
 Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
@@ -120,9 +144,9 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:csv-and-flat-file-wrangling` — or just describe the task.
 
-**What it does:** Ingests real-world CSV and flat-file exports safely — detecting encodings and delimiters, surviving bank/ERP export quirks (BOMs, footers, quoted commas, leading-zero IDs, mixed date formats), validating the parsed schema, and merging files without silent row loss. Use when loading a CSV that parses wrong, combining exports from different systems, or hardening a recurring file feed.
+**What it does:** Ingests real-world CSV and flat-file exports safely — inspecting raw bytes before parsing, detecting encodings and delimiters, declaring an explicit read_csv contract (encoding, separator, string-typed IDs, date formats, na_values) instead of trusting inference, surviving export quirks (BOMs, footer rows, quoted commas, European decimals, mixed date formats, and the float-coercion hazard that strips leading zeros and destroys join keys), validating every parse against row counts and control figures, and merging with an outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing. Use when loading a CSV that parses wrong, combining exports from different systems, or hardening a recurring file feed to fail loudly on layout changes.
 
-**Triggers:** `csv parsing`, `delimiter`, `encoding error`, `utf-8 vs latin-1`, `BOM`, `pipe delimited`, `fixed width file`, `load csv pandas`, `merge csv files`, `bank export csv`, `leading zeros lost`, `csv broken columns`
+**Triggers:** `csv parsing`, `delimiter`, `encoding error`, `utf-8 vs latin-1`, `BOM`, `pipe delimited`, `fixed width file`, `load csv pandas`, `merge csv files`, `bank export csv`, `leading zeros lost`, `csv broken columns`, `mojibake`, `flat file feed`
 
 ### `data-tools-skills:data-file-hygiene`
 
@@ -144,9 +168,9 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:excel-automation-python` — or just describe the task.
 
-**What it does:** Reads, writes, and formats real Excel workbooks with Python — pandas for data in/out, openpyxl for formulas, multiple sheets, number formats, column widths, and styling — so recurring spreadsheet deliverables become a script instead of hand work. Use when automating an Excel report, converting data to a formatted .xlsx, reading a messy workbook into a DataFrame, or deciding between pandas and openpyxl.
+**What it does:** Reads, writes, and formats real Excel workbooks with Python — pandas read_excel/to_excel for data in and out, openpyxl for the document layer (formulas as strings, number formats, widths, freeze panes, styling), xlsxwriter for write-only speed, and the template-workbook pattern where styling lives in a human-maintained file and the script only moves numbers — so recurring spreadsheet deliverables become a verified script instead of hand work. Reads defensively (shifted headers, merged cells, numbers-as-text, leading-zero loss on IDs, stale formula caches) and verifies output totals against the source. Use when automating an Excel report, converting data to a formatted .xlsx, reading a messy workbook into a DataFrame, or deciding between pandas and openpyxl.
 
-**Triggers:** `excel automation`, `openpyxl`, `write xlsx`, `read excel python`, `pandas to_excel`, `format excel with python`, `excel report script`, `xlsxwriter`, `automate spreadsheet`, `excel formulas python`
+**Triggers:** `excel automation`, `openpyxl`, `write xlsx`, `read excel python`, `pandas to_excel`, `format excel with python`, `excel report script`, `xlsxwriter`, `automate spreadsheet`, `excel formulas python`, `excel template python`, `ExcelWriter`
 
 ### `data-tools-skills:pdf-data-extraction`
 
@@ -155,6 +179,14 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 **What it does:** Extracts tables and text from PDFs into usable data — choosing between pdfplumber and camelot by PDF type, detecting scanned-vs-native pages, handling multi-page tables, bank-statement and invoice layouts, and validating extracted numbers against the document's own totals. Use when pulling transactions from a PDF bank statement, tabling data out of a PDF report or invoice, or when a PDF extraction comes out scrambled.
 
 **Triggers:** `extract pdf table`, `pdf to excel`, `pdfplumber`, `camelot`, `parse bank statement pdf`, `pdf invoice data`, `scanned pdf`, `OCR pdf`, `pdf text extraction`, `table extraction python`
+
+### `data-tools-skills:reproducible-analysis`
+
+**Invoke:** `/data-tools-skills:reproducible-analysis` — or just describe the task.
+
+**What it does:** Makes an analysis produce the same numbers twice, rerun by anyone — a discipline spanning spreadsheets, notebooks, SQL, and scripts. Defines reproducible (same data + code) vs replicable (new data or implementation) — the ACM used the terms backwards for seven years — then climbs the practice ladder: pin environments and record random seeds, make the rerun one command, keep lineage one-directional (raw → cleaned → derived, raw never edited), write literate analysis with code and narrative together, apply FAIR principles at working level, and verify by fresh-clone rerun plus a second person re-deriving the headline number. Python environment mechanics stay with coding-agent-skills:python-for-analysts. Use when an analysis must survive rerun, handoff, audit, or hostile scrutiny.
+
+**Triggers:** `reproducible analysis`, `can someone rerun this`, `rerun the analysis`, `replication crisis`, `reproducibility crisis`, `random seed`, `data lineage`, `data provenance`, `literate programming`, `FAIR data`
 
 ### `data-tools-skills:rest-api-data-pulls`
 
@@ -198,9 +230,9 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 **Invoke:** `/machine-learning-skills:ml-project-framing` — or just describe the task.
 
-**What it does:** Turns a business problem into a well-posed machine-learning task: names the decision, defines the target and the unit of prediction, lists only features available at prediction time, picks an evaluation metric tied to the decision, sets a baseline to beat, and runs leakage and feasibility checks before any model is built. Use when starting an ML project, scoping a prediction, or sanity-checking whether ML even fits the problem.
+**What it does:** Turns a business problem into a well-posed machine-learning task before any model is built — names the decision and the cost of a wrong call, defines the target (type, window, labeling rule), fixes the unit of prediction and the prediction time, lists only features knowable at that moment (the on-paper leakage check), picks a metric tied to the decision's error costs, sets the naive baseline the model must beat, runs feasibility checks, and writes a one-page framing spec — and is willing to conclude ML does not fit or the baseline should ship. Use when starting an ML or prediction project, scoping a "can we predict X?" request, deciding whether ML fits at all, or diagnosing a model that underperforms from a framing flaw.
 
-**Triggers:** `ML problem`, `machine learning problem`, `framing`, `frame the problem`, `target variable`, `prediction task`, `unit of prediction`, `baseline model`, `is this an ML problem`, `does ML fit`, `feasibility`, `well-posed`
+**Triggers:** `ML problem`, `machine learning problem`, `framing`, `frame the problem`, `target variable`, `prediction task`, `unit of prediction`, `baseline model`, `is this an ML problem`, `does ML fit`, `feasibility`, `well-posed`, `can we predict`, `framing spec`, `scope an ML project`
 
 ### `machine-learning-skills:model-evaluation`
 
@@ -236,9 +268,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:a3-thinking` — or just describe the task.
 
-**What it does:** Structures a problem, its analysis, and countermeasures on a single A3 page using the PDCA cycle, as a thinking and alignment tool rather than a form to fill. Use when proposing an improvement, telling a problem-solving story on one page, building consensus around a change, or running a PDCA cycle.
+**What it does:** Structures a problem, its analysis, and countermeasures on a single A3 page using the PDCA cycle, as a thinking and alignment tool rather than a form to fill — the Toyota practice codified by Sobek & Smalley and Shook. Seven boxes read left to right: background, data-backed current condition, measurable target, verified root cause, countermeasures traced to causes, an owned implementation plan, and follow-up filled in later with actual results. Drafted with the affected people, nemawashi-style, so consensus is built before the decision meeting; fits any problem story — an analyst's process fix, an attorney's intake bottleneck, an ops manager's error spike, a developer's flaky pipeline. Use when proposing an improvement, telling a problem-solving story on one page, building consensus around a change, or running a PDCA cycle.
 
-**Triggers:** `A3`, `A3 report`, `PDCA`, `plan do check act`, `problem solving`, `countermeasure`, `one-page proposal`
+**Triggers:** `A3`, `A3 report`, `A3 problem solving`, `PDCA`, `plan do check act`, `problem solving`, `countermeasure`, `one-page proposal`, `nemawashi`
 
 ### `continuous-improvement-skills:curve-hero-design-language`
 
@@ -284,9 +316,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:kaizen-and-codesign` — or just describe the task.
 
-**What it does:** Plans and facilitates kaizen events and co-design sessions so the people who do the work — and their downstream customers — design the improvement themselves, at the gemba, with rapid PDCA and captured standard work. Use when running an improvement workshop, a kaizen event, or a participatory/co-design session, or facilitating continuous improvement.
+**What it does:** Plans and facilitates kaizen events and co-design sessions so the people who do the work — and their downstream customers — design the improvement themselves: a tight measurable charter, operators plus a downstream customer plus an on-the-spot decision-maker in the room, a gemba walk before any design talk, equal-voice facilitation (brainwriting, affinity grouping, dot-voting), rapid PDCA loops tested on real work the same day, and standard work plus a 30/60-day check captured before close. Grounded in Imai's kaizen and the participatory-design tradition, respect-for-people throughout; fits any team — analysts, attorneys, ops, or developers. Use when running an improvement workshop, kaizen event, or participatory/co-design session, or facilitating continuous improvement.
 
-**Triggers:** `kaizen`, `kaizen event`, `co-design`, `participatory design`, `improvement workshop`, `gemba`, `facilitation`, `continuous improvement event`
+**Triggers:** `kaizen`, `kaizen event`, `kaizen blitz`, `co-design`, `co-creation`, `participatory design`, `improvement workshop`, `rapid improvement event`, `gemba`, `gemba walk`, `facilitation`, `continuous improvement event`
 
 ### `continuous-improvement-skills:lean-six-sigma-for-software`
 
@@ -340,9 +372,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:standard-work` — or just describe the task.
 
-**What it does:** Documents the current best-known method for a repeatable task as standard work (an SOP) — capturing sequence, timing, and the key points and reasons — with takt/cycle context and visual management, so the process is stable enough to improve. Use when documenting, standardizing, or stabilizing a process, or writing an SOP or work instruction.
+**What it does:** Documents the current best-known method for a repeatable task as standard work (an SOP), so the process is stable enough to improve — the Toyota trio of takt time, work sequence, and standard in-process stock, plus the TWI Job Instruction breakdown of steps, key points, and the reason behind each; adds visual management so deviations announce themselves, verified training, and a review cadence that keeps the standard a living baseline every kaizen updates. Fits any recurring task an analyst, attorney, ops manager, or developer owns — a weekly report, an intake review, a handoff, a release. Use when documenting, standardizing, or stabilizing a process that varies by who does it, capturing tribal knowledge, or writing an SOP or work instruction people will follow.
 
-**Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize`, `visual management`
+**Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize`, `visual management`, `TWI`, `job instruction`, `job breakdown`, `takt time`, `everyone does it differently`, `tribal knowledge`
 
 ### `continuous-improvement-skills:structured-ideation`
 
@@ -364,9 +396,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:value-stream-mapping` — or just describe the task.
 
-**What it does:** Maps a process end to end in current and future state, quantifying cycle time, lead time, and value-added vs non-value-added time to expose waste and improve flow; scopes the effort first with SIPOC. Use when analyzing a whole process, mapping a value stream, drawing a current- or future-state map, measuring lead vs cycle time, or scoping a process with SIPOC.
+**What it does:** Maps a process end to end in current and future state to expose waste and improve flow — the Rother & Shook Learning-to-See method adapted to office work: scope one product/service family with SIPOC, walk the process with one real item, hang a data box (cycle time, %complete-and-accurate, people, systems) under each step, capture queue time between steps, build the timeline ladder, and compute flow efficiency (value-added ÷ lead time); then tag the eight wastes and design a future state with an owned action plan. Fits any stream an analyst, attorney, ops manager, or developer runs — request-to-resolution, intake-to-filing, order-to-delivery, commit-to-deploy. Use when analyzing a whole process, drawing a current- or future-state map, measuring lead vs cycle time, or scoping with SIPOC.
 
-**Triggers:** `value stream mapping`, `VSM`, `current state`, `future state`, `process map`, `SIPOC`, `lead time`, `cycle time`, `waste`, `flow`
+**Triggers:** `value stream mapping`, `VSM`, `current state`, `future state`, `process map`, `SIPOC`, `lead time`, `cycle time`, `waste`, `flow`, `flow efficiency`, `eight wastes`, `%C&A`, `where does all the time go`
 
 ## `board-of-advisors-skills`
 
@@ -478,7 +510,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -550,9 +582,9 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:git-and-code-review` — or just describe the task.
 
-**What it does:** Uses version control well and reviews changes constructively — branch-per-change, atomic commits with clear messages, the pull request flow, merge vs rebase (concept and when to use each), resolving merge conflicts calmly, and reading a diff for correctness and readability with useful feedback. Use when using git, opening or reviewing a pull request, resolving a merge conflict, or deciding how to structure a set of changes.
+**What it does:** Uses version control well and reviews changes constructively — branch-per-change, atomic commits whose messages answer why, pull requests sized and described so a reviewer can say yes (what changed, why, how verified), merge vs rebase chosen on purpose under the golden rule of never rewriting shared history, calm conflict resolution that decides the correct combined result, and diff review in a fixed order — correctness, then readability, then style — with feedback that names the line, the concern, and a fix, severity labeled. Routes its seams: deep multi-agent audits, review-comment tone, contact-tracing a bug review finds, excavating accreted history. Use when using git, opening or reviewing a pull request, resolving a merge conflict, structuring a set of changes, or writing history a future reader can trust.
 
-**Triggers:** `git`, `branch`, `commit`, `pull request`, `PR`, `merge conflict`, `code review`, `rebase`, `version control`
+**Triggers:** `git`, `branch`, `commit`, `pull request`, `PR`, `merge conflict`, `code review`, `rebase`, `version control`, `commit message`, `force push`, `git blame`, `revert`, `review this diff`
 
 ### `coding-agent-skills:master-prompt-architect`
 
@@ -660,17 +692,17 @@ Install: `/plugin install metacognition-skills@treasury-analyst-skills`
 
 **Invoke:** `/metacognition-skills:hierarchical-memory-manager` — or just describe the task.
 
-**What it does:** Maintains multi-layered, actively curated memory across sessions and long contexts — Working (current task state), Episodic (timestamped events and decisions), and Semantic (durable facts, preferences, lessons) — with periodic compaction, contradiction detection, and progressive disclosure, structuring native memory, MEMORY.md, and project files rather than replacing them. Use at session start, during long multi-turn work, when context grows large, when past information is referenced, or when asked to remember something.
+**What it does:** Maintains multi-layered, actively curated memory across sessions and long contexts — Working (current task state), Episodic (timestamped events and decisions), Semantic (durable facts, preferences, lessons, each entry carrying evidence and confidence) — via a session-start load restating only task-relevant anchors, compaction promoting Working → Episodic → Semantic and pruning the rest, and contradiction flagging with provenance instead of silent overwrites, structuring native memory, MEMORY.md, and project files rather than replacing them. Receives the reflective learner's lessons; feeds the knowledge crystallizer. Use at session start, during long multi-turn work, when context grows large, or when something should be remembered or recalled.
 
-**Triggers:** `remember this`, `memory`, `what did we decide`, `last session`, `continuity`, `compact the context`, `working memory`, `episodic memory`, `semantic memory`, `MEMORY.md`, `memory layers`, `save for later`
+**Triggers:** `remember this`, `memory`, `what did we decide`, `last session`, `continuity`, `compact the context`, `working memory`, `episodic memory`, `semantic memory`, `MEMORY.md`, `memory layers`, `save for later`, `what do you remember`, `pick up where we left off`
 
 ### `metacognition-skills:knowledge-crystallizer`
 
 **Invoke:** `/metacognition-skills:knowledge-crystallizer` — or just describe the task.
 
-**What it does:** Extracts, validates, and integrates durable insights from analysis, reflection, and experience into structured semantic memory and evolving working methods — harvesting candidate insights, checking them against existing knowledge for consistency and evidence strength, distilling them into atomic well-scoped entries, integrating with an audit trail, and pruning redundant or stale items. Use after significant analysis or reflection cycles, when a pattern recurs across interactions, at session end, or when consolidating lessons into permanent knowledge or skill updates.
+**What it does:** Extracts durable insights from analysis, reflection, and experience into semantic memory and evolving working methods — harvests candidates from working and episodic notes, validates them against four gates (consistency, evidence strength, scope, leverage), distills survivors into atomic FACT/PREFERENCE/RULE/LESSON/PATTERN/METHOD entries, integrates through the memory manager with user sign-off for structural changes, prunes redundant or stale entries, and appends one audit line to the crystallization log so every change stays traceable and reversible. Use after significant analysis or reflection cycles, when a pattern recurs, at session end or milestones, or when consolidating lessons into permanent knowledge or skill updates.
 
-**Triggers:** `crystallize`, `consolidate knowledge`, `distill lessons`, `save what we learned`, `make this permanent`, `update working methods`, `clean up the knowledge base`, `merge duplicate notes`, `retire stale facts`, `capability map`
+**Triggers:** `crystallize`, `consolidate knowledge`, `distill lessons`, `save what we learned`, `make this permanent`, `update working methods`, `clean up the knowledge base`, `merge duplicate notes`, `retire stale facts`, `capability map`, `crystallization pass`
 
 ### `metacognition-skills:reflective-learner`
 
@@ -696,7 +728,7 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
 ## `writing-skills`
 
-Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
+Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
 
 Install: `/plugin install writing-skills@treasury-analyst-skills`
 
@@ -732,9 +764,17 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **Triggers:** `gonzo`, `get gonzo`, `get weird`, `hunter s. thompson`, `thompson treatment`, `fear and loathing take`, `gonzo commentary`, `savage take`, `gonzo dispatch`, `ride shotgun on this`
 
+### `writing-skills:technical-documentation`
+
+**Invoke:** `/writing-skills:technical-documentation` — or just describe the task.
+
+**What it does:** Structures technical documentation as typed artifacts, not prose: routes docs through Procida's Diátaxis framework (tutorial, how-to guide, reference, explanation — four forms that fail when blended), shapes the README around a newcomer's first screen, records decisions as Nygard-style architecture decision records (context/decision/consequences, superseded never edited), keeps a human-readable changelog keyed to semantic versioning, writes routine procedure docs, and holds API and reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the document types; sentence-level register stays with writing-skills:adams-smart-brevity, explanation craft with writing-skills:explanation-design. Use when writing or restructuring docs for a project, method, or process.
+
+**Triggers:** `technical documentation`, `write the README`, `ADR`, `architecture decision record`, `changelog`, `Diátaxis`, `how-to guide`, `tutorial vs reference`, `API docs`, `docs as code`, `semantic versioning`
+
 ## `safety-and-reliability-skills`
 
-High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).
+High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).
 
 Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
@@ -850,7 +890,7 @@ Install: `/plugin install learning-skills@treasury-analyst-skills`
 
 ## `collaboration-skills`
 
-Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail).
+Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).
 
 Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
@@ -861,6 +901,14 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 **What it does:** Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed doorknob phenomenon (the key disclosure arrives as the interview seems over): lower the stakes so the expert educates rather than defends, restate their words slightly wrong so correction does the teaching, hold contradictions as the interviewer's own confusion, let silence work, then ask one casual question after the formal close. Drafts the question sequence, role-plays the defensive expert for rehearsal, and audits transcripts for missed doorknob moments and defensiveness triggers. Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction.
 
 **Triggers:** `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, `the users can't articulate what they do`, `expert won't open up`, `walkthrough with the process owner`, `doorknob question`, `one more thing`
+
+### `collaboration-skills:executive-briefing`
+
+**Invoke:** `/collaboration-skills:executive-briefing` — or just describe the task.
+
+**What it does:** Gets a decision from a reader with two minutes: writes the answer-first decision document — BLUF per Army writing doctrine (DA Pam 600-67, 1986) with Minto's SCQA and Pyramid Principle (1996 ed.: answer first, grouped support) — as a one-page decision memo (decision requested, options with costs, recommendation, what happens if nothing) that passes the completed-staff-work test: could the reader just sign? Calibrates the ask up front — inform, decide, or approve. Turns a long analysis, client advisory, process-change pitch, or architecture proposal into the page that survives one rapid reading; re-leads buried-conclusion drafts; audits a memo for the missing ask. Composes with adams-smart-brevity for register; urgent spoken escalation goes to SBAR. Use when a decision-maker must act from one page.
+
+**Triggers:** `executive briefing`, `executive summary`, `BLUF`, `bottom line up front`, `decision memo`, `one-pager`, `SCQA`, `pyramid principle`, `completed staff work`, `brief the board`
 
 ### `collaboration-skills:feedback-that-lands`
 
@@ -877,6 +925,14 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 **What it does:** Designs meetings that produce decisions instead of discussion. Tests whether the meeting should exist (does it produce a decision or a commitment? status flows async); writes the agenda as a list of decisions to make, each with a timebox and a decision rule named before discussion opens (single owner, consent, consult-then-decide, or vote); sends pre-reads ahead with silent reading at the start (documented Amazon practice) instead of live walkthroughs; parks tangents visibly, calls the decision at the timebox, gives every action an owner and a date, and closes by reading back decisions and commitments. Drafts the decision-list agenda from a stated purpose, red-checks an agenda for non-decisions, turns a transcript into a decision log, and audits recurring meetings nobody has re-justified. Use when planning, tightening, or questioning any meeting.
 
 **Triggers:** `meeting agenda`, `run this meeting`, `too many meetings`, `this should be an email`, `action items`, `decision protocol`, `pre-read`, `standing meeting audit`
+
+### `collaboration-skills:stakeholder-mapping`
+
+**Invoke:** `/collaboration-skills:stakeholder-mapping` — or just describe the task.
+
+**What it does:** Maps who can sink or save the work before it matters: builds the power-interest grid — with the open correction that the grid everyone draws is Johnson & Scholes (1999) / Eden & Ackermann (1998), not Mendelow's 1981 paper, whose matrix is power/dynamism — assigns engagement moves per quadrant (manage closely, keep satisfied, keep informed, monitor), writes the RACI so "consulted" stops meaning "surprised", plans influence without authority (Cohen & Bradford's exchange currencies) for whoever you cannot compel, and sets re-map triggers at milestones, because the map is a snapshot, not a truth. For a process change with opponents, a multi-party matter, a migration, or a deprecation you lack authority to force. Once the map says who matters, disarming-elicitation is how to talk to them.
+
+**Triggers:** `stakeholder map`, `stakeholder mapping`, `stakeholder analysis`, `power-interest grid`, `RACI`, `responsibility matrix`, `influence without authority`, `buy-in`, `who needs to sign off`, `stakeholder management`
 
 ## `math-foundations-skills`
 
@@ -934,7 +990,7 @@ Install: `/plugin install math-foundations-skills@treasury-analyst-skills`
 
 ## `decision-science-skills`
 
-Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
+Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
 
 Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
@@ -945,6 +1001,14 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Facilitates the Army's four-question after-action review (AAR): a blameless, rank-free team debrief asking what was SUPPOSED to happen, what ACTUALLY happened (ground truth before interpretation), WHY the difference, and what to SUSTAIN and IMPROVE — roughly a quarter of the time on each of the first two questions and half on causes and fixes. The LLM reconstructs the what-actually-happened timeline from logs, emails, and tickets, keeps discussion on the four rails, and converts sustain/improve items into standard-work updates; it facilitates and never adjudicates blame. Use after a project milestone, a month-end close, a reconciliation incident or break, or an Oracle go-live. Owns team and event debriefs — an assistant's own self-retrospective belongs to reflective-learner instead.
 
 **Triggers:** `after-action review`, `AAR`, `hot wash`, `team debrief`, `sustain and improve`, `what should we do differently next close`
+
+### `decision-science-skills:bayesian-updating`
+
+**Invoke:** `/decision-science-skills:bayesian-updating` — or just describe the task.
+
+**What it does:** Runs belief revision as a decision discipline: starts a live question from an explicit prior (base-rate anchor from decision-science-skills:reference-class-forecasting), weighs each piece of evidence by how surprising it would be under each hypothesis, updates with count tables or the odds shortcut rather than formulas, grades evidence in Bayes-factor terms (barely-worth-mentioning to strong), and keeps a Tetlock-style update journal — small, frequent, logged revisions scored at resolution. Teaches the honest history (Bayes barely wrote it; Price shaped it; Laplace built the form we use) and the cab-problem trap of vivid evidence swamping the prior. Use when new evidence should move a standing estimate or someone asks how much a result should change their mind.
+
+**Triggers:** `bayesian updating`, `update my beliefs`, `belief revision`, `likelihood ratio`, `Bayes factor`, `posterior probability`, `prior probability`, `superforecasting`, `superforecaster`, `perpetual beta`, `how much should this evidence move me`
 
 ### `decision-science-skills:competing-hypotheses-analysis`
 

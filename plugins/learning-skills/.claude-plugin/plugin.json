@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "learning-skills",
-  "description": "Learning science applied, with the LLM removing each method's historical labor barrier: spaced-retrieval-learning (the testing effect, spacing, and interleaving — retrieval prompts authored and scheduled for you), deliberate-practice (edge-of-ability drills with immediate feedback — the drill built and the environment played for you), and habit-design (implementation intentions, habit stacking, friction engineering). Each skill both runs the method and teaches why it works.",
-  "version": "0.1.0"
+  "description": "Learning science applied, with the LLM removing each method's historical labor barrier: spaced-retrieval-learning (the testing effect, spacing, and interleaving \u2014 retrieval prompts authored and scheduled for you), deliberate-practice (edge-of-ability drills with immediate feedback \u2014 the drill built and the environment played for you), and habit-design (implementation intentions, habit stacking, friction engineering). Each skill both runs the method and teaches why it works.",
+  "version": "0.1.1"
 }

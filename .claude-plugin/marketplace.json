@@ -10,13 +10,13 @@
     {
       "name": "data-analytics-bi-skills",
       "source": "./plugins/data-analytics-bi-skills",
-      "description": "SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.",
+      "description": "SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence \u2014 plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).",
       "category": "data"
     },
     {
       "name": "data-tools-skills",
       "source": "./plugins/data-tools-skills",
-      "description": "Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.",
+      "description": "Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice \u2014 seeds, environments, lineage, one-command reruns).",
       "category": "data"
     },
     {
@@ -46,7 +46,7 @@
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).",
+      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).",
       "category": "development"
     },
     {
@@ -64,13 +64,13 @@
     {
       "name": "writing-skills",
       "source": "./plugins/writing-skills",
-      "description": "Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).",
+      "description": "Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Di\u00e1taxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).",
       "category": "writing"
     },
     {
       "name": "safety-and-reliability-skills",
       "source": "./plugins/safety-and-reliability-skills",
-      "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), weight-of-the-books design-basis load review (the Load Manifest), and break-glass-playbooks (Seldon-crisis homage: tripwires, sealed first moves, expiring authority, unsealing drills).",
+      "description": "High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).",
       "category": "operations"
     },
     {
@@ -82,7 +82,7 @@
     {
       "name": "collaboration-skills",
       "source": "./plugins/collaboration-skills",
-      "description": "Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail).",
+      "description": "Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).",
       "category": "operations"
     },
     {
@@ -94,7 +94,7 @@
     {
       "name": "decision-science-skills",
       "source": "./plugins/decision-science-skills",
-      "description": "Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, plus the fiction-anchored set \u2014 minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.",
+      "description": "Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set \u2014 minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.",
       "category": "research"
     }
   ]
