@@ -155,7 +155,14 @@ Never store secrets, credentials, account numbers, or client data here.
   under `blakereaganlaw-droid` cannot attach `CatCorner22/*` repos even though it is the same
   renamed account — and the old owner name no longer resolves for repos created after the
   rename. Working in a CatCorner22-only repo needs a session started with it as the initial
-  source. (hit 2026-08-02 attaching dental)
+  source. (hit 2026-08-02 attaching dental; CONFIRMED 2026-08-11 on this repo itself, exact
+  error: "cross-tier adds are not supported in v1: requested catcorner22/claude_skills_2 but
+  session already has repos from owner(s) [blakereaganlaw-droid]".) Important split: **git
+  push still works** from an old-owner session — GitHub redirects the push URL, so commits
+  land normally; only the GitHub **API** tools (PR read/write, comments, merge) are denied.
+  So a renamed-repo session can do all the work and just cannot touch the PR body. The
+  account authorization is NOT the problem — `list_repos` shows the CatCorner22 repos with
+  `can_push: true`; scope is pinned at session creation.
 - LESSON: "make X a loaded skill" requests require checking `claude plugin list` (installed
   snapshot versions) against repo plugin.json versions — installed copies are version-pinned
   snapshots under ~/.claude/plugins/cache and silently lag the repo until a version bump +
