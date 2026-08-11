@@ -9,8 +9,8 @@ git-ignored. Commit only sanitized, structural examples.
 - **Top events defined so far:** <one moment of lost control each, e.g. "unauthorized payment
   released", "fraudulent instruction accepted as genuine">
 - **Process descriptions to run guidewords over:** <where the SOPs live>
-- **Existing control inventory:** <e.g. the SOD/control catalog in
-  cash-management-skills:cash-management-controls/references/sod-and-control-catalog.md; your
+- **Existing control inventory:** <wire in wherever your SOD/control catalog lives in your
+  current role and systems — a controls matrix, policy doc, or GRC tool; plus your
   bank-platform control settings>
 - **Barrier owners:** <role names — who owns callback, dual approval, positive pay, recall runbook>
 - **Assurance-test cadence and evidence store:** <how each barrier is exercised/sampled; where

@@ -7,7 +7,8 @@
 Expected: skill loads; characterizes the data; logs the three candidate hypotheses (volume,
 price, mix/new service) plus rivals; tests each with executed code (volume × unit price
 decomposition); prunes and deepens adaptively; reports the driver with calibrated confidence
-and limitations. May pull in `banking-skills:bank-fee-analysis` for domain specifics.
+and limitations. May pull in a domain-specific fee-analysis skill for specifics where one
+is available in the environment.
 
 ## 2. Near-miss (should NOT load this skill)
 > "I just got this new dataset — give me a quick profile: columns, types, missing values."

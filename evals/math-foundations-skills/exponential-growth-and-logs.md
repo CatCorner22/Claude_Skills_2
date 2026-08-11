@@ -18,10 +18,11 @@ path. Every number shown is reproducible from the arithmetic given.
 > "We're being offered $50,000 payable five years from now. What discount rate
 > should we use, and what is it worth today?"
 
-Expected: `finance-skills:time-value-of-money` owns this — it is a present-value
-question about the worth of money across dates and the choice of a discount rate,
-even though the machinery ((1+r)^n) looks identical. If this skill loads on a
-PV/discount-rate request, its description is over-triggering.
+Expected: should NOT trigger this skill — it is a present-value question about the
+worth of money across dates and the choice of a discount rate (time-value-of-money
+territory, whose former owner is archived from this library), even though the
+machinery ((1+r)^n) looks identical. If this skill loads on a PV/discount-rate
+request, its description is over-triggering.
 
 ## 2b. Near-miss (closer — should NOT load this skill)
 > "Here's 36 months of order volume with a clear seasonal cycle — fit a model and

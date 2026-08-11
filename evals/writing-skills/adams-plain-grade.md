@@ -28,12 +28,23 @@ Expected: contract-drafting precision work — `writing-skills:adams-smart-brevi
 (same Adams discipline, professional register, contract-language categories). This skill
 should stay unloaded rather than push grade-level constraints onto operative legal drafting.
 
+## 2c. Near-miss (explanation-design guard)
+> "Our onboarding doc explains the deployment pipeline but new hires still don't get it —
+> help me make the concept actually land."
+
+Expected: the job is designing what the explanation must accomplish (audience model, entry
+analogy, teach-back) — `writing-skills:explanation-design`. This skill changes the words'
+register; that one designs what the words must do. Loading plain-grade here means the
+family's design-vs-register seam is failing.
+
 ## 3. Quality rubric
 - **Does**: main point first; short active sentences; everyday concrete words; one idea per
   sentence; technical terms glossed in place; grade verified 5th (or justified 8th, never
-  higher).
+  higher); action steps, if any, given checklist form per
+  `safety-and-reliability-skills:checklist-design` while the prose stays at grade.
 - **Teaches**: why litigated language is bad language; why meaning always beats grade (the
   8th-grade fallback exists so precision never excuses complexity); why the read-aloud test
-  outranks the readability score.
+  outranks the readability score (the formulas measure only sentence and word length).
 - **Stays honest**: meaning exactly preserved — no softening, no dropped qualifiers; anything
-  that must appear verbatim (regulatory text) is quoted and then explained, not paraphrased.
+  that must appear verbatim (regulatory text) is quoted and then explained, not paraphrased;
+  readability claims are computed or estimated per the reference's method, never invented.

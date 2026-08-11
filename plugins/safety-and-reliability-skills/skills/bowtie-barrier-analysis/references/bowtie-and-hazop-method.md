@@ -108,7 +108,7 @@ Threat lines (guideword-generated):
 
 Consequence lines (right side): funds released to attacker →
 [M] recall/return request with rail-specific clocks (wire vs. ACH) — [M] receiving-bank KYC/AML
-detection and freeze (see `banking-skills:kyc-aml-basics`) — [M] fraud insurance / law-enforcement
+detection and freeze — [M] fraud insurance / law-enforcement
 referral (IC3-style reporting) — [M] incident response and counterparty notification.
 
 Every barrier above gets an owner and an assurance test before the bowtie is called done.

@@ -26,8 +26,8 @@ that hidden denominator, so the first question is always the same: *percent of w
 - Comparing rates across groups of different sizes: normalizing per-1,000 or per capita,
   weighting a combined rate, or explaining why a total moved against its subgroups.
 - Converting markup to margin (or back); building, reading, or rebasing an index series.
-- Not for: liquidity, leverage, and profitability ratios as company diagnostics → see
-  `finance-skills:financial-ratios`.
+- Not for: liquidity, leverage, and profitability ratios as company diagnostics — that
+  is financial-statement ratio analysis (archived: `finance-skills:financial-ratios`, restorable from `archive/`).
 - Not for: summarizing a dataset (typical value, spread, shape) → see
   `data-analytics-bi-skills:descriptive-statistics`.
 - Multi-period growth math — CAGR, doubling time, log scales — belongs to the sibling

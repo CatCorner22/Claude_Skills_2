@@ -64,7 +64,7 @@ matrix is refined (step 4) rather than filled once.
 
 Setting: an operating account shows an unexplained **$12,480.00 credit-side break** — the
 statement carries a lockbox credit the ledger cannot pair. The standard reconciliation pass
-(`cash-management-skills:bank-reconciliation`) did not clear it.
+did not clear it.
 
 **Hypotheses**
 - **H1 Timing** — the ledger receipt exists but posts in the next period.
@@ -113,8 +113,8 @@ is not, and escalates.
 
 **Report (steps 7–8):** all six likelihoods with the driving evidence, then the milestones —
 tomorrow's feed line count for the same reference, and whether reloading the corrected feed clears
-the break. If the duplicate reproduces, the diagnosis moves from this matrix into
-`oracle-fusion-finance-skills:fusion-cm-production-troubleshooting` to fix the import.
+the break. If the duplicate reproduces, the diagnosis moves from this matrix into production
+troubleshooting of the statement-feed import.
 
 ## Deception hypotheses
 
@@ -126,8 +126,9 @@ designed to look like the innocent explanation — at face value the evidence wi
   marks. Its I marks come from *absence* evidence (clean access logs, intact approvals) and from
   verifying load-bearing items at a source the potential deceiver could not shape.
 - Include one whenever an actor has **means, motive, and opportunity** to shape what you are
-  seeing — in treasury, business-email compromise and mandate fraud are engineered precisely so
-  the evidence reads as routine (see `cash-management-skills:cash-management-controls`).
+  seeing — in payments work, business-email compromise and mandate fraud are engineered precisely
+  so the evidence reads as routine (`safety-and-reliability-skills:bowtie-barrier-analysis` maps
+  the barriers such schemes are built to defeat).
 - Weak disconfirmation is not clearance. If a deception hypothesis survives to the final ranking,
   say so plainly and route it to escalation/verification, never to quiet closure.
 

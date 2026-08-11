@@ -25,10 +25,10 @@ chicken-little loads on generic Python asks, the description is over-triggering.
 > "Some supplier invoices are stuck in validation with holds on them — walk me through
 > releasing the holds in Oracle Fusion."
 
-Expected: a single-domain Fusion AP operations ask — no statistics, no build, no persona name —
-routed to `oracle-fusion-finance-skills:fusion-ap-invoice-to-pay`. It shares "stuck invoices"
-surface vocabulary with the positive trigger; chicken-little should load only on the persona's
-name or a genuinely multi-domain ask.
+Expected: a single-domain Fusion AP operations how-to — no statistics, no build, no persona
+name — that should NOT trigger any skill in this library (its former owner was archived with the
+Oracle Fusion plugins). It shares "stuck invoices" surface vocabulary with the positive trigger;
+chicken-little should load only on the persona's name or a genuinely multi-domain ask.
 
 ## 3. Quality rubric
 A good response:

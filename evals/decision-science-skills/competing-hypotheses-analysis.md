@@ -28,10 +28,10 @@ rival-explanation language.
 > "Here's this month's bank statement and the GL cash activity — reconcile them, match the
 > transactions, and list the outstanding items."
 
-Expected: `cash-management-skills:bank-reconciliation` owns the mechanics of matching and
-classifying. This skill mounts only when a break *resists* that pass and rival causes must be
-weighed. A response that jumps straight to a hypothesis matrix for a routine reconciliation is
-over-triggering.
+Expected: no skill loads — routine matching and classifying of outstanding items is plain
+assistance, not a rival-explanation problem. This skill mounts only when a break *resists* the
+routine pass and rival causes must be weighed. A response that jumps straight to a hypothesis
+matrix for a routine reconciliation is over-triggering.
 
 ## 3. Quality rubric
 A good response:

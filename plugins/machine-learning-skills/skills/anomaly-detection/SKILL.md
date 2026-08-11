@@ -16,7 +16,7 @@ description: >-
 - Flagging unusual transactions or values: reconciliation breaks, fee/interest spikes, duplicate or out-of-pattern payments, suspicious activity.
 - Finding outliers in a time series (a day's cash movement far from its seasonal norm) or in multivariate transaction data.
 - Setting a detection threshold when you have few or no labels, and managing the resulting alert volume.
-- Not for: mechanically matching a statement to the ledger and classifying breaks → see `cash-management-skills:bank-reconciliation` (use this skill to *rank* which breaks are unusual). For the control framework alerts feed into → see `cash-management-skills:cash-management-controls`.
+- Not for: mechanically matching a statement to the ledger and classifying breaks — that is bank-to-ledger reconciliation (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`); use this skill to *rank* which breaks are unusual. Designing the control framework alerts feed into is cash-controls work (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
 
 ## Do it
 1. **Define "anomalous" for this context, and the cost of each error.** Decide what unusual means here
@@ -74,8 +74,8 @@ and sample rows in `your-environment.private.md`, which is git-ignored): what "a
 process, the fields you monitor, whether you have any labels, your alert budget (how many alerts/day the team
 can investigate), known-benign recurring patterns to suppress, and the cost of a missed anomaly vs a false
 alarm. This skill then maps its generic methods onto your data. To rank reconciliation breaks by unusualness,
-pair it with `cash-management-skills:bank-reconciliation`; to fit alerts into the control framework, see
-`cash-management-skills:cash-management-controls`.
+pair it with your reconciliation process (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`);
+fitting alerts into a control framework is cash-controls design (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
 
 ## References
 - references/methods-and-thresholds.md — statistical, time-series, and unsupervised methods, with threshold-setting and evaluation under label scarcity

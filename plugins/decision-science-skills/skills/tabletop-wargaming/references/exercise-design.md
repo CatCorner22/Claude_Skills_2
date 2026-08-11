@@ -11,7 +11,7 @@
 
 ## Scenario library — the three treasury golds
 
-**1. BEC payment-fraud drill** (pairs with `cash-management-skills:cash-management-controls`)
+**1. BEC payment-fraud drill** (pairs with `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
 - Setup: a supplier "bank-change" email chain, followed by an urgent wire request that
   impersonates an executive, timed against an approver's known absence.
 - Blue objective: the fraudulent payment never releases; the genuine payment run is not
@@ -21,7 +21,7 @@
 - What it reveals: callback discipline, out-of-band verification, dual-approval reality
   vs. paper, who can say "stop" to a name with authority on it.
 
-**2. Bank-connectivity outage on payroll day** (pairs with `banking-skills:bank-connectivity`)
+**2. Bank-connectivity outage on payroll day** (pairs with `safety-and-reliability-skills:break-glass-playbooks` — the drill unseals the contingency playbook)
 - Setup: the transmission channel to the disbursement bank fails the morning payroll
   files are due; the bank's status line says "investigating."
 - Blue objective: payroll settles on time through a contingency channel without

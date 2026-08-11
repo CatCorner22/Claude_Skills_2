@@ -1,9 +1,13 @@
 # CLAUDE.md — treasury-analyst-skills
 
-This repo is the `treasury-analyst-skills` plugin marketplace (100+ skills, 16+ plugins).
-Authoring standard: `plugins/coding-agent-skills/skills/writing-agent-skills/SKILL.md` — read it
-before creating or editing any skill. Validate with `bash scripts/validate.sh` and regenerate
-`docs/SKILLS.md` via `python3 scripts/gen-catalog.py` after any skill change.
+This repo is the `treasury-analyst-skills` plugin marketplace (the name is kept for install
+compatibility; the active library is general-use and career-portable — 100+ skills across the
+active plugins, with the finance/Oracle/treasury domain plugins preserved in `archive/`, see
+`archive/README.md`). Authoring standard:
+`plugins/coding-agent-skills/skills/writing-agent-skills/SKILL.md` — read it before creating or
+editing any skill. Validate with `bash scripts/validate.sh` and regenerate `docs/SKILLS.md` +
+`docs/INDEX.md` via `python3 scripts/gen-catalog.py` after any skill change. Never build new
+content mounted on the archived domains (standing directive, 2026-08-11).
 
 ## Standing metacognition engagement (user-mandated, permanent)
 

@@ -20,10 +20,9 @@ description: >-
   the automotive AIAG/VDA handbook lineage `[snippet-only]`.
 - Ordering a reconciliation break investigation: break types — duplicate statement line, truncated
   addenda, tolerance mismatch — are failure modes; rate them S/O/D and work the register in priority
-  order (see `cash-management-skills:bank-reconciliation`, its references/matching-and-tolerance.md).
+  order.
 - Design-FMEA on an auto-reconciliation rule set before go-live, where Detection asks: "will this
-  failure surface in the unreconciled report, or silently auto-match the wrong pair?" (see
-  `oracle-fusion-finance-skills:fusion-auto-reconciliation-design`).
+  failure surface in the unreconciled report, or silently auto-match the wrong pair?"
 - The Improve phase of `continuous-improvement-skills:dmaic-problem-solving` names FMEA as its
   new-risk check — this skill is that method, defined.
 - Prioritizing what an adversarial release gauntlet fuzzes and property-tests hardest, by Action

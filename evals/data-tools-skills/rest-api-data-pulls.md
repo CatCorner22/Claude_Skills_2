@@ -11,7 +11,8 @@ count reconciliation via `totalResults=true`; credentials via environment variab
 ## 2. Near-miss (should NOT load this skill)
 > "I need to bulk-load these 10,000 journals INTO Fusion from a spreadsheet."
 
-Expected: inbound bulk load — `oracle-fusion-finance-skills:fusion-fbdi-data-loading`. If this
+Expected: an inbound bulk load into the ERP — the opposite direction from this skill's outbound
+extracts, and a task no active skill in this library owns; nothing should load. If this
 skill loads, sharpen the extract/outbound framing.
 
 ## 3. Quality rubric

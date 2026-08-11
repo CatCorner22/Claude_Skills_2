@@ -1,13 +1,16 @@
 # Your ML problem (sanitized template)
 
-Fill this in with your real problem. If any value is sensitive (actual figures, account identifiers,
-sample rows, internal system names), keep it in `your-environment.private.md` instead — that suffix is
-git-ignored. Commit only sanitized, structural examples.
+Wire in your current role here — the framing method is domain-neutral, and this file is what
+points it at the predictions that matter wherever you work now. If any value is sensitive
+(actual figures, account identifiers, sample rows, internal system names), keep it in
+`your-environment.private.md` instead — that suffix is git-ignored. Commit only sanitized,
+structural examples.
 
 - **Decision & owner:** <who acts on the prediction, and what action changes>
 - **Cost of a wrong call:** <false positive vs false negative, or over- vs under-forecast, in business terms>
 - **Target (label):** <exactly what you predict; number / category / event-in-window>
-- **How the label is measured:** <window, cutoff, and the rule that decides the outcome>
+- **How the label is measured:** <window, cutoff, and the rule that decides the outcome; for
+  human-judged labels, the evidence that judges agree>
 - **Task type:** <regression | classification | forecasting | anomaly | ranking>
 - **Unit of prediction (grain):** <one row = one …>
 - **Prediction time / cadence:** <the moment a prediction is made; how often>

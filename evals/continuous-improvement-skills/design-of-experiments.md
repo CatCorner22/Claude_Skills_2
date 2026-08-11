@@ -28,8 +28,8 @@ production, the boundary has failed.
 > "We need to tighten our vendor screening process — new suppliers should be checked against
 > sanctions lists before onboarding."
 
-Expected: compliance screening — `banking-skills:kyc-aml-basics` territory (KYC/AML and resume
-screening own the bare word). design-of-experiments must not trigger on "screening" alone; its
+Expected: compliance/vendor screening — a due-diligence onboarding task, not an experiment; no
+continuous-improvement skill should trigger. design-of-experiments must not trigger on "screening" alone; its
 screening sense only appears fully qualified (screening designs, Plackett-Burman). If it loads
 here, the trigger surface has grown too greedy. (Likewise, a request to "run a quick experiment"
 with a single A/B significance check belongs to `data-analytics-bi-skills:statistical-inference`.)

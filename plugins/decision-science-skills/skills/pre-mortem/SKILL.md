@@ -18,10 +18,8 @@ description: >-
 ## When to use
 - A concrete plan exists, the team is briefed, and commitment is imminent — the last calm
   moment when the plan can still absorb changes cheaply.
-- Before-go-live gates in this environment: Oracle CM configuration or ruleset changes,
-  reconciliation-engine go-lives, FBDI conversions (pair with
-  `oracle-fusion-finance-skills:fusion-fbdi-data-loading`), dental-app releases,
-  bank-migration cutovers, month-start process changes.
+- Before-go-live gates: system configuration or ruleset changes, engine go-lives, bulk
+  data conversions, app releases, migration cutovers, month-start process changes.
 - As the BEFORE companion to `continuous-improvement-skills:project-command-center`: that
   doctrine red-teams and logs interventions on plans under way but has no structured
   prospective-hindsight step — run the pre-mortem first, file its output there.

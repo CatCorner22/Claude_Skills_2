@@ -1,7 +1,7 @@
 # Negotiation prep and tactics
 
 The full prep template, the tactic catalog with example lines, a worked bank-fee-increase
-example wired to `banking-skills:bank-fee-analysis` outputs, the rehearsal protocol, and
+example built from account-analysis fee-benchmark outputs, the rehearsal protocol, and
 the ethics line. Sources: *Getting to Yes* (Fisher/Ury, Harvard Negotiation Project) for
 the strategy layer; *Never Split the Difference* (Voss) for the tactics layer. Both are
 practitioner canon — teaching and field practice, not controlled trials.
@@ -78,7 +78,7 @@ Avoid "why" questions — they read as accusations ("Why did you raise this?"). 
 ## 3. Worked example: the bank fee increase
 The bank announces a 12% increase on ACH origination and lockbox unit prices.
 
-**Inputs from `banking-skills:bank-fee-analysis`** (run it first — it builds the case):
+**Inputs from the fee-benchmark analysis** (run it first — it builds the case):
 the AFP-coded unit-price benchmark table, the volume × unit price driver ranking, the
 ECR / compensating-balance trade-off math, and the lever list (waive or reduce unit
 prices, raise the ECR, cut the reserve factor, consolidate accounts). Those tables *are*

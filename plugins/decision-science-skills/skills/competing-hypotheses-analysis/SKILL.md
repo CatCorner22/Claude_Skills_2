@@ -27,11 +27,10 @@ In this library that letter sequence means Automated Clearing House (the banking
 own it). Write "competing hypotheses" or "the hypothesis matrix" — in prose, headings, and output.
 
 ## When to use
-- An unexplained result with a natural set of rival causes. The canonical mount here: a
+- An unexplained result with a natural set of rival causes. Canonical examples: a
   reconciliation break that resists the standard pass — timing difference vs. duplicate statement
-  line vs. matching-rule gap vs. bank error vs. keying error — escalating out of
-  `cash-management-skills:bank-reconciliation`, or a works-in-test-fails-in-prod mystery in
-  `oracle-fusion-finance-skills:fusion-cm-production-troubleshooting`.
+  line vs. matching-rule gap vs. bank error vs. keying error — or a works-in-test-fails-in-prod
+  production mystery.
 - Any analysis at risk of confirmation bias: an incident with multiple suspects, rival readings of
   a prompt during a `coding-agent-skills:master-prompt-architect` audit, or generalizing the
   disconfirmation pass of `deep-research-skills:medical-research-detective` beyond medicine.

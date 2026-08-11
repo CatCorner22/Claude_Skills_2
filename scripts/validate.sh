@@ -9,8 +9,10 @@ cd "$ROOT" || exit 2
 
 errors=0
 warns=0
+notes=0
 err()  { echo "ERROR: $1"; errors=$((errors+1)); }
 warn() { echo "WARN:  $1"; warns=$((warns+1)); }
+note() { echo "NOTE:  $1"; notes=$((notes+1)); }
 ok()   { echo "OK:    $1"; }
 
 json_ok() {
@@ -37,6 +39,7 @@ for dir in plugins/*/skills/*/; do
   skill="${dir%/}"
   base="$(basename "$skill")"
   md="$skill/SKILL.md"
+  pre_errors=$errors
   [ -f "$md" ] || { err "$skill has no SKILL.md"; continue; }
 
   # Extract YAML frontmatter (between the first two '---' fences).
@@ -64,6 +67,7 @@ for dir in plugins/*/skills/*/; do
     dlen=$(printf '%s' "$desc" | wc -m | tr -d ' ')
     if [ "$dlen" -eq 0 ]; then err "$base: empty description"; fi
     if [ "$dlen" -gt 1024 ]; then err "$base: description is $dlen chars (max 1024)"; fi
+    if [ "$dlen" -gt 973 ] && [ "$dlen" -le 1024 ]; then note "$base: description is $dlen chars (within 5% of the 1024 cap — watch future edits)"; fi
   else
     err "$base: missing 'description'"
   fi
@@ -79,9 +83,9 @@ for dir in plugins/*/skills/*/; do
     fi
   fi
 
-  [ "$errors" -eq 0 ] && ok "$base" || true
+  [ "$errors" -eq "$pre_errors" ] && ok "$base" || true
 done
 
 echo
-echo "== Summary: $errors error(s), $warns warning(s) =="
+echo "== Summary: $errors error(s), $warns warning(s), $notes note(s) =="
 [ "$errors" -eq 0 ]

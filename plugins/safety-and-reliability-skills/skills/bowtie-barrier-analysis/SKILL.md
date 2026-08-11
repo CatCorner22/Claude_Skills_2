@@ -97,12 +97,12 @@ correcting threats against reality, naming owners, and running assurance tests.
 ## Tailor to your environment
 Record your hazards, top events, barrier owners, and assurance-test cadence in
 `references/your-environment.md`; anything naming real people, accounts, or incidents goes in
-`your-environment.private.md` (git-ignored). Known mounts in this library: the flat control catalog
-at `cash-management-skills:cash-management-controls` → `references/sod-and-control-catalog.md`
-(SOD, dual approval, positive pay, BEC controls) becomes the barrier set for top event
-"unauthorized payment released"; `banking-skills:kyc-aml-basics` supplies the mitigative chain on
-the right side of a fraud bowtie; audit findings (e.g. via a Tennessee/UT audit-findings skill in
-your environment) map one-to-one onto missing or failed barriers.
+`your-environment.private.md` (git-ignored). Known mounts: a flat cash-controls catalog (SOD, dual
+approval, positive pay, BEC controls) becomes the barrier set for top event "unauthorized payment
+released" — one such catalog lived in the archived `cash-management-skills:cash-management-controls` → `references/sod-and-control-catalog.md` (restorable from `archive/`);
+receiving-bank KYC/AML detection supplies the mitigative chain on the right side of a fraud bowtie
+(archived: `banking-skills:kyc-aml-basics`, restorable from `archive/`); audit findings (e.g. via a
+Tennessee/UT audit-findings skill in your environment) map one-to-one onto missing or failed barriers.
 
 ## References
 - references/bowtie-and-hazop-method.md — guideword × parameter matrix, barrier quality tests

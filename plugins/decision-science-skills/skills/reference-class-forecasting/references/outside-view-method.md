@@ -37,7 +37,7 @@ The class must be **broad enough for statistics, narrow enough to be comparable*
 1. Express every case as a comparable, scale-free outcome measure:
    - **Ratio form:** `r = actual / estimate` (cost, duration, receipts).
    - **Signed-error form:** `e = (actual − estimate) / estimate` — the same "variance %" and
-     signed-bias convention used by `cash-management-skills:cash-forecasting`'s accuracy loop.
+     signed-bias convention operational forecast-accuracy loops use.
 2. Sort the values and read empirical percentiles: P10, P50 (median), P80, P90. With n cases, the
    Pk value is the `ceil(k/100 × n)`-th sorted value — no distributional assumption needed.
 3. Report **mean, median, and spread together**. Overrun distributions are typically right-skewed
@@ -73,9 +73,9 @@ least that much arrived. Certainty level is a risk-appetite decision the human o
 
 ## Worked example: a cash-driver anchor from MAPE/bias history
 
-Setting: the tuition-receipts driver in a 13-week direct-method cash process
-(`cash-management-skills:cash-forecasting`). The accuracy loop already tracks per-cycle
-variance — MAPE and signed bias — so the reference class is sitting in the variance file.
+Setting: the tuition-receipts driver in a rolling 13-week direct-method cash process. The
+accuracy loop already tracks per-cycle variance — MAPE and signed bias — so the reference
+class is sitting in the variance file.
 
 1. **Class:** the driver's own last 24 cycles of `(actual − forecast) / forecast`, same
    definition as the accuracy reference. Ratified: same payer population, same calendar; two
@@ -94,10 +94,10 @@ variance — MAPE and signed bias — so the reference class is sitting in the v
 5. **Log and score:** journal the prediction (number, percentile basis, class, review date); when
    actuals land, compute the realized ratio, note which percentile it fell at, and append the
    cycle to the class. The same-signed run also feeds back to the *model* owner: a persistent
-   +3.5% bias is a driver-curve correction for the forecasting skill to make once, with a reason —
+   +3.5% bias is a driver-curve correction for the forecast owner to make once, with a reason —
    not something to chase cycle-by-cycle (see `calibration-and-tampering.md`).
 
-This is the loop-closing move: the library already measures MAPE and bias; this method turns that
+This is the loop-closing move: the forecast process already measures MAPE and bias; this method turns that
 measurement into next-cycle anchors and uplifts per driver (tuition receipts, payroll, grant
 drawdowns), instead of letting the accuracy history sit unread.
 

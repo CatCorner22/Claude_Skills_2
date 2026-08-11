@@ -25,8 +25,9 @@ one claim in a full sentence and proves it with a picture; every number carries 
 - Building a "TED-style" technical talk with sentence-headline slides instead of bullet dumps.
 - Auditing an existing `.pptx` against the assertion-evidence checklist.
 - Not for: performing the underlying data analysis → use the data-analytics/statistics skills; the
-  Oracle CM configuration diagnosis → `oracle-fusion-finance-skills:fusion-cm-production-troubleshooting`
-  or `oracle-cm-config-review`; XML-level `.pptx` editing the builder can't express → the `pptx`
+  Oracle CM configuration diagnosis → the user-environment `oracle-cm-config-review` skill where
+  installed (archived: `oracle-fusion-finance-skills:fusion-cm-production-troubleshooting`, restorable
+  from `archive/`); XML-level `.pptx` editing the builder can't express → the `pptx`
   skill. This skill turns *verified* output into slides; run the analysis under its own skill first.
 
 ## Do it

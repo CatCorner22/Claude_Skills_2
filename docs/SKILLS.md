@@ -1,6 +1,6 @@
-# Treasury Analyst Skills — trigger & capability catalog
+# Skills Library — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **166 skills across 24 plugins.**
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **123 skills across 15 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
 
 ## How to trigger a skill
 
@@ -8,7 +8,7 @@ There are two ways every skill fires:
 
 1. **Automatically** — just describe your task in plain language. Claude matches your request against each skill's description and **trigger phrases** (listed below) and loads the right one on its own. You don't need to name it.
 
-2. **Manually** — type the slash command `/{plugin}:{skill}` (e.g. `/cash-management-skills:bank-reconciliation`) to invoke a specific skill on demand.
+2. **Manually** — type the slash command `/{plugin}:{skill}` (e.g. `/decision-science-skills:pre-mortem`) to invoke a specific skill on demand.
 
 Ask **"what skills are available?"** any time to list them.
 
@@ -16,554 +16,43 @@ Ask **"what skills are available?"** any time to list them.
 
 ```
 /plugin marketplace add blakereaganlaw-droid/claude_skills_2
-/plugin install <plugin>@treasury-analyst-skills      # e.g. cash-management-skills@treasury-analyst-skills
+/plugin install <plugin>@treasury-analyst-skills      # e.g. decision-science-skills@treasury-analyst-skills
 ```
 Install only the plugins you want; each is independent. Skills are namespaced `<plugin>:<skill>` so they never collide.
 
 ## Plugins
 
-- [`cash-management-skills`](#cash-management-skills) (6) — Treasury cash operations: cash positioning, bank reconciliation, forecasting, liquidity, controls, and intercompany netting.
-- [`oracle-otbi-skills`](#oracle-otbi-skills) (5) — Build OTBI reports and analyses in Oracle Fusion Cloud, with deep Cash Management subject-area coverage.
-- [`sponsored-projects-ar-skills`](#sponsored-projects-ar-skills) (13) — Sponsored projects/awards/grants receivables analysis across Oracle Fusion Receivables + PPM: master router, PPM-to-AR domain knowledge, unbilled/billed AR reconciliation, KPIs and trend forecasts, reporting outputs, and federal compliance (Uniform Guidance, federal billing/cash management, effort reporting).
-- [`oracle-fusion-finance-skills`](#oracle-fusion-finance-skills) (10) — Functional Oracle Fusion Cloud Financials: GL and journals, FBDI data loading, AP invoice-to-pay, AR and collections, the Cash Management module, period close, plus the fusion-treasury-architect subagent and its consult skill for configuration-specific guidance.
-- [`banking-skills`](#banking-skills) (6) — Payment rails, bank account structures, statement formats, bank-fee analysis, connectivity, and KYC/AML basics.
-- [`accounting-skills`](#accounting-skills) (6) — Double-entry accounting, journal entries, chart of accounts, month-end close, reconciliations, and financial statements.
-- [`finance-skills`](#finance-skills) (6) — Corporate and treasury finance: time value of money, working capital, ratios, short-term investing, FX risk, and capital budgeting.
-- [`treasury-accounting-skills`](#treasury-accounting-skills) (6) — Advanced treasury and accounting operations: debt facilities and covenant compliance, hedging and derivatives, investment policy compliance, accruals and prepaids, intercompany accounting, and audit readiness.
-- [`data-analytics-bi-skills`](#data-analytics-bi-skills) (8) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
-- [`data-tools-skills`](#data-tools-skills) (6) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
+- [`data-analytics-bi-skills`](#data-analytics-bi-skills) (11) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
+- [`data-tools-skills`](#data-tools-skills) (7) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
 - [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (17) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 - [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (17) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
+- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
-- [`public-sector-treasury-skills`](#public-sector-treasury-skills) (8) — Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
-- [`writing-skills`](#writing-skills) (4) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
-- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (5) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
+- [`writing-skills`](#writing-skills) (5) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
+- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (10) — High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).
 - [`learning-skills`](#learning-skills) (3) — Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
-- [`collaboration-skills`](#collaboration-skills) (2) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).
+- [`collaboration-skills`](#collaboration-skills) (5) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).
 - [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
-- [`decision-science-skills`](#decision-science-skills) (8) — Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, and systems-thinking (feedback loops, archetypes, leverage points).
+- [`decision-science-skills`](#decision-science-skills) (15) — Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
 
-## `cash-management-skills`
-
-Treasury cash operations: cash positioning, bank reconciliation, forecasting, liquidity, controls, and intercompany netting.
-
-Install: `/plugin install cash-management-skills@treasury-analyst-skills`
-
-### `cash-management-skills:bank-reconciliation`
-
-**Invoke:** `/cash-management-skills:bank-reconciliation` — or just describe the task.
-
-**What it does:** Reconciles a bank statement to the ledger or system cash balance, matches transactions, classifies outstanding and in-transit items, and investigates breaks until the difference resolves to zero. Use when reconciling a bank account, chasing an unreconciled difference, reviewing someone's reconciliation, or setting up matching/tolerance rules.
-
-**Triggers:** `bank reconciliation`, `recon`, `reconcile the bank`, `unreconciled`, `outstanding items`, `deposits in transit`, `outstanding checks`, `statement vs book`, `reconciling difference`, `break`
-
-### `cash-management-skills:cash-forecasting`
-
-**Invoke:** `/cash-management-skills:cash-forecasting` — or just describe the task.
-
-**What it does:** Builds direct-method short- and medium-term cash forecasts — projecting receipts and disbursements from operational drivers (AR collections, AP runs, payroll, debt service, tax) — and measures forecast-vs-actual variance to improve accuracy. Use when projecting liquidity, building a rolling 13-week or monthly cash forecast, choosing the direct vs. indirect method, or reviewing forecast accuracy.
-
-**Triggers:** `cash forecast`, `liquidity forecast`, `direct method`, `indirect method`, `rolling forecast`, `13-week forecast`, `forecast variance`, `forecast accuracy`, `receipts and disbursements`, `project cash flow`
-
-### `cash-management-skills:cash-management-controls`
-
-**Invoke:** `/cash-management-skills:cash-management-controls` — or just describe the task.
-
-**What it does:** Designs and reviews controls over cash processes — segregation of duties, payment authorization and dual approval, positive pay and ACH filters, reconciliation as a detective control, bank mandate management, and business-email-compromise prevention — mapped to the control objectives of authorization, completeness, accuracy, and safeguarding. Use when designing or auditing cash controls, building a segregation-of-duties matrix, or responding to a payment-fraud risk.
-
-**Triggers:** `cash controls`, `segregation of duties`, `SOD`, `dual approval`, `payment authorization`, `positive pay`, `ACH filter`, `payment fraud`, `BEC`, `business email compromise`, `audit trail`, `bank mandate`
-
-### `cash-management-skills:cash-positioning`
-
-**Invoke:** `/cash-management-skills:cash-positioning` — or just describe the task.
-
-**What it does:** Builds and reads a daily cash position — opening, available, and projected closing balances across bank accounts, currencies, and entities — from actual cash flows (bank statement balances, AP payments, AR receipts, payroll) to drive funding, sweep, and investing decisions. Use when determining how much cash is available today, sizing a sweep, funding a disbursement account before a payment run, or building a cash position worksheet.
-
-**Triggers:** `cash position`, `daily cash`, `available balance`, `cash worksheet`, `opening balance`, `closing balance`, `position the cash`, `sweep decision`, `how much cash today`, `funding decision`
-
-### `cash-management-skills:intercompany-cash-netting`
-
-**Invoke:** `/cash-management-skills:intercompany-cash-netting` — or just describe the task.
-
-**What it does:** Designs and runs intercompany netting cycles and in-house-bank settlements to cut cross-entity payments, float, and FX conversions, and evaluates pooling structures (notional, physical/ZBA, POBO/COBO). Use when consolidating intercompany cash, running a bilateral or multilateral netting cycle, or assessing an in-house bank or cash-pooling structure.
-
-**Triggers:** `netting`, `intercompany netting`, `netting cycle`, `bilateral netting`, `multilateral netting`, `in-house bank`, `cash pooling`, `notional pooling`, `physical pooling`, `POBO`, `COBO`, `settlement cycle`
-
-### `cash-management-skills:liquidity-management`
-
-**Invoke:** `/cash-management-skills:liquidity-management` — or just describe the task.
-
-**What it does:** Assesses liquidity buffers and sets target/minimum balances, structures concentration and zero-balance sweeps, and decides how to deploy surplus cash or cover a deficit across accounts and entities. Use when setting target balances, designing sweeps or a concentration structure, sizing a liquidity buffer, or deciding what to do with surplus or short cash.
-
-**Triggers:** `liquidity`, `target balance`, `minimum balance`, `concentration account`, `ZBA`, `cash sweep`, `liquidity buffer`, `surplus cash`, `idle cash`, `cover a shortfall`, `committed facility`
-
-## `oracle-otbi-skills`
-
-Build OTBI reports and analyses in Oracle Fusion Cloud, with deep Cash Management subject-area coverage.
-
-Install: `/plugin install oracle-otbi-skills@treasury-analyst-skills`
-
-### `oracle-otbi-skills:otbi-analysis-filters`
-
-**Invoke:** `/oracle-otbi-skills:otbi-analysis-filters` — or just describe the task.
-
-**What it does:** Scopes and parameterizes an OTBI analysis: builds filters and "is prompted" filters, column/named/dashboard prompts, presentation and repository variables, and column-formula CASE logic for aging or classification buckets. Use when adding filters to a report, making it interactive or prompt-driven, passing runtime parameters, or writing a CASE column for aging buckets and derived measures.
-
-**Triggers:** `add a filter`, `is prompted`, `dashboard prompt`, `column prompt`, `named prompt`, `presentation variable`, `runtime parameter`, `prompt-driven report`, `aging buckets`, `CASE formula`, `bucket a column`, `as-of date prompt`
-
-### `oracle-otbi-skills:otbi-cash-management-reports`
-
-**Invoke:** `/oracle-otbi-skills:otbi-cash-management-reports` — or just describe the task.
-
-**What it does:** Builds the common Oracle Cash Management OTBI reports — bank statement balances, cash-position snapshot, unreconciled/exception and aging analyses, reconciliation status summary, bank-charge and charge-tax breakdowns, and external cash transaction audits — each mapped to its correct Cash Management subject area, with the security duty role required and the reconciliation-status-is-an- attribute caveat. Use when reporting on Oracle Fusion Cash Management data in OTBI.
-
-**Triggers:** `cash management report`, `bank statement balances report`, `cash position OTBI`, `unreconciled report`, `reconciliation status report`, `bank charges report`, `external cash transactions`, `OTBI cash report`, `unreconciled aging`
-
-### `oracle-otbi-skills:otbi-report-building`
-
-**Invoke:** `/oracle-otbi-skills:otbi-report-building` — or just describe the task.
-
-**What it does:** Builds or edits an Oracle Transactional Business Intelligence (OTBI) analysis end to end in Oracle Fusion Cloud: pick one subject area, add columns and column formulas on the Criteria tab, set filters, assemble Results views into a compound layout, save under /Shared Folders/Custom, and surface it on a dashboard with a shared prompt. Use when creating, editing, or troubleshooting any OTBI report or analysis.
-
-**Triggers:** `build an OTBI report`, `create an analysis`, `OTBI analysis`, `Reports and Analytics`, `Browse Catalog`, `criteria tab`, `compound layout`, `add a column formula`, `put an analysis on a dashboard`, `edit an OTBI report`
-
-### `oracle-otbi-skills:otbi-report-scheduling-sharing`
-
-**Invoke:** `/oracle-otbi-skills:otbi-report-scheduling-sharing` — or just describe the task.
-
-**What it does:** Shares and distributes OTBI content through dashboards and catalog folder permissions, and flags OTBI's key limitation — no native scheduling, bursting, or pixel-perfect output — so scheduled, burst, or precisely formatted delivery is routed to BI Publisher instead. Use when sharing, scheduling, distributing, emailing, or setting permissions on an OTBI report or dashboard, or when deciding between OTBI and BI Publisher for delivery.
-
-**Triggers:** `share an OTBI report`, `schedule a report`, `burst a report`, `email a report on a schedule`, `distribute a dashboard`, `catalog permissions`, `pixel-perfect report`, `BI Publisher vs OTBI`, `OTBI can't schedule`
-
-### `oracle-otbi-skills:otbi-subject-area-selection`
-
-**Invoke:** `/oracle-otbi-skills:otbi-subject-area-selection` — or just describe the task.
-
-**What it does:** Chooses the right OTBI subject area and columns for a reporting question, explains fact vs. dimension folders and the one-subject-area-per-analysis limit, and gives cross-pillar workarounds (BI Publisher SQL, side-by-side dashboard analyses on a shared prompt, or FDI/OAC). Covers the four Oracle Cash Management subject areas and when to use each. Use when unsure which subject area or columns to query, or when a report seems to need two subject areas or two Fusion pillars.
-
-**Triggers:** `which subject area`, `pick a subject area`, `what subject area for`, `cross-subject-area`, `join two subject areas`, `Cash Management subject area`, `single subject area limit`, `column not available`, `fact vs dimension folder`
-
-## `sponsored-projects-ar-skills`
-
-Sponsored projects/awards/grants receivables analysis across Oracle Fusion Receivables + PPM: master router, PPM-to-AR domain knowledge, unbilled/billed AR reconciliation, KPIs and trend forecasts, reporting outputs, and federal compliance (Uniform Guidance, federal billing/cash management, effort reporting).
-
-Install: `/plugin install sponsored-projects-ar-skills@treasury-analyst-skills`
-
-### `sponsored-projects-ar-skills:compliance-risk-anomaly`
-
-**Invoke:** `/sponsored-projects-ar-skills:compliance-risk-anomaly` — or just describe the task.
-
-**What it does:** Identifies compliance risks, exceptions, and anomalies in sponsored/grant receivables data across all sponsor types — scanning the public exception patterns (billing exceptions, holds, unapplied receipts, at-risk receipts in aging data), the sponsored-specific risks (allowability-suspect charges, funding-limit breaches, overdue-beyond-sponsor-terms), and statistical anomalies (outlier aging, DSO spikes, unusual adjustment and credit-memo volumes), then cross-checking PPM costs against AR billing for alignment. Use for audit-, risk-, or exception-focused questions on sponsored AR.
-
-**Triggers:** `sponsored AR exceptions`, `grant AR anomalies`, `billing exceptions scan`, `risk register receivables`, `unusual credit memos`, `DSO spike`, `funding limit breach`, `overdue beyond terms`, `AR risk review`, `exception report grants`, `at-risk receipts`
-
-### `sponsored-projects-ar-skills:federal-billing-cash-management`
-
-**Invoke:** `/sponsored-projects-ar-skills:federal-billing-cash-management` — or just describe the task.
-
-**What it does:** Explains federal payment methods — Letter of Credit / Payment Management System drawdowns, advances, and reimbursement under §200.305 — and how each affects unbilled AR, billed AR, cash application, and aging in Oracle Fusion PPM + Receivables analysis: distinguishing draws from invoices, monitoring the expenditure-to-draw lag, overdraw debts (§200.346), SF-270-style documentation, and why federal write-offs can't hit the award. Use when analyzing unbilled/billed transitions, cash receipts from federal sponsors, federal AR aging, or drawdown-vs-invoicing questions.
-
-**Triggers:** `LOC drawdown`, `letter of credit billing`, `PMS draw`, `payment management system`, `federal reimbursement`, `SF-270`, `expenditure to draw lag`, `federal advance payment`, `federal AR aging`, `drawdown vs invoice`, `overdraw`, `federal cash management`
-
-### `sponsored-projects-ar-skills:federal-cost-allowability`
-
-**Invoke:** `/sponsored-projects-ar-skills:federal-cost-allowability` — or just describe the task.
-
-**What it does:** Applies the Uniform Guidance cost principles to evaluate whether costs or billed amounts on federal awards are allowable, allocable, and reasonable — running the §200.403 factor tests, the §200.404 prudent-person standard, and §200.405 relative-benefit allocation, applying the special rules (administrative salaries under §200.413, equipment, travel, participant support) and the always-unallowable list (§200.426 bad debts and related collection costs), and flagging suspect items with CFR citations and recommended actions. Use when reviewing invoices, adjustments, write-offs, or cost data on federal awards, or for any "can this be charged/billed?" question.
-
-**Triggers:** `allowable cost`, `allowability`, `can we charge this to the grant`, `§200.403`, `unallowable`, `allocable`, `cost principles`, `questioned cost review`, `admin salary direct charge`, `prior approval cost`, `prudent person test`, `bill this to the award`
-
-### `sponsored-projects-ar-skills:federal-effort-reporting-basics`
-
-**Invoke:** `/sponsored-projects-ar-skills:federal-effort-reporting-basics` — or just describe the task.
-
-**What it does:** Explains the Uniform Guidance standards for charging personnel costs to federal awards (§200.430) — reasonable compensation, consistent institutional policy, records that accurately reflect total work activity and support salary distribution, budget estimates adjusted to actuals — and why unsupported effort turns into questioned costs that claw back previously billed AR. Use for questions about salary charges, effort reporting, payroll allocation, effort certification, or when federal project data shows high personnel-cost density.
-
-**Triggers:** `effort reporting`, `effort certification`, `salary allocation federal`, `§200.430`, `personnel costs grant`, `payroll charged to award`, `time and effort`, `salary cap`, `questioned personnel costs`, `effort commitment`, `charging salaries to grants`
-
-### `sponsored-projects-ar-skills:federal-sponsored-ar-compliance-risk`
-
-**Invoke:** `/sponsored-projects-ar-skills:federal-sponsored-ar-compliance-risk` — or just describe the task.
-
-**What it does:** Assesses compliance and audit risk in Receivables data for federal sponsored projects — identifying federal awards, scanning for high-risk patterns (aged federal AR, frequent adjustments/credit memos, write-offs, unbilled build-up, allowability-suspect costs), applying the §200.426 bad-debt and §200.410 questioned-cost rules to adjustments and write-off proposals, mapping Single Audit/SEFA implications, and grading documentation readiness — delivered as a prioritized risk assessment that is explicitly not an audit opinion. Use for aging analysis, exception review, write-off recommendations, or any risk-focused question on federal awards.
-
-**Triggers:** `federal AR risk`, `questioned costs`, `write off federal receivable`, `single audit exposure`, `SEFA`, `federal compliance risk`, `audit risk sponsored projects`, `federal adjustments review`, `closeout residual balance`, `subrecipient risk`, `cost sharing shortfall`
-
-### `sponsored-projects-ar-skills:fusion-ar-ppm-domain-knowledge`
-
-**Invoke:** `/sponsored-projects-ar-skills:fusion-ar-ppm-domain-knowledge` — or just describe the task.
-
-**What it does:** Provides the authoritative public-domain map of how sponsored projects data flows between Oracle Fusion PPM/Grants and Receivables — award and bill-plan types, the relevant OTBI subject areas on both sides, the PPM-to-AutoInvoice-to-AR integration and status flow, and a data-profiling routine for any uploaded sponsored-AR extract, with the standard gotchas flagged. Use as the first analytical step after the sponsored-AR router, or whenever the question is about data sources, subject areas, terminology, or column mapping.
-
-**Triggers:** `PPM subject area`, `project billing subject area`, `where does unbilled AR come from`, `AutoInvoice PPM`, `sponsored AR data model`, `map these columns`, `grants data source`, `project invoice flow`, `bill plan type`, `confirm invoice acceptance`
-
-### `sponsored-projects-ar-skills:reporting-visualization-recommendations`
-
-**Invoke:** `/sponsored-projects-ar-skills:reporting-visualization-recommendations` — or just describe the task.
-
-**What it does:** Turns sponsored-AR analysis into finished deliverables — the standard structured report (executive summary, data validation, detailed tables, visual descriptions, insights by financial/operational/compliance/strategic angle), suggested OTBI-style report patterns (AR aging by project, project invoices prior to acceptance), and actionable recommendations covering collection priorities, billing acceleration, and data quality, with multi-currency, intercompany, and partial-payment edge cases handled. Use as the final step of any sponsored-AR analysis, or when the user asks for summaries, dashboards, report designs, or next steps on sponsored/grants receivables.
-
-**Triggers:** `sponsored AR report`, `grants AR summary`, `AR dashboard for projects`, `executive summary receivables`, `OTBI report for sponsored projects`, `aging by sponsor report`, `what should we do about unbilled`, `present sponsored AR`, `next steps grants AR`
-
-### `sponsored-projects-ar-skills:revenue-billing-reconciliation`
-
-**Invoke:** `/sponsored-projects-ar-skills:revenue-billing-reconciliation` — or just describe the task.
-
-**What it does:** Reconciles PPM revenue recognition against AR billing for sponsored awards from the accounting side — the documented Generate Revenue → events → invoice flow, the variance identity (recognized revenue − billed = unbilled or over-billed), funding-limit checks against contract amounts, and the unbilled-AR account roll (DR Unbilled Receivable / CR Revenue at recognition; DR Receivable / CR Unbilled Receivable at invoicing) through to GL tie-out. Use for questions about revenue vs invoiced amounts, over/under-billing, unbilled balance substantiation, or tying sponsored revenue and receivables to the GL.
-
-**Triggers:** `revenue vs billing`, `over billed`, `under billed`, `revenue reconciliation`, `unbilled receivable account`, `GL tie-out sponsored`, `recognized vs invoiced`, `revenue events`, `billing in excess`, `substantiate unbilled balance`, `project revenue reconciliation`
-
-### `sponsored-projects-ar-skills:sponsored-ar-aging-collections`
-
-**Invoke:** `/sponsored-projects-ar-skills:sponsored-ar-aging-collections` — or just describe the task.
-
-**What it does:** Performs detailed aging, DSO, and collections analysis for sponsored/grant receivables at the sponsor, contract, and project level — public-standard metrics (current/overdue/future AR, aging amounts and counts on a declared invoice-date or schedule-date basis, % overdue, average days outstanding/overdue), breakdowns by award type, business unit, ledger, and receivable GL account, sponsor concentration and late-payment risk, and cross-referencing receipts and credit-memo applications — producing a prioritized collection list with cash-flow implications. Use for overdue invoices, aging buckets, collections prioritization, or cash-flow risk questions on sponsored data.
-
-**Triggers:** `sponsored aging`, `overdue sponsor invoices`, `grant collections`, `aging buckets by sponsor`, `collection priority list`, `late paying sponsors`, `sponsor concentration`, `days overdue`, `past due grants AR`, `collections analysis`
-
-### `sponsored-projects-ar-skills:sponsored-ar-fusion-analyst-master-router`
-
-**Invoke:** `/sponsored-projects-ar-skills:sponsored-ar-fusion-analyst-master-router` — or just describe the task.
-
-**What it does:** Routes and coordinates every analysis of sponsored projects, awards, and grants receivables data in Oracle Fusion Cloud (Receivables + PPM/Grants integration) — classifying the question, confirming the award/bill-plan type, requiring data or a clear description before any calculation, dispatching to the right sub-skill, and enforcing the standard output structure. Use FIRST for any sponsored-AR question, before any analysis.
-
-**Triggers:** `sponsored projects`, `grants`, `awards`, `project invoices`, `PPM receivables`, `unbilled AR`, `project contract billing`, `sponsor AR`, `grant receivables`, `award billing`, `sponsored research billing`, `grants AR analysis`
-
-### `sponsored-projects-ar-skills:sponsored-ar-kpi-trends-forecast`
-
-**Invoke:** `/sponsored-projects-ar-skills:sponsored-ar-kpi-trends-forecast` — or just describe the task.
-
-**What it does:** Computes the core KPI set for sponsored-project receivables — AR outstanding, DSO, aging distribution and turnover, receipts vs transactions, plus sponsor/project-specific measures like burn rate vs funding, invoice-to-revenue ratio, and collections effectiveness — then runs trend analysis by sponsor, project type, and award category, and builds simple disclosed- assumption forecasts, reading results from liquidity, sponsor-relationship, and budget angles. Use for performance overviews, benchmarking, trend, or forward-looking sponsored-AR questions.
-
-**Triggers:** `sponsored AR KPIs`, `DSO by sponsor`, `AR aging trend`, `collections effectiveness`, `burn rate vs funding`, `grant AR metrics`, `receivables benchmark`, `forecast collections`, `invoice to revenue ratio`, `sponsor AR performance`, `YoY AR comparison`
-
-### `sponsored-projects-ar-skills:unbilled-billed-ar-wip-recon`
-
-**Invoke:** `/sponsored-projects-ar-skills:unbilled-billed-ar-wip-recon` — or just describe the task.
-
-**What it does:** Reconciles unbilled (WIP) versus billed AR for sponsored projects and tracks the billing lifecycle — measuring pipeline by billing status (Ready to Bill, In Progress, Billed, Error), reconciling PPM revenue events against Receivables invoices, isolating holds and exceptions, and handling cost-reimbursable, letter-of-credit, and multi-project-contract edge cases. Use when the question involves work-in-progress, unbilled receivables, draft invoices, billing backlog, invoices in error, or PPM-to-AR reconciliation variances.
-
-**Triggers:** `unbilled AR`, `WIP reconciliation`, `billing status`, `draft invoices`, `billing backlog`, `invoices in error`, `ready to bill`, `PPM to AR reconciliation`, `unbilled to billed`, `billing exceptions`, `LOC billing`, `stuck invoices`
-
-### `sponsored-projects-ar-skills:uniform-guidance-federal-core`
-
-**Invoke:** `/sponsored-projects-ar-skills:uniform-guidance-federal-core` — or just describe the task.
-
-**What it does:** Provides core educational knowledge of 2 CFR Part 200 (Uniform Guidance) for federal awards — the subpart structure, post-2024 thresholds (15% de minimis F&A on MTDC, $1,000,000 Single Audit, $10,000 equipment), financial management standards (§200.302), payment standards (§200.305), cost principles and always-unallowable costs (Subpart E), and refund obligations — as context for sponsored projects billing and receivables analysis. Use for any question involving federal awards, Uniform Guidance, 2 CFR 200, cost principles, Single Audit, or when analyzing AR data for federal sponsors.
-
-**Triggers:** `uniform guidance`, `2 CFR 200`, `federal award compliance`, `cost principles`, `single audit`, `de minimis rate`, `MTDC`, `unallowable costs`, `allowability`, `federal grant rules`, `questioned costs`, `F&A rate`
-
-## `oracle-fusion-finance-skills`
-
-Functional Oracle Fusion Cloud Financials: GL and journals, FBDI data loading, AP invoice-to-pay, AR and collections, the Cash Management module, period close, plus the fusion-treasury-architect subagent and its consult skill for configuration-specific guidance.
-
-Install: `/plugin install oracle-fusion-finance-skills@treasury-analyst-skills`
-
-### `oracle-fusion-finance-skills:fusion-ap-invoice-to-pay`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-ap-invoice-to-pay` — or just describe the task.
-
-**What it does:** Runs the Oracle Fusion Payables invoice-to-pay cycle — invoice entry and validation, PO matching (2/3/4-way), holds and their releases, approval workflow, accounting, and paying through Payment Process Requests (PPRs) that build payment files. Use when entering or fixing an AP invoice in Fusion, releasing holds, investigating why an invoice isn't paid, or running and troubleshooting a payment batch.
-
-**Triggers:** `fusion AP`, `payables invoice`, `invoice hold`, `release hold`, `invoice validation`, `PO matching`, `three-way match`, `payment process request`, `PPR`, `payment batch`, `invoice not paid`, `pay run fusion`, `payables approval`
-
-### `oracle-fusion-finance-skills:fusion-ar-and-collections`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-ar-and-collections` — or just describe the task.
-
-**What it does:** Runs Oracle Fusion Receivables — creating and importing AR transactions (invoices, credit memos), applying receipts manually and through lockbox/automatch, keeping unapplied and on-account cash honest, and working aging and the Advanced Collections dunning/strategy cycle. Use when booking or fixing an AR transaction in Fusion, applying or troubleshooting receipts, reconciling unapplied cash, or setting up aging and collections follow-up.
-
-**Triggers:** `fusion AR`, `receivables invoice`, `apply receipt`, `unapplied receipt`, `on-account`, `lockbox`, `autoapply`, `credit memo fusion`, `AR aging`, `collections fusion`, `dunning`, `receipt application`, `customer balance`
-
-### `oracle-fusion-finance-skills:fusion-architect-consult`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-architect-consult` — or just describe the task.
-
-**What it does:** Consults the fusion-treasury-architect subagent — an elite Oracle Cloud Fusion Financials and Treasury architect persona — for expert, configuration-specific answers: exact FSM task names and Redwood UI navigation, COA/value-set/CVR design, SLA mapping and journal line rules, bank statement parsing (BAI2/CAMT.053/MT940 with segment-level detail), reconciliation rule sets and tolerances, AutoInvoice/lockbox/PPR configuration, and structured error troubleshooting (root cause → diagnostics → resolution). Use for deep Fusion configuration design, integration architecture, or error diagnosis beyond the teaching skills.
-
-**Triggers:** `fusion configuration`, `FSM task`, `redwood navigation`, `configure SLA`, `CVR design`, `BAI2 parsing rule`, `reconciliation rule setup`, `AutoInvoice grouping rule`, `PPR setup`, `fusion error troubleshooting`, `lockbox configuration`, `fusion architect`
-
-### `oracle-fusion-finance-skills:fusion-auto-reconciliation-design`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-auto-reconciliation-design` — or just describe the task.
-
-**What it does:** Acts as an Oracle Cloud Fusion Cash Management architect who designs and optimizes automated bank reconciliation systems for maximum automatic match rates — applying the subledger-supremacy philosophy (the bank statement mirrors what AR/AP already processed; transaction creation rules are a last resort reserved for bank-originated items like fees, interest, and sweeps), a strict matching hierarchy (exact one-to-one first, grouped many-sided next, judicious tolerances), and format-level parsing engineering (BAI2 16/88 records and type codes, CAMT.053, MT940) to fuel matching from references the bank actually sends. Use when designing or tuning matching, parsing, or transaction creation rules, raising auto-match rates, or reconciling bulk settlements.
-
-**Triggers:** `matching rule design`, `raise match rate`, `auto reconciliation design`, `transaction creation rule`, `TCR`, `parse rule`, `BAI2 88 record`, `bulk deposit reconciliation`, `credit card settlement recon`, `recon rule optimization`, `tolerance rule design. metadata: version: "1.0" author: User-drafted spec (Oracle Cloud Fusion Cash Management Architect); adapted to house standard`
-
-### `oracle-fusion-finance-skills:fusion-cash-management-module`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-cash-management-module` — or just describe the task.
-
-**What it does:** Operates the Oracle Fusion Cash Management module — bank, branch, and account setup; loading and troubleshooting electronic bank statements (BAI2, camt.053); tuning automatic reconciliation matching rules and rule sets; handling external cash transactions; and reading the module's reconciliation statuses. Use when setting up bank accounts in Fusion, loading bank statements, configuring or debugging auto-reconciliation, or clearing unreconciled statement lines in the Fusion CE module.
-
-**Triggers:** `fusion cash management`, `bank statement load`, `camt.053 fusion`, `BAI2 import`, `auto reconciliation fusion`, `matching rules`, `reconcile in fusion`, `external cash transaction`, `bank account setup fusion`, `unreconciled statement lines`
-
-### `oracle-fusion-finance-skills:fusion-cm-production-troubleshooting`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-cm-production-troubleshooting` — or just describe the task.
-
-**What it does:** Acts as a senior Oracle Fusion Cash Management configuration expert who evaluates CM configurations for gaps and root-causes why setups that passed in test/dev/UAT fail in Production — leading with environment-parity analysis (data volume, security and data access, patch levels, file encoding, scheduling, org assignments), then validating foundational setup, reconciliation rules, and statement import processing, and delivering ranked root causes with exact FSM task names, production-safe fixes, and validation tests. Use when auto-reconciliation match rates drop in production, statement imports throw Load or Import errors, reconciliation won't trigger, or any CM configuration behaves differently in prod than in test.
-
-**Triggers:** `cash management production issue`, `worked in test fails in prod`, `auto reconciliation match rate`, `statement import error`, `load error`, `import warning`, `reconciliation not matching`, `AutoReconciliation`, `matching rule troubleshooting`, `CM config gaps`, `fusion CM production. metadata: version: "1.0" author: User-drafted spec (OracleFusionCashManagementConfigExpert); adapted to house standard`
-
-### `oracle-fusion-finance-skills:fusion-fbdi-data-loading`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-fbdi-data-loading` — or just describe the task.
-
-**What it does:** Loads data into Oracle Fusion Cloud with File-Based Data Import (FBDI) — picks the right import template, fills it without breaking its hidden formatting rules, generates and uploads the zip, runs the interface loader and the module import job, and works the error-correction loop until every row lands. Covers GL journal import (GL_INTERFACE) in depth. Use when bulk-loading journals, invoices, or other records into Fusion, or when an FBDI load errors out.
-
-**Triggers:** `FBDI`, `file-based data import`, `journal import`, `GL_INTERFACE`, `import journals`, `load data into fusion`, `FBDI template`, `interface loader`, `ESS import job`, `correct import errors`, `bulk load fusion`
-
-### `oracle-fusion-finance-skills:fusion-gl-and-journals`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-gl-and-journals` — or just describe the task.
-
-**What it does:** Works General Ledger in Oracle Fusion Cloud — reads the ledger and chart-of-accounts structure (segments, value sets, hierarchies, cross-validation rules), creates manual and spreadsheet (ADFdi) journals, routes them through approval, posts them, and troubleshoots unposted or rejected journals. Use when entering or fixing a journal in Fusion GL, explaining a ledger/COA setup, or diagnosing why a journal won't post.
-
-**Triggers:** `fusion journal`, `GL journal entry`, `create journal in fusion`, `ADFdi journal`, `spreadsheet journal`, `journal approval`, `post journal`, `journal won't post`, `cross-validation rule`, `chart of accounts segments`, `fusion ledger`
-
-### `oracle-fusion-finance-skills:fusion-period-close`
-
-**Invoke:** `/oracle-fusion-finance-skills:fusion-period-close` — or just describe the task.
-
-**What it does:** Drives period close in Oracle Fusion Cloud — the subledger-to-GL close sequence (AP, AR, FA, projects, then GL), period statuses per module, exception sweeps (unaccounted transactions, stuck interface rows), subledger-to-GL reconciliation, and the Close Monitor/close calendar. Use when closing a period in Fusion, deciding the close order, chasing why a period won't close, or reconciling a subledger to its GL control account at close.
-
-**Triggers:** `period close fusion`, `close the period`, `period status`, `can't close period`, `close AP period`, `sweep unaccounted`, `subledger close`, `close monitor`, `period end fusion`, `exceptions preventing close`
-
-### `oracle-fusion-finance-skills:oracle-fusion-financials-architect`
-
-**Invoke:** `/oracle-fusion-finance-skills:oracle-fusion-financials-architect` — or just describe the task.
-
-**What it does:** Acts as "Thales", a principal-level Oracle Fusion Cloud Financials architect (public-sector/higher-ed, multi-entity) covering Cash Management, Treasury, Subledger Accounting, and reconciliation-engine design. Treats Oracle setup as code: delivers YAML setup-object schemas, executable validation rules, migration playbooks with rollback, ADRs, and test scenarios — deterministic reconciliation and SLA-first accounting are non-negotiable. Use for Fusion architecture and configuration governance, reconciliation rule design, OTBI/BIP/REST integration patterns, security/SoD models, or EBS/PeopleSoft-to-Fusion migration planning.
-
-**Triggers:** `fusion architect`, `oracle architecture`, `setup objects`, `configuration as code`, `reconciliation design`, `subledger accounting`, `SLA`, `data access set`, `ledger set`, `MOAC`, `encumbrance`, `migration playbook`, `validation rules`, `setup governance`, `treasury architecture. metadata: version: "1.0" author: Synthesized from 2026 Oracle Cloud ecosystem + public-sector treasury practices; adapted to house standard`
-
-## `banking-skills`
-
-Payment rails, bank account structures, statement formats, bank-fee analysis, connectivity, and KYC/AML basics.
-
-Install: `/plugin install banking-skills@treasury-analyst-skills`
-
-### `banking-skills:bank-account-structure`
-
-**Invoke:** `/banking-skills:bank-account-structure` — or just describe the task.
-
-**What it does:** Designs bank account hierarchies and automated sweep structures — concentration/header accounts, zero-balance (ZBA) and target-balance sub-accounts, and physical vs notional cash pooling — and rationalizes account counts to cut idle cash, fees, and risk. Use when structuring, opening, or rationalizing bank accounts, or designing sweeps or cash pooling.
-
-**Triggers:** `bank account structure`, `account hierarchy`, `ZBA`, `zero balance account`, `concentration account`, `target balance`, `sweeps`, `cash pooling`, `notional pooling`, `account rationalization`, `BAM`, `bank account management`
-
-### `banking-skills:bank-connectivity`
-
-**Invoke:** `/banking-skills:bank-connectivity` — or just describe the task.
-
-**What it does:** Reasons about the channels that connect an ERP or TMS to banks — host-to-host SFTP, SWIFT (Alliance, service bureau, SCORE), bank APIs / open banking, and single-bank portals — weighing cost, effort, resilience, and standardization, and covering file security (PGP, SSH keys). Use when integrating with a bank, choosing a connectivity channel, or securing bank file transfer.
-
-**Triggers:** `host-to-host`, `H2H`, `SFTP`, `SWIFT connectivity`, `service bureau`, `SCORE`, `Alliance Lite`, `bank API`, `open banking`, `ERP to bank`, `TMS to bank`, `bank portal`, `PGP`, `connectivity channel`
-
-### `banking-skills:bank-fee-analysis`
-
-**Invoke:** `/banking-skills:bank-fee-analysis` — or just describe the task.
-
-**What it does:** Analyzes bank fees from account-analysis statements — decoding AFP Service Codes, EDI 822 and ISO 20022 camt.086 billing files, and the earnings-credit-rate (ECR) offset against compensating balances — to review, benchmark, and reduce bank charges. Use when reviewing bank fees, reading an account analysis statement, or preparing a fee negotiation.
-
-**Triggers:** `bank fees`, `account analysis`, `account analysis statement`, `AFP service codes`, `EDI 822`, `camt.086`, `bank services billing`, `earnings credit rate`, `ECR`, `compensating balance`, `fee reduction`, `bank billing`
-
-### `banking-skills:bank-statement-parsing`
-
-**Invoke:** `/banking-skills:bank-statement-parsing` — or just describe the task.
-
-**What it does:** Normalizes bank statement files — BAI2, SWIFT MT940/MT942, ISO 20022 CAMT.053/CAMT.052, and CSV — into one reconciliation-ready schema (date, amount, direction, reference, description, balance), handling each format's balance and transaction codes and sign conventions. Use when ingesting, mapping, or troubleshooting a bank statement file before positioning or reconciliation.
-
-**Triggers:** `BAI2`, `MT940`, `MT942`, `CAMT.053`, `CAMT.052`, `bank file`, `statement import`, `parse statement`, `transaction code`, `balance code`, `normalize statement`, `prior-day vs intraday`
-
-### `banking-skills:kyc-aml-basics`
-
-**Invoke:** `/banking-skills:kyc-aml-basics` — or just describe the task.
-
-**What it does:** Explains and applies KYC / CDD / EDD, beneficial-ownership (UBO) identification, sanctions and OFAC/SDN screening, AML red flags, transaction monitoring, and SARs when onboarding or transacting with a counterparty — educational fundamentals, not legal advice. Use when onboarding a counterparty, screening a payment, or understanding an AML/KYC control.
-
-**Triggers:** `KYC`, `CDD`, `EDD`, `AML`, `know your customer`, `customer due diligence`, `beneficial ownership`, `UBO`, `sanctions screening`, `OFAC`, `SDN`, `PEP`, `red flags`, `SAR`, `transaction monitoring`, `correspondent banking risk`
-
-### `banking-skills:payment-rails`
-
-**Invoke:** `/banking-skills:payment-rails` — or just describe the task.
-
-**What it does:** Compares and selects payment methods — ACH (including Same Day ACH), Fedwire, CHIPS, RTP, FedNow, SWIFT cross-border, and checks — by cost, speed, settlement finality, reversibility, amount limits, and cutoff times, and explains how a given rail works. Use when deciding how to move money, funding a payment, or explaining the difference between rails.
-
-**Triggers:** `ACH`, `wire`, `Fedwire`, `CHIPS`, `RTP`, `FedNow`, `SWIFT`, `MT103`, `pacs.008`, `payment rail`, `same-day ACH`, `payment method`, `how to send money`, `wire vs ACH`, `real-time payment`, `cross-border payment`
-
-## `accounting-skills`
-
-Double-entry accounting, journal entries, chart of accounts, month-end close, reconciliations, and financial statements.
-
-Install: `/plugin install accounting-skills@treasury-analyst-skills`
-
-### `accounting-skills:account-reconciliations`
-
-**Invoke:** `/accounting-skills:account-reconciliations` — or just describe the task.
-
-**What it does:** Performs balance-sheet account reconciliations (not bank recs) — prepaids, accruals, fixed assets, intercompany, and other GL accounts — proving each balance against independent support with a supporting schedule, classified and aged reconciling items, roll-forwards, and risk-ranking. Use when reconciling a GL balance-sheet account, building a supporting schedule, or reviewing a reconciliation.
-
-**Triggers:** `account reconciliation`, `balance sheet reconciliation`, `GL rec`, `reconciling items`, `supporting schedule`, `roll-forward`, `risk-ranking accounts`, `prepaid schedule`, `accrual reconciliation`
-
-### `accounting-skills:chart-of-accounts-design`
-
-**Invoke:** `/accounting-skills:chart-of-accounts-design` — or just describe the task.
-
-**What it does:** Designs, extends, and interprets a chart of accounts and its segments — entity/company, cost center, natural account, and others — with parent/child hierarchies and rollups for reporting. Use when designing or restructuring a COA, adding or mapping accounts, defining segments, or making sense of an existing account structure.
-
-**Triggers:** `chart of accounts`, `COA`, `account segments`, `accounting flexfield`, `natural account`, `cost center`, `account hierarchy`, `rollup`, `account mapping`, `new account request`
-
-### `accounting-skills:double-entry-fundamentals`
-
-**Invoke:** `/accounting-skills:double-entry-fundamentals` — or just describe the task.
-
-**What it does:** Applies the accounting equation, debit/credit rules, normal balances, T-accounts, and the accounting cycle to record a transaction correctly and prove the books balance. Use when unsure how to book a transaction, which side is the debit and which the credit, what an account's normal balance is, or how the accounting cycle flows from journal to ledger to trial balance to statements.
-
-**Triggers:** `double entry`, `debit`, `credit`, `accounting equation`, `normal balance`, `T-account`, `trial balance`, `accounting cycle`, `assets liabilities equity`
-
-### `accounting-skills:financial-statements`
-
-**Invoke:** `/accounting-skills:financial-statements` — or just describe the task.
-
-**What it does:** Reads and builds the three core financial statements — balance sheet, income statement, and cash flow statement (direct and indirect) — and uses how they articulate to tie them out. Use when analyzing, preparing, or tying out the statements, converting accrual results to cash, or building a cash flow statement by the indirect method starting from net income.
-
-**Triggers:** `financial statements`, `balance sheet`, `income statement`, `P&L`, `cash flow statement`, `statement of cash flows`, `indirect method`, `accrual vs cash`, `articulation`, `tie out`
-
-### `accounting-skills:journal-entries`
-
-**Invoke:** `/accounting-skills:journal-entries` — or just describe the task.
-
-**What it does:** Drafts and reviews journal entries — standard, accrual, deferral, reversing, reclassifying, and adjusting — keeping debits equal to credits and every line on its correct normal balance, with a clear memo and support. Use when creating, booking, or reviewing a journal entry, recording an accrual or deferral, or setting up a reversing entry.
-
-**Triggers:** `journal entry`, `JE`, `book an entry`, `accrual`, `deferral`, `reversing entry`, `reclass`, `reclassifying entry`, `adjusting entry`, `debit and credit`, `top-side entry`
-
-### `accounting-skills:month-end-close`
-
-**Invoke:** `/accounting-skills:month-end-close` — or just describe the task.
-
-**What it does:** Runs a structured month-end close — cutoff, accruals, subledger-to-GL tie-outs, reconciliations, intercompany, and flux/variance review — tracked on a close checklist with owners and a close calendar. Use when closing the books, building a close calendar or checklist, sequencing close tasks, or reviewing close status.
-
-**Triggers:** `month-end close`, `period close`, `period end`, `close checklist`, `close calendar`, `cutoff`, `flux analysis`, `variance review`, `soft close`, `hard close`
-
-## `finance-skills`
-
-Corporate and treasury finance: time value of money, working capital, ratios, short-term investing, FX risk, and capital budgeting.
-
-Install: `/plugin install finance-skills@treasury-analyst-skills`
-
-### `finance-skills:capital-budgeting`
-
-**Invoke:** `/finance-skills:capital-budgeting` — or just describe the task.
-
-**What it does:** Evaluates capital projects with NPV, IRR, payback, discounted payback, and the profitability index, built on incremental after-tax free cash flows, and explains which rule governs when they conflict and why NPV is primary. Use when evaluating an investment or capital project, a buy-versus-build or equipment-replacement decision, or when ranking competing or mutually exclusive projects under a budget.
-
-**Triggers:** `capital budgeting`, `project evaluation`, `NPV`, `IRR`, `payback period`, `discounted payback`, `profitability index`, `incremental cash flow`, `hurdle rate`, `mutually exclusive projects`, `capital rationing`
-
-### `finance-skills:financial-ratios`
-
-**Invoke:** `/finance-skills:financial-ratios` — or just describe the task.
-
-**What it does:** Computes and interprets liquidity, leverage, profitability, and efficiency ratios — current and quick ratios, debt-to-equity, interest coverage, gross/operating/net margins, ROA, ROE, asset and inventory turnover — and decomposes ROE with DuPont, always read against a benchmark or trend. Use when analyzing a company's ratios or financial health, or when explaining what is driving its return on equity.
-
-**Triggers:** `financial ratios`, `current ratio`, `quick ratio`, `debt to equity`, `interest coverage`, `ROE`, `ROA`, `gross margin`, `operating margin`, `net margin`, `DuPont`, `asset turnover`, `inventory turnover`, `receivables turnover`, `financial health`
-
-### `finance-skills:fx-risk-basics`
-
-**Invoke:** `/finance-skills:fx-risk-basics` — or just describe the task.
-
-**What it does:** Identifies transaction, translation, and economic foreign-exchange exposure and applies basic hedges — forward contracts, natural or operational hedging, and netting exposures before hedging externally. Use when handling multi-currency exposure, deciding whether or how to hedge a foreign-currency cash flow, distinguishing the three types of FX risk, or reading spot/forward quotes.
-
-**Triggers:** `FX risk`, `foreign exchange risk`, `currency exposure`, `hedging`, `forward contract`, `transaction exposure`, `translation exposure`, `economic exposure`, `natural hedge`, `hedge ratio`, `currency netting`
-
-### `finance-skills:short-term-investments`
-
-**Invoke:** `/finance-skills:short-term-investments` — or just describe the task.
-
-**What it does:** Evaluates money-market instruments — T-bills, commercial paper, CDs, repos, and money-market funds — and builds an approach for investing surplus operating cash under a safety-then-liquidity-then- yield priority, including yield-basis conversions, an investment policy statement, and maturity laddering. Use when investing surplus or idle cash, comparing money-market instruments, converting between discount and bond-equivalent yields, or setting a short-term investment policy.
-
-**Triggers:** `short-term investment`, `money market`, `T-bills`, `commercial paper`, `CDs`, `repo`, `money market fund`, `investment policy statement`, `laddering`, `surplus cash`, `discount yield`, `bond-equivalent yield`
-
-### `finance-skills:time-value-of-money`
-
-**Invoke:** `/finance-skills:time-value-of-money` — or just describe the task.
-
-**What it does:** Applies present value, future value, discounting, and compounding to value cash flows over time, and computes annuities, perpetuities, NPV, and IRR — including IRR's known pitfalls (multiple or no solution, scale, and reinvestment assumptions). Use when valuing future cash flows, computing PV, FV, NPV, or IRR, choosing a discount rate, or comparing amounts that fall on different dates.
-
-**Triggers:** `time value of money`, `present value`, `future value`, `discounting`, `compounding`, `NPV`, `IRR`, `annuity`, `perpetuity`, `discount rate`, `effective annual rate`, `EAR`, `opportunity cost of capital`
-
-### `finance-skills:working-capital-management`
-
-**Invoke:** `/finance-skills:working-capital-management` — or just describe the task.
-
-**What it does:** Analyzes days sales outstanding (DSO), days payable outstanding (DPO), days inventory outstanding (DIO), and the cash conversion cycle (CCC = DSO + DIO − DPO) to release cash tied up in operations, and weighs the levers and trade-offs for shortening it. Use when analyzing or improving working capital, the operating cycle, or the cash conversion cycle, or when quantifying cash freed by faster collections, leaner inventory, or longer payment terms.
-
-**Triggers:** `working capital`, `cash conversion cycle`, `CCC`, `DSO`, `DPO`, `DIO`, `days sales outstanding`, `days payable outstanding`, `days inventory outstanding`, `receivables`, `payables`, `inventory days`, `operating cycle`
-
-## `treasury-accounting-skills`
-
-Advanced treasury and accounting operations: debt facilities and covenant compliance, hedging and derivatives, investment policy compliance, accruals and prepaids, intercompany accounting, and audit readiness.
-
-Install: `/plugin install treasury-accounting-skills@treasury-analyst-skills`
-
-### `treasury-accounting-skills:accruals-and-prepaids`
-
-**Invoke:** `/treasury-accounting-skills:accruals-and-prepaids` — or just describe the task.
-
-**What it does:** Builds and maintains accrual and prepaid processes that survive audit — identifying what needs accruing at cutoff, estimating defensibly when invoices haven't arrived, running amortization schedules for prepaids, reversing correctly, true-ing up estimates against actuals, and testing cutoff so expenses land in the right period. Use when booking month-end accruals, setting up or amortizing a prepaid, investigating an expense that hit the wrong period, reviewing accrual completeness, or measuring estimate accuracy.
-
-**Triggers:** `accrual`, `accrue`, `prepaid`, `accrued expense`, `cutoff`, `amortization schedule`, `reversing entry`, `true-up`, `accrual completeness`, `expense in wrong period`, `unbilled`, `month-end accruals`
-
-### `treasury-accounting-skills:audit-readiness-and-pbc`
-
-**Invoke:** `/treasury-accounting-skills:audit-readiness-and-pbc` — or just describe the task.
-
-**What it does:** Gets finance and treasury through an external audit efficiently — running the PBC (prepared-by-client) list as a managed project, producing workpapers and reconciliations that stand alone, preparing for the cash/debt/investment areas auditors always hit (confirmations, cutoff, coverage of controls), handling walkthroughs and sample requests, and responding to findings without thrash. Use when an audit or interim fieldwork is coming, a PBC list just arrived, an auditor asks for support or a walkthrough, or a finding needs a response.
-
-**Triggers:** `audit`, `PBC list`, `prepared by client`, `auditor request`, `bank confirmation`, `walkthrough`, `audit evidence`, `workpaper`, `audit finding`, `management letter`, `interim fieldwork`, `audit readiness`, `support for the auditors`
-
-### `treasury-accounting-skills:debt-facilities-and-covenants`
-
-**Invoke:** `/treasury-accounting-skills:debt-facilities-and-covenants` — or just describe the task.
-
-**What it does:** Manages corporate debt facilities day to day — revolver draws and paydowns, term loan amortization, interest calculations (SOFR + spread, day-count conventions), availability and borrowing-base tracking, and the covenant compliance cycle: computing leverage/coverage ratios exactly as the credit agreement defines them and producing the compliance certificate. Use when drawing or repaying a facility, verifying an interest charge, computing covenants, preparing a compliance certificate, or assessing headroom.
-
-**Triggers:** `revolver draw`, `credit facility`, `term loan`, `covenant`, `leverage ratio`, `interest coverage`, `compliance certificate`, `borrowing base`, `facility availability`, `SOFR interest`, `debt covenant headroom`, `paydown`
-
-### `treasury-accounting-skills:hedging-and-derivatives`
-
-**Invoke:** `/treasury-accounting-skills:hedging-and-derivatives` — or just describe the task.
-
-**What it does:** Runs a corporate hedging program — choosing and pricing the workhorse instruments (FX forwards and swaps, interest-rate swaps, caps/collars), sizing hedges against measured exposures, executing through the trade lifecycle (quote, execute, confirm, settle), monitoring mark-to-market and counterparty exposure, and understanding hedge accounting (cash flow vs fair value designation, effectiveness, documentation) well enough to keep hedges from whipsawing earnings. Use when hedging an FX or interest-rate exposure, evaluating a forward or swap quote, rolling or unwinding a hedge, or setting up hedge accounting documentation.
-
-**Triggers:** `hedge`, `FX forward`, `forward points`, `interest rate swap`, `cap`, `collar`, `hedge accounting`, `cash flow hedge`, `mark to market`, `unwind hedge`, `hedge effectiveness`, `ISDA`, `notional`, `hedge ratio`
-
-### `treasury-accounting-skills:intercompany-accounting`
-
-**Invoke:** `/treasury-accounting-skills:intercompany-accounting` — or just describe the task.
-
-**What it does:** Keeps intercompany accounting clean across entities — structuring IC transactions (billing, loans, allocations) with agreements behind them, booking both sides symmetrically, reconciling IC balances so they mirror each other, settling per policy, handling FX on cross-currency balances, and making consolidation eliminations net to zero. Use when booking or reconciling intercompany transactions, chasing an out-of-balance IC account, setting up an IC billing or loan arrangement, or preparing eliminations for consolidation.
-
-**Triggers:** `intercompany`, `IC reconciliation`, `intercompany out of balance`, `elimination entries`, `IC billing`, `intercompany loan`, `transfer pricing entry`, `IC mismatch`, `consolidation eliminations`, `due to due from`, `intercompany settlement`
-
-### `treasury-accounting-skills:investment-policy-compliance`
-
-**Invoke:** `/treasury-accounting-skills:investment-policy-compliance` — or just describe the task.
-
-**What it does:** Writes and enforces a corporate investment policy for excess cash — permitted instruments and ratings, concentration and counterparty limits, maturity/liquidity tiers matched to the cash forecast, and the monthly compliance check that proves the portfolio sits inside policy, plus the exception/waiver process when it doesn't. Use when drafting or updating an investment policy statement, checking holdings against policy, setting counterparty or concentration limits, or handling a rating downgrade or policy breach.
-
-**Triggers:** `investment policy`, `IPS`, `permitted investments`, `counterparty limit`, `concentration limit`, `rating downgrade`, `policy compliance check`, `excess cash investment`, `money market fund policy`, `portfolio compliance`, `investment guidelines`
+Archived plugins (delisted, preserved, restorable) are documented in [archive/README.md](../archive/README.md) and indexed in [INDEX.md](INDEX.md).
 
 ## `data-analytics-bi-skills`
 
-SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence.
+SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
 
 Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
+
+### `data-analytics-bi-skills:ab-test-design`
+
+**Invoke:** `/data-analytics-bi-skills:ab-test-design` — or just describe the task.
+
+**What it does:** Designs trustworthy online controlled experiments — the design-and-operations half of A/B testing, before any data arrives: randomization unit choice and interference, minimum detectable effect (MDE) sizing, sample ratio mismatch (SRM) as the first validity check, the peeking problem and pre-committed stopping rules, guardrail metrics plus an overall evaluation criterion (OEC), A/A tests, novelty and primacy effects, and Twyman's law. Analysis of a finished test (p-values, significance) belongs to data-analytics-bi-skills:statistical-inference; offline multi-factor factorial studies belong to continuous-improvement-skills:design-of-experiments. Use when planning a live variant test of a page, form, letter, cadence, or process.
+
+**Triggers:** `design an A/B test`, `online experiment design`, `online controlled experiment`, `sample ratio mismatch`, `SRM`, `peeking`, `minimum detectable effect`, `MDE`, `guardrail metric`, `A/A test`, `overall evaluation criterion`, `OEC`, `Twyman's law`, `novelty effect`
 
 ### `data-analytics-bi-skills:assertion-evidence-deck`
 
@@ -573,21 +62,29 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Triggers:** `build a deck`, `make slides`, `PowerPoint`, `briefing`, `leadership update`, `Controller update`, `readout`, `TED-style technical talk`, `sentence-headline slides`, `snorkel vs scuba`, `turn this report into slides`, `audit my deck`
 
+### `data-analytics-bi-skills:causal-inference`
+
+**Invoke:** `/data-analytics-bi-skills:causal-inference` — or just describe the task.
+
+**What it does:** Establishes whether X actually caused Y when there was no experiment — draws the causal DAG first (confounders, mediators, colliders; backdoor thinking in plain language), then names what identifies the effect: randomization when available (that path belongs to continuous-improvement-skills:design-of-experiments), otherwise the quasi-experimental toolkit — difference-in-differences, instrumental variables, regression discontinuity — each with its key assumption in plain terms. Applies Hill's considerations as viewpoints, never a checklist, plus the humility rail: what observational data cannot rule out. Association tests belong to data-analytics-bi-skills:statistical-inference. Use when a policy, change, or exposure is claimed to have caused an outcome.
+
+**Triggers:** `causal inference`, `correlation vs causation`, `correlation is not causation`, `does X cause Y`, `confounder`, `confounding`, `collider bias`, `difference-in-differences`, `instrumental variable`, `regression discontinuity`, `natural experiment`
+
 ### `data-analytics-bi-skills:dashboard-design`
 
 **Invoke:** `/data-analytics-bi-skills:dashboard-design` — or just describe the task.
 
-**What it does:** Designs decision-driving BI dashboards and reports — defining robust KPIs (numerator, denominator, target, direction), choosing the right chart for the question being asked, and laying out for the audience and the decision. Use when building a report, dashboard, or scorecard, defining a KPI or metric, choosing a chart type, or cutting clutter from an existing view.
+**What it does:** Designs decision-driving BI dashboards, reports, and scorecards on the Few, Tufte, and Cleveland & McGill canon: works backward from the reader's decision, defines each KPI rigorously (numerator, denominator, target, direction, timeframe, grain), picks the chart from the analytical question — position and length encodings before angle or area — builds a top-left, headline-then-support hierarchy, cuts non-data ink, gives every number context against target or prior period, and keeps the default view answering the main question with zero clicks. Use when building a report, dashboard, or scorecard, defining a KPI or metric, choosing a chart type, or cutting clutter from an existing view.
 
-**Triggers:** `dashboard`, `KPI`, `metric`, `scorecard`, `chart choice`, `which chart`, `visualization`, `report layout`, `drill-down`, `report design`, `vanity metric`, `chart type`
+**Triggers:** `dashboard`, `KPI`, `metric`, `scorecard`, `chart choice`, `which chart`, `visualization`, `report layout`, `drill-down`, `report design`, `vanity metric`, `chart type`, `executive dashboard`, `KPI definition`, `data-ink`, `bullet graph`, `dashboard clutter`, `wall of numbers`
 
 ### `data-analytics-bi-skills:data-cleaning`
 
 **Invoke:** `/data-analytics-bi-skills:data-cleaning` — or just describe the task.
 
-**What it does:** Cleans and reshapes messy data into an analysis-ready, tidy form — handling missing values, type and format coercion, deduplication, category standardization, and join hygiene — with validation at each step and a reproducible, non-destructive workflow. Use when preparing, wrangling, or fixing data before analysis or reporting.
+**What it does:** Cleans and reshapes messy extracts into analysis-ready form on Wickham's tidy-data principles (variable per column, observation per row, value per cell): coerces types and formats (dates-as-text, currency strings, units), standardizes categories through an explicit reusable mapping table, handles missing values per column by missingness mechanism (MCAR/MAR/MNAR) with a was_missing flag on anything imputed, deduplicates on a defined key with a survivor rule, checks join cardinality so fan-out can't multiply rows, and validates counts and control totals in a scripted, non-destructive pipeline that never overwrites the raw source. Use when preparing, wrangling, or fixing data before analysis or reporting.
 
-**Triggers:** `data cleaning`, `data wrangling`, `data prep`, `data preparation`, `missing values`, `impute`, `deduplicate`, `remove duplicates`, `standardize`, `normalize categories`, `tidy data`, `reshape`, `pivot`, `join hygiene`, `fan-out`, `data quality fix`
+**Triggers:** `data cleaning`, `data wrangling`, `data prep`, `data preparation`, `missing values`, `impute`, `deduplicate`, `remove duplicates`, `standardize`, `normalize categories`, `tidy data`, `reshape`, `pivot`, `join hygiene`, `fan-out`, `data quality fix`, `dirty data`, `unpivot`, `inconsistent categories`
 
 ### `data-analytics-bi-skills:descriptive-statistics`
 
@@ -601,17 +98,17 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:exploratory-data-analysis` — or just describe the task.
 
-**What it does:** Profiles a dataset before any modeling or reporting — its shape, column types, grain, distributions, missingness, outliers, and relationships — so you understand and can trust the data before drawing conclusions from it. Use when first inspecting a new dataset, sizing up data quality, or deciding what needs fixing before analysis.
+**What it does:** Profiles a dataset before any modeling or reporting, in the Tukey (1977) tradition of looking at the data before summarizing it: establishes shape and grain (what one row represents, tested by key uniqueness), checks column types against meaning, quantifies and classifies missingness per column, goes univariate first (mean vs. median for skew, SD/IQR, histograms) then bivariate (correlation, cross-tabs, group-by), flags outliers (IQR fence, z-score) and investigates before deleting, plots before trusting summaries (Anscombe's quartet), and ends in a data-quality memo handed to cleaning. Use when first inspecting a new dataset, sizing up data quality, or deciding what needs fixing before analysis.
 
-**Triggers:** `EDA`, `exploratory data analysis`, `data profiling`, `profile the data`, `first look at data`, `distribution`, `summary statistics`, `central tendency`, `spread`, `outliers`, `correlation`, `cross-tab`, `missing data`, `data quality check`, `get to know the data`
+**Triggers:** `EDA`, `exploratory data analysis`, `data profiling`, `profile the data`, `first look at data`, `distribution`, `summary statistics`, `central tendency`, `spread`, `outliers`, `correlation`, `cross-tab`, `missing data`, `data quality check`, `get to know the data`, `what does one row represent`, `Anscombe`
 
 ### `data-analytics-bi-skills:spreadsheet-modeling`
 
 **Invoke:** `/data-analytics-bi-skills:spreadsheet-modeling` — or just describe the task.
 
-**What it does:** Builds and audits transparent, reliable spreadsheet models (Excel/Google Sheets) — a clean input/calculation/output separation, consistent one-formula-per-row logic, named ranges, check cells and control totals, no constants hardcoded inside formulas, and sensitivity/what-if analysis. Use when building a financial or operational spreadsheet model, or reviewing/auditing one for errors.
+**What it does:** Builds and audits transparent, reliable spreadsheet models (Excel/Google Sheets) using FAST-style structured-modeling conventions: one-directional inputs → calculations → outputs separation, one consistent formula per row filled across, no constants hardcoded inside formulas, named ranges for readable logic, check cells and control totals with a single OK/ERROR flag, assumptions documented with source and units, and one/two-way data tables and scenario toggles for sensitivity. Grounded in the EuSpRIG spreadsheet-error field-audit record: errors are the norm, so auditability is the design goal. Use when building a financial or operational model (budget, forecast, pricing, ROI), or reviewing/auditing an inherited workbook.
 
-**Triggers:** `Excel model`, `spreadsheet model`, `financial model`, `named ranges`, `check cell`, `control total`, `model audit`, `sensitivity analysis`, `what-if`, `data table`, `hardcoded formula`, `model review`
+**Triggers:** `Excel model`, `spreadsheet model`, `financial model`, `named ranges`, `check cell`, `control total`, `model audit`, `sensitivity analysis`, `what-if`, `data table`, `hardcoded formula`, `model review`, `scenario toggle`, `spreadsheet error`, `one formula per row`
 
 ### `data-analytics-bi-skills:sql-for-analysts`
 
@@ -629,9 +126,17 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Triggers:** `hypothesis test`, `p-value`, `statistical significance`, `confidence interval`, `t-test`, `chi-square`, `ANOVA`, `effect size`, `sampling`, `sampling distribution`, `type I error`, `type II error`, `statistical power`, `A/B test`, `significance level`, `null hypothesis`
 
+### `data-analytics-bi-skills:survey-and-sampling-design`
+
+**Invoke:** `/data-analytics-bi-skills:survey-and-sampling-design` — or just describe the task.
+
+**What it does:** Designs the survey instrument and the sampling plan BEFORE any data exists, organized by total survey error (Groves): chooses among simple random, stratified, cluster, and convenience designs and names what each does to inference; sizes the sample for a proportion in plain terms; plans the nonresponse follow-up so the Literary Digest failure (Squire 1988: nonresponse, not just frame bias, sank a 2.4-million-ballot poll) stays a cautionary tale; audits every question for double-barreled, leading, acquiescence, and order effects (Schuman & Presser); and schedules contacts with Dillman's tailored-design discipline. Use when writing a questionnaire, sizing a sample, or reviewing a survey before launch — client satisfaction, process pain, user research, or litigation-adjacent surveys.
+
+**Triggers:** `survey design`, `questionnaire`, `sample size`, `sampling plan`, `response rate`, `nonresponse bias`, `stratified sampling`, `quota sampling`, `convenience sample`, `question wording`, `Likert`, `margin of error`
+
 ## `data-tools-skills`
 
-Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, and data-file hygiene.
+Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
 
 Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
@@ -639,9 +144,9 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:csv-and-flat-file-wrangling` — or just describe the task.
 
-**What it does:** Ingests real-world CSV and flat-file exports safely — detecting encodings and delimiters, surviving bank/ERP export quirks (BOMs, footers, quoted commas, leading-zero IDs, mixed date formats), validating the parsed schema, and merging files without silent row loss. Use when loading a CSV that parses wrong, combining exports from different systems, or hardening a recurring file feed.
+**What it does:** Ingests real-world CSV and flat-file exports safely — inspecting raw bytes before parsing, detecting encodings and delimiters, declaring an explicit read_csv contract (encoding, separator, string-typed IDs, date formats, na_values) instead of trusting inference, surviving export quirks (BOMs, footer rows, quoted commas, European decimals, mixed date formats, and the float-coercion hazard that strips leading zeros and destroys join keys), validating every parse against row counts and control figures, and merging with an outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing. Use when loading a CSV that parses wrong, combining exports from different systems, or hardening a recurring file feed to fail loudly on layout changes.
 
-**Triggers:** `csv parsing`, `delimiter`, `encoding error`, `utf-8 vs latin-1`, `BOM`, `pipe delimited`, `fixed width file`, `load csv pandas`, `merge csv files`, `bank export csv`, `leading zeros lost`, `csv broken columns`
+**Triggers:** `csv parsing`, `delimiter`, `encoding error`, `utf-8 vs latin-1`, `BOM`, `pipe delimited`, `fixed width file`, `load csv pandas`, `merge csv files`, `bank export csv`, `leading zeros lost`, `csv broken columns`, `mojibake`, `flat file feed`
 
 ### `data-tools-skills:data-file-hygiene`
 
@@ -663,9 +168,9 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:excel-automation-python` — or just describe the task.
 
-**What it does:** Reads, writes, and formats real Excel workbooks with Python — pandas for data in/out, openpyxl for formulas, multiple sheets, number formats, column widths, and styling — so recurring spreadsheet deliverables become a script instead of hand work. Use when automating an Excel report, converting data to a formatted .xlsx, reading a messy workbook into a DataFrame, or deciding between pandas and openpyxl.
+**What it does:** Reads, writes, and formats real Excel workbooks with Python — pandas read_excel/to_excel for data in and out, openpyxl for the document layer (formulas as strings, number formats, widths, freeze panes, styling), xlsxwriter for write-only speed, and the template-workbook pattern where styling lives in a human-maintained file and the script only moves numbers — so recurring spreadsheet deliverables become a verified script instead of hand work. Reads defensively (shifted headers, merged cells, numbers-as-text, leading-zero loss on IDs, stale formula caches) and verifies output totals against the source. Use when automating an Excel report, converting data to a formatted .xlsx, reading a messy workbook into a DataFrame, or deciding between pandas and openpyxl.
 
-**Triggers:** `excel automation`, `openpyxl`, `write xlsx`, `read excel python`, `pandas to_excel`, `format excel with python`, `excel report script`, `xlsxwriter`, `automate spreadsheet`, `excel formulas python`
+**Triggers:** `excel automation`, `openpyxl`, `write xlsx`, `read excel python`, `pandas to_excel`, `format excel with python`, `excel report script`, `xlsxwriter`, `automate spreadsheet`, `excel formulas python`, `excel template python`, `ExcelWriter`
 
 ### `data-tools-skills:pdf-data-extraction`
 
@@ -674,6 +179,14 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 **What it does:** Extracts tables and text from PDFs into usable data — choosing between pdfplumber and camelot by PDF type, detecting scanned-vs-native pages, handling multi-page tables, bank-statement and invoice layouts, and validating extracted numbers against the document's own totals. Use when pulling transactions from a PDF bank statement, tabling data out of a PDF report or invoice, or when a PDF extraction comes out scrambled.
 
 **Triggers:** `extract pdf table`, `pdf to excel`, `pdfplumber`, `camelot`, `parse bank statement pdf`, `pdf invoice data`, `scanned pdf`, `OCR pdf`, `pdf text extraction`, `table extraction python`
+
+### `data-tools-skills:reproducible-analysis`
+
+**Invoke:** `/data-tools-skills:reproducible-analysis` — or just describe the task.
+
+**What it does:** Makes an analysis produce the same numbers twice, rerun by anyone — a discipline spanning spreadsheets, notebooks, SQL, and scripts. Defines reproducible (same data + code) vs replicable (new data or implementation) — the ACM used the terms backwards for seven years — then climbs the practice ladder: pin environments and record random seeds, make the rerun one command, keep lineage one-directional (raw → cleaned → derived, raw never edited), write literate analysis with code and narrative together, apply FAIR principles at working level, and verify by fresh-clone rerun plus a second person re-deriving the headline number. Python environment mechanics stay with coding-agent-skills:python-for-analysts. Use when an analysis must survive rerun, handoff, audit, or hostile scrutiny.
+
+**Triggers:** `reproducible analysis`, `can someone rerun this`, `rerun the analysis`, `replication crisis`, `reproducibility crisis`, `random seed`, `data lineage`, `data provenance`, `literate programming`, `FAIR data`
 
 ### `data-tools-skills:rest-api-data-pulls`
 
@@ -717,9 +230,9 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 **Invoke:** `/machine-learning-skills:ml-project-framing` — or just describe the task.
 
-**What it does:** Turns a business problem into a well-posed machine-learning task: names the decision, defines the target and the unit of prediction, lists only features available at prediction time, picks an evaluation metric tied to the decision, sets a baseline to beat, and runs leakage and feasibility checks before any model is built. Use when starting an ML project, scoping a prediction, or sanity-checking whether ML even fits the problem.
+**What it does:** Turns a business problem into a well-posed machine-learning task before any model is built — names the decision and the cost of a wrong call, defines the target (type, window, labeling rule), fixes the unit of prediction and the prediction time, lists only features knowable at that moment (the on-paper leakage check), picks a metric tied to the decision's error costs, sets the naive baseline the model must beat, runs feasibility checks, and writes a one-page framing spec — and is willing to conclude ML does not fit or the baseline should ship. Use when starting an ML or prediction project, scoping a "can we predict X?" request, deciding whether ML fits at all, or diagnosing a model that underperforms from a framing flaw.
 
-**Triggers:** `ML problem`, `machine learning problem`, `framing`, `frame the problem`, `target variable`, `prediction task`, `unit of prediction`, `baseline model`, `is this an ML problem`, `does ML fit`, `feasibility`, `well-posed`
+**Triggers:** `ML problem`, `machine learning problem`, `framing`, `frame the problem`, `target variable`, `prediction task`, `unit of prediction`, `baseline model`, `is this an ML problem`, `does ML fit`, `feasibility`, `well-posed`, `can we predict`, `framing spec`, `scope an ML project`
 
 ### `machine-learning-skills:model-evaluation`
 
@@ -755,9 +268,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:a3-thinking` — or just describe the task.
 
-**What it does:** Structures a problem, its analysis, and countermeasures on a single A3 page using the PDCA cycle, as a thinking and alignment tool rather than a form to fill. Use when proposing an improvement, telling a problem-solving story on one page, building consensus around a change, or running a PDCA cycle.
+**What it does:** Structures a problem, its analysis, and countermeasures on a single A3 page using the PDCA cycle, as a thinking and alignment tool rather than a form to fill — the Toyota practice codified by Sobek & Smalley and Shook. Seven boxes read left to right: background, data-backed current condition, measurable target, verified root cause, countermeasures traced to causes, an owned implementation plan, and follow-up filled in later with actual results. Drafted with the affected people, nemawashi-style, so consensus is built before the decision meeting; fits any problem story — an analyst's process fix, an attorney's intake bottleneck, an ops manager's error spike, a developer's flaky pipeline. Use when proposing an improvement, telling a problem-solving story on one page, building consensus around a change, or running a PDCA cycle.
 
-**Triggers:** `A3`, `A3 report`, `PDCA`, `plan do check act`, `problem solving`, `countermeasure`, `one-page proposal`
+**Triggers:** `A3`, `A3 report`, `A3 problem solving`, `PDCA`, `plan do check act`, `problem solving`, `countermeasure`, `one-page proposal`, `nemawashi`
 
 ### `continuous-improvement-skills:curve-hero-design-language`
 
@@ -803,9 +316,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:kaizen-and-codesign` — or just describe the task.
 
-**What it does:** Plans and facilitates kaizen events and co-design sessions so the people who do the work — and their downstream customers — design the improvement themselves, at the gemba, with rapid PDCA and captured standard work. Use when running an improvement workshop, a kaizen event, or a participatory/co-design session, or facilitating continuous improvement.
+**What it does:** Plans and facilitates kaizen events and co-design sessions so the people who do the work — and their downstream customers — design the improvement themselves: a tight measurable charter, operators plus a downstream customer plus an on-the-spot decision-maker in the room, a gemba walk before any design talk, equal-voice facilitation (brainwriting, affinity grouping, dot-voting), rapid PDCA loops tested on real work the same day, and standard work plus a 30/60-day check captured before close. Grounded in Imai's kaizen and the participatory-design tradition, respect-for-people throughout; fits any team — analysts, attorneys, ops, or developers. Use when running an improvement workshop, kaizen event, or participatory/co-design session, or facilitating continuous improvement.
 
-**Triggers:** `kaizen`, `kaizen event`, `co-design`, `participatory design`, `improvement workshop`, `gemba`, `facilitation`, `continuous improvement event`
+**Triggers:** `kaizen`, `kaizen event`, `kaizen blitz`, `co-design`, `co-creation`, `participatory design`, `improvement workshop`, `rapid improvement event`, `gemba`, `gemba walk`, `facilitation`, `continuous improvement event`
 
 ### `continuous-improvement-skills:lean-six-sigma-for-software`
 
@@ -837,7 +350,7 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **What it does:** Adaptive project command doctrine for planning, requirements, architecture, implementation, debugging, code review, release preparation, incident response, statistical interpretation, technical writing, and AI-system review — Van Riper red-teaming (preserve the possibility of failure, log interventions, separate continuation from validation), nested OODA loops, Toyota-style flow, co-design with feedback closure, Smart Brevity updates, contract-drafting writing discipline, absolute-vs-relative risk and full confusion-matrix statistics, constrained-agency AI assurance, and the Chicken Little constructive-paranoia pass. Use when planning or reviewing projects, auditing experiments or benchmarks, evaluating risk claims or diagnostic metrics, or preparing releases.
 
-**Triggers:** `project command`, `red team the plan`, `preserve the possibility of failure`, `intervention log`, `OODA`, `audit this benchmark`, `relative risk claim`, `confusion matrix`, `release readiness`, `constructive paranoia`, `now next later watch. metadata: version: "1.0.0" source: "Adapted from the user's project-command-center spec (2026-08-05)"`
+**Triggers:** `project command`, `red team the plan`, `preserve the possibility of failure`, `intervention log`, `OODA`, `audit this benchmark`, `relative risk claim`, `confusion matrix`, `release readiness`, `constructive paranoia`, `now next later watch`
 
 ### `continuous-improvement-skills:qfd-house-of-quality`
 
@@ -859,9 +372,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:standard-work` — or just describe the task.
 
-**What it does:** Documents the current best-known method for a repeatable task as standard work (an SOP) — capturing sequence, timing, and the key points and reasons — with takt/cycle context and visual management, so the process is stable enough to improve. Use when documenting, standardizing, or stabilizing a process, or writing an SOP or work instruction.
+**What it does:** Documents the current best-known method for a repeatable task as standard work (an SOP), so the process is stable enough to improve — the Toyota trio of takt time, work sequence, and standard in-process stock, plus the TWI Job Instruction breakdown of steps, key points, and the reason behind each; adds visual management so deviations announce themselves, verified training, and a review cadence that keeps the standard a living baseline every kaizen updates. Fits any recurring task an analyst, attorney, ops manager, or developer owns — a weekly report, an intake review, a handoff, a release. Use when documenting, standardizing, or stabilizing a process that varies by who does it, capturing tribal knowledge, or writing an SOP or work instruction people will follow.
 
-**Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize`, `visual management`
+**Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize`, `visual management`, `TWI`, `job instruction`, `job breakdown`, `takt time`, `everyone does it differently`, `tribal knowledge`
 
 ### `continuous-improvement-skills:structured-ideation`
 
@@ -883,9 +396,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:value-stream-mapping` — or just describe the task.
 
-**What it does:** Maps a process end to end in current and future state, quantifying cycle time, lead time, and value-added vs non-value-added time to expose waste and improve flow; scopes the effort first with SIPOC. Use when analyzing a whole process, mapping a value stream, drawing a current- or future-state map, measuring lead vs cycle time, or scoping a process with SIPOC.
+**What it does:** Maps a process end to end in current and future state to expose waste and improve flow — the Rother & Shook Learning-to-See method adapted to office work: scope one product/service family with SIPOC, walk the process with one real item, hang a data box (cycle time, %complete-and-accurate, people, systems) under each step, capture queue time between steps, build the timeline ladder, and compute flow efficiency (value-added ÷ lead time); then tag the eight wastes and design a future state with an owned action plan. Fits any stream an analyst, attorney, ops manager, or developer runs — request-to-resolution, intake-to-filing, order-to-delivery, commit-to-deploy. Use when analyzing a whole process, drawing a current- or future-state map, measuring lead vs cycle time, or scoping with SIPOC.
 
-**Triggers:** `value stream mapping`, `VSM`, `current state`, `future state`, `process map`, `SIPOC`, `lead time`, `cycle time`, `waste`, `flow`
+**Triggers:** `value stream mapping`, `VSM`, `current state`, `future state`, `process map`, `SIPOC`, `lead time`, `cycle time`, `waste`, `flow`, `flow efficiency`, `eight wastes`, `%C&A`, `where does all the time go`
 
 ## `board-of-advisors-skills`
 
@@ -937,7 +450,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Pythagoras", a principal-level Python engineer who applies the 2026 industry-standard toolchain — uv, Ruff, ty/Pyright strict, Python 3.14+, Pydantic v2, FastAPI, Polars, structlog — to design, write, review, refactor, and migrate Python code. Delivers complete, ready-to-ship solutions: 100% type annotations, domain exceptions with deterministic error handling, audit-ready JSON logging, src/ layout, pytest + hypothesis tests, and CI-ready pyproject.toml, pre-commit, and GitHub Actions config. Use for any production-grade Python task — new code, code review, refactoring, architecture, performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
 
-**Triggers:** `python`, `write python`, `refactor`, `code review`, `python architecture`, `fastapi`, `pydantic`, `uv`, `ruff`, `ty`, `structlog`, `type hints`, `python logging`, `error handling`, `migrate to uv`, `elite python engineer`, `production python. metadata: version: "1.3" author: Grok Team (synthesized 2026 ecosystem knowledge); adapted to house standard`
+**Triggers:** `python`, `write python`, `refactor`, `code review`, `python architecture`, `fastapi`, `pydantic`, `uv`, `ruff`, `ty`, `structlog`, `type hints`, `python logging`, `error handling`, `migrate to uv`, `elite python engineer`, `production python`
 
 ### `full-stack-dev-skills:frontend-modern-ui`
 
@@ -993,11 +506,11 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **What it does:** Inspects a bespoke web application for usability, cognitive-load, accessibility, interaction, workflow, performance, and privacy defects — tracing critical user processes backward from successful end states, separating observed evidence from inference, and producing reproducible severity- and confidence-rated findings with affected routes, remediation, and verification tests (a ui-ux-inspection.md report plus machine-readable ui-ux-findings.json). Use when the user asks to inspect or audit a web interface; review its UX, UI, forms, navigation, tables, or cognitive load; simplify a workflow; analyze screenshots or routes; generate Playwright or accessibility tests; compare an implementation with design heuristics; or create a remediation backlog.
 
-**Triggers:** `inspect the UI`, `UX audit`, `usability review`, `accessibility audit`, `cognitive load`, `form review`, `navigation review`, `simplify a workflow`, `remediation backlog`, `playwright accessibility tests`, `heuristic evaluation. metadata: version: "1.0.0" source: >- Adapted from the user's ui-and-ux-inspection spec (2026-08-04)`, `itself distilled from their report 'Eye Tracking`, `Web-App Usability`, `and Cognitive Design'`
+**Triggers:** `inspect the UI`, `UX audit`, `usability review`, `accessibility audit`, `cognitive load`, `form review`, `navigation review`, `simplify a workflow`, `remediation backlog`, `playwright accessibility tests`, `heuristic evaluation`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer's soviet-space-graphite simplicity challenge, and The Foreman's can-do draw-inspection punch list).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -1023,7 +536,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the modern toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name.
 
-**Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions. metadata: version: "2026.2" author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard`
+**Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions`
 
 ### `coding-agent-skills:chicken-little-college-kid`
 
@@ -1031,7 +544,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Chicken Little, College Kid" — a calm, professional language- and cultural-sensitivity persona for a family dental practice web app: flags potentially loaded phrases with practical alternatives (sensitivity varies by audience), recommends but never requires gender-neutral wording in generic system text, and provides cultural-humility guidance for patient care — ISO country and language intake fields with an interpreter flag, non-US-born/non-English staff notifications with quick-reference cards, Southern US idiom explanations, and cross-cultural communication patterns framed strictly as starting points to confirm with each patient. Use when writing or reviewing patient- or staff-facing copy, intake forms, chatbot scripts, or preparing the team for a specific patient's visit.
 
-**Triggers:** `college kid`, `chicken little college kid`, `inclusive language check`, `loaded phrase`, `cultural sensitivity note`, `patient communication culture`, `intake form languages`, `interpreter flag. metadata: version: "1.0.0" source: >- Adapted from the user's "Chicken Little`, `College Kid" persona spec (upload truncated in its final Cursor implementation-notes list; the seam is marked in references/cultural-guidance.md — supply the remainder to complete it)`
+**Triggers:** `college kid`, `chicken little college kid`, `inclusive language check`, `loaded phrase`, `cultural sensitivity note`, `patient communication culture`, `intake form languages`, `interpreter flag`
 
 ### `coding-agent-skills:chicken-little-executive-advisor`
 
@@ -1039,7 +552,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as Forward-Deployed Chicken Little (Executive Edition) — an anxious but rigorously realistic polymath advisor (corporate strategy, Lean Six Sigma, TPS, UI/UX, statistics, co-design) who is violently pro-user and professionally adversarial to their blind spots: runs a fixed strategic-and-operational autopsy (meta-cognitive AI-leverage intercept, downstream-blocker ultimatum, TPS waste audit, human-friction scan, current-vs-future-state lock-in forecast, MSCD linguistic-failure table, proactive pivot), refuses to move past an unresolved blocker, and interrupts manual work whenever an automated or agentic path exists. Use when the user says "deploy advisor" or asks for an adversarial strategic autopsy of a business model, project, process, or design.
 
-**Triggers:** `deploy advisor`, `deploy_advisor`, `executive chicken little`, `activate executive chicken little`, `strategic autopsy`, `operational autopsy`, `red team my business`, `blocker protocol`, `stand down. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"`
+**Triggers:** `deploy advisor`, `deploy_advisor`, `executive chicken little`, `activate executive chicken little`, `strategic autopsy`, `operational autopsy`, `red team my business`, `blocker protocol`, `stand down`
 
 ### `coding-agent-skills:chicken-little-technical-compiler`
 
@@ -1047,7 +560,15 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as Forward-Deployed Chicken Little (Technical Compiler Edition) — an adversarial systems auditor, technical architect, and probabilistic risk assessor who stress-tests codebases, system architectures, and logic workflows before they collapse under real-world pressure: runs a fixed architectural autopsy (load-bearing pillars, the Jenga cascading-failure analysis of the one unpinned dependency, a fragility table with statistical likelihood and remediation difficulty, compute-bleed inefficiencies, a proactive pivot to the modern alternative, and mandated actions split critical vs strategic), written to strict MSCD precision — zero passive voice, actors and logic explicit. Use when the user says "deploy compiler" or asks for an adversarial codebase or architecture autopsy.
 
-**Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase. metadata: version: "1.0.0" source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"`
+**Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase`
+
+### `coding-agent-skills:defect-epidemiology`
+
+**Invoke:** `/coding-agent-skills:defect-epidemiology` — or just describe the task.
+
+**What it does:** Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread: fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history transmission tree), dispositions every contact as patched, not-applicable, or accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared snippet) so reinfection stops at the source, computes the pattern's R0, and quarantines high-R0 sources with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009 (inconsistent clone edits cause real faults). Use when a found bug's pattern may live elsewhere, or the same bug keeps coming back.
+
+**Triggers:** `contact tracing`, `patient zero`, `code clone`, `copy-paste bug`, `everywhere else this appears`, `outbreak`, `this bug again`, `trace the clones`, `quarantine the template`
 
 ### `coding-agent-skills:extreme-ownership`
 
@@ -1055,15 +576,15 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "The Commander" — a theatrical leadership persona channeling Jocko Willink's published Extreme Ownership doctrine (an homage to the published work, not the person): total ownership of every outcome with zero excuse-making, the four Laws of Combat applied to projects — Cover and Move (cross-functional mutual support), Simple (plans the most junior teammate can repeat back), Prioritize and Execute (detach, assess, make a call), Decentralized Command (intent so people act without permission) — Dichotomy of Leadership balance checks, leading up and down the chain, and disciplined blameless debriefs. Calm, direct, "Good." at every setback. Use when the user asks for Jocko or wants ownership discipline on a project: blame-language rewrites, cross-team dependency briefs, triage under overload, delegation briefs.
 
-**Triggers:** `jocko`, `extreme ownership`, `laws of combat`, `cover and move`, `prioritize and execute`, `decentralized command`, `discipline equals freedom`, `own this project. metadata: version: "1.0.0" source: >- Homage persona built on the published leadership doctrine of Jocko Willink and Leif Babin (Extreme Ownership; The Dichotomy of Leadership). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
+**Triggers:** `jocko`, `extreme ownership`, `laws of combat`, `cover and move`, `prioritize and execute`, `decentralized command`, `discipline equals freedom`, `own this project`
 
 ### `coding-agent-skills:git-and-code-review`
 
 **Invoke:** `/coding-agent-skills:git-and-code-review` — or just describe the task.
 
-**What it does:** Uses version control well and reviews changes constructively — branch-per-change, atomic commits with clear messages, the pull request flow, merge vs rebase (concept and when to use each), resolving merge conflicts calmly, and reading a diff for correctness and readability with useful feedback. Use when using git, opening or reviewing a pull request, resolving a merge conflict, or deciding how to structure a set of changes.
+**What it does:** Uses version control well and reviews changes constructively — branch-per-change, atomic commits whose messages answer why, pull requests sized and described so a reviewer can say yes (what changed, why, how verified), merge vs rebase chosen on purpose under the golden rule of never rewriting shared history, calm conflict resolution that decides the correct combined result, and diff review in a fixed order — correctness, then readability, then style — with feedback that names the line, the concern, and a fix, severity labeled. Routes its seams: deep multi-agent audits, review-comment tone, contact-tracing a bug review finds, excavating accreted history. Use when using git, opening or reviewing a pull request, resolving a merge conflict, structuring a set of changes, or writing history a future reader can trust.
 
-**Triggers:** `git`, `branch`, `commit`, `pull request`, `PR`, `merge conflict`, `code review`, `rebase`, `version control`
+**Triggers:** `git`, `branch`, `commit`, `pull request`, `PR`, `merge conflict`, `code review`, `rebase`, `version control`, `commit message`, `force push`, `git blame`, `revert`, `review this diff`
 
 ### `coding-agent-skills:master-prompt-architect`
 
@@ -1071,7 +592,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as a Master Prompt Architect and Technical Strategist who engineers commercial-grade, optimized, stable prompts and scripts for sophisticated users — operating as the user's absolute advocate with a clarify-first gate (identify missing variables, edge cases, and systemic risks, then halt drafting until parameters are confirmed), backward design from the exact end state, and a triple audit before anything ships: hostile red team, expert panel review, and a Ken Adams MSCD compliance pass. Delivers in a fixed format — risk assessment, blueprint summary, then the deliverable in a single copyable code block. Use when commissioning a high-stakes prompt, system prompt, agent instruction set, or script where parameters must be locked before drafting.
 
-**Triggers:** `master prompt architect`, `engineer a prompt`, `system prompt design`, `commercial-grade prompt`, `optimize this prompt`, `prompt blueprint`, `token budget`, `backward design`, `triple audit`, `harden this prompt`, `production prompt. metadata: version: "1.0" author: User-drafted persona spec (Master Prompt Architect); adapted to house standard`
+**Triggers:** `master prompt architect`, `engineer a prompt`, `system prompt design`, `commercial-grade prompt`, `optimize this prompt`, `prompt blueprint`, `token budget`, `backward design`, `triple audit`, `harden this prompt`, `production prompt`
 
 ### `coding-agent-skills:prompt-engineering`
 
@@ -1089,13 +610,29 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Triggers:** `python`, `pandas`, `script`, `automate`, `virtualenv`, `notebook`, `dataframe`, `read csv`, `python for analysis`
 
+### `coding-agent-skills:rule-stress-testing`
+
+**Invoke:** `/coding-agent-skills:rule-stress-testing` — or just describe the task.
+
+**What it does:** Stress-tests any rule set (agent guardrails, CLAUDE.md, team policies, contract clauses, house git rules) by generating the situations where rules conflict, gap, or perversely instantiate: inventories rules and their unstated precedence, extracts load-bearing undefined terms, runs the six failure modes cataloged in Asimov's robot stories (conflict equilibrium, term widening, redundancy loss/literal compliance, scope creep/precedence inversion, definitional capture, information partitioning), adds Goodhart and malicious-compliance passes, classifies findings, proposes fixes in legal-canon vocabulary (specific-over-general, ambiguity against the drafter, term definitions), then re-tests the fixed set, since patches breed new conflicts. Use when hardening rules before they meet reality or hunting what breaks them.
+
+**Triggers:** `three laws`, `rule conflict`, `stress test the rules`, `loophole hunt`, `what breaks this policy`, `clause conflict`, `conflicting rules`, `malicious compliance`, `specification gaming`
+
 ### `coding-agent-skills:script-wizard`
 
 **Invoke:** `/coding-agent-skills:script-wizard` — or just describe the task.
 
 **What it does:** Plans, drafts, and audits substantial technical deliverables — scripts and modules, automation, AI system designs, documentation, specifications, and project plans — through a disciplined Frame → Diagnose → Design → Build → Audit → Refine workflow that front-loads thinking, scales to the task's consequence, and ends with an adversarial defect hunt before anything is presented. Use when asked to build, write, fix, review, scope, or improve any script, tool, document, or technical artifact of real substance — even when phrased casually ("write me a script", "draft this doc", "clean this up") — or to break a project into phases, audit a deliverable for defects, or stress-test a technical decision.
 
-**Triggers:** `write a script`, `build a tool`, `draft a document`, `technical spec`, `project plan`, `review this code`, `clean this up`, `audit this`, `scope this project`, `break into phases`, `stress test`, `improve this process`, `script wizard. metadata: version: "1.0" author: User-drafted workflow spec; adapted to house standard`
+**Triggers:** `write a script`, `build a tool`, `draft a document`, `technical spec`, `project plan`, `review this code`, `clean this up`, `audit this`, `scope this project`, `break into phases`, `stress test`, `improve this process`, `script wizard`
+
+### `coding-agent-skills:software-archaeology`
+
+**Invoke:** `/coding-agent-skills:software-archaeology` — or just describe the task.
+
+**What it does:** Excavates an accreted system — codebase, config, rules, or documents — before demolition or refactoring: harvests dating evidence (timestamps, commit history, style eras), builds Harris-matrix DAG (superposition of layers), clusters into named eras, classifies as living/fill/rubble with evidence, removes rubble via reversible scream test (disable, wait, see who screams, rollback ready), files site report. Chesterton's fence systematized for a whole site. Use when a mature system must be understood, pruned, or safely demolished, or when nobody knows which parts are alive.
+
+**Triggers:** `software archaeology`, `excavate`, `dig into this legacy`, `harris matrix`, `stratigraphy`, `which of these are dead`, `scream test`, `who wrote this and why`, `safe to delete`
 
 ### `coding-agent-skills:soviet-space-graphite`
 
@@ -1103,7 +640,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Comrade Engineer" — a theatrical Soviet-era design-bureau persona built on the space-pen legend (NASA buys a costly pen, Soviets use a pencil) AND on its falsity: graphite dust is conductive and flammable in a spacecraft, both programs bought the pen, and that falsity is the deeper lesson. Relentlessly hunts the simpler solution — the Pencil Pass generates radically cheaper alternatives (do nothing, use what exists, buy not build, delete the requirement) — then subjects every survivor to the Graphite Test: the hidden constraint that makes the simple thing dangerous, before a better-faster-cheaper triage and a trajectory check that the deliverable still serves the mission. Use when asked for the simple solution, when a project feels overengineered, or to streamline direction.
 
-**Triggers:** `soviet space graphite`, `comrade engineer`, `space pen`, `is there a pencil`, `simpler solution`, `better faster cheaper`, `are we overengineering this`, `streamline our direction. metadata: version: "1.0.0" source: >- Original house persona commissioned by the user`, `built on the space-pen legend and its debunking. The legend's falsity is load-bearing: simplicity as search strategy`, `hidden constraints as the veto`
+**Triggers:** `soviet space graphite`, `comrade engineer`, `space pen`, `is there a pencil`, `simpler solution`, `better faster cheaper`, `are we overengineering this`, `streamline our direction`
 
 ### `coding-agent-skills:sparring-partner`
 
@@ -1111,7 +648,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as a rigorous, constructive sparring partner that evaluates the user's submitted work — projects, deliverables, scripts, code, plans, writing, any work product — combining the eye of a battle-tested principal engineer, a meticulous editor, a skeptical stakeholder, and a demanding coach who wants the user to win. Delivers structured, direct, evidence-based feedback: a verdict, specific strengths, sparring feedback (clarify / reconsider / deepen / fix / risks), probing questions, and a prioritized action plan — never sycophantic, always pairing criticism with why it matters and a path forward. Use when the user submits work for critique, pressure-testing, or red-teaming.
 
-**Triggers:** `sparring partner`, `spar with this`, `review this`, `critique my`, `evaluate my`, `feedback on`, `pressure test`, `red team`, `tear this apart`, `be honest about`, `sparring review`, `how good is this. metadata: version: "1.0" author: User-drafted persona spec; adapted to house standard`
+**Triggers:** `sparring partner`, `spar with this`, `review this`, `critique my`, `evaluate my`, `feedback on`, `pressure test`, `red team`, `tear this apart`, `be honest about`, `sparring review`, `how good is this`
 
 ### `coding-agent-skills:stay-hard-accountability`
 
@@ -1119,7 +656,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "The Mirror" — a theatrical hard-accountability persona channeling David Goggins's published Can't Hurt Me doctrine (an homage to the published work, not the person): the Accountability Mirror (the real status in plain words, no softeners), the 40% Rule (the first "we're done" is roughly 40% of true capacity — challenged with evidence, never bravado), the Cookie Jar (a logged bank of past hard wins drawn on mid-crisis), callusing the mind (scheduled deliberate discomfort — the avoided task first), and finishing what was started. Intense, no-excuses voice kept professional; effort aimed at controllables, system problems still get system fixes. Use when the user asks for Goggins or wants the mirror held up: watermelon status reports (green outside, red inside), stalled grind-phase projects, avoided backlogs, honest capacity conversations.
 
-**Triggers:** `goggins`, `stay hard`, `accountability mirror`, `40% rule`, `forty percent rule`, `cookie jar`, `callus the mind`, `stop making excuses`, `hold up the mirror. metadata: version: "1.0.0" source: >- Homage persona built on the published doctrine of David Goggins (Can't Hurt Me; Never Finished). No affiliation or endorsement; the persona channels the books' frameworks`, `it does not impersonate the author`
+**Triggers:** `goggins`, `stay hard`, `accountability mirror`, `40% rule`, `forty percent rule`, `cookie jar`, `callus the mind`, `stop making excuses`, `hold up the mirror`
 
 ### `coding-agent-skills:the-foreman`
 
@@ -1127,7 +664,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **What it does:** Runs a can-do site inspection on a project before it moves forward — finding what is insufficiently built and turning every gap into a buildable fix. Modeled on two real construction controls: the draw inspection (verify claimed completion against actual built state before releasing the next phase) and the punch list that gates handover. The Foreman walks the site claim by claim, sorts findings into load-bearing deficiencies versus punch items, always answers "can we fix it?" with a sequenced plan, and says plainly whether the next phase can start — real praise for what is solid, no blame for what is not, and no releasing the draw over an unsafe structure. Use before building a next phase on top of existing work, when something feels half-built, or when "done" needs verifying.
 
-**Triggers:** `bob the builder`, `deploy the foreman`, `punch list`, `site inspection`, `draw inspection`, `half-built`, `insufficiently built`, `is this ready to build on`, `can we fix it`, `before we move forward`, `unfinished work check. metadata: version: "1.0.0" source: >- Commissioned by the user as a positive can-do build-completeness inspector`, `in affectionate homage to the spirit of the Bob the Builder children's series (no affiliation with or endorsement by its rights holders; the persona channels an optimistic construction ethos and does not reproduce the character). The mechanism is real construction practice: progress-draw inspections and the punch list`
+**Triggers:** `bob the builder`, `deploy the foreman`, `punch list`, `site inspection`, `draw inspection`, `half-built`, `insufficiently built`, `is this ready to build on`, `can we fix it`, `before we move forward`, `unfinished work check`
 
 ### `coding-agent-skills:writing-agent-skills`
 
@@ -1155,17 +692,17 @@ Install: `/plugin install metacognition-skills@treasury-analyst-skills`
 
 **Invoke:** `/metacognition-skills:hierarchical-memory-manager` — or just describe the task.
 
-**What it does:** Maintains multi-layered, actively curated memory across sessions and long contexts — Working (current task state), Episodic (timestamped events and decisions), and Semantic (durable facts, preferences, lessons) — with periodic compaction, contradiction detection, and progressive disclosure, structuring native memory, MEMORY.md, and project files rather than replacing them. Use at session start, during long multi-turn work, when context grows large, when past information is referenced, or when asked to remember something.
+**What it does:** Maintains multi-layered, actively curated memory across sessions and long contexts — Working (current task state), Episodic (timestamped events and decisions), Semantic (durable facts, preferences, lessons, each entry carrying evidence and confidence) — via a session-start load restating only task-relevant anchors, compaction promoting Working → Episodic → Semantic and pruning the rest, and contradiction flagging with provenance instead of silent overwrites, structuring native memory, MEMORY.md, and project files rather than replacing them. Receives the reflective learner's lessons; feeds the knowledge crystallizer. Use at session start, during long multi-turn work, when context grows large, or when something should be remembered or recalled.
 
-**Triggers:** `remember this`, `memory`, `what did we decide`, `last session`, `continuity`, `compact the context`, `working memory`, `episodic memory`, `semantic memory`, `MEMORY.md`, `memory layers`, `save for later`
+**Triggers:** `remember this`, `memory`, `what did we decide`, `last session`, `continuity`, `compact the context`, `working memory`, `episodic memory`, `semantic memory`, `MEMORY.md`, `memory layers`, `save for later`, `what do you remember`, `pick up where we left off`
 
 ### `metacognition-skills:knowledge-crystallizer`
 
 **Invoke:** `/metacognition-skills:knowledge-crystallizer` — or just describe the task.
 
-**What it does:** Extracts, validates, and integrates durable insights from analysis, reflection, and experience into structured semantic memory and evolving working methods — harvesting candidate insights, checking them against existing knowledge for consistency and evidence strength, distilling them into atomic well-scoped entries, integrating with an audit trail, and pruning redundant or stale items. Use after significant analysis or reflection cycles, when a pattern recurs across interactions, at session end, or when consolidating lessons into permanent knowledge or skill updates.
+**What it does:** Extracts durable insights from analysis, reflection, and experience into semantic memory and evolving working methods — harvests candidates from working and episodic notes, validates them against four gates (consistency, evidence strength, scope, leverage), distills survivors into atomic FACT/PREFERENCE/RULE/LESSON/PATTERN/METHOD entries, integrates through the memory manager with user sign-off for structural changes, prunes redundant or stale entries, and appends one audit line to the crystallization log so every change stays traceable and reversible. Use after significant analysis or reflection cycles, when a pattern recurs, at session end or milestones, or when consolidating lessons into permanent knowledge or skill updates.
 
-**Triggers:** `crystallize`, `consolidate knowledge`, `distill lessons`, `save what we learned`, `make this permanent`, `update working methods`, `clean up the knowledge base`, `merge duplicate notes`, `retire stale facts`, `capability map`
+**Triggers:** `crystallize`, `consolidate knowledge`, `distill lessons`, `save what we learned`, `make this permanent`, `update working methods`, `clean up the knowledge base`, `merge duplicate notes`, `retire stale facts`, `capability map`, `crystallization pass`
 
 ### `metacognition-skills:reflective-learner`
 
@@ -1174,76 +711,6 @@ Install: `/plugin install metacognition-skills@treasury-analyst-skills`
 **What it does:** Runs structured self-reflection and error-analysis cycles — situation, outcome, strengths, weaknesses, root cause, lessons, actionable updates — and integrates user corrections into durable working methods, turning experience into explicit, auditable improvement instead of leaving learning implicit. Use after a significant task or major response, immediately after user feedback or corrections, at natural session breakpoints, or when errors, suboptimal outcomes, or high uncertainty are detected.
 
 **Triggers:** `reflect`, `retrospective`, `lessons learned`, `what went wrong`, `post-mortem`, `error analysis`, `self-review`, `you got this wrong`, `that's not what I meant`, `feedback`, `correction`, `improve your approach`, `do better next time`
-
-## `public-sector-treasury-skills`
-
-Public-sector and higher-ed treasury: fund accounting (GASB), public funds investing, unclaimed property escheatment, merchant services and PCI, NACHA ACH rules, debt post-issuance compliance, treasurer reporting, and CTP exam prep.
-
-Install: `/plugin install public-sector-treasury-skills@treasury-analyst-skills`
-
-### `public-sector-treasury-skills:ctp-exam-prep`
-
-**Invoke:** `/public-sector-treasury-skills:ctp-exam-prep` — or just describe the task.
-
-**What it does:** Coaches structured preparation for the Certified Treasury Professional (CTP) exam: maps the exam's domain areas to skills the analyst already exercises daily, builds a spaced-repetition study plan weighted by blueprint weight and personal weakness, generates CTP-style practice questions to drill weak areas (working capital, cash and liquidity management, capital markets, risk, treasury operations and controls, banking relationships), and teaches exam technique — always confirming blueprint and eligibility against AFP's current publications. Use when studying for the CTP, requesting practice questions, or building a certification study plan.
-
-**Triggers:** `CTP`, `certified treasury professional`, `treasury certification`, `CTP exam`, `practice questions treasury`, `study plan CTP`, `AFP certification`
-
-### `public-sector-treasury-skills:debt-post-issuance-compliance`
-
-**Invoke:** `/public-sector-treasury-skills:debt-post-issuance-compliance` — or just describe the task.
-
-**What it does:** Maintains post-issuance compliance for tax-exempt debt: arbitrage yield restriction and rebate concepts, spend-down expectations for bond proceeds, private business use monitoring of bond-financed facilities, continuing disclosure obligations (EMMA filings), record retention, and the compliance calendar. Use when monitoring bond compliance, assessing private use of a financed facility, preparing or checking continuing disclosure, or explaining arbitrage and rebate.
-
-**Triggers:** `post-issuance compliance`, `arbitrage`, `rebate`, `yield restriction`, `private business use`, `continuing disclosure`, `EMMA`, `tax-exempt bonds`, `bond compliance`, `spend-down`, `bond proceeds`
-
-### `public-sector-treasury-skills:fund-accounting-gasb`
-
-**Invoke:** `/public-sector-treasury-skills:fund-accounting-gasb` — or just describe the task.
-
-**What it does:** Applies governmental and fund accounting under GASB for public higher-ed: fund types and net-position categories (unrestricted, restricted expendable/nonexpendable), GASB vs FASB framing, restricted-fund discipline, interfund loans and transfers, and how fund restrictions drive cash and investment decisions. Use when classifying funds or net position, explaining the GASB treatment of a transaction, handling restricted monies, or reading a public university's financial statements.
-
-**Triggers:** `fund accounting`, `GASB`, `net position`, `restricted funds`, `unrestricted`, `expendable`, `fund balance`, `governmental accounting`, `public university financials`, `interfund`
-
-### `public-sector-treasury-skills:merchant-services-and-pci`
-
-**Invoke:** `/public-sector-treasury-skills:merchant-services-and-pci` — or just describe the task.
-
-**What it does:** Runs merchant card acceptance for an institution: the acquiring stack (merchant IDs/MIDs, acquirer, processor, gateways), settlement and funding flows into depository accounts, interchange and fee structures and how to read a merchant statement, chargeback and dispute handling, and PCI-DSS fundamentals (scope minimization, SAQ types, never storing PANs). Use when managing MIDs, reconciling card settlements to bank deposits, reviewing merchant fees, handling a chargeback, or answering PCI compliance questions.
-
-**Triggers:** `merchant services`, `MID`, `merchant ID`, `card settlement`, `interchange`, `merchant statement`, `chargeback`, `dispute`, `PCI`, `PCI-DSS`, `SAQ`, `card acceptance`, `gateway`, `acquirer`, `merchant fees`
-
-### `public-sector-treasury-skills:nacha-ach-rules`
-
-**Invoke:** `/public-sector-treasury-skills:nacha-ach-rules` — or just describe the task.
-
-**What it does:** Applies NACHA ACH operating-rule fundamentals from both the originator's and the receiver's seat: choosing and interpreting SEC codes (PPD, CCD, CTX, WEB, TEL), reading return codes and their timeframes, handling notifications of change (NOCs), running compliant reversals and prenotes, Same Day ACH eligibility and windows, and ODFI/RDFI responsibilities. Use when interpreting an ACH return or NOC, originating or reversing an entry, choosing an SEC code, or investigating an ACH exception on a bank statement.
-
-**Triggers:** `NACHA`, `ACH rules`, `return code`, `R01`, `NOC`, `notification of change`, `SEC code`, `PPD`, `CCD`, `WEB`, `ACH reversal`, `prenote`, `ODFI`, `RDFI`, `ACH return timeframe`, `unauthorized ACH`
-
-### `public-sector-treasury-skills:public-funds-investing`
-
-**Invoke:** `/public-sector-treasury-skills:public-funds-investing` — or just describe the task.
-
-**What it does:** Invests public and institutional funds under statutory constraint: the safety-liquidity-yield hierarchy as law rather than preference, permitted-investment statutes, collateralization of public deposits (pledged securities and state collateral pools), local government investment pools (LGIPs), delivery-versus-payment custody, and board-approved investment policies for public entities. Use when investing public funds, checking an investment or deposit for statutory compliance, collateralizing deposits over insurance limits, or evaluating an LGIP.
-
-**Triggers:** `public funds`, `permitted investments`, `collateralization`, `pledged collateral`, `collateral pool`, `LGIP`, `local government investment pool`, `public deposit`, `state statute investment`, `public investment policy`
-
-### `public-sector-treasury-skills:treasurer-reporting`
-
-**Invoke:** `/public-sector-treasury-skills:treasurer-reporting` — or just describe the task.
-
-**What it does:** Turns cash, investment, and debt data into decision-grade treasury reports for leadership and boards: the standard package (cash position and trend, investment holdings versus policy, debt profile, forecast versus actual, exceptions), narrative that explains the so-what, and cadence and depth calibrated to the audience. Use when writing a treasury report, treasurer's report, board memo, or leadership update on cash and investments.
-
-**Triggers:** `treasury report`, `board report`, `treasurer's report`, `cash report to leadership`, `investment report`, `monthly treasury package`, `executive summary cash`
-
-### `public-sector-treasury-skills:unclaimed-property-escheatment`
-
-**Invoke:** `/public-sector-treasury-skills:unclaimed-property-escheatment` — or just describe the task.
-
-**What it does:** Manages unclaimed property from stale outstanding checks and dormant balances through the escheatment lifecycle: identifying dormancy, statutory due-diligence letters, reissue-versus-report decisions, state holder reporting and remittance cycles, record-keeping, and reducing future escheatment at the source through payee data quality and e-payments. Use when handling stale or uncashed checks, preparing an unclaimed-property holder report, responding to a state inquiry or audit, or designing the escheatment process.
-
-**Triggers:** `unclaimed property`, `escheatment`, `stale checks`, `dormant`, `due diligence letter`, `state report unclaimed`, `outstanding check aging`, `remit to state`, `holder report`
 
 ## `deep-research-skills`
 
@@ -1261,7 +728,7 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
 ## `writing-skills`
 
-Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), and explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back).
+Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
 
 Install: `/plugin install writing-skills@treasury-analyst-skills`
 
@@ -1271,7 +738,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Writes and edits to Ken Adams clarity principles at a 5th-grade reading level (US Southeast), falling back to 8th grade only when precision demands it — short active sentences, everyday concrete words, one idea per sentence, technical terms explained in place, and a hard rejection of litigated "tested language," archaisms, doublets, and ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by name, or wants plain English, patient or client materials, easy-read text, or writing for low-literacy audiences.
 
-**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `5th grade reading level`, `easy to read`, `easy-read`, `patient materials`, `low literacy`, `simplest accurate version. metadata: version: "1.0.0" source: "Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04)"`
+**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `5th grade reading level`, `easy to read`, `easy-read`, `patient materials`, `low literacy`, `simplest accurate version`
 
 ### `writing-skills:adams-smart-brevity`
 
@@ -1279,7 +746,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Applies Ken Adams clarity principles plus Axios Smart Brevity to technical, legal, professional, clinical, and documentation writing — rejects the "tested language" myth (litigated language is bad language), eliminates archaisms, doublets, ambiguity, and lawyerisms, and structures everything for scanning: the one most important point first, "why it matters" second, short active sentences, bullets and bold, nothing non-essential. Use for drafting, editing, or reviewing documents, contract language, clinical notes, emails, report writing, code comments, or any request for clear, brief, precise, or litigation-resistant language.
 
-**Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing. metadata: version: "1.0.0" source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"`
+**Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing`
 
 ### `writing-skills:explanation-design`
 
@@ -1295,11 +762,19 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Files gonzo dispatches — Hunter S. Thompson-style participatory commentary on social events, news, culture, or any submitted topic — on explicit request. Channels the published gonzo craft as a labeled homage: the narrator rides inside the story, the ostensible subject gives way to the story under the story, and the copy mixes four registers (high-velocity invective, paranoid escalation, deadpan procedural, and the elegiac wave passage that drops the mask). Savage about power, ideas, and events — never inventing facts about real people; the narrator's inner weather is the only licensed fiction — and hyperbole stays legally cognizable as hyperbole, with the rhetorical-hyperbole doctrine mapped for counsel. Use when the user asks for the gonzo treatment, weird-mode commentary, or a Thompson-flavored read on anything they submit.
 
-**Triggers:** `gonzo`, `get gonzo`, `get weird`, `hunter s. thompson`, `thompson treatment`, `fear and loathing take`, `gonzo commentary`, `savage take`, `gonzo dispatch`, `ride shotgun on this. metadata: version: "1.0.0" source: >- Commissioned by the user so the spirit of Dr. Thompson's work lives on in their own endeavors. A labeled homage to the published gonzo style (Hell's Angels through the letters volumes) — no affiliation with or endorsement by the Thompson estate; the skill channels the craft of the genre he founded`, `quotes only briefly with attribution`, `and does not reproduce copyrighted passages or impersonate the man. The user is an attorney`, `which the skill considers extremely gonzo of them`
+**Triggers:** `gonzo`, `get gonzo`, `get weird`, `hunter s. thompson`, `thompson treatment`, `fear and loathing take`, `gonzo commentary`, `savage take`, `gonzo dispatch`, `ride shotgun on this`
+
+### `writing-skills:technical-documentation`
+
+**Invoke:** `/writing-skills:technical-documentation` — or just describe the task.
+
+**What it does:** Structures technical documentation as typed artifacts, not prose: routes docs through Procida's Diátaxis framework (tutorial, how-to guide, reference, explanation — four forms that fail when blended), shapes the README around a newcomer's first screen, records decisions as Nygard-style architecture decision records (context/decision/consequences, superseded never edited), keeps a human-readable changelog keyed to semantic versioning, writes routine procedure docs, and holds API and reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the document types; sentence-level register stays with writing-skills:adams-smart-brevity, explanation craft with writing-skills:explanation-design. Use when writing or restructuring docs for a project, method, or process.
+
+**Triggers:** `technical documentation`, `write the README`, `ADR`, `architecture decision record`, `changelog`, `Diátaxis`, `how-to guide`, `tutorial vs reference`, `API docs`, `docs as code`, `semantic versioning`
 
 ## `safety-and-reliability-skills`
 
-High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry).
+High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).
 
 Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
@@ -1311,6 +786,14 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Triggers:** `bowtie`, `barrier analysis`, `top event`, `lines of defense`, `what stops this from happening`, `escalation factor`, `HAZOP`, `guideword`
 
+### `safety-and-reliability-skills:break-glass-playbooks`
+
+**Invoke:** `/safety-and-reliability-skills:break-glass-playbooks` — or just describe the task.
+
+**What it does:** Arms each foreseeable crisis with a break-glass playbook, channeling documented break-glass emergency-access procedures (HIPAA; NIST/CIS-mapped testing) and regulator-mandated contingency plans with early-warning indicators and graduated triggers: define the tripwire as a number a named person watches on a stated cadence, pre-author the first ten moves at calm-headed quality, pre-grant emergency authority with automatic expiry and full logging, name the comms tree and the decision chair, drill the unsealing on a schedule, and re-arm after every firing. Converts pre-mortem failure modes into tripwire-plus-playbook pairs, red-checks each tripwire for measurability, drafts the sealed instructions, and simulates the unsealing drill. Use when a crisis is foreseeable but the team would be scrambling if it hit.
+
+**Triggers:** `break glass`, `break-glass`, `seldon crisis`, `what do we do when X hits`, `emergency access`, `runbook`, `kill switch`, `tripwire`, `covenant trip`, `we'd be scrambling`, `sealed instructions`
+
 ### `safety-and-reliability-skills:checklist-design`
 
 **Invoke:** `/safety-and-reliability-skills:checklist-design` — or just describe the task.
@@ -1318,6 +801,22 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 **What it does:** Designs checklists that actually get used — selecting only killer items (steps that cause serious harm if missed AND are skipped in practice), choosing read-do vs. do-confirm format, anchoring the card to a natural pause point, holding it to 5–9 imperative items on one page, and field-testing it in the real workflow — and diagnoses why an existing checklist is ignored or produced no improvement. Use when designing a wire-release, sterilization, patient-handoff, or close-task checklist, cutting a bloated one down, or fixing one that people skip; running an existing checklist stays with the skill that owns that process.
 
 **Triggers:** `design a checklist`, `read-do`, `do-confirm`, `killer items`, `pause point`, `our checklist isn't working`, `people skip the checklist`, `checklist too long`, `redesign the checklist`
+
+### `safety-and-reliability-skills:detection-system-tuning`
+
+**Invoke:** `/safety-and-reliability-skills:detection-system-tuning` — or just describe the task.
+
+**What it does:** Tunes detection systems — monitors, exception queues, spam filters, code-review bots, compliance screens — along the immune system's axis: between autoimmunity (false matches that desensitize operators) and immunodeficiency (missed threats). Measures each rule's empirical false-positive rate, recalibrates defaults before adding detectors, layers cheap screens ahead of costly investigation, gates human paging on danger signals, maintains expiring tolerance lists for verified-benign patterns, converts every true incident into a permanent detector, simulates threshold changes against historical firings before going live. Use when queues drown operators, real signals get buried, or systems need tuning.
+
+**Triggers:** `alarm fatigue`, `detection tuning`, `autoimmunity`, `immune system`, `too many false matches`, `exception queue drowning`, `tune the alerts`, `memory cell`, `everything is an exception`, `nobody looks at the alerts anymore`
+
+### `safety-and-reliability-skills:rebuild-rehearsal`
+
+**Invoke:** `/safety-and-reliability-skills:rebuild-rehearsal` — or just describe the task.
+
+**What it does:** Keeps critical capabilities alive by rehearsing the rebuild on a cadence shorter than anyone's tenure, channeling the Ise Grand Shrine's Shikinen Sengu (rebuilt in full every 20 years since 690 CE; carpenters learn, lead, then teach; and a ~120-year lapse after the Ōnin War proving the cycle needs a funding owner): census what lives only in heads, pick a real rebuild unit (restore from backup, recreate the deliverable from raw inputs, rebuild the environment from docs alone), rotate learn-lead-teach so last time's apprentice leads, harvest every exposed gap into the docs, and name who funds the cycle. The assistant simulates the rebuild, interrogates the docs for gaps, and plays the newcomer with only the written record. Use when knowledge lives in one head or docs have never been proven by use.
+
+**Triggers:** `rebuild drill`, `restore drill`, `if she left tomorrow`, `are the docs enough to recreate this`, `it only lives in his head`, `bus factor`, `knowledge refresh`, `could a newcomer run this`, `disaster recovery rehearsal`
 
 ### `safety-and-reliability-skills:reliability-engineering`
 
@@ -1335,13 +834,29 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Triggers:** `SBAR`, `escalate this to`, `structured handoff`, `transition this work`, `coverage notes`, `read-back`, `closed-loop communication`, `graded assertiveness`, `PACE`, `speak up to the boss`
 
+### `safety-and-reliability-skills:sortition-review`
+
+**Invoke:** `/safety-and-reliability-skills:sortition-review` — or just describe the task.
+
+**What it does:** Designs selection-by-lot oversight channeling Athenian euthynai (every magistrate, generals included, faced scheduled end-of-term review by allotted reviewers: universal, never suspicion-triggered) and the 1268 Venetian doge protocol (ten alternating rounds of lot and vote, blind draws, 529 years): define the reviewable population, set a universal floor with no exemptions, draw items by verifiable lot (pre-committed seed, dice in the open), rotate reviewer pairs by lot too, make end-of-role handover review the default so departure carries no stigma, size the draw to real attention (the assistant first-passes every drawn item, the human adjudicates), and publish the rule, never the draw. Use when selection must be unriggable, review must carry no accusation, or the same person always checks the same people.
+
+**Triggers:** `sortition`, `review by lot`, `spot-check by lot`, `they know which ones get looked at`, `same person always reviews`, `rotate reviewers`, `end-of-term handover`, `draw at random`, `unriggable selection`
+
+### `safety-and-reliability-skills:split-tally-evidence`
+
+**Invoke:** `/safety-and-reliability-skills:split-tally-evidence` — or just describe the task.
+
+**What it does:** Designs tamper-evident records on the split tally-stick principle (English Exchequer, ~650 years): notched stick split lengthwise into stock and foil, wood grain self- authenticating. Halves each record between adverse parties so verification is rejoining two halves neither can alter alone. Inventories records one party could rewrite, designs the split for each (counterpart-held confirmations, hash-anchored exports, signed receipts, append-only logs with external anchors), schedules verification as rejoining ritual, proves by attempted alteration, adds second keeper who independently re-derives critical numbers. Use when records must survive disputes or when evidence needs designing rather than hoping.
+
+**Triggers:** `tally stick`, `split tally`, `tamper-evident`, `who holds the other copy`, `could someone alter this after the fact`, `does our half fit their half`, `hash anchor`, `dual custody`, `evidence design`
+
 ### `safety-and-reliability-skills:weight-of-the-books`
 
 **Invoke:** `/safety-and-reliability-skills:weight-of-the-books` — or just describe the task.
 
 **What it does:** Prevents the sinking-library failure — a design that never accounted for the load it exists to carry — with a design-basis load review before commitment: name every payload (data volumes, rates, users, documents, weight), quantify each at day one, at peak, on the growth curve, and at the special-collections outlier (the biggest single lot ever swallowed), trace every load to a named component with stated capacity, apply written safety factors with margin-exhaustion dates, and require acceptance tests to run LOADED at design and peak values — an empty-building inspection proves nothing. Output: a one-page signed Load Manifest, re-reviewed on every payload change. Use when sizing or design-reviewing a system, feature, migration, or process against its real volumes.
 
-**Triggers:** `weight of the books`, `sinking library`, `design load`, `load basis`, `load manifest`, `will it hold at real volumes`, `size it for production`, `test loaded not empty`, `biggest single lot`, `special-collections outlier. metadata: version: "1.0.0" source: >- Commissioned by the user on the campus legend of a university library designed without accounting for the weight of its books`, `unoccupied for years until retrofitted. Assumed true as commissioned; the legend is told of many campuses`, `and the lesson stands either way`
+**Triggers:** `weight of the books`, `sinking library`, `design load`, `load basis`, `load manifest`, `will it hold at real volumes`, `size it for production`, `test loaded not empty`, `biggest single lot`, `special-collections outlier`
 
 ## `learning-skills`
 
@@ -1375,9 +890,25 @@ Install: `/plugin install learning-skills@treasury-analyst-skills`
 
 ## `collaboration-skills`
 
-Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions) and feedback-that-lands (SBI/COIN, feedforward, receiving feedback well).
+Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).
 
 Install: `/plugin install collaboration-skills@treasury-analyst-skills`
+
+### `collaboration-skills:disarming-elicitation`
+
+**Invoke:** `/collaboration-skills:disarming-elicitation` — or just describe the task.
+
+**What it does:** Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed doorknob phenomenon (the key disclosure arrives as the interview seems over): lower the stakes so the expert educates rather than defends, restate their words slightly wrong so correction does the teaching, hold contradictions as the interviewer's own confusion, let silence work, then ask one casual question after the formal close. Drafts the question sequence, role-plays the defensive expert for rehearsal, and audits transcripts for missed doorknob moments and defensiveness triggers. Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction.
+
+**Triggers:** `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, `the users can't articulate what they do`, `expert won't open up`, `walkthrough with the process owner`, `doorknob question`, `one more thing`
+
+### `collaboration-skills:executive-briefing`
+
+**Invoke:** `/collaboration-skills:executive-briefing` — or just describe the task.
+
+**What it does:** Gets a decision from a reader with two minutes: writes the answer-first decision document — BLUF per Army writing doctrine (DA Pam 600-67, 1986) with Minto's SCQA and Pyramid Principle (1996 ed.: answer first, grouped support) — as a one-page decision memo (decision requested, options with costs, recommendation, what happens if nothing) that passes the completed-staff-work test: could the reader just sign? Calibrates the ask up front — inform, decide, or approve. Turns a long analysis, client advisory, process-change pitch, or architecture proposal into the page that survives one rapid reading; re-leads buried-conclusion drafts; audits a memo for the missing ask. Composes with adams-smart-brevity for register; urgent spoken escalation goes to SBAR. Use when a decision-maker must act from one page.
+
+**Triggers:** `executive briefing`, `executive summary`, `BLUF`, `bottom line up front`, `decision memo`, `one-pager`, `SCQA`, `pyramid principle`, `completed staff work`, `brief the board`
 
 ### `collaboration-skills:feedback-that-lands`
 
@@ -1394,6 +925,14 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 **What it does:** Designs meetings that produce decisions instead of discussion. Tests whether the meeting should exist (does it produce a decision or a commitment? status flows async); writes the agenda as a list of decisions to make, each with a timebox and a decision rule named before discussion opens (single owner, consent, consult-then-decide, or vote); sends pre-reads ahead with silent reading at the start (documented Amazon practice) instead of live walkthroughs; parks tangents visibly, calls the decision at the timebox, gives every action an owner and a date, and closes by reading back decisions and commitments. Drafts the decision-list agenda from a stated purpose, red-checks an agenda for non-decisions, turns a transcript into a decision log, and audits recurring meetings nobody has re-justified. Use when planning, tightening, or questioning any meeting.
 
 **Triggers:** `meeting agenda`, `run this meeting`, `too many meetings`, `this should be an email`, `action items`, `decision protocol`, `pre-read`, `standing meeting audit`
+
+### `collaboration-skills:stakeholder-mapping`
+
+**Invoke:** `/collaboration-skills:stakeholder-mapping` — or just describe the task.
+
+**What it does:** Maps who can sink or save the work before it matters: builds the power-interest grid — with the open correction that the grid everyone draws is Johnson & Scholes (1999) / Eden & Ackermann (1998), not Mendelow's 1981 paper, whose matrix is power/dynamism — assigns engagement moves per quadrant (manage closely, keep satisfied, keep informed, monitor), writes the RACI so "consulted" stops meaning "surprised", plans influence without authority (Cohen & Bradford's exchange currencies) for whoever you cannot compel, and sets re-map triggers at milestones, because the map is a snapshot, not a truth. For a process change with opponents, a multi-party matter, a migration, or a deprecation you lack authority to force. Once the map says who matters, disarming-elicitation is how to talk to them.
+
+**Triggers:** `stakeholder map`, `stakeholder mapping`, `stakeholder analysis`, `power-interest grid`, `RACI`, `responsibility matrix`, `influence without authority`, `buy-in`, `who needs to sign off`, `stakeholder management`
 
 ## `math-foundations-skills`
 
@@ -1451,7 +990,7 @@ Install: `/plugin install math-foundations-skills@treasury-analyst-skills`
 
 ## `decision-science-skills`
 
-Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, and systems-thinking (feedback loops, archetypes, leverage points).
+Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
 
 Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
@@ -1463,6 +1002,14 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Triggers:** `after-action review`, `AAR`, `hot wash`, `team debrief`, `sustain and improve`, `what should we do differently next close`
 
+### `decision-science-skills:bayesian-updating`
+
+**Invoke:** `/decision-science-skills:bayesian-updating` — or just describe the task.
+
+**What it does:** Runs belief revision as a decision discipline: starts a live question from an explicit prior (base-rate anchor from decision-science-skills:reference-class-forecasting), weighs each piece of evidence by how surprising it would be under each hypothesis, updates with count tables or the odds shortcut rather than formulas, grades evidence in Bayes-factor terms (barely-worth-mentioning to strong), and keeps a Tetlock-style update journal — small, frequent, logged revisions scored at resolution. Teaches the honest history (Bayes barely wrote it; Price shaped it; Laplace built the form we use) and the cab-problem trap of vivid evidence swamping the prior. Use when new evidence should move a standing estimate or someone asks how much a result should change their mind.
+
+**Triggers:** `bayesian updating`, `update my beliefs`, `belief revision`, `likelihood ratio`, `Bayes factor`, `posterior probability`, `prior probability`, `superforecasting`, `superforecaster`, `perpetual beta`, `how much should this evidence move me`
+
 ### `decision-science-skills:competing-hypotheses-analysis`
 
 **Invoke:** `/decision-science-skills:competing-hypotheses-analysis` — or just describe the task.
@@ -1470,6 +1017,22 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Weighs rival explanations against the same body of evidence using Heuer's structured competing-hypotheses method from intelligence analysis: brainstorm the full hypothesis set including unlikely and deception hypotheses, list the significant evidence, build the hypothesis matrix (hypotheses across the top, evidence down the side), drop non-diagnostic evidence, judge by disconfirmation — the winner is the hypothesis with the least evidence against it — sensitivity-check the load-bearing items, report the relative likelihood of every hypothesis, and name the future observations that would change the answer. Use when several plausible causes compete: a reconciliation break that resists the standard pass, an incident with multiple suspects, any analysis at risk of confirmation bias.
 
 **Triggers:** `competing hypotheses`, `hypothesis matrix`, `which explanation fits the evidence`, `diagnostic evidence`, `rule out causes`, `weigh rival explanations`, `why is this break really happening`
+
+### `decision-science-skills:minority-report`
+
+**Invoke:** `/decision-science-skills:minority-report` — or just describe the task.
+
+**What it does:** Runs a precognition cell over any decision: builds three to five named, internally coherent, structurally different future scenarios (Shell-lineage scenario planning — never best/expected/worst on one axis), turns one variable at a time to find which single change flips the outcome ranking, and always files the minority report — the dissenting future given full voice, because suppressing it is the failure the namesake story is about. Adds the reflexivity check (acting on a forecast changes the futures it forecast), probabilities only via reference-class base rates with honest bands, and ends with per-scenario tripwires and a decision log. Scenarios are rehearsals, not predictions — the human owns the choice. Use when weighing future outcomes, testing what happens if a variable changes, or deciding under uncertainty.
+
+**Triggers:** `precog`, `precognition`, `minority report`, `run the scenarios`, `future outcomes`, `what happens if X changes`, `scenario planning`, `branch the futures`
+
+### `decision-science-skills:no-win-drills`
+
+**Invoke:** `/decision-science-skills:no-win-drills` — or just describe the task.
+
+**What it does:** Runs a no-win drill — a simulation with the winning move removed, as practiced in emergency-medicine patient-death scenarios and EMS stress training — and grades the decision process, never the outcome: the LLM generates a situation guaranteeing no clean exit (humans designing their own drills leave doors open), plays the escalating environment, then debriefs loss-minimization, explicit ordering of what to save, communication under futility, and the emotional response. Carries the Kirk blade held honestly (Conti & Caroland, IEEE Security & Privacy): sort physics constraints from policy constraints — reframing is legitimate when it changes policy transparently and owns the consequences, cheating when hidden — and it flags any quiet mid-drill redefinition of success. Use when every option costs and someone must practice choosing least-worst.
+
+**Triggers:** `kobayashi maru`, `no-win`, `every option is bad`, `least-worst`, `damage control drill`, `degraded mode`, `can't win this one`, `loss triage`
 
 ### `decision-science-skills:pre-mortem`
 
@@ -1483,9 +1046,17 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Invoke:** `/decision-science-skills:principled-negotiation` — or just describe the task.
 
-**What it does:** Prepares and runs a negotiation with a two-layer method — Fisher/Ury strategy (map the interests behind each side's positions, build your BATNA and estimate theirs, assemble objective criteria, invent options for mutual gain) plus Voss conversation tactics (accusation audit, mirrors, labels, calibrated how/what questions) — drafting BATNA trees, interest maps, criteria tables, and question banks, and roleplaying the counterpart for rehearsal, while the human sets the walk-away line and makes every concession decision. Use when preparing for, rehearsing, or debriefing a negotiation over a bank fee increase (banking-skills:bank-fee-analysis builds the benchmark case; this skill runs the ask), processor markup, an insurance-carrier fee schedule, or a vendor or carrier contract renewal or dispute.
+**What it does:** Prepares and runs a negotiation with a two-layer method — Fisher/Ury strategy (map the interests behind each side's positions, build your BATNA and estimate theirs, assemble objective criteria, invent options for mutual gain) plus Voss conversation tactics (accusation audit, mirrors, labels, calibrated how/what questions) — drafting BATNA trees, interest maps, criteria tables, and question banks, and roleplaying the counterpart for rehearsal, while the human sets the walk-away line and makes every concession decision. Use when preparing for, rehearsing, or debriefing a negotiation over a fee or price increase (a benchmarking analysis builds the case; this skill runs the ask), a processor or carrier fee schedule, or a vendor contract renewal or dispute.
 
 **Triggers:** `BATNA`, `prepare for a negotiation`, `push back on this fee increase`, `renegotiate the contract`, `calibrated questions`, `tactical empathy`, `accusation audit`, `talk them down`
+
+### `decision-science-skills:rashomon-effect`
+
+**Invoke:** `/decision-science-skills:rashomon-effect` — or just describe the task.
+
+**What it does:** Reconciles contradictory good-faith accounts of one event (witness statements, incident write-ups, contested post-mortems) using Rashomon-effect scholarship and eyewitness-memory science: takes each account whole (cognitive-interview moves) before comparing, splits accounts into observations, interpretations, and stakes, maps who could see what from where, finds the invariant core, sorts each divergence into perspective, memory, or stake artifact vs genuine contradiction, weights initial uncontaminated statements over late rehearsed ones, adjudicates genuine contradictions only against physical evidence, never confidence or seniority, and writes a reconciled account marking confidence, filing unresolved forks instead of dropping them. Good faith is the default; bad faith must be earned with evidence. Use when accounts of one event conflict.
+
+**Triggers:** `rashomon`, `conflicting accounts`, `witnesses disagree`, `everyone remembers it differently`, `whose story is right`, `reconcile the statements`, `contradictory testimony`
 
 ### `decision-science-skills:reference-class-forecasting`
 
@@ -1494,6 +1065,14 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Applies the outside view (Kahneman/Tversky's planning fallacy; Flyvbjerg's reference-class method) to discipline any material estimate: identify a reference class of comparable past cases, establish its outcome distribution, anchor on that base rate, adjust only with explicit written justification — or apply a required uplift at a chosen certainty level (P80-style) — then log the prediction and score it against actuals. Counters optimism bias and strategic misrepresentation, and guards against tampering (reworking the rule after every miss). Turns an existing variance history, such as per-driver MAPE and signed bias, into next-cycle base-rate anchors; it feeds estimation loops, never builds the models. Use when an estimate rests only on its own story or a plan looks optimistic.
 
 **Triggers:** `outside view`, `reference class`, `base-rate anchor`, `base rate`, `optimism bias`, `planning fallacy`, `how long do projects like this actually take`, `uplift the estimate`
+
+### `decision-science-skills:skin-in-the-game`
+
+**Invoke:** `/decision-science-skills:skin-in-the-game` — or just describe the task.
+
+**What it does:** Designs consequence symmetry for decisions that transfer risk: maps who creates a risk versus who eats the loss when the tail lands (Hammurabi §229–233, the oldest written rule against transferring hidden tail risk — Taleb's Skin in the Game framing), drafts a graduated symmetry table (harm class → who bears what), converts diffuse "reviewed by team" approvals into named-owner attestations, puts real defect-liability and warranty terms into vendor and contractor agreements, then checks the new consequence for perverse incentives such as over-caution and concealment. Consequence design binds decision-makers with power, never punishment-washing onto the powerless. Use when a sign-off carries no consequence, a vendor will not stand behind its work, or accountability needs structure instead of exhortation.
+
+**Triggers:** `skin in the game`, `who signs their name to this`, `who eats the loss`, `accountability without consequence`, `attestation`, `vendor won't stand behind it`, `hammurabi`, `consequence mapping`
 
 ### `decision-science-skills:systems-thinking`
 
@@ -1517,5 +1096,21 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **What it does:** Runs the revision review that momentum and sunk costs suppress — named for the 1986 Challenger launch decision, where schedule fever inverted the burden of proof over the engineers' objection. When evidence changes mid-project, it zero-bases the continue-vs-revise decision: only forward-looking costs count (money spent argues nothing), continuation past a trigger carries the burden of proof, normalized anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip, descope, phase, re-plan), a dissent channel guarantees the objector is restated before the decision, and the outcome is logged with the next review trigger. Use when a deadline is driving decisions the evidence argues against, when "we've come too far" appears in any form, or when a go/no-go needs honest structure.
 
-**Triggers:** `the challenger`, `challenge the timeline`, `sunk cost`, `plan continuation`, `should we slip the date`, `launch fever`, `are we still go`, `normalization of deviance`, `escalation of commitment`, `revision review. metadata: version: "1.0.0" source: >- Commissioned by the user to prevent momentum and sunk costs from holding a project to a timeline when revision would be optimal. Anchored on the documented record of the Challenger launch decision (Rogers Commission; Vaughan's normalization of deviance) — held soberly: seven people died; this skill borrows the lessons`, `not drama`
+**Triggers:** `the challenger`, `challenge the timeline`, `sunk cost`, `plan continuation`, `should we slip the date`, `launch fever`, `are we still go`, `normalization of deviance`, `escalation of commitment`, `revision review`
+
+### `decision-science-skills:ulysses-pact`
+
+**Invoke:** `/decision-science-skills:ulysses-pact` — or just describe the task.
+
+**What it does:** Writes a Ulysses pact — the self-binding commitment device psychiatry formalizes as the Ulysses contract in advance directives: in a calm state, identify where future judgment predictably degrades (deadline pressure, sunk-cost fog, market panic, the 11pm production incident, the angry-email urge); write hard rules with required second signatures, cooling-off periods, and pre-committed defaults; pre-decide the unbinding criteria that legitimately release the pact so it is never a straitjacket; register it where the future self will hit it; and enforce by quoting the user's own words and reasons back, never scolding. Pacts carry review dates and are renegotiated in calm state, never under fire. Use when someone keeps overriding their own rules under pressure or wants to bind a future decision against a foreseen worse self.
+
+**Triggers:** `ulysses pact`, `self-binding`, `commitment device`, `stop us from overriding`, `we broke our own rule again`, `bind my future self`, `cooling-off rule`, `no force-push after midnight`
+
+### `decision-science-skills:weak-signal-navigation`
+
+**Invoke:** `/decision-science-skills:weak-signal-navigation` — or just describe the task.
+
+**What it does:** Estimates a current position or state when the usual instrument — a dashboard, tracker, status report, or data feed — is down, stale, or untrusted, by fusing many weak independent cues (last known-good state, scheduled events that must have fired, historical rhythms, side channels, absence of expected noise) into a continuously re-estimated belief with a stated confidence band; narrates which cue the position leans on hardest, updates as cues arrive, and defines what will confirm or deny the belief when the instruments return (the method of Polynesian/Micronesian wayfinding and etak — Hokule'a, Mau Piailug, Hutchins' distributed-cognition analysis). Use when a decision needs the position anyway and the authoritative number is missing or disbelieved.
+
+**Triggers:** `wayfinding`, `weak signals`, `estimate blind`, `the dashboard is down`, `I don't trust this number`, `navigate without instruments`, `what would we expect to see`, `position without the data`, `dead reckoning`
 

@@ -19,9 +19,9 @@ description: >-
 ## When to use
 - A team event just ended and you want the learning before it evaporates: a project
   milestone (post-milestone review in
-  `continuous-improvement-skills:project-command-center`), a month-end close
-  (`accounting-skills:month-end-close`), a reconciliation incident or break, an Oracle
-  configuration go-live, a payment-fraud near-miss.
+  `continuous-improvement-skills:project-command-center`), a month-end close, a
+  reconciliation incident or break, a system-configuration go-live, a payment-fraud
+  near-miss.
 - Immediately after the event as a short "hot wash," or scheduled within days while the
   artifacts (logs, emails, tickets) are still warm.
 - When sustain/improve findings should flow somewhere durable: the next iteration's plan,

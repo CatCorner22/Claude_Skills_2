@@ -16,14 +16,15 @@ sessions (successive relearning), and interleaves the three instruments rather t
 them.
 
 ## 2. Near-miss (should NOT load this skill)
-> "I'm sitting for the CTP in November. Build me a study plan across the exam domains with
-> practice questions weighted by the blueprint."
+> "I freeze up in live negotiations — set up practice sessions where you play the hostile
+> counterparty so I get better at holding my position in the moment."
 
-Expected: `public-sector-treasury-skills:ctp-exam-prep` owns CTP domain material, blueprint
-weighting, and CTP-style questions. This skill supplies only the generic retrieval method;
-if it loads first on an explicitly CTP request, its description is over-triggering. (The
-correct composed behavior: ctp-exam-prep supplies the material and may run its question bank
-on this skill's schedule.)
+Expected: `learning-skills:deliberate-practice` owns performable-skill training — drills with
+an opponent, immediate feedback, rising difficulty. "Practice sessions" sounds like study
+scheduling, but the ask trains *doing* under pressure, not recalling facts; this skill trains
+knowing, not performing. If spaced-retrieval-learning loads first here, its description is
+over-triggering. (Correct composed behavior: drills that surface facts worth keeping cold
+hand them to this skill's schedule.)
 
 ## 2b. Near-miss (closer — should NOT load this skill)
 > "I want the model to learn the seasonality in our daily receipts series and improve as new
@@ -51,7 +52,7 @@ A good response:
 - **Stays honest:** presents the interval table as a sane default rather than an optimized
   law; cites the research at author level without invented statistics or precise "optimal
   interval" numbers; doesn't claim mastery from one correct answer (successive relearning
-  gate); routes exam-domain content, performable-skill training, and session-attendance
-  problems to `public-sector-treasury-skills:ctp-exam-prep`,
-  `learning-skills:deliberate-practice`, and `learning-skills:habit-design` respectively
-  instead of absorbing them.
+  gate); routes performable-skill training and session-attendance problems to
+  `learning-skills:deliberate-practice` and `learning-skills:habit-design` respectively
+  instead of absorbing them, and supplies the retrieval method for exam study while leaving
+  exam-domain content and blueprint weighting to the user's own materials.
