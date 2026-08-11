@@ -1,8 +1,11 @@
 # Grade targets, Adams rules, and the self-check
 
-Preserved from the source spec (adams-plain-grade v1.0.0, 2026-08-04), organized for use.
+§1–§4 are preserved from the source spec (adams-plain-grade v1.0.0, 2026-08-04), organized
+for use; §5–§8 are house additions.
 
-Contents: §1 Grade targets · §2 The Adams rules · §3 Measuring the grade · §4 Self-check
+Contents: §1 Grade targets · §2 The Adams rules · §3 Measuring the grade · §4 Self-check ·
+§5 Where the targets come from · §6 Worked example (before/after) · §7 The plain-word
+ladder · §8 Routing within the register family
 
 ## §1 Grade targets
 
@@ -61,3 +64,124 @@ endeavor, remuneration*.
 - [ ] Grade is 5th if possible, never higher than 8th.
 - [ ] A 5th-grader in the Southeast United States could understand it without help.
 - [ ] The meaning is exactly what the source meant — nothing softened, nothing dropped.
+
+## §5 Where the targets come from
+
+The register this skill enforces is not a private taste — it sits on a documented public
+lineage. Provenance: claims marked [snippet-only] were verified against web-search snippets,
+not full primary texts.
+
+- **The Plain Writing Act of 2010** is a US federal law requiring federal agencies to write
+  the documents the public relies on in clear, straightforward language [snippet-only].
+  Plain language for high-stakes reader-facing text is codified policy, not a stylistic
+  indulgence.
+- **The Federal Plain Language Guidelines** (maintained at plainlanguage.gov) operationalize
+  the Act, leading with the same moves this skill drills: define your audience and write for
+  their needs, put the main point first, keep sentences short, prefer active voice and
+  everyday words [snippet-only].
+- **Flesch Reading Ease** was published by Rudolf Flesch in 1948 and scores text 0–100 from
+  two surface features — average sentence length and average syllables per word — with
+  higher scores meaning easier reading [snippet-only].
+- **Flesch-Kincaid Grade Level** was derived in 1975 by J. Peter Kincaid and colleagues under
+  contract to the US Navy, recalibrating readability formulas against reading tests of
+  enlisted personnel so the output reads as a US school grade [snippet-only]. The formulas
+  were built to make *technical manuals usable by their real readers* — the same job this
+  skill does for patient letters and public notices.
+- **The honest boundary of the formulas:** both measure only sentence length and word
+  length. They cannot detect ambiguity, a dropped qualifier, or a softened meaning. That is
+  why the Adams rules (§2) and the read-aloud test outrank the score, and why "meaning
+  always wins" is a hard limit rather than a preference.
+- **The Adams core** is adapted from Ken Adams's contract-drafting clarity doctrine as
+  carried by the source spec: litigated language is language with a documented failure
+  history, and the modern plain formulation is the safer one because it leaves nothing to
+  interpret.
+
+## §6 Worked example (before/after)
+
+Domain-neutral by design — the same notice could go out from an analyst's team, a law
+office, an operations department, or a software product. The organization is adding a
+sign-in code.
+
+**Before** (typical first draft — two sentences averaging about 34 words, passive voice,
+archaic connectors, unexplained jargon):
+
+> Pursuant to our updated security protocols, effective May 1, multi-factor authentication
+> will be required for all account access; users must therefore furnish, in addition to
+> their password, a one-time verification code, which shall be transmitted via SMS to the
+> mobile number associated with the account. In the event that a user is unable to receive
+> SMS transmissions, alternative verification arrangements may be made by contacting
+> customer support.
+
+**After** (plain grade — 9 sentences, average 8 words per sentence, nearly all one- and
+two-syllable words; by the §3 method this sits comfortably in the 5th-grade band):
+
+> We are changing how you sign in.
+>
+> Starting May 1, you will need a one-time code as well as your password. A one-time code
+> is a short set of numbers that works only once. We will text it to your phone. Type it on
+> the sign-in page after your password.
+>
+> This keeps your account safer.
+>
+> Can't get text messages? Call us at 555-0100. We will set up another way for you.
+
+What the rewrite did, move by move:
+- **Main point first:** "We are changing how you sign in" replaces a buried lead behind
+  "pursuant to our updated security protocols."
+- **Litigated/archaic formulas removed:** *pursuant to* → gone; *in the event that* → "Can't
+  get…?"; *shall be transmitted* → "We will text it."
+- **Technical term said once, explained immediately:** "one-time code" gets one plain
+  sentence of explanation right where it first appears. "Multi-factor authentication" does
+  not survive at all — the reader needs the behavior, not the term.
+- **Actor named, active voice:** "We will text it to your phone" instead of "which shall be
+  transmitted via SMS."
+- **Meaning fully preserved:** the date, the requirement, the delivery channel, the safety
+  rationale, and the fallback path all survive. Nothing was softened; the reader lost no
+  rights and no obligations.
+- **Not gamed:** the sentences are short because each carries one idea — not chopped
+  fragments planted to fool the formula. Read it aloud: it sounds like a person.
+
+## §7 The plain-word ladder
+
+Swap on sight; the left column adds syllables and legal fog, never meaning.
+
+| Instead of | Say |
+|---|---|
+| utilize | use |
+| commence | start |
+| endeavor | try |
+| remuneration | pay |
+| prior to | before |
+| subsequent to | after |
+| in the event that | if |
+| pursuant to | under |
+| in order to | to |
+| notwithstanding | even if |
+| obtain | get |
+| provide | give |
+| request | ask for |
+| regarding | about |
+| approximately | about |
+| sufficient | enough |
+| additional | more |
+| assistance | help |
+| immediately | right away |
+| terminate | end |
+
+If a swap would change the meaning even slightly, the swap loses — keep the precise word and
+explain it in plain words right after (that is the 8th-grade fallback working as designed).
+
+## §8 Routing within the register family
+
+Four registers, one library — the audience picks the skill:
+
+- **This skill** — the most accessible accurate version: patients, clients, the public,
+  low-literacy readers. Grade-measured, meaning-exact.
+- **`writing-skills:adams-smart-brevity`** — the same Adams core for jargon-fluent
+  professional readers: point first, scannable, precise; no grade ceiling.
+- **`writing-skills:explanation-design`** — when the job is building *understanding* of a
+  concept, not delivering a notice: audience model, entry analogy, teach-back. Design the
+  explanation there; bring its words down to grade here.
+- **`writing-skills:gonzo`** — the deliberately wild register, engaged by name only, for
+  commentary that polite registers can't reach. Never for anything a patient or client must
+  rely on.

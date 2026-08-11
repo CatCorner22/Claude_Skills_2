@@ -1,25 +1,37 @@
 ---
 name: csv-and-flat-file-wrangling
 description: >-
-  Ingests real-world CSV and flat-file exports safely — detecting encodings and delimiters,
-  surviving bank/ERP export quirks (BOMs, footers, quoted commas, leading-zero IDs, mixed date
-  formats), validating the parsed schema, and merging files without silent row loss. Use when
-  loading a CSV that parses wrong, combining exports from different systems, or hardening a
-  recurring file feed. Triggers: csv parsing, delimiter, encoding error, utf-8 vs latin-1, BOM,
-  pipe delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
-  zeros lost, csv broken columns.
+  Ingests real-world CSV and flat-file exports safely — inspecting raw bytes before parsing,
+  detecting encodings and delimiters, declaring an explicit read_csv contract (encoding,
+  separator, string-typed IDs, date formats, na_values) instead of trusting inference,
+  surviving export quirks (BOMs, footer rows, quoted commas, European decimals, mixed date
+  formats, and the float-coercion hazard that strips leading zeros and destroys join keys),
+  validating every parse against row counts and control figures, and merging with an
+  outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing.
+  Use when loading a CSV that parses wrong, combining
+  exports from different systems, or hardening a recurring file feed to fail loudly on layout
+  changes. Triggers: csv parsing, delimiter, encoding error, utf-8 vs latin-1, BOM, pipe
+  delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
+  zeros lost, csv broken columns, mojibake, flat file feed.
+metadata:
+  version: "1.1.0"
 ---
 
 # CSV and flat-file wrangling
 
 ## When to use
-- Loading CSV/TSV/pipe-delimited/fixed-width exports from banks, ERPs, or vendors — especially
-  when the parse comes out wrong (shifted columns, mojibake, lost zeros).
+- Loading CSV/TSV/pipe-delimited/fixed-width exports from any upstream system — an ERP, a case
+  or ticket system, a vendor portal, a bank — especially when the parse comes out wrong
+  (shifted columns, mojibake, lost zeros).
 - Merging or appending multiple flat files into one dataset for analysis.
 - Not for: deep cleaning after a correct parse (dedupe, outliers, imputation) → see
   `data-analytics-bi-skills:data-cleaning`. Statement-specific formats (BAI2, camt.053, MT940) are
   bank-format knowledge (archived: `banking-skills:bank-statement-parsing`, restorable from
   `archive/`), not general flat-file wrangling.
+- Not for: sources that aren't flat files — a workbook (.xlsx) → see
+  `data-tools-skills:excel-automation-python`; a PDF report or statement → see
+  `data-tools-skills:pdf-data-extraction`. Both hand their output back to this skill's typing
+  discipline.
 
 ## Do it
 1. **Look at the raw bytes before parsing.** `head -c 500 file.csv | xxd | head` (or open in a
@@ -51,29 +63,40 @@ df = pd.read_csv(
    in a text field (fix quoting/sep, or the export itself); `1.234,56` means European decimal
    convention (`decimal=","`, `thousands="."`); dates flipping month/day mid-file mean two
    source formats — parse with an explicit `format=` per slice and fail loudly on the rest.
-   `references/flat-file-quirks.md` is the quirk-to-fix table.
+   `references/flat-file-quirks.md` is the symptom → cause → fix table, with a worked
+   two-system merge example.
 5. **Merge without silent loss.** Appending files: assert identical schemas first, add a
    `source_file` column, then `pd.concat`. Joining: normalize keys (strip, case, zero-pad),
    then `df.merge(..., how="outer", indicator=True)` once and *look at* `_merge` counts before
    settling on the final join type — unmatched rows are findings, not noise.
-6. **Harden the recurring feed.** Wrap the load in a function that runs the step-3 checks and
-   raises on violation; log filename, row count, and totals per run. When the vendor changes the
+6. **Too big for pandas, or the job is really a join?** Point
+   `data-tools-skills:duckdb-local-analytics` at the files and do it in SQL — the same
+   declare-the-types discipline applies there (`types={'id':'VARCHAR'}`), because DuckDB's
+   sniffer can mistype IDs exactly like pandas.
+7. **Harden the recurring feed.** Wrap the load in a function that runs the step-3 checks and
+   raises on violation; log filename, row count, and totals per run — structure the script per
+   `coding-agent-skills:python-for-analysts`. Keep the raw export pristine and separate from
+   processed outputs per `data-tools-skills:data-file-hygiene`; when the vendor changes the
    layout (they will), the load fails at the door instead of poisoning the analysis.
 
 ## Why / learn
 A flat file has no schema — every load is an act of *interpretation*, and the parser will happily
 misinterpret in silence: Latin-1 bytes read as UTF-8 become mojibake, an unquoted comma shifts
 every column after it, and `read_csv`'s type inference turns account "00123" into the number 123.
-The whole discipline is therefore to make interpretation explicit (encoding, delimiter, dtypes,
-date formats are *declared*, not guessed) and then to *prove* the parse with counts and control
-totals, exactly like reconciling a statement. The reason IDs are always strings is that identity
-data has no arithmetic meaning — the moment it becomes a number, leading zeros, huge values
-(scientific notation!), and checksums are corrupted. And the outer-join-with-indicator habit
-exists because a join is a claim ("these keys correspond"); the `_merge` column is the audit of
-that claim, and skipping it is how a thousand rows quietly vanish from a reconciliation.
+The float-coercion form of that hazard is the worst, because it corrupts *identity*: an ID like
+`0006789599` round-tripped through numeric inference comes back as `6789599.0`, every join
+against the original keys goes quiet, and nothing errors — a known hazard class this library
+documents from hard experience. The whole discipline is therefore to make interpretation
+explicit (encoding, delimiter, dtypes, date formats are *declared*, not guessed) and then to
+*prove* the parse with counts and control totals, exactly like reconciling a statement. The
+reason IDs are always strings is that identity data has no arithmetic meaning — the moment it
+becomes a number, leading zeros, huge values (scientific notation!), and checksums are
+corrupted. And the outer-join-with-indicator habit exists because a join is a claim ("these
+keys correspond"); the `_merge` column is the audit of that claim, and skipping it is how a
+thousand rows quietly vanish from an analysis.
 
 ## Common mistakes
-- Letting pandas infer ID columns → leading zeros lost, long IDs in scientific notation; `dtype="string"` for identifiers.
+- Letting pandas infer ID columns → leading zeros lost, long IDs in scientific notation, join keys destroyed; `dtype="string"` for identifiers.
 - Guessing encoding until the error goes away → mojibake survives silently; inspect bytes, then declare.
 - Ignoring the BOM → a phantom `\ufeff` in the first column name breaks every rename; `utf-8-sig`.
 - Parsing European numbers as US → amounts off by orders of magnitude; set `decimal`/`thousands`.
@@ -82,11 +105,15 @@ that claim, and skipping it is how a thousand rows quietly vanish from a reconci
 - No row-count/total check on a recurring feed → layout changes poison months of analysis before anyone notices.
 
 ## Tailor to your environment
-Document each recurring feed in `references/your-environment.md` (real files in
-`references/*.local.*`, git-ignored): source system, encoding, delimiter, schema, known quirks,
-and the control totals you validate against. Sanitized structural examples only — **never real
-bank or customer exports**.
+Wire in your current role here — this skill is domain-neutral and attaches to whatever feeds
+you inherit wherever you work next: an analyst's system exports, an attorney's e-billing or
+docket extracts, an ops manager's vendor files, a developer's log or usage dumps. Document
+each recurring feed in `references/your-environment.md` (real files in
+`references/*.local.*`, git-ignored): source system, encoding, delimiter, schema, known
+quirks, and the control totals you validate against. Sanitized structural examples only —
+**never real customer or account-bearing exports**.
 
 ## References
-- references/flat-file-quirks.md — symptom → cause → fix table for encodings, delimiters, numbers, dates
+- references/flat-file-quirks.md — symptom → cause → fix tables for encodings, delimiters,
+  numbers, dates, structure, and keys; the hardened-loader pattern; a worked two-system merge
 - references/your-environment.md — your feeds, layouts, and validation contracts (fill in)

@@ -1,21 +1,27 @@
 # Evals — machine-learning-skills:ml-project-framing
 
 ## 1. Positive trigger (should load the skill)
-> "Finance wants us to 'use ML to predict which vendor payments will be late.' Before I build anything,
-> how should I frame this as a proper prediction problem — what's the target, and how do I know it's
-> even feasible?"
+> "Leadership wants us to 'use ML to predict which vendor payments will be late.' Before I build
+> anything, how should I frame this as a proper prediction problem — what's the target, and how
+> do I know it's even feasible?"
 
 Expected: skill loads; names the decision and its cost; defines a precise target with an observation
 window; fixes the unit of prediction (one invoice/payment) and the prediction time; lists only features
 known at that time; picks a decision-tied metric and a baseline to beat; runs feasibility/leakage checks;
-produces a one-page framing spec and hands metric details to `model-evaluation`.
+produces a one-page framing spec and hands metric details to `machine-learning-skills:model-evaluation`.
 
 ## 2. Near-miss (should NOT load this skill)
 > "My random forest is overfitting — train accuracy is 0.99 but validation is 0.71. How do I fix it?"
 
-Expected: this is validation/overfitting diagnosis on an already-framed, already-built model. The
-`machine-learning-skills:model-evaluation` (and `supervised-modeling`) skills should handle it. If this
-framing skill loads, tighten the description / cross-links.
+Expected: this is validation/overfitting diagnosis on an already-framed, already-built model.
+`machine-learning-skills:model-evaluation` (and `machine-learning-skills:supervised-modeling`) should
+handle it. If this framing skill loads, tighten the description / cross-links.
+
+## 2b. Near-miss (build-stage guard)
+> "Should I one-hot or target-encode these categorical columns before training?"
+
+Expected: feature preparation on an already-framed task — `machine-learning-skills:feature-engineering`.
+If this skill loads, the framing-vs-build boundary needs sharpening.
 
 ## 3. Quality rubric
 A good response:
@@ -24,5 +30,13 @@ A good response:
   feasibility/leakage — ideally as a one-page spec.
 - **Teaches:** explains *why* most ML failures are framing failures (wrong target, metric disconnected
   from the decision) and why fixing the prediction time is what makes leakage visible — not just a checklist.
+- **Routes:** hands the framed task onward by type — `machine-learning-skills:supervised-modeling`,
+  `machine-learning-skills:time-series-forecasting`, or `machine-learning-skills:anomaly-detection` —
+  with features to `machine-learning-skills:feature-engineering`, metrics to
+  `machine-learning-skills:model-evaluation`, signal checks to
+  `data-analytics-bi-skills:exploratory-data-analysis`, human-judged label agreement to
+  `continuous-improvement-skills:measurement-systems-analysis`, and realistic-lift expectations to
+  `decision-science-skills:reference-class-forecasting`.
 - **Safe:** is willing to conclude "this isn't an ML problem" or "ship the baseline" when the decision,
-  labels, or signal don't justify a model; never skips the baseline.
+  labels, or signal don't justify a model; never skips the baseline; never presents an invented
+  statistic as evidence of expected lift.

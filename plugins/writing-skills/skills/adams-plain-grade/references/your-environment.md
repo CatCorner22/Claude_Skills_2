@@ -1,7 +1,8 @@
 # Your environment (fill in)
 
-Point this skill at your real audience. Keep anything identifying real patients or clients in
-`your-environment.private.md` (git-ignored) — never in this file.
+Wire in your current role here — the register is domain-neutral, and this file points it at
+your real audience wherever you work now. Keep anything identifying real patients or clients
+in `your-environment.private.md` (git-ignored) — never in this file.
 
 ## Your audience
 - Region/dialect notes beyond the US Southeast default (local terms, idioms to use or avoid):
