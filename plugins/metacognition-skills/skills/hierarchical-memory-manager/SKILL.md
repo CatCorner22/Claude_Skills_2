@@ -62,7 +62,8 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
    run the four-step protocol in `metacognition-skills:reflective-learner` — its final step
    logs the rule back through this skill; when a deep analysis via
    `metacognition-skills:dynamic-analysis-engine` produces durable findings, they land here
-   the same way.
+   the same way, as do the sustain/improve items a team debrief surfaces via
+   `decision-science-skills:after-action-review`.
 4. **Compact periodically** — after major milestones or roughly every 15–30 significant
    turns: distill Working → Episodic → Semantic. Promote what proved durable; drop what
    didn't. Anything recurring and validated is a candidate for permanence — hand it to
