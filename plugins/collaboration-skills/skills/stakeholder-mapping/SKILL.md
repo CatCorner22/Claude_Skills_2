@@ -7,7 +7,7 @@ description: >-
   matrix is power/dynamism — assigns engagement moves per quadrant (manage closely,
   keep satisfied, keep informed, monitor), writes the RACI so "consulted" stops meaning
   "surprised", plans influence without authority (Cohen & Bradford's exchange
-  currencies) for whoever you cannot compel, and sets re-map triggers at milestones,
+  currencies), and sets re-map triggers at milestones,
   because the map is a snapshot, not a truth. For a process change with opponents, a
   multi-party matter, a migration, or a deprecation you lack authority to force. Once
   the map says who matters, disarming-elicitation is how to talk to them. Triggers:
@@ -15,7 +15,7 @@ description: >-
   RACI, responsibility matrix, influence without authority, buy-in, who needs to sign
   off, stakeholder management.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the general-use expansion dossier
     (docs/research/general-use-expansion-research.md §7 stakeholder-mapping) —

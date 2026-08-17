@@ -3,8 +3,7 @@ name: rebuild-rehearsal
 description: >-
   Keeps critical capabilities alive by rehearsing the rebuild on a cadence shorter than
   anyone's tenure, channeling the Ise Grand Shrine's Shikinen Sengu (rebuilt in full every
-  20 years since 690 CE; carpenters learn, lead, then teach; and a ~120-year lapse after
-  the Ōnin War proving the cycle needs a funding owner): census what lives only in heads,
+  20 years since 690 CE): census what lives only in heads,
   pick a real rebuild unit (restore from backup, recreate the deliverable from raw inputs,
   rebuild the environment from docs alone), rotate learn-lead-teach so last time's
   apprentice leads, harvest every exposed gap into the docs, and name who funds the cycle.
@@ -13,6 +12,8 @@ description: >-
   never been proven by use. Triggers: rebuild drill, restore drill, if she left tomorrow,
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
+metadata:
+  version: "1.1.0"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)

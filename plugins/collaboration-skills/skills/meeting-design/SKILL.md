@@ -5,14 +5,16 @@ description: >-
   should exist (does it produce a decision or a commitment? status flows async); writes the
   agenda as a list of decisions to make, each with a timebox and a decision rule named
   before discussion opens (single owner, consent, consult-then-decide, or vote); sends
-  pre-reads ahead with silent reading at the start (documented Amazon practice) instead of
-  live walkthroughs; parks tangents visibly, calls the decision at the timebox, gives every
+  pre-reads with silent reading at the start (documented Amazon practice);
+  parks tangents visibly, calls the decision at the timebox, gives every
   action an owner and a date, and closes by reading back decisions and commitments. Drafts
   the decision-list agenda from a stated purpose, red-checks an agenda for non-decisions,
   turns a transcript into a decision log, and audits recurring meetings nobody has
   re-justified. Use when planning, tightening, or questioning any meeting. Triggers:
   meeting agenda, run this meeting, too many meetings, this should be an email, action
   items, decision protocol, pre-read, standing meeting audit.
+metadata:
+  version: "1.1.0"
 ---
 
 # Meeting design (decisions, not topics)

@@ -1,10 +1,9 @@
 ---
 name: sortition-review
 description: >-
-  Designs selection-by-lot oversight channeling Athenian euthynai (every magistrate,
-  generals included, faced scheduled end-of-term review by allotted reviewers: universal,
-  never suspicion-triggered) and the 1268 Venetian doge protocol (ten alternating rounds
-  of lot and vote, blind draws, 529 years): define the reviewable population, set a
+  Designs selection-by-lot oversight channeling Athenian euthynai (scheduled end-of-term
+  review by allotted reviewers, generals included) and the 1268 Venetian doge protocol
+  (ten alternating rounds of lot and vote, blind draws, 529 years): define the reviewable population, set a
   universal floor with no exemptions, draw items by verifiable lot (pre-committed seed,
   dice in the open), rotate reviewer pairs by lot too, make end-of-role handover review
   the default so departure carries no stigma, size the draw to real attention (the
@@ -13,6 +12,8 @@ description: >-
   or the same person always checks the same people. Triggers: sortition, review by lot,
   spot-check by lot, they know which ones get looked at, same person always reviews,
   rotate reviewers, end-of-term handover, draw at random, unriggable selection.
+metadata:
+  version: "1.1.0"
 ---
 
 # Sortition review (euthynai and the ballotino)

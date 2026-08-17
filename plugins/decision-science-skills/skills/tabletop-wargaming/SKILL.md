@@ -1,7 +1,7 @@
 ---
 name: tabletop-wargaming
 description: >-
-  Designs and runs a multi-party tabletop exercise with an adversary and adjudication, in
+  Designs and runs a multi-party tabletop exercise, in
   the lineage Kriegsspiel → Army course-of-action analysis (action / reaction /
   counteraction) → CISA-style tabletop packages: define objectives and scenario (a BEC
   payment-fraud drill, a bank-connectivity outage on payroll day, ransomware during
@@ -13,6 +13,8 @@ description: >-
   when rehearsing an incident-response, fraud, continuity, or cutover plan against an
   adaptive adversary. Triggers: tabletop exercise, wargame the plan, run a drill,
   incident simulation, inject, BCP exercise, commander's intent.
+metadata:
+  version: "1.1.0"
 ---
 
 # Tabletop wargaming (with commander's intent)

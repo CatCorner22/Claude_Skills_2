@@ -2,10 +2,9 @@
 name: the-challenger
 description: >-
   Runs the revision review that momentum and sunk costs suppress — named for the 1986
-  Challenger launch decision, where schedule fever inverted the burden of proof over the
-  engineers' objection. When evidence changes mid-project, it zero-bases the
-  continue-vs-revise decision: only forward-looking costs count (money spent argues
-  nothing), continuation past a trigger carries the burden of proof, normalized
+  Challenger launch decision, where schedule fever inverted the burden of proof. When
+  evidence changes mid-project, it zero-bases the continue-vs-revise decision: only
+  forward-looking costs count, continuation past a trigger carries the burden of proof, normalized
   anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip,
   descope, phase, re-plan), a dissent channel guarantees the objector is restated
   before the decision, and the outcome is logged with the next review trigger. Use when
@@ -15,7 +14,7 @@ description: >-
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.0.1"
+  version: "1.1.0"
   source: >-
     Commissioned by the user to prevent momentum and sunk costs from holding a project to
     a timeline when revision would be optimal. Anchored on the documented record of the

@@ -7,15 +7,15 @@ description: >-
   comparing, splits accounts into observations, interpretations, and stakes, maps who
   could see what from where, finds the invariant core, sorts each divergence into
   perspective, memory, or stake artifact vs genuine contradiction, weights initial
-  uncontaminated statements over late rehearsed ones, adjudicates genuine contradictions
-  only against physical evidence, never confidence or seniority, and writes a reconciled
-  account marking confidence, filing unresolved forks instead of dropping them. Good
-  faith is the default; bad faith must be earned with evidence. Use when accounts of one
-  event conflict. Triggers: rashomon, conflicting accounts, witnesses disagree, everyone
+  uncontaminated statements over late rehearsed ones, adjudicates only against physical
+  evidence, never confidence or seniority, and writes a reconciled account marking
+  confidence, filing unresolved forks instead of dropping them. Bad faith must be earned
+  with evidence. Use when accounts of one event conflict.
+  Triggers: rashomon, conflicting accounts, witnesses disagree, everyone
   remembers it differently, whose story is right, reconcile the statements, contradictory
   testimony.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Commissioned by the user, named for the Rashomon effect — the scholarly term (Karl G.
     Heider, American Anthropologist, 1988) that honors Kurosawa's film Rashomon (1950),

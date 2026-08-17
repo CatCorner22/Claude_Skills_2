@@ -3,19 +3,19 @@ name: ulysses-pact
 description: >-
   Writes a Ulysses pact — the self-binding commitment device psychiatry formalizes as
   the Ulysses contract in advance directives: in a calm state, identify where future
-  judgment predictably degrades (deadline pressure, sunk-cost fog, market panic, the
+  judgment degrades (deadline pressure, sunk-cost fog, market panic, the
   11pm production incident, the angry-email urge); write hard rules with required
   second signatures, cooling-off periods, and pre-committed defaults; pre-decide the
-  unbinding criteria that legitimately release the pact so it is never a straitjacket;
+  unbinding criteria that legitimately release the pact, never a straitjacket;
   register it where the future self will hit it; and enforce by quoting the user's own
   words and reasons back, never scolding. Pacts carry review dates and are renegotiated
-  in calm state, never under fire. Use when someone keeps overriding their own rules
+  in calm state. Use when someone keeps overriding their own rules
   under pressure or wants to bind a future decision against a foreseen worse self.
   Triggers: ulysses pact, self-binding, commitment device, stop us from overriding, we
   broke our own rule again, bind my future self, cooling-off rule, no force-push after
   midnight.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Named for Odysseus lashed to the mast (public domain; "Ulysses pact" / "Ulysses
     contract" is the established clinical term). Channels the documented practices:

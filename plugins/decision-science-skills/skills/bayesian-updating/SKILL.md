@@ -1,8 +1,8 @@
 ---
 name: bayesian-updating
 description: >-
-  Runs belief revision as a decision discipline: starts a live question from an explicit
-  prior (base-rate anchor from decision-science-skills:reference-class-forecasting), weighs
+  Runs belief revision as a decision discipline: starts a question from an explicit
+  prior (base-rate anchor from reference-class-forecasting), weighs
   each piece of evidence by how surprising it would be under each hypothesis, updates with
   count tables or the odds shortcut rather than formulas, grades evidence in Bayes-factor
   terms (barely-worth-mentioning to strong), and keeps a Tetlock-style update journal —
@@ -14,7 +14,7 @@ description: >-
   probability, prior probability, superforecasting, superforecaster, perpetual beta, how
   much should this evidence move me.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §4), whose anchors were verified

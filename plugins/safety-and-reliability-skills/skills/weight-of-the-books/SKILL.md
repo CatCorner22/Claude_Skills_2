@@ -7,14 +7,14 @@ description: >-
   the growth curve, and at the special-collections outlier (the biggest single lot ever
   swallowed), trace every load to a named component with stated capacity, apply written
   safety factors with margin-exhaustion dates, and require acceptance tests to run LOADED
-  at design and peak values — an empty-building inspection proves nothing. Output: a
+  at design and peak values. Output: a
   one-page signed Load Manifest, re-reviewed on every payload change. Use when sizing or
   design-reviewing a system, feature, migration, or process against its real volumes.
   Triggers: weight of the books, sinking library, design load, load basis, load manifest,
   will it hold at real volumes, size it for production, test loaded not empty, biggest
   single lot, special-collections outlier.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Commissioned by the user on the campus legend of a university library designed
     without accounting for the weight of its books, unoccupied for years until
