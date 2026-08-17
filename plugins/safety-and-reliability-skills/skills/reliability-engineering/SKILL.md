@@ -1,27 +1,31 @@
 ---
 name: reliability-engineering
 description: >-
-  Applies reliability-engineering math to systems and processes: fits a Weibull distribution to
-  failure times (censored units handled honestly), reads the shape parameter beta to choose
-  burn-in vs run-to-failure vs scheduled replacement, computes MTBF, MTTR, and availability,
-  converts an SLO target into an allowed-downtime budget, works series/parallel system
-  arithmetic — parallel credit only with demonstrated independent failover — and forecasts from
-  two or three failures with Weibayes. Use when a failure log needs quantifying (interface or
-  data-feed failures, job aborts, process breaks, equipment), when sizing redundancy against an
-  uptime target, or when setting a replacement or renewal schedule. Triggers: Weibull, bathtub
-  curve, MTBF, MTTR, availability math, downtime budget, series parallel reliability, burn-in,
-  failure rate fit, how much downtime does our SLO allow.
+  Applies reliability-engineering math to systems and processes: splits non-repairable populations
+  (Weibull time-to-failure, censoring, fit checks, bootstrap bounds) from repairable systems with
+  recurrent failures (power-law NHPP / Crow-AMSAA trend), reads beta to pick burn-in,
+  run-to-failure, or scheduled replacement, computes MTBF, MTTR, time- or event-based availability,
+  and an error budget, converts an SLO into a downtime budget, works series/parallel arithmetic —
+  parallel credit only with demonstrated independent failover — and forecasts from two or three
+  failures with Weibayes. Use when a failure log needs quantifying (interface or data-feed
+  failures, job aborts, process breaks, equipment), when sizing redundancy against an uptime
+  target, or setting a replacement schedule. Triggers: Weibull, bathtub curve, MTBF, MTTR,
+  availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
+  much downtime does our SLO allow.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Reliability engineering
 
 ## When to use
-- A failure log exists — Oracle interface or BAI2 feed failures, scheduled-job aborts, recon
+- A failure log exists — interface or data-feed failures, scheduled-job aborts, reconciliation
   breaks, equipment faults — and you want math, not adjectives, out of it.
-- Converting an SLO or uptime commitment into an allowed-downtime budget, and sizing redundancy
-  to meet it.
+- Deciding whether the thing you are modelling is a **non-repairable population** (Weibull) or a
+  **repairable system with recurrent failures** (power-law NHPP / Crow-AMSAA) — the choice that
+  makes every later number mean something, and the one most analyses skip.
+- Converting an SLO or uptime commitment into an allowed-downtime budget — time-based, or
+  event-based with an error budget — and sizing redundancy to meet it.
 - Choosing a maintenance policy: burn-in, run-to-failure with redundancy, or scheduled
   replacement — including deterministic expiries (certificates, passwords, key rotations).
 - Forecasting failures from tiny samples (two or three events) with Weibayes.
@@ -38,8 +42,22 @@ metadata:
    removals toward optimism. One failure mode per dataset; separate modes before fitting. Data
    quality is the human gate — confirm the timestamps mean what you think (failure start, not
    ticket-open).
-2. **Fit a Weibull and read the shape parameter β.** (Fitting mechanics and worked numbers in
-   `references/reliability-math.md`.) The decision table:
+2. **Classify the data before choosing a model — this decides everything after it.**
+   - **Non-repairable population:** many units, each contributing **one** time-to-first-failure
+     plus censored survivors (certificates, disks, one-shot devices). → Weibull, step 3.
+   - **Repairable system:** **one** system failing, being repaired, and failing again — a feed, a
+     job, a service, a machine. This is **recurrent-event data**, not a set of lifetimes. Fitting
+     a Weibull to one repaired system's gaps mixes the hazard shape with the reliability trend and
+     produces a β that the step-3 table cannot legally interpret. → power-law NHPP
+     (**Crow-AMSAA**), step 4.
+   Say which case you are in, in writing, before any number is quoted.
+3. **Non-repairable: fit a Weibull, check the fit, bound it, then read β.** (Mechanics and worked
+   numbers in `references/reliability-math.md`.) Check the fit before quoting anything — the
+   Weibull plot should be straight; curvature means a threshold or mixed modes, and comparing r²
+   against a lognormal plot guards against fitting the wrong family. Then **bootstrap the fit** —
+   resample from the fitted parameters, refit, and report percentile intervals on β, η, and any
+   B-life. A five-point fit typically leaves β spanning several-fold and a B10 spanning a factor
+   of three, so no interval means no policy. The decision table:
    - **β < 1 — infant mortality.** Failures front-loaded (bad installs, fresh patches) →
      burn-in / shake-down before trusting the unit; hunt the defect source; do not schedule
      replacements.
@@ -50,25 +68,44 @@ metadata:
    - **β → ∞ — deterministic expiry.** Certificates, passwords, key rotations fail on a known
      date: pure wear-out → calendar-driven renewal, alarmed well ahead.
    This is the bathtub curve made decidable: β tells you which region you are in and the region
-   dictates the policy.
-3. **Compute MTBF, MTTR, availability.** MTBF = total operating time ÷ failures. MTTR = mean
-   detection-to-restored time (include detection and diagnosis, not repair alone).
-   Availability = MTBF ÷ (MTBF + MTTR). Convert the SLO into a downtime budget — 99.9% allows
-   about 43.8 minutes a month (full table in the reference) — and compare measured downtime to
-   the budget: the gap tells you whether to attack failure rate (MTBF) or recovery (MTTR).
-4. **Do the system arithmetic.** Series (every part needed): R = ∏Rᵢ — chains multiply badly;
-   two 99% components in series give 98.01%. Parallel (any one suffices):
-   R = 1 − ∏(1 − Rᵢ) — **but claim it only where independent failover has been demonstrated.**
-   An unexercised standby contributes nothing ("untested failover is scenery" — here a theorem,
-   not a slogan), and common causes (shared credential, same patch, same endpoint) void
-   independence even when the failover works.
-5. **Small samples — Weibayes.** With two or three failures, assume β from engineering
+   dictates the policy — for a **unit's own age**, which is why it applies only to case one.
+4. **Repairable: model the failure intensity, not a lifetime.** Fit the power-law NHPP
+   N(t) = λt^β with β̂ = n ÷ Σ ln(T/tᵢ) and λ̂ = n ÷ T^β̂ over an observation window T, and read it
+   on its own scale: **β < 1 the system is improving** (fixes are sticking), **β ≈ 1 stable**
+   (constant rate — random regime), **β > 1 degrading between repairs** (repair returns it
+   bad-as-old; renew the unit or change repair practice — *not* a burn-in and *not* a wear-out
+   claim about units). Run the cheap **Laplace trend test** first: no trend means a renewal
+   process survives and Weibull-on-gaps becomes legitimate. β̂ has SE ≈ β̂/√n, so with a handful
+   of failures report the interval and expect it to straddle 1.
+5. **Compute MTBF, MTTR, availability — with bounds and the right definition.** MTBF = total
+   operating time ÷ failures; MTTR = mean detection-to-restored time (include detection and
+   diagnosis, not repair alone); Availability = MTBF ÷ (MTBF + MTTR). Attach the exact Poisson
+   (chi-square) interval on the failure rate — nine failures give a roughly fourfold MTBF range,
+   which decides whether "we missed the target" is a finding or noise. Convert the SLO into a
+   downtime budget — 99.9% allows about 43.8 minutes a month (full table in the reference) — and
+   compare measured to budget: the gap says whether to attack failure rate (MTBF) or recovery
+   (MTTR). For a request-serving service, use the **event-based** definition instead
+   (good events ÷ valid events) with an **error budget** = (1 − SLO) × valid events and a burn
+   rate, because a service erroring on 3% of calls logs zero minutes of downtime. The two
+   definitions don't convert unless traffic is uniform in time — say which one the SLO is written
+   against.
+6. **Do the system arithmetic.** Series (every part needed): R = ∏Rᵢ — chains multiply badly;
+   two 99% components in series give 98.01%. **That product assumes independent failures too:**
+   it is the no-overlap end of the range (fully overlapping outages would give 99%), so it is
+   safe to plan with but is not a reason to skip the shared-cause audit. Parallel (any one
+   suffices): R = 1 − ∏(1 − Rᵢ) — **claim it only where independent failover has been
+   demonstrated.** An unexercised standby contributes nothing ("untested failover is scenery" —
+   here a theorem, not a slogan), and common causes (shared credential, same patch, same
+   endpoint) void independence even when the failover works.
+7. **Small samples — Weibayes.** With two or three failures, assume β from engineering
    knowledge or the history of like items, and estimate only the scale η from the data. State
-   the assumed β in every output; the forecast is conditional on it.
-6. **Deliver the decision, not the fit.** Paste the failure log and have the model run and
-   interpret the math; the deliverable is a maintenance policy per failure mode, the downtime
-   budget versus measured, and redundancy sized to the SLO — with the two judgments no fit can
-   make flagged for a human: is the data honest, and are the parallel paths truly independent?
+   the assumed β in every output, and show what a different defensible β would have given; the
+   forecast is conditional on it.
+8. **Deliver the decision, not the fit.** Paste the failure log and have the model run and
+   interpret the math; the deliverable is the repairable/non-repairable call, a maintenance policy
+   per failure mode with an interval on every quoted number, the downtime budget versus measured,
+   and redundancy sized to the SLO — with the two judgments no fit can make flagged for a human:
+   is the data honest, and are the parallel paths truly independent?
 
 ## Why / learn
 The bathtub curve is folklore until it is decidable — everyone sketches it, but the sketch
@@ -80,25 +117,58 @@ Weibull's distribution (introduced in the ASME Journal of Applied Mechanics, 195
 citation classic: the shape parameter carries physical meaning, not just fit quality. US Air
 Force handbook practice and Pratt & Whitney turbine-engine work, codified in Abernethy's New
 Weibull Handbook, pushed it further: with Weibayes, usable replacement decisions from as few as
-two or three failures [snippet-only]. The system formulas teach the two structural lessons.
-Series multiplication is why long chains disappoint — a bank feed that traverses four
-99%-class steps is a ~98.9% chain, and no step "feels" like the problem. The parallel formula
-flatters, because it assumes independence: the moment both paths share a credential, a patch
-cycle, or an endpoint, the joint failure probability is set by the common cause, not the
-product — which is why demonstrated, exercised failover is the price of admission for parallel
-credit. Availability arithmetic converts "how reliable is enough?" from taste into a budget you
-can spend and audit. The barrier to all of this was never the concepts — it was the statistics:
-MLE fits, censoring, plotting positions were a reliability engineer's trade. With the math
-runnable on a pasted log, what remains genuinely human are the judgments no fit can make:
-whether the data is honest, and whether the redundant paths share a common cause.
+two or three failures [snippet-only].
+
+**But β only locates you on that curve if the curve is the right picture of your data.** The
+bathtub is a statement about *one unit's own age*, estimated across a population of units each
+observed until its first failure. One system that fails and gets repaired nine times is a
+different object: what varies there is the *rate* at which events arrive, and the model for it is
+a recurrent-event one — the power-law NHPP. Both models have a parameter called β and the two
+mean different things, which is exactly why the mistake is so easy and so invisible. Fitted to one
+repaired system's gaps, the Weibull β absorbs reliability growth or decay along with any hazard
+shape, and the resulting number is then read off a table it does not belong to. Asking
+"repairable or not?" first is what keeps the rest of the arithmetic honest.
+
+The second habit worth building is refusing point estimates. β̂ = 3.8 on five failures sounds
+decisive and is not: bootstrap the fit and the interval routinely spans several-fold, which can
+leave the *qualitative* claim (wear-out is real) standing while destroying the *quantitative* one
+(replace at 51 days). Those two deserve different confidence and usually get the same, and that
+is where reliability math causes harm rather than preventing it.
+
+The system formulas teach the structural lessons. Series multiplication is why long chains
+disappoint — a feed that traverses four 99%-class steps is a ~98.9% chain, and no step "feels"
+like the problem. Both formulas rest on independence, in opposite directions: in series,
+correlated outages overlap and the product is the pessimistic end of the range (safe to plan
+with); in parallel the product is the whole claim, so the moment both paths share a credential, a
+patch cycle, or an endpoint the joint failure probability is the common cause's, not the product's
+— which is why demonstrated, exercised failover is the price of admission for parallel credit.
+Availability arithmetic converts "how reliable is enough?" from taste into a budget you can spend
+and audit, whether you count minutes or events; counting events is the fairer measure wherever
+failure is partial rather than total. The barrier to all of this was never the concepts — it was
+the statistics: MLE fits, censoring, plotting positions, trend tests were a reliability
+engineer's trade. With the math runnable on a pasted log, what remains genuinely human are the
+judgments no fit can make: whether the data is honest, and whether the redundant paths share a
+common cause.
 
 ## Common mistakes
+- Fitting a Weibull to one repaired system's inter-arrival times → a category error; that is
+  recurrent-event data. Use the power-law NHPP (Crow-AMSAA), and read its β on its own scale.
+- Reading an NHPP β through the bathtub table → β > 1 there means the system degrades between
+  repairs, not that units wear out. Name which model produced the β you are quoting.
+- Quoting β, η, or a B-life as a bare number → bootstrap it. A five-point fit can support
+  "wear-out is real" while refusing to support "replace at 50 days."
+- Skipping the fit check → a curved Weibull plot means a threshold or two mixed modes, and no β
+  read off it means anything. Look at the plot; compare against a lognormal.
 - Dropping censored/suspended units → biased fit; enter survivors and removals as censored.
 - Mixing failure modes in one dataset → a meaningless in-between β; split by mode, fit each.
 - Reading MTBF as a lifetime promise → it is the mean of a distribution; under β ≈ 1 roughly
-  63% of units fail before MTBF.
+  63% of units fail before MTBF. It also has wide bounds — nine failures leave a ~4× range.
 - Scheduled replacement under β ≈ 1 → pure waste; random failure calls for redundancy and fast
   repair, not calendars.
+- Time-based availability on a request-serving service → partial failure logs as zero downtime.
+  Count events (good ÷ valid) and spend an error budget.
+- Multiplying a series chain without naming the independence assumption → the product is the
+  no-overlap end of the range; still audit shared causes, which are what widen the blast radius.
 - Parallel credit for an unexercised standby → treat it as absent until switchover is
   demonstrated; then re-check for common causes.
 - MTTR clocked from ticket-open instead of failure-start → availability overstated; include
@@ -107,12 +177,17 @@ whether the data is honest, and whether the redundant paths share a common cause
 
 ## Tailor to your environment
 Record your real setup in `references/your-environment.md`: which feeds and interfaces you
-monitor and where their failure timestamps live (e.g. the bank-statement feed, interface run
-logs), your uptime commitments and maintenance windows, your MTTR convention (when the clock
-starts and stops), and known common-cause couplings between "redundant" paths. Real incident
-details, system names, or account data go in `your-environment.private.md` (git-ignored).
-Never commit real bank or payment data.
+monitor and where their failure timestamps live, **which of them are repairable systems and which
+are populations of replaceable units** (that list is what stops the wrong model being fitted next
+time), your uptime commitments and maintenance windows, whether each SLO is written time-based or
+event-based, your MTTR convention (when the clock starts and stops), and known common-cause
+couplings between "redundant" paths. Real incident details, system names, or account data go in
+`your-environment.private.md` (git-ignored). Never commit real client or payment data.
 
 ## References
-- references/reliability-math.md — formulas, the β decision table, the SLO downtime-budget table, and worked examples (a BAI2-feed MTBF case, series/parallel arithmetic, a Weibull fit, Weibayes)
+- references/reliability-math.md — the repairable/non-repairable split, Weibull formulas with fit
+  checks and bootstrap bounds, the β decision table, the power-law NHPP (Crow-AMSAA) with the
+  Laplace trend test, MTBF/MTTR/availability with Poisson bounds, the SLO downtime-budget table and
+  the event-based error-budget arithmetic, series/parallel arithmetic with its independence bounds,
+  Weibayes, and a worked overnight-feed failure log
 - references/your-environment.md — your feeds, SLOs, and repair-time conventions (add when supplied)

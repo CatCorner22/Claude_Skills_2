@@ -10,11 +10,15 @@ git-ignored. Commit only sanitized, structural examples.
   limit; e.g. tolerance width 0–$5, date window 1–5 days>
 - **Where runs execute:** <test instance / statement-month copy / eval harness — never live
   production for designed bursts>
-- **Replication convention:** <n seeds or repeats per cell for nondeterministic responses; which
+- **Replication convention:** <n repeats per cell for nondeterministic responses; which
   eval set or data month is the fixed test bed>
-- **Blocking factors:** <what can't be randomized — data months, statement sources — and is
-  blocked instead>
-- **Noise factors for robustness runs:** <input mix, volume spikes, paraphrase sets, temperature>
+- **Blocks (nuisance groupings you don't care about):** <what forces the runs apart — two work
+  days, two analysts, two extracts — and, for each, which effect the block is confounded with>
+- **Hard-to-change factors (whole-plot):** <factors of interest you can't reset per run — a data
+  extract, a deployment, a settle-time config — which make the design a split-plot with two error
+  terms rather than a block>
+- **Noise factors for robustness runs:** <input mix, volume spikes, paraphrase sets, run-to-run
+  sampling variation>
 - **Sign-offs:** <who authorizes factor levels; who decides whether results change production>
 - **Records:** <where designs, run logs, and conclusions (with alias caveats) are kept>
 - **Hand-off to live tuning:** <how a designed-experiment winner enters evolutionary operation:
