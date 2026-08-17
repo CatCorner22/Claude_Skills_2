@@ -29,6 +29,52 @@ fill in.
 Installed skills are namespaced, e.g. `decision-science-skills:pre-mortem`. Type
 `/<plugin>:<skill>` to invoke one directly, or just describe your task and Claude will pick it up.
 
+### Install a subset — the full library does not fit comfortably
+
+**Install the plugins you will actually use, not all fourteen.** Every installed skill's `name` and
+`description` sit in the system prompt for the whole session, whether or not you use it. Measured
+2026-08-17 across all 121 skills: **110,081 characters ≈ 29,750 tokens ≈ 14.9% of a 200K context**,
+before you have asked anything.
+
+| Plugin | Skills | ~Tokens | % of 200K |
+| --- | --- | --- | --- |
+| `coding-agent-skills` | 20 | 4,769 | 2.38% |
+| `continuous-improvement-skills` | 16 | 4,038 | 2.02% |
+| `decision-science-skills` | 15 | 3,931 | 1.97% |
+| `data-analytics-bi-skills` | 11 | 2,757 | 1.38% |
+| `safety-and-reliability-skills` | 10 | 2,587 | 1.29% |
+| `full-stack-dev-skills` | 11 | 2,411 | 1.21% |
+| `data-tools-skills` | 7 | 1,576 | 0.79% |
+| `math-foundations-skills` | 6 | 1,561 | 0.78% |
+| `machine-learning-skills` | 7 | 1,545 | 0.77% |
+| `collaboration-skills` | 5 | 1,362 | 0.68% |
+| `writing-skills` | 5 | 1,262 | 0.63% |
+| `metacognition-skills` | 4 | 955 | 0.48% |
+| `learning-skills` | 3 | 721 | 0.36% |
+| `deep-research-skills` | 1 | 276 | 0.14% |
+| **all 14** | **121** | **29,752** | **14.88%** |
+
+There is a second, sharper reason to subset. **At roughly 100 installed skills the listing starts
+trimming the least-used skills' descriptions to name-only** — silently, with no error, while
+`/plugin:skill` direct invocation keeps working. Past that point a skill can be perfectly valid and
+still unreachable by description-matching, and you cannot tell from inside your own session. A full
+install of this library is *past* that threshold.
+
+Practical guidance:
+
+- **Three or four plugins (~35-50 skills, 5-7% of context)** is the sweet spot: comfortably below the
+  degradation threshold, and small enough that the router discriminates well.
+- **Pick by the work you do**, not by breadth. Analyst: `data-analytics-bi-skills` +
+  `data-tools-skills` + `math-foundations-skills`. Developer: `full-stack-dev-skills` +
+  `coding-agent-skills`. Operations / process: `continuous-improvement-skills` +
+  `safety-and-reliability-skills`. Management / communication: `collaboration-skills` +
+  `writing-skills` + `decision-science-skills`.
+- **The lever is skills per install, not description length.** Trimming a description from 1,000 to
+  900 characters saves ~27 tokens; skipping a 15-skill plugin saves ~3,900. Descriptions here are
+  kept tight because a tight description *routes* better, not because trimming buys back context.
+- Swapping plugins between sessions is cheap. Install narrowly and add what you find yourself
+  reaching for.
+
 ## Plugins
 
 | Plugin | Skills | What it covers |
@@ -84,6 +130,13 @@ they simply stop receiving updates and no longer appear in the marketplace listi
 - The authoring standard lives in the `coding-agent-skills:writing-agent-skills` skill; its
   template is `plugins/coding-agent-skills/skills/writing-agent-skills/assets/SKILL.template.md`.
 - `bash scripts/validate.sh` lints every skill and manifest (currently 0 errors).
+- `python3 scripts/gen-catalog.py` regenerates `docs/SKILLS.md` and `docs/INDEX.md` from the skills
+  themselves — never edit those two by hand.
+- **[`docs/trigger-test.md`](docs/trigger-test.md) — routing compliance, written and not yet run.**
+  Validation proves a skill is well-formed; it cannot prove the skill is *findable*, because routing
+  depends only on the description and cannot be tested from the session that authored it. That
+  protocol is the standing gap in this library's definition of done, and it is recorded as unmet
+  rather than assumed passing.
 
 ## Recommended companion marketplaces
 

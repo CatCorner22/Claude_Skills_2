@@ -54,7 +54,21 @@ A skill is done when every box is checked.
 ## Trigger test (in a fresh session) — the only check that validates routing
 Everything above can pass on a skill that never loads. This is the one item that proves the
 description works, and it cannot be automated from inside a session that already knows the
-answer. Run it in a fresh session with the plugin installed; log the result in
-`docs/trigger-test.md`.
+answer. The full protocol — setup, scoring, and the ranked rows — is `docs/trigger-test.md`;
+add a row there for the skill you are shipping and log the result.
 - [ ] The positive-trigger prompt loads the skill.
 - [ ] The near-miss prompt does NOT load it.
+
+Four rules that decide whether the result means anything:
+- **One fresh session per prompt.** Once a skill loads, its body is in context and biases every
+  later turn, so a second prompt in the same session tests nothing.
+- **Do not paste a trigger phrase verbatim.** Write the prompt in the words a user would actually
+  type. A test that quotes the trigger string passes by construction and measures nothing.
+- **Record the install set.** The listing trims descriptions to name-only somewhere around 100
+  installed skills, silently. A pass with four plugins installed is not evidence of a pass with
+  fourteen — they are different experiments.
+- **Distinguish the two failures.** Nothing loaded (**MISS**) means the description lacks the
+  user's vocabulary — add it. A different plausible skill loaded (**WRONG**) means two descriptions
+  are competing and neither names the boundary — write reciprocal `Not for:` lines in *both*, in
+  matching words. Never fix a WRONG by deleting the loser's trigger phrase: doing that to a word
+  three skills shared is what left `standardize` with no owner at all.
