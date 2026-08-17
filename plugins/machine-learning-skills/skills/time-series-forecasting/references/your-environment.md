@@ -12,5 +12,14 @@ Commit only sanitized, structural examples.
 - **Known exogenous drivers (and when knowable):** <payroll dates, tax dates, rate resets, promotions>
 - **Gaps / holidays / one-off spikes handling:** <how you fill or flag them>
 - **Outlier policy:** <cap, flag, or leave; source of known one-offs>
-- **Baseline & accuracy target:** <seasonal-naive; target MASE < 1 or MAE < X currency by horizon>
-- **Tooling:** <statsmodels, pmdarima, sktime, Prophet, Darts, etc.>
+- **Baseline & accuracy target:** <baseline = seasonal-naive at the decision horizon; target stated as a
+  **skill ratio** — model MAE(h) ÷ baseline MAE(h) < 1 on the same backtest origins — and/or MAE < X
+  currency at horizon h. Do **not** set "MASE < 1" as the target: MASE scales h-step out-of-sample error by
+  an in-sample *one-step* naive error, so a good multi-step model routinely exceeds 1. Report MASE as the
+  scale-free number for comparing series, not as the bar.>
+- **Interval requirement:** <level you need (80% / 95%), and the **measured coverage** you accept from the
+  backtest — e.g. "80% nominal, coverage within ±5 points">
+- **Model-selection protocol:** <nested — re-select order/hyperparameters inside each backtest origin | frozen
+  — selected on a warm-up segment before the first origin. Never selected on the full series.>
+- **Tooling:** <statsmodels, pmdarima, sktime, Prophet, Darts, etc.> — **MASE seasonal lag actually used:**
+  <library default is often lag 1 even on seasonal data>

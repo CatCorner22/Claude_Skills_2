@@ -105,8 +105,9 @@ negatives and precision jumps to 94% with AUC untouched. So prefer **PR AUC** wh
 not because ROC AUC is "inflated by true negatives" — it isn't — but because PR AUC is prevalence-*aware*
 and therefore tracks the operational reality you will live with. The corollary is the practically useful
 one: resampling to "fix imbalance" will not move your AUC, and any precision you gain from it is an
-artifact of the new class ratio, not of a better model (Davis & Goadrich 2006; Saito & Rehmsmeier 2015 are
-the standard references for the ROC-vs-PR comparison).
+artifact of the new class ratio, not of a better model. (The ROC-vs-PR comparison is usually attributed to
+Davis & Goadrich 2006 and Saito & Rehmsmeier 2015 — pointers to check before quoting, not sources for any
+number here; every figure above is computed from its own stated inputs.)
 
 Threshold choice is where evaluation meets economics: the model outputs a score, but the *decision* is a
 threshold, and the right threshold is wherever the marginal cost of a false positive equals the marginal

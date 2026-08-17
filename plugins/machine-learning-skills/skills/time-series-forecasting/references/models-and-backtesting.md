@@ -5,7 +5,10 @@
 - Stationarity and differencing
 - Model selection cheat-sheet
 - Rolling-origin backtesting
+- Keeping model selection inside the origin
 - Metrics and their traps
+- MASE: what it decides and what it doesn't
+- Prediction intervals and the coverage check
 
 ## Decomposition — trend, seasonality, residual
 Every series is a mix of a slow **trend**, a repeating **seasonal** pattern, and irregular **residual**.
@@ -29,7 +32,7 @@ only on lag. ARIMA assumes stationarity; ETS does not.
 |---|---|
 | Any series, first move | **naive** and **seasonal-naive** baselines |
 | Clear trend + seasonality, little else | **ETS / Holt-Winters** (additive or multiplicative) |
-| Autocorrelation structure to exploit | **ARIMA / SARIMA** (auto-search orders, then check residuals) |
+| Autocorrelation structure to exploit | **ARIMA / SARIMA** (auto-search orders *inside the training window*, then check residuals) |
 | Known external drivers matter | regression w/ ARIMA errors, Prophet-style, or **ML on lag + exogenous features** |
 | Many related series, long history | global ML / gradient boosting on engineered features |
 
@@ -46,6 +49,37 @@ A single train/test cut is one draw. Backtesting slides the cutoff (the "origin"
 - **Expanding window** (training grows) uses all history; good when the process is stable.
 - **Sliding window** (fixed training length) adapts to a process that changes; good after regime shifts.
 - Never let the training window include anything at or after its origin — that is temporal leakage.
+- **How many origins?** Enough that the average error is stable and enough to build intervals from (see the
+  interval section: ~30 origins per horizon step is a workable floor for an 80% interval, far fewer than you
+  need for a stable 95% one). Errors from overlapping horizons are serially correlated, so the effective
+  sample is smaller than the number of forecasts — don't read the average as if it came from independent draws.
+
+## Keeping model selection inside the origin
+Everything the procedure *learns from data* must be re-learned inside each origin's training window.
+Otherwise the backtest scores a pipeline that has already seen its own holdouts, and the reported error is
+optimistic — the temporal version of tuning on the test set.
+
+Re-fit at every origin, using only data up to that origin:
+
+| Learned thing | Why it leaks if fitted on the full series |
+|---|---|
+| Box-Cox / log λ, scaling stats | Chosen using future variance |
+| Differencing orders `d`, `D` (and unit-root tests) | Chosen using future trend/seasonality |
+| ARIMA orders from an auto-search, ETS component choice | The search compared candidates on the holdouts |
+| Hyperparameters (lags, tree depth, regularization) | Same as any tuned-on-test parameter |
+| Feature selection, outlier flags, imputation values | Encode future information into "known" inputs |
+| Seasonal indices, holiday effects estimated from data | Estimated from periods being predicted |
+
+Two defensible protocols — name the one you used:
+1. **Nested selection (honest, expensive).** At each origin, run the whole selection procedure on that
+   window, fit, forecast *h*, record errors. Cost: one full search per origin. Cheap trick that keeps most of
+   the honesty — re-run the search every *k*-th origin and carry it forward, and say so.
+2. **Freeze-then-backtest (cheap, slightly conservative).** Run selection once on an early warm-up segment
+   that ends *before* the first backtest origin, freeze the order/hyperparameters, then backtest with fitting
+   (coefficient re-estimation) only. No holdout was ever seen by the selector; the trade is that the order
+   came from less history than you'd use in production.
+
+Reporting a full-series `auto_arima` search followed by a rolling backtest as "out-of-sample" is neither.
 
 ## Metrics and their traps
 - **MAE** — mean absolute error, in the series' units; robust, easy to explain.
@@ -53,7 +87,71 @@ A single train/test cut is one draw. Backtesting slides the cutoff (the "origin"
 - **MAPE** — mean absolute *percentage* error; **undefined at zero** and explodes for small actuals;
   also asymmetric (punishes over-forecasts more).
 - **sMAPE** — symmetric variant; tamer but still unstable near zero.
-- **MASE** — error scaled by the in-sample seasonal-naive error; **< 1 means you beat seasonal-naive**,
-  ≥ 1 means you didn't. The cleanest single number for "is this model worth it," and safe on zeros.
-- For treasury cash series (small, zero, or negative values), prefer **MAE/RMSE in currency** and
-  **MASE**; avoid MAPE/sMAPE. Always report the baseline's score next to the model's.
+- **MASE** — error scaled by the **in-sample one-step naive** error (seasonal lag *m* for a seasonal series,
+  lag 1 otherwise). Scale-free and safe on zeros, so it is the right metric for **comparing across series**
+  — but it is *not* a pass/fail bar. See the next section.
+- **The decision rule: an explicit skill ratio.** `skill = model MAE(h) ÷ baseline MAE(h)`, both measured on
+  the **same backtest origins** at the **same horizon** *h* you decide on. Below 1 you beat the baseline.
+  Report it per horizon step if the decision spans several (h = 1 may win while h = 13 loses).
+- For treasury cash series (small, zero, or negative values), prefer **MAE/RMSE in currency** plus the skill
+  ratio, with **MASE** as the cross-series companion; avoid MAPE/sMAPE. Always report the baseline's score
+  next to the model's.
+
+## MASE: what it decides and what it doesn't
+`MASE = mean(|out-of-sample errors|) / Q`, where `Q` = mean absolute error of the **in-sample one-step**
+naive forecast (Hyndman & Koehler 2006 — attribution, no numbers taken from it). Three consequences:
+
+1. **The numerator and denominator use different horizons.** Your errors are *h*-step-ahead; `Q` is
+   one-step. Forecast error grows with the horizon, so the bar tightens as *h* grows for reasons that have
+   nothing to do with model quality. Concretely, for a random walk with independent Gaussian steps the
+   *optimal* h-step forecast has error scale σ√h while the in-sample one-step naive error scale is σ, so
+   its MASE (lag-1 denominator) sits near **√h** — at h = 13 that is √13 ≈ **3.6**. A "MASE < 1" policy
+   rejects the best possible model on that series. Meanwhile the skill
+   ratio against a 13-step-ahead naive forecast is ≈ **1.0**, which is the correct verdict: on a random walk
+   nothing beats the last value.
+2. **The denominator is in-sample.** `Q` comes from the training period, so a calmer or wilder training
+   stretch moves MASE without any change in forecast quality — and after a level shift or regime change the
+   comparison is across two different processes.
+3. **Implementations differ.** Some libraries default to the lag-1 naive even on seasonal data (a seasonal
+   `sp`/`m` argument you have to set), which changes `Q` and makes numbers incomparable across tools. Check
+   which lag yours used before quoting a MASE.
+
+What MASE *is* good for: a scale-free error you can average across series of different magnitudes, and a
+same-series model comparison — `MASE_A / MASE_B` equals `MAE_A / MAE_B` because the shared `Q` cancels, so
+the ratio of two MASEs on one series *is* a skill ratio. Use it to compare; use the horizon-matched skill
+ratio to decide.
+
+## Prediction intervals and the coverage check
+A point forecast can't size a buffer, a limit, or a worst case. Build the interval, then prove it.
+
+**Empirical intervals from the backtest (preferred, and teachable).**
+1. From the rolling-origin run, collect the errors `e_h = actual − forecast` **grouped by horizon step h**.
+   Errors widen with *h*; pooling h = 1 with h = 13 produces an interval that is too wide early and too
+   narrow late.
+2. For each *h*, take the quantiles of that error set: the 10th and 90th percentiles give an **80%**
+   interval, the 2.5th/97.5th a 95% one. Add them to the point forecast for that step.
+3. Mind the tail arithmetic: with 60 origins, the 2.5th percentile sits between the 1st and 2nd smallest
+   errors — one observation decides your lower bound. The 10th percentile sits near the 6th of 60, which is
+   far steadier. **With few origins, an honest 80% interval beats a fictional 95% one.**
+
+**Model-based intervals (ARIMA/ETS) are a fallback, and run too narrow.** They propagate the innovation
+variance forward *conditional on the fitted model*, and in standard implementations ignore
+parameter-estimation uncertainty and model-selection uncertainty, while assuming the residual distribution
+(usually Gaussian, constant variance) is right. Under-coverage is a repeatedly reported finding — Hyndman &
+Athanasopoulos state the caveat plainly, and the M-competition interval evaluations reported empirical
+coverage below nominal (both cited as reported findings; measure your own).
+
+**The coverage check — one line, and it settles the argument.** Over the backtest, count how often the
+actual fell inside the interval, per horizon:
+
+- 60 origins at h = 13, **48** actuals inside a nominal **95%** interval → coverage 48/60 = **80%**.
+- Is 80% distinguishable from 95%? Under a true 95% interval the count's standard error is
+  `√(0.95 × 0.05 / 60) ≈ 0.028`, so ±1.96 SE ≈ ±5.5 points — 80% is far outside. The interval is too narrow,
+  not unlucky. (Overlapping horizons make the errors serially dependent, so this is a rough guide, not a test.)
+- Fixes, in order: widen from the empirical quantiles; re-check whether residual variance is
+  changing (heteroscedasticity, or a variance that needs a log/Box-Cox); if the label still can't be earned,
+  report the *measured* coverage instead of the nominal one.
+
+Also report **width**: a calibrated interval so wide that every decision fits inside it is honest and
+useless. Width plus coverage together is the interval's report card. (For sharpness scoring, quantile/pinball
+loss or a Winkler-style interval score does this in one number.)

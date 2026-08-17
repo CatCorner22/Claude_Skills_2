@@ -87,7 +87,64 @@ Two cautions:
 | Temporal | Time-series CV (rolling/expanding origin) | Never train on the future |
 | Grouped (repeats per entity) | Grouped k-fold | Same entity never in both train and test |
 
+## Uncertainty on the reported metric
+Every metric is a statistic on a finite sample, so it carries a standard error. Report an interval.
+
+- **A rate (precision, recall, accuracy)** is a proportion: `SE ≈ √(p̂(1−p̂)/n)`, and the `n` is the
+  denominator of *that* rate — recall's `n` is the number of **positives** in the test set, not the row count.
+- **AUC, RMSE, F1, a composite** have no tidy closed form: **bootstrap** the test set (resample rows with
+  replacement, recompute, take the 2.5th/97.5th percentiles of ~2,000+ replicates).
+- **k-fold** gives you a spread for free: report the mean **and** the across-fold standard deviation.
+
+Worked: a test set with **40 positives** and an observed recall of **0.80**.
+- `SE ≈ √(0.80 × 0.20 / 40) = √0.004 = 0.063` → 95% normal-approximation interval `0.80 ± 1.96 × 0.063 =
+  0.80 ± 0.124` → **[0.68, 0.92]**, i.e. ±12 points on your headline number.
+- At small `n` the normal approximation is crude; the Wilson interval for the same data is **[0.65, 0.90]**
+  — wider still. Use Wilson (or an exact/Clopper–Pearson interval) below a few hundred events.
+- With **200 positives** the same 0.80 gives `SE = √(0.16/200) = 0.028` → **[0.74, 0.86]** (±5.5 points).
+
+So: "we improved recall from 78% to 81%" on 40 positives is not a finding. Sizing question to ask before the
+experiment, not after: how many positives does the test set need for the band to be narrower than the
+smallest improvement worth shipping? A useful anchor — halving the interval width takes **4×** the positives.
+
+## Slice (subgroup) evaluation
+The aggregate metric is a weighted average over segments, and averages hide their worst term.
+1. List the slices the decision actually touches: region, channel, product line, customer size/tenure,
+   language, device, new-vs-returning, time period (recent months especially), plus any protected or
+   contractually sensitive group.
+2. Report the metric **per slice with the slice's own n** and the slice's own baseline. A slice can be worse
+   than the current rule while the aggregate looks better than the current rule.
+3. Watch for the two failure shapes: a **small slice with a terrible score** (invisible in the average, very
+   visible to the people in it) and a **large slice carrying the whole lift** (the model works for one
+   segment and you are about to deploy it to five).
+4. Guard against slice-hunting: many slices means many chances for noise, so treat per-slice gaps as
+   hypotheses to confirm (bigger sample, next period), and pre-register the slices you will report.
+5. Time is the slice people forget. Score the most recent period separately — a model that is fine on
+   average and degrading over the last quarter is a model with an expiry date.
+
+## Label quality — auditing the target
+The leakage checklist audits features; this audits the **target**. A label is a measurement produced by some
+process — a reviewer, a rule, a downstream system, a judge model — and every metric inherits its error.
+- **Provenance:** who or what produced each label, from what evidence, and at what point in time? Labels
+  created *after* the prediction moment (a later manual correction, a closed-case disposition) may encode
+  information the model won't have — which is target leakage wearing a label's clothes.
+- **Agreement:** if humans (or an LLM judge) assign labels, measure agreement before trusting scores —
+  repeat judgments per rater, multiple raters on the same items, a reference set, and a kappa. A model
+  cannot be scored more finely than its labels agree with themselves.
+- **Error review:** pull a sample of the model's *confident* mistakes and re-adjudicate them. Some fraction
+  will be label errors, and that fraction is a ceiling on the metric you can honestly claim.
+- **Asymmetry:** noise in the positive labels usually hurts more than noise in the negatives when positives
+  are rare, because each mislabelled positive is a large share of a small class.
+- **Do the study properly:** `continuous-improvement-skills:measurement-systems-analysis` runs the
+  attribute-agreement study for pass/fail judgments (including LLM-as-judge scoring) and the crossed Gage
+  R&R that splits repeatability (the same rater re-judging) from reproducibility (rater-to-rater), judged on
+  %GRR and distinct categories. That skill already describes itself as adding the inter-rater rigor on top
+  of this one; this is the return link — send label-quality questions there and bring the agreement numbers
+  back into the evaluation report.
+
 ## Leakage checklist
+Run all of it on **every** evaluation, and record what each check found — a suspiciously good score raises
+the priority of the hunt, it is not the trigger for starting it.
 - **Target leakage** — a feature is a proxy for, or derived from, the outcome (e.g. `days_to_payment` when
   predicting late payment). Drop it.
 - **Train/test contamination** — the same row, or near-duplicate, in both splits; or tuning on the test set.
@@ -95,5 +152,9 @@ Two cautions:
 - **Group leakage** — the same customer/account in train and test inflates scores.
 - **Preprocessing leakage** — scalers, encoders, imputers, or feature selection fit on the full dataset
   instead of inside each training fold. Fit on train only; apply to validation/test.
+- **Selection leakage** — any choice made by looking at the test set: the threshold, the model, the feature
+  set, the early-stopping point, "we tried a few splits." Each one turns test into validation.
+- **Label-side problems** are audited separately — see *Label quality* above; the checks above only cover
+  features and splits.
 - **Red flag:** a metric far better than the baseline or than domain intuition — trace every feature back to
-  the prediction time before believing it.
+  the prediction time before believing it. Absence of the red flag is not absence of leakage.
