@@ -43,7 +43,7 @@ suspicion, not a cascade — put it in the fragility table and say what evidence
 confirm it. For whole-system excavation of an inherited codebase before refactoring,
 route to `coding-agent-skills:software-archaeology`; for hunting all instances of a
 defect class once one is found, `coding-agent-skills:defect-epidemiology`; for a
-multi-angle non-persona review, `board-of-advisors-skills:board-review`.
+multi-angle non-persona review, `coding-agent-skills:board-review`.
 
 ## Calibrating the fragility table
 

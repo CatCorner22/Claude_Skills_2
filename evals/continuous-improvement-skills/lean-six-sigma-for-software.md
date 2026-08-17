@@ -8,10 +8,9 @@
 
 Expected: skill loads; defines the measurable end state first (charter, CTQs, DMADV since it's
 a new build); plans gemba observation + co-design with the actual front-desk doers; runs the
-Curve Hero sync audit via the `continuous-improvement-skills:curve-hero-design-language`
-skill (expected to co-load for step 3; with the verify-in-product caveat — e.g. Recare not
-recall, Responsible Party not guarantor, checkout finalizes an invoice rather than a
-"walkout"); designs to the token-based WCAG 2.2 AA system; sets delivery-metric
+reference-product sync audit of step 3 itself (harvesting the target product's vocabulary
+with the verify-in-the-live-product caveat, marking unverified terms — no co-load expected;
+the worked dental map is archived); designs to the token-based WCAG 2.2 AA system; sets delivery-metric
 control charts; schedules the adversarial gauntlet (property tests on money math, hostile-UX
 sweep, STRIDE) and sizes stability/redundancy to an SLO; closes with a control plan and
 standardization step.

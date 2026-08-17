@@ -31,7 +31,7 @@ metadata:
 - Not for: automating git behavior in the Claude Code harness (hooks that run on commit,
   allow-listing `git push`) → see `coding-agent-skills:agent-harness-config`.
 - Not for: a deep multi-angle audit of a module by parallel specialists →
-  `board-of-advisors-skills:board-review` (routine PR review stays here; "run the board"
+  `coding-agent-skills:board-review` (routine PR review stays here; "run the board"
   goes there).
 - Not for: critiquing a whole submitted work product — a plan, document, or script judged
   as a deliverable → `coding-agent-skills:sparring-partner`; review here is scoped to a diff

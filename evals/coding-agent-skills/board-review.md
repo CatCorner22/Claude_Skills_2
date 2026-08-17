@@ -1,4 +1,4 @@
-# Evals — board-of-advisors-skills:board-review
+# Evals — coding-agent-skills:board-review
 
 ## 1. Positive trigger (should load the skill)
 > "Run the board of advisors on `app/pricing/` — I want a full optimization review for speed

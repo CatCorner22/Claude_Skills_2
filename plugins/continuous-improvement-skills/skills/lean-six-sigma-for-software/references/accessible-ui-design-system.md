@@ -160,7 +160,7 @@ Power users live on the keyboard; so do assistive-tech users. Same investment se
 ## §9 Content style (the words are part of the design system)
 
 - Labels in the **user's professional vocabulary** — harvested at the gemba and from the
-  reference product (see the `continuous-improvement-skills:curve-hero-design-language`
+  reference product (see the archived `continuous-improvement-skills:curve-hero-design-language`
   skill), one term per concept everywhere
   (if the reference says "Recare," the app never says "Recall" in one screen and "Recare" in
   another).

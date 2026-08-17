@@ -37,7 +37,7 @@ reality, never to the preferred answer.**
 - Not for: the full software-build discipline (charters, control charts, WCAG, adversarial
   gauntlet) → `continuous-improvement-skills:lean-six-sigma-for-software`; facilitating
   the improvement workshop → `continuous-improvement-skills:kaizen-and-codesign`;
-  multi-advisor code review → `board-of-advisors-skills:board-review`; a themed
+  multi-advisor code review → `coding-agent-skills:board-review`; a themed
   adversarial autopsy persona → the chicken-little skills in `coding-agent-skills`.
 
 ## Do it

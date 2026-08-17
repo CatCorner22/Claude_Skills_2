@@ -29,7 +29,7 @@ metadata:
   `full-stack-dev-skills:elite-python-engineer` (this skill owns the *process*; that one
   owns Python *standards* — they compose). Authoring Agent Skills →
   `coding-agent-skills:writing-agent-skills`. A multi-agent adversarial review →
-  `board-of-advisors-skills:board-review` (Phase 5 here is the lightweight solo version).
+  `coding-agent-skills:board-review` (Phase 5 here is the lightweight solo version).
 
 ## Do it
 1. **Scale the workflow to the task — by consequence, not length.** Run all six phases for

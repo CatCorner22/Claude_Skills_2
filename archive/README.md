@@ -31,6 +31,25 @@ Nothing was lost:
 (Last-version numbers are as recorded in each plugin's `.claude-plugin/plugin.json`
 at archive time; verify with the manifest files here if they ever drift.)
 
+## Archived individual skills (2026-08-11, consolidation pass)
+
+Two dental-practice-mounted skills were archived at skill level (their host plugins stay
+active). The dental app direction was not chosen at the career re-aim; both are preserved
+and restorable:
+
+| Skill | From plugin | Where it lives now |
+|---|---|---|
+| `curve-hero-design-language` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `chicken-little-college-kid` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+
+Restore: `git mv archive/skills/<plugin>/<skill> plugins/<plugin>/skills/<skill>` and
+`git mv archive/evals/<plugin>/<skill>.md evals/<plugin>/<skill>.md`, restore any
+cross-links marked `archived:` in the active tree, bump the plugin version, validate.
+
+Also recorded here: `board-of-advisors-skills` was **merged, not archived** — its single
+skill and six subagents now live in `coding-agent-skills` as
+`coding-agent-skills:board-review` (same content, new namespace).
+
 ## Restore procedure
 
 To restore a plugin to the active marketplace:

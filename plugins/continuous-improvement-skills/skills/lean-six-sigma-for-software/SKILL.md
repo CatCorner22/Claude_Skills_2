@@ -6,7 +6,7 @@ description: >-
   andon, poka-yoke, standard work) translated to code and pipelines, DMAIC/DMADV with
   begin-with-the-end-in-mind backward design, co-design with real users, and hybrid project
   management — then builds to a full-stack standard: UI vocabulary and patterns synced to a
-  reference product such as Curve Hero, beautiful WCAG 2.2 AA accessible design, stability
+  reference product your users already know, beautiful WCAG 2.2 AA accessible design, stability
   and redundancy engineering, and adversarial testing before release. Use when building or
   improving software with lean/six sigma rigor. Triggers: lean six sigma software, DMAIC
   software, Toyota production system for software, Deming for software, standardize and
@@ -22,16 +22,14 @@ description: >-
 - Improving an existing software process (slow releases, defect leakage, abandoned features)
   with DMAIC instead of vibes.
 - Making a product's UI feel native to users of a reference product — vocabulary, fields, and
-  patterns synced; the sync-audit method and the pre-built Curve Hero map live in
-  `continuous-improvement-skills:curve-hero-design-language` (load it for that step, return
-  here for the build).
+  patterns synced via the sync audit in step 3. (A fully worked example — a dental-PMS
+  design-language map — is archived: `continuous-improvement-skills:curve-hero-design-language`,
+  restorable from `archive/skills/`.)
 - Installing engineering standards: accessibility, stability/redundancy, full-stack quality
   gates, adversarial test gauntlets.
 - Not for: facilitating the improvement workshop itself →
   `continuous-improvement-skills:kaizen-and-codesign`; generic DMAIC on non-software processes
-  → `continuous-improvement-skills:dmaic-problem-solving`; Curve Hero terminology or
-  vocabulary-only questions, or a standalone sync audit →
-  `continuous-improvement-skills:curve-hero-design-language`; pure code-level minimalism →
+  → `continuous-improvement-skills:dmaic-problem-solving`; pure code-level minimalism →
   `full-stack-dev-skills:lean-code-principles`; deep single-layer builds → the
   `full-stack-dev-skills` skill for that layer.
 
@@ -51,10 +49,10 @@ description: >-
 3. **Sync the UI to the reference product.** When the software must feel native to users of an
    existing product, run the sync audit — inventory, vocabulary harvest, terminology map,
    pattern mirroring, live-tenant verification, standardization — and keep one term per
-   concept everywhere. The method and the pre-built Curve Hero design-language map (the
-   Sidekick panel, modules like the Scheduler, field and workflow vocabulary, provenance
-   caveats) are `continuous-improvement-skills:curve-hero-design-language`; load that skill
-   for this step.
+   concept everywhere. Build the map for YOUR reference product: harvest its
+   vocabulary from its own UI and docs, verify each term in the live product before adopting
+   it, and mark unverified terms. (A complete worked map for one product is archived:
+   `continuous-improvement-skills:curve-hero-design-language`, restorable from `archive/skills/`.)
 4. **Design beautiful, accessible, dense-but-calm UI from tokens.** Build on the design system
    in `references/accessible-ui-design-system.md`: token-driven color/type/spacing, WCAG 2.2
    AA engineered in (contrast, focus, keyboard, target size, redundant-entry elimination),
@@ -133,7 +131,7 @@ improve, improve so the standard rises — forever.
 - Measuring people instead of the process → red beads; gamed metrics and hidden problems.
 
 ## Tailor to your environment
-Fill `references/your-environment.md` with your reference product (Curve Hero or another),
+Fill `references/your-environment.md` with your reference product (whichever product your users already live in),
 your value-stream baseline and where its control charts live, your stack and golden path,
 your co-design panel, your SLOs and redundancy tier, and your adversarial cadence. Keep
 anything sensitive in `your-environment.private.md` (git-ignored); never commit real client

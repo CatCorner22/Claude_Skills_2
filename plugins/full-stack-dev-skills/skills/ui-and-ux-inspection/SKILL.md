@@ -30,8 +30,9 @@ metadata:
   remediation backlog.
 - Not for: building a new accessible UI or design system from scratch → see
   `continuous-improvement-skills:lean-six-sigma-for-software` (and its
-  references/accessible-ui-design-system.md). UI vocabulary syncing →
-  `continuous-improvement-skills:curve-hero-design-language`.
+  references/accessible-ui-design-system.md). Syncing UI vocabulary to a reference product → the worked method lives in the archived
+  design-language skill (archived: `continuous-improvement-skills:curve-hero-design-language`,
+  restorable from `archive/skills/`).
 
 ## Do it
 The full step-by-step procedure is preserved verbatim in references/procedure.md — read it

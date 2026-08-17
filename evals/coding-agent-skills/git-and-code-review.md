@@ -22,7 +22,7 @@ tighten the description / cross-links.
 > "Run the board on the pricing module — I want a full multi-angle optimization audit:
 > performance, accuracy, structure, robustness, everything suboptimal, before we touch it."
 
-Expected: that is the parallel-specialist swarm → `board-of-advisors-skills:board-review`.
+Expected: that is the parallel-specialist swarm → `coding-agent-skills:board-review`.
 This skill owns routine PR/diff review; a commissioned deep multi-agent audit of a module is
 the board's job. If this skill loads as primary, the seam is failing.
 

@@ -1,6 +1,6 @@
 # Skills Library — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **123 skills across 15 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **121 skills across 14 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
 
 ## How to trigger a skill
 
@@ -25,10 +25,9 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`data-analytics-bi-skills`](#data-analytics-bi-skills) (11) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
 - [`data-tools-skills`](#data-tools-skills) (7) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
 - [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
-- [`continuous-improvement-skills`](#continuous-improvement-skills) (17) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
-- [`board-of-advisors-skills`](#board-of-advisors-skills) (1) — Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
+- [`continuous-improvement-skills`](#continuous-improvement-skills) (16) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
+- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, rule-stress-testing, software-archaeology, defect-epidemiology, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (5) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
@@ -260,7 +259,7 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 ## `continuous-improvement-skills`
 
-Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
+Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
 
 Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
@@ -271,14 +270,6 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 **What it does:** Structures a problem, its analysis, and countermeasures on a single A3 page using the PDCA cycle, as a thinking and alignment tool rather than a form to fill — the Toyota practice codified by Sobek & Smalley and Shook. Seven boxes read left to right: background, data-backed current condition, measurable target, verified root cause, countermeasures traced to causes, an owned implementation plan, and follow-up filled in later with actual results. Drafted with the affected people, nemawashi-style, so consensus is built before the decision meeting; fits any problem story — an analyst's process fix, an attorney's intake bottleneck, an ops manager's error spike, a developer's flaky pipeline. Use when proposing an improvement, telling a problem-solving story on one page, building consensus around a change, or running a PDCA cycle.
 
 **Triggers:** `A3`, `A3 report`, `A3 problem solving`, `PDCA`, `plan do check act`, `problem solving`, `countermeasure`, `one-page proposal`, `nemawashi`
-
-### `continuous-improvement-skills:curve-hero-design-language`
-
-**Invoke:** `/continuous-improvement-skills:curve-hero-design-language` — or just describe the task.
-
-**What it does:** Provides the pre-built design-language map of Curve Hero — Curve Dental's cloud practice-management platform: its modules (Scheduler, Charting, Billing, Claims), shell patterns (Sidekick, SnapShot, Playbook Dashboards), verified field and workflow vocabulary (Recare not recall, Responsible Party not guarantor, Invoice not walkout, Carrier, Operatory, fee guide, days-owing aging), a say-this-not-that term map with provenance caveats — plus the reusable UI sync-audit method for making software feel native to users of any reference product. Use when building or labeling UI for Curve Hero users, answering Curve Hero terminology, module, or pattern questions, or syncing vocabulary to a reference product.
-
-**Triggers:** `curve hero`, `curve dental`, `sidekick`, `recare`, `design language`, `terminology map`, `sync the UI`, `feel native to`, `reference product vocabulary`, `dental practice management software UI`
 
 ### `continuous-improvement-skills:design-of-experiments`
 
@@ -324,7 +315,7 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:lean-six-sigma-for-software` — or just describe the task.
 
-**What it does:** Runs software projects as Lean Six Sigma operations — Deming's standardize-and-measure discipline (PDSA, variation, quality built in), Toyota Production System practice (jidoka, andon, poka-yoke, standard work) translated to code and pipelines, DMAIC/DMADV with begin-with-the-end-in-mind backward design, co-design with real users, and hybrid project management — then builds to a full-stack standard: UI vocabulary and patterns synced to a reference product such as Curve Hero, beautiful WCAG 2.2 AA accessible design, stability and redundancy engineering, and adversarial testing before release. Use when building or improving software with lean/six sigma rigor.
+**What it does:** Runs software projects as Lean Six Sigma operations — Deming's standardize-and-measure discipline (PDSA, variation, quality built in), Toyota Production System practice (jidoka, andon, poka-yoke, standard work) translated to code and pipelines, DMAIC/DMADV with begin-with-the-end-in-mind backward design, co-design with real users, and hybrid project management — then builds to a full-stack standard: UI vocabulary and patterns synced to a reference product your users already know, beautiful WCAG 2.2 AA accessible design, stability and redundancy engineering, and adversarial testing before release. Use when building or improving software with lean/six sigma rigor.
 
 **Triggers:** `lean six sigma software`, `DMAIC software`, `Toyota production system for software`, `Deming for software`, `standardize and measure`, `begin with the end in mind`, `adversarial release gauntlet`, `WCAG-conformant app build`, `stability and redundancy`, `co-design the UI`
 
@@ -399,20 +390,6 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 **What it does:** Maps a process end to end in current and future state to expose waste and improve flow — the Rother & Shook Learning-to-See method adapted to office work: scope one product/service family with SIPOC, walk the process with one real item, hang a data box (cycle time, %complete-and-accurate, people, systems) under each step, capture queue time between steps, build the timeline ladder, and compute flow efficiency (value-added ÷ lead time); then tag the eight wastes and design a future state with an owned action plan. Fits any stream an analyst, attorney, ops manager, or developer runs — request-to-resolution, intake-to-filing, order-to-delivery, commit-to-deploy. Use when analyzing a whole process, drawing a current- or future-state map, measuring lead vs cycle time, or scoping with SIPOC.
 
 **Triggers:** `value stream mapping`, `VSM`, `current state`, `future state`, `process map`, `SIPOC`, `lead time`, `cycle time`, `waste`, `flow`, `flow efficiency`, `eight wastes`, `%C&A`, `where does all the time go`
-
-## `board-of-advisors-skills`
-
-Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.
-
-Install: `/plugin install board-of-advisors-skills@treasury-analyst-skills`
-
-### `board-of-advisors-skills:board-review`
-
-**Invoke:** `/board-of-advisors-skills:board-review` — or just describe the task.
-
-**What it does:** Runs the full Board of Advisors multi-agent swarm — five read-only specialist subagents (performance, accuracy/correctness, structure/architecture, clarity/maintainability, robustness/edge-cases) launched in parallel over the code under review, then the board-chair subagent synthesizing their findings into one deduplicated, ranked revision report that optimizes for speed and accuracy while strictly preserving the original deliverable goals. Nothing is implemented without explicit user approval. Use when the user asks for a board review, board of advisors, full optimization review, performance+accuracy audit, or a deep multi-angle code audit.
-
-**Triggers:** `board review`, `board of advisors`, `run the board`, `full optimization review`, `performance and accuracy audit`, `deep code audit`, `multi-agent review`, `suboptimal code audit`, `optimize this code thoroughly`
 
 ## `full-stack-dev-skills`
 
@@ -510,7 +487,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, rule-stress-testing, software-archaeology, defect-epidemiology, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -530,6 +507,14 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Triggers:** `agent`, `autonomous agent`, `agentic workflow`, `tool use`, `orchestration`, `multi-step`, `pipeline`, `human in the loop`, `guardrails`
 
+### `coding-agent-skills:board-review`
+
+**Invoke:** `/coding-agent-skills:board-review` — or just describe the task.
+
+**What it does:** Runs the full Board of Advisors multi-agent swarm — five read-only specialist subagents (performance, accuracy/correctness, structure/architecture, clarity/maintainability, robustness/edge-cases) launched in parallel over the code under review, then the board-chair subagent synthesizing their findings into one deduplicated, ranked revision report that optimizes for speed and accuracy while strictly preserving the original deliverable goals. Nothing is implemented without explicit user approval. Use when the user asks for a board review, board of advisors, full optimization review, performance+accuracy audit, or a deep multi-angle code audit.
+
+**Triggers:** `board review`, `board of advisors`, `run the board`, `full optimization review`, `performance and accuracy audit`, `deep code audit`, `multi-agent review`, `suboptimal code audit`, `optimize this code thoroughly`
+
 ### `coding-agent-skills:chicken-little`
 
 **Invoke:** `/coding-agent-skills:chicken-little` — or just describe the task.
@@ -537,14 +522,6 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 **What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the modern toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name.
 
 **Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions`
-
-### `coding-agent-skills:chicken-little-college-kid`
-
-**Invoke:** `/coding-agent-skills:chicken-little-college-kid` — or just describe the task.
-
-**What it does:** Acts as "Chicken Little, College Kid" — a calm, professional language- and cultural-sensitivity persona for a family dental practice web app: flags potentially loaded phrases with practical alternatives (sensitivity varies by audience), recommends but never requires gender-neutral wording in generic system text, and provides cultural-humility guidance for patient care — ISO country and language intake fields with an interpreter flag, non-US-born/non-English staff notifications with quick-reference cards, Southern US idiom explanations, and cross-cultural communication patterns framed strictly as starting points to confirm with each patient. Use when writing or reviewing patient- or staff-facing copy, intake forms, chatbot scripts, or preparing the team for a specific patient's visit.
-
-**Triggers:** `college kid`, `chicken little college kid`, `inclusive language check`, `loaded phrase`, `cultural sensitivity note`, `patient communication culture`, `intake form languages`, `interpreter flag`
 
 ### `coding-agent-skills:chicken-little-executive-advisor`
 
