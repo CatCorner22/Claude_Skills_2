@@ -75,17 +75,47 @@ def sentences(text):
     return [p.strip() for p in parts if p.strip()]
 
 
+LEAD_LIMIT = 150
+
+
+def lead_clause(what):
+    """The capability phrase a reader scans for: what the skill *does*, in one phrase.
+
+    House descriptions open 'Does X — mechanism, mechanism, mechanism', so the text before
+    the first em-dash/colon/semicolon is the capability statement and is usually short.
+    Falling back to 'first sentence' does not work here: that clause commonly runs 300-600
+    characters before its first period, which truncated 86% of this column when the index
+    was first generated. Order of attempts: lead clause -> drop a trailing parenthetical ->
+    cut at the last clause boundary before the limit -> hard word-boundary truncation.
+    """
+    cand = re.split(r"\s+[—–]\s+|:\s+|;\s+", what, maxsplit=1)[0].strip()
+    if 12 <= len(cand) <= LEAD_LIMIT:
+        return cand
+    base = cand if len(cand) >= 12 else what
+    cut = base.split(" (")[0].strip()
+    if 12 <= len(cut) <= LEAD_LIMIT:
+        return cut
+    if len(base) > LEAD_LIMIT:
+        head = base[:LEAD_LIMIT]
+        for sep in (", ", " and ", " that ", " which "):
+            j = head.rfind(sep)
+            if j >= 40:
+                return head[:j].strip().rstrip(",") + "…"
+        return head.rsplit(" ", 1)[0].strip() + "…"
+    return base
+
+
 def index_fields(what):
     """Derive (optimized_for, when_to_use) deterministically from the what-part.
 
-    optimized_for = the first sentence (the lead capability clause).
+    optimized_for = the lead capability clause (see lead_clause).
     when_to_use   = the first sentence starting with 'Use ' (the house 'Use when...'
                     convention); falls back to the second sentence, then the first.
     """
     sents = sentences(what)
     if not sents:
         return "", ""
-    optimized = sents[0]
+    optimized = lead_clause(what)
     when = next((s for s in sents if re.match(r"^Use\b", s)), None)
     if when is None:
         when = sents[1] if len(sents) > 1 else sents[0]
