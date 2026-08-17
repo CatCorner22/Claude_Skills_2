@@ -125,7 +125,8 @@ R0 at practice level: **the average number of direct copies each instance spawne
 off the transmission tree's out-degrees (not an invented epidemiological statistic — just
 a name for the tree's branching rate).
 
-Worked example — the sweep found 7 instances; pass 3's tree shows:
+Worked example — the sweep found 8 instances (patient-zero template T, its descendants
+A–F, and one independent twin G); pass 3's tree shows:
 
 ```
 template T ──> A ──> B ──> (none)
@@ -136,7 +137,8 @@ G (independent Type-4 twin, no edge from T)
 ```
 
 - Out-degrees: T→4, A→1, C→1, B/D/E/F/G→0.
-- Pattern R0 = total transmissions / instances that had the chance to transmit
+- Pattern R0 = total transmissions / members of the transmission tree (G, the
+  independent twin, arose without transmission and sits outside the tree)
   = 6 / 7 ≈ 0.9 — near 1, so the pattern was still roughly self-sustaining.
 - Per-source: **T alone spawned 4** — the high-R0 node. Fixing A–G without fixing T
   leaves expected reinfection on every new project scaffolded from it.
