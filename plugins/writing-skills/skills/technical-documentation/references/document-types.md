@@ -8,6 +8,7 @@ below carries that mark. Re-verify against the primary sites before quoting exte
 ## Contents
 1. [The Diátaxis router](#1-the-diátaxis-router)
 2. [The quadrant audit protocol](#2-the-quadrant-audit-protocol)
+2a. [Owner, cadence, and "last verified" — the time-triggered half](#2a-owner-cadence-and-last-verified--the-time-triggered-half)
 3. [README anatomy — the first screen](#3-readme-anatomy--the-first-screen)
 4. [Architecture Decision Records](#4-architecture-decision-records)
 5. [Changelog + semantic versioning](#5-changelog--semantic-versioning)
@@ -48,18 +49,86 @@ Honesty notes carried from the dossier [snippet-only]:
 
 ## 2. The quadrant audit protocol
 
-For an existing docs corpus that "nobody uses":
-1. List every page/section as a row: title, current location, one-line summary.
+For an existing docs corpus that "nobody uses". **Audit on three axes, not one** — form (is it
+filed right?), ownership (does anyone answer for it?), and freshness (is it still true?). A page
+can be perfectly filed, beautifully written, and quietly wrong, and a form-only audit is blind to
+exactly that page.
+
+1. List every page/section as a row: title, current location, one-line summary, **owner (a person's
+   name), last-verified date, review cadence**.
 2. Assign each row a quadrant (T / H / R / E). Force a single choice; "both" means the
    section blends forms and gets split.
 3. Flag the misfits: how-to steps buried in explanations, reference tables inside
    tutorials, why-discussions inside how-tos. Each misfit is one fix-list item: move,
    split, or rewrite in the target form.
-4. Check coverage *against need*, not symmetry: a library needs a strong reference and
+4. **Flag the unowned and the unverified — the second fix list.** Any row with a blank owner, a blank
+   last-verified date, or a last-verified date older than its cadence is a finding, independent of how
+   well it is filed. This list is usually longer than the misfiled one and is the reason the corpus
+   is distrusted.
+5. Check coverage *against need*, not symmetry: a library needs a strong reference and
    a first tutorial; an internal process needs how-tos and one explanation. Empty
    quadrants are only gaps if a real reader arrives in that state.
-5. Wire the navigation so each form links sideways (tutorial → reference for details,
+6. Wire the navigation so each form links sideways (tutorial → reference for details,
    how-to → explanation for the why) instead of inlining the other form.
+7. **Resolve every unverified row one of three ways — and "leave it" is not one of them:**
+   **verify** it (do the specific check, stamp the date), **fix** it, or **retire** it (delete, or
+   mark deprecated with a date and a pointer to what replaced it). An unowned, unverified page costs
+   more than no page, because a reader cannot tell it from a live one; deletion is a legitimate and
+   often correct outcome. Without a retirement path a staleness audit produces guilt instead of a
+   cleaner corpus.
+
+Row template that makes the three axes visible:
+
+| Page | Form | Owner | Last verified | How verified | Cadence | Verdict |
+|---|---|---|---|---|---|---|
+| Run sheet: monthly extract | H | <name> | 2026-08-04 | ran it | on each use | current |
+| Data dictionary | R | <name> | 2025-11-12 | diffed vs schema | quarterly | **stale — verify** |
+| Utilization method note | E | *(blank)* | *(never)* | — | annual | **unowned + unverified** |
+
+## 2a. Owner, cadence, and "last verified" — the time-triggered half
+
+Docs-as-code (§8) is **change-triggered**: a behaviour change and its doc change ride the same PR,
+so review catches drift at the cheapest moment. That works beautifully for a doc sitting beside the
+code it describes, and does nothing at all for the docs people actually complain about — the method
+note, the data dictionary, the run sheet. Those rot without anyone's PR ever touching them: the
+upstream team renames a column, the assumption behind a definition stops holding, the tool the run
+sheet drives ships a new menu. No commit in your repo, no review, no signal. The complement is
+**time-triggered** review, and it needs three cheap mechanisms.
+
+**1. A named owner — one person, in the page.** "The team owns it" means nobody does. The owner's job
+is *not* to write the page; it is to answer for whether it is still true, and to be the name a reader
+can ask. Where a page has genuinely no owner, that is the finding: either someone adopts it or it
+gets retired.
+
+**2. A review cadence set by the page's rot rate**, not by a uniform policy — and Diátaxis form is a
+good predictor of rot rate, so the router does double duty:
+
+| Form | How it rots | Cheapest verification | Cadence |
+|---|---|---|---|
+| **Tutorial** | Fastest and most visibly — it must run end to end, so any change on the path breaks it | **Run it.** Mechanical, and automatable in CI where the path allows | Every release touching the path, plus a scheduled run |
+| **How-to / run sheet** | When the system or tool it drives changes | The operator verifies **on use** and stamps the date — the cheapest cadence there is, because it rides work already happening | On each use (flag if unused for a period — an unused run sheet may be a dead process) |
+| **Reference / data dictionary** | Silently, and worst — nobody notices a wrong column until a decision rests on it | **Diff the generated regions against the source** (§7); the hand-written residue needs a read | Quarterly, or on any upstream schema change |
+| **Explanation / method note** | By *assumption* drift rather than fact drift — which is exactly why link-checking and same-PR review never catch it | Ask the specific question: "would we still choose this, and are the alternatives we rejected still the live alternatives?" | Annual, plus whenever the thing it explains changes materially |
+| **ADR** | **It doesn't — by design** | n/a | **Never. Exempt explicitly** (see below) |
+
+**3. A "last verified" stamp, distinct from "last edited."** Git hands you last-*modified* for free
+and it is the misleading number: a typo fix resets it, so a page nobody has checked in two years
+reads as fresh the day someone reflows a paragraph. Record instead:
+
+    Owner: <name> · Last verified: 2026-08-04 by <name> — ran the tutorial end-to-end on a clean
+    machine · Review: quarterly
+
+Naming *how* it was verified is what stops the stamp from becoming a signature ritual: "read it and
+it looked fine" is not a verification, and writing the method down makes that obvious. Then make it
+mechanical, which is the honest completion of docs-as-code: **the build can warn or fail on any page
+whose last-verified date is past its cadence**, exactly as it already fails on a broken link. Render
+the stamp visibly in the page so a reader can price the page's trustworthiness themselves.
+
+**The ADR exemption is load-bearing — state it wherever the cadence policy lives.** ADRs are
+historical records; their value comes from being immutable (§4). A staleness sweep that "refreshes"
+old ADRs to match current reality destroys the exact trail a successor needs, and a review bot that
+flags them as stale will eventually persuade someone to do it. Exempt them by name. Their update
+mechanism is supersession, not verification.
 
 ## 3. README anatomy — the first screen
 
@@ -140,7 +209,10 @@ claim with no evidence. Worked example:
 ## [2.0.0] - 2026-08-01
 ### Changed
 - Quarterly capacity model now reads calendars from the HR feed instead of the
-  manual tab. **Breaking:** the `manual_calendar` input is gone (hence 2.0.0).
+  manual tab.
+### Removed
+- The `manual_calendar` input. **Breaking** — supply calendars through the HR
+  feed instead (hence 2.0.0).
 ### Fixed
 - Weekend shifts no longer double-counted in utilization (#41).
 
@@ -148,6 +220,16 @@ claim with no evidence. Worked example:
 ### Added
 - Per-team drill-down sheet in the output workbook.
 ```
+
+**Note the split, because it is the category rule most often broken.** One substitution generates
+*two* entries: **Changed** for the behaviour that now works differently, **Removed** for the thing
+that no longer exists. It is tempting to write the removal as a "Breaking:" clause inside the Changed
+line — and that is a filing error, because the categories are a contract a consumer reads
+selectively. Someone upgrading scans `### Removed` for everything that will break them; a removal
+buried in a Changed sentence is invisible to exactly the reader it was written for. Rule of thumb:
+**if a name that used to work no longer works, it goes under Removed**, whatever replaced it.
+(Same discipline: an input that still works but is on notice goes under **Deprecated**, with the
+removal date — that is the entry that gives consumers time.)
 
 Version *methods and models* too, not just software: an analysis whose assumptions
 change is a MINOR bump; one whose outputs stop being comparable to last quarter's is a
@@ -193,7 +275,14 @@ Documentation in version control, reviewed and built like software — Anne Gent
 - Docs live in the same repo as what they document; a behavior change and its doc
   change ride the same PR, so review catches drift at the cheapest moment.
 - Builds check what can be checked mechanically: links, spelling, example code that
-  actually runs.
+  actually runs, **and the last-verified date against each page's cadence** (§2a) — a date past its
+  review interval is as mechanically checkable as a dead link.
+- **Know the boundary of this practice.** Same-PR review is *change-triggered*: it catches drift only
+  in docs coupled to a change someone is already making. Docs whose subject moves without any commit
+  in this repo — the data dictionary an upstream team's schema change invalidates, the method note
+  whose assumption stopped holding — are invisible to it. Those need the time-triggered half:
+  owner, cadence, last-verified stamp (§2a). Claiming docs-as-code as the whole answer is how a
+  well-run repo ends up with a confidently wrong data dictionary.
 - Prose quality in that review is `writing-skills:adams-smart-brevity`'s job;
   commit/PR prose is `coding-agent-skills:git-and-code-review`'s.
 
@@ -202,12 +291,20 @@ Documentation in version control, reviewed and built like software — Anne Gent
 An analyst owns a quarterly capacity study (the same skeleton fits an attorney's
 matter playbook, an ops process, or a developer's service). The docs sort like this:
 
-| Artifact | Diátaxis form | Content |
-|---|---|---|
-| First-time walkthrough | Tutorial | A new teammate runs last quarter's study end-to-end on frozen sample data; every step guaranteed to work |
-| Run sheet | How-to guide | Trigger (day 3 after quarter close), steps, expected outputs, verification totals, escalation |
-| Data dictionary | Reference | Every input column and derived field: source, type, allowed values, owner — uniform entries, generated from the schema where possible |
-| Method note | Explanation | Why utilization is defined this way, alternatives rejected, known limits — written per `writing-skills:explanation-design` |
+| Artifact | Diátaxis form | Content | Owner · verification · cadence |
+|---|---|---|---|
+| First-time walkthrough | Tutorial | A new teammate runs last quarter's study end-to-end on frozen sample data; every step guaranteed to work | Study owner · run it on a clean machine · each release touching the path + quarterly |
+| Run sheet | How-to guide | Trigger (day 3 after quarter close), steps, expected outputs, verification totals, escalation | The operator on rotation · verified on use, date stamped · every use |
+| Data dictionary | Reference | Every input column and derived field: source, type, allowed values, owner — uniform entries, generated from the schema where possible | Data steward · diff generated regions vs schema · quarterly + on upstream change |
+| Method note | Explanation | Why utilization is defined this way, alternatives rejected, known limits — written per `writing-skills:explanation-design` | Analyst who owns the method · "would we still choose this?" · annual + on material change |
+| ADRs | (record, not a quadrant) | One decision each, Context/Decision/Consequences | Author, permanently · **exempt from freshness review** · never |
+
+Note which page in that table docs-as-code protects and which it doesn't. The tutorial and run sheet
+sit on paths a change usually touches, so a same-PR review has a chance at them. The **data
+dictionary** breaks when an upstream team renames a column — no commit here — and the **method note**
+breaks when an assumption quietly stops holding, which no diff can see. Those two are why the
+owner/cadence/last-verified columns exist, and they are reliably the two pages a team describes as
+"out of date" years before anyone fixes them.
 
 Decisions and change history attach to the same corpus: ADR-0001 records why the HR
 feed replaced the manual calendar (context: two silent staleness incidents;

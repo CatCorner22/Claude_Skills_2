@@ -8,7 +8,10 @@ Part B (§6–§7) qualifies the process — in that order, always.
 2. The ANOVA decomposition, explained
 3. Acceptance criteria — %GRR and ndc
 4. Attribute agreement studies (pass/fail judgments)
+4a. Kappa is prevalence-sensitive — read it with the table
 5. LLM-as-judge agreement protocol — worked example
+5a. What counts as a repeat trial for an LLM judge
+5b. Operator-specific biases of an LLM judge, and their MSA controls
 6. Process capability — Cp and Cpk, with the stability precondition
 7. Worked capability example — off-center, then centered
 
@@ -77,26 +80,115 @@ run the attribute variant:
      κ = (p_observed − p_chance) / (1 − p_chance).
 4. Customary bars: κ > 0.75 and effectiveness ≥ 90% → acceptable; κ 0.40–0.75 → conditional;
    κ < 0.40 → the judgment system is unusable. Raw percent agreement alone flatters — with an
-   85% base rate of "pass", two coin-flippers agree often. Always report kappa.
+   85% base rate of "pass", two coin-flippers agree often. **Always report kappa — and never
+   report kappa alone.** It is prevalence-sensitive in the opposite direction, so a κ quoted
+   without its base rate and its 2×2 table is as misleading as a raw percentage. §4a is the rule.
+
+## 4a. Kappa is prevalence-sensitive — read it with the table
+
+Kappa corrects raw agreement for the agreement two raters would reach by chance:
+κ = (p_o − p_e)/(1 − p_e), where p_e is built from the raters' **marginal** rates. That makes κ a
+big improvement on p_o — and gives it a well-documented pathology in the other direction: **skewed
+marginals inflate p_e, which depresses κ even when the raters disagree about very little.** Feinstein
+& Cicchetti named it "high agreement but low kappa" (*Journal of Clinical Epidemiology* 43(6), 1990,
+543–549; the companion paper on resolving the paradoxes follows at 551–558) [snippet-only,
+cross-checked].
+
+**Same disagreements, two base rates.** Thirty items, six disagreements (three each way) in both
+tables — identical raw agreement of 24/30 = **80%**:
+
+*Table A — 70% pass rate:*
+
+| | Rater B: pass | Rater B: fail | row total |
+|---|---|---|---|
+| **Rater A: pass** | 18 | 3 | 21 |
+| **Rater A: fail** | 3 | 6 | 9 |
+| **column total** | 21 | 9 | 30 |
+
+*Table B — 50% pass rate:*
+
+| | Rater B: pass | Rater B: fail | row total |
+|---|---|---|---|
+| **Rater A: pass** | 12 | 3 | 15 |
+| **Rater A: fail** | 3 | 12 | 15 |
+| **column total** | 15 | 15 | 30 |
+
+- **Table A (70% base rate):** p_o = (18 + 6)/30 = 0.80; p_e = 0.70² + 0.30² = 0.49 + 0.09 = 0.58
+  → κ = (0.80 − 0.58)/(1 − 0.58) = 0.22/0.42 ≈ **0.52**.
+- **Table B (50% base rate):** p_o = (12 + 12)/30 = 0.80; p_e = 0.50² + 0.50² = 0.50
+  → κ = (0.80 − 0.50)/(1 − 0.50) = 0.30/0.50 = **0.60**.
+
+Nothing about the raters changed. The *item mix* changed, and κ moved 0.08 — enough to move a verdict
+across a threshold in the middle of the conditional band. Consequences for practice:
+
+- **Never compare kappas across studies with different base rates.** A κ of 0.55 on a 95%-pass item
+  set can represent a better judgment system than a κ of 0.65 on a balanced one. The acceptance bars
+  in §4 are only meaningful with the base rate stated beside them.
+- **Report the 2×2 table itself, always.** Every agreement statistic — p_o, κ, effectiveness — is a
+  lossy summary of that table, and the table is four numbers. Publishing it makes the paradox
+  self-evident and lets a reader recompute anything.
+- **Balance the item set — which §4 already tells you to do for a different reason.** Deliberately
+  including borderline cases pushes the base rate toward 50%, which both sharpens diagnosticity
+  *and* stops kappa from being artificially depressed. Two benefits, one action.
+- **Prevalence-adjusted statistics are a supplement, never a substitute.** PABAK
+  (prevalence-adjusted bias-adjusted kappa, Byrt/Bishop/Carlin 1993 [snippet-only, cross-checked])
+  is κ computed as though the marginals were balanced; for two categories it reduces to
+  `2·p_o − 1`, which here is 2(0.80) − 1 = **0.60** — exactly the balanced-table κ above, as it must
+  be. Gwet's AC1 is a related alternative. Report one *beside* κ if the marginals are badly skewed,
+  and say which is which. Do not swap κ for PABAK because PABAK is kinder: it earns the higher number
+  by discarding real information about the marginals, and that criticism is the standard one made of
+  it [background — verify].
+- **The verdict sentence, therefore, has three parts:** "p_o = 0.80 on a 70%-pass set, κ ≈ 0.52,
+  effectiveness 80% — conditional." Any one part alone is arguable in bad faith.
 
 ## 5. LLM-as-judge agreement protocol — worked example
 
 An LLM judge is an operator; qualify it like one, *before* its scores drive prompt choices,
 skill evals, or model comparisons.
 
-**Setup:** 30 eval transcripts scored pass/fail against a rubric. Judges: the same LLM judge run
-twice at varied temperature (J1a, J1b), a second model as judge (J2), and a human reference on
-all 30.
+**Setup:** 30 eval transcripts scored pass/fail against a rubric, deliberately including borderline
+cases. Judges: the same LLM judge run twice under a **fixed, production-identical configuration**
+with only the presentation order re-randomized (J1a, J1b — see §5a for why this, and not a
+temperature change, is the legitimate repeat trial), a second model from a different family as
+judge (J2), and a human-adjudicated reference on all 30.
 
-**Results (illustrative):**
-- Within-judge (J1a vs J1b): 27/30 agree → 90% raw. Human pass rate 70%, judge pass rate ~73%;
-  p_chance = 0.70·0.73 + 0.30·0.27 ≈ 0.59.
-- Judge vs human (J1 consensus vs reference): 24/30 → p_o = 0.80,
-  **κ = (0.80 − 0.59) / (1 − 0.59) ≈ 0.51** — *conditional*, not acceptable.
+**Results (illustrative, with the tables — per §4a).**
 
-**Reading:** κ ≈ 0.5 means roughly half the judge's beyond-chance calls track the human standard.
-The judge's scores can support coarse verdicts (clear passes/fails) but **cannot rank close
-alternatives** — a 2-point score delta between two prompts is inside the judge's own noise.
+*Within-judge repeatability, J1a vs J1b* — 27/30 agree → p_o = **90%** raw:
+
+| | J1b: pass | J1b: fail | |
+|---|---|---|---|
+| **J1a: pass** | 20 | 1 | (21) |
+| **J1a: fail** | 2 | 7 | (9) |
+| | (22) | (8) | 30 |
+
+p_e = (21/30)(22/30) + (9/30)(8/30) = 0.5133 + 0.0800 = 0.5933 →
+**κ = (0.90 − 0.5933)/(1 − 0.5933) = 0.3067/0.4067 ≈ 0.75.**
+
+*Judge vs human reference* — 24/30 agree → p_o = **80%** raw, at a 70% human pass rate:
+
+| | Reference: pass | Reference: fail | |
+|---|---|---|---|
+| **J1: pass** | 18 | 3 | (21) |
+| **J1: fail** | 3 | 6 | (9) |
+| | (21) | (9) | 30 |
+
+p_e = 0.70² + 0.30² = 0.58 → **κ = (0.80 − 0.58)/(1 − 0.58) = 0.22/0.42 ≈ 0.52** — *conditional*,
+not acceptable. Effectiveness (share matching the reference) = 24/30 = **80%**, below the ≥ 90% bar.
+
+**Reading — and note the two numbers say different things.** Within-judge κ ≈ 0.75 sits exactly on
+the acceptance boundary: the judge is roughly repeatable with itself. Judge-vs-human κ ≈ 0.52 is
+squarely conditional. **Repeatable but not aligned** is a *reproducibility* diagnosis, not a
+repeatability one — the judge applies a stable rule that is not the human's rule, which points at the
+rubric's operational definitions rather than at decoding noise. And per §4a, both κ figures must be
+read with their base rates attached: at this 70% pass rate the same 80% agreement would score κ =
+0.60 on a balanced item set, so 0.52 is partly a property of the item mix, and the honest verdict
+line is "p_o = 0.80 on a 70%-pass set, κ ≈ 0.52, effectiveness 80% — conditional."
+
+Either way, the practical conclusion holds: the judge's scores can support coarse verdicts (clear
+passes/fails) but **cannot rank close alternatives** — a 2-point score delta between two prompts is
+inside the judge's own noise.
+
 **Fixes, in order:** tighten the rubric's operational definitions (reproducibility problem);
 add few-shot anchor examples of adjudicated borderline cases; ensemble judges and take majority;
 re-run the study after each change. Item-level disagreement lists are the diagnostic gold —
@@ -105,6 +197,76 @@ they show *which kinds* of items the judge misreads (the operator×part interact
 Apply the same protocol to any recon match-rate claim: before crediting new rules with a gain,
 show two engine runs and two human reviewers agree on what counts as "a match" — else the
 "improvement" may be reader noise.
+
+## 5a. What counts as a repeat trial for an LLM judge
+
+Repeatability means **the same operator measuring the same part again under the same conditions**.
+Everything in a gage study depends on that "same conditions," and for an LLM judge it is easy to
+break in either direction. Two opposite traps, both of which produce a number that looks like
+repeatability and is not:
+
+**Trap 1 — varying temperature between trials measures a different system, not the same one twice.**
+Temperature is a *setting of the gauge*. Score J1a at 0.2 and J1b at 0.9 and the disagreement you
+observe is a mixture of sampling noise and a systematic effect of the setting change — which is not
+repeatability at all. In gage vocabulary you have accidentally run a two-level factor and reported
+it as a re-trial, the way an operator who changed the micrometer between readings has not
+demonstrated a repeatable micrometer. Worse, it is unclear which system you qualified: a judge
+certified across 0.2–0.9 certifies neither, and **the configuration you qualify must be the
+configuration you ship** (same model version, same prompt, same decoding parameters).
+
+**Trap 2 — temperature 0 manufactures perfect repeatability.** Greedy decoding on identical input is
+near-deterministic, so re-running it returns the same verdict and within-judge agreement comes out at
+or near 100%, κ ≈ 1.0. That is not evidence; it is a cached function evaluated twice. And it is
+exactly the artifact the blinding-and-randomization rule in §1 exists to prevent for humans: an
+operator who *remembers* the part gives a flattering repeatability number, and a deterministic decoder
+is an operator with perfect memory of every part. (Residual variation you may still see at
+temperature 0 — from batching, kernel non-determinism, or routing — is infrastructure noise, not
+judgment variability. Do not report it as repeatability either.)
+
+**So what is the legitimate repeat trial?** Hold the configuration fixed and vary the *presentation*,
+which is precisely what §1's randomization rule already prescribes for parts:
+
+1. **Swap the order in any pairwise comparison** and require the verdict to be consistent. This is
+   the highest-value repeat trial available, because order is the judge's best-documented weakness
+   (§5b) and swapped-order agreement is a genuine same-part re-measurement.
+2. **Re-randomize item order and batch composition**, and score each item in a **fresh context** with
+   no history of the other items. Neighbouring items are the LLM analogue of an operator anchoring on
+   the last part.
+3. **Re-order the rubric's criteria** between trials while keeping their content identical.
+4. **Repeat at the production temperature, whatever it is.** If production runs greedy, say so and
+   report that within-judge repeatability is ~1.0 *by construction and therefore uninformative* —
+   then get your repeat signal from (1)–(3) instead. Reporting a construction as a pass is the
+   failure mode; declaring it is the fix.
+5. **If you genuinely want to know how sensitive the judge is to decoding settings**, run that as its
+   own labelled arm — a deliberate factor, reported as a setting effect alongside repeatability and
+   reproducibility, never folded into either.
+
+## 5b. Operator-specific biases of an LLM judge, and their MSA controls
+
+If an LLM judge is an operator, then it has operator pathologies — and the useful thing about the MSA
+frame is that it already contains the controls; they just have to be pointed at the right failure.
+Three are well documented in the LLM-as-judge literature (Zheng et al., "Judging LLM-as-a-Judge with
+MT-Bench and Chatbot Arena," which names position, verbosity and self-enhancement bias plus limited
+reasoning as the method's core limitations) [snippet-only, cross-checked]:
+
+| Bias | What the judge does | MSA reading | Control |
+|---|---|---|---|
+| **Position / order bias** | Prefers whichever response sits in a given slot — reported preferences for the first position running as high as ~75% for some models, and even strong judges agreeing with themselves on swapped pairs only around two-thirds of the time [snippet-only, cross-checked] | The gauge reads differently depending on how the part was presented — a **repeatability** failure caused by presentation, and the reason presentation must be randomized | **Swap the A/B order and require consistency.** Report swapped-order agreement as a headline statistic; count only consistent verdicts, or record inconsistent pairs as ties. This is an MSA repeat trial in the strict sense (§5a) |
+| **Verbosity bias** | Prefers longer, more elaborate answers regardless of quality | A **gauge bias correlated with a nuisance characteristic of the part** — the ruler reads long on long parts | Stratify effectiveness by response length and report whether verdicts track token count; include padded-but-not-better probe items in the reference set; state length limits in the rubric |
+| **Self-preference / self-enhancement bias** | Rates its own outputs more favourably than others' [snippet-only, cross-checked] | The operator has a stake in the part — the reason inspection is kept independent of production | **Never let the model that generated the candidates be their only judge.** Use a judge from a different family as J2, blind the judge to authorship (the §1 blinding rule extended from item identity to item *provenance*), and record which model produced each item so the effect is measurable rather than assumed |
+
+Two more worth designing against, though they sit outside the documented trio:
+- **Scale compression.** Judges cluster on a few values of a 1–10 scale, which destroys ndc — the
+  system cannot resolve as many distinct groupings as the scale implies. Report the actual number of
+  distinct scores used, and prefer a short, anchored scale you can defend over a long one you cannot.
+- **Rubric drift across a long batch.** Standards shift as a session accumulates context. Fresh
+  context per item, and re-randomized order, are the same control (§5a item 2).
+
+Design rule that follows from all of it: **an LLM-judge qualification study reports at least four
+things** — swapped-order consistency, within-judge agreement under a fixed production configuration,
+between-judge agreement against a judge from another family, and effectiveness against a
+human-adjudicated reference — each with its 2×2 table and base rate (§4a). Any one of them alone can
+be made to look good.
 
 ## 6. Process capability — Cp and Cpk, with the stability precondition
 

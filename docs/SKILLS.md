@@ -49,9 +49,9 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:ab-test-design` — or just describe the task.
 
-**What it does:** Designs trustworthy online controlled experiments — the design-and-operations half of A/B testing, before any data arrives: randomization unit choice and interference, minimum detectable effect sizing, sample ratio mismatch as the first validity check, the peeking problem and pre-committed stopping rules, guardrail metrics plus an overall evaluation criterion, A/A tests, novelty and primacy effects, and Twyman's law. Analysis of a finished test (p-values, significance) belongs to data-analytics-bi-skills:statistical-inference; offline multi-factor factorial studies belong to continuous-improvement-skills:design-of-experiments. Use when planning a live variant test of a page, form, letter, cadence, or process.
+**What it does:** Designs trustworthy online controlled experiments — the design half of A/B testing, before any data arrives: randomization unit and interference, minimum detectable effect sizing, variance reduction with CUPED and stratification, sample ratio mismatch as the first validity check, the peeking problem and pre-committed stopping rules, guardrails with an overall evaluation criterion, A/A tests, novelty and primacy effects, and Twyman's law. Analysis of a finished test belongs to data-analytics-bi-skills:statistical-inference; offline factorial studies to continuous-improvement-skills:design-of-experiments. Use when planning a live variant test of a page, form, letter, cadence, or process.
 
-**Triggers:** `design an A/B test`, `online experiment design`, `online controlled experiment`, `sample ratio mismatch`, `SRM`, `peeking`, `minimum detectable effect`, `MDE`, `guardrail metric`, `A/A test`, `overall evaluation criterion`, `OEC`, `Twyman's law`, `novelty effect`
+**Triggers:** `design an A/B test`, `online experiment design`, `online controlled experiment`, `sample ratio mismatch`, `SRM`, `peeking`, `minimum detectable effect`, `MDE`, `CUPED`, `variance reduction`, `guardrail metric`, `A/A test`, `overall evaluation criterion`, `OEC`, `Twyman's law`, `novelty effect`
 
 ### `data-analytics-bi-skills:assertion-evidence-deck`
 
@@ -65,9 +65,9 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:causal-inference` — or just describe the task.
 
-**What it does:** Establishes whether X actually caused Y when there was no experiment — draws the causal DAG first (confounders, mediators, colliders; backdoor thinking), then names what identifies the effect: randomization when available (that path is continuous-improvement-skills:design-of-experiments), otherwise the quasi-experimental toolkit — difference-in-differences, instrumental variables, regression discontinuity — each with its key assumption in plain terms. Applies Hill's considerations as viewpoints, never a checklist, plus the humility rail: what observational data cannot rule out. Association tests belong to data-analytics-bi-skills:statistical-inference. Use when a policy, change, or exposure is claimed to have caused an outcome.
+**What it does:** Establishes whether X caused Y when there was no experiment — draws the causal DAG first (confounders, mediators, colliders; backdoor thinking), then names what identifies it: randomization when available (that path is continuous-improvement-skills:design-of-experiments), else the quasi-experimental toolkit — difference-in-differences, instrumental variables, regression discontinuity — each with its assumption, scope limit, and inference trap. Applies Hill's considerations as viewpoints, never a checklist, plus the humility rail: what observational data cannot rule out. Association tests belong to data-analytics-bi-skills:statistical-inference. Use when a policy, change, or exposure is claimed to have caused an outcome.
 
-**Triggers:** `causal inference`, `correlation vs causation`, `correlation is not causation`, `does X cause Y`, `confounder`, `confounding`, `collider bias`, `difference-in-differences`, `instrumental variable`, `regression discontinuity`, `natural experiment`
+**Triggers:** `causal inference`, `correlation vs causation`, `correlation is not causation`, `does X cause Y`, `confounder`, `confounding`, `collider bias`, `difference-in-differences`, `staggered rollout`, `instrumental variable`, `regression discontinuity`, `natural experiment`
 
 ### `data-analytics-bi-skills:dashboard-design`
 
@@ -97,7 +97,7 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:exploratory-data-analysis` — or just describe the task.
 
-**What it does:** Profiles a dataset before any modeling or reporting, in the Tukey tradition: establishes shape and grain (what one row represents, tested by key uniqueness), checks column types against meaning, quantifies and classifies missingness per column, goes univariate first (distributions, skew) then bivariate (correlation, cross-tabs, group-by), flags outliers (IQR fence, z-score) and investigates before deleting, plots before trusting summaries (Anscombe's quartet), and ends in a data-quality memo handed to cleaning. Use when first inspecting a new dataset, sizing up data quality, or deciding what needs fixing before analysis.
+**What it does:** Profiles a dataset before any modeling or reporting, in the Tukey (1977) tradition of looking at the data before summarizing it: establishes shape and grain (what one row represents, tested by key uniqueness), checks column types against meaning, quantifies and classifies missingness per column, goes univariate first (centre, spread, shape as screening signals — choosing the summary you publish belongs to descriptive-statistics) then bivariate (correlation, cross-tabs, group-by), flags outliers (IQR fence, z-score) and investigates before deleting, plots before trusting summaries (Anscombe's quartet), and ends in a data-quality memo handed to cleaning. Use when first inspecting a new dataset, sizing up data quality, or deciding what needs fixing before analysis.
 
 **Triggers:** `EDA`, `exploratory data analysis`, `data profiling`, `profile the data`, `first look at data`, `distribution`, `outliers`, `correlation`, `cross-tab`, `missing data`, `data quality check`, `get to know the data`, `what does one row represent`, `Anscombe`
 
@@ -115,15 +115,15 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **What it does:** Writes, reviews, and optimizes analytical SQL — joins, GROUP BY aggregation, window functions, CTEs, subqueries, and date/time handling — with a working sense of performance (grain, sargability, indexing). Delivers the query as a package: a grain comment on top, the CTE-layered query, stated row-count/known-total validation, and dialect caveats. Use when turning a business question into a query for a report or analysis, adding window logic like running totals or rankings, or reviewing a query for correctness and speed.
 
-**Triggers:** `SQL`, `query`, `write a query`, `join`, `GROUP BY`, `aggregate`, `window function`, `OVER`, `PARTITION BY`, `running total`, `moving average`, `rank`, `lag`, `lead`, `CTE`, `subquery`, `QUALIFY`, `slow query`, `optimize query`, `group by grain`
+**Triggers:** `SQL`, `query`, `write a query`, `join`, `GROUP BY`, `aggregate`, `window function`, `OVER clause`, `PARTITION BY`, `running total`, `moving average`, `rank`, `lag`, `lead`, `CTE`, `subquery`, `QUALIFY`, `slow query`, `optimize query`, `group by grain`
 
 ### `data-analytics-bi-skills:statistical-inference`
 
 **Invoke:** `/data-analytics-bi-skills:statistical-inference` — or just describe the task.
 
-**What it does:** Reasons from a sample to a population with confidence intervals and hypothesis tests (t-test, chi-square, ANOVA) — choosing the right test, checking its assumptions, and interpreting p-values, effect size, and Type I/II errors correctly rather than treating "significant" as a verdict. Use when testing a claim, comparing groups, running an A/B test, or quantifying the uncertainty of an estimate from a sample.
+**What it does:** Reasons from a sample to a population with confidence intervals and hypothesis tests (t-test, chi-square, ANOVA, plus bootstrap and permutation methods) — choosing the right test, checking its assumptions, naming what each test's null actually is, gating an experiment's validity before interpreting it, and reading p-values, effect size, and Type I/II errors correctly rather than treating "significant" as a verdict. Use when testing a claim, comparing groups, running an A/B test, or quantifying the uncertainty of an estimate from a sample.
 
-**Triggers:** `hypothesis test`, `p-value`, `statistical significance`, `confidence interval`, `t-test`, `chi-square`, `ANOVA`, `effect size`, `sampling`, `sampling distribution`, `type I error`, `type II error`, `statistical power`, `A/B test`, `significance level`, `null hypothesis`
+**Triggers:** `hypothesis test`, `p-value`, `statistical significance`, `confidence interval`, `t-test`, `chi-square`, `ANOVA`, `effect size`, `sampling`, `sampling distribution`, `type I error`, `type II error`, `statistical power`, `A/B test`, `significance level`, `null hypothesis`, `bootstrap confidence interval`, `permutation test`, `Mann-Whitney`, `nonparametric test`
 
 ### `data-analytics-bi-skills:survey-and-sampling-design`
 
@@ -167,7 +167,7 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:excel-automation-python` — or just describe the task.
 
-**What it does:** Reads, writes, and formats real Excel workbooks with Python — pandas read_excel/to_excel for data in and out, openpyxl for the document layer (formulas as strings, number formats, widths, freeze panes, styling), xlsxwriter for write-only speed, and the template-workbook pattern where styling lives in a human-maintained file and the script only moves numbers. Reads defensively (shifted headers, merged cells, numbers-as-text, leading-zero loss on IDs, stale formula caches) and verifies output totals against the source. Use when automating an Excel report, converting data to a formatted .xlsx, reading a messy workbook into a DataFrame, or deciding between pandas and openpyxl.
+**What it does:** Reads, writes, and formats real Excel workbooks with Python — pandas read_excel/to_excel for data in and out, openpyxl for the document layer (formulas as strings, number formats, widths, freeze panes, styling), xlsxwriter for write-only speed, and the template-workbook pattern where styling lives in a human-maintained file and the script only moves numbers — so recurring spreadsheet deliverables become a verified script instead of hand work. Reads defensively (shifted headers, merged cells, numbers-as-text, leading-zero loss on IDs, stale formula caches) and verifies output totals against the source. Use when automating an Excel report, converting data to a formatted .xlsx, reading a messy workbook into a DataFrame, or deciding between pandas and openpyxl.
 
 **Triggers:** `excel automation`, `openpyxl`, `write xlsx`, `read excel python`, `pandas to_excel`, `format excel with python`, `excel report script`, `xlsxwriter`, `automate spreadsheet`, `excel formulas python`, `excel template python`, `ExcelWriter`
 
@@ -237,9 +237,9 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 **Invoke:** `/machine-learning-skills:model-evaluation` — or just describe the task.
 
-**What it does:** Chooses the right metric and validation scheme for a model, guards against data leakage and overfitting, and compares every result against a baseline. Covers train/validation/test discipline, k-fold and time-series cross-validation, regression metrics (RMSE/MAE/R²) versus classification metrics (precision/recall/F1, ROC AUC vs PR AUC, calibration), confusion-matrix and threshold choice tied to error costs, and the common sources of leakage. Use when validating any model or picking a metric or decision threshold.
+**What it does:** Chooses the right metric and validation scheme for a model, guards against data leakage and overfitting, and compares every result against a baseline. Covers train/validation/test discipline, k-fold and time-series cross-validation, regression metrics (RMSE/MAE/R²) versus classification metrics (precision/recall/F1, ROC AUC vs PR AUC, calibration), confusion-matrix reading and threshold choice made on validation and tied to error costs, a confidence interval on the reported metric, performance by slice, label-quality checks, and the common sources of leakage. Use when validating any model or picking a metric or decision threshold.
 
-**Triggers:** `model evaluation`, `evaluate a model`, `cross-validation`, `k-fold`, `overfitting`, `underfitting`, `ROC AUC`, `precision recall`, `PR AUC`, `RMSE`, `R2`, `data leakage`, `train test split`, `confusion matrix`, `threshold`, `calibration`
+**Triggers:** `model evaluation`, `evaluate a model`, `cross-validation`, `k-fold`, `overfitting`, `underfitting`, `ROC AUC`, `precision recall`, `PR AUC`, `RMSE`, `R2`, `data leakage`, `train test split`, `confusion matrix`, `threshold`, `calibration`, `subgroup performance`, `slice evaluation`, `label quality`
 
 ### `machine-learning-skills:supervised-modeling`
 
@@ -253,9 +253,9 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 **Invoke:** `/machine-learning-skills:time-series-forecasting` — or just describe the task.
 
-**What it does:** Builds and evaluates time-series forecasts with proper temporal validation — decomposition and stationarity checks, naive and seasonal-naive baselines first, classical models (ETS/Holt-Winters, ARIMA/SARIMA), and ML approaches with lagged and exogenous features — using time-ordered splits and rolling-origin backtesting, and metrics chosen for the series. Use when forecasting a series over time such as cash flow, account balances, transaction volumes, or collections.
+**What it does:** Builds and evaluates time-series forecasts with proper temporal validation — decomposition and stationarity checks, naive and seasonal-naive baselines first, classical models (ETS/Holt-Winters, ARIMA/SARIMA), and ML approaches with lagged and exogenous features — using time-ordered splits, rolling-origin backtesting with model selection re-run inside each origin, a skill-vs-baseline ratio at the decision horizon, and empirical prediction intervals with a coverage check. Use when forecasting a series over time such as cash flow, account balances, transaction volumes, or collections.
 
-**Triggers:** `time series`, `forecast`, `forecasting`, `ARIMA`, `SARIMA`, `ETS`, `Holt-Winters`, `exponential smoothing`, `seasonality`, `backtesting`, `rolling forecast`, `rolling origin`, `predict future values`, `trend and seasonality`
+**Triggers:** `time series`, `forecast`, `forecasting`, `ARIMA`, `SARIMA`, `ETS`, `Holt-Winters`, `exponential smoothing`, `seasonality`, `backtesting`, `rolling forecast`, `rolling origin`, `predict future values`, `trend and seasonality`, `prediction interval`, `forecast uncertainty`
 
 ## `continuous-improvement-skills`
 
@@ -275,9 +275,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:design-of-experiments` — or just describe the task.
 
-**What it does:** Designs and analyzes efficient multi-factor experiments — full and fractional two-level factorials and Plackett-Burman arrays, randomized run order, replication, main effects and interactions with resolution and aliasing explained in plain words, and Taguchi robustness against noise factors — so many factors are tested at once instead of one at a time. Use when deciding which of many candidate factors actually matter, tuning settings such as reconciliation tolerances or prompt-model-temperature combinations, or replacing slow one-factor-at-a-time trials with a designed test.
+**What it does:** Designs and analyzes multi-factor experiments — full and fractional two-level factorials and Plackett-Burman arrays, each design's true resolution and alias structure in plain words, run and replicate sizing for a target effect size, randomized run order, blocking and split-plots for factors that cannot be randomized, main effects and interactions judged against a noise yardstick (Lenth's PSE when unreplicated), and Taguchi robustness against noise factors with the combined-array critique of it — so many factors are tested at once. Use when deciding which of many candidate factors actually matter, tuning settings such as tolerance or prompt, model, and effort-level combinations, or replacing slow one-factor-at-a-time trials with a designed test.
 
-**Triggers:** `design of experiments`, `DOE`, `factorial`, `fractional factorial`, `which factors actually matter`, `orthogonal array`, `Taguchi`, `robust design`, `one-factor-at-a-time is too slow`
+**Triggers:** `design of experiments`, `DOE`, `factorial`, `fractional factorial`, `which factors actually matter`, `orthogonal array`, `screening design`, `split-plot`, `Taguchi`, `robust design`, `one-factor-at-a-time is too slow`
 
 ### `continuous-improvement-skills:dmaic-problem-solving`
 
@@ -323,7 +323,7 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:measurement-systems-analysis` — or just describe the task.
 
-**What it does:** Answers two questions: can this measurement be trusted, and is the process behind it capable? Part A runs Gage R&R — a crossed study (10 parts × 3 operators × 3 trials, blind and randomized) decomposed by ANOVA into repeatability, reproducibility, and part-to-part variation, judged on %GRR and distinct categories — plus attribute agreement studies for pass/fail judgments, including LLM-as-judge scoring, measuring judge agreement before any eval score is trusted. Part B computes process capability, Cp and Cpk against spec limits, only after stability is confirmed on a control chart. Use when validating a metric or gauge, measuring inter-rater or judge agreement, or judging a stable process against its spec limits.
+**What it does:** Answers two questions no metric-driven decision should skip: can this measurement be trusted, and is the process capable? Part A runs Gage R&R — a crossed study (10 parts × 3 operators × 3 trials, blind and randomized) decomposed by ANOVA into repeatability, reproducibility, and part-to-part variation, judged on %GRR and ndc — plus attribute agreement studies for pass/fail judgments, including LLM-as-judge scoring, where agreement across judges and repeated runs is measured before any eval score is trusted. Part B computes capability, Cp and Cpk against spec limits, only after stability is confirmed on a control chart. Use when validating a metric or gauge, measuring inter-rater or judge agreement, or judging a stable process against its spec limits.
 
 **Triggers:** `gage R&R`, `measurement systems analysis`, `can I trust this metric`, `repeatability and reproducibility`, `inter-rater agreement`, `attribute agreement`, `LLM judge agreement`, `process capability`, `Cp`, `Cpk`, `capability study`
 
@@ -365,13 +365,13 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **What it does:** Documents the current best-known method for a repeatable task as standard work (an SOP), so the process is stable enough to improve — the Toyota trio of takt time, work sequence, and standard in-process stock, plus the TWI Job Instruction breakdown of steps, key points, and the reason behind each; adds visual management so deviations announce themselves, verified training, and a review cadence that keeps the standard a living baseline every kaizen updates. Fits any recurring task — a weekly report, an intake review, a handoff, a release. Use when documenting, standardizing, or stabilizing a process that varies by who does it, capturing tribal knowledge, or writing an SOP or work instruction people will follow.
 
-**Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize`, `visual management`, `TWI`, `job instruction`, `job breakdown`, `takt time`, `everyone does it differently`, `tribal knowledge`
+**Triggers:** `standard work`, `standardized work`, `SOP`, `standard operating procedure`, `work instruction`, `standardize a process`, `visual management`, `TWI`, `job instruction`, `job breakdown`, `takt time`, `everyone does it differently`, `tribal knowledge`
 
 ### `continuous-improvement-skills:structured-ideation`
 
 **Invoke:** `/continuous-improvement-skills:structured-ideation` — or just describe the task.
 
-**What it does:** Runs structured idea-generation sessions that separate divergence from convergence: brainwriting (6-3-5 silent rounds) as the default over open brainstorming, quantity targets with judgment deferred, SCAMPER prompts and creative constraints when the well runs dry, and convergence by explicit criteria (effort/impact matrix, weighted scoring) instead of applause volume — with the LLM as anonymity engine, fatigue-proof idea partner, and wild-card generator of deliberately distant analogies. Grounded in why interacting groups underproduce (production blocking and evaluation apprehension — Diehl & Stroebe). Use when a person or team needs many options for a defined problem, an idea session is stalling or dominated by a few voices, or a raw pile of ideas needs honest narrowing.
+**What it does:** Runs structured idea-generation sessions that separate divergence from convergence and never let the room do both at once: brainwriting (6-3-5 silent rounds) as the default over open brainstorming, quantity targets with judgment deferred, SCAMPER prompts and creative constraints when the well runs dry, and convergence by explicit criteria (effort/impact matrix, weighted scoring) instead of applause volume — with the LLM as anonymity engine, fatigue-proof idea partner, and wild-card generator of deliberately distant analogies. Grounded in why interacting groups underproduce (production blocking and evaluation apprehension — Diehl & Stroebe). Use when a person or team needs many options for a defined problem, an idea session is stalling or dominated by a few voices, or a raw pile of ideas needs honest narrowing.
 
 **Triggers:** `brainstorm better`, `brainwriting`, `SCAMPER`, `generate options`, `out of ideas`, `ideation session`, `diverge and converge`, `six three five`
 
@@ -409,9 +409,9 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **Invoke:** `/full-stack-dev-skills:database-and-orm` — or just describe the task.
 
-**What it does:** Designs and operates the application data layer the lean way — schema design with real constraints, SQLAlchemy/SQLModel models, Alembic migrations as the only schema-change path, query patterns that avoid N+1 and load only what's needed, transactions at the service boundary, and the SQLite-first-Postgres-ready growth path. Use when designing tables, writing or reviewing ORM queries, setting up or fixing migrations, debugging slow or N+1-ridden endpoints, or moving dev SQLite to production Postgres.
+**What it does:** Designs and operates the application data layer the lean way — schema design with real constraints, SQLAlchemy/SQLModel models, Alembic migrations as the only schema-change path, query patterns that avoid N+1 and load only what's needed, transactions committed inside the request, connection pooling sized for the server, and the SQLite-first-Postgres-ready growth path with its silent engine differences named. Use when designing tables, writing or reviewing ORM queries, setting up or fixing migrations, debugging slow or N+1-ridden endpoints, or moving dev SQLite to production Postgres.
 
-**Triggers:** `database schema`, `SQLAlchemy`, `SQLModel`, `alembic migration`, `N+1 query`, `ORM slow`, `design tables`, `foreign key`, `sqlite to postgres`, `transaction handling`, `database indexes app`
+**Triggers:** `database schema`, `SQLAlchemy`, `SQLModel`, `alembic migration`, `N+1 query`, `ORM slow`, `design tables`, `foreign key`, `sqlite foreign keys`, `sqlite to postgres`, `transaction handling`, `connection pool`, `pool_size`, `too many connections`, `pgbouncer`, `database indexes app`
 
 ### `full-stack-dev-skills:deploy-and-operate`
 
@@ -427,7 +427,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **What it does:** Acts as "Pythagoras", a principal-level Python engineer who applies the 2026 industry-standard toolchain — uv, Ruff, ty/Pyright strict, Python 3.14+, Pydantic v2, FastAPI, Polars, structlog — to design, write, review, refactor, and migrate Python code. Delivers complete, ready-to-ship solutions: 100% type annotations, domain exceptions with deterministic error handling, audit-ready JSON logging, src/ layout, pytest + hypothesis tests, and CI-ready pyproject.toml, pre-commit, and GitHub Actions config. Use for any production-grade Python task — new code, code review, refactoring, architecture, performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
 
-**Triggers:** `pythagoras`, `write python`, `refactor`, `principal python review`, `python architecture`, `production-grade python`, `pydantic`, `uv`, `ruff`, `ty`, `structlog`, `type hints`, `python logging`, `error handling`, `migrate to uv`, `elite python engineer`, `production python`
+**Triggers:** `pythagoras`, `write python`, `refactor`, `principal python review`, `python architecture`, `production-grade python`, `pydantic`, `ruff`, `ty type checker`, `structlog`, `type hints`, `python logging`, `error handling`, `migrate to uv`, `elite python engineer`, `production python`
 
 ### `full-stack-dev-skills:frontend-modern-ui`
 
@@ -473,9 +473,9 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **Invoke:** `/full-stack-dev-skills:testing-strategy` — or just describe the task.
 
-**What it does:** Designs minimal effective test suites for full-stack apps — testing behavior at the API boundary over mocking internals, pytest fixtures for real (test) databases, a handful of Playwright end-to-end tests for critical user flows only, regression tests for every fixed bug, and explicit judgment about what NOT to test — so the suite catches real breakage without taxing every refactor. Use when setting up testing for an app, deciding what to test at which level, reviewing a slow or brittle suite, or adding tests around a bug.
+**What it does:** Designs minimal effective test suites for full-stack apps — testing behavior at the API boundary over mocking internals, a pytest fixture spine whose per-test isolation is proved rather than assumed, the production engine for anything constraint- or dialect-dependent, a handful of Playwright end-to-end tests for critical user flows only, regression tests for every fixed bug, and explicit judgment about what NOT to test — so the suite catches real breakage without taxing every refactor. Use when setting up testing for an app, deciding what to test at which level, reviewing a slow, brittle, or order-dependent suite, or adding tests around a bug.
 
-**Triggers:** `testing strategy`, `what to test`, `pytest setup`, `test the API`, `mock or not`, `brittle tests`, `slow test suite`, `playwright e2e`, `test coverage target`, `regression test`, `test pyramid`, `integration vs unit`
+**Triggers:** `testing strategy`, `what to test`, `pytest setup`, `test the API`, `mock or not`, `brittle tests`, `flaky test`, `test isolation`, `slow test suite`, `playwright e2e`, `test coverage target`, `regression test`, `test pyramid`, `integration vs unit`, `testcontainers`
 
 ### `full-stack-dev-skills:ui-and-ux-inspection`
 
@@ -543,7 +543,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:defect-epidemiology` — or just describe the task.
 
-**What it does:** Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread: fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history transmission tree), dispositions every contact as patched, not-applicable, or accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared snippet) so reinfection stops at the source, computes the pattern's R0, and quarantines high-R0 sources with a template fix plus a lint rule. Grounded in code-clone research (ReDeBug, VUDDY, Juergens et al. 2009). Use when a found bug's pattern may live elsewhere, or the same bug keeps coming back.
+**What it does:** Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread: fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history transmission tree), dispositions every contact as patched, not-applicable, or accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared snippet) so reinfection stops at the source, computes the pattern's R0, and quarantines high-R0 sources with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009 (inconsistent clone edits cause real faults). Use when a found bug's pattern may live elsewhere, or the same bug keeps coming back.
 
 **Triggers:** `contact tracing`, `patient zero`, `code clone`, `copy-paste bug`, `everywhere else this appears`, `outbreak`, `this bug again`, `trace the clones`, `quarantine the template`
 
@@ -575,9 +575,9 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:prompt-engineering` — or just describe the task.
 
-**What it does:** Writes effective, provider-agnostic prompts and instructions for LLM agents — stating the task and success criteria, giving the right context and only that, few-shot examples, an explicit output format, decomposing complex asks, and iterating against real test cases. Delivers the prompt as a package: copyable prompt block, design notes, input assumptions, and eval cases. Use when crafting a prompt, instruction, or system message, or debugging a flaky prompt that gives inconsistent or wrong results.
+**What it does:** Writes and debugs prompts, instructions, and system messages for LLM agents — task and success criteria, the right context and only that, an output contract enforced by provider-native structured output rather than by wording, example strategy (few-shot, many-shot, ordering effects), what changes on reasoning and extended-thinking models, an honest prompt-injection rail, cache-aware ordering, and iteration against an eval set with repeat runs. Delivers a package: copyable prompt, design notes, input assumptions, eval cases. Use when crafting a prompt, instruction, or system message, making model output machine-readable, or debugging a flaky prompt that gives inconsistent or wrong results.
 
-**Triggers:** `prompt`, `prompt engineering`, `system prompt`, `instructions`, `few-shot`, `output format`, `prompt not working`, `improve a prompt`
+**Triggers:** `prompt`, `prompt engineering`, `system prompt`, `instructions`, `few-shot`, `many-shot`, `output format`, `structured output`, `JSON output`, `prompt injection`, `reasoning model`, `extended thinking`, `prompt caching`, `flaky prompt`, `prompt not working`, `improve a prompt`
 
 ### `coding-agent-skills:python-for-analysts`
 
@@ -699,7 +699,7 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
 **Invoke:** `/deep-research-skills:medical-research-detective` — or just describe the task.
 
-**What it does:** Investigates health questions across published medical literature — multi-database searches (PubMed, Europe PMC, Cochrane, Google Scholar), connecting dots across unrelated symptoms, drugs, labs, and exposures to surface overlooked common causes, filtering sources by country of origin, and triple-checking every citation. Produces a graded case file: ranked hypotheses, evidence for and against, questions and tests for a clinician, red flags, and gaps. Research only — never diagnosis, dosing, or treatment advice. Use for a puzzling symptom cluster, a suspected drug or nutrient interaction, a condition that resists explanation, a second-opinion literature review, or verifying a medical claim or citation.
+**What it does:** Investigates health questions across published medical literature — multi-database searches (PubMed, Europe PMC, Cochrane, Google Scholar), connecting dots between seemingly unrelated symptoms, drugs, labs, and exposures to surface overlooked common causes, filtering sources by country of origin, and triple-checking every citation so nothing is fabricated. Produces a graded case file: ranked hypotheses, evidence for and against, questions and tests for a clinician, red flags, and gaps. Research only — never diagnosis, dosing, or treatment advice. Use for a puzzling symptom cluster, a suspected drug or nutrient interaction, a condition that resists explanation, a second-opinion literature review, or verifying a medical claim or citation.
 
 **Triggers:** `medical research`, `research my symptoms`, `connect these symptoms`, `what could link`, `overlooked cause`, `deep dive on this condition`, `PubMed`, `Google Scholar`, `medical literature`, `drug interaction research`, `verify this study`, `check this citation`
 
@@ -729,7 +729,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **Invoke:** `/writing-skills:explanation-design` — or just describe the task.
 
-**What it does:** Designs an explanation for a named audience instead of transcribing the author's understanding: writes the one-sentence audience model first, chooses the entry analogy deliberately with its break-points marked, orders material concrete-first (worked example → general principle → boundary cases, never definition-first), runs the Feynman loop (distilled from accounts of Feynman's practice, not a protocol he wrote) to find the author's own gaps, strips curse-of-knowledge tells (Pinker's framing: undefined abbreviations, "simply," skipped steps), and verifies with teach-back. The assistant plays the smart newcomer, flagging jargon and hand-waves. Use when a concept must land with someone who doesn't already know it — onboarding, newcomer docs, or "why does nobody get this?".
+**What it does:** Designs an explanation for a named audience instead of transcribing the author's understanding: writes the one-sentence audience model first, chooses the entry analogy deliberately with its break-points marked, orders material concrete-first (worked example → general principle → boundary cases, never definition-first), runs the Feynman loop (distilled from accounts of Feynman's practice, not a protocol he wrote) to find the author's own gaps, strips curse-of-knowledge tells (Pinker's framing: undefined abbreviations, "simply," skipped steps), and verifies with teach-back. The assistant plays the smart newcomer, flags jargon and hand-waves, drafts analogies with breaks marked, and simulates the teach-back. Use when a concept must land with someone who doesn't already know it — onboarding, newcomer docs, or "why does nobody get this?".
 
 **Triggers:** `explain it well`, `Feynman technique`, `analogy for`, `teach this concept`, `curse of knowledge`, `make this intuitive`, `teach-back`, `explain to a newcomer`
 
@@ -745,9 +745,9 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **Invoke:** `/writing-skills:technical-documentation` — or just describe the task.
 
-**What it does:** Structures technical documentation as typed artifacts, not prose: routes docs through Procida's Diátaxis framework (tutorial, how-to guide, reference, explanation — four forms that fail when blended), shapes the README around a newcomer's first screen, records decisions as Nygard-style architecture decision records (context/decision/consequences, superseded never edited), keeps a human-readable changelog keyed to semantic versioning, and holds API and reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the document types; sentence-level register stays with writing-skills:adams-smart-brevity, explanation craft with writing-skills:explanation-design. Use when writing or restructuring docs for a project, method, or process.
+**What it does:** Structures technical documentation as typed artifacts, not prose: routes docs through Procida's Diátaxis framework (tutorial, how-to, reference, explanation — forms that fail when blended), shapes the README around a newcomer's first screen, records decisions as Nygard-style ADRs (context/decision/consequences, superseded never edited), keeps a human-readable changelog keyed to SemVer, and holds API and reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the document types; register stays with writing-skills:adams-smart-brevity, explanation craft with writing-skills:explanation-design. Gives every page an owner, a cadence, and a last-verified date. Use when writing or restructuring docs for a project, method, or process.
 
-**Triggers:** `technical documentation`, `write the README`, `ADR`, `architecture decision record`, `changelog`, `Diátaxis`, `how-to guide`, `tutorial vs reference`, `API docs`, `docs as code`, `semantic versioning`
+**Triggers:** `technical documentation`, `write the README`, `ADR`, `architecture decision record`, `changelog`, `Diátaxis`, `how-to guide`, `tutorial vs reference`, `API docs`, `docs as code`, `semantic versioning`, `our docs are out of date`
 
 ## `safety-and-reliability-skills`
 
@@ -767,7 +767,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Invoke:** `/safety-and-reliability-skills:break-glass-playbooks` — or just describe the task.
 
-**What it does:** Arms each foreseeable crisis with a break-glass playbook, channeling documented emergency-access procedures (HIPAA; NIST/CIS-mapped testing) and regulator-mandated contingency plans with graduated triggers: define the tripwire as a number a named person watches on a stated cadence, pre-author the first ten moves at calm-headed quality, pre-grant emergency authority with automatic expiry and full logging, name the comms tree and the decision chair, drill the unsealing on a schedule, and re-arm after every firing. Converts pre-mortem failure modes into tripwire-plus-playbook pairs, red-checks each tripwire for measurability, drafts the sealed instructions, and simulates the unsealing drill. Use when a crisis is foreseeable but the team would be scrambling if it hit.
+**What it does:** Arms each foreseeable crisis with a break-glass playbook, channeling documented emergency-access procedures (HIPAA; NIST/CIS-mapped testing) and regulator-mandated contingency plans with graduated escalation: define the tripwire as a number a named person watches on a stated cadence, pre-author the first ten moves at calm-headed quality, pre-grant emergency authority with automatic expiry and full logging, name the comms tree and the decision chair, drill the unsealing on a schedule, and re-arm after every firing. Converts pre-mortem failure modes into tripwire-plus-playbook pairs, red-checks each tripwire for measurability, drafts the sealed instructions, and simulates the unsealing drill. Use when a crisis is foreseeable but the team would be scrambling if it hit.
 
 **Triggers:** `break glass`, `break-glass`, `seldon crisis`, `what do we do when X hits`, `emergency access`, `runbook`, `kill switch`, `tripwire`, `covenant trip`, `we'd be scrambling`, `sealed instructions`
 
@@ -791,7 +791,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Invoke:** `/safety-and-reliability-skills:rebuild-rehearsal` — or just describe the task.
 
-**What it does:** Keeps critical capabilities alive by rehearsing the rebuild on a cadence shorter than anyone's tenure, channeling the Ise Grand Shrine's Shikinen Sengu (rebuilt in full every 20 years since 690 CE): census what lives only in heads, pick a real rebuild unit (restore from backup, recreate the deliverable from raw inputs, rebuild the environment from docs alone), rotate learn-lead-teach so last time's apprentice leads, harvest every exposed gap into the docs, and name who funds the cycle. The assistant simulates the rebuild, interrogates the docs for gaps, and plays the newcomer with only the written record. Use when knowledge lives in one head or docs have never been proven by use.
+**What it does:** Keeps critical capabilities alive by rehearsing the rebuild on a cadence shorter than anyone's tenure, channeling the Ise Grand Shrine's Shikinen Sengu (rebuilt in full every 20 years since 690 CE; carpenters learn, lead, then teach; a ~120-year lapse after the Ōnin War proved the cycle needs a funding owner): census what lives only in heads, pick a real rebuild unit (restore from backup, recreate the deliverable from raw inputs, rebuild the environment from docs alone), rotate learn-lead-teach so last time's apprentice leads, harvest every exposed gap into the docs, and name who funds the cycle. The assistant simulates the rebuild, interrogates the docs for gaps, and plays the newcomer with only the written record. Use when knowledge lives in one head or docs have never been proven by use.
 
 **Triggers:** `rebuild drill`, `restore drill`, `if she left tomorrow`, `are the docs enough to recreate this`, `it only lives in his head`, `bus factor`, `knowledge refresh`, `could a newcomer run this`, `disaster recovery rehearsal`
 
@@ -799,7 +799,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Invoke:** `/safety-and-reliability-skills:reliability-engineering` — or just describe the task.
 
-**What it does:** Applies reliability-engineering math to systems and processes: fits a Weibull distribution to failure times (censored units handled honestly), reads the shape parameter beta to choose burn-in vs run-to-failure vs scheduled replacement, computes MTBF, MTTR, and availability, converts an SLO target into an allowed-downtime budget, works series/parallel system arithmetic — parallel credit only with demonstrated independent failover — and forecasts from two or three failures with Weibayes. Use when a failure log needs quantifying (interface or data-feed failures, job aborts, process breaks, equipment), when sizing redundancy against an uptime target, or when setting a replacement or renewal schedule.
+**What it does:** Applies reliability-engineering math to systems and processes: splits non-repairable populations (Weibull time-to-failure, censoring, fit checks, bootstrap bounds) from repairable systems with recurrent failures (power-law NHPP / Crow-AMSAA trend), reads beta to pick burn-in, run-to-failure, or scheduled replacement, computes MTBF, MTTR, time- or event-based availability, and an error budget, converts an SLO into a downtime budget, works series/parallel arithmetic — parallel credit only with demonstrated independent failover — and forecasts from two or three failures with Weibayes. Use when a failure log needs quantifying (interface or data-feed failures, job aborts, process breaks, equipment), when sizing redundancy against an uptime target, or setting a replacement schedule.
 
 **Triggers:** `Weibull`, `bathtub curve`, `MTBF`, `MTTR`, `availability math`, `downtime budget`, `series parallel reliability`, `burn-in`, `failure rate fit`, `how much downtime does our SLO allow`
 
@@ -815,7 +815,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Invoke:** `/safety-and-reliability-skills:sortition-review` — or just describe the task.
 
-**What it does:** Designs selection-by-lot oversight channeling Athenian euthynai (scheduled end-of-term review by allotted reviewers, generals included) and the 1268 Venetian doge protocol (ten alternating rounds of lot and vote, blind draws, 529 years): define the reviewable population, set a universal floor with no exemptions, draw items by verifiable lot (pre-committed seed, dice in the open), rotate reviewer pairs by lot too, make end-of-role handover review the default so departure carries no stigma, size the draw to real attention (the assistant first-passes every drawn item, the human adjudicates), and publish the rule, never the draw. Use when selection must be unriggable, review must carry no accusation, or the same person always checks the same people.
+**What it does:** Designs selection-by-lot oversight channeling Athenian euthynai (scheduled end-of-term review by allotted reviewers, generals included, universal, never suspicion-triggered) and the 1268 Venetian doge protocol (ten alternating rounds of lot and vote, blind draws, 529 years): define the reviewable population, set a universal floor with no exemptions, draw items by verifiable lot (pre-committed seed, dice in the open), rotate reviewer pairs by lot too, make end-of-role handover review the default so departure carries no stigma, size the draw to real attention (the assistant first-passes every drawn item, the human adjudicates), and publish the rule, never the draw. Use when selection must be unriggable, review must carry no accusation, or the same person always checks the same people.
 
 **Triggers:** `sortition`, `review by lot`, `spot-check by lot`, `they know which ones get looked at`, `same person always reviews`, `rotate reviewers`, `end-of-term handover`, `draw at random`, `unriggable selection`
 
@@ -875,7 +875,7 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
 **Invoke:** `/collaboration-skills:disarming-elicitation` — or just describe the task.
 
-**What it does:** Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed doorknob phenomenon: lower the stakes so the expert educates rather than defends, restate their words slightly wrong so correction does the teaching, hold contradictions as the interviewer's own confusion, let silence work, then ask one casual question after the formal close. Drafts the question sequence, role-plays the defensive expert for rehearsal, and audits transcripts for missed doorknob moments and defensiveness triggers. Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction.
+**What it does:** Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed doorknob phenomenon (the key disclosure arrives as the interview seems over): lower the stakes so the expert educates rather than defends, restate their words slightly wrong so correction does the teaching, hold contradictions as the interviewer's own confusion, let silence work, then ask one casual question after the formal close. Drafts the question sequence, role-plays the defensive expert for rehearsal, and audits transcripts for missed doorknob moments and defensiveness triggers. Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction.
 
 **Triggers:** `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, `the users can't articulate what they do`, `expert won't open up`, `walkthrough with the process owner`, `doorknob question`, `one more thing`
 
@@ -891,7 +891,7 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
 **Invoke:** `/collaboration-skills:feedback-that-lands` — or just describe the task.
 
-**What it does:** Structures workplace feedback so it lands. Giving: Situation-Behavior-Impact (Center for Creative Leadership) — the specific situation, the observed behavior (never inferred character or motive), impact as the speaker's own experience; one topic per conversation; requests framed forward (Marshall Goldsmith's feedforward); praise as specific as criticism. Receiving: separate data from delivery, name the firing trigger (truth, relationship, identity — Stone & Heen) before responding, ask for the behavior behind a vague label, close the loop. Drafts the SBI script from a messy vent, rehearses as the receiver (even a defensive one), and audits performance notes or review comments for character-language. Use for hard conversations about a person's work behavior, in either direction.
+**What it does:** Structures workplace feedback so it lands, giving and receiving with equal weight. Giving: Situation-Behavior-Impact (Center for Creative Leadership) — the specific situation, the observed behavior (never inferred character or motive), impact as the speaker's own experience; one topic per conversation; requests framed forward (Marshall Goldsmith's feedforward); praise as specific as criticism. Receiving: separate data from delivery, name the firing trigger (truth, relationship, identity — Stone & Heen) before responding, ask for the behavior behind a vague label, close the loop. Drafts the SBI script from a messy vent, rehearses as the receiver (even a defensive one), and audits performance notes or review comments for character-language. Use for hard conversations about a person's work behavior, in either direction.
 
 **Triggers:** `give feedback`, `SBI`, `feedback conversation`, `they got defensive`, `receiving feedback`, `performance conversation`, `code review tone`, `hard conversation with a teammate`
 
@@ -909,7 +909,7 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
 **What it does:** Maps who can sink or save the work before it matters: builds the power-interest grid — with the open correction that the grid everyone draws is Johnson & Scholes (1999) / Eden & Ackermann (1998), not Mendelow's 1981 paper, whose matrix is power/dynamism — assigns engagement moves per quadrant (manage closely, keep satisfied, keep informed, monitor), writes the RACI so "consulted" stops meaning "surprised", plans influence without authority (Cohen & Bradford's exchange currencies), and sets re-map triggers at milestones, because the map is a snapshot, not a truth. For a process change with opponents, a multi-party matter, a migration, or a deprecation you lack authority to force. Once the map says who matters, disarming-elicitation is how to talk to them.
 
-**Triggers:** `stakeholder map`, `stakeholder mapping`, `stakeholder analysis`, `power-interest grid`, `RACI`, `responsibility matrix`, `influence without authority`, `buy-in`, `who needs to sign off`, `stakeholder management`, `who can sink this`
+**Triggers:** `stakeholder map`, `stakeholder mapping`, `stakeholder analysis`, `power-interest grid`, `RACI`, `responsibility matrix`, `influence without authority`, `buy-in`, `who needs to sign off`, `stakeholder management`, `who can block this`
 
 ## `math-foundations-skills`
 
@@ -983,7 +983,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Invoke:** `/decision-science-skills:bayesian-updating` — or just describe the task.
 
-**What it does:** Runs belief revision as a decision discipline: starts a question from an explicit prior (base-rate anchor from reference-class-forecasting), weighs each piece of evidence by how surprising it would be under each hypothesis, updates with count tables or the odds shortcut rather than formulas, grades evidence in Bayes-factor terms (barely-worth-mentioning to strong), and keeps a Tetlock-style update journal — small, frequent, logged revisions scored at resolution. Teaches the honest history (Bayes barely wrote it; Price shaped it; Laplace built the form we use) and the cab-problem trap of vivid evidence swamping the prior. Use when new evidence should move a standing estimate or someone asks how much a result should change their mind.
+**What it does:** Runs belief revision as a decision discipline: starts a question from an explicit prior (base-rate anchor from reference-class-forecasting), weighs each piece of evidence by how surprising it would be under each hypothesis, updates with count tables or the odds shortcut, not formulas, grades evidence in Bayes-factor bands (barely-worth-mentioning to very strong), and keeps a Tetlock-style update journal — small, frequent, logged revisions scored at resolution. Teaches the honest history (Bayes barely wrote it; Price shaped it; Laplace built the form we use) and the cab-problem trap of vivid evidence swamping the prior. Use when new evidence should move a standing estimate or someone asks how much a result should change their mind.
 
 **Triggers:** `bayesian updating`, `update my beliefs`, `belief revision`, `likelihood ratio`, `Bayes factor`, `posterior probability`, `prior probability`, `superforecasting`, `superforecaster`, `perpetual beta`, `how much should this evidence move me`
 
@@ -1039,7 +1039,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Invoke:** `/decision-science-skills:reference-class-forecasting` — or just describe the task.
 
-**What it does:** Applies the outside view (Kahneman/Tversky's planning fallacy; Flyvbjerg's reference-class method) to discipline any material estimate: identify a reference class of comparable past cases, establish its outcome distribution, anchor on that base rate, adjust only with explicit written justification — or apply a required uplift at a chosen certainty level (P80-style) — then log the prediction and score it against actuals. Counters optimism bias and strategic misrepresentation, and guards against tampering (reworking the rule after every miss). Turns an existing variance history, such as per-driver MAPE and signed bias, into next-cycle base-rate anchors; it feeds estimation loops, never builds the models. Use when an estimate rests only on its own story or a plan looks optimistic.
+**What it does:** Applies the outside view (Kahneman/Tversky's planning fallacy, Flyvbjerg's reference-class method) to discipline any material estimate: identify a reference class of comparable past cases, establish its outcome distribution, anchor on that base rate, adjust only with explicit written justification — or apply a required uplift at a chosen certainty level (P80-style, pooled not summed) — then log the prediction and score it against actuals. Counters optimism bias and strategic misrepresentation, and guards against tampering (reworking the rule after every miss). Turns an existing variance history (per-driver MAPE, signed bias) into next-cycle base-rate anchors; it feeds estimation loops, never builds the models. Use when an estimate rests only on its own story or a plan looks optimistic.
 
 **Triggers:** `outside view`, `reference class`, `base-rate anchor`, `base rate`, `optimism bias`, `planning fallacy`, `how long do projects like this actually take`, `uplift the estimate`
 
@@ -1063,7 +1063,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Invoke:** `/decision-science-skills:tabletop-wargaming` — or just describe the task.
 
-**What it does:** Designs and runs a multi-party tabletop exercise, in the lineage Kriegsspiel → Army course-of-action analysis (action / reaction / counteraction) → CISA-style tabletop packages: define objectives and scenario (a BEC payment-fraud drill, a bank-connectivity outage on payroll day, ransomware during close), write the blue team's commander's intent (purpose, key tasks, end state), assign blue players, a red cell, and a white-cell facilitator/adjudicator, play turns driven by pre-scripted and adaptive injects, adjudicate plausibility, capture decisions and gaps, and hand off to an after-action review. The LLM plays red and white cell strictly as a scenario generator — humans adjudicate every consequential outcome. Use when rehearsing an incident-response, fraud, continuity, or cutover plan against an adaptive adversary.
+**What it does:** Designs and runs a multi-party tabletop exercise with an adversary and adjudication, in the lineage Kriegsspiel → Army course-of-action analysis (action / reaction / counteraction) → CISA-style tabletop packages: define objectives and scenario (a BEC payment-fraud drill, a bank-connectivity outage on payroll day, ransomware during close), write the blue team's commander's intent (purpose, key tasks, end state), assign blue players, a red cell, and a white-cell facilitator/adjudicator, play turns driven by pre-scripted and adaptive injects, adjudicate plausibility, capture decisions and gaps, and hand off to an after-action review. The LLM plays red and white cell strictly as a scenario generator — humans adjudicate every consequential outcome. Use when rehearsing an incident-response, fraud, continuity, or cutover plan against an adaptive adversary.
 
 **Triggers:** `tabletop exercise`, `wargame the plan`, `run a drill`, `incident simulation`, `inject`, `BCP exercise`, `commander's intent`
 
@@ -1071,7 +1071,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Invoke:** `/decision-science-skills:the-challenger` — or just describe the task.
 
-**What it does:** Runs the revision review that momentum and sunk costs suppress — named for the 1986 Challenger launch decision, where schedule fever inverted the burden of proof. When evidence changes mid-project, it zero-bases the continue-vs-revise decision: only forward-looking costs count, continuation past a trigger carries the burden of proof, normalized anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip, descope, phase, re-plan), a dissent channel guarantees the objector is restated before the decision, and the outcome is logged with the next review trigger. Use when a deadline is driving decisions the evidence argues against, when "we've come too far" appears in any form, or when a go/no-go needs honest structure.
+**What it does:** Runs the revision review that momentum and sunk costs suppress — named for the 1986 Challenger launch decision, where schedule fever inverted the burden of proof over the engineers' objection. When evidence changes mid-project, it zero-bases the continue-vs-revise decision: only forward-looking costs count (money spent argues nothing), continuation past a trigger carries the burden of proof, normalized anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip, descope, phase, re-plan), a dissent channel guarantees the objector is restated before the decision, and the outcome is logged with the next review trigger. Use when a deadline is driving decisions the evidence argues against, when "we've come too far" appears in any form, or when a go/no-go needs honest structure.
 
 **Triggers:** `the challenger`, `challenge the timeline`, `sunk cost`, `plan continuation`, `should we slip the date`, `launch fever`, `are we still go`, `normalization of deviance`, `escalation of commitment`, `revision review`
 

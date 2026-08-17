@@ -173,6 +173,52 @@ Checks that earn the "if":
 - **Composition:** did the change itself alter what counts as a ticket, or route different work
   to Denver? An outcome-definition change masquerades as an effect.
 
+### The number this table cannot give you: a standard error
+
+**−2.0 days is a point estimate with no inference attached, and that is not an oversight — it is
+the design.** There is **one treated cluster** (Denver) and **one control cluster** (Phoenix).
+Two traps follow, and both get sprung routinely:
+
+- **Do not run the ticket-level regression and read its standard error.** With thousands of
+  tickets it will be small and it will be meaningless: it prices ticket-to-ticket noise, while the
+  thing that could have gone differently is *the office's whole quarter*. Denver's tickets share
+  every shock Denver had — a staffing change, a system outage, a seasonal mix shift — so they are
+  nowhere near independent draws. This is the Bertrand–Duflo–Mullainathan result: DiD standard
+  errors that ignore within-group correlation "severely understate" the true variability — in
+  their placebo experiments, effects came out significant at the 5% level in up to **45%** of
+  interventions where nothing had happened (Bertrand, Duflo & Mullainathan, *QJE* 119(1), 2004)
+  [snippet-only, cross-checked].
+- **And do not reach for the usual fix either.** Their remedy — cluster the standard errors at the
+  group level where treatment is assigned — works when the number of groups is not too small
+  (they show correct size at 50 and at 20 clusters) [snippet-only, cross-checked]. With **one**
+  treated cluster there is nothing for a cluster-robust variance estimator to average over; the
+  treatment indicator is collinear with the treated office's own fixed effect. "I clustered by
+  office" over two offices is a label, not inference.
+
+What the literature actually offers when there is one treated unit:
+
+- **Synthetic control** (Abadie, Diamond & Hainmueller — the California tobacco-tax study is the
+  canonical application [snippet-only, cross-checked]). Instead of picking Phoenix, build a
+  weighted blend of *all* available untreated offices that reproduces Denver's pre-period path,
+  and read the post-period gap. Inference is by **placebo permutation**: re-run the whole
+  procedure pretending each control office was treated, and see whether Denver's gap stands out
+  against that distribution of placebo gaps. Needs several untreated units and a decent pre-period.
+- **Randomization / permutation inference.** Reassign the treatment label across the units (or
+  across candidate dates) many times, recompute the DiD each time, and report where the real
+  −2.0 sits in the resulting placebo distribution. This is what the "placebo window" check above
+  becomes when you run it systematically instead of once. It yields an honest p-value under a
+  sharp null without pretending to a standard error. Conley & Taber's few-treated-groups work is
+  the standard citation [background — verify].
+- **Or report it as what it is.** With two offices and no untreated pool, the honest write-up is
+  "a −2.0-day difference-in-differences, one treated office, no inference available; the pre-trend
+  and placebo checks are the entire evidence for it." That sentence is a finding. A confidence
+  interval manufactured from ticket counts is not.
+
+Seam note, stated plainly because the hand-off does not cover it: this skill routes association
+arithmetic to `data-analytics-bi-skills:statistical-inference`, but the few-clusters problem is
+*identification-adjacent*, not a test-selection question, and it is not covered there. Do not
+assume the seam catches it — the checks above are this skill's own responsibility.
+
 Lineage: the modern canon is Card & Krueger's minimum-wage study (*AER* 1994 — NJ raised its
 minimum wage $4.25→$5.05 in April 1992, PA did not; 331 NJ + 79 eastern-PA fast-food
 restaurants surveyed before and after; DiD ≈ +2.75 FTE, no detectable employment loss)
@@ -181,6 +227,57 @@ restaurants surveyed before and after; DiD ≈ +2.75 FTE, no detectable employme
 discontinuity — survived the fight and reshaped empirical economics, while the specific
 employment estimate remains argued [snippet-only, cross-checked]. DiD reasoning itself is far
 older; John Snow's cholera comparison is the commonly cited precursor [background — verify].
+(Note in passing that Card & Krueger is a two-state comparison, so the inference caution above
+applies to the canonical study too.)
+
+## 5a. Staggered adoption: why plain DiD breaks
+
+The most common real-world shape is not Denver-vs-Phoenix. It is **eight offices adopting over
+five months** — the "phased rollout" that `references/your-environment.md` invites you to hunt for.
+That is a *staggered-adoption* design, and a literature that built up through the late 2010s and
+after established that the obvious way to analyse it is biased — arguably the most consequential
+methodological revision the DiD toolkit has had.
+
+**The obvious way** is a two-way fixed-effects (TWFE) regression: outcome on a unit fixed effect,
+a period fixed effect, and a 0/1 "treated now" indicator. Read the coefficient as "the effect."
+
+**Why it breaks.** Goodman-Bacon showed that this one coefficient is a *weighted average of every
+possible 2×2 DiD* in the panel — and some of those 2×2s use **already-treated** units as the
+control group for later-adopting units (Goodman-Bacon, "Difference-in-differences with variation
+in treatment timing," *Journal of Econometrics* 225(2):254–277, 2021) [snippet-only,
+cross-checked]. When an already-treated office serves as a control, what gets subtracted is that
+office's *change* over the window — which contains its own still-evolving treatment effect. So if
+effects grow, fade, or ramp (they usually do), those comparisons are contaminated. Worse, some of
+the implicit weights are **negative**, which means the estimate is not a convex average of the
+underlying effects at all: **it can come out negative when every single unit's true effect is
+positive** (de Chaisemartin & D'Haultfœuille formalize the negative-weight problem)
+[snippet-only, cross-checked]. Sign, not just magnitude. And the dynamic "event-study" version of
+the same regression has the same disease: each event-time coefficient is contaminated by effects
+from other event times (Sun & Abraham) [snippet-only, cross-checked].
+
+**What to use instead** — name the estimator in the writeup:
+
+| Estimator | The idea in one line |
+|---|---|
+| **Callaway & Sant'Anna** | Estimate a separate ATT(g,t) for each adoption cohort g and period t using only **never-treated or not-yet-treated** units as controls, then aggregate deliberately (overall, by cohort, or as a clean event study) [snippet-only, cross-checked] |
+| **Sun & Abraham** | Interaction-weighted event study: saturate in cohort × relative-time so no coefficient borrows from another period's effect [snippet-only, cross-checked] |
+| **de Chaisemartin & D'Haultfœuille** | Estimators built from clean switcher-vs-not-yet-switcher comparisons, plus a **diagnostic that reports how much negative weight** your TWFE spec carries [snippet-only, cross-checked] |
+| **Imputation / Borusyak–Jaravel–Spiess** | Fit the untreated potential outcome on untreated observations only, impute it for treated ones, average the residuals [background — verify] |
+
+Practical rails:
+- **Run the negative-weight diagnostic before defending a TWFE number.** "How much of my estimate
+  rides on already-treated controls?" is answerable, and the answer is sometimes most of it.
+- **Never-treated units are precious.** A design where every unit eventually adopts has no clean
+  control at the end of the panel; the late adopters are carrying the identification.
+- **Staggered timing is also a pre-trends question**, cohort by cohort — a group that adopted
+  *because* things were going badly is a parallel-trends failure no estimator repairs.
+- **Honest scope on all of this:** these are active methods, and which to prefer depends on the
+  design (cohort count, panel length, whether treatment can switch off). Do not present any one of
+  them as *the* fix; present "we used a staggered-adoption estimator and here is which one and
+  why" as the minimum standard, and check the current guidance before publishing
+  [background — verify].
+- Fixing the estimator does not fix the inference problem from §5. Eight offices is still eight
+  clusters.
 
 ## 6. Instrumental variables in plain terms
 
@@ -194,6 +291,64 @@ Domain-neutral shapes: assignment quirks (which analyst/judge/reviewer a case ha
 distance or timing accidents (a deadline landing on a holiday), eligibility rules that nudge
 uptake without forcing it. The permanent caution: instruments fail quietly on exclusion — a
 "weather" instrument for attendance fails if weather also directly changes the outcome.
+
+### Weak instruments: the failure that hides behind a significant first stage
+
+"Relevance is testable — show it in the data" is true and not sufficient, because the thing to show
+is **strength**, and a first stage can be statistically significant while being far too weak to use.
+
+- **A weak instrument biases 2SLS toward OLS** — toward the confounded answer the instrument was
+  supposed to rescue you from. The relative-bias approximation behind the standard rule of thumb is
+  roughly `1/(1 + C)` in the concentration parameter C, so as the instrument's explanatory power
+  goes to zero, the 2SLS bias approaches the OLS bias [snippet-only, cross-checked]. This is the
+  trap's cruel shape: the estimate looks like an escape from confounding and is quietly a
+  re-run of it, now with wider intervals and a methods section that sounds rigorous.
+- **Coverage collapses too.** With a weak instrument the conventional 2SLS confidence interval
+  undercovers badly — a nominal 95% interval that contains the truth far less than 95% of the time
+  — because the finite-sample distribution of the estimator is nothing like the normal the interval
+  assumes.
+- **The heuristic, with its provenance and its limits.** Report the **first-stage F**. Staiger &
+  Stock (1997) proposed the rule of thumb F > 10 for a single instrument, and Stock & Yogo (2005)
+  gave it a formal basis by tying critical values to a bound on either the maximum relative bias of
+  2SLS versus OLS (~10%) or the maximum size distortion of Wald tests [snippet-only,
+  cross-checked]. Honest hedge, because this is where the folklore stops: **F > 10 is a floor, not
+  a certificate.** Later work shows the rule does not guarantee correct size for the IV t-test and
+  argues for a substantially higher bar; treat 10 as "below this, stop," not "above this, relax"
+  [snippet-only, cross-checked].
+- **When strength is marginal, change the inference, not the adjectives.** Weak-instrument-robust
+  procedures — the Anderson–Rubin test and its confidence sets are the standard example — stay
+  valid whatever the instrument's strength, at the cost of wider (sometimes unbounded) intervals
+  [background — verify]. An unbounded interval is an honest answer. "The first stage was
+  significant (p = 0.03)" is not.
+
+### The LATE scope rail: whose effect did you just estimate?
+
+RD gets told plainly that it identifies the effect **at the cutoff** (§7 step 4). IV owes the same
+sentence, and it is easier to forget because IV produces a single number with no visible boundary.
+
+**With a binary instrument and heterogeneous effects, IV identifies the Local Average Treatment
+Effect — the average effect among *compliers*: the units whose treatment status the instrument
+actually moved.** It is not the population ATE, and not the effect on the treated, unless compliers
+happen to resemble everyone else. The extra assumption that buys the interpretation is
+**monotonicity (no defiers)**: nobody is pushed the *opposite* way by the instrument (Imbens &
+Angrist 1994) [snippet-only, cross-checked].
+
+Three consequences worth stating in a writeup:
+
+1. **Name the compliers in words.** With a "which reviewer the case happened to draw" instrument,
+   the estimate speaks for cases whose handling genuinely turns on the reviewer draw — not for the
+   obvious ones that would go the same way with any reviewer, and not for the ones no reviewer
+   would ever move. Phrase it the way RD does: *"this is the effect for the cases the assignment
+   lottery actually swung, not for the portfolio."*
+2. **The first stage is not just a strength check — it is the complier share.** With a binary
+   instrument and binary treatment under monotonicity, `P(D=1 | Z=1) − P(D=1 | Z=0)` **is** the
+   proportion of compliers. So a first stage of 0.08 is telling you two things at once: the
+   instrument is weak, *and* the estimate is an average over roughly 8% of your sample. Report that
+   percentage next to the estimate.
+3. **Two valid instruments can legitimately disagree.** They define different complier
+   subpopulations, so different LATEs are not necessarily a contradiction — and "our two IVs give
+   different numbers, so one must be broken" is a reasoning error. (It is also not a licence: an
+   *implausible* gap is still evidence that exclusion fails somewhere.)
 
 Provenance lesson worth teaching with the method: IV first appears in Philip G. Wright's *The
 Tariff on Animal and Vegetable Oils* (1928), Appendix B — structural supply/demand equations,
@@ -273,3 +428,33 @@ Denver only, timed to the rollout." If a mundane candidate clears the bar (a sta
 mix shift, a measurement change), name it, check it if you can, and downgrade the claim if you
 can't. State conclusions at the strength the design earns: "consistent with a causal effect
 under parallel trends" is a finding; "proves the form caused it" is not.
+
+### Answer that question with a named method, not a feeling
+
+Asked without a method, "how strong would a confounder have to be?" gets answered by whoever
+speaks with most confidence. Two named quantifications, both reportable:
+
+- **E-value** (VanderWeele & Ding, *Annals of Internal Medicine* 2017 [snippet-only,
+  cross-checked]). The minimum strength of association — on the **risk-ratio scale** — that an
+  unmeasured confounder would need to have with *both* the exposure and the outcome, beyond the
+  measured covariates, to fully explain away the observed association. Report it for the point
+  estimate **and** for the confidence limit nearest the null: a finding whose point estimate needs
+  a confounder of 2.5 but whose lower limit needs only 1.1 is fragile. The interpretation is
+  comparative, and that is the whole value: an E-value of 1.3 sitting beside measured risk factors
+  that already carry risk ratios near 2 says "a confounder no stronger than ones we know about
+  could erase this." Two limits to state: it lives on a ratio scale (differences and standardized
+  mean differences need the published conversion), and it is a *minimum* — a bound, not a
+  probability that confounding exists.
+- **Rosenbaum bounds** (Rosenbaum's sensitivity analysis for matched observational studies
+  [snippet-only, cross-checked]). For a matched design, Γ (gamma) asks how much two units matched
+  on covariates could differ in their *odds* of treatment before the study's conclusion stops
+  holding. Reported as "the result is insensitive to hidden bias up to Γ ≈ 1.8." Same comparative
+  logic: Γ = 1.1 means a whisper of hidden selection undoes the finding.
+- **Negative controls**, the design-side sibling: a negative-control *outcome* the treatment cannot
+  plausibly affect, or a negative-control *exposure* that shares the suspected confounding but not
+  the causal path. If the "effect" also shows up where it cannot exist, you have found your
+  confounder rather than your effect. (The DiD placebo window in §5 is exactly this move in time.)
+
+Neither number rules confounding out. Both convert an unfalsifiable objection ("but there could be
+something else") into a quantity a reader can argue with — which is the most an observational
+design can offer, and much more than a vibe.

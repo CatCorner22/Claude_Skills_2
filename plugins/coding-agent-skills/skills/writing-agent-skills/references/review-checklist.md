@@ -36,6 +36,12 @@ A skill is done when every box is checked.
       established skill, not just the new one.
 - [ ] Every cited `plugin:skill` resolves to a live skill directory; archived targets use the
       explicit `(archived: plugin:skill, restorable from archive/)` form.
+      **`scripts/validate.sh` now enforces this** — it resolves every `plugin:skill` reference
+      against active skills, active subagents (`plugins/*/agents/*.md` share the namespace), and
+      `archive/`, and errors on any that resolves to none of them or that points at an archived
+      target without saying so. So the manual version of this check is now a courtesy; the one
+      thing still worth eyeballing is whether the *prose around* the link describes the target
+      accurately, which no script can tell you.
 - [ ] Any external number or attribution carries a provenance mark or an honest hedge; no
       invented statistics.
 

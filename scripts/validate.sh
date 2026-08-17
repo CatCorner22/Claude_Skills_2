@@ -93,6 +93,61 @@ for dir in plugins/*/skills/*/; do
   [ "$errors" -eq "$pre_errors" ] && ok "$base" || true
 done
 
+# ---------------------------------------------------------------------------
+# Cross-link resolution.
+#
+# Skills reference each other as `plugin-name:skill-name`. A reference can
+# legitimately resolve to three things: an active skill, an active subagent
+# (installed under the same plugin:name namespace), or an archived skill that
+# the text marks as archived. Anything resolving to none of those is a broken
+# promise to the reader, so it errors.
+#
+# Marked-archived references are matched by looking for "archiv" in a character
+# window *preceding* the reference, not on its own line — house prose wraps, so
+# the mark and the backtick reference are frequently on different lines:
+#   (A complete worked map for one product is archived:
+#   `continuous-improvement-skills:curve-hero-design-language`, restorable from ...)
+# An archived target referenced *without* that mark still errors, because the
+# reader is then sent to a skill they cannot install.
+# ---------------------------------------------------------------------------
+if command -v python3 >/dev/null 2>&1; then
+  xlink_out=$(python3 - <<'PY'
+import re, glob, os, sys
+
+active = {f"{p.split(os.sep)[1]}:{p.split(os.sep)[3]}"
+          for p in glob.glob("plugins/*/skills/*/SKILL.md")}
+agents = {f"{p.split(os.sep)[1]}:{os.path.basename(p)[:-3]}"
+          for p in glob.glob("plugins/*/agents/*.md")}
+archived = set()
+for pat, idx in (("archive/skills/*/*", (2, 3)), ("archive/*/skills/*", (1, 3))):
+    for p in glob.glob(pat):
+        parts = p.split(os.sep)
+        if len(parts) > max(idx):
+            archived.add(f"{parts[idx[0]]}:{parts[idx[1]]}")
+
+REF = re.compile(r"`([a-z0-9-]+-skills):([a-z0-9-]+)`")
+WINDOW = 160          # chars of preceding prose that may carry the "archived" mark
+bad = []
+for md in glob.glob("plugins/**/*.md", recursive=True):
+    text = open(md, encoding="utf-8").read()
+    for m in REF.finditer(text):
+        ref = f"{m.group(1)}:{m.group(2)}"
+        if ref in active or ref in agents:
+            continue
+        if "archiv" in text[max(0, m.start() - WINDOW):m.start()].lower():
+            continue          # archived pointer, honestly labelled
+        lineno = text.count("\n", 0, m.start()) + 1
+        bad.append(f"{md}:{lineno}: unresolved cross-link `{ref}`"
+                   + (" (target is archived — mark it as archived)" if ref in archived else ""))
+for b in bad:
+    print(b)
+PY
+  ) || true
+  if [ -n "$xlink_out" ]; then
+    while IFS= read -r line; do err "$line"; done <<< "$xlink_out"
+  fi
+fi
+
 echo
 echo "== Summary: $errors error(s), $warns warning(s), $notes note(s) =="
 [ "$errors" -eq 0 ]

@@ -1,20 +1,20 @@
 ---
 name: causal-inference
 description: >-
-  Establishes whether X actually caused Y when there was no experiment — draws the causal DAG
+  Establishes whether X caused Y when there was no experiment — draws the causal DAG
   first (confounders, mediators, colliders; backdoor thinking), then names what identifies
-  the effect: randomization when available (that path is
-  continuous-improvement-skills:design-of-experiments), otherwise the quasi-experimental toolkit
+  it: randomization when available (that path is
+  continuous-improvement-skills:design-of-experiments), else the quasi-experimental toolkit
   — difference-in-differences, instrumental variables, regression discontinuity — each with its
-  key assumption in plain terms. Applies Hill's considerations as viewpoints, never a checklist,
-  plus the humility rail: what observational data cannot rule out. Association tests belong to
-  data-analytics-bi-skills:statistical-inference.
+  assumption, scope limit, and inference trap. Applies Hill's considerations as viewpoints,
+  never a checklist, plus the humility rail: what observational data cannot rule out. Association
+  tests belong to data-analytics-bi-skills:statistical-inference.
   Use when a policy, change, or exposure is claimed to have caused an outcome. Triggers:
   causal inference, correlation vs causation, correlation is not causation, does X cause Y,
-  confounder, confounding, collider bias, difference-in-differences, instrumental variable,
-  regression discontinuity, natural experiment.
+  confounder, confounding, collider bias, difference-in-differences, staggered rollout,
+  instrumental variable, regression discontinuity, natural experiment.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from docs/research/general-use-expansion-research.md §1 (general-use expansion wave
     dossier). Provenance marks carried from the dossier: [snippet-only, cross-checked] =
@@ -58,28 +58,44 @@ viewpoints, and sensitivity phrasing — is in `references/causal-identification
    path — every path that reaches X through an arrow pointing *into* it — by adjusting for
    confounders on it. Never adjust for a collider (that *opens* a path and manufactures
    correlation) or a mediator (that throws away the effect you're estimating), and never adjust
-   for anything downstream of the treatment.
+   for anything downstream of the treatment. And draw the *unmeasured* causes too: "pre-treatment"
+   is not a safety certificate, because a pre-treatment variable that is a common effect of one
+   cause of X and one cause of Y opens a path the moment you adjust for it (M-bias, §1–§2).
 4. **Name what would identify the effect — climb the ladder.** (a) **Randomization** if still
    possible — stop and go design the experiment (see the seams above). (b) **Difference-in-
    differences**: change hits one group/date but not another; key assumption: the groups would
-   have moved in *parallel* absent the change — check pre-trends and run a placebo period.
-   (c) **Instrumental variable**: something nudges X but touches Y *only through* X (exclusion);
-   also must actually move X (relevance). (d) **Regression discontinuity**: a score/date/size
-   cutoff assigns treatment; units just above and just below are comparable; check that no one
-   manipulated their position around the cutoff. (e) If none apply: adjustment-only, labeled as
-   the weakest rung.
+   have moved in *parallel* absent the change — check pre-trends and run a placebo period. Ask
+   first whether adoption is **staggered** (offices phasing in over months): the standard two-way
+   fixed-effects regression is *biased* there — it silently uses already-treated units as controls
+   and can report the wrong sign even when every unit improved — so use a staggered-adoption
+   estimator, named (§5a). (c) **Instrumental variable**: something nudges X but touches Y *only
+   through* X (exclusion); must actually move X, and *strongly* — a weak-but-significant
+   instrument biases the estimate back toward the confounded OLS answer. Scope: IV identifies the
+   effect on **compliers**, not the population (§6). (d) **Regression discontinuity**: a
+   score/date/size cutoff assigns treatment; units just above and just below are comparable; check
+   that no one manipulated their position around the cutoff; the effect is the one **at the
+   cutoff**. (e) If none apply: adjustment-only, labeled as the weakest rung — and run with its
+   actual toolkit (propensity matching/weighting or doubly-robust estimation, judged on covariate
+   balance) plus an explicit **positivity/overlap** check (§4a).
 5. **Stress the design's key assumption — that *is* the analysis.** Pre-trend plots and placebo
-   tests for DiD; the exclusion argument stated in words for IV; bunching-at-the-cutoff and
-   bandwidth checks for RD. An estimator run without its assumption check is a number, not a finding.
+   tests for DiD; the exclusion argument in words *plus* a first-stage strength number for IV;
+   bunching-at-the-cutoff and bandwidth checks for RD; overlap plots for adjustment-only. Then say
+   what **inference** the design can carry: one treated office is one cluster, and no standard
+   error computed from its tickets describes the policy comparison — with one or two treated units
+   the honest options are synthetic control or randomization inference (§5). An estimator run
+   without its assumption check is a number, not a finding.
 6. **Walk Hill's viewpoints as viewpoints.** Strength, consistency, specificity, temporality,
    gradient, plausibility, coherence, experiment, analogy — use them to *structure the argument*
    about the total evidence, never as a scorecard. Hill himself: none "can be required as a sine
    qua non" [snippet-only, cross-checked].
 7. **Close with the humility rail.** State the claim at the strength the design earns; say what
-   observational data cannot rule out; and run the sensitivity question: "how strong would an
-   unmeasured confounder have to be to erase this?" If a plausible everyday variable clears that
-   bar, say so and downgrade the conclusion. Route the association arithmetic itself (tests,
-   intervals) to `data-analytics-bi-skills:statistical-inference`.
+   observational data cannot rule out; and run the sensitivity question — "how strong would an
+   unmeasured confounder have to be to erase this?" — **with a named method rather than a feeling**:
+   an E-value for the estimate *and* for the confidence limit nearest the null, or Rosenbaum bounds
+   (Γ) for a matched design (§9). If a plausible everyday variable clears that bar, say so and
+   downgrade the conclusion. Route the association arithmetic itself (tests, intervals) to
+   `data-analytics-bi-skills:statistical-inference` — but not the few-clusters problem in step 5,
+   which that skill does not cover and this one must handle itself.
 
 ## Why / learn
 "Correlation is not causation" has no author — it circulates in print from the 1880s–90s,
@@ -113,6 +129,25 @@ also cautioned against over-reliance on significance tests. Use Hill the way he 
 shape of a mature argument about total evidence, delivered with the humility that observational
 data never proves the counterfactual — it only makes some explanations harder to sustain.
 
+Three ideas hold the toolkit together once you have used it a few times. **First: every design
+answers a narrower question than the one you asked.** RD gives you the effect at the cutoff, IV
+gives you the effect on the units the instrument actually moved, adjustment-only gives you the
+effect over the region where the treated and untreated populations overlap. None of these is a
+defect — they are what "as if randomized" costs — and the discipline is to say which population
+the number describes in the same sentence as the number. The scope statement *is* part of the
+estimate. **Second: identification and inference are separate problems, and a design can solve the
+first while leaving the second untouched.** Denver-vs-Phoenix can be a defensible identification
+story and still support no standard error at all, because the unit that could have gone differently
+is the office-quarter and there is exactly one of them. Software will happily print an interval
+computed from thousands of tickets; the interval answers a question nobody asked. **Third: the
+methods themselves get revised, so cite the design and not just the acronym.** "We ran a DiD"
+described a settled procedure in 2015 and describes an ambiguity now: staggered adoption turned out
+to break the standard two-way fixed-effects implementation badly enough that a whole family of
+replacement estimators exists, and a rollout that phases in over months is the ordinary case, not
+an exotic one. The lesson generalizes past DiD — a method's assumptions are load-bearing, someone
+eventually checks them, and the honest writeup names the estimator and the year's guidance rather
+than the family.
+
 ## Common mistakes
 - Kitchen-sink regression ("control for everything we have") → colliders and mediators in the
   adjustment set create bias. Classify roles on the DAG first; adjust only to block backdoors.
@@ -126,8 +161,22 @@ data never proves the counterfactual — it only makes some explanations harder 
   data. Say "the model relies on X," never "X drives Y" (see supervised-modeling's same rule).
 - DiD without a pre-trends check → "parallel absent treatment" is the whole design; plot the
   before-period and run a placebo window first.
+- Running two-way fixed effects on a staggered rollout → already-treated units become controls and
+  the weights can go negative; the sign itself is unsafe. Use a staggered-adoption estimator (§5a).
+- Reporting a standard error for a one-treated-unit DiD → the tickets are not independent draws and
+  clustering over two offices is a label, not inference. Synthetic control or randomization
+  inference, or report the estimate with no interval and say why.
 - An instrument with its own path to the outcome → exclusion fails and the estimate is polluted;
   argue exclusion in words, not just correlation arithmetic.
+- "The first stage was significant" as the relevance check → significance is not strength; a weak
+  instrument drags 2SLS back toward the confounded OLS answer and its interval undercovers. Report
+  the first-stage F, treat 10 as a floor.
+- Reading an IV estimate as the population effect → it is the effect on compliers under
+  monotonicity; name who they are, and report the complier share (the first stage).
+- Propensity matching without an overlap check → where the arms don't overlap the model is
+  extrapolating, not comparing; trim, then restate which population the estimate describes.
+- Hearing "doubly robust" as robust to unmeasured confounding → it is robust to *model
+  misspecification* only; both models still condition on the same measured set.
 - RD where units can steer their own score → bunching at the cutoff means the "arbitrary line"
   was gamed; check the density before trusting the comparison.
 - Claiming causation because p is small → significance is an association statement; identification
@@ -141,8 +190,10 @@ proof. Keep anything naming real clients, cases, or figures in `your-environment
 (git-ignored); commit only sanitized, structural examples.
 
 ## References
-- references/causal-identification.md — the DAG drill with role table and collider demo, the
-  identification ladder, worked DiD/IV/RD examples, Hill's viewpoints as Hill meant them, and
-  sensitivity phrasing (provenance marks carried from the dossier)
+- references/causal-identification.md — the DAG drill with role table, collider demo and M-bias,
+  the identification ladder with the adjustment-only toolkit (propensity/doubly-robust, overlap),
+  worked DiD/IV/RD examples plus the few-clusters inference problem and the staggered-adoption
+  estimators, Hill's viewpoints as Hill meant them, and named sensitivity methods (E-value,
+  Rosenbaum bounds) with provenance marks carried from the dossier
 - references/your-environment.md — your causal questions, free natural experiments, known
   confounders, and burden of proof (fill in)

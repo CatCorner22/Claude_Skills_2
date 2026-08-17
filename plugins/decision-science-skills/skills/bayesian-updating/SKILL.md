@@ -4,8 +4,8 @@ description: >-
   Runs belief revision as a decision discipline: starts a question from an explicit
   prior (base-rate anchor from reference-class-forecasting), weighs
   each piece of evidence by how surprising it would be under each hypothesis, updates with
-  count tables or the odds shortcut rather than formulas, grades evidence in Bayes-factor
-  terms (barely-worth-mentioning to strong), and keeps a Tetlock-style update journal —
+  count tables or the odds shortcut, not formulas, grades evidence in Bayes-factor
+  bands (barely-worth-mentioning to very strong), and keeps a Tetlock-style update journal —
   small, frequent, logged revisions scored at resolution. Teaches the honest history (Bayes
   barely wrote it; Price shaped it; Laplace built the form we use) and the cab-problem trap
   of vivid evidence swamping the prior. Use when new evidence should move a standing
@@ -14,7 +14,7 @@ description: >-
   probability, prior probability, superforecasting, superforecaster, perpetual beta, how
   much should this evidence move me.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §4), whose anchors were verified
@@ -66,11 +66,14 @@ Worked tables, the odds shortcut, the journal template, and the trap catalog are
 1. **Name the question, the decision it serves, and the resolution date.** "Will X happen
    by Y, and what will we do differently at 30% vs 70%?" A belief that serves no decision
    needs no updating discipline.
-2. **Set the prior explicitly, and say where it came from.** Best source: a reference class
-   of comparable past cases (`decision-science-skills:reference-class-forecasting` owns that
-   workflow). No class available? State a judgment prior and label it as judgment. Write the
-   prior as both a probability and odds (30% = 3:7) — odds make the updating arithmetic
-   trivial.
+2. **Set the prior explicitly, and say where it came from — for the whole hypothesis list.**
+   Best source: a reference class of comparable past cases
+   (`decision-science-skills:reference-class-forecasting` owns that workflow). No class available?
+   State a judgment prior and label it as judgment. Write the prior as both a probability and odds
+   (30% = 3:7) — odds make the updating arithmetic trivial. Then check whether your hypotheses are
+   **exhaustive**: "delivers by Q3 / does not" is; two named stories ("timing difference" vs
+   "duplicate posting") is not, so add a catch-all — "something not on this list" — with a real
+   non-zero prior. A catch-all left at zero can never receive evidence later.
 3. **For each new piece of evidence, ask the likelihood question both ways.** "How expected
    is this evidence if the hypothesis is true? How expected if it is false?" The ratio of
    those two answers — the likelihood ratio — is the evidence's entire moving power.
@@ -81,23 +84,39 @@ Worked tables, the odds shortcut, the journal template, and the trap catalog are
    off the flagged row. Odds: posterior odds = prior odds × LR. Both give the same number;
    use whichever the audience can check. The posterior becomes the new prior — updating is
    a loop, not an event.
-5. **Grade the strength in Bayes-factor vocabulary.** As rough intuition grades (Jeffreys;
-   Kass & Raftery): LR around 3 — barely worth mentioning; around 20 — positive, real
-   evidence; around 150 — strong [snippet-only]. Use the grades as *vocabulary* for "how
-   much should this move me," not as a computation requirement. Most evidence people argue
-   loudest about grades out around 2–3.
+5. **Grade the strength in Bayes-factor vocabulary.** As rough intuition grades (Jeffreys via
+   Kass & Raftery): LR **1–3** — barely worth mentioning; **3–20** — positive, real evidence;
+   **20–150** — strong; **above 150** — very strong [snippet-only]. The numbers are band
+   *boundaries*, not band labels — read 20 as the door into "strong," not as its middle. Use the
+   grades as *vocabulary* for "how much should this move me," not as a computation requirement.
+   Most evidence people argue loudest about grades out around 2–3.
 6. **Update small and often, and log every move.** The verified superforecaster discipline:
    frequent, incremental revisions, and "perpetual beta" — the commitment to keep updating —
    was the single strongest predictor of superforecaster status (Tetlock & Gardner;
    Good Judgment Project) [snippet-only]. Each journal entry: date, the evidence, the LR
-   judgment, prior → posterior, and what would change your mind next.
+   judgment, prior → posterior, and what would change your mind next. **Scope this rule
+   deliberately: "small and often" governs the *belief* about a live question, never the *rule*
+   that produces your estimates.** Re-tuning a model, curve, or uplift policy after each miss is
+   tampering — it adds variance rather than removing it — and that guard belongs to
+   `decision-science-skills:reference-class-forecasting`. The test: new information about the case
+   in front of you moves the belief now; the realized error of a case already closed gets
+   classified common-cause vs. special-cause before it changes anything.
 7. **Run the trap checks before trusting a big move.** (a) Vivid evidence does not erase
    the prior — the cab problem's lesson (a "80% reliable" witness against a 15% base rate
    yields ~41%, not 80%). (b) Never invert a conditional: P(evidence|hypothesis) is not
    P(hypothesis|evidence) — the prosecutor's fallacy. (c) Multiply likelihood ratios only
    for genuinely independent evidence; correlated reports of the same underlying fact count
    once. (d) Ask what evidence you would *expect* to see and haven't — silence can carry an
-   LR too.
+   LR too. (e) **Check that your hypotheses are exhaustive, or carry a catch-all.** Updating
+   between two stories that do not cover the possibilities yields a confident posterior about
+   an incomplete world: the arithmetic dutifully normalizes to 100% across whatever you listed.
+   Keep an explicit "something else entirely" with a real prior, and watch the diagnostic — if
+   the evidence is *surprising under every hypothesis you named*, the posterior mass belongs to
+   the catch-all, not to the least-bad story. (f) **Price your own LR error before chaining.**
+   Eyeballed ratios are estimates, and chaining multiplies their errors rather than averaging
+   them — five signals each over-read by 2× move the odds 32× too far, and judgment errors run
+   in the same direction. Grade in bands, round toward 1, and re-run the chain with each LR
+   halved and doubled to see whether the decision survives.
 8. **Score at resolution, and hand off big revisions.** When the question resolves, score
    the forecast against the log. And when accumulated updates push the belief past a
    decision threshold, that is a trigger for
@@ -129,6 +148,26 @@ superforecasters "beat intelligence analysts with classified access by ~30%" is
 comparison. Teach it, if at all, with that provenance chain visible; a skill about
 weighing evidence must weigh its own.
 
+Two limits are worth understanding as *properties of the method*, not as footnotes. The first is
+that **Bayes' theorem divides the probability you have among the hypotheses you supplied.** The
+denominator is the sum over your hypothesis list, so the posteriors always add to 100% of that
+list — whether or not the list covers the world. Compare two stories and the arithmetic will hand
+you back "78% H1" even when the truth is a third thing neither of you named, and it will do so most
+confidently exactly when the evidence is strange, because strange evidence discriminates hard
+between the two things on offer. The tell is available and cheap: compute how likely the evidence
+was *overall* — sum P(evidence | Hᵢ) × P(Hᵢ) across your list. If that number is tiny, your
+evidence is surprising under everything you have thought of, and the correct move is to widen the
+list rather than to trust the winner of a two-horse race. (Enumerating the full hypothesis set is
+its own discipline: `decision-science-skills:competing-hypotheses-analysis` owns it, and its rule
+that starting with "favorite plus strawman" is the standard failure is the same lesson stated
+qualitatively.) The second limit is that **judged likelihood ratios carry error, and chaining
+multiplies the error along with the evidence.** Independence buys you the right to multiply the
+ratios; it does not buy accuracy in the ratios you multiplied. Errors in eyeballed LRs are also
+not random with respect to each other — the analyst who reads one signal generously reads the next
+one generously — so they compound instead of cancelling. This is why the grades in step 5 are
+bands: a practice that says "roughly a 3" and rounds toward 1 degrades gracefully, while one that
+says "LR = 3.4" and chains five of them produces false precision that looks like rigor.
+
 The cab problem (Tversky & Kahneman's taxicab study: 85% Green cabs, 15% Blue, witness 80%
 reliable, says "Blue" → the answer is ≈41%, yet most people say 80%+) shows *why* the
 prior needs writing down: unrecorded priors get silently replaced by whatever evidence is
@@ -144,10 +183,18 @@ under stated assumptions, not gospel.
   reading the evidence.
 - Inverting the conditional ("the test is 90% accurate, so you're 90% guilty/sick/right")
   → prosecutor's fallacy; run the count table in the direction you need.
-- Treating LR ≈ 3 evidence as decisive → barely worth mentioning on the standard grades;
-  say the grade out loud.
+- Treating LR ≈ 3 evidence as decisive → it sits on the boundary between "barely worth
+  mentioning" and "positive" on the standard grades; say the grade out loud.
+- Quoting a band boundary as the band ("LR 20, so positive evidence") → 20 is the entry to
+  *strong* and 150 the entry to *very strong*; check the table before naming a grade.
 - Multiplying likelihood ratios from correlated sources → three echoes of one report is
   one report; check independence before chaining.
+- Chaining five eyeballed LRs and quoting the product to two digits → the errors multiply too;
+  a consistent 2× over-read across five signals is a 32× error in the odds. Bands, conservative
+  rounding, and a halve-and-double sensitivity pass.
+- Updating between exactly two hypotheses that don't exhaust the possibilities → the posterior
+  is confident about an incomplete world. Add a catch-all with a real prior; if the evidence is
+  unlikely under every named hypothesis, that is the finding.
 - Saving updates for a dramatic reversal → the tournament-verified discipline is small and
   frequent; big silent jumps mean the journal was fiction.
 - Updating only on confirming evidence → decide in advance what would move you *down*;
@@ -168,9 +215,11 @@ structural — real case names, client matters, or account-level numbers belong 
 
 ## References
 - references/updating-method.md — the update loop end-to-end: prior-setting with the
-  reference-class handoff, the likelihood question, a worked alert-triage count table, the
-  odds shortcut with chaining rules, Bayes-factor vocabulary, the update-journal template
-  with scoring, the trap catalog (cab problem worked, prosecutor's fallacy, correlated
-  evidence), and the honest history
+  reference-class handoff and the exhaustive-hypothesis-list check, the likelihood question, a
+  worked alert-triage count table, the odds shortcut with chaining rules and a worked
+  LR-error-compounding table, Bayes-factor vocabulary (bands read as boundaries), the
+  update-journal template with scoring, the trap catalog (cab problem worked, prosecutor's
+  fallacy, the catch-all hypothesis, correlated evidence, LR-error compounding), and the honest
+  history
 - references/your-environment.md — your live questions, base-rate sources, alert
   histories, journal, and thresholds (fill in)
