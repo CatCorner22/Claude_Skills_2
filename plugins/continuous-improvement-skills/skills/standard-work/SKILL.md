@@ -9,7 +9,7 @@ description: >-
   Fits any recurring task — a weekly report, an intake review, a handoff, a release. Use when
   documenting, standardizing, or stabilizing a process that varies by who does it, capturing
   tribal knowledge, or writing an SOP or work instruction people will follow. Triggers: standard
-  work, standardized work, SOP, standard operating procedure, work instruction, standardize,
+  work, standardized work, SOP, standard operating procedure, work instruction, standardize a process,
   visual management, TWI, job instruction, job breakdown, takt time, everyone does it
   differently, tribal knowledge.
 metadata:

@@ -11,7 +11,9 @@ independently confirmed — do not repeat as fact without checking.
 2. [Backdoor thinking in plain language](#2-backdoor-thinking-in-plain-language)
 3. [The collider demonstration](#3-the-collider-demonstration)
 4. [The identification ladder](#4-the-identification-ladder)
+4a. [The adjustment-only toolkit (the weakest rung, run properly)](#4a-the-adjustment-only-toolkit-the-weakest-rung-run-properly)
 5. [Worked example A — difference-in-differences](#5-worked-example-a--difference-in-differences)
+5a. [Staggered adoption: why plain DiD breaks](#5a-staggered-adoption-why-plain-did-breaks)
 6. [Instrumental variables in plain terms](#6-instrumental-variables-in-plain-terms)
 7. [Worked example B — regression discontinuity](#7-worked-example-b--regression-discontinuity)
 8. [Hill's viewpoints, as Hill meant them](#8-hills-viewpoints-as-hill-meant-them)
@@ -31,6 +33,13 @@ research," *Biometrika* 1995; lay canon *The Book of Why*, Pearl & Mackenzie 201
 | Mediator M | X→M→Y | Carries part of the effect | **No** for the total effect (adjusting subtracts the pathway) |
 | Collider C | X→C←Y (or two causes → C) | Common *effect*; harmless until conditioned on | **Never** — conditioning opens a spurious path |
 | Descendant of X | X→D | Downstream of treatment | **No** — adjusting for it is partial conditioning on X's effects |
+
+**A collider need not sit downstream of X.** The row above is the easy case. The dangerous case is
+a *pre-treatment* variable that is a common effect of two things you never measured: U1→X and
+U1→Z, U2→Z and U2→Y. Z arrives in the analyst's list looking innocent — measured before treatment,
+correlated with both X and Y, plainly "not a mediator" — but the path X ← U1 → Z ← U2 → Y is
+blocked *until you adjust for Z*, and adjusting opens it. Drawn out, the graph looks like the
+letter M, hence **M-bias**. See §2 for the procedural guard.
 
 The correlation-vs-causation aphorism this drill operationalizes has no author: it appears in
 print by the 1880s–90s, alongside the birth of correlation itself, and Alexander Bain warned of
