@@ -757,7 +757,7 @@ would have survived any conformance check — ROC AUC's prevalence mechanism, MA
 rule, rank tests as drop-in means tests, resolution IV promised for designs that are resolution III,
 a Weibull fitted to a repairable system, and a test-isolation setting that leaks. 12 unnecessary
 description trims reverted with trigger lists verified byte-identical.
-Deliverables: docs/trigger-test.md (43 risk-ranked rows; written, never run — the library's one
+Deliverables: docs/trigger-test.md (45 risk-ranked rows; written, never run — the library's one
 never-met definition-of-done item, now recorded as unmet rather than assumed); README install-cost
 table with the 14.9% verdict; review report sections 9-10 including an 8-item owner decision list.
 Tooling: validate.sh now enforces cross-link resolution (verified both directions, including a

@@ -100,13 +100,21 @@ months" where its own SLO gives ~5.5; `weight-of-the-books` projected 7-year ret
 equation; `medical-research-detective` said "the relative risk is 100%" for a doubling,
 readable as RR = 1.0.
 
-**Finalization** — 9 trigger-phrase collisions resolved (now **1298 phrases, zero
-collisions**), 50 descriptions trimmed for headroom (validator notes 57 → 19), README and
+**Finalization** — 9 trigger-phrase collisions resolved, 50 descriptions trimmed for headroom,
+README and
 CONTRIBUTING corrected (both still described the pre-archive library; CONTRIBUTING's "Next:"
 section contradicted the repo's own standing directive), dated status stamps on all five
 research docs, and the **first-ever coherence audit of the eval suite**: 95 of 121 coherent,
 zero positive-prompt drift, 3 dead near-miss references fixed, 22 files cleared of
 archived-domain scenarios.
+
+> **Corrected by §6.** Two claims in this Finalization paragraph did not survive re-measurement, and
+> are left above as written so the record shows what changed. (1) The **50 description trims were
+> unnecessary** — the validator was counting bytes rather than characters, so none of those
+> descriptions had ever exceeded the cap; 12 of the trims destroyed routing or teaching signal and
+> have been reverted. (2) **"Zero collisions" means zero *exact duplicate strings*, not unambiguous
+> routing** — the router matches whole descriptions, and 85 phrases still compete inside other
+> skills' prose. The live phrase count is 1,328.
 
 ## 5. Tooling
 
@@ -155,7 +163,7 @@ code and re-deriving results** rather than by reading.
   name-only. `README.md` now carries a per-plugin cost table and recommends three or four plugins.
   The corollary, stated plainly rather than defended: description trimming was never the lever —
   skills per install is, by a factor of ~145.
-- **`docs/trigger-test.md` (new)**: 43 risk-ranked rows with exact prompts, expected skill,
+- **`docs/trigger-test.md` (new)**: 45 risk-ranked rows with exact prompts, expected skill,
   near-miss, and a pass/fail log — covering the skills that lost trigger phrases, the phrases that
   moved, over-broad single-word triggers, the persona-gated skills, and everything rewritten today.
 
