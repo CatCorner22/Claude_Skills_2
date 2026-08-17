@@ -121,7 +121,48 @@ with collision-scanned triggers and misattribution warnings as load-bearing cont
   archived-plugins manifest).
 - `scripts/validate.sh`: per-skill OK flag; NOTE tier for near-cap descriptions.
 
-## 7. What to watch next
+## 7. Addendum (2026-08-11, second pass): consolidation + adversarial review
+
+**Consolidation executed** (owner-authorized):
+- `board-of-advisors-skills` (1 skill + 6 subagents) **merged into `coding-agent-skills`** —
+  board-review and all six advisors keep working under the new namespace; 9 citing files
+  re-namespaced. A one-skill plugin was pure install friction.
+- `curve-hero-design-language` and `chicken-little-college-kid` **archived at skill level**
+  (`archive/skills/`) — both were mounted on the dental-practice direction that was not
+  chosen at the career re-aim. lean-six-sigma-for-software's sync-audit step rewritten as
+  generic build-your-own-map guidance with an archived pointer to the worked dental example.
+- Active library after consolidation: **121 skills / 14 plugins**.
+
+**Adversarial review** (15 agents: 7 reviewers → 7 skeptics → synthesizer; 62 raw findings,
+23 refuted, **39 confirmed → 30 work items, all executed**). The wave verdict, verbatim from
+the synthesis: *"one compromised skill, roughly a dozen worked-example numbers to correct,
+and about twenty one-line seam and residue fixes."* What held up under attack: all section
+order/eval/naming hygiene, every archived pointer, the full attribution layer (Cleveland &
+McGill, Wickham, Rubin, CRISP-DM, Hill, Twyman→Ehrenberg, the TPS canon), and a clean
+privacy sweep. Highlights of what was fixed:
+- **Taught-something-false tier**: causal-inference's collider example had its sign inverted;
+  spreadsheet-modeling's cross-foot "catch" was an algebraic tautology and its breakeven was
+  ~7 points off its own inputs; excel-automation's verification assert ended in `or True`
+  (dead code); ml-project-framing's leakage remedy didn't fix the leak it named;
+  ab-test-design's A/A advice recreated the peeking setup its own §5 condemns; VSM labeled
+  process time as value-added time; standard-work asserted a postwar TWI column as wartime.
+- **The one standing-directive breach**: assertion-evidence-deck still named the former
+  employer and an internal ERP nickname in its published routing contract, and its build
+  script defaulted to the employer's brand palette. De-mounted; the UT palette survives as
+  an explicit non-default legacy option; oracle-cm-domain.md relabeled a legacy reference.
+- **Discovery seams**: six of eight new skills had zero inbound citations — reciprocal
+  Not-for lines added to statistical-inference, probability-fundamentals, meeting-design;
+  assertion-evidence-deck's bare `briefing` trigger narrowed so executive-briefing can
+  receive its own traffic.
+- **Kept by explicit exception** (recorded in MEMORY.md): chicken-little's Oracle Fusion
+  data-model reference — name-gated (zero routing pollution) and the only surviving copy of
+  that commissioned depth in the repo.
+
+**Standing lessons adopted for future waves**: (1) every worked example gets an
+arithmetic-verification pass before ship — examples are the part readers lift; (2) every
+new-skill wave gets a reciprocal-link pass so additions don't land as citation sinks.
+
+## 8. What to watch next
 
 - 40+ descriptions sit within 5% of the 1024 cap (validator now NOTEs them) —
   any future edit to those must re-count.
