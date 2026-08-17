@@ -7,13 +7,14 @@ description: >-
   general principle → boundary cases, never definition-first), runs the Feynman loop (distilled
   from accounts of Feynman's practice, not a protocol he wrote) to find the author's own gaps,
   strips curse-of-knowledge tells (Pinker's framing: undefined abbreviations, "simply," skipped
-  steps), and verifies with teach-back. The assistant plays the smart newcomer, flagging jargon
-  and hand-waves. Use when a concept must land with someone who doesn't already know it —
-  onboarding, newcomer docs, or "why does nobody get this?". Triggers: explain it well, Feynman
+  steps), and verifies with teach-back. The assistant plays the smart newcomer, flags jargon and
+  hand-waves, drafts analogies with breaks marked, and simulates the teach-back. Use when a
+  concept must land with someone who doesn't already know it — onboarding, newcomer docs, or
+  "why does nobody get this?". Triggers: explain it well, Feynman
   technique, analogy for, teach this concept, curse of knowledge, make this intuitive,
   teach-back, explain to a newcomer.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Explanation design

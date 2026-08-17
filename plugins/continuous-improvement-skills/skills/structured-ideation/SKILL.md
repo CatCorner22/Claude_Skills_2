@@ -1,18 +1,19 @@
 ---
 name: structured-ideation
 description: >-
-  Runs structured idea-generation sessions that separate divergence from convergence:
-  brainwriting (6-3-5 silent rounds) as the default over open brainstorming, quantity targets
-  with judgment deferred, SCAMPER prompts and creative constraints when the well runs dry, and
-  convergence by explicit criteria (effort/impact matrix, weighted scoring) instead of applause
-  volume — with the LLM as anonymity engine, fatigue-proof idea partner, and wild-card generator
-  of deliberately distant analogies. Grounded in why interacting groups underproduce (production
-  blocking and evaluation apprehension — Diehl & Stroebe). Use when a person or team needs many
+  Runs structured idea-generation sessions that separate divergence from convergence and never
+  let the room do both at once: brainwriting (6-3-5 silent rounds) as the default over open
+  brainstorming, quantity targets with judgment deferred, SCAMPER prompts and creative
+  constraints when the well runs dry, and convergence by explicit criteria (effort/impact
+  matrix, weighted scoring) instead of applause volume — with the LLM as anonymity engine,
+  fatigue-proof idea partner, and wild-card generator of deliberately distant analogies.
+  Grounded in why interacting groups underproduce (production blocking and evaluation
+  apprehension — Diehl & Stroebe). Use when a person or team needs many
   options for a defined problem, an idea session is stalling or dominated by a few voices, or a
   raw pile of ideas needs honest narrowing. Triggers: brainstorm better, brainwriting, SCAMPER,
   generate options, out of ideas, ideation session, diverge and converge, six three five.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Structured ideation (diverge, then converge)

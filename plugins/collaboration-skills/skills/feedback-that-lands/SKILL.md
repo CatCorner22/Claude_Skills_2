@@ -1,7 +1,7 @@
 ---
 name: feedback-that-lands
 description: >-
-  Structures workplace feedback so it lands.
+  Structures workplace feedback so it lands, giving and receiving with equal weight.
   Giving: Situation-Behavior-Impact (Center for Creative
   Leadership) — the specific situation, the observed behavior (never inferred character or
   motive), impact as the speaker's own experience; one topic per conversation;
@@ -15,7 +15,7 @@ description: >-
   feedback, SBI, feedback conversation, they got defensive, receiving feedback,
   performance conversation, code review tone, hard conversation with a teammate.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Feedback that lands (giving and receiving)

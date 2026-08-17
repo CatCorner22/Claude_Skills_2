@@ -1,11 +1,12 @@
 ---
 name: exploratory-data-analysis
 description: >-
-  Profiles a dataset before any modeling or reporting, in the Tukey tradition: establishes
-  shape and grain (what one row represents, tested by key uniqueness), checks column types
-  against meaning, quantifies and classifies missingness per column, goes univariate first (centre, spread, shape — the summary statistics themselves belong to
-  descriptive-statistics)
-  (distributions, skew) then bivariate (correlation, cross-tabs, group-by), flags outliers
+  Profiles a dataset before any modeling or reporting, in the Tukey (1977) tradition of
+  looking at the data before summarizing it: establishes shape and grain (what one row
+  represents, tested by key uniqueness), checks column types
+  against meaning, quantifies and classifies missingness per column, goes univariate first
+  (centre, spread, shape as screening signals — choosing the summary you publish belongs to
+  descriptive-statistics) then bivariate (correlation, cross-tabs, group-by), flags outliers
   (IQR fence, z-score) and investigates before deleting, plots before trusting summaries
   (Anscombe's quartet), and ends in a data-quality memo handed to cleaning.
   Use when first inspecting a new dataset, sizing up data quality, or deciding what needs
@@ -13,7 +14,7 @@ description: >-
   the data, first look at data, distribution, outliers, correlation, cross-tab, missing data,
   data quality check, get to know the data, what does one row represent, Anscombe.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     The stance and sequence follow Tukey, Exploratory Data Analysis (1977); the
     plot-before-trusting-summaries demonstration is Anscombe's quartet (The American

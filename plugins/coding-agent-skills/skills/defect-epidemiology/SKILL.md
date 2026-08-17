@@ -7,13 +7,14 @@ description: >-
   transmission tree), dispositions every contact as patched, not-applicable, or
   accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared
   snippet) so reinfection stops at the source, computes the pattern's R0, and quarantines
-  high-R0 sources with a template fix plus a lint rule. Grounded in code-clone research
-  (ReDeBug, VUDDY, Juergens et al. 2009). Use when a found bug's pattern may live elsewhere, or
-  the same bug keeps coming back. Triggers: contact tracing, patient zero, code clone,
-  copy-paste bug, everywhere else this appears, outbreak, this bug again, trace the clones,
-  quarantine the template.
+  high-R0 sources with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY
+  (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009
+  (inconsistent clone edits cause real faults). Use when a found bug's pattern may live
+  elsewhere, or the same bug keeps coming back. Triggers: contact tracing, patient zero, code
+  clone, copy-paste bug, everywhere else this appears, outbreak, this bug again, trace the
+  clones, quarantine the template.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Defect epidemiology (contact-trace the bug you just found)

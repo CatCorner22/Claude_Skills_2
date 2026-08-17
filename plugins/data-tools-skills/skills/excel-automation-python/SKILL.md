@@ -4,15 +4,16 @@ description: >-
   Reads, writes, and formats real Excel workbooks with Python — pandas read_excel/to_excel for
   data in and out, openpyxl for the document layer (formulas as strings, number formats,
   widths, freeze panes, styling), xlsxwriter for write-only speed, and the template-workbook
-  pattern where styling lives in a human-maintained file and the script only moves numbers.
-  Reads defensively (shifted headers, merged cells, numbers-as-text, leading-zero loss on IDs, stale
+  pattern where styling lives in a human-maintained file and the script only moves numbers —
+  so recurring spreadsheet deliverables become a verified script instead of hand work. Reads
+  defensively (shifted headers, merged cells, numbers-as-text, leading-zero loss on IDs, stale
   formula caches) and verifies output totals against the source. Use when automating an Excel
   report, converting data to a formatted .xlsx, reading a messy workbook into a DataFrame, or
   deciding between pandas and openpyxl. Triggers: excel automation, openpyxl, write xlsx, read
   excel python, pandas to_excel, format excel with python, excel report script, xlsxwriter,
   automate spreadsheet, excel formulas python, excel template python, ExcelWriter.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Excel automation with Python

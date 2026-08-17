@@ -83,6 +83,10 @@ LEAD_MIN_STANDALONE = 45
 APPOSITIVE = re.compile(r"\s+[—–]\s+[^—–]{0,140}?\s+[—–]\s+")
 
 
+def _first_sentence(s):
+    return re.split(r"(?<=[.!?])\s+(?=[A-Z])", s)[0].strip()
+
+
 def _lead_split(what):
     cand = re.split(r"\s+[—–]\s+|:\s+|;\s+", what, maxsplit=1)[0].strip()
     if 12 <= len(cand) <= LEAD_LIMIT:
@@ -110,18 +114,23 @@ def lead_clause(what):
     characters before its first period, which truncated 86% of this column when the index
     was first generated.
 
-    One correction on top of that split: when the first em-dash opens a *paired* appositive
-    rather than ending the clause, the split returns a fragment ("Turns any material",
-    "Tunes detection systems"). So if the first attempt comes back too short to stand alone,
-    drop paired appositives, refuse to cross a sentence boundary, and re-split. The
-    length gate matters — applying appositive-stripping unconditionally joins clauses
-    ungrammatically in descriptions whose pre-dash text was already complete.
+    Two corrections on top of that split. First: a capability clause never spans a sentence
+    boundary, but the em-dash/colon that ends it sometimes sits in a *later* sentence, so the
+    split runs past a period and trails the next sentence's opening words ("...with equal
+    weight. Giving"). Cut back to the first sentence whenever what remains can still stand
+    alone. Second: when the first em-dash opens a *paired* appositive rather than ending the
+    clause, the split returns a fragment ("Turns any material", "Tunes detection systems").
+    So if the attempt comes back too short to stand alone, drop paired appositives and
+    re-split. Both length gates matter — cutting or appositive-stripping unconditionally
+    truncates or ungrammatically joins descriptions whose pre-dash text was already complete.
     """
     first = _lead_split(what)
+    head = _first_sentence(first)
+    if head != first and len(head) >= LEAD_MIN_STANDALONE:
+        first = head
     if len(first) >= LEAD_MIN_STANDALONE:
-        return first
-    stripped = APPOSITIVE.sub(" ", what).strip()
-    stripped = re.split(r"(?<=[.!?])\s+(?=[A-Z])", stripped)[0].strip()
+        return first.rstrip(". ")
+    stripped = _first_sentence(APPOSITIVE.sub(" ", what).strip())
     second = _lead_split(stripped)
     return (second if len(second) > len(first) else first).rstrip(". ")
 
