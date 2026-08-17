@@ -61,6 +61,13 @@ Never store secrets, credentials, account numbers, or client data here.
   (user-stated for BSL_MATCHING_ENGINE, 2026-07-18)
 
 ## Project State & Decisions
+- FACT: Library FINALIZED 2026-08-11: **121 active skills / 14 plugins**, 1298 trigger
+  phrases with **zero collisions**, validator 0 errors / 0 warnings / 19 near-cap notes,
+  121 evals at 1:1 parity, 0 unresolved cross-links. Repo root is the marketplace only
+  (non-library apps/tools in `archive/apps/`). PR body for #39 is `docs/pr-body.md`
+  (this session's GitHub API cannot reach the renamed CatCorner22 repo; git push works).
+  The one verification never done: evals have never been EXECUTED — static coherence
+  audited, ~360 scenarios unrun, needs fresh interactive sessions.
 - FACT: Library state (2026-08-11, post-consolidation): **121 active skills / 14 plugins**
   (+ 66 skills / 9 plugins archived, + 2 skills archived at skill level in `archive/skills/`;
   board-of-advisors-skills MERGED into coding-agent-skills — board-review + 6 subagents,
@@ -241,6 +248,35 @@ Never store secrets, credentials, account numbers, or client data here.
   (17 files) never trigger alone. (2026-08-08)
 
 ## Crystallization log
+- 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
+  (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core
+  purpose the phrase names; elite-python-engineer (name-gated persona) yielded bare
+  `python`/`code review`/`fastapi`; EDA yielded the three summary-statistics phrases and
+  gained the reciprocal seam it never had; `standardize` stayed bare with standard-work
+  while data-side claimants qualified. Now 1298 phrases / 0 collisions. Plus 9 new
+  triggers, each collision-verified twice: real user phrasings ("works in the notebook",
+  "containerize", "stopped getting better") and 4 phrases that sat in a skill's own
+  description prose where routing could not key on them. (2) HEADROOM: 50 descriptions
+  trimmed, validator notes 57 -> 19; every provenance mark, misattribution correction and
+  safety rail preserved verbatim. DECLINED to chase 0 notes — 4 skills at 982-985 keep
+  39-42 chars of headroom, which meets the goal; the goal was headroom, not a clean lint
+  run. (3) EVAL COHERENCE (first ever): 95/121 coherent; 0 positive-prompt drift; 3 dead
+  near-miss references fixed; 0 vacuous guards (6 flagged, all 6 correctly judged
+  legitimate — deliberate own-token planting is the point of a hard near-miss); 22 files
+  cleared of archived-domain scenarios. (4) DOCS: README + CONTRIBUTING were still
+  describing the pre-archive library and CONTRIBUTING's "Next:" contradicted the standing
+  directive; dated superseded-stamps on all 5 research docs with bodies preserved as
+  record. (5) ROOT CLEANUP: two separate dental apps (different programs, similar names —
+  duplication had been invisible), their benchmark docs, WORKFLOW_VALIDATION.md, and the
+  Oracle-era fusioncash tool -> archive/apps/; GITHUB_SETUP.md deleted (all facts dead).
+  (6) 14 plugin bumps; docs/pr-body.md written for #39.
+  LESSON: my own generated INDEX had TWO lead-clause extraction bugs, found only by
+  spot-checking my own output — first truncated 86% of the capability column, second
+  returned fragments on paired em-dash appositives. RULE: check generated output the same
+  way skill content is checked; a generator's bug is silent and repo-wide.
+  LESSON: an unnamed seam sentence ("Routes its seams: deep multi-agent audits, review
+  tone, ...") cannot route and lends other skills' vocabulary to itself — seams must name
+  the target skill.
 - 2026-08-11 (3) — consolidation + adversarial review pass (121 active / 14 plugins).
   User granted merge/delete/consolidate authority. EXECUTED: board-of-advisors-skills
   merged into coding-agent-skills (board-review + 6 subagents, re-namespaced, 9 citing
