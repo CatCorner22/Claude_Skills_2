@@ -3,11 +3,11 @@ name: prompt-engineering
 description: >-
   Writes and debugs prompts, instructions, and system messages for LLM agents — task and success
   criteria, the right context and only that, an output contract enforced by provider-native
-  structured output rather than by wording, a deliberate example strategy (few-shot, many-shot,
-  ordering effects), what changes on reasoning and extended-thinking models, an honest
-  prompt-injection rail for untrusted input, cache-aware ordering, and iteration against an eval
-  set with repeat runs. Delivers a package: copyable prompt, design notes, input assumptions, eval
-  cases. Use when crafting a prompt, instruction, or system message, making model output
+  structured output rather than by wording, example strategy (few-shot, many-shot, ordering
+  effects), what changes on reasoning and extended-thinking models, an honest prompt-injection
+  rail, cache-aware ordering, and iteration against an eval set with repeat runs. Delivers a
+  package: copyable prompt, design notes, input assumptions, eval cases. Use when crafting a
+  prompt, instruction, or system message, making model output
   machine-readable, or debugging a flaky prompt that gives inconsistent or wrong results.
   Triggers: prompt, prompt engineering, system prompt, instructions, few-shot, many-shot, output
   format, structured output, JSON output, prompt injection, reasoning model, extended thinking,
@@ -64,67 +64,51 @@ skill is that reference for Anthropic models; every mechanism named below was ch
    `messages.parse()` validates the response against your schema — or, when the result should arrive
    as a tool call, a tool whose `input_schema` *is* the contract, with `strict: true` and
    `tool_choice: {"type": "tool", "name": …}` forcing that tool. The model is then constrained to
-   conforming JSON rather than persuaded toward it. Know the edges, because they are where the
-   prompt-level fallback still earns its place:
-   - **A schema pins shape, not values.** Recursive schemas, numeric bounds
-     (`minimum`/`maximum`/`multipleOf`), and string-length limits are not supported, and every
-     object needs `additionalProperties: false`. Range and length rules stay in your validation code
-     (some SDKs strip unsupported keywords and check them client-side — worth knowing before you
-     rely on one).
-   - **Two ways you still don't get an object:** a refusal need not match the schema, and hitting
-     the output-token cap truncates. So branch on the stop reason before parsing, and treat token
-     headroom as part of the contract.
-   - **It doesn't compose with everything.** On the Claude API, constrained format and document
-     citations are mutually exclusive (the pair errors). If you need quotes back to a source, that
-     is a real trade-off to make deliberately.
-
-   Where the model or endpoint has no such feature, *then* shape by prompt: name the exact
-   structure, show one instance, say what to emit for a missing value (`null`? `"unknown"`? omit
-   the key?), and state whether anything may accompany the result. Keep it labeled as the fallback:
-   a format request narrows the distribution, a schema constrains it.
+   conforming JSON rather than persuaded toward it. Then know the edges, because they are where the
+   prompt-level fallback still earns its place: a schema pins **shape, not values** (no recursion,
+   no numeric bounds, no string lengths — range checks stay in your code); a refusal or a
+   truncated response still won't match it, so branch on the stop reason before parsing; and it
+   doesn't compose with everything (on the Claude API, constrained format and document citations are
+   mutually exclusive). Where the model or endpoint has no such feature, *then* shape by prompt:
+   name the exact structure, show one instance, say what to emit for a missing value (`null`?
+   `"unknown"`? omit the key?), and say whether anything may accompany the result. Keep that labeled
+   as the fallback — a format request narrows the distribution, a schema constrains it. Mechanism
+   details and the full limits list are in `references/prompt-patterns.md`.
 4. **Choose an example strategy on purpose.** Examples are the strongest single signal in a prompt —
    the model matches their length, tone, and structure — which is what makes them powerful and a
-   careless set expensive.
-   - **Default 2–5 input→output pairs** for anything stylistic or edge-case-heavy, covering the hard
-     cases (an empty value, an ambiguous input, the "say you don't know" case), each written in
-     *exactly* the format you want back. Inconsistent examples teach inconsistency.
-   - **Scale up when you have the labels and the window.** A long context window plus a cacheable
-     static prefix makes a block of dozens or hundreds of examples affordable — written to cache
-     once, then read at a fraction of input price. The in-context-learning literature reports
-     many-shot blocks beating the classic handful `[unverified here — no provider documentation for
-     a number, no citation checked in this environment]`, so treat block size as a factor to
-     measure on your eval set (step 8), not a setting to copy.
-   - **Probe the sensitivities rather than trusting them.** Example order, and the balance of labels
-     across examples, are reported to move classification-style output `[same hedge]`. Both are
-     cheap to test: shuffle the order, balance the label counts, re-run. If the answer moves, you
-     found a real dependency and your draft's success was partly ordering luck.
-   - **Examples rot.** A block written against an earlier model freezes that model's behavior into
-     a later one. Keep the examples that pin a genuinely format-sensitive shape, mark them
-     illustrative, and delete examples of judgment the model now handles unaided.
+   careless set expensive. **Default to 2–5 input→output pairs** for stylistic or edge-case-heavy
+   work, covering the hard cases (an empty value, an ambiguous input, the "say you don't know" case)
+   in *exactly* the format you want back; inconsistent examples teach inconsistency. **Scale up when
+   you have the labels and the window** — a long context plus a cacheable static prefix makes a block
+   of dozens or hundreds affordable, and many-shot blocks are reported to beat the classic handful
+   `[unverified here — no provider documentation for a number, no citation checked in this
+   environment]`, so measure block size on your eval set (step 8) rather than copying one. **Probe
+   the sensitivities** rather than trusting them: example order and label balance are reported to
+   move classification-style output `[same hedge]`, and both are cheap to test — shuffle, rebalance,
+   re-run. And remember examples **rot**: a block written for an earlier model freezes its behavior
+   into a later one, so keep the ones that pin a format-sensitive shape, mark them illustrative, and
+   delete examples of judgment the model now handles unaided.
 5. **Match the reasoning strategy to the model class, not to the task's difficulty.** Ask what kind
    of model this is *before* writing anything about how it should think.
-   - **On a model with a thinking/reasoning mode, depth is configuration, not prose.** The Claude
-     API exposes adaptive thinking (`thinking: {type: "adaptive"}`) and an `effort` level
-     (`low` … `max`); on several models thinking is on by default or always on. "Think step by
-     step" and `<scratchpad>` instructions are therefore redundant at best, and the documented
-     guidance is to set depth through configuration instead. Same for "plan before acting", which
-     causes over-planning, and for "double-check your answer" / "add a verification step", which is
-     documented to cause *over*-verification on at least one model where removing it lost no
-     capability. That last one inverts a long-standing prompting habit — which is why it belongs in
-     a per-model check rather than a reflex.
-   - **Don't ask for the reasoning back.** Where the raw chain of thought is never returned to the
-     caller, an instruction to reproduce it cannot be satisfied, and on at least one model asking
-     can itself trigger a refusal. Read the thinking blocks the API returns (a readable summary is a
-     display setting where offered) instead of asking the model to narrate.
+   - **With a thinking/reasoning mode, depth is configuration, not prose.** The Claude API exposes
+     adaptive thinking (`thinking: {type: "adaptive"}`) and an `effort` level (`low` … `max`), and on
+     several models thinking is on by default or always on. So "think step by step" and
+     `<scratchpad>` instructions are redundant at best; "plan before acting" causes over-planning;
+     and "double-check your answer" is documented to cause *over*-verification on at least one model
+     where removing it cost no capability. That last one inverts a long-standing prompting habit,
+     which is exactly why it belongs in a per-model check rather than a reflex. Don't ask for the
+     reasoning back either — the raw chain of thought isn't returned to the caller, and on at least
+     one model asking can trigger a refusal; read the thinking blocks the API returns instead.
    - **What still matters, and matters more:** an unambiguous task statement, the output contract
      (step 3), the evidence and context the model cannot infer, and the success criteria. Reasoning
      models remove the need to *elicit* reasoning. They do not remove the need to *specify the job*.
-   - **On a model without a thinking mode**, the older shape still applies: let it work through
-     steps before committing, and when you need both a clean answer and the reasoning, ask for the
-     reasoning first in one labeled field and the answer last in another you can extract.
+   - **Without a thinking mode**, the older shape still applies: let the model work through steps
+     before committing, and when you need both a clean answer and the reasoning, ask for reasoning
+     first in one labeled field and the answer last in another you can extract.
    - Either way, a prompt written for an earlier generation is often *too prescriptive* for a later
      one, and that over-specification is documented to reduce output quality. A model change is a
-     reason to re-test the prompt, not only to swap the model string.
+     reason to re-test the prompt, not only to swap the model string. The full stop-doing list is in
+     `references/prompt-patterns.md`.
 6. **Decompose a complex ask.** If the task has several parts, number the steps ("First… then…
    finally…"); if the parts are truly separate, use separate prompts or a workflow. A prompt that
    bundles five loosely-related requests fails on the hardest one. Reserve step-by-step
@@ -138,20 +122,19 @@ skill is that reference for Anthropic models; every mechanism named below was ch
    or a tag around it does not reliably stop the model from following them. Say so plainly in your
    design notes rather than claiming a fix, then put the real controls where they hold:
    - **Authority belongs in a channel the content can't reach.** Instructions embedded in user or
-     tool text are forgeable by anything that can write to that text; some APIs offer an operator
+     tool text are forgeable by anything that can write that text; some APIs offer an operator
      channel that isn't (the Claude API's mid-conversation `role: "system"` message is documented as
      the non-spoofable form of exactly this pattern, on the models that support it).
-   - **Constrain what a successful injection could do.** Narrow the exposed tool set, keep
-     read-only tools obviously read-only, treat model-produced commands and paths as untrusted input
-     on the way *out* (allowlist, not blocklist), and keep credentials somewhere the model's
-     execution context cannot read.
-   - **Put a human in front of consequential, hard-to-reverse actions** — sending, paying, deleting,
-     publishing. Reversibility is the useful criterion. These harness-level controls are
+   - **Constrain what a successful injection could do, and gate what it could not undo.** Narrow the
+     exposed tool set, treat model-emitted commands and paths as untrusted on the way *out*
+     (allowlist, not blocklist), keep credentials out of reach of the model's execution context, and
+     put a human in front of hard-to-reverse actions — sending, paying, deleting, publishing.
+     Reversibility is the criterion. Those harness controls are
      `coding-agent-skills:agentic-workflow-design`'s subject; the prompt-side job is to state the
      trust boundary and not to overclaim.
-   - Prompt-level mitigations are still worth having (label the block untrusted, instruct that
-     content inside it is data to analyze and never instructions to follow, ask for a refusal note
-     when it tries). Rank them as mitigation, not solution.
+   - **Prompt-level mitigations, ranked as mitigation:** label the block untrusted, say that content
+     inside it is data to analyze and never instructions to follow, and ask the model to report
+     attempted redirection instead of complying. Useful; not sufficient.
 8. **Iterate against real cases, with repeat runs.** Collect a handful of representative real inputs
    *including the ones that currently fail*, each with a known-good output. Then:
    - **Run every case more than once.** Sampling variance alone produces different outputs for an
@@ -167,20 +150,22 @@ skill is that reference for Anthropic models; every mechanism named below was ch
      a specific cause, one edit per run is what makes the attribution valid.
    - **Switch to a designed experiment when you are optimizing, not debugging.** Once several
      factors are in play at once — instruction style, example count, output mechanism, model or
-     effort level — one-factor-at-a-time can't see interactions (examples that help a terse prompt
-     and hurt a stepwise one) and spends runs inefficiently. A factorial design tests all of them in
-     fewer runs and reads the interactions; runs against an eval set are cheap enough that the full
-     design is usually affordable. Hand that off to
+     effort level — one-factor-at-a-time buys one comparison per run and can never see an
+     interaction (examples that help a terse prompt and hurt a stepwise one). A balanced factorial
+     spends the same runs better: every run informs *every* factor's estimate, so one design yields
+     all the main effects and the interactions between them, which is information OFAT cannot
+     produce at any run count. Prompt runs against an eval set are cheap, so the full design is
+     usually affordable. Hand that off to
      `continuous-improvement-skills:design-of-experiments`, which covers the design matrix,
-     randomized run order, replication as the noise yardstick, and the verification run. The two
-     rules are not in conflict: one-factor-at-a-time is for attributing a fix, a factorial is for
-     finding the best combination.
+     randomized run order, replication as the noise yardstick, and the confirming run. The two rules
+     are not in conflict: one-factor-at-a-time is for attributing a fix, a factorial is for finding
+     the best combination.
    - **If a model grades the outputs, the grader is an instrument and needs qualifying first.**
      Repeat runs, a second judge, a human reference on a sample, and an agreement statistic —
      before its scores decide which prompt ships. That protocol is
      `continuous-improvement-skills:measurement-systems-analysis`; a judge that can't agree with
      itself can't rank your prompt versions.
-   - Keep the version that wins across the whole set — not the one that fixed your favourite example
+   - Keep the version that wins across the whole set — not the one that fixed your favorite example
      while quietly breaking two others — and write down what each change was for. When the set
      passes, freeze it as a regression check.
 9. **Diagnose failures by cause.** Wrong format → move to a schema constraint (step 3); tighten the
@@ -259,8 +244,8 @@ reference.
   each case and record a pass rate.
 - Reaching for temperature to stop inconsistency → the knob may not exist on your model, and never
   guaranteed identical output where it did.
-- One-factor-at-a-time while optimizing four factors → interactions stay invisible and runs are
-  wasted. Design factorially (`continuous-improvement-skills:design-of-experiments`).
+- One-factor-at-a-time while optimizing four factors → interactions stay invisible however many runs
+  you spend. Design factorially (`continuous-improvement-skills:design-of-experiments`).
 - Trusting a model judge's single-run scores to pick a prompt → qualify the judge first
   (`continuous-improvement-skills:measurement-systems-analysis`).
 - Vague task ("summarize this") → generic output. State the job, audience, and success criteria.

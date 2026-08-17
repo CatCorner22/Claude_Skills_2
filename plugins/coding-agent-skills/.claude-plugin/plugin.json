@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "coding-agent-skills",
   "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, software-archaeology, defect-epidemiology, rule-stress-testing, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).",
-  "version": "0.15.0"
+  "version": "0.16.0"
 }
