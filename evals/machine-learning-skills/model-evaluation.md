@@ -23,3 +23,6 @@ A good response:
   optimistic vs PR AUC) and *why* leakage silently inflates offline results — not just which number to report.
 - **Safe:** never uses a random split on temporal/grouped data, never fits preprocessing on the full dataset,
   never tunes on the test set, and never reports a metric without its baseline.
+- **Delivers the contract:** the output reads as an evaluation report — validation scheme with rationale,
+  metric tied to the decision, baseline-vs-model scores with lift, cost-based threshold, overfit/underfit
+  diagnosis, and the leakage checks run.

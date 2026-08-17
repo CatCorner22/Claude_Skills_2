@@ -9,6 +9,8 @@ description: >-
   metric or decision threshold. Triggers: model evaluation, evaluate a model, cross-validation, k-fold,
   overfitting, underfitting, ROC AUC, precision recall, PR AUC, RMSE, R2, data leakage, train test
   split, confusion matrix, threshold, calibration.
+metadata:
+  version: "1.1.0"
 ---
 
 # Model evaluation
@@ -46,6 +48,13 @@ description: >-
    the prediction time and the split. Target leakage, train/test contamination, temporal leakage, group
    leakage, and preprocessing fit on the full dataset are the usual culprits — the checklist is in
    `references/metrics-and-leakage.md`.
+
+**Deliverable — the evaluation report.** The finished output states: (1) the split/validation
+scheme and why it fits the data (IID / temporal / grouped); (2) the metric and the decision it
+proxies; (3) baseline vs model scores side by side, with the lift; (4) the chosen threshold and
+the FP/FN costs behind it (classification); (5) the overfit/underfit diagnosis from the
+train-vs-validation gap; (6) which leakage checks ran and what they found. The assistant drafts
+the report; the human owns the error costs and the ship/no-ship decision.
 
 ## Why / learn
 Two ideas do the heavy lifting: **the metric must match the decision, and leakage is the silent killer of

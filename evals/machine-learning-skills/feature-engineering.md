@@ -24,3 +24,6 @@ A good response:
   be fit on training data only — not just a list of transforms.
 - **Safe:** never fits transforms on the full dataset, never target-encodes without out-of-fold/smoothing, and
   never builds rolling/lag features that include the current or future rows.
+- **Delivers the contract:** the output includes a feature dictionary (name, source, transform, fit-on),
+  a single fit-on-train-only pipeline, a per-feature knowable-at-prediction-time leakage audit, and the
+  keep/cut selection result with reasons.

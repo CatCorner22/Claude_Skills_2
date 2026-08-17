@@ -8,6 +8,8 @@ description: >-
   time such as cash flow, account balances, transaction volumes, or collections. Triggers: time series,
   forecast, forecasting, ARIMA, SARIMA, ETS, Holt-Winters, exponential smoothing, seasonality,
   backtesting, rolling forecast, rolling origin, predict future values, trend and seasonality.
+metadata:
+  version: "1.1.0"
 ---
 
 # Time-series forecasting
@@ -47,6 +49,14 @@ description: >-
    **MAPE/sMAPE** only when values stay comfortably away from zero — they explode or divide-by-zero on
    low volumes and intermittent series. Prefer a **scaled error (MASE)** or an explicit skill-vs-baseline
    ratio so the score says whether you beat seasonal-naive. Details in `machine-learning-skills:model-evaluation`.
+
+**Deliverable — the forecast package.** The finished output contains: (1) the decomposition read —
+trend, seasonal periods, additive vs multiplicative, level shifts and one-offs noted; (2) naive and
+seasonal-naive baseline scores; (3) the chosen model and why the decomposition points to it;
+(4) rolling-origin backtest results at the decision horizon — MAE/RMSE in the series' units plus
+MASE or an explicit skill-vs-seasonal-naive ratio; (5) the forecast itself with honest uncertainty
+(prediction intervals, or the backtest error range stated plainly). The assistant builds and
+backtests the models; the human owns the horizon, the business calendar, and forecast acceptance.
 
 ## Why / learn
 Two principles carry almost all of time-series forecasting. First, **respect temporal order**: the whole
