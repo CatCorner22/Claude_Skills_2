@@ -27,3 +27,6 @@ A good response:
   so recall is usually unmeasurable, and why robust statistics beat mean/std when hunting outliers.
 - **Safe:** never treats a flag as proof, never uses plain mean/std where outliers inflate the spread, and
   never ships a hard cutoff that swamps reviewers without ranking or a budget.
+- **Delivers the contract:** the output includes the definition of "anomalous" with error costs, the
+  method choice with rationale, the threshold + alert budget, a ranked top-N list with driving fields
+  and a first check per alert, and the feedback/re-tuning plan.

@@ -8,6 +8,8 @@ description: >-
   unusual activity such as reconciliation breaks, fee spikes, duplicate or out-of-pattern payments, or
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
+metadata:
+  version: "1.1.0"
 ---
 
 # Anomaly detection
@@ -42,6 +44,14 @@ description: >-
 7. **Close the loop and manage alert fatigue.** Track precision on reviewed alerts, suppress known-benign
    recurring patterns (a scheduled large transfer isn't news every month), fold confirmed cases back as labels,
    and re-tune. An alert stream nobody trusts is worse than none.
+
+**Deliverable — the detection design + ranked alert feed.** The finished output contains:
+(1) a one-paragraph definition of "anomalous" for this data, with the missed-anomaly vs
+false-alarm cost trade-off stated; (2) the method(s) chosen and why they fit the data's shape;
+(3) the threshold and the alert budget it was tuned to; (4) a ranked top-N alert list — score,
+the fields driving each flag, and a suggested first check per alert; (5) the feedback plan:
+how reviewed alerts feed the precision estimate and re-tuning. The assistant drafts the design
+and the ranked alerts; the human owns the investigation and the verdict on every alert.
 
 ## Why / learn
 The mental shift is that **an anomaly is "unusual," not automatically "wrong."** These methods find points
