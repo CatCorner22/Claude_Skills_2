@@ -1,5 +1,14 @@
 # Core skills & techniques — synergy proposal (study only, nothing built)
 
+> **Status as of 2026-08-11: superseded — "study only, nothing built" no longer holds.** 9 of the
+> 13 ranked candidates shipped: systems-thinking, spaced-retrieval-learning, meeting-design,
+> feedback-that-lands, deliberate-practice, structured-ideation, habit-design, explanation-design,
+> and priority-and-wip. Still unbuilt, with their verdicts intact: argument-and-fallacies (HOLD),
+> mental-models-catalog (FOLD-IN), note-taking/PKM (CUT), decision-journal (FOLD-IN). The 156-skill
+> / 22-plugin counts below are historical — the active library is now 121 skills / 14 plugins after
+> the archive and consolidation passes. Retained as the research record; the analysis below reflects
+> the library as it stood when the study ran.
+
 **Why it matters:** the library is deep in domain methods (156 skills / 22 plugins) but
 thin in the *general* layer — the skills that upgrade every other skill's outcomes.
 This proposal ranks that layer, gap-checked by grep against all 156 descriptions,
@@ -60,7 +69,9 @@ learning science, and almost nobody studies this way because authoring good retr
 prompts is labor. The LLM is the tutor that removes the barrier: it generates the
 question bank from any material (a skill, a codebase, CTP prep), schedules the
 spacing, and grades the recall attempt. Mounts: every skill's Why/learn section;
-`public-sector-treasury-skills:ctp-exam-prep` (exam natural fit); onboarding to any
+`public-sector-treasury-skills:ctp-exam-prep` *[archived 2026-08-11 —
+`archive/plugins/public-sector-treasury-skills`; the shipped skill mounts on domain-neutral
+material instead]* (exam natural fit); onboarding to any
 new codebase or domain. Triggers (free): spaced repetition, retrieval practice, help
 me remember this, quiz me on, make this stick, study plan.
 

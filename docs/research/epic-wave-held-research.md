@@ -1,6 +1,14 @@
 # Epic-wave research — three lanes, HELD pending re-aim
 
-**Status: HELD.** These three research-lane reports were commissioned for the "create
+> **Status as of 2026-08-11: superseded — the HELD status is over and the wave was built.** All
+> 12 cross-lane shortlist candidates shipped as skills: detection-system-tuning, no-win-drills,
+> weak-signal-navigation, disarming-elicitation, software-archaeology, break-glass-playbooks,
+> split-tally-evidence, ulysses-pact, rebuild-rehearsal, defect-epidemiology, sortition-review,
+> and skin-in-the-game — each re-aimed to domain-neutral mount points, since the Oracle/treasury
+> pairings named below are no longer build targets (those plugins are archived). Retained as the
+> research record; the analysis below reflects the library as it stood when the study ran.
+
+**Status: HELD** *(historical — see the status block above)*. These three research-lane reports were commissioned for the "create
 something epic" wave and completed 2026-08-08. Before synthesis began, the user issued a
 standing directive: **no more Oracle work**. The lanes were briefed with Oracle/treasury
 mount points *before* that directive, so the library pairings below reference skills and
@@ -176,7 +184,7 @@ All marks: **[snippet-only; N-source convergent]** — the proxy blocked every W
 ## 3. EPIDEMIOLOGY OF DEFECTS → contact-tracing for copy-paste propagation (narrow)
 **DOCUMENTED SCIENCE/PRACTICE [snippet-only; convergent]:** Clone-vulnerability propagation is an established research line with tooling: **ReDeBug** found unpatched code clones across entire OS distributions (IEEE S&P 2012 — patches routinely fail to propagate to clones, leaving latent vulnerabilities) ([paper PDF](https://www.ieee-security.org/TC/SP2012/papers/4681a048.pdf)); **VUDDY** scaled vulnerable-clone discovery with function fingerprints (IEEE S&P 2017) ([PDF](https://seulbae-security.github.io/pubs/vuddy-sp17.pdf)); **Juergens et al., "Do Code Clones Matter?" (ICSE 2009)** — inconsistent changes to clones are frequent and yielded ~107 confirmed faults across commercial/OSS systems ([ACM](https://dl.acm.org/doi/10.1109/ICSE.2009.5070547)). Clone genealogy research (Kim et al.) documents lineage tracking.
 **MECHANISM:** When one bug is confirmed, treat it as an index case, not a singleton: fingerprint the defective pattern, contact-trace every clone (including mutated variants), check each contact's patch status, and find patient zero (the origin commit/template) to stop reinfection at the source. R0 = average clones spawned per instance of a pattern — high-R0 templates deserve quarantine (fix the template, lint-block the pattern).
-**PAIRING (pre-directive):** systematizes `coding-agent-skills:chicken-little-college-kid`'s template-clone warning (dental app); pairs with `coding-agent-skills:git-and-code-review` (a found-bug review step: "trace the contacts before closing"). Distinct from RCA (one causal chain, one incident) and FMEA (prospective, mode-by-mode): this is *retrospective population-level spread control* — the unit is the pattern, not the failure.
+**PAIRING (pre-directive):** systematizes `coding-agent-skills:chicken-little-college-kid`'s template-clone warning (dental app) *[archived 2026-08-11 — `archive/skills/coding-agent-skills/chicken-little-college-kid`; the shipped `defect-epidemiology` skill does not mount on it]*; pairs with `coding-agent-skills:git-and-code-review` (a found-bug review step: "trace the contacts before closing"). Distinct from RCA (one causal chain, one incident) and FMEA (prospective, mode-by-mode): this is *retrospective population-level spread control* — the unit is the pattern, not the failure.
 **LLM AMPLIFICATION:** LLM does semantic clone detection cheaply (catches Type-3/4 mutated clones grep misses), builds the transmission tree from git history, computes per-template R0, drafts the quarantine lint rule.
 **TRIGGER SKETCH:** Safe: "contact tracing", "patient zero", "code clone", "copy-paste bug", "everywhere else this appears", "outbreak". Avoid bare "clone" (git clone collision) and bare "spread".
 

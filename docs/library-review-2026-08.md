@@ -7,10 +7,16 @@ plus the archive directive that landed during scoping: move all Oracle/Fusion/OT
 treasury/finance-domain plugins out of the active marketplace.
 
 **Outcome in one line:** the library went from 181 skills / 24 plugins (mixed
-domain-specific and general) to a career-portable active library of **123 skills /
-15 plugins** (115 kept + 8 new), with 66 domain skills preserved in `archive/`,
-every mechanical audit finding fixed, a generated quick-router index at
-[INDEX.md](INDEX.md), and zero validator errors.
+domain-specific and general) to a career-portable active library of **121 skills /
+14 plugins**, with 66 domain skills preserved in `archive/`, every mechanical audit
+finding fixed, a generated quick-router index at [INDEX.md](INDEX.md), and zero
+validator errors.
+
+The arithmetic: 181 pre-overhaul skills − 66 archived with their nine plugins
+(§3) = 115 kept, + 8 new (§5) = 123 across 15 plugins at the end of the first pass;
+then the second-pass consolidation (§7) archived 2 more skills at skill level and
+merged the one-skill `board-of-advisors-skills` into `coding-agent-skills`, landing
+at the current **121 skills / 14 plugins**.
 
 ## 1. Structural audit (what "needs improvement" actually meant)
 
@@ -31,9 +37,15 @@ findings were quality-tier and tooling:
 | Undocumented `metadata: {version, source}` convention (34/181 adoption, all August-wave) | convention gap | Codified in the authoring standard; applied to touched skills only — no mass retrofit |
 | July-vs-August generation gap: early-wave skills conforming but thin (descriptions ~580 vs ~980 chars; 1–3 cross-links vs 7; ~75 reference lines vs ~142) | ~70 skills matched ≥1 weakness criterion | The 15 weakest **active** skills deep-rewritten to the current standard (see §4) |
 
-## 2. Consolidation analysis (suggestions only — none executed)
+## 2. Consolidation analysis (first-pass findings)
 
-Seven suspected overlap zones were examined skill-by-skill. Verdicts:
+Seven suspected overlap zones were examined skill-by-skill. Nothing was merged
+during this first pass — the verdicts and recommendations below were handed to the
+owner as options. **Consolidation was executed in the second pass, on different
+grounds: see §7** (`board-of-advisors-skills` merged into `coding-agent-skills` for
+install friction, not overlap; `chicken-little-college-kid` and
+`curve-hero-design-language` archived at skill level as dental-direction mounts).
+Verdicts:
 
 | Zone | Skills | Verdict |
 |---|---|---|
@@ -45,8 +57,8 @@ Seven suspected overlap zones were examined skill-by-skill. Verdicts:
 | Anomaly/detection | anomaly-detection vs detection-system-tuning vs compliance-risk-anomaly (+ federal-sponsored-ar-compliance-risk) | Named trio: **DISTINCT** (build → operate → apply). The unnamed pair compliance-risk-anomaly vs federal-sponsored-ar-compliance-risk: **OVERLAPPING** — near-identical exception lists, superset/subset populations |
 | Writing/communication | writing-skills ×4, assertion-evidence-deck, collaboration ×3 | **DISTINCT** — three registers + one structure + one artifact + three live-interaction skills |
 
-**Recommendations:**
-- **No active-library merges.** Both genuinely overlapping pairs live in
+**Recommendations (as written in the first pass — superseded in part by §7):**
+- **No active-library merges *on overlap grounds*.** Both genuinely overlapping pairs live in
   `sponsored-projects-ar-skills`, which is now archived — consolidation is moot
   unless the plugin is restored. If it ever is: merge
   `federal-sponsored-ar-compliance-risk` into `compliance-risk-anomaly` as a
@@ -55,7 +67,7 @@ Seven suspected overlap zones were examined skill-by-skill. Verdicts:
 - `chicken-little-college-kid` would be better named for what it does
   (patient/staff-facing copy sensitivity) than for the family it shares a name
   with — a rename is cosmetic and was deliberately not executed (trigger gating
-  works; renames break user habit).
+  works; renames break user habit). *Moot as of §7: the skill was archived instead.*
 - The review-persona crowd (~8–10 adversarial-critique skills) is dense but
   functionally separated; INDEX.md now makes the separation visible instead of
   requiring a merge.
@@ -194,8 +206,10 @@ new-skill wave gets a reciprocal-link pass so additions don't land as citation s
 
 ## 8. What to watch next
 
-- 40+ descriptions sit within 5% of the 1024 cap (validator now NOTEs them) —
-  any future edit to those must re-count.
+- **57 of the 121 active descriptions** sat within 5% of the 1024-char cap (> 973
+  chars) as measured at the close of this review; the validator now NOTEs each one,
+  so its summary line is the live count. Any future edit to a near-cap description
+  must re-count before it overruns.
 - The archived plugins receive no updates; locally installed copies keep working
   as pinned snapshots. Restore procedure is in archive/README.md.
 - If a future role lands in a new domain, the pattern is established: found a new

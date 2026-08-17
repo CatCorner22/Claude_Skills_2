@@ -10,11 +10,21 @@ Start any new skill by copying
 ## Quick reference
 - A skill = `plugins/<plugin>/skills/<skill-name>/SKILL.md` (+ optional `references/`, `assets/`, `scripts/`).
 - Frontmatter: `name` (== folder name, lowercase-hyphen, no `claude`/`anthropic`) and a third-person
-  `description` (≤ 1024 chars) that states **what + when** and ends with `Triggers:`.
+  `description` (≤ 1024 chars — a hard cap the validator errors on) that states **what + when** and
+  ends with `Triggers:`. Past **973 chars** (within 5% of the cap) the validator emits a non-gating
+  `NOTE`: the skill still passes, but any future edit to that description has to re-count before it
+  overruns. Dozens of active descriptions sit in that band at any given time — `validate.sh`'s
+  summary line reports the live note count, so read it rather than trusting a number written here.
 - Body sections, in order: `When to use` → `Do it` → `Why / learn` → `Common mistakes` →
   `Tailor to your environment` → `References` → (optional) `Scripts`. Keep the body under 500 lines.
 - Evals go in `evals/<plugin>/<skill>.md` (positive trigger, near-miss, quality rubric) — never in SKILL.md.
 - Validate with `bash scripts/validate.sh` and `claude plugin validate plugins/<plugin>`.
+  Ship at **0 errors**; `NOTE` lines are informational.
+- **Regenerate the catalog after any skill change:** `python3 scripts/gen-catalog.py` rewrites both
+  [`docs/SKILLS.md`](docs/SKILLS.md) (full catalog) and [`docs/INDEX.md`](docs/INDEX.md) (the
+  when-to-use / optimized-for / how-to-trigger router) from skill frontmatter. **Never hand-edit
+  either file** — they are generated artifacts, and hand edits are silently destroyed on the next
+  run. A skill change that isn't followed by a regen leaves the two published catalogs lying.
 - **Bump the plugin's `version` in its `plugin.json` whenever its content changes** — installed
   copies only receive updates on a version bump (`claude plugin update` trusts the version).
 
@@ -23,34 +33,53 @@ Never commit real client, bank, or account data. Sanitize to structural examples
 artifacts in `*.private.md` or `references/*.local.*` (git-ignored).
 
 ## Build status (waves)
-All ten waves are complete: **96 skills across 15 plugins** (plus 7 plugin subagents),
-`validate.sh` clean.
+Current state: **121 active skills across 14 plugins** (plus 6 subagents, all in
+`coding-agent-skills`), with **9 plugins / 66 skills archived** to
+[`archive/`](archive/README.md) and 2 more archived at skill level. `validate.sh` is clean —
+0 errors, 0 warnings (the remaining `NOTE` lines are the non-gating near-cap description warnings).
+
+Many waves have shipped since the original ten below: the **KSA waves A–D** (industrial
+engineering, safety & reliability, decision science, and the Wave-D reference retrofits), the
+**general-use expansion** (8 science/writing/communication/statistics skills), the **epic wave**
+(12 cross-lane candidates), the **archive + consolidation pass** (domain plugins delisted,
+`board-of-advisors-skills` merged, 2 dental-mounted skills archived), and **three review passes**
+(adversarial review, text optimization, closing arithmetic audit) — all recorded in
+[`docs/library-review-2026-08.md`](docs/library-review-2026-08.md).
+
+### The original ten waves (day-job first)
+Plugins marked **[archived]** were later moved to `archive/plugins/` when the library was re-aimed
+at general use; they are preserved and restorable, not deleted.
+
 - **Wave 0 — Foundation:** ✅ repo scaffold, authoring standard + template, `bank-reconciliation`
   exemplar, validator.
-- **Wave 1 — Day-job core:** ✅ `cash-management-skills` (6), `oracle-otbi-skills` (5),
-  accounting core, `agent-harness-config`.
-- **Wave 2 — Adjacent domains + analysis base:** ✅ `banking-skills` (6), `finance-skills` (6),
-  accounting remainder, BI core.
+- **Wave 1 — Day-job core:** ✅ `cash-management-skills` (6) **[archived]**, `oracle-otbi-skills`
+  (5) **[archived]**, accounting core **[archived]**, `agent-harness-config`.
+- **Wave 2 — Adjacent domains + analysis base:** ✅ `banking-skills` (6) **[archived]**,
+  `finance-skills` (6) **[archived]**, accounting remainder **[archived]**, BI core.
 - **Wave 3 — Advanced analytics + improvement + agents:** ✅ statistics,
   `machine-learning-skills` (6), `continuous-improvement-skills` (6), coding/agents remainder.
-- **Wave 4 — Fusion Financials + data tools:** ✅ `oracle-fusion-finance-skills` (6): GL/journals,
-  FBDI, AP, AR, Cash Management module, period close; `data-tools-skills` (6): Excel automation,
-  CSV wrangling, DuckDB, PDF extraction, REST API pulls, file hygiene.
-- **Wave 5 — Advanced treasury & accounting ops:** ✅ `treasury-accounting-skills` (6): debt
-  facilities & covenants, hedging & derivatives, investment policy compliance, accruals &
-  prepaids, intercompany accounting, audit readiness & PBC.
-- **Wave 6 — Sponsored projects AR:** ✅ `sponsored-projects-ar-skills` (13): master router,
-  PPM-to-AR domain knowledge, unbilled/billed WIP reconciliation, revenue-to-billing
+- **Wave 4 — Fusion Financials + data tools:** ✅ `oracle-fusion-finance-skills` (6)
+  **[archived]**: GL/journals, FBDI, AP, AR, Cash Management module, period close;
+  `data-tools-skills` (6): Excel automation, CSV wrangling, DuckDB, PDF extraction, REST API
+  pulls, file hygiene.
+- **Wave 5 — Advanced treasury & accounting ops:** ✅ `treasury-accounting-skills` (6)
+  **[archived]**: debt facilities & covenants, hedging & derivatives, investment policy
+  compliance, accruals & prepaids, intercompany accounting, audit readiness & PBC.
+- **Wave 6 — Sponsored projects AR:** ✅ `sponsored-projects-ar-skills` (13) **[archived]**:
+  master router, PPM-to-AR domain knowledge, unbilled/billed WIP reconciliation, revenue-to-billing
   reconciliation & GL tie-out, KPIs & trend forecasts, detailed aging & collections
   prioritization, reporting & recommendations, compliance risk & anomaly scanning, plus
   federal compliance — Uniform Guidance core, federal billing/cash management (LOC/PMS
   draws), effort reporting basics, cost allowability screening, and compliance/audit risk
   assessment.
-
-- **Wave 8 — Board of Advisors:** ✅ `board-of-advisors-skills`: the `board-review`
+- **Wave 8 — Board of Advisors:** ✅ shipped as `board-of-advisors-skills`: the `board-review`
   orchestration skill plus six read-only subagents (performance, accuracy/correctness,
   structure/architecture, clarity/maintainability, robustness/edge-cases, board-chair) in
-  the plugin's `agents/` folder.
+  the plugin's `agents/` folder. **[merged]** — a one-skill plugin was pure install friction, so
+  in the consolidation pass it was folded into `coding-agent-skills`: the skill is now
+  `coding-agent-skills:board-review` and all six agents live in
+  `plugins/coding-agent-skills/agents/`. Same content, new namespace; this is the only plugin
+  that ships subagents.
 - **Wave 7 — Full-stack development (completed after Wave 8):** ✅ `full-stack-dev-skills`
   (9): lean-code principles, app architecture, FastAPI backends, database/ORM, modern
   dynamic frontends, realtime features, ML in production, testing strategy, deploy &
@@ -58,8 +87,19 @@ All ten waves are complete: **96 skills across 15 plugins** (plus 7 plugin subag
 - **Wave 9 — Fusion Treasury Architect:** ✅ `fusion-treasury-architect` subagent (elite
   configuration-specific Oracle Fusion Financials/Treasury persona: FSM tasks, Redwood
   navigation, SLA, bank-file parsing, structured troubleshooting) + the
-  `fusion-architect-consult` skill, added to `oracle-fusion-finance-skills`.
+  `fusion-architect-consult` skill, added to `oracle-fusion-finance-skills`. **[archived]** —
+  both went to `archive/plugins/oracle-fusion-finance-skills/` with their host plugin, so no
+  subagent ships outside `coding-agent-skills` today.
 
-Each plugin is independently installable and useful. Next: tailoring skills to your real
-environment (Oracle OTBI reports, reconciliation process, chart of accounts, bank statement
-formats) via each skill's `references/your-environment.md`.
+Each plugin is independently installable and useful.
+
+**Next.** The active library is general-use by standing directive — **no new content is built on
+the archived finance/Oracle/treasury domains** (see [`CLAUDE.md`](CLAUDE.md)). Work from here goes
+into: (1) the genuinely-unbuilt research tail (service-recovery, smed-setup-reduction,
+queueing-methods, argument-and-fallacies — see [`docs/research/`](docs/research/), whose files
+carry dated status blocks saying what shipped and what didn't); (2) depth on existing skills over
+new-skill count, with an arithmetic-verification pass on every worked example and a
+reciprocal-link pass on every new-skill wave (both standing lessons from the review waves); and
+(3) role tailoring by whoever installs the library, through each skill's
+`references/your-environment.md` — which is where role-specific systems, formats, and vocabulary
+belong, never in the published skill body.
