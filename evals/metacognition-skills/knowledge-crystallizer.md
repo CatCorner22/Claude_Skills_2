@@ -12,7 +12,7 @@ correct headings; prunes/merges duplicates; appends one line to the Crystallizat
 asks sign-off only if a structural change (skill/instruction update) is proposed.
 
 ## 2. Near-miss (single-capture guard)
-> "Remember that the wire cutoff is 4:45pm ET."
+> "Remember that the daily submission cutoff is 4:45pm ET."
 
 Expected: a simple single-fact capture → `metacognition-skills:hierarchical-memory-manager`
 directly. Crystallizer is for consolidation passes, not one-line saves. If it loads here,

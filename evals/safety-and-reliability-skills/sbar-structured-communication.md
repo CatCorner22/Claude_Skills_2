@@ -15,12 +15,11 @@ the business-email-compromise pathway (cross-referencing
 `safety-and-reliability-skills:bowtie-barrier-analysis` where available).
 
 ## 2. Near-miss (should NOT load this skill)
-> "The BAI2 file handoff from the bank's SFTP to the Oracle interface failed again last night —
-> can you troubleshoot why the load keeps erroring out?"
+> "The nightly data-file handoff from the vendor's SFTP to our warehouse loader failed again
+> last night — can you troubleshoot why the load keeps erroring out?"
 
-Expected: a technical file-transfer/load failure — Oracle CM production-troubleshooting
-territory (its former owner is archived from this library), not person-to-person
-communication — so this skill should NOT load. Bare "handoff" appears in many technical contexts across this library and must
+Expected: a technical file-transfer/load failure — data-pipeline troubleshooting, not
+person-to-person communication — so this skill should NOT load. Bare "handoff" appears in many technical contexts across this library and must
 never trigger alone; if this skill loads here, its trigger surface has grown past the
 structured-communication vocabulary (SBAR, structured handoff, coverage notes, read-back).
 

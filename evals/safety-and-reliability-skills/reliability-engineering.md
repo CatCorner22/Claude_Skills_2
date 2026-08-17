@@ -1,7 +1,7 @@
 # Evals — safety-and-reliability-skills:reliability-engineering
 
 ## 1. Positive trigger (should load the skill)
-> "Here's six months of failure timestamps for our overnight BAI2 bank-statement feed, plus how
+> "Here's six months of failure timestamps for our overnight batch data feed, plus how
 > long each outage took to fix. Compute the MTBF and availability, tell me how much downtime a
 > 99.5% target actually allows, and whether a Weibull fit says we should be scheduling anything
 > or just adding a backup path."

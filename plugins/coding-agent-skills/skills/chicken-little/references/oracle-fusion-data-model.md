@@ -1,8 +1,8 @@
 # Oracle Cloud Fusion Financials data model (AP · AR · CoA/GL · XLA)
 
-Preserved near-verbatim from the source spec (Chicken Little v2026.2). Scope: current releases
+Preserved near-verbatim from the source spec (Chicken Little v2026.2). Scope: releases
 in the 25x/26x range, schema FUSION. Rare statuses and newer features are version-specific —
-verify against the instance or the current "Tables and Views for Financials" documentation
+verify against the instance or the "Tables and Views for Financials" documentation
 before relying on them.
 
 Contents: §1 Architecture & nomenclature · §2 CoA & GL · §3 Payables · §4 Receivables ·
