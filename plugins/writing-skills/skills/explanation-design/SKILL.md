@@ -10,8 +10,11 @@ description: >-
   steps), and verifies with teach-back. The assistant plays the smart newcomer, flags jargon and
   hand-waves, drafts analogies with breaks marked, and simulates the teach-back. Use when a
   concept must land with someone who doesn't already know it — onboarding, newcomer docs, or
-  "why does nobody get this?". Triggers: explain it well, Feynman technique, analogy for, teach
-  this concept, curse of knowledge, make this intuitive, teach-back, explain to a newcomer.
+  "why does nobody get this?". Triggers: explain it well, Feynman
+  technique, analogy for, teach this concept, curse of knowledge, make this intuitive,
+  teach-back, explain to a newcomer.
+metadata:
+  version: "1.1.1"
 ---
 
 # Explanation design

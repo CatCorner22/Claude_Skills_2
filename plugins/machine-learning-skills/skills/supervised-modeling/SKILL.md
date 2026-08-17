@@ -8,6 +8,8 @@ description: >-
   predicting a numeric or categorical outcome from features. Triggers: regression, classification,
   logistic regression, linear regression, random forest, gradient boosting, XGBoost, LightGBM, predict
   a category, predict a number, classifier, feature importance, coefficients.
+metadata:
+  version: "1.1.0"
 ---
 
 # Supervised modeling
@@ -44,6 +46,14 @@ description: >-
    and magnitude) for linear/logistic; for trees prefer **permutation importance** and **partial
    dependence** over default impurity importance. Treat all of these as *associations, not causes*, and
    confirm the model actually beats the baseline out of sample before shipping.
+
+**Deliverable — the model summary.** The finished output contains: (1) the task type, target, and
+split scheme; (2) the interpretable baseline's out-of-sample score next to the final model's;
+(3) the pipeline (ordered steps, transforms fit on train only) and the final hyperparameters;
+(4) how imbalance and the decision threshold were handled, if classifying; (5) an interpretation
+section saying what the model relies on — worded as association, never cause. The assistant
+builds and interprets the models; the human owns the framing, the error costs, and the decision
+to ship.
 
 ## Why / learn
 The governing principle is **start with an interpretable baseline, and add complexity only when it earns

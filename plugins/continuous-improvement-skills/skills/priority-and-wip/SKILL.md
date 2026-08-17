@@ -1,18 +1,19 @@
 ---
 name: priority-and-wip
 description: >-
-  Applies personal lean to an overloaded individual workload: put every current commitment on
-  one visible personal kanban (to-do / doing / done — nothing hidden in inboxes or memory), cap
-  "doing" with a hard WIP limit of two or three and finish before starting, triage incoming
-  work with an honestly held urgent/important split (Eisenhower lineage), timebox deep work and
-  batch shallow work, renegotiate or decline explicitly when the week is over capacity, and
-  prune stale commitments in a weekly review. Teaches the Little's Law intuition — at fixed
-  throughput, more WIP means proportionally longer cycle time, so starting more makes
-  everything finish later — this is theory of constraints for one person, where attention is
-  the limiting resource. Use when someone is juggling too many open tasks, everything feels
-  urgent, or nothing seems to finish. Triggers: WIP limit, personal kanban, timeboxing, too
-  many priorities, drowning in tasks, context switching, Eisenhower matrix, finish before
-  starting.
+  Applies personal lean to an overloaded workload: put every current commitment on one visible
+  personal kanban (to-do / doing / done — nothing hidden in inboxes or memory), cap "doing" with
+  a hard WIP limit of two or three and finish before starting, triage incoming work with an
+  honestly held urgent/important split (Eisenhower lineage), timebox deep work and batch shallow
+  work, renegotiate or decline explicitly when the week is over capacity, and prune stale
+  commitments in a weekly review. Teaches the Little's Law intuition — at fixed throughput, more
+  WIP means proportionally longer cycle time — this is theory of constraints for one person,
+  where attention is the limiting resource. Use when someone is juggling too many open tasks,
+  everything feels urgent, or nothing seems to finish. Triggers: WIP limit, personal kanban,
+  timeboxing, too many priorities, drowning in tasks, context switching, Eisenhower matrix,
+  finish before starting.
+metadata:
+  version: "1.2.0"
 ---
 
 # Priority and WIP (personal lean)
@@ -38,7 +39,9 @@ description: >-
 ## Do it
 Board setup, WIP-limit selection and the violation protocol, the triage flow, timebox/batch
 patterns, the weekly review script, and renegotiation scripts are in
-`references/personal-lean-method.md`.
+`references/personal-lean-method.md`. The assistant drafts the sweep, the card splits, the triage
+calls, and the renegotiation scripts; the human owns the WIP limit, every yes and no, and the
+weekly review.
 
 1. **Visualize all current work in one place.** Build a personal kanban — three columns are
    enough: to-do / doing / done. Sweep everything into it: flagged emails, chat promises,

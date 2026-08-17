@@ -8,10 +8,13 @@
 Expected: skill loads; writes the OEC (e.g., response within 30 days) and guardrails (complaint/
 opt-out rate) before discussing variants; picks the randomization unit and checks interference
 (one clerk handling both variants); sizes with n ≈ 16σ²/δ² per arm from a historical baseline and
-confronts the duration honestly; pre-commits a stopping rule (fixed horizon or a named sequential
-method — not "run until significant"); schedules an SRM chi-square for every readout and an A/A
-test on new machinery; plans full-cycle coverage with a novelty/primacy check; routes the finished
-data to statistical-inference for analysis.
+confronts the duration honestly — offering **variance reduction (CUPED on a pre-period covariate,
+stratification, ANCOVA) before proposing a bigger MDE or more traffic**; pre-commits a stopping rule
+(fixed horizon or a named sequential method — not "run until significant"); schedules an SRM
+chi-square for every readout and an A/A test on new machinery; plans full-cycle coverage with a
+novelty/primacy check; says what a barely-significant win may be promised to deliver (winner's-curse
+discount / re-measurement); routes the finished data to statistical-inference for analysis, along
+with the assignment counts, the stopping rule as followed, and the randomization unit.
 
 ## 2. Near-miss (should NOT load this skill — statistical-inference seam)
 > "Our A/B test finished: variant B converted at 4.1% vs 3.8% for A over two weeks. Is that
@@ -37,8 +40,20 @@ ab-test-design loads as primary here, the routing is broken.
 A good response:
 - **Does the task:** produces a complete pre-launch design — OEC + guardrails with veto
   thresholds, randomization unit with interference reasoning, MDE and n-per-arm arithmetic shown,
-  pre-committed stopping rule, A/A plan, SRM check cadence, full-cycle duration — and an explicit
-  analysis handoff to statistical-inference.
+  a variance-reduction decision (CUPED covariate and its ρ, stratification, or ANCOVA) with the
+  revised n, pre-committed stopping rule, A/A plan, SRM check cadence, full-cycle duration — and an
+  explicit analysis handoff to statistical-inference carrying the validity-gate inputs.
+- **Reaches for variance reduction before compromise:** when the duration is unaffordable, the first
+  answer is cutting σ² — CUPED on a strictly pre-assignment covariate cuts variance by (1 − ρ²), so
+  ρ ≈ 0.7 roughly halves required n on the same traffic — and only then a bigger MDE, a more sensitive
+  OEC, or more traffic. A response whose only options are "bigger MDE / more traffic / wait" has failed
+  this item; so has one that adjusts on a covariate measured *during* the test.
+- **Gets the ratio-metric variance right:** flags that a metric measured below the randomization unit
+  (per pageview, per session, per case-event while randomizing users/offices) needs a delta-method,
+  cluster-robust, or unit-level bootstrap standard error rather than naive row-level independence.
+- **Discounts the winner:** notes that a barely-significant win from an underpowered test exaggerates
+  the effect (~2.5× at ~17% power), and that the forecast should use a shrunk estimate or the CI's
+  lower bound with a re-measurement after rollout.
 - **Teaches:** why optional stopping on a fixed-horizon test inflates false positives (~5×
   nominal per the KDD 2017 peeking paper) and why sequential designs make looking legitimate;
   why a failed SRM chi-square voids a scorecard even at 50.2/49.8 on a large sample; why week-one

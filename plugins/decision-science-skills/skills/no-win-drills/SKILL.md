@@ -4,7 +4,7 @@ description: >-
   Runs a no-win drill — a simulation with the winning move removed, as practiced in
   emergency-medicine patient-death scenarios and EMS stress training — and grades the
   decision process, never the outcome: the LLM generates a situation guaranteeing no
-  clean exit (humans designing their own drills leave doors open), plays the escalating
+  clean exit, plays the escalating
   environment, then debriefs loss-minimization, explicit ordering of what to save,
   communication under futility, and the emotional response. Carries the Kirk blade held
   honestly (Conti & Caroland, IEEE Security & Privacy): sort physics constraints from
@@ -14,7 +14,7 @@ description: >-
   choosing least-worst. Triggers: kobayashi maru, no-win, every option is bad,
   least-worst, damage control drill, degraded mode, can't win this one, loss triage.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Homage to Star Trek's Kobayashi Maru, the Starfleet Academy simulation that cannot
     be won (the name lives in triggers only; no affiliation with or endorsement by the

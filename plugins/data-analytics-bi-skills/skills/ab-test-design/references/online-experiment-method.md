@@ -5,18 +5,26 @@ research dossier (`docs/research/general-use-expansion-research.md` §2):
 **[snippet-only, cross-checked]** = verified via convergent web-search snippets, direct source
 fetches egress-blocked at research time. Platform success-rate figures are **self-reported** by
 their owners — cite them as reported experience, never as measured industry constants.
+**[canon attribution]** = author/year named from the experimentation canon at authoring time and
+**not** independently re-verified (no dossier entry, direct fetches unavailable) — treat the
+attribution as a pointer to check before quoting it. No figure in this file is taken from a
+[canon attribution] source: every number in §5, §6 and §11 is computed here from its own stated
+inputs, so the arithmetic stands even if an attribution needs correcting.
 
 ## Contents
 1. [The design worksheet](#1-the-design-worksheet)
 2. [Randomization unit and interference](#2-randomization-unit-and-interference)
 3. [OEC and guardrails](#3-oec-and-guardrails)
 4. [Worked example — sizing an outreach-letter test](#4-worked-example--sizing-an-outreach-letter-test)
-5. [Stopping rules and the peeking problem](#5-stopping-rules-and-the-peeking-problem)
-6. [Sample ratio mismatch — the first check, with arithmetic](#6-sample-ratio-mismatch--the-first-check-with-arithmetic)
-7. [A/A tests](#7-aa-tests)
-8. [Novelty and primacy effects](#8-novelty-and-primacy-effects)
-9. [Twyman's law and the trust audit](#9-twymans-law-and-the-trust-audit)
-10. [Launch checklist](#10-launch-checklist)
+5. [Variance reduction — CUPED, stratification, adjustment](#5-variance-reduction--cuped-stratification-adjustment)
+6. [Ratio metrics and the delta method](#6-ratio-metrics-and-the-delta-method)
+7. [Stopping rules and the peeking problem](#7-stopping-rules-and-the-peeking-problem)
+8. [Sample ratio mismatch — the first check, with arithmetic](#8-sample-ratio-mismatch--the-first-check-with-arithmetic)
+9. [A/A tests](#9-aa-tests)
+10. [Novelty and primacy effects](#10-novelty-and-primacy-effects)
+11. [Type-M exaggeration — the winner's curse](#11-type-m-exaggeration--the-winners-curse)
+12. [Twyman's law and the trust audit](#12-twymans-law-and-the-trust-audit)
+13. [Launch checklist](#13-launch-checklist)
 
 ## 1. The design worksheet
 
@@ -59,7 +67,7 @@ to fine: site/office → team → account/matter → user → session → page-v
 
 Developer shape: a feature flag is the randomization unit's implementation — the flag
 assignment IS the experiment assignment, exposure logs are the denominator, and the flag system
-itself deserves an A/A test (§7) before its first real A/B.
+itself deserves an A/A test (§9) before its first real A/B.
 
 ## 3. OEC and guardrails
 
@@ -96,9 +104,11 @@ Experimenters," KDD 2014): **n ≈ 16σ²/δ² per arm** for two-sided α = 0.05
 - n ≈ 16 × 0.16 / (0.02)² = 2.56 / 0.0004 = **6,400 per arm** (~12,800 letters total)
 
 Consequences to confront *now*:
-- At 1,000 letters/week total, that is ~13 weeks. If that's unacceptable, the honest moves are
-  a bigger MDE (declare "we can only detect ≥4-point swings" — n drops 4× to ~1,600/arm), a
-  more sensitive OEC, or more traffic. The dishonest move is running 3 weeks and "seeing."
+- At 1,000 letters/week total, that is ~13 weeks. If that's unacceptable, the moves in order are:
+  **cut the variance** (§5 — CUPED/stratification on a pre-period covariate, which at ρ = 0.7 takes
+  6,400/arm to ~3,264/arm without touching the MDE), then a **bigger MDE** (declare "we can only detect
+  ≥4-point swings" — n drops 4× to ~1,600/arm), then a **more sensitive OEC**, then **more traffic**.
+  The dishonest move is running 3 weeks and "seeing."
 - Calibrate ambition: the canon's practice guidance is that relative MDEs above ~5% are usually
   wishful — Bing's average effect across tens of thousands of experiments was rarely above
   0.3% [snippet-only, cross-checked]. Small teams testing big, rare changes may legitimately
@@ -106,7 +116,86 @@ Consequences to confront *now*:
 - Pre-register the stop: "we read the scorecard after 6,400/arm or on <date>, whichever is
   later, covering whole weeks."
 
-## 5. Stopping rules and the peeking problem
+## 5. Variance reduction — CUPED, stratification, adjustment
+
+Sizing scales with **σ²** (`n ≈ 16σ²/δ²`), so halving the variance halves the sample for the same MDE.
+This is the canon's first answer to "we can't afford the duration," and the one most often skipped.
+
+**CUPED** — *Controlled-experiment Using Pre-Experiment Data* (Deng, Xu, Kohavi & Walker, WSDM 2013)
+[canon attribution]. For each unit take a **pre-assignment** covariate `X` (best choice: the
+same metric over a comparable window before the test) and analyse the adjusted outcome
+
+```
+Y' = Y − θ (X − X̄)          with θ = Cov(Y, X) / Var(X),  X̄ and θ pooled across both arms
+```
+
+- **Why it's unbiased:** `X` is measured before assignment, so its distribution is the same in both arms
+  in expectation; subtracting a function of it removes variance, not signal. Adjust on anything measured
+  *after* assignment and you can absorb part of the treatment effect — that is the one way to get this
+  wrong, and it is fatal.
+- **How much it buys:** `Var(Y') = Var(Y)(1 − ρ²)` where `ρ = corr(Y, X)`. Applied to §4's 6,400/arm:
+
+| ρ (pre-period vs in-test metric) | variance multiplier `1 − ρ²` | n needed vs unadjusted | 6,400/arm becomes |
+|---|---|---|---|
+| 0.3 | 0.91 | 91% | 5,824 |
+| 0.5 | 0.75 | 75% | 4,800 |
+| 0.7 | 0.51 | 51% | 3,264 |
+| 0.9 | 0.19 | 19% | 1,216 |
+
+Each row is `6,400 × (1 − ρ²)`: 0.91 → 5,824; 0.75 → 4,800; 0.51 → 3,264; 0.19 → 1,216. At ρ ≈ 0.7 —
+routine for a stable per-unit metric with a decent pre-period — CUPED roughly **halves** the required
+sample on the same traffic.
+
+- **Where ρ comes from:** measure it on history *before* the test (regress this period's metric on the
+  prior period's for the same units). Units with no pre-period (new users, first-time cases) get X = 0 or
+  an imputed value, which dilutes ρ — report the share of units without history.
+- **Practical notes:** fit θ once on the pooled arms (fitting it per-arm reintroduces the treatment into
+  the adjustment); the point estimate of the effect is essentially unchanged while the CI narrows; and
+  CUPED composes with the sequential/fixed-horizon choice in §7 rather than replacing it.
+
+**Stratification / post-stratification.** Block units on a pre-experiment variable (region, plan tier,
+pre-period decile), estimate the effect within each stratum, and combine with stratum weights. Same
+covariance intuition, coarser instrument, no θ to fit — useful when the covariate is categorical or the
+pipeline can't carry a continuous adjustment.
+
+**Regression adjustment (ANCOVA).** Put the covariate in a regression alongside the treatment indicator.
+Include **treatment × centered-covariate interactions** — Lin (2013) shows that form is never worse
+asymptotically than the unadjusted difference in means, which answers Freedman's finite-sample critique
+of naive OLS adjustment [canon attribution].
+
+**Pre-specified capping / winsorizing.** Trimming a heavy tail cuts σ² sharply, but it *changes the
+estimand* (you are no longer measuring the mean of the full distribution). Legitimate only if declared
+before launch, with the cap and its rationale in the design worksheet, and reported in the readout.
+
+**What variance reduction is not:** it does not fix interference, a broken randomizer, a mismatched
+analysis unit, or an unplanned stop. It only buys power.
+
+## 6. Ratio metrics and the delta method
+
+Cutting variance is half the job; *estimating* it correctly is the other half. When the OEC is a **ratio**
+whose denominator is finer than the randomization unit — clicks per pageview, revenue per session, minutes
+per case, while randomizing on users/accounts — treating the fine-grained rows as independent understates
+the standard error and manufactures significance.
+
+Two correct routes:
+
+1. **Aggregate then delta method.** Compute each randomization unit's numerator sum `Yᵢ` and denominator
+   sum `Xᵢ`; those `n` unit-level pairs are the independent observations. For `R = Ȳ/X̄`:
+
+   ```
+   Var(R) ≈ (1 / (n · X̄²)) · [ σ²_Y − 2R·σ_XY + R²·σ²_X ]
+   ```
+
+   (the first-order Taylor expansion of `Ȳ/X̄`; Deng, Knoblich & Lu, "Applying the delta method in metric
+   analytics," KDD 2018) [canon attribution]. Note it needs the **covariance** term — dropping
+   it is the common half-fix, and it can err in either direction.
+2. **Cluster or bootstrap at the unit.** Cluster-robust standard errors, or a bootstrap that resamples
+   whole randomization units, get the same protection without the algebra.
+
+The failure this prevents is the same one `data-analytics-bi-skills:statistical-inference` gates on
+(analysis unit = randomization unit) — design it here so the analysis doesn't have to rescue it.
+
+## 7. Stopping rules and the peeking problem
 
 Watching a fixed-horizon test continuously and stopping the moment p < 0.05 inflates the Type I
 error to roughly **5× nominal** (Johari, Koomen, Pekelis & Walsh, "Peeking at A/B Tests," KDD
@@ -128,7 +217,7 @@ before launch:
 Rule: decide the stopping rule before the data, then obey it. A "significant" result obtained
 by rule-breaking is not evidence; it is the peeking artifact wearing a decision's clothes.
 
-## 6. Sample ratio mismatch — the first check, with arithmetic
+## 8. Sample ratio mismatch — the first check, with arithmetic
 
 Designed split 50/50; the scorecard is read only after this check passes. Compare observed
 assignment counts to expected with a one-degree-of-freedom chi-square:
@@ -153,21 +242,24 @@ report SRM in roughly 6–10% of tests — a soft, self-reported figure; treat i
 to check every time," not as a constant [snippet-only, cross-checked]. SRM is Twyman's law
 applied to your own scorecard: the most interesting number on it may be the assignment split.
 
-## 7. A/A tests
+## 9. A/A tests
 
 Run the full machinery — assignment, logging, metric pipeline, analysis — with *identical*
 experiences in both arms (2009 survey paper; 2020 book) [snippet-only, cross-checked]:
 
-- A correctly operating system produces p < 0.05 about **5% of the time** — that is the pass
-  condition, not a bug. Many A/A runs (or one long one, re-analyzed on schedule) should show
-  roughly uniform p-values.
+- A correctly operating system produces p < 0.05 about **5% of the time** (across independent
+  replicates) — that is the pass condition, not a bug. **Many independent A/A runs** should
+  show roughly uniform p-values: separate runs, disjoint time windows analyzed independently,
+  or repeated re-randomization of one historical exposure log. Do not substitute one long run
+  re-analyzed on a schedule — nested looks at an accumulating sample are the §7 peeking setup
+  and will condemn a healthy randomizer.
 - What failures mean: frequent "significant" A/A results → broken randomization, correlated
   units (§2 mismatch), or variance mis-estimation; SRM in an A/A → assignment/logging bug found
   *before* it could void a real test.
 - When: before the first real experiment on any new assignment mechanism (new flag system, new
   letter-merge process, new routing switch), and periodically thereafter.
 
-## 8. Novelty and primacy effects
+## 10. Novelty and primacy effects
 
 Two time-shapes that make early readouts lie (2009 survey; formal long-term estimator in
 Sadeghi et al., *Technometrics* 2022) [snippet-only, cross-checked]:
@@ -183,7 +275,35 @@ enough to see the curve flatten; and treat any decision made on a still-moving c
 provisional. Cover whole weeks/cycles regardless — day-of-week and cycle mix are the cheapest
 confounders to avoid.
 
-## 9. Twyman's law and the trust audit
+## 11. Type-M exaggeration — the winner's curse
+
+A test that passes its significance bar has been **selected on its estimate**, and selection biases what
+you ship on. Gelman & Carlin (2014) name this the **Type-M (magnitude) error**, alongside Type-S (sign)
+— the questions "how exaggerated?" and "could the direction be wrong?" that a plain power number
+doesn't answer [canon attribution].
+
+Mechanism, with the arithmetic done here. Two-sided α = 0.05 means you declare a win only when
+`|δ̂| ≥ 1.96 SE`. Suppose the **true** effect is `δ = 1.0 SE` — an ordinary underpowered situation:
+
+- **Power** = `P(Z > 1.96 − 1) + P(Z < −1.96 − 1)` = `P(Z > 0.96) + P(Z < −2.96)`
+  = `0.1685 + 0.0015` ≈ **17%**.
+- **What the winners report.** Conditional on `δ̂ > 1.96 SE`, the expected estimate is
+  `δ + SE · φ(0.96)/(1 − Φ(0.96))` = `SE · (1 + 0.2516/0.1685)` = `SE · (1 + 1.49)` ≈ **2.49 SE** —
+  about **2.5×** the true effect of 1.0 SE. (Truncated-normal mean; the ~0.15% wrong-sign tail ignored.)
+- The exaggeration shrinks as power rises: it is a property of *underpowered* winners, which is exactly
+  the regime a traffic-starved team operates in — and exactly when the roll-out business case gets written.
+
+What to do with it:
+- **Discount before forecasting.** Project annual impact from the CI's lower bound, or from a shrunk
+  (empirical-Bayes style) estimate, not from the point estimate that won.
+- **Re-measure after rollout.** A holdback slice or a re-test on fresh traffic is the only honest
+  confirmation; the second measurement is not selected on its own significance.
+- **Or fix the cause:** power the test properly (§4–§5). Variance reduction is a Type-M countermeasure as
+  well as a duration one — higher power means less exaggeration in the wins you keep.
+- **Never** report the winning estimate as the expected future lift without saying which of the above
+  you did.
+
+## 12. Twyman's law and the trust audit
 
 **"Any figure that looks interesting or different is usually wrong."** Attribution, told
 honestly because it is itself the lesson: named for UK media/market researcher Tony Twyman, who
@@ -191,9 +311,9 @@ apparently never published it; the surviving formulation is Ehrenberg's, in *Dat
 (1975); Kohavi et al. devote a chapter to it as the trust reflex [snippet-only, cross-checked].
 An attribution onion atop the very skill of distrusting surprising numbers — teach the chain.
 
-The audit, run *before* celebrating any surprising result: SRM (§6) → instrumentation (did a
+The audit, run *before* celebrating any surprising result: SRM (§8) → instrumentation (did a
 logging change land mid-test?) → outliers (one whale account moving a mean) → segment
-definitions (did a filter quietly condition on post-treatment behavior?) → duration (§8 curve
+definitions (did a filter quietly condition on post-treatment behavior?) → duration (§10 curve
 still moving?) → only then the statistics. Context for calibrating surprise, self-reported by
 platform owners and cited as such: roughly ⅓ of ideas positive / ⅓ flat / ⅓ negative at
 Microsoft; ~10–20% success in optimized domains; reported failure rates ranging 66% (Microsoft)
@@ -202,16 +322,22 @@ to 92% (Airbnb); and the Bing long-ad-titles change — rated low, backlogged fo
 The base rate of big wins is low; a big win on your dashboard is more often a bug than a
 breakthrough, and checking is cheaper than retracting.
 
-## 10. Launch checklist
+## 13. Launch checklist
 
 - [ ] Decision, variants, and owner written down
 - [ ] Randomization unit chosen; interference channels named and contained
 - [ ] OEC defined (window, denominator); guardrails with veto thresholds
 - [ ] Baseline and variance pulled; MDE chosen consciously; n/arm and duration computed
+- [ ] Variance reduction decided: CUPED covariate (pre-assignment only) with its measured ρ,
+      stratification, or ANCOVA — and the revised n; any capping rule pre-specified
+- [ ] Ratio-metric standard errors planned (delta method / cluster / bootstrap at the randomization unit)
 - [ ] Stopping rule pre-committed (fixed horizon or named sequential method)
 - [ ] A/A passed on this machinery
 - [ ] SRM chi-square scheduled for every readout
 - [ ] Full-cycle coverage planned; exposure-week effect plot planned
 - [ ] Twyman audit steps agreed for any surprising result
+- [ ] Winner's-curse policy agreed: what gets forecast from a barely-significant win, and the
+      holdback/re-measure plan
 - [ ] Analysis handoff: `data-analytics-bi-skills:statistical-inference` conventions aligned
-      (α, power, one/two-sided, multiplicity policy)
+      (α, power, one/two-sided, multiplicity policy) and its validity gates (SRM counts, the
+      stopping rule as followed, exposure window, analysis unit) supplied with the data

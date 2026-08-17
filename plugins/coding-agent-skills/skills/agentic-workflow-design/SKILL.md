@@ -4,9 +4,13 @@ description: >-
   Designs reliable autonomous and multi-step agent workflows — deciding agent vs deterministic
   script, decomposing a task into steps and subtasks, defining tools and their contracts, adding
   verification, guardrails, and checkpoints, handling failure and human-in-the-loop review, and
-  evaluating the workflow against real cases. Use when building an agent, an automation pipeline,
+  evaluating the workflow against real cases. Produces a workflow design doc: agent-vs-script
+  verdict, step map with per-step checks, tool-contract table, guardrails, failure and escalation
+  paths, and an eval plan. Use when building an agent, an automation pipeline,
   or a multi-step LLM workflow. Triggers: agent, autonomous agent, agentic workflow, tool use,
   orchestration, multi-step, pipeline, human in the loop, guardrails.
+metadata:
+  version: "1.1.0"
 ---
 
 # Agentic workflow design
@@ -49,6 +53,17 @@ description: >-
    known-good outcomes. Run the workflow end-to-end against them, measure task success (not vibes),
    inspect the failures, and fix the specific step that broke. Re-run the suite after every change so
    you catch regressions. Build the eval set before you tune.
+
+**The deliverable is a workflow design doc** (a page or two) with these sections:
+1. **Verdict** — agent, script, or script-with-one-LLM-call, and the reason.
+2. **Step map** — each step's input → output → verification check, in order.
+3. **Tool contracts** — a table: name, purpose, typed inputs, output shape, side effects, failure behavior.
+4. **Guardrails** — loop/spend/time bounds, checkpoints, least-privilege notes.
+5. **Failure & escalation paths** — per step: retry / fallback / escalate, plus every human-approval gate.
+6. **Eval plan** — the case set, the success metric, and when the suite re-runs.
+
+The assistant drafts the decomposition, tool contracts, guardrails, and eval plan; the human owns
+the risk tolerance, where approval gates sit, and the go/no-go on anything irreversible.
 
 ## Why / learn
 The core lesson: **reliability comes from decomposition and verification, not from a bigger prompt.**

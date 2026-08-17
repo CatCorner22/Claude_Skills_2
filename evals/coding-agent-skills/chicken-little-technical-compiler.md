@@ -23,7 +23,7 @@ strategic/vendor/process autopsies. The compiler edition targets code and archit
 ## 2b. Near-miss (plain-review guard)
 > "Review this PR before I merge it."
 
-Expected: an ordinary code review — `board-of-advisors-skills:board-review` or a direct
+Expected: an ordinary code review — `coding-agent-skills:board-review` or a direct
 review, not the persona. The compiler engages on explicit deployment or an adversarial
 stress-test ask, not routine merges.
 

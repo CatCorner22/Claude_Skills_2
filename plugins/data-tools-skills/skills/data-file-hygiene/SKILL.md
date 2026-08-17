@@ -8,7 +8,9 @@ description: >-
   recurring extract files, deciding what may be committed or emailed, or scrubbing a dataset for
   sharing. Triggers: file naming convention, organize data files, folder structure analysis,
   version data files, sanitize data, anonymize spreadsheet, remove sensitive data, what can I
-  commit, data retention files, raw vs processed.
+  commit, data retention files, raw vs processed, safe to share.
+metadata:
+  version: "1.1.0"
 ---
 
 # Data-file hygiene
@@ -50,6 +52,8 @@ project/
    identifiers (account numbers, IBANs, SSNs/tax IDs, customer/supplier names, emails), real
    balances/amounts tied to identifiable parties, or credentials? If yes, it is sensitive —
    sharing it (git, email, tickets, AI tools) needs sanitization first, per your data policy.
+   The assistant drafts names, folder skeletons, and scrub steps; the human owns the sensitivity
+   classification and the final call to share.
 5. **Sanitize structurally, not cosmetically.** Replace identifiers with consistent fakes that
    keep the *shape* (account `021000021-4837291` → `NNNNNNNNN-XXXXXXX` or `BANK-A-ACCT-01`),
    shift or bucket amounts if amounts are the sensitive part, keep the columns/structure so the

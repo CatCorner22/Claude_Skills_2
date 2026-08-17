@@ -26,8 +26,8 @@ on a mapping ask, tighten the description and the Not-for cross-link.
 > "Add a unique constraint on invoice_number to the payments table, and check which foreign-key
 > constraints are missing indexes."
 
-Expected: database/ORM work — `full-stack-dev-skills:database-and-orm` territory (and Oracle
-validation rules own the word in the Fusion context). Bare "constraint" must never trigger this
+Expected: database/ORM work — `full-stack-dev-skills:database-and-orm` territory (the word
+"constraint" is a schema term there, not a throughput term). Bare "constraint" must never trigger this
 skill; its triggers are qualified (bottleneck, five focusing steps, exploit the constraint,
 drum-buffer-rope). If it loads here, the trigger surface has grown too greedy.
 

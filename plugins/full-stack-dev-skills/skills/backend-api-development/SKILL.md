@@ -2,12 +2,16 @@
 name: backend-api-development
 description: >-
   Builds lean FastAPI backends — routing and dependency injection, Pydantic models as the
-  single validation/serialization layer, auth (session cookies vs JWT, chosen by client
-  type), consistent error handling, pagination, and the auto-generated OpenAPI schema as the
+  single validation/serialization layer, thin routes over feature-module services, auth
+  (session cookies vs JWT, chosen by client type), one error shape with correct status
+  codes, pagination on every list endpoint, and the auto-generated OpenAPI schema as the
   API contract. Use when creating or extending a REST API, adding authentication, fixing
   validation or error-handling inconsistencies, or designing endpoints. Triggers: FastAPI,
-  build an API, REST endpoint, pydantic validation, API auth, JWT vs session, API error
-  handling, pagination endpoint, OpenAPI schema, dependency injection fastapi, CRUD API.
+  build an API, REST endpoint, add an endpoint, pydantic validation, API auth, JWT vs
+  session, API error handling, HTTP status codes, pagination endpoint, OpenAPI schema,
+  dependency injection fastapi, CRUD API.
+metadata:
+  version: "1.2.0"
 ---
 
 # Backend API development (FastAPI)
@@ -18,6 +22,10 @@ description: >-
 - Not for: consuming someone else's API → see `data-tools-skills:rest-api-data-pulls`.
   Database modeling behind the endpoints → see `full-stack-dev-skills:database-and-orm`.
   Streaming/WebSocket endpoints → see `full-stack-dev-skills:realtime-and-dynamic-features`.
+- Not for: whole-project Python rigor around the service — the 2026 toolchain (uv, Ruff,
+  strict type checking), packaging/CI layout, and ship-ready hardening of an entire codebase
+  → invoke the "Pythagoras" persona in `full-stack-dev-skills:elite-python-engineer`. This
+  skill stays at the endpoint and contract level.
 
 ## Do it
 1. **Let Pydantic models be the whole validation layer.** One request model and one response

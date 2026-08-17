@@ -14,7 +14,7 @@ produces Q4 sustain AND improve items, each improve with owner, date, and a dura
 offers to feed durable lessons to MEMORY.md crystallization.
 
 ## 2. Near-miss (should NOT load this skill — the self-retrospective seam, exactly)
-> "You got the CONCATENATED_SEGMENTS table wrong earlier and I corrected you. Reflect on
+> "You got the account-code mapping wrong earlier and I corrected you. Reflect on
 > that correction, restate your corrected understanding, and record the rule so you don't
 > repeat it."
 

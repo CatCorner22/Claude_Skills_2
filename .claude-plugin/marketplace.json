@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "treasury-analyst-skills",
   "owner": {
-    "name": "blakereaganlaw-droid",
+    "name": "CatCorner22",
     "email": "blakereaganlaw@gmail.com"
   },
   "description": "A career-portable library of Claude Code Agent Skills: decision science, safety and reliability, writing and communication, collaboration, data analytics and BI, machine learning, coding agents and personas, learning science, math foundations, continuous improvement, and deep research. Every skill both does the task and teaches the reasoning. Domain-specific finance/Oracle plugins are preserved in archive/ (see archive/README.md).",
@@ -28,14 +28,8 @@
     {
       "name": "continuous-improvement-skills",
       "source": "./plugins/continuous-improvement-skills",
-      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the Curve Hero design-language map, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).",
+      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).",
       "category": "operations"
-    },
-    {
-      "name": "board-of-advisors-skills",
-      "source": "./plugins/board-of-advisors-skills",
-      "description": "Multi-agent Board of Advisors code review: five read-only specialist subagents plus a board-chair synthesizer, orchestrated by the board-review skill into a ranked, goal-preserving optimization report.",
-      "category": "development"
     },
     {
       "name": "full-stack-dev-skills",
@@ -46,7 +40,7 @@
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, authoring Agent Skills, rule-stress-testing (Asimov-mode rule-conflict discovery), software-archaeology (Harris-matrix excavation), defect-epidemiology (contact-tracing for defect classes), and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).",
+      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, rule-stress-testing, software-archaeology, defect-epidemiology, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).",
       "category": "development"
     },
     {

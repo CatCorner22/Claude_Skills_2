@@ -1,17 +1,16 @@
 # Evals — continuous-improvement-skills:lean-six-sigma-for-software
 
 ## 1. Positive trigger (should load the skill)
-> "We're building a payment-posting module for our practice-management users — they live in
-> Curve Hero all day. I want this run with real Lean Six Sigma discipline: define what done
-> means up front, get actual front-desk staff designing it with us, make the UI accessible and
-> familiar to them, and beat on it hard before we ship."
+> "We're building a payment-posting module for our front-office users — they live in the
+> incumbent scheduling system all day. I want this run with real Lean Six Sigma discipline:
+> define what done means up front, get actual front-desk staff designing it with us, make the
+> UI accessible and familiar to them, and beat on it hard before we ship."
 
 Expected: skill loads; defines the measurable end state first (charter, CTQs, DMADV since it's
 a new build); plans gemba observation + co-design with the actual front-desk doers; runs the
-Curve Hero sync audit via the `continuous-improvement-skills:curve-hero-design-language`
-skill (expected to co-load for step 3; with the verify-in-product caveat — e.g. Recare not
-recall, Responsible Party not guarantor, checkout finalizes an invoice rather than a
-"walkout"); designs to the token-based WCAG 2.2 AA system; sets delivery-metric
+reference-product sync audit of step 3 itself (harvesting the incumbent product's vocabulary
+with the verify-in-the-live-product caveat, marking unverified terms — no co-load expected,
+and no pre-built vocabulary map to lean on); designs to the token-based WCAG 2.2 AA system; sets delivery-metric
 control charts; schedules the adversarial gauntlet (property tests on money math, hostile-UX
 sweep, STRIDE) and sizes stability/redundancy to an SLO; closes with a control plan and
 standardization step.
@@ -43,6 +42,6 @@ A good response:
 - **Teaches:** explains quality-from-the-system vs inspection (Deming), the TPS mapping it's
   using (jidoka/andon/poka-yoke in pipeline terms), why backward design converts "done" into a
   test, and why tampering with common-cause noise makes things worse.
-- **Stays honest:** flags Curve Hero vocabulary as compiled-from-public-sources to be verified
-  in the live product; never presents unverified UI terms as fact; keeps metrics aimed at the
-  process, not individuals.
+- **Stays honest:** flags any reference-product vocabulary as compiled-from-public-sources to be
+  verified in the live product; never presents unverified UI terms as fact; keeps metrics aimed at
+  the process, not individuals.

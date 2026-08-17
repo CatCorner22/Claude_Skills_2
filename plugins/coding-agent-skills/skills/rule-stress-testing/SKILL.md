@@ -1,20 +1,19 @@
 ---
 name: rule-stress-testing
 description: >-
-  Stress-tests any rule set (agent guardrails, CLAUDE.md, team policies, contract
-  clauses, house git rules) by generating the situations where rules conflict, gap, or
-  perversely instantiate: inventories rules and their unstated precedence, extracts
-  load-bearing undefined terms, runs the six failure modes cataloged in Asimov's robot
-  stories (conflict equilibrium, term widening, redundancy loss/literal compliance, scope
-  creep/precedence inversion, definitional capture, information partitioning), adds
-  Goodhart and malicious-compliance passes, classifies findings, proposes fixes in
-  legal-canon vocabulary (specific-over-general, ambiguity against the drafter, term
-  definitions), then re-tests the fixed set, since patches breed new conflicts. Use when
-  hardening rules before they meet reality or hunting what breaks them. Triggers: three
-  laws, rule conflict, stress test the rules, loophole hunt, what breaks this policy,
-  clause conflict, conflicting rules, malicious compliance, specification gaming.
+  Stress-tests any rule set (agent guardrails, CLAUDE.md, team policies, contract clauses) by
+  generating the situations where rules conflict, gap, or perversely instantiate: inventories
+  rules and their unstated precedence, extracts load-bearing undefined terms, runs the six
+  failure modes cataloged in Asimov's robot stories (conflict equilibrium, term widening,
+  redundancy loss/literal compliance, scope creep/precedence inversion, definitional capture,
+  information partitioning), adds Goodhart and malicious-compliance passes, classifies findings,
+  proposes fixes in legal-canon vocabulary (specific-over-general, ambiguity against the
+  drafter), then re-tests the fixed set, since patches breed new conflicts. Use when hardening
+  rules before they meet reality or hunting what breaks them. Triggers: three laws, rule
+  conflict, stress test the rules, loophole hunt, what breaks this policy, clause conflict,
+  conflicting rules, malicious compliance, specification gaming.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Commissioned by the user, inspired by Isaac Asimov's robot stories — homage in
     triggers and teaching only; no affiliation. The stories are cited as fiction that

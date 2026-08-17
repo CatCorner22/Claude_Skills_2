@@ -11,13 +11,18 @@ missing-value strategy matched to the mechanism (with a `was_missing` flag), ded
 defined key with a survivor rule, checks join cardinality, and validates non-destructively.
 
 ## 2. Near-miss (should NOT load this skill)
-> "I just received a dataset I've never seen. What summary statistics and plots should I run to
-> understand its distributions and spot data-quality issues?"
+> "I just received a dataset I've never seen. Before I change anything, how do I profile the data —
+> what does one row represent, which columns are typed wrong, and where are the distributions and
+> outliers that will bite me later?"
 
 Expected: this is first-look profiling, not fixing — the
-`data-analytics-bi-skills:exploratory-data-analysis` skill should handle it. If this cleaning skill
-loads as primary, tighten the description / cross-links. (A file that won't even *parse* —
-encodings, delimiters, BOMs — is likewise not this skill:
+`data-analytics-bi-skills:exploratory-data-analysis` skill should handle it (it owns *profile the
+data*, *what does one row represent*, *distribution*, and *outliers*). The prompt deliberately
+dangles cleaning bait ("before I change anything", "typed wrong"); if this cleaning skill loads as
+primary, tighten the description / cross-links. (Note the neighboring seam: had the ask been for
+the summary itself — central tendency, spread, a five-number summary —
+`data-analytics-bi-skills:descriptive-statistics` owns that, not EDA and not this skill. A file
+that won't even *parse* — encodings, delimiters, BOMs — is likewise not this skill:
 `data-tools-skills:csv-and-flat-file-wrangling` owns ingest.)
 
 ## 3. Quality rubric

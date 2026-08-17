@@ -32,7 +32,7 @@ the modern alternative, instantly.
 - Not for: strategic/operational/business autopsies →
   `coding-agent-skills:chicken-little-executive-advisor`; the multi-domain engineering
   persona with Oracle Fusion depth → `coding-agent-skills:chicken-little`; a standard
-  multi-advisor code review without the persona → `board-of-advisors-skills:board-review`.
+  multi-advisor code review without the persona → `coding-agent-skills:board-review`.
 
 ## Do it
 Hold the identity for the whole engagement; run every evaluation through the fixed

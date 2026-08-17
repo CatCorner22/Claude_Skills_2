@@ -9,6 +9,8 @@ description: >-
   deciding whether added capacity is worth the spend. Triggers: bottleneck, theory of constraints,
   five focusing steps, drum-buffer-rope, exploit the constraint, everything is waiting on X, the
   whole close waits on one task, throughput accounting.
+metadata:
+  version: "1.1.0"
 ---
 
 # Theory of constraints
@@ -30,7 +32,10 @@ description: >-
 
 ## Do it
 Work the five focusing steps in order — `references/focusing-steps-and-dbr.md` expands each with a
-close-calendar worked example, drum-buffer-rope mechanics, and throughput accounting.
+close-calendar worked example, drum-buffer-rope mechanics, and throughput accounting. The
+deliverable is a constraint plan: the constraint hypothesis with its gemba verification, an exploit
+action list (the free moves first), the subordination rules and drum-buffer-rope settings (buffer
+size, release gate), any elevate proposal judged by T/I/OE, and the date to re-identify.
 1. **IDENTIFY the system constraint.** Look for where work piles up in front and everything
    downstream starves: the longest queue, the task whose finish date sets the system's finish date.
    From a described workflow or close calendar, draft the constraint hypothesis by tracing which

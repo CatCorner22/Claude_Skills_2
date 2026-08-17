@@ -24,7 +24,7 @@ never trigger this skill; **design or diagnosis intent is required**. If checkli
 here, tighten the description's trigger phrases.
 
 ## 2b. Second near-miss (full-method guard — should NOT load this skill)
-> "Every hygienist runs instrument reprocessing differently — document the whole procedure
+> "Every technician runs instrument reprocessing differently — document the whole procedure
 > end-to-end with sequence, timing, and key points so it's done the same way every time."
 
 Expected: documenting a complete method is `continuous-improvement-skills:standard-work`, not

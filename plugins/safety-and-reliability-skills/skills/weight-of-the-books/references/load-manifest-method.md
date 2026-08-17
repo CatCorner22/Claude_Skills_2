@@ -114,8 +114,9 @@ unknown.
 quarter-end arriving in a ~2-hour batch window ≈ 95k lines/hr — measured from 12-month
 history, and the soak runs at the window rate); the 1.9M-line backfile as the special
 lot (the prior system held only 18 months at lower volume, which is why the one-time
-conversion is 1.9M while the go-forward retention grows toward ~97M lines over 7
-years — the staging schema's true size is the archive, not the day). Load path: parser
+conversion is 1.9M while the go-forward retention grows toward ~140M lines over 7
+years (38k/day ≈ 13.9M/yr, compounding at +12%/yr) — the staging schema's true size is
+the archive, not the day). Load path: parser
 → staging table; governing member measured as the index rebuild at 589k lines/day.
 Factor 3.1× on peak with floor 1.5 → exhaustion ≈ 6.4 years at +12%/yr; partition key
 flagged one-way door (changing it post-load = the retrofit). Loaded tests: backfile

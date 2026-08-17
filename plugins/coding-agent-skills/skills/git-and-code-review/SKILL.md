@@ -2,19 +2,18 @@
 name: git-and-code-review
 description: >-
   Uses version control well and reviews changes constructively — branch-per-change, atomic
-  commits whose messages answer why, pull requests sized and described so a reviewer can say
-  yes (what changed, why, how verified), merge vs rebase chosen on purpose under the golden
-  rule of never rewriting shared history, calm conflict resolution that decides the correct
-  combined result, and diff review in a fixed order — correctness, then readability, then
-  style — with feedback that names the line, the concern, and a fix, severity labeled. Routes
-  its seams: deep multi-agent audits, review-comment tone, contact-tracing a bug review
-  finds, excavating accreted history. Use when using git, opening or reviewing a pull
-  request, resolving a merge conflict, structuring a set of changes, or writing history a
-  future reader can trust. Triggers: git, branch, commit, pull request, PR, merge conflict,
-  code review, rebase, version control, commit message, force push, git blame, revert,
-  review this diff.
+  commits whose messages answer why, pull requests sized and described so a reviewer can say yes
+  (what changed, why, how verified), merge vs rebase chosen on purpose under the golden rule of
+  never rewriting shared history, calm conflict resolution that decides the correct combined
+  result, and diff review in a fixed order — correctness, then readability, then style — with
+  feedback that names the line, the concern, and a fix, severity labeled. Deep multi-specialist
+  audits route to coding-agent-skills:board-review. Use when using git, opening or reviewing a
+  pull request, resolving a merge conflict, structuring a set of changes, or writing history a
+  future reader can trust. Triggers: git, branch, commit, pull request, PR, merge conflict, code
+  review, rebase, version control, commit message, force push, git blame, revert, review this
+  diff.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Review-size and review-rate figures come from the SmartBear/Cisco peer-review study
     (2,500 reviews, 3.2M LOC), verified via web search snippets — claims carrying those
@@ -31,7 +30,7 @@ metadata:
 - Not for: automating git behavior in the Claude Code harness (hooks that run on commit,
   allow-listing `git push`) → see `coding-agent-skills:agent-harness-config`.
 - Not for: a deep multi-angle audit of a module by parallel specialists →
-  `board-of-advisors-skills:board-review` (routine PR review stays here; "run the board"
+  `coding-agent-skills:board-review` (routine PR review stays here; "run the board"
   goes there).
 - Not for: critiquing a whole submitted work product — a plan, document, or script judged
   as a deliverable → `coding-agent-skills:sparring-partner`; review here is scoped to a diff
@@ -85,8 +84,10 @@ example review — is in `references/review-checklist.md`; task-oriented command
    when review confirms a real bug, contact-trace its copies with
    `coding-agent-skills:defect-epidemiology` before closing the fix — a confirmed defect is
    evidence about a population, not a line; and when the change is correct but looks like
-   more machine than the job needs, run the simplicity challenge in
-   `coding-agent-skills:soviet-space-graphite` before approving the extra moving parts.
+   more machine than the job needs, review it against
+   `full-stack-dev-skills:lean-code-principles` before approving the extra moving parts —
+   and if the *whole solution*, not the code, is the overbuilt thing, run the Pencil Pass
+   in `coding-agent-skills:soviet-space-graphite`.
 7. **Write feedback that names the line, the concern, and a fix.** Separate blocking from
    nice-to-have (`nit:` prefix), ask questions where you might lack context, praise what's
    genuinely good, and approve when the change is correct and clear — not when it is

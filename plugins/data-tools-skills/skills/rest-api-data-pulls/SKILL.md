@@ -3,18 +3,17 @@ name: rest-api-data-pulls
 description: >-
   Pulls data from REST APIs into files and DataFrames reliably — authentication patterns, query
   and field selection, pagination until exhaustion, retries with backoff for rate limits and
-  transient failures, and flattening nested JSON — using Oracle Fusion Cloud REST APIs as the
-  worked example. Use when extracting data from a REST API (Fusion or any SaaS), when a pull
-  returns partial data, or when hardening a recurring API extract. Triggers: rest api pull,
-  call api python, fusion rest api, pagination, api rate limit, 429 retry, requests python,
-  extract data from api, api to csv, json to dataframe, oauth token api.
+  transient failures, and flattening nested JSON. Use when extracting data from a REST API, when
+  a pull returns partial data, or when hardening a recurring API extract. Triggers: rest api pull,
+  call api python, paginate an api, saas api export, pagination, api rate limit, 429 retry,
+  requests python, extract data from api, api to csv, json to dataframe, oauth token api.
 ---
 
 # REST API data pulls
 
 ## When to use
-- Extracting records from a REST API — Oracle Fusion resources (invoices, receivables, cash
-  transactions), or any SaaS/bank API — into CSV/Parquet/DataFrames for analysis.
+- Extracting records from a REST API — a CRM, ERP, ticketing system, or any SaaS endpoint — into
+  CSV/Parquet/DataFrames for analysis.
 - Fixing pulls that silently return partial data, hit rate limits, or break on nested JSON.
 - Not for: loading data *into* Fusion in bulk → that's an FBDI bulk load
   (archived: `oracle-fusion-finance-skills:fusion-fbdi-data-loading`, restorable from `archive/`).
@@ -93,5 +92,5 @@ filter windows, field lists, the integration user's roles, rate limits observed,
 outputs land. **Never commit tokens, passwords, or real pulled data.**
 
 ## References
-- references/api-patterns.md — hardened session with retries, pagination styles, Fusion query idioms, json flattening
+- references/api-patterns.md — hardened session with retries, pagination styles, query idioms, json flattening
 - references/your-environment.md — your endpoints, resources, and extract schedules (fill in)

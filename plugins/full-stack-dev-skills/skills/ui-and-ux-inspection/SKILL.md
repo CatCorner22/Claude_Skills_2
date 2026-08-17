@@ -14,10 +14,12 @@ description: >-
   accessibility audit, cognitive load, form review, navigation review, simplify a
   workflow, remediation backlog, playwright accessibility tests, heuristic evaluation.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Adapted from the user's ui-and-ux-inspection spec (2026-08-04), itself distilled
-    from their report 'Eye Tracking, Web-App Usability, and Cognitive Design'
+    from their report 'Eye Tracking, Web-App Usability, and Cognitive Design'; the
+    human-factors instruments (Fitts, NASA-TLX) carry [snippet-only] provenance marks
+    in references/human-factors-instruments.md.
 ---
 
 # UI and UX Inspection
@@ -30,8 +32,9 @@ metadata:
   remediation backlog.
 - Not for: building a new accessible UI or design system from scratch → see
   `continuous-improvement-skills:lean-six-sigma-for-software` (and its
-  references/accessible-ui-design-system.md). UI vocabulary syncing →
-  `continuous-improvement-skills:curve-hero-design-language`.
+  references/accessible-ui-design-system.md). Syncing UI vocabulary to a reference product → the worked method lives in the archived
+  design-language skill (archived: `continuous-improvement-skills:curve-hero-design-language`,
+  restorable from `archive/skills/`).
 
 ## Do it
 The full step-by-step procedure is preserved verbatim in references/procedure.md — read it
@@ -66,7 +69,13 @@ before a real inspection. The operational shape:
    automated checks plus the 13 manual checks — automated success does not prove
    accessibility), responsive and environmental behavior (320–1440 px widths, zoom,
    reduced motion, offline, stale edits), performance (INP/LCP/CLS with p75 budgets;
-   Lighthouse is a diagnostic, not the only measure), and privacy.
+   Lighthouse is a diagnostic, not the only measure), and privacy. Quantify tap-target
+   and pointing findings with Fitts's index of difficulty (computed from DOM geometry —
+   report `D`, `W`, and current-vs-proposed ID), and structure the cognitive-load pass
+   with the six NASA-TLX subscales so each flag names its driver — both per
+   references/human-factors-instruments.md, as design-heuristic proxies: the geometry is
+   observed evidence; predicted movement time or workload is inference, capped at
+   `medium` confidence.
 6. **Write the automated test plan.** Detect the existing package manager and test
    framework first; prefer Playwright, `@axe-core/playwright`, and Lighthouse (CI) when
    compatible. Generate task-level tests, not only page-load tests: keyboard-only
@@ -123,6 +132,9 @@ of that and tends to fail silently for exactly the users least able to report it
   critical path.
 - Treating Lighthouse as the performance verdict → it is a lab diagnostic; prefer
   real-user p75 distributions (INP/LCP/CLS) for production decisions.
+- Reporting Fitts/TLX-derived numbers as user data → the ID is measured geometry, but
+  movement-time and workload claims are model/rubric inference; label them so and keep
+  them out of `observed_evidence`.
 - Asserting usability from automated evidence → automation finds defects; pose
   human-validation prompts for what only humans can confirm.
 - Collecting biometric, webcam, production-analytics, or personal data without explicit

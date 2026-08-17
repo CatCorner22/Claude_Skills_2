@@ -1,5 +1,19 @@
 # Cross-Industry KSA Study: Old Methods × New Capability
 
+> **Status as of 2026-08-11: superseded — the build decision was made and executed.** All of §6's
+> ranked rows 1–16 shipped as skills (checklist-design, fmea, competing-hypotheses-analysis,
+> reference-class-forecasting, bowtie-barrier-analysis, principled-negotiation,
+> theory-of-constraints, sbar-structured-communication, pre-mortem, evolutionary-operation,
+> measurement-systems-analysis, design-of-experiments, tabletop-wargaming, qfd-house-of-quality,
+> after-action-review, reliability-engineering), and Wave D's reference retrofits are done — the
+> human-factors instruments (Fitts, NASA-TLX) into `ui-and-ux-inspection` and Reason's error
+> taxonomy into `root-cause-analysis`. The genuinely-still-unbuilt tail is rows 17–19
+> (service-recovery, smed-setup-reduction, queueing-methods) plus the tier-3 long tail
+> (hoshin-kanri, triz, 5s-digital, quality-circles). Many mount points named below are archived
+> plugins (Oracle Fusion/OTBI, cash-management, accounting, banking, public-sector treasury,
+> sponsored-projects AR), so the shipped skills were re-aimed at domain-neutral mounts. Retained as
+> the research record; the analysis below reflects the library as it stood when the study ran.
+
 **What this is:** a deep study of knowledge, skills, and abilities from industries beyond
 this library's current reach — industrial engineering, high-hazard operations, intelligence
 analysis, military doctrine, service industries — ranked as candidate Claude Skills.

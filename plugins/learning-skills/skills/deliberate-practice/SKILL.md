@@ -11,7 +11,7 @@ description: >-
   Use when the user wants to get better at a performable skill — debugging, writing,
   negotiating, arguing, presenting — rather than critique a finished piece of work.
   Triggers: deliberate practice, practice drill, kata, rehearse with me, get better at,
-  practice session, play the opponent.
+  practice session, play the opponent, stopped getting better.
 ---
 
 # Deliberate practice (edge-of-ability drills)

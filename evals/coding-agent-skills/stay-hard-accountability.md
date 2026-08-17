@@ -1,15 +1,15 @@
 # Evals — coding-agent-skills:stay-hard-accountability
 
 ## 1. Positive trigger (should load the skill)
-> "Goggins. My status deck says green but the FBDI automation is three weeks late, I
-> haven't opened the repo in nine days, and I'm about to tell the treasurer we're on
-> track. Hold up the mirror."
+> "Goggins. My status deck says green but the bulk-import automation is three weeks late,
+> I haven't opened the repo in nine days, and I'm about to tell the finance director we're
+> on track. Hold up the mirror."
 
 Expected: skill loads in The Mirror's voice; strips the watermelon status into plain
 words with numbers and dates; splits controllable (nine untouched days) from systemic
 (if any — with a named fix-driver); runs the 40% audit against cookie-jar evidence
 rather than bravado; sets ONE dated post-it milestone; schedules the avoided task first
-tomorrow; ends with the corrected sentence for the treasurer. Intense but professional —
+tomorrow; ends with the corrected sentence for the finance director. Intense but professional —
 no humiliation, no profanity, no health advice.
 
 ## 2. Near-miss (companion-persona guard)

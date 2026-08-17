@@ -1,18 +1,21 @@
 ---
 name: measurement-systems-analysis
 description: >-
-  Answers two questions no metric-driven decision should skip: can this measurement be
-  trusted, and is the process behind it capable? Part A runs Gage R&R — a crossed study (10
-  parts × 3 operators × 3 trials, blind and randomized) decomposed by ANOVA into repeatability,
-  reproducibility, and part-to-part variation, judged on %GRR and distinct categories — plus
-  attribute agreement studies for pass/fail judgments, including LLM-as-judge scoring, where
-  agreement across judges and repeated runs is measured before any eval score is trusted. Part
-  B computes process capability, Cp and Cpk against spec limits, only after stability is
-  confirmed on a control chart. Use when validating a metric or gauge, measuring inter-rater or
-  judge agreement, or judging a stable process against its spec limits. Triggers: gage R&R,
-  measurement systems analysis, can I trust this metric, repeatability and
+  Answers two questions no metric-driven decision should skip: can this measurement be trusted,
+  and is the process capable?
+  Part A runs Gage R&R — a crossed study (10 parts × 3 operators × 3 trials, blind and
+  randomized) decomposed by ANOVA into repeatability, reproducibility, and part-to-part
+  variation, judged on %GRR and ndc — plus attribute agreement studies for
+  pass/fail judgments, including LLM-as-judge scoring, where agreement across judges and
+  repeated runs is measured before any eval score is trusted. Part B computes capability,
+  Cp and Cpk against spec limits, only after stability is confirmed on a control chart.
+  Use when validating a metric or gauge,
+  measuring inter-rater or judge agreement, or judging a stable process against its spec limits.
+  Triggers: gage R&R, measurement systems analysis, can I trust this metric, repeatability and
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
+metadata:
+  version: "1.2.0"
 ---
 
 # Measurement systems analysis and process capability
@@ -48,11 +51,23 @@ description: >-
 3. **Judge against the acceptance table:** %GRR **< 10%** and number of distinct categories
    (ndc) **≥ 5** → acceptable; 10–30% → conditional, only with a documented reason and an
    improvement plan; **> 30%** → the metric cannot support decisions; fix the measurement system
-   before touching the process (§3).
-4. **For LLM-as-judge scoring, measure agreement before trusting scores:** run the same items
-   past multiple judges — or the same judge repeatedly, temperature-varied — plus a human
-   reference where you can get one, and compute agreement (kappa, effectiveness) exactly as an
-   attribute study (§5). If the judge can't agree with itself, its scores can't rank anything.
+   before touching the process (§3). For the pass/fail (attribute) variant the bars are κ > 0.75
+   and effectiveness ≥ 90% — but **kappa is prevalence-sensitive**, so quote it only with its base
+   rate and its 2×2 table beside it, and never compare kappas across item sets with different base
+   rates (§4a).
+4. **For LLM-as-judge scoring, measure agreement before trusting scores — and define a repeat
+   trial correctly.** Hold the configuration fixed (model version, prompt, decoding parameters —
+   *the one you will ship*) and get your repeat signal by re-randomizing **presentation**: swap the
+   A/B order and require the verdict to hold, re-shuffle item order, score each item in a fresh
+   context. Do **not** vary temperature between trials — that changes the gauge rather than
+   re-measuring the part — and do not report the ~100% self-agreement a greedy/temperature-0 judge
+   produces as repeatability; determinism is an operator with perfect memory, which is exactly what
+   the blinding rule in step 1 exists to defeat (§5a). Then run a second judge **from a different
+   model family** and a human-adjudicated reference, and test the three operator-specific biases:
+   **position/order**, **verbosity**, and **self-preference** — never let the model that produced
+   the candidates be their only judge (§5b). Compute agreement as an attribute study (kappa,
+   effectiveness), reporting each 2×2 table and base rate (§4a). If the judge can't agree with
+   itself under a fixed configuration, its scores can't rank anything.
 **Part B — is the process capable?**
 5. **Confirm stability first.** Capability math assumes one process with one σ; an out-of-control
    process isn't one process. Point to the control chart (SPC coverage above) showing in-control
@@ -84,6 +99,35 @@ matching rules "raised the match rate", show two runs and two reviewers score th
 the same way, or the gain may be reader noise. What once needed Minitab literacy the LLM now does
 from a pasted table — the thresholds and spec limits stay human.
 
+Take that "just an operator" claim seriously and it pays twice, because the frame does not only
+transfer the *procedure* — it predicts the *failure modes* and already contains their controls. A
+judge that prefers whichever answer sits first is a gauge whose reading depends on how the part was
+presented, which is why the answer is to swap the order and demand consistency: that swap is a
+same-part re-measurement, i.e. a repeat trial in the strict Gage R&R sense, and it happens to test
+the best-documented weakness LLM judges have. A judge that rewards length is a gauge biased by a
+nuisance characteristic of the part, caught by stratifying effectiveness against a reference rather
+than by inspecting agreement. A model grading its own output is an operator with a stake in the
+part — the reason inspection is kept independent of production in every quality system ever built,
+long before anyone had a language model to worry about. The same discipline also exposes the
+opposite error, the one that flatters: the "same conditions" in *same operator, same part, same
+conditions* is load-bearing. Change the temperature between trials and you have changed the gauge,
+so the disagreement you measure is a setting effect wearing repeatability's name; run at
+temperature 0 and you get near-perfect self-agreement, which is not a repeatable judge but a cached
+function evaluated twice — the machine equivalent of an inspector who remembers every part, which
+is precisely what blinding and randomization exist to prevent. Both traps produce a number; neither
+produces evidence.
+
+The chance-correction statistic deserves the same scepticism the skill applies to everything else.
+Raw percent agreement flatters, so kappa is the right instinct — but kappa's correction is built
+from the raters' marginal rates, and **skewed marginals depress it**, the "high agreement but low
+kappa" paradox (Feinstein & Cicchetti, 1990) [snippet-only, cross-checked]. The same six
+disagreements out of thirty items score κ ≈ 0.52 on a 70%-pass set and κ = 0.60 on a balanced one,
+with nothing about the raters changed. So a hard verdict drawn off a bare kappa repeats, one level
+up, the error of drawing one off a bare percentage: report p_o, the base rate, and the 2×2 table
+together — the table is four numbers and every statistic is a lossy summary of it. And balance the
+item set with borderline cases, which the study design already asks for on diagnosticity grounds
+and which happens to be the cleanest mitigation for the paradox too.
+
 ## Common mistakes
 - Computing Cpk on an unstable process → there is no single σ; the index is fiction. Chart first.
 - Improving the metric before studying the measurement → you may be tuning noise. Part A first.
@@ -94,6 +138,23 @@ from a pasted table — the thresholds and spec limits stay human.
   is the voice of the process. Never let the process grade itself.
 - Trusting single-run LLM-judge scores → repeat runs and multiple judges first; report kappa,
   not vibes.
+- Varying temperature between a judge's "trials" → that changes the gauge, not the measurement;
+  the disagreement is a setting effect. Fix the configuration you will ship and re-randomize
+  presentation instead.
+- Reporting ~100% self-agreement from a temperature-0 judge as repeatability → determinism is an
+  operator with perfect memory, the artifact blinding exists to prevent. Declare it uninformative
+  and get the repeat signal from swapped order and reshuffled items.
+- No order-swap check on pairwise judging → position bias is the best-documented LLM-judge
+  pathology; swap A/B, require consistency, and report that consistency rate.
+- Letting a model judge its own output → self-preference bias; inspection stays independent of
+  production. Use a judge from another family and blind the judge to authorship.
+- Ignoring response length → verbosity bias reads long parts high; stratify effectiveness by
+  length and include padded-but-not-better probe items.
+- Quoting kappa without its base rate and 2×2 table → skewed marginals depress kappa (the same
+  80% agreement gives 0.52 at a 70% base rate and 0.60 at 50%). Report p_o, prevalence, and the
+  table; never compare kappas across differently-balanced item sets.
+- Swapping kappa for PABAK because PABAK is kinder → it buys the higher number by discarding the
+  marginals. Report it beside kappa, labelled, if at all.
 - Attacking variance before centering → centering is usually free and raises Cpk toward Cp;
   spend on variance only after the mean sits mid-spec.
 
@@ -105,6 +166,8 @@ limits, or reviewer names). Never commit real transaction or personnel data — 
 
 ## References
 - references/msa-and-capability.md — study designs, the ANOVA decomposition explained, the
-  %GRR/ndc acceptance table, the LLM-as-judge agreement protocol as a worked example, and Cp/Cpk
+  %GRR/ndc acceptance table, kappa's prevalence sensitivity read off the 2×2 table, the
+  LLM-as-judge agreement protocol as a worked example with what counts as a repeat trial and the
+  position/verbosity/self-preference biases mapped to their MSA controls, and Cp/Cpk
   math with the stability precondition and an off-center worked example
 - references/your-environment.md — your metrics, measurement systems, judges, and spec limits

@@ -1,20 +1,19 @@
 ---
 name: value-stream-mapping
 description: >-
-  Maps a process end to end in current and future state to expose waste and improve flow —
-  the Rother & Shook Learning-to-See method adapted to office work: scope one
-  product/service family with SIPOC, walk the process with one real item, hang a data box
-  (cycle time, %complete-and-accurate, people, systems) under each step, capture queue time
-  between steps, build the timeline ladder, and compute flow efficiency (value-added ÷ lead
-  time); then tag the eight wastes and design a future state with an owned action plan.
-  Fits any stream an analyst, attorney, ops manager, or developer runs —
+  Maps a process end to end in current and future state to expose waste and improve flow — the
+  Rother & Shook Learning-to-See method adapted to office work: scope one product/service family
+  with SIPOC, walk the process with one real item, hang a data box (cycle time,
+  %complete-and-accurate, people, systems) under each step, capture queue time between steps,
+  build the timeline ladder, and compute flow efficiency (process time ÷ lead time); then tag
+  the eight wastes and design a future state with an owned action plan. Fits any stream —
   request-to-resolution, intake-to-filing, order-to-delivery, commit-to-deploy. Use when
-  analyzing a whole process, drawing a current- or future-state map, measuring lead vs
-  cycle time, or scoping with SIPOC. Triggers: value stream mapping, VSM, current state,
-  future state, process map, SIPOC, lead time, cycle time, waste, flow, flow efficiency,
-  eight wastes, %C&A, where does all the time go.
+  analyzing a whole process, drawing a current- or future-state map, measuring lead vs cycle
+  time, or scoping with SIPOC. Triggers: value stream mapping, VSM, current state, future state,
+  process map, SIPOC, lead time, cycle time, waste, flow, flow efficiency, eight wastes, %C&A,
+  where does all the time go.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Value stream mapping
@@ -57,9 +56,10 @@ math with a worked example, and the eight wastes.
    waiting is usually where most of the elapsed time lives, and it is invisible unless you
    write it down.
 5. **Build the timeline ladder and do the math.** Draw a two-level line under the map:
-   **process time** (sum of value-added CT) on the lower rungs, **lead time** (total
-   elapsed, including all waits) on the upper rungs. Compute **flow efficiency** (also
-   called process cycle efficiency) **= value-added time ÷ lead time**. Measure it — in
+   **process time** (sum of CT — hands-on time, value-added and not) on the lower rungs,
+   **lead time** (total elapsed, including all waits) on the upper rungs. Compute **flow
+   efficiency** (the activity ratio) **= process time ÷ lead time**; true process cycle
+   efficiency divides only the value-added slice, so it reads lower still. Measure it — in
    transactional office work it routinely lands low enough to surprise the team that owns
    the process.
 6. **Tag the 8 wastes (DOWNTIME).** Defects, Overproduction, Waiting, Non-utilized talent,

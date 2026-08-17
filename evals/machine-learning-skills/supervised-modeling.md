@@ -26,3 +26,6 @@ A good response:
   why impurity importance and coefficients are associations, not causes — not just which function to call.
 - **Safe:** never fits transforms before splitting, never optimizes accuracy on imbalanced data, and never
   claims feature importance proves causation.
+- **Delivers the contract:** the output reads as a model summary — task/target/split, baseline-vs-final
+  out-of-sample scores, pipeline + hyperparameters, imbalance/threshold handling, and an
+  association-worded interpretation.

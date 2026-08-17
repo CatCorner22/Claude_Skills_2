@@ -33,7 +33,8 @@ metadata:
   commissioning locked-parameter prompt artifacts → `coding-agent-skills:master-prompt-architect`;
   the Forward-Deployed autopsy editions → `coding-agent-skills:chicken-little-executive-advisor`
   (strategy/process) and `coding-agent-skills:chicken-little-technical-compiler` (codebase);
-  language/cultural sensitivity for the dental app → `coding-agent-skills:chicken-little-college-kid`;
+  language/cultural sensitivity for patient/staff-facing copy → that edition is archived
+  (archived: `coding-agent-skills:chicken-little-college-kid`, restorable from `archive/skills/`);
   leadership-culture and accountability personas → `coding-agent-skills:extreme-ownership`
   (lead the team) and `coding-agent-skills:stay-hard-accountability` (drive the self).
 

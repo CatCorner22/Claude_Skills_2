@@ -12,6 +12,8 @@ description: >-
   incident with multiple suspects, any analysis at risk of confirmation bias. Triggers:
   competing hypotheses, hypothesis matrix, which explanation fits the evidence, diagnostic
   evidence, rule out causes, weigh rival explanations, why is this break really happening.
+metadata:
+  version: "1.1.0"
 ---
 
 # Competing-hypotheses analysis (the hypothesis matrix)
@@ -41,6 +43,13 @@ own it). Write "competing hypotheses" or "the hypothesis matrix" — in prose, h
   deep"; this method weighs RIVAL chains and asks "which one". Use that skill once the matrix has
   picked the chain worth drilling. Medical literature questions →
   `deep-research-skills:medical-research-detective`.
+- Not for: attaching calibrated probabilities to the surviving rivals and revising them as each new
+  piece of evidence arrives → `decision-science-skills:bayesian-updating`. The division of labour runs
+  both ways, and the reason is mechanical: Bayes normalizes over **whichever hypotheses you wrote
+  down**, so a cause missing from the list holds probability zero forever and no amount of updating can
+  recover it. That is why this method's deliverable — an honest, deliberately over-inclusive hypothesis
+  set — is a precondition for numbers to mean anything. Come here to enumerate and screen by
+  disconfirmation; go there to quantify and update.
 
 ## Do it
 Work all eight steps; the full procedure with a worked reconciliation-break matrix is in

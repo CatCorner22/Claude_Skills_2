@@ -15,7 +15,7 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.0.0"
+  version: "1.1.1"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The

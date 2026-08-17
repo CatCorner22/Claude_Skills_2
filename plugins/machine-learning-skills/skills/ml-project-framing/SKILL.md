@@ -4,7 +4,7 @@ description: >-
   Turns a business problem into a well-posed machine-learning task before any model is built —
   names the decision and the cost of a wrong call, defines the target (type, window, labeling
   rule), fixes the unit of prediction and the prediction time, lists only features knowable at
-  that moment (the on-paper leakage check), picks a metric tied to the decision's error costs,
+  that moment (the on-paper leakage check), picks a metric tied to those costs,
   sets the naive baseline the model must beat, runs feasibility checks, and writes a one-page
   framing spec — and is willing to conclude ML does not fit or the baseline should ship. Use
   when starting an ML or prediction project, scoping a "can we predict X?" request, deciding
@@ -13,7 +13,7 @@ description: >-
   prediction task, unit of prediction, baseline model, is this an ML problem, does ML fit,
   feasibility, well-posed, can we predict, framing spec, scope an ML project.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     The framing discipline descends from CRISP-DM's Business Understanding phase (the
     late-1990s NCR/DaimlerChrysler/SPSS/OHRA consortium process model), verified via
@@ -38,7 +38,8 @@ metadata:
 2. **Define the target precisely.** Name exactly what you predict, its type (a number → regression; a
    category → classification; an event over a window → time-to-event or a windowed label), the
    observation window, and how it is actually measured/labeled. "Predict a late payment" is not yet a
-   target; "will invoice *i* be paid > 30 days past due, judged 45 days after issue" is. The type
+   target; "will invoice *i* be paid > 30 days past due — on net-30 terms, paid after issue + 60 —
+   judged at issue + 75, still-unpaid counted late" is. The type
    routes the eventual build: number/category → `machine-learning-skills:supervised-modeling`; a
    series over time → `machine-learning-skills:time-series-forecasting`; unusual-instance detection
    with scarce labels → `machine-learning-skills:anomaly-detection`. If the label comes from human

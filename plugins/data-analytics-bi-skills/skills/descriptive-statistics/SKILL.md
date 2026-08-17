@@ -3,11 +3,15 @@ name: descriptive-statistics
 description: >-
   Summarizes a variable or dataset with the right measures of central tendency, dispersion, shape,
   and percentiles — and switches to robust measures (median, IQR, MAD) when outliers or skew would
-  make the mean and standard deviation mislead. Use when describing or summarizing data, computing a
+  make the mean and standard deviation mislead. Delivers a per-variable summary block: matched
+  center and spread, five-number summary, n and missing count, percentile method, and a plot.
+  Use when describing or summarizing data, computing a
   "typical" value or a spread, or choosing which summary statistic to report before drawing
   conclusions. Triggers: descriptive statistics, summary statistics, mean, median, mode, average,
   standard deviation, variance, range, percentile, quartile, IQR, coefficient of variation, skewness,
   kurtosis, distribution shape, central tendency, spread.
+metadata:
+  version: "1.1.0"
 ---
 
 # Descriptive statistics
@@ -50,10 +54,20 @@ description: >-
    tail percentiles your decision needs (p5/p95, or p99 for SLAs and risk). State the interpolation
    method — tools disagree at the edges (Excel `PERCENTILE.INC` vs `.EXC`, differing quartile
    definitions) — so a percentile is reproducible.
-7. **Choose robust vs. classical, then report center and spread together.** If skew or outliers are
-   present, lead with **median + IQR** (optionally MAD or a trimmed mean); reserve **mean + SD** for
-   roughly symmetric data. Always show `n` and the count of missing/excluded values, and prefer a
-   histogram or boxplot beside the table — a single number cannot show shape.
+7. **Choose robust vs. classical.** If skew or outliers are present, lead with **median + IQR**
+   (optionally MAD or a trimmed mean); reserve **mean + SD** for roughly symmetric data.
+8. **Deliver the summary block, not loose numbers.** Per variable, the finished output is:
+
+```
+variable · n · missing/excluded
+center: median 412.50          spread: IQR 118.00      (mean + SD if roughly symmetric)
+five-number: min / Q1 / median / Q3 / max               tails: p95 (p99 for SLA/risk)
+shape: right-skewed (mean 512 > median 412) · percentile method: PERCENTILE_CONT
+plot: histogram or boxplot alongside — a single number cannot show shape
+```
+
+   The assistant computes and drafts the block; the human owns the population/grain definition and
+   the decision the numbers feed.
 
 ## Why / learn
 Descriptive statistics answer "what does this data look like?" honestly, *before* any inference — and

@@ -21,6 +21,9 @@ instead, tighten the description / cross-links.
 A good response:
 - **Does the task:** decomposes into small verifiable steps, defines tool contracts, adds guardrails
   (step/cost bounds), verification, and a human-in-the-loop gate for irreversible actions.
+- **Deliverable shape:** produces the workflow design doc from the skill's contract — verdict
+  (agent vs script), step map with per-step checks, tool-contract table, guardrails, failure &
+  escalation paths, and an eval plan — not just prose advice.
 - **Teaches:** explains that reliability comes from decomposition and verification, not a bigger
   prompt; treats the agent as a testable process; and argues for script-over-agent where possible.
 - **Safe:** requires approval before irreversible actions, least-privilege tools, and an eval set

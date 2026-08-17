@@ -1,19 +1,19 @@
 ---
 name: kaizen-and-codesign
 description: >-
-  Plans and facilitates kaizen events and co-design sessions so the people who do the work —
-  and their downstream customers — design the improvement themselves: a tight measurable
-  charter, operators plus a downstream customer plus an on-the-spot decision-maker in the
-  room, a gemba walk before any design talk, equal-voice facilitation (brainwriting,
-  affinity grouping, dot-voting), rapid PDCA loops tested on real work the same day, and
-  standard work plus a 30/60-day check captured before close. Grounded in Imai's kaizen and
-  the participatory-design tradition, respect-for-people throughout; fits any team —
-  analysts, attorneys, ops, or developers. Use when running an improvement workshop, kaizen
-  event, or participatory/co-design session, or facilitating continuous improvement. Triggers: kaizen, kaizen event, kaizen blitz,
-  co-design, co-creation, participatory design, improvement workshop, rapid improvement
-  event, gemba, gemba walk, facilitation, continuous improvement event.
+  Plans and facilitates kaizen events and co-design sessions so the people who do the work — and
+  their downstream customers — design the improvement themselves: a tight measurable charter,
+  operators plus a downstream customer plus an on-the-spot decision-maker in the room, a gemba
+  walk before any design talk, equal-voice facilitation (brainwriting, affinity grouping,
+  dot-voting), rapid PDCA loops tested on real work the same day, and standard work plus a
+  30/60-day check captured before close. Grounded in Imai's kaizen and the participatory-design
+  tradition, respect-for-people throughout. Use when running an improvement workshop, kaizen
+  event, or participatory/co-design session, or facilitating continuous improvement. Triggers:
+  kaizen, kaizen event, kaizen blitz, co-design, co-creation, participatory design, improvement
+  workshop, rapid improvement event, gemba, gemba walk, facilitation, continuous improvement
+  event.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Kaizen and co-design

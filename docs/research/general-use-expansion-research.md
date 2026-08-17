@@ -1,6 +1,14 @@
 # General-use expansion wave — research-verification dossiers (8 skills)
 
-**Status: research complete, nothing built.** Commissioned for the general-use / career-portable
+> **Status as of 2026-08-11: superseded — all 8 planned skills shipped.** causal-inference,
+> ab-test-design, and survey-and-sampling-design (data-analytics-bi-skills); bayesian-updating
+> (decision-science-skills); technical-documentation (writing-skills); executive-briefing and
+> stakeholder-mapping (collaboration-skills); reproducible-analysis (data-tools-skills). The
+> misattribution warnings verified here became load-bearing skill content, and the shipped skills
+> were later line-checked by the adversarial and arithmetic review passes. Retained as the research
+> record; the analysis below reflects the library as it stood when the study ran.
+
+**Status: research complete, nothing built** *(historical — see the status block above)*. Commissioned for the general-use / career-portable
 expansion wave (post "no more Oracle work" directive). Eight domain-neutral skills planned across
 five existing plugins; every anchor below was verified before authoring begins, per the house
 pattern (3rd+ application): **research-verify anchors first; misattribution warnings are

@@ -1,5 +1,14 @@
 # KSA Synergy Map — top-tier candidates × existing skills
 
+> **Status as of 2026-08-11: superseded — all eight candidate boxes were built, and most of the
+> mount points they point at have since been archived.** The eight top-tier skills shipped
+> (checklist-design, fmea, competing-hypotheses-analysis, reference-class-forecasting,
+> bowtie-barrier-analysis, principled-negotiation, theory-of-constraints,
+> sbar-structured-communication), but the "Existing skills (mount points, file-verified)" block
+> below was verified against the pre-overhaul library and no longer describes the active tree — see
+> the archived-node list under the diagram. Retained as the research record; the analysis below
+> reflects the library as it stood when the study ran.
+
 Companion to [cross-industry-ksa-study.md](cross-industry-ksa-study.md). Eight top-tier
 candidates (rounded boxes, grouped by proposed build wave) and the existing skills they
 mount onto (rectangles). Edge labels name the combination pattern from the study's §4.
@@ -57,8 +66,30 @@ flowchart LR
     SBAR -- "P4 PACE = human barrier" --> CMC
 ```
 
-Reading the map: the densest mount points are `bank-reconciliation`, `month-end-close`,
-`cash-management-controls`, and the dental app — the user's daily surfaces. Tier-2
+**Which nodes are archived (added 2026-08-11 — the diagram is left as drawn).** Seven of the twelve
+"existing skills" mount-point nodes are no longer in the active library. The candidate boxes and
+the three subgraph target plugins (`continuous-improvement-skills`,
+`safety-and-reliability-skills`, `decision-science-skills`) are all active; so are `VSM`, `DMAIC`,
+`LSS`, `MRD`, and `MPA`. Archived:
+
+| Node in diagram | Skill / group | Now at |
+|---|---|---|
+| `MEC` | `accounting-skills:month-end-close` | `archive/plugins/accounting-skills/` |
+| `BR` | `cash-management-skills:bank-reconciliation` | `archive/plugins/cash-management-skills/` |
+| `CMC` | `cash-management-skills:cash-management-controls` | `archive/plugins/cash-management-skills/` |
+| `CF` | `cash-management-skills:cash-forecasting` | `archive/plugins/cash-management-skills/` |
+| `BFA` | `banking-skills:bank-fee-analysis` | `archive/plugins/banking-skills/` |
+| `FARD` | `oracle-fusion-finance-skills:fusion-auto-reconciliation-design` | `archive/plugins/oracle-fusion-finance-skills/` |
+| `DENTAL` | `chicken-little-college-kid`, `curve-hero-design-language` | `archive/skills/` (archived at skill level) |
+
+That is four archived plugins plus the two dental-mounted skills. The eight shipped skills were
+re-aimed at domain-neutral mount points instead; for the live mounts, read each skill's own
+References section or [`docs/INDEX.md`](../INDEX.md).
+
+Reading the map (as written in 2026-08): the densest mount points are `bank-reconciliation`,
+`month-end-close`, `cash-management-controls`, and the dental app — the user's daily surfaces at
+the time, all since archived. Tier-2
 candidates (pre-mortem, evolutionary-operation, measurement-systems-analysis,
 design-of-experiments, tabletop-wargaming, qfd, after-action-review, and others) are
-tabled in the study's §6 and omitted here for legibility.
+tabled in the study's §6 and omitted here for legibility — all seven of those named have since
+shipped as skills.

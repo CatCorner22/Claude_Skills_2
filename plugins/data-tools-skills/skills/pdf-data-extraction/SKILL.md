@@ -3,11 +3,15 @@ name: pdf-data-extraction
 description: >-
   Extracts tables and text from PDFs into usable data — choosing between pdfplumber and camelot
   by PDF type, detecting scanned-vs-native pages, handling multi-page tables, bank-statement and
-  invoice layouts, and validating extracted numbers against the document's own totals. Use when
+  invoice layouts, and validating extracted numbers against the document's own totals. Delivers
+  a typed table (DataFrame/CSV/Excel) that reproduces the document's control totals, plus a
+  frozen per-layout recipe for recurring documents. Use when
   pulling transactions from a PDF bank statement, tabling data out of a PDF report or invoice,
   or when a PDF extraction comes out scrambled. Triggers: extract pdf table, pdf to excel,
   pdfplumber, camelot, parse bank statement pdf, pdf invoice data, scanned pdf, OCR pdf,
   pdf text extraction, table extraction python.
+metadata:
+  version: "1.1.0"
 ---
 
 # PDF data extraction
@@ -62,6 +66,8 @@ with pdfplumber.open("statement.pdf") as pdf:
    opening balance + credits − debits = closing balance; line items sum to the invoice total;
    page counts of transactions match a stated count when present. An extraction that doesn't
    reproduce the document's own totals is wrong somewhere — find the dropped or doubled rows.
+   The assistant extracts and runs these checks; the human adjudicates OCR-uncertain digits the
+   totals cannot confirm and owns the decision to rely on the output.
 7. **For a recurring document, freeze the recipe.** Lock the per-layout settings (bbox, strategy,
    column positions, header patterns) in a script keyed to the document type; when the bank
    redesigns the statement, the totals check fails loudly and you re-tune once.

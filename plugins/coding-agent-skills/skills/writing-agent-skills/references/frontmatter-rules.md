@@ -19,9 +19,22 @@
 - Leads with the primary use case; ends with a short `Triggers:` list of literal phrases.
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
-- In Claude Code the combined `description` + `when_to_use` is truncated at ~1536 chars in the
-  skill listing, and the whole listing is budgeted to ~1% of the context window. With a large
-  library, keep descriptions tight and put the trigger phrase early.
+- **Budget reality, measured 2026-08-11 (this replaces an earlier ~1%-of-context claim that the
+  library's own numbers contradict).** 121 skills' names + descriptions = ~107,700 chars ≈
+  **29,000 tokens ≈ 14.6% of a 200K window**, mean ~870 chars per description. A literal
+  1%-of-context listing budget would fit about six of them, so ~1% cannot describe a
+  full-description listing; it is consistent instead with a listing that has degraded to mostly
+  **name-only**, which is the documented failure mode (see below). Keep descriptions tight
+  because a tight description routes better — not because trimming fixes the budget. The lever
+  that moves real tokens is how many plugins a user installs.
+- **The listing degrades silently at scale.** Observed at ~100 installed skills: least-used
+  skills' descriptions are trimmed to name-only. There is no error; `/plugin:skill` direct
+  invocation still works. So a skill can be fully valid, fully conformant, and unroutable, and
+  the author cannot tell from inside their own session. This is why the fresh-session trigger
+  test in `review-checklist.md` is the only check that proves a description works.
+- A per-skill truncation ceiling (~1536 chars for `description` + `when_to_use` combined) has
+  been reported for Claude Code, but it is **not** the binding constraint here: this library's
+  1024-char cap is stricter, and no skill in it uses `when_to_use` at all.
 
 ## Optional fields used in this library
 - `when_to_use`: extra trigger phrases appended to the description (use sparingly).

@@ -1,9 +1,10 @@
 # Bayesian updating — full method
 
-Contents: 1. The update loop · 2. Setting the prior (reference-class handoff) ·
-3. The likelihood question · 4. Updating with counts (worked alert triage) ·
-5. The odds shortcut and chaining · 6. Bayes-factor vocabulary · 7. The update journal
-(Tetlock discipline) · 8. The trap catalog · 9. The honest history · 10. Provenance notes
+Contents: 1. The update loop · 2. Setting the prior (reference-class handoff, and the hypothesis
+list) · 3. The likelihood question · 4. Updating with counts (worked alert triage) ·
+5. The odds shortcut, chaining, and LR-error compounding · 6. Bayes-factor vocabulary ·
+7. The update journal (Tetlock discipline) · 8. The trap catalog (incl. the catch-all hypothesis) ·
+9. The honest history · 10. Provenance notes
 
 ## 1. The update loop
 
@@ -26,7 +27,10 @@ Examples of the handoff:
 - "Will the vendor deliver by Q3?" → your delivery history with this vendor and vendors
   like it: 9 of 30 comparable commitments landed on time → prior ≈ 30%.
 - "Is this alert a real incident?" → the alert channel's own resolved history: 2% of the
-  last 1,000 fired alerts were true incidents → prior = 2%.
+  last 1,000 fired alerts were true incidents → prior = 2%. Note which population that
+  rate is over: the share of *fired alerts* that resolved true is already post-alarm, so
+  it is your answer for a fired alert — do not then update it again on "the alert fired."
+  §4 starts from the pre-alarm rate instead.
 
 When no reference class exists, state a judgment prior and *label it as judgment* — it is
 still better written down than implicit, because an implicit prior defaults to whichever
@@ -34,6 +38,14 @@ number the first vivid fact suggests. Avoid reflexive 50%: "even odds" is a spec
 strong claim about the world, not an absence of opinion.
 
 Always write the prior in both forms: probability 30% = odds 3:7. Odds feed §5 directly.
+
+**Write the whole hypothesis list, not just the prior on your favourite.** A prior of 30% on H is
+also a prior of 70% on *everything else*, and "everything else" is a real set with real members. If
+the alternative is a genuine complement ("the vendor delivers by Q3" vs "does not"), the two-way
+form is exhaustive and safe. If instead you are weighing two named stories — "the break is a timing
+difference" vs "the break is a duplicate posting" — the pair is **not** exhaustive, and the missing
+member is the one that will bite. Name a catch-all (H_other) with a non-zero prior at this step,
+before any evidence arrives; §8 explains why a catch-all set to zero can never recover.
 
 ## 3. The likelihood question
 
@@ -58,9 +70,9 @@ Two habits make this operational:
 ## 4. Updating with counts — worked alert triage
 
 Setting (domain-neutral): a monitoring flag — fraud rule, failing check, quality alarm —
-fires. History: 2% of flagged-population cases are true issues (prior); the flag catches
-90% of true issues; it also fires on 10% of clean cases. The flag just fired. How worried
-should anyone be?
+fires. History: 2% of all monitored cases are true issues — the prior, taken *before* the
+flag is known; the flag catches 90% of true issues; it also fires on 10% of clean cases.
+The flag just fired. How worried should anyone be?
 
 Build the whole-number table. Out of 10,000 cases:
 
@@ -100,6 +112,39 @@ same data feed, same motivated narrator — count once, at the strength of the b
 Before multiplying, ask: "if the first signal were wrong, would the second one probably be
 wrong for the same reason?" If yes, do not multiply.
 
+**Independence licenses the multiplication; it does not make the factors accurate.** Every LR in
+a chain is a judgment, judgments carry error, and the chain multiplies the errors too. Worked, from
+the §4 alert prior of 1:49:
+
+| | Judged LRs | Chained odds | Posterior |
+|---|---|---|---|
+| Four independent signals, each judged **LR 3** | 3⁴ = 81 | 81:49 | 81/130 ≈ **62.3%** |
+| Same four signals, each *truly* **LR 1.5** (each judgment over-read 2×) | 1.5⁴ ≈ 5.06 | 5.06:49 | 5.06/54.06 ≈ **9.4%** |
+
+A uniform 2× over-read per signal is a **2⁴ = 16×** error in the posterior odds (81 / 5.06 = 16),
+and it moves the answer from "act on this" to "keep watching." Two features make this worse than a
+random-error problem:
+
+- **The errors compound multiplicatively, not additively** — they do not shrink with more evidence,
+  they grow. Chaining is the one place in this method where more work makes the answer less robust.
+- **Judged LRs err in a *correlated direction*.** The analyst who reads the first signal
+  generously reads the second one generously; the estimate that flatters the working hypothesis
+  flatters it four times. So the errors do not cancel the way independent noise would.
+
+Three cheap guards:
+1. **Grade, don't decimalize.** "Roughly a 3" (§6 bands) is honest about the resolution of the
+   judgment; "LR = 3.4" is not, and it chains into false precision.
+2. **Round each LR toward 1.** Deliberate conservative rounding biases the chain *against* your own
+   conclusion, which is the direction you want to be wrong in.
+3. **Halve-and-double the chain.** Recompute with every LR halved, then with every LR doubled. If
+   the decision is the same across that band, the chain is safe to act on; if it flips, the honest
+   report is the band, not the point.
+
+And sanity-check the aggregate, which is often easier to judge than the parts: the four-signal chain
+above claims the evidence *as a whole* is 81:1 in favour. Said out loud, "the whole file is
+81-to-1" is a claim people can accept or reject on the spot — sometimes catching an error the
+individual ratios hid.
+
 **Direction discipline.** An LR below 1 is an update too. A practice that only ever
 multiplies by numbers above 1 is advocacy with arithmetic on top.
 
@@ -114,6 +159,11 @@ Raftery (*JASA* 1995) [snippet-only]:
 | ~3–20 | positive evidence |
 | ~20–150 | strong |
 | >~150 | very strong |
+
+**Read the numbers as boundaries, not labels.** 3, 20 and 150 are the doors between bands, so an LR
+of 20 is the entrance to *strong* and 150 the entrance to *very strong* — quoting "20, so positive"
+or "150, so strong" is a one-band understatement, and the error is easy to make from memory. When
+in doubt, name the band, not the number.
 
 Use the grades as *vocabulary*, not as a computation mandate: the point is to be able to
 say "this witness/result/metric is maybe a 3, not a 100" in a meeting, out loud, before
@@ -141,6 +191,14 @@ Rules that keep the journal honest:
 - **Small and often beats big and dramatic.** A 62% → 58% move on a minor signal is the
   discipline working. If the journal shows months of silence then a 70-point reversal,
   the updating happened invisibly and the journal recorded theater.
+- **Small-and-often applies to the belief, not to the estimating rule.** These are different
+  objects with different correct cadences: a *belief* about an open question should move a few
+  points whenever you learn something about that case; the *rule* that generates your estimates (a
+  model's curve, a lag, an uplift percentage, a reference-class definition) should change rarely and
+  only on diagnosed error from closed cases — re-tuning it after every miss is Deming's funnel
+  Rule 2 and roughly doubles variance. `decision-science-skills:reference-class-forecasting` owns
+  that guard and states the distinction in full. The one-question test: *is this new information
+  about the case in front of me, or the realized error of a case already closed?*
 - **Both-directions column is mandatory.** Deciding in advance what would move you *down*
   is the cheapest available guard against confirmation-only updating.
 - **Score at resolution.** When the question resolves, compare the trajectory to the
@@ -182,9 +240,47 @@ source than if not," then let the prior (the rest of the case) do its work. Same
 applies outside law: "only 5% chance of seeing this metric by luck" is not "95% chance
 the feature caused it."
 
+**The catch-all hypothesis — confident answers about an incomplete world.** The most common way
+real Bayesian reasoning goes wrong is not arithmetic; it is the hypothesis list. Bayes' theorem
+normalizes over **the hypotheses you supplied**: the denominator is Σ P(E | Hᵢ) · P(Hᵢ) across your
+list, so the posteriors always sum to 100% *of that list*, whether or not the list covers reality.
+Two non-exhaustive hypotheses therefore yield a crisp, well-calibrated-looking posterior about a
+world you have mis-described.
+
+The structure of the error, plainly:
+- Comparing H1 against H2 gives a valid **relative** verdict — posterior odds of H1 *versus H2* —
+  and nothing more. Renormalizing that ratio and reporting "78% chance it's H1" silently asserts
+  that H1 and H2 exhaust the possibilities.
+- It gets *worse* with striking evidence, not better. Evidence that is unlikely under both stories
+  still discriminates sharply between them, so the ratio moves hard while the real message —
+  "neither of these explains what I'm seeing" — is exactly what normalization deletes.
+
+Two guards, both cheap:
+1. **Carry an explicit catch-all** — H_other, "something we haven't thought of," with a real
+   non-zero prior (a plain 10% is a defensible default for a question you have not decomposed).
+   Then ask the likelihood question of it too: "how expected is this evidence if the explanation is
+   something not on my list?" Often the answer is "more expected than under either named story,"
+   and the mass belongs there. A catch-all with prior 0 can never receive posterior mass no matter
+   what arrives — a prior of zero is a commitment you cannot update out of.
+2. **Watch the marginal likelihood of the evidence.** Compute P(E) = Σ P(E | Hᵢ) · P(Hᵢ) over your
+   list. If that number is tiny, the observed evidence was surprising under *everything you named*
+   — a direct, checkable signal that the list is incomplete. Widen the list; do not crown the
+   winner of a two-horse race.
+
+Building the full hypothesis set is a discipline of its own, and this skill hands it off:
+`decision-science-skills:competing-hypotheses-analysis` owns enumeration (its rule that starting
+from "favorite plus strawman" is the standard failure is this same lesson, stated qualitatively,
+plus the deception hypothesis most lists omit). Use it when the question is *which* explanations
+exist; use this skill once the list is stable and the evidence is arriving as a stream.
+
 **Correlated evidence double-counting.** §5's caveat, restated as the failure: chaining
 LRs from sources that share a root (one report quoted three times; two dashboards fed by
 one pipeline) manufactures certainty. Count root causes of evidence, not mentions.
+
+**LR-error compounding.** §5's chaining table, restated as the failure: five eyeballed ratios
+multiplied to a two-digit posterior. Independence licenses multiplication; it does not make the
+factors accurate, the errors multiply rather than average, and they run in a correlated direction.
+Grade in bands, round toward 1, and report the halve-and-double band when the decision is close.
 
 **Confirmation-only updating.** If every journal entry moves the same direction, either
 the world is astonishingly cooperative or the likelihood question is being asked in one
@@ -230,6 +326,13 @@ one's own citations first.
   small frequent updates; perpetual beta as the strongest predictor — [snippet-only].
   The "~30% better than classified analysts" figure: reported (journalistic accounts of a
   classified comparison), not published — always hedged.
-- Jeffreys evidence grades; Kass & Raftery, *JASA* 90:773–795 (1995) — [snippet-only].
-- All worked arithmetic in §4, §5, and §8 recomputed at authoring time (180/1,160 = 9/58
-  ≈ 15.5%; 12/29 ≈ 41.4%).
+- Jeffreys evidence grades; Kass & Raftery, *JASA* 90:773–795 (1995) — [snippet-only]. The bands
+  used here (1–3 / 3–20 / 20–150 / >150) are the Kass & Raftery presentation of the scale; the
+  numbers are band boundaries.
+- The catch-all problem is a standard point about Bayes' theorem's normalizing denominator rather
+  than a single-source claim; the hypothesis-enumeration discipline is credited in-library to
+  `decision-science-skills:competing-hypotheses-analysis` (Heuer lineage).
+- All worked arithmetic in §4, §5, and §8 recomputed at authoring time and re-verified on revision:
+  180/1,160 = 9/58 ≈ 15.5%; 12/29 ≈ 41.4%; 36/(36+49) ≈ 42.4%; the §5 compounding table —
+  3⁴ = 81, 81/130 ≈ 62.3%; 1.5⁴ = 5.0625, 5.0625/54.0625 ≈ 9.4%; odds-ratio error 81/5.0625 =
+  16 = 2⁴.

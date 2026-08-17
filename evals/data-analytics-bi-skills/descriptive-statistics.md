@@ -20,7 +20,8 @@ the primary skill, tighten the description / cross-links.
 ## 3. Quality rubric
 A good response:
 - **Does the task:** states grain and sample-vs-population, computes central tendency, dispersion,
-  shape, and percentiles, and reports a matched center+spread pair with `n` and missingness.
+  shape, and percentiles, and delivers the per-variable summary block — matched center+spread pair,
+  five-number summary, `n` and missingness, percentile method, and a plot (or a recommendation of one).
 - **Teaches:** explains *why* the mean misleads on skewed/outlier-laden data and why the median/IQR
   are resistant — describe honestly before inferring.
 - **Safe:** does not report a bare mean on skewed data, does not mismatch center/spread, states the

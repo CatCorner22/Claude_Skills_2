@@ -26,7 +26,7 @@ literature · §4 Worked example: the go-live that should slip · §5 Decision-l
 Timebox: 60–90 minutes. The LLM's role: draft the zero-base summaries, reconstruct the
 anomaly first-reports from tickets/logs, compute the base rates, and steelman BOTH
 branches — with the standing anti-sycophancy rule: it must argue the unpopular branch
-at least as well as the popular one. The humans own the decision (P8).
+at least as well as the popular one. The humans own the decision.
 
 ## §2 The Challenger record, held soberly
 

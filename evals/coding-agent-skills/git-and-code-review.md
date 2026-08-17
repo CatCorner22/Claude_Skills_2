@@ -22,7 +22,7 @@ tighten the description / cross-links.
 > "Run the board on the pricing module — I want a full multi-angle optimization audit:
 > performance, accuracy, structure, robustness, everything suboptimal, before we touch it."
 
-Expected: that is the parallel-specialist swarm → `board-of-advisors-skills:board-review`.
+Expected: that is the parallel-specialist swarm → `coding-agent-skills:board-review`.
 This skill owns routine PR/diff review; a commissioned deep multi-agent audit of a module is
 the board's job. If this skill loads as primary, the seam is failing.
 
@@ -38,8 +38,9 @@ A good response:
   trade-off (truthful record vs linear story) and why the golden rule exists.
 - **Routes the seams:** a real bug confirmed in review → contact-trace copies via
   `coding-agent-skills:defect-epidemiology` before closing; comment tone that indicts the
-  author → `collaboration-skills:feedback-that-lands`; correct-but-overbuilt →
-  `coding-agent-skills:soviet-space-graphite`; "phase is done, build on it" claims →
+  author → `collaboration-skills:feedback-that-lands`; correct-but-overbuilt code →
+  `full-stack-dev-skills:lean-code-principles` (an overbuilt *whole solution* → the Pencil
+  Pass in `coding-agent-skills:soviet-space-graphite`); "phase is done, build on it" claims →
   `coding-agent-skills:the-foreman`; deleting long-standing code → scream test /
   `coding-agent-skills:software-archaeology`.
 - **Stays honest:** review-size/pacing numbers (200–400 LOC, ~500 LOC/hour, 60–90 min,

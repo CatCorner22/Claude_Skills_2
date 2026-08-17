@@ -31,6 +31,39 @@ Nothing was lost:
 (Last-version numbers are as recorded in each plugin's `.claude-plugin/plugin.json`
 at archive time; verify with the manifest files here if they ever drift.)
 
+## Archived individual skills (2026-08-11, consolidation pass)
+
+Two dental-practice-mounted skills were archived at skill level (their host plugins stay
+active). The dental app direction was not chosen at the career re-aim; both are preserved
+and restorable:
+
+| Skill | From plugin | Where it lives now |
+|---|---|---|
+| `curve-hero-design-language` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `chicken-little-college-kid` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+
+Restore: `git mv archive/skills/<plugin>/<skill> plugins/<plugin>/skills/<skill>` and
+`git mv archive/evals/<plugin>/<skill>.md evals/<plugin>/<skill>.md`, restore any
+cross-links marked `archived:` in the active tree, bump the plugin version, validate.
+
+Also recorded here: `board-of-advisors-skills` was **merged, not archived** — its single
+skill and six subagents now live in `coding-agent-skills` as
+`coding-agent-skills:board-review` (same content, new namespace).
+
+## Archived applications and domain tools (2026-08-11)
+
+`archive/apps/` holds standalone programs that predate the library's re-aim and were never
+referenced by any skill: two separate dental "notes standardizer" apps (a root Vite + React 19
+app and a `tools/`-based vocabulary normalizer), their Curve Hero benchmark docs and validation
+record, and the Oracle-era `fusioncash-architect` Python tool. They lived at the repository
+root, where they made a skills marketplace read as a JavaScript app. See
+[apps/README.md](apps/README.md) for what each one is and how to restore it.
+
+`GITHUB_SETUP.md` was **deleted** in the same pass rather than archived — every fact in it was
+dead (defunct repo URL, long-merged branch, its own status line saying "not found"). It had
+published an ssh-ed25519 deploy public key; if that key still exists on the repository, revoke
+it in GitHub settings independently of this cleanup.
+
 ## Restore procedure
 
 To restore a plugin to the active marketplace:

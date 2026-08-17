@@ -2,8 +2,9 @@
 
 ## 1. Positive trigger (should load the skill)
 > "I'm building features for a payment-default model. I have a 900-value merchant category, some very
-> skewed amount fields, timestamps, and lots of missing values. How should I encode, scale, and build
-> time features without leaking?"
+> skewed amount fields, and timestamps — plus a few predictors sparse enough that I'll have to impute
+> features rather than drop rows. What encoding should the high-cardinality merchant get, does scaling
+> matter here, and how do I build lag features that stay leakage-safe?"
 
 Expected: skill loads; recommends target/frequency encoding (out-of-fold) for the high-cardinality
 merchant; log-transform for skewed amounts and scaling only if the model needs it; datetime + strictly
@@ -24,3 +25,6 @@ A good response:
   be fit on training data only — not just a list of transforms.
 - **Safe:** never fits transforms on the full dataset, never target-encodes without out-of-fold/smoothing, and
   never builds rolling/lag features that include the current or future rows.
+- **Delivers the contract:** the output includes a feature dictionary (name, source, transform, fit-on),
+  a single fit-on-train-only pipeline, a per-feature knowable-at-prediction-time leakage audit, and the
+  keep/cut selection result with reasons.

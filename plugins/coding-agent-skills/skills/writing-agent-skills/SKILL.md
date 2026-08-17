@@ -73,11 +73,15 @@ Every skill uses these H2 sections, in this order (omit only `scripts` when none
 - Use forward slashes in every path.
 
 ### 5. Add the tailoring hook (privacy-safe)
-This library's skills are meant to fit the user's real environment (Oracle OTBI reports, their
-reconciliation process, chart of accounts, bank statement formats). In `## Tailor to your
-environment`, instruct the user to drop real details into `references/your-environment.md`.
-**Never commit raw real data.** Commit only sanitized, structural examples. Raw artifacts go in
-files matching `.gitignore` patterns (`*.private.md`, `references/*.local.*`).
+Skills in this library are domain-neutral by design, and fit the user's real environment through
+one file rather than through hard-coded domain content. Name the *kind* of artifact the skill
+attaches to, not one employer's version of it — a recurring report and its source system, a
+matter or case intake, an operational runbook, a service and its deploy path. In `## Tailor to
+your environment`, instruct the user to drop their specifics into
+`references/your-environment.md`, framed "wire in your current role here" so the skill survives
+a job change. **Never commit raw real data.** Commit only sanitized, structural examples. Raw
+artifacts go in files matching `.gitignore` patterns (`*.private.md`,
+`references/*.local.*`).
 
 ### 6. Write evals (do not put them in SKILL.md)
 Create `evals/<plugin>/<skill>.md` with at least three scenarios:
@@ -96,11 +100,32 @@ Fix every warning before committing.
 
 ## Why / learn
 Skills work by **progressive disclosure**: at startup Claude only sees each skill's `name` +
-`description` (~100 tokens each), and matches your request against the `description` alone to
-decide whether to load the body. So the description is a *discovery* tool, not documentation —
-that's why it must carry the trigger phrases and be third-person (it is injected into the system
-prompt). Once loaded, the body persists in context across the turn, so every line is a recurring
-cost: concise, well-ordered instructions beat exhaustive ones. The fixed "do + teach" order exists
+`description`, and matches your request against the `description` alone to decide whether to load
+the body. So the description is a *discovery* tool, not documentation — that's why it must carry
+the trigger phrases and be third-person (it is injected into the system prompt). Once loaded, the
+body persists in context across the turn, so every line is a recurring cost: concise,
+well-ordered instructions beat exhaustive ones.
+
+**Know what the listing actually costs, because it decides whether your skill is findable at
+all.** Measured in this library (2026-08-11): 121 skills' names + descriptions come to ~107,700
+characters ≈ **29,000 tokens ≈ 14.6% of a 200K context**, at a mean of ~870 chars (~235 tokens)
+per description — not the ~100 tokens per skill an earlier version of this section claimed. The
+`Triggers:` lists alone are 22% of that spend. This has two consequences worth designing around:
+
+- **The listing degrades before it errors.** Observed at roughly 100 installed skills: the
+  listing trims the least-used skills' descriptions to **name-only**. Nothing fails loudly —
+  `/plugin:skill` direct invocation keeps working, which is exactly the path an author testing
+  their own skill uses, so the degradation is invisible from the inside. A trimmed skill's
+  "Use when…" clause and every trigger phrase are simply absent from the router's context.
+- **Therefore the name must carry task signal.** Under name-only trimming, a skill named for a
+  metaphor or a persona is unroutable, while one named for its task survives. Evocative names are
+  legitimate — this library has several by design, invoked deliberately — but a skill whose *only*
+  intended path is automatic matching should be named for what it does.
+
+The practical lever is **skills per install, not characters per description**. Trimming a
+description from 1000 to 900 chars saves ~27 tokens; not installing a 15-skill plugin saves
+~3,900. Keep descriptions tight because a tight one routes better, not because trimming solves
+the budget. The fixed "do + teach" order exists
 so that each skill reliably both produces the deliverable and leaves you understanding it — the
 whole point of this library. Setting *degrees of freedom* to match fragility (loose prose vs. exact
 scripts) keeps Claude accurate on the steps that break easily while staying flexible where judgment

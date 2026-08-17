@@ -20,7 +20,8 @@ step inside its Analyze phase). If root-cause-analysis loads instead, tighten th
 A good response:
 - **Does the task:** produces a sharp problem statement, separates containment from root cause, runs a
   5 Whys chain to an actionable condition, uses the 6M fishbone to avoid anchoring, applies Pareto to
-  prioritize, and verifies the cause before countermeasuring.
+  prioritize, and verifies the cause before countermeasuring — the countermeasure carries an owner and
+  date, and containment is removed only after a recurrence check.
 - **Teaches:** explains *why* symptoms recur until the cause is removed and why the discipline is
   resisting the first plausible (often blame-based) answer.
 - **Safe:** doesn't ship containment as the cure, doesn't blame a person where a process let the error

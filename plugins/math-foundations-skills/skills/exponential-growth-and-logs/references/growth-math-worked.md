@@ -51,7 +51,8 @@ endpoints (five annual observations span four years).
 
 CAGR is a *smoothing* summary: it is the single constant rate that connects the two
 endpoints. It says nothing about the path between them — a series that went
-+40%, −12% has the same CAGR as one that went +10.2% twice.
++38%, −12% (1.38 × 0.88 = 1.2144) has the same CAGR as one that went +10.2% twice
+(1.10197² = 1.2143).
 
 ## 3. Doubling and halving time; rule-of-72 accuracy
 Exact doubling time at per-period rate r: **t = ln 2 / ln(1+r)** (ln 2 ≈ 0.6931).
@@ -91,7 +92,7 @@ Worked: 5,000 growing at 12% per year; when does it reach 20,000?
 - ln(4) = 1.38629; ln(1.12) = 0.11333.
 - t = 1.38629 / 0.11333 = **12.23 years**.
 - Consistency check: quadrupling is two doublings; doubling at 12% is
-  0.6931/0.11333 = 6.12 years; 2 × 6.12 = 12.23 ✓.
+  0.6931/0.11333 = 6.116 years; 2 × 6.116 = 12.23 ✓.
 - Endpoint check: 1.12^12.23 → 12.23 × 0.11333 = 1.3860 → e^1.386 ≈ 3.999 ≈ 4 ✓.
 
 **Dimensional check** (run it every time):

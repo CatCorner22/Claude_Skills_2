@@ -25,7 +25,7 @@ metadata:
   "code-only", "as skeptical CTO", "focus on clarity").
 - Not for: building a deliverable and auditing it before presenting → see
   `coding-agent-skills:script-wizard` (that skill critiques *my* work; this one critiques
-  *the user's*). A multi-agent deep code audit → `board-of-advisors-skills:board-review`.
+  *the user's*). A multi-agent deep code audit → `coding-agent-skills:board-review`.
   Processing a correction the user gives *me* → `metacognition-skills:reflective-learner`.
 
 ## Do it

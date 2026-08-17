@@ -31,7 +31,7 @@ description: >-
    are ambiguous, ask the user before launching anything; if you must proceed, state your
    assumptions explicitly. Do not expand scope beyond what was given without asking.
 2. **Launch the five specialists in parallel** — each is a read-only subagent shipped with
-   this plugin (namespaced `board-of-advisors-skills:<name>`):
+   this plugin (namespaced `coding-agent-skills:<name>`):
    - `performance-advisor` — speed, complexity, allocations, hot paths
    - `accuracy-correctness-advisor` — logic, precision, invariants, wrong results
    - `structure-architecture-advisor` — modularity, boundaries, ordering
@@ -42,7 +42,7 @@ description: >-
    (`references/finding-schema.md`). Launch them in one parallel batch — they are
    independent by design.
 3. **Wait for all five, then hand everything to the chair.** Invoke
-   `board-of-advisors-skills:board-chair` with the restated goals plus the complete,
+   `coding-agent-skills:board-chair` with the restated goals plus the complete,
    unedited findings from all five specialists. The chair deduplicates, prioritizes
    (accuracy-critical first, then goal-preserving speed wins, then structure, robustness,
    clarity), enforces a written Goal Preservation Check on every proposal, and produces the

@@ -3,6 +3,11 @@ name: skill-name-here
 description: >-
   <Third-person: what the skill does> — use when <the situations that should trigger it>.
   Triggers: <comma-separated phrases the user would actually type>.
+metadata:
+  version: "1.0.0"
+  # source: >-   # OPTIONAL — only when built from external research or a supplied spec.
+  #   <Which dossier or spec this came from, plus the provenance-mark legend if the
+  #   skill's claims carry marks such as [snippet-only].>
 ---
 
 # Human-readable skill title

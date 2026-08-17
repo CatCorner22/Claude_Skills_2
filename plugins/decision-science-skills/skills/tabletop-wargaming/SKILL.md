@@ -13,6 +13,8 @@ description: >-
   when rehearsing an incident-response, fraud, continuity, or cutover plan against an
   adaptive adversary. Triggers: tabletop exercise, wargame the plan, run a drill,
   incident simulation, inject, BCP exercise, commander's intent.
+metadata:
+  version: "1.1.1"
 ---
 
 # Tabletop wargaming (with commander's intent)
@@ -42,10 +44,10 @@ description: >-
 
 ## Do it
 1. **Define objectives and scenario.** What must the exercise reveal (decision gaps, call
-   trees, authority limits, detection lag)? Pick a scenario that matters: the treasury
-   golds are a BEC payment-fraud attempt, a bank-connectivity outage on payroll day, and
-   ransomware during month-end close — see `references/exercise-design.md` for the
-   library. Ground the scenario in the real process documents, not generic templates.
+   trees, authority limits, detection lag)? Pick a scenario that matters: three
+   high-yield starters are a BEC payment-fraud attempt, a bank-connectivity outage on
+   payroll day, and ransomware during month-end close — see `references/exercise-design.md`
+   for the library. Ground the scenario in the real process documents, not generic templates.
 2. **Write the blue team's commander's intent** — purpose, key tasks, end state — so
    players can act without further orders when the plan breaks. Apply the test: could
    someone achieve the intent while violating the plan's specifics? If not, it is a task
@@ -82,8 +84,8 @@ course-of-action analysis added the action/reaction/counteraction turn — plans
 enemy who gets a move, so testing a plan without an adversary's move tests only its
 penmanship. CISA-style packages [snippet-only: Army doctrine and CISA exercise packages
 are the provenance here — practitioner doctrine, not controlled trials] made the format
-portable: scenario, injects, facilitator, debrief. Commander's intent is the load-bearing
-piece for treasury and operations teams because real incidents break the plan first —
+portable: scenario, injects, facilitator, debrief. Commander's intent is load-bearing
+for any operating team because real incidents break the plan first —
 purpose, key tasks, and end state are what let the person at the desk act correctly at
 2 a.m. without calling anyone. The safety discipline earns its prominence from documented
 LLM behavior: models given adversary or adjudicator seats have shown abrupt escalation in
@@ -116,7 +118,7 @@ accounts, banks, people, or live controls goes in `your-environment.private.md`
 (git-ignored) — an exercise file that leaks real payment controls is itself an incident.
 
 ## References
-- references/exercise-design.md — scenario library (incl. the three treasury golds),
+- references/exercise-design.md — scenario library (incl. three high-yield starters),
   inject templates, adjudication rules, escalation-safety discipline
 - references/commanders-intent.md — purpose / key tasks / end state format, the
   violate-the-plan test, and the briefing-an-agent application

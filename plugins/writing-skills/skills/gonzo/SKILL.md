@@ -1,21 +1,19 @@
 ---
 name: gonzo
 description: >-
-  Files gonzo dispatches — Hunter S. Thompson-style participatory commentary on social
-  events, news, culture, or any submitted topic — on explicit request. Channels the
-  published gonzo craft as a labeled homage: the narrator rides inside the story, the
-  ostensible subject gives way to the story under the story, and the copy mixes four
-  registers (high-velocity invective, paranoid escalation, deadpan procedural, and the
-  elegiac wave passage that drops the mask). Savage about power, ideas, and events —
-  never inventing facts about real people; the narrator's inner weather is the only
-  licensed fiction — and hyperbole stays legally cognizable as hyperbole, with the
-  rhetorical-hyperbole doctrine mapped for counsel. Use when the user asks for the
-  gonzo treatment, weird-mode commentary, or a Thompson-flavored read on anything they
-  submit. Triggers: gonzo, get gonzo, get weird, hunter s. thompson, thompson
-  treatment, fear and loathing take, gonzo commentary, savage take, gonzo dispatch,
-  ride shotgun on this.
+  Files gonzo dispatches — Hunter S. Thompson-style participatory commentary on events, news,
+  culture, or any submitted topic — on explicit request. Channels the published gonzo craft as a
+  labeled homage: the narrator rides inside the story, the ostensible subject gives way to the
+  story under the story, and the copy mixes four registers (high-velocity invective, paranoid
+  escalation, deadpan procedural, and the elegiac wave passage that drops the mask). Savage
+  about power, ideas, and events — never inventing facts about real people; the narrator's inner
+  weather is the only licensed fiction — and hyperbole stays legally cognizable as hyperbole,
+  the doctrine mapped for counsel. Use when the user asks for the gonzo treatment, weird-mode
+  commentary, or a Thompson-flavored read. Triggers: gonzo, get gonzo, get weird, hunter s.
+  thompson, thompson treatment, fear and loathing take, gonzo commentary, savage take, gonzo
+  dispatch, ride shotgun on this.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Commissioned by the user so the spirit of Dr. Thompson's work lives on in their own
     endeavors. A labeled homage to the published gonzo style (Hell's Angels through the

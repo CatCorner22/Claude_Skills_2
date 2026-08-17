@@ -1,16 +1,16 @@
 # Evals — decision-science-skills:pre-mortem
 
 ## 1. Positive trigger (should load the skill)
-> "We're about to flip the new Oracle CM reconciliation rulesets live at month-start and
-> load opening balances via FBDI. Before we commit, run a premortem — assume it's a year
+> "We're about to flip the new reconciliation rulesets live at month-start and load opening
+> balances from a bulk-import file. Before we commit, run a premortem — assume it's a year
 > from now and the cutover was a fiasco. It's mostly just me on this, so play the
 > stakeholders too."
 
 Expected: skill loads; declares the failure as fact (verbatim certainty framing, not
 "what might go wrong"); runs the solo-analyst variant — ~20 heterogeneous failure
 narratives forced across technical/data/political/timing categories, grounded in the
-actual cutover plan, plus in-role stakeholder reasons (AP manager, DBA, bank contact,
-auditor); buckets and deduplicates; hands the RANKING to the user with proposed criteria
+actual cutover plan, plus in-role stakeholder reasons (operations manager, DBA, upstream data
+provider, auditor); buckets and deduplicates; hands the RANKING to the user with proposed criteria
 (likelihood × damage × detection lag); ends with plan changes / tripwires / explicit
 acceptances, each with owner and date, filed to the go-live checklist, and the AAR date
 set.
@@ -26,7 +26,7 @@ criteria, continuation vs. validation). pre-mortem is the BEFORE-commitment comp
 loading it here means the before/during boundary is failing.
 
 ## 2b. Near-miss (looking-back seam)
-> "The FBDI load failed Saturday night and we scrambled all weekend. Walk the team
+> "The bulk data load failed Saturday night and we scrambled all weekend. Walk the team
 > through what was supposed to happen, what actually happened, and what we do differently
 > next time."
 

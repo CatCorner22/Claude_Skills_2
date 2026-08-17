@@ -3,8 +3,7 @@ name: reproducible-analysis
 description: >-
   Makes an analysis produce the same numbers twice, rerun by anyone — a discipline
   spanning spreadsheets, notebooks, SQL, and scripts. Defines reproducible (same data
-  + code) vs replicable (new data or implementation) — the ACM used the terms
-  backwards for seven years — then climbs the practice ladder: pin environments and
+  + code) vs replicable (new data or implementation), then climbs the practice ladder: pin environments and
   record random seeds, make the rerun one command, keep lineage one-directional
   (raw → cleaned → derived, raw never edited), write literate
   analysis with code and narrative together, apply FAIR principles at working level,
@@ -15,7 +14,7 @@ description: >-
   rerun this, rerun the analysis, replication crisis, reproducibility crisis, random
   seed, data lineage, data provenance, literate programming, FAIR data.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §8 reproducible-analysis).

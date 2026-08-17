@@ -1,11 +1,11 @@
 # Evals — coding-agent-skills:script-wizard
 
 ## 1. Positive trigger (should load the skill)
-> "Write me a script that pulls yesterday's OTBI export and flags anything unusual before
-> I send the daily cash email. Nothing fancy."
+> "Write me a script that pulls yesterday's transaction export and flags anything unusual
+> before I send the daily summary email. Nothing fancy."
 
 Expected: skill loads; despite the casual phrasing it frames briefly (objective = a trusted
-daily exception flag feeding a report; consequence = financial reporting → full-ish
+daily exception flag feeding a report; consequence = numbers leadership acts on → full-ish
 treatment), diagnoses data assumptions (export format, empty-file day, encoding,
 leading-zero references), designs before building, builds with fail-loud validation, runs
 the audit checklist, and presents answer-first with assumptions, risks, and what was/wasn't

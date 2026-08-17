@@ -18,11 +18,11 @@ path — framing the SOP as a living baseline for improvement.
 > owners and business-day offsets."
 
 Expected: this is sequencing a whole multi-task close calendar — a scheduling task, not
-documenting one repeatable task's method — so standard-work should NOT load (the close
-calendar build was owned by the archived `accounting-skills:month-end-close`; if the ask were
-which close task gates the calendar, `continuous-improvement-skills:theory-of-constraints`
-is the neighbor). If standard-work loads instead, tighten the cross-links. (Standardizing
-one close task's method, though, is a legitimate standard-work use.)
+documenting one repeatable task's method — so standard-work should NOT load, and no active
+skill in this library owns whole-calendar sequencing (if the ask were which close task gates
+the calendar, `continuous-improvement-skills:theory-of-constraints` is the neighbor). If
+standard-work loads instead, tighten the cross-links. (Standardizing one close task's method,
+though, is a legitimate standard-work use.)
 
 ## 2b. Near-miss (checklist guard)
 > "Our deployment SOP is fine — people just skip the two steps that matter when they're

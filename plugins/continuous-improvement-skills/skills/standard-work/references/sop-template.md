@@ -77,7 +77,7 @@ developer's release notes. **All times are illustrative.**
 - **Trigger:** Friday 09:00 · **Ends when:** snapshot sent to the distribution list and
   filed in the archive folder.
 - **Volume context:** 1 per week; must be out before the 13:00 review meeting, so the
-  ~75-minute cycle has a hard window.
+  ~65-minute cycle (sum of the CT column below) has a hard window.
 - **Standard inputs:** source-system export access; last week's snapshot; the open-items
   list; the distribution list (owned, versioned — not retyped from memory).
 
@@ -149,8 +149,10 @@ The goal: the correct state is obvious, and a deviation is visible at a glance, 
   approximated by volume — say which you're writing, so precision claims stay honest.
 - **TWI's J-programs** (Job Instruction, Job Methods, Job Relations) were developed for US
   wartime industry and later introduced to Japan during the postwar rebuilding, where they
-  fed into what became famous as lean training practice. The steps/key-points/reasons format
-  is Job Instruction's breakdown sheet, essentially unchanged.
+  fed into what became famous as lean training practice. The wartime Job Instruction
+  breakdown sheet carried **two** columns — important steps and key points; the reasons
+  column is a later addition (commonly credited to University of Chicago work, ~1967-68),
+  and it is the part that does the most work.
 - **"Without a standard there can be no improvement"** is widely attributed to Taiichi Ohno,
   but a primary source is elusive. Use the logic (a standard is the baseline that makes
   improvement measurable), not the attribution.

@@ -29,7 +29,7 @@ missing barrier to an existing bowtie afterward is a legitimate follow-on.)
 
 Expected: scoring failure modes of a process design is the FMEA discipline →
 `continuous-improvement-skills:fmea` (cross-linked by name from this skill). Also guard the
-adversarial-review variant: "poke holes in our treasury transformation plan" is
+adversarial-review variant: "poke holes in our platform transformation plan" is
 `continuous-improvement-skills:project-command-center`, not a bowtie.
 
 ## 3. Quality rubric

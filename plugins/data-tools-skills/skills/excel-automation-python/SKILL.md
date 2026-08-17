@@ -13,7 +13,7 @@ description: >-
   excel python, pandas to_excel, format excel with python, excel report script, xlsxwriter,
   automate spreadsheet, excel formulas python, excel template python, ExcelWriter.
 metadata:
-  version: "1.1.0"
+  version: "1.2.1"
 ---
 
 # Excel automation with Python
@@ -43,7 +43,10 @@ metadata:
    (`pd.to_numeric(..., errors="coerce")` and count the coerced), dates as serials or strings,
    multiple sheets (`sheet_name=None` returns a dict). Type identifiers as strings
    (`dtype={"account_id": str}`) — a float round-trip strips leading zeros and corrupts join
-   keys, a known data-integrity hazard class. Print `df.dtypes` and `df.head()` before trusting
+   keys, a known data-integrity hazard class. For .xlsx, if the cell holds the *number* 4217
+   under a `000000` display format, the zeros are already gone and `dtype=str` returns
+   `"4217"`; the repair is at the export (emit text) or a zero-pad to the width the spec
+   documents, never a width inferred from the data. Print `df.dtypes` and `df.head()` before trusting
    anything. The same discipline governs flat files — see
    `data-tools-skills:csv-and-flat-file-wrangling` when the source is CSV, not .xlsx.
 3. **Write the data with pandas, then format with openpyxl:**

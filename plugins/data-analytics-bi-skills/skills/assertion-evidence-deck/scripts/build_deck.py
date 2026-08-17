@@ -2,7 +2,7 @@
 """Build a compliant assertion-evidence .pptx from a JSON deck spec.
 
 Usage:
-  python build_deck.py deck_spec.json -o output.pptx [--brand ut|neutral] [--font NAME]
+  python build_deck.py deck_spec.json -o output.pptx [--brand neutral|ut] [--font NAME]
   python build_deck.py --schema         # print the spec format and the eight slide kinds
 
 The builder encodes the geometry, typography, and colors verified in
@@ -353,7 +353,7 @@ def print_schema():
     print(json.dumps({
         "title": "string (used only if a title slide is present)",
         "font": "Calibri (optional; --font overrides)",
-        "brand": "ut | neutral (optional; --brand overrides)",
+        "brand": "neutral | ut (optional; --brand overrides)",
         "slides": ["{kind: <one of below>, headline: ..., ...}"],
     }, indent=2))
     print("\nSlide kinds:\n")
@@ -366,7 +366,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Build an assertion-evidence .pptx from a JSON spec.")
     ap.add_argument("spec", nargs="?", help="deck spec JSON file")
     ap.add_argument("-o", "--out", help="output .pptx path")
-    ap.add_argument("--brand", choices=list(PALETTES), default="ut")
+    ap.add_argument("--brand", choices=list(PALETTES), default="neutral")
     ap.add_argument("--font", default=None, help="override the typeface (default Calibri)")
     ap.add_argument("--schema", action="store_true", help="print the spec format and exit")
     args = ap.parse_args(argv)

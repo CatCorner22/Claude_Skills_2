@@ -9,18 +9,19 @@ window function (`SUM(...) OVER (PARTITION BY customer ORDER BY month)`) for the
 `RANK/DENSE_RANK` for the ranking; notes the join/fan-out and date-range cautions.
 
 ## 2. Near-miss (should NOT load this skill)
-> "In Oracle Fusion, which subject area should I use to report on cash management transactions in
-> OTBI?"
+> "In our reporting tool, which prebuilt subject area should I pick to report on payment
+> transactions?"
 
-Expected: this is subject-area selection for OTBI, not hand-written SQL — tool-specific guidance
+Expected: this is subject-area selection inside a BI product, not hand-written SQL — tool-specific guidance
 that no active skill in this library owns, so nothing should load as primary. If this SQL skill
 loads, tighten the description / cross-links.
 
 ## 3. Quality rubric
 A good response:
 - **Does the task:** produces a correct query at the stated grain, uses `GROUP BY` vs. window
-  functions appropriately, places filters in the right clause (`WHERE`/`HAVING`/`QUALIFY`), and
-  handles dates as half-open ranges.
+  functions appropriately, places filters in the right clause (`WHERE`/`HAVING`/`QUALIFY`),
+  handles dates as half-open ranges, and delivers it as a package — grain comment on top, stated
+  validation evidence, and caveats.
 - **Teaches:** explains *why* grain drives correctness (fan-out/double-counting), the logical query
   order, and what sargability means for speed — not just the syntax.
 - **Safe:** validates row counts / a known total, flags dialect differences (e.g. `QUALIFY`

@@ -4,10 +4,15 @@ description: >-
   Runs real SQL directly over local CSV, Parquet, and Excel files with DuckDB — no database
   server — for joins across files, aggregations on data too big for Excel, and repeatable
   analysis scripts, from the CLI or Python, persisting results back to files or a .duckdb
-  database. Use when joining or aggregating local files with SQL, when a dataset chokes
+  database. Delivers a rerunnable script (paths in, result file out) sanity-checked with row
+  counts, control totals, and unmatched-join counts. Use when joining or aggregating local
+  files with SQL, when a dataset chokes
   Excel/pandas memory, or when replacing a fragile chain of spreadsheet lookups with one query.
   Triggers: duckdb, query csv with sql, join csv files, sql on parquet, local sql, read_csv_auto,
-  analyze large csv, sql without a database, parquet analytics, out of memory pandas.
+  analyze large csv, sql without a database, parquet analytics, out of memory pandas,
+  too big for Excel.
+metadata:
+  version: "1.1.0"
 ---
 
 # DuckDB local analytics
@@ -68,7 +73,8 @@ SELECT count(*) FILTER (WHERE ledger_amt IS NULL) AS stmt_only,
    `references/duckdb-recipes.md` covers window-function recipes, larger-than-memory settings,
    and pandas interop.
 7. **Sanity-check like always:** row counts per source, control totals, and the unmatched counts
-   from any join — SQL makes wrong answers fast, too.
+   from any join — SQL makes wrong answers fast, too. The assistant writes the SQL and the script;
+   the human supplies the control totals and adjudicates any reconciliation breaks.
 
 ## Why / learn
 DuckDB fills the gap between "too big for a spreadsheet" and "not worth a database server": an

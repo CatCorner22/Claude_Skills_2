@@ -2,7 +2,7 @@
 name: systems-thinking
 description: >-
   Maps the feedback structure behind a recurring mess: identifies the stocks (accumulations) and
-  flows (rates) in the user's description, drafts the causal-loop diagram from their prose —
+  flows (rates), drafts the causal-loop diagram from the user's prose —
   nodes, signed links, loop polarity, rendered as Mermaid for the human to correct — classifies
   loops as reinforcing or balancing, finds the delays that produce oscillation and overshoot,
   checks the classic archetypes (fixes-that-fail, shifting-the-burden, limits-to-growth,
@@ -12,6 +12,8 @@ description: >-
   against an unseen limit, or two sides keep escalating. Triggers: systems thinking, feedback
   loop, stock and flow, leverage point, unintended consequences, vicious cycle, virtuous cycle,
   second-order effects, the problem keeps coming back, policy resistance.
+metadata:
+  version: "1.1.0"
 ---
 
 # Systems thinking (the structure behind recurring problems)

@@ -2,9 +2,8 @@
 name: skin-in-the-game
 description: >-
   Designs consequence symmetry for decisions that transfer risk: maps who creates a
-  risk versus who eats the loss when the tail lands (Hammurabi §229–233, the oldest
-  written rule against transferring hidden tail risk — Taleb's Skin in the Game
-  framing), drafts a graduated symmetry table (harm class → who bears what), converts
+  risk versus who eats the loss when the tail lands (Hammurabi §229–233; Taleb's Skin in
+  the Game framing), drafts a graduated symmetry table (harm class → who bears what), converts
   diffuse "reviewed by team" approvals into named-owner attestations, puts real
   defect-liability and warranty terms into vendor and contractor agreements, then
   checks the new consequence for perverse incentives such as over-caution and
@@ -15,7 +14,7 @@ description: >-
   the loss, accountability without consequence, attestation, vendor won't stand
   behind it, hammurabi, consequence mapping.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the library's operational-wisdom research lane
     (docs/research/epic-wave-held-research.md, Lane 1 entry 5). The stele text of

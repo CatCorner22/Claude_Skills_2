@@ -1,19 +1,19 @@
 ---
 name: standard-work
 description: >-
-  Documents the current best-known method for a repeatable task as standard work (an SOP),
-  so the process is stable enough to improve — the Toyota trio of takt time, work sequence,
-  and standard in-process stock, plus the TWI Job Instruction breakdown of steps, key
-  points, and the reason behind each; adds visual management so deviations announce
-  themselves, verified training, and a review cadence that keeps the standard a living
-  baseline every kaizen updates. Fits any recurring task an analyst, attorney, ops manager,
-  or developer owns — a weekly report, an intake review, a handoff, a release. Use when
+  Documents the current best-known method for a repeatable task as standard work (an SOP), so
+  the process is stable enough to improve — the Toyota trio of takt time, work sequence, and
+  standard in-process stock, plus the TWI Job Instruction breakdown of steps, key points, and
+  the reason behind each; adds visual management so deviations announce themselves, verified
+  training, and a review cadence that keeps the standard a living baseline every kaizen updates.
+  Fits any recurring task — a weekly report, an intake review, a handoff, a release. Use when
   documenting, standardizing, or stabilizing a process that varies by who does it, capturing
-  tribal knowledge, or writing an SOP or work instruction people will follow. Triggers: standard work, standardized work, SOP, standard
-  operating procedure, work instruction, standardize, visual management, TWI, job
-  instruction, job breakdown, takt time, everyone does it differently, tribal knowledge.
+  tribal knowledge, or writing an SOP or work instruction people will follow. Triggers: standard
+  work, standardized work, SOP, standard operating procedure, work instruction, standardize a process,
+  visual management, TWI, job instruction, job breakdown, takt time, everyone does it
+  differently, tribal knowledge.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Standard work
@@ -21,8 +21,8 @@ metadata:
 Standard work is the current best-known way to do a repeatable task, written down so anyone
 trained to it gets the same result. The lineage runs through Toyota's standardized work
 (takt, sequence, standard in-process stock) and the WWII-era Training Within Industry (TWI)
-programs whose Job Instruction breakdown — steps, key points, reasons — is still the most
-teachable SOP format there is.
+programs whose Job Instruction breakdown — steps and key points, with the reasons column
+added as the format matured — is still the most teachable SOP format there is.
 
 ## When to use
 - Documenting the current best-known way to do a repeatable task (a weekly report, an
@@ -41,6 +41,10 @@ teachable SOP format there is.
 - Not for: boiling an existing SOP down to the few steps people actually skip → see
   `safety-and-reliability-skills:checklist-design` (a checklist rides on top of standard
   work; it doesn't replace it).
+- Not for: standardizing *data* instead of work — this skill standardizes how a task is
+  performed, not the values in a table. Normalizing messy category values, formats, and types
+  in a dataset → see `data-analytics-bi-skills:data-cleaning`; z-score standardizing or
+  scaling model features → see `machine-learning-skills:feature-engineering`.
 
 ## Do it
 `references/sop-template.md` has the fillable template, a worked example, and the TWI
@@ -91,9 +95,9 @@ is the current best-known method, held only until someone finds better. This is 
 the **reason** behind each key point matters more than the step list — reasons let people
 adapt correctly and spot when a step no longer serves its purpose, whereas a reasonless step
 gets dropped or cargo-culted. That insight is TWI's: Job Instruction's breakdown sheets
-(important steps / key points / reasons) came out of wartime US industry training, were
-carried to Japan during the postwar rebuilding, and were absorbed into Toyota's training
-practice — the SOP format outlived the war by earning it. A terminology note worth knowing:
+(the reasons column a later addition to the original two) came out of wartime US industry
+training, were carried to Japan during the postwar rebuilding, and were absorbed into
+Toyota's training practice — the SOP format outlived the war by earning it. A terminology note worth knowing:
 in Toyota usage, "standardized work" means specifically the takt/sequence/standard-WIP trio
 for cyclical work; office SOPs borrow the spirit and the breakdown format even where takt is
 approximated by volume. Visual management makes the standard *self-policing*: when the

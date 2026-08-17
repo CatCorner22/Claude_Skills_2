@@ -125,8 +125,9 @@ tickets, legal intake, invoice approvals, access requests. **All values are illu
 Goal: one clean table, one row per request, from two systems' exports.
 
 **Profile first** (`data-analytics-bi-skills:exploratory-data-analysis`): System A exports
-12,400 rows, one per request, with `req_id` unique; System B exports 9,800 rows but `req_id`
-duplicates — its grain turns out to be one row per *status change*. Column `opened` is text
+12,400 rows, one per request, with `req_id` unique; System B exports 9,800 rows covering
+8,150 distinct requests — `req_id` duplicates because its grain turns out to be one row per
+*status change*. Column `opened` is text
 in A (`03/07/2025`) and a real date in B; `priority` holds `H, High, high, P1`; `owner` is
 blank in 14% of A's rows.
 
@@ -148,11 +149,12 @@ blank in 14% of A's rows.
    `resolution_code` column via a join instead of a second row.
 6. **Join hygiene.** Joining requests to the owner roster: roster has one row per owner per
    *fiscal year* — a 1:many trap. Rosters are filtered to the current year first (making it
-   1:1), verified by row counts before/after: 22,000 in, 22,000 out.
-7. **Validate.** Final: 21,990 rows (12,400 + 9,800 − 210 dupes), `req_id` unique, sum of
-   A's amounts ties to A's own export footer total, `UNMAPPED` empty, imputation flags
-   present. The script re-runs top to bottom on next month's exports; both raw files sit
-   untouched in `raw/`.
+   1:1), verified by row counts before/after: 20,340 in, 20,340 out.
+7. **Validate.** Final: 20,340 rows — 12,400 from A + 8,150 distinct requests from B − 210
+   in both = 20,340; the reconciliation uses B's collapsed request count, never its 9,800
+   raw status-change rows. Also verified: `req_id` unique, sum of A's amounts ties to A's
+   own export footer total, `UNMAPPED` empty, imputation flags present. The script re-runs
+   top to bottom on next month's exports; both raw files sit untouched in `raw/`.
 
 The two decisions that changed downstream numbers — collapsing B's grain and the `owner`
 imputation policy — are exactly the ones the memo records, because a reader who disagrees

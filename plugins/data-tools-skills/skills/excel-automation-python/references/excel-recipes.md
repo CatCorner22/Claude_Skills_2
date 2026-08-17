@@ -154,6 +154,11 @@ wb.save(f"output/report_{period_label}.xlsx")   # dated name; NEVER over the tem
 ## Performance
 - Writing: the `xlsxwriter` engine is faster for large write-only files
   (`pd.ExcelWriter(f, engine="xlsxwriter")`); openpyxl's `write_only=True` mode streams rows.
+- The engine swap changes the styling API, not just the speed: under `engine="xlsxwriter"`,
+  openpyxl-style `ws.columns` and `ws.column_dimensions` raise `AttributeError`, and
+  `ws.freeze_panes = "A2"` **fails silently** (it overwrites a bound method). The xlsxwriter
+  equivalents: `ws.set_column("A:C", 18)` for widths, `wb.add_format({...})` for styles,
+  and `ws.freeze_panes(1, 0)` — a method call, not an assignment.
 - Reading: `read_only=True` for huge files; read only needed columns with `usecols`.
 - Don't style per-cell in a loop over 100k cells; apply formats per column or via the template.
 - If you're aggregating millions of rows just to write a small summary sheet, do the
@@ -168,7 +173,8 @@ out = pd.read_excel("output/report_2026-07.xlsx", sheet_name="Detail",
                     dtype={"item_id": str})
 assert len(out) == len(detail), f"row count {len(out)} != source {len(detail)}"
 assert abs(out["amount"].sum() - detail["amount"].sum()) < 0.005, "total drifted"
-assert out["item_id"].str.len().nunique() == 1 or True  # spot-check IDs kept their zeros
+assert out["item_id"].tolist() == detail["item_id"].astype(str).tolist(), \
+    "IDs changed on the round-trip (leading zeros lost or type coerced)"
 print("verified: rows", len(out), "total", round(out['amount'].sum(), 2))
 ```
 

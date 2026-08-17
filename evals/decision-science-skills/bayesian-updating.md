@@ -7,14 +7,36 @@
 
 Expected: loads the skill; frames the question with its decision and resolution date;
 writes the 30% prior explicitly (and as 3:7 odds), asking where it came from — offering
-the reference-class handoff if it is unanchored; asks the likelihood question BOTH ways
-(how expected is a missed interim milestone if the vendor will miss Q3, and if they
-won't?); produces the update via a count table or the odds shortcut; grades the evidence
-in Bayes-factor vocabulary (a minor milestone miss is likely a "barely worth mentioning"
-to "positive" grade, not decisive); starts an update journal entry (date, evidence, LR
+the reference-class handoff if it is unanchored; notes that "misses the Q3 date / doesn't"
+is genuinely exhaustive so no catch-all is needed here (and would be needed if the
+hypotheses were two named stories instead of a claim and its complement); asks the
+likelihood question BOTH ways (how expected is a missed interim milestone if the vendor
+will miss Q3, and if they won't?); produces the update via a count table or the odds
+shortcut; grades the evidence in Bayes-factor vocabulary (a minor milestone miss is likely
+a "barely worth mentioning" to "positive" grade, not decisive) using the bands correctly —
+1–3 barely worth mentioning, 3–20 positive, 20–150 strong, above 150 very strong, with the
+numbers read as boundaries; starts an update journal entry (date, evidence, LR
 judgment, prior → posterior, what would move it next in both directions, resolution
 date); names the threshold at which accumulated updates should fire
 `decision-science-skills:the-challenger`.
+
+## 1b. Positive trigger (chained evidence — hypothesis set and LR-error compounding)
+> "Four separate things now point to the vendor slipping: the milestone miss, a slower
+> reply time, a LinkedIn post about layoffs, and a rumour from their integration partner.
+> I'd call each of them maybe 3-to-1 evidence. Multiply them out and tell me where that
+> leaves my 30%."
+
+Expected: skill loads; **checks independence before multiplying** — the layoffs post and
+the partner rumour may be echoes of one underlying fact, in which case they count once, at
+the strength of the better one; if the chain is run, computes it correctly and shows the
+arithmetic; then **prices its own error rather than quoting the product**: four judged LRs
+of 3 give odds ×81, but a uniform 2× over-read per signal (true LR 1.5 each) gives ×5.06 —
+a 16× error in the odds, moving the posterior from roughly 62% to roughly 9% off the same
+1:49-style prior — so errors in eyeballed LRs compound multiplicatively and, because one
+analyst's optimism colours every judgment, do not cancel; runs the halve-and-double
+sensitivity pass and reports the band rather than a two-digit posterior when the decision
+flips inside it; sanity-checks the aggregate out loud ("am I willing to say the whole file
+is 81-to-1?"); and grades in bands rather than decimals.
 
 ## 2. Near-miss (probability-mechanics guard)
 > "A screening test is 95% accurate and the condition affects 1 in 500 people. If someone
@@ -41,11 +63,21 @@ pure establish-the-base-rate ask, tighten the boundary.
   (reference-class handoff offered), written as probability and odds; likelihood question
   asked in both directions per evidence item; update computed by count table or odds
   shortcut with the arithmetic checkable (rows sum); evidence graded in Bayes-factor
-  vocabulary; journal entry produced with the both-directions column; independence
-  checked before chaining LRs; scoring at resolution and the challenger-trigger threshold
-  named.
+  vocabulary with the bands read as boundaries (3 / 20 / 150 are the doors, so an LR of 20
+  is the entry to *strong*, not the middle of *positive*); journal entry produced with the
+  both-directions column; the hypothesis list checked for exhaustiveness and a catch-all
+  carried with a non-zero prior when it is not; independence checked before chaining LRs,
+  *and* the chain's own error priced (halve-and-double, conservative rounding toward 1,
+  aggregate sanity check) rather than a product quoted to two digits; scoring at resolution
+  and the challenger-trigger threshold named.
 - **Teaches**: evidence moves belief only through the likelihood ratio (equally-expected
-  evidence moves nothing); why counts beat formulas, with the Gigerenzer result held
+  evidence moves nothing); that Bayes normalizes over the hypotheses *supplied*, so a
+  non-exhaustive list yields a confident posterior about an incomplete world — and that a
+  small marginal likelihood of the evidence (Σ P(E|Hᵢ)·P(Hᵢ)) is the checkable tell that the
+  list needs widening, with enumeration handed off to
+  `decision-science-skills:competing-hypotheses-analysis`; that independence licenses
+  multiplication but does not make the multiplied judgments accurate, so chained LR errors
+  compound instead of averaging; why counts beat formulas, with the Gigerenzer result held
   honestly (roughly triples correct reasoning, majority still failed — helps, doesn't
   fix); the cab-problem lesson that vivid evidence does not erase the prior, with its
   assumptions caveat; the Tetlock small-frequent-updates discipline and perpetual beta;

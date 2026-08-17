@@ -3,10 +3,14 @@ name: python-for-analysts
 description: >-
   Writes clean, reproducible Python for data work and automation — virtual environments and
   pinned dependencies, script vs notebook structure, pandas essentials (load, select, filter,
-  groupby, merge, write), small functions, and basic error handling and logging. Use when
-  scripting an analysis, automating a repetitive task, cleaning up messy analysis code, or
-  setting up a Python project so it runs the same way twice. Triggers: python, pandas, script,
-  automate, virtualenv, notebook, dataframe, read csv, python for analysis.
+  groupby, merge, write), small functions, and basic error handling and logging.
+  Production-grade engineering — typed APIs, packaging, toolchain migration — routes to
+  full-stack-dev-skills:elite-python-engineer. Use when scripting an analysis, automating a
+  repetitive task, cleaning up messy analysis code, or setting up a Python project so it runs
+  the same way twice. Triggers: python, pandas, script, automate, virtualenv, notebook,
+  dataframe, read csv, python for analysis.
+metadata:
+  version: "1.1.0"
 ---
 
 # Python for analysts

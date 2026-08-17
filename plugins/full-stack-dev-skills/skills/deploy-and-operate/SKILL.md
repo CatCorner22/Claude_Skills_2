@@ -9,7 +9,7 @@ description: >-
   adding health checks or logging, or designing the deploy/rollback flow. Triggers:
   dockerfile, deploy the app, CI/CD pipeline, github actions deploy, environment variables
   prod, secrets management app, health check endpoint, structured logging, rollback deploy,
-  container image size, run migrations on deploy, observability basics.
+  container image size, run migrations on deploy, observability basics, containerize.
 ---
 
 # Deploy and operate

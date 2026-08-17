@@ -1,18 +1,19 @@
 ---
 name: units-and-dimensional-analysis
 description: >-
-  Converts quantities across units with the factor-label method — conversion factors
-  written as fractions so units cancel visibly — chains multi-step conversions (time,
-  volume, currency as a unit, per-unit rates), annualizes and de-annualizes (×12 for
-  flows; compound-growth rates route to the sibling exponential-growth skill), and
-  dimension-checks any formula before trusting it: write the units of every term, and
-  if the two sides disagree the formula is wrong no matter how plausible its numbers
-  look. Treats per-unit rates (cost per unit, items per hour) as first-class quantities
-  that multiply and divide, and catches the classic traps — per-month vs per-year
-  mixups, thousands vs millions scale errors, percent as a dimensionless unit. Use when converting units, checking whether a formula's units
+  Converts quantities across units with the factor-label method — conversion factors written as
+  fractions so units cancel visibly — chains multi-step conversions (time, volume, currency as a
+  unit), treats per-unit rates (cost per unit, items per hour) as first-class quantities that
+  multiply and divide, annualizes and de-annualizes (×12 for flows; compound growth routes to
+  the exponential-growth sibling), and dimension-checks any formula: write the units of every
+  term, and if the two sides disagree the formula is wrong however plausible its numbers look.
+  Catches the classic traps — per-month vs per-year mixups, thousands vs millions scale errors,
+  percent as a dimensionless unit. Use when converting units, checking whether a formula's units
   balance, or annualizing a monthly figure. Triggers: unit conversion, convert units,
-  dimensional analysis, units don't match, per unit, annualize, factor-label, cancel the
-  units, unit check, thousands vs millions.
+  dimensional analysis, units don't match, per unit, annualize, factor-label, cancel the units,
+  unit check, thousands vs millions.
+metadata:
+  version: "1.1.0"
 ---
 
 # Units and dimensional analysis

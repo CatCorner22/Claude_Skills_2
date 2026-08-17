@@ -74,7 +74,7 @@ moment they read the assertion.
 Enough numeracy to avoid the standard traps:
 
 - **Absolute vs. relative risk.** "Doubles the risk" is meaningless alone. If risk goes from 1 in
-  10,000 to 2 in 10,000, the relative risk is 100% and the absolute risk increase is 0.01%. **Always
+  10,000 to 2 in 10,000, the relative risk increase is 100% (RR = 2.0) and the absolute risk increase is 0.01%. **Always
   give both**, and give the base rate.
 - **Confidence intervals.** Width is the message: a 95% CI of 1.8–2.2 is a precise estimate; 1.01–14.5
   is barely distinguishable from noise. A CI for a ratio that **crosses 1.0** is not statistically

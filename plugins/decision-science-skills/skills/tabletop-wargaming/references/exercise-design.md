@@ -1,7 +1,7 @@
 # Exercise design (scenarios, injects, adjudication, escalation safety)
 
 ## Contents
-- Scenario library — the three treasury golds
+- Scenario library — three high-yield starters
 - Scenario library — additional patterns
 - Inject templates
 - Adaptive-inject rules
@@ -9,7 +9,7 @@
 - Escalation-safety discipline for LLM red/white play
 - Turn log template
 
-## Scenario library — the three treasury golds
+## Scenario library — three high-yield starters
 
 **1. BEC payment-fraud drill** (pairs with `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
 - Setup: a supplier "bank-change" email chain, followed by an urgent wire request that

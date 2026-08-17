@@ -46,10 +46,14 @@ Any organization that issues invoices has this problem; nothing below is industr
   prediction reorders that list at invoice issue. A false positive wastes one call slot; a
   false negative means a late invoice nobody called — roughly ten times worse by the team's
   own accounting of write-off exposure.
-- **Target:** will invoice *i* be paid more than 30 days past due — judged 45 days after
-  issue, so every label is final when read. Binary.
+- **Target:** will invoice *i* be paid more than 30 days past due. Terms are net-30, so the
+  due date is issue + 30 and "late" means paid after issue + 60; judged at issue + 75, with
+  a still-unpaid invoice counted late (at day 75 it is already 45 days past due) — so every
+  label is final when read. Binary.
 - **Task type:** binary classification.
-- **Grain:** one invoice.
+- **Grain:** one invoice, with an account-level roll-up for the decision: an account's daily
+  score is its riskiest open invoice, and the call list takes the top 40 *accounts*, one
+  slot each — otherwise one account with six open invoices could hold six of the forty slots.
 - **Prediction time:** the moment the invoice is issued.
 - **Features (each checked "knowable at issue?"):** customer's past on-time rate (billing
   system, available at issue — computed over *prior* invoices only), invoice amount (at
@@ -57,7 +61,8 @@ Any organization that issues invoices has this problem; nothing below is industr
   leakage:** payment reminders sent (recorded after issue), "disputed" flag (set after the
   outcome is in motion), customer's *current-quarter* average days-to-pay (window overlaps
   the label's own period).
-- **Evaluation metric:** precision in the top-40 daily ranking — the list is capacity-bound,
+- **Evaluation metric:** precision in the top-40 daily ranking, measured over accounts —
+  the list is capacity-bound,
   so quality of the *head* of the ranking is the decision-relevant quantity. PR AUC as the
   secondary, since late invoices are the minority class.
 - **Baseline:** "rank by: was this customer late last quarter, then by amount descending" —
@@ -117,7 +122,10 @@ judgment — and writing it down is the first deliverable of the project.
 - Do any aggregate features (customer averages, encodings) use windows that overlap the label's
   observation window? → recompute over strictly-prior data.
 - For time series/panels, will you split by time so the model never trains on the future? → require it.
-- Are aggregates computed over rows you won't have yet at prediction? → recompute per split
+- Are aggregates computed over rows you won't have yet at prediction? → rebuild them *as of*
+  the prediction timestamp, over strictly-prior rows only. Recomputing per split is a
+  different guard (it stops test rows leaking into training features) and does not fix this
+  one: inside the training fold, a row's own future is still in its aggregate
   (mechanics live in `machine-learning-skills:feature-engineering`).
 
 ## Is this even an ML problem? (fast filter)

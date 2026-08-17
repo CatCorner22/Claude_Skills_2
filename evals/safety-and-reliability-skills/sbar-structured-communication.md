@@ -15,17 +15,16 @@ the business-email-compromise pathway (cross-referencing
 `safety-and-reliability-skills:bowtie-barrier-analysis` where available).
 
 ## 2. Near-miss (should NOT load this skill)
-> "The BAI2 file handoff from the bank's SFTP to the Oracle interface failed again last night —
-> can you troubleshoot why the load keeps erroring out?"
+> "The nightly data-file handoff from the vendor's SFTP to our warehouse loader failed again
+> last night — can you troubleshoot why the load keeps erroring out?"
 
-Expected: a technical file-transfer/load failure — Oracle CM production-troubleshooting
-territory (its former owner is archived from this library), not person-to-person
-communication — so this skill should NOT load. Bare "handoff" appears in many technical contexts across this library and must
+Expected: a technical file-transfer/load failure — data-pipeline troubleshooting, not
+person-to-person communication — so this skill should NOT load. Bare "handoff" appears in many technical contexts across this library and must
 never trigger alone; if this skill loads here, its trigger surface has grown past the
 structured-communication vocabulary (SBAR, structured handoff, coverage notes, read-back).
 
 ## 2b. Near-miss (register-vs-protocol guard)
-> "Here's my draft email to the office manager about the schedule change at the dental practice —
+> "Here's my draft email to the office manager about next month's schedule change —
 > tighten it up and make it clearer and more professional."
 
 Expected: prose improvement is a writing-register task → `writing-skills:adams-smart-brevity`.
@@ -40,8 +39,8 @@ A good response:
   PACE — one moment, one protocol); every SBAR ends in a recommendation with a deadline; every
   handoff includes if-then contingencies and ends at the receiver's synthesis/read-back, not
   the sender's monologue; closed loops run three turns with critical values repeated verbatim;
-  PACE ladders are drafted for the specific relationship (analyst → approver, dental
-  assistant → dentist) and climbed in order.
+  PACE ladders are drafted for the specific relationship (analyst → approver, nurse →
+  attending) and climbed in order.
 - **Teaches:** explains the two failure modes the protocols attack — information loss at
   transitions and deference under authority gradients (the United 173 lesson) — and why
   structure, not heroism, is the countermeasure; cites the outcome evidence (I-PASS: errors

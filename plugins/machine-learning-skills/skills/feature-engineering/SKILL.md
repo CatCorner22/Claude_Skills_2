@@ -6,8 +6,10 @@ description: >-
   ordinal), scaling and normalization, datetime and lag/rolling features, aggregations and interactions,
   missing-value handling as information, fit-on-train-only pipelines, and basic feature selection. Use
   when improving model inputs or preparing features for a model. Triggers: feature engineering, features,
-  encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize, datetime
-  features, lag features, rolling features, feature selection, interactions, missing values.
+  encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
+  datetime features, lag features, rolling features, feature selection, interactions, impute features.
+metadata:
+  version: "1.2.0"
 ---
 
 # Feature engineering
@@ -43,6 +45,14 @@ description: >-
 7. **Select a smaller, robust feature set.** Remove near-constant, duplicate, and obviously leaky columns
    first; then use **regularization (lasso)**, **permutation importance**, or correlation pruning to cut the
    rest. Fewer well-chosen features generalize better and are far easier to monitor than a wide, noisy matrix.
+
+**Deliverable — the feature spec + pipeline.** The finished output contains: (1) a feature
+dictionary — each feature's name, source column(s), transform, and what the transform is fit on;
+(2) one fit-on-train-only pipeline (code, or the exact ordered steps) that produces the model
+matrix; (3) a leakage audit — one line per feature confirming it is knowable at prediction time
+from past, in-sample data; (4) the selection result: features kept, features cut, and why. The
+assistant drafts the features and pipeline; the human owns the domain meaning of each field and
+confirms what is truly knowable at prediction time.
 
 ## Why / learn
 Two truths sit under all of this. First, **good features often beat fancier algorithms**: a linear model on
