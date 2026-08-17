@@ -116,19 +116,21 @@ utilization lands anywhere between 55% and 75%.
 | Name | Value | Units | Source |
 |---|---|---|---|
 | `Headcount_Start` | 8 | people | org chart, as-of Jan |
-| `Hires_April` | 2 | people | proposal under test |
+| `Hires_New` | 2 | people | proposal under test |
+| `Hire_Month` | 4 | month index | proposal under test (April) |
 | `Salary_Annual` | 90,000 | $/person/yr | HR band midpoint |
 | `Overhead_Rate` | 30% | of salary | finance standard |
 | `Bill_Rate` | 120 | $/hr | current rate card |
-| `Util_Base` | 65% | of 160 hr/mo | trailing 6-mo actual |
+| `Hours_Per_Month` | 160 | hr/person/mo | org standard workable month |
+| `Util_Base` | 65% | % of `Hours_Per_Month` | trailing 6-mo actual |
 
 **Calculations sheet** — one row per line item, one column per month, every row filled
 across unchanged:
-- `Headcount`: Jan–Mar `=Headcount_Start`; Apr+ `=Headcount_Start+Hires_April` — via a
+- `Headcount`: Jan–Mar `=Headcount_Start`; Apr+ `=Headcount_Start+Hires_New` — via a
   start-month flag row (`=IF(month>=Hire_Month,1,0)`) so the formula is still identical
   across columns.
 - `Cost`: `=Headcount * Salary_Annual/12 * (1+Overhead_Rate)`.
-- `Billable_Hours`: `=Headcount * 160 * Util_Base`.
+- `Billable_Hours`: `=Headcount * Hours_Per_Month * Util_Base`.
 - `Revenue`: `=Billable_Hours * Bill_Rate`.
 - `Margin`: `=Revenue - Cost`.
 
@@ -137,19 +139,27 @@ across unchanged:
 - Sanity: `Util_Base` between 0 and 1; headcount integer and ≥ 0.
 - Reconciliation: Jan cost ties to the payroll actual for January (external anchor).
 
-The cross-foot check earns its keep immediately: a first draft typed April's headcount as
-`=Headcount_Start+2` (hardcoded 2). The row was no longer identical across columns —
-`FORMULATEXT` showed the odd cell — and when `Hires_April` was later changed to 3, the
-cross-foot flag went red because the annual roll-up disagreed with the months. Both defenses
-(consistency scan and control total) caught what a visual read of "clean-looking numbers"
-would not.
+One of these defenses earns its keep immediately — but be precise about which. A first
+draft typed April's headcount as `=Headcount_Start+2` (hardcoded 2), so when `Hires_New`
+was later changed to 3, every April-onward number was silently wrong. The **consistency
+scan** is what catches it: the row is no longer identical across columns, and `FORMULATEXT`
+shows the odd cell. The cross-foot cannot fire on this — Σ(monthly margins) ≡ annual
+revenue − annual cost is an algebraic identity that holds for *every* input set, hardcode
+included, so that flag stays green no matter what the rows contain; its job is catching
+broken aggregation (a roll-up range that dropped a month), not wrong logic. A model that is
+internally coherent but wrong is what the **external reconciliation** exists for — numbers
+that tie to nothing outside the model can agree with each other forever.
 
 **Outputs sheet.** Headline: annual margin under Base. Below it, a **two-way data table**:
-`Util_Base` 55–75% down the rows, `Hires_April` 0/1/2/3 across the columns, annual margin in
-the body. The answer to the actual question is read straight off the table: the hires stay
-margin-positive down to 58% utilization — utilization, not salary, is the input that
-deserves the scrutiny. A scenario toggle (Base/Upside/Downside) switches the full input set
-for the narrative cases.
+`Util_Base` 45–75% down the rows, `Hires_New` 0/1/2/3 across the columns, annual margin in
+the body. The answer to the actual question is read straight off the table: margin stays
+positive down to ~51% utilization — per-person breakeven is monthly cost ÷ monthly capacity
+revenue = (90,000/12 × 1.30) ÷ (160 × 120) = 9,750 / 19,200 = 50.8%, and because both sides
+scale with headcount it holds at any hire count. On leverage, run the numbers before naming
+the driver: a 15% salary move is ≈ $1,460/person/month (0.15 × 9,750) against ≈ $960 for a
+5-point utilization drop (0.05 × 160 × 120) — salary is the larger lever here, even though
+only utilization carries real month-to-month uncertainty. A scenario toggle
+(Base/Upside/Downside) switches the full input set for the narrative cases.
 
 ## Model review checklist
 Reviewing an inherited workbook, in order:

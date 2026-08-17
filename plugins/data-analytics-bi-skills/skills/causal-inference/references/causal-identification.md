@@ -64,7 +64,7 @@ in disguise. Structural example (attorney/ops/developer alike):
 - Now analyze *only escalated tickets* (a filter — i.e., conditioning on the collider): within
   that subset, a severe ticket needed no inexperienced handler to get escalated, and vice versa —
   so severity and handler inexperience become *negatively* associated.
-- Conclusion someone will draw from the filtered data: "our experienced people get the mild
+- Conclusion someone will draw from the filtered data: "our senior people get all the severe
   cases" — a pattern manufactured entirely by the selection.
 
 Same skeleton: studying only *hired* candidates makes skill and connections trade off; studying

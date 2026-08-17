@@ -21,8 +21,8 @@ metadata:
 Standard work is the current best-known way to do a repeatable task, written down so anyone
 trained to it gets the same result. The lineage runs through Toyota's standardized work
 (takt, sequence, standard in-process stock) and the WWII-era Training Within Industry (TWI)
-programs whose Job Instruction breakdown — steps, key points, reasons — is still the most
-teachable SOP format there is.
+programs whose Job Instruction breakdown — steps and key points, with the reasons column
+added as the format matured — is still the most teachable SOP format there is.
 
 ## When to use
 - Documenting the current best-known way to do a repeatable task (a weekly report, an
@@ -91,9 +91,9 @@ is the current best-known method, held only until someone finds better. This is 
 the **reason** behind each key point matters more than the step list — reasons let people
 adapt correctly and spot when a step no longer serves its purpose, whereas a reasonless step
 gets dropped or cargo-culted. That insight is TWI's: Job Instruction's breakdown sheets
-(important steps / key points / reasons) came out of wartime US industry training, were
-carried to Japan during the postwar rebuilding, and were absorbed into Toyota's training
-practice — the SOP format outlived the war by earning it. A terminology note worth knowing:
+(the reasons column a later addition to the original two) came out of wartime US industry
+training, were carried to Japan during the postwar rebuilding, and were absorbed into
+Toyota's training practice — the SOP format outlived the war by earning it. A terminology note worth knowing:
 in Toyota usage, "standardized work" means specifically the takt/sequence/standard-WIP trio
 for cyclical work; office SOPs borrow the spirit and the breakdown format even where takt is
 approximated by volume. Visual management makes the standard *self-policing*: when the

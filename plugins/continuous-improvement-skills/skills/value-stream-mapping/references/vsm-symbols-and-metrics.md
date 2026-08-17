@@ -61,9 +61,11 @@ Under each process step:
 ## The timeline ladder and flow-efficiency math
 
 Draw a two-level line beneath the map:
-- **Lower rungs = process (value-added) time** = Σ CT.
+- **Lower rungs = process time** = Σ CT — hands-on time, value-added *and* not.
 - **Upper rungs = lead time** = Σ CT + Σ all waits.
-- **Flow efficiency (process cycle efficiency, PCE) = value-added time ÷ lead time.**
+- **Activity ratio = process time ÷ lead time** — the number most office maps report and
+  the one the example computes. True **process cycle efficiency (PCE)** divides only the
+  value-added slice by lead time, so it is always lower.
 
 Little's Law connects the queues to the calendar: average WIP = arrival rate × average time
 in system, so at a fixed completion rate, lead time moves with the backlog. Cut WIP or
@@ -91,6 +93,8 @@ Ladder math (1 day = 480 working min):
 - **Lead time** = 125 min + (240 + 720 + 960 + 720 + 120) wait min = 125 + 2,760 =
   **2,885 min ≈ 6 working days**
 - **Flow efficiency** = 125 ÷ 2,885 ≈ **4.3%**
+- 125 min is process time, not value-added time — a customer pays for step 3, not for
+  assignment or a second sign-off, so PCE here sits well under the 4.3% activity ratio.
 
 Reading the map:
 - The item is worked ~2 hours and waits ~5.75 days. Nobody typing faster changes the
@@ -114,7 +118,7 @@ Examples chosen to travel across jobs — analyst, attorney, ops manager, develo
 - **Waiting** — the item idle in an approval queue, a review inbox, a nightly batch, a CI
   pipeline.
 - **Non-utilized talent** — an expert doing manual copy-paste a rule, template, or script
-  could do; the doers never asked how to fix the process.
+  could do; the doers are never asked how to fix the process.
 - **Transportation** — hand-offs between systems, teams, or spreadsheets; emailing files
   around; re-briefing at every transfer.
 - **Inventory** — a backlog of unprocessed items: open tickets, unreviewed drafts,

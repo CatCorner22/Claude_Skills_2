@@ -80,7 +80,7 @@ target; root-cause analysis earns the right to countermeasures; and because ever
 countermeasure traces back to a named cause, no one can smuggle in a pet solution that
 answers no cause on the page. That visible logic is what builds **consensus** — people align
 with a change when they can see the reasoning, not when they're handed a conclusion. The
-nemawashi rounds (literally "preparing the roots" before transplanting) are where objections
+nemawashi rounds (literally "going around the roots" before transplanting) are where objections
 surface cheaply and early, one conversation at a time.
 
 Underneath sits **PDCA**: Plan (background through countermeasures), Do (implement), Check

@@ -93,8 +93,9 @@ a causal claim *earned*. The DAG supplies that. Pearl's graphical framework (cau
 cross-checked]) turns "control for everything" — the kitchen-sink reflex — into a structural
 question with a structural answer: adjusting is only correct for variables that block backdoor
 paths, and adjusting for a collider actively *creates* bias where none existed (condition on
-"escalated tickets" and severity suddenly anti-correlates with handler skill among the escalated,
-even if they're independent overall). The quasi-experimental designs are the honest middle
+"escalated tickets" and severity suddenly *correlates* with handler skill among the escalated —
+the senior handlers look like they absorb every hard case — even if the two are independent
+overall). The quasi-experimental designs are the honest middle
 ground between "we randomized" and "we hope": each one finds a piece of the world that behaved
 *as if* someone had randomized — a policy hitting one unit (DiD), an instrument's nudge (IV), a
 cutoff's arbitrary line (RD) — and each buys its credibility with one named assumption you must
