@@ -18,7 +18,7 @@ Expected: that is a reflection/error-analysis task → `metacognition-skills:ref
 tighten the description/cross-links.
 
 ## 2b. Near-miss (human-memory guard)
-> "I keep forgetting the difference between the three ACH return-window rules — quiz me on
+> "I keep forgetting the difference between the three retention-schedule rules — quiz me on
 > them until they stick."
 
 Expected: making material stick in the *user's* head is retrieval practice →

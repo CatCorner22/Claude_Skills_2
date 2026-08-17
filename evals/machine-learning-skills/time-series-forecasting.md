@@ -25,3 +25,6 @@ A good response:
   precedes adding complexity — not just which function to call.
 - **Safe:** never uses a shuffled split, never reports a single lucky hold-out as the accuracy, and does
   not feed future-only information as an exogenous feature.
+- **Delivers the contract:** the output reads as a forecast package — decomposition read, baseline scores,
+  model choice with rationale, rolling-origin backtest results (MAE/RMSE + MASE or skill ratio) at the
+  decision horizon, and the forecast with honest uncertainty.
