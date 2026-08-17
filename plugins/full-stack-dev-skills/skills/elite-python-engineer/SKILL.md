@@ -10,7 +10,7 @@ description: >-
   production-grade Python task — new code, code review, refactoring, architecture,
   performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
   Triggers: pythagoras, write python, refactor, principal python review, python
-  architecture, production-grade python, pydantic, uv, ruff, ty, structlog, type hints,
+  architecture, production-grade python, pydantic, ruff, ty type checker, structlog, type hints,
   python logging, error handling, migrate to uv, elite python engineer, production python.
 metadata:
   version: "1.4.0"

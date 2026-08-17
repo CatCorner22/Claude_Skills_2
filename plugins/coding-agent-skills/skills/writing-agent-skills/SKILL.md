@@ -100,11 +100,32 @@ Fix every warning before committing.
 
 ## Why / learn
 Skills work by **progressive disclosure**: at startup Claude only sees each skill's `name` +
-`description` (~100 tokens each), and matches your request against the `description` alone to
-decide whether to load the body. So the description is a *discovery* tool, not documentation —
-that's why it must carry the trigger phrases and be third-person (it is injected into the system
-prompt). Once loaded, the body persists in context across the turn, so every line is a recurring
-cost: concise, well-ordered instructions beat exhaustive ones. The fixed "do + teach" order exists
+`description`, and matches your request against the `description` alone to decide whether to load
+the body. So the description is a *discovery* tool, not documentation — that's why it must carry
+the trigger phrases and be third-person (it is injected into the system prompt). Once loaded, the
+body persists in context across the turn, so every line is a recurring cost: concise,
+well-ordered instructions beat exhaustive ones.
+
+**Know what the listing actually costs, because it decides whether your skill is findable at
+all.** Measured in this library (2026-08-11): 121 skills' names + descriptions come to ~107,700
+characters ≈ **29,000 tokens ≈ 14.6% of a 200K context**, at a mean of ~870 chars (~235 tokens)
+per description — not the ~100 tokens per skill an earlier version of this section claimed. The
+`Triggers:` lists alone are 22% of that spend. This has two consequences worth designing around:
+
+- **The listing degrades before it errors.** Observed at roughly 100 installed skills: the
+  listing trims the least-used skills' descriptions to **name-only**. Nothing fails loudly —
+  `/plugin:skill` direct invocation keeps working, which is exactly the path an author testing
+  their own skill uses, so the degradation is invisible from the inside. A trimmed skill's
+  "Use when…" clause and every trigger phrase are simply absent from the router's context.
+- **Therefore the name must carry task signal.** Under name-only trimming, a skill named for a
+  metaphor or a persona is unroutable, while one named for its task survives. Evocative names are
+  legitimate — this library has several by design, invoked deliberately — but a skill whose *only*
+  intended path is automatic matching should be named for what it does.
+
+The practical lever is **skills per install, not characters per description**. Trimming a
+description from 1000 to 900 chars saves ~27 tokens; not installing a 15-skill plugin saves
+~3,900. Keep descriptions tight because a tight one routes better, not because trimming solves
+the budget. The fixed "do + teach" order exists
 so that each skill reliably both produces the deliverable and leaves you understanding it — the
 whole point of this library. Setting *degrees of freedom* to match fragility (loose prose vs. exact
 scripts) keeps Claude accurate on the steps that break easily while staying flexible where judgment

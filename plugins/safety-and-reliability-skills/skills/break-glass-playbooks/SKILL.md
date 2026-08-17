@@ -3,8 +3,8 @@ name: break-glass-playbooks
 description: >-
   Arms each foreseeable crisis with a break-glass playbook, channeling documented
   emergency-access procedures (HIPAA; NIST/CIS-mapped testing) and
-  regulator-mandated contingency plans with graduated
-  triggers: define the tripwire as a number a named person watches on a stated
+  regulator-mandated contingency plans with graduated escalation: define the tripwire
+  as a number a named person watches on a stated
   cadence, pre-author the first ten moves at calm-headed quality, pre-grant emergency
   authority with automatic expiry and full logging, name the comms tree and the
   decision chair, drill the unsealing on a schedule, and re-arm after every firing.

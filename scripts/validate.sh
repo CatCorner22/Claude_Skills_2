@@ -64,7 +64,14 @@ for dir in plugins/*/skills/*/; do
       flag && /^[a-zA-Z_-]+:([[:space:]]|$)/{flag=0}
       flag{gsub(/^[[:space:]]+/,""); buf=buf" "$0}
       END{print buf}')"
-    dlen=$(printf '%s' "$desc" | wc -m | tr -d ' ')
+    # Count CHARACTERS, not bytes. `wc -m` silently degrades to bytes under the C/POSIX
+    # locale, which over-counts every em dash and arrow by 2 — so the "1024-char" cap was
+    # really a byte cap on most runners. Prefer python3 (already required above for JSON).
+    if command -v python3 >/dev/null 2>&1; then
+      dlen=$(printf '%s' "$desc" | python3 -c 'import sys; print(len(sys.stdin.read()))')
+    else
+      dlen=$(printf '%s' "$desc" | LC_ALL=C.UTF-8 wc -m | tr -d ' ')
+    fi
     if [ "$dlen" -eq 0 ]; then err "$base: empty description"; fi
     if [ "$dlen" -gt 1024 ]; then err "$base: description is $dlen chars (max 1024)"; fi
     if [ "$dlen" -gt 973 ] && [ "$dlen" -le 1024 ]; then note "$base: description is $dlen chars (within 5% of the 1024 cap — watch future edits)"; fi

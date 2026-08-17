@@ -3,7 +3,8 @@ name: exploratory-data-analysis
 description: >-
   Profiles a dataset before any modeling or reporting, in the Tukey tradition: establishes
   shape and grain (what one row represents, tested by key uniqueness), checks column types
-  against meaning, quantifies and classifies missingness per column, goes univariate first
+  against meaning, quantifies and classifies missingness per column, goes univariate first (centre, spread, shape — the summary statistics themselves belong to
+  descriptive-statistics)
   (distributions, skew) then bivariate (correlation, cross-tabs, group-by), flags outliers
   (IQR fence, z-score) and investigates before deleting, plots before trusting summaries
   (Anscombe's quartet), and ends in a data-quality memo handed to cleaning.

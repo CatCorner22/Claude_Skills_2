@@ -8,7 +8,7 @@ description: >-
   turning a business question into a query for a report or
   analysis, adding window logic like running totals or rankings, or reviewing a query for
   correctness and speed. Triggers: SQL, query, write a query, join, GROUP BY, aggregate, window
-  function, OVER, PARTITION BY, running total, moving average, rank, lag, lead, CTE, subquery,
+  function, OVER clause, PARTITION BY, running total, moving average, rank, lag, lead, CTE, subquery,
   QUALIFY, slow query, optimize query, group by grain.
 metadata:
   version: "1.1.0"
