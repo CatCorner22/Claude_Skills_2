@@ -59,6 +59,18 @@ Plain-language procedure:
 3. A path is already blocked if it passes through a collider you have *not* conditioned on.
 4. Block the open backdoors by adjusting for a confounder on each.
 5. Confirm nothing you adjusted for is a collider, a mediator, or downstream of X.
+6. **Draw the unmeasured causes too — the ones you would never put in a regression.** Steps 3 and 5
+   only protect you against colliders that are *on the drawing*. The usual way M-bias (§1) slips
+   through is that U1 and U2 are unmeasured, so nobody drew them, so Z's collider role is invisible
+   and Z passes step 5 as an ordinary pre-treatment covariate. Before adding any variable, ask
+   the question the DAG answers: "could this be a common effect of something that causes X and
+   something else that causes Y?" **"Pre-treatment" is not a safety certificate.**
+
+How much M-bias costs in practice is genuinely contested — one line of work argues the induced bias
+is usually small next to the confounding you remove by adjusting, while the graphical camp holds
+that you cannot know that without the graph [background — verify]. The defensible rule is not "never
+adjust for pre-treatment covariates"; it is **draw the unmeasured causes and decide on the graph**,
+and say out loud which variables you are adjusting for on faith.
 
 If no set of *measured* variables blocks all backdoors, adjustment cannot identify the effect —
 you need a design from §4, not more covariates.
@@ -89,17 +101,55 @@ Name the rung out loud in every writeup — the rung, not the estimator, is the 
    online/field variant tests → `data-analytics-bi-skills:ab-test-design`.
 2. **Difference-in-differences (DiD).** A change hits one group or date but not another.
    Key assumption: **parallel trends** — absent the change, both groups would have moved
-   together. Checkable in part: pre-period trend plots, placebo windows.
+   together. Checkable in part: pre-period trend plots, placebo windows. **DiD is not one
+   method.** The clean 2×2 (one treated group, one control group, one switch date) is the case
+   every textbook draws; **staggered adoption** — units switching on at different dates — is a
+   different estimand with a different literature and its own failure mode (§5a). Ask which one
+   you have before you pick an estimator.
 3. **Instrumental variable (IV).** Something nudges X without touching Y except through X.
-   Key assumptions: **relevance** (it really moves X — testable) and **exclusion** (no other
-   path to Y — an argument, not a test).
+   Key assumptions: **relevance** (it really moves X — testable, and the test is *strength*, not
+   significance) and **exclusion** (no other path to Y — an argument, not a test), plus
+   **monotonicity** if you want to name what the estimate is an average over. Scope limit, as
+   binding as RD's: IV identifies the effect on **compliers**, not the population (§6).
 4. **Regression discontinuity (RD).** A cutoff on a score/date/size assigns treatment.
    Key assumption: units just above and just below the cutoff are comparable — no one
    manipulated their position. Checkable in part: density/bunching at the cutoff, covariate
-   smoothness.
+   smoothness. Scope limit: the effect **at the cutoff**, not for the whole population (§7).
 5. **Adjustment only.** Backdoor-valid covariate adjustment with no design behind it — the
    weakest rung; every conclusion inherits "assuming no unmeasured confounder," so §9 is
-   mandatory here.
+   mandatory here. Weakest ≠ toolless: §4a is the equipment this rung is supposed to be run with.
+
+## 4a. The adjustment-only toolkit (the weakest rung, run properly)
+
+Naming this rung "weakest" and then leaving it bare is how it gets run as a raw regression with
+twelve controls. It has a real toolkit. All of it presumes you already have a *backdoor-valid
+adjustment set* from §2 — none of these methods finds one for you.
+
+- **Propensity score** (Rosenbaum & Rubin 1983 [snippet-only, cross-checked]): the estimated
+  probability of treatment given the covariates. Conditioning on it — by **matching**,
+  **stratification**, or **inverse-probability weighting (IPW)** — balances the covariates that
+  went into it, and nothing else. It is a dimension-reduction device for an adjustment set, not a
+  substitute for having the right one. Matching on a collider is still conditioning on a collider.
+- **Judge the propensity model by balance, not by fit.** Report standardized mean differences for
+  every covariate after matching/weighting (a common bar: |SMD| < 0.1). A propensity model with a
+  beautiful AUC is a warning, not an achievement: near-perfect prediction of treatment means the
+  arms barely overlap, which is the next bullet.
+- **Positivity / overlap (the check that is always skipped).** Every unit must have a real chance
+  of both treatment states within the strata you compare. Plot the propensity-score distributions
+  by arm and look at the ends: where they do not overlap there is no comparison, only the outcome
+  model extrapolating. Symptom in IPW: a handful of weights blowing up as p̂ → 0 or 1, so a few
+  units carry the estimate. Remedy: **trim to the overlap region — and then restate the population
+  the estimate is now about.** That is the same scope honesty RD owes at its cutoff and IV owes on
+  its compliers; adjustment-only owes it on its overlap region.
+- **Doubly robust estimation** (AIPW — Robins, Rotnitzky & Zhao 1994; TMLE — van der Laan & Rubin
+  2006; double/debiased ML — Chernozhukov et al. 2018 [snippet-only, cross-checked]): fit both an
+  outcome model and a treatment model; the estimator stays consistent if *either* is correctly
+  specified. The limit that gets misread constantly: doubly robust means robust to **model
+  misspecification**, not to unmeasured confounding. Both models condition on the same measured
+  set, so an incomplete backdoor set makes both of them wrong in the same direction. Two wrong
+  models do not average out to identification.
+- **Then §9, non-optionally**, with a named sensitivity method — because everything above still
+  ends at "assuming no unmeasured confounder."
 
 ## 5. Worked example A — difference-in-differences
 

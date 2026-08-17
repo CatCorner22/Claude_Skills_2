@@ -7,6 +7,9 @@
 - Calibration
 - Confusion matrix and threshold selection
 - Cross-validation schemes
+- Uncertainty on the reported metric
+- Slice (subgroup) evaluation
+- Label quality — auditing the target
 - Leakage checklist
 
 ## Regression metrics
@@ -24,10 +27,33 @@ For a chosen threshold, from the confusion matrix (TP, FP, TN, FN):
 - **Accuracy** = (TP + TN) / all — misleading under imbalance; a 99%-negative problem scores 99% by predicting "no."
 
 ## ROC AUC vs PR AUC
-- **ROC AUC** — probability the model ranks a random positive above a random negative; threshold-independent.
-  **Optimistic under heavy imbalance** because the large negative class inflates the true-negative rate.
-- **PR AUC (average precision)** — precision-vs-recall area; focuses on the rare positive class. **Prefer it
-  when positives are scarce** (fraud, anomalies, defaults). Its baseline is the positive rate, not 0.5.
+- **ROC AUC** — probability the model ranks a random positive above a random negative; threshold-independent
+  and **prevalence-invariant**. Both ROC axes are within-class rates — TPR = TP/(TP+FN) uses only positives,
+  FPR = FP/(FP+TN) only negatives, and TNR = 1 − FPR only negatives — so changing the class ratio changes
+  none of them. Duplicating or downsampling negatives leaves AUC alone (up to sampling noise). AUC is
+  therefore not "inflated by the true-negative rate"; it simply **does not know** how rare the positives are.
+- **PR AUC (average precision)** — precision-vs-recall area; prevalence-*aware*, so it moves with the class
+  ratio. **Prefer it when positives are scarce** (fraud, anomalies, defaults). Its baseline is the positive
+  rate, not 0.5 — a 1%-positive problem has PR-AUC baseline 0.01, so 0.15 can be a 15× lift.
+
+**Why a high AUC still ships a useless alert queue** (the honest mechanism). Precision mixes the classes:
+`precision = TPR·P / (TPR·P + FPR·N)`. Take 100,000 rows, 1% positive → P = 1,000, N = 99,000, at a
+threshold with TPR = 0.80 and FPR = 0.05:
+
+| | Predicted positive | Predicted negative |
+|---|---|---|
+| **Actual positive (1,000)** | TP = 800 | FN = 200 |
+| **Actual negative (99,000)** | FP = 4,950 | TN = 94,050 |
+
+- Recall = 800/1,000 = **80%**; TNR = 94,050/99,000 = **95%** = 1 − FPR.
+- Precision = 800 / (800 + 4,950) = 800/5,750 = **13.9%** — reviewers work 5,750 alerts to find 800 cases.
+- Now downsample negatives to 1,000 (a balanced test set, same model, same threshold): FP = 0.05 × 1,000 =
+  50, precision = 800/850 = **94.1%**. AUC is identical in both tables; precision moved 13.9% → 94.1%.
+
+The lesson to carry: resampling does not improve AUC, and the precision it "improves" is an artifact of the
+new class ratio. Report PR AUC (and precision at your operating point) on the *real* prevalence. Standard
+references for the comparison: Davis & Goadrich (ICML 2006); Saito & Rehmsmeier (2015) — cited as
+attributions, no numbers taken from them.
 
 ## Calibration
 Ranking (AUC) says who is riskier; **calibration** says whether a predicted 0.10 really means a 10% chance.
@@ -35,11 +61,23 @@ When you make expected-cost decisions from the probability (not just rank), chec
 consider **Platt scaling** or **isotonic regression** to recalibrate. Boosted trees are often mis-calibrated.
 
 ## Confusion matrix and threshold selection
-The model outputs a score; the **decision** is a threshold on it.
-1. For candidate thresholds, build the confusion matrix (TP/FP/TN/FN).
+The model outputs a score; the **decision** is a threshold on it. The threshold is a **fitted parameter**, so
+it is selected on validation data and never on test.
+1. On the **validation set** (or inside each CV fold), build the confusion matrix at candidate thresholds
+   (TP/FP/TN/FN).
 2. Attach the business cost of a false positive and a false negative.
 3. Pick the threshold that minimizes total expected cost (or hits a required recall / an alert budget).
-The optimum is almost never 0.5. Document the threshold and the cost assumptions behind it.
+4. **Freeze** it, then score the test set **once** at that threshold and report that number as the estimate.
+The optimum is almost never 0.5. Document the threshold, the split it was chosen on, and the cost
+assumptions behind it.
+
+Two cautions:
+- **The threshold has its own selection noise.** The cost curve near its minimum is usually flat, and with
+  few positives the argmin jumps between validation samples. Prefer a threshold justified by an operating
+  constraint (a required recall, an alert budget of N/day) or averaged across CV folds over the single
+  argmin of one small validation set — and re-check it when the class balance or the cost changes.
+- **Selecting the threshold on test contaminates the estimate** exactly as hyperparameter tuning on test
+  does. If it already happened, say so and treat the test number as an upper bound.
 
 ## Cross-validation schemes
 | Data shape | Scheme | Why |

@@ -20,8 +20,8 @@ metadata:
 ## When to use
 - Deciding how to validate a model (holdout vs k-fold vs time-series CV) and which metric to report.
 - Diagnosing overfitting/underfitting, choosing a decision threshold, or reading a confusion matrix.
-- Hunting for data leakage when offline results look "too good," or comparing a model to its baseline.
-- Not for: framing the target and picking the decision metric conceptually up front → see `machine-learning-skills:ml-project-framing`. For time-series-specific backtesting mechanics → see `machine-learning-skills:time-series-forecasting`.
+- Running the leakage checklist on any evaluation (routinely, not only when results look "too good"), putting an interval on the reported metric, breaking performance down by slice, or comparing a model to its baseline.
+- Not for: framing the target and picking the decision metric conceptually up front → see `machine-learning-skills:ml-project-framing`. For time-series-specific backtesting mechanics → see `machine-learning-skills:time-series-forecasting`. For qualifying the label/judgment process the metric is scored against — inter-rater agreement, attribute-agreement studies, Gage R&R → see `continuous-improvement-skills:measurement-systems-analysis`.
 
 ## Do it
 1. **Split before you look at anything.** Carve out a **test set** and don't touch it until the very end;
