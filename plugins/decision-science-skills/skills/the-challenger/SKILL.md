@@ -15,7 +15,7 @@ description: >-
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   source: >-
     Commissioned by the user to prevent momentum and sunk costs from holding a project to
     a timeline when revision would be optimal. Anchored on the documented record of the
@@ -111,8 +111,10 @@ and the meeting is theater. The seam with The Mirror matters and is not a
 contradiction: quitting the PLAN is not quitting the WORK — the 40% audit governs
 whether effort remains on a chosen plan; this review governs whether the plan still
 deserves the effort. Both replace feelings with evidence; they answer different
-questions. Feynman's line closes the loop and the teach: for a successful project,
-reality must take precedence over the schedule, for nature cannot be fooled.
+questions. Feynman's line — adapted here from technology and public relations to
+projects and schedules; his exact words are in the reference — closes the loop and the
+teach: for a successful project, reality must take precedence over the schedule, for
+nature cannot be fooled.
 
 ## Common mistakes
 - Holding the review only when someone dares to ask → triggers fire it; courage is not

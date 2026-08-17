@@ -82,7 +82,7 @@ did about it. The audit turns it into per-rule autoimmunity rates.
    with no human touch). `unread` is a disposition — the most alarming one.
 3. **Compute per rule:** firings; autoimmunity rate = (benign-known + benign-new +
    duplicate + unread) / firings; flood contribution = that rule's non-actionable firings
-   as a share of the queue's total.
+   as a share of the queue's total non-actionable firings.
 4. **Rank by flood contribution** and take the top three rules as the working set.
 5. **For each, ask the default question:** who set this threshold or scope, for what
    population, and would anyone set it there today? Prefer recalibrating the default over
@@ -123,7 +123,8 @@ Actions, in method order:
 - **R9 — leave it alone.** 34% autoimmunity at low volume with real catches is a healthy
   adaptive-layer rule. Not every rule needs surgery; the audit also certifies health.
 
-Projected queue after the changes: roughly 450 firings/quarter, with the page tier gated
+Projected queue after the changes: roughly 500 live-queue firings/quarter (1,240 − ~500
+removed at R4's source − 240 demoted to R7's digest), with the page tier gated
 on danger signals. The team then sets tolerance-list expiries for R4's newly-approved
 senders and schedules the next audit — the numbers above are the baseline it will be
 measured against.

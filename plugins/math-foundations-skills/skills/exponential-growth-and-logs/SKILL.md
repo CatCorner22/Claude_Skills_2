@@ -14,6 +14,8 @@ description: >-
   across dates or fitting trend models to history. Triggers: exponential growth,
   CAGR, doubling time, rule of 72, logarithm, log scale, growth rate math, geometric
   average, how long until it doubles, decay rate.
+metadata:
+  version: "1.0.1"
 ---
 
 # Exponential growth and logarithms

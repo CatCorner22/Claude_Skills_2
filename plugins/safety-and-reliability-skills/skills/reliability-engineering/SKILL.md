@@ -11,6 +11,8 @@ description: >-
   uptime target, or when setting a replacement or renewal schedule. Triggers: Weibull, bathtub
   curve, MTBF, MTTR, availability math, downtime budget, series parallel reliability, burn-in,
   failure rate fit, how much downtime does our SLO allow.
+metadata:
+  version: "1.1.0"
 ---
 
 # Reliability engineering

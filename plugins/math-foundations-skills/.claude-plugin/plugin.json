@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "math-foundations-skills",
   "description": "Statistics and basic-math foundations, domain-neutral and portable: number sense and Fermi estimation, percentages and proportions (percent change vs points, weighted means, mix effects), algebra and formula rearrangement, unit conversion and dimensional analysis, exponential growth and logarithms (CAGR, doubling time, log scales), and probability fundamentals (conditional probability, Bayes' theorem via natural frequencies, expected value). Each skill both does the math and teaches the reasoning.",
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

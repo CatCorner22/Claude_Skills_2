@@ -172,6 +172,22 @@ descriptions upgraded with 9 collision-checked new triggers; sql-for-analysts' O
 generalized; descriptive-statistics restructured cleanly. All verified additive — no lost
 provenance marks, no meaning inversions, no cap breaches.
 
+**Closing assessment** (9 agents over the ~46 August-wave skills no prior pass had
+line-checked, arithmetic-first): **10 real defects fixed, 31 skills confirmed at standard,
+zero verifier flags.** Every authoring wave contributed at least one worked-example error:
+weak-signal-navigation's fused band didn't follow from its own inputs (34-37 → 34-36),
+systems-thinking's loop legend cited a hiring node its diagram doesn't have, pre-mortem's
+"30-45 min" total was unreachable from its own step budgets, the-challenger's Feynman
+paraphrase had drifted from the verbatim quote in its own reference, detection-system-tuning's
+projected queue and flood-share denominator were off, reliability-engineering's "one failure
+every four months" is actually every ~5.5 months at its own SLO, weight-of-the-books' 7-year
+retention ignored its manifest's own +12%/yr compounding (~97M → ~140M),
+exponential-growth-and-logs shipped a false same-CAGR equation (fixed to +38%/−12%), and
+medical-research-detective's "relative risk is 100%" was misreadable as RR = 1.0 (now
+"relative risk increase is 100% (RR = 2.0)"). Plus defect-epidemiology's R0 example counted
+7 instances against an 8-node tree (fixed inline). Every active skill has now had line-level
+review this session.
+
 **Standing lessons adopted for future waves**: (1) every worked example gets an
 arithmetic-verification pass before ship — examples are the part readers lift; (2) every
 new-skill wave gets a reciprocal-link pass so additions don't land as citation sinks.

@@ -13,7 +13,7 @@ description: >-
   what could link, overlooked cause, deep dive on this condition, PubMed, Google Scholar, medical
   literature, drug interaction research, verify this study, check this citation.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Medical research detective

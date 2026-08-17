@@ -108,7 +108,7 @@ flowchart LR
 
 Loop legend:
 - **B1 — the overtime push** (backlog → pressure → overtime → resolution −→ backlog; one `−`,
-  balancing): the fix that "works." It drains the tub — with a delay before hiring pressure eases.
+  balancing): the fix that "works." It drains the tub — the fast loop of the pair.
 - **R1 — the fatigue spiral** (backlog → pressure → overtime → fatigue → reopens → backlog; zero
   `−`, reinforcing): the same push that drains the tub re-fills it later through rushed fixes.
   B1 and R1 sharing the `overtime` node, with R1 slower, is the *fixes-that-fail* signature.

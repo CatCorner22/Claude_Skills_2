@@ -132,13 +132,13 @@ stands. All figures below are illustrative, not benchmarks.
 
 **Fusion:** floor 30 (group A, aged) + rhythm says +4–6 (group A history, aged the
 same way) + independent groups B, C, D, E all consistent with continued normal
-progress, none suggesting a stall. Position: **"34 to 37 of 50 items complete, most
+progress, none suggesting a stall. Position: **"34 to 36 of 50 items complete, most
 likely around 35 — moderate confidence."** Band width: rhythm is the only cue that
 sizes the increment, and it is a moderate-grade cue from the same source family as
 the floor.
 
-**Confirm/deny:** when the owner returns or the tracker is updated, a count of 33–38
-confirms the method; below 32 means a stall the side channels missed — investigate
+**Confirm/deny:** when the owner returns or the tracker is updated, a count of 33–37
+confirms the method; below 33 means a stall the side channels missed — investigate
 which silence lied.
 
 **The decision:** the meeting can proceed on "on pace, no stall detected, position

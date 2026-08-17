@@ -14,7 +14,7 @@ description: >-
   will it hold at real volumes, size it for production, test loaded not empty, biggest
   single lot, special-collections outlier.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Commissioned by the user on the campus legend of a university library designed
     without accounting for the weight of its books, unoccupied for years until

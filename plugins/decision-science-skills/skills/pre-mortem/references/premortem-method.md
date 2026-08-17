@@ -9,7 +9,7 @@
 
 ## Facilitation script (team version)
 
-Total time: 30–45 minutes. Works with 3–12 people who know the plan.
+Total time: 35–45 minutes. Works with 3–12 people who know the plan.
 
 1. **Set-up (5 min).** Restate the plan in one paragraph: what ships, when, who owns it.
    Confirm everyone recognizes that statement as *the* plan.

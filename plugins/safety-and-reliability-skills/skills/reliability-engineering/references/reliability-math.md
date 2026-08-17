@@ -86,8 +86,9 @@ Downtime a given SLO allows:
 | 99.999% | 5.26 min | 26.3 s | 6.05 s |
 
 Read the table backwards to size the response: a 99.9% target with an MTTR of 4 hours allows
-roughly one failure every four months — if failures are monthly, either MTTR must drop below
-~44 minutes or the failure rate must fall, and the arithmetic says which is cheaper.
+roughly one failure every five to six months (8.77 h/yr ÷ 4 h ≈ 2.2 failures/yr) — if failures
+are monthly, either MTTR must drop below ~44 minutes or the failure rate must fall, and the
+arithmetic says which is cheaper.
 
 ## §5 Series/parallel arithmetic
 

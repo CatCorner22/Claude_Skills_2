@@ -263,6 +263,14 @@ Never store secrets, credentials, account numbers, or client data here.
   (12 skills gained end-of-Do-it Deliverable blocks + rubric lines); ui-and-ux-inspection's
   dormant Fitts/NASA-TLX retrofit wired into Do-it. PATTERN: "already_at_standard is an
   expected verdict" in optimizer briefs prevents churn — 27/46 untouched by design.
+  CLOSING PASS (same day): arithmetic-first assessment of the ~46 August-wave skills +
+  3-skill gap (rule-stress/software-arch/defect-epi) → 10 worked-example defects fixed
+  (weak-signal band, systems-thinking phantom node, pre-mortem time budget, the-challenger
+  Feynman drift, detection-tuning queue math, reliability "4 months"→5.5, weight-of-books
+  compounding 97M→140M, exp-growth false CAGR equation, medical RR=100% ambiguity,
+  defect-epi R0 7-vs-8 count), all skeptic-recomputed; 31 confirmed at standard. EVERY
+  active skill line-reviewed this session; the arithmetic-verification RULE caught defects
+  in every wave — it is load-bearing, keep it.
 - 2026-08-11 (2) — library overhaul: archive + enhance + index + expansion wave
   (active library 123 skills / 15 plugins; 66 skills archived). User's 4-part request
   (enhance / suggest consolidations / build index / new skills in science, tech writing,
