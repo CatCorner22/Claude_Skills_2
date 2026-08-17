@@ -13,6 +13,8 @@ description: >-
   urgent, or nothing seems to finish. Triggers: WIP limit, personal kanban, timeboxing, too
   many priorities, drowning in tasks, context switching, Eisenhower matrix, finish before
   starting.
+metadata:
+  version: "1.1.0"
 ---
 
 # Priority and WIP (personal lean)
@@ -38,7 +40,9 @@ description: >-
 ## Do it
 Board setup, WIP-limit selection and the violation protocol, the triage flow, timebox/batch
 patterns, the weekly review script, and renegotiation scripts are in
-`references/personal-lean-method.md`.
+`references/personal-lean-method.md`. The assistant drafts the sweep, the card splits, the triage
+calls, and the renegotiation scripts; the human owns the WIP limit, every yes and no, and the
+weekly review.
 
 1. **Visualize all current work in one place.** Build a personal kanban — three columns are
    enough: to-do / doing / done. Sweep everything into it: flagged emails, chat promises,

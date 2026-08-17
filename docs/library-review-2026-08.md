@@ -158,6 +158,20 @@ privacy sweep. Highlights of what was fixed:
   data-model reference — name-gated (zero routing pollution) and the only surviving copy of
   that commissioned depth in the repo.
 
+**Text-optimization pass** (10 agents: 5 optimizers + 5 diff-level verifiers, zero
+must-fix flags): the 46 earlier-vintage skills the review didn't line-check were each
+assessed against seven criteria (deliverable contract, Do-it executability, division of
+labor, routing contract, token economy, teaching integrity, cross-links). **19 optimized,
+27 confirmed already at standard** — churn explicitly avoided. The dominant real gap was
+the missing deliverable contract: 12 skills (all five general ML skills, three CI method
+skills, anomaly/feature/eval/forecast outputs, agentic-workflow-design, prompt-engineering)
+gained compact end-of-Do-it Deliverable blocks with matching eval-rubric lines, so each now
+states what the finished artifact contains. Other wins: ui-and-ux-inspection's dormant
+Fitts/NASA-TLX retrofit is now wired into its inspection steps; dmaic and root-cause-analysis
+descriptions upgraded with 9 collision-checked new triggers; sql-for-analysts' OTBI residue
+generalized; descriptive-statistics restructured cleanly. All verified additive — no lost
+provenance marks, no meaning inversions, no cap breaches.
+
 **Standing lessons adopted for future waves**: (1) every worked example gets an
 arithmetic-verification pass before ship — examples are the part readers lift; (2) every
 new-skill wave gets a reciprocal-link pass so additions don't land as citation sinks.

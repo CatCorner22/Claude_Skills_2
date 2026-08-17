@@ -21,6 +21,9 @@ tighten the description / cross-links.
 A good response:
 - **Does the task:** states the task + success criteria, gives the right context, adds few-shot
   examples, specifies an explicit output format, and grounds to prevent hallucination.
+- **Deliverable shape:** delivers the prompt as the skill's package — copyable prompt block, design
+  notes on what each constraint prevents, input assumptions, and the eval cases (failing ones
+  first) — not a bare rewritten prompt.
 - **Teaches:** explains that specificity and structure drive quality, and that prompts should be
   tested like code (a small real eval set, change one thing at a time) rather than tuned by vibes.
 - **Provider-agnostic:** the method doesn't depend on a specific vendor; any model-specific knob is

@@ -57,9 +57,9 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:assertion-evidence-deck` — or just describe the task.
 
-**What it does:** Builds assertion-evidence presentations (the Marshall/Alley method: one full-sentence claim per slide, proven by a visual, every number sourced) from verified analysis or configuration findings — for data-analysis results, Oracle Fusion Cash Management, reconciliation, audit findings, and University of Tennessee Controller or leadership updates. Turns verified output into slides; it does not run the analysis or Oracle diagnosis. Use when the user asks for a deck, slides, PowerPoint, briefing, readout, or leadership/Controller update on Oracle CM, DASH, unreconciled items, parse/matching/tolerance/transaction-creation rules, cash positioning, audit remediation, or an analysis result — even without saying "assertion-evidence" — or to audit an existing deck.
+**What it does:** Builds assertion-evidence presentations (the Marshall/Alley method: one full-sentence claim per slide, proven by a visual, every number sourced) from verified findings — an analysis result, an audit or review finding, a process-change proposal, a technical design. Turns verified output into slides; it does not run the underlying analysis. Use when the user asks for a deck, slides, PowerPoint, briefing deck, readout, or leadership update on an analysis result, finding, or proposal — even without saying "assertion-evidence" — or to audit an existing deck.
 
-**Triggers:** `build a deck`, `make slides`, `PowerPoint`, `briefing`, `leadership update`, `Controller update`, `readout`, `TED-style technical talk`, `sentence-headline slides`, `snorkel vs scuba`, `turn this report into slides`, `audit my deck`
+**Triggers:** `build a deck`, `make slides`, `PowerPoint`, `briefing deck`, `leadership update`, `readout`, `TED-style technical talk`, `sentence-headline slides`, `snorkel vs scuba`, `turn this report into slides`, `audit my deck`
 
 ### `data-analytics-bi-skills:causal-inference`
 
@@ -89,7 +89,7 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:descriptive-statistics` — or just describe the task.
 
-**What it does:** Summarizes a variable or dataset with the right measures of central tendency, dispersion, shape, and percentiles — and switches to robust measures (median, IQR, MAD) when outliers or skew would make the mean and standard deviation mislead. Use when describing or summarizing data, computing a "typical" value or a spread, or choosing which summary statistic to report before drawing conclusions.
+**What it does:** Summarizes a variable or dataset with the right measures of central tendency, dispersion, shape, and percentiles — and switches to robust measures (median, IQR, MAD) when outliers or skew would make the mean and standard deviation mislead. Delivers a per-variable summary block: matched center and spread, five-number summary, n and missing count, percentile method, and a plot. Use when describing or summarizing data, computing a "typical" value or a spread, or choosing which summary statistic to report before drawing conclusions.
 
 **Triggers:** `descriptive statistics`, `summary statistics`, `mean`, `median`, `mode`, `average`, `standard deviation`, `variance`, `range`, `percentile`, `quartile`, `IQR`, `coefficient of variation`, `skewness`, `kurtosis`, `distribution shape`, `central tendency`, `spread`
 
@@ -113,7 +113,7 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-analytics-bi-skills:sql-for-analysts` — or just describe the task.
 
-**What it does:** Writes, reviews, and optimizes analytical SQL — joins, GROUP BY aggregation, window functions, CTEs, subqueries, and date/time handling — with a working sense of performance (grain, sargability, indexing). Use when turning a business question into a query for a report or analysis, adding window logic like running totals or rankings, or reviewing a query for correctness and speed.
+**What it does:** Writes, reviews, and optimizes analytical SQL — joins, GROUP BY aggregation, window functions, CTEs, subqueries, and date/time handling — with a working sense of performance (grain, sargability, indexing). Delivers the query as a package: a grain comment on top, the CTE-layered query, stated row-count/known-total validation, and dialect caveats. Use when turning a business question into a query for a report or analysis, adding window logic like running totals or rankings, or reviewing a query for correctness and speed.
 
 **Triggers:** `SQL`, `query`, `write a query`, `join`, `GROUP BY`, `aggregate`, `window function`, `OVER`, `PARTITION BY`, `running total`, `moving average`, `rank`, `lag`, `lead`, `CTE`, `subquery`, `QUALIFY`, `slow query`, `optimize query`, `group by grain`
 
@@ -159,7 +159,7 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:duckdb-local-analytics` — or just describe the task.
 
-**What it does:** Runs real SQL directly over local CSV, Parquet, and Excel files with DuckDB — no database server — for joins across files, aggregations on data too big for Excel, and repeatable analysis scripts, from the CLI or Python, persisting results back to files or a .duckdb database. Use when joining or aggregating local files with SQL, when a dataset chokes Excel/pandas memory, or when replacing a fragile chain of spreadsheet lookups with one query.
+**What it does:** Runs real SQL directly over local CSV, Parquet, and Excel files with DuckDB — no database server — for joins across files, aggregations on data too big for Excel, and repeatable analysis scripts, from the CLI or Python, persisting results back to files or a .duckdb database. Delivers a rerunnable script (paths in, result file out) sanity-checked with row counts, control totals, and unmatched-join counts. Use when joining or aggregating local files with SQL, when a dataset chokes Excel/pandas memory, or when replacing a fragile chain of spreadsheet lookups with one query.
 
 **Triggers:** `duckdb`, `query csv with sql`, `join csv files`, `sql on parquet`, `local sql`, `read_csv_auto`, `analyze large csv`, `sql without a database`, `parquet analytics`, `out of memory pandas`
 
@@ -175,7 +175,7 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:pdf-data-extraction` — or just describe the task.
 
-**What it does:** Extracts tables and text from PDFs into usable data — choosing between pdfplumber and camelot by PDF type, detecting scanned-vs-native pages, handling multi-page tables, bank-statement and invoice layouts, and validating extracted numbers against the document's own totals. Use when pulling transactions from a PDF bank statement, tabling data out of a PDF report or invoice, or when a PDF extraction comes out scrambled.
+**What it does:** Extracts tables and text from PDFs into usable data — choosing between pdfplumber and camelot by PDF type, detecting scanned-vs-native pages, handling multi-page tables, bank-statement and invoice layouts, and validating extracted numbers against the document's own totals. Delivers a typed table (DataFrame/CSV/Excel) that reproduces the document's control totals, plus a frozen per-layout recipe for recurring documents. Use when pulling transactions from a PDF bank statement, tabling data out of a PDF report or invoice, or when a PDF extraction comes out scrambled.
 
 **Triggers:** `extract pdf table`, `pdf to excel`, `pdfplumber`, `camelot`, `parse bank statement pdf`, `pdf invoice data`, `scanned pdf`, `OCR pdf`, `pdf text extraction`, `table extraction python`
 
@@ -191,9 +191,9 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:rest-api-data-pulls` — or just describe the task.
 
-**What it does:** Pulls data from REST APIs into files and DataFrames reliably — authentication patterns, query and field selection, pagination until exhaustion, retries with backoff for rate limits and transient failures, and flattening nested JSON — using Oracle Fusion Cloud REST APIs as the worked example. Use when extracting data from a REST API (Fusion or any SaaS), when a pull returns partial data, or when hardening a recurring API extract.
+**What it does:** Pulls data from REST APIs into files and DataFrames reliably — authentication patterns, query and field selection, pagination until exhaustion, retries with backoff for rate limits and transient failures, and flattening nested JSON. Use when extracting data from a REST API, when a pull returns partial data, or when hardening a recurring API extract.
 
-**Triggers:** `rest api pull`, `call api python`, `fusion rest api`, `pagination`, `api rate limit`, `429 retry`, `requests python`, `extract data from api`, `api to csv`, `json to dataframe`, `oauth token api`
+**Triggers:** `rest api pull`, `call api python`, `paginate an api`, `saas api export`, `pagination`, `api rate limit`, `429 retry`, `requests python`, `extract data from api`, `api to csv`, `json to dataframe`, `oauth token api`
 
 ## `machine-learning-skills`
 
@@ -283,9 +283,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:dmaic-problem-solving` — or just describe the task.
 
-**What it does:** Runs a Six Sigma DMAIC cycle — Define, Measure, Analyze, Improve, Control — to structure a data-driven improvement project that measures and confirms cause before changing anything. Use when structuring an improvement project, reducing defects or variation with rigor, or translating voice of the customer into CTQs and a charter.
+**What it does:** Runs a Six Sigma DMAIC cycle — Define, Measure, Analyze, Improve, Control — to structure a data-driven improvement project that measures and confirms cause before changing anything: a signed project charter with voice of the customer translated into CTQs, an operationally defined metric checked for trustworthiness before a baseline is drawn, a root cause verified against data rather than opinion, a solution piloted against that baseline, and a control plan that keeps the gain from reverting — with a tollgate review between phases. Use when structuring an improvement project, reducing defects or variation with rigor, proving a fix actually moved the metric, or translating voice of the customer into CTQs and a charter.
 
-**Triggers:** `DMAIC`, `six sigma`, `define measure analyze improve control`, `process improvement project`, `reduce defects`, `reduce variation`, `CTQ`
+**Triggers:** `DMAIC`, `six sigma`, `define measure analyze improve control`, `process improvement project`, `reduce defects`, `reduce variation`, `CTQ`, `project charter`, `tollgate`, `control plan`, `voice of the customer`, `prove the fix worked`
 
 ### `continuous-improvement-skills:evolutionary-operation`
 
@@ -355,9 +355,9 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:root-cause-analysis` — or just describe the task.
 
-**What it does:** Finds the true cause of a recurring problem with 5 Whys, a fishbone/Ishikawa diagram across the 6M categories, and Pareto analysis, separating immediate containment from the root cause and verifying the cause before any countermeasure. Use when diagnosing a recurring problem, chasing a defect's cause, or a fix that never sticks.
+**What it does:** Finds the true cause of a recurring problem with 5 Whys, a fishbone/Ishikawa diagram across the 6M categories, and Pareto analysis, separating immediate containment from the root cause and verifying the cause before any countermeasure — driving from a quantified, blame-free problem statement through a toggle-the-cause verification test to an error-proofed countermeasure with an owner, with Reason's slip/lapse/mistake/violation taxonomy so human error gets the right fix instead of blame. Use when diagnosing a recurring problem, chasing a defect's cause, or a fix that never sticks.
 
-**Triggers:** `root cause`, `5 whys`, `fishbone`, `Ishikawa`, `cause and effect`, `Pareto`, `RCA`, `why did this happen`, `recurring problem`
+**Triggers:** `root cause`, `5 whys`, `fishbone`, `Ishikawa`, `cause and effect`, `Pareto`, `RCA`, `why did this happen`, `recurring problem`, `keeps happening`, `corrective action`, `containment`, `verify the cause`
 
 ### `continuous-improvement-skills:standard-work`
 
@@ -387,7 +387,7 @@ Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
 **Invoke:** `/continuous-improvement-skills:value-stream-mapping` — or just describe the task.
 
-**What it does:** Maps a process end to end in current and future state to expose waste and improve flow — the Rother & Shook Learning-to-See method adapted to office work: scope one product/service family with SIPOC, walk the process with one real item, hang a data box (cycle time, %complete-and-accurate, people, systems) under each step, capture queue time between steps, build the timeline ladder, and compute flow efficiency (value-added ÷ lead time); then tag the eight wastes and design a future state with an owned action plan. Fits any stream an analyst, attorney, ops manager, or developer runs — request-to-resolution, intake-to-filing, order-to-delivery, commit-to-deploy. Use when analyzing a whole process, drawing a current- or future-state map, measuring lead vs cycle time, or scoping with SIPOC.
+**What it does:** Maps a process end to end in current and future state to expose waste and improve flow — the Rother & Shook Learning-to-See method adapted to office work: scope one product/service family with SIPOC, walk the process with one real item, hang a data box (cycle time, %complete-and-accurate, people, systems) under each step, capture queue time between steps, build the timeline ladder, and compute flow efficiency (process time ÷ lead time); then tag the eight wastes and design a future state with an owned action plan. Fits any stream an analyst, attorney, ops manager, or developer runs — request-to-resolution, intake-to-filing, order-to-delivery, commit-to-deploy. Use when analyzing a whole process, drawing a current- or future-state map, measuring lead vs cycle time, or scoping with SIPOC.
 
 **Triggers:** `value stream mapping`, `VSM`, `current state`, `future state`, `process map`, `SIPOC`, `lead time`, `cycle time`, `waste`, `flow`, `flow efficiency`, `eight wastes`, `%C&A`, `where does all the time go`
 
@@ -401,9 +401,9 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **Invoke:** `/full-stack-dev-skills:backend-api-development` — or just describe the task.
 
-**What it does:** Builds lean FastAPI backends — routing and dependency injection, Pydantic models as the single validation/serialization layer, auth (session cookies vs JWT, chosen by client type), consistent error handling, pagination, and the auto-generated OpenAPI schema as the API contract. Use when creating or extending a REST API, adding authentication, fixing validation or error-handling inconsistencies, or designing endpoints.
+**What it does:** Builds lean FastAPI backends — routing and dependency injection, Pydantic models as the single validation/serialization layer, thin routes over feature-module services, auth (session cookies vs JWT, chosen by client type), one error shape with correct status codes, pagination on every list endpoint, and the auto-generated OpenAPI schema as the API contract. Use when creating or extending a REST API, adding authentication, fixing validation or error-handling inconsistencies, or designing endpoints.
 
-**Triggers:** `FastAPI`, `build an API`, `REST endpoint`, `pydantic validation`, `API auth`, `JWT vs session`, `API error handling`, `pagination endpoint`, `OpenAPI schema`, `dependency injection fastapi`, `CRUD API`
+**Triggers:** `FastAPI`, `build an API`, `REST endpoint`, `add an endpoint`, `pydantic validation`, `API auth`, `JWT vs session`, `API error handling`, `HTTP status codes`, `pagination endpoint`, `OpenAPI schema`, `dependency injection fastapi`, `CRUD API`
 
 ### `full-stack-dev-skills:database-and-orm`
 
@@ -503,7 +503,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:agentic-workflow-design` — or just describe the task.
 
-**What it does:** Designs reliable autonomous and multi-step agent workflows — deciding agent vs deterministic script, decomposing a task into steps and subtasks, defining tools and their contracts, adding verification, guardrails, and checkpoints, handling failure and human-in-the-loop review, and evaluating the workflow against real cases. Use when building an agent, an automation pipeline, or a multi-step LLM workflow.
+**What it does:** Designs reliable autonomous and multi-step agent workflows — deciding agent vs deterministic script, decomposing a task into steps and subtasks, defining tools and their contracts, adding verification, guardrails, and checkpoints, handling failure and human-in-the-loop review, and evaluating the workflow against real cases. Produces a workflow design doc: agent-vs-script verdict, step map with per-step checks, tool-contract table, guardrails, failure and escalation paths, and an eval plan. Use when building an agent, an automation pipeline, or a multi-step LLM workflow.
 
 **Triggers:** `agent`, `autonomous agent`, `agentic workflow`, `tool use`, `orchestration`, `multi-step`, `pipeline`, `human in the loop`, `guardrails`
 
@@ -575,7 +575,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:prompt-engineering` — or just describe the task.
 
-**What it does:** Writes effective, provider-agnostic prompts and instructions for LLM agents — stating the task and success criteria, giving the right context and only that, few-shot examples, an explicit output format, decomposing complex asks, and iterating against real test cases. Use when crafting a prompt, instruction, or system message, or debugging a flaky prompt that gives inconsistent or wrong results.
+**What it does:** Writes effective, provider-agnostic prompts and instructions for LLM agents — stating the task and success criteria, giving the right context and only that, few-shot examples, an explicit output format, decomposing complex asks, and iterating against real test cases. Delivers the prompt as a package: copyable prompt block, design notes, input assumptions, and eval cases. Use when crafting a prompt, instruction, or system message, or debugging a flaky prompt that gives inconsistent or wrong results.
 
 **Triggers:** `prompt`, `prompt engineering`, `system prompt`, `instructions`, `few-shot`, `output format`, `prompt not working`, `improve a prompt`
 
@@ -715,7 +715,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Writes and edits to Ken Adams clarity principles at a 5th-grade reading level (US Southeast), falling back to 8th grade only when precision demands it — short active sentences, everyday concrete words, one idea per sentence, technical terms explained in place, and a hard rejection of litigated "tested language," archaisms, doublets, and ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by name, or wants plain English, patient or client materials, easy-read text, or writing for low-literacy audiences.
 
-**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `5th grade reading level`, `easy to read`, `easy-read`, `patient materials`, `low literacy`, `simplest accurate version`
+**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `plain language`, `5th grade reading level`, `easy to read`, `easy-read`, `make this easier to read`, `simplify this letter`, `accessible language`, `patient materials`, `low literacy`, `simplest accurate version`
 
 ### `writing-skills:adams-smart-brevity`
 
@@ -807,7 +807,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Invoke:** `/safety-and-reliability-skills:sbar-structured-communication` — or just describe the task.
 
-**What it does:** Structures high-stakes workplace communication with the protocols high-hazard industries run on: SBAR for escalations (Situation, Background, Assessment, Recommendation with a deadline), I-PASS for transferring work (criticality, problem summary, action list, if-then contingencies, receiver read-back), closed-loop confirmation for critical instructions, and PACE graded assertiveness (Probe, Alert, Challenge, Emergency) for questioning a decision upward — drafting phrase ladders for the specific relationship and roleplaying the hard conversation first. Use when escalating an issue to a manager or treasurer, transitioning work for coverage or shift change, giving instructions that must not be misheard, or preparing to challenge a superior's call such as a suspicious approved payment.
+**What it does:** Structures high-stakes workplace communication with the protocols high-hazard industries run on: SBAR for escalations (Situation, Background, Assessment, Recommendation with a deadline), I-PASS for transferring work (criticality, problem summary, action list, if-then contingencies, receiver read-back), closed-loop confirmation for critical instructions, and PACE graded assertiveness (Probe, Alert, Challenge, Emergency) for questioning a decision upward — drafting phrase ladders for the specific relationship and roleplaying the hard conversation first. Use when escalating an issue to a manager, partner, or executive, transitioning work for coverage or shift change, giving instructions that must not be misheard, or preparing to challenge a superior's call such as a suspicious approved payment.
 
 **Triggers:** `SBAR`, `escalate this to`, `structured handoff`, `transition this work`, `coverage notes`, `read-back`, `closed-loop communication`, `graded assertiveness`, `PACE`, `speak up to the boss`
 

@@ -10,6 +10,8 @@ description: >-
   trials with a designed test. Triggers: design of experiments, DOE, factorial, fractional
   factorial, which factors actually matter, orthogonal array, Taguchi, robust design,
   one-factor-at-a-time is too slow.
+metadata:
+  version: "1.1.0"
 ---
 
 # Design of experiments
@@ -36,7 +38,11 @@ description: >-
 
 ## Do it
 `references/doe-method.md` has the design-choice table, aliasing in plain words, a worked
-prompt-factorial, Taguchi signal-to-noise, and the analysis walkthrough.
+prompt-factorial, Taguchi signal-to-noise, and the analysis walkthrough. The deliverable is three
+artifacts: a **run sheet** (the design matrix with factor levels, randomized order, and the
+replication/seed plan), an **effects table** (each effect, its alias statement, and whether it
+cleared the noise yardstick), and a **recommendation** naming the winning settings with the
+verification-run result.
 1. **Define the response and list candidate factors.** One measurable response (auto-match rate,
    eval pass rate, cycle time). For each factor set **two levels** — low/high, current/candidate —
    far enough apart to show an effect. **Human gate:** the process owner sets the safety limits;

@@ -257,7 +257,12 @@ Never store secrets, credentials, account numbers, or client data here.
   Also fixed this pass: INDEX.md capability-column extraction (106/123 rows truncated →
   8). New RULEs recorded above (arithmetic-verification pass; reciprocal-link pass);
   chicken-little Oracle-depth exception ratified. Merged: board-of-advisors-skills.
-  Retired to archive: 2 dental skills.
+  Retired to archive: 2 dental skills. FOLLOW-ON same day: text-optimization pass over
+  the 46 skills the review didn't line-check (5 optimizers + 5 verifiers, 0 must-fix):
+  19 optimized / 27 already-at-standard; dominant gap = missing deliverable contracts
+  (12 skills gained end-of-Do-it Deliverable blocks + rubric lines); ui-and-ux-inspection's
+  dormant Fitts/NASA-TLX retrofit wired into Do-it. PATTERN: "already_at_standard is an
+  expected verdict" in optimizer briefs prevents churn — 27/46 untouched by design.
 - 2026-08-11 (2) — library overhaul: archive + enhance + index + expansion wave
   (active library 123 skills / 15 plugins; 66 skills archived). User's 4-part request
   (enhance / suggest consolidations / build index / new skills in science, tech writing,

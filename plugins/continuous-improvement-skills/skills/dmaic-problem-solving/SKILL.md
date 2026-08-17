@@ -2,10 +2,18 @@
 name: dmaic-problem-solving
 description: >-
   Runs a Six Sigma DMAIC cycle — Define, Measure, Analyze, Improve, Control — to structure a
-  data-driven improvement project that measures and confirms cause before changing anything. Use when
-  structuring an improvement project, reducing defects or variation with rigor, or translating voice
-  of the customer into CTQs and a charter. Triggers: DMAIC, six sigma, define measure analyze improve
-  control, process improvement project, reduce defects, reduce variation, CTQ.
+  data-driven improvement project that measures and confirms cause before changing anything:
+  a signed project charter with voice of the customer translated into CTQs, an operationally
+  defined metric checked for trustworthiness before a baseline is drawn, a root cause verified
+  against data rather than opinion, a solution piloted against that baseline, and a control
+  plan that keeps the gain from reverting — with a tollgate review between phases. Use when
+  structuring an improvement project, reducing defects or variation with rigor, proving a fix
+  actually moved the metric, or translating voice of the customer into CTQs and a charter.
+  Triggers: DMAIC, six sigma, define measure analyze improve control, process improvement
+  project, reduce defects, reduce variation, CTQ, project charter, tollgate, control plan,
+  voice of the customer, prove the fix worked.
+metadata:
+  version: "1.1.0"
 ---
 
 # DMAIC problem solving
@@ -23,7 +31,9 @@ description: >-
 
 ## Do it
 Work the five phases in order, with a **tollgate** review between each — don't advance until the prior
-phase's deliverable is real. See `references/phase-toolkit.md` for each phase's checklist.
+phase's deliverable is real. See `references/phase-toolkit.md` for each phase's checklist. The
+assistant drafts every phase artifact — charter, data-collection plan, analysis, control plan — and
+runs the arithmetic; the human owns the data's provenance, tollgate sign-off, and the rollout decision.
 1. **Define.** Write a project charter: problem statement (quantified, blame-free), goal/target,
    scope, business case, team, timeline. Scope the process with **SIPOC**. Capture **voice of the
    customer** and translate it into **CTQs** (Critical-to-Quality characteristics) with measurable

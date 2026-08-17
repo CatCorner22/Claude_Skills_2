@@ -3,11 +3,15 @@ name: sql-for-analysts
 description: >-
   Writes, reviews, and optimizes analytical SQL — joins, GROUP BY aggregation, window functions,
   CTEs, subqueries, and date/time handling — with a working sense of performance (grain,
-  sargability, indexing). Use when turning a business question into a query for a report or
+  sargability, indexing). Delivers the query as a package: a grain comment on top, the
+  CTE-layered query, stated row-count/known-total validation, and dialect caveats. Use when
+  turning a business question into a query for a report or
   analysis, adding window logic like running totals or rankings, or reviewing a query for
   correctness and speed. Triggers: SQL, query, write a query, join, GROUP BY, aggregate, window
   function, OVER, PARTITION BY, running total, moving average, rank, lag, lead, CTE, subquery,
   QUALIFY, slow query, optimize query, group by grain.
+metadata:
+  version: "1.1.0"
 ---
 
 # SQL for analysts
@@ -16,9 +20,9 @@ description: >-
 - Translating a business question into an analytical query (aggregations, trends, rankings, cohorts) against a warehouse or database.
 - Adding window functions (running totals, moving averages, rank, period-over-period) or restructuring a query with CTEs.
 - Reviewing a query for correctness (grain, join fan-out, filter placement) or making a slow one faster.
-- Not for: choosing between OTBI/BI Publisher and hand-written SQL in Oracle Fusion → that's an OTBI
-  subject-area choice (archived: `oracle-otbi-skills:otbi-subject-area-selection`, restorable from
-  `archive/`). For profiling a dataset before you query it → see
+- Not for: deciding whether a platform's governed reporting layer (semantic model, subject areas)
+  should replace hand-written SQL → a platform policy call; record yours in
+  `references/your-environment.md`. For profiling a dataset before you query it → see
   `data-analytics-bi-skills:exploratory-data-analysis`.
 
 ## Do it
@@ -49,6 +53,12 @@ description: >-
    source. For speed: keep predicates **sargable** (compare the bare column, not `WHERE UPPER(col)=…`),
    filter early, select only needed columns, and ensure join/filter keys are indexed or clustered.
    See `references/query-patterns.md` for copy-ready patterns and dialect notes.
+9. **Deliver the query as a package, not bare SQL.** The finished deliverable contains: a one-line
+   grain comment on top (`-- grain: one row per customer-month`); the CTE-layered query; the
+   validation evidence from step 8, stated rather than just performed ("row count 1,204 matches
+   the source; June total ties to the dashboard"); and caveats (dialect substitutions, time zone,
+   any accepted fan-out). The assistant drafts the query and runs the checks; the human owns the
+   metric's business definition and names the trusted source to tie against.
 
 ## Why / learn
 The core shift is to **think in sets, not row-by-row loops**. SQL is declarative: you describe the

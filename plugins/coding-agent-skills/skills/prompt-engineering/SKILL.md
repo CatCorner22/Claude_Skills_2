@@ -3,10 +3,14 @@ name: prompt-engineering
 description: >-
   Writes effective, provider-agnostic prompts and instructions for LLM agents — stating the task
   and success criteria, giving the right context and only that, few-shot examples, an explicit
-  output format, decomposing complex asks, and iterating against real test cases. Use when crafting
+  output format, decomposing complex asks, and iterating against real test cases. Delivers the
+  prompt as a package: copyable prompt block, design notes, input assumptions, and eval cases.
+  Use when crafting
   a prompt, instruction, or system message, or debugging a flaky prompt that gives inconsistent or
   wrong results. Triggers: prompt, prompt engineering, system prompt, instructions, few-shot,
   output format, prompt not working, improve a prompt.
+metadata:
+  version: "1.1.0"
 ---
 
 # Prompt engineering
@@ -50,6 +54,16 @@ description: >-
    runs → add structure/examples and reduce ambiguity (and lower randomness/temperature if you control
    it). Hallucinated facts → supply the source material and instruct "use only the provided context;
    if it's not there, say so." More failure modes are in `references/prompt-patterns.md`.
+
+**Deliver the prompt as a package**, not bare text:
+- the prompt itself, in one copyable block;
+- design notes — what each constraint, example, and format rule is there to prevent;
+- assumptions made about the inputs (encoding, language, size, edge cases);
+- the eval cases used or recommended, the currently-failing ones first;
+- when iterating: what changed from the previous version and which failure it targets.
+
+The assistant drafts the prompt, examples, and eval cases; the human owns the success criteria
+and validates the prompt against real inputs before relying on it.
 
 ## Why / learn
 Two ideas carry almost all of prompt quality. First, **specificity and structure drive quality**: a

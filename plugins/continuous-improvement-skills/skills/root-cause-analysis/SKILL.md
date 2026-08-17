@@ -3,9 +3,14 @@ name: root-cause-analysis
 description: >-
   Finds the true cause of a recurring problem with 5 Whys, a fishbone/Ishikawa diagram across the 6M
   categories, and Pareto analysis, separating immediate containment from the root cause and verifying
-  the cause before any countermeasure. Use when diagnosing a recurring problem, chasing a defect's
-  cause, or a fix that never sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and
-  effect, Pareto, RCA, why did this happen, recurring problem.
+  the cause before any countermeasure — driving from a quantified, blame-free problem statement
+  through a toggle-the-cause verification test to an error-proofed countermeasure with an owner,
+  with Reason's slip/lapse/mistake/violation taxonomy so human error gets the right fix instead of
+  blame. Use when diagnosing a recurring problem, chasing a defect's cause, or a fix that never
+  sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and effect, Pareto, RCA, why did
+  this happen, recurring problem, keeps happening, corrective action, containment, verify the cause.
+metadata:
+  version: "1.1.0"
 ---
 
 # Root-cause analysis
@@ -19,6 +24,11 @@ description: >-
   page for alignment → see `continuous-improvement-skills:a3-thinking`.
 
 ## Do it
+A finished RCA is five artifacts: a quantified problem statement, a containment action labeled as
+such, a verified cause chain, an error-proofed countermeasure with owner and date, and a recurrence
+check that clears the containment. The assistant drafts the statement, why-chains, fishbone
+candidates, and Pareto tally; the human owns containment, the verification test, and the
+countermeasure decision.
 1. **Write a sharp problem statement.** State *what* is wrong, *where*, *when it started*, *how big*
    (magnitude/frequency), and *how you know* — with evidence, no cause and no blame. "AP posted 14
    duplicate payments in Q2, up from 2 in Q1" beats "AP is careless." A vague problem yields a vague

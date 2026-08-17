@@ -19,8 +19,9 @@ loads, tighten the description / cross-links.
 ## 3. Quality rubric
 A good response:
 - **Does the task:** produces a correct query at the stated grain, uses `GROUP BY` vs. window
-  functions appropriately, places filters in the right clause (`WHERE`/`HAVING`/`QUALIFY`), and
-  handles dates as half-open ranges.
+  functions appropriately, places filters in the right clause (`WHERE`/`HAVING`/`QUALIFY`),
+  handles dates as half-open ranges, and delivers it as a package — grain comment on top, stated
+  validation evidence, and caveats.
 - **Teaches:** explains *why* grain drives correctness (fan-out/double-counting), the logical query
   order, and what sargability means for speed — not just the syntax.
 - **Safe:** validates row counts / a known total, flags dialect differences (e.g. `QUALIFY`
