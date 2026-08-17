@@ -76,18 +76,14 @@ def sentences(text):
 
 
 LEAD_LIMIT = 150
+# A lead clause shorter than this is treated as too fragmentary to stand alone.
+LEAD_MIN_STANDALONE = 45
+# A parenthetical list set off by a PAIR of em-dashes: "Turns any material — a document,
+# a codebase, an exam syllabus — into retrieval practice".
+APPOSITIVE = re.compile(r"\s+[—–]\s+[^—–]{0,140}?\s+[—–]\s+")
 
 
-def lead_clause(what):
-    """The capability phrase a reader scans for: what the skill *does*, in one phrase.
-
-    House descriptions open 'Does X — mechanism, mechanism, mechanism', so the text before
-    the first em-dash/colon/semicolon is the capability statement and is usually short.
-    Falling back to 'first sentence' does not work here: that clause commonly runs 300-600
-    characters before its first period, which truncated 86% of this column when the index
-    was first generated. Order of attempts: lead clause -> drop a trailing parenthetical ->
-    cut at the last clause boundary before the limit -> hard word-boundary truncation.
-    """
+def _lead_split(what):
     cand = re.split(r"\s+[—–]\s+|:\s+|;\s+", what, maxsplit=1)[0].strip()
     if 12 <= len(cand) <= LEAD_LIMIT:
         return cand
@@ -103,6 +99,31 @@ def lead_clause(what):
                 return head[:j].strip().rstrip(",") + "…"
         return head.rsplit(" ", 1)[0].strip() + "…"
     return base
+
+
+def lead_clause(what):
+    """The capability phrase a reader scans for: what the skill *does*, in one phrase.
+
+    House descriptions open 'Does X — mechanism, mechanism, mechanism', so the text before
+    the first em-dash/colon/semicolon is the capability statement and is usually short.
+    Falling back to 'first sentence' does not work here: that clause commonly runs 300-600
+    characters before its first period, which truncated 86% of this column when the index
+    was first generated.
+
+    One correction on top of that split: when the first em-dash opens a *paired* appositive
+    rather than ending the clause, the split returns a fragment ("Turns any material",
+    "Tunes detection systems"). So if the first attempt comes back too short to stand alone,
+    drop paired appositives, refuse to cross a sentence boundary, and re-split. The
+    length gate matters — applying appositive-stripping unconditionally joins clauses
+    ungrammatically in descriptions whose pre-dash text was already complete.
+    """
+    first = _lead_split(what)
+    if len(first) >= LEAD_MIN_STANDALONE:
+        return first
+    stripped = APPOSITIVE.sub(" ", what).strip()
+    stripped = re.split(r"(?<=[.!?])\s+(?=[A-Z])", stripped)[0].strip()
+    second = _lead_split(stripped)
+    return (second if len(second) > len(first) else first).rstrip(". ")
 
 
 def index_fields(what):

@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "treasury-analyst-skills",
   "owner": {
-    "name": "blakereaganlaw-droid",
+    "name": "CatCorner22",
     "email": "blakereaganlaw@gmail.com"
   },
   "description": "A career-portable library of Claude Code Agent Skills: decision science, safety and reliability, writing and communication, collaboration, data analytics and BI, machine learning, coding agents and personas, learning science, math foundations, continuous improvement, and deep research. Every skill both does the task and teaches the reasoning. Domain-specific finance/Oracle plugins are preserved in archive/ (see archive/README.md).",
