@@ -122,7 +122,7 @@ utilization lands anywhere between 55% and 75%.
 | `Overhead_Rate` | 30% | of salary | finance standard |
 | `Bill_Rate` | 120 | $/hr | current rate card |
 | `Hours_Per_Month` | 160 | hr/person/mo | org standard workable month |
-| `Util_Base` | 65% | % of `Hours_Per_Month` | trailing 6-mo actual |
+| `Util_Base` | 65% | of `Hours_Per_Month` | trailing 6-mo actual |
 
 **Calculations sheet** — one row per line item, one column per month, every row filled
 across unchanged:

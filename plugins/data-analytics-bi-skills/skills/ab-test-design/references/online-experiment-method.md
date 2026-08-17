@@ -158,9 +158,12 @@ applied to your own scorecard: the most interesting number on it may be the assi
 Run the full machinery — assignment, logging, metric pipeline, analysis — with *identical*
 experiences in both arms (2009 survey paper; 2020 book) [snippet-only, cross-checked]:
 
-- A correctly operating system produces p < 0.05 about **5% of the time** — that is the pass
-  condition, not a bug. Many A/A runs (or one long one, re-analyzed on schedule) should show
-  roughly uniform p-values.
+- A correctly operating system produces p < 0.05 about **5% of the time** (across independent
+  replicates) — that is the pass condition, not a bug. **Many independent A/A runs** should
+  show roughly uniform p-values: separate runs, disjoint time windows analyzed independently,
+  or repeated re-randomization of one historical exposure log. Do not substitute one long run
+  re-analyzed on a schedule — nested looks at an accumulating sample are the §5 peeking setup
+  and will condemn a healthy randomizer.
 - What failures mean: frequent "significant" A/A results → broken randomization, correlated
   units (§2 mismatch), or variance mis-estimation; SRM in an A/A → assignment/logging bug found
   *before* it could void a real test.

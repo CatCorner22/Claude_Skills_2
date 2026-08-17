@@ -85,8 +85,10 @@ example review — is in `references/review-checklist.md`; task-oriented command
    when review confirms a real bug, contact-trace its copies with
    `coding-agent-skills:defect-epidemiology` before closing the fix — a confirmed defect is
    evidence about a population, not a line; and when the change is correct but looks like
-   more machine than the job needs, run the simplicity challenge in
-   `coding-agent-skills:soviet-space-graphite` before approving the extra moving parts.
+   more machine than the job needs, review it against
+   `full-stack-dev-skills:lean-code-principles` before approving the extra moving parts —
+   and if the *whole solution*, not the code, is the overbuilt thing, run the Pencil Pass
+   in `coding-agent-skills:soviet-space-graphite`.
 7. **Write feedback that names the line, the concern, and a fix.** Separate blocking from
    nice-to-have (`nit:` prefix), ask questions where you might lack context, praise what's
    genuinely good, and approve when the change is correct and clear — not when it is

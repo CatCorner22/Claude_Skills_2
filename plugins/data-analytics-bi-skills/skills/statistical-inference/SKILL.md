@@ -25,6 +25,9 @@ description: >-
   `data-analytics-bi-skills:ab-test-design` (this skill owns the analysis once the data is in);
   claiming causation from observational (non-randomized) data →
   `data-analytics-bi-skills:causal-inference`.
+- Not for: sizing a survey sample → see `data-analytics-bi-skills:survey-and-sampling-design`.
+  The sizing split: power/MDE sizing for a *test* is step 2 here; margin-of-error sizing for
+  a *survey estimate* is that skill's.
 
 ## Do it
 1. **State the population claim and hypotheses first — before seeing results.** Write the null `H₀`

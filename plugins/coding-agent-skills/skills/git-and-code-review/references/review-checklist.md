@@ -43,8 +43,9 @@ that a blocking comment means "wrong result possible," not "not how I'd write it
 - No copy-paste duplication that should be a shared helper; no dead code.
 - Comments explain *why*, not *what the code already says*.
 - Is the mechanism proportionate to the job? Correct-but-overbuilt is a real finding — raise
-  it as a question, and for a serious case run the simplicity challenge in
-  `coding-agent-skills:soviet-space-graphite`.
+  it as a question, and review the code against
+  `full-stack-dev-skills:lean-code-principles`; if the *whole solution*, not the code, is
+  what's overbuilt, run the Pencil Pass in `coding-agent-skills:soviet-space-graphite`.
 
 ## Tests and verification
 - Is there a test that would fail without this change and passes with it?
@@ -65,8 +66,8 @@ Its findings, verified via search snippets and marked accordingly:
   ability to find defects diminishes beyond ~400 LOC [snippet-only].
 - Defect density drops significantly at inspection rates **faster than ~500 LOC per
   hour** [snippet-only].
-- A review of 200–400 LOC over **60–90 minutes** yielded **70–90% defect discovery** in
-  the studied population [snippet-only].
+- SmartBear pairs those two findings into a target: a 200–400 LOC review taking
+  **60–90 minutes** *should yield* **70–90% defect discovery** [snippet-only].
 
 Practical consequences:
 - A large feature ships as a stack of small PRs, each independently reviewable, rather

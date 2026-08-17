@@ -6,9 +6,9 @@ data. Anything sensitive goes in `your-environment.private.md` — that suffix i
 and never committed.
 
 ## Recurring materials
-- <Material 1 — e.g., "NACHA operating rules summaries" — source location, question-bank
-  location, target: exam / permanent>
-- <Material 2 — e.g., "our Oracle CM configuration conventions" — source, bank, target>
+- <Material 1 — e.g., "civil-procedure deadline rules" or "cloud-architect exam domains" —
+  source location, question-bank location, target: exam / permanent>
+- <Material 2 — e.g., "our platform's incident-severity conventions" — source, bank, target>
 
 ## Deadlines and retention targets
 - <Exam or certification: name, date, blueprint/topic weights if published>

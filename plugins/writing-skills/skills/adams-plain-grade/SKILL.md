@@ -7,9 +7,10 @@ description: >-
   place, and a hard rejection of litigated "tested language," archaisms, doublets, and
   ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by
   name, or wants plain English, patient or client materials, easy-read text, or writing for
-  low-literacy audiences. Triggers: adams plain grade, plain grade, plain english, 5th grade
-  reading level, easy to read, easy-read, patient materials, low literacy, simplest accurate
-  version.
+  low-literacy audiences. Triggers: adams plain grade, plain grade, plain english, plain
+  language, 5th grade reading level, easy to read, easy-read, make this easier to read,
+  simplify this letter, accessible language, patient materials, low literacy, simplest
+  accurate version.
 metadata:
   version: "1.1.0"
   source: >-

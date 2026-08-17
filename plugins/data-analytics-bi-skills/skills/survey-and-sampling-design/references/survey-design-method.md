@@ -169,7 +169,11 @@ concentrates. Decision attached: which of three candidate fixes gets funded.
    process everyone loves to hate). Design spends on follow-up waves and a neutral
    instrument, not on extra n.
 3. **Design**: stratified random by unit — Operations 600, Sales 400, Support 200 —
-   proportional allocation so each unit's estimate stands on its own.
+   proportional allocation, which buys the tightest *overall* estimate. The price is
+   per-unit precision: at n = 146/97/49 the per-unit margins are roughly ±7 / ±9 / ±12
+   points (1.96·√(0.25/n)·FPC), not ±5. If each unit's estimate must stand on its own at
+   ±5, use equal or minimum-n allocation instead — and note that ±5 in Support means ~132
+   completes from a unit of 200, a near-census of that stratum.
 4. **Size**: ±5 points at 95% → n₀ = 385; FPC at N = 1,200 → 292. Proportional split:
    146 / 97 / 49. Historical response rate 40% → invite 730 (365 / 243 / 122). Sanity
    check: inviting 730 of 1,200 is close to a census — consider inviting all 1,200 and
@@ -182,7 +186,8 @@ concentrates. Decision attached: which of three candidate fixes gets funded.
    (no double-barrels); two reversed items guard acquiescence; overall-satisfaction item
    placed *before* the specific-problem battery.
 7. **Analysis plan, precommitted**: estimate the ≥2-hours proportion overall and per
-   stratum with 95% intervals; compare units. Analysis itself runs under
+   stratum with 95% intervals (per-stratum intervals are the wide ones from step 3);
+   compare units. Analysis itself runs under
    `data-analytics-bi-skills:statistical-inference`.
 
 ## 7. The litigation-adjacent shape (generically framed)

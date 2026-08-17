@@ -7,7 +7,7 @@ description: >-
   receiver read-back), closed-loop confirmation for critical instructions, and PACE graded
   assertiveness (Probe, Alert, Challenge, Emergency) for questioning a decision upward — drafting
   phrase ladders for the specific relationship and roleplaying the hard conversation first. Use
-  when escalating an issue to a manager or treasurer, transitioning work for coverage or shift
+  when escalating an issue to a manager, partner, or executive, transitioning work for coverage or shift
   change, giving instructions that must not be misheard, or preparing to challenge a superior's
   call such as a suspicious approved payment. Triggers: SBAR, escalate this to, structured
   handoff, transition this work, coverage notes, read-back, closed-loop communication, graded
@@ -82,7 +82,7 @@ heroism. The evidence is unusually strong for a communication intervention: the 
 bundle across 9 hospitals and 10,740 admissions cut medical errors 23% and preventable adverse
 events 30% with no increase in handoff time [snippet-only], and VA team training showed an 18%
 surgical mortality decline in trained facilities versus 7% in untrained, with a dose-response
-relationship [snippet-only]. In treasury terms, PACE is the human barrier on the
+relationship [snippet-only]. In any approval chain, PACE is the human barrier on the
 business-email-compromise bowtie (see `safety-and-reliability-skills:bowtie-barrier-analysis`):
 the junior analyst who challenges the suspicious approved wire is a control, and the ladder is
 what makes that control fire. One caution the evidence also teaches: copying the form without

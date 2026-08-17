@@ -26,7 +26,10 @@ Examples of the handoff:
 - "Will the vendor deliver by Q3?" → your delivery history with this vendor and vendors
   like it: 9 of 30 comparable commitments landed on time → prior ≈ 30%.
 - "Is this alert a real incident?" → the alert channel's own resolved history: 2% of the
-  last 1,000 fired alerts were true incidents → prior = 2%.
+  last 1,000 fired alerts were true incidents → prior = 2%. Note which population that
+  rate is over: the share of *fired alerts* that resolved true is already post-alarm, so
+  it is your answer for a fired alert — do not then update it again on "the alert fired."
+  §4 starts from the pre-alarm rate instead.
 
 When no reference class exists, state a judgment prior and *label it as judgment* — it is
 still better written down than implicit, because an implicit prior defaults to whichever
@@ -58,9 +61,9 @@ Two habits make this operational:
 ## 4. Updating with counts — worked alert triage
 
 Setting (domain-neutral): a monitoring flag — fraud rule, failing check, quality alarm —
-fires. History: 2% of flagged-population cases are true issues (prior); the flag catches
-90% of true issues; it also fires on 10% of clean cases. The flag just fired. How worried
-should anyone be?
+fires. History: 2% of all monitored cases are true issues — the prior, taken *before* the
+flag is known; the flag catches 90% of true issues; it also fires on 10% of clean cases.
+The flag just fired. How worried should anyone be?
 
 Build the whole-number table. Out of 10,000 cases:
 

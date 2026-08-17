@@ -2,26 +2,24 @@
 name: assertion-evidence-deck
 description: >-
   Builds assertion-evidence presentations (the Marshall/Alley method: one full-sentence claim per
-  slide, proven by a visual, every number sourced) from verified analysis or configuration findings
-  — for data-analysis results, Oracle Fusion Cash Management, reconciliation, audit findings, and
-  University of Tennessee Controller or leadership updates. Turns verified output into slides; it
-  does not run the analysis or Oracle diagnosis. Use when the user asks for a deck, slides,
-  PowerPoint, briefing, readout, or leadership/Controller update on Oracle CM, DASH, unreconciled
-  items, parse/matching/tolerance/transaction-creation rules, cash positioning, audit remediation,
-  or an analysis result — even without saying "assertion-evidence" — or to audit an existing deck.
-  Triggers: build a deck, make slides, PowerPoint, briefing, leadership update, Controller update,
-  readout, TED-style technical talk, sentence-headline slides, snorkel vs scuba, turn this report
-  into slides, audit my deck.
+  slide, proven by a visual, every number sourced) from verified findings — an analysis result, an
+  audit or review finding, a process-change proposal, a technical design. Turns verified output
+  into slides; it does not run the underlying analysis. Use when the user asks for a deck, slides,
+  PowerPoint, briefing deck, readout, or leadership update on an analysis result, finding, or
+  proposal — even without saying "assertion-evidence" — or to audit an existing deck. Triggers:
+  build a deck, make slides, PowerPoint, briefing deck, leadership update, readout, TED-style
+  technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
+  my deck.
 ---
 
 # Assertion-evidence deck
 
-Build presentations that survive an auditor, a skeptic, and a busy Controller. Every slide states
+Build presentations that survive an auditor, a skeptic, and a busy decision-maker. Every slide states
 one claim in a full sentence and proves it with a picture; every number carries a source.
 
 ## When to use
-- Turning a verified analysis, an Oracle Cash Management config review, or an audit-response into
-  slides — a deck, briefing, readout, or leadership/Controller update.
+- Turning a verified analysis, a system-configuration review, or an audit-response into
+  slides — a deck, briefing, readout, or leadership update.
 - Building a "TED-style" technical talk with sentence-headline slides instead of bullet dumps.
 - Auditing an existing `.pptx` against the assertion-evidence checklist.
 - Not for: performing the underlying data analysis → use the data-analytics/statistics skills; the
@@ -29,11 +27,15 @@ one claim in a full sentence and proves it with a picture; every number carries 
   installed (archived: `oracle-fusion-finance-skills:fusion-cm-production-troubleshooting`, restorable
   from `archive/`); XML-level `.pptx` editing the builder can't express → the `pptx`
   skill. This skill turns *verified* output into slides; run the analysis under its own skill first.
+- Not for: getting a decision from one written page — the answer-first decision memo (BLUF, costed
+  options, an ask the reader can sign) → `collaboration-skills:executive-briefing`. That skill owns
+  the one-page decision document and routes here when the briefing becomes slides; this skill owns
+  the slide deck.
 
 ## Do it
 Run seven stages in order. Each names what it produces, so you can stop, hand off, or resume at any
-boundary. **Skipping stage 2 is the failure mode that matters** — a deck that reaches a Controller
-with an unsourced number costs more credibility than one that openly reports a gap.
+boundary. **Skipping stage 2 is the failure mode that matters** — a deck that reaches a
+decision-maker with an unsourced number costs more credibility than one that openly reports a gap.
 
 | # | Stage | Produces |
 |---|---|---|
@@ -57,9 +59,7 @@ name, and comparison that reaches a slide must trace to a named source with a da
 **source ledger** (claim, value, source, source date, tier). Tier each claim: **Verified** (read
 from a named artifact this session — goes on a slide), **Reported** (from the user or a prior
 summary — slide only with confirmation and an "as reported" tag), **Inferred** (derived/estimated/
-remembered — never a bare number on a slide; verify it or convert it to a stated gap). For UT Oracle
-CM work, read `references/oracle-cm-domain.md` for vocabulary and where live figures live — treat it
-as orientation only, never as evidence.
+remembered — never a bare number on a slide; verify it or convert it to a stated gap).
 
 **Stage 3 — Choose the spine.** Write the headlines first, as a plain numbered list, and show them
 to the user before building anything — the headline list *is* the talk. Each headline states a
@@ -68,14 +68,14 @@ at 28 pt across 11.52 in — verify by rendering, not counting).
 
 | Weak | Strong |
 |---|---|
-| Transaction Creation Rules | Transaction Creation Rules generate more noise than signal |
-| Tolerance settings | A single 30-day tolerance window undermines date integrity |
-| Next steps | Enabling AutoRecon requires three configuration changes first |
+| Ticket backlog | The backlog doubled in Q3 while inflow stayed flat |
+| Retry configuration | One unbounded retry loop causes 80% of pipeline failures |
+| Next steps | Intake form v2 cut median triage time from 6 days to 2 |
 
-A narrative arc for a findings/remediation talk: (1) inherited condition → (2) the system as it
-actually runs (one map, with scale) → (3) defects, one headline each → (4) what the team built →
-(5) evidence it works, honestly bounded → (6) what remains open → (7) the ask → (8) summary
-(restate the stage-1 claim).
+A narrative arc for a findings-and-remediation talk: (1) the starting condition → (2) the system or
+process as it actually runs (one map, with scale) → (3) findings, one headline each → (4) what was
+changed or built → (5) evidence it works, honestly bounded → (6) what remains open → (7) the ask →
+(8) summary (restate the stage-1 claim).
 
 **Stage 4 — Design each slide.** Read `references/ae-method.md` for the full checklist and
 evidence-type guide. Three style rules govern every body slide: (1) the headline is a
@@ -88,8 +88,9 @@ claim — distribution → chart, sequence → flow diagram, magnitude → 2–4
 labeled diagram. Over ~40 body words means the claim is too big — split the slide.
 
 **Stage 5 — Build the file.** Prefer **Path A**, the bundled builder: write a deck spec as JSON and
-run `python scripts/build_deck.py deck_spec.json -o output.pptx` (add `--brand ut` for the UT
-palette). It encodes the geometry, typography, and colors in `references/design-tokens.md`, so
+run `python scripts/build_deck.py deck_spec.json -o output.pptx` (neutral palette by default;
+`--brand ut` only to match a legacy UT-branded deck). It encodes the geometry, typography, and
+colors in `references/design-tokens.md`, so
 slides come out compliant, and it rejects a headline that busts the two-line budget rather than
 overflowing it. `assets/deck_spec_example.json` is a worked example; `--schema` prints the field
 list and the eight slide kinds. **Path B** — the official Microsoft template Melissa Marshall
@@ -118,7 +119,7 @@ looks at one picture, and listens. The method also disciplines the *speaker* —
 cannot be written as a falsifiable sentence signals a slide with no point, which is worth
 discovering while drafting rather than mid-talk. The **snorkel/scuba** split keeps the screen at the
 "so what?" level while the mechanism waits in the notes for questions. And the governing evidence
-rule is an asymmetry every reconciler already knows: **a wrong number costs more than a missing
+rule is an asymmetry: **a wrong number costs more than a missing
 number.** A missing figure invites a question you can answer with command of the problem; a wrong
 figure, once found, retroactively taints every correct figure beside it, because the audience can no
 longer tell which claims were checked. Prefer the honest gap.
@@ -132,25 +133,24 @@ longer tell which claims were checked. Prefer the honest gap.
 - Unsourced number → verify it against a named artifact, or convert it to a stated gap.
 - Fifty slides for a 20-minute slot → budget ~1 minute per body slide in stage 1 and cut to fit.
 - Jargon-only headline for a leadership audience → keep the term, add the consequence ("…, which
-  strands real subledger activity").
-- Tennessee Orange text on white → it fails WCAG contrast; set text in Smoky Mountain Gray (see
-  design-tokens).
+  delays every downstream report").
+- Brand accent used as body text → most saturated accents fail WCAG contrast on white; set body
+  text in the palette's dark neutral (see design-tokens).
 
 ## Tailor to your environment
 Record your setup in `references/your-environment.md` (keep real figures, client names, and audit
 numbers in `your-environment.private.md`, which is git-ignored). Capture your audiences and the
-decisions each deck serves, your brand palette and fonts (the tokens ship with the UT System
-defaults), the artifacts your figures come from, and any house deck conventions. For UT Oracle Cash
-Management work, `references/oracle-cm-domain.md` carries the ecosystem vocabulary and the map of
-where live figures live — always re-read the underlying artifact before any figure lands on a slide.
+decisions each deck serves, your brand palette and fonts (the tokens ship with a neutral default;
+the UT System palette is preserved as the `ut` option), the artifacts your figures come from, and
+any house deck conventions.
 
 ## References
 - references/ae-method.md — full checklist, evidence-type guide, failure modes, before/after examples
-- references/design-tokens.md — verified geometry, UT System palette and typography, font-substitution rule
+- references/design-tokens.md — verified geometry and typography, neutral palette default, legacy UT System brand pack, font-substitution rule
 - references/evidence-discipline.md — claim tiers, source-ledger format, source-tag wording, gap language
-- references/oracle-cm-domain.md — Oracle CM vocabulary, processing chain, where live figures live
+- references/oracle-cm-domain.md — legacy domain reference (Oracle CM vocabulary, processing chain, where live figures live) — read only if you work that system
 - references/your-environment.md — your audiences, brand, and artifacts (add when supplied)
 
 ## Scripts
-- `scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand ut|neutral` and `--font` control theme.
+- `scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|ut` and `--font` control theme.
 - `scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; exits non-zero on error.

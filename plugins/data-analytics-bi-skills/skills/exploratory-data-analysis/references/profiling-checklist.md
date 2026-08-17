@@ -121,20 +121,27 @@ worse?" A 200k-row CSV arrives: `item_id, category, opened, closed, amount, owne
   impute away. `category` has 23 distinct values for what should be 8 (case and punctuation
   variants). `amount` has 41 negatives — reversals, per the source team, i.e. real data.
 - **Univariate (step 4).** Completion days: mean 11.2, median 4 — strong right skew; the
-  "typical" completion is 4 days and any average-based SLA claim would mislead. Histogram
+  "typical" completion is 4 days and any average-based SLA claim would mislead. Completion
+  days exist only for closed items: 12% of items are still open, i.e. right-censored, and
+  open items skew long, so every duration figure here is optimistic. Histogram
   shows a spike at exactly 90 days — an auto-close policy, not behavior.
 - **Outliers (step 5).** IQR fence flags 2.1% of durations. Investigation of the top ten:
   seven genuine long-runners, two data errors (closed date year-typo 2035), one unit error.
   Three different fixes; zero blanket deletions.
 - **Bivariate (step 6).** Median completion days by category (group-by, boxplots): two
   categories run 3× the rest — but both are also the categories with the auto-close spike,
-  so the gap may be policy, not workload. Labeled a hypothesis for follow-up.
+  so the gap may be policy, not workload. Labeled a hypothesis for follow-up. The "is it
+  getting worse" half of the question needs a like-for-like cohort comparison: group items
+  by *opened* month and measure every cohort at the same age (e.g. share closed within 30
+  days of opening) — a naive trend over closed items scores recent months only on their
+  fast finishers, because their slow items are still open, and so looks deceptively good.
 - **Plot check (step 7).** The duration-vs-amount correlation is r ≈ 0.02, "no
   relationship" — but the scatter shows two separate clouds (small routine items;
   large reviewed items), each with its own positive slope. Simpson's-pattern lead recorded.
 - **Memo (step 8).** Grain warning (assignment vs. item), the auto-close artifact, the
   category variants → mapping table, the 2035 typos, and the two-clouds lead; cleaning list
-  handed to `data-analytics-bi-skills:data-cleaning`, caveat recorded that pre-2023 data
+  handed to `data-analytics-bi-skills:data-cleaning`; caveats recorded that durations are
+  censored at 12% (open items appear in no completion figure) and that pre-2023 data
   lacks `owner` entirely.
 
 ## Tool notes

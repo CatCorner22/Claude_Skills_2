@@ -34,6 +34,9 @@ description: >-
 - Not for: negotiating the substance once you are in the room → see
   `decision-science-skills:principled-negotiation`; this skill designs the container,
   not the bargaining.
+- Not for: working out who must be in the room at all — power, interest, engagement
+  moves → see `collaboration-skills:stakeholder-mapping`; this skill designs the
+  meeting for the people the map surfaces.
 
 ## Do it
 Full templates — the decision-list agenda, the four decision rules, silent-start
@@ -72,7 +75,8 @@ mechanics, the decision-log format, and the recurring-meeting audit — are in
 
 Division of labor: the assistant drafts the decision-list agenda from a stated purpose,
 red-checks an existing agenda item by item, and converts a transcript or notes into the
-decision log. The human owns the invite list, ratifies each decision rule, and makes
+decision log. The human owns the invite list (map it with
+`collaboration-skills:stakeholder-mapping`), ratifies each decision rule, and makes
 the calls in the room.
 
 ## Why / learn

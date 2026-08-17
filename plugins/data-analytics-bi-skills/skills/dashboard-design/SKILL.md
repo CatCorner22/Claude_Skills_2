@@ -53,9 +53,10 @@ metadata:
    `data-analytics-bi-skills:sql-for-analysts`.
 4. **Choose the chart from the question, not from taste.** Match the visual to the analytical question:
    comparison → bar; trend over time → line; composition → stacked bar/100% bar (rarely pie);
-   distribution → histogram/box; relationship → scatter; part-to-whole over time → area. The decision
-   table in `references/chart-selection.md` is ordered by Cleveland & McGill's perception ranking —
-   when in doubt, a plain bar or line beats a fancy chart.
+   distribution → histogram/box; relationship → scatter; part-to-whole over time → area. Each row of
+   the decision table in `references/chart-selection.md` puts the value you most need compared into
+   the highest-ranked encoding that question allows, per Cleveland & McGill — when in doubt, a plain
+   bar or line beats a fancy chart.
 5. **Build a visual hierarchy.** Put the most important number or chart **top-left** (where the eye
    starts), group related items, and follow a headline-then-support pattern: the answer big and first,
    the breakdown beneath it. Size and position should mirror importance.
@@ -117,8 +118,9 @@ tool's own build path (wire tool-specific build notes into this file); for color
 `dataviz`.
 
 ## References
-- references/chart-selection.md — the perception-ranked chart-by-question table, KPI definition
-  template, layout and decluttering method, and a worked domain-neutral example (a work-queue
-  dashboard designed end to end)
+- references/chart-selection.md — the chart-by-question decision table (each row puts the compared
+  value into the highest-ranked encoding that question allows, per Cleveland & McGill), KPI
+  definition template, layout and decluttering method, and a worked domain-neutral example (a
+  work-queue dashboard designed end to end)
 - references/your-environment.md — your BI tool, audiences, KPI targets, and conventions (sanitized
   stub; live detail goes in the `.private.md` twin)

@@ -37,6 +37,8 @@ over formulas — and inoculates against the standard fallacies.
   see `decision-science-skills:reference-class-forecasting` (it consumes the
   base-rate discipline this skill teaches, and owns the base-rate-anchoring
   workflow).
+- Not for: running belief revision on a live decision — priors, likelihood ratios,
+  update journals → see `decision-science-skills:bayesian-updating`.
 - Not for: weighing competing explanations of the same body of evidence → see
   `decision-science-skills:competing-hypotheses-analysis`.
 - Not for: failure-time modeling — Weibull fits, MTBF, availability → see

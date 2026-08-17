@@ -38,8 +38,9 @@ A good response:
   trade-off (truthful record vs linear story) and why the golden rule exists.
 - **Routes the seams:** a real bug confirmed in review → contact-trace copies via
   `coding-agent-skills:defect-epidemiology` before closing; comment tone that indicts the
-  author → `collaboration-skills:feedback-that-lands`; correct-but-overbuilt →
-  `coding-agent-skills:soviet-space-graphite`; "phase is done, build on it" claims →
+  author → `collaboration-skills:feedback-that-lands`; correct-but-overbuilt code →
+  `full-stack-dev-skills:lean-code-principles` (an overbuilt *whole solution* → the Pencil
+  Pass in `coding-agent-skills:soviet-space-graphite`); "phase is done, build on it" claims →
   `coding-agent-skills:the-foreman`; deleting long-standing code → scream test /
   `coding-agent-skills:software-archaeology`.
 - **Stays honest:** review-size/pacing numbers (200–400 LOC, ~500 LOC/hour, 60–90 min,

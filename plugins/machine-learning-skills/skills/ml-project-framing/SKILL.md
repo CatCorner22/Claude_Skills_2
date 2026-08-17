@@ -38,7 +38,8 @@ metadata:
 2. **Define the target precisely.** Name exactly what you predict, its type (a number → regression; a
    category → classification; an event over a window → time-to-event or a windowed label), the
    observation window, and how it is actually measured/labeled. "Predict a late payment" is not yet a
-   target; "will invoice *i* be paid > 30 days past due, judged 45 days after issue" is. The type
+   target; "will invoice *i* be paid > 30 days past due — on net-30 terms, paid after issue + 60 —
+   judged at issue + 75, still-unpaid counted late" is. The type
    routes the eventual build: number/category → `machine-learning-skills:supervised-modeling`; a
    series over time → `machine-learning-skills:time-series-forecasting`; unusual-instance detection
    with scarce labels → `machine-learning-skills:anomaly-detection`. If the label comes from human

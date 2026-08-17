@@ -162,8 +162,9 @@ print(m["_merge"].value_counts())
 The 24 unmatched rows are the *deliverable* of the merge audit — each one is a question for
 the system owners, not noise to drop. Only after they're explained do you choose the final
 join type and record why. Note what made this work: bytes inspected first (BOM, cp1252,
-semicolons), IDs read as strings on both sides (a numeric read would have made
-`004217` ≠ `4217` unfixable), keys normalized to one convention, uniqueness proven, and the
+semicolons), IDs read as strings on both sides (read numerically, both sides collapse to
+`4217` and the documented 6-wide convention is gone; a string/numeric mix then refuses to
+merge at all), keys normalized to one convention, uniqueness proven, and the
 outer-join audit read before any rows were discarded.
 
 ## Feed-validation contract template
