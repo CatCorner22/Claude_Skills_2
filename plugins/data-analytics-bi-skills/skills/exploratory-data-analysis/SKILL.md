@@ -28,10 +28,11 @@ metadata:
 - Deciding what to clean or transform, or checking whether a metric is even measurable in the data.
 - Not for: actually fixing the issues you find (imputing, dedup, reshaping) → see
   `data-analytics-bi-skills:data-cleaning`.
-- Not for: the variable-level summary itself — choosing and computing central tendency, spread,
-  shape, and percentiles (mean vs. median, SD vs. IQR, five-number summary) → see
-  `data-analytics-bi-skills:descriptive-statistics`. EDA decides *which* variables deserve a
-  summary; that skill produces the summary.
+- Not for: the measure-selection craft — which summary is defensible for a given distribution,
+  the robust alternatives and when they are required, and reporting a five-number summary as a
+  deliverable → see `data-analytics-bi-skills:descriptive-statistics`. This skill computes
+  centre, spread, and shape as **screening signals** (is it skewed? are there outliers? does the
+  grain hold?); that skill owns choosing and defending the summary you publish.
 - Not for: testing whether a pattern you found generalizes beyond this sample — that is
   confirmatory work → `data-analytics-bi-skills:statistical-inference`. EDA generates
   hypotheses; it does not certify them.
