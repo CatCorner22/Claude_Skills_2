@@ -3,9 +3,9 @@ name: ab-test-design
 description: >-
   Designs trustworthy online controlled experiments — the design-and-operations half of A/B
   testing, before any data arrives: randomization unit choice and interference, minimum
-  detectable effect (MDE) sizing, sample ratio mismatch (SRM) as the first validity check,
+  detectable effect sizing, sample ratio mismatch as the first validity check,
   the peeking problem and pre-committed stopping rules, guardrail metrics plus an overall
-  evaluation criterion (OEC), A/A tests, novelty and primacy effects, and Twyman's law.
+  evaluation criterion, A/A tests, novelty and primacy effects, and Twyman's law.
   Analysis of a finished test (p-values, significance) belongs to
   data-analytics-bi-skills:statistical-inference; offline multi-factor factorial studies
   belong to continuous-improvement-skills:design-of-experiments.
@@ -14,7 +14,7 @@ description: >-
   mismatch, SRM, peeking, minimum detectable effect, MDE, guardrail metric, A/A test, overall
   evaluation criterion, OEC, Twyman's law, novelty effect.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from docs/research/general-use-expansion-research.md §2 (general-use expansion wave
     dossier; Kohavi/Tang/Xu canon). Provenance marks carried from the dossier: [snippet-only,

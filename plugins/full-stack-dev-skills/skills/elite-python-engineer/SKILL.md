@@ -9,11 +9,11 @@ description: >-
   tests, and CI-ready pyproject.toml, pre-commit, and GitHub Actions config. Use for any
   production-grade Python task — new code, code review, refactoring, architecture,
   performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
-  Triggers: python, write python, refactor, code review, python architecture, fastapi,
-  pydantic, uv, ruff, ty, structlog, type hints, python logging, error handling, migrate to
-  uv, elite python engineer, production python.
+  Triggers: pythagoras, write python, refactor, principal python review, python
+  architecture, production-grade python, pydantic, uv, ruff, ty, structlog, type hints,
+  python logging, error handling, migrate to uv, elite python engineer, production python.
 metadata:
-  version: "1.3"
+  version: "1.4.0"
   author: Grok Team (synthesized 2026 ecosystem knowledge); adapted to house standard
 ---
 

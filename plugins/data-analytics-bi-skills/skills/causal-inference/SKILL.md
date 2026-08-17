@@ -2,8 +2,8 @@
 name: causal-inference
 description: >-
   Establishes whether X actually caused Y when there was no experiment — draws the causal DAG
-  first (confounders, mediators, colliders; backdoor thinking in plain language), then names
-  what identifies the effect: randomization when available (that path belongs to
+  first (confounders, mediators, colliders; backdoor thinking), then names what identifies
+  the effect: randomization when available (that path is
   continuous-improvement-skills:design-of-experiments), otherwise the quasi-experimental toolkit
   — difference-in-differences, instrumental variables, regression discontinuity — each with its
   key assumption in plain terms. Applies Hill's considerations as viewpoints, never a checklist,
@@ -14,7 +14,7 @@ description: >-
   confounder, confounding, collider bias, difference-in-differences, instrumental variable,
   regression discontinuity, natural experiment.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from docs/research/general-use-expansion-research.md §1 (general-use expansion wave
     dossier). Provenance marks carried from the dossier: [snippet-only, cross-checked] =

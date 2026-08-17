@@ -1,20 +1,18 @@
 ---
 name: exploratory-data-analysis
 description: >-
-  Profiles a dataset before any modeling or reporting, in the Tukey (1977) tradition of
-  looking at the data before summarizing it: establishes shape and grain (what one row
-  represents, tested by key uniqueness), checks column types against meaning, quantifies and
-  classifies missingness per column, goes univariate first (mean vs. median for skew,
-  SD/IQR, histograms) then bivariate (correlation, cross-tabs, group-by), flags outliers
+  Profiles a dataset before any modeling or reporting, in the Tukey tradition: establishes
+  shape and grain (what one row represents, tested by key uniqueness), checks column types
+  against meaning, quantifies and classifies missingness per column, goes univariate first
+  (distributions, skew) then bivariate (correlation, cross-tabs, group-by), flags outliers
   (IQR fence, z-score) and investigates before deleting, plots before trusting summaries
   (Anscombe's quartet), and ends in a data-quality memo handed to cleaning.
   Use when first inspecting a new dataset, sizing up data quality, or deciding what needs
   fixing before analysis. Triggers: EDA, exploratory data analysis, data profiling, profile
-  the data, first look at data, distribution, summary statistics, central tendency, spread,
-  outliers, correlation, cross-tab, missing data, data quality check, get to know the data,
-  what does one row represent, Anscombe.
+  the data, first look at data, distribution, outliers, correlation, cross-tab, missing data,
+  data quality check, get to know the data, what does one row represent, Anscombe.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     The stance and sequence follow Tukey, Exploratory Data Analysis (1977); the
     plot-before-trusting-summaries demonstration is Anscombe's quartet (The American
@@ -28,8 +26,11 @@ metadata:
 - Sizing up data quality (missingness, outliers, inconsistent categories) before you build anything on it.
 - Deciding what to clean or transform, or checking whether a metric is even measurable in the data.
 - Not for: actually fixing the issues you find (imputing, dedup, reshaping) → see
-  `data-analytics-bi-skills:data-cleaning`. For the formal definitions and formulas behind these
-  summary statistics → see `data-analytics-bi-skills:descriptive-statistics`.
+  `data-analytics-bi-skills:data-cleaning`.
+- Not for: the variable-level summary itself — choosing and computing central tendency, spread,
+  shape, and percentiles (mean vs. median, SD vs. IQR, five-number summary) → see
+  `data-analytics-bi-skills:descriptive-statistics`. EDA decides *which* variables deserve a
+  summary; that skill produces the summary.
 - Not for: testing whether a pattern you found generalizes beyond this sample — that is
   confirmatory work → `data-analytics-bi-skills:statistical-inference`. EDA generates
   hypotheses; it does not certify them.

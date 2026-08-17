@@ -4,9 +4,8 @@ description: >-
   Designs the survey instrument and the sampling plan BEFORE any data exists, organized by
   total survey error (Groves): chooses among simple random, stratified, cluster, and
   convenience designs and names what each does to inference; sizes the sample for a
-  proportion in plain terms; plans the nonresponse
-  follow-up so the Literary Digest failure (Squire 1988: nonresponse, not just frame
-  bias, sank a 2.4-million-ballot poll) stays a cautionary tale; audits every
+  proportion; plans the nonresponse follow-up against the Literary Digest failure
+  (Squire 1988: nonresponse, not just frame bias, sank a 2.4-million-ballot poll); audits every
   question for double-barreled, leading, acquiescence, and order effects (Schuman & Presser);
   and schedules contacts with Dillman's tailored-design discipline. Use when writing a
   questionnaire, sizing a sample, or reviewing a survey before launch — client satisfaction,
@@ -14,7 +13,7 @@ description: >-
   questionnaire, sample size, sampling plan, response rate, nonresponse bias, stratified
   sampling, quota sampling, convenience sample, question wording, Likert, margin of error.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §3), whose anchors were verified

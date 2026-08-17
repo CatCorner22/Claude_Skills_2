@@ -4,17 +4,16 @@ description: >-
   Ingests real-world CSV and flat-file exports safely — inspecting raw bytes before parsing,
   detecting encodings and delimiters, declaring an explicit read_csv contract (encoding,
   separator, string-typed IDs, date formats, na_values) instead of trusting inference,
-  surviving export quirks (BOMs, footer rows, quoted commas, European decimals, mixed date
-  formats, and the float-coercion hazard that strips leading zeros and destroys join keys),
+  surviving export quirks (BOMs, footer rows, quoted commas, European decimals, and the
+  float-coercion hazard that strips leading zeros from join keys),
   validating every parse against row counts and control figures, and merging with an
   outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing.
-  Use when loading a CSV that parses wrong, combining
-  exports from different systems, or hardening a recurring file feed to fail loudly on layout
-  changes. Triggers: csv parsing, delimiter, encoding error, utf-8 vs latin-1, BOM, pipe
+  Use when loading a CSV that parses wrong, combining exports from different systems, or
+  hardening a recurring file feed to fail loudly on layout changes. Triggers: csv parsing, delimiter, encoding error, utf-8 vs latin-1, BOM, pipe
   delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
   zeros lost, csv broken columns, mojibake, flat file feed.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # CSV and flat-file wrangling

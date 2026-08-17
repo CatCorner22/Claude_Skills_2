@@ -6,10 +6,10 @@ description: >-
   ordinal), scaling and normalization, datetime and lag/rolling features, aggregations and interactions,
   missing-value handling as information, fit-on-train-only pipelines, and basic feature selection. Use
   when improving model inputs or preparing features for a model. Triggers: feature engineering, features,
-  encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize, datetime
-  features, lag features, rolling features, feature selection, interactions, missing values.
+  encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
+  datetime features, lag features, rolling features, feature selection, interactions, impute features.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Feature engineering

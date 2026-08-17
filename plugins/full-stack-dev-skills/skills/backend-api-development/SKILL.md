@@ -11,7 +11,7 @@ description: >-
   session, API error handling, HTTP status codes, pagination endpoint, OpenAPI schema,
   dependency injection fastapi, CRUD API.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Backend API development (FastAPI)
@@ -22,6 +22,10 @@ metadata:
 - Not for: consuming someone else's API → see `data-tools-skills:rest-api-data-pulls`.
   Database modeling behind the endpoints → see `full-stack-dev-skills:database-and-orm`.
   Streaming/WebSocket endpoints → see `full-stack-dev-skills:realtime-and-dynamic-features`.
+- Not for: whole-project Python rigor around the service — the 2026 toolchain (uv, Ruff,
+  strict type checking), packaging/CI layout, and ship-ready hardening of an entire codebase
+  → invoke the "Pythagoras" persona in `full-stack-dev-skills:elite-python-engineer`. This
+  skill stays at the endpoint and contract level.
 
 ## Do it
 1. **Let Pydantic models be the whole validation layer.** One request model and one response

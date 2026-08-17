@@ -3,18 +3,18 @@ name: data-cleaning
 description: >-
   Cleans and reshapes messy extracts into analysis-ready form on Wickham's tidy-data
   principles (variable per column, observation per row, value per cell): coerces types and
-  formats (dates-as-text, currency strings, units), standardizes categories through an
-  explicit reusable mapping table, handles missing values per column by missingness
-  mechanism (MCAR/MAR/MNAR) with a was_missing flag on anything imputed, deduplicates on a
+  formats (dates-as-text, currency strings, units), standardizes categories through a
+  reusable mapping table, handles missing values per column by missingness mechanism
+  (MCAR/MAR/MNAR) with a was_missing flag on anything imputed, deduplicates on a
   defined key with a survivor rule, checks join cardinality so fan-out can't multiply rows,
-  and validates counts and control totals in a scripted, non-destructive pipeline that never
-  overwrites the raw source. Use when preparing, wrangling, or fixing data before analysis
+  and validates counts and control totals in a scripted pipeline that never overwrites the
+  raw source. Use when preparing, wrangling, or fixing data before analysis
   or reporting. Triggers: data cleaning, data wrangling, data prep, data preparation,
-  missing values, impute, deduplicate, remove duplicates, standardize, normalize categories,
-  tidy data, reshape, pivot, join hygiene, fan-out, data quality fix, dirty data, unpivot,
-  inconsistent categories.
+  missing values, impute, deduplicate, remove duplicates, standardize values, normalize
+  categories, tidy data, reshape, pivot, join hygiene, fan-out, data quality fix, dirty
+  data, unpivot, inconsistent categories.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     The tidy-data structure rules follow Wickham, "Tidy Data", Journal of Statistical
     Software (2014); the missing-data mechanism vocabulary (MCAR/MAR/MNAR) is Rubin's,
