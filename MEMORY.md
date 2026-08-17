@@ -65,7 +65,7 @@ Never store secrets, credentials, account numbers, or client data here.
   phrases with **zero collisions**, validator 0 errors / 0 warnings / 19 near-cap notes,
   121 evals at 1:1 parity, 0 unresolved cross-links. Repo root is the marketplace only
   (non-library apps/tools in `archive/apps/`). PR body for #39 is `docs/pr-body.md`
-  (this session's GitHub API cannot reach the renamed CatCorner22 repo; git push works).
+  (GitHub API reachability was restored 2026-08-17; #39 merged, follow-on work posted as #40).
   The one verification never done: evals have never been EXECUTED — static coherence
   audited, ~360 scenarios unrun, needs fresh interactive sessions.
   - CORRECTION (2026-08-17, measured): "**zero collisions**" is true only of *exact duplicate

@@ -1,8 +1,18 @@
 # Library overhaul: re-aim to a career-portable general-use skills library
 
-> **This file is the PR description for PR #39.** Paste its contents into the PR body on
-> GitHub. It lives in the repo because this session's GitHub API cannot reach the renamed
-> `CatCorner22/Claude_Skills_2` (git push works — GitHub redirects — but API calls 403).
+> **Status (2026-08-17): this is an in-repo narrative record, not a pending action.**
+>
+> It was written as the PR body for **#39** because the GitHub API could not reach the renamed
+> `CatCorner22/Claude_Skills_2` at the time (git push worked — GitHub redirects — but API calls
+> 403'd), so there was no way to post it. That has since resolved: the API reaches the repo again,
+> **#39 is merged**, and the follow-on work has its own posted body on **#40**. Nothing here needs
+> pasting anywhere.
+>
+> The file is kept because PR descriptions are easy to lose and this is the fullest single account
+> of the overhaul. **Read §1–§5 as the record of #39** (archive, consolidation, the eight new
+> skills, the four review passes) and **§6 onward as the from-scratch pass**, which lands in #40 and
+> corrects several claims in §1–§5. Where the two disagree, the later section is right — the earlier
+> text is deliberately left standing so the corrections are visible rather than quietly rewritten.
 
 ## What this does
 
