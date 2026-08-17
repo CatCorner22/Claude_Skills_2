@@ -115,7 +115,51 @@ archived-domain scenarios.
   grouped by category with an archived-plugins manifest. Two lead-clause extraction bugs
   fixed along the way (the first truncated 86% of the capability column; the second returned
   fragments like "Turns any material" where an em-dash opened a paired appositive).
-- `scripts/validate.sh` — per-skill error flag; non-gating NOTE tier at >973 chars.
+- `scripts/validate.sh` — per-skill error flag; non-gating NOTE tier at >973 chars. Two further
+  changes from the from-scratch pass: description length is now counted in **characters** (it was
+  counting bytes via `wc -m` under a C locale, over-charging every em dash by two across 112 of 121
+  skills), and **cross-link resolution is now enforced** rather than eyeballed — every
+  `plugin:skill` reference resolves against active skills, active subagents, and `archive/`, and
+  errors if it resolves to none of them or points at an archived target without saying so.
+- `scripts/gen-catalog.py` — a third lead-clause bug fixed: the capability clause could run past a
+  sentence boundary and trail the next sentence's opening words into the INDEX cell. Verified by
+  diffing all 121 generated rows; exactly the 2 intended rows changed.
+
+## 6. From-scratch pass (2026-08-17) — substance and routing
+
+Sections 1–5 describe passes that all checked **conformance**. This pass asked the two questions
+none of them had: *is the advice correct?* and *does the library actually route?* It treated the
+earlier work — including its own — as suspect, and briefed domain experts to verify by **executing
+code and re-deriving results** rather than by reading.
+
+- **The authoring standard had drifted from the library it governs.** `writing-agent-skills` is the
+  reference every skill conforms to, so no conformance check can detect a fault *in it*. Four were
+  present: an Oracle directive breach in its tailoring exemplars, a template that contradicted its
+  own frontmatter rules, token math wrong by an order of magnitude in two directions that cancelled,
+  and a checklist missing every guard this session had to learn the hard way. All fixed.
+- **~45 substance defects fixed across 19 skills**, including six that taught something *false* and
+  would have survived any conformance check: ROC AUC's prevalence mechanism (stated backwards —
+  resampling does not move AUC), MASE < 1 as a ship/no-ship rule (unreachable at h=13 on a random
+  walk), rank tests as drop-in tests of means (a verified case where the arm with twice the revenue
+  is declared *dominated*), resolution IV promised for designs that are resolution III, a Weibull
+  β fitted to a repairable system, and a test-isolation setting that actively leaks rows between
+  tests.
+- **Three of eight claims briefed to one reviewer did not survive contact with a real install** —
+  including a SQLAlchemy warning that no longer fires, making a silent data-loss bug worse than
+  documented. Reviewers were explicitly instructed to report defects *in the brief* as findings.
+- **46 description trims from an earlier pass were unnecessary** — the byte-counting bug above meant
+  none had ever exceeded the cap. 12 that destroyed routing or teaching signal are reverted, with
+  trigger lists verified byte-identical so no routing contract moved.
+- **Routing viability**: the full 121-skill library costs **14.9% of a 200K context** before anything
+  is asked, and sits past the ~100-skill point where the listing silently trims descriptions to
+  name-only. `README.md` now carries a per-plugin cost table and recommends three or four plugins.
+  The corollary, stated plainly rather than defended: description trimming was never the lever —
+  skills per install is, by a factor of ~145.
+- **`docs/trigger-test.md` (new)**: 43 risk-ranked rows with exact prompts, expected skill,
+  near-miss, and a pass/fail log — covering the skills that lost trigger phrases, the phrases that
+  moved, over-broad single-word triggers, the persona-gated skills, and everything rewritten today.
+
+Full narrative and an 8-item owner decision list: `docs/library-review-2026-08.md` §9–§10.
 
 ## Verification
 
@@ -124,16 +168,31 @@ bash scripts/validate.sh      # 0 errors, 0 warnings
 python3 scripts/gen-catalog.py # 121 skills across 14 plugins (+9 archived)
 ```
 - 121 skills ↔ 121 evals, no orphans.
-- 1298 trigger phrases, **0 collisions**.
-- 0 unresolved cross-links; 0 `board-of-advisors-skills` references in the active tree.
+- **0 exact duplicate trigger phrases** — but read that precisely: the router matches whole
+  descriptions, not `Triggers:` lists, and **85 trigger phrases still appear as whole words inside a
+  different skill's description prose** (`python` in 7 others). The earlier "0 collisions" headline
+  was true at the string level and misleading at the routing level; the collision was renamed, not
+  resolved. Those 85 are measured and recorded, not fixed.
+- 0 unresolved cross-links — now **enforced by `validate.sh`**, not audited by hand.
 - 14 marketplace entries ↔ 14 plugin directories, names and versions reconciled.
 - All 14 plugins version-bumped — **installed copies only pick up changes on a bump**, so run
   `claude plugin update <plugin>@treasury-analyst-skills` for the ones you have installed.
 
-**Not covered by any automated pass:** the evals have never been *executed*. Real trigger
-testing needs fresh interactive sessions, which no agent in this work could do cleanly. The
-audit verified their static coherence — that each eval tests the route its skill actually
-advertises — but the ~360 scenarios remain unrun.
+**Two verifications this PR does not have, stated plainly:**
+
+1. **The fresh-session trigger test has never been run, for any skill.** It is the only check that
+   validates routing, and it cannot be run from a session that already knows the answer.
+   `docs/trigger-test.md` now provides the runnable protocol; the compliance log is **empty**.
+   Nothing in this library's history establishes that any skill routes.
+2. **The evals have never been executed** — ~360 scenarios remain unrun. Their static coherence was
+   audited (each eval tests the route its skill actually advertises), which is a different and much
+   weaker claim.
+
+**And one bound on scope:** only **14 of 121 skills** received expert substance review. On that
+sample, 3 were NET-NEGATIVE and 6 MARGINAL against the test "does invoking this beat an unaided
+competent assistant?" — every one of them conformant, and rated passing by four prior passes. The
+sample was drawn toward technical skills where staleness is most likely, so it should not be
+extrapolated to the whole library; neither should the unreviewed 107 be assumed better.
 
 ## Notes
 
@@ -141,15 +200,27 @@ advertises — but the ~360 scenarios remain unrun.
   compatibility. Renaming it would break every existing `<plugin>@treasury-analyst-skills`
   reference. The name is stale; the breakage would be worse.
 - `coding-agent-skills:chicken-little` keeps its Oracle Fusion data-model reference by
-  ratified exception: it is name-gated (zero routing pollution) and the only surviving copy of
-  that commissioned depth. Recorded in `MEMORY.md` so future residue sweeps don't re-flag it.
+  ratified exception: it is name-gated and the only surviving copy of that commissioned depth.
+  Recorded in `MEMORY.md` so future residue sweeps don't re-flag it. **Correction from this pass:**
+  the original rationale said "zero routing pollution", which is not accurate — 3 of the skill's 7
+  triggers are Oracle domain phrases rather than the persona name, and about a third of its
+  always-loaded description is Oracle specifics. The exception is *bounded and accepted*, not zero.
+  The decision is unchanged; only the reason is corrected, because a falsifiable justification
+  invites the next audit to re-derive the finding and re-open a settled call — which is exactly what
+  happened here.
 - **Security housekeeping:** the deleted `GITHUB_SETUP.md` had committed an `ssh-ed25519`
   deploy **public** key and an expired device code. The public half discloses nothing on its
   own, but if that deploy key still exists on the repository, revoke it in GitHub settings —
   independently of this PR.
-- Two standing process rules were adopted from what these passes found, and are now in
-  `MEMORY.md`: **arithmetic-verify every worked example before ship** (it failed in every
-  authoring wave), and **run a reciprocal-link pass on every new-skill wave** (six of eight
-  new skills landed as citation sinks with zero inbound links).
+- Standing process rules adopted from what these passes found. The first two came from the earlier
+  passes: **arithmetic-verify every worked example before ship** (it failed in every authoring wave),
+  and **run a reciprocal-link pass on every new-skill wave** (six of eight new skills landed as
+  citation sinks with zero inbound links). The from-scratch pass added, among others: **a conformance
+  regime cannot audit its own reference**; **verify a measurement before acting on it** (the byte-vs-
+  character bug drove 46 pointless edits); **never resolve a trigger collision by deleting the
+  loser's phrase** (doing so left `standardize` with no owner at all and broke a live route in
+  `exploratory-data-analysis`); and **put the guard where the author works** — rules that lived only
+  in `MEMORY.md` were re-learned repeatedly, so each now lands in `review-checklist.md` too, and the
+  automatable ones went into `validate.sh`.
 
 Full narrative: `docs/library-review-2026-08.md`.

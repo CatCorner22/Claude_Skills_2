@@ -68,6 +68,17 @@ Never store secrets, credentials, account numbers, or client data here.
   (this session's GitHub API cannot reach the renamed CatCorner22 repo; git push works).
   The one verification never done: evals have never been EXECUTED — static coherence
   audited, ~360 scenarios unrun, needs fresh interactive sessions.
+  - CORRECTION (2026-08-17, measured): "**zero collisions**" is true only of *exact duplicate
+    trigger strings*. The router matches whole descriptions, and 85 trigger phrases still appear
+    as whole words inside a different skill's description prose (`python` in 7 others). Read the
+    zero as "no two skills claim an identical phrase", never as "routing is unambiguous".
+  - CORRECTION (2026-08-17): there are **two** never-run verifications, not one. Alongside the
+    unexecuted evals, the fresh-session **trigger test** has never been run for any skill — the
+    only check that validates routing. Protocol now exists at `docs/trigger-test.md` (43
+    risk-ranked rows); the compliance log is empty.
+  - CORRECTION (2026-08-17): the near-cap note count came from a validator that counted **bytes,
+    not characters**, inflating 112 of 121 skills. Fixed; the live count is the validator's own
+    summary line (29 notes at the close of 2026-08-17), and no skill has ever exceeded 1024 chars.
 - FACT: Library state (2026-08-11, post-consolidation): **121 active skills / 14 plugins**
   (+ 66 skills / 9 plugins archived, + 2 skills archived at skill level in `archive/skills/`;
   board-of-advisors-skills MERGED into coding-agent-skills — board-review + 6 subagents,
@@ -142,12 +153,65 @@ Never store secrets, credentials, account numbers, or client data here.
   skill hard-codes one. (flagged in OTBI research)
 
 ## Lessons Learned & Avoidance Rules
+- RULE (2026-08-17, from-scratch pass): **a conformance regime cannot audit its own reference.**
+  `writing-agent-skills` is the standard every skill is checked against, so a fault *in it* is
+  invisible to every conformance pass — four passes missed an Oracle directive breach at its root,
+  a template that contradicted its own frontmatter rules, and token math wrong by an order of
+  magnitude in two directions that cancelled. Audit the standard on its own schedule, against
+  reality, never against the skills that conform to it.
+- RULE (2026-08-17): **verify a measurement before acting on it, not after.** `validate.sh` counted
+  bytes not characters (`wc -m` under a C locale), over-charging every em dash by two across 112 of
+  121 skills. Acting on those numbers, a pass trimmed 46 descriptions — none of which had ever
+  exceeded the cap. 12 trims destroyed real routing or teaching signal. The edit was cheap to make
+  and expensive to undo; the check would have cost one command.
+- RULE (2026-08-17): **never resolve a trigger collision by deleting the loser's phrase.** Name the
+  seam reciprocally in both skills instead. Deleting produced two defects: `standardize` was
+  qualified away by three skills simultaneously and now has *no* trigger owner, and scrubbing
+  `mean`/`median`/`spread` from `exploratory-data-analysis`'s prose made "summary statistics for this
+  dataset" unable to reach the first-look skill at all.
+- RULE (2026-08-17): **"zero exact trigger collisions" is the wrong metric.** The router matches
+  whole descriptions, not `Triggers:` lists. At 0 exact duplicates there were still 85 phrases
+  appearing as whole words inside other skills' description prose (`python` in 7). Measure prose
+  competition, not string equality.
+- RULE (2026-08-17): **skills-per-install is the routing lever, not chars-per-description.** Trimming
+  a description 100 chars saves ~27 tokens; skipping a 15-skill plugin saves ~3,900 — 145x. The full
+  121-skill library costs 14.9% of a 200K window and sits past the ~100-skill point where the listing
+  silently trims descriptions to name-only. Recommend subsets; never defend trimming as budget work.
+- RULE (2026-08-17): **conformance and value are close to uncorrelated.** On a 14-skill expert sample,
+  3 were NET-NEGATIVE and 6 MARGINAL against the test "does invoking this beat an unaided competent
+  assistant?" — every one of them conformant, and rated passing by four prior passes. The failure mode
+  is staleness, not sloppiness: correct advice for an earlier tooling generation, presented as current.
+  Always ask the value question separately; conformance cannot stand in for it.
+- RULE (2026-08-17): **make experts verify by execution, not by review.** Reviewers who ran the code
+  or re-derived the result overturned 3 of 8 claims briefed to them, including a "standard" test-
+  isolation fix that actively leaks. A review claim about library behaviour is a hypothesis until the
+  code runs. This generalises the existing arithmetic-verification rule from examples to mechanisms.
+- RULE (2026-08-17): **when briefing agents, expect the brief itself to be wrong.** Every prior review
+  was scoped by the same coordinator, so coordinator error propagated silently through all of them.
+  Instruct reviewers to report defects *in the brief* as first-class findings — that instruction is
+  what surfaced the SQLAlchemy warning removal, the inverted FastAPI rationale, and an arithmetic
+  inconsistency the coordinator had introduced.
+- RULE (2026-08-17): **put the lesson where the author works, not where the coordinator reads.**
+  Guards learned in this repo lived in `MEMORY.md` while authors worked from `review-checklist.md`,
+  so each was re-learned. Every durable rule now lands in the checklist too, and automatable ones go
+  into `validate.sh` (cross-link resolution now errors there rather than being eyeballed).
 - EXCEPTION (owner-ratified via consolidation authority, 2026-08-11): `coding-agent-skills:
   chicken-little` keeps its Oracle Fusion data-model reference despite the archive directive —
-  it is name-gated (loads only on "Chicken Little"/"Aether", zero routing pollution) and is
-  the only surviving copy of that commissioned depth in the repo. Do not re-flag it in future
-  residue sweeps. The UT palette in assertion-evidence-deck likewise survives as an explicit
-  NON-DEFAULT legacy brand option (script defaults to neutral).
+  it is name-gated and is the only surviving copy of that commissioned depth in the repo.
+  **Do not re-flag it in future residue sweeps.** The UT palette in assertion-evidence-deck
+  likewise survives as an explicit NON-DEFAULT legacy brand option (script defaults to neutral).
+  - CORRECTION (2026-08-17, measured): the original rationale said "zero routing pollution".
+    That is not accurate — 3 of the skill's 7 triggers (`invoice black hole`, `ghost receipts`,
+    `orphan distributions`) are Oracle domain phrases, not the persona name, and roughly a third
+    of the always-loaded description is Oracle specifics. Read the exception as **bounded and
+    accepted**, not zero. The decision is unchanged; only the reason is corrected. Recorded
+    because "zero" is falsifiable, so a later sweep re-derives the finding and re-opens a settled
+    call — which is exactly what happened on 2026-08-17.
+- RULE (2026-08-17): a settled exception needs its *reason* stated in terms that survive
+  re-measurement. An owner-ratified decision defended by a checkable claim that turns out false
+  will be re-litigated by the next audit, and the audit will look correct while doing it. When
+  ratifying an exception, record the bound ("a few hundred tokens, three specific triggers"),
+  not an absolute ("zero").
 - RULE (from the 2026-08-11 adversarial review): every worked example in a skill gets an
   arithmetic-verification pass before ship — recompute each number from the example's own
   inputs; three of four data-cluster examples failed their own arithmetic, and worked
@@ -673,3 +737,31 @@ Never store secrets, credentials, account numbers, or client data here.
   0.11.0. Validation 0 errors/0 warnings. Catalog regenerated to 181 skills / 24 plugins.
   Merged/retired: none. Flagged: no contradictions. **EPIC WAVE COMPLETE** — user's original
   request scoped, fiction lane built, research holds consumed, general-use library shipped.
+
+### Crystallization pass — 2026-08-17 (from-scratch debug and substance review)
+Trigger: owner asked to "debug and review from scratch for substance and optimal output" — a pass
+that treats this session's own prior work as suspect. Harvested from 5 parallel expert-review agents
+(prompt-engineering; database-and-orm + testing-strategy; model-evaluation + time-series +
+statistical-inference + ab-test-design; design-of-experiments + reliability-engineering;
+causal-inference + bayesian-updating + reference-class-forecasting + measurement-systems-analysis +
+technical-documentation) plus a trim-revert lane, each instructed to verify by execution and to
+report defects in the coordinator's own brief.
+Validated and integrated: 9 new avoidance rules (above) — the standard cannot audit itself; verify
+measurements before acting; never delete a collision loser's trigger; exact-collision count is the
+wrong metric; skills-per-install is the lever; conformance != value; verify by execution; expect the
+brief to be wrong; put guards where authors work. 1 correction to a stored exception's rationale
+(chicken-little "zero routing pollution" -> bounded and accepted) with the decision left standing,
+per the flag-don't-overwrite rule.
+Substance outcome: ~45 defects fixed across 19 skills, including 6 that taught something false and
+would have survived any conformance check — ROC AUC's prevalence mechanism, MASE < 1 as a decision
+rule, rank tests as drop-in means tests, resolution IV promised for designs that are resolution III,
+a Weibull fitted to a repairable system, and a test-isolation setting that leaks. 12 unnecessary
+description trims reverted with trigger lists verified byte-identical.
+Deliverables: docs/trigger-test.md (43 risk-ranked rows; written, never run — the library's one
+never-met definition-of-done item, now recorded as unmet rather than assumed); README install-cost
+table with the 14.9% verdict; review report sections 9-10 including an 8-item owner decision list.
+Tooling: validate.sh now enforces cross-link resolution (verified both directions, including a
+false positive of my own on wrapped prose); gen-catalog.py lead-clause sentence-boundary fix (third
+bug in that function, verified by diffing all 121 rows — exactly the 2 intended changed).
+Pruned: nothing. Flagged, not resolved: 85 prose collisions measured only; 107 of 121 skills never
+substance-reviewed; the trigger test still unexecuted.

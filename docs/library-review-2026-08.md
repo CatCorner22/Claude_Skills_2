@@ -389,21 +389,26 @@ alternative.** It is the position most modern texts take, and it costs fewer run
 rather than presenting a balanced menu, because a skill that refuses to recommend leaves the reader
 where they started.
 
-**D2 — `coding-agent-skills:chicken-little` is still mounted on the archived Oracle domain.** *(found
-in this pass; the sharpest tension with your archive directive)*
-This is the one place where archived-domain content sits in the **always-loaded routing payload**, not
-behind an opt-in reference. The skill's description advertises "deep Oracle Cloud Fusion Financials
-data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses)" and "named Oracle failure modes"; **3
-of its 7 trigger phrases** are Oracle-specific (`invoice black hole`, `ghost receipts`, `orphan
-distributions`); and `references/oracle-fusion-data-model.md` (144 lines) is listed as a live
-reference. Your directive was to archive all Oracle/Fusion/OTBI/treasury skills, but this is a
-*multi-domain persona you drafted* that happens to include Oracle among Python, Lean Six Sigma, and
-project management — so archiving it wholesale is not obviously what you asked for.
-→ **Recommendation: de-mount rather than archive.** Move `oracle-fusion-data-model.md` to `archive/`,
-strip the Oracle clauses and the three Oracle triggers from the description, and keep the persona's
-portable layers. That is the pattern already applied to `assertion-evidence-deck` and
-`rest-api-data-pulls` in this session. **Not done pending your call**, because it materially changes a
-persona you authored.
+**D2 — `chicken-little`'s Oracle content: already settled, with one factual correction to the stored
+rationale.** *(not a new finding — see the correction below)*
+This pass's residue sweep flagged `coding-agent-skills:chicken-little` as archived-domain content in an
+active plugin. **That is a settled decision, not an open one**: `MEMORY.md` records it as an
+owner-ratified exception (2026-08-11) with an explicit instruction not to re-flag it in future residue
+sweeps, on the grounds that it is name-gated and is the only surviving copy of that commissioned depth.
+The decision stands and nothing was changed.
+
+One narrow correction to the *rationale* rather than the decision, because the stored reason contains a
+measurable claim that does not hold: the exception is justified as "zero routing pollution" on the basis
+of name-gating, but **3 of the skill's 7 trigger phrases are not the persona name** — `invoice black
+hole`, `ghost receipts`, and `orphan distributions` are Oracle domain phrases that can route on their
+own, and the description spends roughly a third of its always-loaded budget on Oracle Fusion specifics.
+So the pollution is small and bounded, not zero.
+→ **Recommendation: no action, and stop re-flagging it.** The cost is a few hundred tokens for anyone
+who installs `coding-agent-skills`, which is a fair price for the only copy of commissioned depth, and
+the three domain triggers are specific enough that they will not fire on unrelated work. The reason to
+record the correction at all is that "zero" invites a future sweep to re-derive the same finding and
+re-open the same decision — which is exactly what happened here. The residue-sweep note in `MEMORY.md`
+has been amended to say *bounded and accepted* instead of *zero*.
 
 **D3 — `assertion-evidence-deck/references/oracle-cm-domain.md` (151 lines) is retained as an opt-in
 legacy reference.** The skill itself was de-mounted earlier in this session; the description and body
