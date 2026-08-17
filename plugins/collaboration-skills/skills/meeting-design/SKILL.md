@@ -12,7 +12,7 @@ description: >-
   turns a transcript into a decision log, and audits recurring meetings nobody has
   re-justified. Use when planning, tightening, or questioning any meeting. Triggers:
   meeting agenda, run this meeting, too many meetings, this should be an email, action
-  items, decision protocol, pre-read, standing meeting audit.
+  items, decision protocol, pre-read, standing meeting audit, fix the agenda.
 metadata:
   version: "1.1.0"
 ---

@@ -9,7 +9,8 @@ description: >-
   files with SQL, when a dataset chokes
   Excel/pandas memory, or when replacing a fragile chain of spreadsheet lookups with one query.
   Triggers: duckdb, query csv with sql, join csv files, sql on parquet, local sql, read_csv_auto,
-  analyze large csv, sql without a database, parquet analytics, out of memory pandas.
+  analyze large csv, sql without a database, parquet analytics, out of memory pandas,
+  too big for Excel.
 metadata:
   version: "1.1.0"
 ---

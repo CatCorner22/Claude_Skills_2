@@ -8,7 +8,7 @@ description: >-
   The LLM reconstructs the what-actually-happened timeline from logs, emails, and
   tickets, keeps discussion on the four rails, and converts sustain/improve items into
   standard-work updates; it facilitates and never adjudicates blame. Use after a project
-  milestone, a month-end close, a reconciliation incident or break, or an Oracle go-live.
+  milestone, a period-end close, an incident or process break, or a system go-live.
   Owns team and event debriefs — an assistant's own self-retrospective belongs to
   reflective-learner instead. Triggers: after-action review, AAR, hot wash, team debrief,
   sustain and improve, what should we do differently next close.

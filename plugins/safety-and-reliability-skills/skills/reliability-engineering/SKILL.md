@@ -6,8 +6,8 @@ description: >-
   burn-in vs run-to-failure vs scheduled replacement, computes MTBF, MTTR, and availability,
   converts an SLO target into an allowed-downtime budget, works series/parallel system
   arithmetic — parallel credit only with demonstrated independent failover — and forecasts from
-  two or three failures with Weibayes. Use when a failure log needs quantifying (Oracle interface
-  or bank-feed failures, job aborts, recon breaks, equipment), when sizing redundancy against an
+  two or three failures with Weibayes. Use when a failure log needs quantifying (interface or
+  data-feed failures, job aborts, process breaks, equipment), when sizing redundancy against an
   uptime target, or when setting a replacement or renewal schedule. Triggers: Weibull, bathtub
   curve, MTBF, MTTR, availability math, downtime budget, series parallel reliability, burn-in,
   failure rate fit, how much downtime does our SLO allow.

@@ -8,7 +8,7 @@ description: >-
   recurring extract files, deciding what may be committed or emailed, or scrubbing a dataset for
   sharing. Triggers: file naming convention, organize data files, folder structure analysis,
   version data files, sanitize data, anonymize spreadsheet, remove sensitive data, what can I
-  commit, data retention files, raw vs processed.
+  commit, data retention files, raw vs processed, safe to share.
 metadata:
   version: "1.1.0"
 ---

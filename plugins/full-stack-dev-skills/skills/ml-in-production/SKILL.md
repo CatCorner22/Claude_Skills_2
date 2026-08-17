@@ -9,7 +9,8 @@ description: >-
   an inference endpoint, choosing a serving pattern, debugging training/serving skew, or
   setting up prediction logging and drift checks. Triggers: deploy ML model, model serving,
   inference endpoint, predict API, batch scoring, model versioning, training serving skew,
-  model monitoring, drift detection production, ml pipeline app, score in real time.
+  model monitoring, drift detection production, ml pipeline app, score in real time,
+  put the model into the app, works in the notebook.
 ---
 
 # ML in production

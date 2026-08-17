@@ -13,7 +13,7 @@ description: >-
   the map says who matters, disarming-elicitation is how to talk to them. Triggers:
   stakeholder map, stakeholder mapping, stakeholder analysis, power-interest grid,
   RACI, responsibility matrix, influence without authority, buy-in, who needs to sign
-  off, stakeholder management.
+  off, stakeholder management, who can sink this.
 metadata:
   version: "1.1.0"
   source: >-

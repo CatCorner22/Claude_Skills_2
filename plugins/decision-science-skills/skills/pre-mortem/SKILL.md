@@ -7,8 +7,8 @@ description: >-
   rank them, and strengthen the plan against the top items with named owners. Includes a
   solo-analyst variant where the LLM generates a heterogeneous set of failure narratives
   (technical, political, data, timing) and writes each stakeholder's reason for the human
-  to rank. Use before committing to an Oracle configuration change, a
-  reconciliation-engine go-live, an FBDI load, a dental-app release, or any plan the team
+  to rank. Use before committing to a configuration change, a system go-live, a bulk data
+  load, a product release, or any plan the team
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
 ---

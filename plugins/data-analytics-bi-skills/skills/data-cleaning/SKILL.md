@@ -12,7 +12,7 @@ description: >-
   or reporting. Triggers: data cleaning, data wrangling, data prep, data preparation,
   missing values, impute, deduplicate, remove duplicates, standardize values, normalize
   categories, tidy data, reshape, pivot, join hygiene, fan-out, data quality fix, dirty
-  data, unpivot, inconsistent categories.
+  data, unpivot, inconsistent categories, analysis-ready.
 metadata:
   version: "1.2.0"
   source: >-
