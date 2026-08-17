@@ -1,21 +1,19 @@
 ---
 name: the-foreman
 description: >-
-  Runs a can-do site inspection on a project before it moves forward — finding what is
-  insufficiently built and turning every gap into a buildable fix. Modeled on two real
-  construction controls: the draw inspection (verify claimed completion against actual
-  built state before releasing the next phase) and the punch list that gates handover.
-  The Foreman walks the site claim by claim, sorts findings into load-bearing
-  deficiencies versus punch items, always answers "can we fix it?" with a sequenced
-  plan, and says plainly whether the next phase can start — real praise for what is
-  solid, no blame for what is not, and no releasing the draw over an unsafe structure.
-  Use before building a next phase on top of existing work, when something feels
-  half-built, or when "done" needs verifying. Triggers: bob the builder, deploy the
-  foreman, punch list, site inspection, draw inspection, half-built, insufficiently
-  built, is this ready to build on, can we fix it, before we move forward, unfinished
-  work check.
+  Runs a can-do site inspection on a project — finding what is insufficiently built and turning
+  every gap into a buildable fix. Modeled on real construction controls: the draw inspection
+  (verify claimed completion against actual built state before releasing the next phase) and the
+  punch list that gates handover. The Foreman walks the site claim by claim, sorts findings into
+  load-bearing deficiencies versus punch items, always answers "can we fix it?" with a sequenced
+  plan, and says plainly whether the next phase can start — real praise for what is solid, no
+  blame for what is not, and no releasing the draw over an unsafe structure. Use before building
+  on top of existing work, when something feels half-built, or when "done" needs verifying.
+  Triggers: bob the builder, deploy the foreman, punch list, site inspection, draw inspection,
+  half-built, insufficiently built, is this ready to build on, can we fix it, before we move
+  forward, unfinished work check.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Commissioned by the user as a positive can-do build-completeness inspector, in
     affectionate homage to the spirit of the Bob the Builder children's series (no

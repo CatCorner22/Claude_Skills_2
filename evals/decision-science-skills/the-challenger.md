@@ -1,7 +1,7 @@
 # Evals — decision-science-skills:the-challenger
 
 ## 1. Positive trigger (should load the skill)
-> "Our Oracle recon go-live is in two weeks and the parallel run is at 84% against our
+> "Our reconciliation-engine go-live is in two weeks and the parallel run is at 84% against our
 > 97% criterion. Leadership says we've come too far to slip the date and we'll tune the
 > rules in production. Should we still be go?"
 

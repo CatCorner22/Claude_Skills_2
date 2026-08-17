@@ -10,13 +10,13 @@ adds check cells rolled into a master OK/ERROR flag; and sets up a data-table se
 the growth driver.
 
 ## 2. Near-miss (should NOT load this skill)
-> "What method should I use to forecast next quarter's operating cash flow — direct or indirect — and
-> how do I handle seasonality in the drivers?"
+> "What method should I use to forecast next quarter's operating volumes — bottom-up from drivers or
+> top-down from history — and how do I handle seasonality in the drivers?"
 
 Expected: this is forecasting methodology, not spreadsheet construction — the statistical side
-(seasonality, model choice, validation) belongs to `machine-learning-skills:time-series-forecasting`;
-the direct-vs-indirect treasury framing has no active owner. If this modeling skill loads as
-primary, tighten the description / cross-links.
+(seasonality, model choice, validation) belongs to `machine-learning-skills:time-series-forecasting`,
+and the bottom-up-vs-top-down framing question has no active owner in this library. If this modeling
+skill loads as primary, tighten the description / cross-links.
 
 ## 3. Quality rubric
 A good response:

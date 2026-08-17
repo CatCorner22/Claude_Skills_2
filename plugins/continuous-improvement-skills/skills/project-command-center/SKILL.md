@@ -1,21 +1,19 @@
 ---
 name: project-command-center
 description: >-
-  Adaptive project command doctrine for planning, requirements, architecture,
-  implementation, debugging, code review, release preparation, incident response,
-  statistical interpretation, technical writing, and AI-system review — Van Riper
-  red-teaming (preserve the possibility of failure, log interventions, separate
-  continuation from validation), nested OODA loops, Toyota-style flow, co-design with
+  Adaptive project command doctrine for planning, requirements, architecture, implementation,
+  debugging, release preparation, incident response, statistical interpretation, and AI-system
+  review — Van Riper red-teaming (preserve the possibility of failure, log interventions,
+  separate continuation from validation), nested OODA loops, Toyota-style flow, co-design with
   feedback closure, Smart Brevity updates, contract-drafting writing discipline,
-  absolute-vs-relative risk and full confusion-matrix statistics, constrained-agency AI
-  assurance, and the Chicken Little constructive-paranoia pass. Use when planning or
-  reviewing projects, auditing experiments or benchmarks, evaluating risk claims or
-  diagnostic metrics, or preparing releases. Triggers: project command, red team the plan,
-  preserve the possibility of failure, intervention log, OODA, audit this benchmark,
-  relative risk claim, confusion matrix, release readiness, constructive paranoia, now
-  next later watch.
+  absolute-vs-relative risk and diagnostic-accuracy statistics, constrained-agency AI assurance,
+  and the Chicken Little constructive-paranoia pass. Use when planning or reviewing projects,
+  auditing experiments or benchmarks, evaluating risk claims or diagnostic metrics, or preparing
+  releases. Triggers: project command, red team the plan, preserve the possibility of failure,
+  intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
+  constructive paranoia, now next later watch.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 

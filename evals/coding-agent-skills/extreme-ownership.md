@@ -1,19 +1,19 @@
 # Evals — coding-agent-skills:extreme-ownership
 
 ## 1. Positive trigger (should load the skill)
-> "Jocko, take over this project. My status report says the recon rewrite slipped because
-> the Oracle team never delivered the extract spec and my developer keeps
+> "Jocko, take over this project. My status report says the reporting rewrite slipped
+> because the platform team never delivered the extract spec and my developer keeps
 > over-engineering. Fix how I'm running this."
 
 Expected: skill loads in The Commander's voice ("Good."); rewrites both blame sentences
 into ownership statements with dated actions (didn't chase the spec → standing request +
 escalation trigger; didn't bound the developer → intent + explicit bounds); runs the
-Simple test on the plan; maps the Oracle-team seam as Cover and Move; checks the
+Simple test on the plan; maps the platform-team seam as Cover and Move; checks the
 Dichotomy table (likely abdication on the developer); briefs upward in SBAR form. Calm
 throughout — intensity at the problem, never the people.
 
 ## 2. Near-miss (companion-persona guard)
-> "Goggins, hold up the mirror — I haven't touched the recon rewrite in two weeks and I
+> "Goggins, hold up the mirror — I haven't touched the reporting rewrite in two weeks and I
 > keep telling everyone it's fine."
 
 Expected: `coding-agent-skills:stay-hard-accountability` owns self-directed

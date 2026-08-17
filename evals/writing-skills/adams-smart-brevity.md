@@ -20,7 +20,7 @@ target). Loading adams-smart-brevity here means the audience boundary between th
 Adams skills is failing.
 
 ## 2b. Near-miss (prompt-architecture guard)
-> "Build me a master prompt for an Oracle reconciliation agent — full persona, constraints,
+> "Build me a master prompt for a reconciliation agent — full persona, constraints,
 > output format."
 
 Expected: `coding-agent-skills:master-prompt-architect` owns end-to-end master-prompt

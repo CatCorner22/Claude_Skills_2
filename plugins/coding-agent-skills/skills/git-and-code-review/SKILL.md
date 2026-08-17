@@ -2,19 +2,18 @@
 name: git-and-code-review
 description: >-
   Uses version control well and reviews changes constructively — branch-per-change, atomic
-  commits whose messages answer why, pull requests sized and described so a reviewer can say
-  yes (what changed, why, how verified), merge vs rebase chosen on purpose under the golden
-  rule of never rewriting shared history, calm conflict resolution that decides the correct
-  combined result, and diff review in a fixed order — correctness, then readability, then
-  style — with feedback that names the line, the concern, and a fix, severity labeled. Routes
-  its seams: deep multi-agent audits, review-comment tone, contact-tracing a bug review
-  finds, excavating accreted history. Use when using git, opening or reviewing a pull
-  request, resolving a merge conflict, structuring a set of changes, or writing history a
-  future reader can trust. Triggers: git, branch, commit, pull request, PR, merge conflict,
-  code review, rebase, version control, commit message, force push, git blame, revert,
-  review this diff.
+  commits whose messages answer why, pull requests sized and described so a reviewer can say yes
+  (what changed, why, how verified), merge vs rebase chosen on purpose under the golden rule of
+  never rewriting shared history, calm conflict resolution that decides the correct combined
+  result, and diff review in a fixed order — correctness, then readability, then style — with
+  feedback that names the line, the concern, and a fix, severity labeled. Deep multi-specialist
+  audits route to coding-agent-skills:board-review. Use when using git, opening or reviewing a
+  pull request, resolving a merge conflict, structuring a set of changes, or writing history a
+  future reader can trust. Triggers: git, branch, commit, pull request, PR, merge conflict, code
+  review, rebase, version control, commit message, force push, git blame, revert, review this
+  diff.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Review-size and review-rate figures come from the SmartBear/Cisco peer-review study
     (2,500 reviews, 3.2M LOC), verified via web search snippets — claims carrying those

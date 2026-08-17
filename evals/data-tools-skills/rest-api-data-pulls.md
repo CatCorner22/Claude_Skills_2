@@ -1,7 +1,7 @@
 # Evals — data-tools-skills:rest-api-data-pulls
 
 ## 1. Positive trigger (should load the skill)
-> "Pull all June invoices from the Fusion REST API into a CSV — my current script only returns
+> "Pull all June invoices from our ERP's REST API into a CSV — my current script only returns
 > 500 rows and I know there are thousands, and sometimes it dies with a 429."
 
 Expected: skill loads; diagnoses missing pagination (loop on `hasMore`/offset); server-side
@@ -9,7 +9,7 @@ filtering with `q=` and `fields=`; hardened session with backoff honoring Retry-
 count reconciliation via `totalResults=true`; credentials via environment variables.
 
 ## 2. Near-miss (should NOT load this skill)
-> "I need to bulk-load these 10,000 journals INTO Fusion from a spreadsheet."
+> "I need to bulk-load these 10,000 journal entries INTO the ERP from a spreadsheet."
 
 Expected: an inbound bulk load into the ERP — the opposite direction from this skill's outbound
 extracts, and a task no active skill in this library owns; nothing should load. If this

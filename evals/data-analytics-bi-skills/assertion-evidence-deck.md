@@ -11,12 +11,11 @@ official template on request), lints and visually checks it; delivers deck + sou
 It does **not** re-run the reconciliation analysis — it asks for the verified findings.
 
 ## 2. Near-miss (should NOT load this skill)
-> "Why are 400 of our bank statement lines still unreconciled this month — which rule is dropping
+> "Why are 400 of our statement lines still unmatched this month — which rule is dropping
 > them?"
 
-Expected: this is a configuration diagnosis, not a presentation task → the user-environment
-`oracle-cm-config-review` skill (where installed) owns it; otherwise no skill in this library
-should run the diagnosis.
+Expected: this is a tool-configuration diagnosis, not a presentation task — no active skill in
+this library owns matching-rule diagnosis, so nothing should load to run it.
 This skill only turns *verified* findings into slides. If it loads and starts diagnosing rules, the
 description is over-triggering; if it loads only to say "run the diagnosis first, then I'll build the
 deck," that is acceptable.

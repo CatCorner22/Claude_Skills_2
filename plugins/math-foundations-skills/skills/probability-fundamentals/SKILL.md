@@ -1,20 +1,19 @@
 ---
 name: probability-fundamentals
 description: >-
-  Computes probabilities with the core rules — complement, addition with
-  the overlap subtracted, multiplication for independent events — and teaches
-  frequency vs degree-of-belief readings, mutually exclusive vs independent
-  (near-opposites), conditional probability and why P(A|B) differs from P(B|A) (the
-  prosecutor's fallacy), Bayes' theorem via natural frequencies (out-of-10,000
-  tables) so rare-condition screening results read right, expected value and when it
-  misleads (ruin risk, one-shot decisions), plus inoculations against base-rate
-  neglect, the gambler's fallacy, the conjunction fallacy, and hot-hand overreads.
-  Use for any chance-of-X question, combining event probabilities, or interpreting a
-  positive test, screen, or alarm; not for sample-to-population inference
-  (confidence intervals, p-values). Triggers: probability, odds, chance of,
-  conditional probability, Bayes, Bayes' theorem, expected value, independent
-  events, mutually exclusive, base rate neglect, likelihood of both, what are the
-  odds.
+  Computes probabilities with the core rules — complement, addition with the overlap subtracted,
+  multiplication for independent events — and teaches frequency vs degree-of-belief readings,
+  mutually exclusive vs independent (near-opposites), conditional probability and why P(A|B)
+  differs from P(B|A) (the prosecutor's fallacy), Bayes' theorem via natural frequencies
+  (out-of-10,000 tables), expected value and when it misleads (ruin risk, one-shot decisions),
+  plus inoculations against base-rate neglect, the gambler's fallacy, the conjunction fallacy,
+  and hot-hand overreads. Use for any chance-of-X question, combining event probabilities, or
+  interpreting a positive test, screen, or alarm; not for sample-to-population inference
+  (confidence intervals, p-values). Triggers: probability, odds, chance of, conditional
+  probability, Bayes, Bayes' theorem, expected value, independent events, mutually exclusive,
+  base rate neglect, likelihood of both, what are the odds.
+metadata:
+  version: "1.1.0"
 ---
 
 # Probability fundamentals

@@ -1,21 +1,19 @@
 ---
 name: hierarchical-memory-manager
 description: >-
-  Maintains multi-layered, actively curated memory across sessions and long contexts —
-  Working (current task state), Episodic (timestamped events and decisions), Semantic
-  (durable facts, preferences, lessons, each entry carrying evidence and confidence) — via
-  a session-start load restating only task-relevant anchors, compaction promoting
-  Working → Episodic → Semantic and pruning the rest, and contradiction flagging with
-  provenance instead of silent overwrites, structuring native memory, MEMORY.md, and
-  project files rather than replacing them. Receives the reflective learner's lessons;
-  feeds the knowledge crystallizer. Use at session start, during long multi-turn work, when
-  context grows large, or when something should be remembered or recalled. Triggers:
-  remember this, memory, what
-  did we decide, last session, continuity, compact the context, working memory, episodic
-  memory, semantic memory, MEMORY.md, memory layers, save for later, what do you remember,
-  pick up where we left off.
+  Maintains layered memory across sessions and long contexts — Working (current task state),
+  Episodic (timestamped events and decisions), Semantic (durable facts, preferences, lessons,
+  each entry carrying evidence and confidence) — via a session-start load restating only
+  task-relevant anchors, compaction promoting Working → Episodic → Semantic and pruning the
+  rest, and contradiction flagging with provenance instead of silent overwrites, structuring
+  native memory, MEMORY.md, and project files rather than replacing them. Receives
+  reflective-learner lessons; feeds the knowledge crystallizer. Use at session start, during
+  long multi-turn work, when context grows large, or when something should be remembered or
+  recalled. Triggers: remember this, memory, what did we decide, last session, continuity,
+  compact the context, working memory, episodic memory, semantic memory, MEMORY.md, memory
+  layers, save for later, what do you remember, pick up where we left off.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Hierarchical memory manager

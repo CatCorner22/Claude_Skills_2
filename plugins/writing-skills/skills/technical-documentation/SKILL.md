@@ -1,21 +1,19 @@
 ---
 name: technical-documentation
 description: >-
-  Structures technical documentation as typed artifacts, not prose: routes docs
-  through Procida's Diátaxis framework (tutorial, how-to guide, reference,
-  explanation — four forms that fail when blended), shapes the README around a
-  newcomer's first screen, records decisions as Nygard-style architecture decision
-  records (context/decision/consequences, superseded never edited), keeps a
-  human-readable changelog keyed to semantic versioning, writes routine procedure
-  docs, and holds API and reference docs to examples-first, versioned,
-  generated-vs-hand-written discipline. Owns the document types; sentence-level
-  register stays with writing-skills:adams-smart-brevity, explanation craft with
-  writing-skills:explanation-design. Use when writing or restructuring docs for a
-  project, method, or process. Triggers: technical documentation, write the README,
-  ADR, architecture decision record, changelog, Diátaxis, how-to guide, tutorial vs
-  reference, API docs, docs as code, semantic versioning.
+  Structures technical documentation as typed artifacts, not prose: routes docs through
+  Procida's Diátaxis framework (tutorial, how-to guide, reference, explanation — four forms that
+  fail when blended), shapes the README around a newcomer's first screen, records decisions as
+  Nygard-style architecture decision records (context/decision/consequences, superseded never
+  edited), keeps a human-readable changelog keyed to semantic versioning, and holds API and
+  reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the
+  document types; sentence-level register stays with writing-skills:adams-smart-brevity,
+  explanation craft with writing-skills:explanation-design. Use when writing or restructuring
+  docs for a project, method, or process. Triggers: technical documentation, write the README,
+  ADR, architecture decision record, changelog, Diátaxis, how-to guide, tutorial vs reference,
+  API docs, docs as code, semantic versioning.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §5 technical-documentation).

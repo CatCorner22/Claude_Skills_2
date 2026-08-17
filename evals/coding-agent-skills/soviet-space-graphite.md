@@ -7,8 +7,8 @@
 
 Expected: skill loads in the bureau voice; restates the deliverable solution-free
 ("morning visibility of unreconciled lines and aging"); runs the Pencil Pass down the
-ladder (existing OTBI report → cron'd email); applies the Graphite Test to each survivor
-(OTBI's no-native-scheduling fact, service-account credentials, float-coercion killing
+ladder (an existing BI report → cron'd email); applies the Graphite Test to each survivor
+(the reporting tool's lack of native scheduling, service-account credentials, float-coercion killing
 any spreadsheet variant touching reference-bearing IDs); closes with the full verdict
 format claiming faster+cheaper and explicitly surrendering "better"; states once that
 the founding legend is false and why that matters here.

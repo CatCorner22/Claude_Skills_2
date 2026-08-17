@@ -12,12 +12,12 @@ perception ranking); checks the KPI is measurable at the data's grain; and advis
 hierarchy plus context vs. target/prior (bullet graph or delta).
 
 ## 2. Near-miss (should NOT load this skill)
-> "In Oracle OTBI, how do I add a table layout and a bar view to my analysis and set up the column
+> "In our BI tool, how do I add a table layout and a bar view to my analysis and set up the column
 > prompts?"
 
-Expected: this is building the OTBI report artifact, not designing what the dashboard should show —
-tool-mechanics that no active skill in this library owns, so nothing should load as primary. If this
-design skill loads as primary, tighten the description / cross-links.
+Expected: this is clicking together the report artifact in a specific product, not designing what the
+dashboard should show — tool-mechanics that no active skill in this library owns, so nothing should
+load as primary. If this design skill loads as primary, tighten the description / cross-links.
 
 ## 3. Quality rubric
 A good response:

@@ -1,21 +1,19 @@
 ---
 name: exponential-growth-and-logs
 description: >-
-  Does the math of anything that grows or shrinks by a roughly constant percent per
-  period — growth-factor form (up r% means ×(1+r); n periods means ×(1+r)^n), CAGR
-  from two endpoints, doubling time exactly (ln 2/ln(1+r)) and via the rule of 72
-  with its accuracy range, halving time for decay, solving how-long-until-it-reaches-X
-  with logs (t = ln(target/current)/ln(1+r)), honest log scales, and averaging
-  growth rates with the geometric mean, not the arithmetic. Teaches why percent
-  changes multiply, not add, why +10% then −10% ends below the start, and why
-  linear intuition underestimates exponential runaway. Use when a quantity changes
-  by a percent each period — revenue, users, prices, data volumes — and the question
-  is a rate, a horizon, or a fair per-period figure; not for discounting money
-  across dates or fitting trend models to history. Triggers: exponential growth,
-  CAGR, doubling time, rule of 72, logarithm, log scale, growth rate math, geometric
+  Does the math of anything that grows or shrinks by a roughly constant percent per period —
+  growth-factor form (up r% means ×(1+r); n periods means ×(1+r)^n), CAGR from two endpoints,
+  doubling time exactly (ln 2/ln(1+r)) and via the rule of 72 with its accuracy range, halving
+  time for decay, solving how-long-until-it-reaches-X with logs (t =
+  ln(target/current)/ln(1+r)), honest log scales, and averaging growth rates with the geometric
+  mean, not the arithmetic. Teaches why percent changes multiply, not add, and why +10% then
+  −10% ends below the start. Use when a quantity changes by a percent each period — revenue,
+  users, prices — and the question is a rate, a horizon, or a fair per-period figure; not for
+  discounting money across dates or fitting trend models to history. Triggers: exponential
+  growth, CAGR, doubling time, rule of 72, logarithm, log scale, growth rate math, geometric
   average, how long until it doubles, decay rate.
 metadata:
-  version: "1.0.1"
+  version: "1.1.0"
 ---
 
 # Exponential growth and logarithms

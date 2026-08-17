@@ -2,7 +2,7 @@
 
 ## 1. Positive trigger (should load the skill)
 > "Set up a tabletop exercise for a BEC payment-fraud attempt hitting us during the
-> Friday payroll run. Treasury ops is the blue team — I need the scenario, injects,
+> Friday payroll run. Our payments-ops team is the blue team — I need the scenario, injects,
 > someone to play the adversary, and adjudication, then a debrief."
 
 Expected: skill loads; defines objectives and grounds the scenario in the real payment

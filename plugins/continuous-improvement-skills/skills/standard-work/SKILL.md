@@ -1,19 +1,19 @@
 ---
 name: standard-work
 description: >-
-  Documents the current best-known method for a repeatable task as standard work (an SOP),
-  so the process is stable enough to improve — the Toyota trio of takt time, work sequence,
-  and standard in-process stock, plus the TWI Job Instruction breakdown of steps, key
-  points, and the reason behind each; adds visual management so deviations announce
-  themselves, verified training, and a review cadence that keeps the standard a living
-  baseline every kaizen updates. Fits any recurring task an analyst, attorney, ops manager,
-  or developer owns — a weekly report, an intake review, a handoff, a release. Use when
+  Documents the current best-known method for a repeatable task as standard work (an SOP), so
+  the process is stable enough to improve — the Toyota trio of takt time, work sequence, and
+  standard in-process stock, plus the TWI Job Instruction breakdown of steps, key points, and
+  the reason behind each; adds visual management so deviations announce themselves, verified
+  training, and a review cadence that keeps the standard a living baseline every kaizen updates.
+  Fits any recurring task — a weekly report, an intake review, a handoff, a release. Use when
   documenting, standardizing, or stabilizing a process that varies by who does it, capturing
-  tribal knowledge, or writing an SOP or work instruction people will follow. Triggers: standard work, standardized work, SOP, standard
-  operating procedure, work instruction, standardize, visual management, TWI, job
-  instruction, job breakdown, takt time, everyone does it differently, tribal knowledge.
+  tribal knowledge, or writing an SOP or work instruction people will follow. Triggers: standard
+  work, standardized work, SOP, standard operating procedure, work instruction, standardize,
+  visual management, TWI, job instruction, job breakdown, takt time, everyone does it
+  differently, tribal knowledge.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Standard work
@@ -41,6 +41,10 @@ added as the format matured — is still the most teachable SOP format there is.
 - Not for: boiling an existing SOP down to the few steps people actually skip → see
   `safety-and-reliability-skills:checklist-design` (a checklist rides on top of standard
   work; it doesn't replace it).
+- Not for: standardizing *data* instead of work — this skill standardizes how a task is
+  performed, not the values in a table. Normalizing messy category values, formats, and types
+  in a dataset → see `data-analytics-bi-skills:data-cleaning`; z-score standardizing or
+  scaling model features → see `machine-learning-skills:feature-engineering`.
 
 ## Do it
 `references/sop-template.md` has the fillable template, a worked example, and the TWI

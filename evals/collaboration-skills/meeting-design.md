@@ -2,7 +2,7 @@
 
 ## 1. Positive trigger (should load the skill)
 > "Our weekly team sync has grown to 12 people and 90 minutes, and nothing ever
-> actually gets decided — we just go around the room. Can you fix the agenda? Here's
+> actually gets decided — we just go around the room. Can you fix the meeting agenda? Here's
 > what we currently cover: project updates, blockers, upcoming deadlines, and any
 > other business."
 

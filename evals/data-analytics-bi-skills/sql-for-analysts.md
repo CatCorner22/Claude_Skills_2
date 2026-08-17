@@ -9,10 +9,10 @@ window function (`SUM(...) OVER (PARTITION BY customer ORDER BY month)`) for the
 `RANK/DENSE_RANK` for the ranking; notes the join/fan-out and date-range cautions.
 
 ## 2. Near-miss (should NOT load this skill)
-> "In Oracle Fusion, which subject area should I use to report on cash management transactions in
-> OTBI?"
+> "In our reporting tool, which prebuilt subject area should I pick to report on payment
+> transactions?"
 
-Expected: this is subject-area selection for OTBI, not hand-written SQL — tool-specific guidance
+Expected: this is subject-area selection inside a BI product, not hand-written SQL — tool-specific guidance
 that no active skill in this library owns, so nothing should load as primary. If this SQL skill
 loads, tighten the description / cross-links.
 

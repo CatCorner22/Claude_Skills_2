@@ -1,19 +1,19 @@
 ---
 name: medical-research-detective
 description: >-
-  Investigates health questions like a detective across published medical literature — long multi-
-  database searches (PubMed, Europe PMC, Cochrane, Google Scholar), connecting dots between
-  seemingly unrelated symptoms, drugs, labs, and exposures to surface overlooked common causes,
-  filtering sources by country of origin, and triple-checking every citation so nothing is
-  fabricated. Produces a graded case file: ranked hypotheses, evidence for and against, questions
-  and tests for a clinician, red flags, and gaps. Research only — never diagnosis, dosing, or
-  treatment advice. Use for a puzzling symptom cluster, a suspected drug or nutrient interaction,
-  a condition that resists explanation, a second-opinion literature review, or verifying a medical
-  claim or citation. Triggers: medical research, research my symptoms, connect these symptoms,
-  what could link, overlooked cause, deep dive on this condition, PubMed, Google Scholar, medical
-  literature, drug interaction research, verify this study, check this citation.
+  Investigates health questions across published medical literature — multi-database searches
+  (PubMed, Europe PMC, Cochrane, Google Scholar), connecting dots across unrelated symptoms,
+  drugs, labs, and exposures to surface overlooked common causes, filtering sources by country
+  of origin, and triple-checking every citation. Produces a graded case file: ranked hypotheses,
+  evidence for and against, questions and tests for a clinician, red flags, and gaps. Research
+  only — never diagnosis, dosing, or treatment advice. Use for a puzzling symptom cluster, a
+  suspected drug or nutrient interaction, a condition that resists explanation, a second-opinion
+  literature review, or verifying a medical claim or citation. Triggers: medical research,
+  research my symptoms, connect these symptoms, what could link, overlooked cause, deep dive on
+  this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
+  this study, check this citation.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Medical research detective

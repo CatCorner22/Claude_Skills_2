@@ -24,7 +24,7 @@ never trigger alone; if this skill loads here, its trigger surface has grown pas
 structured-communication vocabulary (SBAR, structured handoff, coverage notes, read-back).
 
 ## 2b. Near-miss (register-vs-protocol guard)
-> "Here's my draft email to the office manager about the schedule change at the dental practice —
+> "Here's my draft email to the office manager about next month's schedule change —
 > tighten it up and make it clearer and more professional."
 
 Expected: prose improvement is a writing-register task → `writing-skills:adams-smart-brevity`.
@@ -39,8 +39,8 @@ A good response:
   PACE — one moment, one protocol); every SBAR ends in a recommendation with a deadline; every
   handoff includes if-then contingencies and ends at the receiver's synthesis/read-back, not
   the sender's monologue; closed loops run three turns with critical values repeated verbatim;
-  PACE ladders are drafted for the specific relationship (analyst → approver, dental
-  assistant → dentist) and climbed in order.
+  PACE ladders are drafted for the specific relationship (analyst → approver, nurse →
+  attending) and climbed in order.
 - **Teaches:** explains the two failure modes the protocols attack — information loss at
   transitions and deference under authority gradients (the United 173 lesson) — and why
   structure, not heroism, is the countermeasure; cites the outcome evidence (I-PASS: errors

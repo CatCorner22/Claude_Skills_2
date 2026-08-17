@@ -1,7 +1,7 @@
 # Evals — coding-agent-skills:writing-agent-skills
 
 ## 1. Positive trigger (should load the skill)
-> "I want to add a new skill to the finance plugin for computing bond duration.
+> "I want to add a new skill to the math-foundations plugin for compound-interest math.
 > How should I set it up so it matches the rest of the library?"
 
 Expected: skill loads; directs the author to copy `assets/SKILL.template.md`, enforces the

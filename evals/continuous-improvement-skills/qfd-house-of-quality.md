@@ -1,7 +1,7 @@
 # Evals — continuous-improvement-skills:qfd-house-of-quality
 
 ## 1. Positive trigger (should load the skill)
-> "We just finished the co-design interviews for the dental app — I have a pile of patient and
+> "We just finished the co-design interviews for the new patient-intake app — I have a pile of patient and
 > front-desk needs with rough priorities. Build me a house of quality that translates them into
 > measurable engineering characteristics so we can decide what to build first."
 

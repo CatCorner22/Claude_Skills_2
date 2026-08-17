@@ -1,18 +1,19 @@
 ---
 name: measurement-systems-analysis
 description: >-
-  Answers two questions no metric-driven decision should skip: can this measurement be
-  trusted, and is the process behind it capable? Part A runs Gage R&R — a crossed study (10
-  parts × 3 operators × 3 trials, blind and randomized) decomposed by ANOVA into repeatability,
-  reproducibility, and part-to-part variation, judged on %GRR and distinct categories — plus
-  attribute agreement studies for pass/fail judgments, including LLM-as-judge scoring, where
-  agreement across judges and repeated runs is measured before any eval score is trusted. Part
-  B computes process capability, Cp and Cpk against spec limits, only after stability is
-  confirmed on a control chart. Use when validating a metric or gauge, measuring inter-rater or
-  judge agreement, or judging a stable process against its spec limits. Triggers: gage R&R,
-  measurement systems analysis, can I trust this metric, repeatability and
+  Answers two questions: can this measurement be trusted, and is the process behind it capable?
+  Part A runs Gage R&R — a crossed study (10 parts × 3 operators × 3 trials, blind and
+  randomized) decomposed by ANOVA into repeatability, reproducibility, and part-to-part
+  variation, judged on %GRR and distinct categories — plus attribute agreement studies for
+  pass/fail judgments, including LLM-as-judge scoring, measuring judge agreement before any eval
+  score is trusted. Part B computes process capability, Cp and Cpk against spec limits, only
+  after stability is confirmed on a control chart. Use when validating a metric or gauge,
+  measuring inter-rater or judge agreement, or judging a stable process against its spec limits.
+  Triggers: gage R&R, measurement systems analysis, can I trust this metric, repeatability and
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
+metadata:
+  version: "1.1.0"
 ---
 
 # Measurement systems analysis and process capability

@@ -24,7 +24,7 @@ requires), not the patterns themselves. If it loads on pattern-implementation as
 quantitative frame, tighten the description.
 
 ## 2b. Near-miss (generic-token guard)
-> "How reliable is our dental practice's recall system? Patients keep slipping through — look
+> "How reliable is our appointment-recall process? Patients keep slipping through — look
 > at the process and tell me where it breaks down."
 
 Expected: a qualitative process-diagnosis ask — root-cause / process-improvement territory

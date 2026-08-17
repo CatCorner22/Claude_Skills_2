@@ -50,6 +50,20 @@ Also recorded here: `board-of-advisors-skills` was **merged, not archived** — 
 skill and six subagents now live in `coding-agent-skills` as
 `coding-agent-skills:board-review` (same content, new namespace).
 
+## Archived applications and domain tools (2026-08-11)
+
+`archive/apps/` holds standalone programs that predate the library's re-aim and were never
+referenced by any skill: two separate dental "notes standardizer" apps (a root Vite + React 19
+app and a `tools/`-based vocabulary normalizer), their Curve Hero benchmark docs and validation
+record, and the Oracle-era `fusioncash-architect` Python tool. They lived at the repository
+root, where they made a skills marketplace read as a JavaScript app. See
+[apps/README.md](apps/README.md) for what each one is and how to restore it.
+
+`GITHUB_SETUP.md` was **deleted** in the same pass rather than archived — every fact in it was
+dead (defunct repo URL, long-merged branch, its own status line saying "not found"). It had
+published an ssh-ed25519 deploy public key; if that key still exists on the repository, revoke
+it in GitHub settings independently of this cleanup.
+
 ## Restore procedure
 
 To restore a plugin to the active marketplace:

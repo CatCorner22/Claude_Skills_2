@@ -1,7 +1,7 @@
 # Evals — continuous-improvement-skills:fmea
 
 ## 1. Positive trigger (should load the skill)
-> "We're about to go live with a new Oracle Fusion auto-reconciliation rule set. Before we flip it
+> "We're about to go live with a new auto-reconciliation rule set. Before we flip it
 > on, run an FMEA: list the failure modes for each matching and parse rule, rate severity,
 > occurrence, and detection, and give me an action priority ranking of what to fix first."
 
