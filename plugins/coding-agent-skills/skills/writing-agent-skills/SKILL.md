@@ -73,11 +73,15 @@ Every skill uses these H2 sections, in this order (omit only `scripts` when none
 - Use forward slashes in every path.
 
 ### 5. Add the tailoring hook (privacy-safe)
-This library's skills are meant to fit the user's real environment (Oracle OTBI reports, their
-reconciliation process, chart of accounts, bank statement formats). In `## Tailor to your
-environment`, instruct the user to drop real details into `references/your-environment.md`.
-**Never commit raw real data.** Commit only sanitized, structural examples. Raw artifacts go in
-files matching `.gitignore` patterns (`*.private.md`, `references/*.local.*`).
+Skills in this library are domain-neutral by design, and fit the user's real environment through
+one file rather than through hard-coded domain content. Name the *kind* of artifact the skill
+attaches to, not one employer's version of it — a recurring report and its source system, a
+matter or case intake, an operational runbook, a service and its deploy path. In `## Tailor to
+your environment`, instruct the user to drop their specifics into
+`references/your-environment.md`, framed "wire in your current role here" so the skill survives
+a job change. **Never commit raw real data.** Commit only sanitized, structural examples. Raw
+artifacts go in files matching `.gitignore` patterns (`*.private.md`,
+`references/*.local.*`).
 
 ### 6. Write evals (do not put them in SKILL.md)
 Create `evals/<plugin>/<skill>.md` with at least three scenarios:
