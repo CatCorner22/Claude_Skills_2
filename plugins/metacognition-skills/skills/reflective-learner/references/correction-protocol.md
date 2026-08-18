@@ -245,7 +245,9 @@ not read at the moment of action, which is a design fact about the workflow, not
 ## Worked example: six corrections in one session, end to end
 
 Context: a recurring vendor-performance summary, assembled from a monthly export. Six corrections
-arrive across one session. Each is triaged with the four questions.
+arrive across one session. Four of them land on the summary itself, which is past the
+correlated-corrections threshold above — so this is one triage pass run at the end of the session,
+not six reflection cycles. Triage is cheap enough to run per correction; the cycle is not.
 
 | # | The correction | Recurs? | Derivable? | Source | Routing |
 |---|---|---|---|---|---|
@@ -253,7 +255,7 @@ arrive across one session. Each is triaged with the four questions.
 | C2 | "Three of these totals don't match the export." | Yes | Yes — recomputable from the source | Explicit | `RULE:` storing the missing check |
 | C3 | "Drop the note about that vendor, the contract ended." | No | — | Explicit | Apply; store nothing |
 | C4 | User silently rewrites two headings from questions to noun phrases | Yes | No | Inferred, 1st sighting | Hold as a candidate in working notes |
-| C5 | Same heading rewrite, seen once before in a prior session | Yes | No | Inferred, 2nd sighting | `PREFERENCE:` promoted |
+| C5 | The same rewrite again, on the next artifact in the session — C4 was the first sighting | Yes | No | Inferred, 2nd sighting | `PREFERENCE:` promoted |
 | C6 | "Give me the full detail here, all of it" — store holds *"user wants one-page summaries"* | Yes | No | Explicit, apparent conflict | Diagnose before writing |
 
 Tally — **3** new durable entries (C1, C2, C5), **1** amendment to an existing entry (C6), and **2**

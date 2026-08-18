@@ -33,6 +33,14 @@ A skill is done when every box is checked.
       only for what it cannot parse: conclusions drawn *from* the numbers, figures carried
       across prose sentences, and any claim that an example's stated finding follows from its
       own setup. The script proves the sums; you still have to prove the story.
+- [ ] **If you changed a skill's internal structure — its steps, phases, gates, or fields —
+      re-check what other skills SAY about it.** `validate.sh` proves a `plugin:skill` reference
+      resolves; nothing proves the sentence around it is still true. Deepening `reflective-learner`
+      turned its four-step protocol into five, and three inbound references in two other files went
+      on calling it "the four-step protocol" — resolving perfectly, describing something that no
+      longer existed. `python3 scripts/check-cross-claims.py` finds counted claims about other
+      skills (advisory, not gating). The durable fix is to *name* the thing rather than count it:
+      "the correction protocol", not "the four-step protocol".
 - [ ] **Reciprocal-link pass on the OLDER side of every new seam.** A new skill that cites 3–8
       neighbours while receiving zero inbound citations is a discovery dead-end: nobody starting
       from an existing skill will ever learn it exists. Add the `Not for:` line to the

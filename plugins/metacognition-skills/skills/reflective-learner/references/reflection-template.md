@@ -73,8 +73,9 @@ applied count is the least informative number in the set; read the other two fir
 A working trigger: when repeats exceed roughly one in five of a cycle's updates, stop adding entries
 and spend the cycle relocating the ones you already have, because past that ratio the store is
 growing faster than the behavior. For this cycle the line sits just under three updates: 14 / 5 = 2.8.
-Two repeats is below it — each still gets a site fix, but the cycle is not yet dominated by them. The exact fraction has no measured basis; pick one, write it down, and hold it, so
-the trigger is a threshold rather than a mood.
+Two repeats is below it — each still gets a site fix, but the cycle is not yet dominated by them.
+The exact fraction has no measured basis; pick one, write it down, and hold it, so the trigger is
+a threshold rather than a mood.
 
 A lesson repeatedly "not applied" after relocation is a candidate for a stronger mechanism — a
 standing rule in project instructions, an automated check, or a skill update — via

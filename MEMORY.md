@@ -332,7 +332,7 @@ Never store secrets, credentials, account numbers, or client data here.
 - PATTERN: Generated documentation (catalog from frontmatter) stays honest — regenerate rather
   than hand-edit. (docs/SKILLS.md)
 - METHOD: Current metacognition loop — capture durable items here per
-  `hierarchical-memory-manager`; on corrections run the `reflective-learner` 4-step protocol;
+  `hierarchical-memory-manager`; on corrections run the `reflective-learner` correction protocol;
   crystallize at milestones/session end and append to the log below. (adopted 2026-07-18)
 - METHOD: Verify a self-contained HTML deliverable before sending — render it in the
   pre-installed Chromium (`/opt/pw-browsers/chromium-*`) via Playwright, screenshot each
