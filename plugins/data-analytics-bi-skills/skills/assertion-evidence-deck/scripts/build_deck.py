@@ -2,7 +2,7 @@
 """Build a compliant assertion-evidence .pptx from a JSON deck spec.
 
 Usage:
-  python build_deck.py deck_spec.json -o output.pptx [--brand neutral|ut] [--font NAME]
+  python build_deck.py deck_spec.json -o output.pptx [--brand neutral|warm-accent] [--font NAME]
   python build_deck.py --schema         # print the spec format and the eight slide kinds
 
 The builder encodes the geometry, typography, and colors verified in
@@ -46,11 +46,30 @@ BANNED = {"kind"}             # reserved keys, not content
 
 # --- Palettes -------------------------------------------------------------
 PALETTES = {
-    "ut": dict(primary="FF8200", ink="4B4B4B", muted="767676",
-               secondary="A6A6A6", bg="FFFFFF"),
     "neutral": dict(primary="4B4B4B", ink="333333", muted="767676",
                     secondary="A6A6A6", bg="FFFFFF"),
+    # A warm-accent institutional palette, kept as a worked case of a *published*
+    # brand whose accent fails WCAG as text (FF8200 on white is 2.49:1). It is not
+    # the default and it warns on every run — see references/design-tokens.md.
+    "warm-accent": dict(primary="FF8200", ink="4B4B4B", muted="767676",
+                        secondary="A6A6A6", bg="FFFFFF"),
 }
+
+# Old spec files and command lines say `ut`. Renaming a CLI value silently breaks
+# every deck spec that already carries it, so the old name still resolves and says so.
+BRAND_ALIASES = {"ut": "warm-accent"}
+
+
+def resolve_brand(name):
+    """Canonical palette name, honouring deprecated aliases."""
+    if name in PALETTES:
+        return name
+    if name in BRAND_ALIASES:
+        new = BRAND_ALIASES[name]
+        print(f"NOTE: brand '{name}' was renamed to '{new}'; the old name still works.",
+              file=sys.stderr)
+        return new
+    raise SystemExit(f"unknown brand {name!r} — choose from {', '.join(PALETTES)}")
 
 SLIDE_KINDS = {
     "title":      "Title slide. Fields: headline, subtitle.",
@@ -316,7 +335,7 @@ BUILDERS = {
 
 
 def build(spec, brand, font_override):
-    pal = PALETTES[brand].copy()
+    pal = PALETTES[resolve_brand(brand)].copy()
     font = font_override or spec.get("font") or "Calibri"
 
     # Contrast guard on the standard text pairs.
@@ -369,7 +388,7 @@ def print_schema():
     print(json.dumps({
         "title": "string (used only if a title slide is present)",
         "font": "Calibri (optional; --font overrides)",
-        "brand": "neutral | ut (optional; --brand overrides)",
+        "brand": "neutral | warm-accent (optional; --brand overrides)",
         "slides": ["{kind: <one of below>, headline: ..., ...}"],
     }, indent=2))
     print("\nSlide kinds:\n")
@@ -382,7 +401,13 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Build an assertion-evidence .pptx from a JSON spec.")
     ap.add_argument("spec", nargs="?", help="deck spec JSON file")
     ap.add_argument("-o", "--out", help="output .pptx path")
-    ap.add_argument("--brand", choices=list(PALETTES), default="neutral")
+    # default=None, NOT "neutral": the spec file's own brand applies only when the
+    # flag is absent, and `--brand neutral` given explicitly has to win over a spec
+    # that says otherwise. Defaulting to the string makes those two cases identical.
+    ap.add_argument("--brand", default=None,
+                    help="palette: " + " | ".join(PALETTES)
+                         + " (deprecated aliases still accepted: "
+                         + ", ".join(BRAND_ALIASES) + ")")
     ap.add_argument("--font", default=None, help="override the typeface (default Calibri)")
     ap.add_argument("--schema", action="store_true", help="print the spec format and exit")
     args = ap.parse_args(argv)
@@ -395,9 +420,15 @@ def main(argv=None):
 
     with open(args.spec, encoding="utf-8") as fh:
         spec = json.load(fh)
-    prs = build(spec, args.brand, args.font)
+    # --brand wins when given; otherwise the spec file's own "brand" field applies.
+    # Resolve once — resolve_brand warns on a deprecated name, and warning twice for
+    # one run reads like two problems.
+    brand = resolve_brand(args.brand
+                          if args.brand is not None
+                          else spec.get("brand", "neutral"))
+    prs = build(spec, brand, args.font)
     prs.save(args.out)
-    print(f"wrote {args.out}  ({len(spec.get('slides', []))} slides, brand={args.brand})")
+    print(f"wrote {args.out}  ({len(spec.get('slides', []))} slides, brand={brand})")
 
 
 if __name__ == "__main__":

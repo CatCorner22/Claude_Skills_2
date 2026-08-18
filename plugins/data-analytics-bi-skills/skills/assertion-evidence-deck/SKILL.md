@@ -90,7 +90,7 @@ labeled diagram. Over ~40 body words means the claim is too big — split the sl
 
 **Stage 5 — Build the file.** Prefer **Path A**, the bundled builder: write a deck spec as JSON and
 run `python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py" deck_spec.json -o output.pptx` (neutral palette by default;
-`--brand ut` only to match a legacy UT-branded deck). It encodes the geometry, typography, and
+`--brand warm-accent` to match that brand instead). It encodes the geometry, typography, and
 colors in `references/design-tokens.md`, so
 slides come out compliant, and it rejects a headline that busts the two-line budget rather than
 overflowing it. `assets/deck_spec_example.json` is a worked example; `--schema` prints the field
@@ -143,9 +143,11 @@ longer tell which claims were checked. Prefer the honest gap.
 ## Tailor to your environment
 Record your setup in `references/your-environment.md` (keep real figures, client names, and audit
 numbers in `your-environment.private.md`, which is git-ignored). Capture your audiences and the
-decisions each deck serves, your brand palette and fonts (the tokens ship with a neutral default;
-the UT System palette is preserved as the `ut` option), the artifacts your figures come from, and
-any house deck conventions.
+decisions each deck serves, your brand palette and fonts (the tokens ship with a neutral default,
+plus one `warm-accent` pack kept as a worked accessibility case), the artifacts your figures come
+from, and any house deck conventions. Whatever palette you record, run its accent through the
+contrast arithmetic in `references/design-tokens.md` before trusting it as text — a brand-sanctioned
+color is not automatically an accessible one.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
@@ -155,7 +157,7 @@ own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/ae-method.md — full checklist, evidence-type guide, failure modes, before/after examples
-- references/design-tokens.md — verified geometry and typography, neutral palette default, legacy UT System brand pack, font-substitution rule
+- references/design-tokens.md — verified geometry and typography, neutral palette default, the optional warm-accent brand pack and its WCAG failure, font-substitution rule
 - references/evidence-discipline.md — claim tiers, source-ledger format, source-tag wording, gap language
 - references/your-environment.md — your audiences, brand, and artifacts (add when supplied)
 
@@ -163,5 +165,5 @@ own rather than in a cache you may not realise is disposable.
 > Paths use `${CLAUDE_PLUGIN_ROOT}` so they resolve from **any** working directory once the
 > plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
 > repo, which is not where a user runs these.
-- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|ut` and `--font` control theme.
+- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|warm-accent` and `--font` control theme.
 - `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; exits non-zero on error.

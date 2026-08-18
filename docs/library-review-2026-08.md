@@ -723,15 +723,14 @@ ordinary vocabulary. One item is *not* removed and is a decision for the owner: 
 
 ### 12.6 Open decisions from this pass
 
-1. **The `ut` brand pack in `assertion-evidence-deck`.** It names a specific institution's brand
-   guidelines, which is the identifying-detail category the `MEMORY.md` split moved to a private
-   file. It survives here by an earlier ratified exception (kept as an explicit non-default option;
-   the builder defaults to neutral), and it carries real teaching value — a published brand color
-   that fails WCAG at 2.49:1, with the consequences worked out. Removing the affiliation while
-   keeping the palette means renaming the flag across five files including a CLI contract that any
-   existing deck spec may reference as `"brand": "ut"`. **Recommendation: keep, unchanged.** It is
-   a public brand guideline rather than confidential data, and it is already in git history, which
-   the owner chose to leave intact.
+1. ~~**The `ut` brand pack in `assertion-evidence-deck`.**~~ **RESOLVED 2026-08-18** — the owner
+   directed "genericize", overriding the recommendation to keep it unchanged. The palette and its
+   WCAG analysis stay; the institution does not. `ut` → `warm-accent`, with the old name kept as a
+   deprecated alias that resolves and prints a note, so no existing deck spec breaks. Doing the
+   rename surfaced a real bug it would otherwise have hidden: the spec file's documented `"brand"`
+   field was never read — `build()` took only the CLI flag — so a spec saying `"brand": "ut"` had
+   been rendering neutral in silence. Now the flag overrides the spec and the spec is honoured when
+   the flag is absent, which is what the schema always claimed.
 2. **Depth for the five hub-but-thin skills** (§12.3). Not a defect; a ranked opportunity.
 3. **`docs/trigger-test.md` remains unrun.** It is the one checklist item nothing in this library's
    history has ever met, and it cannot be run from a session that authored the skills.

@@ -240,6 +240,12 @@ Never store secrets, credentials, account numbers, or client data here.
   it is name-gated and is the only surviving copy of that commissioned depth in the repo.
   **Do not re-flag it in future residue sweeps.** The legacy brand palette in assertion-evidence-deck
   likewise survives as an explicit NON-DEFAULT legacy brand option (script defaults to neutral).
+  - UPDATE (2026-08-18, owner-directed "genericize"): the palette stays, its *institution* does
+    not. Renamed `ut` → `warm-accent`; the old name resolves as a deprecated alias with a stderr
+    note, because renaming a CLI value silently breaks every deck spec already carrying it. Color
+    names, brand attribution, and sub-brand references genericized. The palette is now framed as a
+    worked accessibility case — a real published brand accent that fails WCAG as text at 2.49:1 —
+    which is why it was worth keeping at all.
   - CORRECTION (2026-08-17, measured): the original rationale said "zero routing pollution".
     That is not accurate — 3 of the skill's 7 triggers (`invoice black hole`, `ghost receipts`,
     `orphan distributions`) are Oracle domain phrases, not the persona name, and roughly a third
