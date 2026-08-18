@@ -158,6 +158,24 @@ design *provided* the name reaches the skill, the skill is still findable by som
 know the name, and it does not squat on work outside its scope. Those are three different questions,
 so each row asks all three.
 
+**Extended to 15 rows (2026-08-18)** to cover every genuinely name-gated skill in the library, not
+just eight of them. `machine-learning-skills:bespoke-llm-architect` is deliberately **excluded**:
+it sets `disable-model-invocation: true`, so the router cannot reach it by any prompt and a routing
+row for it would measure nothing. It is user-invoke-only by construction — worth knowing, not worth
+testing.
+
+**Two by-name prompts deliberately use a name that is NOT in the target's trigger list**, because
+the skill's own text presents that name to the user:
+
+- **D11** says "The Commander" — `extreme-ownership`'s description opens `Acts as "The Commander"`,
+  but its triggers are `jocko`, `extreme ownership`, `laws of combat`… The persona's own name is
+  not among them.
+- **D14** says `adams-plain-grade` hyphenated — the skill's When-to-use says "the user asks for
+  adams-plain-grade by name", while the trigger reads `adams plain grade` with spaces.
+
+A MISS on either is a finding about the description, not a broken prompt. Read it as: the skill
+tells the user a name that does not reach it.
+
 **The middle column has now been wrong twice, in opposite directions.** Version 1 asked only "does
 a generic prompt fail to load it?", and six of its eight generic prompts were
 paraphrases of trigger phrases those skills *deliberately own* (`is this ready to build on`,
@@ -175,6 +193,13 @@ a real route. The in-scope column now makes that a **PASS**, and only the third 
 | D6 | `Deploy the Foreman on this codebase.` | `The team says this feature is done. I do not believe them. How do I check what is actually finished?` | `Write the release notes for this version.` | `coding-agent-skills:the-foreman` |
 | D7 | `Comrade Engineer — is there a pencil for this?` | `We have three engineers on a six-month build for something I suspect a spreadsheet could do.` | `Implement the design we agreed on last week.` | `coding-agent-skills:soviet-space-graphite` |
 | D8 | `Weight of the books on this schema.` | `It flies in staging with our seed data. What happens in March when the real volume shows up?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
+| D9 | `Deploy advisor on our new pricing model.` | `Tear our new pricing model apart like someone who wants it to fail — where does the whole thing come undone?` | `Summarize the pricing model in a paragraph for the board deck.` | `coding-agent-skills:chicken-little-executive-advisor` |
+| D10 | `Deploy compiler on this service.` | `Which single dependency in this service, if it went away tomorrow, takes everything down with it?` | `Add a health-check endpoint to this service.` | `coding-agent-skills:chicken-little-technical-compiler` |
+| D11 | `Bring in The Commander on this postmortem.` | `This writeup blames three other teams. Rewrite it so we own our part.` | `Who on the team has capacity to pick up this ticket?` | `coding-agent-skills:extreme-ownership` |
+| D12 | `Hold up the mirror on this project.` | `Status says green but I know it isn't. Tell me the real state in plain words.` | `How many hours of sleep should I be getting?` | `coding-agent-skills:stay-hard-accountability` |
+| D13 | `Master prompt architect: build me a system prompt.` | `I need a system prompt for a customer-facing agent, and I want the requirements pinned down before you write a line of it.` | `Why does my prompt sometimes return prose instead of JSON?` | `coding-agent-skills:master-prompt-architect` |
+| D14 | `Run adams-plain-grade over this notice.` | `Rewrite this so someone who left school at fourteen can act on it without asking anyone.` | `Tighten this memo for the executive team — they have two minutes.` | `writing-skills:adams-plain-grade` |
+| D15 | `Run the board on this module.` | `I want several specialists looking at this from different angles at once, not one opinion.` | `Is this function's variable naming consistent with the rest of the file?` | `coding-agent-skills:board-review` |
 
 How to read the three results together:
 
