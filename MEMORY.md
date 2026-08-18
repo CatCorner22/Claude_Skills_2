@@ -153,6 +153,34 @@ Never store secrets, credentials, account numbers, or client data here.
   skill hard-codes one. (flagged in OTBI research)
 
 ## Lessons Learned & Avoidance Rules
+- RULE (2026-08-18, surfaces pass): **the repository is not the product.** Every gate here —
+  `validate.sh`, `gen-catalog.py`, every review — operates on the repo, and nothing had ever
+  verified the installed artifact. That single blind spot explained a cluster of unrelated-looking
+  findings: `CLAUDE_PLUGIN_ROOT` used zero times across 121 skills while every bundled-script
+  command was repo-relative (guaranteed file-not-found after install); `your-environment.md` stored
+  in a plugin cache that updates discard; archived pointers naming a directory installed users lack.
+  Before shipping anything path-shaped, ask what it resolves to from a foreign working directory.
+- RULE (2026-08-18): **an undisclosed method turns a measurement into folklore.** The "85 prose
+  collisions" figure was wrong (111) because of a ≥6-char filter nobody stated, and the token
+  percentages disagreed between two files because a 3.7 chars/token divisor was never written down.
+  Publish the method with the number, or the number will be re-derived differently and both versions
+  will survive.
+- RULE (2026-08-18): **a checkable number in a doc is a liability until something regenerates it.**
+  Hand-copied figures drifted in four places. Tables that matter (install cost, per-bundle cost) are
+  now generated from measurement in the same pass that publishes them.
+- RULE (2026-08-18): **when a check "passes", ask what would make it pass while blind.** Four gate
+  defects all failed silently rather than loudly: a missing `---` fence made the whole file
+  frontmatter; one non-UTF-8 byte disabled the entire cross-link check via a swallowed traceback; a
+  body `---` truncated the line counter; JSON-validity-only manifest checks hid eight missing skills
+  and 11 drifted descriptions. A swallowed error must report UNCHECKED, never clean.
+- RULE (2026-08-18): **test a protocol against the thing it will judge before publishing it.** Six of
+  the eight Tier D rows in `docs/trigger-test.md` demanded that skills NOT load on paraphrases of
+  trigger phrases they deliberately own. Run as written, the compliance record would have scored
+  correct routing as failure and invited deleting real routes.
+- RULE (2026-08-18): **a public repo makes a committed memory store a publication surface.** The
+  "no secrets or client data in committed files" rule was read narrowly for two months while the
+  user's employer, role, handles, and private repo names accumulated in `MEMORY.md` one honest fact
+  at a time. Ask where a durable fact will be readable from, not only whether it is a secret.
 - DECISION (owner, 2026-08-18): this repository is **public**, and the committed `MEMORY.md`
   named the user's employer, role, GitHub handles, and private project names. The owner chose to
   **split forward and leave git history intact**: identifying detail moved to the git-ignored
@@ -779,3 +807,23 @@ bug in that function, verified by diffing all 121 rows — exactly the 2 intende
 Pruned: nothing. Flagged, not resolved: 111 description collisions measured only (the figure was
 first published as 85 from an undisclosed >=6-char filter; corrected 2026-08-18); 107 of 121 skills never
 substance-reviewed; the trigger test still unexecuted.
+
+### Crystallization pass — 2026-08-18 (surfaces review: references, evals, docs, tooling, packaging)
+Trigger: owner asked for another deep review for overlooked defects. Scoped deliberately around the
+in-flight skill-body review so the two did not overlap: 19 agents over the 22,604-line reference
+corpus (4 lanes), the 121 evals as deliverables, the docs layer, the two scripts, and
+packaging/privacy — each lane's findings attacked by an adversarial verifier. 81 survived.
+Validated and integrated: 6 new avoidance rules (above). Headline: the repository is not the
+product. Applied: 13 bundled-script paths made install-safe + house-standard 4b + checklist line +
+validator guard; four validator blind spots fixed (missing fence, non-UTF-8 byte, body-line counter,
+manifest coherence) each reproduced before fixing; gen-catalog lead-clause bug #4 (bracket-blind);
+an inverted settings-precedence claim (security-relevant) in 3 places; an impossible DOE alias count
+(9 pairs from 15 interactions -> 7 groups, derived); 8 skills missing from plugin descriptions and
+11 drifted marketplace entries; MEMORY.md identity split to a git-ignored twin per owner decision.
+Self-corrections: my own "85 collisions" -> 111 with the method disclosed; token figures reconciled
+across three files and regenerated from measurement; README bundle guidance corrected against its
+own bundles; trigger-test budget 35 -> 80 prompts; Tier D rewritten after finding it would score six
+correct routes as defects.
+Flagged, not resolved: D9 (your-environment.md in the disposable plugin cache — needs owner
+go-ahead, ~121 edits); the trigger test still unexecuted; 107 of 121 skills still without substance
+review.

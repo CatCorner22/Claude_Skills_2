@@ -471,3 +471,102 @@ this session had been using, under the hard 1024 cap (`exploratory-data-analysis
 → **Recommendation: accept them.** Two were at that length before the unnecessary trims of §9.2;
 restoring them returns to a state that never violated anything. The soft target was an artifact of the
 byte-counting bug.
+
+**D9 — `references/your-environment.md` lives in the plugin cache, which updates discard.** *(new,
+2026-08-18; the one finding from the surfaces pass that is a design decision rather than a defect)*
+All 121 skills tell the user to record their real specifics in `references/your-environment.md`. That
+file sits inside the installed plugin, so `/plugin marketplace update` either refuses on the dirty
+tree or overwrites it. The single persistent artifact the library asks a user to create is stored in
+the least durable place available, and nothing warns them.
+→ **Recommendation: change what the skills ask for, not where the file lives.** Keep
+`your-environment.md` as the shipped *template* — it documents what to record — but have the Tailor
+section tell the user to copy it into **their own project** (e.g. `.claude/skills-env/<skill>.md`) and
+point the skill at that. It survives updates, it is theirs, and it keeps real data out of a directory
+they may not realise is disposable. This is ~121 small edits to one section, so it wants your
+go-ahead before it starts. The alternative — documenting the fragility in place — is cheaper but
+leaves the user's work destructible by a routine update.
+
+---
+
+## 11. Addendum (2026-08-18, surfaces pass): everything that is not a SKILL.md
+
+Sections 9–10 reviewed the 121 skill bodies. This pass reviewed the surfaces that review could not
+see — the 22,604-line reference corpus, the 121 evals as deliverables, the docs layer, the two
+scripts, and packaging/privacy — across 19 agents, with every finding attacked by an adversarial
+verifier. 81 survived.
+
+### 11.1 The headline: the repository is not the product
+
+**Every quality gate in this library operates on the repository, and nothing had ever verified the
+installed artifact.** `validate.sh` and `gen-catalog.py` walk `plugins/**` from the repo root and
+cannot be run by an installed user at all. Once you look for that, several independently-reported
+findings collapse into one cause:
+
+- **`CLAUDE_PLUGIN_ROOT` appeared zero times across all 121 skills**, while every bundled-script
+  invocation used a bare repo-relative path. The one command that produces the assertion-evidence
+  deck, and all five citation-verification examples, were a guaranteed file-not-found after
+  `/plugin install` — the skill runs from a plugin cache with the user's own project as cwd.
+  **Fixed at 13 sites**, plus a new house-standard §4b, a checklist line, and a validator check.
+- **`references/your-environment.md` lives inside the plugin cache.** All 121 skills instruct the
+  user to write their environment there, where a `/plugin marketplace update` either aborts on the
+  dirty tree or discards it. The one persistent thing the library asks a user to create is stored
+  in the least durable place available. **Flagged, not fixed — this is a design decision (D9).**
+- The `(archived: plugin:skill, restorable from archive/)` convention names a directory installed
+  users do not have. Honest inside the repo; meaningless outside it.
+
+### 11.2 The artifacts are sound; the statements about themselves were not
+
+The largest category was false self-description, and the worst instance was this review's own:
+
+| Claim | Reality |
+|---|---|
+| "85 distinct trigger phrases appear inside another skill's description" | **111.** The 85 came from an undisclosed ≥6-char filter, and the method was described as searching "prose" when it searched whole descriptions (prose-only gives 98 and contradicts the paragraph's own three examples). It had propagated to seven sites including `MEMORY.md`. |
+| Authoring standard: 107,700 chars / 29,000 tokens / 14.6% | README said 110,081 / 29,750 / 14.9% for the *same* measurement, and §9 had declared that discrepancy fixed. Both now regenerate from measurement: **110,110 / 29,759 / 14.88%**. |
+| Token counts throughout | Derived from a 3.7 chars/token divisor **disclosed nowhere**. Now stated at every site — an undisclosed divisor is exactly how the two figures above diverged. |
+| README "sweet spot: ~35–50 skills, 5–7%" | Contradicted by all four of its own bundles. Measured: **24–31 skills, 2.95–3.59%.** Guidance and a per-bundle table are now generated from one measurement. |
+| `trigger-test.md`: "~35 rows means ~35 sessions" | 45 rows, **80 prompts**. The one instrument aimed at the installed product understated its own cost by more than 2× — a plausible reason it has never been run. |
+| Install command in the published catalog | Still named the pre-rename GitHub owner, disagreeing with README and the marketplace manifest, and re-emitted on every regeneration. Fixed at the generator. |
+
+### 11.3 Tooling that reported green while not looking
+
+Four defects in the gate itself, each reproduced before fixing:
+
+- **A missing closing `---` fence passed as OK** — the whole file became "frontmatter" and its
+  mangled description flowed into both catalogs.
+- **One non-UTF-8 byte anywhere silently disabled the entire cross-link check.** Reproduced: a
+  planted broken link reported 1 error clean, **0 errors** with one bad byte elsewhere.
+- **The body-line counter stopped at the first bare `---`**, so the 500-line cap was bypassable by
+  any skill using a horizontal rule. A 168-line file counted as 30.
+- **`gen-catalog.py`'s lead-clause splitter was bracket-blind** (its fourth bug), emitting three
+  unbalanced cells in the committed `INDEX.md`.
+- **Manifests were checked only for JSON validity.** Adding coherence checks immediately found that
+  **all eight skills added this session were missing from their plugin descriptions** — the strings
+  `/plugin` shows pre-install — and that **11 of 14 marketplace entries had drifted** from their
+  plugin manifests, so neither file was authoritative.
+
+### 11.4 Two more false claims in skill content
+
+- **`agent-harness-config` inverted the settings-precedence order**, placing enterprise/managed
+  settings lowest — i.e. telling readers a git-ignored `settings.local.json` overrides
+  administrator policy. Security-relevant and wrong in all three places it appeared.
+- **`design-of-experiments` claimed "nine aliased pairs"** for the 16-run 2^(6−2) design. Six
+  factors have only C(6,2) = 15 two-factor interactions; nine pairs would need 18. The real
+  structure, derived from I = ABCE = BCDF = ADEF, is seven groups — six pairs and one triple.
+
+### 11.5 What was good, stated plainly
+
+The eval corpus is 121:1 complete with zero orphans; all 26 archived pointers resolve; the
+generated catalogs are byte-identical to a fresh regeneration; and **no secrets, credentials, or
+client data exist anywhere in the tree**. The `executive-briefing → briefing-method.md` path is
+complete end to end — template, worked memo, and checklist produce a signable deliverable without
+leaving the skill. That is the model the analytical and engineering paths should copy.
+
+### 11.6 A trap caught in this pass's own deliverable
+
+`docs/trigger-test.md`'s Tier D asked whether a "generic prompt" fails to load each persona skill.
+Checked against the skills' actual trigger lists, **six of its eight generic prompts were
+paraphrases of phrases those skills deliberately own** (`is this ready to build on`, `simpler
+solution`, `will it hold at real volumes`, `future outcomes`, `how good is this`, `refactor`). Run
+as written, the compliance record would have scored six correct routes as failures and invited
+deleting real trigger phrases — the exact move the protocol forbids elsewhere. Tier D now asks its
+three questions as three columns, and the in-scope column makes a load a **PASS**.
