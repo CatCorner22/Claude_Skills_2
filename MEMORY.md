@@ -482,6 +482,21 @@ Never store secrets, credentials, account numbers, or client data here.
   clauses moved the library 109,662 -> 109,958 chars (14.82% -> 14.86%). Re-run
   `scripts/measure-listing-cost.py` and refresh README after any description change.
 
+- FACT (2026-08-18, Tier C run, blind): **16/16 over-trigger guards PASS, 0 OVER.** The four new
+  `script-wizard` breadth guards (C13-C16) each landed on the *correct* owner — data-cleaning,
+  git-and-code-review, value-stream-mapping, rule-stress-testing — which is stronger than merely
+  staying out of the way. The seam repairs shipped just before had already moved script-wizard from
+  winning two Tier D prompts to runner-up on both.
+- LESSON (2026-08-18, third occurrence — treat as a standing rule): **the test prompt is the most
+  common defect in this protocol, not the description.** Tier D v1 used generic prompts that were
+  really in-scope; Tier D v2 used in-scope prompts carrying the target's own trigger; the Tier C
+  decoy added the word "Python" and got steered to `python-for-analysts`, which owns the bare
+  trigger and was the better answer anyway. Before scoring any routing prompt, check it against
+  **every** skill's trigger list, not just the target's. `scripts/check-trigger-test.py` only
+  checks the target's — the gap is now documented in the script, and automating the full check is
+  harder than it looks because short triggers like "agent", "prompt", and "module" are ordinary
+  English.
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core

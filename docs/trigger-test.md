@@ -64,18 +64,18 @@ thing the test can usefully measure.
 
 2. **One fresh session per row.** This is not optional and it is the expensive part. Once a skill is
    loaded its body is in context and biases every later turn in that session, so a second prompt in
-   the same session tests nothing. **Budget accordingly: 52 rows carry 101 distinct prompts**, so a
-   full run is up to 101 fresh sessions. A cheaper first pass is 52 sessions — the must-load column
+   the same session tests nothing. **Budget accordingly: 56 rows carry 105 distinct prompts**, so a
+   full run is up to 105 fresh sessions. A cheaper first pass is 56 sessions — the must-load column
    only — following up on the other columns for anything that passes.
 
    | Tier | Rows | Prompts/row | Prompts |
    |---|---:|---:|---:|
    | A — routes that lost their phrases | 11 | 2 | 22 |
    | B — did the moved phrases land? | 6 | 1 | 6 |
-   | C — over-trigger guards | 12 | 1 | 12 |
+   | C — over-trigger guards | 16 | 1 | 16 |
    | D — name-gated skills | 15 | 3 | 45 |
    | E — skills rewritten this session | 8 | 2 | 16 |
-   | **total** | **52** | | **101** |
+   | **total** | **56** | | **105** |
 
 3. **Paste the prompt verbatim.** No preamble, no "can you", no follow-up clarification. Any editing
    makes the row unrepeatable.
@@ -149,7 +149,17 @@ supposed to *gain* it. A MISS here means a phrase was taken from one skill and d
 The library has **285 single-word trigger phrases**. Most are precise jargon (`weibull`, `cpk`,
 `duckdb`) and carry no risk. These rows probe the subset that are ordinary English words with a
 dominant non-skill meaning — the ones most likely to fire on an unrelated request. Every prompt here
-uses the word in its **everyday** sense. Loading the skill is a **failure**.
+uses the word in its **everyday** sense, or in a sense another skill owns. Loading the named skill
+is a **failure**.
+
+**C13–C16 are a different shape from C1–C12 and were added 2026-08-18.** They do not probe a bare
+common word; they probe one skill's *breadth*. `script-wizard` claims "improve any script, tool,
+document, or technical artifact of real substance — even when phrased casually", and two
+independent methods flagged it as the library's general-work attractor: the five-lens trim ranking
+placed it 2nd of 121 on reach while every other lens placed it near the bottom, and the Tier D
+re-run watched it absorb a prompt belonging to `elite-python-engineer`. Each row below hands it a
+casual phrasing whose substance another skill owns. Its cost, if these fail, is not its own tokens
+— it is the precision it takes from its neighbours.
 
 | # | Prompt (paste verbatim) | Must NOT load | Trigger at fault |
 |---|---|---|---|
@@ -165,6 +175,10 @@ uses the word in its **everyday** sense. Loading the skill is a **failure**.
 | C10 | `Refactor this paragraph so it reads better.` | `full-stack-dev-skills:elite-python-engineer` | `refactor` (bare, and the skill's broadest remaining route) |
 | C11 | `What are the visitor permissions for the building on weekends?` | `coding-agent-skills:agent-harness-config` | `permissions`, `hooks` |
 | C12 | `Investigate why the office coffee order keeps arriving late.` | `metacognition-skills:dynamic-analysis-engine` | `investigate` |
+| C13 | `Half the rows in this export have blanks and the dates come in three different formats. Clean this up.` | `coding-agent-skills:script-wizard` | `clean this up` (should be `data-analytics-bi-skills:data-cleaning`) |
+| C14 | `Here's the diff for my branch — review this code before I open the PR.` | `coding-agent-skills:script-wizard` | `review this code` (should be `coding-agent-skills:git-and-code-review`) |
+| C15 | `Our onboarding takes eleven days and nobody can say why. Improve this process.` | `coding-agent-skills:script-wizard` | `improve this process` (should be a continuous-improvement method) |
+| C16 | `Our refund policy has an edge case people keep exploiting. Stress test it.` | `coding-agent-skills:script-wizard` | `stress test` (shared with `coding-agent-skills:rule-stress-testing`) |
 
 > A single OVER here is not automatically a defect — a slightly pushy skill that offers itself and is
 > waved off costs one line. An OVER on **C6, C7, C8 or C12** is more serious, because those skills

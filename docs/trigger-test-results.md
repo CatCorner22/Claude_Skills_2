@@ -396,3 +396,57 @@ agent's self-reported confidence 1–5, recorded before scoring. Row ids map to 
    result into runtime evidence.
 5. **Keep the blind harness.** Structural withholding of the key cost nothing and is the only reason
    this run's number can be discussed at all.
+
+---
+
+# Tier C run — 2026-08-18 (all 16 guards, blind)
+
+**16/16 guards PASS. 0 OVER.** Method as above: four fresh agents, only the 121 name+description
+pairs plus opaque-id prompts, answer key withheld structurally. Three decoy prompts that *should*
+load a skill were mixed in, so a panel that simply abstained on everything would score badly rather
+than perfectly.
+
+## The four new rows (C13–C16) and why they exist
+
+`script-wizard` claims "improve any script, tool, document, or technical artifact of real substance
+— even when phrased casually". Two independent methods flagged that breadth: the five-lens trim
+ranking placed it **2nd of 121 on reach while every other lens placed it near the bottom** — its
+largest single disagreement — and the Tier D re-run watched it absorb a prompt belonging to
+`elite-python-engineer`. Each row hands it a casual phrasing whose substance another skill owns.
+
+| Row | Prompt | Trigger at fault | Result | Landed on |
+|---|---|---|---|---|
+| C13 | "Half the rows in this export have blanks and the dates come in three different formats. Clean this up." | `clean this up` | PASS | `data-cleaning` (conf 5) |
+| C14 | "Here's the diff for my branch — review this code before I open the PR." | `review this code` | PASS | `git-and-code-review` (conf 5) |
+| C15 | "Our onboarding takes eleven days and nobody can say why. Improve this process." | `improve this process` | PASS | `value-stream-mapping` (conf 4) |
+| C16 | "Our refund policy has an edge case people keep exploiting. Stress test it." | `stress test` | PASS | `rule-stress-testing` (conf 5) |
+
+**Each landed on the correct owner, which is a stronger result than "did not load script-wizard".**
+A guard only proves the skill stayed out of the way; landing on the right neighbour proves the
+neighbour was reachable through the same words. Note that the two seam repairs shipped just before
+this run had already moved `script-wizard` from *winning* two Tier D prompts to *runner-up* on both.
+
+## The decoy that failed was my prompt, not the library
+
+X3 — "Write me a Python script that pulls yesterday's export and flags anything unusual" — expected
+`script-wizard` and got `coding-agent-skills:python-for-analysts` (conf 3).
+
+That is my authoring error, and worth recording rather than filing as a defect. The prompt is
+adapted from script-wizard's own eval, which reads "Write me a **script** that pulls yesterday's
+transaction export…" — no language named. I added the word "Python", and `python-for-analysts` owns
+the bare trigger `python` and is scoped to "scripting an analysis, automating a repetitive task".
+For a prompt that says Python *and* describes analyst data work, `python-for-analysts` is the better
+answer. The decoy was steered by one word I put there.
+
+**This is the third time in this protocol's history that a test prompt, not a description, was the
+defect** — after Tier D v1 (generic prompts that were really in-scope) and Tier D v2 (in-scope
+prompts carrying the target's own trigger). The standing lesson: before scoring a routing prompt,
+check it against *every* skill's trigger list, not just the target's.
+
+## The remaining watch item
+
+`C2` ("I need to commit to a decision by Friday") passed but loaded `minority-report` at confidence
+2, and `C9` ("My memory is terrible…") loaded `spaced-retrieval-learning` at confidence 2. Both are
+correct-by-the-letter — neither is the guarded skill — but both are weak pulls into a skill whose
+own scope note arguably excludes the request. They are guards that held on reasoning rather than on
+absence of a matching word, which is the capability most at risk under name-only listing truncation.
