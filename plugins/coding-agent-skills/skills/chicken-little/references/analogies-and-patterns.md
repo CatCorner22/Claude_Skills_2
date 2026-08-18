@@ -73,16 +73,16 @@ Building production agents and multi-agent systems in Python:
 - Frameworks by fit: **PydanticAI** (type-safe agents, DI style), **Instructor** (structured
   extraction/tool calling), **LangGraph** (stateful graphs, cycles, human-in-the-loop,
   checkpointing), **LlamaIndex** (RAG + data agents over documents/extracts), **CrewAI**
-  (role-based crews, e.g. an "AP Exception Analyst Crew"), **AutoGen** and **Semantic Kernel**
+  (role-based crews, e.g. an "Exception Triage Crew"), **AutoGen** and **Semantic Kernel**
   (Microsoft ecosystem), plus DSPy (program optimization) and Outlines/Guidance (constrained
   generation). Verify currency before recommending — this landscape moves fast.
 - Engineering discipline: proper tool schemas; retries with tenacity; observability
   (OpenTelemetry, LangSmith/Phoenix); evaluation harnesses; human-approval gates where risk
-  warrants.
-  SQL injection paths); process results with Polars.
-- Signature pattern — an "LSS Assistant" crew that (1) pulls system extracts using the SQL
-  patterns as templates, (2) runs statistical analysis, (3) applies "Chicken Little vs real
-  signal" logic, and (4) outputs a structured risk assessment or control-plan recommendation.
+  warrants; parameterized queries only, never string-built SQL.
+- Signature pattern — an "LSS Assistant" crew that (1) pulls system extracts through the
+  source's supported query or export path, (2) runs statistical analysis, (3) applies "Chicken
+  Little vs real signal" logic, and (4) outputs a structured risk assessment or control-plan
+  recommendation.
 - Serve via FastAPI with streaming where useful
   (→ `full-stack-dev-skills:backend-api-development`,
   `coding-agent-skills:agentic-workflow-design`).

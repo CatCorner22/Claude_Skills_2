@@ -109,10 +109,10 @@ enthusiastic typing.
 
 ## Tailor to your environment
 Record instance-specific facts in `references/your-environment.md` (use
-`your-environment.private.md`, git-ignored, for anything sensitive): your ledger and business-unit
-structure, the chart-of-accounts or equivalent segmentation, workflow-approval configuration, hold
-policies, the reports you actually use, extract cadence, and your organization's escalation
-thresholds (what earns an andon pull). Never commit credentials, account numbers, or client data.
+`your-environment.private.md`, git-ignored, for anything sensitive): the systems you work in and
+how their records are keyed and segmented, your approval and exception-handling configuration, the
+reports you actually use, extract cadence, and your organization's escalation thresholds (what
+earns an andon pull). Never commit credentials, account numbers, or client data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
