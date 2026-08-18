@@ -444,6 +444,26 @@ Never store secrets, credentials, account numbers, or client data here.
   check-arithmetic.py, and my own review. **Budget an adversarial reader for anything authored, and
   RUN any script a skill ships against the case it claims to catch.**
 
+- FACT (2026-08-18, Tier D re-run, blind, 15 rows / 45 prompts): **41/45 — 11 HEALTHY, 4 NAME-ONLY,
+  0 OVER.** All 15 by-name prompts passed at confidence 5. Of the four name-only skills, **two are
+  by design** (`chicken-little` says "asks for Chicken Little or Aether by name"; `gonzo` is
+  gated on requests for the register) and **two are defects** where the description promises reach
+  it does not have: `elite-python-engineer` ("Use for ANY production-grade Python task") lost a
+  production-Python prompt to `script-wizard`, and `chicken-little-executive-advisor` ("or asks for
+  an adversarial strategic autopsy") lost one to `sparring-partner`. Both are SEAM defects — the
+  target was runner-up in each — so the fix is reciprocal `Not for:` lines in both skills, never
+  deleting the winner's trigger.
+- FACT (2026-08-18, converged from two independent methods): **`script-wizard` is the library's
+  general-work attractor.** The five-lens trim ranking put it 2nd of 121 on reach and near-bottom on
+  every other lens — the largest disagreement in that exercise — and the Tier D re-run watched it
+  absorb two prompts on "improve any script, tool, document, or technical artifact… even when
+  phrased casually", one of which belonged to another skill. Its cost is the precision it takes from
+  neighbours, not its own tokens. Needs a Tier C guard row.
+- LESSON (2026-08-18): **"name-only reachable" is not automatically a defect — check the skill's own
+  When-to-use before calling it one.** Four rows scored NAME-ONLY; two of them say in their own
+  descriptions that name-gating is the contract. Reporting all four as findings would have invented
+  two problems and buried the two real ones.
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core

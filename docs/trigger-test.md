@@ -1,14 +1,24 @@
 # Trigger test protocol
 
-**Status: written 2026-08-17, revised 2026-08-18. Executed 2026-08-18 as a blind-router simulation —
-80/80 PASS. The live fresh-session run specified below has still never been performed.** Results,
-method, and limits: [`trigger-test-results.md`](trigger-test-results.md). The simulation gave eight
-fresh agents only the 121 name+description pairs and ten opaque-id prompts, with the answer key
-withheld in a separate file; it tests whether the descriptions *can* be routed correctly by a
-careful reader, **not** whether the runtime router does so, and it does not reproduce name-only
-listing truncation. Read §1 and §4 of the results before treating the 100% as a clean bill of health
-— in particular, Tier D's in-scope column needs rewriting before it can produce the finding it
-exists to produce.
+**Status: written 2026-08-17, revised 2026-08-18. Two blind-router simulation runs; the live
+fresh-session run specified below has still never been performed.**
+
+- **Run 1 (2026-08-18) — 80/80 PASS, partly unearned.** Eight fresh agents, 121 name+description
+  pairs, ten opaque-id prompts each, answer key withheld in a separate file. Results, method, and
+  limits: [`trigger-test-results.md`](trigger-test-results.md). Read §1 and §4 before treating the
+  100% as a clean bill of health: **Tier D's result did not count**, because seven of its eight
+  in-scope prompts contained a literal trigger phrase of their own target, so that column asked the
+  same question as the by-name column.
+- **Run 2 — Tier D re-run (2026-08-18) — 41/45.** Tier D rewritten (0 trigger leakage, verified by
+  `scripts/check-trigger-test.py`) and extended from 8 rows to 15, then re-executed with five fresh
+  agents and the key withheld structurally. by-name 15/15 · in-scope **11/15** · out-of-scope 15/15.
+  **11 HEALTHY · 4 NAME-ONLY (`gonzo`, `elite-python-engineer`, `chicken-little`,
+  `chicken-little-executive-advisor`) · 0 OVER.** Write-up:
+  [`trigger-test-tier-d-rerun.md`](trigger-test-tier-d-rerun.md).
+
+Both runs test whether the descriptions *can* be routed correctly by a careful reader, **not**
+whether the runtime router does so, and neither reproduces name-only listing truncation. A
+simulation is an upper bound on live performance.
 
 This is the compliance record for the one
 definition-of-done item in `writing-agent-skills/references/review-checklist.md` that no skill in
@@ -54,8 +64,8 @@ thing the test can usefully measure.
 
 2. **One fresh session per row.** This is not optional and it is the expensive part. Once a skill is
    loaded its body is in context and biases every later turn in that session, so a second prompt in
-   the same session tests nothing. **Budget accordingly: 45 rows carry 80 distinct prompts**, so a
-   full run is up to 80 fresh sessions. A cheaper first pass is 45 sessions — the must-load column
+   the same session tests nothing. **Budget accordingly: 52 rows carry 101 distinct prompts**, so a
+   full run is up to 101 fresh sessions. A cheaper first pass is 52 sessions — the must-load column
    only — following up on the other columns for anything that passes.
 
    | Tier | Rows | Prompts/row | Prompts |
@@ -63,9 +73,9 @@ thing the test can usefully measure.
    | A — routes that lost their phrases | 11 | 2 | 22 |
    | B — did the moved phrases land? | 6 | 1 | 6 |
    | C — over-trigger guards | 12 | 1 | 12 |
-   | D — persona-named skills | 8 | 3 | 24 |
+   | D — name-gated skills | 15 | 3 | 45 |
    | E — skills rewritten this session | 8 | 2 | 16 |
-   | **total** | **45** | | **80** |
+   | **total** | **52** | | **101** |
 
 3. **Paste the prompt verbatim.** No preamble, no "can you", no follow-up clarification. Any editing
    makes the row unrepeatable.
