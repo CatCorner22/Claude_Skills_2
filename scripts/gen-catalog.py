@@ -232,7 +232,7 @@ def emit_catalog(plugins, total):
 
     w("## Install\n")
     w("```")
-    w("/plugin marketplace add blakereaganlaw-droid/claude_skills_2")
+    w("/plugin marketplace add CatCorner22/Claude_Skills_2")
     w(f"/plugin install <plugin>@{MARKET}      # e.g. decision-science-skills@{MARKET}")
     w("```")
     w("Install only the plugins you want; each is independent. Skills are namespaced "

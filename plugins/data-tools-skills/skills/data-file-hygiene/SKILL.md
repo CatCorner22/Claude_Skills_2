@@ -59,7 +59,9 @@ project/
    The assistant drafts names, folder skeletons, and scrub steps; the human owns the sensitivity
    classification and the final call to share.
 5. **Sanitize structurally, not cosmetically.** Replace identifiers with consistent fakes that
-   keep the *shape* (account `021000021-4837291` → `NNNNNNNNN-XXXXXXX` or `BANK-A-ACCT-01`),
+   keep the *shape* (account `999999999-4837291` → `NNNNNNNNN-XXXXXXX` or `BANK-A-ACCT-01` —
+   note the example itself is unassignable: no real routing number begins `99`, which is how an
+   illustration should be built),
    shift or bucket amounts if amounts are the sensitive part, keep the columns/structure so the
    example still teaches. Hiding Excel columns, white text, or deleting rows but keeping the
    pivot cache are *not* sanitization — remake the file cleanly from sanitized data.

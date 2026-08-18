@@ -5,15 +5,15 @@ see the crystallization log at the bottom). Loaded at session start per CLAUDE.m
 Never store secrets, credentials, account numbers, or client data here.
 
 ## Core Facts & Entities
-- FACT: The user (GitHub: blakereaganlaw-droid) works in Cash Management at the University of
-  Tennessee on Oracle Fusion Cloud — their personal environment carries UT-specific skills
-  (`bsl-enrichment`, `oracle-cm-config-review`) for Oracle CM BSL exports and config review.
-  (evidence: skills present in user env, 2026-07-18; confidence: high)
-  (UPDATE 2026-08-08: the user's UT role is ending — see the standing directive below.
-  Contradiction flagged, original kept for provenance.)
+- FACT: The user's prior role was finance/treasury operations on a cloud ERP, with a
+  personal-environment pair of employer-specific skills for that system's exports and config
+  review. Identifying detail (employer, role, handles, project names) lives in the git-ignored
+  `MEMORY.private.md`; this file stays publishable. (evidence: user env, 2026-07-18; high)
+  (UPDATE 2026-08-08: that role is ending — see the standing directive below. Contradiction
+  flagged, original kept for provenance.)
 - DIRECTIVE (user-stated 2026-08-08, standing): **No more Oracle work.** Build nothing new
-  that mounts on Oracle/UT-treasury workflows. The existing Oracle/treasury skills stay in
-  the library untouched — they are the user's portable professional assets, not UT's.
+  that mounts on Oracle/employer-treasury workflows. The existing Oracle/treasury skills stay in
+  the library untouched — they are the user's portable professional assets, not the employer's.
   In-flight research is HELD (see `docs/research/epic-wave-held-research.md`) until the
   user says where to re-aim: the dental practice app, the job search, or a new direction.
   (UPDATE 2026-08-11: EXTENDED — the "stay untouched" clause is superseded. The user
@@ -31,11 +31,11 @@ Never store secrets, credentials, account numbers, or client data here.
   branch — other agents' PRs merge into it, not only into main. (evidence: PRs #4–#12
   targeted it; confidence: high)
 
-- FACT: The user's reconciliation projects: `OG_Recon` = the deterministic forward matching
-  engine (open BSL → open ST, Oracle CM "DASH", passes P0–P10, independent audit C1–C10);
-  `Unreconcile2` = the separate backward un-reconciliation engine; `BSL_MATCHING_ENGINE` =
-  the bank-data-free recreation of OG_Recon (built 2026-07-18). (evidence: repo READMEs +
-  build session; confidence: high)
+- FACT: The user maintains a family of three reconciliation engines — a deterministic forward
+  matcher with numbered passes and an independent audit tier, a separate backward
+  un-reconciliation engine, and a bank-data-free recreation of the first. Repo names and the
+  system-specific vocabulary are in `MEMORY.private.md`. (evidence: repo READMEs + build
+  session, 2026-07-18; confidence: high)
 
 ## User Preferences & Style
 - PREFERENCE: Skills follow the "do + teach" house standard — perform the task step by step AND
@@ -58,7 +58,7 @@ Never store secrets, credentials, account numbers, or client data here.
   camt/SWIFT) prohibited as a hard guard, and no potentially sensitive data retained — purge
   staged inputs post-run, scrub 9+-digit runs in logs/manifests (keep YYYYMMDD stamps), git
   hygiene gate for data files. The BSL_UNR export and its derivatives are always allowed.
-  (user-stated for BSL_MATCHING_ENGINE, 2026-07-18)
+  (user-stated for the matching-engine project, 2026-07-18)
 
 ## Project State & Decisions
 - FACT: Library FINALIZED 2026-08-11: **121 active skills / 14 plugins**, 1298 trigger
@@ -149,10 +149,23 @@ Never store secrets, credentials, account numbers, or client data here.
 - OPEN: Tailoring artifacts not yet supplied — sample OTBI report, reconciliation checklist,
   chart-of-accounts structure, redacted bank statement file. Each unlocks the corresponding
   `your-environment.md`. (as of 2026-07-18)
-- OPEN: The CAMT.053 version supported in UT's Oracle release needs confirmation before any
+- OPEN: The CAMT.053 version supported in the employer's ERP release needs confirmation before any
   skill hard-codes one. (flagged in OTBI research)
 
 ## Lessons Learned & Avoidance Rules
+- DECISION (owner, 2026-08-18): this repository is **public**, and the committed `MEMORY.md`
+  named the user's employer, role, GitHub handles, and private project names. The owner chose to
+  **split forward and leave git history intact**: identifying detail moved to the git-ignored
+  `MEMORY.private.md`, `MEMORY.md` genericized (`<owner-old>`, `<owner-new>`, "the recon
+  engine") and kept publishable. Those strings still exist in earlier commits — that is a
+  deliberate call, not an oversight. **Do not re-flag it, and do not rewrite history without
+  asking.** Residual, knowingly retained: `design-tokens.md` names a public university's brand
+  guidelines as an explicitly non-default legacy brand pack.
+- RULE (2026-08-18): a committed memory store in a public repo is a **publication surface**. The
+  standing "no secrets or client data in committed files" rule was read too narrowly for two
+  months — it was applied to bank and client data but not to the user's own employer, role, and
+  private repo names, which accumulated in `MEMORY.md` one honest fact at a time. When writing a
+  durable fact, ask where it will be readable from, not only whether it is a secret.
 - RULE (2026-08-17, from-scratch pass): **a conformance regime cannot audit its own reference.**
   `writing-agent-skills` is the standard every skill is checked against, so a fault *in it* is
   invisible to every conformance pass — four passes missed an Oracle directive breach at its root,
@@ -198,7 +211,7 @@ Never store secrets, credentials, account numbers, or client data here.
 - EXCEPTION (owner-ratified via consolidation authority, 2026-08-11): `coding-agent-skills:
   chicken-little` keeps its Oracle Fusion data-model reference despite the archive directive —
   it is name-gated and is the only surviving copy of that commissioned depth in the repo.
-  **Do not re-flag it in future residue sweeps.** The UT palette in assertion-evidence-deck
+  **Do not re-flag it in future residue sweeps.** The legacy brand palette in assertion-evidence-deck
   likewise survives as an explicit NON-DEFAULT legacy brand option (script defaults to neutral).
   - CORRECTION (2026-08-17, measured): the original rationale said "zero routing pollution".
     That is not accurate — 3 of the skill's 7 triggers (`invoice black hole`, `ghost receipts`,
@@ -236,21 +249,21 @@ Never store secrets, credentials, account numbers, or client data here.
   plugins appear in the listing only at the next refresh. (observed 2026-07-18)
 - LESSON: The GitHub App integration cannot create repositories (403 "Resource not accessible
   by integration") — the user creates the empty repo manually, then `add_repo` brings it into
-  session scope for pushing. (observed creating BSL_MATCHING_ENGINE, 2026-07-18)
+  session scope for pushing. (observed creating the matching-engine project, 2026-07-18)
 - RULE: Never pass reference-bearing Oracle/bank exports through pandas or an Excel resave —
   float coercion turns `0006789599` into `6789599.0` and destroys join keys; the recon engines
-  ban pandas entirely for this reason. (source: OG_Recon README, engine-enforced)
+  ban pandas entirely for this reason. (source: the recon engine README, engine-enforced)
 - LESSON: add_repo cannot cross owners within one session (v1): a session whose sources are
-  under `blakereaganlaw-droid` cannot attach `CatCorner22/*` repos even though it is the same
+  under `<owner-old>` cannot attach `<owner-new>/*` repos even though it is the same
   renamed account — and the old owner name no longer resolves for repos created after the
-  rename. Working in a CatCorner22-only repo needs a session started with it as the initial
+  rename. Working in a <owner-new>-only repo needs a session started with it as the initial
   source. (hit 2026-08-02 attaching dental; CONFIRMED 2026-08-11 on this repo itself, exact
-  error: "cross-tier adds are not supported in v1: requested catcorner22/claude_skills_2 but
-  session already has repos from owner(s) [blakereaganlaw-droid]".) Important split: **git
+  error: "cross-tier adds are not supported in v1: requested <owner-new>/<repo> but
+  session already has repos from owner(s) [<owner-old>]".) Important split: **git
   push still works** from an old-owner session — GitHub redirects the push URL, so commits
   land normally; only the GitHub **API** tools (PR read/write, comments, merge) are denied.
   So a renamed-repo session can do all the work and just cannot touch the PR body. The
-  account authorization is NOT the problem — `list_repos` shows the CatCorner22 repos with
+  account authorization is NOT the problem — `list_repos` shows the <owner-new> repos with
   `can_push: true`; scope is pinned at session creation.
 - LESSON: "make X a loaded skill" requests require checking `claude plugin list` (installed
   snapshot versions) against repo plugin.json versions — installed copies are version-pinned
@@ -494,7 +507,7 @@ Never store secrets, credentials, account numbers, or client data here.
   `docs/research/epic-wave-held-research.md` with a 12-row cross-lane shortlist (top:
   immune-system detection tuning, Kobayashi Maru, wayfinding/etak, Columbo elicitation,
   stratigraphy/Harris matrix). NOT synthesized, NOT scored, NOT built: mid-wave the user
-  issued the standing directive "No more Oracle work" (UT role ending) — recorded as a
+  issued the standing directive "No more Oracle work" (that role ending) — recorded as a
   DIRECTIVE in Core Facts with the contradiction to the original employment fact flagged,
   not overwritten. All lane mount points were briefed pre-directive and need re-aiming;
   the mechanisms themselves are domain-portable. Nothing deleted — the Oracle/treasury
@@ -514,7 +527,7 @@ Never store secrets, credentials, account numbers, or client data here.
   The Challenger governs whether the plan still deserves it — quitting the plan ≠
   quitting the work; partner skills, not exits from each other. Merged/retired: none.
 - 2026-08-08 (5) — weight-of-the-books (safety-and-reliability 0.2.0; library 148/21).
-  User-commissioned on the UT sinking-library legend (assumed true as given; held
+  User-commissioned on the sinking-library legend (assumed true as given; held
   honestly as told-of-many-campuses). The failure class: category omission of the
   payload the system exists to carry; countermeasure: the signed one-page Load Manifest
   (four numbers per load — day-1/PEAK/growth/special-lot — every load traced to a
@@ -617,9 +630,9 @@ Never store secrets, credentials, account numbers, or client data here.
   owner per bare token). Plugin 0.2.0→0.3.0; marketplace.json description drift fixed for
   both plugins; installed copies refreshed to load curve-hero + chicken-little. Added: 1
   lesson (installed snapshots lag repo — check `claude plugin list`, not repo content).
-  Companion: CatCorner22/dental wiring PREPARED but not committed — add_repo rejects
-  cross-owner adds (session tier = blakereaganlaw-droid; dental resolves only under the
-  renamed CatCorner22), so the design doc + .claude/settings.json were delivered to the user
+  Companion: <owner-new>/dental wiring PREPARED but not committed — add_repo rejects
+  cross-owner adds (session tier = <owner-old>; dental resolves only under the
+  renamed <owner-new>), so the design doc + .claude/settings.json were delivered to the user
   as a ready-to-commit zip instead. Merged/retired: LSS references/curve-hero-design-language.md.
 - 2026-08-02 — lean-six-sigma-for-software (119th skill) + chicken-little (ninth external-spec
   adaptation). Added: 2 facts (library state; Curve Hero as design/UX reference + its
@@ -640,9 +653,9 @@ Never store secrets, credentials, account numbers, or client data here.
   skill specs to house standard). Library delta pending merge: 101st skill
   (`full-stack-dev-skills:elite-python-engineer`), validate.sh clean, catalog regenerated.
   Merged/retired: none. Flagged: no contradictions.
-- 2026-07-18 — BSL_MATCHING_ENGINE build. Added: 1 fact (recon-repo family), 1 preference
+- 2026-07-18 — the matching-engine project build. Added: 1 fact (recon-repo family), 1 preference
   (data-sensitivity posture for variants), 1 lesson (integration cannot create repos),
-  1 rule (no pandas on reference-bearing exports). Deliverable: OG_Recon recreated bank-data-
+  1 rule (no pandas on reference-bearing exports). Deliverable: the recon engine recreated bank-data-
   free with BankDataProhibited guard + data_guard purge/scrub/hygiene; 80/80 tests; source
   repo verified untouched. Merged/retired: none. Flagged: no contradictions.
 - 2026-07-18 — oracle-fusion-financials-architect (Thales persona, 102nd skill). Raised
@@ -702,7 +715,7 @@ Never store secrets, credentials, account numbers, or client data here.
   the four reference files near-verbatim. The doc cited two Python scripts (build_deck.py, ae_lint.py)
   as "alongside" but only the markdown was attached; per the script-wizard lesson I flagged this, but
   since the user said "create and load" + "continue," I authored functional versions from the
-  documented interfaces (python-pptx builder with 8 slide kinds + verified geometry/UT palette;
+  documented interfaces (python-pptx builder with 8 slide kinds + verified geometry/legacy brand palette;
   linter for headline/bullet/wordcount/format/source/font) and invited a swap for the originals.
   Both scripts tested: builder rejects over-long headlines, linter catches violations and passes the
   example clean; deck verified structurally (pixel render unavailable — see LibreOffice lesson).

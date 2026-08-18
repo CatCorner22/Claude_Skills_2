@@ -15,7 +15,7 @@ Ask **"what skills are available?"** any time to list them.
 ## Install
 
 ```
-/plugin marketplace add blakereaganlaw-droid/claude_skills_2
+/plugin marketplace add CatCorner22/Claude_Skills_2
 /plugin install <plugin>@treasury-analyst-skills      # e.g. decision-science-skills@treasury-analyst-skills
 ```
 Install only the plugins you want; each is independent. Skills are namespaced `<plugin>:<skill>` so they never collide.
