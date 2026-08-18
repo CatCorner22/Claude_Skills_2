@@ -1,6 +1,6 @@
 # Trigger test protocol
 
-**Status: written 2026-08-17, never executed.** This is the compliance record for the one
+**Status: written 2026-08-17, revised 2026-08-18, never executed.** This is the compliance record for the one
 definition-of-done item in `writing-agent-skills/references/review-checklist.md` that no skill in
 this library has ever met — the fresh-session trigger test. Four review passes checked conformance,
 arithmetic, and link integrity. None of them could tell you whether a single skill actually *routes*,
@@ -44,10 +44,18 @@ thing the test can usefully measure.
 
 2. **One fresh session per row.** This is not optional and it is the expensive part. Once a skill is
    loaded its body is in context and biases every later turn in that session, so a second prompt in
-   the same session tests nothing. **Budget accordingly: 45 rows carrying 71 distinct prompts means up
-to 71 fresh sessions** if you run every near-miss as its own row, or 45 if you check only the
-must-load column first and follow up on the near-misses of anything that passes. Tiers A and E have
-a prompt in both columns; C and D are one prompt each.
+   the same session tests nothing. **Budget accordingly: 45 rows carry 80 distinct prompts**, so a
+   full run is up to 80 fresh sessions. A cheaper first pass is 45 sessions — the must-load column
+   only — following up on the other columns for anything that passes.
+
+   | Tier | Rows | Prompts/row | Prompts |
+   |---|---:|---:|---:|
+   | A — routes that lost their phrases | 11 | 2 | 22 |
+   | B — did the moved phrases land? | 6 | 1 | 6 |
+   | C — over-trigger guards | 12 | 1 | 12 |
+   | D — persona-named skills | 8 | 3 | 24 |
+   | E — skills rewritten this session | 8 | 2 | 16 |
+   | **total** | **45** | | **80** |
 
 3. **Paste the prompt verbatim.** No preamble, no "can you", no follow-up clarification. Any editing
    makes the row unrepeatable.
@@ -133,27 +141,43 @@ uses the word in its **everyday** sense. Loading the skill is a **failure**.
 > waved off costs one line. An OVER on **C6, C7, C8 or C12** is more serious, because those skills
 > load large always-on bodies.
 
-## Tier D — name-gated persona skills
+## Tier D — persona-named skills
 
 This library deliberately contains skills named for a persona rather than a task. That is a valid
-design *provided* the skill is reached by name and does not squat on generic work. Each row tests
-both directions. These are also the skills most damaged by name-only trimming, since a trimmed
-persona name carries no task signal at all.
+design *provided* the name reaches the skill, the skill is still findable by someone who does not
+know the name, and it does not squat on work outside its scope. Those are three different questions,
+so each row asks all three.
 
-| # | By-name prompt (must load) | Must load | Generic prompt (must NOT load) |
-|---|---|---|---|
-| D1 | `Get gonzo on this quarterly report.` | `writing-skills:gonzo` | `Make this quarterly report more engaging to read.` |
-| D2 | `Bring in Pythagoras for this module.` | `full-stack-dev-skills:elite-python-engineer` | `Clean up this Python file a bit.` |
-| D3 | `Chicken Little, look at this integration.` | `coding-agent-skills:chicken-little` | `What could go wrong with this integration?` |
-| D4 | `Be my sparring partner on this strategy.` | `coding-agent-skills:sparring-partner` | `What do you think of this strategy?` |
-| D5 | `Run precog on the next two quarters.` | `decision-science-skills:minority-report` | `What might happen next quarter?` |
-| D6 | `Deploy the Foreman on this codebase.` | `coding-agent-skills:the-foreman` | `Is this codebase finished?` |
-| D7 | `Comrade Engineer — is there a pencil for this?` | `coding-agent-skills:soviet-space-graphite` | `Is there a simpler way to do this?` |
-| D8 | `Weight of the books on this schema.` | `safety-and-reliability-skills:weight-of-the-books` | `Will this schema handle production load?` |
+**Read the middle column carefully — it is the one that was wrong.** An earlier version of this tier
+asked only "does a generic prompt fail to load it?", and six of its eight generic prompts were
+paraphrases of trigger phrases those skills *deliberately own* (`is this ready to build on`,
+`simpler solution`, `will it hold at real volumes`, `future outcomes`, `how good is this`,
+`refactor`). Run as written, it would have recorded correct routing as a defect and invited deleting
+a real route. The in-scope column now makes that a **PASS**, and only the third column is a guard.
 
-> The generic column is the interesting one. A persona skill that loads on the generic prompt is
-> claiming general work under an evocative name, which is the failure mode the authoring standard
-> warns about. A persona skill that loads on **neither** column is dead budget.
+| # | By-name (must load) | In-scope paraphrase (**should** load) | Out-of-scope (must NOT load) | Skill |
+|---|---|---|---|---|
+| D1 | `Get gonzo on this quarterly report.` | `Give this a savage, first-person take — I want the reader to feel it.` | `Proofread this quarterly report for typos and grammar.` | `writing-skills:gonzo` |
+| D2 | `Bring in Pythagoras for this module.` | `Refactor this module to production standards — typing, logging, error handling.` | `What's the difference between a list and a tuple in Python?` | `full-stack-dev-skills:elite-python-engineer` |
+| D3 | `Chicken Little, look at this integration.` | `The sky is falling on this integration — walk me through it.` | `What could go wrong with this integration?` | `coding-agent-skills:chicken-little` |
+| D4 | `Be my sparring partner on this strategy.` | `Tear this strategy apart and be honest about it.` | `Summarize this strategy document in three bullets.` | `coding-agent-skills:sparring-partner` |
+| D5 | `Run precog on the next two quarters.` | `Branch the futures — what happens if demand drops 20%?` | `What were last quarter's actual numbers?` | `decision-science-skills:minority-report` |
+| D6 | `Deploy the Foreman on this codebase.` | `Is this ready to build on, or is it half-built?` | `Write the release notes for this version.` | `coding-agent-skills:the-foreman` |
+| D7 | `Comrade Engineer — is there a pencil for this?` | `Are we overengineering this? Is there a simpler solution?` | `Implement the design we agreed on last week.` | `coding-agent-skills:soviet-space-graphite` |
+| D8 | `Weight of the books on this schema.` | `Will it hold at real volumes, or did we test it empty?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
+
+How to read the three results together:
+
+- **Name loads, in-scope loads, out-of-scope does not** — the skill is healthy. The persona name is
+  a convenience, not the only door.
+- **Name loads, in-scope MISSES** — the skill is *name-only reachable*. It is not broken, but it is
+  invisible to anyone who has not been told its name, and it is the shape most damaged by name-only
+  listing degradation. This is the finding to act on, and the fix is adding the user's vocabulary to
+  the description — never removing the persona name.
+- **Out-of-scope loads (OVER)** — the skill is squatting on general work under an evocative name,
+  which is the failure the authoring standard warns about. Qualify the offending trigger.
+- **Name MISSES** — the name is not in the description's trigger list, or the listing has trimmed
+  this skill. Check the install set before concluding anything.
 
 ## Tier E — skills substantively rewritten this session
 
