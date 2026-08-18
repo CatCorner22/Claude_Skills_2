@@ -9,6 +9,8 @@ description: >-
   for a project. Triggers: lean code, minimize lines of code, YAGNI, over-engineering,
   simplify this code, too much boilerplate, do we need this abstraction, code review
   simplicity, delete code, small diff, keep it simple.
+metadata:
+  version: "1.1.0"
 ---
 
 # Lean-code principles
@@ -26,7 +28,12 @@ description: >-
 1. **Solve it with what you already have, in this order:** the language's standard library →
    the framework you already depend on → a well-maintained library → your own code. Every
    hand-rolled retry loop, date parser, or auth scheme is code you now own forever; FastAPI,
-   React, SQLAlchemy, and the stdlib have already written most of what an app needs.
+   React, SQLAlchemy, and the stdlib have already written most of what an app needs. Name the
+   framework-native replacement, don't gesture at one: a hand-rolled `for attempt in range(3)`
+   retry with `time.sleep(2 ** attempt)` becomes `httpx.Client(transport=HTTPTransport(retries=3))`
+   for connect failures, or `@retry(stop=stop_after_attempt(3), wait=wait_exponential())`
+   (tenacity) when you also need to retry on a status or an exception type — both already have
+   the backoff, the attempt cap, and the final-failure semantics your loop got approximately.
 2. **Apply YAGNI at every decision point.** Build for the requirement in front of you, not the
    one you can imagine. No plugin systems for one implementation, no config options nobody
    asked to configure, no "for future flexibility" parameters. The future requirement, when it
@@ -38,7 +45,25 @@ description: >-
 4. **Earn every abstraction.** The rule of three: duplicate once (fine), duplicate twice
    (note it), on the third occurrence extract — *if* the copies are truly the same concept and
    changing together. A wrong abstraction is worse than duplication, because every future
-   change fights it. Inline trivial helpers; a one-line function called once is negative value.
+   change fights it. Inline trivial helpers; a one-line function called once is negative value:
+
+```python
+# before — an exported name, a docstring, a test, and an indirection, for one call site
+def _normalize_email(value: str) -> str:
+    """Lowercase and strip an email address."""
+    return value.strip().lower()
+
+def register(payload: SignupIn) -> User:
+    return users.create(email=_normalize_email(payload.email))
+
+# after
+def register(payload: SignupIn) -> User:
+    return users.create(email=payload.email.strip().lower())
+```
+
+   −4 lines in the module, −3 in the test file that only asserted `str.strip().lower()`:
+   −7 net, −1 exported name. Report the accounting that way in review; "simplified" without a
+   number is an opinion.
 5. **Make deletion a first-class activity.** Dead code, commented-out blocks, unused deps,
    feature flags that shipped — delete them in their own commits (git remembers). Measure PRs
    by *net* lines: a feature that adds 200 and deletes 150 is better engineering than one that
@@ -81,6 +106,12 @@ fewer hallucinated APIs, and make agent-written diffs reviewable.
 Record your project's lean conventions in `references/your-environment.md`: your resolution
 order (which frameworks/libs are "already paid for" here), the abstraction threshold your
 team uses, banned patterns, and where you deliberately deviate (and why).
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/lean-code-principles.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/lean-review-checklist.md — the PR review checklist and over-engineering signs table

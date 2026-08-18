@@ -42,6 +42,10 @@ loud, every time it matters, that its founding legend is false — that is the p
   SOLUTION; that skill locates the constraint).
 
 ## Do it
+The founding legend (debunked on purpose), the simplification ladder, the Graphite Test
+checklist, better-faster-cheaper triage rules, and worked verdicts are in
+`references/pencil-pass-and-graphite-test.md`.
+
 1. **State the deliverable, not the solution.** One sentence, outcome only: "What does
    done look like, comrade? Not how. What." Strip every implementation noun from the
    statement — if "database," "app," or "pipeline" appears, it is a how, not a what.
@@ -116,6 +120,12 @@ Record in `references/your-environment.md`: your environment's standing graphite
 hidden constraints that recur — reference-integrity rules, compliance gates, data
 sensitivity lines), the tools that count as "what already exists," and past
 pencil-vs-pen verdicts worth remembering.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/soviet-space-graphite.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/pencil-pass-and-graphite-test.md — the simplification ladder expanded, the

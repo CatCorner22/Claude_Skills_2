@@ -51,8 +51,9 @@ A good response:
   destroyed-asset cliff causes the post-miss collapse; presence keeps the data without the
   moralizing).
 - **Stays honest:** labels Fogg and Clear as practitioner syntheses atop the research base
-  rather than research authority; cites Gollwitzer's meta-analytic result qualitatively
-  without invented effect sizes; states that automaticity takes weeks to months and varies —
-  no "21 days" folklore; treats retiring a habit as success, not failure; and routes drive
-  problems and team standardization to `coding-agent-skills:stay-hard-accountability` and
+  rather than research authority; quotes the Gollwitzer & Sheeran (2006) result at its real
+  size (d ≈ 0.65, medium-to-large, 94 tests) rather than inflating it or inventing one; states
+  that automaticity takes weeks to months and varies — no "21 days" folklore; treats retiring a
+  habit as success, not failure; and routes drive problems and standardization to
+  `coding-agent-skills:stay-hard-accountability` and
   `continuous-improvement-skills:standard-work` instead of absorbing them.

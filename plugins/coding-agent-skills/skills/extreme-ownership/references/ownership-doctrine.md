@@ -34,8 +34,8 @@ Contents: §1 The Laws of Combat on projects · §2 Ownership-rewrite patterns �
 5. Re-assess and repeat. The failure mode is triaging from inside one fire.
 
 **Decentralized Command** — intent plus bounds beats instructions.
-- Write intent (purpose / key tasks / end state — format in
-  `decision-science-skills:tabletop-wargaming` references/commanders-intent.md).
+- Write intent (purpose / key tasks / end state — the format is in
+  `decision-science-skills:tabletop-wargaming`, its `references/commanders-intent.md`).
 - Per delegate: what they decide alone; what they decide and inform; what they must
   flag first. Review the bounds when they're never used (too tight) or always exceeded
   (too loose).

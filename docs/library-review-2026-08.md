@@ -12,6 +12,14 @@ domain-specific and general) to a career-portable active library of **121 skills
 finding fixed, a generated quick-router index at [INDEX.md](INDEX.md), and zero
 validator errors.
 
+**Current state, 2026-08-18** (the counts below are the running history; this is where the
+tree stands today): 121 active skills across 14 plugins and **zero archived plugins**. All nine
+domain plugins the first pass archived were later deleted on owner direction — the two Oracle ones
+(17 skills / 70 files) and then the seven finance/treasury ones (49 skills / 154 files). What
+remains in `archive/` is two skill-level archives and the standalone apps. Every cross-link that
+used to point into a deleted plugin was rewritten to name the domain rather than promise a restore;
+`validate.sh` enforces that none is left dangling.
+
 The arithmetic: 181 pre-overhaul skills − 66 archived with their nine plugins
 (§3) = 115 kept, + 8 new (§5) = 123 across 15 plugins at the end of the first pass;
 then the second-pass consolidation (§7) archived 2 more skills at skill level and
@@ -168,7 +176,9 @@ privacy sweep. Highlights of what was fixed:
   receive its own traffic.
 - **Kept by explicit exception** (recorded in MEMORY.md): chicken-little's Oracle Fusion
   data-model reference — name-gated (zero routing pollution) and the only surviving copy of
-  that commissioned depth in the repo.
+  that commissioned depth in the repo. **Superseded 2026-08-18** — see §"Oracle deletion"
+  below: the owner directed deletion of all Oracle skills, the exception was retired, and the
+  reference files were removed.
 
 **Text-optimization pass** (10 agents: 5 optimizers + 5 diff-level verifiers, zero
 must-fix flags): the 46 earlier-vintage skills the review didn't line-check were each
@@ -296,8 +306,17 @@ footnote**: a 121-skill marketplace is a catalog to select from, not a manifest 
 An earlier pass reported "zero trigger collisions" and that claim is *literally* true — there are **0
 exact duplicate trigger phrases** across all 121 skills. It is also misleading, and the correction
 belongs in the record: **the router matches against whole descriptions, not against `Triggers:` lists.**
-Measured now, **85 distinct trigger phrases still appear as whole words inside a different skill's
-description prose** — `python` in 7 other descriptions, `pipeline` in 6, `code review` in 3.
+Measured now, **111 distinct trigger phrases still appear as whole words inside a different skill's
+description** — `python` in 7 other descriptions, `pipeline` in 6, `code review` in 3.
+
+> **Method, stated because the first published figure was wrong.** This counts, for each of the
+> 1,328 trigger phrases, how many *other* skills' descriptions contain it as a whole word,
+> searching the **entire** description including that skill's own `Triggers:` list — which is what
+> the router actually sees. Excluding the other skill's `Triggers:` list gives 98 instead, but that
+> narrower reading contradicts the three examples above (it yields `python` in 5 and `code review`
+> in 1). An earlier version of this section published **85**, which came from an undisclosed
+> minimum-length filter of 6 characters that silently dropped short phrases like `git` and `SQL`;
+> it also described the method as searching "prose" when it did not. Corrected 2026-08-18.
 `elite-python-engineer` yielded the trigger `code review` while continuing to advertise code review in
 its prose. The collision was **renamed, not resolved.**
 
@@ -364,7 +383,7 @@ model to do less than it would have done unaided. The NET-NEGATIVE cases were no
 - **Only 14 of 121 skills received expert substance review.** The value-test verdicts above are a
   sample, not a census. Extrapolating them is not warranted; neither is assuming the unreviewed 107
   are better.
-- **85 whole-word prose collisions remain.** They are recorded and measured, not fixed. Fixing them
+- **111 whole-word description collisions remain.** They are recorded and measured, not fixed. Fixing them
   means naming seams reciprocally, one pair at a time, and the trigger test is what identifies which
   pairs actually mis-route.
 
@@ -409,6 +428,16 @@ the three domain triggers are specific enough that they will not fire on unrelat
 record the correction at all is that "zero" invites a future sweep to re-derive the same finding and
 re-open the same decision — which is exactly what happened here. The residue-sweep note in `MEMORY.md`
 has been amended to say *bounded and accepted* instead of *zero*.
+
+**Superseded 2026-08-18 (owner directive).** The owner subsequently directed that *all* Oracle
+skills be deleted. That directive overrides this exception: chicken-little's two Oracle reference
+files (`oracle-fusion-data-model.md`, `sql-patterns.md`) were deleted, the Oracle Do-it step and
+the named-Oracle-failure-modes section were removed, the three Oracle domain triggers
+(`invoice black hole`, `ghost receipts`, `orphan distributions`) were dropped, and
+`your-environment.md` was rewritten domain-neutral. The skill is now gated on the persona name
+alone, so the routing cost analysed above is now zero as a matter of fact. The analysis is left in
+place because it is the reason the "zero" claim was auditable at all — but the decision it
+recommended (no action) no longer stands.
 
 **D3 — `assertion-evidence-deck/references/oracle-cm-domain.md` (151 lines) is retained as an opt-in
 legacy reference.** The skill itself was de-mounted earlier in this session; the description and body
@@ -462,3 +491,246 @@ this session had been using, under the hard 1024 cap (`exploratory-data-analysis
 → **Recommendation: accept them.** Two were at that length before the unnecessary trims of §9.2;
 restoring them returns to a state that never violated anything. The soft target was an artifact of the
 byte-counting bug.
+
+**D9 — `references/your-environment.md` lives in the plugin cache, which updates discard.** *(new,
+2026-08-18; the one finding from the surfaces pass that is a design decision rather than a defect)*
+All 121 skills tell the user to record their real specifics in `references/your-environment.md`. That
+file sits inside the installed plugin, so `/plugin marketplace update` either refuses on the dirty
+tree or overwrites it. The single persistent artifact the library asks a user to create is stored in
+the least durable place available, and nothing warns them.
+→ **Recommendation: change what the skills ask for, not where the file lives.** Keep
+`your-environment.md` as the shipped *template* — it documents what to record — but have the Tailor
+section tell the user to copy it into **their own project** (e.g. `.claude/skills-env/<skill>.md`) and
+point the skill at that. It survives updates, it is theirs, and it keeps real data out of a directory
+they may not realise is disposable. This is ~121 small edits to one section, so it wants your
+go-ahead before it starts. The alternative — documenting the fragility in place — is cheaper but
+leaves the user's work destructible by a routine update.
+
+---
+
+## 11. Addendum (2026-08-18, surfaces pass): everything that is not a SKILL.md
+
+Sections 9–10 reviewed the 121 skill bodies. This pass reviewed the surfaces that review could not
+see — the 22,604-line reference corpus, the 121 evals as deliverables, the docs layer, the two
+scripts, and packaging/privacy — across 19 agents, with every finding attacked by an adversarial
+verifier. 81 survived.
+
+### 11.1 The headline: the repository is not the product
+
+**Every quality gate in this library operates on the repository, and nothing had ever verified the
+installed artifact.** `validate.sh` and `gen-catalog.py` walk `plugins/**` from the repo root and
+cannot be run by an installed user at all. Once you look for that, several independently-reported
+findings collapse into one cause:
+
+- **`CLAUDE_PLUGIN_ROOT` appeared zero times across all 121 skills**, while every bundled-script
+  invocation used a bare repo-relative path. The one command that produces the assertion-evidence
+  deck, and all five citation-verification examples, were a guaranteed file-not-found after
+  `/plugin install` — the skill runs from a plugin cache with the user's own project as cwd.
+  **Fixed at 13 sites**, plus a new house-standard §4b, a checklist line, and a validator check.
+- **`references/your-environment.md` lives inside the plugin cache.** All 121 skills instruct the
+  user to write their environment there, where a `/plugin marketplace update` either aborts on the
+  dirty tree or discards it. The one persistent thing the library asks a user to create is stored
+  in the least durable place available. **Flagged, not fixed — this is a design decision (D9).**
+- The `(archived: plugin:skill, restorable from archive/)` convention names a directory installed
+  users do not have. Honest inside the repo; meaningless outside it.
+
+### 11.2 The artifacts are sound; the statements about themselves were not
+
+The largest category was false self-description, and the worst instance was this review's own:
+
+| Claim | Reality |
+|---|---|
+| "85 distinct trigger phrases appear inside another skill's description" | **111.** The 85 came from an undisclosed ≥6-char filter, and the method was described as searching "prose" when it searched whole descriptions (prose-only gives 98 and contradicts the paragraph's own three examples). It had propagated to seven sites including `MEMORY.md`. |
+| Authoring standard: 107,700 chars / 29,000 tokens / 14.6% | README said 110,081 / 29,750 / 14.9% for the *same* measurement, and §9 had declared that discrepancy fixed. Both now regenerate from measurement, and `scripts/measure-listing-cost.py` prints both tables so neither can drift again: **109,662 / 29,638 / 14.82%** as of 2026-08-18. |
+| Token counts throughout | Derived from a 3.7 chars/token divisor **disclosed nowhere**. Now stated at every site — an undisclosed divisor is exactly how the two figures above diverged. |
+| README "sweet spot: ~35–50 skills, 5–7%" | Contradicted by all four of its own bundles. Measured: **24–31 skills, 2.95–3.59%.** Guidance and a per-bundle table are now generated from one measurement. |
+| `trigger-test.md`: "~35 rows means ~35 sessions" | 45 rows, **80 prompts**. The one instrument aimed at the installed product understated its own cost by more than 2× — a plausible reason it has never been run. |
+| Install command in the published catalog | Still named the pre-rename GitHub owner, disagreeing with README and the marketplace manifest, and re-emitted on every regeneration. Fixed at the generator. |
+
+### 11.3 Tooling that reported green while not looking
+
+Four defects in the gate itself, each reproduced before fixing:
+
+- **A missing closing `---` fence passed as OK** — the whole file became "frontmatter" and its
+  mangled description flowed into both catalogs.
+- **One non-UTF-8 byte anywhere silently disabled the entire cross-link check.** Reproduced: a
+  planted broken link reported 1 error clean, **0 errors** with one bad byte elsewhere.
+- **The body-line counter stopped at the first bare `---`**, so the 500-line cap was bypassable by
+  any skill using a horizontal rule. A 168-line file counted as 30.
+- **`gen-catalog.py`'s lead-clause splitter was bracket-blind** (its fourth bug), emitting three
+  unbalanced cells in the committed `INDEX.md`.
+- **Manifests were checked only for JSON validity.** Adding coherence checks immediately found that
+  **all eight skills added this session were missing from their plugin descriptions** — the strings
+  `/plugin` shows pre-install — and that **11 of 14 marketplace entries had drifted** from their
+  plugin manifests, so neither file was authoritative.
+
+### 11.4 Two more false claims in skill content
+
+- **`agent-harness-config` inverted the settings-precedence order**, placing enterprise/managed
+  settings lowest — i.e. telling readers a git-ignored `settings.local.json` overrides
+  administrator policy. Security-relevant and wrong in all three places it appeared.
+- **`design-of-experiments` claimed "nine aliased pairs"** for the 16-run 2^(6−2) design. Six
+  factors have only C(6,2) = 15 two-factor interactions; nine pairs would need 18. The real
+  structure, derived from I = ABCE = BCDF = ADEF, is seven groups — six pairs and one triple.
+
+### 11.5 What was good, stated plainly
+
+The eval corpus is 121:1 complete with zero orphans; every archived pointer resolves; the
+generated catalogs are byte-identical to a fresh regeneration; and **no secrets, credentials, or
+client data exist anywhere in the tree**. The `executive-briefing → briefing-method.md` path is
+complete end to end — template, worked memo, and checklist produce a signable deliverable without
+leaving the skill. That is the model the analytical and engineering paths should copy.
+
+### 11.6 A trap caught in this pass's own deliverable
+
+`docs/trigger-test.md`'s Tier D asked whether a "generic prompt" fails to load each persona skill.
+Checked against the skills' actual trigger lists, **six of its eight generic prompts were
+paraphrases of phrases those skills deliberately own** (`is this ready to build on`, `simpler
+solution`, `will it hold at real volumes`, `future outcomes`, `how good is this`, `refactor`). Run
+as written, the compliance record would have scored six correct routes as failures and invited
+deleting real trigger phrases — the exact move the protocol forbids elsewhere. Tier D now asks its
+three questions as three columns, and the in-scope column makes a load a **PASS**.
+
+## 12. Addendum (2026-08-18, comprehensive from-scratch pass): consolidation verdict
+
+Owner instruction: *"do a comprehensive review from scratch… delete all Oracle skills. Review all
+others for substance and effectiveness, and optimize where appropriate. Feel free to delete and
+merge when appropriate."* The Oracle deletion is §12.1. The consolidation verdict is §12.3, and it
+is a negative result, which is the part worth reading carefully: **no merge and no deletion is
+warranted on the current tree**, and the evidence for that is stronger than the evidence any
+previous pass produced for its positive findings.
+
+### 12.1 Oracle deletion (done)
+
+17 skills across `oracle-fusion-finance-skills` and `oracle-otbi-skills`, 70 files, removed from
+`archive/plugins/` entirely rather than left archived. The archived-plugin count therefore falls
+from 9 to 7. Three follow-on removals were needed because the directive reaches further than the
+plugins themselves:
+
+- `coding-agent-skills:chicken-little` lost two reference files, one Do-it step, three trigger
+  phrases, its named-Oracle-failure-modes section, and its Oracle-shaped `your-environment.md`.
+  This **retires the owner-ratified exception** recorded in `MEMORY.md` on 2026-08-11 and analysed
+  at §10; the later directive supersedes the earlier exception, and the analysis at §10 is left in
+  place only because it is why the exception's stated reason was checkable at all.
+- `coding-agent-skills:soviet-space-graphite` had an OTBI-specific worked verdict citing a "library
+  fact" about a skill that no longer exists. Rewritten to carry the same lesson without the vendor.
+- `decision-science-skills:reference-class-forecasting` named an OTBI export in its environment
+  template. Generalized.
+
+What remains and is *not* residue: Oracle as a SQL dialect in `sql-for-analysts` (portability is
+the point), Oracle OTBI as one of five named BI products in `dashboard-design`, and "oracle" as the
+testing term in `lean-six-sigma-for-software`. Those are the word, not the domain.
+
+### 12.2 What was checked, and how to re-check it
+
+Everything below is a command, not a judgement, so the next pass can reproduce it rather than
+re-derive it:
+
+| Check | Result |
+|---|---|
+| `bash scripts/validate.sh` | 0 errors, 0 warnings, 28 notes |
+| `python3 scripts/check-arithmetic.py` (new) | 0 disagreeing chains across 410 files |
+| `python3 scripts/gen-catalog.py` | 121 skills / 14 plugins, catalogs byte-identical on regeneration |
+| Runnable-code sweep (191 blocks) | 84 PASS, 0 FAIL, 107 not independently runnable |
+| Eval parity | 121 skills : 121 evals, 0 orphans either way |
+| Eval asset references | 0 pointing at a `references/` or `scripts/` file that does not exist |
+| Cross-links | 0 unresolved; 15 distinct archived targets across 37 pointers, all marked |
+| Relative markdown links | 0 broken |
+| Exact trigger collisions | 0 |
+| Inbound-citation graph | 0 skills with zero inbound citations |
+| Description promises vs content | 0 capabilities advertised in a description and absent from the skill |
+| Pairwise description overlap | max Jaccard **0.168**, on the two Chicken Little autopsy editions |
+
+Two of these are new instruments rather than new results. `check-arithmetic.py` closes the defect
+class that appeared in *every* authoring wave and survived four hand passes;
+`measure-listing-cost.py` closes the one where a number quoted in two documents drifts apart.
+
+### 12.3 Consolidation verdict: nothing to merge, nothing to delete
+
+The consolidation question was asked properly this time — by measurement first, then by reading the
+candidates measurement produced — and it came back empty.
+
+**Overlap.** The highest description overlap between any two of the 121 skills is 0.168 (Jaccard on
+content words). For comparison, the pairs that *were* merged in earlier passes were obvious on
+sight. Nothing in the current tree is a near-duplicate of anything else.
+
+**The candidates measurement produced, and why each survives:**
+
+- `chicken-little-executive-advisor` / `chicken-little-technical-compiler` (0.168) — two fixed
+  autopsy protocols with different stages, different output structures, and different activation
+  phrases (`deploy advisor` vs `deploy compiler`). Merging them yields one skill holding two
+  mutually exclusive protocols behind two name-gates: strictly worse.
+- `adams-plain-grade` / `adams-smart-brevity` (0.138) — the same Adams core aimed at opposite
+  registers (5th-grade accessible vs professional-scanning). A merged skill would need a mode
+  switch on the one axis that decides every sentence it writes.
+- `full-stack-app-architecture` / `frontend-modern-ui` (0.148) — a stack-and-boundaries decision
+  versus a layer's craft. Different questions, explicit seam in both.
+- `extreme-ownership` / `stay-hard-accountability` (0.102) — leading a team versus driving
+  yourself. The seam is stated in both descriptions and both bodies.
+- `python-for-analysts` / `excel-automation-python` (0.124, cross-plugin) — overlap is the word
+  "Python", not the work.
+
+**Thinness is not redundancy.** The five thinnest skills (`reflective-learner` 148 lines,
+`full-stack-app-architecture` 152, `supervised-modeling` 154, `lean-code-principles` 155,
+`dmaic-problem-solving` 157) are all load-bearing: `dmaic-problem-solving` carries 14 inbound
+citations, the second-most in its plugin, and `reflective-learner` carries 8. The honest finding is
+the inverse of a deletion case — **the hub skills are the shallowest ones**, and the improvement
+available is depth, not removal.
+
+**The context-cost problem is not solved by deleting skills.** A full install costs 14.8% of a 200K
+window, and the library sits past the ~100-skill point where the listing silently degrades to
+name-only. Deleting the five thinnest skills would recover about 1,200 tokens — 0.6% of a context —
+while removing genuinely used content. Installing two plugins instead of fourteen recovers 11%.
+The lever is skills *per install*; `README.md` carries the measured per-plugin and per-bundle
+tables, and `scripts/measure-listing-cost.py` keeps them honest.
+
+### 12.4 Substance fixes applied in this pass
+
+Nine, each verified in place rather than merely changed:
+
+1. **`fmea`** — the Action Priority table let a catastrophic-but-rare-and-detectable failure
+   (S 9, O 2, D 3) rate **Low**, which is precisely the averaging-away the table replaced RPN to
+   prevent. Rule 2 gained a severity ceiling. Swept all 1,000 (S, O, D) cells: 18 cells rated Low
+   at S ≥ 9 before, 0 now (and 0 at S ≥ 7); 36 cells move, all Low → Medium; all five worked-example
+   AP values unchanged.
+2. **`rest-api-data-pulls`** — the pagination loop advanced `offset` by the requested page size, so
+   a server returning a short page while `hasMore` stayed true silently skipped the rows it
+   withheld. Now advances by `len(items)`.
+3. **`pdf-data-extraction`** — `amount()` inverted the sign of a plain `-750.25`: the regex that
+   strips parentheses also stripped the minus the negativity test never looked for. A sign
+   inversion in a statement parser is the worst kind of quiet defect.
+4. **`backend-api-development`** — the login snippet called `pwd.verify()`. `pwd` is a Python
+   stdlib module with no such function, so the snippet shadows stdlib *and* does not run.
+5. **`csv-and-flat-file-wrangling`** — `xxd` ships with vim; the POSIX `od` fallback is now given.
+6. **`spaced-retrieval-learning`** — a "10–20% of the retention interval" rule contradicted the
+   study it cited: Cepeda's own 70-day data point is ~21 days, where the rule yields 7–14. Replaced
+   with the four reported intervals and a note that the proportion collapses at long delays.
+7. **`anomaly-detection`** — step 6 attributed every alert by marginal robust z, which is blind by
+   construction to the joint anomalies step 4's multivariate detectors exist to find. Added the
+   branch, and the instruction to say plainly that no single value is out of range.
+8. **`stakeholder-mapping`** — the worked example asserted that a re-map must reach both artifacts
+   while showing artifacts that did not contain the change it described.
+9. **`medical-research-detective`** — country inference resolved name-beats-city across a whole
+   affiliation string rather than per segment, and carried a bare `wales` hint. Self-test 46/46
+   with four regression cases added.
+
+### 12.5 Privacy sweep
+
+Two private project names remained in committed files (`adams-smart-brevity` ×3,
+`weight-of-the-books`' environment template) after the `MEMORY.md` identity split. Both removed; a
+token-level sweep of `MEMORY.private.md` against the whole committed tree now returns nothing but
+ordinary vocabulary. One item is *not* removed and is a decision for the owner: see §12.6.
+
+### 12.6 Open decisions from this pass
+
+1. ~~**The `ut` brand pack in `assertion-evidence-deck`.**~~ **RESOLVED 2026-08-18** — the owner
+   directed "genericize", overriding the recommendation to keep it unchanged. The palette and its
+   WCAG analysis stay; the institution does not. `ut` → `warm-accent`, with the old name kept as a
+   deprecated alias that resolves and prints a note, so no existing deck spec breaks. Doing the
+   rename surfaced a real bug it would otherwise have hidden: the spec file's documented `"brand"`
+   field was never read — `build()` took only the CLI flag — so a spec saying `"brand": "ut"` had
+   been rendering neutral in silence. Now the flag overrides the spec and the spec is honoured when
+   the flag is absent, which is what the schema always claimed.
+2. **Depth for the five hub-but-thin skills** (§12.3). Not a defect; a ranked opportunity.
+3. **`docs/trigger-test.md` remains unrun.** It is the one checklist item nothing in this library's
+   history has ever met, and it cannot be run from a session that authored the skills.

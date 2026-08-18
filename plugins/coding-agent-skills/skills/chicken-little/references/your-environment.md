@@ -1,24 +1,30 @@
 # Your environment (fill in)
 
-Add the instance-specific facts that make Chicken Little's answers exact rather than generic.
+Add the system-specific facts that make Chicken Little's answers exact rather than generic.
 Keep anything sensitive in `your-environment.private.md` (git-ignored). Never commit
 credentials, account numbers, or client data.
 
-## Ledgers and business units
-- Primary ledger(s), currency, calendar:
-- Business units and `ORG_ID` mapping conventions:
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it. Copy it into your own
+project — `.claude/skills-env/chicken-little.md` works well — and point the skill at that copy.
 
-## Chart of accounts
-- Segments in order, with segment labels (balancing, natural account, cost center…):
-- Conventions for concatenated segments:
+## The systems in scope
+- Primary system(s) of record, and what each one owns:
+- Environments (prod / test) and how you tell them apart in output:
+- Org, entity, or tenant structure and its key names:
 
-## Workflow and holds
-- Invoice approval workflow configuration (stages, escalation):
-- Hold policies and who releases which hold:
+## The record model you work in
+- The main transactional objects and the level the decisive status lives at (header vs line):
+- Segmentation or coding structure, in order, with labels:
+- Naming conventions for identifiers you will see in extracts:
+
+## Workflow and exceptions
+- Approval workflow configuration (stages, escalation):
+- Hold / exception policies and who clears which:
 
 ## Reporting access
-- OTBI subject areas you actually use:
-- Extract cadence and format (FBDI, BI Publisher, ADW…):
+- The reports or subject areas you actually use:
+- Extract cadence and format:
 
 ## Escalation thresholds (what earns an andon pull)
 - Cycle-time or aging thresholds that trigger action:

@@ -13,7 +13,7 @@ description: >-
   who holds the other copy, could someone alter this after the fact, does our half fit
   their half, hash anchor, dual custody, evidence design.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the library's operational-wisdom research dossier
     (docs/research/epic-wave-held-research.md, Lane 1 entry 2: split tally sticks, English
@@ -47,12 +47,11 @@ designed disposal.
   developer proving what was delivered when.
 - After a dispute exposed that a record could not be trusted, and the flow needs a split so
   it cannot happen again.
-- Not for: reconciling two systems' outputs against each other — bank-to-ledger matching
-  (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`) and the
-  ledger reconciliation craft (archived: `accounting-skills:account-reconciliations`, restorable from `archive/`);
-  this skill designs what each side should hold so later comparison is even possible.
+- Not for: reconciling two systems' outputs against each other — statement-to-ledger matching and
+  the account-reconciliation craft are finance-domain work this library does not carry; this skill
+  designs what each side should hold so later comparison is even possible.
 - Not for: assembling the audit file and responding to auditor requests — audit-readiness / PBC
-  work (archived: `treasury-accounting-skills:audit-readiness-and-pbc`, restorable from `archive/`).
+  work, also outside this library.
 - Not for: reconciling conflicting good-faith human recollections of one event →
   `decision-science-skills:rashomon-effect`; this skill exists so the record never depends
   on recollection.
@@ -90,8 +89,8 @@ ritual, alteration test, and the second-keeper section are in
    seeing the first result, and agreement is checked result-against-result. The Inka ran
    accounts this way — multiple khipu keepers per community encoding the same events
    separately, with surviving duplicate khipu as physical evidence of the practice
-   [snippet-only]. One section, one habit: the sibling of the split, for records that are
-   computations rather than exchanges.
+   [snippet-only]. The sibling of the split: use it for records that are computations
+   rather than exchanges.
 7. **Design the retirement.** State how long each half is kept, by whom, and how disposal
    is confirmed on both sides. The Exchequer's control outlived its empire's memory of why
    it mattered; the disposal was improvised, and Parliament burned [snippet-only]. Half of
@@ -159,6 +158,12 @@ chosen per flow, where anchors live, the rejoining ritual's schedule and log, an
 retirement rule per flow. Keep the committed file structural. Real counterpart names,
 agreement contents, live hashes, and anything client- or employer-identifying belong in
 `your-environment.private.md`, which is git-ignored and never committed.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/split-tally-evidence.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/split-record-method.md — the Exchequer mechanics and the Parliament fire

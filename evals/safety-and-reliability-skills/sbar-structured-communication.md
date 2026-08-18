@@ -47,5 +47,5 @@ A good response:
   −23%, preventable adverse events −30%, no workflow cost; VA team training dose-response).
 - **Stays honest:** marks the evidence base as compiled from snippets [snippet-only]; states
   that the protocol works only enacted — the read-back and the decision are human acts, and a
-  pasted template nobody speaks is scenery; never abbreviates crew resource management to its
-  three-letter form (reserved for customer relationship management in this library).
+  pasted template nobody speaks is scenery; writes crew resource management out rather than
+  abbreviating it.

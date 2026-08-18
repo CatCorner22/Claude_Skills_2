@@ -12,6 +12,8 @@ description: >-
   or a spreadsheet formula returns a number that looks wrong. Triggers: solve for x,
   rearrange the formula, algebra, linear equations, word problem, isolate the variable,
   breakeven, two unknowns, order of operations, PEMDAS.
+metadata:
+  version: "1.1.0"
 ---
 
 # Algebra and formulas
@@ -31,8 +33,8 @@ description: >-
   → see `data-analytics-bi-skills:spreadsheet-modeling`. This skill reads a single
   formula as algebra; that one builds the workbook around it.
 - Not for: the accounting equation, debits/credits, and normal balances — that is
-  double-entry bookkeeping (archived: `accounting-skills:double-entry-fundamentals`, restorable from `archive/`),
-  not solve-for-x.
+  double-entry bookkeeping, an accounting-domain topic this library does not carry, not
+  solve-for-x.
 - Siblings: unit-check every rearranged formula with
   `math-foundations-skills:units-and-dimensional-analysis`; rough-size the answer before
   solving with `math-foundations-skills:number-sense-and-estimation`.
@@ -146,6 +148,12 @@ breakeven inputs, commission structure — in `references/your-environment.md`, 
 its symbols named in words and units. Keep committed content structural: real rates,
 client terms, or anything sensitive belongs in `your-environment.private.md`
 (git-ignored), never in a committed file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/algebra-and-formulas.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/solving-and-rearranging.md — the solve-for-x ladder from one-step to formula

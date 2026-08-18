@@ -13,7 +13,7 @@ description: >-
   intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
   constructive paranoia, now next later watch.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 
@@ -97,8 +97,9 @@ reality, never to the preferred answer.**
 ## Why / learn
 The doctrine's spine is the Millennium Challenge lesson: an exercise whose organizers
 protect the preferred answer from adaptive challenge loses its epistemic value — when the
-red team's sunk fleet was refloated and the rules were rewritten mid-game, the exercise
-stopped being evidence. Everything else follows from taking that seriously in software:
+fleet Van Riper's red team had sunk was refloated and the rules were rewritten mid-game, the
+exercise stopped being evidence: the organizers had restored the side whose success the
+exercise was meant to test. Everything else follows from taking that seriously in software:
 criteria fixed before results, interventions logged, continuation never dressed up as
 validation. OODA earns its place because orientation — not speed — is the decisive
 element: it determines what you can even notice, which is why dashboards without
@@ -126,6 +127,12 @@ only severity + evidence + owner + trigger turns them into findings.
 Record in `references/your-environment.md`: your release gates and rollback rehearsal
 cadence, who holds stop-the-line authority, your intervention-log location, house
 severity levels, and the statistical reporting template your org requires.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/project-command-center.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/command-doctrine.md — adaptive command, the three OODA loops, the Toyota

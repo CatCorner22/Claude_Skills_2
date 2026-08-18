@@ -11,7 +11,7 @@ description: >-
   pdfplumber, camelot, parse bank statement pdf, pdf invoice data, scanned pdf, OCR pdf,
   pdf text extraction, table extraction python.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # PDF data extraction
@@ -20,7 +20,7 @@ metadata:
 - Turning PDF bank statements, invoices, or report tables into DataFrames/CSV/Excel.
 - Debugging an extraction that merges columns, drops rows, or returns empty text.
 - Not for: understanding statement *formats* like BAI2/camt.053 — those are data files, not PDFs
-  (archived: `banking-skills:bank-statement-parsing`, restorable from `archive/`). For cleaning
+  — format-specific banking knowledge this library does not carry. For cleaning
   after a good extraction → see
   `data-analytics-bi-skills:data-cleaning`. If you have Anthropic's official `pdf` skill (from
   `anthropics/skills`), prefer it for creating/filling PDFs; this skill is about getting *data
@@ -30,8 +30,9 @@ metadata:
 1. **Classify the PDF first — it decides everything.** Open a page and try to select text. Text
    selects → **native** PDF (text layer exists; pdfplumber/camelot will work). Nothing selects →
    **scanned image** (you need OCR — `ocrmypdf` adds a text layer, then proceed as native; accept
-   that OCR of numbers demands verification). Programmatic check: `page.extract_text()`
-   returning nothing ≈ scanned.
+   that OCR of numbers demands verification). Programmatic check:
+   `not page.extract_text().strip()` ≈ scanned — pdfplumber returns an empty *string*, not
+   `None`, so an `is None` test never fires.
 2. **Pick the tool by table style.**
    - **pdfplumber** — the general workhorse: text with positions, and table extraction driven by
      ruling lines or alignment. Best when you need control or the layout is odd.
@@ -99,6 +100,12 @@ Catalog your recurring PDFs in `references/your-environment.md` (real documents 
 `references/*.local.*`, git-ignored): document type, native or scanned, the tool/settings recipe
 that works, and the internal totals used for validation. **Never commit real statements or
 invoices.**
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/pdf-data-extraction.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/pdf-recipes.md — pdfplumber/camelot settings, OCR pipeline, statement/invoice layout patterns

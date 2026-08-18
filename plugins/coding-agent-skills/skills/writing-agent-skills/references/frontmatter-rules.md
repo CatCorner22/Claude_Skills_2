@@ -9,7 +9,7 @@
 - **Must equal the skill's folder name exactly.**
 - Must **not** contain the reserved words `anthropic` or `claude`.
 - Must not contain XML tags.
-- Prefer gerund-ish or plain task names (`bank-reconciliation`, `time-value-of-money`).
+- Prefer gerund-ish or plain task names (`after-action-review`, `percentages-and-proportions`).
   Avoid vague names (`helper`, `utils`, `tools`, `data`).
 
 ### `description`
@@ -19,9 +19,13 @@
 - Leads with the primary use case; ends with a short `Triggers:` list of literal phrases.
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
-- **Budget reality, measured 2026-08-11 (this replaces an earlier ~1%-of-context claim that the
-  library's own numbers contradict).** 121 skills' names + descriptions = ~107,700 chars ≈
-  **29,000 tokens ≈ 14.6% of a 200K window**, mean ~870 chars per description. A literal
+- **Budget reality, re-measured 2026-08-18 (this replaces an earlier ~1%-of-context claim that the
+  library's own numbers contradict).** 121 skills' names + descriptions = **109,662 chars ≈
+  29,638 tokens ≈ 14.8% of a 200K window**, mean ~885 chars per description. Token figures are an
+  estimate at ~3.7 chars/token — stated, because an undisclosed divisor is exactly how this
+  paragraph and `README.md` came to publish two different percentages. Both now come from
+  `python3 scripts/measure-listing-cost.py`; re-run it rather than editing the figure by hand,
+  because a hand-kept number in two places is a number that will disagree with itself again. A literal
   1%-of-context listing budget would fit about six of them, so ~1% cannot describe a
   full-description listing; it is consistent instead with a listing that has degraded to mostly
   **name-only**, which is the documented failure mode (see below). Keep descriptions tight

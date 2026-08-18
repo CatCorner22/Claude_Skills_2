@@ -53,11 +53,35 @@ can verify afterward that nobody could have. Mechanics, simplest first:
    presence. Fits monthly draws over small populations.
 2. **Pre-committed seed.** Before the period closes, the operator commits to a seed —
    writes it in a dated note, emails it, or (stronger) shares only its hash, revealing
-   the seed at draw time. The seed feeds a published deterministic formula (e.g., seed
-   the standard random generator, shuffle the sorted item list, take the first N).
-   Anyone can re-run the formula and get the same draw. The commitment must predate
-   the population being final, or the operator could pick the seed after seeing the
-   items.
+   the seed at draw time. The seed feeds a *pinned* deterministic formula, so anyone can
+   re-run it and get the same draw. The commitment must predate the population being
+   final, or the operator could pick the seed after seeing the items.
+
+   **Pin the formula, not just the seed.** "Seed the standard random generator and take
+   N" is not reproducible: the same seed in the same language gives different draws under
+   `shuffle`-then-slice versus `sample`, and different languages share no generator at
+   all. A verifier who reaches a different answer cannot tell an honest tool difference
+   from a rigged draw, which destroys exactly the property the lot was for.
+
+   **The hash-rank draw** (reproducible in any tool with SHA-256, including a shell):
+
+   > For each item, `rank = SHA256("<seed>|<item id>")`. Sort items ascending by `rank`.
+   > The first N are the draw.
+
+   Publish the three inputs — the seed, the item-id list, and that sentence — and the
+   draw is checkable by hand:
+
+   ```
+   while read -r id; do
+     printf '%s  %s\n' "$(printf '%s|%s' "$SEED" "$id" | sha256sum | cut -c1-64)" "$id"
+   done < items.txt | sort | head -8
+   ```
+
+   **Stratified odds, same primitive.** To draw a class at k× the base probability, give
+   each of its items k tickets — `SHA256("<seed>|<item id>|0")` … `|k-1` — rank all
+   tickets together, walk the sorted list, and take an item the first time any of its
+   tickets appears, stopping at N. Eligibility stays universal (every item keeps at
+   least one ticket); only the odds move.
 3. **External public value.** Index the list by a number nobody controls and nobody
    knows yet: the hash of tomorrow's publicly posted figure (a lottery number, a
    published closing value). Strongest against insider steering, since even the
@@ -170,9 +194,10 @@ three approvers; the office manager wants oversight without accusing anyone.
   full stop — the generals test.) Odds stratified, eligibility not: lines above the
   delegation limit at 3× the base probability.
 - **Lot:** on the first business day, the office manager reveals a seed committed by
-  email on the 25th of the prior month (before the population closed); a published
-  ten-line script shuffles the sorted export and takes eight lines. Anyone can re-run
-  it.
+  email on the 25th of the prior month (before the population closed), then runs the
+  published hash-rank draw over the export's line ids — three tickets per line above the
+  delegation limit, one per line below it, first eight distinct lines taken. Anyone with
+  the export and the seed can re-run it in a shell.
 - **Reviewer rotation:** two reviewers per month drawn from the five staff who are
   not approvers, same seed, pairing history kept; a drawn reviewer never examines
   their own or their manager's lines (next-draw replacement rule).

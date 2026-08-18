@@ -11,15 +11,18 @@ description: >-
   recurring task, or wants a personal routine built or repaired. Triggers: habit,
   implementation intention, habit stacking, make it automatic, build a routine, stop doing X
   every time, keep forgetting to.
+metadata:
+  version: "1.1.0"
 ---
 
 # Habit design (make it automatic)
 
 A behavior repeated by decision is paid for every single time; a behavior repeated by habit
 is paid for once, at design time. This skill does the design: cue, routine, reward, written
-as an implementation intention — Gollwitzer's "when X happens, I will Y," one of the better
-replicated effects in behavior-change research — stacked onto something stable, sized below
-the failure threshold, and given a scheduled renegotiation so it never becomes clutter.
+as an implementation intention — Gollwitzer's if-then form, rendered here as "when X happens,
+I will Y," one of the better-replicated effects in behavior-change research — stacked onto
+something stable, sized below the failure threshold, and given a scheduled renegotiation so
+it never becomes clutter.
 
 ## When to use
 - Making one repeated behavior automatic: the daily position check before anything else, the
@@ -56,11 +59,11 @@ renegotiation protocol, and the failure-mode table are in `references/habit-meth
    ("after I pour the first coffee…"). Also workable: a fixed event or place. Not workable:
    a time of day the user doesn't already notice, or "in the morning" (too vague to fire).
 4. **Write the implementation intention verbatim.** "When <cue>, I will <tiny routine> in
-   <place>." Gollwitzer's meta-analytic work (with Sheeran) found that pre-deciding the
-   when-where-how of acting substantially raises the rate of actually doing it — a large,
-   well-replicated effect for a one-sentence intervention. Have the user say it back; write
-   it into the worksheet. Add a coping form for the known obstacle: "if <obstacle>, then
-   <planned response>."
+   <place>." Gollwitzer & Sheeran's 2006 meta-analysis found that pre-deciding the
+   when-where-how of acting substantially raises the rate of actually doing it: d ≈ 0.65,
+   medium-to-large, across 94 independent tests — a strong return on one written sentence.
+   Have the user say it back; write it into the worksheet. Add a coping form for the known
+   obstacle: "if <obstacle>, then <planned response>."
 5. **Engineer the friction.** Make the good path one step shorter (stage it the night
    before: worksheet already open, shoes by the door) and the competing path one step longer
    (app logged out, snack not in the house). The friction audit in the reference walks the
@@ -147,6 +150,12 @@ intention, the presence tracker's location, and your renegotiation calendar. Kee
 content structural — health specifics, personal routines you'd rather not publish, or
 anything sensitive goes in `your-environment.private.md` (git-ignored), never in a committed
 file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/habit-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/habit-method.md — the design worksheet, implementation-intention patterns, the

@@ -11,6 +11,8 @@ description: >-
   load, a product release, or any plan the team
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
+metadata:
+  version: "1.1.0"
 ---
 
 # Pre-mortem (prospective hindsight)
@@ -30,6 +32,10 @@ description: >-
   `continuous-improvement-skills:project-command-center`. Looking BACK at what actually
   happened → see `decision-science-skills:after-action-review`. The assistant reflecting
   on its own corrections → see `metacognition-skills:reflective-learner`.
+- Not for: the period *before* there is a plan to attack — noticing faint early signals against a
+  noisy background and deciding which deserve attention → see
+  `decision-science-skills:weak-signal-navigation`. A pre-mortem imagines a named failure; that
+  skill is how you notice one forming.
 
 ## Do it
 1. **Put the plan on the table.** Everyone participating has read or been briefed on the
@@ -46,8 +52,8 @@ description: >-
 4. **Amplify with the LLM as a tireless failure-imaginer.** Have it generate ~20
    heterogeneous failure narratives, forced across categories — technical, data, people
    and politics, timing and external events — then bucket and deduplicate them. When the
-   user is a team of one (the analyst's usual condition), have it write "each
-   stakeholder's reason" in role: the AP manager, the bank contact, the DBA, the auditor.
+   user is a team of one, have it write "each stakeholder's reason" in role: the
+   operations lead, the approver, the vendor contact, the DBA, the internal auditor.
    Ground every narrative in the real plan and process documents, not generic risk lists.
    Use the prompt list in `references/premortem-method.md`.
 5. **Round-robin.** Each person (and each LLM bucket) contributes one reason per pass, no
@@ -96,7 +102,7 @@ wish, and because what a team ranks highest reveals what it actually fears.
   explicit acceptance, each with an owner and date.
 - Only technical failures imagined → force the categories: data, political, timing,
   external; use the reference prompt list.
-- Inviting only the planners → the people who will operate the thing on day two (the AP
+- Inviting only the planners → the people who will operate the thing on day two (the
   clerk, the help desk) see failures planners cannot; include at least one.
 - Three mild reasons and early consensus → the room still fears the sponsor; re-run the
   silent-writing round anonymously.
@@ -109,6 +115,12 @@ pre-mortem, your stakeholder roster for the solo role-play variant, a sanitized 
 past failures (your best category prompts), and where ranked outputs get filed. If real
 incidents, vendors, or people must be named, use `your-environment.private.md` — that
 suffix is git-ignored. Never commit real client or bank data.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/pre-mortem.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/premortem-method.md — facilitation script, solo-analyst variant,

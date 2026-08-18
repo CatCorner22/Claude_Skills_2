@@ -9,7 +9,7 @@ description: >-
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
 metadata:
-  version: "1.1.0"
+  version: "1.3.0"
 ---
 
 # Anomaly detection
@@ -18,7 +18,11 @@ metadata:
 - Flagging unusual transactions or values: reconciliation breaks, fee/interest spikes, duplicate or out-of-pattern payments, suspicious activity.
 - Finding outliers in a time series (a day's cash movement far from its seasonal norm) or in multivariate transaction data.
 - Setting a detection threshold when you have few or no labels, and managing the resulting alert volume.
-- Not for: mechanically matching a statement to the ledger and classifying breaks — that is bank-to-ledger reconciliation (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`); use this skill to *rank* which breaks are unusual. Designing the control framework alerts feed into is cash-controls work (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
+- Not for: mechanically matching a statement to the ledger and classifying breaks — that is reconciliation, a finance-domain procedure this library does not carry; use this skill to *rank* which breaks are unusual. Designing the control framework alerts feed into is controls work, also outside this library.
+- Not for: operating a whole *queue* of detectors — disposition audits, tolerance lists with
+  expiry, paging gates, and the economics of alert volume → see
+  `safety-and-reliability-skills:detection-system-tuning`. This skill builds and tunes one
+  detector; that one runs the system those detectors feed.
 
 ## Do it
 1. **Define "anomalous" for this context, and the cost of each error.** Decide what unusual means here
@@ -38,9 +42,22 @@ metadata:
 5. **Set the threshold by the precision/recall trade-off, not a default.** These methods output a **score**;
    the alert is a cut on it. Tune the cut (contamination rate, score quantile) to your **alert budget** and
    the FP/FN cost. With few labels, estimate precision by having reviewers check a sample of top alerts.
-6. **Rank, don't just flag.** Emit a ranked score and route the **top-N** the team can actually investigate,
-   rather than a raw binary flag. Prioritization is what makes detection usable when everything above a hard
-   cutoff would swamp the reviewers.
+6. **Rank, and say what drove each flag.** Emit a ranked score and route the **top-N** the team can
+   actually investigate, rather than a raw binary flag — prioritization is what makes detection usable when
+   everything above a hard cutoff would swamp the reviewers. A score alone is not investigable, so attach
+   the **drivers**: for each alert, report the two or three fields whose robust z (step 2:
+   `0.6745·(x − median)/MAD`) is most extreme, and the first check a reviewer should run. That recipe works
+   for any scorer, including isolation forest and LOF, which give no native attribution.
+   **When no field is individually extreme, the anomaly is a joint one** — the combination is
+   unusual though every value is ordinary (a routine amount, to a routine vendor, at a routine
+   hour, but never that trio together). Marginal robust z is blind to it by construction, so
+   branch: if the top |z| is unremarkable (say < 3), attribute by *what the point is unusual
+   relative to* instead — the nearest normal neighbours and which fields differ from them (LOF
+   and DBSCAN give you these directly), or a drop-one pass that re-scores the point with each
+   field removed and names the field whose removal collapses the score. Report that as
+   "unusual combination: X given Y", never as a bare score, and say plainly that no single value
+   is out of range — otherwise a reviewer checks each field, finds nothing, and learns to
+   distrust the feed.
 7. **Close the loop and manage alert fatigue.** Track precision on reviewed alerts, suppress known-benign
    recurring patterns (a scheduled large transfer isn't news every month), fold confirmed cases back as labels,
    and re-tune. An alert stream nobody trusts is worse than none.
@@ -74,7 +91,7 @@ which point even the true positives are lost. Detection is only as valuable as t
 - Plain z-score/mean-std on data with big outliers → the outliers inflate the std and mask themselves. Use robust z (median/MAD).
 - Chasing recall/F1 with almost no labels → you can't measure what you didn't catch. Tune to precision on reviewed alerts + an alert budget.
 - Ignoring seasonality in a time series → normal month-end/quarter-end spikes flood the alerts. Flag residuals against a season-aware baseline.
-- Distance/density methods on unscaled features → the largest-unit feature dominates. Standardize before isolation forest isn't required, but LOF/Mahalanobis need scaling.
+- Distance/density methods on unscaled features → the largest-unit feature dominates. Standardize for LOF and DBSCAN; isolation forest is split-based and Mahalanobis is covariance-aware (Σ⁻¹ already absorbs per-feature scale), so neither needs it.
 - A hard binary cutoff that swamps reviewers → nobody can act. Rank and route the top-N to an alert budget.
 - Never suppressing known-benign recurrences → alert fatigue. Whitelist scheduled/expected patterns and re-tune.
 
@@ -83,9 +100,14 @@ Record your setup in `references/your-environment.md` (keep real transaction dat
 and sample rows in `your-environment.private.md`, which is git-ignored): what "anomalous" means for your
 process, the fields you monitor, whether you have any labels, your alert budget (how many alerts/day the team
 can investigate), known-benign recurring patterns to suppress, and the cost of a missed anomaly vs a false
-alarm. This skill then maps its generic methods onto your data. To rank reconciliation breaks by unusualness,
-pair it with your reconciliation process (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`);
-fitting alerts into a control framework is cash-controls design (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
+alarm. This skill then maps its generic methods onto your data — to rank reconciliation breaks by
+unusualness, point it at whatever reconciliation process you already run.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/anomaly-detection.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/methods-and-thresholds.md — statistical, time-series, and unsupervised methods, with threshold-setting and evaluation under label scarcity

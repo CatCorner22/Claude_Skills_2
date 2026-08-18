@@ -21,6 +21,7 @@ data (see below).
 ## Job-status pattern
 ```python
 class Job(Base):
+    __tablename__ = "jobs"                                   # required: SQLAlchemy 2.0 raises
     id: Mapped[str] = mapped_column(primary_key=True)        # uuid
     status: Mapped[str] = mapped_column(default="queued")    # queued|running|done|failed
     progress: Mapped[int] = mapped_column(default=0)         # 0–100
@@ -35,7 +36,10 @@ def start_report(params: ReportIn, bg: BackgroundTasks, db=Depends(get_db)):
 
 @router.get("/jobs/{jid}")
 def job_status(jid: str, db=Depends(get_db)):
-    return db.get(Job, jid) or raise_(HTTPException(404))
+    job = db.get(Job, jid)
+    if job is None:
+        raise HTTPException(404)
+    return job
 ```
 Worker updates the row as it goes; polling and SSE both just read it. Escalate from
 BackgroundTasks to arq/Celery when: jobs must survive restarts, need retries, or saturate

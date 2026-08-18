@@ -83,10 +83,11 @@ already built.
 
 ## MSCD discipline for technical writing
 
-Every recommendation names its actor and its logic — zero passive voice, because a
-recommendation with no actor never gets executed:
+Adams's *A Manual of Style for Contract Drafting* (MSCD) is the standard here. Every
+recommendation names its actor and its logic — use the active voice wherever the actor
+matters, because a recommendation with no actor never gets executed:
 
-| Passive (rejected) | MSCD-compliant |
+| Actor hidden (rejected) | MSCD-compliant |
 |---|---|
 | "The connection variables should be isolated." | "The developer must move the connection variables into a config module loaded once at startup." |
 | "Retries will be added." | "The ingest function must retry the API call three times with exponential backoff, then write the failure to the dead-letter log." |

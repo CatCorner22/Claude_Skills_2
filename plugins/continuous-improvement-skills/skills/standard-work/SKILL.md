@@ -32,7 +32,7 @@ added as the format matured — is still the most teachable SOP format there is.
   as a method others can be trained to.
 - Writing an SOP or work instruction that people will actually use.
 - Not for: sequencing a whole multi-task close on a calendar → that's a month-end-close calendar
-  build (archived: `accounting-skills:month-end-close`, restorable from `archive/`). To propose
+  build — an accounting-domain procedure this library does not carry. To propose
   and align on a specific improvement → see `continuous-improvement-skills:a3-thinking`.
 - Not for: finding which task gates a whole multi-step effort → see
   `continuous-improvement-skills:theory-of-constraints`. To see where one task sits in the
@@ -45,6 +45,10 @@ added as the format matured — is still the most teachable SOP format there is.
   performed, not the values in a table. Normalizing messy category values, formats, and types
   in a dataset → see `data-analytics-bi-skills:data-cleaning`; z-score standardizing or
   scaling model features → see `machine-learning-skills:feature-engineering`.
+- Not for: deciding which *document* should exist, what type it is, and where it lives — tutorial
+  vs how-to vs reference vs explanation, ADRs, and the owner/cadence/last-verified mechanism that
+  keeps it true → see `writing-skills:technical-documentation`. This skill owns the one right way
+  to do a task; that one owns the documentation set around it.
 
 ## Do it
 `references/sop-template.md` has the fillable template, a worked example, and the TWI
@@ -125,6 +129,12 @@ record your SOP template and where standards live, your naming/version conventio
 or volume applies to your work, your visual-management tools, and your training and review
 cadence. Keep the committed file structural; real system names, accounts, credentials, or
 people go in `your-environment.private.md`, which is git-ignored and never committed.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/standard-work.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/sop-template.md — the fillable standard-work/SOP template (sequence, timing,

@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Measurement systems analysis and process capability
@@ -108,14 +108,7 @@ the best-documented weakness LLM judges have. A judge that rewards length is a g
 nuisance characteristic of the part, caught by stratifying effectiveness against a reference rather
 than by inspecting agreement. A model grading its own output is an operator with a stake in the
 part — the reason inspection is kept independent of production in every quality system ever built,
-long before anyone had a language model to worry about. The same discipline also exposes the
-opposite error, the one that flatters: the "same conditions" in *same operator, same part, same
-conditions* is load-bearing. Change the temperature between trials and you have changed the gauge,
-so the disagreement you measure is a setting effect wearing repeatability's name; run at
-temperature 0 and you get near-perfect self-agreement, which is not a repeatable judge but a cached
-function evaluated twice — the machine equivalent of an inspector who remembers every part, which
-is precisely what blinding and randomization exist to prevent. Both traps produce a number; neither
-produces evidence.
+long before anyone had a language model to worry about.
 
 The chance-correction statistic deserves the same scepticism the skill applies to everything else.
 Raw percent agreement flatters, so kappa is the right instinct — but kappa's correction is built
@@ -163,6 +156,12 @@ Record in `references/your-environment.md` the metrics you actually decide on, h
 measured (system, query, reviewer), the judges/reviewers involved, and the owner-set spec limits
 and thresholds (use `your-environment.private.md`, which is git-ignored, for real system names,
 limits, or reviewer names). Never commit real transaction or personnel data — structure only.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/measurement-systems-analysis.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/msa-and-capability.md — study designs, the ANOVA decomposition explained, the

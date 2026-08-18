@@ -9,7 +9,7 @@ clients in `your-environment.private.md` (git-ignored) — never in this file.
 - Where "shall" is permitted (language of obligation only) vs. banned outright:
 
 ## Clinical notes (if applicable)
-- Controlled vocabulary source (template set, note system, Smile Notes configuration):
+- Controlled vocabulary source (template set, note system, EHR configuration):
 - Findings-to-plan chain format your practice uses:
 - Known template-clone hotspots to watch (visit types with copy-paste history):
 

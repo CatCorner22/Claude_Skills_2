@@ -9,7 +9,7 @@ description: >-
   encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
   datetime features, lag features, rolling features, feature selection, interactions, impute features.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Feature engineering
@@ -35,7 +35,8 @@ metadata:
 4. **Build datetime and lag/rolling features — carefully.** From a timestamp derive day-of-week, month,
    quarter-end, business-day, holiday, and payroll-cycle flags. For time series add **lags** (`y_{t-1}`,
    `y_{t-7}`) and **rolling** stats (trailing mean/std) — but each window may use **only past data relative
-   to the row's timestamp**, or you leak the future. This is the most common leak in finance data.
+   to the row's timestamp**, or you leak the future. Temporal leakage is the leak that most often survives
+   review, because a rolling window computed on a fully sorted frame looks identical to a correct one.
 5. **Add aggregations and interactions where the domain suggests them.** Group statistics (per-customer
    average, per-account volatility), ratios (amount ÷ typical amount), and interaction terms can encode real
    structure. Compute aggregates over training rows only, and be wary of stats that peek across the split.
@@ -45,6 +46,9 @@ metadata:
 7. **Select a smaller, robust feature set.** Remove near-constant, duplicate, and obviously leaky columns
    first; then use **regularization (lasso)**, **permutation importance**, or correlation pruning to cut the
    rest. Fewer well-chosen features generalize better and are far easier to monitor than a wide, noisy matrix.
+8. **Write the leakage audit last, one line per surviving feature.** For each kept feature record: what the
+   value would have been at the prediction timestamp, which rows the transform was fit on, and the window it
+   reads (strictly prior, or not). A feature you cannot write that line for does not ship.
 
 **Deliverable — the feature spec + pipeline.** The finished output contains: (1) a feature
 dictionary — each feature's name, source column(s), transform, and what the transform is fit on;
@@ -83,6 +87,12 @@ rows in `your-environment.private.md`, which is git-ignored): your categorical f
 which numerics are skewed, the timestamp columns and the calendar effects that matter (month-end, payroll,
 holidays), how missingness arises and what it means, and your preferred pipeline tooling. This skill then maps
 its generic transforms onto your columns, and hands the model choice to `machine-learning-skills:supervised-modeling`.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/feature-engineering.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/transforms-and-leakage.md — encoding/scaling/datetime/selection recipes and the leakage-safe pipeline pattern

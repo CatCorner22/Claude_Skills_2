@@ -9,7 +9,7 @@ description: >-
   logistic regression, linear regression, random forest, gradient boosting, XGBoost, LightGBM, predict
   a category, predict a number, classifier, feature importance, coefficients.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Supervised modeling
@@ -21,6 +21,9 @@ metadata:
 - Not for: framing the problem, target, and baseline in the first place → see `machine-learning-skills:ml-project-framing`. For choosing metrics, cross-validation, and guarding leakage → see `machine-learning-skills:model-evaluation`. For encoding/scaling the inputs → see `machine-learning-skills:feature-engineering`.
 
 ## Do it
+Algorithm selection by data shape, hyperparameters that actually matter, and how to read a
+fitted model's coefficients or importances are in `references/algorithms-and-interpretation.md`.
+
 1. **Confirm the task type.** Numeric target → **regression**; categorical target → **classification**
    (binary or multiclass). This decides the model family, the loss, and the metrics. If the problem isn't
    framed yet, do `machine-learning-skills:ml-project-framing` first.
@@ -58,10 +61,10 @@ to ship.
 ## Why / learn
 The governing principle is **start with an interpretable baseline, and add complexity only when it earns
 its keep.** A linear or logistic model is not a throwaway — it is a real model, it rarely overfits, and
-its coefficients are a defensible explanation, which matters enormously in finance where a black box that
-holds a payment or flags a customer has to be justifiable. You reach for trees and boosting when the
-linear model demonstrably underfits (it can't capture the curve or the interaction), and the price you
-pay is interpretability and a real risk of overfitting that only regularization and honest validation keep
+its coefficients are a defensible explanation, which matters wherever a prediction has to be defended to
+someone who did not build it — an adverse-action notice, a triage rule a clinician overrides, a screening
+model an auditor will ask about. You reach for trees and boosting when the linear model demonstrably
+underfits (it can't capture the curve or the interaction), and the price you pay is interpretability and a real risk of overfitting that only regularization and honest validation keep
 in check. Understanding *why* the families differ helps you choose: linear models assume an additive,
 monotone relationship and extrapolate; trees carve the feature space into boxes, capture interactions for
 free, but never extrapolate beyond the training range. Interpretation is where people most often fool
@@ -86,6 +89,12 @@ feature list and their types, class balance if classifying, your preferred libra
 XGBoost, LightGBM), and any interpretability requirement (e.g. a model you must explain to auditors or
 risk). This skill then maps its generic steps onto your data and constraints, and defers metric and
 validation choices to `machine-learning-skills:model-evaluation`.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/supervised-modeling.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/algorithms-and-interpretation.md — model-family cheat-sheet, default hyperparameters, imbalance tactics, and interpretation caveats

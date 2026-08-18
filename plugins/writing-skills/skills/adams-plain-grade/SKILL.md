@@ -1,8 +1,8 @@
 ---
 name: adams-plain-grade
 description: >-
-  Writes and edits to Ken Adams clarity principles at a 5th-grade reading level (US
-  Southeast), falling back to 8th grade only when precision demands it — short active
+  Writes and edits to Ken Adams clarity principles at a 5th-grade reading level, falling
+  back to 8th grade only when precision demands it — short active
   sentences, everyday concrete words, one idea per sentence, technical terms explained in
   place, and a hard rejection of litigated "tested language," archaisms, doublets, and
   ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by
@@ -12,7 +12,7 @@ description: >-
   simplify this letter, accessible language, patient materials, low literacy, simplest
   accurate version.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search
@@ -60,11 +60,15 @@ version that still keeps the exact meaning.
    said once, then explained immediately in plain words; the structure never makes the reader
    guess.
 5. **Check the grade.** 5th grade preferred: sentences average 10–14 words, everyday 1–2
-   syllable words, Flesch Reading Ease near 90–100 (Flesch-Kincaid near 5.0). Fall back to
-   8th grade (sentences up to 15–18 words) only where a precise idea cannot stay accurate at
-   5th. Never above 8th. Never fuzz the meaning to hit a lower grade — meaning always wins.
-6. **Read it aloud.** It should sound like a clear adult talking to a smart 11-year-old from
-   the US Southeast.
+   syllable words, Flesch Reading Ease 90 or better (a floor, not a window — 105 is fine).
+   Flesch-Kincaid is a second opinion, not a restatement of the same target: at 10–14 words
+   per sentence, FRE 90–100 computes to FKGL ≈ 1.8–4.2, so never lengthen a sentence to
+   chase an FKGL of 5.0. Fall back to 8th grade (sentences up to 15–18 words) only where a
+   precise idea cannot stay accurate at 5th. Never above 8th. Never fuzz the meaning to hit
+   a lower grade — meaning always wins.
+6. **Read it aloud.** It should sound like a clear adult talking to a smart 11-year-old:
+   plain American English, second person, no regionalisms and no institutional voice. If
+   your readers share a specific dialect, set it in `references/your-environment.md`.
 7. **Run the self-check** (bundled in the reference) before delivering.
 
 ## Why / learn
@@ -100,10 +104,16 @@ Wire in your current role here — the register is domain-neutral and serves who
 accessible-audience readers are wherever you work next: an analyst's public summary, an
 attorney's client letters, an ops manager's staff notices, a developer's user-facing
 messages. Record in `references/your-environment.md`: your audience's region and dialect
-notes, house terms with their approved plain glosses, and any regulatory phrases that must
+(plain American English is the default), house terms with their approved plain glosses, and any regulatory phrases that must
 appear verbatim (quote them, then explain them in plain words right after). Keep anything
 identifying real patients or clients out of git — raw detail goes in
 `your-environment.private.md` (git-ignored).
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/adams-plain-grade.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/grade-targets-and-checks.md — grade targets, readability measures, the Adams

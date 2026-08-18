@@ -13,7 +13,7 @@ description: >-
   matches, exception queue drowning, tune the alerts, memory cell, everything is an
   exception, nobody looks at the alerts anymore.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from the library's biological-systems research dossier
     (docs/research/epic-wave-held-research.md, Lane 3 top pick). The mechanism is the
@@ -114,6 +114,11 @@ are in `references/immune-tuning-method.md`.
    same idea at practice level — accept small failures continuously so risk surfaces instead
    of accumulating [snippet-only].
 
+**Deliverable.** A dated tuning audit: the period, the per-rule table (firings, autoimmunity rate,
+flood contribution), the layer each rule now routes to, the tolerance entries with evidence counts
+and expiry dates, the memory cells minted, the replay result behind every threshold change, and the
+next audit date. It is the baseline the next audit is scored against.
+
 **Division of labor.** The assistant reads the disposition history and computes per-rule
 autoimmunity rates, drafts the tolerance list with evidence counts, converts postmortems into
 memory-cell rule drafts, and runs the threshold-change replay. The human owns every
@@ -181,6 +186,12 @@ list's home and its expiry convention, and the re-audit cadence. Keep the commit
 structural. Real rule names, thresholds, incident details, and anything client- or
 employer-identifying belong in `your-environment.private.md`, which is git-ignored and
 never committed.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/detection-system-tuning.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/immune-tuning-method.md — the axis with the documented numbers

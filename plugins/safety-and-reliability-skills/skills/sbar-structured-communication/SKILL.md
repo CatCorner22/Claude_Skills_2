@@ -12,6 +12,8 @@ description: >-
   call such as a suspicious approved payment. Triggers: SBAR, escalate this to, structured
   handoff, transition this work, coverage notes, read-back, closed-loop communication, graded
   assertiveness, PACE, speak up to the boss.
+metadata:
+  version: "1.1.0"
 ---
 
 # SBAR structured communication
@@ -29,7 +31,10 @@ description: >-
   instruction — without either silence or insubordination.
 - Not for: tightening general professional prose → see `writing-skills:adams-smart-brevity`
   (that is a writing register; this is a communication protocol). Processing a correction of
-  your own work → see `metacognition-skills:reflective-learner`.
+  your own work → see `metacognition-skills:reflective-learner`. Getting a decision out of a
+  written page — the one-pager with costed options and a signable ask → see
+  `collaboration-skills:executive-briefing`; SBAR is the urgent, usually spoken escalation that
+  must land in one read, and that skill owns the page a reader signs.
 
 ## Do it
 1. **Pick the protocol by the moment.** Escalation → SBAR (step 2). Transferring work to another
@@ -69,9 +74,8 @@ Two failure modes destroy communication under pressure: information dies at tran
 deference silences warnings under an authority gradient. The second one crashed United 173 — the
 flight engineer knew fuel was critically low, hinted instead of challenging, and the aircraft ran
 out of fuel while the captain troubleshot a landing-gear light [snippet-only]. That accident is
-why aviation began training crews in crew resource management (spelled out — in this library the
-three-letter abbreviation means customer relationship management), the lineage PACE and
-closed-loop come from; SBAR came the other way, adapted at Kaiser Permanente by Leonard, Bonacum,
+why aviation began training crews in crew resource management, from which PACE and
+closed-loop descend; SBAR came the other way, adapted at Kaiser Permanente by Leonard, Bonacum,
 and Graham from military and aviation briefing formats into clinical escalation. Each protocol
 attacks one failure mode structurally: SBAR forces the sender to commit to an assessment and a
 timed request instead of dumping data and hoping the listener infers urgency; I-PASS converts a
@@ -95,7 +99,6 @@ the mechanism nulls the result — a pasted SBAR nobody reads back is scenery.
 - Closing the loop in two turns → the mishear survives; the sender's final confirmation is the loop.
 - Starting at Emergency, or never leaving Probe → climb the ladder in order, at the pace the risk demands.
 - Treating the written template as the intervention → enactment is the active ingredient; unread ladders and skipped read-backs deliver nothing.
-- Calling the aviation lineage by its abbreviation → here that means customer relationship management (dental context); write crew resource management out.
 
 ## Tailor to your environment
 Record your real communication paths in `references/your-environment.md`: who escalates to whom
@@ -103,6 +106,12 @@ Record your real communication paths in `references/your-environment.md`: who es
 phases you treat as sterile-cockpit (payment release windows, procedures), and PACE ladders tuned
 to the actual relationships. If it names real people, accounts, or incidents, put it in
 `your-environment.private.md` (git-ignored) instead. Never commit real payment or patient details.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/sbar-structured-communication.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/protocols-and-scripts.md — the four protocols in full, with worked treasury and dental examples, PACE phrase ladders, the sterile-cockpit rule, and the evidence base

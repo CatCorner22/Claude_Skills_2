@@ -95,10 +95,13 @@ always supposed to be routine."). The subject enters late, already surrounded.
   delete it and end on the image above it.
 
 ## 7. Register mixing map
-A serviceable 800-word dispatch: open procedural or in-medias-res (¶1) → invective
-build (¶2–3) → paranoid escalation on one detail (¶4) → artifact interpolation (¶5) →
-counsel aside (¶6) → the wave (¶7) → hot or hollow close (¶8). Vary it; never omit
-the wave; never let two fever passages touch without a flat one between.
+Two registers run hot (invective, paranoid escalation) and two run flat (deadpan
+procedural, the wave). The map alternates them on purpose. A serviceable 800-word
+dispatch: open procedural or in-medias-res (¶1, flat) → invective build (¶2–3, hot) →
+artifact interpolation (¶4, flat) → paranoid escalation on one detail (¶5, hot) →
+counsel aside (¶6, flat) → the wave (¶7) → hot or hollow close (¶8). Vary it; never
+omit the wave; never let two fever passages touch without a flat one between — that
+rule is what this ordering exists to satisfy, so check any variation against it.
 
 ## 8. Heat calibration
 Three settings, chosen by the user's venue (defaults in your-environment.md):

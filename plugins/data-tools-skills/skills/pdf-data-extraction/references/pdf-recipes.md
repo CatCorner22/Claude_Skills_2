@@ -59,9 +59,58 @@ mandatory, and a human review threshold for low-confidence pages is reasonable p
    debit/credit columns → one signed column with the sign convention documented).
 5. Assert: opening + sum(credits) − sum(debits) = closing (per the statement's own figures).
 
+All five steps in one pass — repeated headers dropped, section headings captured, continuation
+lines stitched, parens/trailing-minus negatives signed, and the statement's own arithmetic used
+as the assertion:
+
+```python
+import pdfplumber, pandas as pd, re
+
+HDR = ("Date", "Description", "Amount")
+SECTIONS = {"Deposits", "Withdrawals", "Fees"}
+
+def amount(s):            # "(750.25)" -> -750.25 ; "1,200.00-" -> -1200.0 ;
+                          # "-750.25" -> -750.25 ; "" -> None
+    s = (s or "").replace(",", "").replace("$", "").strip()
+    if not s:
+        return None
+    # Leading "-" must be tested here: the re.sub below strips every "-", so a plain
+    # negative would otherwise come back positive — a sign inversion that reconciles.
+    neg = (s.startswith("(") and s.endswith(")")) or s.startswith("-") or s.endswith("-")
+    return (-1.0 if neg else 1.0) * float(re.sub(r"[()\-]", "", s))
+
+rows, section = [], None
+with pdfplumber.open("statement.pdf") as pdf:
+    for page in pdf.pages:
+        for tbl in page.extract_tables():
+            for r in tbl:
+                date, desc, amt = [(x or "").strip() for x in r[:3]]
+                if (date, desc, amt) == HDR:              # repeated page header
+                    continue
+                if not date and not amt and desc in SECTIONS:
+                    section = desc                        # section heading, not a row
+                elif not date and not amt:
+                    rows[-1]["description"] += " " + desc  # continuation line
+                else:
+                    rows.append({"section": section, "date": date,
+                                 "description": desc, "amount": amount(amt)})
+
+df = pd.DataFrame(rows)
+df["date"] = pd.to_datetime(df["date"], format="%Y-%m-%d")
+
+OPENING, CLOSING = 1000.00, 2835.25       # read off the statement itself, not computed
+assert abs(OPENING + df["amount"].sum() - CLOSING) < 0.005, \
+    f"balance check failed: {OPENING + df['amount'].sum():.2f} != {CLOSING:.2f}"
+```
+
+On a two-page statement whose rows are +2,500.00, +110.50, −750.25, −25.00, this yields four
+typed rows carrying their section, and `1,000.00 + 1,835.25 = 2,835.25` passes. Every failure
+of that assertion is a dropped, doubled, or mis-signed row — find it before shipping the table.
+
 ## Invoice pattern
 1. Header fields by regex on text: invoice number, dates, PO number, supplier
-   (`r"Invoice\s*(?:No|#)\s*[:.]?\s*(\S+)"` style — anchor per supplier layout).
+   (`re.search(r"Invoice\s*(?:No|#)\s*[:.]?\s*(\S+)", text, re.I)` — the `re.I` is not
+   optional: `INVOICE NO:` in all caps is the common case and the pattern misses it without).
 2. Line-item table by the table tools above.
 3. Assert: sum(line totals) = subtotal; subtotal + tax = total. Route failures to a human.
 4. Per-supplier recipes: invoices are template-stable per sender — key the recipe on supplier.

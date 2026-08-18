@@ -9,6 +9,8 @@ description: >-
   types for investigation, design-reviewing an auto-match rule set before go-live, or choosing what
   to test hardest. Triggers: FMEA, failure modes, failure mode and effects analysis, severity
   occurrence detection, action priority, RPN, risk priority number, rank what could go wrong.
+metadata:
+  version: "1.1.0"
 ---
 
 # FMEA (failure mode and effects analysis)
@@ -42,8 +44,7 @@ rating scales, and a worked bank-reconciliation FMEA table.
 3. **Analyze failures.** For every function list its failure **modes** (the ways it fails), chain
    each mode **upstream to its effect** (what the customer/system experiences) and **downstream to
    its cause** (the mechanism that produces it). Pre-draft the *entire* inventory from the process
-   description — the multi-day worksheet grind is what killed FMEA in offices, and drafting is
-   where an LLM collapses that cost so the team's hour goes to correcting, not composing.
+   description, so the team's hour goes to correcting rather than composing.
 4. **Rate Severity, Occurrence, Detection** on the anchored 1–10 scales in the reference (S = how
    bad the effect; O = how often the cause; D = how likely current controls catch it — 10 is
    *worst*, i.e. no control). **Human gate:** drafted ratings are proposals, never final — a
@@ -91,6 +92,12 @@ FMEA, your failure-mode taxonomy (e.g. your reconciliation break types), your an
 scales calibrated to your volumes and materiality, where the register lives, the re-run cadence,
 and who owns rating adjudication and actions. Never commit real transaction or client data —
 sanitize to structure only.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/fmea.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/fmea-method.md — the seven steps expanded, anchored S/O/D scales for office

@@ -45,10 +45,11 @@ DATE | THE WIN | WHAT IT TOOK | THE MOMENT IT ALMOST DIDN'T HAPPEN
 2026-08 | six-skill wave built in one session | 7 parallel agents, 2 truncated specs | the mid-wave branch collision
 ```
 
-Uses: drawn on mid-crisis (read the closest-matching entry aloud); fed to
-`decision-science-skills:reference-class-forecasting` as the personal reference class
-(what deliveries of this shape actually took); reviewed when the 40% audit asks "when
-did we last say this?"
+Uses: drawn on mid-crisis (read the closest-matching entry aloud); reviewed when the 40%
+audit asks "when did we last say this?" NOT a reference class on its own — it logs wins
+only, so `decision-science-skills:reference-class-forecasting` needs the full delivery
+history (slips and abandonments included) to build an outcome distribution. The cookie
+jar is that history's right tail.
 
 ## §4 Callus-schedule patterns
 

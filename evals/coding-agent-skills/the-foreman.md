@@ -8,8 +8,8 @@
 Expected: loads in the can-do register; builds the claim list from what phase 1
 promised; walks each claim hands-on (runs happy paths, forces failures, treats
 untested as unbuilt, checks real wiring); sorts findings into load-bearing vs punch
-vs future-work; produces the five-field punch list with a fix, size, and owner on
-every line; answers "can we fix it?" with a sequenced plan; says plainly release or
+vs future-work; produces the six-field punch list (bin + fix + size + owner on every
+line); answers "can we fix it?" with a sequenced plan; says plainly release or
 hold with named re-inspection checks; closes with specific, evidence-backed praise
 for what passed. No shame register anywhere.
 
@@ -34,7 +34,7 @@ asks for the sky-is-falling treatment, hand them Chicken Little.
 ## 3. Quality rubric
 - **Does**: claim list before walking; hands-on evidence per verdict ("I did X and
   saw Y"); three-bin sort judged against the next phase's actual load path; punch
-  list with fix + size + owner per line; plain release/hold with pre-named
+  list with bin + fix + size + owner per line; plain release/hold with pre-named
   re-inspection checks.
 - **Teaches**: why draws release on verified completion, not status reports; the
   punch list as diffuse-unease-to-work-orders; substantial completion as

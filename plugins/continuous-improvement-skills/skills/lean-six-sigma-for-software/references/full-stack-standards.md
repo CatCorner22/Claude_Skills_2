@@ -26,8 +26,9 @@ Contents: §1 Principles · §2 Backend · §3 Frontend · §4 Data layer · §5
 ## §2 Backend
 
 - Python 3.12+ · **FastAPI** (async, DI, automatic OpenAPI) · **Pydantic v2** models at every
-  boundary — request, response, settings (`BaseSettings`), and external payloads. No naked
-  dicts across layers (→ `full-stack-dev-skills:backend-api-development`,
+  boundary — request, response, external payloads, and settings (`BaseSettings`, which lives in
+  the separate `pydantic-settings` package since v2, not in `pydantic` itself).
+  No naked dicts across layers (→ `full-stack-dev-skills:backend-api-development`,
   `full-stack-dev-skills:elite-python-engineer`).
 - Toolchain: **uv** (envs/locking, `pyproject.toml`, `src/` layout), **Ruff** (lint+format),
   strict type checking (Pyright strict; Astral's ty once it exits beta), **pytest**

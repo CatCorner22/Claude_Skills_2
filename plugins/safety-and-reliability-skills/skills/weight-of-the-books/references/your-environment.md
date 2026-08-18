@@ -4,9 +4,9 @@ Real production volumes that are sensitive stay in `your-environment.private.md`
 (git-ignored); sanitized magnitudes may live here.
 
 ## Standing payloads (measured, with source)
-- Bank feed volumes (day-1 / peak / growth / largest historical file):
-- Statement-line retention horizon (what the staging schema truly carries):
-- Patient/appointment volumes for the dental app (Monday peak, biggest single record):
+- Inbound feed volumes (day-1 / peak / growth rate / largest historical file):
+- Retention horizon (what the staging schema truly carries, not what the policy says):
+- Per-user or per-record volumes for your busiest app (peak day, biggest single record):
 
 ## House safety factors
 - Well-measured, cheap-to-grow loads: <e.g. 1.5×>

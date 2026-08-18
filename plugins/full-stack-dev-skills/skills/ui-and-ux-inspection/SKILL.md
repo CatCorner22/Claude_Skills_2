@@ -14,7 +14,7 @@ description: >-
   accessibility audit, cognitive load, form review, navigation review, simplify a
   workflow, remediation backlog, playwright accessibility tests, heuristic evaluation.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Adapted from the user's ui-and-ux-inspection spec (2026-08-04), itself distilled
     from their report 'Eye Tracking, Web-App Usability, and Cognitive Design'; the
@@ -149,6 +149,12 @@ Fill in references/your-environment.md: target routes, critical processes writte
 outcomes, test-account policy, browser matrix, performance budgets, and the default
 write_permission. Real URLs, credential procedures, or client specifics belong in
 references/your-environment.private.md — git-ignored, never committed.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/ui-and-ux-inspection.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/procedure.md — the full inspection procedure, verbatim from the source spec

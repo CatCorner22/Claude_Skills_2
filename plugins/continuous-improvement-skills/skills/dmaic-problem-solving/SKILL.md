@@ -86,6 +86,12 @@ where you pull baseline data, your measurement-system and significance conventio
 control-chart practice, and who owns tollgate sign-offs. Never commit real customer or transaction data —
 keep it sanitized to structure.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/dmaic-problem-solving.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/phase-toolkit.md — per-phase deliverables, tollgate questions, and the tools each phase uses
 - references/your-environment.md — your CTQs, data sources, and sign-offs (add when supplied)

@@ -64,6 +64,13 @@ ANOVA splits total observed variance into components:
 These are the AIAG MSA-lineage thresholds; the process owner may set stricter ones. The
 threshold choice is a business decision (what's at stake when the metric lies), not a statistic.
 
+One arithmetic consequence worth knowing before you quote both numbers as independent evidence:
+when %GRR is taken against **study** variation, ndc = 1.41·√(1 − %GRR²)/%GRR, so the two criteria
+are the same fact twice — ndc ≥ 5 holds exactly while %GRR ≤ ~27%, and a 30% %GRR necessarily
+returns ndc = 4. The last row therefore only bites independently when %GRR is quoted against
+**tolerance** (where spec width, not part spread, is the denominator). Say which convention you
+used; otherwise "%GRR 28% but ndc 6" is arithmetically impossible and signals a mixed calculation.
+
 ## 4. Attribute agreement studies (pass/fail judgments)
 
 When the "measurement" is a judgment — match / no-match, pass / fail, compliant / exception —

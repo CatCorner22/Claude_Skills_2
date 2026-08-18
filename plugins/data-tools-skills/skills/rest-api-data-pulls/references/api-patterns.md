@@ -3,7 +3,6 @@
 ## Contents
 - Hardened session (retries + backoff)
 - Pagination styles
-- Oracle Fusion query idioms
 - Flattening nested JSON
 - Run logging
 
@@ -16,7 +15,8 @@ from urllib3.util.retry import Retry
 def make_session():
     s = requests.Session()
     retry = Retry(
-        total=5, backoff_factor=2,                 # 2s, 4s, 8s, 16s, 32s
+        total=5, backoff_factor=1,   # sleeps: 0s, 2s, 4s, 8s, 16s — urllib3 does NOT
+                                     # sleep before the first retry
         status_forcelist=[429, 500, 502, 503, 504],
         respect_retry_after_header=True,
         allowed_methods=["GET"],
@@ -26,6 +26,10 @@ def make_session():
     s.headers["Accept"] = "application/json"
     return s
 ```
+- The first retry fires immediately: `Retry.get_backoff_time()` returns 0 until two
+  consecutive failures are in its history. If you need a delay on the first retry,
+  urllib3's `Retry` cannot supply it — wrap the call yourself, or rely on `Retry-After`
+  (`respect_retry_after_header` is already on).
 - Timeouts always (`timeout=60`); a hung request is worse than a failed one.
 - 4xx (except 429): read `r.json()` / `r.text` for the API's diagnostic and fix the request.
 
@@ -38,24 +42,27 @@ def make_session():
 | Link header | `Link: <url>; rel="next"` | until no `next` link |
 Cursor pagination is safest under concurrent writes (no skipped/duplicated rows when data
 shifts between pages); with offset pagination, keep the pull window short and sort stable.
+The offset/`hasMore` loop is in the skill body; the other two styles:
 
-## Oracle Fusion query idioms
+```python
+# Cursor: the body carries the next cursor; absent/null means done.
+rows, cursor = [], None
+while True:
+    r = s.get(url, params={"cursor": cursor} if cursor else {}, timeout=60)
+    r.raise_for_status(); body = r.json()
+    rows += body["items"]
+    cursor = body.get("next_cursor")
+    if not cursor:
+        break
+
+# Link header: requests parses it for you — no header string parsing needed.
+rows, next_url, params = [], url, {"per_page": 100}
+while next_url:
+    r = s.get(next_url, params=params, timeout=60); r.raise_for_status()
+    rows += r.json()
+    next_url = r.links.get("next", {}).get("url")   # already absolute; carries its own query
+    params = None                                   # don't re-append params to the next URL
 ```
-GET /fscmRestApi/resources/11.13.18.05/invoices
-    ?q=InvoiceDate>=2026-06-01;InvoiceDate<2026-07-01;InvoiceAmount>1000
-    &fields=InvoiceId,InvoiceNumber,Supplier,InvoiceAmount,InvoiceDate
-    &orderBy=InvoiceDate:asc
-    &limit=500&offset=0
-    &totalResults=true          # adds totalResults for count reconciliation
-```
-- `;` = AND in `q`; comparison operators and `LIKE` supported per resource docs.
-- Children: `expand=invoiceLines` inlines them, or hit the child URL
-  `.../invoices/{id}/child/invoiceLines` — for volume, prefer separate pulls per level.
-- The integration user needs the same functional data security as a human — missing rows often
-  means missing data access, not a bug.
-- Other useful finance resources: `receivablesInvoices`, `standardReceipts`,
-  `cashTransactions`, `cashBankAccounts`, `ledgerBalances`, `journalBatches` (availability
-  varies by release — check the REST API guide for yours).
 
 ## Flattening nested JSON
 ```python

@@ -11,6 +11,8 @@ description: >-
   to stick — for an exam, a new domain, a standard they keep re-looking-up — or asks to be
   quizzed rather than lectured. Triggers: spaced repetition, retrieval practice, quiz me,
   make this stick, study plan, flashcards, help me remember this, test me on.
+metadata:
+  version: "1.1.0"
 ---
 
 # Spaced retrieval (make it stick)
@@ -29,10 +31,9 @@ questions, withholding answers, grading, and bookkeeping the schedule.
 - The user asks to be quizzed, wants flashcard-style drilling, or wants a study plan with
   actual sessions rather than a reading list.
 - Something keeps being re-looked-up and the user wants it in their head instead.
-- Not for: exam *domain content* — e.g. CTP treasury material and blueprint weighting
-  (archived: `public-sector-treasury-skills:ctp-exam-prep`, restorable from `archive/`);
-  this skill owns the method, not the material. A domain or exam-prep source pairs
-  naturally: run its question bank on this skill's schedule.
+- Not for: exam *domain content* — the syllabus, the blueprint weighting, the facts
+  themselves. This skill owns the method, not the material. A domain or exam-prep source
+  pairs naturally: run its question bank on this skill's schedule.
 - Not for: machine learning in the model-training sense → see the `machine-learning-skills`
   plugin (start at `machine-learning-skills:ml-project-framing`).
 - Not for: building a *performable* skill (debugging, negotiating, writing under pressure) →
@@ -134,6 +135,12 @@ recurrently, exam or certification dates, preferred session length and cadence, 
 question bank and tracker live. Keep committed content structural — actual exam registrations,
 employer-specific material, or anything sensitive goes in `your-environment.private.md`
 (git-ignored), never in a committed file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/spaced-retrieval-learning.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/retrieval-method.md — question-authoring patterns by material type, the

@@ -69,9 +69,20 @@ excluded-country journal is judged on the research, though the venue itself stil
 quality check from `evidence-appraisal.md`.
 
 `scripts/verify_citation.py` reports the affiliation countries it can infer from the metadata and
-flags excluded ones. Affiliation data is often missing or partial in metadata, so **treat the script's
-output as a first pass, not a verdict** — confirm against the paper itself when a source is load-
-bearing.
+flags excluded ones. **Treat its output as a first pass, not a verdict** — confirm against the paper
+itself when a source is load-bearing. Read its provenance line as one of four distinct states:
+
+| State | Means | What you must do |
+|---|---|---|
+| A country, no caveat | Every affiliation string resolved, and they agree | Proceed |
+| `PROVENANCE PARTIAL` | Some affiliations resolved, others named nothing the script knows | Read the paper's corresponding-author affiliation — the unresolved one may be the lead |
+| `PROVENANCE UNRECOGNIZED` | Affiliation data exists but names no country in the script's table | An unlisted country: judge it on the criteria above; **do not** read this as "excluded" |
+| `PROVENANCE UNKNOWN` | No affiliation metadata at all (common for Crossref-only records) | Resolve from the paper itself |
+
+Two limits are structural. The script's country table covers common research countries only, so an
+unlisted country reads as *unrecognized*, never as excluded. And it uses a city name only when the
+affiliation names no country at all — because "Moscow, ID 83844, USA" is the University of Idaho, not
+Russia.
 
 ## Hard cases
 
@@ -137,7 +148,7 @@ The case file's reference list gives each source's country, and the verification
 filter's effect, e.g.:
 
 > Sources screened: 84. Allowed and cited: 27. Excluded by country policy: 9 (7 duplicative of
-> allowed sources and dropped; 2 unique leads listed in Appendix B). Country filter: allowed set per
+> allowed sources and dropped; 2 unique leads listed in Appendix A). Country filter: allowed set per
 > your-environment.md; Russia and China excluded.
 
 Two lines, and the reader knows exactly how the filter shaped the evidence base — including how much

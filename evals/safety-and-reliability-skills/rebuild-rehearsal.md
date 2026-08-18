@@ -47,7 +47,8 @@ loads on an unsealing-mechanics ask, tighten the boundary.
   role with a budget line and a transfer rule; simulated (assistant-driven) and real
   rehearsals alternate, never substitute.
 - **Teaches**: why knowledge survives only when exercised on a schedule shorter than a
-  career, and why 20 years at Ise is a career-derived number, not numerology; why the
+  career, and why generational overlap — not the exact figure — is the property Ise's
+  20-year cycle supplies and the one to scale; why the
   artifact is disposable and the capability is the asset; why only execution by
   someone without the knowledge tests documentation (curse of knowledge), hence
   newcomer-drives; why renewal lapses silently without a funding owner — the Ōnin

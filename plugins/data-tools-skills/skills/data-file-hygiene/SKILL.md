@@ -10,7 +10,7 @@ description: >-
   version data files, sanitize data, anonymize spreadsheet, remove sensitive data, what can I
   commit, data retention files, raw vs processed, safe to share.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Data-file hygiene
@@ -22,6 +22,10 @@ metadata:
   the source contains sensitive data.
 - Not for: cleaning the *contents* of a dataset → see `data-analytics-bi-skills:data-cleaning`.
   For git mechanics → see `coding-agent-skills:git-and-code-review`.
+- Not for: making the analysis itself rerunnable — seeds, pinned environments, a one-command
+  rebuild, and the delete-everything-downstream-of-raw regenerate test → see
+  `data-tools-skills:reproducible-analysis`. This skill owns where files live and what is safe
+  to share; that one owns whether rerunning them reproduces the number.
 
 ## Do it
 1. **Name files so they sort and explain themselves.** Pattern:
@@ -55,7 +59,9 @@ project/
    The assistant drafts names, folder skeletons, and scrub steps; the human owns the sensitivity
    classification and the final call to share.
 5. **Sanitize structurally, not cosmetically.** Replace identifiers with consistent fakes that
-   keep the *shape* (account `021000021-4837291` → `NNNNNNNNN-XXXXXXX` or `BANK-A-ACCT-01`),
+   keep the *shape* (account `999999999-4837291` → `NNNNNNNNN-XXXXXXX` or `BANK-A-ACCT-01` —
+   note the example itself is unassignable: no real routing number begins `99`, which is how an
+   illustration should be built),
    shift or bucket amounts if amounts are the sensitive part, keep the columns/structure so the
    example still teaches. Hiding Excel columns, white text, or deleting rows but keeping the
    pivot cache are *not* sanitization — remake the file cleanly from sanitized data.
@@ -96,6 +102,12 @@ Record your conventions in `references/your-environment.md`: your naming pattern
 skeleton, retention rules, what your organization classifies as sensitive, and the approved
 sharing channels per class. This library's own guardrails (`.gitignore` patterns
 `*.private.md`, `references/*.local.*`) are the model — mirror them in your own projects.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/data-file-hygiene.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/hygiene-checklists.md — scrub checklist by file type; project-folder and archive checklists

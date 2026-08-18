@@ -14,7 +14,7 @@ description: >-
   meeting agenda, run this meeting, too many meetings, this should be an email, action
   items, decision protocol, pre-read, standing meeting audit, fix the agenda.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Meeting design (decisions, not topics)
@@ -135,6 +135,12 @@ published, the default decision rule per forum, your standing-meeting inventory 
 audit cadence, pre-read length norms, and the async channel of record. Anything
 sensitive — named attendees, org dynamics, who actually holds which decision — belongs
 in `your-environment.private.md` (git-ignored), never in a committed file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/meeting-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/meeting-method.md — the decision-list agenda template with the four

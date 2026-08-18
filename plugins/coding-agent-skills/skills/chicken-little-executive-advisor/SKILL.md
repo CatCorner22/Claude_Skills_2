@@ -14,7 +14,7 @@ description: >-
   chicken little, strategic autopsy, operational autopsy, red team my business, blocker
   protocol, stand down.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"
 ---
 
@@ -38,6 +38,10 @@ efficiency.
   project-command doctrine → `continuous-improvement-skills:project-command-center`.
 
 ## Do it
+Session semantics, the evidence bar section by section, the competency stack unpacked, a worked
+client-intake-portal example, and the calibration for when *not* to fire are in
+`references/autopsy-method.md`.
+
 Hold the stance for the whole engagement, and run every evaluation through the fixed
 template below — no regression to a standard, polite assistant while deployed.
 
@@ -57,8 +61,8 @@ DMAIC the fix) · statistics and logic (base rates, failure likelihood, dismantl
 and survivorship fallacies) · UI/UX and human emotion (where cognitive load, anxiety,
 confusion, or fatigue causes drop-off or error) · path dependency (map current state →
 future state; flag lock-in choices that make reversal prohibitively expensive) · MSCD
-technical writing (destroy ambiguity — syntactic, semantic, contextual; contain and
-explicitly define intentional vagueness).
+technical writing (Adams's *A Manual of Style for Contract Drafting*: destroy ambiguity —
+syntactic, semantic, contextual; contain and explicitly define intentional vagueness).
 
 **The output template (use this exact format for all evaluations):**
 
@@ -130,6 +134,12 @@ guaranteed by topology.
 Record in `references/your-environment.md`: your tool stack (so the AI-leverage intercept
 names real alternatives), your organization's lock-in sensitivities, and any standing
 constraints the sentinel should assume without re-asking.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little-executive-advisor.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/autopsy-method.md — session semantics, the evidence bar per template

@@ -3,10 +3,10 @@ name: tabletop-wargaming
 description: >-
   Designs and runs a multi-party tabletop exercise with an adversary and adjudication, in
   the lineage Kriegsspiel → Army course-of-action analysis (action / reaction /
-  counteraction) → CISA-style tabletop packages: define objectives and scenario (a BEC
-  payment-fraud drill, a bank-connectivity outage on payroll day, ransomware during
-  close), write the blue team's commander's intent (purpose, key tasks, end state),
-  assign blue players, a red cell, and a white-cell facilitator/adjudicator, play turns
+  counteraction) → CISA-style tabletop packages: define objectives and scenario (an
+  impersonated urgent instruction, a critical-vendor outage on a deadline day,
+  ransomware in a freeze), write the blue team's commander's intent (purpose, key tasks,
+  end state), assign blue players, a red cell, and a white-cell adjudicator, play turns
   driven by pre-scripted and adaptive injects, adjudicate plausibility, capture decisions
   and gaps, and hand off to an after-action review. The LLM plays red and white cell
   strictly as a scenario generator — humans adjudicate every consequential outcome. Use
@@ -14,18 +14,20 @@ description: >-
   adaptive adversary. Triggers: tabletop exercise, wargame the plan, run a drill,
   incident simulation, inject, BCP exercise, commander's intent.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Tabletop wargaming (with commander's intent)
 
 ## When to use
-- Rehearsing a plan against an *adaptive* opposition or environment: a business-email-
-  compromise payment-fraud drill (pair with
+- Rehearsing a plan against an *adaptive* opposition or environment: an out-of-band
+  urgent instruction from a named authority, timed against the approver's absence — a
+  payment release, an access grant, a data export (pair with
   `safety-and-reliability-skills:bowtie-barrier-analysis` — it maps the barriers the
-  drill exercises), a bank-connectivity outage on payroll day
+  drill exercises); a critical-vendor connectivity outage on a hard-deadline day
   (`safety-and-reliability-skills:break-glass-playbooks` arms the contingency path the
-  drill tests), ransomware landing mid-close, a cutover that meets a hostile Monday.
+  drill tests); ransomware landing during a period-close or release freeze; a cutover
+  that meets a hostile Monday.
 - Testing whether people two levels down can act when the plan breaks — which is what
   commander's intent exists for (see `references/commanders-intent.md`).
 - As the multi-party procedure that
@@ -45,9 +47,11 @@ metadata:
 ## Do it
 1. **Define objectives and scenario.** What must the exercise reveal (decision gaps, call
    trees, authority limits, detection lag)? Pick a scenario that matters: three
-   high-yield starters are a BEC payment-fraud attempt, a bank-connectivity outage on
-   payroll day, and ransomware during month-end close — see `references/exercise-design.md`
-   for the library. Ground the scenario in the real process documents, not generic templates.
+   high-yield starters, portable to any organization, are the impersonated urgent
+   instruction, the critical-vendor outage on a hard-deadline day, and ransomware during
+   a close or freeze — each with a worked payments-operations instantiation in
+   `references/exercise-design.md`. Ground the scenario in your own process documents,
+   not generic templates.
 2. **Write the blue team's commander's intent** — purpose, key tasks, end state — so
    players can act without further orders when the plan breaks. Apply the test: could
    someone achieve the intent while violating the plan's specifics? If not, it is a task
@@ -101,8 +105,8 @@ tireless, various, and grounded in your actual documents.
   consequential outcome; the model generates scenario and injects only.
 - A sycophantic red cell that folds each turn → explicit anti-agreement prompting, and
   check red's moves against the scenario bounds.
-- Generic injects from templates → ground them in your real payment flow, bank portals,
-  and close calendar, or players learn nothing about *their* process.
+- Generic injects from templates → ground them in your real approval flow, vendor
+  portals, and deadline calendar, or players learn nothing about *their* process.
 - Commander's intent that is a task list → apply the violate-the-plan test; rewrite as
   purpose / key tasks / end state.
 - Skipping the debrief → the exercise's value lands in the AAR; schedule it with the
@@ -111,11 +115,20 @@ tireless, various, and grounded in your actual documents.
   validity claims need the fixed-criteria discipline in project-command-center.
 
 ## Tailor to your environment
-Record in `references/your-environment.md`: your scenario priorities, the real process
-documents injects must be grounded in, role rosters and authority limits, escalation
-bounds for the red cell, and where exercise logs are filed. Anything naming real
-accounts, banks, people, or live controls goes in `your-environment.private.md`
-(git-ignored) — an exercise file that leaks real payment controls is itself an incident.
+Wire in your current role here — roles, turns, injects, and adjudication are
+domain-neutral, and the same machinery rehearses a payments team, a clinic, a newsroom,
+or a release train. Record in `references/your-environment.md`: your scenario
+priorities, the real process documents injects must be grounded in, role rosters and
+authority limits, escalation bounds for the red cell, and where exercise logs are filed.
+Anything naming real accounts, counterparties, people, or live controls goes in
+`your-environment.private.md` (git-ignored) — an exercise file that leaks real controls
+is itself an incident.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/tabletop-wargaming.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/exercise-design.md — scenario library (incl. three high-yield starters),

@@ -161,9 +161,10 @@ Each entry: the failure, a counted example, and the one-line inoculation.
 accurate in the direction quoted, yet a positive means only 9.2% — because the base
 rate is 1%. *Inoculation: "How common is this before I look at the evidence?"*
 
-**Gambler's fallacy.** Expecting deviations to correct. After 5 heads,
-P(heads) = 1/2 still: P(5 heads) = 1/32 ≈ 3.1% is a statement about the *future*
-sequence from the start, not about the next flip once 4 heads are sunk. The long
+**Gambler's fallacy.** Expecting deviations to correct. After four heads in a row,
+P(heads on the next flip) = 1/2 still. The tempting figure — P(five heads in a row) =
+(1/2)⁵ = 1/32 ≈ 3.1% — is a statement about a *five-flip future* seen from before the
+first flip, not about the fifth flip once four heads are already sunk. The long
 run levels out by swamping — 10 extra heads vanish inside 10,000 further flips —
 not by tails being owed. *Inoculation: "The coin has no memory; the law of averages
 works by dilution, not correction."*

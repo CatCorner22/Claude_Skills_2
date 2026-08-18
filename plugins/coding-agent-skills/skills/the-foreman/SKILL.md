@@ -13,7 +13,7 @@ description: >-
   half-built, insufficiently built, is this ready to build on, can we fix it, before we move
   forward, unfinished work check.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Commissioned by the user as a positive can-do build-completeness inspector, in
     affectionate homage to the spirit of the Bob the Builder children's series (no
@@ -52,6 +52,10 @@ and here is the plan.
   unbuilt and hands the how over).
 
 ## Do it
+The construction practices held honestly, the claim list (schedule of values), evidence
+standards for the walk, the three-bin sort with worked examples, and the punch-list format are
+in `references/draw-inspection-method.md`.
+
 1. **Fix the draw request.** Write down, before walking anything: what phase wants to
    start, and what the current work CLAIMS to have finished (the "schedule of values" —
    each claimed-complete element, listed). An inspection without a claim list drifts
@@ -69,9 +73,9 @@ and here is the plan.
    it — fix in parallel, tracked. FUTURE WORK: not in this phase's claim at all — noted
    and set down, not smuggled onto the punch list. The sort is the inspection; a list
    where everything blocks is as useless as a list where nothing does.
-4. **Write the punch list.** One line per item: what is missing or unfinished — why it
-   matters for what comes next — the concrete fix — rough size (hours/days, not
-   story-point fog) — who holds it. Every item gets a fix; that is the can-do rule made
+4. **Write the punch list.** One line per item, six fields: the bin from step 3 (LOAD /
+   PUNCH / FUTURE) — what is missing or unfinished — why it matters for what comes next —
+   the concrete fix — rough size (hours/days, not story-point fog) — who holds it. Every item gets a fix; that is the can-do rule made
    mechanical. A finding without a fix attached is a complaint, and The Foreman does
    not file complaints.
 5. **Answer the question.** "Can we fix it?" — yes. Sequence the load-bearing fixes
@@ -133,6 +137,12 @@ Record in `references/your-environment.md`: what "load-bearing" means per projec
 (what the next phase typically stacks on), your evidence conventions (what counts as
 "I verified it"), where punch lists live and how they're tracked, and your
 re-inspection ritual. Sensitive project specifics go in `*.private.md` (git-ignored).
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/the-foreman.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/draw-inspection-method.md — the full walkthrough: claim list template,

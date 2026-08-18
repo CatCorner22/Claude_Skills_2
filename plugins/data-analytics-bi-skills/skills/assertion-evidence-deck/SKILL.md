@@ -10,6 +10,8 @@ description: >-
   build a deck, make slides, PowerPoint, briefing deck, leadership update, readout, TED-style
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
+metadata:
+  version: "1.1.0"
 ---
 
 # Assertion-evidence deck
@@ -23,9 +25,8 @@ one claim in a full sentence and proves it with a picture; every number carries 
 - Building a "TED-style" technical talk with sentence-headline slides instead of bullet dumps.
 - Auditing an existing `.pptx` against the assertion-evidence checklist.
 - Not for: performing the underlying data analysis → use the data-analytics/statistics skills; the
-  Oracle CM configuration diagnosis → the user-environment `oracle-cm-config-review` skill where
-  installed (archived: `oracle-fusion-finance-skills:fusion-cm-production-troubleshooting`, restorable
-  from `archive/`); XML-level `.pptx` editing the builder can't express → the `pptx`
+  ERP configuration diagnosis → whatever platform-specific skill your own environment carries;
+  XML-level `.pptx` editing the builder can't express → the `pptx`
   skill. This skill turns *verified* output into slides; run the analysis under its own skill first.
 - Not for: getting a decision from one written page — the answer-first decision memo (BLUF, costed
   options, an ask the reader can sign) → `collaboration-skills:executive-briefing`. That skill owns
@@ -88,8 +89,8 @@ claim — distribution → chart, sequence → flow diagram, magnitude → 2–4
 labeled diagram. Over ~40 body words means the claim is too big — split the slide.
 
 **Stage 5 — Build the file.** Prefer **Path A**, the bundled builder: write a deck spec as JSON and
-run `python scripts/build_deck.py deck_spec.json -o output.pptx` (neutral palette by default;
-`--brand ut` only to match a legacy UT-branded deck). It encodes the geometry, typography, and
+run `python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py" deck_spec.json -o output.pptx` (neutral palette by default;
+`--brand warm-accent` to match that brand instead). It encodes the geometry, typography, and
 colors in `references/design-tokens.md`, so
 slides come out compliant, and it rejects a headline that busts the two-line budget rather than
 overflowing it. `assets/deck_spec_example.json` is a worked example; `--schema` prints the field
@@ -99,11 +100,13 @@ text keyed to that template. Use Path B when the user asks for the template by n
 the builder can't express, use the `pptx` skill and keep this skill's geometry and evidence rules.
 
 **Stage 6 — Audit the file.** Never deliver a deck you have not seen rendered. Lint it —
-`python scripts/ae_lint.py output.pptx` (reports headline violations, bullet characters, word-count
+`python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py" output.pptx` (reports headline violations, bullet characters, word-count
 overruns, banned formatting, missing source tags, font problems; exits non-zero on error) — then
-**look at every slide**: convert to images and check for overflow, overlap, colliding source tags,
-and low contrast, which the linter cannot see. Fix the generator and rebuild; do not hand-patch the
-packed XML.
+**look at every slide**: `soffice --headless --convert-to pdf output.pptx` and read the PDF (or
+`pdftoppm -png` it), checking for overflow, overlap, colliding source tags, and low contrast, which
+the linter cannot see. If no renderer is installed, say so in the handoff — "linted clean; not
+visually verified" — rather than implying you looked. Fix the generator and rebuild; do not
+hand-patch the packed XML.
 
 **Stage 7 — Deliver.** Hand over three things together: the **deck** (dated with the build date),
 the **source ledger** (claim-to-source table), and the **gap list** (what the deck could not
@@ -140,17 +143,27 @@ longer tell which claims were checked. Prefer the honest gap.
 ## Tailor to your environment
 Record your setup in `references/your-environment.md` (keep real figures, client names, and audit
 numbers in `your-environment.private.md`, which is git-ignored). Capture your audiences and the
-decisions each deck serves, your brand palette and fonts (the tokens ship with a neutral default;
-the UT System palette is preserved as the `ut` option), the artifacts your figures come from, and
-any house deck conventions.
+decisions each deck serves, your brand palette and fonts (the tokens ship with a neutral default,
+plus one `warm-accent` pack kept as a worked accessibility case), the artifacts your figures come
+from, and any house deck conventions. Whatever palette you record, run its accent through the
+contrast arithmetic in `references/design-tokens.md` before trusting it as text — a brand-sanctioned
+color is not automatically an accessible one.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/assertion-evidence-deck.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/ae-method.md — full checklist, evidence-type guide, failure modes, before/after examples
-- references/design-tokens.md — verified geometry and typography, neutral palette default, legacy UT System brand pack, font-substitution rule
+- references/design-tokens.md — verified geometry and typography, neutral palette default, the optional warm-accent brand pack and its WCAG failure, font-substitution rule
 - references/evidence-discipline.md — claim tiers, source-ledger format, source-tag wording, gap language
-- references/oracle-cm-domain.md — legacy domain reference (Oracle CM vocabulary, processing chain, where live figures live) — read only if you work that system
 - references/your-environment.md — your audiences, brand, and artifacts (add when supplied)
 
 ## Scripts
-- `scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|ut` and `--font` control theme.
-- `scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; exits non-zero on error.
+> Paths use `${CLAUDE_PLUGIN_ROOT}` so they resolve from **any** working directory once the
+> plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
+> repo, which is not where a user runs these.
+- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|warm-accent` and `--font` control theme.
+- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; exits non-zero on error.

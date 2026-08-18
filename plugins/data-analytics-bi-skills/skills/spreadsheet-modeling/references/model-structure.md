@@ -126,9 +126,9 @@ utilization lands anywhere between 55% and 75%.
 
 **Calculations sheet** — one row per line item, one column per month, every row filled
 across unchanged:
-- `Headcount`: Jan–Mar `=Headcount_Start`; Apr+ `=Headcount_Start+Hires_New` — via a
-  start-month flag row (`=IF(month>=Hire_Month,1,0)`) so the formula is still identical
-  across columns.
+- `Hire_Flag` (its own row): `=IF(month>=Hire_Month,1,0)` — 0 for Jan–Mar, 1 from Apr.
+- `Headcount`: `=Headcount_Start + Hires_New*Hire_Flag` — one formula, filled across
+  unchanged, giving 8 through March and 10 from April.
 - `Cost`: `=Headcount * Salary_Annual/12 * (1+Overhead_Rate)`.
 - `Billable_Hours`: `=Headcount * Hours_Per_Month * Util_Base`.
 - `Revenue`: `=Billable_Hours * Bill_Rate`.

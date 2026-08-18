@@ -9,6 +9,8 @@ description: >-
   outcomes, or high uncertainty are detected. Triggers: reflect, retrospective, lessons learned,
   what went wrong, post-mortem, error analysis, self-review, you got this wrong, that's not what
   I meant, feedback, correction, improve your approach, do better next time.
+metadata:
+  version: "1.1.0"
 ---
 
 # Reflective learner
@@ -22,6 +24,9 @@ description: >-
   `metacognition-skills:dynamic-analysis-engine`; this skill analyzes *the work itself*.
 
 ## Do it
+The full reflection template, the weakness categories, and a worked example are in
+`references/reflection-template.md`.
+
 1. **Produce a structured reflection** (concise — in a memory note or artifact, not sprawling
    into the conversation). Cover, in order:
    - **Situation** — what was attempted and why.
@@ -48,7 +53,6 @@ description: >-
 5. **Compose:** persist lessons through the hierarchical memory manager; hand recurring,
    validated insights to `metacognition-skills:knowledge-crystallizer` for permanent
    integration; seek user sign-off before major strategy shifts.
-6. The full reflection template is in `references/reflection-template.md`.
 
 ## Why / learn
 Learning that stays implicit doesn't compound: an error acknowledged in passing gets repeated,
@@ -73,11 +77,18 @@ change nothing.
 - Letting reflections bloat the conversation → keep them concise; store detail externally.
 
 ## Tailor to your environment
-Record in `references/your-environment.md` what *your* feedback loop looks like: how you prefer
-corrections acknowledged (brief vs. explicit), which recurring quality bars matter to you (e.g.
-"always tie out totals", "cite the Oracle doc"), where lessons should be stored, and any standing
-avoidance rules. Keep anything sensitive in `your-environment.private.md` (git-ignored); never
-commit real data.
+Wire in your current role here — the cycle is role-portable. Record in
+`references/your-environment.md` what *your* feedback loop looks like: how you prefer corrections
+acknowledged (brief vs. explicit), which recurring quality bars matter to you (an analyst's "tie
+out every total", an attorney's "cite the controlling authority", a developer's "tests green
+before done"), where lessons should be stored, and any standing avoidance rules. Keep anything
+sensitive in `your-environment.private.md` (git-ignored); never commit real data.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/reflective-learner.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/reflection-template.md — the full reflection structure with a worked example

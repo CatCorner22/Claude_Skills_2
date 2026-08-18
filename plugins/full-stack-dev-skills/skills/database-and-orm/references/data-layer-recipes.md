@@ -209,7 +209,7 @@ many-to-one (single JOIN); raw column selects for list screens.
 Keep them as tests. Each takes minutes and each answers a question the schema cannot.
 ```python
 def test_fk_is_actually_enforced(db):
-    db.add(Invoice(customer_id=10 ** 9, number="ORPHAN", amount_cents=1))
+    db.add(Invoice(customer_id=10 ** 9, amount_cents=1))   # a customer id that cannot exist
     with pytest.raises(IntegrityError):
         db.flush()          # passes only if the engine enforces the FK
 

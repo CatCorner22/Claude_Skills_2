@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Reliability engineering
@@ -136,8 +136,8 @@ leave the *qualitative* claim (wear-out is real) standing while destroying the *
 is where reliability math causes harm rather than preventing it.
 
 The system formulas teach the structural lessons. Series multiplication is why long chains
-disappoint — a feed that traverses four 99%-class steps is a ~98.9% chain, and no step "feels"
-like the problem. Both formulas rest on independence, in opposite directions: in series,
+disappoint — a feed whose four steps run at 99.5%, 99.9%, 99.7% and 99.8% is a 98.90% chain, and
+no step "feels" like the problem. Both formulas rest on independence, in opposite directions: in series,
 correlated outages overlap and the product is the pessimistic end of the range (safe to plan
 with); in parallel the product is the whole claim, so the moment both paths share a credential, a
 patch cycle, or an endpoint the joint failure probability is the common cause's, not the product's
@@ -183,6 +183,12 @@ time), your uptime commitments and maintenance windows, whether each SLO is writ
 event-based, your MTTR convention (when the clock starts and stops), and known common-cause
 couplings between "redundant" paths. Real incident details, system names, or account data go in
 `your-environment.private.md` (git-ignored). Never commit real client or payment data.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/reliability-engineering.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/reliability-math.md — the repairable/non-repairable split, Weibull formulas with fit

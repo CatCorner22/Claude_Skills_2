@@ -7,6 +7,8 @@ description: >-
   a new skill, editing an existing one, reviewing a skill for quality, or setting up a
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
+metadata:
+  version: "1.1.0"
 ---
 
 # Writing Agent Skills (house standard)
@@ -32,8 +34,12 @@ plugins/<plugin>/skills/<skill-name>/
 ├── assets/*              # optional, templates/boilerplate used in output
 └── scripts/*             # optional, executed (never read into context)
 ```
-Start by copying the template: `cp assets/SKILL.template.md plugins/<plugin>/skills/<name>/SKILL.md`
-(the template lives in this skill's `assets/`).
+Start by copying the template (run from the repo root; the source is addressed from the plugin
+root, per §4b below):
+```
+cp "${CLAUDE_PLUGIN_ROOT}/skills/writing-agent-skills/assets/SKILL.template.md" \
+   plugins/<plugin>/skills/<name>/SKILL.md
+```
 
 ### 2. Write compliant frontmatter
 ```yaml
@@ -43,7 +49,12 @@ description: >-
   <what it does> — use when <trigger situations>. Triggers: <phrases the user says>.
 ---
 ```
-Hard rules (validated by `scripts/validate.sh`):
+Hard rules (the `name` shape and the 1024-char cap are enforced by `scripts/validate.sh`; third
+person, the `Triggers:` ending, and leading with the primary use case are enforced by review — see
+`references/review-checklist.md`) — the full field reference, the optional fields,
+the `metadata` house convention, and the measured description-budget reality are in
+`references/frontmatter-rules.md`; read it before your first skill and whenever you reach for a
+field not listed here:
 - `name`: 1–64 chars, lowercase letters/digits/hyphens only, no leading/trailing/consecutive
   hyphens, **must equal the folder name**, must **not** contain the words `anthropic` or `claude`.
 - `description`: non-empty, **≤ 1024 characters**, written in the **third person**, states
@@ -72,6 +83,24 @@ Every skill uses these H2 sections, in this order (omit only `scripts` when none
 - Add a short TOC to any reference file over ~100 lines so partial reads still reveal scope.
 - Use forward slashes in every path.
 
+### 4b. Write every path for the *installed* shape, not this repo
+A skill is authored in this repo but runs from a plugin cache, with the user's own project as the
+working directory. So **any path a skill tells the user to run or read must be addressed from
+`${CLAUDE_PLUGIN_ROOT}`** — the plugin's installed root — never relative to the marketplace repo:
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/skills/<skill-name>/scripts/<script>.py" <args>
+```
+
+A bare `python scripts/thing.py` works for you and is a guaranteed file-not-found for everyone
+else. The same applies to anything you tell the user to *write*: `references/your-environment.md`
+lives inside the plugin cache, so a `/plugin marketplace update` can discard it — say so, and
+prefer having the user keep their real specifics in their own project.
+
+This rule exists because every quality gate in this repo — `validate.sh`, `gen-catalog.py`, every
+review — operates on the *repository*, and the repository is not the product. Nothing here can
+see the installed artifact, so path correctness is on the author.
+
 ### 5. Add the tailoring hook (privacy-safe)
 Skills in this library are domain-neutral by design, and fit the user's real environment through
 one file rather than through hard-coded domain content. Name the *kind* of artifact the skill
@@ -79,7 +108,10 @@ attaches to, not one employer's version of it — a recurring report and its sou
 matter or case intake, an operational runbook, a service and its deploy path. In `## Tailor to
 your environment`, instruct the user to drop their specifics into
 `references/your-environment.md`, framed "wire in your current role here" so the skill survives
-a job change. **Never commit raw real data.** Commit only sanitized, structural examples. Raw
+a job change. **Then tell them to keep the filled-in copy outside the plugin** — the shipped file is
+a template living in the plugin cache, which `/plugin marketplace update` can overwrite; the house
+wording points them at `.claude/skills-env/<skill-name>.md` in their own project. Every skill in this
+library carries that paragraph; copy it verbatim. **Never commit raw real data.** Commit only sanitized, structural examples. Raw
 artifacts go in files matching `.gitignore` patterns (`*.private.md`,
 `references/*.local.*`).
 
@@ -94,9 +126,15 @@ Create `evals/<plugin>/<skill>.md` with at least three scenarios:
 - Add an entry to `.claude-plugin/marketplace.json` (`name`, `source: "./plugins/<plugin>"`,
   `description`, `category`). Do not put `version` in both files — `plugin.json` wins.
 
-### 8. Validate
+### 8. Validate, then work the definition-of-done checklist
 Run `bash scripts/validate.sh` from the repo root, then `claude plugin validate plugins/<plugin>`.
-Fix every warning before committing.
+Fix every warning before committing. **Then open `references/review-checklist.md` and work it
+line by line** — the validator only checks what a script can see (frontmatter shape, section
+presence, cross-link resolution). The checklist carries the guards that a script cannot: the
+arithmetic-verification pass on every worked example, the reciprocal-link pass on the *older*
+side of every new seam, the trigger-collision scan, and the fresh-session trigger test. Every
+defect class that has survived a review in this library's history was one the validator was
+structurally unable to catch, and is now a line on that checklist.
 
 ## Why / learn
 Skills work by **progressive disclosure**: at startup Claude only sees each skill's `name` +
@@ -107,9 +145,12 @@ body persists in context across the turn, so every line is a recurring cost: con
 well-ordered instructions beat exhaustive ones.
 
 **Know what the listing actually costs, because it decides whether your skill is findable at
-all.** Measured in this library (2026-08-11): 121 skills' names + descriptions come to ~107,700
-characters ≈ **29,000 tokens ≈ 14.6% of a 200K context**, at a mean of ~870 chars (~235 tokens)
-per description — not the ~100 tokens per skill an earlier version of this section claimed. The
+all.** Measured in this library by `python3 scripts/measure-listing-cost.py`: 121 skills' names +
+descriptions come to **109,662 characters ≈ 29,638 tokens ≈ 14.8% of a 200K context**, at a mean of
+~885 chars (~240 tokens) per description — not the ~100 tokens per skill an earlier version of this section claimed.
+(Token figures here are an estimate at ~3.7 characters/token, stated because the number is quoted
+elsewhere in the repo and an undisclosed divisor is how the first version of this paragraph came to
+disagree with `README.md`. Count with your provider's tokenizer if the exact figure matters.) The
 `Triggers:` lists alone are 22% of that spend. This has two consequences worth designing around:
 
 - **The listing degrades before it errors.** Observed at roughly 100 installed skills: the
@@ -124,9 +165,10 @@ per description — not the ~100 tokens per skill an earlier version of this sec
 
 The practical lever is **skills per install, not characters per description**. Trimming a
 description from 1000 to 900 chars saves ~27 tokens; not installing a 15-skill plugin saves
-~3,900. Keep descriptions tight because a tight one routes better, not because trimming solves
-the budget. The fixed "do + teach" order exists
-so that each skill reliably both produces the deliverable and leaves you understanding it — the
+~3,700 (15 × the 910-char name+description mean, at 3.7 chars/token). Keep descriptions tight
+because a tight one routes better, not because trimming solves the budget. The fixed "do + teach"
+order exists so that each skill reliably both produces the deliverable and leaves you
+understanding it — the
 whole point of this library. Setting *degrees of freedom* to match fragility (loose prose vs. exact
 scripts) keeps Claude accurate on the steps that break easily while staying flexible where judgment
 helps.
@@ -145,10 +187,18 @@ If you adopt house conventions of your own (naming, extra sections), record them
 `references/your-environment.md` here so future skills follow them. Keep this meta-skill and the
 `assets/SKILL.template.md` in sync — the template must always reflect the current standard.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/writing-agent-skills.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - assets/SKILL.template.md — copy this to start any new skill
-- references/frontmatter-rules.md — full frontmatter field reference and constraints
-- references/review-checklist.md — the definition-of-done checklist for a finished skill
+- references/frontmatter-rules.md — full frontmatter field reference and constraints (read at §2)
+- references/review-checklist.md — the definition-of-done checklist for a finished skill (worked at §8)
+- references/your-environment.md — your own house conventions: naming, provenance marks,
+  versioning, review depth by skill type (fill in; the `.private.md` twin is git-ignored)
 
 ## Scripts
 - `scripts/validate.sh` (at the repo root, not in this skill) lints every skill's structure and frontmatter.

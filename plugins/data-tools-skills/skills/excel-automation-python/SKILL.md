@@ -116,6 +116,12 @@ Note your recurring workbooks in `references/your-environment.md` (real files un
 contracts, and house number formats. Commit structure and sanitized examples only — **never a
 real report with live figures**.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/excel-automation-python.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/excel-recipes.md — layer choice, defensive reading, tables, charts, conditional
   formatting, protection, performance, verification harness, and a worked end-to-end example

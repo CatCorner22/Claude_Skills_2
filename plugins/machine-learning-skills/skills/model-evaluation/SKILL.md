@@ -12,7 +12,7 @@ description: >-
   RMSE, R2, data leakage, train test split, confusion matrix, threshold, calibration, subgroup
   performance, slice evaluation, label quality.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Model evaluation
@@ -22,6 +22,10 @@ metadata:
 - Diagnosing overfitting/underfitting, choosing a decision threshold, or reading a confusion matrix.
 - Running the leakage checklist on any evaluation (routinely, not only when results look "too good"), putting an interval on the reported metric, breaking performance down by slice, or comparing a model to its baseline.
 - Not for: framing the target and picking the decision metric conceptually up front → see `machine-learning-skills:ml-project-framing`. For time-series-specific backtesting mechanics → see `machine-learning-skills:time-series-forecasting`. For qualifying the label/judgment process the metric is scored against — inter-rater agreement, attribute-agreement studies, Gage R&R → see `continuous-improvement-skills:measurement-systems-analysis`.
+- Not for: what happens after the model ships — serving it, versioning responses, and
+  detecting training/serving skew or drift in production → see
+  `full-stack-dev-skills:ml-in-production` (a separate plugin). Offline metrics say whether
+  it *was* good; that skill says whether it still is.
 
 ## Do it
 1. **Split before you look at anything.** Carve out a **test set** and don't touch it until the very end;
@@ -152,6 +156,12 @@ cares about, your baseline, the slices your decision touches, and where your lab
 then maps its generic guidance onto your problem. For the conceptual choice of metric during problem
 framing, start at `machine-learning-skills:ml-project-framing`; to qualify the labelling or judging process
 itself, run `continuous-improvement-skills:measurement-systems-analysis`.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/model-evaluation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/metrics-and-leakage.md — metric definitions, ROC-vs-PR with the prevalence arithmetic, calibration, threshold selection on validation, confidence intervals on a metric, slice evaluation, label quality, and the leakage checklist

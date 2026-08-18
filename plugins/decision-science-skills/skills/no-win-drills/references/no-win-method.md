@@ -8,11 +8,15 @@ Contents:
 5. [Worked example — deadline vs quality vs scope](#5-worked-example--deadline-vs-quality-vs-scope)
 
 Provenance: the method operationalizes documented practice — no-win patient-death
-simulation in emergency-medicine education [peer-reviewed, Annals of Emergency
-Medicine], EMS Kobayashi-Maru stress-training [practitioner], and sanctioned
-adversarial reframing in cyber education [peer-reviewed, Conti & Caroland, IEEE
-Security & Privacy]. The drill mechanics below are the house implementation of those
-sources' mechanisms, not claims from the sources themselves.
+simulation in emergency-medicine education (a randomized pilot at the University of
+Maryland MASTRI Center, reported as a research-forum abstract in *Annals of Emergency
+Medicine*, 2014: residents in the death arm reported feeling more prepared one month
+later, with no evident harm; small n, self-reported outcome, and the wider simulated-death
+literature is mixed — treat it as suggestive), EMS Kobayashi-Maru stress-training
+[practitioner], and sanctioned adversarial reframing in cyber education [peer-reviewed,
+Conti & Caroland, "Embracing the Kobayashi Maru," IEEE Security & Privacy, 2011]. The
+drill mechanics below are the house implementation of those sources' mechanisms, not
+claims from the sources themselves.
 
 ## 1. Design rules — closing every exit honestly
 

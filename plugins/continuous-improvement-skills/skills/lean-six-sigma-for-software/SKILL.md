@@ -12,6 +12,8 @@ description: >-
   software, Toyota production system for software, Deming for software, standardize and
   measure, begin with the end in mind, adversarial release gauntlet, WCAG-conformant app
   build, stability and redundancy, co-design the UI.
+metadata:
+  version: "1.1.0"
 ---
 
 # Lean Six Sigma for software
@@ -22,8 +24,8 @@ description: >-
 - Improving an existing software process (slow releases, defect leakage, abandoned features)
   with DMAIC instead of vibes.
 - Making a product's UI feel native to users of a reference product — vocabulary, fields, and
-  patterns synced via the sync audit in step 3. (A fully worked example — a dental-PMS
-  design-language map — is archived: `continuous-improvement-skills:curve-hero-design-language`,
+  patterns synced via the sync audit in step 3. (A fully worked design-language map for one
+  such product is archived: `continuous-improvement-skills:curve-hero-design-language`,
   restorable from `archive/skills/`.)
 - Installing engineering standards: accessibility, stability/redundancy, full-stack quality
   gates, adversarial test gauntlets.
@@ -136,6 +138,12 @@ your value-stream baseline and where its control charts live, your stack and gol
 your co-design panel, your SLOs and redundancy tier, and your adversarial cadence. Keep
 anything sensitive in `your-environment.private.md` (git-ignored); never commit real client
 or patient data.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/lean-six-sigma-for-software.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/deming-and-tps.md — Deming's system (SoPK, PDSA, variation, the points that matter) and the TPS→software translation table

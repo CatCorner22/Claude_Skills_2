@@ -33,26 +33,28 @@ Installed skills are namespaced, e.g. `decision-science-skills:pre-mortem`. Type
 
 **Install the plugins you will actually use, not all fourteen.** Every installed skill's `name` and
 `description` sit in the system prompt for the whole session, whether or not you use it. Measured
-2026-08-17 across all 121 skills: **110,081 characters ≈ 29,750 tokens ≈ 14.9% of a 200K context**,
-before you have asked anything.
+with `python3 scripts/measure-listing-cost.py` across all 121 skills: **109,662 characters ≈
+29,638 tokens ≈ 14.8% of a 200K context** (tokens estimated at ~3.7 chars/token), before you
+have asked anything. Re-run that script after any description change — this figure went stale
+within a day of first being measured by hand.
 
 | Plugin | Skills | ~Tokens | % of 200K |
-| --- | --- | --- | --- |
-| `coding-agent-skills` | 20 | 4,769 | 2.38% |
+| --- | ---: | ---: | ---: |
+| `coding-agent-skills` | 20 | 4,682 | 2.34% |
 | `continuous-improvement-skills` | 16 | 4,038 | 2.02% |
 | `decision-science-skills` | 15 | 3,931 | 1.97% |
 | `data-analytics-bi-skills` | 11 | 2,757 | 1.38% |
 | `safety-and-reliability-skills` | 10 | 2,587 | 1.29% |
-| `full-stack-dev-skills` | 11 | 2,411 | 1.21% |
+| `full-stack-dev-skills` | 11 | 2,402 | 1.20% |
 | `data-tools-skills` | 7 | 1,576 | 0.79% |
-| `math-foundations-skills` | 6 | 1,561 | 0.78% |
 | `machine-learning-skills` | 7 | 1,545 | 0.77% |
+| `math-foundations-skills` | 6 | 1,541 | 0.77% |
 | `collaboration-skills` | 5 | 1,362 | 0.68% |
-| `writing-skills` | 5 | 1,262 | 0.63% |
+| `writing-skills` | 5 | 1,265 | 0.63% |
 | `metacognition-skills` | 4 | 955 | 0.48% |
 | `learning-skills` | 3 | 721 | 0.36% |
 | `deep-research-skills` | 1 | 276 | 0.14% |
-| **all 14** | **121** | **29,752** | **14.88%** |
+| **all 14** | **121** | **29,638** | **14.82%** |
 
 There is a second, sharper reason to subset. **At roughly 100 installed skills the listing starts
 trimming the least-used skills' descriptions to name-only** — silently, with no error, while
@@ -62,13 +64,20 @@ install of this library is *past* that threshold.
 
 Practical guidance:
 
-- **Three or four plugins (~35-50 skills, 5-7% of context)** is the sweet spot: comfortably below the
+- **Two to four plugins (~24-31 skills, 3-4% of context)** is the sweet spot: comfortably below the
   degradation threshold, and small enough that the router discriminates well.
-- **Pick by the work you do**, not by breadth. Analyst: `data-analytics-bi-skills` +
-  `data-tools-skills` + `math-foundations-skills`. Developer: `full-stack-dev-skills` +
-  `coding-agent-skills`. Operations / process: `continuous-improvement-skills` +
-  `safety-and-reliability-skills`. Management / communication: `collaboration-skills` +
-  `writing-skills` + `decision-science-skills`.
+- **Pick by the work you do**, not by breadth. Each bundle below is measured, not estimated:
+
+| Bundle | Plugins | Skills | ~Tokens | % of 200K |
+| --- | --- | ---: | ---: | ---: |
+| Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 24 | 5,875 | 2.94% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 31 | 7,084 | 3.54% |
+| Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 26 | 6,624 | 3.31% |
+| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 25 | 6,558 | 3.28% |
+
+  Note that a bundle's skills cross-reference skills in plugins you have not installed. Those
+  pointers name the plugin (`other-plugin:skill`), so they read as "install that plugin if you want
+  this" rather than as broken links — but they will not resolve until you do.
 - **The lever is skills per install, not description length.** Trimming a description from 1,000 to
   900 characters saves ~27 tokens; skipping a 15-skill plugin saves ~3,900. Descriptions here are
   kept tight because a tight description *routes* better, not because trimming buys back context.
@@ -109,13 +118,18 @@ Design notes and the wave-by-wave build log live in [`CONTRIBUTING.md`](CONTRIBU
 
 ## The archive
 
-Nine domain plugins (66 skills) and two individual skills were **delisted, not deleted**, when
-the library was re-aimed at general use: the Oracle Fusion / OTBI, cash-management, treasury,
-public-sector-treasury, sponsored-projects AR, accounting, banking, and finance plugins now live
-under [`archive/`](archive/README.md) with full git history. They are preserved and restorable —
-[`archive/README.md`](archive/README.md) carries the manifest, the reason, and a step-by-step
-restore procedure. Locally installed copies of archived plugins keep working as pinned snapshots;
-they simply stop receiving updates and no longer appear in the marketplace listing.
+**There are no archived plugins.** Nine domain plugins were delisted in 2026-08 when the library
+was re-aimed at general use, and all nine were then **deleted outright** on owner direction: the
+two Oracle Fusion / OTBI plugins (17 skills, 70 files) and the seven finance/treasury plugins —
+cash-management, treasury-accounting, public-sector-treasury, sponsored-projects AR, accounting,
+banking, finance (49 skills, 154 files). Git history still contains them; nothing else does.
+Locally installed copies keep working as version-pinned snapshots, but they will never update and
+no longer appear in the marketplace listing.
+
+What remains under [`archive/`](archive/README.md) is two individual dental-mounted skills
+(preserved with a restore procedure) and a set of standalone applications that predate the
+re-aim. [`archive/README.md`](archive/README.md) carries the manifest of what was deleted and
+why.
 
 ## How it's built
 
@@ -129,7 +143,9 @@ they simply stop receiving updates and no longer appear in the marketplace listi
   `coding-agent-skills:board-review` skill.
 - The authoring standard lives in the `coding-agent-skills:writing-agent-skills` skill; its
   template is `plugins/coding-agent-skills/skills/writing-agent-skills/assets/SKILL.template.md`.
-- `bash scripts/validate.sh` lints every skill and manifest (currently 0 errors).
+- `bash scripts/validate.sh` lints every skill and manifest (currently 0 errors). It also runs
+  `scripts/check-arithmetic.py`, which recomputes every worked `a = b = c` chain in the library
+  and fails on the ones that disagree — the defect class that survived four hand review passes.
 - `python3 scripts/gen-catalog.py` regenerates `docs/SKILLS.md` and `docs/INDEX.md` from the skills
   themselves — never edit those two by hand.
 - **[`docs/trigger-test.md`](docs/trigger-test.md) — routing compliance, written and not yet run.**

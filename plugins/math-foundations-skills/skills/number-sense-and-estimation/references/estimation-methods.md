@@ -88,9 +88,10 @@ per year.
 **Central figure.** 3 × 7 = 21 appointments per day across the office; 21 × 250 = 5,250 per
 year.
 
-**Bound.** Push every factor the same direction:
-- Pessimistic: 3 × 5 × 230 → 3 × 5 = 15; 15 × 230 = 3,450.
-- Optimistic: 3 × 9 × 260 → 3 × 9 = 27; 27 × 260 = 7,020.
+**Bound.** Push every factor to the extreme that moves the *result* the same way. Here the
+formula is a pure product, so "low result" is simply every factor low:
+- Low: 3 × 5 × 230 → 3 × 5 = 15; 15 × 230 = 3,450.
+- High: 3 × 9 × 260 → 3 × 9 = 27; 27 × 260 = 7,020.
 - Bracket check: 3,450 < 5,250 < 7,020 — the central figure sits inside the bounds. If it
   did not, a factor judgment or a multiplication is wrong; stop and find it.
 
@@ -120,10 +121,13 @@ bus per day.
 
 **Central figure.** 75,000 ÷ 100 = 750 buses.
 
-**Bound.**
-- Pessimistic (fewest buses needed): 10% children, 30% ride, 120 per bus:
+**Bound.** Note the denominator: riders-per-bus divides, so the *low* bus count needs the
+*high* per-bus figure. Pushing all three factors to the same numeric extreme would give
+1,000,000 × 0.10 × 0.30 ÷ 60 = 500 and 1,000,000 × 0.18 × 0.60 ÷ 120 = 900 — a bracket four
+times too tight, built by letting the denominator cancel part of the numerator's swing.
+- Low bus count: 10% children, 30% ride, 120 per bus:
   1,000,000 × 0.10 = 100,000; × 0.30 = 30,000; ÷ 120 = 250 buses.
-- Optimistic (most buses): 18% children, 60% ride, 40 seats × 1.5 runs = 60 per bus:
+- High bus count: 18% children, 60% ride, 40 seats × 1.5 runs = 60 per bus:
   1,000,000 × 0.18 = 180,000; × 0.60 = 108,000; ÷ 60 = 1,800 buses.
 - Bracket check: 250 < 750 < 1,800 — holds.
 

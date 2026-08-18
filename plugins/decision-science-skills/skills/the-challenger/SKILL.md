@@ -15,7 +15,7 @@ description: >-
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
   source: >-
     Commissioned by the user to prevent momentum and sunk costs from holding a project to
     a timeline when revision would be optimal. Anchored on the documented record of the
@@ -48,6 +48,10 @@ namesake earned that.
   `coding-agent-skills:chicken-little-executive-advisor`.
 
 ## Do it
+The facilitation script, the Challenger record held soberly, the bias literature, a worked
+go-live-that-should-slip example, and the decision-log template are in
+`references/revision-review-method.md`.
+
 1. **Install triggers at plan time** (the step that makes every later step possible):
    name, in the plan itself, the conditions that OBLIGATE a revision review — slipped
    milestones, anomaly counts, changed load numbers, dependency failures. A review held
@@ -137,6 +141,12 @@ Record in `references/your-environment.md`: the standing revision triggers for y
 active projects (and where they're written), who holds the decision chair and who holds
 the dissent channel, your schedule-slip base rates (feed the ledger), and where
 revision-review logs live.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/the-challenger.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/revision-review-method.md — the full review protocol with facilitation

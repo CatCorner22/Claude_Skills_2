@@ -8,6 +8,8 @@ description: >-
   behavior that should run every time X happens, or wiring up an MCP server.
   Triggers: settings.json, permissions, allow this command, hooks, run automatically,
   whenever X do Y, MCP server, .mcp.json, configure Claude Code, harness config.
+metadata:
+  version: "1.1.0"
 ---
 
 # Configuring the Claude Code harness
@@ -22,9 +24,12 @@ description: >-
   prompt wording → see `coding-agent-skills:prompt-engineering`.
 
 ## Do it
-1. **Pick the right settings file (they layer; later overrides earlier):**
-   - Enterprise/managed (admin) → user `~/.claude/settings.json` → project `.claude/settings.json`
-     (committed, shared) → project `.claude/settings.local.json` (git-ignored, personal).
+1. **Pick the right settings file (they layer; the more specific one wins, with one exception):**
+   - user `~/.claude/settings.json` → project `.claude/settings.json` (committed, shared) →
+     project `.claude/settings.local.json` (git-ignored, personal) → CLI arguments. Each overrides
+     the one before it.
+   - **Enterprise/managed (admin) settings sit above all of them and cannot be overridden.** That
+     is what makes them policy rather than a default — do not plan around editing past them.
    - Put team-wide rules in the committed project file; keep personal or machine-specific rules
      in `settings.local.json`.
 2. **Set permissions** to cut prompts without going unsafe. In `settings.json`:
@@ -76,9 +81,9 @@ formatter" cannot live in a memory note or a skill instruction — the model mig
 compaction might drop it — and must be a `PostToolUse` hook the harness fires deterministically.
 Permissions work the same way: they are enforced by the harness before a tool runs, so an
 allow-list is a *safety and friction* control, not a suggestion to the model. Understanding the
-settings **layering** (enterprise → user → project → local, later wins) is what lets you put
-shared guarantees in the committed project file while keeping personal tweaks local and
-git-ignored. Once you see the harness as "the deterministic shell that the probabilistic model
+settings **layering** (user → project → local → CLI, each overriding the last, with
+administrator-managed policy above all of them and unoverridable) is what lets you put shared
+guarantees in the committed project file while keeping personal tweaks local and git-ignored. Once you see the harness as "the deterministic shell that the probabilistic model
 runs inside," you know where each kind of rule belongs.
 
 ## Common mistakes
@@ -96,6 +101,12 @@ as `*.private.md`): the exact test/lint/build commands to allow-list, the Sessio
 your project needs, any MCP servers you use, and behaviors you want automated. This skill then
 writes the precise `settings.json` entries for your stack. If you only need a simple settings
 change (theme, model), the `/config` command is faster.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/agent-harness-config.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/permissions-and-hooks.md — permission rule syntax, precedence, and the hook events with examples

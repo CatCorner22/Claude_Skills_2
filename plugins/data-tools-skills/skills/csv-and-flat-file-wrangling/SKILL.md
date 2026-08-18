@@ -5,7 +5,7 @@ description: >-
   detecting encodings and delimiters, declaring an explicit read_csv contract (encoding,
   separator, string-typed IDs, date formats, na_values) instead of trusting inference,
   surviving export quirks (BOMs, footer rows, quoted commas, European decimals, and the
-  float-coercion hazard that strips leading zeros from join keys),
+  numeric-coercion hazard that strips leading zeros from join keys),
   validating every parse against row counts and control figures, and merging with an
   outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing.
   Use when loading a CSV that parses wrong, combining exports from different systems, or
@@ -13,7 +13,7 @@ description: >-
   delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
   zeros lost, csv broken columns, mojibake, flat file feed.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # CSV and flat-file wrangling
@@ -25,7 +25,7 @@ metadata:
 - Merging or appending multiple flat files into one dataset for analysis.
 - Not for: deep cleaning after a correct parse (dedupe, outliers, imputation) → see
   `data-analytics-bi-skills:data-cleaning`. Statement-specific formats (BAI2, camt.053, MT940) are
-  bank-format knowledge (archived: `banking-skills:bank-statement-parsing`, restorable from
+  format-specific knowledge (a banking-domain topic this library does not carry; formerly at
   `archive/`), not general flat-file wrangling.
 - Not for: sources that aren't flat files — a workbook (.xlsx) → see
   `data-tools-skills:excel-automation-python`; a PDF report or statement → see
@@ -33,10 +33,12 @@ metadata:
   discipline.
 
 ## Do it
-1. **Look at the raw bytes before parsing.** `head -c 500 file.csv | xxd | head` (or open in a
-   text editor showing invisibles). You're checking: encoding clues (a `EF BB BF` UTF-8 BOM;
-   high bytes suggesting Latin-1/Windows-1252), the actual delimiter (comma, semicolon, pipe,
-   tab), quoting style, line endings, and whether there are title/footer rows around the data.
+1. **Look at the raw bytes before parsing.** `head -c 500 file.csv | xxd | head` — `xxd` ships
+   with vim, so on a box without it use `head -c 500 file.csv | od -An -tx1z | head`, which is
+   POSIX and always present (or open in a text editor showing invisibles). You're checking:
+   encoding clues (a `EF BB BF` UTF-8 BOM; high bytes suggesting Latin-1/Windows-1252), the
+   actual delimiter (comma, semicolon, pipe, tab), quoting style, line endings, and whether
+   there are title/footer rows around the data.
 2. **Parse explicitly — never rely on defaults for a recurring feed:**
 
 ```python
@@ -82,10 +84,12 @@ df = pd.read_csv(
 A flat file has no schema — every load is an act of *interpretation*, and the parser will happily
 misinterpret in silence: Latin-1 bytes read as UTF-8 become mojibake, an unquoted comma shifts
 every column after it, and `read_csv`'s type inference turns account "00123" into the number 123.
-The float-coercion form of that hazard is the worst, because it corrupts *identity*: an ID like
-`0006789599` round-tripped through numeric inference comes back as `6789599.0`, every join
-against the original keys goes quiet, and nothing errors — a known hazard class this library
-documents from hard experience. The whole discipline is therefore to make interpretation
+The numeric-coercion form of that hazard is the worst, because it corrupts *identity*: an ID
+like `0006789599` round-tripped through numeric inference comes back as the integer `6789599`;
+add one null to that column and it becomes the float `6789599.0`; and a 19-digit ID in that same
+float column is written back out as `6.78959912345679e+18`. Every join against the original keys
+goes quiet, and nothing errors — a known hazard class this library documents from hard
+experience. The whole discipline is therefore to make interpretation
 explicit (encoding, delimiter, dtypes, date formats are *declared*, not guessed) and then to
 *prove* the parse with counts and control totals, exactly like reconciling a statement. The
 reason IDs are always strings is that identity data has no arithmetic meaning — the moment it
@@ -111,6 +115,12 @@ each recurring feed in `references/your-environment.md` (real files in
 `references/*.local.*`, git-ignored): source system, encoding, delimiter, schema, known
 quirks, and the control totals you validate against. Sanitized structural examples only —
 **never real customer or account-bearing exports**.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/csv-and-flat-file-wrangling.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/flat-file-quirks.md — symptom → cause → fix tables for encodings, delimiters,

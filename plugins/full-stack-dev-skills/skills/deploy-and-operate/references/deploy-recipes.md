@@ -14,8 +14,8 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: { python-version: "3.12", cache: pip }
       - run: pip install -r requirements.txt -r requirements-dev.txt
       - run: ruff check . && ruff format --check .
@@ -27,15 +27,23 @@ jobs:
     needs: checks
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    env: { REGISTRY: "${{ vars.REGISTRY }}" }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build -t $REGISTRY/app:${{ github.sha }} .
       - run: docker push $REGISTRY/app:${{ github.sha }}
-      - run: ./deploy.sh ${{ github.sha }}   # platform-specific: run migrations, then point at the SHA
-        env: { DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }} }
+      - run: ./deploy.sh ${{ github.sha }}   # platform-specific: migrate, then point at the SHA
+        env: { DEPLOY_TOKEN: "${{ secrets.DEPLOY_TOKEN }}" }
 ```
-Fail-fast order (lint before tests before build); the image is built once and the SHA is
-the release name.
+Set the repository variable `REGISTRY` to your image host (e.g. `ghcr.io/<org>`); `DEPLOY_TOKEN`
+is a repository secret. Without the `env:` block `$REGISTRY` expands to nothing and the build
+tags `/app:<sha>`, which Docker rejects. Note the quotes around every `${{ … }}` that sits inside
+a `{ }` flow mapping: unquoted, the `{{` opens a nested mapping and GitHub rejects the whole file
+as invalid YAML.
+
+Fail-fast order: lint (seconds), then the scratch-DB migration check, then tests — all before
+anything is built. The image is built once and the SHA is the release name; `./deploy.sh` runs
+`alembic upgrade head` against the target database before pointing traffic at the new SHA.
 
 ## docker-compose for dev
 ```yaml

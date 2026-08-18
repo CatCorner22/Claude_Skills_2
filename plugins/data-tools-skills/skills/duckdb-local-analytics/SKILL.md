@@ -12,7 +12,7 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # DuckDB local analytics
@@ -38,7 +38,9 @@ GROUP BY bank ORDER BY total DESC;
 
 -- Globs and Parquet work the same way; a year of files is one table:
 SELECT * FROM read_parquet('data/tx_2026-*.parquet');
--- Excel sheets too:
+-- Excel sheets too (needs the `excel` extension — DuckDB auto-installs it on first
+-- use, which requires network; on a locked-down machine run `INSTALL excel` once
+-- where you do have network, or convert the sheet to CSV first):
 SELECT * FROM read_xlsx('report.xlsx', sheet='Detail');
 ```
 
@@ -54,7 +56,8 @@ SELECT * FROM read_csv('export.csv', header=true, delim=';',
 
 ```sql
 CREATE OR REPLACE TABLE recon AS
-SELECT s.line_id, s.amount AS stmt_amt, l.amount AS ledger_amt,
+SELECT ref_no,                       -- keep the key: break rows are NULL on one side
+       s.line_id, s.amount AS stmt_amt, l.amount AS ledger_amt,
        coalesce(s.amount,0) - coalesce(l.amount,0) AS diff
 FROM read_csv_auto('statement.csv') s
 FULL OUTER JOIN read_csv_auto('ledger.csv') l USING (ref_no);
@@ -101,6 +104,12 @@ NULL sides are your breaks.
 List your standard local datasets and queries in `references/your-environment.md` (real data
 files in `references/*.local.*`, git-ignored): file locations, the Parquet conversions you keep,
 and the recurring analysis scripts. **Never commit the data files themselves.**
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/duckdb-local-analytics.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/duckdb-recipes.md — window functions, pivots, larger-than-memory settings, pandas/Parquet interop

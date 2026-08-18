@@ -1,8 +1,10 @@
 # The habit method: worksheet, patterns, audits, renegotiation
 
-Research base: Gollwitzer's implementation-intentions work (meta-analysis with Sheeran — a
-large, well-replicated effect of pre-deciding when/where/how to act) and the psychology of
-automaticity and context-dependent behavior. Fogg (*Tiny Habits*) and Clear (*Atomic
+Research base: Gollwitzer's implementation-intentions work (the Gollwitzer & Sheeran 2006
+meta-analysis: d ≈ 0.65 — medium-to-large — across 94 independent tests of pre-deciding the
+when/where/how of acting) and the psychology of automaticity and context-dependent behavior.
+Gollwitzer's canonical form is if-then ("if situation Y, then I will do X"); "when X, I will
+Y" below is the same structure in plainer words. Fogg (*Tiny Habits*) and Clear (*Atomic
 Habits*) are practitioner syntheses used here for vocabulary, not as research authority.
 
 ## Contents
@@ -98,7 +100,8 @@ never has to be.
 | ...  | n        | —         | cue never fired — stand-up cancelled |
 ```
 
-- **Presence rate**, not streak length, is the health metric — e.g., "18 of last 21 days."
+- **Presence rate**, not streak length, is the health metric — e.g., "18 of last 21 days" =
+  86%, which is under a ~90% stability gate, so the honest call is hold the size, don't scale.
 - One diagnostic question per miss: did the cue fire? was the routine too big that day? did
   friction reappear? The answer feeds redesign, not judgment.
 - Two consecutive misses → treat as a design signal: shrink the routine one notch or move

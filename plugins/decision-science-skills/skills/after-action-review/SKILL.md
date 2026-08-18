@@ -12,6 +12,8 @@ description: >-
   Owns team and event debriefs — an assistant's own self-retrospective belongs to
   reflective-learner instead. Triggers: after-action review, AAR, hot wash, team debrief,
   sustain and improve, what should we do differently next close.
+metadata:
+  version: "1.1.0"
 ---
 
 # After-action review (AAR)
@@ -40,6 +42,9 @@ description: >-
   plan runs → see `decision-science-skills:pre-mortem`.
 
 ## Do it
+The four questions expanded, the ground rules to read aloud, the facilitation guide, and the
+timeline-reconstruction protocol are in `references/aar-method.md`.
+
 1. **Frame the session.** State the event under review, the ground rules (blameless,
    rank-free, everyone talks, no grades), and the four questions on the wall. Budget the
    time roughly 25% / 25% / 50% across supposed-to / actually-happened / why-plus-fixes.
@@ -110,6 +115,12 @@ email lists, bank portals), who facilitates, where records are filed, and which 
 receive the sustain/improve output. If entries would name real people or incidents, put
 them in `your-environment.private.md` (git-ignored). Never commit real client or bank
 data — sanitize to structure.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/after-action-review.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/aar-method.md — the four questions expanded, facilitation guide,

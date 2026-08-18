@@ -15,7 +15,7 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
@@ -106,11 +106,14 @@ the expanded ethics rail are in `references/elicitation-method.md`.
    especially anything surfaced by a deliberate-error restatement — and read the key
    claims back before you rely on them, so the technique never leaves a wrong number
    standing.
-9. **Division of labor.** The assistant drafts the question sequence for the named
-   interview (naive open → restatement-with-error → discrepancy-held-as-confusion →
-   doorknob), role-plays the defensive expert for rehearsal, and audits transcripts for
-   missed doorknob moments and defensiveness-triggering questions. The human conducts
-   the interview and owns the relationship — the stance cannot be delegated.
+
+Division of labor: the assistant drafts the question sequence for the named interview
+(naive open → restatement-with-error → discrepancy-held-as-confusion → doorknob),
+role-plays the defensive expert for rehearsal, and audits transcripts for missed
+doorknob moments and defensiveness-triggering questions — the audit's deliverable is a
+list of next-contact questions, each tagged with its pattern, plus one sentence on the
+biggest stance improvement. The human conducts the interview and owns the relationship;
+the stance cannot be delegated.
 
 ## Why / learn
 Defensiveness is an economics problem. An expert answering an evaluative-sounding
@@ -174,6 +177,12 @@ recording/note conventions, and where transcripts and verbatim captures live. Ke
 committed file structural — names of roles, not people. Anything sensitive (real names,
 quoted material, internal politics) belongs in `your-environment.private.md`, which is
 git-ignored and never committed.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/disarming-elicitation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/elicitation-method.md — the four question-sequence patterns with examples,

@@ -12,7 +12,7 @@ description: >-
   not, brittle tests, flaky test, test isolation, slow test suite, playwright e2e, test coverage
   target, regression test, test pyramid, integration vs unit, testcontainers.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Testing strategy: minimal and effective
@@ -150,6 +150,12 @@ Record your testing conventions in `references/your-environment.md`: the fixture
 location, test DB engine per environment (and which tests require the production engine), your
 money-path E2E list, external boundaries and their mocks, and the suite-runtime budget you
 enforce.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/testing-strategy.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/testing-recipes.md — conftest spine (with the isolation canary), engine choice, factories, Playwright skeleton, level-decision table

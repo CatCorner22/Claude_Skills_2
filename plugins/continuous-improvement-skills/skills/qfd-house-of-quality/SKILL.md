@@ -12,6 +12,8 @@ description: >-
   build first with a defensible matrix. Triggers: house of quality, QFD, quality function
   deployment, translate customer needs to specs, requirements matrix, what should we build
   first, voice of customer to CTQ, customer needs to engineering characteristics.
+metadata:
+  version: "1.1.0"
 ---
 
 # QFD — the House of Quality
@@ -64,14 +66,14 @@ through a relationship cell to a weighted customer need, so a pet feature with n
 relationships visibly earns a near-zero score, and an unglamorous characteristic that serves
 five weighted needs visibly dominates. The roof does the complementary job for engineering
 honesty: tradeoffs between characteristics are declared before commitment, not discovered in
-integration. The evidence claim that made the method famous comes from Toyota's body-rust work:
-cumulative development-cost reductions of ~61% against a 1977 base by 1984, with development
-time down about a third [snippet-only, HBR]. The method's Western failure mode was never logic
-but *labor* — the house took weeks of matrix workshops, so most adoptions collapsed under their
-own ceremony. That barrier is gone: an LLM drafts the entire house from interview notes —
-candidate WHATs, proposed weights, measurable HOWs, relationship cells, roof conflicts — in
-minutes, and the humans do what only they legitimately can: correct the cells they know better,
-and ratify the weights with the customers whose voice the house claims to carry. A drafted house
+integration. The evidence claim that made the method famous comes from Toyota Auto Body's
+body-rust work: **startup** (pre-production launch) costs down ~61% against a 1977 base by 1984,
+with product-development time down about a third [snippet-only, HBR]. The method's Western
+failure mode was never logic but *labor* — the house took weeks of matrix workshops, so most
+adoptions collapsed under their own ceremony. That barrier is gone: an LLM drafts the entire
+house from interview notes — candidate WHATs, proposed weights, measurable HOWs, relationship
+cells, roof conflicts — in minutes, and the humans do what only they legitimately can: correct
+the cells they know better, and ratify the weights with the customers whose voice the house claims to carry. A drafted house
 is a hypothesis about what customers meant; only they can confirm it.
 
 ## Common mistakes
@@ -93,6 +95,12 @@ tickets, survey exports), your standard HOW catalog with units, benchmark source
 ratifies weights (use `your-environment.private.md`, which is git-ignored, for real customer
 names, competitor data, or product plans). Never commit raw customer feedback — sanitize to
 structure.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/qfd-house-of-quality.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/house-of-quality-method.md — matrix construction walkthrough, weighting math, roof

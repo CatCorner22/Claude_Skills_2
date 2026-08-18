@@ -123,7 +123,7 @@ archived-domain scenarios.
 > unnecessary** — the validator was counting bytes rather than characters, so none of those
 > descriptions had ever exceeded the cap; 12 of the trims destroyed routing or teaching signal and
 > have been reverted. (2) **"Zero collisions" means zero *exact duplicate strings*, not unambiguous
-> routing** — the router matches whole descriptions, and 85 phrases still compete inside other
+> routing** — the router matches whole descriptions, and 111 phrases still compete inside other
 > skills' prose. The live phrase count is 1,328.
 
 ## 5. Tooling
@@ -168,7 +168,7 @@ code and re-deriving results** rather than by reading.
 - **46 description trims from an earlier pass were unnecessary** — the byte-counting bug above meant
   none had ever exceeded the cap. 12 that destroyed routing or teaching signal are reverted, with
   trigger lists verified byte-identical so no routing contract moved.
-- **Routing viability**: the full 121-skill library costs **14.9% of a 200K context** before anything
+- **Routing viability**: the full 121-skill library costs **14.8% of a 200K context** before anything
   is asked, and sits past the ~100-skill point where the listing silently trims descriptions to
   name-only. `README.md` now carries a per-plugin cost table and recommends three or four plugins.
   The corollary, stated plainly rather than defended: description trimming was never the lever —
@@ -179,15 +179,63 @@ code and re-deriving results** rather than by reading.
 
 Full narrative and an 8-item owner decision list: `docs/library-review-2026-08.md` §9–§10.
 
+## 7. Surfaces pass (2026-08-18) — everything that is not a SKILL.md
+
+A second review covered the surfaces §6 could not see: the 22,604-line reference corpus, the 121
+evals as deliverables, the docs layer, the two scripts, and packaging/privacy.
+
+**The headline finding: every quality gate in this library operates on the repository, and the
+repository is not the product.** Nothing had ever verified the installed artifact, and that single
+blind spot explained a cluster of unrelated-looking defects:
+
+- **`CLAUDE_PLUGIN_ROOT` appeared zero times across all 121 skills**, while every bundled-script
+  command used a bare repo-relative path — a guaranteed file-not-found after `/plugin install`,
+  including the one command that produces the assertion-evidence deck. Fixed at 13 sites, with a
+  new house-standard rule, a checklist line, and a validator check so it cannot recur.
+- `references/your-environment.md` lives in the plugin cache, where an update discards it — the one
+  persistent thing the library asks users to create. **Flagged as owner decision D9, not fixed.**
+
+**Four gate defects that failed silently rather than loudly**, each reproduced before fixing: a
+SKILL.md with no closing `---` passed as `OK`; one non-UTF-8 byte anywhere disabled the entire
+cross-link check (1 planted error → 0); the body-line counter stopped at the first body `---`,
+making the 500-line cap bypassable; and manifests were checked only for JSON validity. Adding
+manifest coherence immediately found **all eight skills added this session missing from their
+plugin descriptions** — the strings `/plugin` shows pre-install — and **11 of 14 marketplace entries
+drifted** from their plugin manifests.
+
+**Two more false claims in skill content:** `agent-harness-config` inverted the settings-precedence
+order, telling readers a git-ignored `settings.local.json` overrides administrator policy
+(security-relevant, wrong in three places); and `design-of-experiments` claimed "nine aliased pairs"
+for a design whose six factors admit only 15 two-factor interactions — nine pairs would need 18. The
+real structure, derived in-file so a reader can check it, is seven groups.
+
+**Corrections to this PR's own earlier claims**, which is what these passes are for:
+
+| Claim in §6 | Corrected |
+|---|---|
+| "85 trigger phrases appear in another skill's description" | **111.** The 85 came from an undisclosed ≥6-char filter, and "prose" misdescribed the method. It had propagated to seven sites including MEMORY.md. |
+| Token totals | The authoring standard and README published different figures for the same measurement. Both now regenerate from measurement via `scripts/measure-listing-cost.py` (109,662 chars / 29,638 tokens / 14.82% as of this pass), with the 3.7 chars/token divisor disclosed. |
+| README "sweet spot ~35–50 skills, 5–7%" | Contradicted by all four of its own bundles. Measured: 24–31 skills, 2.95–3.59%. |
+| `trigger-test.md` "~35 sessions" | 45 rows, **80 prompts**. |
+
+And a trap in this PR's own deliverable: **six of the eight Tier D rows** in `docs/trigger-test.md`
+demanded that persona skills *not* load on paraphrases of trigger phrases they deliberately own. Run
+as written, the compliance record would have scored six correct routes as failures and invited
+deleting real routes. Tier D now asks its three questions as three columns.
+
+**What came back clean, stated plainly:** the eval corpus is 121:1 with zero orphans, all archived
+pointers resolve, the generated catalogs are byte-identical to a fresh regeneration, and **no
+secrets, credentials, or client data exist anywhere in the tree**.
+
 ## Verification
 
 ```
 bash scripts/validate.sh      # 0 errors, 0 warnings
-python3 scripts/gen-catalog.py # 121 skills across 14 plugins (+9 archived)
+python3 scripts/gen-catalog.py # 121 skills across 14 plugins
 ```
 - 121 skills ↔ 121 evals, no orphans.
 - **0 exact duplicate trigger phrases** — but read that precisely: the router matches whole
-  descriptions, not `Triggers:` lists, and **85 trigger phrases still appear as whole words inside a
+  descriptions, not `Triggers:` lists, and **111 trigger phrases still appear as whole words inside a
   different skill's description prose** (`python` in 7 others). The earlier "0 collisions" headline
   was true at the string level and misleading at the routing level; the collision was renamed, not
   resolved. Those 85 are measured and recorded, not fixed.
@@ -217,15 +265,15 @@ extrapolated to the whole library; neither should the unreviewed 107 be assumed 
 - The marketplace ID stays **`treasury-analyst-skills`** deliberately, for install
   compatibility. Renaming it would break every existing `<plugin>@treasury-analyst-skills`
   reference. The name is stale; the breakage would be worse.
-- `coding-agent-skills:chicken-little` keeps its Oracle Fusion data-model reference by
-  ratified exception: it is name-gated and the only surviving copy of that commissioned depth.
-  Recorded in `MEMORY.md` so future residue sweeps don't re-flag it. **Correction from this pass:**
-  the original rationale said "zero routing pollution", which is not accurate — 3 of the skill's 7
-  triggers are Oracle domain phrases rather than the persona name, and about a third of its
-  always-loaded description is Oracle specifics. The exception is *bounded and accepted*, not zero.
-  The decision is unchanged; only the reason is corrected, because a falsifiable justification
-  invites the next audit to re-derive the finding and re-open a settled call — which is exactly what
-  happened here.
+- `coding-agent-skills:chicken-little` **no longer carries any Oracle content.** An earlier
+  pass kept its Oracle Fusion data-model reference by ratified exception (name-gated, the only
+  surviving copy of that commissioned depth). The owner's later directive — delete all Oracle
+  skills — supersedes that exception. The two Oracle reference files, one Do-it step, three
+  domain trigger phrases, and the named-Oracle-failure-modes section were removed, and
+  `your-environment.md` was rewritten domain-neutral. The skill is now gated on the persona
+  name alone (`chicken little`, `aether`, `chicken little mode`, `sky is falling`), so the
+  "bounded and accepted" routing cost recorded earlier is now zero in fact rather than by
+  assertion.
 - **Security housekeeping:** the deleted `GITHUB_SETUP.md` had committed an `ssh-ed25519`
   deploy **public** key and an expired device code. The public half discloses nothing on its
   own, but if that deploy key still exists on the repository, revoke it in GitHub settings —

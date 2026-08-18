@@ -20,7 +20,7 @@ metadata:
 - Forecasting a value that unfolds over time: daily/weekly cash flow, account balances, payment or transaction volumes, a collections series.
 - Choosing between classical (ETS, ARIMA) and ML forecasting approaches, or adding exogenous drivers.
 - Validating a forecast honestly with time-based splits and backtesting instead of a shuffled hold-out.
-- Not for: the treasury framing of a liquidity forecast from operational drivers (AR aging, AP runs) — that is direct-method cash forecasting (archived: `cash-management-skills:cash-forecasting`, restorable from `archive/`); hand the statistical driver-series here. For general metric/validation choice → see `machine-learning-skills:model-evaluation`.
+- Not for: the finance framing of a liquidity forecast built from operational drivers (receivables aging, payment runs) — that is direct-method cash forecasting, a domain method this library does not carry; hand the statistical driver-series here. For general metric/validation choice → see `machine-learning-skills:model-evaluation`.
 
 ## Do it
 1. **Plot it and decompose.** Chart the raw series first. Separate **trend**, **seasonality**, and
@@ -149,9 +149,15 @@ in `your-environment.private.md`, which is git-ignored): the series and its busi
 and horizon, its seasonal periods (weekly/monthly/holiday/quarter-end), known exogenous drivers and when
 they're knowable, how you treat gaps and outliers, and your accuracy target expressed as a **skill ratio at
 your decision horizon** (plus the interval level and the coverage you need) next to your baseline. If you're
-building a treasury liquidity forecast, frame it with a direct-method cash-forecast structure first
-(archived: `cash-management-skills:cash-forecasting`, restorable from `archive/`) and feed the
-statistical forecast of a driver series (e.g. collections) back as an input there.
+building a liquidity forecast, frame it with a direct-method cash-forecast structure first — from
+whatever finance source you use, since this library does not carry one — and feed the statistical
+forecast of a driver series (e.g. collections) back as an input there.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/time-series-forecasting.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/models-and-backtesting.md — decomposition, stationarity, ETS/ARIMA choice, rolling-origin backtesting with in-origin model selection, metric traps and what MASE does/doesn't decide, and prediction intervals with the coverage check

@@ -13,7 +13,7 @@ description: >-
   CUPED, variance reduction, guardrail metric, A/A test, overall evaluation criterion, OEC,
   Twyman's law, novelty effect.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Built from docs/research/general-use-expansion-research.md §2 (general-use expansion wave
     dossier; Kohavi/Tang/Xu canon). Provenance marks carried from the dossier: [snippet-only,
@@ -63,8 +63,10 @@ chi-square, stopping-rule options, the Type-M worked example, and the launch che
    ask whether treated units can contaminate controls (shared queues, shared budgets, word of
    mouth, one clerk handling both letter variants). Interference → randomize at the coarser
    unit that contains it, and note the sample-size price.
-3. **Size the test before launch.** Set the **minimum detectable effect** — the smallest change
-   worth acting on — and size with the rule of thumb n ≈ 16σ²/δ² per arm (two-sided α=0.05,
+3. **Size the test before launch.** Pull the step-1 OEC's **baseline level and variance from
+   history** first — nothing downstream is computable without them. Then set the **minimum
+   detectable effect** — the smallest change worth acting on — and size with the rule of thumb
+   n ≈ 16σ²/δ² per arm (two-sided α=0.05,
    80% power; for a proportion, σ² = p(1−p)) [snippet-only, cross-checked]. If the required
    duration is unacceptable, **reduce the variance before you inflate the MDE** (step 4); only then
    shrink scope honestly (a coarser metric, a bigger MDE stated as such) — never quietly shorten the
@@ -198,6 +200,12 @@ historical correlation with each OEC), whether any OEC is a ratio metric measure
 randomization unit, your guardrail set, and who owns launch/stop authority. Keep real
 metric values, client identifiers, or live results in `your-environment.private.md`
 (git-ignored); commit only sanitized, structural examples.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/ab-test-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/online-experiment-method.md — the design worksheet, unit/interference drill, a

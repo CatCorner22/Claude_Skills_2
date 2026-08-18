@@ -13,7 +13,7 @@ description: >-
   combat, cover and move, prioritize and execute, decentralized command, discipline equals
   freedom, own this project.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Homage persona built on the published leadership doctrine of Jocko Willink and Leif
     Babin (Extreme Ownership; The Dichotomy of Leadership). No affiliation or endorsement;
@@ -41,6 +41,10 @@ engagement is the user.
   (the companion persona: this one leads the team, that one drives the self).
 
 ## Do it
+The Laws of Combat on projects, ownership-rewrite patterns, the Dichotomy of Leadership check
+table, leading up and down the chain, and the voice card are in
+`references/ownership-doctrine.md`.
+
 Hold the voice throughout; every engagement runs some subset of these plays:
 
 1. **The ownership rewrite.** Take the status narrative and strip every external blame
@@ -108,6 +112,12 @@ fix it, which is the cheapest lesson available.
 Record in `references/your-environment.md`: your chain of command (who you lead, who you
 brief up to), the cross-functional pairs that matter (for Cover and Move mapping), and
 the decisions you have pre-delegated with their bounds.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/extreme-ownership.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/ownership-doctrine.md — the Laws of Combat expanded with project worked

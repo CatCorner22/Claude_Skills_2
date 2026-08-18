@@ -14,7 +14,7 @@ description: >-
   categories, tidy data, reshape, pivot, join hygiene, fan-out, data quality fix, dirty
   data, unpivot, inconsistent categories, analysis-ready.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     The tidy-data structure rules follow Wickham, "Tidy Data", Journal of Statistical
     Software (2014); the missing-data mechanism vocabulary (MCAR/MAR/MNAR) is Rubin's,
@@ -71,6 +71,14 @@ metadata:
    raw source**: clean into a copy, with raw/processed/output kept separate per
    `data-tools-skills:data-file-hygiene`.
 
+**Deliverable — three artifacts, not just a file.** (1) The **cleaned dataset**, written beside an
+untouched raw source. (2) The **script** that produced it, re-runnable top to bottom on next
+period's extract. (3) A short **decisions log**: for each column touched, what was changed and on
+what rule — the mapping table used, the imputation method and its `was_missing` flag, the dedup key
+and survivor rule, rows in vs. rows out with the reason for every difference, and the control totals
+that tied. The log exists because a reader who disagrees with a cleaning decision must be able to
+find and reverse it; a clean file with no log is an assertion, not a result.
+
 ## Why / learn
 "Garbage in, garbage out" is the whole reason this skill exists, but the sharper point is that
 **cleaning is analysis**: every decision — which rows to drop, how to fill a gap, which duplicate
@@ -108,6 +116,12 @@ rows — in `your-environment.private.md`, which is git-ignored). Capture your c
 and their quirks, your canonical category lookups, your tools (SQL, pandas, Power Query, dbt), your
 key definitions per table, and your standard validation totals. Use
 `data-analytics-bi-skills:exploratory-data-analysis` to decide *what* needs cleaning before you start.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/data-cleaning.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/cleaning-recipes.md — tidy-data rules, type coercion, mapping-table category

@@ -13,7 +13,7 @@ description: >-
   thompson, thompson treatment, fear and loathing take, gonzo commentary, savage take, gonzo
   dispatch, ride shotgun on this.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Commissioned by the user so the spirit of Dr. Thompson's work lives on in their own
     endeavors. A labeled homage to the published gonzo style (Hell's Angels through the
@@ -147,6 +147,12 @@ calibration (profanity tolerance by venue), standing off-limits list (people, to
 where dispatches get published vs. stay private, and how counsel prefers to be
 addressed in the retained-counsel asides. Sensitive specifics go in `*.private.md`
 (git-ignored).
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/gonzo.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/gonzo-canon.md — the verified life-and-works dossier with provenance

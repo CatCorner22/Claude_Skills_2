@@ -1,11 +1,11 @@
 # Design tokens
 
 Read at stage 5. Every value below carries its provenance. Two sources supply them: the official
-Microsoft assertion-evidence template (geometry and typography), and — for the preserved legacy
-`ut` brand pack only — the University of Tennessee System brand guidelines. The builder ships a
-**neutral palette as its default**; the UT values remain solely as an optional brand pack for
-matching legacy UT-branded decks. `scripts/build_deck.py` encodes all of them; copy the geometry
-table when building outside the script.
+Microsoft assertion-evidence template (geometry and typography), and — for the optional
+`warm-accent` brand pack only — a published institutional brand standard, kept because it is a
+useful worked case rather than because you should use it. The builder ships a **neutral palette as
+its default**. `scripts/build_deck.py` encodes the geometry, typography, and colors for the slide
+kinds it builds; copy the geometry table when building outside the script.
 
 ## Contents
 - [Slide geometry](#slide-geometry)
@@ -52,11 +52,13 @@ Three typefaces compete for this slot. Choose deliberately.
 |---|---|
 | *Present Your Science* handout | A bold sans-serif such as **Calibri** |
 | Microsoft assertion-evidence template | Theme major and minor fonts both set to **Arial** |
-| UT System brand guidelines | Primary **Goudy Old Style** (serif); supporting **Gotham** (sans-serif); sanctioned free alternative for presentations by non-designers: **Montserrat** |
+| The same institutional brand standard | Primary **Goudy Old Style** (serif); supporting **Gotham** (sans-serif); sanctioned free alternative for presentations by non-designers: **Montserrat** |
 
-UT's brand page states that its office licenses Gotham and Goudy Old Style, and that open-source
-alternatives "are encouraged to be used by non-designers for presentations, letters and other
-materials utilizing the UT System brand," naming Montserrat as the preferred alternative to Gotham.
+That brand page states that its office licenses Gotham and Goudy Old Style, and that open-source
+alternatives are encouraged for non-designers producing presentations and letters, naming
+Montserrat as the preferred substitute for Gotham. The pattern generalizes: a licensed brand face
+you do not have a seat for is a font-substitution problem waiting to happen, and most brand
+standards name their own fallback — find it before you pick one yourself.
 
 Point sizes come from the handout and hold regardless of typeface: 28 point headline, 18–24 point
 body, 12–14 point references and source tags, and never bold on the reference line.
@@ -86,22 +88,29 @@ recipient from "fixing" it.
 
 The default is the **neutral palette** (`--brand neutral`, the builder's default): ink `333333`
 for body text, primary `4B4B4B`, muted `767676` for source tags and slide numbers, secondary
-`A6A6A6`, on white — every text pair clears WCAG AA on white. Use it unless the deck must match
-an existing brand.
+`A6A6A6`, on white. Every *text* pair clears WCAG AA on white — `333333` at 12.63:1, `767676` at
+4.54:1. The one value that does not is `A6A6A6`, the second chart series, at 2.43:1 against white:
+below the 3:1 non-text threshold, so it is subject to the same rule as the warm accent below —
+never the sole carrier of meaning. The builder keeps data labels on for exactly that reason. Use
+this palette unless the deck must match an existing brand.
 
-Everything below documents the **UT System palette**, preserved as the legacy `ut` brand pack
-(`--brand ut`) for matching older UT-branded decks. Verified from the UT System brand guidelines.
+Everything below documents the **warm-accent palette** (`--brand warm-accent`; the older name
+`ut` still resolves, so existing deck specs keep working). The values are verified from a
+published institutional brand standard. It is here as a **worked case, not a recommendation** —
+this is what happens when a real brand's signature color meets WCAG, and the same arithmetic
+applies to whatever brand you are handed.
 
 | Token | Name | Hex | RGB | PMS |
 |---|---|---|---|---|
-| Primary | Tennessee Orange | `FF8200` | 255, 130, 0 | 151 |
-| Secondary | Smoky Mountain Gray | `4B4B4B` | 75, 75, 75 | Cool Gray 11 |
+| Primary | Accent Orange | `FF8200` | 255, 130, 0 | 151 |
+| Secondary | Slate Gray | `4B4B4B` | 75, 75, 75 | Cool Gray 11 |
 | Background | White | `FFFFFF` | 255, 255, 255 | — |
 
 Two constraints from the same source:
-- **Black is not in the palette.** UT reserves it for cases where black-and-white printing is the
-  only option. Set body text in Smoky Mountain Gray, not black.
-- **UT targets WCAG 2.2 Level AA.** Check contrast before shipping.
+- **Black is not in the palette.** It is reserved for cases where black-and-white printing is the
+  only option. Set body text in Slate Gray, not black.
+- **The standard targets WCAG 2.2 Level AA.** Check contrast before shipping — which is exactly
+  where it runs into trouble.
 
 Contrast ratios computed from the published RGB values using the WCAG 2.x relative-luminance formula.
 Thresholds: 4.5:1 for normal text, 3:1 for large text (18 pt regular or 14 pt bold and above) and for
@@ -115,33 +124,38 @@ meaningful non-text graphics.
 | White on `FF8200` | 2.49:1 | **Fails** | **Fails** | — |
 | `4B4B4B` on `FF8200` | 3.51:1 | **Fails** | Passes | — |
 
-Three consequences follow, and each contradicts a habit common in UT decks:
-1. **Tennessee Orange fails as text on white.** Never set a headline, body text, or a callout number
+Three consequences follow, and each contradicts a habit common in brand-compliant decks:
+1. **The accent fails as text on white.** Never set a headline, body text, or a callout number
    in orange on a white background.
-2. **White text on a Tennessee Orange fill also fails**, at the same 2.49:1. The readable combination
-   on an orange fill is Smoky Mountain Gray at large sizes, which reaches 3.51:1.
+2. **White text on an accent fill also fails**, at the same 2.49:1. The readable combination
+   on an orange fill is Slate Gray at large sizes, which reaches 3.51:1.
 3. **Orange on white falls below the 3:1 non-text threshold too.** So orange alone must never be the
    sole carrier of meaning in a chart or diagram. Pair it with a direct label, a darker outline, or a
    distinct shape, so the information survives for a viewer who cannot separate the hue.
 
 A working allocation:
-- Headline: Smoky Mountain Gray `4B4B4B`
-- Body text and labels: Smoky Mountain Gray `4B4B4B`
+- Headline: Slate Gray `4B4B4B`
+- Body text and labels: Slate Gray `4B4B4B`
 - Source tags and slide numbers: `767676`, which clears 4.5:1
-- Emphasis fills and chart primary series: Tennessee Orange `FF8200`, always directly labeled and
+- Emphasis fills and chart primary series: Accent Orange `FF8200`, always directly labeled and
   outlined in `4B4B4B` so meaning does not rest on hue
 - Text placed on an orange fill: `4B4B4B` at 18 pt or larger
-- Chart secondary series: Smoky Mountain Gray and its tints
+- Chart secondary series: Slate Gray and its tints
 
-Colors marked "sanctioned" here cover the UT System palette only. Campus and institute brands (UTK,
-UTIA, UTHSC, UTFI) publish their own accent sets; check the relevant brand site before borrowing an
-accent color.
+These values cover one institution-level palette. Sub-brands within a large organization typically
+publish their own accent sets; check the relevant brand site before borrowing an accent color, and
+re-run the contrast arithmetic on whatever you find — a sanctioned color is not an accessible one.
 
 ## Applying the tokens
 
-`scripts/build_deck.py` encodes every value on this page. The neutral palette is the default; pass
-`--brand ut` only to match a legacy UT-branded deck, and `--font` to override the typeface. The
-builder computes contrast and warns when a chosen combination falls below AA.
+`scripts/build_deck.py` encodes the tokens for the slide kinds it builds. The neutral palette is
+the default; pass `--brand warm-accent` only when you must match that brand, and `--font` to
+override the typeface. The builder computes contrast on three pairs — ink-on-background, muted-on-background, and
+the accent used as text — and warns on stderr when one falls below its threshold.
+`--brand warm-accent` warns every run, because the accent as a magnitude number is 2.49:1; that
+warning is the tokens rule above speaking, and the fix is to label the value directly rather than to ignore it. Text placed on
+a filled shape is picked automatically as whichever of ink/background contrasts better with the
+fill.
 
 When you build outside the script — editing a template, using the `pptx` skill directly — copy the
 geometry table above rather than eyeballing positions. Consistent placement across slides is most of

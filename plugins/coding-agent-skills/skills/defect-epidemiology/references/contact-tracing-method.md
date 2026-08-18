@@ -14,7 +14,7 @@ history.
 - [The three-pass sweep](#the-three-pass-sweep)
 - [The contact-disposition table](#the-contact-disposition-table)
 - [Patient-zero analysis and the infectious-source checklist](#patient-zero-analysis-and-the-infectious-source-checklist)
-- [R0, worked on a small example](#r0-worked-on-a-small-example)
+- [Source out-degree, worked on a small example](#source-out-degree-worked-on-a-small-example)
 - [Quarantine patterns](#quarantine-patterns)
 - [The outbreak-report template](#the-outbreak-report-template)
 
@@ -73,7 +73,7 @@ events directly — instance C arrived in a commit that visibly duplicated insta
 Draw the tree: nodes are instances (plus any external source), edges are "copied from."
 This is clone genealogy in the Kim et al. sense `[snippet-only]`, done at outbreak scale
 rather than corpus scale. The tree's root is your patient-zero lead, and its branching
-factors are your R0 data.
+factors — each node's out-degree — are your spread data.
 
 ## The contact-disposition table
 
@@ -119,11 +119,12 @@ infectious?** The infectious-source checklist:
 
 Any box ticked means quarantine work remains even if every current contact is patched.
 
-## R0, worked on a small example
+## Source out-degree, worked on a small example
 
-R0 at practice level: **the average number of direct copies each instance spawned**, read
-off the transmission tree's out-degrees (not an invented epidemiological statistic — just
-a name for the tree's branching rate).
+The number that drives the quarantine decision: **each source's out-degree — how many direct
+copies it spawned** — read straight off the transmission tree. Rank by it and act on the
+maximum. (Note what this deliberately is *not*: a single tree-wide ratio. See the caution
+below the example for why such a ratio cannot work.)
 
 Worked example — the sweep found 8 instances (patient-zero template T, its descendants
 A–F, and one independent twin G); pass 3's tree shows:
@@ -137,16 +138,28 @@ G (independent Type-4 twin, no edge from T)
 ```
 
 - Out-degrees: T→4, A→1, C→1, B/D/E/F/G→0.
-- Pattern R0 = total transmissions / members of the transmission tree (G, the
-  independent twin, arose without transmission and sits outside the tree)
-  = 6 / 7 ≈ 0.9 — near 1, so the pattern was still roughly self-sustaining.
-- Per-source: **T alone spawned 4** — the high-R0 node. Fixing A–G without fixing T
-  leaves expected reinfection on every new project scaffolded from it.
-- G is a reminder that R0 isn't everything: independent twins (Type 4) arise without
-  transmission, which is why the semantic pass runs even when the tree looks complete.
+- **Max out-degree = 4 (T); mean out-degree across the 7 tree members = 6/7.**
+- Read the max, not the mean. **T alone spawned 4** — the super-spreader. Fixing A–F
+  without fixing T leaves expected reinfection on every new project scaffolded from it.
+- G is a reminder that the tree isn't everything: independent twins (Type 4) arise
+  without transmission, which is why the semantic pass runs even when the tree looks
+  complete.
 
-Decision rule: quarantine effort goes to sources in descending out-degree; a pattern
-with R0 ≥ 1, or any live source with out-degree ≥ 2, gets the full quarantine set below.
+> **Why there is no tree-level "R0" here — and why you should distrust one if you see it.**
+> It is tempting to divide total transmissions by tree members and call the result R0. Don't:
+> that ratio is an identity, not a measurement. Every member of a transmission tree except
+> patient zero has exactly one parent, so edges always equal members − 1, and the ratio is
+> always (N−1)/N — just under 1 for every tree that has ever existed or could exist. It rises
+> with tree *size* and tells you nothing about spread, and a threshold like "R0 ≥ 1" built on
+> it can never fire. Epidemiology's R0 is an expected secondary-case count for an *ongoing*
+> process in a susceptible population; a completed clone tree is a finished artifact, and the
+> two are not the same quantity. What the tree can honestly tell you is **which sources are
+> still live and how many copies each spawned** — which is the number the quarantine decision
+> actually needs.
+
+Decision rule: quarantine effort goes to sources in descending out-degree; **any still-live
+source with out-degree ≥ 2 gets the full quarantine set below**, and the single highest
+out-degree source gets it first even if that is the only one.
 
 ## Quarantine patterns
 
@@ -186,7 +199,7 @@ CONTACTS: <N found> — patched <n> / not-applicable <n> / accepted-with-reason 
 PATIENT ZERO: <earliest instance and its origin>
 Source still infectious? <checklist results>
 
-R0: pattern <value>; per-source out-degrees: <top sources>
+SPREAD: max out-degree <value> at <source>; per-source out-degrees: <top sources>
 
 QUARANTINE: <source fix | lint/CI rule id | in-situ warnings placed | doc corrections>
 

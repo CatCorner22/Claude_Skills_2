@@ -70,24 +70,24 @@ carried it for the rest of their lives.
 
 ## §4 Worked example: the go-live that should slip
 
-Oracle recon-rules go-live dated for quarter-start. Trigger fired: parallel-run match
-rate 84% against a 97% acceptance criterion two weeks out. Momentum's voice: "we've
+A reconciliation-rules engine go-live dated for quarter-start. Trigger fired:
+parallel-run match rate 84% against a 97% acceptance criterion two weeks out. Momentum's voice: "we've
 been at this five months; the team's booked; we'll tune rules in production."
 
 - Zero-base: starting today, no one would choose a quarter-start cutover at 84%.
-- Burden check: the room was asking the recon lead to PROVE production tuning would
+- Burden check: the room was asking the engine lead to PROVE production tuning would
   fail — inverted; reset so continuation must show how 84→97 happens before the date.
 - Deviance scan: "parallel-run mismatches are mostly timing noise" had become routine;
   first report had called the same pattern "unexplained variances requiring analysis."
 - Both branches: slip = one quarter of dual maintenance (real, priced); continue-wrong
-  = mis-matched cash through a quarter-end close plus the retrofit clock on trust in
+  = mis-matched records through a quarter-end close plus the retrofit clock on trust in
   the new engine. Base rate: the last two "tune it in production" plans took 9 and 14
   weeks.
-- Options: full slip; phased go-live (one bank account family at 97%+ now, rest next
+- Options: full slip; phased go-live (one account family at 97%+ now, rest next
   quarter); descope (auto-match only, manual queue for the tail); criteria change
   (accept 90% with a documented manual-workload plan) — logged openly if chosen.
 - Decision (example): phased go-live; next trigger = any account family below 95% at
-  week 2. Dissent (the treasury manager wanted full slip) restated and logged.
+  week 2. Dissent (the operations manager wanted full slip) restated and logged.
 
 ## §5 Decision-log template
 

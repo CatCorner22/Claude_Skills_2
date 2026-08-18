@@ -15,33 +15,31 @@ Ask **"what skills are available?"** any time to list them.
 ## Install
 
 ```
-/plugin marketplace add blakereaganlaw-droid/claude_skills_2
+/plugin marketplace add CatCorner22/Claude_Skills_2
 /plugin install <plugin>@treasury-analyst-skills      # e.g. decision-science-skills@treasury-analyst-skills
 ```
 Install only the plugins you want; each is independent. Skills are namespaced `<plugin>:<skill>` so they never collide.
 
 ## Plugins
 
-- [`data-analytics-bi-skills`](#data-analytics-bi-skills) (11) — SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
-- [`data-tools-skills`](#data-tools-skills) (7) — Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
+- [`data-analytics-bi-skills`](#data-analytics-bi-skills) (11) — SQL, exploratory analysis, data cleaning, descriptive statistics, statistical inference, dashboard design, spreadsheet modeling, and assertion-evidence presentations for business intelligence — plus causal inference (DAGs, DiD/IV/RDD), A/B test design (SRM, peeking, MDE, variance reduction), and survey and sampling design (total survey error, nonresponse).
+- [`data-tools-skills`](#data-tools-skills) (7) — Practical data plumbing for analysts: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible analysis (seeds, pinned environments, one-command rebuild).
 - [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
-- [`continuous-improvement-skills`](#continuous-improvement-skills) (16) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
+- [`continuous-improvement-skills`](#continuous-improvement-skills) (16) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD), structured-ideation (brainwriting, SCAMPER, diverge/converge), and priority-and-wip (personal kanban, WIP limits, timeboxing).
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, rule-stress-testing, software-archaeology, defect-epidemiology, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
+- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, software-archaeology, defect-epidemiology, rule-stress-testing, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
-- [`deep-research-skills`](#deep-research-skills) (1) — True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
-- [`writing-skills`](#writing-skills) (5) — Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
-- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (10) — High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).
-- [`learning-skills`](#learning-skills) (3) — Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
-- [`collaboration-skills`](#collaboration-skills) (5) — Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).
-- [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
-- [`decision-science-skills`](#decision-science-skills) (15) — Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
-
-Archived plugins (delisted, preserved, restorable) are documented in [archive/README.md](../archive/README.md) and indexed in [INDEX.md](INDEX.md).
+- [`deep-research-skills`](#deep-research-skills) (1) — True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Starting with medical-research-detective for published medical literature.
+- [`writing-skills`](#writing-skills) (5) — Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) — both rejecting litigated "tested language" and ambiguity — gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask, explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).
+- [`safety-and-reliability-skills`](#safety-and-reliability-skills) (10) — High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry), and break-glass-playbooks (Seldon-crisis homage: watched numeric tripwires, sealed first moves, expiring logged authority, scheduled unsealing drills).
+- [`learning-skills`](#learning-skills) (3) — Learning science applied, with the LLM removing each method's historical labor barrier: spaced-retrieval-learning (the testing effect, spacing, and interleaving — retrieval prompts authored and scheduled for you), deliberate-practice (edge-of-ability drills with immediate feedback — the drill built and the environment played for you), and habit-design (implementation intentions, habit stacking, friction engineering). Each skill both runs the method and teaches why it works.
+- [`collaboration-skills`](#collaboration-skills) (5) — Working-with-humans core: meeting-design (the agenda as a decision list, pre-reads with silent start, named decision rules before discussion opens, actions that leave with owners and dates), feedback-that-lands (SBI/COIN structure, behavior-not-person, feedforward, and receiving feedback as well as giving it), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge — low-stakes questions, deliberate-error restatement, the doorknob question — with a plainly named ethics rail), executive-briefing (BLUF, Minto SCQA, completed staff work), and stakeholder-mapping (power-interest grid, RACI, who can block this). All do the task and teach the reasoning.
+- [`math-foundations-skills`](#math-foundations-skills) (6) — Statistics and basic-math foundations, domain-neutral and portable: number sense and Fermi estimation, percentages and proportions (percent change vs points, weighted means, mix effects), algebra and formula rearrangement, unit conversion and dimensional analysis, exponential growth and logarithms (CAGR, doubling time, log scales), and probability fundamentals (conditional probability, Bayes' theorem via natural frequencies, expected value). Each skill both does the math and teaches the reasoning.
+- [`decision-science-skills`](#decision-science-skills) (15) — Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), the-challenger revision review, systems-thinking (stocks/flows, loops, leverage points), bayesian-updating (natural frequencies, likelihood ratios, update discipline), plus the fiction-anchored set — minority-report (the precog scenario cell: structurally different futures, the one-variable turn, the dissenting scenario always filed), no-win-drills (Kobayashi Maru least-worst training with the physics-vs-policy audit), ulysses-pact (calm-state self-binding with unbinding criteria), and rashomon-effect (reconciling contradictory good-faith accounts).
 
 ## `data-analytics-bi-skills`
 
-SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
+SQL, exploratory analysis, data cleaning, descriptive statistics, statistical inference, dashboard design, spreadsheet modeling, and assertion-evidence presentations for business intelligence — plus causal inference (DAGs, DiD/IV/RDD), A/B test design (SRM, peeking, MDE, variance reduction), and survey and sampling design (total survey error, nonresponse).
 
 Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
@@ -135,7 +133,7 @@ Install: `/plugin install data-analytics-bi-skills@treasury-analyst-skills`
 
 ## `data-tools-skills`
 
-Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
+Practical data plumbing for analysts: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible analysis (seeds, pinned environments, one-command rebuild).
 
 Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
@@ -143,7 +141,7 @@ Install: `/plugin install data-tools-skills@treasury-analyst-skills`
 
 **Invoke:** `/data-tools-skills:csv-and-flat-file-wrangling` — or just describe the task.
 
-**What it does:** Ingests real-world CSV and flat-file exports safely — inspecting raw bytes before parsing, detecting encodings and delimiters, declaring an explicit read_csv contract (encoding, separator, string-typed IDs, date formats, na_values) instead of trusting inference, surviving export quirks (BOMs, footer rows, quoted commas, European decimals, and the float-coercion hazard that strips leading zeros from join keys), validating every parse against row counts and control figures, and merging with an outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing. Use when loading a CSV that parses wrong, combining exports from different systems, or hardening a recurring file feed to fail loudly on layout changes.
+**What it does:** Ingests real-world CSV and flat-file exports safely — inspecting raw bytes before parsing, detecting encodings and delimiters, declaring an explicit read_csv contract (encoding, separator, string-typed IDs, date formats, na_values) instead of trusting inference, surviving export quirks (BOMs, footer rows, quoted commas, European decimals, and the numeric-coercion hazard that strips leading zeros from join keys), validating every parse against row counts and control figures, and merging with an outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing. Use when loading a CSV that parses wrong, combining exports from different systems, or hardening a recurring file feed to fail loudly on layout changes.
 
 **Triggers:** `csv parsing`, `delimiter`, `encoding error`, `utf-8 vs latin-1`, `BOM`, `pipe delimited`, `fixed width file`, `load csv pandas`, `merge csv files`, `bank export csv`, `leading zeros lost`, `csv broken columns`, `mojibake`, `flat file feed`
 
@@ -259,7 +257,7 @@ Install: `/plugin install machine-learning-skills@treasury-analyst-skills`
 
 ## `continuous-improvement-skills`
 
-Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
+Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD), structured-ideation (brainwriting, SCAMPER, diverge/converge), and priority-and-wip (personal kanban, WIP limits, timeboxing).
 
 Install: `/plugin install continuous-improvement-skills@treasury-analyst-skills`
 
@@ -425,7 +423,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 **Invoke:** `/full-stack-dev-skills:elite-python-engineer` — or just describe the task.
 
-**What it does:** Acts as "Pythagoras", a principal-level Python engineer who applies the 2026 industry-standard toolchain — uv, Ruff, ty/Pyright strict, Python 3.14+, Pydantic v2, FastAPI, Polars, structlog — to design, write, review, refactor, and migrate Python code. Delivers complete, ready-to-ship solutions: 100% type annotations, domain exceptions with deterministic error handling, audit-ready JSON logging, src/ layout, pytest + hypothesis tests, and CI-ready pyproject.toml, pre-commit, and GitHub Actions config. Use for any production-grade Python task — new code, code review, refactoring, architecture, performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
+**What it does:** Acts as "Pythagoras", a principal-level Python engineer who applies the 2026 industry-standard toolchain — uv, Ruff, Pyright strict / ty, Python 3.14+, Pydantic v2, FastAPI, Polars, structlog — to design, write, review, refactor, and migrate Python code. Delivers complete, ready-to-ship solutions: 100% type annotations, domain exceptions with deterministic error handling, audit-ready JSON logging, src/ layout, pytest + hypothesis tests, and CI-ready pyproject.toml, pre-commit, and GitHub Actions config. Use for any production-grade Python task — new code, code review, refactoring, architecture, performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
 
 **Triggers:** `pythagoras`, `write python`, `refactor`, `principal python review`, `python architecture`, `production-grade python`, `pydantic`, `ruff`, `ty type checker`, `structlog`, `type hints`, `python logging`, `error handling`, `migrate to uv`, `elite python engineer`, `production python`
 
@@ -487,7 +485,7 @@ Install: `/plugin install full-stack-dev-skills@treasury-analyst-skills`
 
 ## `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, rule-stress-testing, software-archaeology, defect-epidemiology, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, software-archaeology, defect-epidemiology, rule-stress-testing, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 
 Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
@@ -519,9 +517,9 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:chicken-little` — or just describe the task.
 
-**What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the modern toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, hybrid project management, and deep Oracle Cloud Fusion Financials data-model knowledge (AP, AR, CoA/GL, XLA tables and statuses) — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) and named Oracle failure modes (Invoice Black Hole, Ghost Receipts, Orphan Distributions). Use when the user asks for Chicken Little or Aether by name.
+**What it does:** Acts as "Chicken Little" (operating name: Aether), an elite multi-domain persona operating at Principal Engineer / Master Black Belt / Enterprise Architect level — production-grade Python and full-stack engineering on the modern toolchain (uv, Ruff, strict typing, Pydantic v2, FastAPI), Lean Six Sigma statistical rigor, and hybrid project management — teaching with sticky analogies (Chicken Little, Boiling Frog, Swiss Cheese, Whack-a-Mole) that make a failure mode memorable enough to catch the next time it starts. Use when the user asks for Chicken Little or Aether by name.
 
-**Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`, `invoice black hole`, `ghost receipts`, `orphan distributions`
+**Triggers:** `chicken little`, `aether`, `chicken little mode`, `sky is falling`
 
 ### `coding-agent-skills:chicken-little-executive-advisor`
 
@@ -535,7 +533,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:chicken-little-technical-compiler` — or just describe the task.
 
-**What it does:** Acts as Forward-Deployed Chicken Little (Technical Compiler Edition) — an adversarial systems auditor, technical architect, and probabilistic risk assessor who stress-tests codebases, system architectures, and logic workflows before they collapse under real-world pressure: runs a fixed architectural autopsy (load-bearing pillars, the Jenga cascading-failure analysis of the one unpinned dependency, a fragility table with statistical likelihood and remediation difficulty, compute-bleed inefficiencies, a proactive pivot to the modern alternative, and mandated actions split critical vs strategic), written to strict MSCD precision — zero passive voice, actors and logic explicit. Use when the user says "deploy compiler" or asks for an adversarial codebase or architecture autopsy.
+**What it does:** Acts as Forward-Deployed Chicken Little (Technical Compiler Edition) — an adversarial systems auditor, technical architect, and probabilistic risk assessor who stress-tests codebases, system architectures, and logic workflows before they collapse under real-world pressure: runs a fixed architectural autopsy (load-bearing pillars, the Jenga cascading-failure analysis of the one unpinned dependency, a fragility table with statistical likelihood and remediation difficulty, compute-bleed inefficiencies, a proactive pivot to the modern alternative, and mandated actions split critical vs strategic), written to strict MSCD precision — active voice, actors and logic explicit. Use when the user says "deploy compiler" or asks for an adversarial codebase or architecture autopsy.
 
 **Triggers:** `deploy compiler`, `deploy_compiler`, `technical chicken little`, `activate technical chicken little`, `architectural autopsy`, `jenga analysis`, `cascading failure audit`, `stress test my codebase`
 
@@ -543,7 +541,7 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:defect-epidemiology` — or just describe the task.
 
-**What it does:** Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread: fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history transmission tree), dispositions every contact as patched, not-applicable, or accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared snippet) so reinfection stops at the source, computes the pattern's R0, and quarantines high-R0 sources with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009 (inconsistent clone edits cause real faults). Use when a found bug's pattern may live elsewhere, or the same bug keeps coming back.
+**What it does:** Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread: fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history transmission tree), dispositions every contact as patched, not-applicable, or accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared snippet) so reinfection stops at the source, ranks sources by copies spawned, and quarantines the top ones with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009 (inconsistent clone edits cause real faults). Use when a found bug's pattern may live elsewhere, or the same bug keeps coming back.
 
 **Triggers:** `contact tracing`, `patient zero`, `code clone`, `copy-paste bug`, `everywhere else this appears`, `outbreak`, `this bug again`, `trace the clones`, `quarantine the template`
 
@@ -691,7 +689,7 @@ Install: `/plugin install metacognition-skills@treasury-analyst-skills`
 
 ## `deep-research-skills`
 
-True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
+True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Starting with medical-research-detective for published medical literature.
 
 Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
@@ -705,7 +703,7 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
 ## `writing-skills`
 
-Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
+Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) — both rejecting litigated "tested language" and ambiguity — gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask, explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).
 
 Install: `/plugin install writing-skills@treasury-analyst-skills`
 
@@ -713,7 +711,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **Invoke:** `/writing-skills:adams-plain-grade` — or just describe the task.
 
-**What it does:** Writes and edits to Ken Adams clarity principles at a 5th-grade reading level (US Southeast), falling back to 8th grade only when precision demands it — short active sentences, everyday concrete words, one idea per sentence, technical terms explained in place, and a hard rejection of litigated "tested language," archaisms, doublets, and ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by name, or wants plain English, patient or client materials, easy-read text, or writing for low-literacy audiences.
+**What it does:** Writes and edits to Ken Adams clarity principles at a 5th-grade reading level, falling back to 8th grade only when precision demands it — short active sentences, everyday concrete words, one idea per sentence, technical terms explained in place, and a hard rejection of litigated "tested language," archaisms, doublets, and ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by name, or wants plain English, patient or client materials, easy-read text, or writing for low-literacy audiences.
 
 **Triggers:** `adams plain grade`, `plain grade`, `plain english`, `plain language`, `5th grade reading level`, `easy to read`, `easy-read`, `make this easier to read`, `simplify this letter`, `accessible language`, `patient materials`, `low literacy`, `simplest accurate version`
 
@@ -751,7 +749,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 ## `safety-and-reliability-skills`
 
-High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).
+High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry), and break-glass-playbooks (Seldon-crisis homage: watched numeric tripwires, sealed first moves, expiring logged authority, scheduled unsealing drills).
 
 Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
@@ -837,7 +835,7 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 ## `learning-skills`
 
-Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
+Learning science applied, with the LLM removing each method's historical labor barrier: spaced-retrieval-learning (the testing effect, spacing, and interleaving — retrieval prompts authored and scheduled for you), deliberate-practice (edge-of-ability drills with immediate feedback — the drill built and the environment played for you), and habit-design (implementation intentions, habit stacking, friction engineering). Each skill both runs the method and teaches why it works.
 
 Install: `/plugin install learning-skills@treasury-analyst-skills`
 
@@ -867,7 +865,7 @@ Install: `/plugin install learning-skills@treasury-analyst-skills`
 
 ## `collaboration-skills`
 
-Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).
+Working-with-humans core: meeting-design (the agenda as a decision list, pre-reads with silent start, named decision rules before discussion opens, actions that leave with owners and dates), feedback-that-lands (SBI/COIN structure, behavior-not-person, feedforward, and receiving feedback as well as giving it), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge — low-stakes questions, deliberate-error restatement, the doorknob question — with a plainly named ethics rail), executive-briefing (BLUF, Minto SCQA, completed staff work), and stakeholder-mapping (power-interest grid, RACI, who can block this). All do the task and teach the reasoning.
 
 Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
@@ -891,7 +889,7 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
 **Invoke:** `/collaboration-skills:feedback-that-lands` — or just describe the task.
 
-**What it does:** Structures workplace feedback so it lands, giving and receiving with equal weight. Giving: Situation-Behavior-Impact (Center for Creative Leadership) — the specific situation, the observed behavior (never inferred character or motive), impact as the speaker's own experience; one topic per conversation; requests framed forward (Marshall Goldsmith's feedforward); praise as specific as criticism. Receiving: separate data from delivery, name the firing trigger (truth, relationship, identity — Stone & Heen) before responding, ask for the behavior behind a vague label, close the loop. Drafts the SBI script from a messy vent, rehearses as the receiver (even a defensive one), and audits performance notes or review comments for character-language. Use for hard conversations about a person's work behavior, in either direction.
+**What it does:** Structures workplace feedback so it lands, giving and receiving with equal weight. Giving: Situation-Behavior-Impact (Center for Creative Leadership) — the specific situation, the observed behavior (never inferred character or motive), impact as the speaker's own experience; one topic per conversation; requests framed forward (Marshall Goldsmith's feedforward); praise as specific as criticism. Receiving: name the firing trigger (truth, relationship, identity — Stone & Heen) before responding, separate data from delivery, ask for the behavior behind a vague label, close the loop. Drafts the SBI script from a messy vent, rehearses as the receiver (even a defensive one), and audits performance notes or review comments for character-language. Use for hard conversations about a person's work behavior, in either direction.
 
 **Triggers:** `give feedback`, `SBI`, `feedback conversation`, `they got defensive`, `receiving feedback`, `performance conversation`, `code review tone`, `hard conversation with a teammate`
 
@@ -913,7 +911,7 @@ Install: `/plugin install collaboration-skills@treasury-analyst-skills`
 
 ## `math-foundations-skills`
 
-Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
+Statistics and basic-math foundations, domain-neutral and portable: number sense and Fermi estimation, percentages and proportions (percent change vs points, weighted means, mix effects), algebra and formula rearrangement, unit conversion and dimensional analysis, exponential growth and logarithms (CAGR, doubling time, log scales), and probability fundamentals (conditional probability, Bayes' theorem via natural frequencies, expected value). Each skill both does the math and teaches the reasoning.
 
 Install: `/plugin install math-foundations-skills@treasury-analyst-skills`
 
@@ -967,7 +965,7 @@ Install: `/plugin install math-foundations-skills@treasury-analyst-skills`
 
 ## `decision-science-skills`
 
-Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
+Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), the-challenger revision review, systems-thinking (stocks/flows, loops, leverage points), bayesian-updating (natural frequencies, likelihood ratios, update discipline), plus the fiction-anchored set — minority-report (the precog scenario cell: structurally different futures, the one-variable turn, the dissenting scenario always filed), no-win-drills (Kobayashi Maru least-worst training with the physics-vs-policy audit), ulysses-pact (calm-state self-binding with unbinding criteria), and rashomon-effect (reconciling contradictory good-faith accounts).
 
 Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
@@ -1063,7 +1061,7 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 
 **Invoke:** `/decision-science-skills:tabletop-wargaming` — or just describe the task.
 
-**What it does:** Designs and runs a multi-party tabletop exercise with an adversary and adjudication, in the lineage Kriegsspiel → Army course-of-action analysis (action / reaction / counteraction) → CISA-style tabletop packages: define objectives and scenario (a BEC payment-fraud drill, a bank-connectivity outage on payroll day, ransomware during close), write the blue team's commander's intent (purpose, key tasks, end state), assign blue players, a red cell, and a white-cell facilitator/adjudicator, play turns driven by pre-scripted and adaptive injects, adjudicate plausibility, capture decisions and gaps, and hand off to an after-action review. The LLM plays red and white cell strictly as a scenario generator — humans adjudicate every consequential outcome. Use when rehearsing an incident-response, fraud, continuity, or cutover plan against an adaptive adversary.
+**What it does:** Designs and runs a multi-party tabletop exercise with an adversary and adjudication, in the lineage Kriegsspiel → Army course-of-action analysis (action / reaction / counteraction) → CISA-style tabletop packages: define objectives and scenario (an impersonated urgent instruction, a critical-vendor outage on a deadline day, ransomware in a freeze), write the blue team's commander's intent (purpose, key tasks, end state), assign blue players, a red cell, and a white-cell adjudicator, play turns driven by pre-scripted and adaptive injects, adjudicate plausibility, capture decisions and gaps, and hand off to an after-action review. The LLM plays red and white cell strictly as a scenario generator — humans adjudicate every consequential outcome. Use when rehearsing an incident-response, fraud, continuity, or cutover plan against an adaptive adversary.
 
 **Triggers:** `tabletop exercise`, `wargame the plan`, `run a drill`, `incident simulation`, `inject`, `BCP exercise`, `commander's intent`
 

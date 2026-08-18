@@ -2,7 +2,7 @@
 """Build a compliant assertion-evidence .pptx from a JSON deck spec.
 
 Usage:
-  python build_deck.py deck_spec.json -o output.pptx [--brand neutral|ut] [--font NAME]
+  python build_deck.py deck_spec.json -o output.pptx [--brand neutral|warm-accent] [--font NAME]
   python build_deck.py --schema         # print the spec format and the eight slide kinds
 
 The builder encodes the geometry, typography, and colors verified in
@@ -46,11 +46,30 @@ BANNED = {"kind"}             # reserved keys, not content
 
 # --- Palettes -------------------------------------------------------------
 PALETTES = {
-    "ut": dict(primary="FF8200", ink="4B4B4B", muted="767676",
-               secondary="A6A6A6", bg="FFFFFF"),
     "neutral": dict(primary="4B4B4B", ink="333333", muted="767676",
                     secondary="A6A6A6", bg="FFFFFF"),
+    # A warm-accent institutional palette, kept as a worked case of a *published*
+    # brand whose accent fails WCAG as text (FF8200 on white is 2.49:1). It is not
+    # the default and it warns on every run — see references/design-tokens.md.
+    "warm-accent": dict(primary="FF8200", ink="4B4B4B", muted="767676",
+                        secondary="A6A6A6", bg="FFFFFF"),
 }
+
+# Old spec files and command lines say `ut`. Renaming a CLI value silently breaks
+# every deck spec that already carries it, so the old name still resolves and says so.
+BRAND_ALIASES = {"ut": "warm-accent"}
+
+
+def resolve_brand(name):
+    """Canonical palette name, honouring deprecated aliases."""
+    if name in PALETTES:
+        return name
+    if name in BRAND_ALIASES:
+        new = BRAND_ALIASES[name]
+        print(f"NOTE: brand '{name}' was renamed to '{new}'; the old name still works.",
+              file=sys.stderr)
+        return new
+    raise SystemExit(f"unknown brand {name!r} — choose from {', '.join(PALETTES)}")
 
 SLIDE_KINDS = {
     "title":      "Title slide. Fields: headline, subtitle.",
@@ -83,6 +102,15 @@ def contrast(fg, bg):
     a, b = _lum(fg), _lum(bg)
     hi, lo = max(a, b), min(a, b)
     return (hi + 0.05) / (lo + 0.05)
+
+
+def _on(fill_hex, pal):
+    """Readable text colour for a filled shape: whichever of ink/background wins.
+
+    Hard-coding ink put 333333 on the neutral palette's 4B4B4B emphasis fill —
+    1.45:1, i.e. invisible — on the builder's own default brand.
+    """
+    return max((pal["ink"], pal["bg"]), key=lambda c: contrast(c, fill_hex))
 
 
 # --- Headline budget ------------------------------------------------------
@@ -258,8 +286,11 @@ def _column(slide, x, spec_col, pal, font):
 
 
 def build_two_column(slide, spec, pal, font):
-    _column(slide, COL["left_x"] - COL["w"] / 2, spec.get("left", {}), pal, font)
-    _column(slide, COL["right_x"] - COL["w"] / 2, spec.get("right", {}), pal, font)
+    # left_x / right_x are the columns' LEFT EDGES in the tokens table, not their
+    # centres. Treating them as centres shifted the pair to 0.39 / 5.88 in — inside
+    # the 0.92 in side margin, with three inches of dead space on the right.
+    _column(slide, COL["left_x"], spec.get("left", {}), pal, font)
+    _column(slide, COL["right_x"], spec.get("right", {}), pal, font)
 
 
 def build_flow(slide, spec, pal, font):
@@ -280,8 +311,8 @@ def build_flow(slide, spec, pal, font):
         shp.line.color.rgb = rgb(pal["ink"])
         tf = shp.text_frame
         tf.word_wrap = True
-        _set_para(tf, step, font, 14,
-                  pal["ink"] if i != n - 1 else pal["ink"], bold=True,
+        fill_hex = pal["primary"] if i == n - 1 else pal["bg"]
+        _set_para(tf, step, font, 14, _on(fill_hex, pal), bold=True,
                   align=PP_ALIGN.CENTER)
         if i < n - 1:
             _, atf = _textbox(slide, x + box, y, arrow, h, MSO_ANCHOR.MIDDLE)
@@ -304,14 +335,18 @@ BUILDERS = {
 
 
 def build(spec, brand, font_override):
-    pal = PALETTES[brand].copy()
+    pal = PALETTES[resolve_brand(brand)].copy()
     font = font_override or spec.get("font") or "Calibri"
 
     # Contrast guard on the standard text pairs.
-    for label, fg in (("body/ink", pal["ink"]), ("source/muted", pal["muted"])):
+    for label, fg, floor in (("body/ink", pal["ink"], 4.5),
+                             ("source/muted", pal["muted"], 4.5),
+                             ("accent-as-text (magnitude numbers, column titles)",
+                              pal["primary"], 3.0)):
         r = contrast(fg, pal["bg"])
-        if r < 4.5:
-            print(f"WARN: {label} {fg} on {pal['bg']} is {r:.2f}:1 (< 4.5:1 AA)",
+        if r < floor:
+            print(f"WARN: {label} {fg} on {pal['bg']} is {r:.2f}:1 "
+                  f"(< {floor}:1 AA) — label the value directly; do not let colour carry it",
                   file=sys.stderr)
 
     prs = Presentation()
@@ -353,7 +388,7 @@ def print_schema():
     print(json.dumps({
         "title": "string (used only if a title slide is present)",
         "font": "Calibri (optional; --font overrides)",
-        "brand": "neutral | ut (optional; --brand overrides)",
+        "brand": "neutral | warm-accent (optional; --brand overrides)",
         "slides": ["{kind: <one of below>, headline: ..., ...}"],
     }, indent=2))
     print("\nSlide kinds:\n")
@@ -366,7 +401,13 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Build an assertion-evidence .pptx from a JSON spec.")
     ap.add_argument("spec", nargs="?", help="deck spec JSON file")
     ap.add_argument("-o", "--out", help="output .pptx path")
-    ap.add_argument("--brand", choices=list(PALETTES), default="neutral")
+    # default=None, NOT "neutral": the spec file's own brand applies only when the
+    # flag is absent, and `--brand neutral` given explicitly has to win over a spec
+    # that says otherwise. Defaulting to the string makes those two cases identical.
+    ap.add_argument("--brand", default=None,
+                    help="palette: " + " | ".join(PALETTES)
+                         + " (deprecated aliases still accepted: "
+                         + ", ".join(BRAND_ALIASES) + ")")
     ap.add_argument("--font", default=None, help="override the typeface (default Calibri)")
     ap.add_argument("--schema", action="store_true", help="print the spec format and exit")
     args = ap.parse_args(argv)
@@ -379,9 +420,15 @@ def main(argv=None):
 
     with open(args.spec, encoding="utf-8") as fh:
         spec = json.load(fh)
-    prs = build(spec, args.brand, args.font)
+    # --brand wins when given; otherwise the spec file's own "brand" field applies.
+    # Resolve once — resolve_brand warns on a deprecated name, and warning twice for
+    # one run reads like two problems.
+    brand = resolve_brand(args.brand
+                          if args.brand is not None
+                          else spec.get("brand", "neutral"))
+    prs = build(spec, brand, args.font)
     prs.save(args.out)
-    print(f"wrote {args.out}  ({len(spec.get('slides', []))} slides, brand={args.brand})")
+    print(f"wrote {args.out}  ({len(spec.get('slides', []))} slides, brand={brand})")
 
 
 if __name__ == "__main__":

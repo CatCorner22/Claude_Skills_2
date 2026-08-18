@@ -11,7 +11,7 @@ description: >-
   session, API error handling, HTTP status codes, pagination endpoint, OpenAPI schema,
   dependency injection fastapi, CRUD API.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Backend API development (FastAPI)
@@ -56,8 +56,9 @@ def create_invoice(data: InvoiceIn, db: Session = Depends(get_db)):
      framework session middleware, no token plumbing.
    - SPA or third-party API clients → **JWT access token** (short-lived, ~15 min) +
      refresh flow, or an opaque token in a table if you want revocation without JWT caveats.
-   - Never build password hashing yourself — `passlib`/`argon2`; never put secrets in the
-     JWT payload (it's readable, only *signed*).
+   - Never build password hashing yourself — `pwdlib[argon2]` (Argon2id;
+     `PasswordHash.recommended()`). passlib's last release is 1.7.4, October 2020. Never put
+     secrets in the JWT payload (it's readable, only *signed*).
 5. **Make errors one shape everywhere.** Raise `HTTPException` (or a small domain exception
    mapped by one handler) so every error returns `{"detail": ...}` with the right status:
    422 validation (automatic), 401 unauthenticated, 403 forbidden, 404 absent, 409 conflict.
@@ -103,6 +104,12 @@ endpoint.
 Record your API conventions in `references/your-environment.md`: auth choice per client,
 error shape, pagination defaults/max, versioning policy if any, and naming conventions —
 so every new endpoint (human- or agent-written) matches the house shape.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/backend-api-development.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/fastapi-patterns.md — auth recipes (sessions + JWT), error handler, pagination helper, endpoint checklist

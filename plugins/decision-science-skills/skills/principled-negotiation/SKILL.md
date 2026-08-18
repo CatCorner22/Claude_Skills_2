@@ -13,6 +13,8 @@ description: >-
   dispute. Triggers: BATNA, prepare for a
   negotiation, push back on this fee increase, renegotiate the contract, calibrated
   questions, tactical empathy, accusation audit, talk them down.
+metadata:
+  version: "1.1.0"
 ---
 
 # Principled negotiation
@@ -22,17 +24,23 @@ description: >-
   processor markup (the processor's markup is the only layer open to negotiation —
   interchange and network fees are set upstream), an insurance-carrier fee schedule, a
   vendor or carrier contract renewal or dispute.
+- Any repeat-relationship negotiation with the same shape, whatever the domain: a
+  renewal price rise, a scope-vs-fee dispute, a rate or compensation conversation. The
+  prep pack below does not change with the number in dispute — only its criteria table
+  does.
 - Building the prep pack almost nobody writes: interest map, BATNA tree,
   objective-criteria table, accusation audit, calibrated-question bank — then roleplaying
   the counterpart before the real conversation.
-- Not for: computing what the fees *should* be → that is a fee-benchmarking analysis
-  (archived: `banking-skills:bank-fee-analysis`, restorable from `archive/`) — decoding
-  the account-analysis statement into benchmark tables and levers builds the case; this
-  skill runs the ask.
+- Not for: computing what the fees *should* be → that is a fee-benchmarking analysis, a
+  domain exercise this library does not carry. Decoding a vendor's pricing statement into
+  benchmark tables and levers builds the case; this skill runs the ask.
 - Not for: patient-complaint or service-recovery conversations → that is service
   recovery, a different discipline; this library does not yet carry a skill for it.
 
 ## Do it
+Preparation worksheets, the tactic-response table, and the worked case are in
+`references/negotiation-prep-and-tactics.md`.
+
 1. **Map interests behind positions.** A position is what each side says it wants ("the
    12% increase stands"); an interest is *why* they want it (revenue target, cost to
    serve, retention, risk). Write both sides' interests in a two-column map — yours from
@@ -114,6 +122,12 @@ sources in `references/your-environment.md`. Keep walk-away lines, target prices
 positions, and anything about a negotiation still in progress in
 `references/your-environment.private.md` — git-ignored, never committed: a committed
 walk-away line is a leaked one.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/principled-negotiation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/negotiation-prep-and-tactics.md — the full prep template, tactic catalog

@@ -19,6 +19,8 @@ Start any new skill by copying
   `Tailor to your environment` → `References` → (optional) `Scripts`. Keep the body under 500 lines.
 - Evals go in `evals/<plugin>/<skill>.md` (positive trigger, near-miss, quality rubric) — never in SKILL.md.
 - Validate with `bash scripts/validate.sh` and `claude plugin validate plugins/<plugin>`.
+  `validate.sh` calls `scripts/check-arithmetic.py`, so a worked example whose numbers do not
+  add up now fails the build rather than waiting for a reviewer to catch it.
   Ship at **0 errors**; `NOTE` lines are informational.
 - **Regenerate the catalog after any skill change:** `python3 scripts/gen-catalog.py` rewrites both
   [`docs/SKILLS.md`](docs/SKILLS.md) (full catalog) and [`docs/INDEX.md`](docs/INDEX.md) (the
@@ -47,8 +49,9 @@ engineering, safety & reliability, decision science, and the Wave-D reference re
 [`docs/library-review-2026-08.md`](docs/library-review-2026-08.md).
 
 ### The original ten waves (day-job first)
-Plugins marked **[archived]** were later moved to `archive/plugins/` when the library was re-aimed
-at general use; they are preserved and restorable, not deleted.
+Plugins marked **[archived]** were delisted when the library was re-aimed at general use, and the
+Oracle and finance/treasury sets among them were later **deleted** on owner direction (2026-08-18).
+They survive only in git history — see [`archive/README.md`](archive/README.md).
 
 - **Wave 0 — Foundation:** ✅ repo scaffold, authoring standard + template, `bank-reconciliation`
   exemplar, validator.
@@ -87,9 +90,9 @@ at general use; they are preserved and restorable, not deleted.
 - **Wave 9 — Fusion Treasury Architect:** ✅ `fusion-treasury-architect` subagent (elite
   configuration-specific Oracle Fusion Financials/Treasury persona: FSM tasks, Redwood
   navigation, SLA, bank-file parsing, structured troubleshooting) + the
-  `fusion-architect-consult` skill, added to `oracle-fusion-finance-skills`. **[archived]** —
-  both went to `archive/plugins/oracle-fusion-finance-skills/` with their host plugin, so no
-  subagent ships outside `coding-agent-skills` today.
+  `fusion-architect-consult` skill, added to `oracle-fusion-finance-skills`. **[deleted]** —
+  both went with their host plugin in the Oracle deletion, so no subagent ships outside
+  `coding-agent-skills` today.
 
 Each plugin is independently installable and useful.
 

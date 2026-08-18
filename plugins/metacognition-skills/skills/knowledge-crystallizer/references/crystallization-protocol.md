@@ -84,8 +84,10 @@ semantic store:
 ```
 Every permanent entry should be traceable to a log line; every log line should make the
 change reversible (what was there before). One line is the deliberate size: cheap enough
-that the pass actually runs at every milestone, rich enough to audit. This repository's
-own MEMORY.md carries months of these lines — the practice's existence proof.
+that the pass actually runs at every milestone, rich enough to audit. This repository's own
+MEMORY.md carries a month of these entries, and their drift from one line to twenty is
+itself the failure mode the rule guards against — when a pass needs a paragraph, the pass
+was too big, not the log too small.
 
 ## Pruning rules
 - **Merge** entries that say the same thing differently — keep the clearer phrasing, note
@@ -129,7 +131,7 @@ user liked.
 - Leverage gate fails: single occurrence, no evidence the phrasing generalizes.
 - **Discarded** (noted as episodic detail only). If it recurs, it re-nominates itself.
 
-**Candidate C** — the user announces their role (recorded months earlier as a high-
+**Candidate C** — the user announces their role (recorded three weeks earlier as a high-
 confidence FACT) is ending, and issues a standing instruction about future work.
 - Consistency gate fires: contradiction with the stored employment fact.
 - **Handled:** the original FACT gains an UPDATE annotation (original kept for

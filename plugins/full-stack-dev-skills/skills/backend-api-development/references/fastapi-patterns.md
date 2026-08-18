@@ -13,6 +13,10 @@
 app.add_middleware(SessionMiddleware, secret_key=settings.secret_key,
                    https_only=True, same_site="lax")
 
+from pwdlib import PasswordHash
+hasher = PasswordHash.recommended()   # Argon2id; build once at import, not per request.
+                                      # Do NOT name it `pwd` — that shadows the stdlib module.
+
 def require_user(request: Request, db: Session = Depends(get_db)) -> User:
     if uid := request.session.get("uid"):
         if user := db.get(User, uid):
@@ -22,7 +26,7 @@ def require_user(request: Request, db: Session = Depends(get_db)) -> User:
 @router.post("/login")
 def login(data: LoginIn, request: Request, db: Session = Depends(get_db)):
     user = db.scalar(select(User).where(User.email == data.email))
-    if not user or not pwd.verify(data.password, user.password_hash):
+    if not user or not hasher.verify(data.password, user.password_hash):
         raise HTTPException(401, "Invalid credentials")   # same message both cases
     request.session["uid"] = user.id
     return {"ok": True}
@@ -40,11 +44,15 @@ def current_user(creds: HTTPAuthorizationCredentials = Depends(HTTPBearer()),
     try:
         payload = jwt.decode(creds.credentials, settings.secret_key, algorithms=["HS256"])
     except jwt.PyJWTError:
+        raise HTTPException(401) from None
+    user = db.get(User, int(payload["sub"]))
+    if user is None:
         raise HTTPException(401)
-    return db.get(User, int(payload["sub"])) or raise_(HTTPException(401))
+    return user
 ```
 Refresh: long-lived refresh token in an HttpOnly cookie or a DB table (revocable), exchanged
-for short access tokens at `/refresh`. Password hashing: `argon2` via passlib — never custom.
+for short access tokens at `/refresh`. Password hashing: Argon2id via `pwdlib`
+(`PasswordHash.recommended()`) — never custom, never passlib (unmaintained since 2020).
 
 ## One-shape error handling
 ```python
@@ -57,9 +65,13 @@ def domain_error(_, exc: DomainError):
 
 @app.exception_handler(Exception)          # last resort: log detail, hide it
 def unhandled(_, exc: Exception):
-    log.exception("unhandled")
+    log.exception("unhandled", exc_info=exc)   # exc_info=exc is load bearing — see below
     return JSONResponse({"detail": "Internal error"}, status_code=500)
 ```
+Pass `exc_info=exc` explicitly: an exception handler is not running inside an `except` block, so
+a bare `log.exception("unhandled")` records `NoneType: None` where the traceback should be — the
+one thing the generic 500 handler exists to capture. Verified on FastAPI 0.141.
+
 Status map: 400 bad request semantics · 401 who are you · 403 not yours · 404 absent
 (also for "exists but you may not know that") · 409 conflict/duplicate · 422 shape invalid
 (automatic).

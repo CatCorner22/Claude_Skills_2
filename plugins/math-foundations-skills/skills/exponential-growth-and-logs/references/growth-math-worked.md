@@ -55,7 +55,7 @@ endpoints. It says nothing about the path between them — a series that went
 (1.10197² = 1.2143).
 
 ## 3. Doubling and halving time; rule-of-72 accuracy
-Exact doubling time at per-period rate r: **t = ln 2 / ln(1+r)** (ln 2 ≈ 0.6931).
+Exact doubling time at per-period rate r: **t = ln 2 / ln(1+r)** (ln 2 ≈ 0.69315).
 The rule of 72 approximates this as 72 ÷ rate-in-percent.
 
 | Rate r | Exact ln2/ln(1+r) | Rule of 72 | Rule error |
@@ -75,7 +75,7 @@ low rates (where 69.3 would be the better constant), and undershoots at high rat
 Outside that band, compute the exact form.
 
 **Halving time** for a quantity decaying d% per period: t = ln 2 / |ln(1−d)|.
-- At 15% decay per year: ln(0.85) = −0.16252, so t = 0.6931 / 0.16252 = **4.27 years**.
+- At 15% decay per year: ln(0.85) = −0.16252, so t = 0.69315 / 0.16252 = **4.27 years**.
 - Check: 0.85^4.27 → 4.27 × ln(0.85) = 4.27 × (−0.16252) = −0.6940 → e^−0.694 ≈ 0.4996
   ≈ ½ ✓.
 - The rule of 72 gives 72/15 = 4.8 — noticeably too slow, because |ln(1−d)| > ln(1+d)
@@ -92,7 +92,7 @@ Worked: 5,000 growing at 12% per year; when does it reach 20,000?
 - ln(4) = 1.38629; ln(1.12) = 0.11333.
 - t = 1.38629 / 0.11333 = **12.23 years**.
 - Consistency check: quadrupling is two doublings; doubling at 12% is
-  0.6931/0.11333 = 6.116 years; 2 × 6.116 = 12.23 ✓.
+  0.69315/0.11333 = 6.116 years; 2 × 6.116 = 12.23 ✓.
 - Endpoint check: 1.12^12.23 → 12.23 × 0.11333 = 1.3860 → e^1.386 ≈ 3.999 ≈ 4 ✓.
 
 **Dimensional check** (run it every time):
@@ -122,11 +122,11 @@ Worked series: three annual returns +20%, −10%, +15%.
 | 3 | +15% | 1.15 | 1.2420 |
 
 - Actual 3-year outcome: ×1.242 (+24.2%).
-- Geometric average: 1.242^(1/3) − 1. ln(1.242) = 0.21672; ÷3 = 0.07224;
-  e^0.07224 = 1.07491 → **7.49% per year**.
-  Check: 1.07491³ = 1.07491² (=1.15544) × 1.07491 = 1.24200 ✓.
+- Geometric average: 1.242^(1/3) − 1. ln(1.242) = 0.216723; ÷3 = 0.072241;
+  e^0.072241 = 1.074914 → **7.49% per year**.
+  Check: 1.074914² = 1.155440; × 1.074914 = 1.241999 ≈ 1.242 ✓.
 - Arithmetic average: (20 − 10 + 15)/3 = 25/3 = **8.33% per year**.
-  Compounded: 1.08333³ = 1.17361 × 1.08333 = 1.27141 → claims +27.1%, but the actual
+  Compounded: 1.083333² = 1.17361; × 1.083333 = 1.27141 → claims +27.1%, but the actual
   outcome was +24.2%. The arithmetic figure overstates by nearly 3 points of factor.
 
 Extreme case: +50% then −50%. Actual: 1.5 × 0.5 = 0.75 (down 25%). Arithmetic

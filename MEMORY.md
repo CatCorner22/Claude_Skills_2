@@ -5,15 +5,15 @@ see the crystallization log at the bottom). Loaded at session start per CLAUDE.m
 Never store secrets, credentials, account numbers, or client data here.
 
 ## Core Facts & Entities
-- FACT: The user (GitHub: blakereaganlaw-droid) works in Cash Management at the University of
-  Tennessee on Oracle Fusion Cloud — their personal environment carries UT-specific skills
-  (`bsl-enrichment`, `oracle-cm-config-review`) for Oracle CM BSL exports and config review.
-  (evidence: skills present in user env, 2026-07-18; confidence: high)
-  (UPDATE 2026-08-08: the user's UT role is ending — see the standing directive below.
-  Contradiction flagged, original kept for provenance.)
+- FACT: The user's prior role was finance/treasury operations on a cloud ERP, with a
+  personal-environment pair of employer-specific skills for that system's exports and config
+  review. Identifying detail (employer, role, handles, project names) lives in the git-ignored
+  `MEMORY.private.md`; this file stays publishable. (evidence: user env, 2026-07-18; high)
+  (UPDATE 2026-08-08: that role is ending — see the standing directive below. Contradiction
+  flagged, original kept for provenance.)
 - DIRECTIVE (user-stated 2026-08-08, standing): **No more Oracle work.** Build nothing new
-  that mounts on Oracle/UT-treasury workflows. The existing Oracle/treasury skills stay in
-  the library untouched — they are the user's portable professional assets, not UT's.
+  that mounts on Oracle/employer-treasury workflows. The existing Oracle/treasury skills stay in
+  the library untouched — they are the user's portable professional assets, not the employer's.
   In-flight research is HELD (see `docs/research/epic-wave-held-research.md`) until the
   user says where to re-aim: the dental practice app, the job search, or a new direction.
   (UPDATE 2026-08-11: EXTENDED — the "stay untouched" clause is superseded. The user
@@ -31,11 +31,11 @@ Never store secrets, credentials, account numbers, or client data here.
   branch — other agents' PRs merge into it, not only into main. (evidence: PRs #4–#12
   targeted it; confidence: high)
 
-- FACT: The user's reconciliation projects: `OG_Recon` = the deterministic forward matching
-  engine (open BSL → open ST, Oracle CM "DASH", passes P0–P10, independent audit C1–C10);
-  `Unreconcile2` = the separate backward un-reconciliation engine; `BSL_MATCHING_ENGINE` =
-  the bank-data-free recreation of OG_Recon (built 2026-07-18). (evidence: repo READMEs +
-  build session; confidence: high)
+- FACT: The user maintains a family of three reconciliation engines — a deterministic forward
+  matcher with numbered passes and an independent audit tier, a separate backward
+  un-reconciliation engine, and a bank-data-free recreation of the first. Repo names and the
+  system-specific vocabulary are in `MEMORY.private.md`. (evidence: repo READMEs + build
+  session, 2026-07-18; confidence: high)
 
 ## User Preferences & Style
 - PREFERENCE: Skills follow the "do + teach" house standard — perform the task step by step AND
@@ -58,7 +58,7 @@ Never store secrets, credentials, account numbers, or client data here.
   camt/SWIFT) prohibited as a hard guard, and no potentially sensitive data retained — purge
   staged inputs post-run, scrub 9+-digit runs in logs/manifests (keep YYYYMMDD stamps), git
   hygiene gate for data files. The BSL_UNR export and its derivatives are always allowed.
-  (user-stated for BSL_MATCHING_ENGINE, 2026-07-18)
+  (user-stated for the matching-engine project, 2026-07-18)
 
 ## Project State & Decisions
 - FACT: Library FINALIZED 2026-08-11: **121 active skills / 14 plugins**, 1298 trigger
@@ -69,7 +69,7 @@ Never store secrets, credentials, account numbers, or client data here.
   The one verification never done: evals have never been EXECUTED — static coherence
   audited, ~360 scenarios unrun, needs fresh interactive sessions.
   - CORRECTION (2026-08-17, measured): "**zero collisions**" is true only of *exact duplicate
-    trigger strings*. The router matches whole descriptions, and 85 trigger phrases still appear
+    trigger strings*. The router matches whole descriptions, and 111 trigger phrases still appear
     as whole words inside a different skill's description prose (`python` in 7 others). Read the
     zero as "no two skills claim an identical phrase", never as "routing is unambiguous".
   - CORRECTION (2026-08-17): there are **two** never-run verifications, not one. Alongside the
@@ -105,14 +105,13 @@ Never store secrets, credentials, account numbers, or client data here.
   lean-six-sigma-for-software` (Deming/TPS/DMAIC + WCAG 2.2 AA design system + adversarial
   testing + stability/redundancy), `coding-agent-skills:chicken-little` (multi-domain persona,
   loads on its name), and `continuous-improvement-skills:curve-hero-design-language` (promoted
-  from LSS's reference to a standalone sibling skill — owns the bare "curve hero" trigger;
-  LSS cross-links to it and keeps only prose mention). (updated 2026-08-02)
-- FACT: Curve Hero is Curve Dental's cloud dental practice-management platform. The user wants
-  UI work synced to it as a **design/UX reference only** (their words via question: the skill
-  itself is the deliverable; no data integration). Curve-specific vocabulary differs from other
-  dental PMSs: Recare (not recall), Responsible Party/RP (not guarantor), checkout finalizes an
-  Invoice (no "walkout"), Carrier, Operatory, Sidekick, SnapShot, fee guide, "days owing"
-  aging. (researched + gap-checked 2026-08-02; provenance-marked in the skill's reference)
+  from LSS's reference to a standalone sibling skill, owning the reference product's own name as
+  its trigger; LSS cross-links to it and keeps only prose mention). Since archived. (updated 2026-08-02)
+- FACT: the reference product for UI-sync work, its vendor, and its distinguishing vocabulary
+  are recorded in `MEMORY.private.md` (§Private project names) — they name a specific commercial
+  product and a specific practice, so they are tailoring detail, not structural memory. The
+  structural fact that belongs here: UI work is synced to a reference product as a **design/UX
+  reference only** — the skill is the deliverable, never a data integration.
 - PREFERENCE: The user wants research skills that go far past baseline search — explicit
   methodology (hypothesis-before-search, cross-silo dot-connection, disconfirmation), source
   provenance control, and mechanical citation verification. They pre-empt the "not medical advice"
@@ -149,10 +148,51 @@ Never store secrets, credentials, account numbers, or client data here.
 - OPEN: Tailoring artifacts not yet supplied — sample OTBI report, reconciliation checklist,
   chart-of-accounts structure, redacted bank statement file. Each unlocks the corresponding
   `your-environment.md`. (as of 2026-07-18)
-- OPEN: The CAMT.053 version supported in UT's Oracle release needs confirmation before any
+- OPEN: The CAMT.053 version supported in the employer's ERP release needs confirmation before any
   skill hard-codes one. (flagged in OTBI research)
 
 ## Lessons Learned & Avoidance Rules
+- RULE (2026-08-18, surfaces pass): **the repository is not the product.** Every gate here —
+  `validate.sh`, `gen-catalog.py`, every review — operates on the repo, and nothing had ever
+  verified the installed artifact. That single blind spot explained a cluster of unrelated-looking
+  findings: `CLAUDE_PLUGIN_ROOT` used zero times across 121 skills while every bundled-script
+  command was repo-relative (guaranteed file-not-found after install); `your-environment.md` stored
+  in a plugin cache that updates discard; archived pointers naming a directory installed users lack.
+  Before shipping anything path-shaped, ask what it resolves to from a foreign working directory.
+- RULE (2026-08-18): **an undisclosed method turns a measurement into folklore.** The "85 prose
+  collisions" figure was wrong (111) because of a ≥6-char filter nobody stated, and the token
+  percentages disagreed between two files because a 3.7 chars/token divisor was never written down.
+  Publish the method with the number, or the number will be re-derived differently and both versions
+  will survive.
+- RULE (2026-08-18): **a checkable number in a doc is a liability until something regenerates it.**
+  Hand-copied figures drifted in four places. Tables that matter (install cost, per-bundle cost) are
+  now generated from measurement in the same pass that publishes them.
+- RULE (2026-08-18): **when a check "passes", ask what would make it pass while blind.** Four gate
+  defects all failed silently rather than loudly: a missing `---` fence made the whole file
+  frontmatter; one non-UTF-8 byte disabled the entire cross-link check via a swallowed traceback; a
+  body `---` truncated the line counter; JSON-validity-only manifest checks hid eight missing skills
+  and 11 drifted descriptions. A swallowed error must report UNCHECKED, never clean.
+- RULE (2026-08-18): **test a protocol against the thing it will judge before publishing it.** Six of
+  the eight Tier D rows in `docs/trigger-test.md` demanded that skills NOT load on paraphrases of
+  trigger phrases they deliberately own. Run as written, the compliance record would have scored
+  correct routing as failure and invited deleting real routes.
+- RULE (2026-08-18): **a public repo makes a committed memory store a publication surface.** The
+  "no secrets or client data in committed files" rule was read narrowly for two months while the
+  user's employer, role, handles, and private repo names accumulated in `MEMORY.md` one honest fact
+  at a time. Ask where a durable fact will be readable from, not only whether it is a secret.
+- DECISION (owner, 2026-08-18): this repository is **public**, and the committed `MEMORY.md`
+  named the user's employer, role, GitHub handles, and private project names. The owner chose to
+  **split forward and leave git history intact**: identifying detail moved to the git-ignored
+  `MEMORY.private.md`, `MEMORY.md` genericized (`<owner-old>`, `<owner-new>`, "the recon
+  engine") and kept publishable. Those strings still exist in earlier commits — that is a
+  deliberate call, not an oversight. **Do not re-flag it, and do not rewrite history without
+  asking.** Residual, knowingly retained: `design-tokens.md` names a public university's brand
+  guidelines as an explicitly non-default legacy brand pack.
+- RULE (2026-08-18): a committed memory store in a public repo is a **publication surface**. The
+  standing "no secrets or client data in committed files" rule was read too narrowly for two
+  months — it was applied to bank and client data but not to the user's own employer, role, and
+  private repo names, which accumulated in `MEMORY.md` one honest fact at a time. When writing a
+  durable fact, ask where it will be readable from, not only whether it is a secret.
 - RULE (2026-08-17, from-scratch pass): **a conformance regime cannot audit its own reference.**
   `writing-agent-skills` is the standard every skill is checked against, so a fault *in it* is
   invisible to every conformance pass — four passes missed an Oracle directive breach at its root,
@@ -170,12 +210,12 @@ Never store secrets, credentials, account numbers, or client data here.
   `mean`/`median`/`spread` from `exploratory-data-analysis`'s prose made "summary statistics for this
   dataset" unable to reach the first-look skill at all.
 - RULE (2026-08-17): **"zero exact trigger collisions" is the wrong metric.** The router matches
-  whole descriptions, not `Triggers:` lists. At 0 exact duplicates there were still 85 phrases
+  whole descriptions, not `Triggers:` lists. At 0 exact duplicates there were still 111 phrases
   appearing as whole words inside other skills' description prose (`python` in 7). Measure prose
   competition, not string equality.
 - RULE (2026-08-17): **skills-per-install is the routing lever, not chars-per-description.** Trimming
   a description 100 chars saves ~27 tokens; skipping a 15-skill plugin saves ~3,900 — 145x. The full
-  121-skill library costs 14.9% of a 200K window and sits past the ~100-skill point where the listing
+  121-skill library costs ~14.8% of a 200K window and sits past the ~100-skill point where the listing
   silently trims descriptions to name-only. Recommend subsets; never defend trimming as budget work.
 - RULE (2026-08-17): **conformance and value are close to uncorrelated.** On a 14-skill expert sample,
   3 were NET-NEGATIVE and 6 MARGINAL against the test "does invoking this beat an unaided competent
@@ -198,8 +238,14 @@ Never store secrets, credentials, account numbers, or client data here.
 - EXCEPTION (owner-ratified via consolidation authority, 2026-08-11): `coding-agent-skills:
   chicken-little` keeps its Oracle Fusion data-model reference despite the archive directive —
   it is name-gated and is the only surviving copy of that commissioned depth in the repo.
-  **Do not re-flag it in future residue sweeps.** The UT palette in assertion-evidence-deck
+  **Do not re-flag it in future residue sweeps.** The legacy brand palette in assertion-evidence-deck
   likewise survives as an explicit NON-DEFAULT legacy brand option (script defaults to neutral).
+  - UPDATE (2026-08-18, owner-directed "genericize"): the palette stays, its *institution* does
+    not. Renamed `ut` → `warm-accent`; the old name resolves as a deprecated alias with a stderr
+    note, because renaming a CLI value silently breaks every deck spec already carrying it. Color
+    names, brand attribution, and sub-brand references genericized. The palette is now framed as a
+    worked accessibility case — a real published brand accent that fails WCAG as text at 2.49:1 —
+    which is why it was worth keeping at all.
   - CORRECTION (2026-08-17, measured): the original rationale said "zero routing pollution".
     That is not accurate — 3 of the skill's 7 triggers (`invoice black hole`, `ghost receipts`,
     `orphan distributions`) are Oracle domain phrases, not the persona name, and roughly a third
@@ -207,6 +253,12 @@ Never store secrets, credentials, account numbers, or client data here.
     accepted**, not zero. The decision is unchanged; only the reason is corrected. Recorded
     because "zero" is falsifiable, so a later sweep re-derives the finding and re-opens a settled
     call — which is exactly what happened on 2026-08-17.
+  - SUPERSEDED (2026-08-18, owner directive "delete all Oracle skills"): the exception is
+    **retired**. chicken-little's `oracle-fusion-data-model.md` and `sql-patterns.md` were
+    deleted, its Oracle Do-it step and named-Oracle-failure-modes section removed, its three
+    Oracle domain triggers dropped, and `your-environment.md` rewritten domain-neutral. The
+    skill is now gated on the persona name alone. Nothing Oracle-mounted remains in the active
+    tree; do not restore it. The assertion-evidence-deck legacy-palette exception is unaffected.
 - RULE (2026-08-17): a settled exception needs its *reason* stated in terms that survive
   re-measurement. An owner-ratified decision defended by a checkable claim that turns out false
   will be re-litigated by the next audit, and the audit will look correct while doing it. When
@@ -236,21 +288,21 @@ Never store secrets, credentials, account numbers, or client data here.
   plugins appear in the listing only at the next refresh. (observed 2026-07-18)
 - LESSON: The GitHub App integration cannot create repositories (403 "Resource not accessible
   by integration") — the user creates the empty repo manually, then `add_repo` brings it into
-  session scope for pushing. (observed creating BSL_MATCHING_ENGINE, 2026-07-18)
+  session scope for pushing. (observed creating the matching-engine project, 2026-07-18)
 - RULE: Never pass reference-bearing Oracle/bank exports through pandas or an Excel resave —
   float coercion turns `0006789599` into `6789599.0` and destroys join keys; the recon engines
-  ban pandas entirely for this reason. (source: OG_Recon README, engine-enforced)
+  ban pandas entirely for this reason. (source: the recon engine README, engine-enforced)
 - LESSON: add_repo cannot cross owners within one session (v1): a session whose sources are
-  under `blakereaganlaw-droid` cannot attach `CatCorner22/*` repos even though it is the same
+  under `<owner-old>` cannot attach `<owner-new>/*` repos even though it is the same
   renamed account — and the old owner name no longer resolves for repos created after the
-  rename. Working in a CatCorner22-only repo needs a session started with it as the initial
+  rename. Working in a <owner-new>-only repo needs a session started with it as the initial
   source. (hit 2026-08-02 attaching dental; CONFIRMED 2026-08-11 on this repo itself, exact
-  error: "cross-tier adds are not supported in v1: requested catcorner22/claude_skills_2 but
-  session already has repos from owner(s) [blakereaganlaw-droid]".) Important split: **git
+  error: "cross-tier adds are not supported in v1: requested <owner-new>/<repo> but
+  session already has repos from owner(s) [<owner-old>]".) Important split: **git
   push still works** from an old-owner session — GitHub redirects the push URL, so commits
   land normally; only the GitHub **API** tools (PR read/write, comments, merge) are denied.
   So a renamed-repo session can do all the work and just cannot touch the PR body. The
-  account authorization is NOT the problem — `list_repos` shows the CatCorner22 repos with
+  account authorization is NOT the problem — `list_repos` shows the <owner-new> repos with
   `can_push: true`; scope is pinned at session creation.
 - LESSON: "make X a loaded skill" requests require checking `claude plugin list` (installed
   snapshot versions) against repo plugin.json versions — installed copies are version-pinned
@@ -310,6 +362,26 @@ Never store secrets, credentials, account numbers, or client data here.
   management in the dental context; "pooling" = cash pooling; bare "setup" = Oracle config;
   bare "constraint" = database; bare "checklist" (96 artifact files) and bare "handoff"
   (17 files) never trigger alone. (2026-08-08)
+
+- LESSON (2026-08-18, crystallized): **a checker that has never been shown a planted error has not
+  been tested.** The first arithmetic checker reported "0 mismatches across 410 files" while a
+  negative-control file with five obvious errors passed it clean — requiring every link of a chain
+  to carry an operator disqualified every chain, because the right-hand result is always a bare
+  number. Any new validator gets a negative control before its clean run is believed.
+- LESSON (2026-08-18): **a checker's false positives are its real cost.** Three iterations of the
+  arithmetic checker were needed to reach zero: chained `a = b = c` displays, percent read two ways
+  (`6%` is 0.06 in a ratio and 6 in a percentage-point average), and trap tables that show wrong
+  arithmetic on purpose. Shipping it at 13 false positives would have taught authors to ignore it —
+  the alert-fatigue failure `machine-learning-skills:anomaly-detection` describes, committed by the
+  person who wrote that skill's warning.
+- RULE (2026-08-18): **a number quoted in two documents will drift.** The listing-cost figure went
+  stale within a day of being measured by hand. Any figure the repo publishes in more than one place
+  gets a script (`scripts/measure-listing-cost.py`), and the documents point at the script.
+- FACT (2026-08-18, measured): consolidation review found **nothing to merge or delete**. Max
+  pairwise description Jaccard is 0.168; 0 skills lack inbound citations; 0 description promises are
+  unbacked. The thinnest skills are the most-cited hubs (`dmaic-problem-solving` 157 lines / 14
+  inbound), so the available improvement is depth, not removal. Do not re-open this as a deletion
+  question without new evidence.
 
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
@@ -494,7 +566,7 @@ Never store secrets, credentials, account numbers, or client data here.
   `docs/research/epic-wave-held-research.md` with a 12-row cross-lane shortlist (top:
   immune-system detection tuning, Kobayashi Maru, wayfinding/etak, Columbo elicitation,
   stratigraphy/Harris matrix). NOT synthesized, NOT scored, NOT built: mid-wave the user
-  issued the standing directive "No more Oracle work" (UT role ending) — recorded as a
+  issued the standing directive "No more Oracle work" (that role ending) — recorded as a
   DIRECTIVE in Core Facts with the contradiction to the original employment fact flagged,
   not overwritten. All lane mount points were briefed pre-directive and need re-aiming;
   the mechanisms themselves are domain-portable. Nothing deleted — the Oracle/treasury
@@ -514,7 +586,7 @@ Never store secrets, credentials, account numbers, or client data here.
   The Challenger governs whether the plan still deserves it — quitting the plan ≠
   quitting the work; partner skills, not exits from each other. Merged/retired: none.
 - 2026-08-08 (5) — weight-of-the-books (safety-and-reliability 0.2.0; library 148/21).
-  User-commissioned on the UT sinking-library legend (assumed true as given; held
+  User-commissioned on the sinking-library legend (assumed true as given; held
   honestly as told-of-many-campuses). The failure class: category omission of the
   payload the system exists to carry; countermeasure: the signed one-page Load Manifest
   (four numbers per load — day-1/PEAK/growth/special-lot — every load traced to a
@@ -595,11 +667,11 @@ Never store secrets, credentials, account numbers, or client data here.
   self-audit, clinical-note rules (controlled vocabulary, findings-to-plan, no template
   clones), intellectual-honesty rule. Spec's broad auto-apply trigger intent kept, EXCEPT
   bare "report"/"reports" qualified to "report writing" — collision scan showed five Oracle/
-  treasury reporting skills claim that token. Spec's "Smile Notes Litigation Avoidance
-  Pass" not in library → prose mention only (same pattern as before). plain-grade's prose
+  treasury reporting skills claim that token. The spec's named clinical litigation-avoidance pass (product name in
+  `MEMORY.private.md`) was not in the library → prose mention only (same pattern as before). plain-grade's prose
   references upgraded to real `writing-skills:adams-smart-brevity` cross-links; plugin
-  0.1.0→0.2.0. FACT: the user runs "Smile Notes" clinical documentation (dental) with a
-  litigation-avoidance pass — a future skill candidate. Merged/retired: none.
+  0.1.0→0.2.0. FACT: the user runs a clinical-documentation product (named in
+  `MEMORY.private.md`) with a litigation-avoidance pass — a future skill candidate. Merged/retired: none.
 - 2026-08-04 — adams-plain-grade (19th plugin `writing-skills`; library at 121). Tenth
   external-spec adaptation. Core preserved: the litigated-language axiom, 5th-grade target
   with 8th-grade precision fallback (never higher), meaning-always-wins rule, Adams rules,
@@ -613,16 +685,16 @@ Never store secrets, credentials, account numbers, or client data here.
   sibling in continuous-improvement-skills; library at 120). Split: §1 sync-audit method →
   Do-it, §2–§7 map verbatim → references/curve-hero-map.md, §8 lessons → Why/learn; single
   source of truth — LSS copy deleted, five dangling cross-links rewritten to plugin:skill
-  form (grep-verified zero remaining). Bare "curve hero" trigger moved to the new skill (one
+  form (grep-verified zero remaining). The reference product's bare-name trigger moved to the new skill (one
   owner per bare token). Plugin 0.2.0→0.3.0; marketplace.json description drift fixed for
   both plugins; installed copies refreshed to load curve-hero + chicken-little. Added: 1
   lesson (installed snapshots lag repo — check `claude plugin list`, not repo content).
-  Companion: CatCorner22/dental wiring PREPARED but not committed — add_repo rejects
-  cross-owner adds (session tier = blakereaganlaw-droid; dental resolves only under the
-  renamed CatCorner22), so the design doc + .claude/settings.json were delivered to the user
+  Companion: <owner-new>/dental wiring PREPARED but not committed — add_repo rejects
+  cross-owner adds (session tier = <owner-old>; dental resolves only under the
+  renamed <owner-new>), so the design doc + .claude/settings.json were delivered to the user
   as a ready-to-commit zip instead. Merged/retired: LSS references/curve-hero-design-language.md.
 - 2026-08-02 — lean-six-sigma-for-software (119th skill) + chicken-little (ninth external-spec
-  adaptation). Added: 2 facts (library state; Curve Hero as design/UX reference + its
+  adaptation). Added: 2 facts (library state; the reference product as design/UX reference + its
   vocabulary), 3 lessons/rules (Curve sites block fetches → snippet research with provenance;
   no time-anchored claims in skills; Fusion KFV/XLA-code gotchas in user specs). Method that
   worked: research fan-out (2 vocab angles + 2 fact verifiers) → gap-critic (caught cross-PMS
@@ -640,9 +712,9 @@ Never store secrets, credentials, account numbers, or client data here.
   skill specs to house standard). Library delta pending merge: 101st skill
   (`full-stack-dev-skills:elite-python-engineer`), validate.sh clean, catalog regenerated.
   Merged/retired: none. Flagged: no contradictions.
-- 2026-07-18 — BSL_MATCHING_ENGINE build. Added: 1 fact (recon-repo family), 1 preference
+- 2026-07-18 — the matching-engine project build. Added: 1 fact (recon-repo family), 1 preference
   (data-sensitivity posture for variants), 1 lesson (integration cannot create repos),
-  1 rule (no pandas on reference-bearing exports). Deliverable: OG_Recon recreated bank-data-
+  1 rule (no pandas on reference-bearing exports). Deliverable: the recon engine recreated bank-data-
   free with BankDataProhibited guard + data_guard purge/scrub/hygiene; 80/80 tests; source
   repo verified untouched. Merged/retired: none. Flagged: no contradictions.
 - 2026-07-18 — oracle-fusion-financials-architect (Thales persona, 102nd skill). Raised
@@ -702,7 +774,7 @@ Never store secrets, credentials, account numbers, or client data here.
   the four reference files near-verbatim. The doc cited two Python scripts (build_deck.py, ae_lint.py)
   as "alongside" but only the markdown was attached; per the script-wizard lesson I flagged this, but
   since the user said "create and load" + "continue," I authored functional versions from the
-  documented interfaces (python-pptx builder with 8 slide kinds + verified geometry/UT palette;
+  documented interfaces (python-pptx builder with 8 slide kinds + verified geometry/legacy brand palette;
   linter for headline/bullet/wordcount/format/source/font) and invited a swap for the originals.
   Both scripts tested: builder rejects over-long headlines, linter catches violations and passes the
   example clean; deck verified structurally (pixel render unavailable — see LibreOffice lesson).
@@ -763,5 +835,48 @@ table with the 14.9% verdict; review report sections 9-10 including an 8-item ow
 Tooling: validate.sh now enforces cross-link resolution (verified both directions, including a
 false positive of my own on wrapped prose); gen-catalog.py lead-clause sentence-boundary fix (third
 bug in that function, verified by diffing all 121 rows — exactly the 2 intended changed).
-Pruned: nothing. Flagged, not resolved: 85 prose collisions measured only; 107 of 121 skills never
+Pruned: nothing. Flagged, not resolved: 111 description collisions measured only (the figure was
+first published as 85 from an undisclosed >=6-char filter; corrected 2026-08-18); 107 of 121 skills never
 substance-reviewed; the trigger test still unexecuted.
+
+### Crystallization pass — 2026-08-18 (surfaces review: references, evals, docs, tooling, packaging)
+Trigger: owner asked for another deep review for overlooked defects. Scoped deliberately around the
+in-flight skill-body review so the two did not overlap: 19 agents over the 22,604-line reference
+corpus (4 lanes), the 121 evals as deliverables, the docs layer, the two scripts, and
+packaging/privacy — each lane's findings attacked by an adversarial verifier. 81 survived.
+Validated and integrated: 6 new avoidance rules (above). Headline: the repository is not the
+product. Applied: 13 bundled-script paths made install-safe + house-standard 4b + checklist line +
+validator guard; four validator blind spots fixed (missing fence, non-UTF-8 byte, body-line counter,
+manifest coherence) each reproduced before fixing; gen-catalog lead-clause bug #4 (bracket-blind);
+an inverted settings-precedence claim (security-relevant) in 3 places; an impossible DOE alias count
+(9 pairs from 15 interactions -> 7 groups, derived); 8 skills missing from plugin descriptions and
+11 drifted marketplace entries; MEMORY.md identity split to a git-ignored twin per owner decision.
+Self-corrections: my own "85 collisions" -> 111 with the method disclosed; token figures reconciled
+across three files and regenerated from measurement; README bundle guidance corrected against its
+own bundles; trigger-test budget 35 -> 80 prompts; Tier D rewritten after finding it would score six
+correct routes as defects.
+Flagged, not resolved: D9 (your-environment.md in the disposable plugin cache — needs owner
+go-ahead, ~121 edits); the trigger test still unexecuted; 107 of 121 skills still without substance
+review.
+
+2026-08-18 — Comprehensive from-scratch pass (owner-directed). Oracle deleted outright: 17 skills /
+70 files, plus three follow-on de-mounts (chicken-little, soviet-space-graphite,
+reference-class-forecasting); the chicken-little Oracle exception is retired, superseded by the
+delete-all directive. Nine substance fixes verified in place, the largest being the FMEA Action
+Priority table, which rated a catastrophic-but-rare failure Low (1,000-cell sweep: 18 such cells
+before, 0 after). Two new instruments: scripts/check-arithmetic.py (0 findings on the repo, 5/5 on a
+planted-error control) and scripts/measure-listing-cost.py. Consolidation verdict: nothing to merge
+or delete — max description overlap 0.168, zero discovery dead-ends, zero unbacked description
+promises. Two private project names removed from committed files.
+Flagged, not resolved: the `ut` brand pack still names an institution (recommendation: keep — public
+brand guideline, already in history, and the rename touches a CLI contract); the trigger test still
+unexecuted; depth for the five hub-but-thin skills.
+
+- DIRECTIVE (user-stated 2026-08-18, standing, supersedes the 2026-08-11 archive directive):
+  **delete all Oracle AND treasury skills and plugins** — not archive, delete. Executed: 17 Oracle
+  skills / 70 files, then the seven finance-treasury plugins (accounting, banking, cash-management,
+  finance, public-sector-treasury, sponsored-projects-ar, treasury-accounting) = 49 skills / 154
+  files, their archived evals, and the `fusioncash-architect` tool. `archive/plugins/` no longer
+  exists. All 29 active-tree pointers into those skills were rewritten to name the *domain* instead
+  of promising a restore — a pointer to something deleted is worse than no pointer. Never rebuild
+  on these domains, and never re-add an "archived: <treasury skill>, restorable from archive/" mark.

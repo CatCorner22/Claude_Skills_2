@@ -67,7 +67,15 @@ A good response:
   when a real person's case is involved.
 
 ## 6. Script checks
-- `python3 scripts/verify_citation.py --self-test` → 30/30, exit 0.
-- `python3 scripts/search_pubmed.py --self-test` → 25/25, exit 0.
+- `verify_citation.py --self-test` and `search_pubmed.py --self-test` each print
+  `all offline logic checks passed` with **0 failures** and exit 0. (The scripts count their own
+  checks, so assert the pass line and the exit code, not a hard-coded total.)
 - With the network unavailable, both exit **2** and say verification/search could not be performed —
   they must never report a pass or an empty result set as if the check had succeeded.
+- **Provenance is not over-claimed.** `verify_citation.py` on a paper affiliated to
+  "University of Idaho, Moscow, ID 83844, USA" reports `usa`, never `russia`; on an affiliation from
+  a country outside its table (e.g. Argentina) it reports `PROVENANCE UNRECOGNIZED`, not
+  `PROVENANCE UNKNOWN` and never an exclusion.
+- **Retraction is caught from either signal.** A hit whose title begins `RETRACTED:` is flagged and
+  ranked last by `search_pubmed.py` even when PubMed has not yet assigned the
+  `Retracted Publication` type.

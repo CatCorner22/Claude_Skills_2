@@ -23,10 +23,10 @@ them over.
 | **Replicate** | New data and/or new implementation → same conclusion | An independent effort reaches the same finding |
 
 Claerbout & Karrenbach fixed this usage in 1992. The **ACM used the two words with
-swapped meanings from 2013 until August 2020**, when it re-aligned with Claerbout;
-Plesser's "Reproducibility vs. Replicability: A Brief History of a Confused
-Terminology" (*Frontiers in Neuroinformatics*, 2018) documents the whole tangle
-[snippet-only]. Consequences for practice:
+swapped meanings from its 2016 badging policy until August 2020**, when it
+re-aligned with Claerbout; Plesser's "Reproducibility vs. Replicability: A Brief
+History of a Confused Terminology" (*Frontiers in Neuroinformatics*, 2018) documents
+the whole tangle [snippet-only]. Consequences for practice:
 
 - Any document promising "reproducibility" defines the term in its first lines.
 - When reading others' claims, check which convention they use before comparing.

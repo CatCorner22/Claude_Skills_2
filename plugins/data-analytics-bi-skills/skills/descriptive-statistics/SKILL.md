@@ -11,7 +11,7 @@ description: >-
   standard deviation, variance, range, percentile, quartile, IQR, coefficient of variation, skewness,
   kurtosis, distribution shape, central tendency, spread.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Descriptive statistics
@@ -25,6 +25,9 @@ metadata:
   population with intervals or tests → see `data-analytics-bi-skills:statistical-inference`.
 
 ## Do it
+`references/measures-and-formulas.md` carries the formulas, the robust alternatives, and the
+worked five-number summary — open it when you need the definition rather than the choice.
+
 1. **Fix the population and the grain.** State exactly which set of values you are summarizing and
    what one value represents ("revenue per closed order, FY24"). A mean means nothing until you can
    say "mean of what, per what," and mixing grains (order lines vs. orders) silently corrupts every
@@ -62,9 +65,14 @@ metadata:
 variable · n · missing/excluded
 center: median 412.50          spread: IQR 118.00      (mean + SD if roughly symmetric)
 five-number: min / Q1 / median / Q3 / max               tails: p95 (p99 for SLA/risk)
-shape: right-skewed (mean 512 > median 412) · percentile method: PERCENTILE_CONT
-plot: histogram or boxplot alongside — a single number cannot show shape
+shape: right-skewed (mean 512.30 > median 412.50) · percentile method: PERCENTILE_CONT
+plot: histogram when the question is shape or multimodality; boxplot when it is outliers
+      or a comparison across groups; both when n is large and the shape is contested
 ```
+
+   Render the plot when the medium allows it. When it does not, the line still names one — the
+   plot type and the variable — so the reader can produce it; "a plot would help" is not the
+   deliverable, "histogram of order value, 40 bins" is.
 
    The assistant computes and drafts the block; the human owns the population/grain definition and
    the decision the numbers feed.
@@ -100,6 +108,12 @@ sanitized, structural examples. Capture the variables you routinely summarize an
 shape (which are skewed by nature), your house convention for percentile/quartile method and rounding,
 whether you default to mean/SD or median/IQR, and the tool you compute in (SQL, pandas, Excel, BI).
 The skill then applies its generic choices to your real measures.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/descriptive-statistics.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/measures-and-formulas.md — formulas, when each measure is appropriate, and tool/percentile caveats

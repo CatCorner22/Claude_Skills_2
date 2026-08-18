@@ -13,7 +13,7 @@ description: >-
   class, base-rate anchor, base rate, optimism bias, planning fallacy, how long do projects
   like this actually take, uplift the estimate.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Reference-class forecasting (the outside view)
@@ -38,9 +38,8 @@ Green Book; Department for Transport uplift tables) [snippet-only].
 - Not for: building the estimate's underlying model itself — statistical/ML series models belong
   to `machine-learning-skills:time-series-forecasting`, spreadsheet model craft to
   `data-analytics-bi-skills:spreadsheet-modeling`, and direct-method cash projections are a
-  treasury forecasting workflow (archived: `cash-management-skills:cash-forecasting`, restorable
-  from `archive/`). This skill FEEDS those loops with base rates and uplifts; it never replaces
-  them.
+  finance workflow this library does not carry. This skill FEEDS those loops with base rates and
+  uplifts; it never replaces them.
 
 ## Do it
 Full class-selection heuristics, uplift math, and a worked cash-driver example are in
@@ -177,6 +176,12 @@ disbursements, P20 for receipts) **and the level it applies at — per item or p
 who holds the portfolio contingency** — where the decision journal is kept, and your review cadence.
 Keep committed content structural — real figures, counterparty names, or client data belong in
 `your-environment.private.md` (git-ignored), never in a committed file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/reference-class-forecasting.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/outside-view-method.md — class-selection heuristics, distribution and uplift math, the

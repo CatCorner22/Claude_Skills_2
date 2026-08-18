@@ -170,9 +170,8 @@ self-serve the rule.
   Association — VA facilities with medical team training showed an 18% decline in surgical
   mortality versus 7% in untrained facilities, with a dose-response relationship (more
   training, larger decline) [snippet-only].
-- **PACE / closed-loop lineage:** aviation crew resource management (spelled out; the
-  abbreviation is reserved for customer relationship management in this library), which grew
-  from a NASA workshop on flight-deck human factors and the airline training programs that
+- **PACE / closed-loop lineage:** aviation crew resource management (written out to avoid the
+  abbreviation's other meaning), which grew from a NASA workshop on flight-deck human factors and the airline training programs that
   followed — prompted by the United 173 fuel-exhaustion crash, in which the flight engineer's
   unchallenged deference to the captain proved fatal [snippet-only].
 - **Honesty note:** these effects came from enacted protocols with training and verification —

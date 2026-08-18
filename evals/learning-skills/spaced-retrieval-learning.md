@@ -49,10 +49,11 @@ A good response:
   with retention interval), and desirable difficulties (Bjork — fluency is a misleading cue;
   struggle during retrieval is the signal), including why highlighting and re-reading feel
   productive and aren't.
-- **Stays honest:** presents the interval table as a sane default rather than an optimized
-  law; cites the research at author level without invented statistics or precise "optimal
-  interval" numbers; doesn't claim mastery from one correct answer (successive relearning
-  gate); routes performable-skill training and session-attendance problems to
-  `learning-skills:deliberate-practice` and `learning-skills:habit-design` respectively
-  instead of absorbing them, and supplies the retrieval method for exam study while leaving
-  exam-domain content and blueprint weighting to the user's own materials.
+- **Stays honest:** presents the interval table as a sane default rather than an optimized law;
+  sources any statistic it quotes to the real study (e.g. Cepeda et al. 2008's optimal-gap
+  ratio of roughly 10–20% of the retention interval) and invents none; doesn't claim mastery
+  from one correct answer (successive relearning gate); routes performable-skill training
+  and session-attendance problems to `learning-skills:deliberate-practice` and
+  `learning-skills:habit-design` respectively instead of absorbing them, and supplies the
+  retrieval method for exam study while leaving exam-domain content and blueprint weighting
+  to the user's own materials.

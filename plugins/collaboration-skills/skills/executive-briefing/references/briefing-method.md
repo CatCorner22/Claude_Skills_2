@@ -181,20 +181,28 @@ OPTIONS:
      mechanism in place.
 
 RECOMMENDATION: B — it is the only option that removes the cause rather than
-paying for the symptom, and the setup cost is one-time.
+paying for the symptom, and the setup cost is one-time: 40 hours against the ~8
+hours a week option A burns is a five-week payback, then it is free.
 
 IF NOTHING IS DECIDED BY THE 15TH: the transition slips past quarter close and
 we carry the SLA misses through the quarter-end reporting cycle.
 
-SUPPORT: (1) duplicate-triage counts from the request log, attached;
-(2) routing-rule draft reviewed by all three team leads, attached;
-(3) transition plan with rollback point, attached.
+SUPPORT (each reason first, its evidence attached):
+(1) Duplication, not volume alone, is driving the misses — 31% of requests were
+    triaged twice last month [request-log extract, attached].
+(2) The routing rules already exist and are agreed — draft reviewed and signed off
+    by all three team leads [draft, attached].
+(3) The change is reversible — two-week transition with a named rollback point at
+    day 5 [transition plan, attached].
 ```
 
 Why this passes the tests: the ask is named twice with a date; every option is costed
 including do-nothing; the recommendation gives its reason; silence has a stated price;
-the COO could write "approved" on it and execution starts from the attachments. The
-figures came from the request log — a memo's numbers get sourced like any other claim.
+the COO could write "approved" on it and execution starts from the attachments. Note
+what each SUPPORT line is — an *assertion* with its evidence hung underneath, not a list
+of attachments; a bare attachment list is a bibliography, and a bibliography is not a
+pyramid. The figures came from the request log, and the payback arithmetic is shown
+rather than asserted — a memo's numbers get sourced and checked like any other claim.
 
 ## 8. Re-leading — IRAC vs BLUF, and the brief-up
 

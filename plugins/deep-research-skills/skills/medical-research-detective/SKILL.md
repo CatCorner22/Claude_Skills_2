@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.2.1"
+  version: "1.3.0"
 ---
 
 # Medical research detective
@@ -51,16 +51,19 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    timing, which is where most dot-connections hide.
 
 2. **Generate rival hypotheses before searching.** Write a differential *first*, so the search tests
-   ideas instead of confirming one. Deliberately run each generator in
-   `references/dot-connection-method.md`: unifying single cause vs. two coincident conditions;
-   cross-silo bridging (findings studied in different specialties); mechanism-chaining (drug →
-   depletion/inhibition → downstream finding); temporal reasoning (what changed just before onset);
-   "great imitators" and commonly-missed conditions; and the base-rate check (common things are
-   common — a common disease presenting oddly beats a rare disease presenting typically). Aim for at
-   least 5–8 candidate explanations, including the boring ones. This is the medical edition of a
-   domain-general discipline: `decision-science-skills:competing-hypotheses-analysis` owns the full
-   hypothesis-matrix method (judge by disconfirmation, never by accumulation), and the base-rate
-   check is `math-foundations-skills:probability-fundamentals` applied to disease frequency.
+   ideas instead of confirming one. Run **all eight** generators in
+   `references/dot-connection-method.md`, including the ones that feel unlikely: (1) one unifying
+   cause; (2) two coincident common conditions — the standing rival to (1); (3) iatrogenic — a drug,
+   supplement, interaction, or prescribing cascade; (4) deficiency or excess; (5) mechanism-chaining
+   (X depletes Y → Y is needed for Z → the finding); (6) "great imitators" and commonly-missed
+   conditions; (7) temporal/exposure — what changed before onset; (8) the negative-space question —
+   what has never actually been tested, which converts directly into a stage-7 recommendation. Then
+   apply the base-rate check (a common disease presenting oddly beats a rare one presenting
+   typically) and aim for at least 5–8 candidates, the boring ones included. This is the medical
+   edition of a domain-general discipline: `decision-science-skills:competing-hypotheses-analysis`
+   owns the full hypothesis-matrix method (judge by disconfirmation, never by accumulation), and the
+   base-rate check is `math-foundations-skills:probability-fundamentals` applied to disease
+   frequency.
 
 3. **Build an explicit search strategy.** For each hypothesis, write the PICO-style question, then
    the query: MeSH terms plus free-text synonyms (drug generic *and* brand, symptom lay term *and*
@@ -70,12 +73,13 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
 
 4. **Search wide, then chase citations.** Run each query across multiple databases (they index
    different journals): PubMed/MEDLINE, Europe PMC, Cochrane, Google Scholar, ClinicalTrials.gov.
-   `scripts/search_pubmed.py` runs the PubMed pass and returns structured hits. Then **chain**:
+   `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/search_pubmed.py` runs the PubMed pass and returns structured hits. Then **chain**:
    backward through the reference lists of the best papers, forward through "cited by" to newer work.
    Apply the country-of-origin policy from `references/source-provenance.md` as you go — allowed
    sources support conclusions; excluded-country sources go to the quarantine appendix and never
-   support a claim. Keep searching until new queries stop returning new papers (saturation), not
-   until you have "enough."
+   support a claim. Country is **not** in search results; it comes from author affiliations, so run
+   `verify_citation.py` on the hits you keep and read its provenance line. Keep searching until new
+   queries stop returning new papers (saturation), not until you have "enough."
 
 5. **Appraise, then try to kill each hypothesis.** Grade every source by study design, size, and
    quality using `references/evidence-appraisal.md`; check for retraction and predatory venues.
@@ -87,7 +91,7 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    checks in `references/citation-verification.md`: (a) it **exists** (DOI/PMID resolves),
    (b) its **metadata matches** (title, authors, journal, year), and (c) the source **actually
    states the claim** you attached to it — quote the supporting sentence. Run
-   `scripts/verify_citation.py` on each DOI/PMID. A citation that fails any check is removed, not
+   `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` on each DOI/PMID. A citation that fails any check is removed, not
    softened. If verification is impossible (no network, paywalled full text), label the claim
    **unverified** and say exactly what could not be checked.
 
@@ -163,6 +167,12 @@ never in a committed file. Keep only sanitized, structural examples in version c
 involves a real person, work from de-identified facts (ages as ranges, no names, no dates of birth,
 no record numbers).
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/medical-research-detective.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/dot-connection-method.md — the detective methodology: hypothesis generators, cross-silo bridging, disconfirmation
 - references/search-strategy.md — databases, MeSH/synonyms/PICO, boolean, citation chaining, Google Scholar technique
@@ -173,5 +183,8 @@ no record numbers).
 - references/your-environment.md — your conditions, databases, access, and preferences (add when supplied)
 
 ## Scripts
-- `scripts/search_pubmed.py` — searches PubMed via the free NCBI E-utilities API; returns structured hits (PMID, title, journal, year, type, country) as text or JSON. `--help` for options; no API key required.
-- `scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. `--self-test` runs the offline logic tests.
+> Paths use `${CLAUDE_PLUGIN_ROOT}` so they resolve from **any** working directory once the
+> plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
+> repo, which is not where a user runs these.
+- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/search_pubmed.py` — searches PubMed via the free NCBI E-utilities API; returns structured hits (PMID, DOI, title, first author, journal, year, publication type, retraction flag) as text or JSON, ranked by evidence hierarchy. Country of origin is **not** in PubMed's summary metadata — run `verify_citation.py` on the hits you keep to do the stage-4 affiliation-country pass. `--help` for options; no API key required.
+- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. `--self-test` runs the offline logic tests.

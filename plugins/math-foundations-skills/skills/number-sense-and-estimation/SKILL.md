@@ -11,6 +11,8 @@ description: >-
   calculation or model, or when a figure smells wrong. Triggers: mental math, Fermi estimate,
   back-of-the-envelope, order of magnitude, rough number, ballpark, does this number make
   sense, significant figures, rounding, quick math, eyeball the math.
+metadata:
+  version: "1.1.0"
 ---
 
 # Number sense and estimation
@@ -64,9 +66,10 @@ benchmark tables live in `references/estimation-methods.md`.
 
 ### 4. Fermi-estimate the unmeasured: decompose → bound → triangulate
 1. **Decompose** the quantity into factors you can each roughly judge on their own.
-2. **Bound** it: compute a central figure, then an optimistic and a pessimistic version by
-   pushing every factor to its plausible extreme — and check the bounds bracket the central
-   figure.
+2. **Bound** it: compute a central figure, then a high and a low version by pushing every
+   factor to the plausible extreme that moves *the result* the same way — which means the
+   opposite extreme for any factor in a denominator (more riders raises the bus count; more
+   seats per bus lowers it). Then check the bounds bracket the central figure.
 3. **Triangulate**: re-derive the number through a *different* decomposition and check it
    lands inside the same bounds. Agreement between independent routes is the evidence.
 
@@ -131,8 +134,9 @@ readers from building on precision that was never there.
 - Reading the given number before making your own → anchored; estimate first, then compare.
 - Reporting a Fermi result to three digits ("5,250") → the digits overstate what you know;
   give one significant figure and the range.
-- Bounding by varying only one factor → falsely narrow bounds; push every factor to its
-  plausible extreme in the same direction.
+- Bounding by varying only one factor, or pushing every factor to the same numeric
+  extreme regardless of where it sits in the formula → falsely narrow bounds. Push each
+  factor to the extreme that moves the *result* the same way; denominators reverse.
 - Verifying a calculation by re-running it → catches typos only; re-derive by a different route.
 - Rounding at every intermediate step → rounding error compounds; keep digits, round once at
   the end.
@@ -148,6 +152,12 @@ transaction sizes, daily volumes, rough revenue per working day — plus your ho
 conventions and the figures you are most often asked to gut-check. Keep committed entries
 structural and sanitized; real dollar figures or client specifics go in
 `your-environment.private.md`, which is git-ignored.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/number-sense-and-estimation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/estimation-methods.md — the mental-math toolkit expanded, anchor-quantity

@@ -50,7 +50,14 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
     headers: { "Content-Type": "application/json", ...authHeader() },
     ...init,
   });
-  if (!r.ok) throw new ApiError(r.status, (await r.json()).detail ?? r.statusText);
+  if (!r.ok) {
+    // Error bodies are not reliably JSON — an HTML 502 page, an empty 401. Parsing blind
+    // throws a SyntaxError that hides the status, exactly when the caller needs it most.
+    const body = await r.text();
+    let detail = r.statusText;
+    try { detail = JSON.parse(body).detail ?? detail; } catch { /* not JSON — keep statusText */ }
+    throw new ApiError(r.status, detail);
+  }
   return r.json();
 }
 

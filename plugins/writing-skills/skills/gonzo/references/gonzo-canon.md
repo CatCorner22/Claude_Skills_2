@@ -157,7 +157,8 @@ Misattribution warnings (do not use as quoted):
   press took it half-seriously. His own words later: "I never said he was. I said
   there was a rumor in Milwaukee that he was, which was true when I started the
   rumor in Milwaukee." [×3] The deadpan register carried an invented fact into
-  circulation: the exact failure mode this skill's rail 3 exists to prevent.
+  circulation: the exact failure mode rail 3 in legal-lines-for-counsel.md §3 exists to
+  prevent.
 - **The Acosta identification flap** (§5): the disguise you're sure is a disguise may
   not be one — "of and concerning" from inside the canon.
 - **The self-mythology tax**: the torn-notebook origin and the etymologies of "gonzo"

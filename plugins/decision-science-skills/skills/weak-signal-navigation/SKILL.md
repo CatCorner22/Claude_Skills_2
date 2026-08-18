@@ -160,6 +160,12 @@ committed file structural — system names and cue types, no live figures. Anyth
 sensitive (real balances, client or matter names, incident details) goes in
 `your-environment.private.md`, which is git-ignored and never committed.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/weak-signal-navigation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/wayfinding-method.md — the etak mental model explained honestly, the
   five-class cue inventory taxonomy, independence/reliability weighting, the fusion

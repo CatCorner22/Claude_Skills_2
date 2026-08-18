@@ -14,7 +14,7 @@ description: >-
   technique, analogy for, teach this concept, curse of knowledge, make this intuitive,
   teach-back, explain to a newcomer.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Explanation design
@@ -139,6 +139,12 @@ terms that always do, analogies that have worked or backfired with your readers,
 finished explanations live. Keep committed content structural — real names, client material, or
 sensitive examples belong in `your-environment.private.md` (git-ignored), never in a committed
 file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/explanation-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/explanation-method.md — the audience-model template, analogy design with break-point

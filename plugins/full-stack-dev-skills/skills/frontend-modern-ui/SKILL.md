@@ -9,6 +9,8 @@ description: >-
   Triggers: react component, frontend state management, tanstack query, useEffect fetch,
   htmx, vite setup, form handling react, UI architecture, frontend too complex, SPA vs server
   rendered, component design.
+metadata:
+  version: "1.1.0"
 ---
 
 # Frontend: modern, dynamic, lean
@@ -20,6 +22,10 @@ description: >-
   `full-stack-dev-skills:full-stack-app-architecture` (this skill executes it). Realtime
   updates (WebSockets/SSE) → `full-stack-dev-skills:realtime-and-dynamic-features`.
   Dashboard/visualization design → `data-analytics-bi-skills:dashboard-design`.
+- Not for: auditing an interface you have already built — usability, accessibility and
+  cognitive-load defects with severity- and confidence-rated findings → see
+  `full-stack-dev-skills:ui-and-ux-inspection`. This skill builds to the floor; that one
+  measures against it.
 
 ## Do it
 1. **Honor the split decision, and default down.** Forms-and-tables UIs → **htmx**: the
@@ -29,9 +35,10 @@ description: >-
    common middle case.
 2. **In React, separate the two kinds of state — this is most of frontend sanity:**
    - **Server state** (data that lives in the API): owned by **TanStack Query** —
-     `useQuery(['invoices'], fetchInvoices)` gives caching, refetching, loading/error
-     states; after a mutation, `invalidateQueries` re-syncs. Never copy server data into
-     `useState` — that copy is a cache you now maintain by hand.
+     `useQuery({ queryKey: ['invoices'], queryFn: fetchInvoices })` gives caching, refetching,
+     loading/error states; after a mutation, `invalidateQueries({ queryKey: ['invoices'] })`
+     re-syncs. (v5 accepts only the object form; the old positional call throws.) Never copy
+     server data into `useState` — that copy is a cache you now maintain by hand.
    - **UI state** (which tab is open, form drafts): plain `useState`/`useReducer`, kept in
      the component that owns it. Reach for context only for genuine cross-cutting state
      (theme, session); reach for a store library rarely.
@@ -88,6 +95,12 @@ the requirement outgrows the platform, not before.
 Record your frontend conventions in `references/your-environment.md`: React-vs-htmx decision
 per surface, CSS approach, component/folder conventions, how types are derived from the API,
 and your accessibility bar — so new UI (human- or agent-written) matches the house shape.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/frontend-modern-ui.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/frontend-recipes.md — htmx fragment patterns, TanStack Query setup, API layer template, component checklist

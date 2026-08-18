@@ -94,6 +94,12 @@ per project/module, severity calibration for your domain, the verification comma
 suites, benchmarks) the chair should recommend, and any additional specialist you've added
 to the swarm.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/board-review.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/finding-schema.md — the canonical Finding schema, severity/category definitions, and the chair's report structure
 - references/your-environment.md — your goal statements, calibration, verification commands (fill in)

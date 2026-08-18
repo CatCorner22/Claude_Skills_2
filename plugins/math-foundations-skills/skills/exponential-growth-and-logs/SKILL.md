@@ -13,7 +13,7 @@ description: >-
   growth, CAGR, doubling time, rule of 72, logarithm, log scale, growth rate math, geometric
   average, how long until it doubles, decay rate.
 metadata:
-  version: "1.1.0"
+  version: "1.2.1"
 ---
 
 # Exponential growth and logarithms
@@ -31,8 +31,8 @@ averages, honest charts — and teaches the intuition that linear thinking gets 
 - Averaging a series of period growth rates or returns into one fair per-period figure.
 - Choosing or reading a log-scale chart for a fast-changing series.
 - Not for: valuing money across time — PV/FV/NPV/IRR and discount rates are
-  time-value-of-money work (archived: `finance-skills:time-value-of-money`, restorable from `archive/`);
-  same (1+r)^n machinery, but the question there is worth, not size.
+  time-value-of-money work, a finance-domain topic this library does not carry; same (1+r)^n
+  machinery, but the question there is worth, not size.
 - Not for: fitting trend or seasonality models to a history → see
   `machine-learning-skills:time-series-forecasting`.
 - Not for: sizing a system against projected load to an exhaustion date → see
@@ -55,9 +55,9 @@ averages, honest charts — and teaches the intuition that linear thinking gets 
    endpoint exactly, so always run this check.
 4. **Doubling time.** Exact: t = ln 2 / ln(1+r). At 8% per year:
    0.6931/0.07696 ≈ 9.0 years. Shortcut: the rule of 72 — 72 ÷ rate-in-percent —
-   gives 72/8 = 9. The rule stays within about ±1% of exact for rates of roughly
-   4–12%; it overshoots at lower rates and undershoots at higher ones (accuracy table
-   in references/growth-math-worked.md).
+   gives 72/8 = 9. The rule stays within about ±2% of exact for rates of roughly
+   4–12% (and within ±1% over 6–10%); it overshoots at lower rates and undershoots at
+   higher ones (accuracy table in references/growth-math-worked.md).
 5. **Any target, not just double:** t = ln(target/current) / ln(1+r). Worked:
    5,000 → 20,000 at 12% per year: ln(4)/ln(1.12) = 1.3863/0.11333 ≈ 12.2 years.
    Consistency check: quadrupling is two doublings, and 2 × ln 2/ln(1.12) =
@@ -129,6 +129,12 @@ year, month vs 4-week cycle), house rounding and display rules for rates, and yo
 default chart-axis policy. Keep committed content structural — real figures, client
 names, or internal projections belong in `your-environment.private.md` (git-ignored),
 never in a committed file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/exponential-growth-and-logs.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/growth-math-worked.md — worked CAGR, doubling-time, and solve-for-time

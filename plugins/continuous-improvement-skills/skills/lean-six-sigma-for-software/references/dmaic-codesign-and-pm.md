@@ -50,7 +50,9 @@ DFSS practice: **specify the destination before designing the route.**
   work (genchi genbutsu), rank what must be true for them to succeed.
 - **Analyze** — candidate architectures/designs against the CTQs; prototype the risky parts
   (spike the unknown, not the familiar); FMEA the leading design: how does each component fail,
-  how bad, how detectable — fix high-RPN items *in the design*.
+  how bad, how detectable — fix the **high Action-Priority** items *in the design*. Rank by the
+  AP lookup, not by multiplying S×O×D into an RPN, which lets a catastrophic-but-rare failure be
+  averaged below a common annoyance (→ `continuous-improvement-skills:fmea`).
 - **Design** — build to the CTQs with quality built in (types, contracts, tests as you go), UI
   to the design system, co-designed with users (§5).
 - **Verify** — against the Define-phase criteria, not against enthusiasm: acceptance tests,
@@ -108,8 +110,8 @@ both deliberately:
 - **Charter** every significant effort: problem/opportunity with a number, scope (and
   explicitly out-of-scope), sponsor, team, timebox, success criteria, top risks. One page.
 - **Risk register**, reviewed on cadence: risk, likelihood×impact, owner, mitigation, trigger.
-  FMEA for the technical risks; plain register for the rest. Swiss-cheese the big ones
-  (multiple independent mitigations).
+  FMEA (Action-Priority ranked) for the technical risks; plain register for the rest.
+  Swiss-cheese the big ones (multiple independent mitigations).
 - **RACI** only where handoffs are ambiguous — co-design shrinks the need.
 - **Iterative core**: WIP-limited flow, small batches, demo working software on cadence,
   retrospectives that produce shipped experiments (PDSA).

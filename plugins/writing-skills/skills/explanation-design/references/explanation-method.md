@@ -45,8 +45,10 @@ not two.
 
 Worksheet:
 
-1. **Candidates.** Generate 2–3 source domains from the audience model's <X>. Reject any source
-   the reader knows only as well as the target.
+1. **Candidates.** Generate 2–3 source domains the reader demonstrably owns — start from the
+   audience model's <X>, and widen to common experience when <X> is narrow (the worked example
+   below draws one candidate from <X> and two from ordinary life). Reject any source the reader
+   knows only as well as the target.
 2. **Correspondence map.** For the leading candidate, list `source element → target element`
    pairs. Each pair licenses inferences; that's the point of the analogy.
 3. **Break list.** For each correspondence, ask: what would the reader conclude by extending

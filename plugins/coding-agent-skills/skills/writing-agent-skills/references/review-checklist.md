@@ -28,8 +28,11 @@ A skill is done when every box is checked.
 - [ ] Terminology is consistent; no time-sensitive claims ("as of 2026 …").
 - [ ] **Every worked example's arithmetic recomputed from its own inputs.** This is the defect
       class that has survived every other check in this library's history — it appeared in
-      *every* authoring wave. Recompute totals, percentages, rates, and any conclusion drawn
-      from them; confirm an example's stated finding actually follows from its own setup.
+      *every* authoring wave. `python3 scripts/check-arithmetic.py` (also run by
+      `validate.sh`) now recomputes every `a = b = c` chain mechanically, so the hand pass is
+      only for what it cannot parse: conclusions drawn *from* the numbers, figures carried
+      across prose sentences, and any claim that an example's stated finding follows from its
+      own setup. The script proves the sums; you still have to prove the story.
 - [ ] **Reciprocal-link pass on the OLDER side of every new seam.** A new skill that cites 3–8
       neighbours while receiving zero inbound citations is a discovery dead-end: nobody starting
       from an existing skill will ever learn it exists. Add the `Not for:` line to the
@@ -44,6 +47,10 @@ A skill is done when every box is checked.
       accurately, which no script can tell you.
 - [ ] Any external number or attribution carries a provenance mark or an honest hedge; no
       invented statistics.
+- [ ] **Every runnable path is written for the installed shape**, i.e. addressed from
+      `${CLAUDE_PLUGIN_ROOT}` (or from the user's own project), never as a bare `scripts/…`
+      relative to this repo. `validate.sh` errors on the bare form. Nothing else in this repo
+      tests the installed artifact, so this is the author's job.
 
 ## Evals & validation
 - [ ] `evals/<plugin>/<skill>.md` has a positive trigger, a near-miss, and a quality rubric.

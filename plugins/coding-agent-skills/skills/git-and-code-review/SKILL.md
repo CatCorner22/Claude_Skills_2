@@ -13,7 +13,7 @@ description: >-
   review, rebase, version control, commit message, force push, git blame, revert, review this
   diff.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Review-size and review-rate figures come from the SmartBear/Cisco peer-review study
     (2,500 reviews, 3.2M LOC), verified via web search snippets — claims carrying those
@@ -142,6 +142,12 @@ a rule set — hunt their conflicts and loopholes with `coding-agent-skills:rule
 (house git rules are one of its named inputs) before they bite in production. Keep anything
 sensitive (private repo hosts, tokens, reviewer names/emails) in
 `references/your-environment.private.md`, which `.gitignore` keeps out of git.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/git-and-code-review.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/review-checklist.md — the full review method: order, checklists, size and pacing

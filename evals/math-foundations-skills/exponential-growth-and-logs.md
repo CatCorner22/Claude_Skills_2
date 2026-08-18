@@ -9,7 +9,7 @@ Expected: skill loads and works in growth factors. It computes the endpoint rati
 (≈ 3.22/2.0 = 1.61), takes the fifth root to get CAGR ≈ 10% per year (1.10⁵ =
 1.61051), and *checks by recompounding to the endpoint*. Doubling time comes out
 both ways: exact ln 2/ln(1.10) ≈ 7.27 years and rule of 72 → 72/10 = 7.2, with the
-note that the rule sits within about ±1% of exact in the 4–12% band. It states the
+note that the rule sits within about ±2% of exact in the 4–12% band (±1% over 6–10%). It states the
 constant-rate assumption explicitly (the projection holds only if ~10% persists)
 and explains why the per-year figure is a geometric, not arithmetic, summary of the
 path. Every number shown is reproducible from the arithmetic given.

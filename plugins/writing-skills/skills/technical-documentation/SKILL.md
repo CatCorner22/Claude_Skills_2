@@ -14,7 +14,7 @@ description: >-
   ADR, architecture decision record, changelog, Diátaxis, how-to guide, tutorial vs reference,
   API docs, docs as code, semantic versioning, our docs are out of date.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §5 technical-documentation).
@@ -142,8 +142,8 @@ are writing. And teach it honestly — a framework with one named author, system
 practice that (as at Django) partly predates it, is more credible than a fake timeless
 standard, and the attribution models the citation hygiene good reference docs need.
 
-ADRs are Nygard's answer to a specific failure: "large documents are never kept up to
-date; small, modular documents have at least a chance" [snippet-only]. An ADR records
+ADRs are Nygard's answer to a specific failure: "Large documents are never kept up to date.
+Small, modular documents have at least a chance at being updated" [snippet-only]. An ADR records
 *one* decision at the moment it was made, with the context that forced it. Immutability
 is what makes the trail trustworthy — a superseded ADR still explains why the system
 looked that way in its era, while an edited one erases the very history a successor
@@ -223,6 +223,12 @@ last-verified date for each**, and the audiences each serves. Keep
 the committed file structural — client names, internal system details, or anything
 sensitive goes in `your-environment.private.md` (git-ignored), never in a committed
 file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/technical-documentation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/document-types.md — the Diátaxis router with the three-axis audit protocol

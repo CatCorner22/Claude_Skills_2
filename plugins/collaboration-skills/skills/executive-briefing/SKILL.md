@@ -15,7 +15,7 @@ description: >-
   decision memo, one-pager, SCQA, pyramid principle, completed staff work, brief the
   board.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the general-use expansion dossier
     (docs/research/general-use-expansion-research.md §6 executive-briefing) —
@@ -159,6 +159,12 @@ role and what each needs to see before signing, house memo formats and length no
 sign-off and routing conventions, and where decided memos are filed. Anything sensitive
 — real names, live decisions, walk-away numbers — belongs in
 `your-environment.private.md` (git-ignored), never in a committed file.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/executive-briefing.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/briefing-method.md — the ask-calibration rail, BLUF doctrine and its

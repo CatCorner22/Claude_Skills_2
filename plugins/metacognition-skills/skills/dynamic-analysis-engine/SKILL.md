@@ -10,6 +10,8 @@ description: >-
   Triggers: analyze this, deep analysis, investigate, dig into this data, what is driving,
   explore this dataset, form a hypothesis, root cause the numbers, multi-angle analysis,
   iterative analysis, adaptive analysis, why did this change.
+metadata:
+  version: "1.1.0"
 ---
 
 # Dynamic analysis engine
@@ -25,6 +27,9 @@ description: >-
   inside a larger adaptive loop.
 
 ## Do it
+The method menu, depth-control heuristics, and the hypothesis-log template are in
+`references/methods-and-hypotheses.md`.
+
 1. **Orient & characterize.** Assess the material's type, size, quality, domain, structure, the
    goal, constraints, and uncertainty. State assumptions and missing information explicitly
    before analyzing anything.
@@ -50,7 +55,12 @@ description: >-
    still working; flag when it isn't. Persist durable findings via
    `metacognition-skills:hierarchical-memory-manager`, and after a major analysis, evaluate the
    *process* with `metacognition-skills:reflective-learner`.
-8. The method menu and a hypothesis-log template are in `references/methods-and-hypotheses.md`.
+
+**Deliverable — the analysis readout.** The finished output carries: (1) the material's
+characterization and the assumptions made; (2) the hypothesis log, rivals and dead branches
+included, each row naming the test that was actually run; (3) the findings, each with its
+evidence; (4) a confidence level per finding in the *because/unless* form; (5) the limitations
+and what would change the answer. An analysis missing (2) or (5) is a claim, not an analysis.
 
 ## Why / learn
 One-shot analysis fails on non-trivial questions because the right method depends on facts you
@@ -74,10 +84,18 @@ Z" survives contact with reality far better than one that reports a single confi
 - Endless exploration with no synthesis → set a checkpoint: "what would change my answer?"
 
 ## Tailor to your environment
-Record in `references/your-environment.md` the data sources and formats you analyze most (e.g.
-Oracle BSL exports, OTBI extracts, bank fee statements), your preferred tools and output forms,
-and standing analytical conventions (fiscal calendar, currency handling, materiality thresholds).
-Keep anything sensitive in `your-environment.private.md` (git-ignored); never commit real data.
+Wire in your current role here — the engine is material-agnostic. Record in
+`references/your-environment.md` the material you analyze most (an analyst's system exports, an
+attorney's discovery corpus, an ops manager's incident logs, a developer's telemetry), your
+preferred tools and output forms, and standing conventions (calendar, units, materiality
+thresholds). Keep anything sensitive in `your-environment.private.md` (git-ignored); never
+commit real data.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/dynamic-analysis-engine.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/methods-and-hypotheses.md — the method menu, depth-control heuristics, and a hypothesis-log template

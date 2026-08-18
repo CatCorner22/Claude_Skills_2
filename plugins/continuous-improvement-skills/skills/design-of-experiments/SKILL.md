@@ -13,7 +13,7 @@ description: >-
   which factors actually matter, orthogonal array, screening design, split-plot, Taguchi, robust
   design, one-factor-at-a-time is too slow.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Design of experiments
@@ -157,6 +157,12 @@ git-ignored, if it names real systems, accounts, or data). Capture the responses
 safe ranges, who signs off on levels and on acting on results, your replication conventions,
 and where designs and results are recorded. Never commit real transaction or client data —
 sanitize to structure only.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/design-of-experiments.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/doe-method.md — design-choice table with per-cell resolution and the ceiling rule, run

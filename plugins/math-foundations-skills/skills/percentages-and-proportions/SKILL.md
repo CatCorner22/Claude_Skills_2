@@ -27,7 +27,8 @@ that hidden denominator, so the first question is always the same: *percent of w
   weighting a combined rate, or explaining why a total moved against its subgroups.
 - Converting markup to margin (or back); building, reading, or rebasing an index series.
 - Not for: liquidity, leverage, and profitability ratios as company diagnostics — that
-  is financial-statement ratio analysis (archived: `finance-skills:financial-ratios`, restorable from `archive/`).
+  is financial-statement ratio analysis, a finance-domain skill this library does not carry.
+  The percentage machinery here is the same; the interpretation is not.
 - Not for: summarizing a dataset (typical value, spread, shape) → see
   `data-analytics-bi-skills:descriptive-statistics`.
 - Multi-period growth math — CAGR, doubling time, log scales — belongs to the sibling
@@ -166,6 +167,12 @@ quoted in basis points or percentage points, whether pricing is stated as markup
 standard index base periods, default rate denominators (per-1,000, per FTE, per transaction),
 and rounding conventions for quoted percents. Keep committed entries structural; real prices,
 rates, or client figures go in `your-environment.private.md`, which is git-ignored.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/percentages-and-proportions.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/percentage-traps.md — the trap catalog with verified worked numbers: the

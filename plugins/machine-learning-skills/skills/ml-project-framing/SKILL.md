@@ -30,6 +30,9 @@ metadata:
 - Not for: choosing metrics and validation once the task is framed → see
   `machine-learning-skills:model-evaluation`. For profiling the data to test feasibility → see
   `data-analytics-bi-skills:exploratory-data-analysis`.
+- Not for: architecting a bespoke or fine-tuned language model once framing says a generic one
+  will not do — the prompting/RAG/PEFT/full-tune ladder, data budget, and eval harness → see
+  `machine-learning-skills:bespoke-llm-architect`.
 
 ## Do it
 1. **State the decision first, not the model.** Write one sentence: *who* acts, *what* action changes
@@ -104,6 +107,12 @@ Note the decision and its owner, the target and how you label it, your unit of p
 prediction cadence, the systems your features come from and when each becomes available, your
 cost-of-error asymmetry, and the baseline you compare to. This skill then maps its generic steps
 onto your specific problem and hands the framed task to `machine-learning-skills:model-evaluation`.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/ml-project-framing.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/framing-spec.md — the one-page framing template, worked examples across four

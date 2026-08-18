@@ -39,6 +39,28 @@ data is the entire population, not a sample of a process.
   - SQL `PERCENTILE_CONT` interpolates; `PERCENTILE_DISC` returns an actual data value.
   State which you used; on large samples the difference is tiny, on small samples it is not.
 
+### Worked five-number summary — and why the method has to be stated
+
+Ten order values, sorted: `120, 145, 160, 180, 210, 260, 330, 480, 900, 1500` (n = 10, 0 missing).
+
+- `min = 120`, `max = 1500`, `median = (210 + 260)/2 = 235`.
+- `mean = 4,285 / 10 = 428.50`, sample `SD = 443.26`. Mean ≫ median ⇒ right-skewed, so **lead with
+  median + IQR**; `CV = 443.26/428.50 = 1.03` confirms spread as large as the level.
+- Q1 and Q3 depend on the convention, and the three common ones disagree:
+
+| Convention | Q1 | Q3 | IQR | Upper fence `Q3 + 1.5·IQR` | Values flagged |
+|---|---|---|---|---|---|
+| Excel `PERCENTILE.INC` / numpy `linear` | 165.00 | 442.50 | 277.50 | 858.75 | 900 **and** 1500 |
+| Excel `PERCENTILE.EXC` | 156.25 | 585.00 | 428.75 | 1228.13 | 1500 only |
+| Tukey hinges (many boxplots) | 160.00 | 480.00 | 320.00 | 960.00 | 1500 only |
+
+Same ten numbers; the IQR ranges over 277.5–428.75 and the outlier count changes from two to one.
+That is why step 6 asks for the method by name: on small n the convention is not a rounding
+detail, it decides which points you go and investigate.
+
+Five-number summary as delivered (INC): `120 / 165.00 / 235.00 / 442.50 / 1500`, n = 10, 0 missing,
+percentile method `PERCENTILE.INC` (= numpy `linear`, SQL `PERCENTILE_CONT`).
+
 ## Choosing the summary
 | Distribution                    | Center | Spread                   |
 |---------------------------------|--------|--------------------------|

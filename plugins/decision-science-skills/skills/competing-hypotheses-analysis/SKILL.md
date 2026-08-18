@@ -125,6 +125,12 @@ reports, access logs), your source-credibility conventions, and your escalation 
 hypotheses. Keep it structural — real account numbers, amounts, or names belong in
 `your-environment.private.md` (git-ignored), never in a committed file.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/competing-hypotheses-analysis.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/hypothesis-matrix-method.md — the eight steps in full, diagnosticity explained with a
   worked reconciliation-break matrix, deception hypotheses, and the sensitivity protocol

@@ -13,7 +13,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -30,9 +30,9 @@ governs document-level attention (lead with the point, format for scanning, stop
   legal analysis, emails, reports, prompts, code comments, or professional communications.
 - Requests for clear, brief, precise, or litigation-resistant language; language audits,
   ambiguity checks, style improvements.
-- Clinical documentation defensibility work (Smile Notes and similar) — this skill governs
-  the quality of the language itself; a separate litigation-avoidance pass (not in this
-  library) flags sparse or incomplete content.
+- Clinical documentation defensibility work — this skill governs the quality of the language
+  itself; a separate litigation-avoidance pass (a content reviewer, not in this library) flags
+  sparse or incomplete content.
 - Not for: audiences that need the most accessible register (patients, low-literacy, "plain
   English") → `writing-skills:adams-plain-grade` (same Adams core, 5th-grade target).
   Building a master prompt end to end → `coding-agent-skills:master-prompt-architect`
@@ -45,15 +45,17 @@ governs document-level attention (lead with the point, format for scanning, stop
    archaisms, no doublets or triplets, no lawyerisms or terms needing specialized decoding;
    consistent terminology; subject, verb, object close; active voice wherever the actor
    matters. Where contract language is involved, control meaning with the categories of
-   contract language (performance, obligation, discretion, prohibition, policy — see
-   `references/adams-and-brevity-checks.md` §3).
+   contract language — performance, obligation, discretion, prohibition, policy, and
+   declaration for a fact a party asserts ("the Seller states that…", never "shall"). The
+   full table, and the four rarer categories, are in
+   `references/adams-and-brevity-checks.md` §3.
 3. **Format the rest for scanning**: short paragraphs, bullets, bold key phrases, white
    space; one idea per sentence or bullet; cut everything that is not new, necessary, or
    actionable; stop the moment the point is made — length is not a virtue.
 4. **Flag litigated or traditional phrasing** wherever it appears and supply the clearer
    modern alternative (offender list in the reference §2). Treat caselaw as cautionary tales
    of drafting that failed, never as validation.
-5. **Clinical notes** (including Smile Notes): controlled vocabulary, explicit
+5. **Clinical notes**: controlled vocabulary, explicit
    findings-to-plan chains, zero ambiguous modifiers, no template-clone language (identical
    soft/hard-tissue descriptions across visits are a defensibility hole); Smart Brevity
    structure so the note stays usable under clinical time pressure.
@@ -65,11 +67,11 @@ governs document-level attention (lead with the point, format for scanning, stop
    finalizing.
 
 ## Why / learn
-Litigation over meaning proves the original wording failed to express intent clearly enough
-to avoid a fight — so "tested by the courts" describes a failure history, not a warranty.
-Courts resolve disputes created by defective drafting; they never validate the words that
-caused the dispute. That is why the modern precise formulation is *safer* than the
-traditional one, not riskier: it leaves nothing to interpret. Smart Brevity is the same
+Litigation over meaning is evidence that the wording left room to fight over — so "tested by
+the courts" describes a failure history, not a warranty. A court's construction resolves one
+dispute on one record; it does not certify the words for your contract, your facts, or your
+jurisdiction. That is why the modern precise formulation is *safer* than the traditional
+one, not riskier: it leaves nothing to interpret. Smart Brevity is the same
 respect applied to attention instead of meaning — the reader under time pressure gets the
 point first, the reason second, and a scannable structure for everything else, because a
 precise document nobody finishes still fails. The two systems compose cleanly: Adams decides
@@ -95,6 +97,12 @@ Record in `references/your-environment.md`: your house style and terminology dec
 controlled vocabulary for clinical notes, and which document types get the full treatment vs.
 a light pass. Keep anything identifying real patients or clients in
 `your-environment.private.md` (git-ignored).
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/adams-smart-brevity.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/adams-and-brevity-checks.md — the Adams rules, forbidden-pattern list, contract

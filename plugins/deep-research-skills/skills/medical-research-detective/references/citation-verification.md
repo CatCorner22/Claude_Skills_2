@@ -102,21 +102,21 @@ do it.
 
 ```bash
 # Resolve a DOI and print canonical metadata
-python scripts/verify_citation.py --doi 10.1056/NEJMoa2034577
+python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --doi 10.1056/NEJMoa2034577
 
 # Resolve a PMID
-python scripts/verify_citation.py --pmid 33301246
+python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --pmid 33301246
 
 # Verify a claimed citation: flags title/author/year mismatches
-python scripts/verify_citation.py --doi 10.1056/NEJMoa2034577 \
+python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --doi 10.1056/NEJMoa2034577 \
     --claim-title "Safety and Efficacy of the ..." \
     --claim-author "Polack" --claim-year 2020
 
 # JSON output for batch work; exits non-zero if any check fails
-python scripts/verify_citation.py --doi 10.xxxx/yyyy --json
+python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --doi 10.xxxx/yyyy --json
 
 # Offline logic tests (no network needed)
-python scripts/verify_citation.py --self-test
+python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --self-test
 ```
 
 It reports: existence, canonical metadata, field-by-field comparison against any claimed values,
