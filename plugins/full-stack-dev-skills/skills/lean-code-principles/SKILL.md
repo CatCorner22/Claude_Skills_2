@@ -42,10 +42,20 @@ metadata:
    options. A module that exposes 3 functions is testable and learnable; one that exposes 30
    is a liability. Default arguments over configuration objects; one obvious way over three
    flexible ones.
-4. **Earn every abstraction.** The rule of three: duplicate once (fine), duplicate twice
-   (note it), on the third occurrence extract — *if* the copies are truly the same concept and
-   changing together. A wrong abstraction is worse than duplication, because every future
-   change fights it. Inline trivial helpers; a one-line function called once is negative value:
+4. **Earn every abstraction** against four gates, all of which must pass — the full test,
+   with the thresholds and a worked three-version example, is in
+   `references/earning-abstractions.md`:
+   (1) **shared axis of change** — the copies have a history of being edited in the same
+   commit for the same reason, or a document outside the code forces them to agree;
+   (2) **name and one-sentence docstring** — if the docstring needs "or" / "depending on",
+   it is more than one concept; (3) **signature projection** — add the next caller on paper,
+   and if it needs a new parameter or a boolean you are building a switchboard, not an
+   abstraction; (4) **read-through** — cover the body, read the call site, state the output.
+   The rule of three still applies but is not sufficient on its own: extract on the third
+   occurrence **and** gate 1. A wrong abstraction is worse than duplication, because
+   duplication is a visible local cost and a wrong abstraction is an invisible global one
+   that every future change fights. Inline trivial helpers; a one-line function called once
+   is negative value:
 
 ```python
 # before — an exported name, a docstring, a test, and an indirection, for one call site
@@ -72,8 +82,19 @@ def register(payload: SignupIn) -> User:
    boring query. Optimize or generalize only when a measurement or a real second use case
    demands it. Cleverness is a cost: the reader (often future-you or an AI agent) pays it on
    every read.
-7. **Review against the checklist** in `references/lean-review-checklist.md` — it's the
-   codified version of steps 1–6 for PR review, with the "signs of over-engineering" table.
+7. **Before you call it lean, check the irreversible list.** YAGNI is an argument about
+   option value, so it holds only where deferring keeps the option open. One question
+   decides it: *if we skip this and turn out to be wrong, is the fix a code change — or a
+   data repair, a security disclosure, or a customer-visible incident?* A code change means
+   skip it; anything else means the cost of deferral grows with every hour of traffic and
+   building it now is not over-engineering. Trust-boundary validation, idempotency wherever
+   a retry exists, timeouts on every network call, schema choices that would need a
+   backfill, identifier and wire-format shape, and a request-scoped correlation id are on
+   that list. The full table, and the tells that "lean" has become an excuse for
+   under-engineering, are in `references/earning-abstractions.md`.
+8. **Review against the checklist** in `references/lean-review-checklist.md` — it's the
+   codified version of steps 1–7 for PR review, with the "signs of over-engineering" table
+   and the eight-part contract for what a finished lean review actually contains.
 
 ## Why / learn
 Every line of code is a liability with a maintenance coupon attached: it must be read,
@@ -84,7 +105,11 @@ of users. That's why the resolution order in step 1 matters: stdlib and framewor
 effectively free (someone else patches it), while your code is expensive (you patch it).
 YAGNI works because of an asymmetry: adding a capability later costs roughly the same as
 adding it now, but carrying an unused capability costs continuously — and speculative designs
-are usually wrong anyway, so you pay twice: once to carry it, once to fight it. The
+are usually wrong anyway, so you pay twice: once to carry it, once to fight it. Notice the
+condition that asymmetry rests on — *later costs about the same as now* — because that is
+exactly what step 7 is checking. Where deferring converts a future code change into a data
+repair or a disclosure, the asymmetry inverts and YAGNI is the wrong tool, which is why
+"lean" and "under-engineered" are distinguishable at all. The
 abstraction rule is the same economics: duplication is a visible, local cost, while a wrong
 abstraction is an invisible, global one. And small surface area is what makes all of it
 compound — code that exposes little can change much, which is the property that keeps a
@@ -101,6 +126,8 @@ fewer hallucinated APIs, and make agent-written diffs reviewable.
 - Measuring productivity in lines added → net negative diffs that ship the feature are the win.
 - Clever comprehensions/metaprogramming to save lines → you saved lines and spent readability; the reader pays more.
 - Skipping the boring version to build the general one → the general one is speculation; ship the boring one and learn.
+- Treating a negative net diff as a *target* → Goodhart: deleting the retry that was absorbing a real flake is a negative diff and a worse system. Net lines is a diagnostic you read, never a score you optimize.
+- YAGNI applied to things whose later fix is a data repair (idempotency, edge validation, timeouts) → that isn't lean, it's deferred incident cost; see step 7.
 
 ## Tailor to your environment
 Record your project's lean conventions in `references/your-environment.md`: your resolution
@@ -114,5 +141,9 @@ there, and point this skill at that copy. Your specifics then survive updates an
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/lean-review-checklist.md — the PR review checklist and over-engineering signs table
+- references/earning-abstractions.md — the four gates with thresholds, a worked example carried
+  through three versions with line counts, when duplication beats DRY, when an indirection is
+  warranted before the third occurrence, and the under-engineering failure envelope
+- references/lean-review-checklist.md — the PR review checklist, over-engineering signs table,
+  and the deliverable contract for a finished lean review
 - references/your-environment.md — your conventions, approved deps, deviations (fill in)

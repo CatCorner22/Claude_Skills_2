@@ -21,5 +21,12 @@ A good response:
   replacements named, net-lines accounting shown.
 - **Teaches:** code as liability with maintenance coupons, the YAGNI asymmetry, wrong
   abstraction vs duplication economics, and why lean ≠ code golf.
+- **Decides, doesn't hedge:** names which of the four gates each abstraction passes or
+  fails (shared axis of change / name-and-docstring / signature projection / read-through)
+  rather than saying "it depends"; where history is available, actually checks whether the
+  duplicates were ever edited in the same commit.
 - **Safe:** preserves behavior, keeps clarity over character-count cleverness, and doesn't
   delete the audit-trail/validation code that regulated domains actually require.
+- **Doesn't under-engineer:** applies the "is the later fix a code change, or a data repair
+  / disclosure / incident?" test before deleting anything, and leaves a "not touched, and
+  why" note for the code it deliberately left duplicated or defensive.
