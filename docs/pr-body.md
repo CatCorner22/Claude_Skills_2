@@ -179,6 +179,54 @@ code and re-deriving results** rather than by reading.
 
 Full narrative and an 8-item owner decision list: `docs/library-review-2026-08.md` §9–§10.
 
+## 7. Surfaces pass (2026-08-18) — everything that is not a SKILL.md
+
+A second review covered the surfaces §6 could not see: the 22,604-line reference corpus, the 121
+evals as deliverables, the docs layer, the two scripts, and packaging/privacy.
+
+**The headline finding: every quality gate in this library operates on the repository, and the
+repository is not the product.** Nothing had ever verified the installed artifact, and that single
+blind spot explained a cluster of unrelated-looking defects:
+
+- **`CLAUDE_PLUGIN_ROOT` appeared zero times across all 121 skills**, while every bundled-script
+  command used a bare repo-relative path — a guaranteed file-not-found after `/plugin install`,
+  including the one command that produces the assertion-evidence deck. Fixed at 13 sites, with a
+  new house-standard rule, a checklist line, and a validator check so it cannot recur.
+- `references/your-environment.md` lives in the plugin cache, where an update discards it — the one
+  persistent thing the library asks users to create. **Flagged as owner decision D9, not fixed.**
+
+**Four gate defects that failed silently rather than loudly**, each reproduced before fixing: a
+SKILL.md with no closing `---` passed as `OK`; one non-UTF-8 byte anywhere disabled the entire
+cross-link check (1 planted error → 0); the body-line counter stopped at the first body `---`,
+making the 500-line cap bypassable; and manifests were checked only for JSON validity. Adding
+manifest coherence immediately found **all eight skills added this session missing from their
+plugin descriptions** — the strings `/plugin` shows pre-install — and **11 of 14 marketplace entries
+drifted** from their plugin manifests.
+
+**Two more false claims in skill content:** `agent-harness-config` inverted the settings-precedence
+order, telling readers a git-ignored `settings.local.json` overrides administrator policy
+(security-relevant, wrong in three places); and `design-of-experiments` claimed "nine aliased pairs"
+for a design whose six factors admit only 15 two-factor interactions — nine pairs would need 18. The
+real structure, derived in-file so a reader can check it, is seven groups.
+
+**Corrections to this PR's own earlier claims**, which is what these passes are for:
+
+| Claim in §6 | Corrected |
+|---|---|
+| "85 trigger phrases appear in another skill's description" | **111.** The 85 came from an undisclosed ≥6-char filter, and "prose" misdescribed the method. It had propagated to seven sites including MEMORY.md. |
+| Token totals | The authoring standard and README published different figures for the same measurement. Both now regenerate from measurement: 110,110 chars / 29,759 tokens / 14.88%, with the 3.7 chars/token divisor disclosed. |
+| README "sweet spot ~35–50 skills, 5–7%" | Contradicted by all four of its own bundles. Measured: 24–31 skills, 2.95–3.59%. |
+| `trigger-test.md` "~35 sessions" | 45 rows, **80 prompts**. |
+
+And a trap in this PR's own deliverable: **six of the eight Tier D rows** in `docs/trigger-test.md`
+demanded that persona skills *not* load on paraphrases of trigger phrases they deliberately own. Run
+as written, the compliance record would have scored six correct routes as failures and invited
+deleting real routes. Tier D now asks its three questions as three columns.
+
+**What came back clean, stated plainly:** the eval corpus is 121:1 with zero orphans, all archived
+pointers resolve, the generated catalogs are byte-identical to a fresh regeneration, and **no
+secrets, credentials, or client data exist anywhere in the tree**.
+
 ## Verification
 
 ```
