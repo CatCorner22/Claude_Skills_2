@@ -257,6 +257,27 @@ if [ -f scripts/check-arithmetic.py ]; then
   fi
 fi
 
+# ---------------------------------------------------------------------------
+# Trigger-test protocol integrity.
+#
+# Tier D asks whether a persona skill is reachable by someone who does not know
+# its name. A prompt in that column carrying the target's own trigger phrase
+# asks a different question and passes for the wrong reason — which is exactly
+# what happened on the first executed run, producing a clean Tier D result the
+# tier had not earned. Checked mechanically now.
+# ---------------------------------------------------------------------------
+if [ -f scripts/check-trigger-test.py ] && [ -f docs/trigger-test.md ]; then
+  tt_out=$(python3 scripts/check-trigger-test.py 2>&1)
+  tt_rc=$?
+  if [ "$tt_rc" -gt 1 ]; then
+    err "trigger-test check failed to run (exit $tt_rc) — treat as UNCHECKED: $tt_out"
+  elif [ "$tt_rc" -eq 1 ]; then
+    while IFS= read -r line; do
+      case "$line" in TRIGGER-TEST:*) err "$line" ;; esac
+    done <<< "$tt_out"
+  fi
+fi
+
 echo
 echo "== Summary: $errors error(s), $warns warning(s), $notes note(s) =="
 [ "$errors" -eq 0 ]

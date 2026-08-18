@@ -405,6 +405,30 @@ Never store secrets, credentials, account numbers, or client data here.
   skills largely cite each other — a closed loop that made the cluster look healthy. Measure
   citation health cross-plugin, never in-plugin.
 
+- FACT (2026-08-18): the trigger test was **executed** for the first time, as a blind-router
+  simulation — eight fresh agents given only the 121 name+description pairs and ten opaque-id
+  prompts, answer key withheld in a separate file. **80/80 PASS.** Verified: zero out-of-bounds
+  reads by any router. Results in `docs/trigger-test-results.md`; the live fresh-session run is
+  still never performed.
+- LESSON (2026-08-18): **a suspiciously perfect score is a hypothesis, not a conclusion — test the
+  hypothesis.** A first run scored 99% and I diagnosed answer-key contamination, rebuilt the
+  harness to withhold the key structurally, and re-ran. The blind run scored **100%** — *higher*.
+  The contamination theory was falsified by the fix intended to confirm it. The ceiling is a
+  property of the instrument: 39 of 80 prompts are NOT-prompts that pass on any of 120 wrong
+  answers, and a deliberating model with the full listing and one prompt is an upper bound on
+  routing, not an estimate of it. Withhold keys structurally anyway — it is the only reason the
+  number is discussable — but do not assume leakage explains a high score.
+- LESSON (2026-08-18): **a test prompt containing the target's own trigger phrase measures string
+  presence, not routing reach.** Tier D's in-scope column was meant to ask "is this skill
+  reachable by someone who does not know its name?" — and 7 of its 8 prompts contained a literal
+  trigger substring of the target, so it asked the same question as the by-name column and
+  reported a clean result it had not earned. I relayed that unearned result before checking it.
+  All eight rewritten; `scripts/check-trigger-test.py` now enforces the invariant and is wired
+  into `validate.sh`, with a negative control proving it fires.
+- FACT (2026-08-18, the one result that cannot be passed by abstaining): all **19/19** near-miss
+  prompts landed on the *specific alternative skill the protocol names*, not merely "not the
+  forbidden one". That is the real evidence the trigger-collision surgery held.
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core

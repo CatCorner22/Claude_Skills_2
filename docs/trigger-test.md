@@ -1,6 +1,16 @@
 # Trigger test protocol
 
-**Status: written 2026-08-17, revised 2026-08-18, never executed.** This is the compliance record for the one
+**Status: written 2026-08-17, revised 2026-08-18. Executed 2026-08-18 as a blind-router simulation —
+80/80 PASS. The live fresh-session run specified below has still never been performed.** Results,
+method, and limits: [`trigger-test-results.md`](trigger-test-results.md). The simulation gave eight
+fresh agents only the 121 name+description pairs and ten opaque-id prompts, with the answer key
+withheld in a separate file; it tests whether the descriptions *can* be routed correctly by a
+careful reader, **not** whether the runtime router does so, and it does not reproduce name-only
+listing truncation. Read §1 and §4 of the results before treating the 100% as a clean bill of health
+— in particular, Tier D's in-scope column needs rewriting before it can produce the finding it
+exists to produce.
+
+This is the compliance record for the one
 definition-of-done item in `writing-agent-skills/references/review-checklist.md` that no skill in
 this library has ever met — the fresh-session trigger test. Four review passes checked conformance,
 arithmetic, and link integrity. None of them could tell you whether a single skill actually *routes*,
@@ -148,8 +158,8 @@ design *provided* the name reaches the skill, the skill is still findable by som
 know the name, and it does not squat on work outside its scope. Those are three different questions,
 so each row asks all three.
 
-**Read the middle column carefully — it is the one that was wrong.** An earlier version of this tier
-asked only "does a generic prompt fail to load it?", and six of its eight generic prompts were
+**The middle column has now been wrong twice, in opposite directions.** Version 1 asked only "does
+a generic prompt fail to load it?", and six of its eight generic prompts were
 paraphrases of trigger phrases those skills *deliberately own* (`is this ready to build on`,
 `simpler solution`, `will it hold at real volumes`, `future outcomes`, `how good is this`,
 `refactor`). Run as written, it would have recorded correct routing as a defect and invited deleting
@@ -157,14 +167,14 @@ a real route. The in-scope column now makes that a **PASS**, and only the third 
 
 | # | By-name (must load) | In-scope paraphrase (**should** load) | Out-of-scope (must NOT load) | Skill |
 |---|---|---|---|---|
-| D1 | `Get gonzo on this quarterly report.` | `Give this a savage, first-person take — I want the reader to feel it.` | `Proofread this quarterly report for typos and grammar.` | `writing-skills:gonzo` |
-| D2 | `Bring in Pythagoras for this module.` | `Refactor this module to production standards — typing, logging, error handling.` | `What's the difference between a list and a tuple in Python?` | `full-stack-dev-skills:elite-python-engineer` |
-| D3 | `Chicken Little, look at this integration.` | `The sky is falling on this integration — walk me through it.` | `What could go wrong with this integration?` | `coding-agent-skills:chicken-little` |
-| D4 | `Be my sparring partner on this strategy.` | `Tear this strategy apart and be honest about it.` | `Summarize this strategy document in three bullets.` | `coding-agent-skills:sparring-partner` |
-| D5 | `Run precog on the next two quarters.` | `Branch the futures — what happens if demand drops 20%?` | `What were last quarter's actual numbers?` | `decision-science-skills:minority-report` |
-| D6 | `Deploy the Foreman on this codebase.` | `Is this ready to build on, or is it half-built?` | `Write the release notes for this version.` | `coding-agent-skills:the-foreman` |
-| D7 | `Comrade Engineer — is there a pencil for this?` | `Are we overengineering this? Is there a simpler solution?` | `Implement the design we agreed on last week.` | `coding-agent-skills:soviet-space-graphite` |
-| D8 | `Weight of the books on this schema.` | `Will it hold at real volumes, or did we test it empty?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
+| D1 | `Get gonzo on this quarterly report.` | `Write this up the way a magazine columnist would — first person, in the room, no corporate hedging.` | `Proofread this quarterly report for typos and grammar.` | `writing-skills:gonzo` |
+| D2 | `Bring in Pythagoras for this module.` | `This module works but I would not put it in front of a paying customer. Bring it up to the bar you would hold yourself to.` | `What's the difference between a list and a tuple in Python?` | `full-stack-dev-skills:elite-python-engineer` |
+| D3 | `Chicken Little, look at this integration.` | `Three dashboards went red this morning and everyone is in a war room. Is this actually an emergency?` | `What could go wrong with this integration?` | `coding-agent-skills:chicken-little` |
+| D4 | `Be my sparring partner on this strategy.` | `I have talked myself into this plan and I no longer trust my own judgement on it. Push back hard.` | `Summarize this strategy document in three bullets.` | `coding-agent-skills:sparring-partner` |
+| D5 | `Run precog on the next two quarters.` | `Give me three genuinely different ways the next two quarters could go, not a best and worst case.` | `What were last quarter's actual numbers?` | `decision-science-skills:minority-report` |
+| D6 | `Deploy the Foreman on this codebase.` | `The team says this feature is done. I do not believe them. How do I check what is actually finished?` | `Write the release notes for this version.` | `coding-agent-skills:the-foreman` |
+| D7 | `Comrade Engineer — is there a pencil for this?` | `We have three engineers on a six-month build for something I suspect a spreadsheet could do.` | `Implement the design we agreed on last week.` | `coding-agent-skills:soviet-space-graphite` |
+| D8 | `Weight of the books on this schema.` | `It flies in staging with our seed data. What happens in March when the real volume shows up?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
 
 How to read the three results together:
 
