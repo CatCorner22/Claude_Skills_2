@@ -40,6 +40,9 @@ description: >-
   plan runs → see `decision-science-skills:pre-mortem`.
 
 ## Do it
+The four questions expanded, the ground rules to read aloud, the facilitation guide, and the
+timeline-reconstruction protocol are in `references/aar-method.md`.
+
 1. **Frame the session.** State the event under review, the ground rules (blameless,
    rank-free, everyone talks, no grades), and the four questions on the wall. Budget the
    time roughly 25% / 25% / 50% across supposed-to / actually-happened / why-plus-fixes.

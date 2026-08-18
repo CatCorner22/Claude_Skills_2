@@ -22,6 +22,10 @@ metadata:
   the source contains sensitive data.
 - Not for: cleaning the *contents* of a dataset → see `data-analytics-bi-skills:data-cleaning`.
   For git mechanics → see `coding-agent-skills:git-and-code-review`.
+- Not for: making the analysis itself rerunnable — seeds, pinned environments, a one-command
+  rebuild, and the delete-everything-downstream-of-raw regenerate test → see
+  `data-tools-skills:reproducible-analysis`. This skill owns where files live and what is safe
+  to share; that one owns whether rerunning them reproduces the number.
 
 ## Do it
 1. **Name files so they sort and explain themselves.** Pattern:

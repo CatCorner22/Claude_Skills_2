@@ -32,6 +32,10 @@ metadata:
   `coding-agent-skills:board-review` (Phase 5 here is the lightweight solo version).
 
 ## Do it
+Three domain packs carry the depth this spine draws on — `references/python-and-code.md`,
+`references/writing-and-drafting.md`, and `references/process-and-stakeholders.md`. Open the one
+the request lands in at the Diagnose step, not before.
+
 1. **Scale the workflow to the task — by consequence, not length.** Run all six phases for
    substantial deliverables (multi-file tools, system designs, documents people rely on,
    plans with dependencies). Compress hard for small ones: for a ten-line utility, Phases

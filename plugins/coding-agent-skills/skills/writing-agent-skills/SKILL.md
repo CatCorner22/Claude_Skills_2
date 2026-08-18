@@ -43,7 +43,10 @@ description: >-
   <what it does> — use when <trigger situations>. Triggers: <phrases the user says>.
 ---
 ```
-Hard rules (validated by `scripts/validate.sh`):
+Hard rules (validated by `scripts/validate.sh`) — the full field reference, the optional fields,
+the `metadata` house convention, and the measured description-budget reality are in
+`references/frontmatter-rules.md`; read it before your first skill and whenever you reach for a
+field not listed here:
 - `name`: 1–64 chars, lowercase letters/digits/hyphens only, no leading/trailing/consecutive
   hyphens, **must equal the folder name**, must **not** contain the words `anthropic` or `claude`.
 - `description`: non-empty, **≤ 1024 characters**, written in the **third person**, states
@@ -94,9 +97,15 @@ Create `evals/<plugin>/<skill>.md` with at least three scenarios:
 - Add an entry to `.claude-plugin/marketplace.json` (`name`, `source: "./plugins/<plugin>"`,
   `description`, `category`). Do not put `version` in both files — `plugin.json` wins.
 
-### 8. Validate
+### 8. Validate, then work the definition-of-done checklist
 Run `bash scripts/validate.sh` from the repo root, then `claude plugin validate plugins/<plugin>`.
-Fix every warning before committing.
+Fix every warning before committing. **Then open `references/review-checklist.md` and work it
+line by line** — the validator only checks what a script can see (frontmatter shape, section
+presence, cross-link resolution). The checklist carries the guards that a script cannot: the
+arithmetic-verification pass on every worked example, the reciprocal-link pass on the *older*
+side of every new seam, the trigger-collision scan, and the fresh-session trigger test. Every
+defect class that has survived a review in this library's history was one the validator was
+structurally unable to catch, and is now a line on that checklist.
 
 ## Why / learn
 Skills work by **progressive disclosure**: at startup Claude only sees each skill's `name` +
@@ -147,8 +156,10 @@ If you adopt house conventions of your own (naming, extra sections), record them
 
 ## References
 - assets/SKILL.template.md — copy this to start any new skill
-- references/frontmatter-rules.md — full frontmatter field reference and constraints
-- references/review-checklist.md — the definition-of-done checklist for a finished skill
+- references/frontmatter-rules.md — full frontmatter field reference and constraints (read at §2)
+- references/review-checklist.md — the definition-of-done checklist for a finished skill (worked at §8)
+- references/your-environment.md — your own house conventions: naming, provenance marks,
+  versioning, review depth by skill type (fill in; the `.private.md` twin is git-ignored)
 
 ## Scripts
 - `scripts/validate.sh` (at the repo root, not in this skill) lints every skill's structure and frontmatter.

@@ -52,6 +52,9 @@ the ones that cannot ambush you.
   (this skill runs BEFORE commitment and re-arms it with tripwires).
 
 ## Do it
+Framing, variable sorting, a domain-neutral worked scenario construction, the minority-report
+rule, and the one-variable turn are in `references/scenario-cell-method.md`.
+
 1. **Frame the decision, not the future.** Write the decision this cell serves, the
    time horizon, and what would count as a good outcome. Scenario work without a
    decision attached produces interesting fiction; the decision is what makes it

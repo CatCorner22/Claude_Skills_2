@@ -30,6 +30,9 @@ metadata:
 - Not for: choosing metrics and validation once the task is framed → see
   `machine-learning-skills:model-evaluation`. For profiling the data to test feasibility → see
   `data-analytics-bi-skills:exploratory-data-analysis`.
+- Not for: architecting a bespoke or fine-tuned language model once framing says a generic one
+  will not do — the prompting/RAG/PEFT/full-tune ladder, data budget, and eval harness → see
+  `machine-learning-skills:bespoke-llm-architect`.
 
 ## Do it
 1. **State the decision first, not the model.** Write one sentence: *who* acts, *what* action changes

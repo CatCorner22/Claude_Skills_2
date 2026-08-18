@@ -48,6 +48,10 @@ namesake earned that.
   `coding-agent-skills:chicken-little-executive-advisor`.
 
 ## Do it
+The facilitation script, the Challenger record held soberly, the bias literature, a worked
+go-live-that-should-slip example, and the decision-log template are in
+`references/revision-review-method.md`.
+
 1. **Install triggers at plan time** (the step that makes every later step possible):
    name, in the plan itself, the conditions that OBLIGATE a revision review — slipped
    milestones, anomaly counts, changed load numbers, dependency failures. A review held

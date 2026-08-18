@@ -35,6 +35,10 @@ most durable improvements. This skill runs the room where that happens.
   `continuous-improvement-skills:value-stream-mapping`. Ordinary working meetings that
   should produce decisions → see `collaboration-skills:meeting-design` (this skill owns
   workshop facilitation; that one owns the everyday meeting).
+- Not for: translating the weighted needs this event surfaces into engineering characteristics,
+  with the correlation matrix and the competitive benchmark → see
+  `continuous-improvement-skills:qfd-house-of-quality`. The prioritized needs a co-design
+  session produces are exactly that skill's left wall.
 
 ## Do it
 `references/facilitation-playbook.md` has the charter, agenda, technique details, and a

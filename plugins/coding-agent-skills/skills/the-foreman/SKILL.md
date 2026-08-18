@@ -52,6 +52,10 @@ and here is the plan.
   unbuilt and hands the how over).
 
 ## Do it
+The construction practices held honestly, the claim list (schedule of values), evidence
+standards for the walk, the three-bin sort with worked examples, and the punch-list format are
+in `references/draw-inspection-method.md`.
+
 1. **Fix the draw request.** Write down, before walking anything: what phase wants to
    start, and what the current work CLAIMS to have finished (the "schedule of values" —
    each claimed-complete element, listed). An inspection without a claim list drifts

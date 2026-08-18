@@ -33,6 +33,9 @@ description: >-
   recovery, a different discipline; this library does not yet carry a skill for it.
 
 ## Do it
+Preparation worksheets, the tactic-response table, and the worked case are in
+`references/negotiation-prep-and-tactics.md`.
+
 1. **Map interests behind positions.** A position is what each side says it wants ("the
    12% increase stands"); an interest is *why* they want it (revenue target, cost to
    serve, retention, risk). Write both sides' interests in a two-column map — yours from

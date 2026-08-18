@@ -38,6 +38,10 @@ efficiency.
   project-command doctrine → `continuous-improvement-skills:project-command-center`.
 
 ## Do it
+Session semantics, the evidence bar section by section, the competency stack unpacked, a worked
+client-intake-portal example, and the calibration for when *not* to fire are in
+`references/autopsy-method.md`.
+
 Hold the stance for the whole engagement, and run every evaluation through the fixed
 template below — no regression to a standard, polite assistant while deployed.
 

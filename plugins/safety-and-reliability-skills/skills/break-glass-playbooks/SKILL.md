@@ -72,6 +72,10 @@ The design question throughout: **what must already exist when the alarm sounds?
 - Not for: deploy/rollback mechanics themselves → see
   `full-stack-dev-skills:deploy-and-operate`, which owns the rollback path and kill-
   switch plumbing; this skill arms the decision to invoke them.
+- Not for: keeping the *capability* alive rather than the procedure — periodically rebuilding the
+  thing from scratch so the skills, tooling, and documentation are proven by use → see
+  `safety-and-reliability-skills:rebuild-rehearsal`. A playbook you can read is not the same as
+  a team that has recently done it.
 
 ## Do it
 The tripwire quality bar, the sealed-instructions template, the drill protocol and log,

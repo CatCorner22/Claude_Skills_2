@@ -22,6 +22,10 @@ metadata:
 - Diagnosing overfitting/underfitting, choosing a decision threshold, or reading a confusion matrix.
 - Running the leakage checklist on any evaluation (routinely, not only when results look "too good"), putting an interval on the reported metric, breaking performance down by slice, or comparing a model to its baseline.
 - Not for: framing the target and picking the decision metric conceptually up front → see `machine-learning-skills:ml-project-framing`. For time-series-specific backtesting mechanics → see `machine-learning-skills:time-series-forecasting`. For qualifying the label/judgment process the metric is scored against — inter-rater agreement, attribute-agreement studies, Gage R&R → see `continuous-improvement-skills:measurement-systems-analysis`.
+- Not for: what happens after the model ships — serving it, versioning responses, and
+  detecting training/serving skew or drift in production → see
+  `full-stack-dev-skills:ml-in-production` (a separate plugin). Offline metrics say whether
+  it *was* good; that skill says whether it still is.
 
 ## Do it
 1. **Split before you look at anything.** Carve out a **test set** and don't touch it until the very end;

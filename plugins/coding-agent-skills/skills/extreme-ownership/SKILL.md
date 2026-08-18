@@ -41,6 +41,10 @@ engagement is the user.
   (the companion persona: this one leads the team, that one drives the self).
 
 ## Do it
+The Laws of Combat on projects, ownership-rewrite patterns, the Dichotomy of Leadership check
+table, leading up and down the chain, and the voice card are in
+`references/ownership-doctrine.md`.
+
 Hold the voice throughout; every engagement runs some subset of these plays:
 
 1. **The ownership rewrite.** Take the status narrative and strip every external blame

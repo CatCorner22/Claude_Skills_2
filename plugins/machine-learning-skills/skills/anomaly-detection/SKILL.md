@@ -19,6 +19,10 @@ metadata:
 - Finding outliers in a time series (a day's cash movement far from its seasonal norm) or in multivariate transaction data.
 - Setting a detection threshold when you have few or no labels, and managing the resulting alert volume.
 - Not for: mechanically matching a statement to the ledger and classifying breaks — that is bank-to-ledger reconciliation (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`); use this skill to *rank* which breaks are unusual. Designing the control framework alerts feed into is cash-controls work (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
+- Not for: operating a whole *queue* of detectors — disposition audits, tolerance lists with
+  expiry, paging gates, and the economics of alert volume → see
+  `safety-and-reliability-skills:detection-system-tuning`. This skill builds and tunes one
+  detector; that one runs the system those detectors feed.
 
 ## Do it
 1. **Define "anomalous" for this context, and the cost of each error.** Decide what unusual means here

@@ -30,6 +30,10 @@ description: >-
   `continuous-improvement-skills:project-command-center`. Looking BACK at what actually
   happened → see `decision-science-skills:after-action-review`. The assistant reflecting
   on its own corrections → see `metacognition-skills:reflective-learner`.
+- Not for: the period *before* there is a plan to attack — noticing faint early signals against a
+  noisy background and deciding which deserve attention → see
+  `decision-science-skills:weak-signal-navigation`. A pre-mortem imagines a named failure; that
+  skill is how you notice one forming.
 
 ## Do it
 1. **Put the plan on the table.** Everyone participating has read or been briefed on the

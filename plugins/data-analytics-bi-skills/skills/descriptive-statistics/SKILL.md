@@ -25,6 +25,9 @@ metadata:
   population with intervals or tests → see `data-analytics-bi-skills:statistical-inference`.
 
 ## Do it
+`references/measures-and-formulas.md` carries the formulas, the robust alternatives, and the
+worked five-number summary — open it when you need the definition rather than the choice.
+
 1. **Fix the population and the grain.** State exactly which set of values you are summarizing and
    what one value represents ("revenue per closed order, FY24"). A mean means nothing until you can
    say "mean of what, per what," and mixing grains (order lines vs. orders) silently corrupts every

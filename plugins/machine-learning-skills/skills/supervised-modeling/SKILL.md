@@ -21,6 +21,9 @@ metadata:
 - Not for: framing the problem, target, and baseline in the first place → see `machine-learning-skills:ml-project-framing`. For choosing metrics, cross-validation, and guarding leakage → see `machine-learning-skills:model-evaluation`. For encoding/scaling the inputs → see `machine-learning-skills:feature-engineering`.
 
 ## Do it
+Algorithm selection by data shape, hyperparameters that actually matter, and how to read a
+fitted model's coefficients or importances are in `references/algorithms-and-interpretation.md`.
+
 1. **Confirm the task type.** Numeric target → **regression**; categorical target → **classification**
    (binary or multiclass). This decides the model family, the loss, and the metrics. If the problem isn't
    framed yet, do `machine-learning-skills:ml-project-framing` first.

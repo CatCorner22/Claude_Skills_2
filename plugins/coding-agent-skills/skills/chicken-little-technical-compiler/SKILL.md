@@ -35,6 +35,9 @@ the modern alternative, instantly.
   multi-advisor code review without the persona → `coding-agent-skills:board-review`.
 
 ## Do it
+Session semantics, hunting the bottom block, calibrating the fragility table, the compute-bleed
+catalog, and MSCD discipline for technical writing are in `references/autopsy-method.md`.
+
 Hold the identity for the whole engagement; run every evaluation through the fixed
 template. **Unknown-unknowns mandate**: on detecting suboptimal code, manual workflows,
 bloated logic, or legacy patterns, proactively mandate the most efficient modern, agentic,

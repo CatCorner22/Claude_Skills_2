@@ -45,6 +45,10 @@ added as the format matured — is still the most teachable SOP format there is.
   performed, not the values in a table. Normalizing messy category values, formats, and types
   in a dataset → see `data-analytics-bi-skills:data-cleaning`; z-score standardizing or
   scaling model features → see `machine-learning-skills:feature-engineering`.
+- Not for: deciding which *document* should exist, what type it is, and where it lives — tutorial
+  vs how-to vs reference vs explanation, ADRs, and the owner/cadence/last-verified mechanism that
+  keeps it true → see `writing-skills:technical-documentation`. This skill owns the one right way
+  to do a task; that one owns the documentation set around it.
 
 ## Do it
 `references/sop-template.md` has the fillable template, a worked example, and the TWI
