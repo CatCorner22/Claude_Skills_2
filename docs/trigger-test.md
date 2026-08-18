@@ -1,14 +1,24 @@
 # Trigger test protocol
 
-**Status: written 2026-08-17, revised 2026-08-18. Executed 2026-08-18 as a blind-router simulation —
-80/80 PASS. The live fresh-session run specified below has still never been performed.** Results,
-method, and limits: [`trigger-test-results.md`](trigger-test-results.md). The simulation gave eight
-fresh agents only the 121 name+description pairs and ten opaque-id prompts, with the answer key
-withheld in a separate file; it tests whether the descriptions *can* be routed correctly by a
-careful reader, **not** whether the runtime router does so, and it does not reproduce name-only
-listing truncation. Read §1 and §4 of the results before treating the 100% as a clean bill of health
-— in particular, Tier D's in-scope column needs rewriting before it can produce the finding it
-exists to produce.
+**Status: written 2026-08-17, revised 2026-08-18. Two blind-router simulation runs; the live
+fresh-session run specified below has still never been performed.**
+
+- **Run 1 (2026-08-18) — 80/80 PASS, partly unearned.** Eight fresh agents, 121 name+description
+  pairs, ten opaque-id prompts each, answer key withheld in a separate file. Results, method, and
+  limits: [`trigger-test-results.md`](trigger-test-results.md). Read §1 and §4 before treating the
+  100% as a clean bill of health: **Tier D's result did not count**, because seven of its eight
+  in-scope prompts contained a literal trigger phrase of their own target, so that column asked the
+  same question as the by-name column.
+- **Run 2 — Tier D re-run (2026-08-18) — 41/45.** Tier D rewritten (0 trigger leakage, verified by
+  `scripts/check-trigger-test.py`) and extended from 8 rows to 15, then re-executed with five fresh
+  agents and the key withheld structurally. by-name 15/15 · in-scope **11/15** · out-of-scope 15/15.
+  **11 HEALTHY · 4 NAME-ONLY (`gonzo`, `elite-python-engineer`, `chicken-little`,
+  `chicken-little-executive-advisor`) · 0 OVER.** Write-up:
+  [`trigger-test-tier-d-rerun.md`](trigger-test-tier-d-rerun.md).
+
+Both runs test whether the descriptions *can* be routed correctly by a careful reader, **not**
+whether the runtime router does so, and neither reproduces name-only listing truncation. A
+simulation is an upper bound on live performance.
 
 This is the compliance record for the one
 definition-of-done item in `writing-agent-skills/references/review-checklist.md` that no skill in
@@ -54,18 +64,18 @@ thing the test can usefully measure.
 
 2. **One fresh session per row.** This is not optional and it is the expensive part. Once a skill is
    loaded its body is in context and biases every later turn in that session, so a second prompt in
-   the same session tests nothing. **Budget accordingly: 45 rows carry 80 distinct prompts**, so a
-   full run is up to 80 fresh sessions. A cheaper first pass is 45 sessions — the must-load column
+   the same session tests nothing. **Budget accordingly: 56 rows carry 105 distinct prompts**, so a
+   full run is up to 105 fresh sessions. A cheaper first pass is 56 sessions — the must-load column
    only — following up on the other columns for anything that passes.
 
    | Tier | Rows | Prompts/row | Prompts |
    |---|---:|---:|---:|
    | A — routes that lost their phrases | 11 | 2 | 22 |
    | B — did the moved phrases land? | 6 | 1 | 6 |
-   | C — over-trigger guards | 12 | 1 | 12 |
-   | D — persona-named skills | 8 | 3 | 24 |
+   | C — over-trigger guards | 16 | 1 | 16 |
+   | D — name-gated skills | 15 | 3 | 45 |
    | E — skills rewritten this session | 8 | 2 | 16 |
-   | **total** | **45** | | **80** |
+   | **total** | **56** | | **105** |
 
 3. **Paste the prompt verbatim.** No preamble, no "can you", no follow-up clarification. Any editing
    makes the row unrepeatable.
@@ -84,9 +94,18 @@ thing the test can usefully measure.
 | **WRONG** | A *different, plausible* skill loaded. This is a seam defect, not a description defect — two descriptions are competing and neither names the boundary. |
 | **OVER** | The near-miss prompt loaded the skill. It is too pushy. |
 
-**MISS and WRONG have different fixes.** MISS → the description is missing the user's vocabulary; add
-it. WRONG → both skills need a reciprocal `Not for: … → see plugin:other-skill` line naming the
-boundary in matching words. Do not fix a WRONG by deleting the loser's trigger — that is what created
+**MISS and WRONG have different fixes, and both fixes live in the DESCRIPTION.** MISS → the
+description is missing the user's vocabulary; add it. WRONG → both descriptions need a reciprocal
+boundary clause naming the seam in matching words.
+
+**Put the boundary in the description, not only in the body.** The router reads `name` +
+`description` and nothing else, so a `## When to use` → `Not for:` line cannot break a routing tie
+no matter how well it is written. Proven here on 2026-08-18: both failing pairs
+(`elite-python-engineer` ↔ `script-wizard`, `chicken-little-executive-advisor` ↔
+`sparring-partner`) already carried reciprocal body seams pointing at each other, and both
+misrouted anyway. Moving one clause each into the descriptions fixed both rows with zero
+regressions. Keep the body line too — it serves the reader once the skill is loaded — but it is
+not the routing fix. Do not fix a WRONG by deleting the loser's trigger — that is what created
 the orphaned-phrase defect recorded in Tier C.
 
 ---
@@ -130,7 +149,17 @@ supposed to *gain* it. A MISS here means a phrase was taken from one skill and d
 The library has **285 single-word trigger phrases**. Most are precise jargon (`weibull`, `cpk`,
 `duckdb`) and carry no risk. These rows probe the subset that are ordinary English words with a
 dominant non-skill meaning — the ones most likely to fire on an unrelated request. Every prompt here
-uses the word in its **everyday** sense. Loading the skill is a **failure**.
+uses the word in its **everyday** sense, or in a sense another skill owns. Loading the named skill
+is a **failure**.
+
+**C13–C16 are a different shape from C1–C12 and were added 2026-08-18.** They do not probe a bare
+common word; they probe one skill's *breadth*. `script-wizard` claims "improve any script, tool,
+document, or technical artifact of real substance — even when phrased casually", and two
+independent methods flagged it as the library's general-work attractor: the five-lens trim ranking
+placed it 2nd of 121 on reach while every other lens placed it near the bottom, and the Tier D
+re-run watched it absorb a prompt belonging to `elite-python-engineer`. Each row below hands it a
+casual phrasing whose substance another skill owns. Its cost, if these fail, is not its own tokens
+— it is the precision it takes from its neighbours.
 
 | # | Prompt (paste verbatim) | Must NOT load | Trigger at fault |
 |---|---|---|---|
@@ -146,6 +175,10 @@ uses the word in its **everyday** sense. Loading the skill is a **failure**.
 | C10 | `Refactor this paragraph so it reads better.` | `full-stack-dev-skills:elite-python-engineer` | `refactor` (bare, and the skill's broadest remaining route) |
 | C11 | `What are the visitor permissions for the building on weekends?` | `coding-agent-skills:agent-harness-config` | `permissions`, `hooks` |
 | C12 | `Investigate why the office coffee order keeps arriving late.` | `metacognition-skills:dynamic-analysis-engine` | `investigate` |
+| C13 | `Half the rows in this export have blanks and the dates come in three different formats. Clean this up.` | `coding-agent-skills:script-wizard` | `clean this up` (should be `data-analytics-bi-skills:data-cleaning`) |
+| C14 | `Here's the diff for my branch — review this code before I open the PR.` | `coding-agent-skills:script-wizard` | `review this code` (should be `coding-agent-skills:git-and-code-review`) |
+| C15 | `Our onboarding takes eleven days and nobody can say why. Improve this process.` | `coding-agent-skills:script-wizard` | `improve this process` (should be a continuous-improvement method) |
+| C16 | `Our refund policy has an edge case people keep exploiting. Stress test it.` | `coding-agent-skills:script-wizard` | `stress test` (shared with `coding-agent-skills:rule-stress-testing`) |
 
 > A single OVER here is not automatically a defect — a slightly pushy skill that offers itself and is
 > waved off costs one line. An OVER on **C6, C7, C8 or C12** is more serious, because those skills
@@ -157,6 +190,24 @@ This library deliberately contains skills named for a persona rather than a task
 design *provided* the name reaches the skill, the skill is still findable by someone who does not
 know the name, and it does not squat on work outside its scope. Those are three different questions,
 so each row asks all three.
+
+**Extended to 15 rows (2026-08-18)** to cover every genuinely name-gated skill in the library, not
+just eight of them. `machine-learning-skills:bespoke-llm-architect` is deliberately **excluded**:
+it sets `disable-model-invocation: true`, so the router cannot reach it by any prompt and a routing
+row for it would measure nothing. It is user-invoke-only by construction — worth knowing, not worth
+testing.
+
+**Two by-name prompts deliberately use a name that is NOT in the target's trigger list**, because
+the skill's own text presents that name to the user:
+
+- **D11** says "The Commander" — `extreme-ownership`'s description opens `Acts as "The Commander"`,
+  but its triggers are `jocko`, `extreme ownership`, `laws of combat`… The persona's own name is
+  not among them.
+- **D14** says `adams-plain-grade` hyphenated — the skill's When-to-use says "the user asks for
+  adams-plain-grade by name", while the trigger reads `adams plain grade` with spaces.
+
+A MISS on either is a finding about the description, not a broken prompt. Read it as: the skill
+tells the user a name that does not reach it.
 
 **The middle column has now been wrong twice, in opposite directions.** Version 1 asked only "does
 a generic prompt fail to load it?", and six of its eight generic prompts were
@@ -175,6 +226,13 @@ a real route. The in-scope column now makes that a **PASS**, and only the third 
 | D6 | `Deploy the Foreman on this codebase.` | `The team says this feature is done. I do not believe them. How do I check what is actually finished?` | `Write the release notes for this version.` | `coding-agent-skills:the-foreman` |
 | D7 | `Comrade Engineer — is there a pencil for this?` | `We have three engineers on a six-month build for something I suspect a spreadsheet could do.` | `Implement the design we agreed on last week.` | `coding-agent-skills:soviet-space-graphite` |
 | D8 | `Weight of the books on this schema.` | `It flies in staging with our seed data. What happens in March when the real volume shows up?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
+| D9 | `Deploy advisor on our new pricing model.` | `Tear our new pricing model apart like someone who wants it to fail — where does the whole thing come undone?` | `Summarize the pricing model in a paragraph for the board deck.` | `coding-agent-skills:chicken-little-executive-advisor` |
+| D10 | `Deploy compiler on this service.` | `Which single dependency in this service, if it went away tomorrow, takes everything down with it?` | `Add a health-check endpoint to this service.` | `coding-agent-skills:chicken-little-technical-compiler` |
+| D11 | `Bring in The Commander on this postmortem.` | `This writeup blames three other teams. Rewrite it so we own our part.` | `Who on the team has capacity to pick up this ticket?` | `coding-agent-skills:extreme-ownership` |
+| D12 | `Hold up the mirror on this project.` | `Status says green but I know it isn't. Tell me the real state in plain words.` | `How many hours of sleep should I be getting?` | `coding-agent-skills:stay-hard-accountability` |
+| D13 | `Master prompt architect: build me a system prompt.` | `I need a system prompt for a customer-facing agent, and I want the requirements pinned down before you write a line of it.` | `Why does my prompt sometimes return prose instead of JSON?` | `coding-agent-skills:master-prompt-architect` |
+| D14 | `Run adams-plain-grade over this notice.` | `Rewrite this so someone who left school at fourteen can act on it without asking anyone.` | `Tighten this memo for the executive team — they have two minutes.` | `writing-skills:adams-plain-grade` |
+| D15 | `Run the board on this module.` | `I want several specialists looking at this from different angles at once, not one opinion.` | `Is this function's variable naming consistent with the rest of the file?` | `coding-agent-skills:board-review` |
 
 How to read the three results together:
 

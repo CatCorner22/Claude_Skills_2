@@ -444,6 +444,59 @@ Never store secrets, credentials, account numbers, or client data here.
   check-arithmetic.py, and my own review. **Budget an adversarial reader for anything authored, and
   RUN any script a skill ships against the case it claims to catch.**
 
+- FACT (2026-08-18, Tier D re-run, blind, 15 rows / 45 prompts): **41/45 — 11 HEALTHY, 4 NAME-ONLY,
+  0 OVER.** All 15 by-name prompts passed at confidence 5. Of the four name-only skills, **two are
+  by design** (`chicken-little` says "asks for Chicken Little or Aether by name"; `gonzo` is
+  gated on requests for the register) and **two are defects** where the description promises reach
+  it does not have: `elite-python-engineer` ("Use for ANY production-grade Python task") lost a
+  production-Python prompt to `script-wizard`, and `chicken-little-executive-advisor` ("or asks for
+  an adversarial strategic autopsy") lost one to `sparring-partner`. Both are SEAM defects — the
+  target was runner-up in each — so the fix is reciprocal `Not for:` lines in both skills, never
+  deleting the winner's trigger.
+- FACT (2026-08-18, converged from two independent methods): **`script-wizard` is the library's
+  general-work attractor.** The five-lens trim ranking put it 2nd of 121 on reach and near-bottom on
+  every other lens — the largest disagreement in that exercise — and the Tier D re-run watched it
+  absorb two prompts on "improve any script, tool, document, or technical artifact… even when
+  phrased casually", one of which belonged to another skill. Its cost is the precision it takes from
+  neighbours, not its own tokens. Needs a Tier C guard row.
+- LESSON (2026-08-18): **"name-only reachable" is not automatically a defect — check the skill's own
+  When-to-use before calling it one.** Four rows scored NAME-ONLY; two of them say in their own
+  descriptions that name-gating is the contract. Reporting all four as findings would have invented
+  two problems and buried the two real ones.
+
+- FACT (2026-08-18, seam repair verified): the two Tier D defects are fixed and measured.
+  **41/45 -> 43/45; NAME-ONLY 4 -> 2; zero regressions across the other 13 rows.** The two
+  remaining NAME-ONLY skills (`gonzo`, `chicken-little`) are name-gated by their own
+  descriptions, which is the contract, not a defect.
+- LESSON (2026-08-18, important and counter to what the protocol said): **a body `Not for:` line
+  cannot fix a routing WRONG. The router never reads bodies.** Both failing pairs ALREADY had
+  reciprocal body seams pointing at each other and misrouted anyway. The repair had to go in the
+  DESCRIPTION, which is the only text the router sees. `docs/trigger-test.md`'s prescribed fix for
+  a WRONG was therefore incomplete; it now says description-level.
+- FACT (2026-08-18): the repair's causal attribution is direct, not inferred. The blind router that
+  fixed D9 wrote: "Decided by the explicit hand-off written into sparring-partner… Without that
+  cross-reference, sparring-partner's 'tear this apart' / 'red team' triggers would have won on
+  surface wording." The one that fixed D2 quoted "raising existing code to a shipping standard" —
+  the exact clause added. Both quoted strings verified present in the edited descriptions.
+- RULE (2026-08-18): a description edit costs listing budget and must be re-measured. These four
+  clauses moved the library 109,662 -> 109,958 chars (14.82% -> 14.86%). Re-run
+  `scripts/measure-listing-cost.py` and refresh README after any description change.
+
+- FACT (2026-08-18, Tier C run, blind): **16/16 over-trigger guards PASS, 0 OVER.** The four new
+  `script-wizard` breadth guards (C13-C16) each landed on the *correct* owner — data-cleaning,
+  git-and-code-review, value-stream-mapping, rule-stress-testing — which is stronger than merely
+  staying out of the way. The seam repairs shipped just before had already moved script-wizard from
+  winning two Tier D prompts to runner-up on both.
+- LESSON (2026-08-18, third occurrence — treat as a standing rule): **the test prompt is the most
+  common defect in this protocol, not the description.** Tier D v1 used generic prompts that were
+  really in-scope; Tier D v2 used in-scope prompts carrying the target's own trigger; the Tier C
+  decoy added the word "Python" and got steered to `python-for-analysts`, which owns the bare
+  trigger and was the better answer anyway. Before scoring any routing prompt, check it against
+  **every** skill's trigger list, not just the target's. `scripts/check-trigger-test.py` only
+  checks the target's — the gap is now documented in the script, and automating the full check is
+  harder than it looks because short triggers like "agent", "prompt", and "module" are ordinary
+  English.
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core

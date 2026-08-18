@@ -9,7 +9,8 @@ description: >-
   current-vs-future-state lock-in forecast, MSCD linguistic-failure table, proactive
   pivot), refuses to move past an unresolved blocker, and interrupts manual work whenever
   an automated or agentic path exists. Use when the user says "deploy advisor" or asks for
-  an adversarial strategic autopsy of a business model, project, process, or design.
+  a business model, process, or design attacked whole; for one submitted work product,
+  `coding-agent-skills:sparring-partner`.
   Triggers: deploy advisor, deploy_advisor, executive chicken little, activate executive
   chicken little, strategic autopsy, operational autopsy, red team my business, blocker
   protocol, stand down.

@@ -33,19 +33,19 @@ Installed skills are namespaced, e.g. `decision-science-skills:pre-mortem`. Type
 
 **Install the plugins you will actually use, not all fourteen.** Every installed skill's `name` and
 `description` sit in the system prompt for the whole session, whether or not you use it. Measured
-with `python3 scripts/measure-listing-cost.py` across all 121 skills: **109,662 characters ≈
-29,638 tokens ≈ 14.8% of a 200K context** (tokens estimated at ~3.7 chars/token), before you
+with `python3 scripts/measure-listing-cost.py` across all 121 skills: **109,958 characters ≈
+29,718 tokens ≈ 14.9% of a 200K context** (tokens estimated at ~3.7 chars/token), before you
 have asked anything. Re-run that script after any description change — this figure went stale
 within a day of first being measured by hand.
 
 | Plugin | Skills | ~Tokens | % of 200K |
 | --- | ---: | ---: | ---: |
-| `coding-agent-skills` | 20 | 4,682 | 2.34% |
+| `coding-agent-skills` | 20 | 4,754 | 2.38% |
 | `continuous-improvement-skills` | 16 | 4,038 | 2.02% |
 | `decision-science-skills` | 15 | 3,931 | 1.97% |
 | `data-analytics-bi-skills` | 11 | 2,757 | 1.38% |
 | `safety-and-reliability-skills` | 10 | 2,587 | 1.29% |
-| `full-stack-dev-skills` | 11 | 2,402 | 1.20% |
+| `full-stack-dev-skills` | 11 | 2,411 | 1.21% |
 | `data-tools-skills` | 7 | 1,576 | 0.79% |
 | `machine-learning-skills` | 7 | 1,545 | 0.77% |
 | `math-foundations-skills` | 6 | 1,541 | 0.77% |
@@ -54,7 +54,7 @@ within a day of first being measured by hand.
 | `metacognition-skills` | 4 | 955 | 0.48% |
 | `learning-skills` | 3 | 721 | 0.36% |
 | `deep-research-skills` | 1 | 276 | 0.14% |
-| **all 14** | **121** | **29,638** | **14.82%** |
+| **all 14** | **121** | **29,718** | **14.86%** |
 
 There is a second, sharper reason to subset. **At roughly 100 installed skills the listing starts
 trimming the least-used skills' descriptions to name-only** — silently, with no error, while
@@ -71,7 +71,7 @@ Practical guidance:
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 | --- | --- | ---: | ---: | ---: |
 | Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 24 | 5,875 | 2.94% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 31 | 7,084 | 3.54% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 31 | 7,164 | 3.58% |
 | Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 26 | 6,624 | 3.31% |
 | Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 25 | 6,558 | 3.28% |
 
