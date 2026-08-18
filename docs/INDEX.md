@@ -17,7 +17,7 @@ Every skill fires two ways: **describe the task** in words like its trigger phra
 
 ### `deep-research-skills`
 
-True deep research: extensive multi-database literature investigation, cross-domain dot-connection between seemingly unrelated findings, source-provenance control, evidence appraisal, and triple-checked citation verification. Includes the medical-research-detective for published medical literature.
+True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Starting with medical-research-detective for published medical literature.
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -25,7 +25,7 @@ True deep research: extensive multi-database literature investigation, cross-dom
 
 ### `learning-skills`
 
-Learning science applied: spaced-retrieval-learning (testing effect, spacing, interleaving), deliberate-practice (edge-of-ability drills with immediate feedback), and habit-design (implementation intentions, habit stacking, friction engineering).
+Learning science applied, with the LLM removing each method's historical labor barrier: spaced-retrieval-learning (the testing effect, spacing, and interleaving — retrieval prompts authored and scheduled for you), deliberate-practice (edge-of-ability drills with immediate feedback — the drill built and the environment played for you), and habit-design (implementation intentions, habit stacking, friction engineering). Each skill both runs the method and teaches why it works.
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -35,7 +35,7 @@ Learning science applied: spaced-retrieval-learning (testing effect, spacing, in
 
 ### `decision-science-skills`
 
-Structured-judgment methods: competing-hypotheses analysis, reference-class forecasting, pre-mortem, after-action review, tabletop wargaming, principled negotiation, the-challenger revision review, systems-thinking, bayesian-updating (belief revision for decisions), weak-signal-navigation (wayfinding), skin-in-the-game (Hammurabi symmetry), plus the fiction-anchored set — minority-report (precog scenario cell), no-win-drills (Kobayashi Maru), ulysses-pact, and rashomon-effect.
+Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), the-challenger revision review, systems-thinking (stocks/flows, loops, leverage points), bayesian-updating (natural frequencies, likelihood ratios, update discipline), plus the fiction-anchored set — minority-report (the precog scenario cell: structurally different futures, the one-variable turn, the dissenting scenario always filed), no-win-drills (Kobayashi Maru least-worst training with the physics-vs-policy audit), ulysses-pact (calm-state self-binding with unbinding criteria), and rashomon-effect (reconciling contradictory good-faith accounts).
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -59,7 +59,7 @@ Structured-judgment methods: competing-hypotheses analysis, reference-class fore
 
 ### `continuous-improvement-skills`
 
-Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis, DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, DOE, EVOP, MSA, QFD), structured-ideation, and priority-and-wip (personal kanban).
+Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD), structured-ideation (brainwriting, SCAMPER, diverge/converge), and priority-and-wip (personal kanban, WIP limits, timeboxing).
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -82,7 +82,7 @@ Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, 
 
 ### `safety-and-reliability-skills`
 
-High-hazard-industry methods transplanted to operations and software: checklist design, bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math, weight-of-the-books design-basis review, break-glass-playbooks (Seldon-crisis homage), detection-system-tuning (immune-system axis), rebuild-rehearsal (Ise Shrine renewal), sortition-review (selection by verifiable lot), and split-tally-evidence (tamper-evident records).
+High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry), and break-glass-playbooks (Seldon-crisis homage: watched numeric tripwires, sealed first moves, expiring logged authority, scheduled unsealing drills).
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -99,7 +99,7 @@ High-hazard-industry methods transplanted to operations and software: checklist 
 
 ### `collaboration-skills`
 
-Working-with-humans core: meeting-design (agenda as a decision list, pre-reads, named decision rules, owned actions), feedback-that-lands (SBI/COIN, feedforward, receiving feedback well), disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge, with its ethics rail), executive-briefing (BLUF, Minto SCQA, the one-page decision memo, completed staff work), and stakeholder-mapping (power-interest grid with honest attribution, RACI, influence without authority).
+Working-with-humans core: meeting-design (the agenda as a decision list, pre-reads with silent start, named decision rules before discussion opens, actions that leave with owners and dates), feedback-that-lands (SBI/COIN structure, behavior-not-person, feedforward, and receiving feedback as well as giving it), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge — low-stakes questions, deliberate-error restatement, the doorknob question — with a plainly named ethics rail), executive-briefing (BLUF, Minto SCQA, completed staff work), and stakeholder-mapping (power-interest grid, RACI, who can block this). All do the task and teach the reasoning.
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -131,7 +131,7 @@ Full-stack application development with a lean-code philosophy: architecture, Fa
 
 ### `coding-agent-skills`
 
-Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, rule-stress-testing, software-archaeology, defect-epidemiology, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
+Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, software-archaeology, defect-epidemiology, rule-stress-testing, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -171,7 +171,7 @@ Composed meta-cognition suite: hierarchical memory management, reflective learni
 
 ### `data-analytics-bi-skills`
 
-SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, and spreadsheet modeling for business intelligence — plus the experiment-and-evidence set: causal-inference (DAGs, confounders, quasi-experiments), ab-test-design (online experiment design and operations), and survey-and-sampling-design (total survey error, instruments, sampling).
+SQL, exploratory analysis, data cleaning, descriptive statistics, statistical inference, dashboard design, spreadsheet modeling, and assertion-evidence presentations for business intelligence — plus causal inference (DAGs, DiD/IV/RDD), A/B test design (SRM, peeking, MDE, variance reduction), and survey and sampling design (total survey error, nonresponse).
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -189,7 +189,7 @@ SQL, exploratory analysis, data cleaning, statistics, inference, dashboard desig
 
 ### `data-tools-skills`
 
-Practical data plumbing: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible-analysis (same numbers twice — seeds, environments, lineage, one-command reruns).
+Practical data plumbing for analysts: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible analysis (seeds, pinned environments, one-command rebuild).
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -217,7 +217,7 @@ Practical machine learning for analysts: project framing, feature engineering, s
 
 ### `math-foundations-skills`
 
-Statistics and basic-math foundations, domain-neutral: number sense and Fermi estimation, percentages and proportions, algebra and formula rearrangement, units and dimensional analysis, exponential growth and logarithms, and probability fundamentals (Bayes' theorem, expected value).
+Statistics and basic-math foundations, domain-neutral and portable: number sense and Fermi estimation, percentages and proportions (percent change vs points, weighted means, mix effects), algebra and formula rearrangement, unit conversion and dimensional analysis, exponential growth and logarithms (CAGR, doubling time, log scales), and probability fundamentals (conditional probability, Bayes' theorem via natural frequencies, expected value). Each skill both does the math and teaches the reasoning.
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -232,7 +232,7 @@ Statistics and basic-math foundations, domain-neutral: number sense and Fermi es
 
 ### `writing-skills`
 
-Writing registers and explanation craft: adams-smart-brevity (professional/technical/legal/clinical), adams-plain-grade (5th-8th grade accessible register), gonzo (Hunter S. Thompson-homage participatory commentary, engaged on explicit ask), explanation-design (audience models, analogies with marked break-points, the Feynman loop, teach-back), and technical-documentation (Diátaxis-routed READMEs, ADRs, changelogs, API reference, routine runbooks).
+Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) — both rejecting litigated "tested language" and ambiguity — gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask, explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|

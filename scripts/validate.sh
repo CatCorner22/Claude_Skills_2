@@ -32,6 +32,44 @@ for mf in .claude-plugin/marketplace.json plugins/*/.claude-plugin/plugin.json; 
   if json_ok "$mf"; then ok "$mf (valid JSON)"; else err "$mf is not valid JSON"; fi
 done
 
+# Manifest coherence: JSON validity alone never caught a missing plugin.json, a name that
+# disagrees with its directory, a plugin absent from the marketplace, or a marketplace
+# description that had drifted from the plugin's own (11 of 14 had, on 2026-08-18).
+if command -v python3 >/dev/null 2>&1; then
+  man_out=$(python3 - <<'MANPY' 2>&1
+import json, glob, os
+mk = json.load(open(".claude-plugin/marketplace.json"))
+entries = {p["name"]: p for p in mk.get("plugins", [])}
+dirs = {os.path.basename(os.path.dirname(os.path.dirname(f)))
+        for f in glob.glob("plugins/*/.claude-plugin/plugin.json")}
+alldirs = {os.path.basename(d) for d in glob.glob("plugins/*") if os.path.isdir(d)}
+for d in sorted(alldirs - dirs):
+    print(f"plugins/{d}: has no .claude-plugin/plugin.json")
+for name in sorted(dirs - set(entries)):
+    print(f"{name}: on disk but absent from marketplace.json")
+for name in sorted(set(entries) - dirs):
+    print(f"{name}: in marketplace.json but has no plugin directory")
+for name in sorted(dirs & set(entries)):
+    pj = json.load(open(f"plugins/{name}/.claude-plugin/plugin.json"))
+    for field in ("name", "description", "version"):
+        if not pj.get(field):
+            print(f"{name}/plugin.json: missing required field '{field}'")
+    if pj.get("name") and pj["name"] != name:
+        print(f"{name}/plugin.json: name '{pj['name']}' != directory '{name}'")
+    if "version" in entries[name]:
+        print(f"{name}: marketplace.json carries a version; plugin.json is the single source")
+    if pj.get("description") and entries[name].get("description") != pj["description"]:
+        print(f"{name}: marketplace.json description has drifted from plugin.json")
+MANPY
+  )
+  man_rc=$?
+  if [ "$man_rc" -ne 0 ]; then
+    err "manifest coherence check failed to run (exit $man_rc) — treat as UNCHECKED: $man_out"
+  elif [ -n "$man_out" ]; then
+    while IFS= read -r line; do err "$line"; done <<< "$man_out"
+  fi
+fi
+
 echo
 echo "== Validating skills =="
 shopt -s nullglob
@@ -43,6 +81,16 @@ for dir in plugins/*/skills/*/; do
   [ -f "$md" ] || { err "$skill has no SKILL.md"; continue; }
 
   # Extract YAML frontmatter (between the first two '---' fences).
+  # The closing fence must exist. Without this check the awk below never hits its exit
+  # condition, the whole file becomes "frontmatter", and a truncated SKILL.md passes as OK
+  # while its mangled description flows into both generated catalogs.
+  fences=$(awk '$0=="---"{n++} END{print n+0}' "$md")
+  if [ "$(head -n1 "$md")" != "---" ]; then
+    err "$base: SKILL.md does not start with a '---' frontmatter fence"; continue
+  fi
+  if [ "$fences" -lt 2 ]; then
+    err "$base: frontmatter has no closing '---' fence"; continue
+  fi
   fm="$(awk 'NR==1 && $0=="---"{f=1; next} f && $0=="---"{exit} f{print}' "$md")"
   [ -n "$fm" ] || { err "$base: no frontmatter"; continue; }
 
@@ -155,7 +203,12 @@ REF = re.compile(r"`([a-z0-9-]+-skills):([a-z0-9-]+)`")
 WINDOW = 160          # chars of preceding prose that may carry the "archived" mark
 bad = []
 for md in glob.glob("plugins/**/*.md", recursive=True):
-    text = open(md, encoding="utf-8").read()
+    # errors="replace" keeps one stray byte from raising, which used to kill this whole
+    # check silently: the traceback went to stderr, `|| true` swallowed the exit code, and
+    # an empty $xlink_out read as "no broken links".
+    text = open(md, encoding="utf-8", errors="replace").read()
+    if "\ufffd" in text:
+        print(f"{md}:1: file is not valid UTF-8 (decoded with replacement)")
     for m in REF.finditer(text):
         ref = f"{m.group(1)}:{m.group(2)}"
         if ref in active or ref in agents:
@@ -168,7 +221,12 @@ for md in glob.glob("plugins/**/*.md", recursive=True):
 for b in bad:
     print(b)
 PY
-  ) || true
+  ) 2>&1
+  xlink_rc=$?
+  if [ "$xlink_rc" -ne 0 ]; then
+    err "cross-link check failed to run (exit $xlink_rc) — treat as UNCHECKED, not as clean: $xlink_out"
+    xlink_out=""
+  fi
   if [ -n "$xlink_out" ]; then
     while IFS= read -r line; do err "$line"; done <<< "$xlink_out"
   fi

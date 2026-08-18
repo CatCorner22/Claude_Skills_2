@@ -1,13 +1,28 @@
 # Permissions and hooks (reference)
 
 ## Settings files and precedence
-From lowest to highest priority (later overrides earlier):
-1. Enterprise / managed settings (administrator-controlled).
-2. User settings: `~/.claude/settings.json` (applies to all your projects).
-3. Project settings: `.claude/settings.json` (committed, shared with the team).
-4. Local project settings: `.claude/settings.local.json` (git-ignored, personal/machine-specific).
+From **highest to lowest** priority — the first match wins:
 
-Check the effective result with `/config`, `/permissions`, and `/doctor`.
+1. **Enterprise / managed settings (administrator-controlled).** Highest, and deliberately
+   **not overridable** by anything below it. That is the whole point: an administrator can set
+   policy a user cannot edit away.
+2. Command-line arguments (this invocation only).
+3. Local project settings: `.claude/settings.local.json` (git-ignored, personal/machine-specific).
+4. Project settings: `.claude/settings.json` (committed, shared with the team).
+5. User settings: `~/.claude/settings.json` (applies to all your projects).
+
+So the ordering runs *narrowest scope wins*, with one exception at the top: managed policy beats
+everything precisely because it is not yours to change. Read it as "the more specific and the more
+authoritative, the higher."
+
+> An earlier version of this section listed these lowest-to-highest with managed settings at the
+> bottom, which said that a git-ignored `settings.local.json` overrides administrator policy. That
+> is backwards, and it is the kind of error worth being loud about: someone reading it might
+> conclude an enterprise `deny` rule can be worked around locally, or that a policy they shipped is
+> being honoured when it is not.
+
+Check the effective result with `/config`, `/permissions`, and `/doctor` rather than reasoning from
+the list — those commands report what actually resolved.
 
 ## Permission rules
 Shape:

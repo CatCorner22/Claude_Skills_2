@@ -22,9 +22,12 @@ description: >-
   prompt wording → see `coding-agent-skills:prompt-engineering`.
 
 ## Do it
-1. **Pick the right settings file (they layer; later overrides earlier):**
-   - Enterprise/managed (admin) → user `~/.claude/settings.json` → project `.claude/settings.json`
-     (committed, shared) → project `.claude/settings.local.json` (git-ignored, personal).
+1. **Pick the right settings file (they layer; the more specific one wins, with one exception):**
+   - user `~/.claude/settings.json` → project `.claude/settings.json` (committed, shared) →
+     project `.claude/settings.local.json` (git-ignored, personal) → CLI arguments. Each overrides
+     the one before it.
+   - **Enterprise/managed (admin) settings sit above all of them and cannot be overridden.** That
+     is what makes them policy rather than a default — do not plan around editing past them.
    - Put team-wide rules in the committed project file; keep personal or machine-specific rules
      in `settings.local.json`.
 2. **Set permissions** to cut prompts without going unsafe. In `settings.json`:
@@ -76,9 +79,9 @@ formatter" cannot live in a memory note or a skill instruction — the model mig
 compaction might drop it — and must be a `PostToolUse` hook the harness fires deterministically.
 Permissions work the same way: they are enforced by the harness before a tool runs, so an
 allow-list is a *safety and friction* control, not a suggestion to the model. Understanding the
-settings **layering** (enterprise → user → project → local, later wins) is what lets you put
-shared guarantees in the committed project file while keeping personal tweaks local and
-git-ignored. Once you see the harness as "the deterministic shell that the probabilistic model
+settings **layering** (user → project → local → CLI, each overriding the last, with
+administrator-managed policy above all of them and unoverridable) is what lets you put shared
+guarantees in the committed project file while keeping personal tweaks local and git-ignored. Once you see the harness as "the deterministic shell that the probabilistic model
 runs inside," you know where each kind of rule belongs.
 
 ## Common mistakes

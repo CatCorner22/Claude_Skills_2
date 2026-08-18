@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "writing-skills",
-  "description": "Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) \u2014 both rejecting litigated \"tested language\" and ambiguity \u2014 gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask, and explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back).",
-  "version": "0.7.0"
+  "description": "Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) — both rejecting litigated \"tested language\" and ambiguity — gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask, explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).",
+  "version": "0.8.0"
 }

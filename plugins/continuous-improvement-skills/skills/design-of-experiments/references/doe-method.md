@@ -29,7 +29,7 @@ generators are given so you can re-derive them yourself before you run.
 | 6 | 8 | 2^(6−3), D = AB, E = AC, F = BC | **III** | Same: no "main effect" from this design is safe to act on |
 | 7 | 8 | 2^(7−4), saturated | **III** | Seven mains out of eight runs, every one riding on 2FIs |
 | 5 | 16 | 2^(5−1), E = ABCD → I = ABCDE | **V** | Mains and all 2FIs clear; mains alias 4FIs, 2FIs alias 3FIs |
-| 6 | 16 | 2^(6−2), E = ABC, F = BCD | **IV** | Mains clear; 2FIs alias each other (nine aliased pairs) |
+| 6 | 16 | 2^(6−2), E = ABC, F = BCD | **IV** | Mains clear; the 15 two-factor interactions fall into 7 alias groups — 6 pairs plus one triple (AE = BC = DF) |
 | 7 | 16 | 2^(7−3), E = ABC, F = BCD, G = ACD | **IV** | Same trade, more crowded 2FI chains |
 | 8 | 16 | 2^(8−4), E = BCD, F = ACD, G = ABC, H = ABD | **IV** | The largest resolution IV design that fits in 16 runs |
 | 9–15 | 16 | 2^(k−p) | **III** | Past k = 8 in 16 runs, III is the ceiling — screening only |
@@ -37,6 +37,13 @@ generators are given so you can re-derive them yourself before you run.
 | 7–8 | 32 | 2^(7−2) / 2^(8−3) | **IV** | Mains clear; 2FIs alias each other |
 | 8–15 | 12, 16, 20 | **Plackett–Burman** | **III** | Mains only, cheaply; each main is *partially* correlated (±1/3 in the 12-run array) with the 2FIs not containing it — a pure screen |
 | any, runs nearly free | as many as useful | Full factorial anyway | (full) | When runs are cheap (prompts, configs, simulations), buy the clean answer |
+
+> **Check that count yourself — the table said "nine aliased pairs" until 2026-08-18, which is
+> arithmetically impossible.** Six factors have C(6,2) = 15 two-factor interactions, so nine
+> *pairs* would need 18. With I = ABCE = BCDF = ADEF, multiplying each 2FI by every defining
+> word gives: AB=CE, AC=BE, AD=EF, AF=DE, BD=CF, BF=CD, and AE=BC=DF — 7 groups, 15 members,
+> all accounted for. The triple is the one worth remembering: it is why "pairs" was the wrong
+> word as well as the wrong number.
 
 **The ceiling rule, so you can sanity-check any claim including this table's.** In N runs a regular
 two-level fraction reaches resolution IV only while k ≤ N/2, and resolution V only for k ≤ 5 at
@@ -285,8 +292,8 @@ and wrong for the other.
   (BC ≡ DE, BD ≡ CE, BE ≡ CD). Cost: double the runs. Payoff: clean mains.
 - **Resolution IV → a full fold-over buys nothing about the aliasing.** The mains were already
   clear, and reversing all the signs leaves the 2FI alias pairs *exactly* where they were: on
-  2^(4−1) it is AB ≡ CD, AC ≡ BD, AD ≡ BC before and after; on the 16-run 2^(6−2), the same nine
-  aliased 2FI pairs before and after. A second full block here buys **replication** — it halves
+  2^(4−1) it is AB ≡ CD, AC ≡ BD, AD ≡ BC before and after; on the 16-run 2^(6−2), the same 7
+  alias groups before and after. A second full block here buys **replication** — it halves
   SE(effect) — and nothing else. Do not spend it expecting to untangle an interaction.
 - **Resolution IV → break a specific pair with a single-factor fold or a semifold.** Reverse the
   sign of *one* factor instead of all of them and every 2FI involving that factor comes free of its
