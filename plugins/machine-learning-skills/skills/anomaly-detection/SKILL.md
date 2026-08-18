@@ -9,7 +9,7 @@ description: >-
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Anomaly detection
@@ -74,7 +74,7 @@ which point even the true positives are lost. Detection is only as valuable as t
 - Plain z-score/mean-std on data with big outliers → the outliers inflate the std and mask themselves. Use robust z (median/MAD).
 - Chasing recall/F1 with almost no labels → you can't measure what you didn't catch. Tune to precision on reviewed alerts + an alert budget.
 - Ignoring seasonality in a time series → normal month-end/quarter-end spikes flood the alerts. Flag residuals against a season-aware baseline.
-- Distance/density methods on unscaled features → the largest-unit feature dominates. Standardize before isolation forest isn't required, but LOF/Mahalanobis need scaling.
+- Distance/density methods on unscaled features → the largest-unit feature dominates. Standardize for LOF and DBSCAN; isolation forest is split-based and Mahalanobis is covariance-aware (Σ⁻¹ already absorbs per-feature scale), so neither needs it.
 - A hard binary cutoff that swamps reviewers → nobody can act. Rank and route the top-N to an alert budget.
 - Never suppressing known-benign recurrences → alert fatigue. Whitelist scheduled/expected patterns and re-tune.
 

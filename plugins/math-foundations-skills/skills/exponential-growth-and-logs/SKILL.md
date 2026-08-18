@@ -13,7 +13,7 @@ description: >-
   growth, CAGR, doubling time, rule of 72, logarithm, log scale, growth rate math, geometric
   average, how long until it doubles, decay rate.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Exponential growth and logarithms
@@ -55,9 +55,9 @@ averages, honest charts — and teaches the intuition that linear thinking gets 
    endpoint exactly, so always run this check.
 4. **Doubling time.** Exact: t = ln 2 / ln(1+r). At 8% per year:
    0.6931/0.07696 ≈ 9.0 years. Shortcut: the rule of 72 — 72 ÷ rate-in-percent —
-   gives 72/8 = 9. The rule stays within about ±1% of exact for rates of roughly
-   4–12%; it overshoots at lower rates and undershoots at higher ones (accuracy table
-   in references/growth-math-worked.md).
+   gives 72/8 = 9. The rule stays within about ±2% of exact for rates of roughly
+   4–12% (and within ±1% over 6–10%); it overshoots at lower rates and undershoots at
+   higher ones (accuracy table in references/growth-math-worked.md).
 5. **Any target, not just double:** t = ln(target/current) / ln(1+r). Worked:
    5,000 → 20,000 at 12% per year: ln(4)/ln(1.12) = 1.3863/0.11333 ≈ 12.2 years.
    Consistency check: quadrupling is two doublings, and 2 × ln 2/ln(1.12) =

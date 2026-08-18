@@ -6,15 +6,15 @@ description: >-
   three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history
   transmission tree), dispositions every contact as patched, not-applicable, or
   accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared
-  snippet) so reinfection stops at the source, computes the pattern's R0, and quarantines
-  high-R0 sources with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY
+  snippet) so reinfection stops at the source, ranks sources by copies spawned, and quarantines
+  the top ones with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY
   (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009
   (inconsistent clone edits cause real faults). Use when a found bug's pattern may live
   elsewhere, or the same bug keeps coming back. Triggers: contact tracing, patient zero, code
   clone, copy-paste bug, everywhere else this appears, outbreak, this bug again, trace the
   clones, quarantine the template.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Defect epidemiology (contact-trace the bug you just found)
@@ -51,7 +51,7 @@ response: index case → fingerprint → contact trace → disposition → patie
   before closing).
 
 ## Do it
-Fingerprinting patterns, the three-pass sweep in detail, the disposition table, R0 math on
+Fingerprinting patterns, the three-pass sweep in detail, the disposition table, source out-degree on
 a worked example, quarantine patterns, and the outbreak-report template are in
 `references/contact-tracing-method.md`.
 
@@ -84,15 +84,19 @@ a worked example, quarantine patterns, and the outbreak-report template are in
    scaffold or starter template, a code generator, one person's muscle memory. Then the
    critical question — **is the source still infectious?** A patched codebase with an
    unpatched template reinfects on the next project.
-5. **Compute R0 and quarantine the high-R0 sources.** R0 here is the average number of
-   direct copies each instance spawned (read it off the transmission tree). A pattern
-   whose R0 is at or above 1 is still growing. Quarantine acts on sources, not cases: fix
-   the template or wiki page itself, add the lint/CI rule that blocks the pattern from
-   re-entering, and leave an in-situ warning where the next copy-paster will actually
-   look (the old location, the template file, the wiki page).
+5. **Rank the sources by out-degree and quarantine the top of that list.** Read each node's
+   **out-degree** — how many direct copies it spawned — off the transmission tree, and act on
+   the **maximum**, not an average. Resist computing a tree-wide "R0" by dividing transmissions
+   by members: in any transmission tree every member but patient zero has exactly one parent, so
+   that ratio is always (N−1)/N — just under 1 for every tree, rising with size and measuring
+   nothing (`references/contact-tracing-method.md` shows why, and why a "R0 ≥ 1" threshold built
+   on it can never fire). The actionable trigger is **any still-live source with out-degree ≥ 2**.
+   Quarantine acts on sources, not cases: fix the template or wiki page itself, add the lint/CI
+   rule that blocks the pattern from re-entering, and leave an in-situ warning where the next
+   copy-paster will actually look (the old location, the template file, the wiki page).
 6. **Close only when every contact is dispositioned, and file the outbreak report:** index
    case, fingerprint, passes run and their coverage, the disposition table, patient zero,
-   R0, quarantine actions, and the closure statement. The report is what turns "we fixed
+   the spread numbers, quarantine actions, and the closure statement. The report is what turns "we fixed
    it everywhere, I think" into a checkable claim.
 
 ## Why / learn
@@ -111,7 +115,7 @@ tracing* forces exhaustiveness — a sweep is not done when you found "a few mor
 done when every contact has a disposition, because one undispositioned clone is a live
 transmission chain. *Patient zero* forces the origin question, which is what actually
 stops recurrence: fixing all current copies while the scaffold that spawns them stays
-infectious just schedules the next outbreak. And *R0* forces prioritization by
+infectious just schedules the next outbreak. And *source out-degree* forces prioritization by
 reproductive power rather than by instance count: a template that spawns four copies per
 project matters more than six inert copies in code nobody extends.
 
@@ -154,7 +158,7 @@ repo names, vulnerability details, or anything sensitive belongs in
 ## References
 - references/contact-tracing-method.md — the Type 1–4 fingerprinting taxonomy, the
   three-pass sweep, the contact-disposition table, patient-zero analysis with the
-  infectious-source checklist, R0 worked on a small example, quarantine patterns, the
+  infectious-source checklist, source out-degree worked on a small example, quarantine patterns, the
   outbreak-report template, and the research anchors
 - references/your-environment.md — your sweep scope, template locations, and lint
   infrastructure (fill in)

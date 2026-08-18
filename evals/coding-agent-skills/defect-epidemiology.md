@@ -14,8 +14,8 @@ author cluster, similarly structured files) for Type 3–4 mutations, then the
 version-history transmission tree; produces a contact-disposition table where every row
 ends patched, not-applicable (with the reason), or accepted-with-reason (with owner and
 revisit date); traces patient zero and runs the infectious-source checklist (is the
-snippet still on the wiki? in the scaffold?); reads R0 off the tree's out-degrees;
-quarantines the high-R0 source (fix the origin, lint/CI rule carrying the outbreak-report
+snippet still on the wiki? in the scaffold?); reads each source's out-degree off the tree;
+quarantines the highest out-degree source (fix the origin, lint/CI rule carrying the outbreak-report
 ID, in-situ warning); closes only when the table has no blank dispositions, and files the
 outbreak report.
 
@@ -40,7 +40,7 @@ spread control triggered by a confirmed index case.
   against buggy and fixed versions; all three passes run with coverage recorded (regions
   cleared listed alongside hits); a complete disposition table with no blank rows and no
   unreasoned not-applicables; patient-zero identified with the infectious-source
-  checklist answered; R0 computed from the transmission tree, not asserted; quarantine
+  checklist answered; source out-degrees read from the transmission tree, not asserted; quarantine
   that acts on sources (origin fix + mechanical lint/CI rule + in-situ warning), not just
   cases; an outbreak report filed.
 - **Teaches**: why patches do not propagate on their own (the ReDeBug finding) and why
@@ -48,7 +48,7 @@ spread control triggered by a confirmed index case.
   is the pattern, not the failure; why the fingerprint must be semantic (Type 1–4
   mutation vs. which pass still catches it); why mechanism (lint rule) outlives memo.
 - **Stays honest**: provenance marks (`[snippet-only]`) preserved on ReDeBug, VUDDY,
-  Juergens (~107 faults), and clone-genealogy claims; R0 presented as the tree's
+  Juergens (~107 faults), and clone-genealogy claims; spread presented as the tree's
   branching rate, never as an invented statistic; accepted-with-reason rows carry a named
   owner and revisit date, not a shrug; near-miss boundaries respected (no RCA or FMEA
   work smuggled in).

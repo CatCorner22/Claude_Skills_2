@@ -138,11 +138,13 @@ effort scored inverted so higher = easier):
 | Ease of pilot (0.3) | 4 | 1 | 5 | 5 |
 | Speed to first result (0.2) | 4 | 1 | 5 | 4 |
 | Low risk to current ops (0.1) | 4 | 2 | 5 | 5 |
-| **Weighted total** | **4.0** | **2.7** | **3.8** | **3.7** |
+| **Weighted total** | **4.0** | **2.7** | **3.8** | **4.0** |
 
-Reading it: A wins on balance; B has the highest ceiling but fails every speed/effort criterion
-— it becomes a sponsored big bet, not a discard; C and D are near-ties behind A, and D
-(analyze error types before fixing anything) is arguably a *prerequisite* — which the matrix
-surfaces for discussion. The totals start the final conversation; they don't end it. A matrix
+Reading it: **A and D tie at 4.0.** B has the highest ceiling but fails every speed/effort
+criterion — it becomes a sponsored big bet, not a discard. And the tie is the matrix doing its
+job: D (analyze error types before fixing anything) is arguably a *prerequisite* to A rather
+than a rival to it, which is exactly the ordering a dot cloud hides. A tie hands the room a
+specific question — *do we need D's diagnosis before A's fix?* — instead of a winner. The totals
+start the final conversation; they don't end it. A matrix
 that merely confirms the loudest voice's favorite was probably scored after the winner was
 chosen — re-check the weights' paper trail.
