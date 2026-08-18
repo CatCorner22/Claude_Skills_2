@@ -121,7 +121,7 @@ seeds):
 
 Two things fall out of that table, and both change the recommendation:
 
-- **The wear-out claim survives.** Only 0.01% of resamples put β below 1, so "the hazard rises
+- **The wear-out claim survives.** About 0.02% of resamples put β below 1, so "the hazard rises
   with age" is supportable from five points. Scheduled replacement is the right *kind* of
   policy here.
 - **The 50-day interval does not survive.** B10 is somewhere between about three weeks and
@@ -352,8 +352,8 @@ nine times. It is **recurrent-event data, not nine lifetimes**, so §5 applies a
    the record: instantaneous MTBF at day 182 = 1/u(182) = 23.6 days against a cumulative 20.2 —
    the gap is what β̂ < 1 buys, and it is well inside the noise.)
 3. **Find the structure the averages hide.** Tag each failure by its distance from a patch
-   window. Six of the nine (days 2, 33, 62, 93, 122, 152) fall within 3 days of a patch. Those
-   windows are 6 × 3 = **18 of 182 days = 9.9% of the exposure**, so a constant-rate process
+   window. Six of the nine (days 2, 33, 62, 93, 122, 152) fall in the 3 days following a patch.
+   Those windows are 6 × 3 = **18 of 182 days = 9.9% of the exposure**, so a constant-rate process
    would put 9 × 0.099 = **0.89** failures there. Observing 6 has probability
    P(X ≥ 6 | Binomial(9, 0.0989)) = **6.0 × 10⁻⁵**. That is the finding: failures are
    concentrated after patches, and it needed a clustering test, not a Weibull.

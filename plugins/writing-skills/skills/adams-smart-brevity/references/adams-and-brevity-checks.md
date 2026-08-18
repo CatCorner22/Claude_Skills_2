@@ -9,10 +9,12 @@ language · §4 Dual self-audit checklist · §5 Interaction notes
 
 **Primary rule: if language has been litigated, it is bad language.**
 
-- Litigation over meaning proves the original wording failed to express intent clearly
-  enough to avoid a fight.
-- The claim that language is "tested" or "settled" by courts is a myth. Courts resolve
-  disputes created by defective drafting; they do not validate the original words.
+- Litigation over meaning is evidence that the wording left room to fight over. (Parties
+  also litigate clear language opportunistically — but you cannot tell which case you are
+  in from the outside, and the drafting fix is the same either way.)
+- The claim that language is "tested" or "settled" by courts is a myth. A court's
+  construction resolves one dispute on one record; it does not certify the words for your
+  contract, with your facts, in your jurisdiction.
 - Use caselaw only as cautionary tales of what not to do.
 - Express every concept in modern, precise English so that parties and courts never need to
   interpret it.
@@ -40,7 +42,8 @@ historical baggage.
 
 ## §3 Categories of contract language
 
-Control meaning by choosing the category deliberately (Adams's framework):
+Control meaning by choosing the category deliberately. These six carry most drafting;
+Adams's full taxonomy also covers agreement, belief, intention, and recommendation.
 
 | Category | Function | Marker verb form |
 |---|---|---|
@@ -49,9 +52,12 @@ Control meaning by choosing the category deliberately (Adams's framework):
 | Language of discretion | Grants permission or choice | "may" |
 | Language of prohibition | Forbids | "shall not" / "must not" |
 | Language of policy | States rules governing the contract itself | present tense, no "shall" |
+| Language of declaration | States a fact a party asserts (a representation) | present tense — "states that", "acknowledges that" — never "shall" |
 
-Most drafting ambiguity comes from category leakage — "shall" doing five different jobs. One
-category per sentence; the verb form signals which.
+Most drafting ambiguity comes from category leakage — one "shall" doing every job in the
+table. One category per sentence; the verb form signals which. On declarations Adams's own
+preference is "states that" over "represents and warrants": the doublet adds remedies
+argument, not meaning.
 
 ## §4 Dual self-audit checklist (run before finalizing)
 

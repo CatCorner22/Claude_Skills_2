@@ -9,13 +9,16 @@ ladder · §8 Routing within the register family
 
 ## §1 Grade targets
 
-**Preferred — 5th grade (US Southeast)**
+**Preferred — 5th grade**
 - Average sentence length: 10–14 words.
 - Everyday concrete words; prefer 1–2 syllables.
 - Active voice.
 - One main idea per sentence.
 - Concrete examples.
-- Target: Flesch Reading Ease near 90–100, or Flesch-Kincaid grade near 5.0.
+- Target: Flesch Reading Ease 90 or higher, **or** Flesch-Kincaid grade at or below 5.0 —
+  two separate scales, not two readings of the same number (§3). Either one is a pass, and
+  both are floors, not windows: Reading Ease runs past 100, and scoring 105 is not "too
+  easy," it is easy. Only the read-aloud test can fail a text for being too simple.
 
 **Fallback — 8th grade (only when precision requires it)**
 - Sentences may reach 15–18 words.
@@ -47,12 +50,18 @@ endeavor, remuneration*.
 - Flesch Reading Ease ≈ 206.835 − 1.015 × (words/sentence) − 84.6 × (syllables/word).
   Higher is easier; 90–100 reads at roughly 5th grade.
 - Flesch-Kincaid Grade ≈ 0.39 × (words/sentence) + 11.8 × (syllables/word) − 15.59.
+- **The two do not agree, and §1 does not ask them to.** Solve both formulas at this
+  register's 10–14 words per sentence: FRE 90–100 lands at FKGL ≈ 1.8–4.2, while FKGL 5.0
+  lands at FRE ≈ 77–84. Text that passes on one scale will read a grade or two off on the
+  other. Pick the scale you are reporting, say which, and never lengthen sentences to raise
+  a Flesch-Kincaid number.
 - Estimate honestly when you can't compute: count words per sentence (the dominant lever)
   and watch for 3+ syllable words — swapping those two things moves the grade more than
   anything else.
 - Scores are a check, not the goal. Choppy fragments can game a formula; they fail the
   read-aloud test. The read-aloud test is the judge: a clear adult talking to a smart
-  11-year-old from the US Southeast.
+  11-year-old, in plain American English with no regionalisms. If your readers share a
+  dialect, record it in your-environment.md and read aloud in that voice.
 
 ## §4 Self-check before you finish
 
@@ -62,7 +71,7 @@ endeavor, remuneration*.
 - [ ] No litigated or traditional formulas.
 - [ ] No ambiguity.
 - [ ] Grade is 5th if possible, never higher than 8th.
-- [ ] A 5th-grader in the Southeast United States could understand it without help.
+- [ ] A 5th-grader in your audience's own community could understand it without help.
 - [ ] The meaning is exactly what the source meant — nothing softened, nothing dropped.
 
 ## §5 Where the targets come from
@@ -102,8 +111,9 @@ Domain-neutral by design — the same notice could go out from an analyst's team
 office, an operations department, or a software product. The organization is adding a
 sign-in code.
 
-**Before** (typical first draft — two sentences averaging about 34 words, passive voice,
-archaic connectors, unexplained jargon):
+**Before** (typical first draft — 2 sentences, 67 words, ~34 words per sentence, ~1.8–2.0
+syllables per word — **FRE ≈ 7–19, FKGL ≈ 19–21** — passive voice, archaic connectors,
+unexplained jargon):
 
 > Pursuant to our updated security protocols, effective May 1, multi-factor authentication
 > will be required for all account access; users must therefore furnish, in addition to
@@ -112,8 +122,12 @@ archaic connectors, unexplained jargon):
 > SMS transmissions, alternative verification arrangements may be made by contacting
 > customer support.
 
-**After** (plain grade — 9 sentences, average 8 words per sentence, nearly all one- and
-two-syllable words; by the §3 method this sits comfortably in the 5th-grade band):
+**After** (plain grade — 9 sentences, 71 words, ~8 words per sentence, ~1.15–1.23 syllables
+per word; by the §3 formulas that is **FRE ≈ 95–101**, clearing the 90 floor. Note the
+divergence §3 warns about: the same text scores **FKGL ≈ 1–2**, far under 5.0, and it is the
+right text anyway. The ranges are not sloppiness — two syllable counters run over this exact
+paragraph disagreed by six Reading Ease points, which is why §3 calls the score a check and
+the read-aloud test the judge):
 
 > We are changing how you sign in.
 >

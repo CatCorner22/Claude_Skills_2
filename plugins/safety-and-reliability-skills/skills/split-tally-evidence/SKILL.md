@@ -13,7 +13,7 @@ description: >-
   who holds the other copy, could someone alter this after the fact, does our half fit
   their half, hash anchor, dual custody, evidence design.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the library's operational-wisdom research dossier
     (docs/research/epic-wave-held-research.md, Lane 1 entry 2: split tally sticks, English
@@ -90,8 +90,8 @@ ritual, alteration test, and the second-keeper section are in
    seeing the first result, and agreement is checked result-against-result. The Inka ran
    accounts this way — multiple khipu keepers per community encoding the same events
    separately, with surviving duplicate khipu as physical evidence of the practice
-   [snippet-only]. One section, one habit: the sibling of the split, for records that are
-   computations rather than exchanges.
+   [snippet-only]. The sibling of the split: use it for records that are computations
+   rather than exchanges.
 7. **Design the retirement.** State how long each half is kept, by whom, and how disposal
    is confirmed on both sides. The Exchequer's control outlived its empire's memory of why
    it mattered; the disposal was improvised, and Parliament burned [snippet-only]. Half of

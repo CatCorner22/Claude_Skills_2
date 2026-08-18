@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Reliability engineering
@@ -136,8 +136,8 @@ leave the *qualitative* claim (wear-out is real) standing while destroying the *
 is where reliability math causes harm rather than preventing it.
 
 The system formulas teach the structural lessons. Series multiplication is why long chains
-disappoint — a feed that traverses four 99%-class steps is a ~98.9% chain, and no step "feels"
-like the problem. Both formulas rest on independence, in opposite directions: in series,
+disappoint — a feed whose four steps run at 99.5%, 99.9%, 99.7% and 99.8% is a 98.90% chain, and
+no step "feels" like the problem. Both formulas rest on independence, in opposite directions: in series,
 correlated outages overlap and the product is the pessimistic end of the range (safe to plan
 with); in parallel the product is the whole claim, so the moment both paths share a credential, a
 patch cycle, or an endpoint the joint failure probability is the common cause's, not the product's

@@ -5,7 +5,8 @@ your real audience wherever you work now. Keep anything identifying real patient
 in `your-environment.private.md` (git-ignored) — never in this file.
 
 ## Your audience
-- Region/dialect notes beyond the US Southeast default (local terms, idioms to use or avoid):
+- Region/dialect (the skill defaults to plain American English with no regionalisms; set
+  yours here — e.g. *US Southeast* — with local terms and idioms to use or avoid):
 - Typical reading context (letter, portal message, waiting-room handout, text message):
 
 ## House glosses (term → approved plain wording)

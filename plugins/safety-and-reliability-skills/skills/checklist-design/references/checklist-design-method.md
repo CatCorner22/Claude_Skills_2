@@ -29,8 +29,11 @@ candidates, (b) *a written rationale per cut* — why each dropped step fails a 
 where the model is guessing about omission frequency. The owner then challenges every rationale
 against real incident data. The model's cut is a draft, never the decision.
 
-Target count: **5–9 items**. Below 5, ask whether the pause point is worth a card; above 9, the card
-is becoming the SOP again — recut.
+Target count: **5–9 items per pause point**. Below 5, ask whether the pause point is worth a card;
+above 9, the card is becoming the SOP again — recut. The count is per card, not per process: the
+19-item WHO Surgical Safety Checklist is three cards at three pause points (sign-in, time-out,
+sign-out), each inside this range. If your list will not fit in 9, look for a second pause point
+rather than a longer card.
 
 ## Format choice: read-do vs. do-confirm
 
@@ -84,10 +87,11 @@ otherwise the checklist will be run after the fact, as paperwork.
 
 ## Evidence base (with provenance)
 - **B-17 origin** [snippet-only]: Boeing's Model 299 crashed on its 1935 Army evaluation flight with
-  the elevator/rudder gust locks still engaged, killing the crew including Boeing's chief test
-  pilot. Judged "too much airplane for one man to fly," the type was nearly cancelled; the surviving
-  pilots' remedy was the first pre-flight checklist, and the aircraft went on to fly safely at scale
-  as the B-17.
+  the elevator/rudder gust locks still engaged. Two of the five aboard died — the Army's chief of
+  flight testing, Maj. Ployer Hill, and, of his injuries, Boeing's chief test pilot Leslie Tower;
+  three survived. Judged "too much airplane for one man to fly," the type was nearly cancelled; the
+  surviving test pilots' remedy was the first pre-flight checklist, and the aircraft went on to fly
+  safely at scale as the B-17.
 - **WHO surgical checklist — Haynes et al., NEJM 2009** [snippet-only]: prospective study in eight
   hospitals across eight cities, ~7,700 patients; after introducing the 19-item WHO Surgical Safety
   Checklist, mortality fell 1.5% → 0.8% and inpatient complications 11.0% → 7.0%.

@@ -14,7 +14,7 @@ description: >-
   technique, analogy for, teach this concept, curse of knowledge, make this intuitive,
   teach-back, explain to a newcomer.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Explanation design

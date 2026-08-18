@@ -14,7 +14,7 @@ description: >-
   spot-check by lot, they know which ones get looked at, same person always reviews,
   rotate reviewers, end-of-term handover, draw at random, unriggable selection.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Sortition review (euthynai and the ballotino)
@@ -82,9 +82,13 @@ are in `references/sortition-method.md`.
 3. **Draw by verifiable lot.** The draw itself must be un-steerable and provably so.
    Simple mechanics that work: dice rolled in the open at a standing meeting; a seed
    committed in advance (write it down, hash it, or email it before the period closes)
-   fed to a published formula; or index by an external value nobody controls, such as
-   the hash of tomorrow's publicly posted number. The test: could the person running
-   the draw have chosen the outcome? If yes, redesign.
+   fed to a *pinned* formula; or index by an external value nobody controls, such as
+   the hash of tomorrow's publicly posted number. Pin the formula, not just the seed —
+   "seed the standard random generator" is not reproducible across tools, so the
+   reference gives a hash-rank draw (`rank = SHA256("<seed>|<item id>")`, sort, take
+   the first N) that a verifier can re-run in a shell, plus its weighted-ticket variant
+   for stratified odds. The test: could the person running the draw have chosen the
+   outcome, and could anyone else tell? If either answer is wrong, redesign.
 4. **Rotate who reviews, by lot too.** Draw reviewer pairs from the qualified pool the
    same way you draw items, and bar permanent reviewer-reviewee pairs. Venice's
    interleaved rounds are the model: randomness at *multiple stages* means capturing

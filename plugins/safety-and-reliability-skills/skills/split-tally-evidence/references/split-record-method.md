@@ -167,8 +167,6 @@ medium or custody changes:
 
 ## The second keeper — independent parallel derivation
 
-*(Khipu fold-in, per the research dossier's verdict: the sibling pattern, one section.)*
-
 The Inka ran imperial bookkeeping on khipu — knotted-cord decimal records — and did not
 trust a single keeper: Garcilaso de la Vega reports a minimum of four khipu keepers per
 community maintaining the same accounts, and Gary Urton's work identifies surviving

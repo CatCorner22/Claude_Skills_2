@@ -14,7 +14,7 @@ description: >-
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)
@@ -119,10 +119,11 @@ Capability decays by a mechanism, not by bad luck. Skills that aren't exercised 
 docs that aren't executed rot silently as systems drift around them; and the people who
 could correct both eventually leave. Ise's insight is that all three decay curves are
 beaten by one move: rebuild the real thing on a fixed schedule, timed so the people who
-did it last are still present to correct the people doing it next. The 20-year figure is
-not numerology — it is the longest interval that still guarantees generational overlap.
-Scale it to your tenure reality: if analysts stay three years, a three-year cadence
-guarantees nothing.
+did it last are still present to correct the people doing it next. Why exactly 20 years is
+not settled — thatch and timber durability and ritual renewal are all offered — but the
+property that makes it work as a pattern is generational overlap: 20 years is short enough
+that a working life spans two or three cycles. That is the property to scale, not the
+number: if analysts stay three years, a three-year cadence guarantees nothing.
 
 The inversion worth internalizing: **the artifact is disposable; the capability is the
 asset.** Ise does not preserve thousand-year-old buildings — it preserves the ability to

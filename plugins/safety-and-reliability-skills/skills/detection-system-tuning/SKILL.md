@@ -13,7 +13,7 @@ description: >-
   matches, exception queue drowning, tune the alerts, memory cell, everything is an
   exception, nobody looks at the alerts anymore.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from the library's biological-systems research dossier
     (docs/research/epic-wave-held-research.md, Lane 3 top pick). The mechanism is the
@@ -113,6 +113,11 @@ are in `references/immune-tuning-method.md`.
    disposition audit (step 1, repeated) are the prescribed burns. SRE error budgets are the
    same idea at practice level — accept small failures continuously so risk surfaces instead
    of accumulating [snippet-only].
+
+**Deliverable.** A dated tuning audit: the period, the per-rule table (firings, autoimmunity rate,
+flood contribution), the layer each rule now routes to, the tolerance entries with evidence counts
+and expiry dates, the memory cells minted, the replay result behind every threshold change, and the
+next audit date. It is the baseline the next audit is scored against.
 
 **Division of labor.** The assistant reads the disposition history and computes per-rule
 autoimmunity rates, drafts the tolerance list with evidence counts, converts postmortems into

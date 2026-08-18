@@ -11,6 +11,8 @@ description: >-
   defense architecture, or auditing whether a claimed control is a real barrier. Triggers: bowtie,
   barrier analysis, top event, lines of defense, what stops this from happening, escalation factor,
   HAZOP, guideword.
+metadata:
+  version: "1.1.0"
 ---
 
 # Bowtie barrier analysis
@@ -53,6 +55,9 @@ description: >-
    but people must correct the threat lines against how work really happens, *own* each barrier, and
    run its assurance test on a cadence. An untested barrier is scenery — the same doctrine as the
    failover rule elsewhere in this library: a backup you have never exercised is not a backup.
+   **The deliverable is two things:** the diagram, and a barrier register with one row per barrier —
+   which line it sits on, owner (a named role), assurance test, cadence, last test result. A diagram
+   without the register is a picture; the register is what gets audited.
 
 ## Why / learn
 Barrier thinking has an engineering lineage: bowtie-style diagrams trace to ICI hazard-analysis
@@ -76,7 +81,7 @@ clean before/after trial. Present it as a structuring discipline with an enginee
 as a proven effect size.
 
 Why this skill pairs well with a model: a classical bowtie workshop needs a trained facilitator and
-a cross-functional team for one to two days *per hazard*, which is why most treasuries have none. A
+a cross-functional team for one to two days *per hazard*, which is why most teams never run one. A
 model drafts the complete bowtie — threat lines, barriers, escalation factors — from a plain process
 description in minutes, and flags every soft barrier as it goes. The human work moves to the gate:
 correcting threats against reality, naming owners, and running assurance tests.
@@ -101,8 +106,9 @@ Record your hazards, top events, barrier owners, and assurance-test cadence in
 approval, positive pay, BEC controls) becomes the barrier set for top event "unauthorized payment
 released" — one such catalog lived in the archived `cash-management-skills:cash-management-controls` → `references/sod-and-control-catalog.md` (restorable from `archive/`);
 receiving-bank KYC/AML detection supplies the mitigative chain on the right side of a fraud bowtie
-(archived: `banking-skills:kyc-aml-basics`, restorable from `archive/`); audit findings (e.g. via a
-Tennessee/UT audit-findings skill in your environment) map one-to-one onto missing or failed barriers.
+(archived: `banking-skills:kyc-aml-basics`, restorable from `archive/`); an audit-findings catalog
+from your own assurance function maps one-to-one onto missing or failed barriers — record where
+yours lives here.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against

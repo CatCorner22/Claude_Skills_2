@@ -14,7 +14,7 @@ description: >-
   ADR, architecture decision record, changelog, Diátaxis, how-to guide, tutorial vs reference,
   API docs, docs as code, semantic versioning, our docs are out of date.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §5 technical-documentation).
@@ -142,8 +142,8 @@ are writing. And teach it honestly — a framework with one named author, system
 practice that (as at Django) partly predates it, is more credible than a fake timeless
 standard, and the attribution models the citation hygiene good reference docs need.
 
-ADRs are Nygard's answer to a specific failure: "large documents are never kept up to
-date; small, modular documents have at least a chance" [snippet-only]. An ADR records
+ADRs are Nygard's answer to a specific failure: "Large documents are never kept up to date.
+Small, modular documents have at least a chance at being updated" [snippet-only]. An ADR records
 *one* decision at the moment it was made, with the context that forced it. Immutability
 is what makes the trail trustworthy — a superseded ADR still explains why the system
 looked that way in its era, while an edited one erases the very history a successor

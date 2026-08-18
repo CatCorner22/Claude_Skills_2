@@ -8,7 +8,7 @@ below carries that mark. Re-verify against the primary sites before quoting exte
 ## Contents
 1. [The Diátaxis router](#1-the-diátaxis-router)
 2. [The quadrant audit protocol](#2-the-quadrant-audit-protocol)
-2a. [Owner, cadence, and "last verified" — the time-triggered half](#2a-owner-cadence-and-last-verified--the-time-triggered-half)
+    - [2a. Owner, cadence, and "last verified" — the time-triggered half](#2a-owner-cadence-and-last-verified--the-time-triggered-half)
 3. [README anatomy — the first screen](#3-readme-anatomy--the-first-screen)
 4. [Architecture Decision Records](#4-architecture-decision-records)
 5. [Changelog + semantic versioning](#5-changelog--semantic-versioning)
@@ -175,9 +175,9 @@ Rules that make ADRs work:
 - **One decision per record.** An ADR is not a design doc and not an RFC — it records
   one decision and its consequences, briefly.
 - **Immutable once accepted.** Reversals get a new ADR marked "Supersedes ADR-0007";
-  the old record's status becomes "Superseded by ADR-0012." Nygard's rationale: large
-  documents are never kept up to date; small modular documents have at least a chance
-  [snippet-only] — and an unedited trail is the only trustworthy one.
+  the old record's status becomes "Superseded by ADR-0012." Nygard's rationale: "Large
+  documents are never kept up to date. Small, modular documents have at least a chance at
+  being updated" [snippet-only] — and an unedited trail is the only trustworthy one.
 - **Context is the payload.** Consequences state costs honestly, including what would
   trigger revisiting. A consequences section with no downsides is advocacy, not record.
 - Numbered sequentially, stored with the project (`docs/adr/` or equivalent).

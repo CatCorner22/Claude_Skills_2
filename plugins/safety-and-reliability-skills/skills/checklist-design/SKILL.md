@@ -10,6 +10,8 @@ description: >-
   checklist stays with the skill that owns that process. Triggers: design a checklist, read-do,
   do-confirm, killer items, pause point, our checklist isn't working, people skip the checklist,
   checklist too long, redesign the checklist.
+metadata:
+  version: "1.1.0"
 ---
 
 # Checklist design
@@ -41,8 +43,10 @@ description: >-
 3. **Fix a natural pause point.** Anchor the checklist to a moment where the team *already* stops —
    before incision, before pressing "release payments", before the patient leaves the operatory. A
    checklist with no natural pause point never runs; one bolted mid-flow gets skipped first.
-4. **Draft to the discipline: 5–9 items, one page, imperative wording.** One verifiable action per
-   line ("Confirm beneficiary against the vendor master", not "Beneficiary considerations"). Precise
+4. **Draft to the discipline: 5–9 items per pause point, one page, imperative wording.** The count
+   is per card, not per process — the 19-item WHO checklist is three cards at three pause points, so
+   a list that won't fit in 9 usually wants a second pause point, not a longer card. One verifiable
+   action per line ("Confirm beneficiary against the vendor master", not "Beneficiary considerations"). Precise
    nouns, no paragraphs; the response to each line is a check or a challenge, not an essay.
 5. **Field-test in the real workflow and revise.** Run it live with the crew that will use it. Time
    it, watch for skipped lines, wrong-order items, ambiguous wording, a pause point the team blows
@@ -90,12 +94,15 @@ the team enacts — a checklist nobody rehearses is Ontario.
 ## Tailor to your environment
 Record your redesign targets and live checklists in `references/your-environment.md`; anything
 naming real people, accounts, or incidents goes in `your-environment.private.md` (git-ignored).
-Known mounts: a month-end close checklist is a prime redesign target (which close tasks are killer
-items at which pause points?) — one lived at the archived `accounting-skills:month-end-close` → `references/close-checklist.md` (restorable from `archive/`);
-many library skills ship checklist artifacts that were never designed to this
-discipline — candidates for a killer-item pass; a treasury wire release wants a do-confirm card at
-the "before send" pause point; dental clinical workflows (instrument sterilization, patient handoff)
-want read-do cards. Capture your pause points, callers, and skip-data source.
+Known mounts, by format:
+- **Do-confirm** — a payment or wire release at the "before send" pause point; a period-end close
+  (which close tasks are killer items, at which pause points? one such checklist lived at the
+  archived `accounting-skills:month-end-close` → `references/close-checklist.md`, restorable from
+  `archive/`).
+- **Read-do** — rotating-staff, sequence-critical work: instrument sterilization, patient handoff,
+  a system cutover.
+
+Capture your pause points, callers, and skip-data source.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against

@@ -13,7 +13,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -45,8 +45,10 @@ governs document-level attention (lead with the point, format for scanning, stop
    archaisms, no doublets or triplets, no lawyerisms or terms needing specialized decoding;
    consistent terminology; subject, verb, object close; active voice wherever the actor
    matters. Where contract language is involved, control meaning with the categories of
-   contract language (performance, obligation, discretion, prohibition, policy — see
-   `references/adams-and-brevity-checks.md` §3).
+   contract language — performance, obligation, discretion, prohibition, policy, and
+   declaration for a fact a party asserts ("the Seller states that…", never "shall"). The
+   full table, and the four rarer categories, are in
+   `references/adams-and-brevity-checks.md` §3.
 3. **Format the rest for scanning**: short paragraphs, bullets, bold key phrases, white
    space; one idea per sentence or bullet; cut everything that is not new, necessary, or
    actionable; stop the moment the point is made — length is not a virtue.
@@ -65,11 +67,11 @@ governs document-level attention (lead with the point, format for scanning, stop
    finalizing.
 
 ## Why / learn
-Litigation over meaning proves the original wording failed to express intent clearly enough
-to avoid a fight — so "tested by the courts" describes a failure history, not a warranty.
-Courts resolve disputes created by defective drafting; they never validate the words that
-caused the dispute. That is why the modern precise formulation is *safer* than the
-traditional one, not riskier: it leaves nothing to interpret. Smart Brevity is the same
+Litigation over meaning is evidence that the wording left room to fight over — so "tested by
+the courts" describes a failure history, not a warranty. A court's construction resolves one
+dispute on one record; it does not certify the words for your contract, your facts, or your
+jurisdiction. That is why the modern precise formulation is *safer* than the traditional
+one, not riskier: it leaves nothing to interpret. Smart Brevity is the same
 respect applied to attention instead of meaning — the reader under time pressure gets the
 point first, the reason second, and a scannable structure for everything else, because a
 precise document nobody finishes still fails. The two systems compose cleanly: Adams decides
