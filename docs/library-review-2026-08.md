@@ -589,3 +589,148 @@ solution`, `will it hold at real volumes`, `future outcomes`, `how good is this`
 as written, the compliance record would have scored six correct routes as failures and invited
 deleting real trigger phrases — the exact move the protocol forbids elsewhere. Tier D now asks its
 three questions as three columns, and the in-scope column makes a load a **PASS**.
+
+## 12. Addendum (2026-08-18, comprehensive from-scratch pass): consolidation verdict
+
+Owner instruction: *"do a comprehensive review from scratch… delete all Oracle skills. Review all
+others for substance and effectiveness, and optimize where appropriate. Feel free to delete and
+merge when appropriate."* The Oracle deletion is §12.1. The consolidation verdict is §12.3, and it
+is a negative result, which is the part worth reading carefully: **no merge and no deletion is
+warranted on the current tree**, and the evidence for that is stronger than the evidence any
+previous pass produced for its positive findings.
+
+### 12.1 Oracle deletion (done)
+
+17 skills across `oracle-fusion-finance-skills` and `oracle-otbi-skills`, 70 files, removed from
+`archive/plugins/` entirely rather than left archived. The archived-plugin count therefore falls
+from 9 to 7. Three follow-on removals were needed because the directive reaches further than the
+plugins themselves:
+
+- `coding-agent-skills:chicken-little` lost two reference files, one Do-it step, three trigger
+  phrases, its named-Oracle-failure-modes section, and its Oracle-shaped `your-environment.md`.
+  This **retires the owner-ratified exception** recorded in `MEMORY.md` on 2026-08-11 and analysed
+  at §10; the later directive supersedes the earlier exception, and the analysis at §10 is left in
+  place only because it is why the exception's stated reason was checkable at all.
+- `coding-agent-skills:soviet-space-graphite` had an OTBI-specific worked verdict citing a "library
+  fact" about a skill that no longer exists. Rewritten to carry the same lesson without the vendor.
+- `decision-science-skills:reference-class-forecasting` named an OTBI export in its environment
+  template. Generalized.
+
+What remains and is *not* residue: Oracle as a SQL dialect in `sql-for-analysts` (portability is
+the point), Oracle OTBI as one of five named BI products in `dashboard-design`, and "oracle" as the
+testing term in `lean-six-sigma-for-software`. Those are the word, not the domain.
+
+### 12.2 What was checked, and how to re-check it
+
+Everything below is a command, not a judgement, so the next pass can reproduce it rather than
+re-derive it:
+
+| Check | Result |
+|---|---|
+| `bash scripts/validate.sh` | 0 errors, 0 warnings, 28 notes |
+| `python3 scripts/check-arithmetic.py` (new) | 0 disagreeing chains across 410 files |
+| `python3 scripts/gen-catalog.py` | 121 skills / 14 plugins, catalogs byte-identical on regeneration |
+| Runnable-code sweep (191 blocks) | 84 PASS, 0 FAIL, 107 not independently runnable |
+| Eval parity | 121 skills : 121 evals, 0 orphans either way |
+| Eval asset references | 0 pointing at a `references/` or `scripts/` file that does not exist |
+| Cross-links | 0 unresolved; 15 distinct archived targets across 37 pointers, all marked |
+| Relative markdown links | 0 broken |
+| Exact trigger collisions | 0 |
+| Inbound-citation graph | 0 skills with zero inbound citations |
+| Description promises vs content | 0 capabilities advertised in a description and absent from the skill |
+| Pairwise description overlap | max Jaccard **0.168**, on the two Chicken Little autopsy editions |
+
+Two of these are new instruments rather than new results. `check-arithmetic.py` closes the defect
+class that appeared in *every* authoring wave and survived four hand passes;
+`measure-listing-cost.py` closes the one where a number quoted in two documents drifts apart.
+
+### 12.3 Consolidation verdict: nothing to merge, nothing to delete
+
+The consolidation question was asked properly this time — by measurement first, then by reading the
+candidates measurement produced — and it came back empty.
+
+**Overlap.** The highest description overlap between any two of the 121 skills is 0.168 (Jaccard on
+content words). For comparison, the pairs that *were* merged in earlier passes were obvious on
+sight. Nothing in the current tree is a near-duplicate of anything else.
+
+**The candidates measurement produced, and why each survives:**
+
+- `chicken-little-executive-advisor` / `chicken-little-technical-compiler` (0.168) — two fixed
+  autopsy protocols with different stages, different output structures, and different activation
+  phrases (`deploy advisor` vs `deploy compiler`). Merging them yields one skill holding two
+  mutually exclusive protocols behind two name-gates: strictly worse.
+- `adams-plain-grade` / `adams-smart-brevity` (0.138) — the same Adams core aimed at opposite
+  registers (5th-grade accessible vs professional-scanning). A merged skill would need a mode
+  switch on the one axis that decides every sentence it writes.
+- `full-stack-app-architecture` / `frontend-modern-ui` (0.148) — a stack-and-boundaries decision
+  versus a layer's craft. Different questions, explicit seam in both.
+- `extreme-ownership` / `stay-hard-accountability` (0.102) — leading a team versus driving
+  yourself. The seam is stated in both descriptions and both bodies.
+- `python-for-analysts` / `excel-automation-python` (0.124, cross-plugin) — overlap is the word
+  "Python", not the work.
+
+**Thinness is not redundancy.** The five thinnest skills (`reflective-learner` 148 lines,
+`full-stack-app-architecture` 152, `supervised-modeling` 154, `lean-code-principles` 155,
+`dmaic-problem-solving` 157) are all load-bearing: `dmaic-problem-solving` carries 14 inbound
+citations, the second-most in its plugin, and `reflective-learner` carries 8. The honest finding is
+the inverse of a deletion case — **the hub skills are the shallowest ones**, and the improvement
+available is depth, not removal.
+
+**The context-cost problem is not solved by deleting skills.** A full install costs 14.8% of a 200K
+window, and the library sits past the ~100-skill point where the listing silently degrades to
+name-only. Deleting the five thinnest skills would recover about 1,200 tokens — 0.6% of a context —
+while removing genuinely used content. Installing two plugins instead of fourteen recovers 11%.
+The lever is skills *per install*; `README.md` carries the measured per-plugin and per-bundle
+tables, and `scripts/measure-listing-cost.py` keeps them honest.
+
+### 12.4 Substance fixes applied in this pass
+
+Nine, each verified in place rather than merely changed:
+
+1. **`fmea`** — the Action Priority table let a catastrophic-but-rare-and-detectable failure
+   (S 9, O 2, D 3) rate **Low**, which is precisely the averaging-away the table replaced RPN to
+   prevent. Rule 2 gained a severity ceiling. Swept all 1,000 (S, O, D) cells: 18 cells rated Low
+   at S ≥ 9 before, 0 now (and 0 at S ≥ 7); 36 cells move, all Low → Medium; all five worked-example
+   AP values unchanged.
+2. **`rest-api-data-pulls`** — the pagination loop advanced `offset` by the requested page size, so
+   a server returning a short page while `hasMore` stayed true silently skipped the rows it
+   withheld. Now advances by `len(items)`.
+3. **`pdf-data-extraction`** — `amount()` inverted the sign of a plain `-750.25`: the regex that
+   strips parentheses also stripped the minus the negativity test never looked for. A sign
+   inversion in a statement parser is the worst kind of quiet defect.
+4. **`backend-api-development`** — the login snippet called `pwd.verify()`. `pwd` is a Python
+   stdlib module with no such function, so the snippet shadows stdlib *and* does not run.
+5. **`csv-and-flat-file-wrangling`** — `xxd` ships with vim; the POSIX `od` fallback is now given.
+6. **`spaced-retrieval-learning`** — a "10–20% of the retention interval" rule contradicted the
+   study it cited: Cepeda's own 70-day data point is ~21 days, where the rule yields 7–14. Replaced
+   with the four reported intervals and a note that the proportion collapses at long delays.
+7. **`anomaly-detection`** — step 6 attributed every alert by marginal robust z, which is blind by
+   construction to the joint anomalies step 4's multivariate detectors exist to find. Added the
+   branch, and the instruction to say plainly that no single value is out of range.
+8. **`stakeholder-mapping`** — the worked example asserted that a re-map must reach both artifacts
+   while showing artifacts that did not contain the change it described.
+9. **`medical-research-detective`** — country inference resolved name-beats-city across a whole
+   affiliation string rather than per segment, and carried a bare `wales` hint. Self-test 46/46
+   with four regression cases added.
+
+### 12.5 Privacy sweep
+
+Two private project names remained in committed files (`adams-smart-brevity` ×3,
+`weight-of-the-books`' environment template) after the `MEMORY.md` identity split. Both removed; a
+token-level sweep of `MEMORY.private.md` against the whole committed tree now returns nothing but
+ordinary vocabulary. One item is *not* removed and is a decision for the owner: see §12.6.
+
+### 12.6 Open decisions from this pass
+
+1. **The `ut` brand pack in `assertion-evidence-deck`.** It names a specific institution's brand
+   guidelines, which is the identifying-detail category the `MEMORY.md` split moved to a private
+   file. It survives here by an earlier ratified exception (kept as an explicit non-default option;
+   the builder defaults to neutral), and it carries real teaching value — a published brand color
+   that fails WCAG at 2.49:1, with the consequences worked out. Removing the affiliation while
+   keeping the palette means renaming the flag across five files including a CLI contract that any
+   existing deck spec may reference as `"brand": "ut"`. **Recommendation: keep, unchanged.** It is
+   a public brand guideline rather than confidential data, and it is already in git history, which
+   the owner chose to leave intact.
+2. **Depth for the five hub-but-thin skills** (§12.3). Not a defect; a ranked opportunity.
+3. **`docs/trigger-test.md` remains unrun.** It is the one checklist item nothing in this library's
+   history has ever met, and it cannot be run from a session that authored the skills.

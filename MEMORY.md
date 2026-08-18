@@ -358,6 +358,26 @@ Never store secrets, credentials, account numbers, or client data here.
   bare "constraint" = database; bare "checklist" (96 artifact files) and bare "handoff"
   (17 files) never trigger alone. (2026-08-08)
 
+- LESSON (2026-08-18, crystallized): **a checker that has never been shown a planted error has not
+  been tested.** The first arithmetic checker reported "0 mismatches across 410 files" while a
+  negative-control file with five obvious errors passed it clean — requiring every link of a chain
+  to carry an operator disqualified every chain, because the right-hand result is always a bare
+  number. Any new validator gets a negative control before its clean run is believed.
+- LESSON (2026-08-18): **a checker's false positives are its real cost.** Three iterations of the
+  arithmetic checker were needed to reach zero: chained `a = b = c` displays, percent read two ways
+  (`6%` is 0.06 in a ratio and 6 in a percentage-point average), and trap tables that show wrong
+  arithmetic on purpose. Shipping it at 13 false positives would have taught authors to ignore it —
+  the alert-fatigue failure `machine-learning-skills:anomaly-detection` describes, committed by the
+  person who wrote that skill's warning.
+- RULE (2026-08-18): **a number quoted in two documents will drift.** The listing-cost figure went
+  stale within a day of being measured by hand. Any figure the repo publishes in more than one place
+  gets a script (`scripts/measure-listing-cost.py`), and the documents point at the script.
+- FACT (2026-08-18, measured): consolidation review found **nothing to merge or delete**. Max
+  pairwise description Jaccard is 0.168; 0 skills lack inbound citations; 0 description promises are
+  unbacked. The thinnest skills are the most-cited hubs (`dmaic-problem-solving` 157 lines / 14
+  inbound), so the available improvement is depth, not removal. Do not re-open this as a deletion
+  question without new evidence.
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core
@@ -833,3 +853,16 @@ correct routes as defects.
 Flagged, not resolved: D9 (your-environment.md in the disposable plugin cache — needs owner
 go-ahead, ~121 edits); the trigger test still unexecuted; 107 of 121 skills still without substance
 review.
+
+2026-08-18 — Comprehensive from-scratch pass (owner-directed). Oracle deleted outright: 17 skills /
+70 files, plus three follow-on de-mounts (chicken-little, soviet-space-graphite,
+reference-class-forecasting); the chicken-little Oracle exception is retired, superseded by the
+delete-all directive. Nine substance fixes verified in place, the largest being the FMEA Action
+Priority table, which rated a catastrophic-but-rare failure Low (1,000-cell sweep: 18 such cells
+before, 0 after). Two new instruments: scripts/check-arithmetic.py (0 findings on the repo, 5/5 on a
+planted-error control) and scripts/measure-listing-cost.py. Consolidation verdict: nothing to merge
+or delete — max description overlap 0.168, zero discovery dead-ends, zero unbacked description
+promises. Two private project names removed from committed files.
+Flagged, not resolved: the `ut` brand pack still names an institution (recommendation: keep — public
+brand guideline, already in history, and the rename touches a CLI contract); the trigger test still
+unexecuted; depth for the five hub-but-thin skills.
