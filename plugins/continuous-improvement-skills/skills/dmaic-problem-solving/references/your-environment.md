@@ -12,4 +12,9 @@ structural examples.
 - **Analyze conventions:** <significance level / test types you accept; who reviews the analysis>
 - **Pilot practice:** <how you run small-scale pilots here; guardrails>
 - **Control practice:** <control chart / KPI limits you use; where standard work is stored>
+- **Chart and rule set:** <chart type per metric, subgroup rule, which run rules are armed and why>
+- **Limit-recompute rule:** <what change justifies recomputing limits, and who approves it>
+- **Counterweight metrics:** <for each common project type, the metric a fix here tends to damage>
 - **Tollgate owners:** <who signs off each phase; cadence of reviews>
+- **Tollgate reviewer:** <who asks the stop questions and is independent of the project team>
+- **Closure convention:** <how met / partially met / missed is reported, and who re-charters residuals>
