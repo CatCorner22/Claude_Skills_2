@@ -80,7 +80,11 @@ for dir in plugins/*/skills/*/; do
   fi
 
   # body under 500 lines
-  body_lines=$(awk 'seen==2{c++} /^---$/{seen++} END{print c+0}' "$md")
+  # Count everything after the frontmatter's closing '---'. Only the FIRST TWO '---'
+  # lines delimit frontmatter; a later bare '---' is a horizontal rule in the body and
+  # must not stop the count (the old form did, reporting a 168-line file as 30 and
+  # making the <500 rule bypassable by any skill that used a horizontal rule).
+  body_lines=$(awk '/^---$/ && seen<2 {seen++; next} seen==2 {c++} END{print c+0}' "$md")
   [ "$body_lines" -lt 500 ] || warn "$base: body is $body_lines lines (keep under 500)"
 
   # references one level deep

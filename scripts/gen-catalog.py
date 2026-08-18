@@ -87,8 +87,46 @@ def _first_sentence(s):
     return re.split(r"(?<=[.!?])\s+(?=[A-Z])", s)[0].strip()
 
 
+def _top_level_split(what):
+    """Text before the first ' — ', ': ' or '; ' that sits OUTSIDE parentheses and quotes.
+
+    A plain regex split is bracket-blind, so it cuts inside a parenthetical and emits an
+    unbalanced cell — 'Acts as "Chicken Little" (operating name', 'presentations (the
+    Marshall/Alley method', 'procedures (HIPAA'. Delimiters only end the capability clause
+    when they are at depth zero.
+    """
+    depth, inq, n = 0, False, len(what)
+    for i, ch in enumerate(what):
+        if ch == '"':
+            inq = not inq
+        elif inq:
+            continue
+        elif ch in "([":
+            depth += 1
+        elif ch in ")]":
+            depth = max(0, depth - 1)
+        elif depth == 0:
+            nxt = what[i + 1] if i + 1 < n else ""
+            prv = what[i - 1] if i else ""
+            if ch in "—–" and prv.isspace() and nxt.isspace():
+                return what[:i].strip()
+            if ch in ":;" and nxt.isspace():
+                return what[:i].strip()
+    return what
+
+
+def _balance(s):
+    """Trim a truncated clause back so it never ends inside an open bracket or quote."""
+    for o, c in (("(", ")"), ("[", "]")):
+        while s.count(o) > s.count(c):
+            s = s[: s.rfind(o)].strip().rstrip(",;:—–-")
+    if s.count('"') % 2:
+        s = s[: s.rfind('"')].strip().rstrip(",;:—–-")
+    return s
+
+
 def _lead_split(what):
-    cand = re.split(r"\s+[—–]\s+|:\s+|;\s+", what, maxsplit=1)[0].strip()
+    cand = _top_level_split(what).strip()
     if 12 <= len(cand) <= LEAD_LIMIT:
         return cand
     base = cand if len(cand) >= 12 else what
@@ -100,9 +138,9 @@ def _lead_split(what):
         for sep in (", ", " and ", " that ", " which "):
             j = head.rfind(sep)
             if j >= 40:
-                return head[:j].strip().rstrip(",") + "…"
-        return head.rsplit(" ", 1)[0].strip() + "…"
-    return base
+                return _balance(head[:j].strip().rstrip(",")) + "…"
+        return _balance(head.rsplit(" ", 1)[0].strip()) + "…"
+    return _balance(base)
 
 
 def lead_clause(what):
