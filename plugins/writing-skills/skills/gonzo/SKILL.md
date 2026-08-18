@@ -148,6 +148,12 @@ where dispatches get published vs. stay private, and how counsel prefers to be
 addressed in the retained-counsel asides. Sensitive specifics go in `*.private.md`
 (git-ignored).
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/gonzo.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/gonzo-canon.md — the verified life-and-works dossier with provenance
   marks: the canon with dates, the origin story, the attorney thread, attested quotes

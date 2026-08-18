@@ -104,6 +104,12 @@ receiving-bank KYC/AML detection supplies the mitigative chain on the right side
 (archived: `banking-skills:kyc-aml-basics`, restorable from `archive/`); audit findings (e.g. via a
 Tennessee/UT audit-findings skill in your environment) map one-to-one onto missing or failed barriers.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/bowtie-barrier-analysis.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/bowtie-and-hazop-method.md — guideword × parameter matrix, barrier quality tests
   (independent / effective / auditable), escalation-factor catalog, assurance-test patterns, the

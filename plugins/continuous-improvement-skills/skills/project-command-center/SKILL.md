@@ -127,6 +127,12 @@ Record in `references/your-environment.md`: your release gates and rollback rehe
 cadence, who holds stop-the-line authority, your intervention-log location, house
 severity levels, and the statistical reporting template your org requires.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/project-command-center.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/command-doctrine.md — adaptive command, the three OODA loops, the Toyota
   translation, co-design and feedback closure, writing discipline and the ambiguity audit

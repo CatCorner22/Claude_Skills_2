@@ -100,7 +100,10 @@ attaches to, not one employer's version of it — a recurring report and its sou
 matter or case intake, an operational runbook, a service and its deploy path. In `## Tailor to
 your environment`, instruct the user to drop their specifics into
 `references/your-environment.md`, framed "wire in your current role here" so the skill survives
-a job change. **Never commit raw real data.** Commit only sanitized, structural examples. Raw
+a job change. **Then tell them to keep the filled-in copy outside the plugin** — the shipped file is
+a template living in the plugin cache, which `/plugin marketplace update` can overwrite; the house
+wording points them at `.claude/skills-env/<skill-name>.md` in their own project. Every skill in this
+library carries that paragraph; copy it verbatim. **Never commit raw real data.** Commit only sanitized, structural examples. Raw
 artifacts go in files matching `.gitignore` patterns (`*.private.md`,
 `references/*.local.*`).
 
@@ -174,6 +177,12 @@ helps.
 If you adopt house conventions of your own (naming, extra sections), record them in
 `references/your-environment.md` here so future skills follow them. Keep this meta-skill and the
 `assets/SKILL.template.md` in sync — the template must always reflect the current standard.
+
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/writing-agent-skills.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
 
 ## References
 - assets/SKILL.template.md — copy this to start any new skill

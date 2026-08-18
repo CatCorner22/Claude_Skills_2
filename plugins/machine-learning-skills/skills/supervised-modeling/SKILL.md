@@ -90,6 +90,12 @@ XGBoost, LightGBM), and any interpretability requirement (e.g. a model you must 
 risk). This skill then maps its generic steps onto your data and constraints, and defers metric and
 validation choices to `machine-learning-skills:model-evaluation`.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/supervised-modeling.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/algorithms-and-interpretation.md — model-family cheat-sheet, default hyperparameters, imbalance tactics, and interpretation caveats
 - references/your-environment.md — your target, features, class balance, libraries, and interpretability needs (add when supplied)

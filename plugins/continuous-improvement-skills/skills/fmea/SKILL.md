@@ -92,6 +92,12 @@ scales calibrated to your volumes and materiality, where the register lives, the
 and who owns rating adjudication and actions. Never commit real transaction or client data —
 sanitize to structure only.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/fmea.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/fmea-method.md — the seven steps expanded, anchored S/O/D scales for office
   processes, the Action-Priority-vs-RPN story, and a worked bank-reconciliation FMEA table

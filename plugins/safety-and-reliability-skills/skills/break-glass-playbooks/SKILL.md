@@ -188,6 +188,12 @@ structural — roles and mechanisms, not live thresholds. Real trigger values, s
 names, account identifiers, and access paths belong in `your-environment.private.md`,
 which is git-ignored and never committed.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/break-glass-playbooks.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/break-glass-method.md — the tripwire quality bar, the sealed-instructions
   template (first ten moves, authority grant with expiry, comms tree, decision chair),

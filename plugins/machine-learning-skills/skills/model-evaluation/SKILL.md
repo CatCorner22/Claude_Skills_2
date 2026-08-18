@@ -157,6 +157,12 @@ then maps its generic guidance onto your problem. For the conceptual choice of m
 framing, start at `machine-learning-skills:ml-project-framing`; to qualify the labelling or judging process
 itself, run `continuous-improvement-skills:measurement-systems-analysis`.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/model-evaluation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/metrics-and-leakage.md — metric definitions, ROC-vs-PR with the prevalence arithmetic, calibration, threshold selection on validation, confidence intervals on a metric, slice evaluation, label quality, and the leakage checklist
 - references/your-environment.md — your data type, class balance, error costs, metric, baseline, slices, and label source (add when supplied)

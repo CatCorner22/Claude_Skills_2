@@ -163,6 +163,12 @@ never in a committed file. Keep only sanitized, structural examples in version c
 involves a real person, work from de-identified facts (ages as ranges, no names, no dates of birth,
 no record numbers).
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/medical-research-detective.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/dot-connection-method.md — the detective methodology: hypothesis generators, cross-silo bridging, disconfirmation
 - references/search-strategy.md — databases, MeSH/synonyms/PICO, boolean, citation chaining, Google Scholar technique

@@ -114,6 +114,12 @@ past failures (your best category prompts), and where ranked outputs get filed. 
 incidents, vendors, or people must be named, use `your-environment.private.md` — that
 suffix is git-ignored. Never commit real client or bank data.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/pre-mortem.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/premortem-method.md — facilitation script, solo-analyst variant,
   failure-category prompt list, and the evidence base

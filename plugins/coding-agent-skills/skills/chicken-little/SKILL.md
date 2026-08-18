@@ -126,6 +126,12 @@ structure, CoA segments and labels, workflow-approval configuration, hold polici
 areas you actually use, extract cadence, and your organization's escalation thresholds (what
 earns an andon pull). Never commit credentials, account numbers, or client data.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/analogies-and-patterns.md — the teaching analogies, named Oracle failure modes, LSS toolset, agent-framework practice, and the default response protocol
 - references/oracle-fusion-data-model.md — Fusion architecture, nomenclature, and AP/AR/GL/XLA tables with status codes

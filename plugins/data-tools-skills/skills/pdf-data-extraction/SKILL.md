@@ -100,6 +100,12 @@ Catalog your recurring PDFs in `references/your-environment.md` (real documents 
 that works, and the internal totals used for validation. **Never commit real statements or
 invoices.**
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/pdf-data-extraction.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/pdf-recipes.md — pdfplumber/camelot settings, OCR pipeline, statement/invoice layout patterns
 - references/your-environment.md — your document types and frozen extraction recipes (fill in)

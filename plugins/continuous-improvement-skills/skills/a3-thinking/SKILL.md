@@ -115,6 +115,12 @@ your data sources for the current-condition box, and how A3s get stored and revi
 the committed file structural; real names, systems, numbers, or client situations go in
 `your-environment.private.md`, which is git-ignored and never committed.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/a3-thinking.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/a3-template.md — the one-page layout, PDCA mapping, box-by-box guidance, a
   worked domain-neutral example, reviewer's walk, and canon/misattribution notes

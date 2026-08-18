@@ -223,6 +223,12 @@ add-in). Keep the experiment-side conventions consistent with
 `data-analytics-bi-skills:ab-test-design`'s `references/your-environment.md`. The skill then targets its
 workflow at your real decisions.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/statistical-inference.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/choosing-a-test.md — decision guide: which test for which data type and design, what each test's null actually is, bootstrap and permutation recipes, and assumptions
 - references/your-environment.md — your tested decisions, conventions, and tools (add when supplied)

@@ -91,6 +91,12 @@ credentials references in `your-environment.private.md`, git-ignored): which res
 filter windows, field lists, the integration user's roles, rate limits observed, and where
 outputs land. **Never commit tokens, passwords, or real pulled data.**
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/rest-api-data-pulls.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/api-patterns.md — hardened session with retries, pagination styles, query idioms, json flattening
 - references/your-environment.md — your endpoints, resources, and extract schedules (fill in)

@@ -169,6 +169,12 @@ power map.** Real names of colleagues, actual placements, currencies plans, and
 anything about live org dynamics go in `your-environment.private.md` — git-ignored,
 never committed. A leaked power map damages every relationship on it.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/stakeholder-mapping.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/stakeholder-method.md — the grid with attribution notes, quadrant move
   catalog, RACI rules, the Cohen & Bradford currencies catalog, the re-map protocol,

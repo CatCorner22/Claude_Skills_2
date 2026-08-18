@@ -103,6 +103,12 @@ skeleton, retention rules, what your organization classifies as sensitive, and t
 sharing channels per class. This library's own guardrails (`.gitignore` patterns
 `*.private.md`, `references/*.local.*`) are the model — mirror them in your own projects.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/data-file-hygiene.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/hygiene-checklists.md — scrub checklist by file type; project-folder and archive checklists
 - references/your-environment.md — your naming, retention, and classification rules (fill in)

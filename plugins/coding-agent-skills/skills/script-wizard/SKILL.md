@@ -112,6 +112,12 @@ Oracle data pulls), house documentation formats, review/approval gates, and the 
 artifacts must integrate with. Keep anything sensitive in `your-environment.private.md`
 (git-ignored); never commit real data.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/script-wizard.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/audit-checklist.md — the Phase 5 adversarial review, in full (use on every audit)
 - references/python-and-code.md — standards for scripts, tools, automation, AI systems

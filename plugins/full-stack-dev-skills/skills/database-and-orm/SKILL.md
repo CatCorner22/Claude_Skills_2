@@ -176,6 +176,12 @@ PK/timestamp/money conventions (minor-unit scale, or the `Numeric` precision), m
 workflow, pool settings against your server's `max_connections`, and the known hot queries with
 their indexes — so new tables and queries match the house shape.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/database-and-orm.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/data-layer-recipes.md — engine/session setup with the SQLite pragmas, transaction boundary, migration workflow, N+1 diagnosis, pooling numbers, SQLite→Postgres checklist, the three probes
 - references/your-environment.md — your engines, conventions, hot paths (fill in)

@@ -89,6 +89,12 @@ defect categories, where you pull occurrence counts for Pareto, your containment
 conventions, and who signs off that a cause is verified. Never commit real incident or client data —
 sanitize to structure only.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/root-cause-analysis.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/tools-and-templates.md — 5 Whys worksheet, 6M fishbone prompts, Pareto tally, verification test
 - references/human-error-taxonomy.md — Reason's slip/lapse/mistake/violation taxonomy on Rasmussen's

@@ -102,6 +102,12 @@ List your standard local datasets and queries in `references/your-environment.md
 files in `references/*.local.*`, git-ignored): file locations, the Parquet conversions you keep,
 and the recurring analysis scripts. **Never commit the data files themselves.**
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/duckdb-local-analytics.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/duckdb-recipes.md — window functions, pivots, larger-than-memory settings, pandas/Parquet interop
 - references/your-environment.md — your datasets, conversions, and saved analyses (fill in)

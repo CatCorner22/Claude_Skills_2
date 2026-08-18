@@ -154,6 +154,12 @@ Record in `references/your-environment.md`: the standing decisions this cell ser
 watches which tripwires, and where scenario decks and decision logs are filed.
 Sensitive specifics go in `*.private.md` (git-ignored).
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/minority-report.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/scenario-cell-method.md — the full protocol: variable sorting, scenario
   construction with a worked domain-neutral example, the minority-report rule, the

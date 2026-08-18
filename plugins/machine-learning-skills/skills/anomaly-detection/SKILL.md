@@ -91,6 +91,12 @@ alarm. This skill then maps its generic methods onto your data. To rank reconcil
 pair it with your reconciliation process (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`);
 fitting alerts into a control framework is cash-controls design (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/anomaly-detection.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/methods-and-thresholds.md — statistical, time-series, and unsupervised methods, with threshold-setting and evaluation under label scarcity
 - references/your-environment.md — your definition of anomalous, monitored fields, labels, and alert budget (add when supplied)

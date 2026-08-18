@@ -119,6 +119,12 @@ Record in `references/your-environment.md`: your stack (so pivots name real mode
 alternatives), deployment gates the Critical list feeds into, and known accepted risks so
 the autopsy doesn't re-litigate settled tradeoffs.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little-technical-compiler.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/autopsy-method.md — session semantics, hunting the bottom block, fragility-
   table calibration (defensible likelihoods, Patch/Refactor/Rebuild rubric), the

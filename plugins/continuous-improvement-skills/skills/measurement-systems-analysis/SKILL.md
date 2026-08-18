@@ -164,6 +164,12 @@ measured (system, query, reviewer), the judges/reviewers involved, and the owner
 and thresholds (use `your-environment.private.md`, which is git-ignored, for real system names,
 limits, or reviewer names). Never commit real transaction or personnel data — structure only.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/measurement-systems-analysis.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/msa-and-capability.md — study designs, the ANOVA decomposition explained, the
   %GRR/ndc acceptance table, kappa's prevalence sensitivity read off the 2×2 table, the

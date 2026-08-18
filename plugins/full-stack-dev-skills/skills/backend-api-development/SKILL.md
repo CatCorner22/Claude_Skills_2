@@ -104,6 +104,12 @@ Record your API conventions in `references/your-environment.md`: auth choice per
 error shape, pagination defaults/max, versioning policy if any, and naming conventions —
 so every new endpoint (human- or agent-written) matches the house shape.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/backend-api-development.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/fastapi-patterns.md — auth recipes (sessions + JWT), error handler, pagination helper, endpoint checklist
 - references/your-environment.md — your auth, conventions, limits (fill in)

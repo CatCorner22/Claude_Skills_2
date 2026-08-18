@@ -92,6 +92,12 @@ naming or partitioning conventions. This skill then maps its generic steps onto 
 your platform offers a governed reporting layer (like Oracle Fusion's OTBI subject areas), note here
 when to prefer it over hand-written SQL.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/sql-for-analysts.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/query-patterns.md — window-function, QUALIFY, date, and sargability patterns with dialect notes
 - references/your-environment.md — your dialect, tables, grain, and conventions (add when supplied)

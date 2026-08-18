@@ -144,6 +144,12 @@ decisions each deck serves, your brand palette and fonts (the tokens ship with a
 the UT System palette is preserved as the `ut` option), the artifacts your figures come from, and
 any house deck conventions.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/assertion-evidence-deck.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/ae-method.md — full checklist, evidence-type guide, failure modes, before/after examples
 - references/design-tokens.md — verified geometry and typography, neutral palette default, legacy UT System brand pack, font-substitution rule

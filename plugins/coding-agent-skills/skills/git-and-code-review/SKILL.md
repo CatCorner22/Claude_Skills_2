@@ -143,6 +143,12 @@ a rule set — hunt their conflicts and loopholes with `coding-agent-skills:rule
 sensitive (private repo hosts, tokens, reviewer names/emails) in
 `references/your-environment.private.md`, which `.gitignore` keeps out of git.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/git-and-code-review.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/review-checklist.md — the full review method: order, checklists, size and pacing
   evidence, feedback grammar, and a worked example review

@@ -100,6 +100,12 @@ Record your realtime map in `references/your-environment.md`: which surfaces use
 transport and why, the job queue choice and its escalation trigger, heartbeat/timeout
 settings, and the multi-node fan-out mechanism if any.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/realtime-and-dynamic-features.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/realtime-recipes.md — transport decision table, WebSocket endpoint, job-status pattern, optimistic mutation
 - references/your-environment.md — your transports, queue, settings (fill in)

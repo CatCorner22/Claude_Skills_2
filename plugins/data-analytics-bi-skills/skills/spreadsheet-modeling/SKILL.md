@@ -110,6 +110,12 @@ standard, your sheet-structure convention (inputs/calcs/outputs), your standard 
 named-range conventions, and your review/sign-off process. Wire any domain forecasting method the
 model depends on into the same file.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/spreadsheet-modeling.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/model-structure.md — zone layout, formatting and named-range conventions, check-cell
   patterns, data-table sensitivity, the audit toolkit, and a worked domain-neutral example (a

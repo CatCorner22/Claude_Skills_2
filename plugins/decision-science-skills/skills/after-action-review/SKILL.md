@@ -114,6 +114,12 @@ receive the sustain/improve output. If entries would name real people or inciden
 them in `your-environment.private.md` (git-ignored). Never commit real client or bank
 data — sanitize to structure.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/after-action-review.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/aar-method.md — the four questions expanded, facilitation guide,
   timeline-reconstruction protocol, ground rules, and the corporate-adoption evidence

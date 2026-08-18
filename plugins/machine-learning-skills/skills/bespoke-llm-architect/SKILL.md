@@ -115,6 +115,12 @@ tool, data locations and formats, latency targets, and safety/compliance require
 anything sensitive — credentials, dataset contents, client specifics — in
 `your-environment.private.md` (git-ignored); never commit real data.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/bespoke-llm-architect.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/architect-directives.md — the seven immutable directives, the Master Prompt Architect workflow, and the deliverable format (near-verbatim from the spec)
 - references/large-text-handling.md — the Large-Txt-Handler protocol for datasets, logs, and long contexts (near-verbatim from the spec)

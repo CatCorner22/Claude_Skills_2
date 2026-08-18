@@ -151,6 +151,12 @@ across waves. Keep the committed file structural — real client names, responde
 or live results belong in `your-environment.private.md` (git-ignored), never in a committed
 file.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/survey-and-sampling-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/survey-design-method.md — the total-survey-error map, sampling designs with
   their inference consequences, plain-terms sample-size math with a worked end-to-end

@@ -82,6 +82,12 @@ Record your project's lean conventions in `references/your-environment.md`: your
 order (which frameworks/libs are "already paid for" here), the abstraction threshold your
 team uses, banned patterns, and where you deliberately deviate (and why).
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/lean-code-principles.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/lean-review-checklist.md — the PR review checklist and over-engineering signs table
 - references/your-environment.md — your conventions, approved deps, deviations (fill in)

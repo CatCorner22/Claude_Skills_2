@@ -112,6 +112,12 @@ each recurring feed in `references/your-environment.md` (real files in
 quirks, and the control totals you validate against. Sanitized structural examples only —
 **never real customer or account-bearing exports**.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/csv-and-flat-file-wrangling.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/flat-file-quirks.md — symptom → cause → fix tables for encodings, delimiters,
   numbers, dates, structure, and keys; the hardened-loader pattern; a worked two-system merge

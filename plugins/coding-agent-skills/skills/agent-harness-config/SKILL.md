@@ -100,6 +100,12 @@ your project needs, any MCP servers you use, and behaviors you want automated. T
 writes the precise `settings.json` entries for your stack. If you only need a simple settings
 change (theme, model), the `/config` command is faster.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/agent-harness-config.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/permissions-and-hooks.md — permission rule syntax, precedence, and the hook events with examples
 - references/your-environment.md — your project's commands, bootstrap, MCP servers (add when supplied)

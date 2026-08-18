@@ -104,6 +104,12 @@ phases you treat as sterile-cockpit (payment release windows, procedures), and P
 to the actual relationships. If it names real people, accounts, or incidents, put it in
 `your-environment.private.md` (git-ignored) instead. Never commit real payment or patient details.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/sbar-structured-communication.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/protocols-and-scripts.md — the four protocols in full, with worked treasury and dental examples, PACE phrase ladders, the sterile-cockpit rule, and the evidence base
 - references/your-environment.md — your escalation paths, ladders, and templates (add when supplied)

@@ -109,6 +109,12 @@ their serving pattern, artifact store, prediction-log location, drift thresholds
 retrain/rollback triggers you committed to. **Never commit real prediction data or model
 artifacts trained on sensitive data.**
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/ml-in-production.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/serving-recipes.md — artifact layout, batch scoring job, prediction-log schema, rollout and pre-launch checklists
 - references/your-environment.md — your models, patterns, thresholds, triggers (fill in)

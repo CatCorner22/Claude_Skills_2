@@ -138,6 +138,12 @@ Record in `references/your-environment.md`: what "load-bearing" means per projec
 "I verified it"), where punch lists live and how they're tracked, and your
 re-inspection ritual. Sensitive project specifics go in `*.private.md` (git-ignored).
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/the-foreman.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/draw-inspection-method.md — the full walkthrough: claim list template,
   evidence standards, the three-bin sort with worked examples, punch-list format, and

@@ -173,6 +173,12 @@ committed file structural — roles and capability types, not names, system iden
 or access details. Real names, system paths, and anything sensitive belong in
 `your-environment.private.md`, which is git-ignored and never committed.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/rebuild-rehearsal.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/rebuild-method.md — the bus-factor census template, rebuild-unit patterns
   by capability type, scheduling rules (cadence shorter than tenure), the

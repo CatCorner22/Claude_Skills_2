@@ -199,6 +199,12 @@ randomization unit, your guardrail set, and who owns launch/stop authority. Keep
 metric values, client identifiers, or live results in `your-environment.private.md`
 (git-ignored); commit only sanitized, structural examples.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/ab-test-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/online-experiment-method.md — the design worksheet, unit/interference drill, a
   worked MDE sizing (outreach-letter test), variance reduction with CUPED arithmetic and the

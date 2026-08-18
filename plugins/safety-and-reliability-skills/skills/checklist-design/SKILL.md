@@ -97,6 +97,12 @@ discipline — candidates for a killer-item pass; a treasury wire release wants 
 the "before send" pause point; dental clinical workflows (instrument sterilization, patient handoff)
 want read-do cards. Capture your pause points, callers, and skip-data source.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/checklist-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/checklist-design-method.md — killer-item selection heuristics, read-do vs. do-confirm
   decision table, pause-point identification, drafting rules, field-test protocol, failure catalog,

@@ -84,6 +84,12 @@ which numerics are skewed, the timestamp columns and the calendar effects that m
 holidays), how missingness arises and what it means, and your preferred pipeline tooling. This skill then maps
 its generic transforms onto your columns, and hands the model choice to `machine-learning-skills:supervised-modeling`.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/feature-engineering.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/transforms-and-leakage.md — encoding/scaling/datetime/selection recipes and the leakage-safe pipeline pattern
 - references/your-environment.md — your columns, cardinalities, calendar effects, and missingness meaning (add when supplied)

@@ -107,6 +107,12 @@ sink/schema and redaction rules, and coverage gates. Keep secrets, internal host
 client data out of git — real details go in `*.private.md` / `references/*.local.*` files,
 which are git-ignored.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/elite-python-engineer.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/toolchain-2026.md — the mandatory stack plus complete config templates
   (pyproject.toml with Ruff/ty/pytest config, pre-commit, GitHub Actions, uv commands)

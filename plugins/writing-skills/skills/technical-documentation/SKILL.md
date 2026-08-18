@@ -224,6 +224,12 @@ the committed file structural — client names, internal system details, or anyt
 sensitive goes in `your-environment.private.md` (git-ignored), never in a committed
 file.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/technical-documentation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/document-types.md — the Diátaxis router with the three-axis audit protocol
   (form / ownership / freshness) and the owner-cadence-last-verified mechanisms per form, README

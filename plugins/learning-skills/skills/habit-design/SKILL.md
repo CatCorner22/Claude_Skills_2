@@ -148,6 +148,12 @@ content structural — health specifics, personal routines you'd rather not publ
 anything sensitive goes in `your-environment.private.md` (git-ignored), never in a committed
 file.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/habit-design.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/habit-method.md — the design worksheet, implementation-intention patterns, the
   friction audit, the renegotiation protocol, and the failure-mode table

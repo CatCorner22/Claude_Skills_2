@@ -156,6 +156,12 @@ known to compensate when policy pushes, and where the behavior-over-time data li
 committed content structural — real figures, names, or client data belong in
 `your-environment.private.md` (git-ignored), never in a committed file.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/systems-thinking.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/systems-method.md — the stock/flow identification drill, the causal-loop drafting
   protocol with Mermaid conventions and a worked support-ticket backlog example, the archetype

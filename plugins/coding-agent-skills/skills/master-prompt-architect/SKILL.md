@@ -109,6 +109,12 @@ of your ingestion pipeline, house terminology the artifacts must use, and standi
 always check. Keep anything sensitive in `your-environment.private.md` (git-ignored); never
 commit real credentials or client data.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/master-prompt-architect.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/triple-audit-protocol.md — the three audits in full, plus the deliverable-format template
 - references/your-environment.md — your target models, budgets, surfaces, and standing risks (add when supplied)

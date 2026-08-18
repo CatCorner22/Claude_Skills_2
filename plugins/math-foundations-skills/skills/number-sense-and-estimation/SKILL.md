@@ -149,6 +149,12 @@ conventions and the figures you are most often asked to gut-check. Keep committe
 structural and sanitized; real dollar figures or client specifics go in
 `your-environment.private.md`, which is git-ignored.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/number-sense-and-estimation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/estimation-methods.md — the mental-math toolkit expanded, anchor-quantity
   benchmark tables, two fully worked Fermi examples (decompose → bound → triangulate with

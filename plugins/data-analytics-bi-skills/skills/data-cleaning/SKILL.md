@@ -109,6 +109,12 @@ and their quirks, your canonical category lookups, your tools (SQL, pandas, Powe
 key definitions per table, and your standard validation totals. Use
 `data-analytics-bi-skills:exploratory-data-analysis` to decide *what* needs cleaning before you start.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/data-cleaning.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/cleaning-recipes.md — tidy-data rules, type coercion, mapping-table category
   standardization, missing-value strategies and their bias, dedup, join-fan-out diagnostics, the

@@ -124,6 +124,12 @@ timing on the walk), your volume or takt, and your target lead time. Keep the co
 structural; real vendor, client, system, or transaction detail goes in
 `your-environment.private.md`, which is git-ignored and never committed.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/value-stream-mapping.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/vsm-symbols-and-metrics.md — SIPOC layout, data-box metric definitions, the
   timeline ladder with a worked domain-neutral example, the 8 wastes, future-state design

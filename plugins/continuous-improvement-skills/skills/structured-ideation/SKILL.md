@@ -138,6 +138,12 @@ and weights you reuse, and where idea logs and parking lots live. If details are
 (real teams, clients, initiatives), keep them in `your-environment.private.md` — that suffix is
 git-ignored. Commit only sanitized, structural examples.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/structured-ideation.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/ideation-method.md — the session plan, brainwriting mechanics and variants, the
   SCAMPER prompt bank, constraint-injection patterns, and convergence protocols with a worked

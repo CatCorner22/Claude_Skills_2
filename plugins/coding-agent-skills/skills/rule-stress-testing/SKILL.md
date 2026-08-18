@@ -169,6 +169,12 @@ pressure — write it as a pre-commitment with the unbinding condition stated in
 (`decision-science-skills:ulysses-pact`). Anything naming real contracts, clients, or
 personnel goes in `your-environment.private.md` (git-ignored), never in a committed file.
 
+**Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
+the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
+a dirty tree. Copy it into your own project — `.claude/skills-env/rule-stress-testing.md` works well — fill it in
+there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
+own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/rule-stress-method.md — the Three Laws quoted whole with provenance and
   quote cautions, the six-mode taxonomy with one story exhibit per mode, the
