@@ -232,6 +232,31 @@ PY
   fi
 fi
 
+# ---------------------------------------------------------------------------
+# Worked arithmetic.
+#
+# Every skill that teaches a calculation shows it worked. Four review passes
+# checked those by hand and one still shipped a table whose totals did not add
+# up, so the check is mechanical now. check-arithmetic.py evaluates chains of
+# the form `expr = expr = result` and reports the ones that disagree; it skips
+# anything carrying variables or units, treats a bare percent as ambiguous, and
+# ignores cells under a "Wrong way" column, because a checker that cries wolf on
+# a deliberate trap table teaches authors to stop reading it.
+# ---------------------------------------------------------------------------
+if [ -f scripts/check-arithmetic.py ]; then
+  arith_out=$(python3 scripts/check-arithmetic.py 2>&1)
+  arith_rc=$?
+  if [ "$arith_rc" -gt 1 ]; then
+    err "arithmetic check failed to run (exit $arith_rc) — treat as UNCHECKED, not as clean: $arith_out"
+  elif [ "$arith_rc" -eq 1 ]; then
+    while IFS= read -r line; do
+      case "$line" in
+        MISMATCH*|"         "*) err "$line" ;;
+      esac
+    done <<< "$arith_out"
+  fi
+fi
+
 echo
 echo "== Summary: $errors error(s), $warns warning(s), $notes note(s) =="
 [ "$errors" -eq 0 ]

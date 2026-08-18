@@ -30,9 +30,9 @@ governs document-level attention (lead with the point, format for scanning, stop
   legal analysis, emails, reports, prompts, code comments, or professional communications.
 - Requests for clear, brief, precise, or litigation-resistant language; language audits,
   ambiguity checks, style improvements.
-- Clinical documentation defensibility work (Smile Notes and similar) — this skill governs
-  the quality of the language itself; a separate litigation-avoidance pass (not in this
-  library) flags sparse or incomplete content.
+- Clinical documentation defensibility work — this skill governs the quality of the language
+  itself; a separate litigation-avoidance pass (a content reviewer, not in this library) flags
+  sparse or incomplete content.
 - Not for: audiences that need the most accessible register (patients, low-literacy, "plain
   English") → `writing-skills:adams-plain-grade` (same Adams core, 5th-grade target).
   Building a master prompt end to end → `coding-agent-skills:master-prompt-architect`
@@ -55,7 +55,7 @@ governs document-level attention (lead with the point, format for scanning, stop
 4. **Flag litigated or traditional phrasing** wherever it appears and supply the clearer
    modern alternative (offender list in the reference §2). Treat caselaw as cautionary tales
    of drafting that failed, never as validation.
-5. **Clinical notes** (including Smile Notes): controlled vocabulary, explicit
+5. **Clinical notes**: controlled vocabulary, explicit
    findings-to-plan chains, zero ambiguous modifiers, no template-clone language (identical
    soft/hard-tissue descriptions across visits are a defensibility hole); Smart Brevity
    structure so the note stays usable under clinical time pressure.

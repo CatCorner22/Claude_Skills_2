@@ -23,7 +23,7 @@ __pycache__/
 .venv/
 venv/
 
-# Node / dental notes standardizer
+# Node / bundled JS tooling
 node_modules
 dist
 *.local

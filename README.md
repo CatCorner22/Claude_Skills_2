@@ -136,7 +136,9 @@ they simply stop receiving updates and no longer appear in the marketplace listi
   `coding-agent-skills:board-review` skill.
 - The authoring standard lives in the `coding-agent-skills:writing-agent-skills` skill; its
   template is `plugins/coding-agent-skills/skills/writing-agent-skills/assets/SKILL.template.md`.
-- `bash scripts/validate.sh` lints every skill and manifest (currently 0 errors).
+- `bash scripts/validate.sh` lints every skill and manifest (currently 0 errors). It also runs
+  `scripts/check-arithmetic.py`, which recomputes every worked `a = b = c` chain in the library
+  and fails on the ones that disagree — the defect class that survived four hand review passes.
 - `python3 scripts/gen-catalog.py` regenerates `docs/SKILLS.md` and `docs/INDEX.md` from the skills
   themselves — never edit those two by hand.
 - **[`docs/trigger-test.md`](docs/trigger-test.md) — routing compliance, written and not yet run.**

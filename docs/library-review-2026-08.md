@@ -12,6 +12,13 @@ domain-specific and general) to a career-portable active library of **121 skills
 finding fixed, a generated quick-router index at [INDEX.md](INDEX.md), and zero
 validator errors.
 
+**Current state, 2026-08-18** (the counts below are the running history; this is where the
+tree stands today): 121 active skills across 14 plugins, 7 plugins in `archive/plugins/` plus 2
+skill-level archives, and 51 archived skills on disk. The two Oracle plugins that the first pass
+archived were later *deleted* on owner direction, which is why the archived-plugin count fell from
+nine to seven. The active tree references 15 distinct archived skills across 37 pointers; every one
+resolves and carries its archived mark, enforced by `validate.sh`.
+
 The arithmetic: 181 pre-overhaul skills − 66 archived with their nine plugins
 (§3) = 115 kept, + 8 new (§5) = 123 across 15 plugins at the end of the first pass;
 then the second-pass consolidation (§7) archived 2 more skills at skill level and
@@ -567,7 +574,7 @@ Four defects in the gate itself, each reproduced before fixing:
 
 ### 11.5 What was good, stated plainly
 
-The eval corpus is 121:1 complete with zero orphans; all 26 archived pointers resolve; the
+The eval corpus is 121:1 complete with zero orphans; every archived pointer resolves; the
 generated catalogs are byte-identical to a fresh regeneration; and **no secrets, credentials, or
 client data exist anywhere in the tree**. The `executive-briefing → briefing-method.md` path is
 complete end to end — template, worked memo, and checklist produce a signable deliverable without

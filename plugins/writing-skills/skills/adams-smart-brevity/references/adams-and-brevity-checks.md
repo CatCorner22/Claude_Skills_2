@@ -83,7 +83,7 @@ argument, not meaning.
   language, no ambiguity), different register — plain-grade targets a 5th-grade reading
   level for accessible audiences; this skill targets professional readers under time
   pressure. Choose by audience.
-- **With a clinical litigation-avoidance pass** (e.g. Smile Notes; not in this library): the
+- **With a clinical litigation-avoidance pass** (a content reviewer; not in this library): the
   pass flags sparse, ambiguous, or incomplete *content*; this skill ensures the suggested or
   generated *language* is free of litigated constructions and maximally clear.
 - **With `coding-agent-skills:master-prompt-architect`**: its Kenneth A. Adams Compliance

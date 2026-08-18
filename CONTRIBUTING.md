@@ -19,6 +19,8 @@ Start any new skill by copying
   `Tailor to your environment` → `References` → (optional) `Scripts`. Keep the body under 500 lines.
 - Evals go in `evals/<plugin>/<skill>.md` (positive trigger, near-miss, quality rubric) — never in SKILL.md.
 - Validate with `bash scripts/validate.sh` and `claude plugin validate plugins/<plugin>`.
+  `validate.sh` calls `scripts/check-arithmetic.py`, so a worked example whose numbers do not
+  add up now fails the build rather than waiting for a reviewer to catch it.
   Ship at **0 errors**; `NOTE` lines are informational.
 - **Regenerate the catalog after any skill change:** `python3 scripts/gen-catalog.py` rewrites both
   [`docs/SKILLS.md`](docs/SKILLS.md) (full catalog) and [`docs/INDEX.md`](docs/INDEX.md) (the
