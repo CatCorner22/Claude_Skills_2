@@ -77,7 +77,7 @@ A boundary rule nobody checks is a preference. This is the mechanical version:
 import ast, pathlib
 
 FEATURES = pathlib.Path("app/features")
-PRIVATE = {"models", "repo", "routes", "jobs", "rules"}   # a feature's insides
+
 
 def test_features_touch_each_other_only_through_their_public_surface():
     violations = []
@@ -89,17 +89,26 @@ def test_features_touch_each_other_only_through_their_public_surface():
             parts = node.module.split(".")            # app, features, <other>, <leaf>
             if len(parts) < 3 or parts[:2] != ["app", "features"]:
                 continue
-            leaf = parts[3] if len(parts) > 3 else ""
-            if parts[2] != owner and leaf in PRIVATE:
+            if parts[2] != owner and len(parts) > 3:  # deeper than the package = private
                 violations.append(f"{py}: imports {node.module}")
     assert not violations, violations
 ```
 
-Two things this does not catch, and the fix for each:
+The rule is positional, not a list of forbidden filenames: `from app.features.customers import
+contact_email` addresses the package — therefore `__init__.py` — and passes; anything deeper fails.
+The version most people write first is a denylist of the insides (`{"models", "routes", "rules"}`),
+and it quietly permits whatever filename someone adds next — including `service.py`, which is
+exactly where the public function's body lives.
+
+Three things this does not catch, and the fix for each:
 
 - **Relative imports.** `from ..customers.models import Customer` has `node.module == "customers.models"`
   and `level == 2`, so it slips past. Ban relative imports repo-wide instead of complicating the
   test — Ruff's `TID252` does it in one config line.
+- **Plain `import` statements.** `import app.features.customers.models as m` is an `ast.Import`,
+  not an `ast.ImportFrom`, so the walk skips it; `TID252` does not cover it either. One extra
+  branch closes it (`elif isinstance(node, ast.Import): modules = [a.name for a in node.names]`),
+  and is worth adding only if your codebase actually uses that style.
 - **Reaching through the ORM.** `db.query(Invoice).join(Customer)` imports nothing illegal and still
   couples the two schemas. Nothing static will catch it; code review is the control, and the tell in
   review is a query in feature A that names feature B's table.
@@ -138,6 +147,7 @@ Applied, piece by piece:
 | 6 | The customer's email address | 2 | call `customers.contact_email(db, id)` | Invoices must not join `customers.email` — that join is what makes the customers table unchangeable later |
 | 7 | Daily 07:00 schedule entry | 3 + 1 | registration in `app/jobs.py`, body in `features/invoices/jobs.py` | The registry is a framework file that must know everything; the body must be deletable |
 | 8 | `reminder_grace_days`, `reminders_enabled`, `smtp_url` | 3 | `config.py` | Varies per deploy, not per customer (see the config-vs-data rule below) |
+| 9 | `GET /invoices/{id}/reminders` behind the Reminders tab | 1 | `features/invoices/routes.py` | The tab dies with the feature; the route parses and calls the service, and holds no rule of its own |
 
 Row 6 is the one people get wrong, and it is worth being explicit about the cost. The join version
 is one line shorter today. It also means that the day customers grows a `contacts` table with a
@@ -163,7 +173,8 @@ and a grep can both see.
 | `migrations/versions/xxxx_invoice_reminders.py` | 18 |
 
 Inside `features/invoices/`: 9 + 7 + 22 + 6 + 8 + 5 + 34 = 91 lines. Outside it: 11 + 4 + 3 + 1 + 18 = 37 lines,
-for 91 + 37 = 128 across 12 files — and 91 / 128 ≈ 71% of the change sits in one folder.
+for 91 + 37 = 128 lines across the twelve entries above — and 91 / 128 ≈ 71% of the change sits in
+one folder.
 
 **Read the shape, not the total.** The 37 outside lines are the signature of a boundary that held:
 one new platform capability, three one-line additions, and a migration. The failure signature looks
@@ -329,9 +340,9 @@ Five decisions in twenty lines, each of which is the point:
 
 1. **No default on a secret.** A default for `secret_key` means the app boots in production with the
    development key and tells you nothing. Absent default → the process refuses to start.
-2. **`SecretStr`.** Its `repr` is `**********`, so a settings object dumped into a log line or an
-   exception page does not leak the value. Getting it takes `.get_secret_value()`, which makes every
-   read of a secret greppable.
+2. **`SecretStr`.** Its `repr` and `str` mask the value as `**********`, so a settings object
+   dumped into a log line or an exception page does not leak it. Getting the value takes
+   `.get_secret_value()`, which makes every read of a secret greppable.
 3. **Validation on the value, not just the type.** `ge=1, le=365` turns `APP_REMINDER_GRACE_DAYS=0`
    into a boot failure rather than a Monday morning where every invoice is overdue.
 4. **`extra="forbid"`.** A key in `.env` that matches no field becomes an error instead of a silent

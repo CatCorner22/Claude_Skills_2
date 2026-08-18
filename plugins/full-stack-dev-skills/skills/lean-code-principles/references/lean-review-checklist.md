@@ -41,7 +41,9 @@
 ## Net-lines discipline
 Track per PR: `+added / −deleted / net`. Healthy mature codebases trend near zero net while
 shipping features. Celebrate the negative-net feature PR in review — it's the strongest
-signal the discipline is working.
+signal the discipline is working. Celebrate it as an outcome, never set it as a target:
+see the last tell in `earning-abstractions.md`, where the deleted retry that was absorbing
+a real flake is a negative diff and a worse system.
 
 ## What a finished lean review contains (deliverable contract)
 
@@ -74,20 +76,22 @@ prevent: a smaller codebase that is worse.
 
 ## Worked example: the review artifact
 
-Against the three-CSV-export change in `earning-abstractions.md`:
+Against the three-CSV-export change in `earning-abstractions.md`. The shape is the
+deliverable; the log windows, commit ratios, and flag ages below are an illustration of
+what evidence looks like when written down, not measurements from a real project.
 
 ```
 Lean review — PR 214, "CSV exports"
 
 1. Net lines
-     app/exports/     +35  −42   net −7
+     app/exports/     +35  −240  net −205
      tests/exports/   +14  −33   net −19
-     total                       net −26
+     total                       net −224
 
 2. Deletions, with evidence
      exports/legacy_xlsx.py (183 lines) — no route registers it since the
        /exports/v2 cutover; 90 days of access logs, zero hits on any path in it.
-     FEATURE_CSV_STREAMING flag (11 lines + one dead branch) — set true in every
+     FEATURE_CSV_STREAMING flag (11 lines, the dead branch included) — set true in every
        environment for 7 months; last toggle in config history is the enable.
 
 3. Inlines
@@ -122,7 +126,13 @@ Lean review — PR 214, "CSV exports"
        whose claim is "no behaviour changed".
 ```
 
-The group totals reconcile: −7 + −19 = −26.
+The group totals reconcile, and this is the part a reviewer should re-add rather than
+trust. The `app/exports/` deletions are 42 (the three Version A handlers the rewrite
+replaces) + 183 (`legacy_xlsx.py`) + 11 (the flag and its dead branch) + 4 (`_fmt_money`)
+= 240, against 35 added, so 35 − 240 = −205. Tests are 14 − 33 = −19. Total:
+−205 + −19 = −224. A net-lines line that does not survive this re-addition means the
+deletion inventory and the diff have drifted apart — which is the most common way a lean
+review overstates what it did.
 
 Read what the artifact makes arguable. Every claim in it can be checked by someone who
 disagrees — the log window, the commit ratio, the parameter count, the golden files. That

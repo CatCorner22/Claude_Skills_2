@@ -107,7 +107,7 @@ building microservices, you're preserving the *right* to.
 - Features importing each other's models/tables directly → boundaries rot, split option dies; narrow explicit interfaces.
 - Config sprinkled as `os.environ` reads and env checks → one typed settings object, read at startup.
 - Secrets in the repo "temporarily" → git history is forever; env vars + git-ignored `.env`.
-- Defaulting to a React SPA for CRUD forms → htmx/server-rendered is often 5x less code; choose per UI reality.
+- Defaulting to a React SPA for CRUD forms → htmx/server-rendered is usually far less code; choose per UI reality.
 - Architecture doc as a wiki novel → one page: stack, layout, boundaries, split criteria.
 - A `shared/` folder that only ever grows → it is layer-first returning under a new name; every line in it is a line no feature can delete. Watch the platform-to-features ratio's direction.
 - Env var for something that differs per customer → that is data; it belongs in a table, and you'll find out when someone asks for a second customer's value.

@@ -160,7 +160,7 @@ Area B holds 268 / 411 = 65.2% of workaround reopens at 4.6× the rate of A and 
 (143 / 1700 = 8.4%):
 
 - pooled p̂ = (268 + 143) / (700 + 1700) = 411 / 2400 = 0.17125
-- SE = √(0.17125 × 0.82875 × (1/700 + 1/1700)) ≈ √0.000286211 ≈ 0.016918
+- SE = √(0.17125 × 0.82875 × (1/700 + 1/1700)) ≈ √0.000286232 ≈ 0.016918
 - z = (0.382857 − 0.084118) / 0.016918 ≈ **17.7**
 
 The honest reading is not "p < 0.001." It is that at these sample sizes the test is a formality —
@@ -185,10 +185,16 @@ because it is a prediction the data could have refused. A cause is confirmed whe
 advance what the data must look like if you are right, and it looks like that. "The numbers are
 big in Area B" is not confirmation; "reopens will pile up on days 8–12 and they do" is.
 
-**Tollgate outcome:** passed, with the gap arithmetic on the record. Eliminating Area B's excess
-entirely would remove at most 290 of 912 reopens — the project can close roughly a third of the
-gap, not all of it. Saying that at the Analyze tollgate is what turned the missed target at
-Control from a failure into a planned outcome.
+**Tollgate outcome:** passed, with the gap arithmetic on the record. The charter gap is 9.5% →
+6.0% = 3.5 points = 336 reopens. Area B carries 290 reopens in total, so even driving them to
+zero — an upper bound no fix reaches — leaves 622 / 9600 = **6.48%**, still above the 6.0% target.
+The charter goal is therefore unreachable from this cause alone, whatever the fix achieves. Saying
+that at the Analyze tollgate is what turned the missed target at Control from a failure into a
+planned outcome.
+
+Note which denominator that arithmetic used. 290 is about a third of the 912 *reopens*, but 86% of
+the 336-reopen *gap to target* — two very different statements, and quoting the first while
+meaning the second is the same denominator error this project spends the Improve phase avoiding.
 
 ---
 

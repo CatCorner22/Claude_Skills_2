@@ -12,6 +12,21 @@ therefore carries *both* readings, and a chain is flagged only when no reading
 makes it consistent. Being wrong in the accusing direction is what makes a
 checker get ignored.
 
+WHAT THIS DOES NOT SEE — read before quoting a clean run as "the arithmetic is
+verified". It finds chains that sit after a sentence, colon, dash, or pipe
+boundary. Two independent reviewers hit the limit on the same day:
+
+  * A chain embedded mid-prose is skipped entirely. An author planting
+    deliberate errors inside prose sentences watched all of them pass, then had
+    to reword the lines to sit after a boundary before the gate could see them.
+  * A quantitative claim with no equation is invisible by construction. "The
+    project can close roughly a third of the gap" was wrong by a factor of
+    nearly three — 290 reopens is a third of total reopens but 86% of the gap to
+    target — and this script passed the file before and after the fix.
+
+So a clean run means "no chain I could parse disagrees", not "the numbers are
+right". The prose still needs a reader.
+
 Exit status is 1 if any chain disagrees. Run from the repo root:
 
     python3 scripts/check-arithmetic.py

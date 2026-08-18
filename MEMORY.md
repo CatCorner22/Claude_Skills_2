@@ -429,6 +429,21 @@ Never store secrets, credentials, account numbers, or client data here.
   prompts landed on the *specific alternative skill the protocol names*, not merely "not the
   forbidden one". That is the real evidence the trigger-collision surgery held.
 
+- LESSON (2026-08-18): **`check-arithmetic.py` proves less than a clean run suggests.** It only sees
+  chains isolated by a sentence/colon/dash boundary, so (a) arithmetic embedded mid-prose is skipped
+  — an author planting deliberate errors inside prose watched every one pass — and (b) a quantitative
+  claim with no equation is invisible by construction: "closes roughly a third of the gap" was wrong
+  by ~3x and the gate passed the file before and after the fix. Quote it as "no parseable chain
+  disagrees", never as "the arithmetic is verified". Documented in the script itself.
+- LESSON (2026-08-18): **adversarial review caught three defect classes no mechanical gate can.**
+  (1) A claim arithmetically fine in isolation and physically backwards — an L2 penalty said to hit
+  large-unit features 100x *harder* when it hits them 100x less. (2) Prose in OTHER skills going
+  stale because this skill's structure changed (the four-step → five-step protocol). (3) A shipped
+  enforcement script that did not enforce its own stated rule — a denylist of private module names
+  passed the very cross-feature import it existed to catch. All three passed validate.sh,
+  check-arithmetic.py, and my own review. **Budget an adversarial reader for anything authored, and
+  RUN any script a skill ships against the case it claims to catch.**
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core
