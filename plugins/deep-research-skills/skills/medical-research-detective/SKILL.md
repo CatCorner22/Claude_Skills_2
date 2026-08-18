@@ -70,7 +70,7 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
 
 4. **Search wide, then chase citations.** Run each query across multiple databases (they index
    different journals): PubMed/MEDLINE, Europe PMC, Cochrane, Google Scholar, ClinicalTrials.gov.
-   `scripts/search_pubmed.py` runs the PubMed pass and returns structured hits. Then **chain**:
+   `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/search_pubmed.py` runs the PubMed pass and returns structured hits. Then **chain**:
    backward through the reference lists of the best papers, forward through "cited by" to newer work.
    Apply the country-of-origin policy from `references/source-provenance.md` as you go — allowed
    sources support conclusions; excluded-country sources go to the quarantine appendix and never
@@ -87,7 +87,7 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    checks in `references/citation-verification.md`: (a) it **exists** (DOI/PMID resolves),
    (b) its **metadata matches** (title, authors, journal, year), and (c) the source **actually
    states the claim** you attached to it — quote the supporting sentence. Run
-   `scripts/verify_citation.py` on each DOI/PMID. A citation that fails any check is removed, not
+   `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` on each DOI/PMID. A citation that fails any check is removed, not
    softened. If verification is impossible (no network, paywalled full text), label the claim
    **unverified** and say exactly what could not be checked.
 
@@ -173,5 +173,8 @@ no record numbers).
 - references/your-environment.md — your conditions, databases, access, and preferences (add when supplied)
 
 ## Scripts
-- `scripts/search_pubmed.py` — searches PubMed via the free NCBI E-utilities API; returns structured hits (PMID, title, journal, year, type, country) as text or JSON. `--help` for options; no API key required.
-- `scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. `--self-test` runs the offline logic tests.
+> Paths use `${CLAUDE_PLUGIN_ROOT}` so they resolve from **any** working directory once the
+> plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
+> repo, which is not where a user runs these.
+- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/search_pubmed.py` — searches PubMed via the free NCBI E-utilities API; returns structured hits (PMID, title, journal, year, type, country) as text or JSON. `--help` for options; no API key required.
+- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. `--self-test` runs the offline logic tests.

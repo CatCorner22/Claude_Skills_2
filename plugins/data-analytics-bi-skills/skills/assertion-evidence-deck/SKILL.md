@@ -88,7 +88,7 @@ claim — distribution → chart, sequence → flow diagram, magnitude → 2–4
 labeled diagram. Over ~40 body words means the claim is too big — split the slide.
 
 **Stage 5 — Build the file.** Prefer **Path A**, the bundled builder: write a deck spec as JSON and
-run `python scripts/build_deck.py deck_spec.json -o output.pptx` (neutral palette by default;
+run `python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py" deck_spec.json -o output.pptx` (neutral palette by default;
 `--brand ut` only to match a legacy UT-branded deck). It encodes the geometry, typography, and
 colors in `references/design-tokens.md`, so
 slides come out compliant, and it rejects a headline that busts the two-line budget rather than
@@ -99,7 +99,7 @@ text keyed to that template. Use Path B when the user asks for the template by n
 the builder can't express, use the `pptx` skill and keep this skill's geometry and evidence rules.
 
 **Stage 6 — Audit the file.** Never deliver a deck you have not seen rendered. Lint it —
-`python scripts/ae_lint.py output.pptx` (reports headline violations, bullet characters, word-count
+`python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py" output.pptx` (reports headline violations, bullet characters, word-count
 overruns, banned formatting, missing source tags, font problems; exits non-zero on error) — then
 **look at every slide**: convert to images and check for overflow, overlap, colliding source tags,
 and low contrast, which the linter cannot see. Fix the generator and rebuild; do not hand-patch the
@@ -152,5 +152,8 @@ any house deck conventions.
 - references/your-environment.md — your audiences, brand, and artifacts (add when supplied)
 
 ## Scripts
-- `scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|ut` and `--font` control theme.
-- `scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; exits non-zero on error.
+> Paths use `${CLAUDE_PLUGIN_ROOT}` so they resolve from **any** working directory once the
+> plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
+> repo, which is not where a user runs these.
+- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|ut` and `--font` control theme.
+- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; exits non-zero on error.

@@ -98,6 +98,28 @@ for dir in plugins/*/skills/*/; do
 done
 
 # ---------------------------------------------------------------------------
+# Installed-shape path check.
+#
+# A skill runs from a plugin cache with the user's project as cwd, so a runnable
+# path like `python scripts/thing.py` resolves to nothing once installed. Bundled
+# scripts must be addressed from ${CLAUDE_PLUGIN_ROOT}. (scripts/validate.sh itself
+# is exempt: it is a repo-maintenance script and is documented as such.)
+# ---------------------------------------------------------------------------
+# Scans .md AND .json: assets are templates users copy verbatim, and a bare path in an
+# asset comment is exactly as broken as one in prose (found that way, via a nullglob
+# accident that had silently disabled this filter entirely — keep the glob quoted).
+# Exempt: the two repo-maintenance scripts (documented as run from the repo root), and the
+# authoring standard itself, which must quote the bare form as the anti-pattern it forbids.
+badpath=$(grep -rnE '(python3?|bash|sh) +"?scripts/[A-Za-z0-9_.-]+\.(py|sh)' plugins/ --include='*.md' --include='*.json' 2>/dev/null \
+  | grep -vE 'scripts/(validate\.sh|gen-catalog\.py)' \
+  | grep -v 'skills/writing-agent-skills/' || true)
+if [ -n "$badpath" ]; then
+  while IFS= read -r line; do
+    err "${line%%:*}: runnable path is repo-relative; address it from \${CLAUDE_PLUGIN_ROOT}"
+  done <<< "$badpath"
+fi
+
+# ---------------------------------------------------------------------------
 # Cross-link resolution.
 #
 # Skills reference each other as `plugin-name:skill-name`. A reference can

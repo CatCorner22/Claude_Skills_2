@@ -1,5 +1,5 @@
 {
-  "_comment": "Worked example for build_deck.py. All numbers here are ILLUSTRATIVE, not real configuration data. Replace with figures from your source ledger. Build: python scripts/build_deck.py assets/deck_spec_example.json -o example.pptx --brand ut",
+  "_comment": "Worked example for build_deck.py. All numbers here are ILLUSTRATIVE, not real configuration data. Replace with figures from your source ledger. Build: python3 \"${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py\" assets/deck_spec_example.json -o example.pptx --brand ut",
   "font": "Calibri",
   "brand": "ut",
   "slides": [

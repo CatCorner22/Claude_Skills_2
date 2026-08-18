@@ -75,6 +75,24 @@ Every skill uses these H2 sections, in this order (omit only `scripts` when none
 - Add a short TOC to any reference file over ~100 lines so partial reads still reveal scope.
 - Use forward slashes in every path.
 
+### 4b. Write every path for the *installed* shape, not this repo
+A skill is authored in this repo but runs from a plugin cache, with the user's own project as the
+working directory. So **any path a skill tells the user to run or read must be addressed from
+`${CLAUDE_PLUGIN_ROOT}`** — the plugin's installed root — never relative to the marketplace repo:
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/skills/<skill-name>/scripts/<script>.py" <args>
+```
+
+A bare `python scripts/thing.py` works for you and is a guaranteed file-not-found for everyone
+else. The same applies to anything you tell the user to *write*: `references/your-environment.md`
+lives inside the plugin cache, so a `/plugin marketplace update` can discard it — say so, and
+prefer having the user keep their real specifics in their own project.
+
+This rule exists because every quality gate in this repo — `validate.sh`, `gen-catalog.py`, every
+review — operates on the *repository*, and the repository is not the product. Nothing here can
+see the installed artifact, so path correctness is on the author.
+
 ### 5. Add the tailoring hook (privacy-safe)
 Skills in this library are domain-neutral by design, and fit the user's real environment through
 one file rather than through hard-coded domain content. Name the *kind* of artifact the skill

@@ -44,6 +44,10 @@ A skill is done when every box is checked.
       accurately, which no script can tell you.
 - [ ] Any external number or attribution carries a provenance mark or an honest hedge; no
       invented statistics.
+- [ ] **Every runnable path is written for the installed shape**, i.e. addressed from
+      `${CLAUDE_PLUGIN_ROOT}` (or from the user's own project), never as a bare `scripts/…`
+      relative to this repo. `validate.sh` errors on the bare form. Nothing else in this repo
+      tests the installed artifact, so this is the author's job.
 
 ## Evals & validation
 - [ ] `evals/<plugin>/<skill>.md` has a positive trigger, a near-miss, and a quality rubric.
