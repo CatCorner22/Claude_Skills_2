@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "data-analytics-bi-skills",
   "description": "SQL, exploratory analysis, data cleaning, statistics, inference, dashboard design, spreadsheet modeling, and assertion-evidence presentations for business intelligence.",
-  "version": "0.7.0"
+  "version": "0.8.0"
 }
