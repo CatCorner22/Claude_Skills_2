@@ -21,8 +21,10 @@ metadata:
 - Not for: framing the problem, target, and baseline in the first place → see `machine-learning-skills:ml-project-framing`. For choosing metrics, cross-validation, and guarding leakage → see `machine-learning-skills:model-evaluation`. For encoding/scaling the inputs → see `machine-learning-skills:feature-engineering`.
 
 ## Do it
-Algorithm selection by data shape, hyperparameters that actually matter, and how to read a
-fitted model's coefficients or importances are in `references/algorithms-and-interpretation.md`.
+Algorithm selection by data shape, starting hyperparameters with the reasoning behind each number, a
+worked baseline-to-ensemble ladder with the decision to stop, the imbalance thresholds, the failure
+envelopes, and how to read coefficients and importances without over-claiming are all in
+`references/algorithms-and-interpretation.md`.
 
 1. **Confirm the task type.** Numeric target → **regression**; categorical target → **classification**
    (binary or multiclass). This decides the model family, the loss, and the metrics. If the problem isn't
@@ -36,19 +38,33 @@ fitted model's coefficients or importances are in `references/algorithms-and-int
 4. **Build one clean fit/predict pipeline.** Chain preprocessing (impute → encode → scale) and the model
    in a single pipeline whose transforms are **fit on train only**, so the same steps apply identically
    at predict time and nothing leaks. Encoding/scaling detail lives in `machine-learning-skills:feature-engineering`.
-5. **Move to trees/ensembles when linear underfits.** Use a **random forest** for a robust, low-tuning
-   nonlinear model, or **gradient boosting (XGBoost/LightGBM)** for top accuracy on tabular data. They
-   capture interactions and nonlinearity linear models miss, and need little scaling or encoding fuss.
+5. **Move to trees/ensembles when linear underfits — one rung at a time, with a stop rule you wrote
+   first.** Use a **random forest** for a robust, low-tuning nonlinear model, or **gradient boosting
+   (XGBoost/LightGBM)** for top accuracy on tabular data. They capture interactions and nonlinearity linear
+   models miss, and need little scaling or encoding fuss. Climb the ladder (baseline → linear → forest →
+   boosting → tuned boosting → stack) and **keep a rung only when its validation gain over the best kept
+   model exceeds the across-fold standard deviation** — a gain inside the fold noise is not a finding, and
+   a rung you keep is a rung you maintain forever. Before judging a family, check its train-vs-validation
+   gap: a memorized forest scoring badly is an untuned fit, not a verdict on forests. The reference works
+   a six-rung ladder end to end, including the two rungs that get rejected and why.
 6. **Regularize to control overfitting.** For linear/logistic use **L2 (ridge)** or **L1 (lasso, which
    also selects features)**. For boosting, limit tree **depth**, use a small **learning rate** with more
    trees, subsample rows/columns, and stop early on a validation metric. Watch the train-vs-validation gap.
 7. **Handle class imbalance deliberately.** With rare positives, don't optimize accuracy. Use **class
-   weights**, tune the **decision threshold** to the cost of errors, and consider resampling — then judge
-   with precision/recall/PR-AUC, not accuracy. See `machine-learning-skills:model-evaluation`.
+   weights** first (one argument, no data change, cannot leak), tune the **decision threshold** to the cost
+   of errors, and reach for resampling only for a specific symptom — then judge with precision/recall/PR-AUC,
+   not accuracy. See `machine-learning-skills:model-evaluation`. The quantity that decides which tactic you
+   need is the **absolute count of minority events, not the ratio**: above a few thousand positives only the
+   threshold and the metric are broken; below roughly **50** the estimate is what's broken, not the model,
+   and comparing models at that size is noise. The reference gives the full threshold table and the
+   derivation of the 50.
 8. **Interpret honestly, then validate against the baseline.** Read **standardized coefficients** (sign
    and magnitude) for linear/logistic; for trees prefer **permutation importance** and **partial
    dependence** over default impurity importance. Treat all of these as *associations, not causes*, and
-   confirm the model actually beats the baseline out of sample before shipping.
+   confirm the model actually beats the baseline out of sample before shipping. Each quantity also has a
+   specific claim it does **not** support — permutation importance is not what a model retrained without
+   the feature would lose, and an odds ratio is not a change in probability. The reference tabulates what
+   each one licenses, what it does not, and the check to run before saying it aloud.
 
 **Deliverable — the model summary.** The finished output contains: (1) the task type, target, and
 split scheme; (2) the interpretable baseline's out-of-sample score next to the final model's;
@@ -56,7 +72,9 @@ split scheme; (2) the interpretable baseline's out-of-sample score next to the f
 (4) how imbalance and the decision threshold were handled, if classifying; (5) an interpretation
 section saying what the model relies on — worded as association, never cause. The assistant
 builds and interprets the models; the human owns the framing, the error costs, and the decision
-to ship.
+to ship. `references/algorithms-and-interpretation.md` expands this into the twelve-item contract
+a finished summary has to satisfy, including the rungs you rejected and the model's own failure
+envelope stated in its own terms.
 
 ## Why / learn
 The governing principle is **start with an interpretable baseline, and add complexity only when it earns
@@ -81,6 +99,10 @@ Keep the claim as strong as the evidence: "the model relies on X," not "X drives
 - Calling a large coefficient "important" without scaling the features → magnitude reflects units, not effect. Standardize first.
 - Interpreting importance/coefficients as causation → they're associations. Say "the model uses," not "X causes."
 - Tuning on the test set → optimistic, non-reproducible results. Tune on validation/CV; touch test once.
+- Declaring a winner on a gain smaller than the across-fold sd → you shipped noise and now maintain it.
+- Comparing two models by whether their marginal confidence intervals overlap → they were scored on the
+  same rows, so compare them **paired**; overlapping bands routinely hide a difference a paired test finds.
+- Judging a model family from an untuned fit → "the forest didn't help" is usually a memorized forest.
 
 ## Tailor to your environment
 Record your setup in `references/your-environment.md` (keep real feature names, sample rows, and target
@@ -97,5 +119,5 @@ there, and point this skill at that copy. Your specifics then survive updates an
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/algorithms-and-interpretation.md — model-family cheat-sheet, default hyperparameters, imbalance tactics, and interpretation caveats
+- references/algorithms-and-interpretation.md — model-family cheat-sheet, starting hyperparameters with the reasoning for each number, a worked six-rung baseline-to-ensemble ladder with the stop decision, when linear genuinely beats an ensemble, imbalance thresholds, interpretation licences and non-licences, failure envelopes, and the twelve-item deliverable contract
 - references/your-environment.md — your target, features, class balance, libraries, and interpretability needs (add when supplied)

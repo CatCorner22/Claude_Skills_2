@@ -59,7 +59,7 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
    `LESSON:` / `PATTERN:` / `METHOD:` / `DIRECTIVE:`, each with its evidence and
    confidence). Prefer durable external storage (a project file, MEMORY.md, an artifact) over pure context
    whenever the information should outlive the session. When the user corrects something,
-   run the four-step protocol in `metacognition-skills:reflective-learner` — its final step
+   run the correction protocol in `metacognition-skills:reflective-learner` — its triage step
    logs the rule back through this skill; when a deep analysis via
    `metacognition-skills:dynamic-analysis-engine` produces durable findings, they land here
    the same way, as do the sustain/improve items a team debrief surfaces via

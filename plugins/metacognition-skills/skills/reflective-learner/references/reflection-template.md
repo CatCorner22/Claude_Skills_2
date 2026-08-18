@@ -50,5 +50,33 @@ the horizon the user actually named.
 ## Application audit
 At each new reflection, scan the last few for their Actionable updates and mark each:
 - **Applied** (behavior visibly changed) · **Partially applied** · **Not applied** (why?)
-A lesson repeatedly "not applied" is a candidate for a stronger mechanism — a standing rule in
-project instructions or a skill update — via `knowledge-crystallizer`.
+
+Marking honestly requires the counterfactual — what you would have done without the update. Without
+it, "applied" cannot be distinguished from "never came up", and every audit comes back clean. That
+is why the correction record carries the field (see `correction-protocol.md`).
+
+### What the tally actually tells you
+A worked audit over five cycles: **14** actionable updates recorded — **9** applied, **3** partially
+applied, **2** not applied. The three states account for the whole cycle: 9 + 3 + 2 = 14. The
+applied count is the least informative number in the set; read the other two first.
+
+- **Partially applied** usually means the update was two updates wearing one sentence. Split it and
+  re-audit; the half that keeps failing is the real one.
+- **Not applied** is diagnostic only when you distinguish *never fired* from *fired and lost*. An
+  update whose trigger situation never arose is not a failure and should not be counted as one — it
+  is evidence the update was written too narrowly to be worth its scan cost.
+- **Repeats** are the number that matters: updates in this cycle restating something already
+  recorded in an earlier one. Of the 14 above, 2 were repeats. A repeat is not a discipline problem;
+  it is evidence the storage *site* was never read at the moment of action, and the fix is to move
+  the rule, not to write it again (the enforcement ladder in `correction-protocol.md`).
+
+A working trigger: when repeats exceed roughly one in five of a cycle's updates, stop adding entries
+and spend the cycle relocating the ones you already have, because past that ratio the store is
+growing faster than the behavior. For this cycle the line sits just under three updates: 14 / 5 = 2.8.
+Two repeats is below it — each still gets a site fix, but the cycle is not yet dominated by them.
+The exact fraction has no measured basis; pick one, write it down, and hold it, so the trigger is
+a threshold rather than a mood.
+
+A lesson repeatedly "not applied" after relocation is a candidate for a stronger mechanism — a
+standing rule in project instructions, an automated check, or a skill update — via
+`knowledge-crystallizer`.

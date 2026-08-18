@@ -34,7 +34,7 @@ A good response:
 - **Handles conflict correctly:** a new fact contradicting a stored one gets the
   ⚠ CONTRADICTION treatment — UPDATE annotation, original kept for provenance, resolution
   routed to the user — never a silent overwrite.
-- **Routes the suite:** corrections → `metacognition-skills:reflective-learner` four-step
+- **Routes the suite:** corrections → `metacognition-skills:reflective-learner` correction
   protocol (logging back through this skill); recurring validated candidates →
   `metacognition-skills:knowledge-crystallizer` for the permanence gates; durable analysis
   findings arrive from `metacognition-skills:dynamic-analysis-engine`.

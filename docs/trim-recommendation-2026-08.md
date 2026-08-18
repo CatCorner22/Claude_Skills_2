@@ -1,7 +1,27 @@
 # Trim recommendation — 2026-08-18
 
-> **Status: a recommendation, not a decision.** Nothing in this document has been applied. It exists
-> so the owner can choose a depth of cut with the evidence in front of them.
+> ## Status: DECLINED by the owner, 2026-08-18. Keep all 121 skills.
+>
+> **Nothing in this document was applied, and nothing should be.** The owner read the
+> recommendation and decided to keep every skill, including all 13 unanimous cuts. The library
+> stays at **121 skills across 14 plugins**.
+>
+> The analysis is kept because it is a real measurement of the library and useful as a map — which
+> skills are name-gated, which are omnibus, which have no cross-plugin inbound citations, what each
+> one costs. **It is not kept as a pending action.** Do not re-open it as a deletion question, do
+> not re-derive it, and do not treat any row below as an outstanding recommendation.
+>
+> Two things follow from the decision and belong in the record:
+>
+> 1. **Per-install subsetting is now the only lever on context cost.** A full install costs
+>    ~14.8% of a 200K window before the user asks anything, and that number is not going down by
+>    deletion. `README.md` carries the measured per-plugin and per-bundle tables, and
+>    `scripts/measure-listing-cost.py` keeps them honest. Install two to four plugins, not fourteen.
+> 2. **The finding that survives the decision is depth, not count.** The measurement that most
+>    deserves follow-through is not "cut 34" — it is that the most-cited skills were the shallowest,
+>    and that 25 of 121 have no citation from outside their own plugin. Deepening the hubs and
+>    building cross-plugin seams improves the library without removing anything, and that work is
+>    underway.
 
 ## How this was produced, and what was checked
 
