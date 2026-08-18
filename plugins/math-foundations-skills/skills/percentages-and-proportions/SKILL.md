@@ -27,7 +27,8 @@ that hidden denominator, so the first question is always the same: *percent of w
   weighting a combined rate, or explaining why a total moved against its subgroups.
 - Converting markup to margin (or back); building, reading, or rebasing an index series.
 - Not for: liquidity, leverage, and profitability ratios as company diagnostics — that
-  is financial-statement ratio analysis (archived: `finance-skills:financial-ratios`, restorable from `archive/`).
+  is financial-statement ratio analysis, a finance-domain skill this library does not carry.
+  The percentage machinery here is the same; the interpretation is not.
 - Not for: summarizing a dataset (typical value, spread, shape) → see
   `data-analytics-bi-skills:descriptive-statistics`.
 - Multi-period growth math — CAGR, doubling time, log scales — belongs to the sibling

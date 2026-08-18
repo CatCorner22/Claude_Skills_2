@@ -20,7 +20,7 @@ metadata:
 - Turning PDF bank statements, invoices, or report tables into DataFrames/CSV/Excel.
 - Debugging an extraction that merges columns, drops rows, or returns empty text.
 - Not for: understanding statement *formats* like BAI2/camt.053 — those are data files, not PDFs
-  (archived: `banking-skills:bank-statement-parsing`, restorable from `archive/`). For cleaning
+  — format-specific banking knowledge this library does not carry. For cleaning
   after a good extraction → see
   `data-analytics-bi-skills:data-cleaning`. If you have Anthropic's official `pdf` skill (from
   `anthropics/skills`), prefer it for creating/filling PDFs; this skill is about getting *data

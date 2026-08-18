@@ -38,9 +38,8 @@ Green Book; Department for Transport uplift tables) [snippet-only].
 - Not for: building the estimate's underlying model itself — statistical/ML series models belong
   to `machine-learning-skills:time-series-forecasting`, spreadsheet model craft to
   `data-analytics-bi-skills:spreadsheet-modeling`, and direct-method cash projections are a
-  treasury forecasting workflow (archived: `cash-management-skills:cash-forecasting`, restorable
-  from `archive/`). This skill FEEDS those loops with base rates and uplifts; it never replaces
-  them.
+  finance workflow this library does not carry. This skill FEEDS those loops with base rates and
+  uplifts; it never replaces them.
 
 ## Do it
 Full class-selection heuristics, uplift math, and a worked cash-driver example are in

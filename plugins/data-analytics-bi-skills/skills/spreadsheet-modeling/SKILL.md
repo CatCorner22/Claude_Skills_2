@@ -29,9 +29,9 @@ metadata:
 - Adding sensitivity/what-if analysis or scenario toggles to an existing model.
 - Not for: the forecasting *methodology* behind the numbers. Statistical method — seasonality, model
   choice, backtesting → see `machine-learning-skills:time-series-forecasting`; the treasury
-  direct-vs-indirect framing is a cash-forecasting method question
-  (archived: `cash-management-skills:cash-forecasting`, restorable from `archive/`). This skill is
-  the modeling craft, not the method.
+  direct-vs-indirect framing is a cash-forecasting method question, which belongs to whatever
+  finance source you work from — this library no longer carries one. This skill is the modeling
+  craft, not the method.
 
 ## Do it
 1. **Separate inputs, calculations, and outputs.** Put assumptions in one clearly marked zone (or

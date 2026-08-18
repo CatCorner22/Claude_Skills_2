@@ -231,7 +231,7 @@ secrets, credentials, or client data exist anywhere in the tree**.
 
 ```
 bash scripts/validate.sh      # 0 errors, 0 warnings
-python3 scripts/gen-catalog.py # 121 skills across 14 plugins (+7 archived)
+python3 scripts/gen-catalog.py # 121 skills across 14 plugins
 ```
 - 121 skills ↔ 121 evals, no orphans.
 - **0 exact duplicate trigger phrases** — but read that precisely: the router matches whole

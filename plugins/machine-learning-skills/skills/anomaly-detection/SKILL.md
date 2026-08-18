@@ -18,7 +18,7 @@ metadata:
 - Flagging unusual transactions or values: reconciliation breaks, fee/interest spikes, duplicate or out-of-pattern payments, suspicious activity.
 - Finding outliers in a time series (a day's cash movement far from its seasonal norm) or in multivariate transaction data.
 - Setting a detection threshold when you have few or no labels, and managing the resulting alert volume.
-- Not for: mechanically matching a statement to the ledger and classifying breaks — that is bank-to-ledger reconciliation (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`); use this skill to *rank* which breaks are unusual. Designing the control framework alerts feed into is cash-controls work (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
+- Not for: mechanically matching a statement to the ledger and classifying breaks — that is reconciliation, a finance-domain procedure this library does not carry; use this skill to *rank* which breaks are unusual. Designing the control framework alerts feed into is controls work, also outside this library.
 - Not for: operating a whole *queue* of detectors — disposition audits, tolerance lists with
   expiry, paging gates, and the economics of alert volume → see
   `safety-and-reliability-skills:detection-system-tuning`. This skill builds and tunes one
@@ -100,9 +100,8 @@ Record your setup in `references/your-environment.md` (keep real transaction dat
 and sample rows in `your-environment.private.md`, which is git-ignored): what "anomalous" means for your
 process, the fields you monitor, whether you have any labels, your alert budget (how many alerts/day the team
 can investigate), known-benign recurring patterns to suppress, and the cost of a missed anomaly vs a false
-alarm. This skill then maps its generic methods onto your data. To rank reconciliation breaks by unusualness,
-pair it with your reconciliation process (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`);
-fitting alerts into a control framework is cash-controls design (archived: `cash-management-skills:cash-management-controls`, restorable from `archive/`).
+alarm. This skill then maps its generic methods onto your data — to rank reconciliation breaks by
+unusualness, point it at whatever reconciliation process you already run.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against

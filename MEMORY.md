@@ -866,3 +866,12 @@ promises. Two private project names removed from committed files.
 Flagged, not resolved: the `ut` brand pack still names an institution (recommendation: keep — public
 brand guideline, already in history, and the rename touches a CLI contract); the trigger test still
 unexecuted; depth for the five hub-but-thin skills.
+
+- DIRECTIVE (user-stated 2026-08-18, standing, supersedes the 2026-08-11 archive directive):
+  **delete all Oracle AND treasury skills and plugins** — not archive, delete. Executed: 17 Oracle
+  skills / 70 files, then the seven finance-treasury plugins (accounting, banking, cash-management,
+  finance, public-sector-treasury, sponsored-projects-ar, treasury-accounting) = 49 skills / 154
+  files, their archived evals, and the `fusioncash-architect` tool. `archive/plugins/` no longer
+  exists. All 29 active-tree pointers into those skills were rewritten to name the *domain* instead
+  of promising a restore — a pointer to something deleted is worse than no pointer. Never rebuild
+  on these domains, and never re-add an "archived: <treasury skill>, restorable from archive/" mark.

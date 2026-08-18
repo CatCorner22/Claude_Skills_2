@@ -31,10 +31,9 @@ metadata:
 - Building the prep pack almost nobody writes: interest map, BATNA tree,
   objective-criteria table, accusation audit, calibrated-question bank — then roleplaying
   the counterpart before the real conversation.
-- Not for: computing what the fees *should* be → that is a fee-benchmarking analysis
-  (archived: `banking-skills:bank-fee-analysis`, restorable from `archive/`) — decoding
-  the account-analysis statement into benchmark tables and levers builds the case; this
-  skill runs the ask.
+- Not for: computing what the fees *should* be → that is a fee-benchmarking analysis, a
+  domain exercise this library does not carry. Decoding a vendor's pricing statement into
+  benchmark tables and levers builds the case; this skill runs the ask.
 - Not for: patient-complaint or service-recovery conversations → that is service
   recovery, a different discipline; this library does not yet carry a skill for it.
 

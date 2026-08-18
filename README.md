@@ -118,13 +118,18 @@ Design notes and the wave-by-wave build log live in [`CONTRIBUTING.md`](CONTRIBU
 
 ## The archive
 
-Nine domain plugins (66 skills) and two individual skills were **delisted, not deleted**, when
-the library was re-aimed at general use: the Oracle Fusion / OTBI, cash-management, treasury,
-public-sector-treasury, sponsored-projects AR, accounting, banking, and finance plugins now live
-under [`archive/`](archive/README.md) with full git history. They are preserved and restorable —
-[`archive/README.md`](archive/README.md) carries the manifest, the reason, and a step-by-step
-restore procedure. Locally installed copies of archived plugins keep working as pinned snapshots;
-they simply stop receiving updates and no longer appear in the marketplace listing.
+**There are no archived plugins.** Nine domain plugins were delisted in 2026-08 when the library
+was re-aimed at general use, and all nine were then **deleted outright** on owner direction: the
+two Oracle Fusion / OTBI plugins (17 skills, 70 files) and the seven finance/treasury plugins —
+cash-management, treasury-accounting, public-sector-treasury, sponsored-projects AR, accounting,
+banking, finance (49 skills, 154 files). Git history still contains them; nothing else does.
+Locally installed copies keep working as version-pinned snapshots, but they will never update and
+no longer appear in the marketplace listing.
+
+What remains under [`archive/`](archive/README.md) is two individual dental-mounted skills
+(preserved with a restore procedure) and a set of standalone applications that predate the
+re-aim. [`archive/README.md`](archive/README.md) carries the manifest of what was deleted and
+why.
 
 ## How it's built
 

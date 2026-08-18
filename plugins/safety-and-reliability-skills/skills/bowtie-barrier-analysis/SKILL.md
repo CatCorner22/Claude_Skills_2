@@ -104,9 +104,9 @@ Record your hazards, top events, barrier owners, and assurance-test cadence in
 `references/your-environment.md`; anything naming real people, accounts, or incidents goes in
 `your-environment.private.md` (git-ignored). Known mounts: a flat cash-controls catalog (SOD, dual
 approval, positive pay, BEC controls) becomes the barrier set for top event "unauthorized payment
-released" — one such catalog lived in the archived `cash-management-skills:cash-management-controls` → `references/sod-and-control-catalog.md` (restorable from `archive/`);
-receiving-bank KYC/AML detection supplies the mitigative chain on the right side of a fraud bowtie
-(archived: `banking-skills:kyc-aml-basics`, restorable from `archive/`); an audit-findings catalog
+released" — bring your own control catalog, since this library does not carry a finance one;
+counterparty KYC/AML detection supplies the mitigative chain on the right side of a fraud bowtie;
+an audit-findings catalog
 from your own assurance function maps one-to-one onto missing or failed barriers — record where
 yours lives here.
 

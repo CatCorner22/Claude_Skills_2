@@ -24,7 +24,7 @@ metadata:
 - Diagnosing why a mandated checklist produced no measurable improvement.
 - **Not for:** *running* an existing checklist — that belongs to whoever owns the process
   (e.g. a month-end close checklist is run by the close process's owner, not redesigned here;
-  the close itself was owned by the archived `accounting-skills:month-end-close`, restorable from `archive/`). Not for documenting a full
+  the close procedure itself is accounting-domain work this library does not carry). Not for documenting a full
   method with sequence, timing, and key points → see `continuous-improvement-skills:standard-work`.
 - A bare mention of "checklist" is not a trigger: this skill is for *designing or diagnosing* one.
 
@@ -96,9 +96,8 @@ Record your redesign targets and live checklists in `references/your-environment
 naming real people, accounts, or incidents goes in `your-environment.private.md` (git-ignored).
 Known mounts, by format:
 - **Do-confirm** — a payment or wire release at the "before send" pause point; a period-end close
-  (which close tasks are killer items, at which pause points? one such checklist lived at the
-  archived `accounting-skills:month-end-close` → `references/close-checklist.md`, restorable from
-  `archive/`).
+  (which close tasks are killer items, at which pause points? bring your own close calendar — the
+  checklist craft is here, the close procedure is not).
 - **Read-do** — rotating-staff, sequence-critical work: instrument sterilization, patient handoff,
   a system cutover.
 

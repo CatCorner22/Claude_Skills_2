@@ -33,8 +33,8 @@ metadata:
   → see `data-analytics-bi-skills:spreadsheet-modeling`. This skill reads a single
   formula as algebra; that one builds the workbook around it.
 - Not for: the accounting equation, debits/credits, and normal balances — that is
-  double-entry bookkeeping (archived: `accounting-skills:double-entry-fundamentals`, restorable from `archive/`),
-  not solve-for-x.
+  double-entry bookkeeping, an accounting-domain topic this library does not carry, not
+  solve-for-x.
 - Siblings: unit-check every rearranged formula with
   `math-foundations-skills:units-and-dimensional-analysis`; rough-size the answer before
   solving with `math-foundations-skills:number-sense-and-estimation`.

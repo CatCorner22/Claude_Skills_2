@@ -13,11 +13,12 @@ finding fixed, a generated quick-router index at [INDEX.md](INDEX.md), and zero
 validator errors.
 
 **Current state, 2026-08-18** (the counts below are the running history; this is where the
-tree stands today): 121 active skills across 14 plugins, 7 plugins in `archive/plugins/` plus 2
-skill-level archives, and 51 archived skills on disk. The two Oracle plugins that the first pass
-archived were later *deleted* on owner direction, which is why the archived-plugin count fell from
-nine to seven. The active tree references 15 distinct archived skills across 37 pointers; every one
-resolves and carries its archived mark, enforced by `validate.sh`.
+tree stands today): 121 active skills across 14 plugins and **zero archived plugins**. All nine
+domain plugins the first pass archived were later deleted on owner direction — the two Oracle ones
+(17 skills / 70 files) and then the seven finance/treasury ones (49 skills / 154 files). What
+remains in `archive/` is two skill-level archives and the standalone apps. Every cross-link that
+used to point into a deleted plugin was rewritten to name the domain rather than promise a restore;
+`validate.sh` enforces that none is left dangling.
 
 The arithmetic: 181 pre-overhaul skills − 66 archived with their nine plugins
 (§3) = 115 kept, + 8 new (§5) = 123 across 15 plugins at the end of the first pass;

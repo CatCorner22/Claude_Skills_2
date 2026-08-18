@@ -25,7 +25,7 @@ metadata:
 - Merging or appending multiple flat files into one dataset for analysis.
 - Not for: deep cleaning after a correct parse (dedupe, outliers, imputation) → see
   `data-analytics-bi-skills:data-cleaning`. Statement-specific formats (BAI2, camt.053, MT940) are
-  bank-format knowledge (archived: `banking-skills:bank-statement-parsing`, restorable from
+  format-specific knowledge (a banking-domain topic this library does not carry; formerly at
   `archive/`), not general flat-file wrangling.
 - Not for: sources that aren't flat files — a workbook (.xlsx) → see
   `data-tools-skills:excel-automation-python`; a PDF report or statement → see

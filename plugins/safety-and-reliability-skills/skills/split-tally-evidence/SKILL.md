@@ -47,12 +47,11 @@ designed disposal.
   developer proving what was delivered when.
 - After a dispute exposed that a record could not be trusted, and the flow needs a split so
   it cannot happen again.
-- Not for: reconciling two systems' outputs against each other — bank-to-ledger matching
-  (archived: `cash-management-skills:bank-reconciliation`, restorable from `archive/`) and the
-  ledger reconciliation craft (archived: `accounting-skills:account-reconciliations`, restorable from `archive/`);
-  this skill designs what each side should hold so later comparison is even possible.
+- Not for: reconciling two systems' outputs against each other — statement-to-ledger matching and
+  the account-reconciliation craft are finance-domain work this library does not carry; this skill
+  designs what each side should hold so later comparison is even possible.
 - Not for: assembling the audit file and responding to auditor requests — audit-readiness / PBC
-  work (archived: `treasury-accounting-skills:audit-readiness-and-pbc`, restorable from `archive/`).
+  work, also outside this library.
 - Not for: reconciling conflicting good-faith human recollections of one event →
   `decision-science-skills:rashomon-effect`; this skill exists so the record never depends
   on recollection.

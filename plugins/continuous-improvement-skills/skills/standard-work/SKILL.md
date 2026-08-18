@@ -32,7 +32,7 @@ added as the format matured — is still the most teachable SOP format there is.
   as a method others can be trained to.
 - Writing an SOP or work instruction that people will actually use.
 - Not for: sequencing a whole multi-task close on a calendar → that's a month-end-close calendar
-  build (archived: `accounting-skills:month-end-close`, restorable from `archive/`). To propose
+  build — an accounting-domain procedure this library does not carry. To propose
   and align on a specific improvement → see `continuous-improvement-skills:a3-thinking`.
 - Not for: finding which task gates a whole multi-step effort → see
   `continuous-improvement-skills:theory-of-constraints`. To see where one task sits in the
