@@ -15,10 +15,21 @@ fresh-session run specified below has still never been performed.**
   **11 HEALTHY · 4 NAME-ONLY (`gonzo`, `elite-python-engineer`, `chicken-little`,
   `chicken-little-executive-advisor`) · 0 OVER.** Write-up:
   [`trigger-test-tier-d-rerun.md`](trigger-test-tier-d-rerun.md).
+- **Run 3 — live, real harness (2026-08-18).** Not a simulation: `claude plugin eval` under the
+  documented `CLAUDE_CODE_WALNUT_SPIRE=1` early-access flag, all 14 plugins genuinely installed,
+  real `Skill`-tool invocations graded. This is the first execution of anything resembling the
+  live fresh-session run this file has always called for. Full findings, including a live
+  degradation scan (101 of 121 skills reduced to bare names in this exact install) and seven real
+  routing cases: [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
+  **Headline: the D2/D9 seam repairs that Run 2 verified fail for real** when their target's
+  description is degraded — zero `Skill` calls, not a wrong pick. Every PASS recorded by Runs 1
+  and 2 was measured against a full, undegraded listing that a realistic full install does not
+  provide.
 
-Both runs test whether the descriptions *can* be routed correctly by a careful reader, **not**
-whether the runtime router does so, and neither reproduces name-only listing truncation. A
-simulation is an upper bound on live performance.
+Runs 1 and 2 test whether the descriptions *can* be routed correctly by a careful reader reading
+the full listing — an upper bound on live performance. Run 3 tests the real mechanism directly,
+including under real listing degradation, and is the first run in this protocol's history to do
+so.
 
 This is the compliance record for the one
 definition-of-done item in `writing-agent-skills/references/review-checklist.md` that no skill in
@@ -39,12 +50,18 @@ Three properties of the runtime make every cheaper substitute worthless:
 2. **`/plugin:skill` direct invocation always works** — including for a skill the router would never
    reach on its own. So the path an author naturally uses to test their own skill is exactly the path
    that cannot detect the failure.
-3. **The listing degrades silently at scale.** Observed at roughly 100 installed skills: the least-used
-   skills' descriptions are trimmed to **name-only**, with no error. This library ships 121 skills
-   (~29,640 tokens, **14.8% of a 200K window** — see the install-cost table in `README.md`). A full
-   install is therefore *past* the observed degradation threshold, which means results from a
-   121-skill session and a 40-skill session are different experiments. **Record which install you
-   tested.**
+3. **The listing degrades silently at scale, and it is worse than a skill-count threshold
+   suggests.** The real mechanism (`skillListingBudgetFraction`, documented in the CLI's own
+   settings schema) is a *character* budget filled in listing order with a hard cutoff — not a
+   graceful trim of the least-used entries. Verified live on 2026-08-18 with this exact
+   marketplace installed: **101 of 121 skills carried zero description text**, and which 19
+   survived was a function of install order, not usage or importance. Full evidence:
+   [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
+   This library ships 121 skills (~29,700 tokens by this repo's own char-based estimate, or
+   ~38,800 by the harness's real tokenizer — **≈19.4% of a 200K window**, not 14.8%; see
+   `README.md`). A full install is *deep* past the point where this starts, which means results
+   from a 121-skill session and a 40-skill session are different experiments. **Record which
+   install you tested.**
 
 Corollary: pasting a trigger phrase verbatim proves nothing. Every prompt below is deliberately
 written in *natural user language* that avoids the exact trigger string, because that is the only
@@ -55,9 +72,10 @@ thing the test can usefully measure.
 ## Setup
 
 1. **Choose and record an install set.** Either:
-   - **Full install** (121 skills, 14.8% of context) — tests the real degradation regime; or
+   - **Full install** (121 skills, ~19.4% of context by the real tokenizer) — tests the real
+     degradation regime; verified on 2026-08-18 to reduce 101 of 121 skills to bare names. Or
    - **Focused install** — the plugins covering the rows you are testing. Cheaper, cleaner
-     attribution, but it will *not* reproduce name-only trimming.
+     attribution, but it will *not* reproduce the listing-budget cutoff.
 
    Note the set at the top of your log. A pass under a focused install is not evidence of a pass
    under a full one.
