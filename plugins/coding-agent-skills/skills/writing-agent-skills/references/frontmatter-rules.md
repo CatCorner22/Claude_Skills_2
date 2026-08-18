@@ -20,10 +20,12 @@
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
 - **Budget reality, re-measured 2026-08-18 (this replaces an earlier ~1%-of-context claim that the
-  library's own numbers contradict).** 121 skills' names + descriptions = **110,104 chars ≈
-  29,758 tokens ≈ 14.9% of a 200K window**, mean ~890 chars per description. Token figures are an
+  library's own numbers contradict).** 121 skills' names + descriptions = **109,662 chars ≈
+  29,638 tokens ≈ 14.8% of a 200K window**, mean ~885 chars per description. Token figures are an
   estimate at ~3.7 chars/token — stated, because an undisclosed divisor is exactly how this
-  paragraph and `README.md` came to publish two different percentages. A literal
+  paragraph and `README.md` came to publish two different percentages. Both now come from
+  `python3 scripts/measure-listing-cost.py`; re-run it rather than editing the figure by hand,
+  because a hand-kept number in two places is a number that will disagree with itself again. A literal
   1%-of-context listing budget would fit about six of them, so ~1% cannot describe a
   full-description listing; it is consistent instead with a listing that has degraded to mostly
   **name-only**, which is the documented failure mode (see below). Keep descriptions tight

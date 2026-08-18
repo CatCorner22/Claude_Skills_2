@@ -540,7 +540,7 @@ The largest category was false self-description, and the worst instance was this
 | Claim | Reality |
 |---|---|
 | "85 distinct trigger phrases appear inside another skill's description" | **111.** The 85 came from an undisclosed ≥6-char filter, and the method was described as searching "prose" when it searched whole descriptions (prose-only gives 98 and contradicts the paragraph's own three examples). It had propagated to seven sites including `MEMORY.md`. |
-| Authoring standard: 107,700 chars / 29,000 tokens / 14.6% | README said 110,081 / 29,750 / 14.9% for the *same* measurement, and §9 had declared that discrepancy fixed. Both now regenerate from measurement: **110,110 / 29,759 / 14.88%**. |
+| Authoring standard: 107,700 chars / 29,000 tokens / 14.6% | README said 110,081 / 29,750 / 14.9% for the *same* measurement, and §9 had declared that discrepancy fixed. Both now regenerate from measurement, and `scripts/measure-listing-cost.py` prints both tables so neither can drift again: **109,662 / 29,638 / 14.82%** as of 2026-08-18. |
 | Token counts throughout | Derived from a 3.7 chars/token divisor **disclosed nowhere**. Now stated at every site — an undisclosed divisor is exactly how the two figures above diverged. |
 | README "sweet spot: ~35–50 skills, 5–7%" | Contradicted by all four of its own bundles. Measured: **24–31 skills, 2.95–3.59%.** Guidance and a per-bundle table are now generated from one measurement. |
 | `trigger-test.md`: "~35 rows means ~35 sessions" | 45 rows, **80 prompts**. The one instrument aimed at the installed product understated its own cost by more than 2× — a plausible reason it has never been run. |

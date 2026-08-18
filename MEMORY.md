@@ -216,7 +216,7 @@ Never store secrets, credentials, account numbers, or client data here.
   competition, not string equality.
 - RULE (2026-08-17): **skills-per-install is the routing lever, not chars-per-description.** Trimming
   a description 100 chars saves ~27 tokens; skipping a 15-skill plugin saves ~3,900 — 145x. The full
-  121-skill library costs 14.9% of a 200K window and sits past the ~100-skill point where the listing
+  121-skill library costs ~14.8% of a 200K window and sits past the ~100-skill point where the listing
   silently trims descriptions to name-only. Recommend subsets; never defend trimming as budget work.
 - RULE (2026-08-17): **conformance and value are close to uncorrelated.** On a 14-skill expert sample,
   3 were NET-NEGATIVE and 6 MARGINAL against the test "does invoking this beat an unaided competent

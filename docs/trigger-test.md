@@ -21,7 +21,7 @@ Three properties of the runtime make every cheaper substitute worthless:
    that cannot detect the failure.
 3. **The listing degrades silently at scale.** Observed at roughly 100 installed skills: the least-used
    skills' descriptions are trimmed to **name-only**, with no error. This library ships 121 skills
-   (~29,750 tokens, **14.9% of a 200K window** — see the install-cost table in `README.md`). A full
+   (~29,640 tokens, **14.8% of a 200K window** — see the install-cost table in `README.md`). A full
    install is therefore *past* the observed degradation threshold, which means results from a
    121-skill session and a 40-skill session are different experiments. **Record which install you
    tested.**
@@ -35,7 +35,7 @@ thing the test can usefully measure.
 ## Setup
 
 1. **Choose and record an install set.** Either:
-   - **Full install** (121 skills, 14.9% of context) — tests the real degradation regime; or
+   - **Full install** (121 skills, 14.8% of context) — tests the real degradation regime; or
    - **Focused install** — the plugins covering the rows you are testing. Cheaper, cleaner
      attribution, but it will *not* reproduce name-only trimming.
 

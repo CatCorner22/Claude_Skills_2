@@ -145,9 +145,9 @@ body persists in context across the turn, so every line is a recurring cost: con
 well-ordered instructions beat exhaustive ones.
 
 **Know what the listing actually costs, because it decides whether your skill is findable at
-all.** Measured in this library (re-measured 2026-08-18): 121 skills' names + descriptions come to
-**110,104 characters ≈ 29,758 tokens ≈ 14.9% of a 200K context**, at a mean of ~890 chars (~240
-tokens) per description — not the ~100 tokens per skill an earlier version of this section claimed.
+all.** Measured in this library by `python3 scripts/measure-listing-cost.py`: 121 skills' names +
+descriptions come to **109,662 characters ≈ 29,638 tokens ≈ 14.8% of a 200K context**, at a mean of
+~885 chars (~240 tokens) per description — not the ~100 tokens per skill an earlier version of this section claimed.
 (Token figures here are an estimate at ~3.7 characters/token, stated because the number is quoted
 elsewhere in the repo and an undisclosed divisor is how the first version of this paragraph came to
 disagree with `README.md`. Count with your provider's tokenizer if the exact figure matters.) The

@@ -168,7 +168,7 @@ code and re-deriving results** rather than by reading.
 - **46 description trims from an earlier pass were unnecessary** — the byte-counting bug above meant
   none had ever exceeded the cap. 12 that destroyed routing or teaching signal are reverted, with
   trigger lists verified byte-identical so no routing contract moved.
-- **Routing viability**: the full 121-skill library costs **14.9% of a 200K context** before anything
+- **Routing viability**: the full 121-skill library costs **14.8% of a 200K context** before anything
   is asked, and sits past the ~100-skill point where the listing silently trims descriptions to
   name-only. `README.md` now carries a per-plugin cost table and recommends three or four plugins.
   The corollary, stated plainly rather than defended: description trimming was never the lever —
@@ -214,7 +214,7 @@ real structure, derived in-file so a reader can check it, is seven groups.
 | Claim in §6 | Corrected |
 |---|---|
 | "85 trigger phrases appear in another skill's description" | **111.** The 85 came from an undisclosed ≥6-char filter, and "prose" misdescribed the method. It had propagated to seven sites including MEMORY.md. |
-| Token totals | The authoring standard and README published different figures for the same measurement. Both now regenerate from measurement: 110,110 chars / 29,759 tokens / 14.88%, with the 3.7 chars/token divisor disclosed. |
+| Token totals | The authoring standard and README published different figures for the same measurement. Both now regenerate from measurement via `scripts/measure-listing-cost.py` (109,662 chars / 29,638 tokens / 14.82% as of this pass), with the 3.7 chars/token divisor disclosed. |
 | README "sweet spot ~35–50 skills, 5–7%" | Contradicted by all four of its own bundles. Measured: 24–31 skills, 2.95–3.59%. |
 | `trigger-test.md` "~35 sessions" | 45 rows, **80 prompts**. |
 
