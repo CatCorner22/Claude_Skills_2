@@ -13,7 +13,7 @@ description: >-
   probability, Bayes, Bayes' theorem, expected value, independent events, mutually exclusive,
   base rate neglect, likelihood of both, what are the odds.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Probability fundamentals

@@ -11,40 +11,52 @@
 
 ## Scenario library — three high-yield starters
 
-**1. BEC payment-fraud drill** (pairs with `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
-- Setup: a supplier "bank-change" email chain, followed by an urgent wire request that
-  impersonates an executive, timed against an approver's known absence.
-- Blue objective: the fraudulent payment never releases; the genuine payment run is not
-  paralyzed.
+Each starter is stated in portable form first, then instantiated for one concrete
+domain (payments operations) so the shape is visible. Re-instantiate for yours: swap
+the irreversible action, the counterparty, and the deadline.
+
+**1. The impersonated urgent instruction** (pairs with `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
+- Setup: an out-of-band instruction arrives from a named authority, demanding an
+  irreversible action under time pressure, timed against the usual approver's known
+  absence. The action is whatever your organization cannot take back: a payment
+  release, a privileged access grant, a bulk data export, a public statement.
+- Blue objective: the fraudulent instruction is never executed; legitimate work of the
+  same kind is not paralyzed.
 - Red's levers: escalating urgency, spoofed reply-chains, a phone call quoting real
-  invoice numbers, a second smaller "test" payment.
+  internal reference numbers, a second smaller "test" request.
 - What it reveals: callback discipline, out-of-band verification, dual-approval reality
   vs. paper, who can say "stop" to a name with authority on it.
+- *Payments instantiation:* a supplier "bank-change" email chain, then an urgent wire
+  request impersonating an executive while the approver is travelling.
 
-**2. Bank-connectivity outage on payroll day** (pairs with `safety-and-reliability-skills:break-glass-playbooks` — the drill unseals the contingency playbook)
-- Setup: the transmission channel to the disbursement bank fails the morning payroll
-  files are due; the bank's status line says "investigating."
-- Blue objective: payroll settles on time through a contingency channel without
-  duplicate files.
-- Red/environment levers: partial acknowledgments (files maybe received), portal limits
-  below payroll size, cutoff times approaching, a second bank asking for setup lead time.
-- What it reveals: contingency payment paths, duplicate-release controls, bank contact
-  tree currency, decision authority for changing rails under deadline.
+**2. Critical-vendor connectivity outage on a hard-deadline day** (pairs with `safety-and-reliability-skills:break-glass-playbooks` — the drill unseals the contingency playbook)
+- Setup: the channel to a vendor you cannot substitute fails on the morning an
+  externally fixed deadline lands; the vendor's status page says "investigating."
+- Blue objective: the obligation is met through a contingency channel, exactly once.
+- Red/environment levers: partial acknowledgments (the submission may have landed),
+  contingency-channel limits below the required volume, cutoff times approaching, an
+  alternative provider quoting setup lead time.
+- What it reveals: contingency paths, duplicate-submission controls, currency of the
+  vendor contact tree, decision authority for switching rails under deadline.
+- *Payments instantiation:* the transmission channel to the disbursement bank fails the
+  morning payroll files are due.
 
-**3. Ransomware during month-end close**
-- Setup: file shares and the ERP integration layer encrypt mid-close; email is suspect;
-  the close calendar has statutory deadlines.
-- Blue objective: protect cash operations (payments, positions) first, then complete a
-  defensible close with degraded systems.
-- Red's levers: spreading encryption, a ransom deadline, an offer of "proof" decryption,
-  rumors reaching leadership before facts.
-- What it reveals: what treasury can do from a clean device, paper/portal fallbacks,
-  communication when email is untrusted, close-deadline triage authority.
+**3. Ransomware during a period-close or release freeze**
+- Setup: file shares and an integration layer encrypt during a window when the calendar
+  cannot move; email is suspect; the deadlines are statutory or contractual.
+- Blue objective: protect the highest-consequence operations first, then complete a
+  defensible close (or cut the release) with degraded systems.
+- Red's levers: spreading encryption, a ransom deadline, an offer of "proof"
+  decryption, rumors reaching leadership before facts.
+- What it reveals: what the team can still do from a clean device, paper/portal
+  fallbacks, communication when email is untrusted, deadline-triage authority.
+- *Payments instantiation:* protect payments and cash positions first, then close.
 
 ## Scenario library — additional patterns
-- Cutover weekend meets hostile Monday: new Oracle config live, bank file format rejects.
-- Key-person outage: the one analyst who runs the recon engine is unreachable during a
-  break investigation.
+- Cutover weekend meets hostile Monday: new system config live, the downstream interface
+  rejects the file format.
+- Key-person outage: the one person who runs the matching/reconciliation engine is
+  unreachable during an investigation.
 - Regulator/auditor arrives mid-incident: evidence preservation vs. operational speed.
 
 ## Inject templates
@@ -58,14 +70,14 @@ purpose. Format:
 > **Expected branch:** <what blue plausibly does; what red does next in each branch>
 
 Examples (sanitize before use; model on your real formats):
-- Spoofed executive email: reply-chain quoting a real (sanitized) invoice, new IBAN,
-  "board meeting, cannot talk, confirm by 3 pm."
-- Bank alert: "File acknowledgment delayed. Do not retransmit." — arriving after blue
-  has already discussed retransmitting.
-- News item: local outlet reports "payment issues" at the organization — tests the
-  communication plan, not the payment plan.
-- Phone script for red: caller ID matches the bank's number; caller asks blue to "verify"
-  credentials.
+- Spoofed executive email: reply-chain quoting a real (sanitized) internal reference,
+  new payee/endpoint details, "board meeting, cannot talk, confirm by 3 pm."
+- Vendor alert: "Submission acknowledgment delayed. Do not resend." — arriving after
+  blue has already discussed resending.
+- News item: local outlet reports "service issues" at the organization — tests the
+  communication plan, not the operational plan.
+- Phone script for red: caller ID matches the vendor's number; caller asks blue to
+  "verify" credentials.
 
 ## Adaptive-inject rules
 - Adaptive injects respond to what players actually chose; they are drafted by red/white
@@ -78,13 +90,13 @@ Examples (sanitize before use; model on your real formats):
 ## Adjudication rules (white cell)
 - Adjudicate after each action/reaction/counteraction exchange, before the next turn.
 - Rule on plausibility, not preference: "would this action work in our real environment,
-  with our real banks and systems, in this timeframe?" Cite the process document or the
-  person in the room who owns that step.
+  with our real counterparties and systems, in this timeframe?" Cite the process document
+  or the person in the room who owns that step.
 - Track state visibly: what is down, what is pending, what each side knows, the clock.
 - When uncertain, ask the process owner present; when no one knows, log it — "nobody
   could say whether X" is a primary finding.
-- Consequential outcomes (fraud succeeded or not, payroll settled or not, data lost or
-  not) are ruled by the human white cell only.
+- Consequential outcomes (the fraud succeeded or not, the obligation was met or not,
+  data was lost or not) are ruled by the human white cell only.
 
 ## Escalation-safety discipline for LLM red/white play
 - The LLM is a scenario generator in both seats: it drafts red moves, injects, and

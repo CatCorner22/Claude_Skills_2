@@ -13,7 +13,7 @@ description: >-
   report design, vanity metric, chart type, executive dashboard, KPI definition, data-ink,
   bullet graph, dashboard clutter, wall of numbers.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Grounded in Few (Information Dashboard Design), Tufte (The Visual Display of Quantitative
     Information, data-ink), and Cleveland & McGill (JASA 1984, graphical perception). Claims
@@ -29,9 +29,9 @@ metadata:
 - Not for: a one-time narrative readout of a finished analysis — one claim per slide, proven by a
   visual → see `data-analytics-bi-skills:assertion-evidence-deck`. A dashboard is a standing
   instrument read repeatedly; a deck is a story told once.
-- Not for: building the actual report artifact in a BI tool — e.g. an Oracle OTBI analysis with its
-  subject areas, layouts, and prompts → that's an OTBI report build
-  (archived: `oracle-otbi-skills:otbi-report-building`, restorable from `archive/`). For chart color
+- Not for: building the actual report artifact inside a BI tool — its subject areas, layouts, and
+  prompts are that tool's own craft and vary by product; this skill designs what the dashboard should
+  say and show, not how to click it together. For chart color
   palettes and encoding craft → use the built-in `dataviz` skill.
 
 ## Do it
@@ -89,7 +89,10 @@ beat pies and why a line is unbeatable for trend. **KPI rigor** is where dashboa
 undefined metric ("engagement") or a vanity metric (a cumulative count that can't go down) gives the
 illusion of measurement while steering nothing, so pinning down numerator, denominator, target, and
 direction is what makes a metric actionable. **Context is the difference between a number and a
-signal** — 4.2M is neither good nor bad until it sits next to a target or last quarter. And clarity
+signal** for a mechanical reason step 7 does not give: reading a value requires a reference
+distribution, and if the dashboard supplies none the reader supplies one from memory — so the number
+is judged against a half-remembered baseline that is exactly the thing the dashboard was built to
+replace. Printing the comparison beside the number is how you take that judgement back. And clarity
 comes from subtraction — Tufte's data-ink ratio names the discipline: maximize the share of ink that
 presents data. (Attribution note: the data-ink ratio is Tufte's, from The Visual Display of
 Quantitative Information; it is often misattributed to Few, whose own contributions are the

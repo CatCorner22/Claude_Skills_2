@@ -57,9 +57,10 @@ facilitator's main job is getting the room out of it with the timeline agreed.
 
 The tedious step the LLM does best. Before the session:
 
-1. Collect artifacts: scheduler/job logs, ERP process histories (e.g. FBDI load and
-   posting jobs), ticket queues, email threads, chat exports, bank statement and portal
-   timestamps, calendar invites. Sanitize before pasting anything sensitive.
+1. Collect artifacts: scheduler/job logs, ERP or pipeline job histories (e.g. the nightly
+   import and posting jobs, with their run and completion times), ticket queues, email
+   threads, chat exports, system and portal timestamps, calendar invites. Sanitize before
+   pasting anything sensitive.
 2. Extract events into rows: timestamp (with timezone), actor/system, what happened,
    source artifact. One fact per row; no adjectives.
 3. Order, merge, and flag conflicts (two sources disagreeing on a time or sequence) —

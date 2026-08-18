@@ -13,7 +13,7 @@ description: >-
   growth, CAGR, doubling time, rule of 72, logarithm, log scale, growth rate math, geometric
   average, how long until it doubles, decay rate.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Exponential growth and logarithms

@@ -6,16 +6,16 @@ description: >-
   Leadership) — the specific situation, the observed behavior (never inferred character or
   motive), impact as the speaker's own experience; one topic per conversation;
   requests framed forward (Marshall Goldsmith's feedforward); praise as specific as
-  criticism. Receiving: separate data from delivery, name the firing trigger (truth,
-  relationship, identity — Stone & Heen) before responding, ask for the behavior
-  behind a vague label, close the loop. Drafts the SBI script from a messy vent,
+  criticism. Receiving: name the firing trigger (truth, relationship,
+  identity — Stone & Heen) before responding, separate data from delivery, ask for the
+  behavior behind a vague label, close the loop. Drafts the SBI script from a messy vent,
   rehearses as the receiver (even a defensive one), and audits performance notes or
   review comments for character-language. Use for hard conversations about a person's
   work behavior, in either direction. Triggers: give
   feedback, SBI, feedback conversation, they got defensive, receiving feedback,
   performance conversation, code review tone, hard conversation with a teammate.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Feedback that lands (giving and receiving)
@@ -74,12 +74,14 @@ receiving field guide are in `references/feedback-method.md`.
    defensive one — so the first live run is not the real conversation.
 
 **Receiving**
-7. **Separate the data from the delivery.** Badly delivered truth is still truth;
-   discard the packaging, keep the information.
-8. **Name which trigger is firing** before responding — Stone & Heen's three (from
-   *Thanks for the Feedback*): a *truth* trigger ("that's just wrong"), a
+7. **Name which trigger is firing** before you respond to anything — Stone & Heen's
+   three (from *Thanks for the Feedback*): a *truth* trigger ("that's just wrong"), a
    *relationship* trigger ("not from *you*"), an *identity* trigger ("then what am
-   I?"). Naming it to yourself buys back the ability to hear the content.
+   I?"). Naming it to yourself buys back the ability to hear the content. "Give me a
+   second with that" is a complete sentence while you do it.
+8. **Separate the data from the delivery.** Badly delivered truth is still truth;
+   discard the packaging, keep the information. This step needs step 7 first — a
+   triggered listener cannot tell the two apart.
 9. **Ask for the behavior behind the label.** "You're told you're 'not strategic' —
    what did I do or not do, and when?" converts a verdict into data you can act on.
 10. **Close the loop.** Say what you will try, then report back — it turns one

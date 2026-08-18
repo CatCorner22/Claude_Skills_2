@@ -115,6 +115,20 @@ def classify_types(pubtypes) -> list[str]:
     return labels
 
 
+# Publishers mark a retracted article by prefixing the title in caps
+# ("RETRACTED:", "WITHDRAWN:") or appending "[Retracted in: ...]". The
+# "Retracted Publication" pubtype is the primary signal but lags by weeks to
+# months, so the title is checked too — a retracted paper ranked as a clean
+# review is the single worst thing this script could hand back.
+# Caps-sensitive on the prefix so "Retraction and reproducibility ..." (a
+# legitimate methods paper) is not demoted; case-insensitive inside brackets.
+RETRACTED_TITLE_RE = re.compile(r"^(RETRACTED|WITHDRAWN)\b|(?i:\[retracted in\b)", re.M)
+
+
+def title_marks_retraction(title: str) -> bool:
+    return bool(RETRACTED_TITLE_RE.search(title or ""))
+
+
 def parse_year(pubdate: str):
     m = re.match(r"\s*(\d{4})", pubdate or "")
     return int(m.group(1)) if m else None
@@ -127,10 +141,13 @@ def summarize_hit(pmid: str, rec: dict) -> dict:
         if aid.get("idtype") == "doi":
             doi = aid.get("value")
     types = classify_types(rec.get("pubtype", []))
+    title = (rec.get("title") or "").rstrip(".")
+    if title_marks_retraction(title) and "!! RETRACTED" not in types:
+        types.append("!! RETRACTED")
     return {
         "pmid": str(pmid),
         "doi": doi,
-        "title": rec.get("title", "").rstrip("."),
+        "title": title,
         "first_author": authors[0] if authors else None,
         "authors_n": len(authors),
         "journal": rec.get("fulljournalname") or rec.get("source"),
@@ -193,9 +210,10 @@ def format_human(res: dict, show_gap_note=True) -> str:
 
 
 def self_test() -> int:
-    failures = []
+    failures, ran = [], []
 
     def check(name, cond):
+        ran.append(name)
         if not cond:
             failures.append(name)
 
@@ -221,6 +239,19 @@ def self_test() -> int:
     check("classify meta", "META-ANALYSIS" in classify_types(["Meta-Analysis"]))
     check("classify retracted", any("RETRACTED" in t for t in classify_types(["Retracted Publication"])))
     check("classify unknown ignored", classify_types(["Letter"]) == [])
+
+    # Retraction marked in the title only — the pubtype lags behind the notice.
+    check("title-marked retraction caught", title_marks_retraction(
+        "RETRACTED: Ileal-lymphoid-nodular hyperplasia"))
+    check("withdrawn caught", title_marks_retraction("WITHDRAWN: An early trial"))
+    check("bracketed retraction caught", title_marks_retraction(
+        "A trial of X [Retracted in: N Engl J Med. 2021]"))
+    check("ordinary title about retraction not flagged", not title_marks_retraction(
+        "Retraction and reproducibility in clinical research"))
+    h = summarize_hit("9500320", {"title": "RETRACTED: A study.", "pubdate": "1998 Feb",
+                                  "fulljournalname": "Lancet", "pubtype": ["Journal Article"],
+                                  "authors": [{"name": "Wakefield AJ"}], "articleids": []})
+    check("title-only retraction reaches the hit", h["retracted"] is True)
 
     # Year parsing
     check("year parse", parse_year("2020 Dec 31") == 2020)
@@ -276,7 +307,7 @@ def self_test() -> int:
     except SearchError:
         check("network error propagates", True)
 
-    total = 25
+    total = len(ran)
     print(f"self-test: {total - len(failures)}/{total} checks passed")
     if failures:
         for f in failures:

@@ -13,7 +13,7 @@ description: >-
   review, rebase, version control, commit message, force push, git blame, revert, review this
   diff.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Review-size and review-rate figures come from the SmartBear/Cisco peer-review study
     (2,500 reviews, 3.2M LOC), verified via web search snippets — claims carrying those

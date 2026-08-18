@@ -20,8 +20,8 @@
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
 - **Budget reality, re-measured 2026-08-18 (this replaces an earlier ~1%-of-context claim that the
-  library's own numbers contradict).** 121 skills' names + descriptions = **110,110 chars ≈
-  29,759 tokens ≈ 14.9% of a 200K window**, mean ~890 chars per description. Token figures are an
+  library's own numbers contradict).** 121 skills' names + descriptions = **110,104 chars ≈
+  29,758 tokens ≈ 14.9% of a 200K window**, mean ~890 chars per description. Token figures are an
   estimate at ~3.7 chars/token — stated, because an undisclosed divisor is exactly how this
   paragraph and `README.md` came to publish two different percentages. A literal
   1%-of-context listing budget would fit about six of them, so ~1% cannot describe a

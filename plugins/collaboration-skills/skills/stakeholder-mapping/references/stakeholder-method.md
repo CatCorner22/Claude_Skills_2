@@ -44,7 +44,7 @@ outcome touches them). Each stakeholder lands in one of four quadrants:
         ┌────────────┬────────────┐
         │   KEEP     │   MANAGE   │
         │ SATISFIED  │  CLOSELY   │
- low ───┼────────────┼────────────┤─── high
+ low ───┼────────────┼────────────┼─── high
 interest│  MONITOR   │    KEEP    │  interest
         │            │  INFORMED  │
         └────────────┴────────────┘
@@ -56,14 +56,19 @@ version fails checking:
 
 - **A. L. Mendelow, 1981** — "Environmental Scanning—The Impact of the Stakeholder
   Concept," *Proceedings of the 2nd International Conference on Information Systems*
-  (ICIS), Cambridge MA. Secondary sources that actually engage the paper report its
-  matrix as **power/dynamism** — a contingency model for environmental scanning — not
-  power/interest [snippet-only, convergent secondary; the ICIS paper itself (AIS
-  eLibrary, paper 20) was not fetched — reading it would upgrade this to primary].
+  (ICIS), Cambridge MA. The paper's own published abstract states that it develops "a
+  contingency model for environmental scanning… to relate the focus and method used for
+  environmental scanning to the dynamism of the environment and the power of the
+  stakeholder relative to the organization" — **power/dynamism**, not power/interest
+  [abstract verified at AIS eLibrary, ICIS 1981 paper 20; the full paper text remains
+  unread, so quote the abstract, not the figures].
 - **Eden & Ackermann, 1998** — *Making Strategy: The Journey of Strategic Management*
   (Sage), power-interest grid at p. 349 [snippet-only].
-- **Johnson & Scholes, 1999** — *Exploring Corporate Strategy*, which adapted
-  Mendelow's model by replacing the dynamism axis with interest [snippet-only].
+- **Johnson & Scholes** — *Exploring Corporate Strategy*, which adapted Mendelow's model
+  by replacing the dynamism axis with interest. The 1999 edition (p. 156) is the usual
+  citation, but secondary sources put the adaptation in an earlier 1990s edition and
+  disagree about which one — cite the edition you actually consulted, and do not assert
+  a first-appearance date you have not checked [snippet-only, edition dates weak].
 - **Lineage**: R. Edward Freeman, *Strategic Management: A Stakeholder Approach*
   (Pitman, 1984) is the foundational stakeholder-theory text; the word "stakeholder"
   traces to a Stanford Research Institute working group, ~1963 — Freeman credits it,
@@ -175,7 +180,8 @@ the early warning the first map existed to buy.
 
 An ops manager migrates intake from a shared mailbox to a routed-queue system. Roles
 only — a real map with names goes in the git-ignored private file. All placements
-illustrative.
+illustrative. **Mapped at kickoff, <date>** — a grid without a date pretends to be a
+truth (§2); the re-map triggers are the last bullet below.
 
 | Stakeholder (role) | Power | Interest | Quadrant | Stance (evidence?) |
 |---|---|---|---|---|
@@ -199,11 +205,16 @@ Moves that follow:
   they don't know. Brief them before they discover it — surprise converts.
 - **RACI extract** (rows = workstreams): Routing rules — A: ops manager, R: IT
   platform owner, C: claims lead + team leads, I: intake staff. Cost allocation note —
-  A: finance director, R: analyst, C: ops manager, I: COO. Go-live comms — A: ops
-  manager, R: team leads, C: legal, I: all.
+  A: finance director, R: analyst, C: ops manager, I: COO. Go/no-go at pilot end —
+  A: COO, R: ops manager, C: claims lead + IT platform owner, I: all. Go-live comms —
+  A: ops manager, R: team leads, C: legal, I: all. (The go/no-go row is what makes the
+  §4 cross-check pass: without it the COO — a manage-closely sponsor — held nothing but
+  an "I", which is a placement error in one of the two artifacts.)
 - **Pre-mortem narrative that changed the map**: "it failed because audit's
   record-retention requirement surfaced in week ten" → audit moved from monitor to
-  keep-informed with a consultation before the routing rules froze.
+  keep-informed, and was added as a **C on the routing-rules row** before it froze. Note
+  the delta lands in both artifacts: a re-map that does not reach the RACI has not
+  actually changed anything anyone will do.
 - **Re-map triggers**: pilot end, go-live, and any reorg of the three intake teams.
 
 ## 8. Two more shapes — multi-party matter, deprecation without authority

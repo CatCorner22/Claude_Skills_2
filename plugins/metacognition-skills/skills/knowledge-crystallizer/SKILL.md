@@ -14,7 +14,7 @@ description: >-
   methods, clean up the knowledge base, merge duplicate notes, retire stale facts,
   capability map, crystallization pass.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Knowledge crystallizer
@@ -55,8 +55,8 @@ crystallization pass are in `references/crystallization-protocol.md`.
    Items failing a gate wait as candidates or go to the user for confirmation.
 3. **Distill** validated items into atomic, well-scoped entries — one idea per entry,
    phrased actionably in the shared grammar: `FACT:` / `PREFERENCE:` / `RULE:` / `LESSON:` /
-   `PATTERN:` / `METHOD:`, each carrying evidence and confidence. Cause-level phrasing
-   generalizes; outcome-level phrasing doesn't.
+   `PATTERN:` / `METHOD:` / `DIRECTIVE:`, each carrying evidence and confidence.
+   Cause-level phrasing generalizes; outcome-level phrasing doesn't.
 4. **Integrate.** Write entries into the correct semantic-memory sections via
    `metacognition-skills:hierarchical-memory-manager` (its stable headings are the
    destination; its contradiction protocol is the guard). Where an insight warrants a
@@ -87,8 +87,8 @@ retrieval quality forever. And the one-line audit log is what makes permanent me
 to build — it turns the store from a black box into a system the user can inspect,
 question, and roll back. The economy of the log matters as much as its existence: a pass
 cheap enough to run at every milestone actually gets run, which is why the cadence survives
-in practice (this library's own store carries months of one-line entries proving the habit
-holds).
+in practice — and this library's own store carries a month of log entries whose drift from
+one line to twenty is itself the failure mode the rule guards against.
 
 ## Common mistakes
 - Crystallizing everything → one-off details fossilize into noise. High-leverage,

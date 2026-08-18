@@ -7,6 +7,8 @@ description: >-
   a pull returns partial data, or when hardening a recurring API extract. Triggers: rest api pull,
   call api python, paginate an api, saas api export, pagination, api rate limit, 429 retry,
   requests python, extract data from api, api to csv, json to dataframe, oauth token api.
+metadata:
+  version: "1.1.0"
 ---
 
 # REST API data pulls
@@ -15,19 +17,19 @@ description: >-
 - Extracting records from a REST API — a CRM, ERP, ticketing system, or any SaaS endpoint — into
   CSV/Parquet/DataFrames for analysis.
 - Fixing pulls that silently return partial data, hit rate limits, or break on nested JSON.
-- Not for: loading data *into* Fusion in bulk → that's an FBDI bulk load
-  (archived: `oracle-fusion-finance-skills:fusion-fbdi-data-loading`, restorable from `archive/`).
+- Not for: bulk-*loading* data into a SaaS platform — that is the platform's own import pipeline
+  (file templates, staging tables, error reports) and differs per vendor. This skill pulls data out.
   For analyzing the extracted data → see `data-tools-skills:duckdb-local-analytics` or
   `data-analytics-bi-skills` skills.
 
 ## Do it
 1. **Read the API's contract before writing code:** base URL, auth method, pagination style,
-   rate limits, and the resource's field list. For Oracle Fusion, REST resources live under
-   `/fscmRestApi/resources/{version}/{resource}` (e.g. `invoices`, `receivablesInvoices`,
-   `cashTransactions`, `ledgerBalances`), documented in Oracle's REST API guides per module.
-2. **Authenticate the simplest way the API allows, and keep secrets out of code.** Fusion
-   commonly takes Basic auth (an integration user) or OAuth2/JWT; most SaaS APIs use bearer
-   tokens or API keys. Load credentials from environment variables or a secrets manager — never
+   rate limits, and the resource's field list. Most SaaS platforms publish a versioned resource
+   path and a per-resource field list; find both before writing a line of code, because they
+   determine your pagination style and how much you can ask for per call.
+2. **Authenticate the simplest way the API allows, and keep secrets out of code.** Enterprise
+   platforms commonly take Basic auth (a dedicated integration user) or OAuth2/JWT; most other
+   SaaS APIs use bearer tokens or API keys. Load credentials from environment variables or a secrets manager — never
    literals in the script, never in git (see `data-tools-skills:data-file-hygiene`).
 3. **Ask for less: filter and select server-side.** Every API has a query idiom — Fusion uses
    `q=` for filters, `fields=` to trim columns, `orderBy`, and `expand=` for children. Pulling
@@ -39,17 +41,27 @@ description: >-
    links. Loop until the API says done, and count as you go:
 
 ```python
-import requests, time
-def fetch_all(session, url, params):
+def fetch_all(session, url, params, page=500, max_pages=1000):
     rows, offset = [], 0
-    while True:
-        r = session.get(url, params={**params, "limit": 500, "offset": offset}, timeout=60)
+    for _ in range(max_pages):                       # never an unbounded while True
+        r = session.get(url, params={**params, "limit": page, "offset": offset}, timeout=60)
         r.raise_for_status()
         body = r.json()
-        rows += body["items"]
-        if not body.get("hasMore"): return rows
-        offset += 500
+        items = body["items"]
+        rows += items
+        print(f"offset={offset} rows={len(items)} cumulative={len(rows)}")   # count as you go
+        if not body.get("hasMore") or not items:     # done — or hasMore is lying
+            total = body.get("totalResults")         # step 7's reconciliation, at the source
+            if total is not None and len(rows) != total:
+                raise AssertionError(f"fetched {len(rows)} != server total {total}")
+            return rows
+        offset += page
+    raise RuntimeError(f"pagination did not terminate after {max_pages} pages")
 ```
+
+   The three guards matter as much as the loop: an empty page ends it even when `hasMore`
+   stays true, `max_pages` turns a server-side bug into an error instead of a hung script,
+   and the `totalResults` assertion makes a short pull fail loudly rather than look plausible.
 
 5. **Retry transient failures with backoff; respect 429.** Wrap requests so 429 (honor
    `Retry-After`) and 5xx/timeouts retry with exponential backoff and a cap; 4xx other than 429

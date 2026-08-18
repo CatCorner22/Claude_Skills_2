@@ -51,7 +51,7 @@ The same structure is the right way to brief an autonomous agent (or a colleague
 contractor) on a task where you will not be available for follow-up questions:
 
 - **Purpose**: what the work is *for* — so the agent can resolve ambiguity in your
-  favor instead of guessing ("this report exists so the treasurer can decide X").
+  favor instead of guessing ("this report exists so the budget owner can decide X").
 - **Key tasks / constraints**: the must-happen and must-not-happen conditions — data
   that may not leave the machine, formats that must round-trip, approvals that gate
   irreversible steps.

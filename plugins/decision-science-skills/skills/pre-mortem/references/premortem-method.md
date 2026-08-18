@@ -43,11 +43,12 @@ for judgment.
 1. Paste the actual plan (sanitized) and the real process documents it touches.
 2. Declare the fiasco exactly as in the team script.
 3. Ask the LLM for ~20 failure narratives, **forced across the categories below** — a
-   specific story each ("the FBDI load succeeded but the ledger dates were prior-period,
-   so..."), not risk-register abstractions.
+   specific story each ("the bulk load finished clean but every row landed in the prior
+   period, so the first anyone noticed was the month-end variance report"), not
+   risk-register abstractions.
 4. Then run the stakeholder round: "Each of the following people writes their reason the
-   plan failed, in their own voice" — name your real roster (e.g. AP manager, cash
-   manager, bank relationship contact, DBA, internal auditor, the dental-office manager).
+   plan failed, in their own voice" — name your real roster (e.g. the operations lead,
+   the approver, the vendor contact, the DBA, the internal auditor).
 5. Have the LLM bucket and deduplicate. **You rank.** You assign owners — even if every
    owner is you, the date and tripwire still matter.
 6. Anti-agreement discipline: instruct the LLM not to soften ("but this is unlikely...")

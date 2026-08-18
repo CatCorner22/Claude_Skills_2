@@ -11,7 +11,7 @@ description: >-
   standard deviation, variance, range, percentile, quartile, IQR, coefficient of variation, skewness,
   kurtosis, distribution shape, central tendency, spread.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Descriptive statistics
@@ -65,9 +65,14 @@ worked five-number summary — open it when you need the definition rather than 
 variable · n · missing/excluded
 center: median 412.50          spread: IQR 118.00      (mean + SD if roughly symmetric)
 five-number: min / Q1 / median / Q3 / max               tails: p95 (p99 for SLA/risk)
-shape: right-skewed (mean 512 > median 412) · percentile method: PERCENTILE_CONT
-plot: histogram or boxplot alongside — a single number cannot show shape
+shape: right-skewed (mean 512.30 > median 412.50) · percentile method: PERCENTILE_CONT
+plot: histogram when the question is shape or multimodality; boxplot when it is outliers
+      or a comparison across groups; both when n is large and the shape is contested
 ```
+
+   Render the plot when the medium allows it. When it does not, the line still names one — the
+   plot type and the variable — so the reader can produce it; "a plot would help" is not the
+   deliverable, "histogram of order value, 40 bins" is.
 
    The assistant computes and drafts the block; the human owns the population/grain definition and
    the decision the numbers feed.

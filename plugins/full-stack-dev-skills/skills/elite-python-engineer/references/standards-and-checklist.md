@@ -16,7 +16,8 @@ Contents:
    `Any` only when genuinely unavoidable, with a comment justifying it.
 3. **Modern syntax** — Python 3.14+ features on purpose: t-strings (PEP 750) for safe,
    validated interpolation; pattern matching; `pathlib` exclusively; dataclasses or
-   Pydantic over bare classes; free-threading awareness when choosing concurrency.
+   Pydantic over bare classes; free-threading awareness when choosing concurrency (and the
+   awareness includes knowing whether the deployed interpreter is the `t` build).
 4. **Deterministic error handling** — domain-specific exception classes; no bare
    `except:`; predictable JSON error payloads with correct HTTP status codes; fail loudly
    and predictably rather than silently; `contextlib`/`contextvars` for structured error
@@ -119,11 +120,13 @@ numbers must never reach the sink. Wire OpenTelemetry trace IDs into the same co
 Verify every delivery before sending:
 
 - [ ] Ruff-compliant (line-length 100, preview rules enabled)
-- [ ] 100% type coverage; ty/Pyright strict passes
+- [ ] 100% type coverage (Ruff `ANN`); Pyright strict passes — or ty with the required
+      rules promoted to `error`, since ty has no strict mode and will not flag a bare `def f(x)`
 - [ ] Google docstrings + type hints on everything (module `__doc__`, `__version__`)
 - [ ] `uv` commands shown for setup
 - [ ] `src/` layout with proper `__init__.py` and `py.typed`
-- [ ] Async where I/O-bound, sync/free-threaded where CPU-bound (note the trade-off)
+- [ ] Async where I/O-bound; CPU-bound work uses a process pool, or free-threaded threads
+      once the target is stated as a `3.14t` build (note which, and the trade-off)
 - [ ] structlog JSON configured; context bound to loggers
 - [ ] Custom domain exceptions defined and handled deterministically
 - [ ] No global state; dependency injection via FastAPI `Depends` or explicit context
@@ -141,9 +144,9 @@ Verify every delivery before sending:
   auto-fix; (3) turn on ty/Pyright per-module and annotate outward from the core;
   (4) introduce structlog behind the existing logging facade, then flip the renderer to
   JSON; (5) add pre-commit + CI last so the gates lock in the gains.
-- **Performance-critical** — measure first; discuss free-threading vs multiprocessing,
-  GIL release points in extensions, and Polars vs pandas (lazy evaluation, zero-copy
-  Arrow). Prefer algorithmic wins before parallelism.
+- **Performance-critical** — measure first; discuss free-threading (`3.14t` build only) vs
+  multiprocessing, GIL release points in extensions, and Polars vs pandas (lazy evaluation,
+  zero-copy Arrow). Prefer algorithmic wins before parallelism.
 - **CLI tools** — Typer + Rich; structlog console renderer in dev, JSON in prod;
   `__main__.py` entrypoint and a `[project.scripts]` entry.
 - **Data science / ML** — Polars + scikit-learn or JAX/Torch with full typing; keep

@@ -1,5 +1,19 @@
 # Archived plugins
 
+> **Deleted, not archived (2026-08-18, owner-directed): all Oracle skills.** The two
+> Oracle-named plugins — `oracle-fusion-finance-skills` (10 skills) and `oracle-otbi-skills`
+> (5) — plus the two Fusion-named skills inside `sponsored-projects-ar-skills`
+> (`fusion-ar-ppm-domain-knowledge`, `sponsored-ar-fusion-analyst-master-router`) were
+> **removed from the tree entirely**, together with their evals. 17 skills, 70 files. The
+> Oracle layer was also de-mounted from the active library: `chicken-little` lost its
+> Fusion data-model and SQL-pattern references and every Oracle passage in its body,
+> `assertion-evidence-deck` lost `oracle-cm-domain.md`, and `rest-api-data-pulls` lost its
+> Fusion query-idiom section. What deliberately remains is Oracle as one *vendor among
+> several* — SQL dialect notes, BI-tool lists — and the unrelated *test oracle* concept in
+> `lean-six-sigma-for-software`. Git history still contains everything deleted; nothing else
+> does. This supersedes the earlier owner-ratified exception that let `chicken-little` keep
+> its Oracle reference.
+
 These plugins were **archived on 2026-08-11** by the owner's directive during their
 career transition away from a university treasury role: the active marketplace now
 carries only career-portable, domain-neutral skills, while the treasury-, Oracle-,
@@ -22,10 +36,8 @@ Nothing was lost:
 | `banking-skills` | 6 | 0.1.0 | Payment rails, bank account structures, statement formats, bank-fee analysis, connectivity, KYC/AML basics |
 | `cash-management-skills` | 6 | 0.1.0 | Treasury cash operations: positioning, bank reconciliation, forecasting, liquidity, controls, intercompany netting |
 | `finance-skills` | 6 | 0.1.0 | Corporate/treasury finance: time value of money, working capital, ratios, short-term investing, FX risk, capital budgeting |
-| `oracle-fusion-finance-skills` | 10 | 0.5.0 | Functional Oracle Fusion Cloud Financials: GL, FBDI, AP, AR, Cash Management, period close, treasury-architect subagent |
-| `oracle-otbi-skills` | 5 | 0.1.0 | OTBI reports and analyses in Oracle Fusion Cloud, deep Cash Management subject-area coverage |
 | `public-sector-treasury-skills` | 8 | 0.1.0 | Public-sector/higher-ed treasury: GASB funds, public funds investing, escheatment, merchant/PCI, NACHA, bond compliance, CTP prep |
-| `sponsored-projects-ar-skills` | 13 | 1.0.0 | Sponsored projects/grants receivables across Oracle Fusion AR + PPM, federal compliance (Uniform Guidance) |
+| `sponsored-projects-ar-skills` | 11 | 1.0.0 | Sponsored projects/grants receivables, federal compliance (Uniform Guidance) |
 | `treasury-accounting-skills` | 6 | 0.1.0 | Debt facilities and covenants, hedging/derivatives, investment policy compliance, accruals, intercompany, audit readiness |
 
 (Last-version numbers are as recorded in each plugin's `.claude-plugin/plugin.json`

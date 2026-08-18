@@ -10,7 +10,7 @@ description: >-
   or a multi-step LLM workflow. Triggers: agent, autonomous agent, agentic workflow, tool use,
   orchestration, multi-step, pipeline, human in the loop, guardrails.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Agentic workflow design
@@ -36,7 +36,15 @@ metadata:
    typed inputs, output shape, side effects, and failure behavior. Make tools **narrow and hard to
    misuse** — validate arguments, make read-only tools obviously read-only, and make destructive tools
    require explicit confirmation or a dry-run mode. A vague tool ("do the thing") is where agents go
-   off the rails.
+   off the rails. Two rows of the table, one read-only and one destructive:
+
+   | Name | Purpose | Typed inputs | Output shape | Side effects | Failure behavior |
+   |---|---|---|---|---|---|
+   | `lookup_po` | Find a purchase order by number | `po_number: str` | `{po_number, vendor, total_cents: int, status}` or `null` | none (read-only) | returns `null` on miss; raises `TimeoutError` after 5s |
+   | `post_invoice` | File an approved invoice | `invoice_id: str`, `dry_run: bool = True` | `{posted: bool, journal_id: str \| None}` | writes to the ledger | requires human approval; `dry_run=True` returns the diff without writing |
+
+   Note the shape of the second row: the destructive tool defaults to `dry_run=True`, so the
+   agent has to *opt in* to the irreversible call rather than opt out.
 4. **Add verification at every step that can be wrong.** Don't trust a step's output because it looks
    plausible — check it. Use cheap deterministic checks where possible (schema/type validation, row
    counts, totals reconcile, a value is in range) and an LLM-as-judge only where the criterion is

@@ -43,5 +43,6 @@ A good response:
   columns mean, and why the roof surfaces tradeoffs while they're still cheap.
 - **Stays honest:** marks LLM-drafted weights and cells as proposals for human correction —
   weightings are ratified by actual customers/users, never presented as customer voice on the
-  LLM's say-so; keeps the Toyota development-cost evidence attributed as snippet-level HBR
-  reporting rather than a verified fact; invents no customer needs not grounded in the notes.
+  LLM's say-so; keeps the Toyota Auto Body startup-cost evidence attributed as snippet-level
+  HBR reporting rather than a verified fact, and does not restate it as a development-cost
+  figure; invents no customer needs not grounded in the notes.

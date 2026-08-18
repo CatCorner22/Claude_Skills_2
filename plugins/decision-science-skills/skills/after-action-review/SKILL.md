@@ -12,6 +12,8 @@ description: >-
   Owns team and event debriefs — an assistant's own self-retrospective belongs to
   reflective-learner instead. Triggers: after-action review, AAR, hot wash, team debrief,
   sustain and improve, what should we do differently next close.
+metadata:
+  version: "1.1.0"
 ---
 
 # After-action review (AAR)

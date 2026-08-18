@@ -13,6 +13,8 @@ description: >-
   dispute. Triggers: BATNA, prepare for a
   negotiation, push back on this fee increase, renegotiate the contract, calibrated
   questions, tactical empathy, accusation audit, talk them down.
+metadata:
+  version: "1.1.0"
 ---
 
 # Principled negotiation
@@ -22,6 +24,10 @@ description: >-
   processor markup (the processor's markup is the only layer open to negotiation —
   interchange and network fees are set upstream), an insurance-carrier fee schedule, a
   vendor or carrier contract renewal or dispute.
+- Any repeat-relationship negotiation with the same shape, whatever the domain: a
+  renewal price rise, a scope-vs-fee dispute, a rate or compensation conversation. The
+  prep pack below does not change with the number in dispute — only its criteria table
+  does.
 - Building the prep pack almost nobody writes: interest map, BATNA tree,
   objective-criteria table, accusation audit, calibrated-question bank — then roleplaying
   the counterpart before the real conversation.

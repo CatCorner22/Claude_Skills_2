@@ -8,6 +8,8 @@ description: >-
   behavior that should run every time X happens, or wiring up an MCP server.
   Triggers: settings.json, permissions, allow this command, hooks, run automatically,
   whenever X do Y, MCP server, .mcp.json, configure Claude Code, harness config.
+metadata:
+  version: "1.1.0"
 ---
 
 # Configuring the Claude Code harness

@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "collaboration-skills",
   "description": "Working-with-humans core: meeting-design (the agenda as a decision list, pre-reads with silent start, named decision rules before discussion opens, actions that leave with owners and dates), feedback-that-lands (SBI/COIN structure, behavior-not-person, feedforward, and receiving feedback as well as giving it), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge — low-stakes questions, deliberate-error restatement, the doorknob question — with a plainly named ethics rail), executive-briefing (BLUF, Minto SCQA, completed staff work), and stakeholder-mapping (power-interest grid, RACI, who can block this). All do the task and teach the reasoning.",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

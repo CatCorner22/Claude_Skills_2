@@ -13,7 +13,7 @@ description: >-
   review this code, clean this up, audit this, scope this project, break into phases,
   stress test, improve this process, script wizard.
 metadata:
-  version: "1.0"
+  version: "1.1.0"
   author: User-drafted workflow spec; adapted to house standard
 ---
 
@@ -36,48 +36,52 @@ Three domain packs carry the depth this spine draws on — `references/python-an
 `references/writing-and-drafting.md`, and `references/process-and-stakeholders.md`. Open the one
 the request lands in at the Diagnose step, not before.
 
-1. **Scale the workflow to the task — by consequence, not length.** Run all six phases for
-   substantial deliverables (multi-file tools, system designs, documents people rely on,
-   plans with dependencies). Compress hard for small ones: for a ten-line utility, Phases
-   1–3 collapse into one sentence ("Reads the CSV, dedupes on email, writes a new file;
-   assumes UTF-8 and a header row") and you go straight to building. A short script that
-   touches production data or feeds a financial report gets the full treatment; a long
-   document nobody acts on does not. The one compression that rarely pays is skipping the
-   audit — small artifacts have edge cases too.
-2. **Frame.** Establish what "done" means before touching the artifact: the **objective**
+**Scale the workflow to the task — by consequence, not length.** Run all six phases for
+substantial deliverables (multi-file tools, system designs, documents people rely on,
+plans with dependencies). Compress hard for small ones: for a ten-line utility, Phases
+1–3 collapse into one sentence ("Reads the CSV, dedupes on email, writes a new file;
+assumes UTF-8 and a header row") and you go straight to building. A short script that
+touches production data or feeds a financial report gets the full treatment; a long
+document nobody acts on does not. The one compression that rarely pays is skipping the
+audit — small artifacts have edge cases too.
+
+1. **Frame.** Establish what "done" means before touching the artifact: the **objective**
    as an outcome, not a task ("reconcile the bank feed" beats "write a Python script");
    **users and stakeholders** (who runs it, consumes it, approves it); **constraints**
    (environment, dependencies, data access, deadlines, formats); **success criteria**
    that are checkable. State assumptions out loud — unstated assumptions are the raw
    material of rework.
-3. **Diagnose.** Find what will break before building: ambiguities that admit two readings;
+2. **Diagnose.** Find what will break before building: ambiguities that admit two readings;
    hidden assumptions about data shape, volume, encoding, availability; dependencies you
    don't control and what happens when they fail; edge cases (empty input, malformed rows,
    duplicates, nulls, unexpected scale); failure modes in the surrounding process, not
    just the artifact. Separate symptoms from root causes — if a script must clear
    duplicates weekly, something upstream is creating them; say so, then build what was
    asked.
-4. **Design.** Propose structure before producing in full — code: modules, interfaces,
+3. **Design.** Propose structure before producing in full — code: modules, interfaces,
    data flow, error-handling strategy; documents: an outline stating each section's
    purpose; projects: workstreams, sequence, dependencies, decision points. Show the
    design when a wrong structure would be expensive to unwind.
-5. **Build** on the designed structure. Keep it internally consistent: one term per
+4. **Build** on the designed structure. Keep it internally consistent: one term per
    concept, parallel structure for parallel elements, names that reveal intent. Record why
    non-obvious choices were made. Apply the standards reference that fits the deliverable
    (table in References).
-6. **Audit — adversarially, before presenting.** Building and critiquing use different
+5. **Audit — adversarially, before presenting.** Building and critiquing use different
    attention; this phase catches what the building mindset cannot. Work through
    `references/audit-checklist.md`; at minimum ask what breaks, what could be misread,
    which dependency is fragile, and what a skeptical expert attacks first.
-7. **Refine.** Fix what the audit found, tighten the language, cut what isn't earning its
+6. **Refine.** Fix what the audit found, tighten the language, cut what isn't earning its
    place, strengthen thin sections — then present.
-8. **Present in the response architecture** (unless asked otherwise): direct answer first →
-   key assumptions → approach (when the method matters) → the artifact → risks and open
-   issues → next decisions for the user.
-9. **Handle ambiguity without silent guessing.** Name what's missing; infer only where the
-   inference is low-risk and say you inferred it; put strategic choices (architecture,
-   scope, real tradeoffs) to the user; proceed on a flagged, justified default when waiting
-   would stall the work. When several paths are valid, recommend one and name the tradeoff.
+
+Two rules that run across all six phases:
+
+- **Present in the response architecture** (unless asked otherwise): direct answer first →
+  key assumptions → approach (when the method matters) → the artifact → risks and open
+  issues → next decisions for the user.
+- **Handle ambiguity without silent guessing.** Name what's missing; infer only where the
+  inference is low-risk and say you inferred it; put strategic choices (architecture,
+  scope, real tradeoffs) to the user; proceed on a flagged, justified default when waiting
+  would stall the work. When several paths are valid, recommend one and name the tradeoff.
 
 ## Why / learn
 The most common failure in technical work is not incompetence — it is producing a competent
@@ -108,7 +112,7 @@ say plainly what was tested, what was inferred, and what remains unknown.
 ## Tailor to your environment
 Record your recurring deliverable types and their standards in
 `references/your-environment.md`: the scripts you build most (e.g. reconciliation tooling,
-Oracle data pulls), house documentation formats, review/approval gates, and the systems
+ERP or SaaS data pulls), house documentation formats, review/approval gates, and the systems
 artifacts must integrate with. Keep anything sensitive in `your-environment.private.md`
 (git-ignored); never commit real data.
 

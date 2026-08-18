@@ -157,8 +157,8 @@ blank in 14% of A's rows.
    top to bottom on next month's exports; both raw files sit untouched in `raw/`.
 
 The two decisions that changed downstream numbers — collapsing B's grain and the `owner`
-imputation policy — are exactly the ones the memo records, because a reader who disagrees
-with either must be able to see and reverse them.
+imputation policy — head the **decisions log** delivered with the cleaned file, because a
+reader who disagrees with either must be able to see and reverse them.
 
 ## Sources and attribution notes
 - Wickham, H., "Tidy Data", *Journal of Statistical Software* 59(10), 2014 — the three

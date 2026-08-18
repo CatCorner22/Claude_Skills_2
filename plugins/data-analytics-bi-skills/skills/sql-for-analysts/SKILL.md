@@ -11,7 +11,7 @@ description: >-
   function, OVER clause, PARTITION BY, running total, moving average, rank, lag, lead, CTE, subquery,
   QUALIFY, slow query, optimize query, group by grain.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # SQL for analysts
@@ -59,6 +59,11 @@ metadata:
    the source; June total ties to the dashboard"); and caveats (dialect substitutions, time zone,
    any accepted fan-out). The assistant drafts the query and runs the checks; the human owns the
    metric's business definition and names the trusted source to tie against.
+   If you cannot execute the query — no connection, no credentials, a schema you were only told
+   about — emit the validation section as **unfilled checks**: the exact count/total query to run
+   and the source each must tie to, marked "not yet run." Say so plainly. Never state a row count
+   or a tie-out you did not observe; a fabricated validation line is worse than an empty one,
+   because it is the line a reader trusts instead of re-checking.
 
 ## Why / learn
 The core shift is to **think in sets, not row-by-row loops**. SQL is declarative: you describe the
@@ -89,7 +94,7 @@ real table/column names, sample data — in `your-environment.private.md`, which
 your **SQL dialect** (Postgres, Snowflake, BigQuery, Oracle, SQL Server — they differ on `QUALIFY`,
 date functions, and `LIMIT`/`FETCH`), your core tables and their grain, standard join keys, and any
 naming or partitioning conventions. This skill then maps its generic steps onto your schema. If
-your platform offers a governed reporting layer (like Oracle Fusion's OTBI subject areas), note here
+your platform offers a governed reporting layer (a semantic/subject-area layer over the raw tables), note here
 when to prefer it over hand-written SQL.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside

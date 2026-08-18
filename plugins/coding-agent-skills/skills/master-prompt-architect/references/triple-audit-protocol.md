@@ -50,7 +50,8 @@ science, and technical writing would:
 Evaluate the text against the drafting discipline of *A Manual of Style for Contract
 Drafting* (the full treatment lives in `script-wizard`'s writing-and-drafting reference):
 
-- **Eliminate passive voice** — every instruction names its actor.
+- **Name the actor** — use the active voice wherever the actor matters; "the file is
+  written" hides who writes it.
 - **One term per concept** — enforce strict terminology consistency; kill false synonyms.
 - **Remove redundant couplets** and technical bloat — "each and every", "any and all",
   restatements of the obvious.

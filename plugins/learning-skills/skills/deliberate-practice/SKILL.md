@@ -12,6 +12,8 @@ description: >-
   negotiating, arguing, presenting — rather than critique a finished piece of work.
   Triggers: deliberate practice, practice drill, kata, rehearse with me, get better at,
   practice session, play the opponent, stopped getting better.
+metadata:
+  version: "1.1.0"
 ---
 
 # Deliberate practice (edge-of-ability drills)
@@ -63,8 +65,8 @@ feedback formula are in `references/drill-design.md`.
    instruction for the next rep. Feedback names the behavior, never the person.
 5. **Raise difficulty only on demonstrated competence.** Define the ladder up front: which
    dimension scales (time pressure, ambiguity, opposition quality, scaffolds removed) and
-   what earns the next rung — typically two or three clean reps. Failure at a new rung means
-   stepping back down, not pushing through; flailing reps train flailing.
+   what earns the next rung — typically two or three *consecutive* clean reps. Failure at a
+   new rung means stepping back down, not pushing through; flailing reps train flailing.
 6. **Log the chain: target → attempt → feedback → next target.** One line per rep is enough
    (template in the reference). The log is the curriculum — the next session starts where
    the chain left off, and recurring feedback themes become future targets.

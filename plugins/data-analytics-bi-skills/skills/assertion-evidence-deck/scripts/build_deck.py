@@ -85,6 +85,15 @@ def contrast(fg, bg):
     return (hi + 0.05) / (lo + 0.05)
 
 
+def _on(fill_hex, pal):
+    """Readable text colour for a filled shape: whichever of ink/background wins.
+
+    Hard-coding ink put 333333 on the neutral palette's 4B4B4B emphasis fill —
+    1.45:1, i.e. invisible — on the builder's own default brand.
+    """
+    return max((pal["ink"], pal["bg"]), key=lambda c: contrast(c, fill_hex))
+
+
 # --- Headline budget ------------------------------------------------------
 def estimate_lines(text, max_chars=HEAD_LINE_CHARS):
     lines, cur = 0, ""
@@ -258,8 +267,11 @@ def _column(slide, x, spec_col, pal, font):
 
 
 def build_two_column(slide, spec, pal, font):
-    _column(slide, COL["left_x"] - COL["w"] / 2, spec.get("left", {}), pal, font)
-    _column(slide, COL["right_x"] - COL["w"] / 2, spec.get("right", {}), pal, font)
+    # left_x / right_x are the columns' LEFT EDGES in the tokens table, not their
+    # centres. Treating them as centres shifted the pair to 0.39 / 5.88 in — inside
+    # the 0.92 in side margin, with three inches of dead space on the right.
+    _column(slide, COL["left_x"], spec.get("left", {}), pal, font)
+    _column(slide, COL["right_x"], spec.get("right", {}), pal, font)
 
 
 def build_flow(slide, spec, pal, font):
@@ -280,8 +292,8 @@ def build_flow(slide, spec, pal, font):
         shp.line.color.rgb = rgb(pal["ink"])
         tf = shp.text_frame
         tf.word_wrap = True
-        _set_para(tf, step, font, 14,
-                  pal["ink"] if i != n - 1 else pal["ink"], bold=True,
+        fill_hex = pal["primary"] if i == n - 1 else pal["bg"]
+        _set_para(tf, step, font, 14, _on(fill_hex, pal), bold=True,
                   align=PP_ALIGN.CENTER)
         if i < n - 1:
             _, atf = _textbox(slide, x + box, y, arrow, h, MSO_ANCHOR.MIDDLE)
@@ -308,10 +320,14 @@ def build(spec, brand, font_override):
     font = font_override or spec.get("font") or "Calibri"
 
     # Contrast guard on the standard text pairs.
-    for label, fg in (("body/ink", pal["ink"]), ("source/muted", pal["muted"])):
+    for label, fg, floor in (("body/ink", pal["ink"], 4.5),
+                             ("source/muted", pal["muted"], 4.5),
+                             ("accent-as-text (magnitude numbers, column titles)",
+                              pal["primary"], 3.0)):
         r = contrast(fg, pal["bg"])
-        if r < 4.5:
-            print(f"WARN: {label} {fg} on {pal['bg']} is {r:.2f}:1 (< 4.5:1 AA)",
+        if r < floor:
+            print(f"WARN: {label} {fg} on {pal['bg']} is {r:.2f}:1 "
+                  f"(< {floor}:1 AA) — label the value directly; do not let colour carry it",
                   file=sys.stderr)
 
     prs = Presentation()

@@ -41,42 +41,57 @@ TIMEOUT = 20
 # --- Country policy (see references/source-provenance.md) ------------------
 EXCLUDED_COUNTRIES = {"china", "russia"}
 
-# Substrings that appear in affiliation strings, mapped to a country key.
+# Affiliation strings are matched against two tiers of signal.
+#
+# A *country name* is unambiguous and settles the question. A *city* is a weaker
+# hint used only when the string names no country at all — because cities are
+# not unique across countries and a bare substring match on them is wrong in
+# both directions: "Moscow, ID 83844, USA" (University of Idaho) is not Russian,
+# and "Busan" contains the letters "usa". Matching is therefore word-bounded,
+# and country names win over cities within the same affiliation string.
+#
 # Matching is deliberately conservative: it flags for human confirmation rather
-# than deciding. Affiliation metadata is frequently missing or partial.
+# than deciding. Affiliation metadata is frequently missing or partial, and this
+# table covers only common countries — see infer_provenance().
 _COUNTRY_HINTS = [
-    ("china", ["china", "chinese", "beijing", "shanghai", "guangzhou", "shenzhen",
-               "wuhan", "chengdu", "tianjin", "nanjing", "hangzhou", "p.r.c", "prc"]),
-    ("russia", ["russia", "russian", "moscow", "st. petersburg", "saint petersburg",
-                "novosibirsk", "yekaterinburg"]),
-    ("usa", ["usa", "u.s.a", "united states", "boston", "new york", "california",
-             "massachusetts", "maryland", "texas", "bethesda", "baltimore"]),
-    ("uk", ["united kingdom", "england", "scotland", "wales", "london", "oxford",
-            "cambridge, uk", "manchester", "edinburgh"]),
-    ("canada", ["canada", "toronto", "montreal", "vancouver", "ottawa"]),
-    ("germany", ["germany", "deutschland", "berlin", "munich", "münchen", "heidelberg",
-                 "hamburg", "frankfurt"]),
-    ("japan", ["japan", "tokyo", "osaka", "kyoto", "nagoya", "sapporo"]),
-    ("south africa", ["south africa", "cape town", "johannesburg", "pretoria", "durban"]),
-    ("australia", ["australia", "sydney", "melbourne", "brisbane", "perth"]),
-    ("netherlands", ["netherlands", "amsterdam", "rotterdam", "utrecht", "leiden"]),
-    ("france", ["france", "paris", "lyon", "marseille", "toulouse"]),
-    ("sweden", ["sweden", "stockholm", "gothenburg", "uppsala", "karolinska"]),
-    ("denmark", ["denmark", "copenhagen", "aarhus"]),
-    ("norway", ["norway", "oslo", "bergen"]),
-    ("finland", ["finland", "helsinki"]),
-    ("italy", ["italy", "italia", "rome", "milan", "bologna"]),
-    ("spain", ["spain", "madrid", "barcelona"]),
-    ("switzerland", ["switzerland", "zurich", "geneva", "basel", "bern"]),
-    ("israel", ["israel", "tel aviv", "jerusalem", "haifa"]),
-    ("south korea", ["south korea", "republic of korea", "seoul"]),
-    ("singapore", ["singapore"]),
-    ("ireland", ["ireland", "dublin"]),
-    ("new zealand", ["new zealand", "auckland", "wellington"]),
-    ("belgium", ["belgium", "brussels", "leuven", "ghent"]),
-    ("austria", ["austria", "vienna", "wien"]),
-    ("poland", ["poland", "warsaw", "krakow"]),
-    ("taiwan", ["taiwan", "taipei"]),
+    # (country, country-name signals, city signals)
+    ("china", ["china", "chinese", "p.r.c", "prc"],
+     ["beijing", "shanghai", "guangzhou", "shenzhen", "wuhan", "chengdu",
+      "tianjin", "nanjing", "hangzhou"]),
+    ("russia", ["russia", "russian", "russian federation"],
+     ["moscow", "st. petersburg", "saint petersburg", "novosibirsk",
+      "yekaterinburg"]),
+    ("usa", ["usa", "u.s.a", "united states"],
+     ["boston", "new york", "bethesda", "baltimore"]),
+    ("uk", ["united kingdom", "great britain", "england", "scotland", "wales",
+           "uk", "u.k"],
+     ["london", "oxford", "manchester", "edinburgh"]),
+    ("canada", ["canada"], ["toronto", "montreal", "vancouver", "ottawa"]),
+    ("germany", ["germany", "deutschland"],
+     ["berlin", "munich", "münchen", "heidelberg", "hamburg", "frankfurt"]),
+    ("japan", ["japan"], ["tokyo", "osaka", "kyoto", "nagoya", "sapporo"]),
+    ("south africa", ["south africa"],
+     ["cape town", "johannesburg", "pretoria", "durban"]),
+    ("australia", ["australia"], ["sydney", "melbourne", "brisbane", "perth"]),
+    ("netherlands", ["netherlands"],
+     ["amsterdam", "rotterdam", "utrecht", "leiden"]),
+    ("france", ["france"], ["paris", "lyon", "marseille", "toulouse"]),
+    ("sweden", ["sweden"], ["stockholm", "gothenburg", "uppsala", "karolinska"]),
+    ("denmark", ["denmark"], ["copenhagen", "aarhus"]),
+    ("norway", ["norway"], ["oslo", "bergen"]),
+    ("finland", ["finland"], ["helsinki"]),
+    ("italy", ["italy", "italia"], ["rome", "milan", "bologna"]),
+    ("spain", ["spain"], ["madrid", "barcelona"]),
+    ("switzerland", ["switzerland"], ["zurich", "geneva", "basel", "bern"]),
+    ("israel", ["israel"], ["tel aviv", "jerusalem", "haifa"]),
+    ("south korea", ["south korea", "republic of korea"], ["seoul"]),
+    ("singapore", ["singapore"], []),
+    ("ireland", ["ireland"], ["dublin"]),
+    ("new zealand", ["new zealand"], ["auckland", "wellington"]),
+    ("belgium", ["belgium"], ["brussels", "leuven", "ghent"]),
+    ("austria", ["austria"], ["vienna", "wien"]),
+    ("poland", ["poland"], ["warsaw", "krakow"]),
+    ("taiwan", ["taiwan"], ["taipei"]),
 ]
 
 RETRACTION_MARKERS = [
@@ -183,17 +198,41 @@ def years_match(claimed, actual) -> bool:
         return False
 
 
-def infer_countries(affiliations) -> list[str]:
-    """Infer country keys from a list of affiliation strings."""
-    found = []
+def _hit(hints, low: str) -> bool:
+    """Word-bounded substring test. Bare `in` would match 'usa' inside 'Busan'."""
+    return any(re.search(r"\b" + re.escape(h) + r"\b", low) for h in hints)
+
+
+def infer_provenance(affiliations) -> dict:
+    """Resolve affiliation strings to countries.
+
+    Returns {"countries": [...], "unrecognized": [...]} where `unrecognized`
+    holds the affiliation strings that matched no country in the table — a
+    state that must not be confused with "no affiliation data at all", because
+    an unlisted country (source-provenance.md judges those case by case) still
+    has to be looked at by a human.
+
+    Within one affiliation string a country name beats a city, so
+    "Moscow, ID 83844, USA" resolves to usa, not russia.
+    """
+    found, unrecognized = [], []
     for aff in affiliations or []:
         low = (aff or "").lower()
-        for country, hints in _COUNTRY_HINTS:
-            if country in found:
-                continue
-            if any(h in low for h in hints):
-                found.append(country)
-    return found
+        if not low.strip():
+            continue
+        named = [c for c, names, _ in _COUNTRY_HINTS if _hit(names, low)]
+        hits = named or [c for c, _, cities in _COUNTRY_HINTS if _hit(cities, low)]
+        if not hits:
+            unrecognized.append(aff)
+        for c in hits:
+            if c not in found:
+                found.append(c)
+    return {"countries": found, "unrecognized": unrecognized}
+
+
+def infer_countries(affiliations) -> list[str]:
+    """Country keys only — see infer_provenance() for the unrecognized bucket."""
+    return infer_provenance(affiliations)["countries"]
 
 
 def excluded_countries_in(countries) -> list[str]:
@@ -375,16 +414,32 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
                 f"YEAR MISMATCH — claimed {claim_year}, actual {record['year']}")
 
     # --- Provenance
-    countries = infer_countries(record["affiliations"])
+    prov = infer_provenance(record["affiliations"])
+    countries, unrecognized = prov["countries"], prov["unrecognized"]
     record["inferred_countries"] = countries
+    record["unrecognized_affiliations"] = unrecognized
     excluded = excluded_countries_in(countries)
     if excluded:
         out["flags"].append(
             f"EXCLUDED-COUNTRY PROVENANCE ({', '.join(excluded)}) — per the country policy this "
             f"source cannot support a conclusion; quarantine appendix only")
         out["checks"]["provenance_allowed"] = False
-    elif countries:
+    elif countries and not unrecognized:
         out["checks"]["provenance_allowed"] = True
+    elif countries and unrecognized:
+        # Some affiliations resolved, some did not. Reporting only the resolved
+        # ones would hide a possibly-decisive lead affiliation.
+        out["checks"]["provenance_allowed"] = None
+        out["flags"].append(
+            f"PROVENANCE PARTIAL — resolved {', '.join(countries)}, but {len(unrecognized)} "
+            f"affiliation(s) matched no country in the table (e.g. {unrecognized[0][:70]!r}). "
+            f"Read the paper's corresponding-author affiliation before relying on this")
+    elif unrecognized:
+        out["checks"]["provenance_allowed"] = None
+        out["flags"].append(
+            f"PROVENANCE UNRECOGNIZED — affiliation data exists but names no country in the "
+            f"table (e.g. {unrecognized[0][:70]!r}). Unlisted countries are judged on the merits "
+            f"(source-provenance.md), not assumed excluded — resolve it yourself")
     else:
         out["checks"]["provenance_allowed"] = None
         out["flags"].append(
@@ -435,7 +490,13 @@ def format_human(res: dict) -> str:
         if key in res["checks"]:
             L.append(f"  [2] {label:<16} {'PASS' if res['checks'][key] else 'FAIL'}")
     countries = r.get("inferred_countries") or []
-    L.append(f"      Country : {', '.join(countries) if countries else 'unknown (no affiliation data)'}")
+    unknown_affs = r.get("unrecognized_affiliations") or []
+    country_line = ", ".join(countries) if countries else "unresolved"
+    if unknown_affs:
+        country_line += f" (+{len(unknown_affs)} affiliation(s) not matched)"
+    elif not countries:
+        country_line = "unknown (no affiliation data)"
+    L.append(f"      Country : {country_line}")
     L.append(f"  [-] Retraction check.. {'clean' if res['checks'].get('not_retracted') else 'FLAGGED'}")
     if res["flags"]:
         L.append("")
@@ -451,9 +512,10 @@ def format_human(res: dict) -> str:
 # Offline self-test — proves the logic without network access
 # ======================================================================
 def self_test() -> int:
-    failures = []
+    failures, ran = [], []
 
     def check(name, cond):
+        ran.append(name)
         if not cond:
             failures.append(name)
 
@@ -486,6 +548,23 @@ def self_test() -> int:
     check("excluded detects russia", excluded_countries_in(["russia"]) == ["russia"])
     check("excluded clean", excluded_countries_in(["usa", "japan"]) == [])
     check("no affiliation -> empty", infer_countries([]) == [])
+    # Regressions: a bare substring match on a city is wrong in both directions.
+    check("Moscow, Idaho is not Russia",
+          infer_countries(["University of Idaho, Moscow, ID 83844, USA"]) == ["usa"])
+    check("Busan does not contain USA",
+          infer_countries(["Pusan National University, Busan, Republic of Korea"])
+          == ["south korea"])
+    check("Cambridge UK vs Cambridge MA",
+          infer_countries(["MRC Unit, Cambridge, UK"]) == ["uk"]
+          and infer_countries(["MIT, Cambridge, MA, USA"]) == ["usa"])
+    # An unlisted country is not "no data" — it must surface for human judgment.
+    prov = infer_provenance(["Fundacion INFANT, Buenos Aires, Argentina"])
+    check("unlisted country is unrecognized, not empty-silent",
+          prov["countries"] == [] and len(prov["unrecognized"]) == 1)
+    prov2 = infer_provenance(["Fundacion INFANT, Buenos Aires, Argentina",
+                              "SUNY Upstate, Syracuse, NY, USA"])
+    check("mixed known/unknown reports both",
+          prov2["countries"] == ["usa"] and len(prov2["unrecognized"]) == 1)
 
     # Retraction detection
     check("retraction in title", detect_retraction(
@@ -536,6 +615,20 @@ def self_test() -> int:
     check("e2e excluded flagged", any("EXCLUDED-COUNTRY" in f for f in res_x["flags"]))
     check("e2e excluded fails", res_x["passed"] is False)
 
+    def stub_partial(url, params=None, mailto=None):
+        return {"message": {
+            "DOI": "10.1000/p", "title": ["A trial"], "container-title": ["J"],
+            "issued": {"date-parts": [[2021]]}, "type": "journal-article",
+            "author": [{"family": "Ruiz", "given": "M",
+                        "affiliation": [{"name": "Hospital Italiano, Buenos Aires, Argentina"},
+                                        {"name": "NIH, Bethesda, MD, USA"}]}]}}
+
+    res_p = verify(doi="10.1000/p", fetch=stub_partial)
+    check("e2e partial provenance flagged",
+          any("PROVENANCE PARTIAL" in f for f in res_p["flags"]))
+    check("e2e partial provenance not asserted allowed",
+          res_p["checks"]["provenance_allowed"] is None)
+
     def stub_net_down(url, params=None, mailto=None):
         raise VerificationError("network unavailable (blocked) — cannot verify")
 
@@ -543,7 +636,7 @@ def self_test() -> int:
     check("e2e network error reported", bool(res_net["errors"]))
     check("e2e network error not a pass", res_net["passed"] is False)
 
-    total = 30
+    total = len(ran)
     print(f"self-test: {total - len(failures)}/{total} checks passed")
     if failures:
         for f in failures:

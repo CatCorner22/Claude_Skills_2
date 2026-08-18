@@ -9,7 +9,7 @@ description: >-
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Anomaly detection
@@ -42,9 +42,12 @@ metadata:
 5. **Set the threshold by the precision/recall trade-off, not a default.** These methods output a **score**;
    the alert is a cut on it. Tune the cut (contamination rate, score quantile) to your **alert budget** and
    the FP/FN cost. With few labels, estimate precision by having reviewers check a sample of top alerts.
-6. **Rank, don't just flag.** Emit a ranked score and route the **top-N** the team can actually investigate,
-   rather than a raw binary flag. Prioritization is what makes detection usable when everything above a hard
-   cutoff would swamp the reviewers.
+6. **Rank, and say what drove each flag.** Emit a ranked score and route the **top-N** the team can
+   actually investigate, rather than a raw binary flag — prioritization is what makes detection usable when
+   everything above a hard cutoff would swamp the reviewers. A score alone is not investigable, so attach
+   the **drivers**: for each alert, report the two or three fields whose robust z (step 2:
+   `0.6745·(x − median)/MAD`) is most extreme, and the first check a reviewer should run. That recipe works
+   for any scorer, including isolation forest and LOF, which give no native attribution.
 7. **Close the loop and manage alert fatigue.** Track precision on reviewed alerts, suppress known-benign
    recurring patterns (a scheduled large transfer isn't news every month), fold confirmed cases back as labels,
    and re-tune. An alert stream nobody trusts is worse than none.

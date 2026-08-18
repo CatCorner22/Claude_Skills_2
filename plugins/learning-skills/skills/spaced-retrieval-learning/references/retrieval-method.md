@@ -59,6 +59,11 @@ Grade every attempt into one of four buckets and act on it:
 | Partial | Right pieces, wrong or missing pieces | Corrective feedback now; re-ask before the session ends; next gap shrinks one step |
 | Wrong / blank | Incorrect, or "I don't know" | Corrective feedback now; re-ask before the session ends; restart at the shortest interval |
 
+The actions are *relative to the last gap*, so they only bite from session 2 on. On session
+1 there is no prior gap: schedule everything at the session-2 gap below (1–2 days), and apply
+the bucket actions from then. "The shortest interval" for a wrong/blank item means that same
+1–2 days — never longer than the next scheduled session.
+
 **Successive relearning rule:** an item is *retired* only after fluent-correct in three or
 more separate sessions (not three times in one session). Retired items get one long-gap spot
 check before the deadline; a miss un-retires them.
@@ -78,8 +83,12 @@ Expanding gaps, anchored so the final full pass lands shortly before the materia
 
 Honest calibration note: Cepeda's work shows the best gap *scales with the retention
 interval* — longer retention wants longer gaps — so treat this table as a sane default, not
-a law. A held session at a rough interval beats a skipped session at a perfect one. Short
-runway (an exam in ten days) compresses the whole table; "know it forever" stretches it.
+a law. Cepeda et al. (2008) put a usable ratio on it: the optimal gap runs roughly 10–20% of
+the retention interval at week-scale delays and falls to roughly 5–10% at a one-year delay.
+So an exam ten weeks out (70 days) wants gaps of roughly 7–14 days; "keep it for a year"
+(365 days) wants roughly 18–36 days — about a month, and growing. A held session at a rough
+interval still beats a skipped session at a perfect one. Short runway (an exam in ten days)
+compresses the whole table; "know it forever" stretches it.
 
 ## The interleaving plan
 
@@ -111,11 +120,18 @@ A markdown table per material set is enough; keep it wherever the user keeps not
 
 ```
 | Item | Topic | Grade | S1 | S2 | S3 | Status | Next ask |
-|------|-------|-------|----|----|----|--------|----------|
-| ach-vs-wire-finality | payments | discrim | W | P | F | active | +2d |
+|----------------------|----------|---------|----|----|----|--------|----------|
+| ach-vs-wire-finality | payments | discrim | W  | P  | F  | active | +2w |
+| ach-return-window    | payments | recall  | F  | F  | P  | active | +2d |
 ```
 
 Codes: F fluent, E effortful, P partial, W wrong. "Status" is active / retired / demoted.
+Add S4, S5… columns as sessions accrue.
+
+Read the two rows against the bucket table — both were last asked at the ~1-week S2→S3 gap.
+Row 1's latest attempt was fluent, so the gap **expands** 2–3× → ~2 weeks. Row 2's was
+partial, so it **shrinks one step** down the schedule table → 1–2 days. Neither retires yet:
+retirement needs fluent-correct in three *separate* sessions, and row 2 lost its third.
 The assistant reads this to resume ("quiz me on the overdue items") and updates it each
 session.
 

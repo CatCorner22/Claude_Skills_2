@@ -13,7 +13,7 @@ description: >-
   compact the context, working memory, episodic memory, semantic memory, MEMORY.md, memory
   layers, save for later, what do you remember, pick up where we left off.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Hierarchical memory manager
@@ -48,14 +48,16 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
      Entities; User Preferences & Style; Project State & Decisions; Open Questions /
      Uncertainties; Lessons Learned & Avoidance Rules; Successful Patterns / Working
      Methods — with a Crystallization log at the bottom maintained by the crystallizer.
+     Standing user instructions live as `DIRECTIVE:` entries under Core Facts, because the
+     load ritual surfaces them first.
 2. **At session start / on retrieval:** load only the most relevant slices from native
    memory, project knowledge, MEMORY.md, or artifacts. Briefly restate the anchors that
    affect the current task — the standing directives, the avoidance rules that bite here,
    the preferences that shape the deliverable — and don't dump the whole store into context.
 3. **During work:** proactively extract important new information and place it in the
    correct layer, phrased in the entry grammar (`FACT:` / `PREFERENCE:` / `RULE:` /
-   `LESSON:` / `PATTERN:` / `METHOD:`, each with its evidence and confidence). Prefer
-   durable external storage (a project file, MEMORY.md, an artifact) over pure context
+   `LESSON:` / `PATTERN:` / `METHOD:` / `DIRECTIVE:`, each with its evidence and
+   confidence). Prefer durable external storage (a project file, MEMORY.md, an artifact) over pure context
    whenever the information should outlive the session. When the user corrects something,
    run the four-step protocol in `metacognition-skills:reflective-learner` — its final step
    logs the rule back through this skill; when a deep analysis via

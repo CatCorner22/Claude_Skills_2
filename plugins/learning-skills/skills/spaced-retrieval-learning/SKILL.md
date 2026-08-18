@@ -11,6 +11,8 @@ description: >-
   to stick — for an exam, a new domain, a standard they keep re-looking-up — or asks to be
   quizzed rather than lectured. Triggers: spaced repetition, retrieval practice, quiz me,
   make this stick, study plan, flashcards, help me remember this, test me on.
+metadata:
+  version: "1.1.0"
 ---
 
 # Spaced retrieval (make it stick)

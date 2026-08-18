@@ -99,8 +99,12 @@ Every metric is a statistic on a finite sample, so it carries a standard error. 
 Worked: a test set with **40 positives** and an observed recall of **0.80**.
 - `SE ≈ √(0.80 × 0.20 / 40) = √0.004 = 0.063` → 95% normal-approximation interval `0.80 ± 1.96 × 0.063 =
   0.80 ± 0.124` → **[0.68, 0.92]**, i.e. ±12 points on your headline number.
-- At small `n` the normal approximation is crude; the Wilson interval for the same data is **[0.65, 0.90]**
-  — wider still. Use Wilson (or an exact/Clopper–Pearson interval) below a few hundred events.
+- At small `n` the normal approximation is crude — it is symmetric around p̂ and can run past 1 (at a
+  recall of 0.95 on 40 positives it returns an upper bound of **1.018**). Prefer **Wilson**, which is
+  asymmetric and stays inside [0, 1]: **[0.65, 0.90]** here. Note Wilson is not *wider* — it is shifted
+  down, and the correction that matters is to the **lower** bound, which the normal approximation put 3
+  points too high. **Clopper–Pearson** (exact) is the conservative choice and is genuinely wider:
+  **[0.64, 0.91]**. Use Wilson below a few hundred events, Clopper–Pearson when you must not overstate.
 - With **200 positives** the same 0.80 gives `SE = √(0.16/200) = 0.028` → **[0.74, 0.86]** (±5.5 points).
 
 So: "we improved recall from 78% to 81%" on 40 positives is not a finding. Sizing question to ask before the

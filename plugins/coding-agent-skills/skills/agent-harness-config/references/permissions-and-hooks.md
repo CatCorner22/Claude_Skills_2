@@ -48,14 +48,22 @@ Hooks are shell commands the harness runs deterministically on lifecycle events.
 Common events:
 - `SessionStart` — prepare the workspace (install deps, fetch fixtures, print context).
 - `UserPromptSubmit` — react to / augment a user prompt before the model sees it.
-- `PreToolUse` — run before a tool executes; can **block** the tool (non-zero exit / JSON decision).
+- `PreToolUse` — run before a tool executes; can **block** the tool (exit code 2, or a JSON
+  `hookSpecificOutput.permissionDecision`).
 - `PostToolUse` — run after a tool executes (e.g. format the file that was just edited).
 - `Stop` / `SubagentStop` — run when the model (or a subagent) finishes a turn.
 - `Notification` — react to notifications.
 
 Useful variables inside hook commands: `$CLAUDE_PROJECT_DIR` (project root). Keep hook scripts in
-`.claude/hooks/` and make them executable. A `PreToolUse` hook that exits non-zero (or returns a
-JSON block decision) prevents the tool call — use this for guardrails.
+`.claude/hooks/` and make them executable.
+
+**A blocking `PreToolUse` hook exits with code 2 specifically** — not just any non-zero code. Exit
+2 blocks the tool call and feeds the hook's stderr back to the model; any other non-zero exit is
+reported as a hook *error* and the tool call proceeds anyway. That is the failure shape worth
+knowing: a guard written as `exit 1` looks like it fired and blocks nothing. The alternative is a
+JSON decision on stdout — for `PreToolUse`, `{"hookSpecificOutput": {"hookEventName":
+"PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": "..."}}` (the older
+top-level `decision: "block"` is deprecated for this event).
 
 Inspect configured hooks with `/hooks`.
 

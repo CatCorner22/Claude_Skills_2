@@ -41,6 +41,7 @@ pattern). The product reads the predictions table like any other data — no ser
 ## Prediction-log schema
 ```python
 class PredictionLog(Base):
+    __tablename__ = "prediction_log"                # required: SQLAlchemy 2.0 raises without it
     id: Mapped[int] = mapped_column(primary_key=True)
     ts: Mapped[datetime] = mapped_column(server_default=func.now(), index=True)
     model_version: Mapped[str] = mapped_column(index=True)

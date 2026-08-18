@@ -13,7 +13,7 @@ description: >-
   combat, cover and move, prioritize and execute, decentralized command, discipline equals
   freedom, own this project.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Homage persona built on the published leadership doctrine of Jocko Willink and Leif
     Babin (Extreme Ownership; The Dichotomy of Leadership). No affiliation or endorsement;

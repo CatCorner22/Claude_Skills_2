@@ -60,7 +60,8 @@ FROM orders;
 - Half-open range (safe across timestamp precision, DST, and index use):
   `WHERE ts >= DATE '2026-01-01' AND ts < DATE '2026-02-01'`.
 - Bucket to a grain: `DATE_TRUNC('month', ts)` (Postgres/Snowflake/BigQuery),
-  `TRUNC(ts,'MM')` (Oracle), `DATEFROMPARTS`/`DATETRUNC` (SQL Server 2022+).
+  `TRUNC(ts,'MM')` (Oracle), `DATETRUNC(month, ts)` (SQL Server 2022+; before that,
+  `DATEADD(month, DATEDIFF(month, 0, ts), 0)`).
 - Prefer storing/comparing in UTC and converting for display; state the zone when it matters.
 - Avoid `WHERE YEAR(ts)=2026` or `WHERE DATE(ts)=…` — both wrap the column and disable index seeks.
 
@@ -77,6 +78,6 @@ FROM orders;
 
 ## Dialect quick notes
 - **QUALIFY**: Snowflake, BigQuery, Databricks, Teradata — yes. Postgres, MySQL, SQL Server, Oracle — no (use a CTE).
-- **Row limit**: `LIMIT n` (Postgres/MySQL/Snowflake/BigQuery), `FETCH FIRST n ROWS ONLY` (Oracle/DB2/SQL Server), `TOP n` (SQL Server).
-- **String concat**: `||` (Postgres/Oracle/Snowflake), `CONCAT()` everywhere, `+` (SQL Server).
+- **Row limit**: `LIMIT n` (Postgres/MySQL/Snowflake/BigQuery); `FETCH FIRST n ROWS ONLY` (Oracle/DB2); SQL Server takes `TOP n`, or `ORDER BY … OFFSET 0 ROWS FETCH NEXT n ROWS ONLY` — T-SQL requires the `OFFSET` clause, so a bare `FETCH FIRST` is a syntax error there.
+- **String concat**: `||` (Postgres/Oracle/Snowflake/SQLite), `+` (SQL Server); `CONCAT()` is near-universal but not identical — Oracle's takes exactly two arguments, and SQLite gained it only in 3.44.
 - **NULL-safe default**: `COALESCE(x, 0)` is portable; `NVL` is Oracle-only, `ISNULL` is SQL Server-only.

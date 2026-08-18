@@ -10,7 +10,7 @@ description: >-
   version data files, sanitize data, anonymize spreadsheet, remove sensitive data, what can I
   commit, data retention files, raw vs processed, safe to share.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Data-file hygiene

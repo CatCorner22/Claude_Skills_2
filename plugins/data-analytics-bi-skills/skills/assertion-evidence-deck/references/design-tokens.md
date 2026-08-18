@@ -4,8 +4,8 @@ Read at stage 5. Every value below carries its provenance. Two sources supply th
 Microsoft assertion-evidence template (geometry and typography), and — for the preserved legacy
 `ut` brand pack only — the University of Tennessee System brand guidelines. The builder ships a
 **neutral palette as its default**; the UT values remain solely as an optional brand pack for
-matching legacy UT-branded decks. `scripts/build_deck.py` encodes all of them; copy the geometry
-table when building outside the script.
+matching legacy UT-branded decks. `scripts/build_deck.py` encodes the geometry, typography, and
+colors for the slide kinds it builds; copy the geometry table when building outside the script.
 
 ## Contents
 - [Slide geometry](#slide-geometry)
@@ -86,8 +86,11 @@ recipient from "fixing" it.
 
 The default is the **neutral palette** (`--brand neutral`, the builder's default): ink `333333`
 for body text, primary `4B4B4B`, muted `767676` for source tags and slide numbers, secondary
-`A6A6A6`, on white — every text pair clears WCAG AA on white. Use it unless the deck must match
-an existing brand.
+`A6A6A6`, on white. Every *text* pair clears WCAG AA on white — `333333` at 12.63:1, `767676` at
+4.54:1. The one value that does not is `A6A6A6`, the second chart series, at 2.43:1 against white:
+below the 3:1 non-text threshold, so it is subject to the same rule as Tennessee Orange below —
+never the sole carrier of meaning. The builder keeps data labels on for exactly that reason. Use
+this palette unless the deck must match an existing brand.
 
 Everything below documents the **UT System palette**, preserved as the legacy `ut` brand pack
 (`--brand ut`) for matching older UT-branded decks. Verified from the UT System brand guidelines.
@@ -139,9 +142,14 @@ accent color.
 
 ## Applying the tokens
 
-`scripts/build_deck.py` encodes every value on this page. The neutral palette is the default; pass
-`--brand ut` only to match a legacy UT-branded deck, and `--font` to override the typeface. The
-builder computes contrast and warns when a chosen combination falls below AA.
+`scripts/build_deck.py` encodes the tokens for the slide kinds it builds. The neutral palette is
+the default; pass `--brand ut` only to match a legacy UT-branded deck, and `--font` to override the
+typeface. The builder computes contrast on three pairs — ink-on-background, muted-on-background, and
+the accent used as text — and warns on stderr when one falls below its threshold. `--brand ut` warns
+every run, because Tennessee Orange as a magnitude number is 2.49:1; that warning is the tokens rule
+above speaking, and the fix is to label the value directly rather than to ignore it. Text placed on
+a filled shape is picked automatically as whichever of ink/background contrasts better with the
+fill.
 
 When you build outside the script — editing a template, using the `pptx` skill directly — copy the
 geometry table above rather than eyeballing positions. Consistent placement across slides is most of

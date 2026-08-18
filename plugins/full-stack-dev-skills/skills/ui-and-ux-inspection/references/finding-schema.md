@@ -10,6 +10,22 @@ source specification (shown as a fully populated example).
 - `status` tracks the finding's lifecycle in the remediation backlog (`open` when filed;
   update it as findings are fixed and re-verified across re-inspections).
 
+**Allowed values** (added here so two runs of this skill produce comparable JSON — the example
+below is the verbatim source spec, this vocabulary is the house convention for filling it):
+
+| Field | Values |
+|---|---|
+| `severity` | `critical` · `high` · `medium` · `low` |
+| `confidence` | `high` (observed and reproduced) · `medium` (observed once, or model/rubric inference from measured input) · `low` (inferred) |
+| `status` | `open` · `in-progress` · `fixed` · `verified` · `wont-fix` |
+| `estimated_effort` | `small` · `medium` · `large` |
+| `evidence_type` | any of `code` · `runtime` · `automated-test` · `screenshot` · `docs` |
+| `category` | the inspection pass that produced it: `hierarchy` · `grouping` · `choices` · `affordance` · `navigation` · `forms` · `feedback` · `tables` · `onboarding` · `accessibility` · `responsive` · `performance` · `privacy` |
+| `user_impact.*` | free text, but keep the four keys shown below on every finding |
+
+Anything outside these lists is a decision to record in `references/your-environment.md`, not an
+improvisation per finding.
+
 ```json
 {
   "id": "UIX-001",

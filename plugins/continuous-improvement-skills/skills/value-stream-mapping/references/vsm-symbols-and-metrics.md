@@ -99,9 +99,10 @@ Ladder math (1 day = 480 working min):
 Reading the map:
 - The item is worked ~2 hours and waits ~5.75 days. Nobody typing faster changes the
   headline; the queues own it.
-- Step 1's 60% %C&A means 4 in 10 requests bounce back to the requester for missing
-  information — a rework loop that re-enters the 4-hour inbox wait every bounce. Fixing the
-  request form (quality at the source) attacks both %C&A and lead time.
+- Step 1's 60% %C&A is Assignment's score of Intake, not Intake's own: 4 in 10 items reach
+  Assignment unusable — missing information that has to be chased back to the requester before
+  the item can move, re-entering the 4-hour inbox wait each time. Fixing the request form
+  (quality at the source) attacks both %C&A and lead time.
 - The two biggest waits are batching artifacts: twice-weekly triage and a single approver's
   inbox. Daily triage and a deputy approver are future-state candidates that touch no one's
   CT.

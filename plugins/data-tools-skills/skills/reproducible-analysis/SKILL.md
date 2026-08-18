@@ -14,7 +14,7 @@ description: >-
   rerun this, rerun the analysis, replication crisis, reproducibility crisis, random
   seed, data lineage, data provenance, literate programming, FAIR data.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §8 reproducible-analysis).
@@ -28,8 +28,8 @@ metadata:
 Define the two words first, because even the field's institutions got them backwards:
 following Claerbout & Karrenbach (1992), **reproduce** = same data + same code gives
 the same numbers; **replicate** = new data or a new implementation reaches the same
-conclusion. The ACM used the two terms with swapped meanings from 2013 until August
-2020, when it re-aligned with Claerbout; Plesser's "Reproducibility vs. Replicability:
+conclusion. The ACM used the two terms with swapped meanings from its 2016 badging
+policy until August 2020, when it re-aligned with Claerbout; Plesser's "Reproducibility vs. Replicability:
 A Brief History of a Confused Terminology" (2018) maps the mess [snippet-only]. The
 confusion is institutional, not personal — so any reproducibility document states its
 definitions at the top. The stakes come from the metascience literature, held honestly
@@ -70,7 +70,7 @@ The terminology history, the crisis evidence held honestly, per-rung checklists,
 worked example are in `references/reproducibility-method.md`.
 
 1. **State the two definitions at the top of the analysis doc** (reproduce vs
-   replicate, Claerbout usage) and which one you are promising. Seven years of the ACM
+   replicate, Claerbout usage) and which one you are promising. Four years of the ACM
    using the words backwards is the proof that "everyone knows what we mean" is false.
 2. **Pin the environment and record every seed.** Tool and package versions written
    into the output; the seed of anything random — sampling, train/test splits,
@@ -117,7 +117,7 @@ The 36% was formally contested in *Science* (Gilbert et al. argued the estimate 
 biased downward; the OSC replied) — but both camps agree published effect sizes
 overstate, and "36% replicated" must never be flipped into "64% is false": a failed
 replication is evidence of shrinkage and uncertainty, not disproof [snippet-only].
-Even the field's two key words were institutionally swapped for seven years — which is
+Even the field's two key words were institutionally swapped for four years — which is
 why the ladder's first rung is definitions, and why a skill preaching honest numbers
 opens by showing its own foundational numbers are contested.
 
@@ -137,7 +137,7 @@ survives the reviewer who reruns it.
 
 ## Common mistakes
 - Using "reproducible" and "replicable" interchangeably → declare the Claerbout
-  definitions at the top; the ACM's seven backwards years prove the ambiguity is real.
+  definitions at the top; the ACM's four backwards years prove the ambiguity is real.
 - "I reran it and got the same numbers" offered as verification → the author's rerun
   shares the author's environment and blind spots; fresh clone + second keeper.
 - Seedless randomness → any sample, split, or simulation without a recorded seed makes

@@ -98,7 +98,8 @@ hold into a 2-week one and teaches the team to dread inspections.
 
 ## 5. The punch-list format
 
-One line per item, five fields, no exceptions:
+One line per item, six fields, no exceptions: bin, what's missing, why it matters next,
+the fix, size, owner.
 
 | # | Bin | What's missing / unfinished | Why it matters for what's next | The fix | Size | Owner |
 |---|---|---|---|---|---|---|

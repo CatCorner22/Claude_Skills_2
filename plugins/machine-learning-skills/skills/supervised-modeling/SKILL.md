@@ -9,7 +9,7 @@ description: >-
   logistic regression, linear regression, random forest, gradient boosting, XGBoost, LightGBM, predict
   a category, predict a number, classifier, feature importance, coefficients.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Supervised modeling
@@ -61,10 +61,10 @@ to ship.
 ## Why / learn
 The governing principle is **start with an interpretable baseline, and add complexity only when it earns
 its keep.** A linear or logistic model is not a throwaway — it is a real model, it rarely overfits, and
-its coefficients are a defensible explanation, which matters enormously in finance where a black box that
-holds a payment or flags a customer has to be justifiable. You reach for trees and boosting when the
-linear model demonstrably underfits (it can't capture the curve or the interaction), and the price you
-pay is interpretability and a real risk of overfitting that only regularization and honest validation keep
+its coefficients are a defensible explanation, which matters wherever a prediction has to be defended to
+someone who did not build it — an adverse-action notice, a triage rule a clinician overrides, a screening
+model an auditor will ask about. You reach for trees and boosting when the linear model demonstrably
+underfits (it can't capture the curve or the interaction), and the price you pay is interpretability and a real risk of overfitting that only regularization and honest validation keep
 in check. Understanding *why* the families differ helps you choose: linear models assume an additive,
 monotone relationship and extrapolate; trees carve the feature space into boxes, capture interactions for
 free, but never extrapolate beyond the training range. Interpretation is where people most often fool

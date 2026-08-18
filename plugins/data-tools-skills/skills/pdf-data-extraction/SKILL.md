@@ -11,7 +11,7 @@ description: >-
   pdfplumber, camelot, parse bank statement pdf, pdf invoice data, scanned pdf, OCR pdf,
   pdf text extraction, table extraction python.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # PDF data extraction
@@ -30,8 +30,9 @@ metadata:
 1. **Classify the PDF first — it decides everything.** Open a page and try to select text. Text
    selects → **native** PDF (text layer exists; pdfplumber/camelot will work). Nothing selects →
    **scanned image** (you need OCR — `ocrmypdf` adds a text layer, then proceed as native; accept
-   that OCR of numbers demands verification). Programmatic check: `page.extract_text()`
-   returning nothing ≈ scanned.
+   that OCR of numbers demands verification). Programmatic check:
+   `not page.extract_text().strip()` ≈ scanned — pdfplumber returns an empty *string*, not
+   `None`, so an `is None` test never fires.
 2. **Pick the tool by table style.**
    - **pdfplumber** — the general workhorse: text with positions, and table extraction driven by
      ruling lines or alignment. Best when you need control or the layout is odd.

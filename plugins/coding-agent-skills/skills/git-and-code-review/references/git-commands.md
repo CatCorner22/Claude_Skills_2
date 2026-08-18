@@ -52,7 +52,8 @@ git restore path/to/file                # discard unstaged changes to a file
 git restore --staged path/to/file       # unstage but keep the edits
 git revert <commit>                     # new commit that undoes a commit — safe on shared history
 git reset --soft HEAD~1                 # undo last commit, keep changes staged (local only)
-git stash / git stash pop               # shelve work-in-progress and bring it back
+git stash                               # shelve work-in-progress
+git stash pop                           # bring it back
 ```
 Prefer `revert` over `reset --hard` on anything you've pushed — `revert` is additive and doesn't
 rewrite shared history. Reach for `git reflog` to recover a commit you think you lost.

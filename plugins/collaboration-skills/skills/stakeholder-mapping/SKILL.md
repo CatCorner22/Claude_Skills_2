@@ -15,14 +15,15 @@ description: >-
   RACI, responsibility matrix, influence without authority, buy-in, who needs to sign
   off, stakeholder management, who can block this.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from the general-use expansion dossier
     (docs/research/general-use-expansion-research.md §7 stakeholder-mapping) —
     research-verified anchors with the misattribution warnings carried as teaching
     content. [snippet-only] marks claims verified via cross-checked search snippets,
-    not primary documents; the Mendelow power/dynamism finding is convergent-secondary
-    — fetching the 1981 ICIS paper (AIS eLibrary) would upgrade it to primary.
+    not primary documents; the Mendelow power/dynamism finding is confirmed by the
+    paper's own published abstract (AIS eLibrary, ICIS 1981 paper 20) — the full paper
+    text remains unread.
 ---
 
 # Stakeholder mapping (who can sink or save the work)
@@ -30,12 +31,15 @@ metadata:
 The honesty point first, because it is the method's own best lesson: the
 "Mendelow matrix" everyone draws — power on one axis, interest on the other — is not in
 Mendelow. His 1981 ICIS paper on environmental scanning carries a power/**dynamism**
-matrix; the power/**interest** grid comes from Johnson & Scholes' *Exploring Corporate
-Strategy* (1999 edition, adapting Mendelow by swapping dynamism for interest) and
-independently from Eden & Ackermann's *Making Strategy* (1998) [snippet-only,
-convergent secondary — the dossier flags that the ICIS paper text itself was not
-fetched]. Cite the grid to Johnson & Scholes or Eden & Ackermann; cite Mendelow for the
-idea that stakeholder power should drive scanning priority. A mapping skill that
+matrix — its own published abstract says the contingency model relates scanning "to the
+dynamism of the environment and the power of the stakeholder" [abstract verified, AIS
+eLibrary, ICIS 1981 paper 20; the full paper text remains unread]. The power/**interest**
+grid comes from Johnson & Scholes' *Exploring Corporate Strategy* (which swapped dynamism
+for interest; 1999 is the usual citation, but secondary sources trace the adaptation to
+earlier 1990s editions — cite the edition you actually consulted) and independently from
+Eden & Ackermann's *Making Strategy* (1998) [snippet-only]. Cite the grid to Johnson &
+Scholes or Eden & Ackermann; cite Mendelow for the idea that stakeholder power should
+drive scanning priority. A mapping skill that
 mis-cites its own map has already failed its first audit.
 
 ## When to use

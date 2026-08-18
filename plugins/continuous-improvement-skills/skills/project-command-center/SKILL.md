@@ -13,7 +13,7 @@ description: >-
   intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
   constructive paranoia, now next later watch.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 
@@ -97,8 +97,9 @@ reality, never to the preferred answer.**
 ## Why / learn
 The doctrine's spine is the Millennium Challenge lesson: an exercise whose organizers
 protect the preferred answer from adaptive challenge loses its epistemic value — when the
-red team's sunk fleet was refloated and the rules were rewritten mid-game, the exercise
-stopped being evidence. Everything else follows from taking that seriously in software:
+fleet Van Riper's red team had sunk was refloated and the rules were rewritten mid-game, the
+exercise stopped being evidence: the organizers had restored the side whose success the
+exercise was meant to test. Everything else follows from taking that seriously in software:
 criteria fixed before results, interventions logged, continuation never dressed up as
 validation. OODA earns its place because orientation — not speed — is the decisive
 element: it determines what you can even notice, which is why dashboards without

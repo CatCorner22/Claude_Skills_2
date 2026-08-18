@@ -95,7 +95,7 @@ Add the engine's own canary next to it — one deliberate constraint violation, 
 that silently drops constraints cannot pass:
 ```python
 def test_canary_3_fk_is_enforced(db):
-    db.add(Invoice(customer_id=10 ** 9, number="ORPHAN", amount_cents=1))
+    db.add(Invoice(customer_id=10 ** 9, amount_cents=1))   # a customer id that cannot exist
     with pytest.raises(IntegrityError):
         db.flush()
 ```

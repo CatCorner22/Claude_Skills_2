@@ -28,7 +28,9 @@
 | Comments explaining clever code | Cleverness tax | Rewrite boring; delete the comment |
 
 ## Deletion opportunities (hunt monthly)
-- Unused dependencies (`pip-audit` / `npm ls`, import scans)
+- Unused dependencies — `deptry` or `pipreqs` for Python, `depcheck` for Node. Not `pip-audit`
+  (CVEs) and not `npm ls` (prints the installed tree): neither answers "which declared
+  dependency is never imported", so both report clean on a project full of unused deps.
 - Dead endpoints/routes (access logs say nobody calls them)
 - Commented-out code and TODOs older than 6 months (do or delete)
 - Duplicate near-copies that drifted (merge or delete one)

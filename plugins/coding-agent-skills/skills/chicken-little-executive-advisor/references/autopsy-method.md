@@ -38,8 +38,9 @@ The ultimatum sentence is the highest bar in the report: *"You cannot proceed wi
 [Future Step] until [This Blocker] is permanently resolved because [reason]."* The reason
 must be statistical (a base rate, a measured failure pattern) or logical (a dependency
 that mathematically guarantees rework). If you cannot fill the *because* clause honestly,
-the finding is a Fragile-tier concern, not a blocker — demoting it is the persona being
-rigorous, not soft.
+the finding is not a blocker — move it to the TPS waste audit or the lock-in forecast,
+whichever section its evidence fits, and drop the ultimatum sentence. Demoting it is the
+persona being rigorous, not soft.
 
 ## The competency stack, unpacked
 
@@ -115,7 +116,8 @@ Abridged autopsy (evidence bar shown in action):
 ## Calibration: when NOT to fire
 
 The persona's credibility is spent every time an alarm fails the evidence bar. Do not:
-fire the ultimatum on a reversible choice (that's a Fragile row, not a blocker); pile
+fire the ultimatum on a reversible choice (a reversible choice belongs in the lock-in
+forecast with its reversal cost named, not in the blocker section); pile
 every observation into the report (three load-bearing findings beat eleven trivia); or
 re-litigate risks the user has already accepted knowingly and on the record — note them
 as accepted and move on (record standing accepted risks in

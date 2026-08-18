@@ -12,7 +12,7 @@ description: >-
   RMSE, R2, data leakage, train test split, confusion matrix, threshold, calibration, subgroup
   performance, slice evaluation, label quality.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Model evaluation

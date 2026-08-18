@@ -12,7 +12,7 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # DuckDB local analytics
@@ -38,7 +38,9 @@ GROUP BY bank ORDER BY total DESC;
 
 -- Globs and Parquet work the same way; a year of files is one table:
 SELECT * FROM read_parquet('data/tx_2026-*.parquet');
--- Excel sheets too:
+-- Excel sheets too (needs the `excel` extension — DuckDB auto-installs it on first
+-- use, which requires network; on a locked-down machine run `INSTALL excel` once
+-- where you do have network, or convert the sheet to CSV first):
 SELECT * FROM read_xlsx('report.xlsx', sheet='Detail');
 ```
 
@@ -54,7 +56,8 @@ SELECT * FROM read_csv('export.csv', header=true, delim=';',
 
 ```sql
 CREATE OR REPLACE TABLE recon AS
-SELECT s.line_id, s.amount AS stmt_amt, l.amount AS ledger_amt,
+SELECT ref_no,                       -- keep the key: break rows are NULL on one side
+       s.line_id, s.amount AS stmt_amt, l.amount AS ledger_amt,
        coalesce(s.amount,0) - coalesce(l.amount,0) AS diff
 FROM read_csv_auto('statement.csv') s
 FULL OUTER JOIN read_csv_auto('ledger.csv') l USING (ref_no);

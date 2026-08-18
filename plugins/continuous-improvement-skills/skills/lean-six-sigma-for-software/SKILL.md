@@ -12,6 +12,8 @@ description: >-
   software, Toyota production system for software, Deming for software, standardize and
   measure, begin with the end in mind, adversarial release gauntlet, WCAG-conformant app
   build, stability and redundancy, co-design the UI.
+metadata:
+  version: "1.1.0"
 ---
 
 # Lean Six Sigma for software

@@ -9,6 +9,8 @@ description: >-
   Triggers: react component, frontend state management, tanstack query, useEffect fetch,
   htmx, vite setup, form handling react, UI architecture, frontend too complex, SPA vs server
   rendered, component design.
+metadata:
+  version: "1.1.0"
 ---
 
 # Frontend: modern, dynamic, lean
@@ -33,9 +35,10 @@ description: >-
    common middle case.
 2. **In React, separate the two kinds of state — this is most of frontend sanity:**
    - **Server state** (data that lives in the API): owned by **TanStack Query** —
-     `useQuery(['invoices'], fetchInvoices)` gives caching, refetching, loading/error
-     states; after a mutation, `invalidateQueries` re-syncs. Never copy server data into
-     `useState` — that copy is a cache you now maintain by hand.
+     `useQuery({ queryKey: ['invoices'], queryFn: fetchInvoices })` gives caching, refetching,
+     loading/error states; after a mutation, `invalidateQueries({ queryKey: ['invoices'] })`
+     re-syncs. (v5 accepts only the object form; the old positional call throws.) Never copy
+     server data into `useState` — that copy is a cache you now maintain by hand.
    - **UI state** (which tab is open, form drafts): plain `useState`/`useReducer`, kept in
      the component that owns it. Reach for context only for genuine cross-cutting state
      (theme, session); reach for a store library rarely.

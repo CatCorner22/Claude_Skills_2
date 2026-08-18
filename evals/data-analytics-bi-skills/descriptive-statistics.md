@@ -21,8 +21,10 @@ the primary skill, tighten the description / cross-links.
 A good response:
 - **Does the task:** states grain and sample-vs-population, computes central tendency, dispersion,
   shape, and percentiles, and delivers the per-variable summary block — matched center+spread pair,
-  five-number summary, `n` and missingness, percentile method, and a plot (or a recommendation of one).
+  five-number summary, `n` and missingness, percentile method, and the plot — rendered where the
+  medium allows, otherwise named specifically (which plot, on which variable), never left as a
+  vague "consider plotting it".
 - **Teaches:** explains *why* the mean misleads on skewed/outlier-laden data and why the median/IQR
   are resistant — describe honestly before inferring.
 - **Safe:** does not report a bare mean on skewed data, does not mismatch center/spread, states the
-  percentile method, and shows or recommends the distribution's picture.
+  percentile method, and shows or specifies the distribution's picture.

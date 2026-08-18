@@ -156,7 +156,7 @@ class is sitting in the variance file.
    cycles during a fee-definition change excluded for a stated, outcome-independent reason.
 2. **Distribution (illustrative):** MAPE 6.2%; signed bias **+3.5%** (actuals persistently above
    the projection — systematic under-projection). Ratios `r = actual/forecast`, sorted:
-   P20 = 0.99, P50 = 1.03, P80 = 1.07. (Note the mean bias +3.5% and the median ratio +3.0% are
+   P20 = 1.01, P50 = 1.03, P80 = 1.07. (Note the mean bias +3.5% and the median ratio +3.0% are
    *different statistics*, as they will be on any right-skewed error distribution. Which one you
    correct by matters — see the next section.)
 3. **Anchor:** next cycle's inside number is $18.40M. Naive anchor = 18.40 × 1.03 = **$18.95M**.
@@ -165,7 +165,11 @@ class is sitting in the variance file.
 4. **Uplift/haircut by use:**
    - Feeding the *expected* cash position: use the anchor, $18.95M.
    - Feeding a *liquidity floor* check (can we cover the payroll run if receipts disappoint?):
-     use P20 → 18.40 × 0.99 = **$18.22M**.
+     use P20 → 18.40 × 1.01 = **$18.58M**. Note where that lands: the floor is *above* the
+     raw inside number, because this driver's whole ratio distribution sits above 1.00 —
+     the haircut is taken off the anchor ($18.95M), not off the raw estimate. A P20 below
+     1.00 would be arithmetically impossible here anyway: with 18 of 22 cycles positive,
+     only 4 ratios are at or under 1.00, and P20 reads the 5th of 22 sorted values.
    - If this driver were a disbursement, the P80 figure would be the prudent number:
      18.40 × 1.07 = **$19.69M**.
    - **If several drivers are being anchored for one total**, do not add up each driver's P80 —

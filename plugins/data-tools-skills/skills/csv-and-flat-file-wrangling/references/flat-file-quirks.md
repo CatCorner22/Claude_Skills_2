@@ -16,7 +16,8 @@
 ## Reading the raw bytes (the 60-second pre-parse)
 
 ```bash
-head -c 500 export.csv | xxd | head -20   # bytes; or: file export.csv
+head -c 500 export.csv | xxd | head -20   # bytes (no xxd? od -An -tx1z works)
+file export.csv                           # one-line encoding guess
 head -5 export.csv; tail -5 export.csv    # title rows above, total rows below
 awk -F',' '{print NF}' export.csv | sort | uniq -c | head   # field counts per line
 ```
@@ -34,7 +35,7 @@ What to look for:
 | `UnicodeDecodeError` on load | File isn't UTF-8 (often Windows-1252 from Excel/ERP) | `encoding="cp1252"` (or `latin-1`); verify accented names look right after |
 | `Ã©`, `â€™` in text | Latin-1/Win-1252 bytes decoded as UTF-8 (or double-encoded) | Reload with correct encoding; if double-encoded, `s.encode("cp1252").decode("utf-8")` |
 | First column named `\ufeffAccount` | UTF-8 BOM | `encoding="utf-8-sig"` |
-| Every row is one giant column | Wrong delimiter assumed | Inspect a raw line; set `sep=";"` / `"|"` / `"\t"` |
+| Every row is one giant column | Wrong delimiter assumed | Inspect a raw line; set `sep=";"` / `"\|"` / `"\t"` |
 | `latin-1` "works" on everything | It maps every byte to *something* — it can't fail | That silence is the trap: verify text visually; prefer declaring `cp1252` when the source is Windows |
 
 `latin-1` deserves its own warning: because it accepts any byte, it converts an encoding
@@ -62,7 +63,7 @@ the ask that fixes shifted columns at the source.
 | `(1,234.56)` not negative | Accounting negatives in parens | Post-process: strip parens → negative, or converter function |
 | `1.23E+11` in an ID column | Numeric inference on long IDs | `dtype="string"` at read time (too late after) |
 | `00123` becomes `123` | Numeric inference drops leading zeros | `dtype="string"` for all identifiers |
-| `0006789599` becomes `6789599.0` | Float coercion on an ID (a resave through Excel/pandas does this too) | IDs as strings end to end; never round-trip a key column through numeric types |
+| `0006789599` becomes `6789599` — or `6789599.0` once the column also has a null | Numeric inference on an ID: int64 when clean, float64 the moment a null appears (a resave through Excel/pandas does this too) | IDs as strings end to end; never round-trip a key column through numeric types |
 
 The last two rows are one hazard class, and it is the nastiest in this file because it
 corrupts *identity* rather than values: every join against the original keys goes quiet, no

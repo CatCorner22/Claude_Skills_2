@@ -5,7 +5,7 @@ description: >-
   detecting encodings and delimiters, declaring an explicit read_csv contract (encoding,
   separator, string-typed IDs, date formats, na_values) instead of trusting inference,
   surviving export quirks (BOMs, footer rows, quoted commas, European decimals, and the
-  float-coercion hazard that strips leading zeros from join keys),
+  numeric-coercion hazard that strips leading zeros from join keys),
   validating every parse against row counts and control figures, and merging with an
   outer-join-plus-indicator audit so unmatched rows surface as findings instead of vanishing.
   Use when loading a CSV that parses wrong, combining exports from different systems, or
@@ -13,7 +13,7 @@ description: >-
   delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
   zeros lost, csv broken columns, mojibake, flat file feed.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # CSV and flat-file wrangling
@@ -82,10 +82,12 @@ df = pd.read_csv(
 A flat file has no schema — every load is an act of *interpretation*, and the parser will happily
 misinterpret in silence: Latin-1 bytes read as UTF-8 become mojibake, an unquoted comma shifts
 every column after it, and `read_csv`'s type inference turns account "00123" into the number 123.
-The float-coercion form of that hazard is the worst, because it corrupts *identity*: an ID like
-`0006789599` round-tripped through numeric inference comes back as `6789599.0`, every join
-against the original keys goes quiet, and nothing errors — a known hazard class this library
-documents from hard experience. The whole discipline is therefore to make interpretation
+The numeric-coercion form of that hazard is the worst, because it corrupts *identity*: an ID
+like `0006789599` round-tripped through numeric inference comes back as the integer `6789599`;
+add one null to that column and it becomes the float `6789599.0`; and a 19-digit ID in that same
+float column is written back out as `6.78959912345679e+18`. Every join against the original keys
+goes quiet, and nothing errors — a known hazard class this library documents from hard
+experience. The whole discipline is therefore to make interpretation
 explicit (encoding, delimiter, dtypes, date formats are *declared*, not guessed) and then to
 *prove* the parse with counts and control totals, exactly like reconciling a statement. The
 reason IDs are always strings is that identity data has no arithmetic meaning — the moment it

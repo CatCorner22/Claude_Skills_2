@@ -13,7 +13,7 @@ description: >-
   raw pile of ideas needs honest narrowing. Triggers: brainstorm better, brainwriting, SCAMPER,
   generate options, out of ideas, ideation session, diverge and converge, six three five.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Structured ideation (diverge, then converge)

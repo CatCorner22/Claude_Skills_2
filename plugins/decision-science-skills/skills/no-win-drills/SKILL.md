@@ -14,13 +14,14 @@ description: >-
   choosing least-worst. Triggers: kobayashi maru, no-win, every option is bad,
   least-worst, damage control drill, degraded mode, can't win this one, loss triage.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Homage to Star Trek's Kobayashi Maru, the Starfleet Academy simulation that cannot
     be won (the name lives in triggers only; no affiliation with or endorsement by the
     franchise's rights holders). The skill channels the documented training practices,
-    not the fiction: no-win simulation in medical education (Annals of Emergency
-    Medicine patient-death study; EMS Kobayashi Maru stress-training concept) and
+    not the fiction: no-win simulation in medical education (the randomized
+    patient-death pilot reported as an Annals of Emergency Medicine research-forum
+    abstract, 2014; EMS Kobayashi Maru stress-training concept) and
     sanctioned adversarial reframing in cyber education (Conti & Caroland, "Embracing
     the Kobayashi Maru," IEEE Security & Privacy — West Point / US Cyber Command).
 ---
@@ -28,13 +29,16 @@ metadata:
 # No-win drills (the unwinnable simulation)
 
 Fiction's most famous training exercise is a real, documented method. Emergency-medicine
-educators run simulations in which the patient dies no matter what the trainee does — a
-peer-reviewed comparison found the no-survival version yields *greater* educational
-benefit than its survivable twin [peer-reviewed, Annals of Emergency Medicine] — and EMS
-educators have proposed explicitly Kobayashi-Maru-branded stress scenarios
-[practitioner]. Separately, instructors at West Point and US Cyber Command assigned an
-exam that could only be passed by cheating, to teach students to interrogate the frame
-itself [peer-reviewed, IEEE Security & Privacy]. This skill runs both blades: the drill
+educators run simulations in which the patient dies no matter what the trainee does; a
+randomized pilot that ran the same scenario with and without survival found the residents
+in the death arm reported feeling *more* prepared a month later, with no sign of
+psychological harm [research-forum abstract, Annals of Emergency Medicine 2014 — a small
+pilot with a self-reported outcome, and the wider literature on simulated death is mixed;
+cite it as suggestive, not settled]. EMS educators have proposed explicitly
+Kobayashi-Maru-branded stress scenarios [practitioner]. Separately, instructors at West
+Point and US Cyber Command assigned an exam that could only be passed by cheating, to
+teach students to interrogate the frame itself [peer-reviewed, Conti & Caroland, IEEE
+Security & Privacy, 2011]. This skill runs both blades: the drill
 with no winning move, and the honest audit of when refusing the frame is legitimate.
 
 ## When to use
@@ -108,10 +112,11 @@ The reason to remove the winning move is that its presence contaminates the less
 While a path to success exists, trainees optimize toward it, and the skills that only
 matter when there is no such path — bounding losses, ordering what to save,
 communicating honestly while things fail — never get load-bearing practice. The
-emergency-medicine finding makes the point sharply: educators assumed simulated patient
-death would demoralize, and the study found the death scenario taught *more* than the
-survivable version [peer-reviewed]. Futility, rehearsed with a structured debrief, is a
-teacher; encountered raw in production, it is a trauma.
+emergency-medicine pilot points the same way: educators expected simulated patient death
+to demoralize, and the residents in the death arm instead reported feeling better
+prepared a month on [research-forum abstract; small, self-reported, and the broader
+literature is mixed — enough to license the design, not to prove it]. Futility, rehearsed
+with a structured debrief, is a teacher; encountered raw in production, it is a trauma.
 
 Grading process instead of outcome is what makes the drill fair and repeatable. In a
 no-win drill the outcome is fixed by construction, so it carries zero information about

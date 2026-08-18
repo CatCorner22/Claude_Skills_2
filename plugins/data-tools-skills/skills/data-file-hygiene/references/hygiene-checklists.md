@@ -9,7 +9,9 @@
 ## Sanitization scrub by file type
 
 ### Excel (.xlsx)
-- [ ] Replace identifiers in *all* sheets — including hidden sheets (`unhide all` first)
+- [ ] Replace identifiers in *all* sheets — including hidden ones. Excel's right-click →
+      Unhide dialog does **not** list `veryHidden` sheets; enumerate them in code instead:
+      `[(ws.title, ws.sheet_state) for ws in openpyxl.load_workbook(p).worksheets]`
 - [ ] Delete or refresh pivot caches (a pivot remembers source rows even after deletion) —
       safest: paste sanitized values into a fresh workbook
 - [ ] Check defined names, header/footer, and comments/notes for names and account numbers

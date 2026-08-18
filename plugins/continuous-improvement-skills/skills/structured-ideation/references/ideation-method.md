@@ -16,7 +16,8 @@ Rohrbach lineage; SCAMPER as Eberle's mnemonic organizing Osborn's idea-spurring
 
 ## The session plan
 
-A 60–90 minute template. Times scale down for solo work, up for large rooms.
+A 65–90 minute template (the phase ranges below sum to it). Times scale down for solo work, up
+for large rooms.
 
 | Phase | Time | What happens |
 |---|---|---|

@@ -10,7 +10,7 @@ description: >-
   sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and effect, Pareto, RCA, why did
   this happen, recurring problem, keeps happening, corrective action, containment, verify the cause.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Root-cause analysis
@@ -25,8 +25,9 @@ metadata:
 
 ## Do it
 A finished RCA is five artifacts: a quantified problem statement, a containment action labeled as
-such, a verified cause chain, an error-proofed countermeasure with owner and date, and a recurrence
-check that clears the containment. The assistant drafts the statement, why-chains, fishbone
+such, a verified cause chain (with every human-action link classified by error type), an
+error-proofed countermeasure with owner and date, and a recurrence check that clears the
+containment. The assistant drafts the statement, why-chains, fishbone
 candidates, and Pareto tally; the human owns containment, the verification test, and the
 countermeasure decision.
 1. **Write a sharp problem statement.** State *what* is wrong, *where*, *when it started*, *how big*
@@ -41,6 +42,12 @@ countermeasure decision.
    thread, until you reach a cause that (a) is a process/system condition you can act on and (b) whose
    removal would prevent recurrence. Five is a guide, not a quota — stop at the actionable cause. Test
    the logic backwards with "therefore": each *why* should read forward as a valid cause→effect.
+   When a *why* lands on a human action, classify it before continuing — slip, lapse, rule-based
+   mistake, knowledge-based mistake, or violation — because the type decides the countermeasure in
+   step 7: forcing function for a slip, checklist for a lapse, rule repair for a rule-based
+   mistake, training for a knowledge-based one, incentives for a violation. Then keep asking why:
+   the taxonomy names the human failure mode, the chain continues to the process condition that let
+   it through (`references/human-error-taxonomy.md`).
 4. **Widen with a fishbone (Ishikawa) when the cause isn't single-threaded.** Brainstorm candidate
    causes into the **6M** categories — **Man** (people/skill), **Method** (process), **Machine**
    (systems/tools), **Material** (inputs/data), **Measurement** (metrics/definitions), **Environment/
@@ -48,7 +55,9 @@ countermeasure decision.
    plausible answer — see `references/tools-and-templates.md`.
 5. **Use Pareto to prioritize the vital few.** When there are many defect types, tally by category and
    sort descending — typically a small number of causes drive most of the occurrences. Fix the tallest
-   bars first; don't spread effort evenly across trivial many.
+   bars first; don't spread effort evenly across trivial many. If the problem statement already spans
+   several defect types, run this tally *before* step 3, so the why-chain follows the tallest bar
+   rather than whichever type surfaced first.
 6. **Verify the cause before you build a countermeasure.** Confirm with data or a controlled test: if
    this really is the cause, removing or toggling it should change the effect. Unverified causes are
    guesses wearing a diagram.
@@ -78,9 +87,8 @@ reminder to "be more careful" — reminders decay, error-proofing doesn't.
 - Anchoring on the first cause → use the 6M fishbone to force breadth before you converge.
 - Skipping verification → you countermeasure a guess. Confirm the cause changes the effect first.
 - Spreading effort across every defect → use Pareto; fix the vital few first.
-- Blaming a person → almost always a process/system let the error through. Fix the system (classify
-  the error type first — slip, lapse, mistake, or violation each needs a different countermeasure:
-  see `references/human-error-taxonomy.md`).
+- Blaming a person → almost always a process/system let the error through. Fix the system — and
+  classify the error type (step 3) so the countermeasure matches the failure mode.
 
 ## Tailor to your environment
 Record your real recurring problems and data sources in `references/your-environment.md` (use

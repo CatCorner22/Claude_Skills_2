@@ -28,7 +28,7 @@ A good response:
 - **Does the task:** produces an explicit `read_csv` call (encoding, sep, dtypes, dates,
   na_values) that parses correctly, plus schema/count/total validation.
 - **Teaches:** that a flat file has no schema so every load is declared interpretation; why IDs
-  are strings (the float-coercion/leading-zero hazard destroys join keys silently); the
+  are strings (the numeric-coercion/leading-zero hazard destroys join keys silently); the
   outer-join-with-indicator audit before any merge decision.
 - **Routes:** hands post-parse cleaning to `data-analytics-bi-skills:data-cleaning`, oversized
   or join-heavy work to `data-tools-skills:duckdb-local-analytics`, script hardening to

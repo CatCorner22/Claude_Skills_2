@@ -7,6 +7,8 @@ description: >-
   a new skill, editing an existing one, reviewing a skill for quality, or setting up a
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
+metadata:
+  version: "1.1.0"
 ---
 
 # Writing Agent Skills (house standard)
@@ -144,7 +146,7 @@ well-ordered instructions beat exhaustive ones.
 
 **Know what the listing actually costs, because it decides whether your skill is findable at
 all.** Measured in this library (re-measured 2026-08-18): 121 skills' names + descriptions come to
-**110,110 characters ≈ 29,759 tokens ≈ 14.9% of a 200K context**, at a mean of ~890 chars (~240
+**110,104 characters ≈ 29,758 tokens ≈ 14.9% of a 200K context**, at a mean of ~890 chars (~240
 tokens) per description — not the ~100 tokens per skill an earlier version of this section claimed.
 (Token figures here are an estimate at ~3.7 characters/token, stated because the number is quoted
 elsewhere in the repo and an undisclosed divisor is how the first version of this paragraph came to
@@ -163,9 +165,10 @@ disagree with `README.md`. Count with your provider's tokenizer if the exact fig
 
 The practical lever is **skills per install, not characters per description**. Trimming a
 description from 1000 to 900 chars saves ~27 tokens; not installing a 15-skill plugin saves
-~3,900. Keep descriptions tight because a tight one routes better, not because trimming solves
-the budget. The fixed "do + teach" order exists
-so that each skill reliably both produces the deliverable and leaves you understanding it — the
+~3,700 (15 × the 910-char name+description mean, at 3.7 chars/token). Keep descriptions tight
+because a tight one routes better, not because trimming solves the budget. The fixed "do + teach"
+order exists so that each skill reliably both produces the deliverable and leaves you
+understanding it — the
 whole point of this library. Setting *degrees of freedom* to match fragility (loose prose vs. exact
 scripts) keeps Claude accurate on the steps that break easily while staying flexible where judgment
 helps.

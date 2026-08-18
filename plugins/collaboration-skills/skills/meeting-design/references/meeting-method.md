@@ -57,7 +57,9 @@ Conventions that keep it honest:
 - Every numbered item starts with a verb of closure: DECIDE, COMMIT, RESOLVE. If an
   item cannot be phrased that way, it is status — move it to the pre-read or the async
   channel.
-- Timeboxes total less than the slot; the close is a protected line item, never a
+- Timeboxes total less than the slot, **and the silent-reading block counts toward the
+  total** — it is meeting time. The template above spends 10 (reading) + 15 + 10 + 5 +
+  5 (close) = 45 of a 60-minute slot; the close is a protected line item, never a
   leftover.
 - The decision rule and its holder appear on the agenda itself, so nobody discovers
   them mid-discussion.
@@ -150,13 +152,15 @@ Run on a stated cadence (quarterly is common) over every standing meeting you ow
 2. **Re-run the existence test** (§1) against what those occurrences actually
    produced — not against the meeting's original charter.
 3. **Compute the standing cost** honestly: length × headcount × frequency, in
-   person-hours per quarter. No invented dollar figures needed; hours are persuasive
-   on their own.
+   person-hours per quarter. A weekly 60-minute sync with 8 attendees is
+   1 h × 8 × 13 weeks = **104 person-hours per quarter** — 2.6 working weeks of one
+   person, renewed by default. No invented dollar figures needed; hours are
+   persuasive on their own.
 4. **Disposition** each meeting: keep as is / shrink (time or headcount) / reduce
    frequency / merge / demote to async post / end. Default for a meeting producing no
    decisions: demote to async for a cycle and see who objects.
 5. **Record** the disposition in the decision log, with a `REVISIT IF` line — audits
-  are decisions too.
+   are decisions too.
 
 A gentle forcing function: every recurring invite carries an expiry (e.g., two
 quarters). Renewal takes one sentence of justification from the owner; a meeting no

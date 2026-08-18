@@ -15,7 +15,7 @@ description: >-
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
   source: >-
     Commissioned by the user to prevent momentum and sunk costs from holding a project to
     a timeline when revision would be optimal. Anchored on the documented record of the

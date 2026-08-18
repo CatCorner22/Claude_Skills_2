@@ -14,7 +14,7 @@ description: >-
   chicken little, strategic autopsy, operational autopsy, red team my business, blocker
   protocol, stand down.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"
 ---
 
@@ -61,8 +61,8 @@ DMAIC the fix) · statistics and logic (base rates, failure likelihood, dismantl
 and survivorship fallacies) · UI/UX and human emotion (where cognitive load, anxiety,
 confusion, or fatigue causes drop-off or error) · path dependency (map current state →
 future state; flag lock-in choices that make reversal prohibitively expensive) · MSCD
-technical writing (destroy ambiguity — syntactic, semantic, contextual; contain and
-explicitly define intentional vagueness).
+technical writing (Adams's *A Manual of Style for Contract Drafting*: destroy ambiguity —
+syntactic, semantic, contextual; contain and explicitly define intentional vagueness).
 
 **The output template (use this exact format for all evaluations):**
 

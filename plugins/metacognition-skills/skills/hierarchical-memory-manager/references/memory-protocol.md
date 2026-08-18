@@ -11,7 +11,7 @@ repos. Only the contents change with the job — the layers, grammar, and ritual
 - Session-start load ritual
 - Compaction checklist
 - Contradiction handling (flag, annotate, keep provenance)
-- Worked lifecycle example (one store, three months)
+- Worked lifecycle example (one store, three stages)
 - Sizing and hygiene rules
 
 ## Layer templates
@@ -126,19 +126,20 @@ Silent overwriting is the one unforgivable move: it destroys the audit trail tha
 the store trustworthy. If the user resolves the conflict, update Semantic and log the
 resolution in Episodic so the change is traceable.
 
-## Worked lifecycle example (one store, three months)
-Genericized from this repository's real MEMORY.md — the store that maintains this library.
+## Worked lifecycle example (one store, three stages)
+Genericized from this repository's real MEMORY.md — the store that maintains this library;
+the three stages below played out there across about three weeks, not three years.
 Swap the nouns for any role: matters for an attorney, vendors for an ops manager, clients
 for an analyst, services for a developer.
 
-**Month 1 — capture.** Sessions record durable items as they surface:
+**Stage 1 — capture.** Sessions record durable items as they surface:
 ```markdown
 - FACT: The user works in <domain role> on <platform>; their environment carries
   <domain>-specific tooling. (evidence: observed in session, <date>; confidence: high)
 - PREFERENCE: Deliverables follow the "do + teach" standard — perform the task AND explain
   the reasoning. (user-selected at scoping; confirmed throughout)
 ```
-**Month 2 — an incident becomes a RULE.** A destructive command chained with a
+**Stage 2 — an incident becomes a RULE.** A destructive command chained with a
 verification step runs before the verification is read; work is briefly lost, then
 restored. The reflection (via `metacognition-skills:reflective-learner`) lands here as:
 ```markdown
@@ -148,8 +149,8 @@ restored. The reflection (via `metacognition-skills:reflective-learner`) lands h
 Note what makes it durable: cause-level phrasing ("chained commands"), not outcome-level
 ("lost work"), plus the origin pointer.
 
-**Month 3 — the world changes; the store flags, never rewrites.** The user announces the
-role recorded in Month 1 is ending. The store does *not* delete the fact:
+**Stage 3 — the world changes; the store flags, never rewrites.** The user announces the
+role recorded in Stage 1 is ending. The store does *not* delete the fact:
 ```markdown
 - FACT: The user works in <domain role> on <platform>… (evidence: …; confidence: high)
   (UPDATE <date>: the user's role is ending — see the standing directive below.
@@ -163,6 +164,9 @@ capture → rule-formation → contradiction flagged with provenance → session
 
 ## Sizing and hygiene rules
 - Working notes live in context or a scratch file; they are never committed.
+- Episodic notes live wherever they can be dated and scanned: their own section of the
+  semantic file, a separate session log, or — as in this library's store — collapsed into
+  the dated crystallization lines. Pick one place and keep promoting from it.
 - Episodic detail has a shelf life — collapse to period summaries once it stops being
   consulted (retention cadence goes in `your-environment.md`).
 - The semantic store should stay scannable in one read; when it stops being, that is a

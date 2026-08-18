@@ -13,14 +13,16 @@ description: >-
   conflict, stress test the rules, loophole hunt, what breaks this policy, clause conflict,
   conflicting rules, malicious compliance, specification gaming.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Commissioned by the user, inspired by Isaac Asimov's robot stories — homage in
     triggers and teaching only; no affiliation. The stories are cited as fiction that
     catalogs rule-failure modes, never as an engineering standard. The mechanism is
     documented practice: property-based testing (QuickCheck lineage), red-teaming,
     Goodhart's Law and AI specification-gaming research, work-to-rule, and the legal
-    canons of construction.
+    canons of construction. Provenance marks: [snippet-only] = verified from search
+    snippets, not the full source; the ×N suffix is how many independent snippets agreed
+    (×2 is thin — present it carefully; ×4 is well corroborated).
 ---
 
 # Rule stress-testing (the Asimov pass)
@@ -125,8 +127,7 @@ the machine-ethics literature concurs [snippet-only, ×4]. Related discipline: t
 common misquote of the First Law drops "or, through inaction, allow a human being to come
 to harm" — and removing exactly that clause is the plot of "Little Lost Robot"
 [snippet-only, ×4], a live demonstration that a rule's most-forgotten clause is often its
-most load-bearing. And the line "the point of the Three Laws was to fail in interesting
-ways" is circulating commentary, not Asimov — his own quote above is the citable one.
+most load-bearing.
 
 Goodhart's Law explains why the measure pass is separate: when a measure becomes a
 target, it stops being a good measure, and both machine learners (specification gaming,

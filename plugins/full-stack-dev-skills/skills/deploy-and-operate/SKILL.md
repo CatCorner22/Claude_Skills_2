@@ -11,7 +11,7 @@ description: >-
   prod, secrets management app, health check endpoint, structured logging, rollback deploy,
   container image size, run migrations on deploy, observability basics, containerize.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Deploy and operate
@@ -37,7 +37,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # only if you have a Vite frontend
 FROM node:22-slim AS ui
 WORKDIR /ui
-COPY frontend/package*.json .
+COPY frontend/package*.json ./
 RUN npm ci
 COPY frontend/ .
 RUN npm run build
@@ -47,7 +47,7 @@ WORKDIR /app
 COPY --from=deps /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 COPY --from=deps /usr/local/bin /usr/local/bin
 COPY app/ app/
-# FastAPI serves the built UI — one deployable
+# FastAPI serves the built UI — one deployable (drop this line and the `ui` stage if no frontend)
 COPY --from=ui /ui/dist app/static/
 USER nobody
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
@@ -55,10 +55,11 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
    Slim base, no build tools in the final stage, non-root user, dependencies cached in
    their own layer (rebuilds are seconds when only code changed).
-2. **Shape CI as lint → test → build → deploy, failing fast and cheap first.** One workflow:
-   ruff/type-check (seconds) → pytest with the real test DB (`full-stack-dev-skills:testing-strategy`)
-   → build the image once, tag with the git SHA → deploy that exact artifact. The SHA tag is
-   the whole versioning scheme: what runs in prod is a commit you can check out.
+2. **Shape CI as lint → test → build → migrate → deploy, failing fast and cheap first.** One
+   workflow: ruff/type-check (seconds) → pytest with the real test DB
+   (`full-stack-dev-skills:testing-strategy`) → build the image once, tag with the git SHA →
+   `alembic upgrade head` against the target database (step 4) → deploy that exact artifact.
+   The SHA tag is the whole versioning scheme: what runs in prod is a commit you can check out.
 3. **Keep environments twelve-factor: same image, different env.** All differences arrive as
    environment variables into the one settings object
    (`full-stack-dev-skills:full-stack-app-architecture`); secrets come from the platform's

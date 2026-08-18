@@ -14,7 +14,7 @@ description: >-
   uncertainty. Triggers: precog, precognition, minority report, run the scenarios,
   future outcomes, what happens if X changes, scenario planning, branch the futures.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Commissioned by the user, inspired by the precogs of Minority Report (Philip K.
     Dick's story and the film — homage in triggers and teaching only; no affiliation).
@@ -78,12 +78,16 @@ rule, and the one-variable turn are in `references/scenario-cell-method.md`.
    quality, equal indicator coverage, and it is never deleted to make the deck
    cleaner. The namesake story is about exactly this suppression; the cell exists to
    make it impossible.
-5. **Turn one variable.** The sensitivity pass, and the user's founding ask: hold
-   everything else fixed, change ONE variable (the deadline slips a quarter; the
-   ruling goes the other way; the key person leaves; demand halves), and record
-   which scenario rankings flip. Variables whose single turn reorders the outcomes
-   are the ones that deserve monitoring money; variables that flip nothing can stop
-   consuming meeting time.
+5. **Turn one variable.** The sensitivity pass, and the user's founding ask: put the
+   scenarios in a working plausibility order first (step 7 disciplines it; a rough order
+   is enough to see movement), then hold everything else fixed, change ONE variable
+   (the deadline slips a quarter; the ruling goes the other way; the key person leaves;
+   demand halves), and record which scenario rankings flip. Variables whose turn reorders
+   the outcomes deserve monitoring money; variables that flip nothing can stop
+   consuming meeting time. Then list the ROBUST MOVES — actions that pay off in every
+   scenario, the minority report included. These are the cell's highest-value product:
+   decisions you can make now without resolving any uncertainty (in the reference's
+   worked case, negotiating data export wins whether you build, keep, or get squeezed).
 6. **Run the reflexivity check.** Acting on this report changes the futures it
    reports — announce a downturn plan loudly enough and you can cause the downturn;
    prepare visibly for a risk and you may prevent it (which then looks like the
@@ -103,7 +107,8 @@ rule, and the one-variable turn are in `references/scenario-cell-method.md`.
    plus who watches each one and the threshold that fires it (feed
    `safety-and-reliability-skills:break-glass-playbooks` where a fired tripwire
    needs pre-authored moves). Close with the decision log: what was chosen, which
-   scenario it bets on, what evidence would revisit it, and the next review trigger
+   scenario it bets on, which robust moves were taken, what evidence would revisit it,
+   and the next review trigger
    (`decision-science-skills:the-challenger` takes it from there).
 
 ## Why / learn

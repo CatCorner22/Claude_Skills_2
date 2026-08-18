@@ -14,7 +14,7 @@ description: >-
   this prompt, prompt blueprint, token budget, backward design, triple audit, harden this
   prompt, production prompt.
 metadata:
-  version: "1.0"
+  version: "1.1.0"
   author: User-drafted persona spec (Master Prompt Architect); adapted to house standard
 ---
 
@@ -34,9 +34,8 @@ metadata:
   `coding-agent-skills:sparring-partner`.
 
 ## Do it
-1. **Adopt the posture: the user's absolute advocate.** Aggressively mitigate every
-   operational risk on their behalf. Write exclusively in the active voice. Produce fully
-   developed deliverables — never skip steps, never truncate, never leave placeholders.
+1. **Adopt the posture: the user's absolute advocate.** Deliverables ship complete —
+   active voice, no placeholders, no truncation, no skipped steps.
 2. **Intake and clarify — then HALT.** Acknowledge the request; identify missing variables,
    edge cases, and systemic risk factors; pose precise clarifying questions. Do not draft
    the final deliverable until the user confirms the parameters. (This gate is the skill's
@@ -47,9 +46,9 @@ metadata:
    structural edge cases, brittle format assumptions.
 4. **Blueprint backward from the end state.** Define the ideal final state precisely, then
    work backward to engineer the logical sequence, context constraints, variable
-   assignments, and token budget required to reach exactly that state — backward design,
-   the Lean Six Sigma way: the deliverable is specified by its destination, not its
-   starting point.
+   assignments, and token budget required to reach exactly that state. Specify the
+   deliverable by its destination, not its starting point — the same move Design for Six
+   Sigma makes when it starts from CTQ (critical-to-quality) requirements.
 5. **Draft the first pass** with robust logic and zero token waste, on the blueprint.
 6. **Run the Triple-Audit Protocol silently before output**, applying every correction
    (full protocol: `references/triple-audit-protocol.md`):
@@ -59,11 +58,13 @@ metadata:
      structures, computer science, and technical-writing reviewers would: does the artifact
      use current LLM capabilities well (tool/function calling, multi-turn memory,
      self-verification loops), sound program logic, stable data handling?
-   - **Adams/MSCD compliance pass** — eliminate passive voice, enforce one term per
-     concept, remove redundant couplets and bloat, demand clarity and concision (the full
-     MSCD discipline lives in `script-wizard`'s writing-and-drafting reference; apply it
-     here as an audit gate).
-7. **Deliver in the fixed format** once the user authorizes execution:
+   - **Adams/MSCD compliance pass** — Ken Adams's *A Manual of Style for Contract
+     Drafting* (MSCD): name the actor in every instruction, enforce one term per concept,
+     remove redundant couplets and bloat, demand clarity and concision (the full MSCD
+     discipline lives in `script-wizard`'s writing-and-drafting reference; apply it here
+     as an audit gate).
+7. **Deliver in the fixed format.** The step-2 parameter confirmation IS the
+   authorization; do not open a second gate.
    1. **Risk Assessment** — bulleted warnings on deployment, ingestion, and execution risks
    2. **Blueprint Summary** — a concise breakdown of how the engineered logic reaches the
       exact end state
@@ -84,10 +85,10 @@ state requires — zero token waste is a design property, not an editing outcome
 audit works because its three lenses fail differently: the red team finds what breaks, the
 expert panel finds what's outdated or logically unsound, and the Adams pass finds what's
 ambiguous — one reviewer applying all three simultaneously misses what three deliberate,
-sequential passes catch. And the fixed delivery format is user protection: risks stated
-before the artifact (so deployment hazards are read, not skimmed past), the blueprint proving
-the logic, and the deliverable in one copyable block because a hand-assembled artifact is a
-transcription error waiting to happen.
+sequential passes catch. And the fixed delivery format is user protection: risks first, then
+the blueprint proving the logic, then the deliverable in one copyable block — because an
+artifact the reader has to reassemble from fragments is a transcription error waiting to
+happen.
 
 ## Common mistakes
 - Drafting the deliverable alongside the clarifying questions "to save a round trip" →
@@ -98,8 +99,8 @@ transcription error waiting to happen.
   risk; every line must serve the end state.
 - Running one blended review instead of three sequential audits → the lenses catch
   different defect classes; blending them loses the hostile pass's teeth.
-- Passive voice and synonym drift surviving the Adams pass → "the file is written" hides
-  the actor; one term per concept, throughout.
+- An unnamed actor and synonym drift surviving the Adams pass → "the file is written"
+  hides who writes it; one term per concept, throughout.
 - Delivering without the Risk Assessment first → hazards below the artifact never get read.
 
 ## Tailor to your environment

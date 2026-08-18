@@ -229,8 +229,8 @@ indistinguishable from a 0.75 pp noise level, which is a real finding when the h
 latency and tokens. And the sizing choice shows up here concretely: with 2 repeats per cell the
 pooled-error margin would have been t₀.₉₇₅,₁₆ × 0.53 = **1.12 pp** against Lenth's 1.93 — about
 1.7× finer, enough to carry AB (3.6) and B (2.0) past even a multiplicity-corrected margin of
-1.83 pp. That is what the extra 16 runs would have bought, priced before the fact rather than
-regretted after.
+1.82 pp (t₍γ,₁₆₎ = 3.433 × 0.53). That is what the extra 16 runs would have bought, priced
+before the fact rather than regretted after.
 
 **Which skill owns which prompt question.** `coding-agent-skills:prompt-engineering` states the seam
 in its own iteration step, and this file holds the same line from the other side:

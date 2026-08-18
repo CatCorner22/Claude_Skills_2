@@ -12,6 +12,8 @@ description: >-
   or a spreadsheet formula returns a number that looks wrong. Triggers: solve for x,
   rearrange the formula, algebra, linear equations, word problem, isolate the variable,
   breakeven, two unknowns, order of operations, PEMDAS.
+metadata:
+  version: "1.1.0"
 ---
 
 # Algebra and formulas

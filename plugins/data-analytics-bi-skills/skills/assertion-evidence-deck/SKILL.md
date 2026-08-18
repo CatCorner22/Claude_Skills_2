@@ -10,6 +10,8 @@ description: >-
   build a deck, make slides, PowerPoint, briefing deck, leadership update, readout, TED-style
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
+metadata:
+  version: "1.1.0"
 ---
 
 # Assertion-evidence deck
@@ -23,9 +25,8 @@ one claim in a full sentence and proves it with a picture; every number carries 
 - Building a "TED-style" technical talk with sentence-headline slides instead of bullet dumps.
 - Auditing an existing `.pptx` against the assertion-evidence checklist.
 - Not for: performing the underlying data analysis → use the data-analytics/statistics skills; the
-  Oracle CM configuration diagnosis → the user-environment `oracle-cm-config-review` skill where
-  installed (archived: `oracle-fusion-finance-skills:fusion-cm-production-troubleshooting`, restorable
-  from `archive/`); XML-level `.pptx` editing the builder can't express → the `pptx`
+  ERP configuration diagnosis → whatever platform-specific skill your own environment carries;
+  XML-level `.pptx` editing the builder can't express → the `pptx`
   skill. This skill turns *verified* output into slides; run the analysis under its own skill first.
 - Not for: getting a decision from one written page — the answer-first decision memo (BLUF, costed
   options, an ask the reader can sign) → `collaboration-skills:executive-briefing`. That skill owns
@@ -101,9 +102,11 @@ the builder can't express, use the `pptx` skill and keep this skill's geometry a
 **Stage 6 — Audit the file.** Never deliver a deck you have not seen rendered. Lint it —
 `python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py" output.pptx` (reports headline violations, bullet characters, word-count
 overruns, banned formatting, missing source tags, font problems; exits non-zero on error) — then
-**look at every slide**: convert to images and check for overflow, overlap, colliding source tags,
-and low contrast, which the linter cannot see. Fix the generator and rebuild; do not hand-patch the
-packed XML.
+**look at every slide**: `soffice --headless --convert-to pdf output.pptx` and read the PDF (or
+`pdftoppm -png` it), checking for overflow, overlap, colliding source tags, and low contrast, which
+the linter cannot see. If no renderer is installed, say so in the handoff — "linted clean; not
+visually verified" — rather than implying you looked. Fix the generator and rebuild; do not
+hand-patch the packed XML.
 
 **Stage 7 — Deliver.** Hand over three things together: the **deck** (dated with the build date),
 the **source ledger** (claim-to-source table), and the **gap list** (what the deck could not
@@ -154,7 +157,6 @@ own rather than in a cache you may not realise is disposable.
 - references/ae-method.md — full checklist, evidence-type guide, failure modes, before/after examples
 - references/design-tokens.md — verified geometry and typography, neutral palette default, legacy UT System brand pack, font-substitution rule
 - references/evidence-discipline.md — claim tiers, source-ledger format, source-tag wording, gap language
-- references/oracle-cm-domain.md — legacy domain reference (Oracle CM vocabulary, processing chain, where live figures live) — read only if you work that system
 - references/your-environment.md — your audiences, brand, and artifacts (add when supplied)
 
 ## Scripts

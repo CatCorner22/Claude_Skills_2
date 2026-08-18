@@ -86,12 +86,21 @@ number also learned to argue Detection down a point to duck a threshold. The har
 handbook replaced RPN with an **Action Priority table** — a lookup over the (S, O, D) combination
 in which Severity dominates, then Occurrence, then Detection `[snippet-only]`.
 
-Working logic (use this if you don't carry the full published table):
-- **High** — S 9–10 with anything beyond minimal O or D; or S 7–8 with mid-or-worse O and D.
-  Action is required, or the current risk must be explicitly accepted by the owner in writing.
-- **Medium** — mid-range combinations (e.g. S 5–8 with moderate O/D). Action should be taken;
-  justify if not.
-- **Low** — low S, or higher S with both O and D excellent. Action discretionary.
+Working logic — a **Severity-dominant simplification**, not the published lookup; if you hold the
+AIAG-VDA table, calibrate against it and use that. Apply the three rules in order and stop at the
+first that fires:
+
+1. **High** — S 9–10 (unless O and D are both ≤ 3); **or** S 7–8 with O ≥ 4 **or** D ≥ 4;
+   **or** S 4–6 with O ≥ 4 **and** D ≥ 7 (a frequent cause with no working control).
+   Action is required, or the current risk is explicitly accepted by the owner in writing.
+2. **Low** — S 1–3; **or** O ≤ 3 **and** D ≤ 3 (rare, and caught before it hurts).
+   Action discretionary.
+3. **Medium** — everything else. Action should be taken; justify in the register if it isn't.
+
+Note what rule 1 encodes: severity earns High on its own, but a *moderate* severity still reaches
+High when the cause is common **and** the control is blind — silent, frequent failure is the case
+raw RPN buries. Run the worked example below through these three rules before trusting them on
+your own register; all five of its AP values should come back unchanged.
 
 The generalizable lesson: any scheme that compresses multi-dimensional risk into one arithmetic
 score can let the dimension you least afford to ignore be averaged away. Order the dimensions by

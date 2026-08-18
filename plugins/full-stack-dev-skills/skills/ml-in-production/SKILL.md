@@ -11,6 +11,8 @@ description: >-
   inference endpoint, predict API, batch scoring, model versioning, training serving skew,
   model monitoring, drift detection production, ml pipeline app, score in real time,
   put the model into the app, works in the notebook.
+metadata:
+  version: "1.1.0"
 ---
 
 # ML in production

@@ -18,7 +18,9 @@ Every session, regardless of skill type:
 
 1. **Target (1 min).** Restate the single target and the current ladder rung. If the log
    shows the last session ended mid-rung, resume there.
-2. **Warm rep (1 rep).** One rep at the *previous* rung to reload the representation.
+2. **Warm rep (1 rep).** One rep at the *previous* rung to reload the representation. At
+   rung 1 there is no previous rung: run one rep of the target with the scaffolds still on
+   (notes allowed, no time limit) instead.
 3. **Working reps (bulk of session).** Reps at the current rung. After each rep: feedback
    (formula below), one next-rep instruction, immediately rep again. Stop the session while
    attention is still full — a session that ends sloppy trains sloppy.

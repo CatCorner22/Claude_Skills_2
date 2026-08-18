@@ -14,8 +14,9 @@ Worksheets for the three core tools, plus the verification step. Applied to fina
 > **What** is wrong: <the defect/deviation> · **Where**: <process/account/entity> · **When**:
 > <started / how often> · **How big**: <magnitude, frequency, $> · **How we know**: <evidence/source>.
 
-No cause, no solution, no blame. Example: "12 supplier invoices were paid twice in Q2 (vs. 2 in Q1),
-totaling $84k, identified in the duplicate-payment report."
+No cause, no solution, no blame. Example: "14 supplier invoices were paid twice in Q2 (vs. 2 in Q1),
+totaling $84k, identified in the duplicate-payment report." (The Pareto tally below counts the same
+14.)
 
 ## 5 Whys worksheet
 Follow one causal thread; each answer becomes the next "why". Read it back with "therefore" to check.

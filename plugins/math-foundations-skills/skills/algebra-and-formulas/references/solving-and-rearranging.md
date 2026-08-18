@@ -125,16 +125,23 @@ the app inserts by its precedence table. Debugging means making them visible.
 2. Rewrite it in math notation, inserting explicit parentheses exactly where the app's
    precedence puts them (not where you intended them).
 3. Substitute the actual cell values.
-4. Recompute by hand and compare with the cell's displayed result — they will match,
-   which localizes the bug in the formula's *structure*, not the data.
+4. Recompute by hand and compare with the cell's displayed result. Two branches, and the
+   branch you land in names the bug:
+   - **Match** → the bug is in the formula's *structure* (precedence, parentheses). Go to 5.
+   - **Mismatch** → the bug is not precedence; it is the references or the data. Check what
+     each reference actually points at (a shifted row, a hidden row inside a range, a stale
+     or overwritten value, a different sheet), and whether the cell is *displaying* a rounded
+     version of a different stored number. Fix that first, then rerun this step.
 5. Write the formula you meant, with parentheses, and re-verify.
 
-**Excel/Sheets precedence, highest first:** range/space operators; unary minus (`-x`);
+**Excel precedence, highest first:** range/space operators; unary minus (`-x`);
 percent (`%`); exponent (`^`); multiply/divide (`*` `/`); add/subtract (`+` `-`); text
 join (`&`); comparisons. Two departures from written math worth memorizing by example:
-- **Unary minus beats the exponent:** `=-2^2` returns 4, because Excel reads (−2)²,
-  while written math reads −(2²) = −4. `=0-2^2` returns −4 — the binary minus has normal
-  (low) precedence.
+- **Unary minus beats the exponent (Excel):** `=-2^2` returns 4, because Excel reads
+  (−2)², while written math reads −(2²) = −4. `=0-2^2` returns −4 — the binary minus has
+  normal (low) precedence. This one cell is where spreadsheet dialects diverge from each
+  other, so type `=-2^2` into *your* app once and record the answer in
+  `your-environment.md` rather than assuming Excel's rule carries over.
 - **Division beats addition (the hidden order-of-operations error):** `=A1+B1/2`
   intending a midpoint computes `A1 + (B1/2)`. With A1 = 10, B1 = 20: 10 + 10 = 20
   instead of the intended (10 + 20)/2 = 15.

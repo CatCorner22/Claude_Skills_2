@@ -13,7 +13,7 @@ description: >-
   timeboxing, too many priorities, drowning in tasks, context switching, Eisenhower matrix,
   finish before starting.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Priority and WIP (personal lean)
@@ -70,10 +70,10 @@ weekly review.
    task blunts the next one — so the win comes from fewer, longer stretches on one thing, not
    from faster juggling.
 5. **Renegotiate or decline explicitly when the system is over capacity.** When to-do outgrows
-   any plausible week, saying yes and silently slipping is the worst move — an unowned "yes"
-   is a schedule slip someone else discovers later. Go back with the board visible: "I can take
-   this, and it means X moves to Thursday — or I can hand you a smaller version today." The
-   scripts in the reference cover declining, rescheduling, and swapping.
+   any plausible week, saying yes and silently slipping is the worst move. Go back with the
+   board visible: "I can take this, and it means X moves to Thursday — or I can hand you a
+   smaller version today." The scripts in the reference cover declining, rescheduling, and
+   swapping.
 6. **Run a weekly review.** Once a week, walk the board: prune cards that have gone stale,
    re-justify standing commitments (does this recurring task still earn its slot?), celebrate
    the done column, and pick the few things next week is actually about. A board that isn't
