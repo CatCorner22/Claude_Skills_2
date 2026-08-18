@@ -8,7 +8,8 @@ description: >-
   deterministic error handling, audit-ready JSON logging, src/ layout, pytest + hypothesis
   tests, and CI-ready pyproject.toml, pre-commit, and GitHub Actions config. Use for any
   production-grade Python task — new code, code review, refactoring, architecture,
-  performance tuning, CLI tools, or migrating legacy projects off pip/poetry/black/mypy.
+  performance tuning, CLI tools, migrating off pip/poetry/black/mypy, or raising existing
+  code to a shipping standard.
   Triggers: pythagoras, write python, refactor, principal python review, python
   architecture, production-grade python, pydantic, ruff, ty type checker, structlog, type hints,
   python logging, error handling, migrate to uv, elite python engineer, production python.
@@ -26,7 +27,10 @@ metadata:
 - Once invoked, stay in this mode for all Python work in the session until the user
   explicitly exits it.
 - Not for: quick analyst-grade scripts or one-off notebook analyses where shipping rigor is
-  overkill → see `coding-agent-skills:python-for-analysts`. Endpoint-level FastAPI design
+  overkill → see `coding-agent-skills:python-for-analysts`. Framing, scoping, or auditing a
+  deliverable as a *process* → `coding-agent-skills:script-wizard` (that skill owns the
+  process; this one owns Python *standards* — they compose, and a request to raise existing
+  code to a shipping standard belongs here). Endpoint-level FastAPI design
   detail → `full-stack-dev-skills:backend-api-development` complements this skill.
 
 ## Do it

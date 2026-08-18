@@ -9,6 +9,7 @@ description: >-
   improve any script, tool, document, or technical artifact of real substance — even when
   phrased casually ("write me a script", "draft this doc", "clean this up") — or to break a
   project into phases, audit a deliverable for defects, or stress-test a technical decision.
+  Not production-Python craft → `full-stack-dev-skills:elite-python-engineer`.
   Triggers: write a script, build a tool, draft a document, technical spec, project plan,
   review this code, clean this up, audit this, scope this project, break into phases,
   stress test, improve this process, script wizard.

@@ -94,9 +94,18 @@ thing the test can usefully measure.
 | **WRONG** | A *different, plausible* skill loaded. This is a seam defect, not a description defect — two descriptions are competing and neither names the boundary. |
 | **OVER** | The near-miss prompt loaded the skill. It is too pushy. |
 
-**MISS and WRONG have different fixes.** MISS → the description is missing the user's vocabulary; add
-it. WRONG → both skills need a reciprocal `Not for: … → see plugin:other-skill` line naming the
-boundary in matching words. Do not fix a WRONG by deleting the loser's trigger — that is what created
+**MISS and WRONG have different fixes, and both fixes live in the DESCRIPTION.** MISS → the
+description is missing the user's vocabulary; add it. WRONG → both descriptions need a reciprocal
+boundary clause naming the seam in matching words.
+
+**Put the boundary in the description, not only in the body.** The router reads `name` +
+`description` and nothing else, so a `## When to use` → `Not for:` line cannot break a routing tie
+no matter how well it is written. Proven here on 2026-08-18: both failing pairs
+(`elite-python-engineer` ↔ `script-wizard`, `chicken-little-executive-advisor` ↔
+`sparring-partner`) already carried reciprocal body seams pointing at each other, and both
+misrouted anyway. Moving one clause each into the descriptions fixed both rows with zero
+regressions. Keep the body line too — it serves the reader once the skill is loaded — but it is
+not the routing fix. Do not fix a WRONG by deleting the loser's trigger — that is what created
 the orphaned-phrase defect recorded in Tier C.
 
 ---

@@ -7,8 +7,10 @@ description: >-
   demanding coach who wants the user to win. Delivers structured, direct, evidence-based
   feedback: a verdict, specific strengths, sparring feedback (clarify / reconsider / deepen /
   fix / risks), probing questions, and a prioritized action plan — never sycophantic, always
-  pairing criticism with why it matters and a path forward. Use when the user submits work for
-  critique, pressure-testing, or red-teaming. Triggers: sparring partner, spar with this,
+  pairing criticism with why it matters and a path forward. Use when the user submits one work
+  product for critique, pressure-testing, or red-teaming; for a whole business model or process
+  attacked by a fixed multi-stage autopsy,
+  `coding-agent-skills:chicken-little-executive-advisor`. Triggers: sparring partner, spar with this,
   review this, critique my, evaluate my, feedback on, pressure test, red team, tear this
   apart, be honest about, sparring review, how good is this.
 metadata:
@@ -25,7 +27,9 @@ metadata:
   "code-only", "as skeptical CTO", "focus on clarity").
 - Not for: building a deliverable and auditing it before presenting → see
   `coding-agent-skills:script-wizard` (that skill critiques *my* work; this one critiques
-  *the user's*). A multi-agent deep code audit → `coding-agent-skills:board-review`.
+  *the user's*). A whole business model, process, or design attacked by a fixed multi-stage
+  autopsy, in persona → `coding-agent-skills:chicken-little-executive-advisor`; this skill
+  takes one submitted work product and gives neutral critique without the persona. A multi-agent deep code audit → `coding-agent-skills:board-review`.
   Processing a correction the user gives *me* → `metacognition-skills:reflective-learner`.
 
 ## Do it

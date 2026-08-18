@@ -464,6 +464,24 @@ Never store secrets, credentials, account numbers, or client data here.
   descriptions that name-gating is the contract. Reporting all four as findings would have invented
   two problems and buried the two real ones.
 
+- FACT (2026-08-18, seam repair verified): the two Tier D defects are fixed and measured.
+  **41/45 -> 43/45; NAME-ONLY 4 -> 2; zero regressions across the other 13 rows.** The two
+  remaining NAME-ONLY skills (`gonzo`, `chicken-little`) are name-gated by their own
+  descriptions, which is the contract, not a defect.
+- LESSON (2026-08-18, important and counter to what the protocol said): **a body `Not for:` line
+  cannot fix a routing WRONG. The router never reads bodies.** Both failing pairs ALREADY had
+  reciprocal body seams pointing at each other and misrouted anyway. The repair had to go in the
+  DESCRIPTION, which is the only text the router sees. `docs/trigger-test.md`'s prescribed fix for
+  a WRONG was therefore incomplete; it now says description-level.
+- FACT (2026-08-18): the repair's causal attribution is direct, not inferred. The blind router that
+  fixed D9 wrote: "Decided by the explicit hand-off written into sparring-partner… Without that
+  cross-reference, sparring-partner's 'tear this apart' / 'red team' triggers would have won on
+  surface wording." The one that fixed D2 quoted "raising existing code to a shipping standard" —
+  the exact clause added. Both quoted strings verified present in the edited descriptions.
+- RULE (2026-08-18): a description edit costs listing budget and must be re-measured. These four
+  clauses moved the library 109,662 -> 109,958 chars (14.82% -> 14.86%). Re-run
+  `scripts/measure-listing-cost.py` and refresh README after any description change.
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core
