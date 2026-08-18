@@ -91,6 +91,14 @@ reason to state that 121 skills are degraded and 99 are not. The threshold could
 rather than count-driven, could vary by client, and could have changed since. Nothing in this run
 tested it.
 
+> **UPDATE (2026-08-18, same day, later): it has now been tested, live, for real.** The "~100
+> skills" anecdote is superseded, not merely caveated. The real mechanism is a *character* budget
+> filled in listing order with a hard cutoff, not a count threshold or a usage-based trim, and it
+> is more severe: with this exact 121-skill marketplace genuinely installed, **101 of 121 skills
+> carried zero description text**. Full method and evidence, including live `Skill`-tool routing
+> cases showing the D2/D9 seam repairs below fail for real once their target's description is
+> degraded: [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
+
 **(b) A language model's judgement is not the plugin loader's matching behaviour.** The agents were
 asked "which skill would you load", and answered by reading. The loader's actual mechanism — how it
 weights the name against the description, whether the trigger list is privileged, how it behaves when
@@ -384,11 +392,14 @@ agent's self-reported confidence 1–5, recorded before scoring. Row ids map to 
 
 1. **Do not edit any description on the strength of this document.** Zero failures means zero
    evidenced fixes.
-2. **Run the degraded regime.** The one thing this simulation cannot touch is the finding the protocol
-   is most worried about. Present the same 80 prompts against a **name-only listing** (names, no
-   descriptions) and score again. The gap between that run and this one is the actual measurement of
-   truncation risk — and it would also put a number on the `~100 skills` landmark instead of
-   inheriting it from one observation.
+2. ~~**Run the degraded regime.**~~ **DONE 2026-08-18.** Not by presenting a name-only listing to a
+   simulated router — by installing the real marketplace under the real harness
+   (`claude plugin eval`, `CLAUDE_CODE_WALNUT_SPIRE=1`) and reading the real listing state and
+   real `Skill`-tool calls. Result: 101 of 121 skills reduced to bare names, mechanism is a
+   character-budget sequential fill with a hard cutoff (not usage-based), and the D2/D9 seam
+   repairs below fail for real when their target is degraded. This supersedes the `~100 skills`
+   landmark rather than merely putting a number on it. Full writeup:
+   [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
 3. **Fix Tier D before re-running it.** Rewrite the in-scope column so no prompt contains a substring
    of the target's trigger list (§4). As written it cannot detect name-only reachability.
 4. **Run the real thing for the fragile rows.** The seven §5 routes and nine §6 seams are 14 distinct

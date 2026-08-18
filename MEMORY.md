@@ -286,6 +286,17 @@ Never store secrets, credentials, account numbers, or client data here.
 - LESSON: With ~100 installed skills, the skill-listing context budget trims least-used
   descriptions to name-only; direct `/plugin:skill` invocation still works, and newly installed
   plugins appear in the listing only at the next refresh. (observed 2026-07-18)
+  - SUPERSEDED (2026-08-18, tested live for real, not caveated): the real mechanism is
+    `skillListingBudgetFraction` — a *character* budget (default 1% of the context window),
+    filled in **listing order** with a hard cutoff, not a usage-based trim of the least-used
+    entries. With this marketplace's 121 skills genuinely installed under
+    `CLAUDE_CODE_WALNUT_SPIRE=1` + `claude plugin eval`, **101 of 121 carried zero description
+    text**; the 19 survivors were exactly the first 19 processed in install order (verified:
+    `writing-skills` installed first = 5/5 full; `coding-agent-skills` second = first 14 of its
+    20 skills alphabetically full, last 6 name-only; all 12 plugins installed after = 0% full).
+    Length and trigger count do not predict the outcome. Full evidence:
+    `docs/live-routing-and-degradation-2026-08-18.md`. Do not re-cite "~100 skills" as the
+    threshold — cite this instead.
 - LESSON: The GitHub App integration cannot create repositories (403 "Resource not accessible
   by integration") — the user creates the empty repo manually, then `add_repo` brings it into
   session scope for pushing. (observed creating the matching-engine project, 2026-07-18)
@@ -496,6 +507,44 @@ Never store secrets, credentials, account numbers, or client data here.
   checks the target's — the gap is now documented in the script, and automating the full check is
   harder than it looks because short triggers like "agent", "prompt", and "module" are ordinary
   English.
+
+- FACT (2026-08-18): `claude plugin eval` and `claude plugin marketplace` are real shipped CLI
+  commands (visible in `claude plugin --help`), gated behind a per-organization early-access
+  flag. The gate opens for a single shell via `CLAUDE_CODE_WALNUT_SPIRE=1` set in the
+  environment — documented as NOT to be committed to any repo settings file (a committed value
+  leaves the gate closed; it must be set per-shell or in user/managed settings). This is the
+  first time this repo has run anything against the real skill-router mechanism rather than a
+  simulation.
+- FACT (2026-08-18): `claude plugin details <plugin>` reports a real, tokenizer-computed
+  always-on token cost per plugin. Cross-checked against this repo's own
+  `scripts/measure-listing-cost.py` (chars/3.7 estimate) on the same 121 skills: the real
+  tokenizer runs **~27-30% higher**, consistently across every plugin and every individually
+  spot-checked skill, not just in aggregate. A full install is ~38,800 real tokens (~19.4% of
+  200K), not the ~29,700 (~14.9%) this repo had been citing. The char/token divisor was never
+  wrong as a rough estimate; it was never checked against the real tokenizer until now.
+- LESSON (2026-08-18): **live introspection questions need explicit name-tagged answers, or the
+  mapping is unusable.** Asked a live session to report FULL/NAMEONLY for four skills as bare
+  status words in order; the reply's order didn't match the request and looked like a direct
+  contradiction of a prior reliable scan. Re-asked requiring `name<TAB>status` pairs, and it
+  reproduced the reliable scan exactly. This is the same root cause as the three prior
+  "the test prompt was the defect" findings in the trigger-test protocol (Tier D v1, Tier D v2,
+  the Tier C decoy): an under-specified prompt, not an unstable target.
+- LESSON (2026-08-18): **a `tool_used` grader asserting absence needs `min: 0` stated
+  explicitly.** `max: 0` alone left `min` at its schema default of 1, producing an impossible
+  `1..0` expected range that fails regardless of actual behavior. Caught by reading the raw
+  "Skill called Nx" trace, not the pass/fail score, on two live eval cases (c13-live, c16-live)
+  — the guards had actually held; only the grader was broken.
+- FACT (2026-08-18): checked whether `script-wizard`'s over-breadth generalizes to a second
+  skill (candidate: `sparring-partner`, "any work product"). It does not — `script-wizard` is
+  the only skill in the library carrying an explicit, unqualified breadth hedge ("even when
+  phrased casually" or equivalent), and `sparring-partner` already has two reciprocal seams
+  repaired this session with no narrower same-purpose sibling to lose ground to. No second
+  guard row was added. Do not re-run this search without new evidence.
+- FACT (2026-08-18, live, real `Skill`-tool invocations): the D2/D9 seam repairs verified by
+  blind simulation (43/45) **fail for real** when their target's description is degraded to
+  name-only in the actual listing — zero `Skill` calls, not a wrong pick. Every prior PASS in
+  this protocol was measured against a full, undegraded listing that a realistic full install
+  does not provide. This is the single most consequential correction from this pass.
 
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
@@ -994,3 +1043,14 @@ unexecuted; depth for the five hub-but-thin skills.
   exists. All 29 active-tree pointers into those skills were rewritten to name the *domain* instead
   of promising a restore — a pointer to something deleted is worse than no pointer. Never rebuild
   on these domains, and never re-add an "archived: <treasury skill>, restorable from archive/" mark.
+
+2026-08-18 (later) — Live routing test against the real harness, using `claude plugin eval` under
+`CLAUDE_CODE_WALNUT_SPIRE=1` (documented early-access flag). All 14 plugins genuinely installed.
+Superseded the ~100-skill folklore: real mechanism is a character budget filled in listing order
+with a hard cutoff (101/121 skills reduced to bare names in this install, not usage-based). Real
+tokenizer cost (`claude plugin details`) is ~30% above this repo's chars/3.7 estimate — 38,800
+tokens / 19.4% of 200K, not 29,700 / 14.9%. Seven live routing cases (~$0.93 real spend): the D2/D9
+seam repairs verified by simulation fail for real once their target's description is degraded —
+zero Skill calls. Checked script-wizard's defect for a sibling; none found. New doc:
+docs/live-routing-and-degradation-2026-08-18.md. README/MEMORY/library-review/trigger-test docs
+corrected throughout.

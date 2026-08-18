@@ -32,11 +32,14 @@ Installed skills are namespaced, e.g. `decision-science-skills:pre-mortem`. Type
 ### Install a subset — the full library does not fit comfortably
 
 **Install the plugins you will actually use, not all fourteen.** Every installed skill's `name` and
-`description` sit in the system prompt for the whole session, whether or not you use it. Measured
-with `python3 scripts/measure-listing-cost.py` across all 121 skills: **109,958 characters ≈
-29,718 tokens ≈ 14.9% of a 200K context** (tokens estimated at ~3.7 chars/token), before you
-have asked anything. Re-run that script after any description change — this figure went stale
-within a day of first being measured by hand.
+`description` sit in the system prompt for the whole session, whether or not you use it. This
+repo's own estimate, from `python3 scripts/measure-listing-cost.py` across all 121 skills:
+**109,958 characters ≈ 29,718 tokens ≈ 14.9% of a 200K context** (tokens estimated at ~3.7
+chars/token). That estimate has been cross-checked against the harness's own real tokenizer
+(`claude plugin details <plugin>`, summed across all 14 plugins) and runs **~30% light**: the
+real, tokenizer-computed cost is **≈38,800 tokens ≈ 19.4% of a 200K context**. Full measurement
+and method: [`docs/live-routing-and-degradation-2026-08-18.md`](docs/live-routing-and-degradation-2026-08-18.md).
+Re-run the script after any description change — the char-based figure is directional, not exact.
 
 | Plugin | Skills | ~Tokens | % of 200K |
 | --- | ---: | ---: | ---: |
@@ -56,16 +59,22 @@ within a day of first being measured by hand.
 | `deep-research-skills` | 1 | 276 | 0.14% |
 | **all 14** | **121** | **29,718** | **14.86%** |
 
-There is a second, sharper reason to subset. **At roughly 100 installed skills the listing starts
-trimming the least-used skills' descriptions to name-only** — silently, with no error, while
-`/plugin:skill` direct invocation keeps working. Past that point a skill can be perfectly valid and
-still unreachable by description-matching, and you cannot tell from inside your own session. A full
-install of this library is *past* that threshold.
+There is a second, sharper reason to subset, and it is worse than a round "~100 skills" threshold
+suggests. **The real mechanism is a character budget (`skillListingBudgetFraction`, 1% of the
+context window by default), filled in listing order with a hard cutoff — not a graceful
+per-skill trim of the least-used entries.** Verified live on 2026-08-18 with this exact
+marketplace fully installed: **101 of 121 skills carried zero description text, reduced to a
+bare name** — not the shortest or least-triggered ones, but everything past wherever the budget
+ran out in installation order. `/plugin:skill` direct invocation still works past that point, but
+description-matching does not, and which skills survive is arbitrary — a function of install
+order, not importance. Full methodology and the live evidence:
+[`docs/live-routing-and-degradation-2026-08-18.md`](docs/live-routing-and-degradation-2026-08-18.md).
+A full install of this library is *deep* past the point where this starts, not marginally past it.
 
 Practical guidance:
 
 - **Two to four plugins (~24-31 skills, 3-4% of context)** is the sweet spot: comfortably below the
-  degradation threshold, and small enough that the router discriminates well.
+  point where any of this starts, and small enough that the router discriminates well.
 - **Pick by the work you do**, not by breadth. Each bundle below is measured, not estimated:
 
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |

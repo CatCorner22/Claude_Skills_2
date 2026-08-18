@@ -289,10 +289,14 @@ edits, not after.**
 Measured 2026-08-17: 121 skills' names + descriptions = **110,081 characters ≈ 29,750 tokens ≈ 14.9%
 of a 200K context**, present before the user asks anything. Two consequences:
 
-- **A full install is past the observed degradation threshold.** At roughly 100 installed skills the
-  listing begins trimming the least-used skills' descriptions to **name-only** — silently, with no
-  error, while `/plugin:skill` direct invocation keeps working. That is precisely the path an author
-  uses to test their own skill, so the failure is invisible from the inside.
+- **A full install is deep past the point where this starts, and the mechanism is worse than a
+  count threshold.** Verified live on 2026-08-18 (`docs/live-routing-and-degradation-2026-08-18.md`):
+  the real gate is a *character* budget (`skillListingBudgetFraction`) filled in listing order
+  with a hard cutoff, not a graceful per-skill trim of the least-used entries. With this
+  marketplace's 121 skills genuinely installed, **101 of them carried zero description text** —
+  silently, with no error, while `/plugin:skill` direct invocation keeps working. That is
+  precisely the path an author uses to test their own skill, so the failure is invisible from the
+  inside. Which 19 survived was a function of install order, not importance.
 - **The lever is skills per install, not characters per description.** Trimming a description by 100
   characters saves ~27 tokens; not installing a 15-skill plugin saves ~3,900 — a 145× difference.
   This is the arithmetic the trimming pass of §9.2 should have run first.
@@ -677,10 +681,13 @@ citations, the second-most in its plugin, and `reflective-learner` carries 8. Th
 the inverse of a deletion case — **the hub skills are the shallowest ones**, and the improvement
 available is depth, not removal.
 
-**The context-cost problem is not solved by deleting skills.** A full install costs 14.8% of a 200K
-window, and the library sits past the ~100-skill point where the listing silently degrades to
-name-only. Deleting the five thinnest skills would recover about 1,200 tokens — 0.6% of a context —
-while removing genuinely used content. Installing two plugins instead of fourteen recovers 11%.
+**The context-cost problem is not solved by deleting skills.** A full install costs ~19.4% of a
+200K window by the harness's own real tokenizer (not the 14.8-14.9% this repo's char-based
+estimate had reported — see `docs/live-routing-and-degradation-2026-08-18.md`), and the library
+sits deep past the point where the listing silently degrades — 101 of 121 skills reduced to bare
+names in a live 2026-08-18 test, not a rounded "~100 skills" folklore figure. Deleting the five
+thinnest skills would recover about 1,200 tokens — 0.6% of a context — while removing genuinely
+used content. Installing two plugins instead of fourteen recovers 11%.
 The lever is skills *per install*; `README.md` carries the measured per-plugin and per-bundle
 tables, and `scripts/measure-listing-cost.py` keeps them honest.
 
@@ -732,5 +739,56 @@ ordinary vocabulary. One item is *not* removed and is a decision for the owner: 
    been rendering neutral in silence. Now the flag overrides the spec and the spec is honoured when
    the flag is absent, which is what the schema always claimed.
 2. **Depth for the five hub-but-thin skills** (§12.3). Not a defect; a ranked opportunity.
-3. **`docs/trigger-test.md` remains unrun.** It is the one checklist item nothing in this library's
-   history has ever met, and it cannot be run from a session that authored the skills.
+3. ~~**`docs/trigger-test.md` remains unrun.**~~ **SUPERSEDED — see §13.** It has since been run
+   twice as a blind simulation and once live against the real harness.
+
+## 13. Addendum (2026-08-18, later the same day): the live routing test, and two folklore corrections
+
+Three follow-ups on the owner's earlier decisions: run the trigger test live against the real
+harness rather than a simulation, re-measure the ~100-skill degradation claim properly, and check
+whether the `script-wizard` guard pattern generalizes to a second skill.
+
+### 13.1 The live test — real, not simulated
+
+`claude plugin eval` and `claude plugin marketplace` are real shipped commands, gated behind a
+per-organization early-access flag openable per-shell via `CLAUDE_CODE_WALNUT_SPIRE=1` (not
+committed to any settings file). All 14 plugins were installed for real; seven live routing cases
+were run as genuine agent turns graded on the actual `Skill`-tool transcript. Total real spend:
+≈$0.93, disclosed because this mechanism spends real money per run.
+
+**Headline finding: every PASS this protocol has ever recorded — including the freshly-repaired
+D2/D9 seams — was measured against a full, undegraded listing. Run for real, both failed with
+zero `Skill` calls**, because their target's description was, at the time, invisible in this
+session's real listing. A routing fix verified by simulation is conditional on the description
+being visible at all, and a realistic full install does not reliably provide that. Full method
+and every case: `docs/live-routing-and-degradation-2026-08-18.md`.
+
+### 13.2 The ~100-skill folklore, corrected
+
+The standing `MEMORY.md` lesson ("~100 installed skills trims least-used descriptions to
+name-only," one anecdotal 2026-07-18 observation from an unrelated project) is superseded, not
+merely caveated. The real mechanism, read from the CLI's own settings schema
+(`skillListingBudgetFraction`, default 1% of the context window **in characters**, filled in
+listing order with a hard cutoff) was verified live: with this marketplace's 121 skills
+genuinely installed, **101 of 121 carried zero description text**. The 19 survivors were not the
+shortest, least-triggered, or most-used — they were exactly the first 19 processed in
+(apparent) install order. This is more severe than the folklore suggested (a count threshold
+implies most survive; the real mechanism means most do not) and mechanistically different (order,
+not usage).
+
+Separately, `claude plugin details` gave a second, real-tokenizer-computed cost figure —
+**≈38,800 tokens (≈19.4% of 200K)** — about 30% above this repo's own chars/3.7 estimate
+(≈29,700 tokens, ≈14.9%). Both figures are now cited together wherever this repo quotes install
+cost, with the real one primary.
+
+### 13.3 `script-wizard`, checked for a sibling — none found
+
+Before writing more Tier C guards on the pattern that caught `script-wizard`'s over-breadth, the
+library was searched for a second skill carrying the same defect signature (an explicit,
+unqualified breadth claim — "even when phrased casually" or equivalent). Only `script-wizard`
+carries it. The next-broadest candidate, `sparring-partner` ("any work product"), was checked
+against the same standard and found meaningfully different: two reciprocal seams already repaired
+this session, and no narrower same-purpose sibling in this library for generic single-artifact
+critique — unlike `script-wizard`, whose breadth competed directly with siblings owning more
+precise vocabulary. **No second skill warrants a new guard row.** Recorded so this search is not
+repeated.
