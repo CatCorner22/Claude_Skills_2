@@ -93,8 +93,10 @@ first that fires:
 1. **High** — S 9–10 (unless O and D are both ≤ 3); **or** S 7–8 with O ≥ 4 **or** D ≥ 4;
    **or** S 4–6 with O ≥ 4 **and** D ≥ 7 (a frequent cause with no working control).
    Action is required, or the current risk is explicitly accepted by the owner in writing.
-2. **Low** — S 1–3; **or** O ≤ 3 **and** D ≤ 3 (rare, and caught before it hurts).
-   Action discretionary.
+2. **Low** — S 1–3; **or** S ≤ 6 with O ≤ 3 **and** D ≤ 3 (moderate at worst, rare, and caught
+   before it hurts). Action discretionary. The severity ceiling is load-bearing: without it a
+   catastrophic-but-rare-and-detectable mode (S 9, O 2, D 3) would fall to Low, which is exactly
+   the averaging-away this table exists to prevent — severity 7+ never rates Low here.
 3. **Medium** — everything else. Action should be taken; justify in the register if it isn't.
 
 Note what rule 1 encodes: severity earns High on its own, but a *moderate* severity still reaches

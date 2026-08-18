@@ -168,7 +168,9 @@ privacy sweep. Highlights of what was fixed:
   receive its own traffic.
 - **Kept by explicit exception** (recorded in MEMORY.md): chicken-little's Oracle Fusion
   data-model reference — name-gated (zero routing pollution) and the only surviving copy of
-  that commissioned depth in the repo.
+  that commissioned depth in the repo. **Superseded 2026-08-18** — see §"Oracle deletion"
+  below: the owner directed deletion of all Oracle skills, the exception was retired, and the
+  reference files were removed.
 
 **Text-optimization pass** (10 agents: 5 optimizers + 5 diff-level verifiers, zero
 must-fix flags): the 46 earlier-vintage skills the review didn't line-check were each
@@ -418,6 +420,16 @@ the three domain triggers are specific enough that they will not fire on unrelat
 record the correction at all is that "zero" invites a future sweep to re-derive the same finding and
 re-open the same decision — which is exactly what happened here. The residue-sweep note in `MEMORY.md`
 has been amended to say *bounded and accepted* instead of *zero*.
+
+**Superseded 2026-08-18 (owner directive).** The owner subsequently directed that *all* Oracle
+skills be deleted. That directive overrides this exception: chicken-little's two Oracle reference
+files (`oracle-fusion-data-model.md`, `sql-patterns.md`) were deleted, the Oracle Do-it step and
+the named-Oracle-failure-modes section were removed, the three Oracle domain triggers
+(`invoice black hole`, `ghost receipts`, `orphan distributions`) were dropped, and
+`your-environment.md` was rewritten domain-neutral. The skill is now gated on the persona name
+alone, so the routing cost analysed above is now zero as a matter of fact. The analysis is left in
+place because it is the reason the "zero" claim was auditable at all — but the decision it
+recommended (no action) no longer stands.
 
 **D3 — `assertion-evidence-deck/references/oracle-cm-domain.md` (151 lines) is retained as an opt-in
 legacy reference.** The skill itself was de-mounted earlier in this session; the description and body

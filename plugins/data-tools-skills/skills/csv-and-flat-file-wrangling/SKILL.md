@@ -33,10 +33,12 @@ metadata:
   discipline.
 
 ## Do it
-1. **Look at the raw bytes before parsing.** `head -c 500 file.csv | xxd | head` (or open in a
-   text editor showing invisibles). You're checking: encoding clues (a `EF BB BF` UTF-8 BOM;
-   high bytes suggesting Latin-1/Windows-1252), the actual delimiter (comma, semicolon, pipe,
-   tab), quoting style, line endings, and whether there are title/footer rows around the data.
+1. **Look at the raw bytes before parsing.** `head -c 500 file.csv | xxd | head` — `xxd` ships
+   with vim, so on a box without it use `head -c 500 file.csv | od -An -tx1z | head`, which is
+   POSIX and always present (or open in a text editor showing invisibles). You're checking:
+   encoding clues (a `EF BB BF` UTF-8 BOM; high bytes suggesting Latin-1/Windows-1252), the
+   actual delimiter (comma, semicolon, pipe, tab), quoting style, line endings, and whether
+   there are title/footer rows around the data.
 2. **Parse explicitly — never rely on defaults for a recurring feed:**
 
 ```python

@@ -248,6 +248,12 @@ Never store secrets, credentials, account numbers, or client data here.
     accepted**, not zero. The decision is unchanged; only the reason is corrected. Recorded
     because "zero" is falsifiable, so a later sweep re-derives the finding and re-opens a settled
     call — which is exactly what happened on 2026-08-17.
+  - SUPERSEDED (2026-08-18, owner directive "delete all Oracle skills"): the exception is
+    **retired**. chicken-little's `oracle-fusion-data-model.md` and `sql-patterns.md` were
+    deleted, its Oracle Do-it step and named-Oracle-failure-modes section removed, its three
+    Oracle domain triggers dropped, and `your-environment.md` rewritten domain-neutral. The
+    skill is now gated on the persona name alone. Nothing Oracle-mounted remains in the active
+    tree; do not restore it. The assertion-evidence-deck legacy-palette exception is unaffected.
 - RULE (2026-08-17): a settled exception needs its *reason* stated in terms that survive
   re-measurement. An owner-ratified decision defended by a checkable claim that turns out false
   will be re-litigated by the next audit, and the audit will look correct while doing it. When

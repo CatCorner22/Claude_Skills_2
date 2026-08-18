@@ -265,15 +265,15 @@ extrapolated to the whole library; neither should the unreviewed 107 be assumed 
 - The marketplace ID stays **`treasury-analyst-skills`** deliberately, for install
   compatibility. Renaming it would break every existing `<plugin>@treasury-analyst-skills`
   reference. The name is stale; the breakage would be worse.
-- `coding-agent-skills:chicken-little` keeps its Oracle Fusion data-model reference by
-  ratified exception: it is name-gated and the only surviving copy of that commissioned depth.
-  Recorded in `MEMORY.md` so future residue sweeps don't re-flag it. **Correction from this pass:**
-  the original rationale said "zero routing pollution", which is not accurate — 3 of the skill's 7
-  triggers are Oracle domain phrases rather than the persona name, and about a third of its
-  always-loaded description is Oracle specifics. The exception is *bounded and accepted*, not zero.
-  The decision is unchanged; only the reason is corrected, because a falsifiable justification
-  invites the next audit to re-derive the finding and re-open a settled call — which is exactly what
-  happened here.
+- `coding-agent-skills:chicken-little` **no longer carries any Oracle content.** An earlier
+  pass kept its Oracle Fusion data-model reference by ratified exception (name-gated, the only
+  surviving copy of that commissioned depth). The owner's later directive — delete all Oracle
+  skills — supersedes that exception. The two Oracle reference files, one Do-it step, three
+  domain trigger phrases, and the named-Oracle-failure-modes section were removed, and
+  `your-environment.md` was rewritten domain-neutral. The skill is now gated on the persona
+  name alone (`chicken little`, `aether`, `chicken little mode`, `sky is falling`), so the
+  "bounded and accepted" routing cost recorded earlier is now zero in fact rather than by
+  assertion.
 - **Security housekeeping:** the deleted `GITHUB_SETUP.md` had committed an `ssh-ed25519`
   deploy **public** key and an expired device code. The public half discloses nothing on its
   own, but if that deploy key still exists on the repository, revoke it in GitHub settings —

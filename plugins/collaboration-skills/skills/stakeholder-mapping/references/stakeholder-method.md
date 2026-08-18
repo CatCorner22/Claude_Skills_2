@@ -191,7 +191,7 @@ truth (§2); the re-map triggers are the last bullet below.
 | Legal/compliance | High | Low→? | Keep satisfied | Unknown — not yet told |
 | Intake staff (3 teams) | Low-med | High | Keep informed | Mixed (survey) |
 | IT platform owner | Med | Med | Manage closely (borderline) | Supporter if scoped (evidence) |
-| Audit (inheritor) | Med | Low | Monitor → re-map at go-live | Unknown |
+| Audit (inheritor) | Med | Low | Keep informed (was: monitor — see the pre-mortem below) | Unknown |
 
 Moves that follow:
 - **Claims team lead (opponent, manage closely)**: not a broadcast target — a
@@ -204,7 +204,8 @@ Moves that follow:
 - **Legal untold** is the map's loudest finding: high power, interest low only because
   they don't know. Brief them before they discover it — surprise converts.
 - **RACI extract** (rows = workstreams): Routing rules — A: ops manager, R: IT
-  platform owner, C: claims lead + team leads, I: intake staff. Cost allocation note —
+  platform owner, C: claims lead + team leads **+ audit** (added by the pre-mortem below,
+  before the rules froze), I: intake staff. Cost allocation note —
   A: finance director, R: analyst, C: ops manager, I: COO. Go/no-go at pilot end —
   A: COO, R: ops manager, C: claims lead + IT platform owner, I: all. Go-live comms —
   A: ops manager, R: team leads, C: legal, I: all. (The go/no-go row is what makes the
@@ -212,9 +213,11 @@ Moves that follow:
   an "I", which is a placement error in one of the two artifacts.)
 - **Pre-mortem narrative that changed the map**: "it failed because audit's
   record-retention requirement surfaced in week ten" → audit moved from monitor to
-  keep-informed, and was added as a **C on the routing-rules row** before it froze. Note
-  the delta lands in both artifacts: a re-map that does not reach the RACI has not
-  actually changed anything anyone will do.
+  keep-informed, and was added as a **C on the routing-rules row** before it froze. Both
+  edits are shown above, in the grid row and in the routing-rules row — that is the point:
+  a re-map that does not reach the RACI has not actually changed anything anyone will do,
+  so if you can read the change in the narrative but not in the two artifacts, the re-map
+  did not happen.
 - **Re-map triggers**: pilot end, go-live, and any reorg of the three intake teams.
 
 ## 8. Two more shapes — multi-party matter, deprecation without authority

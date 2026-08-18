@@ -6,7 +6,7 @@ sensitive goes in `your-environment.private.md` — that suffix is git-ignored a
 
 ## Variance histories (candidate reference classes you already own)
 - **Cash drivers:** <where the per-driver forecast-vs-actual history lives — e.g., the accuracy
-  tab of the 13-week model, an OTBI export, a variance workbook> — grain <weekly/monthly>,
+  tab of the rolling forecast model, a BI export, a variance workbook> — grain <weekly/monthly>,
   depth <n cycles>, per driver: <tuition receipts, payroll, grant drawdowns, AP runs, ...>
 - **Projects/features:** <where estimated-vs-actual delivery history lives — tracker export,
   sprint reports> — unit <days/points>, depth <n items>

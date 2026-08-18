@@ -69,11 +69,14 @@ import pdfplumber, pandas as pd, re
 HDR = ("Date", "Description", "Amount")
 SECTIONS = {"Deposits", "Withdrawals", "Fees"}
 
-def amount(s):            # "(750.25)" -> -750.25 ; "1,200.00-" -> -1200.0 ; "" -> None
+def amount(s):            # "(750.25)" -> -750.25 ; "1,200.00-" -> -1200.0 ;
+                          # "-750.25" -> -750.25 ; "" -> None
     s = (s or "").replace(",", "").replace("$", "").strip()
     if not s:
         return None
-    neg = (s.startswith("(") and s.endswith(")")) or s.endswith("-")
+    # Leading "-" must be tested here: the re.sub below strips every "-", so a plain
+    # negative would otherwise come back positive — a sign inversion that reconciles.
+    neg = (s.startswith("(") and s.endswith(")")) or s.startswith("-") or s.endswith("-")
     return (-1.0 if neg else 1.0) * float(re.sub(r"[()\-]", "", s))
 
 rows, section = [], None

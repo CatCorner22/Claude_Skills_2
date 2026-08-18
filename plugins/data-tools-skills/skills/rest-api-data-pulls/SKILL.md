@@ -55,13 +55,16 @@ def fetch_all(session, url, params, page=500, max_pages=1000):
             if total is not None and len(rows) != total:
                 raise AssertionError(f"fetched {len(rows)} != server total {total}")
             return rows
-        offset += page
+        offset += len(items)                         # advance by what arrived, not by `limit`
     raise RuntimeError(f"pagination did not terminate after {max_pages} pages")
 ```
 
-   The three guards matter as much as the loop: an empty page ends it even when `hasMore`
-   stays true, `max_pages` turns a server-side bug into an error instead of a hung script,
-   and the `totalResults` assertion makes a short pull fail loudly rather than look plausible.
+   The four guards matter as much as the loop: advancing the offset by `len(items)` rather
+   than by `page` survives a server that returns a short page while `hasMore` is still true
+   (advancing by `page` would silently skip the rows it withheld), an empty page ends the loop
+   even when `hasMore` stays true, `max_pages` turns a server-side bug into an error instead
+   of a hung script, and the `totalResults` assertion makes a short pull fail loudly rather
+   than look plausible.
 
 5. **Retry transient failures with backoff; respect 429.** Wrap requests so 429 (honor
    `Retry-After`) and 5xx/timeouts retry with exponential backoff and a cap; 4xx other than 429

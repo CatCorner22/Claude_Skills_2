@@ -63,8 +63,10 @@ _COUNTRY_HINTS = [
       "yekaterinburg"]),
     ("usa", ["usa", "u.s.a", "united states"],
      ["boston", "new york", "bethesda", "baltimore"]),
-    ("uk", ["united kingdom", "great britain", "england", "scotland", "wales",
-           "uk", "u.k"],
+    # "wales" is deliberately absent as a bare hint: it fires inside "New South Wales"
+    # (Australia) and resolved that to uk with no caveat. Qualified forms only.
+    ("uk", ["united kingdom", "great britain", "england", "scotland", "cymru",
+           "wales, uk", "cardiff", "swansea", "uk", "u.k"],
      ["london", "oxford", "manchester", "edinburgh"]),
     ("canada", ["canada"], ["toronto", "montreal", "vancouver", "ottawa"]),
     ("germany", ["germany", "deutschland"],
@@ -198,6 +200,11 @@ def years_match(claimed, actual) -> bool:
         return False
 
 
+# Institution boundaries inside one affiliation string: semicolons, " and ",
+# and PubMed's numbered-superscript separators.
+_SEGMENTS = re.compile(r";|/|\band\b|(?<=\D)\d\s*[.)]\s")
+
+
 def _hit(hints, low: str) -> bool:
     """Word-bounded substring test. Bare `in` would match 'usa' inside 'Busan'."""
     return any(re.search(r"\b" + re.escape(h) + r"\b", low) for h in hints)
@@ -220,8 +227,19 @@ def infer_provenance(affiliations) -> dict:
         low = (aff or "").lower()
         if not low.strip():
             continue
-        named = [c for c, names, _ in _COUNTRY_HINTS if _hit(names, low)]
-        hits = named or [c for c, _, cities in _COUNTRY_HINTS if _hit(cities, low)]
+        hits = []
+        # Resolve name-beats-city WITHIN each institution, not across the whole
+        # string. One affiliation line often lists two institutions in different
+        # countries ("Beijing ... ; and Harvard ... USA"); applying the rule to the
+        # whole line let a single recognized country NAME discard every city hit,
+        # silently suppressing the other country. For an excluded country that is
+        # the worst possible failure: a clean PASS on a paper needing quarantine.
+        for seg in _SEGMENTS.split(low):
+            if not seg.strip():
+                continue
+            named = [c for c, names, _ in _COUNTRY_HINTS if _hit(names, seg)]
+            seg_hits = named or [c for c, _, cities in _COUNTRY_HINTS if _hit(cities, seg)]
+            hits.extend(seg_hits)
         if not hits:
             unrecognized.append(aff)
         for c in hits:
@@ -554,6 +572,23 @@ def self_test() -> int:
     check("Busan does not contain USA",
           infer_countries(["Pusan National University, Busan, Republic of Korea"])
           == ["south korea"])
+    # Regression (2026-08-18): the name-beats-city rule was applied to the whole
+    # affiliation string, so one recognized country NAME discarded every city hit.
+    # A dual-institution line silently suppressed the excluded country and the
+    # citation passed clean — the worst failure this control can have.
+    check("two institutions, one excluded, both reported",
+          sorted(infer_countries(
+              ["Beijing Anzhen Hospital, Beijing 100029; and Harvard Medical "
+               "School, Boston, MA, USA"])) == ["china", "usa"])
+    check("slash-separated institutions both reported",
+          sorted(infer_countries(
+              ["Beijing Hospital, China / Harvard, Boston, USA"])) == ["china", "usa"])
+    # Regression: a bare "wales" hint fired inside "New South Wales" (Australia)
+    # and resolved it to uk with no caveat. Unrecognised is the honest answer.
+    check("New South Wales is not the UK",
+          infer_countries(["University of New South Wales, Kensington NSW 2052"]) == [])
+    check("qualified Wales still resolves to uk",
+          infer_countries(["Cardiff University, Wales, UK"]) == ["uk"])
     check("Cambridge UK vs Cambridge MA",
           infer_countries(["MRC Unit, Cambridge, UK"]) == ["uk"]
           and infer_countries(["MIT, Cambridge, MA, USA"]) == ["usa"])

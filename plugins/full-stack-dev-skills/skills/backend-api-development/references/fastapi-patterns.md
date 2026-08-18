@@ -13,6 +13,10 @@
 app.add_middleware(SessionMiddleware, secret_key=settings.secret_key,
                    https_only=True, same_site="lax")
 
+from pwdlib import PasswordHash
+hasher = PasswordHash.recommended()   # Argon2id; build once at import, not per request.
+                                      # Do NOT name it `pwd` — that shadows the stdlib module.
+
 def require_user(request: Request, db: Session = Depends(get_db)) -> User:
     if uid := request.session.get("uid"):
         if user := db.get(User, uid):
@@ -22,7 +26,7 @@ def require_user(request: Request, db: Session = Depends(get_db)) -> User:
 @router.post("/login")
 def login(data: LoginIn, request: Request, db: Session = Depends(get_db)):
     user = db.scalar(select(User).where(User.email == data.email))
-    if not user or not pwd.verify(data.password, user.password_hash):
+    if not user or not hasher.verify(data.password, user.password_hash):
         raise HTTPException(401, "Invalid credentials")   # same message both cases
     request.session["uid"] = user.id
     return {"ok": True}

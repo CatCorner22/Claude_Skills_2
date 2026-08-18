@@ -78,8 +78,10 @@ mandatory — the history of the existing solution is read before it is called w
 **Case: "We need a dashboard for daily unreconciled items."**
 - THE DELIVERABLE: the recon lead sees yesterday's unreconciled lines and aging each
   morning.
-- THE PENCIL: rung 3 — the existing OTBI unreconciled report, subscribed... OTBI cannot
-  schedule (library fact); rung 7 — a cron'd query emailing a table at 6 a.m.
+- THE PENCIL: rung 3 — the existing unreconciled-items report in the BI tool, emailed on a
+  subscription... except this tool's subscriptions cannot be scheduled, which is the kind of
+  constraint the pencil pass exists to surface *before* the design depends on it; rung 7 — a
+  cron'd query emailing a table at 6 a.m.
 - THE GRAPHITE: credentials for the cron (security line) → service account required,
   cost added; spreadsheet variant killed on float-coercion (data-integrity line —
   reference-bearing IDs).

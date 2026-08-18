@@ -48,6 +48,16 @@ metadata:
    the **drivers**: for each alert, report the two or three fields whose robust z (step 2:
    `0.6745·(x − median)/MAD`) is most extreme, and the first check a reviewer should run. That recipe works
    for any scorer, including isolation forest and LOF, which give no native attribution.
+   **When no field is individually extreme, the anomaly is a joint one** — the combination is
+   unusual though every value is ordinary (a routine amount, to a routine vendor, at a routine
+   hour, but never that trio together). Marginal robust z is blind to it by construction, so
+   branch: if the top |z| is unremarkable (say < 3), attribute by *what the point is unusual
+   relative to* instead — the nearest normal neighbours and which fields differ from them (LOF
+   and DBSCAN give you these directly), or a drop-one pass that re-scores the point with each
+   field removed and names the field whose removal collapses the score. Report that as
+   "unusual combination: X given Y", never as a bare score, and say plainly that no single value
+   is out of range — otherwise a reviewer checks each field, finds nothing, and learns to
+   distrust the feed.
 7. **Close the loop and manage alert fatigue.** Track precision on reviewed alerts, suppress known-benign
    recurring patterns (a scheduled large transfer isn't news every month), fold confirmed cases back as labels,
    and re-tune. An alert stream nobody trusts is worse than none.

@@ -83,10 +83,25 @@ Expanding gaps, anchored so the final full pass lands shortly before the materia
 
 Honest calibration note: Cepeda's work shows the best gap *scales with the retention
 interval* — longer retention wants longer gaps — so treat this table as a sane default, not
-a law. Cepeda et al. (2008) put a usable ratio on it: the optimal gap runs roughly 10–20% of
-the retention interval at week-scale delays and falls to roughly 5–10% at a one-year delay.
-So an exam ten weeks out (70 days) wants gaps of roughly 7–14 days; "keep it for a year"
-(365 days) wants roughly 18–36 days — about a month, and growing. A held session at a rough
+a law. Cepeda et al. (2008) tested four retention intervals directly and reported an optimal
+gap for each; the figures below are approximate, read off that study's reported optima rather
+than from the raw data, so treat them as calibration landmarks, not exact values:
+
+| Retention interval | Approx. optimal gap | Gap as % of RI |
+|---|---|---|
+| 7 days | ~1 day | ~14% |
+| 35 days | ~11 days | ~31% |
+| 70 days | ~21 days | ~30% |
+| 350 days | ~21 days | ~6% |
+
+Two things to take from it, and one trap. The gap grows in *absolute* terms as the retention
+interval grows, but its *proportion* of that interval collapses at long delays — so a single
+percentage rule is wrong at one end or the other. The trap is quoting a 10–20% rule and
+applying it to a ten-week exam: that yields 7–14 day gaps where the study's own 70-day point
+says about three weeks. Read the table, not a ratio. Practically, anything from a month to a
+year is served by gaps in the two-to-four-week range, growing as you go; a week-scale deadline
+wants gaps of a day or two. Note also that the optimum here is *flat-topped* — retention near
+the peak changes little across a wide band of gaps, which is why a held session at a rough
 interval still beats a skipped session at a perfect one. Short runway (an exam in ten days)
 compresses the whole table; "know it forever" stretches it.
 
