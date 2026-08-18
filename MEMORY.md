@@ -383,6 +383,28 @@ Never store secrets, credentials, account numbers, or client data here.
   inbound), so the available improvement is depth, not removal. Do not re-open this as a deletion
   question without new evidence.
 
+- DIRECTIVE (user-stated 2026-08-18, standing): **Keep all 121 skills. The trim is declined.**
+  A two-method analysis (per-plugin substance review + five-lens forced ranking) recommended
+  cutting 34 skills to 87, with 13 unanimous across every lens. The owner read it and said keep
+  all of them. `docs/trim-recommendation-2026-08.md` is marked DECLINED and retained as a *map*
+  of the library, not as a pending action. **Do not re-derive this analysis and do not re-propose
+  deletion.** Any future pass that rediscovers "these skills are name-gated / low-reach / omnibus"
+  has found what was already found and already decided; the answer is on file.
+  - The decision is stated in terms that survive re-measurement, deliberately: it is not "those
+    skills scored well" (they did not) but "the owner values them and accepts the cost". A
+    settled call defended by a checkable claim gets re-opened the next time someone checks —
+    that lesson was learned here on 2026-08-17 with the chicken-little exception.
+  - CONSEQUENCE: per-install subsetting is the only remaining lever on context cost. A full
+    install is ~14.8% of a 200K window and stays there. Recommend bundles, never trimming.
+  - CONSEQUENCE: the follow-through that survives the decision is **depth, not count** — the
+    most-cited skills measured as the shallowest, and 25 of 121 have zero cross-plugin inbound
+    citations. Deepen hubs and build seams; both improve the library without removing anything.
+- CORRECTION (2026-08-18, to my own earlier finding): "0 discovery dead-ends" was wrong. It
+  counted *total* inbound citations, which includes a skill's own plugin-mates. Counting only
+  **cross-plugin** citations, 25 of 121 skills are routing islands, and the three Chicken Little
+  skills largely cite each other — a closed loop that made the cluster look healthy. Measure
+  citation health cross-plugin, never in-plugin.
+
 ## Crystallization log
 - 2026-08-11 (4) — FINALIZATION pass. Closed every loose end after the review waves.
   (1) ROUTING: all 9 trigger-phrase collisions resolved — owners assigned by whose core
