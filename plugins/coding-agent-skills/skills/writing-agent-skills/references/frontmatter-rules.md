@@ -9,7 +9,7 @@
 - **Must equal the skill's folder name exactly.**
 - Must **not** contain the reserved words `anthropic` or `claude`.
 - Must not contain XML tags.
-- Prefer gerund-ish or plain task names (`bank-reconciliation`, `time-value-of-money`).
+- Prefer gerund-ish or plain task names (`after-action-review`, `percentages-and-proportions`).
   Avoid vague names (`helper`, `utils`, `tools`, `data`).
 
 ### `description`

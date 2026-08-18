@@ -32,8 +32,12 @@ plugins/<plugin>/skills/<skill-name>/
 ├── assets/*              # optional, templates/boilerplate used in output
 └── scripts/*             # optional, executed (never read into context)
 ```
-Start by copying the template: `cp assets/SKILL.template.md plugins/<plugin>/skills/<name>/SKILL.md`
-(the template lives in this skill's `assets/`).
+Start by copying the template (run from the repo root; the source is addressed from the plugin
+root, per §4b below):
+```
+cp "${CLAUDE_PLUGIN_ROOT}/skills/writing-agent-skills/assets/SKILL.template.md" \
+   plugins/<plugin>/skills/<name>/SKILL.md
+```
 
 ### 2. Write compliant frontmatter
 ```yaml
@@ -43,7 +47,9 @@ description: >-
   <what it does> — use when <trigger situations>. Triggers: <phrases the user says>.
 ---
 ```
-Hard rules (validated by `scripts/validate.sh`) — the full field reference, the optional fields,
+Hard rules (the `name` shape and the 1024-char cap are enforced by `scripts/validate.sh`; third
+person, the `Triggers:` ending, and leading with the primary use case are enforced by review — see
+`references/review-checklist.md`) — the full field reference, the optional fields,
 the `metadata` house convention, and the measured description-budget reality are in
 `references/frontmatter-rules.md`; read it before your first skill and whenever you reach for a
 field not listed here:

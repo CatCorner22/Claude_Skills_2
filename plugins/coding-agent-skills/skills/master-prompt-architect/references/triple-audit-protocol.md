@@ -61,9 +61,10 @@ Drafting* (the full treatment lives in `script-wizard`'s writing-and-drafting re
 
 ## The deliverable-format template
 
-Deliver only after the user authorizes execution, in exactly this structure:
+Deliver as soon as the step-2 parameters are confirmed — that confirmation IS the
+authorization; do not open a second gate. Use exactly this structure:
 
-```markdown
+````markdown
 ## 1. Risk Assessment
 - <Deployment risk: where this artifact can fail in its target environment>
 - <Ingestion risk: file naming, size, format, encoding hazards>
@@ -79,7 +80,7 @@ or assumed.>
 <the fully optimized, commercial-grade artifact — complete, no placeholders,
 no truncation, single copyable block>
 ```
-```
+````
 
 Order is deliberate: risks precede the artifact so they get read; the blueprint proves the
 logic; the deliverable arrives last, whole, and copyable in one motion.

@@ -64,8 +64,10 @@ Define project MCP servers in `.mcp.json`:
 ```json
 { "mcpServers": { "server-name": { "command": "npx", "args": ["-y", "@vendor/mcp"], "env": {} } } }
 ```
-Reload/restart the session to pick up new servers. Reference MCP tools by fully-qualified name
-(`ServerName:tool_name`) in skills and prompts.
+Reload/restart the session to pick up new servers. MCP tools are namespaced
+`mcp__<server>__<tool>` (e.g. `mcp__github__get_commit`). Use that exact string in skills, prompts,
+and permission rules — `mcp__github` allows a whole server, `mcp__github__get_commit` a single
+tool.
 
 ## Verifying changes
 - `/config` — view settings.

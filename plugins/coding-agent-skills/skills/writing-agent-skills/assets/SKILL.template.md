@@ -42,6 +42,7 @@ the installed plugin, where a `/plugin marketplace update` can overwrite it or r
 a dirty tree. Copy it into your own project — `.claude/skills-env/<skill-name>.md` works well — fill
 it in there, and point this skill at that copy. Your specifics then survive updates and stay somewhere
 you own rather than in a cache you may not realise is disposable.
+
 ## References
 - references/<topic>.md — <what it contains>
 
