@@ -44,7 +44,10 @@ thing the test can usefully measure.
 
 2. **One fresh session per row.** This is not optional and it is the expensive part. Once a skill is
    loaded its body is in context and biases every later turn in that session, so a second prompt in
-   the same session tests nothing. Budget accordingly: ~35 rows means ~35 sessions.
+   the same session tests nothing. **Budget accordingly: 45 rows carrying 71 distinct prompts means up
+to 71 fresh sessions** if you run every near-miss as its own row, or 45 if you check only the
+must-load column first and follow up on the near-misses of anything that passes. Tiers A and E have
+a prompt in both columns; C and D are one prompt each.
 
 3. **Paste the prompt verbatim.** No preamble, no "can you", no follow-up clarification. Any editing
    makes the row unrepeatable.

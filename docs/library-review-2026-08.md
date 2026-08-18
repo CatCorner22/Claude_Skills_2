@@ -296,8 +296,17 @@ footnote**: a 121-skill marketplace is a catalog to select from, not a manifest 
 An earlier pass reported "zero trigger collisions" and that claim is *literally* true — there are **0
 exact duplicate trigger phrases** across all 121 skills. It is also misleading, and the correction
 belongs in the record: **the router matches against whole descriptions, not against `Triggers:` lists.**
-Measured now, **85 distinct trigger phrases still appear as whole words inside a different skill's
-description prose** — `python` in 7 other descriptions, `pipeline` in 6, `code review` in 3.
+Measured now, **111 distinct trigger phrases still appear as whole words inside a different skill's
+description** — `python` in 7 other descriptions, `pipeline` in 6, `code review` in 3.
+
+> **Method, stated because the first published figure was wrong.** This counts, for each of the
+> 1,328 trigger phrases, how many *other* skills' descriptions contain it as a whole word,
+> searching the **entire** description including that skill's own `Triggers:` list — which is what
+> the router actually sees. Excluding the other skill's `Triggers:` list gives 98 instead, but that
+> narrower reading contradicts the three examples above (it yields `python` in 5 and `code review`
+> in 1). An earlier version of this section published **85**, which came from an undisclosed
+> minimum-length filter of 6 characters that silently dropped short phrases like `git` and `SQL`;
+> it also described the method as searching "prose" when it did not. Corrected 2026-08-18.
 `elite-python-engineer` yielded the trigger `code review` while continuing to advertise code review in
 its prose. The collision was **renamed, not resolved.**
 
@@ -364,7 +373,7 @@ model to do less than it would have done unaided. The NET-NEGATIVE cases were no
 - **Only 14 of 121 skills received expert substance review.** The value-test verdicts above are a
   sample, not a census. Extrapolating them is not warranted; neither is assuming the unreviewed 107
   are better.
-- **85 whole-word prose collisions remain.** They are recorded and measured, not fixed. Fixing them
+- **111 whole-word description collisions remain.** They are recorded and measured, not fixed. Fixing them
   means naming seams reciprocally, one pair at a time, and the trigger test is what identifies which
   pairs actually mis-route.
 

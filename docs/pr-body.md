@@ -123,7 +123,7 @@ archived-domain scenarios.
 > unnecessary** — the validator was counting bytes rather than characters, so none of those
 > descriptions had ever exceeded the cap; 12 of the trims destroyed routing or teaching signal and
 > have been reverted. (2) **"Zero collisions" means zero *exact duplicate strings*, not unambiguous
-> routing** — the router matches whole descriptions, and 85 phrases still compete inside other
+> routing** — the router matches whole descriptions, and 111 phrases still compete inside other
 > skills' prose. The live phrase count is 1,328.
 
 ## 5. Tooling
@@ -187,7 +187,7 @@ python3 scripts/gen-catalog.py # 121 skills across 14 plugins (+9 archived)
 ```
 - 121 skills ↔ 121 evals, no orphans.
 - **0 exact duplicate trigger phrases** — but read that precisely: the router matches whole
-  descriptions, not `Triggers:` lists, and **85 trigger phrases still appear as whole words inside a
+  descriptions, not `Triggers:` lists, and **111 trigger phrases still appear as whole words inside a
   different skill's description prose** (`python` in 7 others). The earlier "0 collisions" headline
   was true at the string level and misleading at the routing level; the collision was renamed, not
   resolved. Those 85 are measured and recorded, not fixed.

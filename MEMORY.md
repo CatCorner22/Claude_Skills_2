@@ -69,7 +69,7 @@ Never store secrets, credentials, account numbers, or client data here.
   The one verification never done: evals have never been EXECUTED — static coherence
   audited, ~360 scenarios unrun, needs fresh interactive sessions.
   - CORRECTION (2026-08-17, measured): "**zero collisions**" is true only of *exact duplicate
-    trigger strings*. The router matches whole descriptions, and 85 trigger phrases still appear
+    trigger strings*. The router matches whole descriptions, and 111 trigger phrases still appear
     as whole words inside a different skill's description prose (`python` in 7 others). Read the
     zero as "no two skills claim an identical phrase", never as "routing is unambiguous".
   - CORRECTION (2026-08-17): there are **two** never-run verifications, not one. Alongside the
@@ -183,7 +183,7 @@ Never store secrets, credentials, account numbers, or client data here.
   `mean`/`median`/`spread` from `exploratory-data-analysis`'s prose made "summary statistics for this
   dataset" unable to reach the first-look skill at all.
 - RULE (2026-08-17): **"zero exact trigger collisions" is the wrong metric.** The router matches
-  whole descriptions, not `Triggers:` lists. At 0 exact duplicates there were still 85 phrases
+  whole descriptions, not `Triggers:` lists. At 0 exact duplicates there were still 111 phrases
   appearing as whole words inside other skills' description prose (`python` in 7). Measure prose
   competition, not string equality.
 - RULE (2026-08-17): **skills-per-install is the routing lever, not chars-per-description.** Trimming
@@ -776,5 +776,6 @@ table with the 14.9% verdict; review report sections 9-10 including an 8-item ow
 Tooling: validate.sh now enforces cross-link resolution (verified both directions, including a
 false positive of my own on wrapped prose); gen-catalog.py lead-clause sentence-boundary fix (third
 bug in that function, verified by diffing all 121 rows — exactly the 2 intended changed).
-Pruned: nothing. Flagged, not resolved: 85 prose collisions measured only; 107 of 121 skills never
+Pruned: nothing. Flagged, not resolved: 111 description collisions measured only (the figure was
+first published as 85 from an undisclosed >=6-char filter; corrected 2026-08-18); 107 of 121 skills never
 substance-reviewed; the trigger test still unexecuted.
