@@ -5,8 +5,9 @@ Point this skill at your real delivery system. Keep anything sensitive in
 data — sanitize to structure.
 
 ## Your reference product for UI sync
-- Product whose design language your software should mirror (default here: Curve Hero — see
-  the archived `continuous-improvement-skills:curve-hero-design-language` skill, restorable from `archive/skills/`):
+- Product whose design language your software should mirror (the incumbent tool your users
+  already know — name it here; a worked design-language map for one such product is archived at
+  `continuous-improvement-skills:curve-hero-design-language`, restorable from `archive/skills/`):
 - Where you can screenshot/observe it (test tenant, sandbox, help center):
 - Terms your team uses that differ from the reference product's:
 

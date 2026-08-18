@@ -73,7 +73,7 @@ Structure the palette by *role*, not by hue list:
 Busy professionals want *density with order*, not whitespace theater:
 
 - **Card-on-canvas**: a soft neutral canvas with white/raised cards grouping related data —
-  the genre's (and Curve Hero's) native pattern. One elevation step; don't stack shadows.
+  the genre's native pattern across operational software. One elevation step; don't stack shadows.
 - Density modes: comfortable (default) and compact (tables at `--text-sm`, tighter row
   padding) — user-selectable, remembered.
 - Alignment grid: 4 px base; labels left-aligned; numbers right-aligned; dates in one format
@@ -108,7 +108,7 @@ Power users live on the keyboard; so do assistive-tech users. Same investment se
 - Keyboard shortcuts for the daily loop (search, new record, save) — documented, discoverable
   (`?` overlay), and remappable or at least disable-able (SC 2.1.4).
 
-## §6 Forms (the heart of practice-management software)
+## §6 Forms (the heart of any record-keeping application)
 
 - **Persistent labels above fields** — never placeholder-as-label (placeholders vanish on
   focus and fail low-vision users). Placeholder only for format hints (`MM/DD/YYYY`).

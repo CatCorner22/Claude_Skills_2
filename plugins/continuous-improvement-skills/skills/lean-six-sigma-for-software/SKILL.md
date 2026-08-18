@@ -24,8 +24,8 @@ metadata:
 - Improving an existing software process (slow releases, defect leakage, abandoned features)
   with DMAIC instead of vibes.
 - Making a product's UI feel native to users of a reference product — vocabulary, fields, and
-  patterns synced via the sync audit in step 3. (A fully worked example — a dental-PMS
-  design-language map — is archived: `continuous-improvement-skills:curve-hero-design-language`,
+  patterns synced via the sync audit in step 3. (A fully worked design-language map for one
+  such product is archived: `continuous-improvement-skills:curve-hero-design-language`,
   restorable from `archive/skills/`.)
 - Installing engineering standards: accessibility, stability/redundancy, full-stack quality
   gates, adversarial test gauntlets.

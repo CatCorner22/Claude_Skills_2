@@ -105,14 +105,13 @@ Never store secrets, credentials, account numbers, or client data here.
   lean-six-sigma-for-software` (Deming/TPS/DMAIC + WCAG 2.2 AA design system + adversarial
   testing + stability/redundancy), `coding-agent-skills:chicken-little` (multi-domain persona,
   loads on its name), and `continuous-improvement-skills:curve-hero-design-language` (promoted
-  from LSS's reference to a standalone sibling skill — owns the bare "curve hero" trigger;
-  LSS cross-links to it and keeps only prose mention). (updated 2026-08-02)
-- FACT: Curve Hero is Curve Dental's cloud dental practice-management platform. The user wants
-  UI work synced to it as a **design/UX reference only** (their words via question: the skill
-  itself is the deliverable; no data integration). Curve-specific vocabulary differs from other
-  dental PMSs: Recare (not recall), Responsible Party/RP (not guarantor), checkout finalizes an
-  Invoice (no "walkout"), Carrier, Operatory, Sidekick, SnapShot, fee guide, "days owing"
-  aging. (researched + gap-checked 2026-08-02; provenance-marked in the skill's reference)
+  from LSS's reference to a standalone sibling skill, owning the reference product's own name as
+  its trigger; LSS cross-links to it and keeps only prose mention). Since archived. (updated 2026-08-02)
+- FACT: the reference product for UI-sync work, its vendor, and its distinguishing vocabulary
+  are recorded in `MEMORY.private.md` (§Private project names) — they name a specific commercial
+  product and a specific practice, so they are tailoring detail, not structural memory. The
+  structural fact that belongs here: UI work is synced to a reference product as a **design/UX
+  reference only** — the skill is the deliverable, never a data integration.
 - PREFERENCE: The user wants research skills that go far past baseline search — explicit
   methodology (hypothesis-before-search, cross-silo dot-connection, disconfirmation), source
   provenance control, and mechanical citation verification. They pre-empt the "not medical advice"
@@ -662,11 +661,11 @@ Never store secrets, credentials, account numbers, or client data here.
   self-audit, clinical-note rules (controlled vocabulary, findings-to-plan, no template
   clones), intellectual-honesty rule. Spec's broad auto-apply trigger intent kept, EXCEPT
   bare "report"/"reports" qualified to "report writing" — collision scan showed five Oracle/
-  treasury reporting skills claim that token. Spec's "Smile Notes Litigation Avoidance
-  Pass" not in library → prose mention only (same pattern as before). plain-grade's prose
+  treasury reporting skills claim that token. The spec's named clinical litigation-avoidance pass (product name in
+  `MEMORY.private.md`) was not in the library → prose mention only (same pattern as before). plain-grade's prose
   references upgraded to real `writing-skills:adams-smart-brevity` cross-links; plugin
-  0.1.0→0.2.0. FACT: the user runs "Smile Notes" clinical documentation (dental) with a
-  litigation-avoidance pass — a future skill candidate. Merged/retired: none.
+  0.1.0→0.2.0. FACT: the user runs a clinical-documentation product (named in
+  `MEMORY.private.md`) with a litigation-avoidance pass — a future skill candidate. Merged/retired: none.
 - 2026-08-04 — adams-plain-grade (19th plugin `writing-skills`; library at 121). Tenth
   external-spec adaptation. Core preserved: the litigated-language axiom, 5th-grade target
   with 8th-grade precision fallback (never higher), meaning-always-wins rule, Adams rules,
@@ -680,7 +679,7 @@ Never store secrets, credentials, account numbers, or client data here.
   sibling in continuous-improvement-skills; library at 120). Split: §1 sync-audit method →
   Do-it, §2–§7 map verbatim → references/curve-hero-map.md, §8 lessons → Why/learn; single
   source of truth — LSS copy deleted, five dangling cross-links rewritten to plugin:skill
-  form (grep-verified zero remaining). Bare "curve hero" trigger moved to the new skill (one
+  form (grep-verified zero remaining). The reference product's bare-name trigger moved to the new skill (one
   owner per bare token). Plugin 0.2.0→0.3.0; marketplace.json description drift fixed for
   both plugins; installed copies refreshed to load curve-hero + chicken-little. Added: 1
   lesson (installed snapshots lag repo — check `claude plugin list`, not repo content).
@@ -689,7 +688,7 @@ Never store secrets, credentials, account numbers, or client data here.
   renamed <owner-new>), so the design doc + .claude/settings.json were delivered to the user
   as a ready-to-commit zip instead. Merged/retired: LSS references/curve-hero-design-language.md.
 - 2026-08-02 — lean-six-sigma-for-software (119th skill) + chicken-little (ninth external-spec
-  adaptation). Added: 2 facts (library state; Curve Hero as design/UX reference + its
+  adaptation). Added: 2 facts (library state; the reference product as design/UX reference + its
   vocabulary), 3 lessons/rules (Curve sites block fetches → snippet research with provenance;
   no time-anchored claims in skills; Fusion KFV/XLA-code gotchas in user specs). Method that
   worked: research fan-out (2 vocab angles + 2 fact verifiers) → gap-critic (caught cross-PMS
