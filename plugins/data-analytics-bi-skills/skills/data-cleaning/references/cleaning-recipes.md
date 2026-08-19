@@ -59,7 +59,7 @@ query.
 ## Missing-value strategies and their bias
 | Strategy | When reasonable | Bias / cost |
 |---|---|---|
-| Drop rows (listwise) | Few missing, missing completely at random (MCAR) | Shrinks sample; biases if not MCAR |
+| Drop rows (listwise) | Few missing, missing completely at random (MCAR) | Shrinks sample; skews summaries once missingness is non-random |
 | Drop column | Column mostly empty or not usable | Loses a variable |
 | Mean/median impute | Numeric, roughly central, low missingness | Shrinks variance; weakens correlations; median safer on skew |
 | Mode impute | Categorical | Over-weights the majority class |
@@ -69,9 +69,13 @@ query.
 
 Always add a `was_missing_<col>` flag when imputing, so the fabrication is visible. Classify
 the mechanism first (Rubin's taxonomy):
-- **MCAR** — missingness unrelated to anything: the only case where dropping rows is unbiased.
+- **MCAR** — missingness unrelated to anything: dropping rows costs sample size and nothing
+  else, whatever you go on to compute.
 - **MAR** — missingness depends on other *observed* columns (small accounts skip a field):
-  model-based imputation using those columns is defensible.
+  model-based imputation using those columns is defensible. Dropping rows is not ruled out here
+  either — a model of `y` on those columns, fit on complete cases, stays unbiased as long as the
+  missingness does not also depend on `y` itself — but any marginal figure (a mean, a total, a
+  rate) read off the survivors is biased, so say which of the two you are doing.
 - **MNAR** — missingness depends on the missing value itself (large values withheld): no
   in-data fix is unbiased; say so in the caveats rather than pretending.
 For *model* pipelines, imputation must be fit on training data only —

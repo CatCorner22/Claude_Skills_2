@@ -96,7 +96,7 @@ you.
 - Deleting outliers on sight → you may erase the real signal or a fixable error. Investigate the cause first.
 - Trusting a correlation without a scatter plot → identical stats hide very different shapes. Plot it.
 - Ignoring the categorical levels → `NY`, `N.Y.`, and `New York` split one group into three. List distinct values.
-- Treating missingness as random → if it's not, dropping those rows biases every later number. Ask *why* it's missing.
+- Treating missingness as random → if it's not, dropping those rows biases the summaries that follow. Ask *why* it's missing.
 - Promoting an explored pattern straight into a claim → patterns found by looking need
   confirmatory testing on their own terms; exploration and confirmation are different jobs.
 - Attributing the quartet to Tukey → the four-dataset demonstration is Anscombe's (1973);

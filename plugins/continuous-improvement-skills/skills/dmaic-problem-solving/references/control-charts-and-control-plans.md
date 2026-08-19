@@ -140,7 +140,7 @@ from five points.
 Arm rules deliberately. Each adds detection power and each adds false alarms, and the arithmetic
 is not intuitive.
 
-| Rule | Detects | Per-point probability the rule is firing | ARL₀: points between false alarms, this rule alone |
+| Rule | Detects | Per-point probability the rule is firing | ARL₀ — mean points between false alarms |
 |---|---|---|---|
 | One point beyond 3σ | Large sudden shift | 2 × (1 − Φ(3)) ≈ 0.0027 | ~370 |
 | 8 consecutive points on one side of the centerline | Sustained moderate shift | 2 × 0.5^8 = 0.0078125 | ~255 |
@@ -155,11 +155,11 @@ not investigations, and inverting it overstates how often you are actually sent 
 (1/0.0078 = 128 against a true ARL₀ of 255; 1/0.0031 = 327 against 511). Budget against the ARL₀
 column, which comes from the run-length distribution.
 
-**The number nobody computes — and do not compute it by adding the probability column.** Summing the four
-rates (0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ 0.019, "one alarm every 52 points") is wrong, because
-the rules overlap heavily: a point beyond 3σ is also beyond 2σ and beyond 1σ and sits on one side
-of the centerline, so it can satisfy several rules at once, and the run rules share the same
-points as they slide. Union ≠ sum. The correct figure comes from the run-length distribution:
+**The number nobody computes — and do not compute it by adding the probability column.** Summing
+the four rates (0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ 0.019, "one alarm every 52 points") is
+wrong, because the rules overlap heavily: a point beyond 3σ is also beyond 2σ and beyond 1σ and
+sits on one side of the centerline, so it can satisfy several rules at once, and the run rules
+share the same points as they slide. Union ≠ sum. The correct figure comes from the run-length distribution:
 **ARL₀ ≈ 92 points with all four armed** — a false-alarm rate of about **0.011 per point**, not
 0.019. (Verified two independent ways: a Markov chain over the rule state space, and a 40,000-run
 Monte Carlo giving 91.6 ± 0.4. The same machinery reproduces the two known closed forms — 370.4
