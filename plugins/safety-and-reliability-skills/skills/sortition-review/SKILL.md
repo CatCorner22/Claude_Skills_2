@@ -14,7 +14,7 @@ description: >-
   spot-check by lot, they know which ones get looked at, same person always reviews,
   rotate reviewers, end-of-term handover, draw at random, unriggable selection.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Sortition review (euthynai and the ballotino)

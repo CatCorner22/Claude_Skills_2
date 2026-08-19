@@ -14,7 +14,7 @@ description: >-
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)
@@ -95,7 +95,16 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    what actually moves the capability between generations.
 5. **Run it for real, newcomer driving.** The person with the least knowledge executes
    from the written record alone; the veteran stays silent until something goes wrong,
-   then corrects out loud. Every question the driver has to ask a human is a gap in
+   then corrects out loud — **except at a step whose effect leaves the building**, where the
+   corrector speaks *before* it runs. Classify the runbook first: money moved, a filing
+   submitted, a client or counterparty contacted, a credential rotated, a record the retention
+   schedule locks — those are declared and simulated, never executed, and a past period or a
+   sandbox instance is preferred to the live one. State an abort trigger before starting: hand
+   back to the veteran the moment a real client, deadline or counterparty is affected, or the
+   driver cannot tell whether the next step is reversible. Handing back is a rehearsal that
+   found its limit, not a failed one. (The screen is in `references/rebuild-method.md`; every
+   other rebuild pattern here is safe by construction, this one is not.)
+   Every question the driver has to ask a human is a gap in
    the docs — log each one verbatim as it happens.
 6. **Harvest every gap into the record.** The rehearsal is the documentation's test:
    each logged question, missing step, stale credential, or dead link becomes a doc fix

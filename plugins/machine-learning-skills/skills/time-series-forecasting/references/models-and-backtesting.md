@@ -49,10 +49,34 @@ A single train/test cut is one draw. Backtesting slides the cutoff (the "origin"
 - **Expanding window** (training grows) uses all history; good when the process is stable.
 - **Sliding window** (fixed training length) adapts to a process that changes; good after regime shifts.
 - Never let the training window include anything at or after its origin — that is temporal leakage.
-- **How many origins?** Enough that the average error is stable and enough to build intervals from (see the
-  interval section: ~30 origins per horizon step is a workable floor for an 80% interval, far fewer than you
-  need for a stable 95% one). Errors from overlapping horizons are serially correlated, so the effective
-  sample is smaller than the number of forecasts — don't read the average as if it came from independent draws.
+- **How many origins?** More than the intuitive answer, and the count that matters is
+  *effectively independent* errors, not forecasts. With origins advanced one step, two consecutive
+  *h*-step errors share *h*−1 of their increments, so the effective count is roughly **origins ÷ h**.
+  A band built from the empirical quantiles of correlated errors is systematically too narrow, and
+  the shortfall grows with the horizon.
+
+  Measured on a random walk with a naive forecast, realised coverage of a nominal **80%** band
+  (4,000 trials per cell, band fitted on the errors shown and tested on a fresh out-of-sample error):
+
+  | h | 30 overlapping origins | 30 non-overlapping | 30·h overlapping | 120 non-overlapping |
+  |---|---|---|---|---|
+  | 1  | 0.742 | 0.744 | — | 0.804 |
+  | 4  | 0.692 | 0.749 | 0.769 | 0.790 |
+  | 13 | **0.565** | 0.756 | 0.770 | 0.784 |
+
+  Two separate effects, and the table separates them. At **h = 1 there is no overlap at all**, and
+  30 errors still yield only ~0.74 — that is pure small-sample quantile estimation: the empirical
+  10th and 90th percentiles of 30 draws sit *inside* the true ones. Overlap is what turns that mild
+  shortfall into a severe one: at h = 13, thirty overlapping origins realise **0.565** against a
+  claimed 0.80, while thirty *non-overlapping* h-step errors realise 0.756.
+
+  So the practical floor is: **~30·h overlapping origins** (or ~30 non-overlapping blocks) to get 30
+  effectively-independent errors — and note that even 30 effective errors buys ~0.75, not 0.80. For a
+  band that a buffer, a limit, or a staffing decision will rest on, aim for **~100 effective errors**
+  and treat anything less as indicative. Where the history cannot afford that, say so plainly in the
+  deliverable: the band is too narrow, by an amount that grows with horizon, and the coverage check
+  is not optional — it is the only thing standing between the band and a decision it cannot support.
+  Don't read the average error as if it came from independent draws either, for the same reason.
 
 ## Keeping model selection inside the origin
 Everything the procedure *learns from data* must be re-learned inside each origin's training window.

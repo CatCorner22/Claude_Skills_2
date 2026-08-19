@@ -60,7 +60,42 @@ nothing. Pick per capability type:
 - **Process** (client intake, onboarding, month-end close, matter opening) → run one
   real or realistic instance with the runbook and a newcomer driving. Success test:
   completion without an undocumented human intervention — every intervention is a
-  logged gap.
+  logged gap. **Screen the runbook for irreversibility first** — see below; this is the
+  one pattern in this list that can reach outside the rehearsal.
+
+### The irreversibility screen (Process rehearsals only)
+
+Every other pattern here is safe by construction: restores go to a scratch location,
+deliverables recreate a *past* period and diff, environments stand up on a clean machine.
+The Process pattern is the exception — it puts a newcomer, following a document, in the live
+system with real authority, on processes named as client intake, onboarding, month-end close
+and matter opening. Those contain steps that leave the building.
+
+Before the rehearsal, walk the runbook and mark every step:
+
+| Class | Examples | In rehearsal |
+|---|---|---|
+| Reversible | internal record created, draft saved, checklist ticked | **Execute** |
+| External, reversible with effort | an internal notification, a calendar hold | Execute only if the recipient is briefed |
+| **External and irreversible** | money moved, a filing submitted, a client or counterparty contacted, a record the retention schedule locks, a credential rotated, anything a regulator or third party sees | **Declare and simulate — never execute** |
+
+Two rules follow, and they invert the ordinary rehearsal discipline:
+
+- **The corrector speaks *before* an irreversible step, not after.** The default rule — stay
+  silent until the driver errs, then correct out loud — is exactly right for reversible work,
+  because the error is the finding. At an irreversible step the error is not recoverable, so
+  the corrector confirms the driver's intent before it executes. The gap is still logged; it is
+  simply logged without being paid for.
+- **Prefer a past period or a sandbox instance.** Re-running last month's intake against a
+  copy, or a genuinely fictitious matter marked as such, tests the same runbook with the
+  external edges removed. Use a live instance only when nothing else exercises the step, and
+  then only with the irreversible steps simulated.
+
+**Abort trigger, stated before the start:** the rehearsal hands back to the veteran the moment
+a real client, a real deadline, or a real counterparty is affected, or the driver cannot tell
+whether the next step is reversible. Handing back is a successful rehearsal that found its
+limit, not a failed one — and "we weren't sure, so we kept going" is the sentence this trigger
+exists to prevent.
 - **Relationship / negotiation knowledge** (the vendor history, the regulator context)
   → hardest to rebuild; the unit is a briefing the newcomer writes from the record and
   the veteran corrects. Weakest pattern; flag these rows for deliberate shadowing.

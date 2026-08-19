@@ -399,9 +399,29 @@ fi
 # 2. Fail fast and completely: an empty environment must fail in under a second,
 #    listing EVERY missing variable, not just the first one.
 #    `_env_file=None` is load bearing — see below.
-#    Raising is the PASS condition here, so assert the failure rather than running it bare.
-if env -i python -c "from app.config import Settings; Settings(_env_file=None)" 2>/dev/null; then
-  echo "config did not fail on an empty environment — defaults are hiding required vars" >&2
+#    Assert the SPECIFIC exception. "Any non-zero exit" is not the assertion you want:
+#    a typo'd import path, a missing dependency and a missing interpreter all exit
+#    non-zero too, and each would be read as the check succeeding.
+if ! env -i python - <<'PY'
+import sys
+try:
+    from pydantic import ValidationError
+    from app.config import Settings
+except Exception as e:                       # bad path, missing dep, wrong working dir
+    print(f"check 2 COULD NOT RUN: {type(e).__name__}: {e}", file=sys.stderr)
+    sys.exit(2)
+try:
+    Settings(_env_file=None)
+except ValidationError:
+    sys.exit(0)                              # the only PASS: it refused to start
+except Exception as e:
+    print(f"check 2: unexpected {type(e).__name__}: {e}", file=sys.stderr)
+    sys.exit(2)
+print("config did not fail on an empty environment — defaults are hiding required vars",
+      file=sys.stderr)
+sys.exit(1)
+PY
+then
   exit 1
 fi
 
@@ -419,6 +439,16 @@ Check 2 is the one that catches the common half-migration: a `Settings` class th
 module still reads `os.environ` lazily on first use, so the app boots clean and dies an hour later
 on the first request that touches that path. Pydantic reports all missing fields at once precisely
 so that a fresh deploy tells you everything wrong in one attempt.
+
+**Check 2 had a second way of quietly passing, and it is the reason the check is a script
+rather than a one-liner.** Written as `if env -i python -c "…"; then fail; fi`, the branch that
+means "passed" is simply *any non-zero exit* — and a typo'd import path, an uninstalled
+dependency, and a missing interpreter (rc=127) all exit non-zero, indistinguishable from the
+`ValidationError` the check exists to assert. With `2>/dev/null` on the end, nobody could see
+which had happened. Reproduced: `from app.confgi import Settings` exits 1 and the check reports
+success. The script form asserts the exception by type and separates three outcomes — passed
+(exit 0), genuinely broken config (exit 1), and *could not run* (exit 2) — and keeps stderr, so
+a failure says which one it was.
 
 Check 2 also has a way of quietly passing when it should fail, and `_env_file=None` is the
 guard. `env -i` clears the *environment*, not the working directory, so

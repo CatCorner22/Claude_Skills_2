@@ -10,7 +10,7 @@ description: >-
   folder layout, where should this code live, new web app setup, scaffold project, module
   boundaries, config management app.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Full-stack application architecture
