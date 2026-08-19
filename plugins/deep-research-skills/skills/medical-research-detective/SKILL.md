@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Medical research detective
@@ -94,6 +94,15 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` on each DOI/PMID. A citation that fails any check is removed, not
    softened. If verification is impossible (no network, paywalled full text), label the claim
    **unverified** and say exactly what could not be checked.
+   - **Read the tool's three-state answers as three states.** Each check returns pass, fail, or
+     *unknown*, and unknown is not a quiet pass. `PROVENANCE PARTIAL` / `UNRECOGNIZED` /
+     `UNKNOWN` mean an affiliation did not resolve — including one institution inside a
+     multi-site string whose other institutions did — so the country question is still open and
+     you resolve it from the paper. `RETRACTION STATUS UNVERIFIED` means the Retraction Watch
+     feed never answered for that record and the only evidence was publication-type metadata,
+     which lags a notice by weeks; check the publisher page before relying on the source. The
+     tool is built to fail toward "look at this," so treating an unknown as a pass converts its
+     one designed safety margin into the failure it was margin against.
 
 7. **Assemble the case file.** Produce the structure in `references/output-format.md` using
    `assets/case-file-template.md`: plain-language summary first, then hypotheses ranked with
@@ -187,4 +196,4 @@ own rather than in a cache you may not realise is disposable.
 > plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
 > repo, which is not where a user runs these.
 - `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/search_pubmed.py` — searches PubMed via the free NCBI E-utilities API; returns structured hits (PMID, DOI, title, first author, journal, year, publication type, retraction flag) as text or JSON, ranked by evidence hierarchy. Country of origin is **not** in PubMed's summary metadata — run `verify_citation.py` on the hits you keep to do the stage-4 affiliation-country pass. `--help` for options; no API key required.
-- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. `--self-test` runs the offline logic tests.
+- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. Provenance and retraction are **three-state** (pass / fail / unverified), because Europe PMC's endpoint is a search rather than a lookup and the Retraction Watch feed does not answer for every record; an "unverified" is a question for you, not a pass. `--self-test` runs the offline logic tests (104 checks).

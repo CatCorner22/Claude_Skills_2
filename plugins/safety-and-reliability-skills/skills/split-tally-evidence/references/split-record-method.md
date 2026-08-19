@@ -124,7 +124,53 @@ highest.
    summary statistics):* someone on the receiving side re-derives the headline figures
    from the raw inputs before acceptance, blind to the contractor's figures.
 7. *Retirement:* both sides keep their halves for the engagement term plus the dispute
-   window stated in the agreement, then confirm disposal to each other in writing.
+   window stated in the agreement, then confirm disposal to each other in writing —
+   **subject to the hold rail below, which overrides the schedule in every case.**
+
+## The hold rail (step 7's mandatory companion)
+
+Step 7 is the only step in this skill that destroys evidence, and it does so on a schedule
+both parties signed. That makes the hold rail structural, not optional.
+
+**The trigger is foreseeability, not filing.** A schedule suspends the moment litigation, a
+claim, an audit, or a regulatory inquiry becomes *reasonably anticipated*. Concretely, any
+of these should trip it: a demand or preservation letter, a threat to sue however informal,
+a serious internal complaint, a regulator's inquiry or subpoena, an insurer's notice, a
+counterpart's lawyer appearing on a thread, or your own decision to bring a claim. Waiting
+for a filed complaint means the deletions that mattered already ran.
+
+**What the rail contains**
+
+| Element | Test it passes |
+|---|---|
+| Named trigger owner + backstop | Someone can trip the hold today, and someone else can when they are on leave |
+| Written suspension notice | Sent to every holder of every half — **including the counterpart**, who cannot honor a hold nobody told them about |
+| Scope statement | Names the flows, anchors, and logs frozen, so "did this cover the ritual log?" has a written answer |
+| Automation confirmation | Retention policies, log rotation, mailbox purges, expiring links, and storage lifecycle rules verified **off**, not merely requested off |
+| Release condition | Disposal resumes only on a written release from a named person, dated and logged like any rejoining result |
+
+**Scope reaches the whole apparatus.** The primary half is the obvious target and the
+easiest to freeze. The parts that quietly expire are the anchors, the third-party
+lodgements, the append-only log's rotation window, the rejoining ritual's result log, and
+the second keeper's working papers. A frozen document whose timestamp log rotated away is a
+file you can no longer authenticate — you preserved the evidence and destroyed the proof it
+is the evidence.
+
+**Log the hold like a rejoining.** Date the trigger, the notice, the automation
+confirmation, and the release, in the same log the ritual writes to. If the destruction is
+ever questioned, that log is the difference between a documented good-faith suspension and
+a schedule that ran on autopilot.
+
+**Scope and limits.** U.S. Federal Rule of Civil Procedure 37(e) governs lost
+electronically stored information in federal civil cases: curative measures on a finding of
+prejudice, and the severe sanctions — adverse-inference instruction, dismissal, default —
+only on a finding that the party acted with intent to deprive another party of the
+information's use. [rule text, FRCP 37(e) as amended 2015; the "reasonably anticipated"
+trigger is the *Zubulake* line — canon attribution, not re-verified here.] State courts and
+other jurisdictions differ, and criminal, tax, employment, healthcare, and securities
+regimes carry their own, sometimes stricter, preservation duties. Nothing here is legal
+advice for a specific matter: a live preservation question goes to counsel immediately,
+because the cost of asking late is the thing that is already gone.
 
 Total cost: a manifest, a reply email, and a one-line log — the tally stick was never
 expensive either. The point is not the tooling; it is that after the split, **neither party

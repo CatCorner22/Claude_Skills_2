@@ -81,9 +81,35 @@ did about it. The audit turns it into per-rule autoimmunity rates.
    set, e.g.: `acted` (something real was done), `benign-known` (recognized recurring
    non-issue), `benign-new` (investigated, nothing there), `duplicate`, `unread` (aged out
    with no human touch). `unread` is a disposition — the most alarming one.
-3. **Compute per rule:** firings; autoimmunity rate = (benign-known + benign-new +
-   duplicate + unread) / firings; flood contribution = that rule's non-actionable firings
-   as a share of the queue's total non-actionable firings. Both ratios are undefined when
+3. **Compute per rule:** firings; autoimmunity rate; flood contribution = that rule's
+   non-actionable firings as a share of the queue's total non-actionable firings.
+
+   **The rate is a band, because `unread` is unknown, not benign.**
+
+   ```
+   floor = (benign-known + benign-new + duplicate) / firings          # confirmed non-actionable
+   ceiling = (benign-known + benign-new + duplicate + unread) / firings
+   ```
+
+   Report both. Folding `unread` into a single point estimate asserts that an alert nobody
+   opened was a false alarm — on the evidence that nobody looked. That bias is not random: it
+   is largest exactly where alerts age out unopened, which is the most flooded queue in the
+   system. Since a high rate is this skill's signal to widen a threshold or retire a rule, a
+   point estimate hands the worst-drowned queue the strongest argument for switching detection
+   off, and immunodeficiency arrives wearing the autoimmunity metric's badge.
+
+   **The band's width is itself the finding.** Narrow (`unread` a few percent) → tune on the
+   floor and move on. Wide (`unread` is a large share) → **you do not yet have a tuning
+   dataset, you have a staffing and triage finding.** Take a random sample of the unread
+   firings — 30–50 is usually enough to tell a 10% actionable rate from a 60% one — adjudicate
+   them properly, and use the sampled rate to place the true value inside the band before any
+   threshold moves. If nobody can be found to adjudicate the sample, that answer is the audit's
+   headline result, not a reason to fall back on the ceiling.
+
+   **Never widen a rule, raise its threshold, or retire it on the strength of `unread`
+   firings.** A rule may only be loosened on *confirmed* non-actionable evidence — the floor.
+   `unread` justifies routing changes (batching, summarizing, lowering the rule's rank in the
+   queue, giving it an owner), which reduce load without reducing coverage. Both ratios are undefined when
    their denominator is zero, and the zero cases carry the information: a rule with **no
    firings this period** has no measurable rate — leave the cell blank rather than
    recording 0%, and put the rule on the silent list, because a detector that broke looks
@@ -109,33 +135,50 @@ Domain-neutral on purpose: this is any shared inbox or monitoring queue — a fi
 mailbox, an analyst's exception feed, a service's alert channel. **All numbers below are
 illustrative**, not research findings.
 
-A team's queue received 1,240 firings last quarter across 11 rules. The audit finds:
+A team's queue received 1,240 firings last quarter across 11 rules. Dispositions split into
+884 *confirmed* non-actionable (benign-known + benign-new + duplicate), 182 `unread`, and 174
+`acted`. The audit reports the rate as a band, floor to ceiling:
 
-| Rule | Firings | No action needed | Autoimmunity rate | Flood share |
-|---|---|---|---|---|
-| R4 "sender not on approved list" | 610 | 588 | 96% | 55% |
-| R7 "attachment over size limit" | 240 | 231 | 96% | 22% |
-| R2 "keyword: urgent/overdue" | 180 | 121 | 67% | 11% |
-| R9 "no response in 48h" | 90 | 31 | 34% | 3% |
-| …7 more rules | 120 | 95 | 79% | 9% |
+| Rule | Firings | Confirmed non-actionable | Unread | Autoimmunity rate (floor–ceiling) | Flood share (confirmed) |
+|---|---|---|---|---|---|
+| R4 "sender not on approved list" | 610 | 560 | 28 | 92–96% | 63% |
+| R2 "keyword: urgent/overdue" | 180 | 115 | 6 | 64–67% | 13% |
+| R7 "attachment over size limit" | 240 | 90 | 141 | **38–96%** | 10% |
+| …7 more rules | 120 | 88 | 7 | 73–79% | 10% |
+| R9 "no response in 48h" | 90 | 31 | 0 | 34% | 4% |
+
+Read the bands before the ranking. R4, R2, R9 and the tail are narrow — their floors are
+real numbers to tune on. **R7 is the trap.** On the old single-number method it tied R4 at
+96% and looked like the second-biggest noise source in the queue; in fact 141 of its 240
+firings were never opened by anyone, so all that is actually known is that its true rate lies
+somewhere between 38% and 96%. Ranked on *confirmed* noise it is not the second-biggest
+source — R2 is — and R7's real finding is that more than half its firings outran the humans.
 
 Actions, in method order:
 - **R4 — recalibrate the default.** The "approved list" was seeded once at go-live and
   never maintained; 40 recurring legitimate senders were simply never added. Fixing the
   list (the default) removes ~500 firings/quarter at the source. No new detector.
-- **R7 — demote a layer.** Oversized attachments never required action within a day;
-  route to a weekly digest (layer 1), out of the live queue (layer 2).
 - **R2 — split the rule and gate the page.** "Urgent" as a bare keyword is anomaly, not
   danger. The rule splits: keyword alone → queue; keyword + a named deadline or a named
   consequence in the message (a danger signal) → immediate attention.
+- **R7 — sample before you touch the threshold.** The tempting move is retirement; the band
+  forbids it, because retiring a rule on the strength of firings nobody read is exactly how
+  a coverage gap gets created deliberately. Adjudicate a random 40 of the 141 unread, place
+  the true rate inside the band, and *then* decide. What the unread count does justify
+  immediately is a routing change that cuts load without cutting coverage: oversized
+  attachments never needed action within a day, so demote them to a weekly digest (layer 1)
+  out of the live queue (layer 2) — reversible, and it costs no detection.
 - **R9 — leave it alone.** 34% autoimmunity at low volume with real catches is a healthy
-  adaptive-layer rule. Not every rule needs surgery; the audit also certifies health.
+  adaptive-layer rule, and its band has zero width because every firing was dispositioned.
+  Not every rule needs surgery; the audit also certifies health.
 
 Projected queue after the changes: roughly 500 live-queue firings/quarter (1,240 − ~500
 removed at R4's source − 240 demoted to R7's digest), with the page tier gated
 on danger signals. The team then sets tolerance-list expiries for R4's newly-approved
-senders and schedules the next audit — the numbers above are the baseline it will be
-measured against.
+senders, books the R7 sample, and schedules the next audit — the numbers above are the
+baseline it will be measured against. Note what the band bought: on the old method R7 would
+have been retired as a 96%-autoimmune rule, and nobody would have learned whether those 141
+firings mattered.
 
 ## The tolerance-list template
 

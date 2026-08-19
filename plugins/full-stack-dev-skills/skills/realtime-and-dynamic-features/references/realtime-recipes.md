@@ -3,7 +3,7 @@
 ## Contents
 - Transport decision table
 - Job-status pattern
-- WebSocket endpoint (when truly needed)
+- WebSocket endpoint (when truly needed) — authorize before `accept()`
 - Optimistic mutation
 - Authenticating a stream
 - Liveness settings
@@ -15,7 +15,7 @@
 | Progress bar for a job | Polling the status row (or SSE if many watchers) | one query |
 | Live feed / notifications | SSE | `new EventSource(url)` — cookie auth only |
 | Token/response streaming (LLM, logs) | SSE | EventSource, or fetch-with-reader when the request needs a header |
-| Chat, co-editing, cursors | WebSocket | reconnect + heartbeat required |
+| Chat, co-editing, cursors | WebSocket | reconnect + heartbeat required; authorize before `accept()` |
 If in doubt: start one row higher (cheaper); upgrading later is localized because status is
 data (see below).
 
@@ -47,20 +47,65 @@ BackgroundTasks to arq/Celery when: jobs must survive restarts, need retries, or
 the web process.
 
 ## WebSocket endpoint (when truly needed)
+
+**Authorize before you accept.** `accept()` is the point of no return: after it, the socket is
+a live bidirectional channel. Everything that decides *whether this person may be here* runs
+before that line — and `{room}` is a path parameter, so a route that authenticates the user but
+never checks the room lets any authenticated user read and post to every room by editing the URL.
+
 ```python
+from fastapi import Query, WebSocket, WebSocketDisconnect, WebSocketException, status
+from pydantic import BaseModel, Field
+
+class RoomMessage(BaseModel):            # never broadcast unvalidated client JSON
+    model_config = {"extra": "forbid"}
+    body: str = Field(max_length=4000)
+
 @router.websocket("/ws/room/{room}")
-async def ws_room(ws: WebSocket, room: str):
-    await ws.accept()
-    await hub.join(room, ws)                  # in-process dict; Redis pub/sub when multi-node
+async def ws_room(ws: WebSocket, room: str, ticket: str = Query(...)):
+    # 1. Origin — CORS does NOT apply to WebSocket handshakes (see the note below).
+    if ws.headers.get("origin") not in settings.allowed_origins:
+        raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)
+    # 2. Authenticate: single-use short-lived ticket from "Authenticating a stream" below.
+    user = await redeem_ticket(ticket)
+    if user is None:
+        raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)
+    # 3. Authorize THIS user for THIS room — the check the path parameter demands.
+    if not await may_join(user, room):
+        raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)
+
+    await ws.accept()                          # only now
+    await hub.join(room, ws)                   # in-process dict; Redis pub/sub when multi-node
     try:
         while True:
-            msg = await ws.receive_json()     # bidirectional: client sends too
-            await hub.broadcast(room, msg)
+            raw = await ws.receive_json()      # bidirectional: client sends too
+            msg = RoomMessage.model_validate(raw)
+            # Identity comes from the session, never from the payload.
+            await hub.broadcast(room, {"from": user.id, "body": msg.body})
     except WebSocketDisconnect:
         await hub.leave(room, ws)
+    finally:
+        await hub.leave(room, ws)              # also drop on validation/broadcast errors
 ```
-Client: heartbeat ping every 20s, reconnect with exponential backoff + jitter, resubscribe
-state on reconnect. If you're not using the client→server direction, this should be SSE.
+
+**Why the origin check is not optional.** The same-origin policy and CORS do not govern
+WebSocket handshakes — a page on any origin may open a `ws://`/`wss://` connection to your
+server, and the browser attaches cookies subject only to `SameSite`. A cookie-authenticated
+socket with no `Origin` check is therefore hijackable cross-site (CSWSH): the attacker's page
+opens the socket as your logged-in user and reads the stream. `SameSite=Lax`/`Strict` blunts it
+for cookie auth, but the explicit allowlist is the control that does not depend on cookie
+policy — and it is one line. A ticket in the query string sidesteps the ambient-credential
+problem entirely, which is why it is the pattern shown here.
+
+**The rest of the input contract.** `receive_json()` raises on malformed JSON — let it close the
+socket rather than catching broadly and continuing. Cap message size (server config, plus the
+`max_length` above) and rate-limit per connection: an authenticated socket is an unmetered write
+path to every other member of the room until you meter it. Broadcast a server-built envelope, so
+a client cannot claim to be someone else by putting a different `from` in its payload.
+
+Client: heartbeat ping every 20s, reconnect with exponential backoff + jitter, **fetch a fresh
+ticket on each reconnect** (single-use means the old one is spent), and resubscribe state on
+reconnect. If you're not using the client→server direction, this should be SSE.
 
 ## Optimistic mutation
 ```tsx

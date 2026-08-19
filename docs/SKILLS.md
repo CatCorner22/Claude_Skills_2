@@ -821,9 +821,9 @@ Install: `/plugin install safety-and-reliability-skills@treasury-analyst-skills`
 
 **Invoke:** `/safety-and-reliability-skills:split-tally-evidence` — or just describe the task.
 
-**What it does:** Designs tamper-evident records on the split tally-stick principle (English Exchequer, ~650 years): notched stick split lengthwise into stock and foil, wood grain self- authenticating. Halves each record between adverse parties so verification is rejoining two halves neither can alter alone. Inventories records one party could rewrite, designs the split for each (counterpart-held confirmations, hash-anchored exports, signed receipts, append-only logs with external anchors), schedules verification as rejoining ritual, proves by attempted alteration, adds second keeper who independently re-derives critical numbers. Use when records must survive disputes or when evidence needs designing rather than hoping.
+**What it does:** Designs tamper-evident records on the split tally-stick principle (English Exchequer, ~650 years): notched stick split lengthwise into stock and foil, wood grain self- authenticating. Halves each record between adverse parties so verification is rejoining two halves neither can alter alone. Inventories records one party could rewrite, designs the split for each (counterpart-held confirmations, hash-anchored exports, signed receipts, append-only logs with external anchors), schedules verification as rejoining ritual, proves by attempted alteration, adds second keeper who independently re-derives critical numbers, and suspends disposal schedules under legal hold. Use when records must survive disputes or when evidence needs designing rather than hoping.
 
-**Triggers:** `tally stick`, `split tally`, `tamper-evident`, `who holds the other copy`, `could someone alter this after the fact`, `does our half fit their half`, `hash anchor`, `dual custody`, `evidence design`
+**Triggers:** `tally stick`, `split tally`, `tamper-evident`, `who holds the other copy`, `could someone alter this after the fact`, `does our half fit their half`, `hash anchor`, `dual custody`, `evidence design`, `litigation hold`, `legal hold`, `spoliation`, `duty to preserve`
 
 ### `safety-and-reliability-skills:weight-of-the-books`
 
