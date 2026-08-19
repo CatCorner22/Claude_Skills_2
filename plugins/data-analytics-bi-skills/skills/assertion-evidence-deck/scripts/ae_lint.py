@@ -203,6 +203,22 @@ def self_test():
     box(0.92, 2.00, 11.52, 2.00, "- one bulleted body line with 42 units", italic=True)
     box(0.92, 6.95, 8.00, 0.40, "Source: EPICOR GENERAL ledger export, 2026-08-19")
 
+    # Slide 2 exists so that every check the docstring claims is exercised actually
+    # fires. Before this slide existed the fixture triggered only format/font/bullet,
+    # and mutation testing showed the headline, wordcount, source and caps checks
+    # could each be deleted outright with `--self-test` still exiting 0 — the gate
+    # passed a linter that had stopped linting.
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    box(0.92, 0.62, 11.52, 1.20,
+        "This headline is deliberately far longer than one hundred and ten characters "
+        "so that the headline length check has something real to fire on here")
+    box(0.92, 2.20, 11.52, 2.60,
+        "This body deliberately carries well over the default word budget so the "
+        "wordcount check fires: " + " ".join(f"word{i}" for i in range(45))
+        + " and the figure 4200 makes this slide carry a number, which with no Source "
+          "tag anywhere on the slide is what the source check exists to catch, while "
+          "URGENT sits above the bottom zone so the caps check fires too")
+
     fd, path = tempfile.mkstemp(suffix=".pptx")
     os.close(fd)
     try:
@@ -213,14 +229,31 @@ def self_test():
 
     checks = {f"{f['check']}:{f['level']}" for f in found}
     failures = []
+    # Assert per CHECK, not per category. Membership on a shared category let one
+    # check be deleted invisibly whenever a sibling in the same category still fired.
     for want, why in (("format:error", "italic/underline on the headline must be an error"),
                       ("font:warn", "an unsanctioned headline font must warn"),
-                      ("bullet:error", "a dashed body line must be an error")):
+                      ("bullet:error", "a dashed body line must be an error"),
+                      ("headline:error", "an over-long headline must be an error"),
+                      ("wordcount:error", "a body over the word budget must be an error"),
+                      ("source:warn", "a figure with no Source: tag must warn"),
+                      ("caps:warn", "an all-caps word above the bottom zone must warn")):
         if want not in checks:
             failures.append(f"missing {want} — {why}")
-    caps = [f for f in found if f["check"] == "caps"]
-    if caps:
-        failures.append(f"bottom-zone caps must be exempt, got {[c['message'] for c in caps]}")
+    # The bottom zone stays exempt: slide 1's source tag shouts EPICOR GENERAL and
+    # must not be flagged, so caps may fire on slide 2 and must not fire on slide 1.
+    caps_s1 = [f for f in found if f["check"] == "caps" and f["slide"] == 1]
+    if caps_s1:
+        failures.append(
+            f"bottom-zone caps must be exempt, got {[c['message'] for c in caps_s1]}")
+    # italic and underline both emit check "format", so category membership cannot
+    # tell them apart — deleting either one left the other still firing format:error
+    # and the mutation went unnoticed. Assert on the distinguishing message text.
+    msgs = " | ".join(f["message"] for f in found)
+    for frag, why in (("italic text:", "the italic check must fire on italic body text"),
+                      ("underlined text:", "the underline check must fire on underlined text")):
+        if frag not in msgs:
+            failures.append(f"missing {frag!r} — {why}")
 
     if failures:
         for f in failures:

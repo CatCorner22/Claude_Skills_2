@@ -340,21 +340,32 @@ _US_STATE_CODES = {
 # "Moscow, ID 83844", "St. Petersburg and Tampa, FL". Deliberately short: it
 # will not step over an institution name, so "Beijing and Harvard Medical
 # School, Boston, MA" leaves Beijing alone.
-_US_TAIL_RE = re.compile(
-    r"[\s,]*(?:and\s+|,\s*)?(?:[a-z.'\-]+(?:\s+[a-z.'\-]+)?\s*,\s*)?"
-    r"([a-z]{2})\b\s*(\d{5})?")
+# The state code must follow the city IMMEDIATELY — only punctuation and whitespace
+# between them. An earlier version allowed an intervening one- or two-word locality,
+# which made "Zhongshan Hospital, Shanghai, and Cleveland Clinic, OH, USA" read
+# Shanghai as an American town and report the paper as clean US provenance. That is
+# the failure this module's header calls the worst possible one, so the guard is
+# deliberately narrow: it suppresses only the adjacent "Moscow, ID 83844" shape.
+_US_TAIL_RE = re.compile(r"[\s,]*([a-z]{2})\b\s*(\d{5})?")
 
 
 def _is_us_locality(low: str, city: str) -> bool:
     """True when `city` reads as an American town rather than its foreign namesake.
 
-    Segmentation alone cannot settle this: " and " splits "Moscow and Boise, ID,
-    USA" so the country name lands in a different segment from the city, and
-    Moscow, Idaho would then be reported as Russian provenance — a hard FAIL on a
-    University of Idaho paper. A state code (with a ZIP, or anywhere in an
-    affiliation that also names the USA) is the signal that settles it, and it
-    covers the whole family: Moscow ID, St. Petersburg FL, Vienna VA, Berlin NH.
+    A US state code immediately after the city settles it, and covers the whole
+    family: Moscow ID, St. Petersburg FL, Vienna VA, Berlin NH.
+
+    **This guard fails safe.** It suppresses a city hit only when that city is
+    directly followed by a state code, and never when the string independently
+    names an excluded country. A multi-site collaboration ("Moscow and Boise, ID,
+    USA") therefore still reports the excluded country for a human to confirm —
+    a false flag costs a reviewer seconds, whereas a false clear silently defeats
+    the provenance policy the caller is relying on.
     """
+    # Backstop: an explicit excluded-country NAME anywhere outranks any locality guess.
+    for _country, names, _cities in _COUNTRY_HINTS:
+        if _country in EXCLUDED_COUNTRIES and _hit(names, low):
+            return False
     for m in re.finditer(r"\b" + re.escape(city) + r"\b", low):
         tail = _US_TAIL_RE.match(low, m.end())
         if not tail or tail.group(1) not in _US_STATE_CODES:
@@ -392,10 +403,21 @@ def infer_provenance(affiliations) -> dict:
             if not seg.strip():
                 continue
             named = [c for c, names, _ in _COUNTRY_HINTS if _hit(names, seg)]
-            seg_hits = named or [
+            city_hits = [
                 c for c, _, cities in _COUNTRY_HINTS
                 if any(_hit([city], seg) and not _is_us_locality(low, city)
                        for city in cities)]
+            seg_hits = named or city_hits
+            # A country NAME normally outranks a city guess within one institution.
+            # The exception is an excluded country: segmentation cannot split a
+            # comma-only string like "Beijing Anzhen Hospital, Beijing, Cleveland
+            # Clinic, OH, USA", so "usa" would otherwise discard the Beijing hit and
+            # the paper would verify clean — the failure this module exists to
+            # prevent. An excluded-country city hint is therefore always carried
+            # through for a human to confirm, never silently outranked.
+            for c in city_hits:
+                if c in EXCLUDED_COUNTRIES and c not in seg_hits:
+                    seg_hits = seg_hits + [c]
             hits.extend(seg_hits)
         if not hits:
             unrecognized.append(aff)
@@ -838,11 +860,31 @@ def self_test() -> int:
     # in a different segment from the city and Moscow, Idaho was reported as Russian
     # provenance — a hard FAIL on a University of Idaho paper. A US state code (with a
     # ZIP, or in an affiliation that also names the USA) settles it.
-    check("Moscow and Boise, ID is Idaho",
-          infer_countries(["University of Idaho, Moscow and Boise, ID, USA"]) == ["usa"])
+    check("Moscow, ID is Idaho",
+          infer_countries(["University of Idaho, Moscow, ID, USA"]) == ["usa"])
     check("St. Petersburg, FL is Florida",
           infer_countries(
-              ["All Children's Hospital, St. Petersburg and Tampa, FL, USA"]) == ["usa"])
+              ["All Children's Hospital, St. Petersburg, FL, USA"]) == ["usa"])
+    # Deliberate, documented trade-off. When the namesake city is NOT adjacent to the
+    # state code -- "Moscow and Boise, ID, USA" -- the guard no longer clears it, so the
+    # tool reports usa AND russia and asks a human. That is a false flag, and it is the
+    # price of never producing a false CLEAR: the adjacency rule was widened once to
+    # swallow this case and the widening let "Shanghai, and Cleveland Clinic, OH, USA"
+    # verify as clean US provenance. Costing a reviewer ten seconds beats silently
+    # passing an excluded-country paper, which is the failure this module exists to stop.
+    check("non-adjacent US namesake over-flags rather than clearing",
+          sorted(infer_countries(
+              ["University of Idaho, Moscow and Boise, ID, USA"])) == ["russia", "usa"])
+    # Regression pins for the suppression bug (comma-only strings never segment).
+    check("Shanghai + US clinic is not clean US provenance",
+          "china" in infer_countries(
+              ["Zhongshan Hospital, Shanghai, and Cleveland Clinic, OH, USA"]))
+    check("Beijing + US clinic, comma-only, is not clean US provenance",
+          "china" in infer_countries(
+              ["Beijing Anzhen Hospital, Beijing, Cleveland Clinic, OH, USA"]))
+    check("Moscow + US hospital is not clean US provenance",
+          "russia" in infer_countries(
+              ["Dept of Medicine, Moscow, and Mount Sinai, NY, USA"]))
     check("state code plus ZIP settles it without 'USA'",
           infer_provenance(["University of Idaho, Moscow, ID 83844"])["countries"] == [])
     # ...and the guard must not swallow a real excluded-country institution that
