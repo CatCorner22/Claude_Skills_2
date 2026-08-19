@@ -50,8 +50,9 @@ loads here, tighten the seam.
   without authority is open exchange and a hidden ledger is politics.
 - **Stays honest**: the power-interest grid cited to Johnson & Scholes (1999) / Eden &
   Ackermann (1998) with the open correction that Mendelow's 1981 paper carries a
-  power/dynamism matrix — and notes the finding is convergent-secondary per the
-  dossier; Freeman (1984) taught as the theory's anchor, never as coiner of
+  power/dynamism matrix — the finding sourced to that paper's own published abstract
+  (AIS eLibrary, ICIS 1981 paper 20), with the full paper text stated as unread;
+  Freeman (1984) taught as the theory's anchor, never as coiner of
   "stakeholder" (SRI ~1963, credited by Freeman himself); RACI's no-inventor status
   stated rather than a vendor origin story repeated; quadrant labels flagged as
   folk-simplifications layered on the grid; no invented adoption or success statistics;

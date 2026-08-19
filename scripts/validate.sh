@@ -94,6 +94,18 @@ for dir in plugins/*/skills/*/; do
   fm="$(awk 'NR==1 && $0=="---"{f=1; next} f && $0=="---"{exit} f{print}' "$md")"
   [ -n "$fm" ] || { err "$base: no frontmatter"; continue; }
 
+  # Duplicate top-level frontmatter keys. YAML parsers silently keep the LAST one, so a
+  # second `metadata:` block does not error anywhere — it just discards the first block's
+  # version and provenance. A version-bump script that appended instead of editing did
+  # exactly that to two skills, destroying a `2026.3` scheme and an `author:` field while
+  # every gate stayed green.
+  dupkeys="$(printf '%s\n' "$fm" | grep -E '^[A-Za-z_][A-Za-z0-9_-]*:' | sed 's/:.*//' | sort | uniq -d)"
+  if [ -n "$dupkeys" ]; then
+    while IFS= read -r k; do
+      [ -n "$k" ] && err "$base: duplicate frontmatter key '$k' — YAML keeps only the last, silently dropping the first"
+    done <<< "$dupkeys"
+  fi
+
   # name
   name="$(printf '%s\n' "$fm" | awk -F':' '/^name:/{sub(/^name:[[:space:]]*/,""); print; exit}' | tr -d '"'"'"' ' )"
   if [ -z "$name" ]; then

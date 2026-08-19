@@ -57,6 +57,8 @@ A good response:
   extracts or supported APIs rather than pretending direct production access.
 
 ## 4. Anti-pattern to watch for
-Escalating on a single out-of-limit point, or building the monitoring before defining the end state
-and the risk register. Both invert the persona's own method — the second is what step 2 (backward
-design) and step 3 (surface risk first) exist to prevent.
+Escalating on a red status or a single out-of-limit point without applying the run rules first (one
+point beyond 3σ *is* a special cause under Western Electric rule 1 — the acorn is a lone red point
+still inside the limits), or building the monitoring before defining the end state and the risk
+register. Both invert the persona's own method — the second is what step 2 (backward design) and
+step 3 (surface risk first) exist to prevent.

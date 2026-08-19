@@ -105,7 +105,8 @@ after, and it spends the credibility the real findings need.
 #### 💥 MSCD LINGUISTIC FAILURES
 | Flaw Type | Specific Vulnerability | Why It Fails (Adams) | Required MSCD Correction |
 | :--- | :--- | :--- | :--- |
-| [Ambiguity/Vagueness] | [e.g., "System will reasonably scale…"] | [Semantic ambiguity; unenforceable] | [Precise condition using "shall/must"] |
+| [Ambiguity — antecedent / syntactic / lexical / scope] | [e.g., "notice to the vendor and its agents in Texas" — which noun does "in Texas" attach to?] | [Syntactic ambiguity; two readings, both defensible in court] | [Split the sentence so only one reading survives] |
+| [Vagueness — a different defect, per Adams] | [e.g., "System will reasonably scale…"] | [Vagueness, not ambiguity: one reading, no measurable boundary] | [Either a precise condition using "shall/must", or vagueness contained and explicitly defined] |
 
 #### 💡 THE PROACTIVE PIVOT
 *   **The Hard Way:** You are currently executing this via [suboptimal method].

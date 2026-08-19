@@ -54,10 +54,11 @@ loads on an unsealing-mechanics ask, tighten the boundary.
   newcomer-drives; why renewal lapses silently without a funding owner — the Ōnin
   lesson told as load-bearing history, not trivia.
 - **Stays honest**: Ise facts carried with their [snippet-only] provenance marks; the
-  ~120-year Ōnin lapse (1462–1585, revived by Keikō-in's fundraising nuns and Oda
-  Nobunaga's patronage) told as half the lesson, never airbrushed into "13 unbroken
-  centuries"; Kongō Gumi's 2006 liquidation stated alongside its longevity; no
-  invented statistics about knowledge decay; boundaries respected — test-suite design
-  to testing-strategy, crisis unsealing to break-glass-playbooks, personal retention
-  to spaced-retrieval-learning (named as the personal-scale twin), doc writing to
-  explanation-design.
+  ~120-year Ōnin lapse (1462–1585, revived by Keikō-in's nuns fundraising across
+  decades with warlord endowment behind them — Oda Nobunaga funding from 1569, the 1585
+  rebuild completed by his successors after his death in 1582) told as half the
+  lesson, never airbrushed into "13 unbroken centuries"; Kongō Gumi's 2006 liquidation
+  stated alongside its longevity; no invented statistics about knowledge decay;
+  boundaries respected — test-suite design to testing-strategy, crisis unsealing to
+  break-glass-playbooks, personal retention to spaced-retrieval-learning (named as the
+  personal-scale twin), doc writing to explanation-design.

@@ -11,7 +11,7 @@ discrimination → generation), keeping answers hidden; quizzes one question at 
 waits for a real attempt before revealing anything; grades attempts into buckets
 (fluent/effortful/partial/wrong) with corrective feedback and source location after each
 attempt; ends the session by scheduling re-asks at expanding intervals and starting a
-tracker; states that items retire only after correct recall across multiple separate
+tracker; states that items retire only after fluent-correct recall across multiple separate
 sessions (successive relearning), and interleaves the three instruments rather than blocking
 them.
 
@@ -50,10 +50,11 @@ A good response:
   struggle during retrieval is the signal), including why highlighting and re-reading feel
   productive and aren't.
 - **Stays honest:** presents the interval table as a sane default rather than an optimized law;
-  sources any statistic it quotes to the real study (e.g. Cepeda et al. 2008's optimal-gap
-  ratio of roughly 10–20% of the retention interval) and invents none; doesn't claim mastery
-  from one correct answer (successive relearning gate); routes performable-skill training
-  and session-attendance problems to `learning-skills:deliberate-practice` and
+  sources any statistic it quotes to the real study (e.g. Cepeda et al. 2008's optimal gap
+  reported per retention interval — about a day for a week's retention, about three weeks for
+  seventy days — rather than a single 10–20% ratio, which that study's own optima contradict)
+  and invents none; doesn't claim mastery from one correct answer (successive relearning
+  gate); routes performable-skill training and session-attendance problems to `learning-skills:deliberate-practice` and
   `learning-skills:habit-design` respectively instead of absorbing them, and supplies the
   retrieval method for exam study while leaving exam-domain content and blueprint weighting
   to the user's own materials.
