@@ -28,6 +28,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -44,11 +45,14 @@ EXCLUDED_COUNTRIES = {"china", "russia"}
 # Affiliation strings are matched against two tiers of signal.
 #
 # A *country name* is unambiguous and settles the question. A *city* is a weaker
-# hint used only when the string names no country at all — because cities are
-# not unique across countries and a bare substring match on them is wrong in
-# both directions: "Moscow, ID 83844, USA" (University of Idaho) is not Russian,
-# and "Busan" contains the letters "usa". Matching is therefore word-bounded,
-# and country names win over cities within the same affiliation string.
+# hint, used only where no country name appears — because cities are not unique
+# across countries and a bare substring match on them is wrong in both
+# directions: "Moscow, ID 83844, USA" (University of Idaho) is not Russian, and
+# "Busan" contains the letters "usa". Matching is therefore word-bounded; a
+# country name beats a city *within the same institution segment* (see
+# infer_provenance, which splits on institution boundaries so a second country
+# is not silently swallowed); and a city sitting in a US postal address is
+# recognized as American wherever the country name falls (see _is_us_locality).
 #
 # Matching is deliberately conservative: it flags for human confirmation rather
 # than deciding. Affiliation metadata is frequently missing or partial, and this
@@ -109,6 +113,22 @@ NAME_PARTICLES = {
     "abu", "mac", "mc", "st", "san", "santa",
 }
 
+# Crossref carries the Retraction Watch database (acquired 2023, refreshed on
+# working days) as `updated-by` entries on the work record itself, so a DOI
+# lookup already downloads the authoritative answer — it just has to be read.
+# This matters because Crossref keeps the *original* title on a retracted paper:
+# there is no "RETRACTED:" prefix to catch, and Crossref's `type` stays
+# "journal-article", so without this the script reported a retracted paper as
+# clean. Only the retraction family blocks; corrections and errata are reported
+# separately in verify(), since a correction does not invalidate a paper.
+RETRACTION_UPDATE_TYPES = {
+    "retraction", "partial_retraction", "withdrawal", "removal",
+    "expression_of_concern",
+}
+CORRECTION_UPDATE_TYPES = {
+    "correction", "corrigendum", "erratum", "addendum", "clarification",
+}
+
 # Publication types are authoritative: PubMed assigns these deliberately.
 RETRACTION_PUBTYPES = {
     "retracted publication",
@@ -165,33 +185,71 @@ def http_get_json(url: str, params: dict | None = None, mailto: str | None = Non
 # ======================================================================
 # Pure logic — unit-tested by --self-test
 # ======================================================================
-def normalize_title(s: str) -> str:
-    """Lowercase, strip punctuation and articles, collapse whitespace."""
+# Letters that NFKD does not decompose into base + combining mark.
+_FOLD_MAP = str.maketrans({"ß": "ss", "ø": "o", "æ": "ae", "œ": "oe",
+                           "ł": "l", "đ": "d", "ð": "d", "þ": "th"})
+
+
+def fold_accents(s: str) -> str:
+    """'Müller' -> 'Muller', 'étude' -> 'etude'.
+
+    Claimed citations are routinely typed without diacritics while the canonical
+    record keeps them. Without folding, the non-ASCII letters were simply deleted
+    ('étude' -> 'tude'), so a correctly-cited German or French paper could fail a
+    check whose failure is *disqualifying*.
+    """
     if not s:
         return ""
-    s = s.lower()
-    s = re.sub(r"[^a-z0-9\s]", " ", s)
+    s = s.lower().translate(_FOLD_MAP)
+    return "".join(c for c in unicodedata.normalize("NFKD", s)
+                   if not unicodedata.combining(c))
+
+
+def normalize_title(s: str) -> str:
+    """Lowercase, fold accents, strip punctuation, collapse whitespace."""
+    if not s:
+        return ""
+    s = re.sub(r"[^a-z0-9\s]", " ", fold_accents(s))
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
 
 def compact_title(s: str) -> str:
-    """All non-alphanumerics removed. Makes 'B-12'=='B12' and
-    'double-blind'=='double blind', which are pervasive in medical titles."""
-    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+    """All non-alphanumerics removed. Makes 'B 12'=='B12', which survives even
+    the word-boundary rules below."""
+    return re.sub(r"[^a-z0-9]", "", fold_accents(s))
+
+
+def dehyphenate_title(s: str) -> str:
+    """Punctuation deleted rather than spaced out, so 'B-12' -> 'b12' while the
+    word boundaries survive: 'vitamin b12 deficiency'."""
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9\s]", "", fold_accents(s))).strip()
+
+
+def _prefix_or_equal(a: str, b: str) -> bool:
+    """Prefix comparison that stops at a word boundary.
+
+    A bare startswith() made 'Vitamin B1' match 'Vitamin B12 deficiency' — B1 and
+    B12 are different vitamins with different syndromes, and a title mismatch is
+    *disqualifying*, so a false PASS here lets a wrong citation through the one
+    gate meant to catch it.
+    """
+    return bool(a) and bool(b) and (a == b or a.startswith(b + " ") or b.startswith(a + " "))
 
 
 def titles_match(a: str, b: str, threshold: float = 0.85) -> bool:
-    """Token-overlap comparison, tolerant of subtitles, punctuation, and the
-    hyphenation differences common in medical titles."""
+    """Token-overlap comparison, tolerant of subtitles, punctuation, accents, and
+    the hyphenation differences common in medical titles."""
     na, nb = normalize_title(a), normalize_title(b)
     if not na or not nb:
         return False
-    if na == nb or na.startswith(nb) or nb.startswith(na):
+    if _prefix_or_equal(na, nb):
         return True
     # Hyphenation-insensitive comparison (B-12 vs B12, COVID-19 vs COVID19).
+    if _prefix_or_equal(dehyphenate_title(a), dehyphenate_title(b)):
+        return True
     ca, cb = compact_title(a), compact_title(b)
-    if ca and cb and (ca == cb or ca.startswith(cb) or cb.startswith(ca)):
+    if ca and cb and ca == cb:
         return True
     ta, tb = set(na.split()), set(nb.split())
     if not ta or not tb:
@@ -212,33 +270,34 @@ def surname_of(author: str) -> str:
     Multi-particle surnames are kept whole. The previous version returned parts[0]
     whenever the last token was initials, so 'van der Berg J' -> 'van' while the same
     person written 'van der Berg' -> 'berg', and authors_match then failed on two
-    renderings of one name.
+    renderings of one name. The key is accent-folded, so 'Müller' and 'Muller' —
+    the same author in two registries — compare equal.
     """
     if not author:
         return ""
     a = author.strip()
     if "," in a:
-        return a.split(",")[0].strip().lower()
+        return fold_accents(a.split(",")[0].strip())
     parts = [p for p in re.split(r"\s+", a) if p]
     if not parts:
         return ""
 
     # 'Smith J' / 'van der Berg JA' -> trailing initials; surname is everything before them
     if len(parts) > 1 and _is_initials(parts[-1]):
-        return " ".join(parts[:-1]).lower()
+        return fold_accents(" ".join(parts[:-1]))
 
     # 'J. Smith' / 'J A Smith' -> leading initials; surname is everything after them
     lead = 0
     while lead < len(parts) - 1 and _is_initials(parts[lead]):
         lead += 1
     if lead:
-        return " ".join(parts[lead:]).lower()
+        return fold_accents(" ".join(parts[lead:]))
 
     # 'van der Berg' -> absorb the nobiliary/compound particles before the final token
     i = len(parts) - 1
     while i > 0 and parts[i - 1].lower().strip(".") in NAME_PARTICLES:
         i -= 1
-    return " ".join(parts[i:]).lower()
+    return fold_accents(" ".join(parts[i:]))
 
 
 def authors_match(claimed: str, actual_first_author: str) -> bool:
@@ -259,8 +318,50 @@ _SEGMENTS = re.compile(r";|/|\band\b|(?<=\D)\d\s*[.)]\s")
 
 
 def _hit(hints, low: str) -> bool:
-    """Word-bounded substring test. Bare `in` would match 'usa' inside 'Busan'."""
-    return any(re.search(r"\b" + re.escape(h) + r"\b", low) for h in hints)
+    """Word-bounded substring test on an accent-folded string.
+
+    Bare `in` would match 'usa' inside 'Busan'. Folding both sides is what lets
+    "Universitätsspital Zürich" and "Ōsaka" resolve at all — unfolded, the accented
+    rendering an author actually uses matched nothing and the paper came back
+    PROVENANCE UNRECOGNIZED.
+    """
+    return any(re.search(r"\b" + re.escape(fold_accents(h)) + r"\b", low) for h in hints)
+
+
+_US_STATE_CODES = {
+    "al", "ak", "az", "ar", "ca", "co", "ct", "de", "dc", "fl", "ga", "hi", "id",
+    "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo",
+    "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok", "or", "pa",
+    "pr", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv", "wi", "wy",
+}
+
+# The tail of a US postal address as it follows the city: an optional second
+# locality, then the two-letter state code and an optional ZIP —
+# "Moscow, ID 83844", "St. Petersburg and Tampa, FL". Deliberately short: it
+# will not step over an institution name, so "Beijing and Harvard Medical
+# School, Boston, MA" leaves Beijing alone.
+_US_TAIL_RE = re.compile(
+    r"[\s,]*(?:and\s+|,\s*)?(?:[a-z.'\-]+(?:\s+[a-z.'\-]+)?\s*,\s*)?"
+    r"([a-z]{2})\b\s*(\d{5})?")
+
+
+def _is_us_locality(low: str, city: str) -> bool:
+    """True when `city` reads as an American town rather than its foreign namesake.
+
+    Segmentation alone cannot settle this: " and " splits "Moscow and Boise, ID,
+    USA" so the country name lands in a different segment from the city, and
+    Moscow, Idaho would then be reported as Russian provenance — a hard FAIL on a
+    University of Idaho paper. A state code (with a ZIP, or anywhere in an
+    affiliation that also names the USA) is the signal that settles it, and it
+    covers the whole family: Moscow ID, St. Petersburg FL, Vienna VA, Berlin NH.
+    """
+    for m in re.finditer(r"\b" + re.escape(city) + r"\b", low):
+        tail = _US_TAIL_RE.match(low, m.end())
+        if not tail or tail.group(1) not in _US_STATE_CODES:
+            continue
+        if tail.group(2) or _hit(["usa", "u.s.a", "united states"], low):
+            return True
+    return False
 
 
 def infer_provenance(affiliations) -> dict:
@@ -277,7 +378,7 @@ def infer_provenance(affiliations) -> dict:
     """
     found, unrecognized = [], []
     for aff in affiliations or []:
-        low = (aff or "").lower()
+        low = fold_accents(aff or "")
         if not low.strip():
             continue
         hits = []
@@ -291,7 +392,10 @@ def infer_provenance(affiliations) -> dict:
             if not seg.strip():
                 continue
             named = [c for c, names, _ in _COUNTRY_HINTS if _hit(names, seg)]
-            seg_hits = named or [c for c, _, cities in _COUNTRY_HINTS if _hit(cities, seg)]
+            seg_hits = named or [
+                c for c, _, cities in _COUNTRY_HINTS
+                if any(_hit([city], seg) and not _is_us_locality(low, city)
+                       for city in cities)]
             hits.extend(seg_hits)
         if not hits:
             unrecognized.append(aff)
@@ -310,8 +414,33 @@ def excluded_countries_in(countries) -> list[str]:
     return [c for c in (countries or []) if c in EXCLUDED_COUNTRIES]
 
 
+def normalize_update(update: dict) -> dict:
+    """One Crossref `updated-by` entry, reduced to what the checks need.
+
+    Shape per Crossref: {"updated": {...}, "DOI": ..., "type": "retraction",
+    "label": "Retraction", "source": "retraction-watch"|"publisher"}. `type` is
+    read first and `label` used as a fallback, so a vocabulary change surfaces
+    rather than disappearing.
+    """
+    kind = str(update.get("type") or update.get("label") or "").strip().lower()
+    kind = re.sub(r"[\s\-]+", "_", kind)
+    return {"type": kind, "doi": update.get("DOI"),
+            "source": update.get("source") or "crossref"}
+
+
+def update_kinds(record: dict, vocabulary) -> list[str]:
+    """The update types on a record that fall in `vocabulary` (see the two sets above)."""
+    out = []
+    for u in (record.get("updates") or []):
+        kind = str((u or {}).get("type") or "")
+        if kind in vocabulary and kind not in out:
+            out.append(kind)
+    return out
+
+
 def detect_retraction(record: dict) -> list[str]:
-    """Look for retraction/EoC signals in publication types (authoritative) and title (anchored).
+    """Look for retraction/EoC signals in Crossref's update records (authoritative),
+    publication types (authoritative), and the title (anchored).
 
     Publication types are matched exactly against the set PubMed actually assigns.
     Titles are matched only when the marker is the *leading* token and is followed by
@@ -331,6 +460,11 @@ def detect_retraction(record: dict) -> list[str]:
         if marker not in signals:
             signals.append(marker)
 
+    for kind in update_kinds(record, RETRACTION_UPDATE_TYPES):
+        signal = f"crossref/retraction-watch: {kind}"
+        if signal not in signals:
+            signals.append(signal)
+
     return signals
 
 
@@ -340,7 +474,7 @@ def detect_retraction(record: dict) -> list[str]:
 def _record(**kw):
     base = dict(source=None, doi=None, pmid=None, title=None, authors=[],
                 first_author=None, journal=None, year=None, publication_types=[],
-                affiliations=[], url=None)
+                affiliations=[], updates=[], url=None)
     base.update(kw)
     return base
 
@@ -361,7 +495,10 @@ def fetch_crossref(doi: str, mailto=None, fetch=http_get_json):
                 affs.append(aff["name"])
     date = (m.get("issued", {}).get("date-parts") or [[None]])[0]
     title = (m.get("title") or [None])[0]
+    updates = [normalize_update(u) for u in (m.get("updated-by") or [])
+               if isinstance(u, dict)]
     return _record(source="crossref", doi=m.get("DOI"), title=title, authors=authors,
+                   updates=updates,
                    first_author=authors[0] if authors else None,
                    journal=(m.get("container-title") or [None])[0],
                    year=date[0] if date else None,
@@ -469,6 +606,17 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
         except VerificationError:
             pass  # enrichment is best-effort
 
+    # A PMID lookup sees PubMed's publication types, which lag a retraction notice
+    # by weeks. Crossref's Retraction Watch annotations do not, so pick them up
+    # whenever the record carries a DOI and the lookup did not come from Crossref.
+    if record["source"] != "crossref" and record.get("doi") and not record.get("updates"):
+        try:
+            cr = fetch_crossref(record["doi"], mailto=mailto, fetch=fetch)
+            if cr and cr.get("updates"):
+                record["updates"] = cr["updates"]
+        except VerificationError:
+            pass  # enrichment is best-effort
+
     out["exists"] = True
     out["checks"]["existence"] = True
     out["record"] = record
@@ -520,8 +668,9 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
         out["checks"]["provenance_allowed"] = None
         out["flags"].append(
             f"PROVENANCE UNRECOGNIZED — affiliation data exists but names no country in the "
-            f"table (e.g. {unrecognized[0][:70]!r}). Unlisted countries are judged on the merits "
-            f"(source-provenance.md), not assumed excluded — resolve it yourself")
+            f"table (e.g. {unrecognized[0][:70]!r}). This is not a verdict either way: it may "
+            f"be an unlisted country, or a listed one named only by a city or in a script the "
+            f"table does not carry. Resolve it from the paper, then apply source-provenance.md")
     else:
         out["checks"]["provenance_allowed"] = None
         out["flags"].append(
@@ -537,6 +686,14 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
             f"verify on the publisher page")
     else:
         out["checks"]["not_retracted"] = True
+
+    # A correction is not a retraction: the paper stands, but a number in it may
+    # not (evidence-appraisal.md). Reported, never a check failure.
+    corrections = update_kinds(record, CORRECTION_UPDATE_TYPES)
+    if corrections:
+        out["flags"].append(
+            f"CORRECTION ON RECORD ({', '.join(corrections)}) — the paper stands, but read "
+            f"the notice before quoting a number from it")
 
     hard = [v for k, v in out["checks"].items() if v is False]
     out["passed"] = not hard
@@ -608,6 +765,21 @@ def self_test() -> int:
         "Metformin and B12: a cohort study", "Metformin and B12"))
     check("title different", not titles_match(
         "Metformin and vitamin B12 deficiency", "Aspirin for primary prevention of stroke"))
+    # Regression: the prefix comparison ignored word boundaries, so a claimed
+    # "Vitamin B1" paper validated against a B12 paper — different vitamin,
+    # different syndrome, and a title check is what is supposed to catch that.
+    check("B1 does not match B12", not titles_match(
+        "Vitamin B1", "Vitamin B12 deficiency"))
+    check("mid-word prefix rejected", not titles_match(
+        "Cardio", "Cardiology in practice: a review"))
+    # Regression: accents were deleted rather than folded ('etude' -> 'tude'), so a
+    # correctly-cited French or German paper failed a disqualifying check.
+    check("accents fold, not vanish", titles_match(
+        "Effets de la metformine — étude", "Effets de la metformine - etude"))
+    check("umlaut title matches ascii rendering", titles_match(
+        "Über die Wirkung von Metformin", "Uber die Wirkung von Metformin"))
+    check("spaced B 12 still matches B12", titles_match(
+        "Vitamin B 12 deficiency", "Vitamin B12 deficiency"))
 
     # Author surname extraction
     check("surname 'Polack F'", surname_of("Polack F") == "polack")
@@ -624,6 +796,10 @@ def self_test() -> int:
           authors_match("van der Berg", "van der Berg J"))
     check("compound surname kept whole", surname_of("Garcia Lopez M") == "garcia lopez")
     check("surname 'de la Cruz A'", surname_of("de la Cruz A") == "de la cruz")
+    # Regression: accented surnames are the same person in two registries.
+    check("surname accent-folded", surname_of("Müller-Lissner S") == "muller-lissner")
+    check("accented author matches ascii rendering",
+          authors_match("Muller-Lissner", "Müller-Lissner S"))
 
     # Year tolerance
     check("year exact", years_match(2020, 2020))
@@ -658,10 +834,35 @@ def self_test() -> int:
               ["Beijing Hospital, China / Harvard, Boston, USA"])) == ["china", "usa"])
     # Regression: a bare "wales" hint fired inside "New South Wales" (Australia)
     # and resolved it to uk with no caveat. Unrecognised is the honest answer.
+    # Regression: " and " is an institution boundary, so the country name could land
+    # in a different segment from the city and Moscow, Idaho was reported as Russian
+    # provenance — a hard FAIL on a University of Idaho paper. A US state code (with a
+    # ZIP, or in an affiliation that also names the USA) settles it.
+    check("Moscow and Boise, ID is Idaho",
+          infer_countries(["University of Idaho, Moscow and Boise, ID, USA"]) == ["usa"])
+    check("St. Petersburg, FL is Florida",
+          infer_countries(
+              ["All Children's Hospital, St. Petersburg and Tampa, FL, USA"]) == ["usa"])
+    check("state code plus ZIP settles it without 'USA'",
+          infer_provenance(["University of Idaho, Moscow, ID 83844"])["countries"] == [])
+    # ...and the guard must not swallow a real excluded-country institution that
+    # merely shares a string with a US address.
+    check("US-locality guard leaves Beijing alone",
+          sorted(infer_countries(
+              ["Beijing Anzhen Hospital, Beijing and Harvard Medical School, "
+               "Boston, MA, USA"])) == ["china", "usa"])
+    check("Russian St. Petersburg still resolves",
+          infer_countries(["St. Petersburg State University, 199034 St. Petersburg"])
+          == ["russia"])
     check("New South Wales is not the UK",
           infer_countries(["University of New South Wales, Kensington NSW 2052"]) == [])
     check("qualified Wales still resolves to uk",
           infer_countries(["Cardiff University, Wales, UK"]) == ["uk"])
+    # Regression: accented city and country names matched nothing, so a Swiss or
+    # Japanese affiliation written the way its authors write it read as unrecognized.
+    check("accented city resolves",
+          infer_countries(["Universitätsspital Zürich, Zürich"]) == ["switzerland"])
+    check("macron city resolves", infer_countries(["Ōsaka University, Ōsaka"]) == ["japan"])
     check("Cambridge UK vs Cambridge MA",
           infer_countries(["MRC Unit, Cambridge, UK"]) == ["uk"]
           and infer_countries(["MIT, Cambridge, MA, USA"]) == ["usa"])
@@ -702,6 +903,24 @@ def self_test() -> int:
         {"title": "WITHDRAWN: Duplicate submission", "publication_types": []}))
     check("pubtype 'Expression of Concern'", detect_retraction(
         {"title": "A study", "publication_types": ["Expression of Concern"]}))
+    # Regression: Crossref carries the Retraction Watch annotations, and it keeps the
+    # ORIGINAL title on a retracted paper — no "RETRACTED:" prefix, type still
+    # "journal-article" — so a DOI check reported a retracted paper as clean until
+    # `updated-by` was read.
+    check("crossref updated-by retraction caught", detect_retraction(
+        {"title": "An ordinary-looking title", "publication_types": ["journal-article"],
+         "updates": [normalize_update({"DOI": "10.1/r", "type": "retraction",
+                                       "label": "Retraction",
+                                       "source": "retraction-watch"})]}))
+    check("expression of concern via label fallback", detect_retraction(
+        {"title": "A study", "publication_types": [],
+         "updates": [normalize_update({"label": "Expression of concern"})]}))
+    check("a correction is not a retraction", not detect_retraction(
+        {"title": "A study", "publication_types": ["journal-article"],
+         "updates": [normalize_update({"type": "correction", "label": "Correction"})]}))
+    check("update kinds are sorted into their vocabularies",
+          update_kinds({"updates": [normalize_update({"type": "erratum"})]},
+                       CORRECTION_UPDATE_TYPES) == ["erratum"])
 
     # End-to-end with a stubbed fetcher (no network)
     def stub_ok(url, params=None, mailto=None):
@@ -755,6 +974,54 @@ def self_test() -> int:
           any("PROVENANCE PARTIAL" in f for f in res_p["flags"]))
     check("e2e partial provenance not asserted allowed",
           res_p["checks"]["provenance_allowed"] is None)
+
+    def stub_retracted(url, params=None, mailto=None):
+        return {"message": {
+            "DOI": "10.1000/r", "title": ["Ileal-lymphoid-nodular hyperplasia"],
+            "container-title": ["J"], "issued": {"date-parts": [[1998]]},
+            "type": "journal-article",
+            "updated-by": [{"DOI": "10.1000/notice", "type": "retraction",
+                            "label": "Retraction", "source": "retraction-watch"}],
+            "author": [{"family": "Wakefield", "given": "A",
+                        "affiliation": [{"name": "Royal Free Hospital, London, UK"}]}]}}
+
+    res_r = verify(doi="10.1000/r", fetch=stub_retracted)
+    check("e2e crossref retraction flagged",
+          any("RETRACTION INDICATOR" in f for f in res_r["flags"]))
+    check("e2e crossref retraction fails", res_r["passed"] is False)
+
+    def stub_corrected(url, params=None, mailto=None):
+        return {"message": {
+            "DOI": "10.1000/c", "title": ["A cohort study"], "container-title": ["J"],
+            "issued": {"date-parts": [[2019]]}, "type": "journal-article",
+            "updated-by": [{"DOI": "10.1000/erratum", "type": "correction",
+                            "label": "Correction", "source": "publisher"}],
+            "author": [{"family": "Smith", "given": "J",
+                        "affiliation": [{"name": "NIH, Bethesda, MD, USA"}]}]}}
+
+    res_c = verify(doi="10.1000/c", fetch=stub_corrected)
+    check("e2e correction reported", any("CORRECTION ON RECORD" in f for f in res_c["flags"]))
+    check("e2e correction is not a failure", res_c["passed"] is True)
+
+    # A PMID lookup must also see the Crossref retraction annotation: PubMed's
+    # "Retracted Publication" type lags the notice by weeks.
+    def stub_pmid_retracted(url, params=None, mailto=None):
+        if url.startswith(CROSSREF):
+            return {"message": {"DOI": "10.1/x", "title": ["A study"],
+                                "type": "journal-article",
+                                "updated-by": [{"DOI": "10.1/n", "type": "retraction",
+                                                "label": "Retraction"}]}}
+        if url == EUTILS:
+            return {"result": {"33301246": {
+                "title": "A study", "pubdate": "2020 Dec",
+                "fulljournalname": "J", "pubtype": ["Journal Article"],
+                "authors": [{"name": "Smith J"}],
+                "articleids": [{"idtype": "doi", "value": "10.1/x"}]}}}
+        return None  # Europe PMC enrichment finds nothing
+
+    res_pm = verify(pmid="33301246", fetch=stub_pmid_retracted)
+    check("e2e pmid picks up crossref retraction",
+          any("RETRACTION INDICATOR" in f for f in res_pm["flags"]))
 
     def stub_net_down(url, params=None, mailto=None):
         raise VerificationError("network unavailable (blocked) — cannot verify")

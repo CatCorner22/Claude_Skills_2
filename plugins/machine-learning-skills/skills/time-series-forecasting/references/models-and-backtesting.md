@@ -87,9 +87,9 @@ Reporting a full-series `auto_arima` search followed by a rolling backtest as "o
 - **MAPE** — mean absolute *percentage* error; **undefined at zero** and explodes for small actuals;
   also asymmetric (punishes over-forecasts more).
 - **sMAPE** — symmetric variant; tamer but still unstable near zero.
-- **MASE** — error scaled by the **in-sample one-step naive** error (seasonal lag *m* for a seasonal series,
-  lag 1 otherwise). Scale-free and safe on zeros, so it is the right metric for **comparing across series**
-  — but it is *not* a pass/fail bar. See the next section.
+- **MASE** — error scaled by the **in-sample naive** error at a fixed lag (seasonal lag *m* for a seasonal
+  series, lag 1 otherwise — check which one your library actually used). Scale-free and safe on zeros, so it
+  is the right metric for **comparing across series** — but it is *not* a pass/fail bar. See the next section.
 - **The decision rule: an explicit skill ratio.** `skill = model MAE(h) ÷ baseline MAE(h)`, both measured on
   the **same backtest origins** at the **same horizon** *h* you decide on. Below 1 you beat the baseline.
   Report it per horizon step if the decision spans several (h = 1 may win while h = 13 loses).
@@ -98,23 +98,32 @@ Reporting a full-series `auto_arima` search followed by a rolling backtest as "o
   next to the model's.
 
 ## MASE: what it decides and what it doesn't
-`MASE = mean(|out-of-sample errors|) / Q`, where `Q` = mean absolute error of the **in-sample one-step**
-naive forecast (Hyndman & Koehler 2006 — attribution, no numbers taken from it). Three consequences:
+`MASE = mean(|out-of-sample errors|) / Q`, where `Q` = mean absolute error of the **in-sample** naive
+forecast at a fixed lag — lag 1, or the seasonal lag *m* where the implementation is told the series is
+seasonal (Hyndman & Koehler 2006 — attribution, no numbers taken from it). Three consequences:
 
-1. **The numerator and denominator use different horizons.** Your errors are *h*-step-ahead; `Q` is
-   one-step. Forecast error grows with the horizon, so the bar tightens as *h* grows for reasons that have
-   nothing to do with model quality. Concretely, for a random walk with independent Gaussian steps the
-   *optimal* h-step forecast has error scale σ√h while the in-sample one-step naive error scale is σ, so
-   its MASE (lag-1 denominator) sits near **√h** — at h = 13 that is √13 ≈ **3.6**. A "MASE < 1" policy
-   rejects the best possible model on that series. Meanwhile the skill
+1. **The numerator and the denominator are measured at different lags, and the mismatch has no fixed
+   sign.** Your errors are *h*-step-ahead; `Q` is a one-step (or one-season) error. Forecast error grows
+   with the horizon, so on a series with little seasonal structure the bar tightens as *h* grows for
+   reasons that have nothing to do with model quality: for a random walk with independent Gaussian steps
+   the *optimal* h-step forecast has error scale σ√h while the in-sample one-step naive error scale is σ,
+   so its MASE (lag-1 denominator) sits near **√h** — at h = 13 that is √13 ≈ **3.6** (simulated over 400
+   paths: 3.60). A "MASE < 1" policy rejects the best possible model on that series. Meanwhile the skill
    ratio against a 13-step-ahead naive forecast is ≈ **1.0**, which is the correct verdict: on a random walk
    nothing beats the last value.
+   Reverse the structure and the error reverses with it. On a strongly seasonal series scored with the
+   **lag-1** denominator, the season-to-season swing inflates `Q`, and a bare seasonal-naive forecast scores
+   around **0.3–0.4** — it sails past a "MASE < 1" bar without beating anything (checked in sktime on a
+   monthly sine-plus-noise series: 0.31 at `sp=1`). Given the seasonal-lag denominator the same forecast
+   scores **near 1** (0.93 at `sp=12`), which is the honest reading. The bar's meaning is set by a
+   denominator you did not choose for this decision.
 2. **The denominator is in-sample.** `Q` comes from the training period, so a calmer or wilder training
    stretch moves MASE without any change in forecast quality — and after a level shift or regime change the
    comparison is across two different processes.
-3. **Implementations differ.** Some libraries default to the lag-1 naive even on seasonal data (a seasonal
-   `sp`/`m` argument you have to set), which changes `Q` and makes numbers incomparable across tools. Check
-   which lag yours used before quoting a MASE.
+3. **Implementations differ.** Some libraries default to the lag-1 naive even on seasonal data — sktime's
+   `MeanAbsoluteScaledError` ships with `sp=1`, so a monthly series stays on the lag-1 denominator until you
+   pass `sp=12` — which changes `Q` and makes numbers incomparable across tools. Check which lag yours used
+   before quoting a MASE.
 
 What MASE *is* good for: a scale-free error you can average across series of different magnitudes, and a
 same-series model comparison — `MASE_A / MASE_B` equals `MAE_A / MAE_B` because the shared `Q` cancels, so

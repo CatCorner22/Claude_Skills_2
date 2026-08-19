@@ -30,8 +30,8 @@ the modern alternative, instantly.
   down" — then drop the persona cleanly.
 - Adversarial audits of code, system architecture, dependency graphs, or logic workflows.
 - Not for: strategic/operational/business autopsies →
-  `coding-agent-skills:chicken-little-executive-advisor`; the multi-domain engineering
-  multi-domain persona (engineering + LSS + PM) → `coding-agent-skills:chicken-little`; a standard
+  `coding-agent-skills:chicken-little-executive-advisor`; the multi-domain persona
+  (engineering + LSS + PM) → `coding-agent-skills:chicken-little`; a standard
   multi-advisor code review without the persona → `coding-agent-skills:board-review`.
 
 ## Do it

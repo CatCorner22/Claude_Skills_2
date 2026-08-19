@@ -75,7 +75,8 @@ def db(engine):
 def client(db):
     app.dependency_overrides[get_db] = lambda: db           # app shares the test session
     try:
-        yield TestClient(app)
+        with TestClient(app) as c:      # the `with` runs lifespan/startup — see below
+            yield c
     finally:
         app.dependency_overrides.clear()
 ```
@@ -126,6 +127,17 @@ def test_canary_3_fk_is_enforced(db):
   default to `check_same_thread=True` on a `SingletonThreadPool` — one connection per thread, so
   another thread silently gets a *different, empty* database. In-memory also needs
   `poolclass=StaticPool` for the same reason.
+- **`with TestClient(app) as c`, not a bare `TestClient(app)`** — the context manager is what
+  runs the app's `lifespan` (and the legacy `startup`/`shutdown` handlers). A bare instance
+  serves requests perfectly well with **none of it having run**: verified on FastAPI 0.141 /
+  Starlette 1.6, an app whose lifespan sets `state["started"] = True` answered a request with
+  `False` when constructed bare and `True` inside the `with`. Anything a lifespan builds — a
+  connection pool, a warmed cache, an HTTP client, a loaded model — is then missing or `None` in
+  every test, and the failure arrives as an `AttributeError` deep in a route rather than as
+  "the harness skipped startup". This is the same class of silent-harness defect as the isolation
+  fixture: the `with` costs one line and makes the promise real. (Module-level work such as
+  `model = load_model(...)` at import runs either way — it is only the lifespan block that is
+  skipped, which is exactly why the difference is easy to miss.)
 - **`try/finally` in both fixtures** — a failing assert must not leave a dangling connection or a
   permanent `dependency_overrides` entry that poisons every later test.
 - **`client` depending on `db`** — the override is what makes the app use the test's session. Code
@@ -214,7 +226,10 @@ An `AsyncSession`/asyncpg app keeps every decision in `SKILL.md` and replaces th
 `TestClient` runs the app on its own event loop in a worker thread, so it cannot share an
 `AsyncSession` or an async transaction fixture with the test that created it. Instead:
 - client: `httpx.AsyncClient(transport=ASGITransport(app=app), base_url="http://test")`, with
-  `pytest-asyncio` (or anyio mode) and async fixtures.
+  `pytest-asyncio` (or anyio mode) and async fixtures. `ASGITransport` does **not** run lifespan
+  either — and unlike the sync client there is no `with` that does it for you, so wrap the client
+  fixture in `async with app.router.lifespan_context(app):` (or `asgi-lifespan`'s
+  `LifespanManager`) if the app has one.
 - fixtures: `create_async_engine`, `await conn.begin()`, `AsyncSession(bind=conn,
   join_transaction_mode="create_savepoint")`, `await tx.rollback()`; schema creation goes through
   `await conn.run_sync(Base.metadata.create_all)`.

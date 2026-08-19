@@ -1,8 +1,13 @@
 # The habit method: worksheet, patterns, audits, renegotiation
 
-Research base: Gollwitzer's implementation-intentions work (the Gollwitzer & Sheeran 2006
-meta-analysis: d ≈ 0.65 — medium-to-large — across 94 independent tests of pre-deciding the
-when/where/how of acting) and the psychology of automaticity and context-dependent behavior.
+Research base: Gollwitzer's implementation-intentions work and the psychology of automaticity
+and context-dependent behavior. On effect size, use the current numbers: Gollwitzer & Sheeran's
+2006 meta-analysis reported d ≈ 0.65 across 94 independent tests of pre-deciding the
+when/where/how of acting, and the 2025 successor (Sheeran, Listrom & Gollwitzer, 642 tests)
+reports .27 ≤ d ≤ .66 depending on the outcome, with substantial publication bias in the
+literature that a robust Bayesian re-analysis nonetheless survives. The effect is real; 0.65
+is the top of its band rather than its centre.
+
 Gollwitzer's canonical form is if-then ("if situation Y, then I will do X"); "when X, I will
 Y" below is the same structure in plainer words. Fogg (*Tiny Habits*) and Clear (*Atomic
 Habits*) are practitioner syntheses used here for vocabulary, not as research authority.

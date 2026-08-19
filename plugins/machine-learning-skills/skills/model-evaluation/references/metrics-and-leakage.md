@@ -95,6 +95,15 @@ Every metric is a statistic on a finite sample, so it carries a standard error. 
 - **AUC, RMSE, F1, a composite** have no tidy closed form: **bootstrap** the test set (resample rows with
   replacement, recompute, take the 2.5th/97.5th percentiles of ~2,000+ replicates).
 - **k-fold** gives you a spread for free: report the mean **and** the across-fold standard deviation.
+- **Both formulas assume the test rows are independent, and a grouped or temporal test set is not.** When
+  the same entity contributes many rows — several invoices per customer, several days per account — the
+  effective sample is the number of *entities*, not the number of rows, and resampling rows collapses the
+  interval. Simulated on 200 entities × 20 rows with strong within-entity correlation, a row-level
+  bootstrap returned a "95%" band about **half** the honest width, covering the true value **61%** of the
+  time; resampling whole entities restored the width and 94% coverage. The size of the gap tracks how
+  strongly rows within an entity agree, but the direction never changes — row resampling is always too
+  narrow, never too wide. So bootstrap the **cluster** (whole entities, or contiguous time blocks for a
+  series), and quote the entity or block count as the `n` behind the interval.
 
 Worked: a test set with **40 positives** and an observed recall of **0.80**.
 - `SE ≈ √(0.80 × 0.20 / 40) = √0.004 = 0.063` → 95% normal-approximation interval `0.80 ± 1.96 × 0.063 =

@@ -119,7 +119,7 @@ statements quietly swap denominators mid-sentence.
 Expected value is a long-run average, so it is the right summary exactly when you
 live in the long run: many repeats, each small enough that no single loss changes
 the game. One-shot decisions and ruinous stakes break both conditions — an average
-assumes you are still around to collect it. Ruin compounds: a repeated bet of
+assumes you are still around to collect it. Ruin compounds: a repeated fair-coin bet of
 +50%/−40% on your whole stake has EV +5% per flip, yet the typical path shrinks
 about 5.1% per flip, because repeated outcomes multiply and the geometric factor
 √(1.5 × 0.6) ≈ 0.949 governs — see sibling

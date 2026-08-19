@@ -34,6 +34,11 @@ metadata:
   inspection findings).
 - A feedback conversation that must end in a concrete agreement borrows the
   owner-and-date read-back from sibling `collaboration-skills:meeting-design`.
+- Not for: conduct that is a policy, safety, or legal matter — harassment,
+  discrimination, retaliation, a falsified record. A private SBI conversation is the
+  wrong instrument there and can compromise the response that is actually owed; route it
+  to the channel your organization designates, and use this skill only for the ordinary
+  working behavior that sits below that line.
 - Not for: critique of a submitted work product → see
   `coding-agent-skills:sparring-partner`; that skill evaluates the work, this one
   addresses a person's behavior.
@@ -100,9 +105,11 @@ because of the pileup"). The closely related *fundamental attribution error* (Ro
 is the one-sided version — over-weighting disposition when explaining someone else's
 behaviour — and it is the term most people reach for, but the self-versus-other contrast
 described here is the actor–observer effect specifically. [canon attribution — named to the
-standard sources, not independently re-verified; note that Malle's 2006 meta-analysis found
-the classic actor–observer asymmetry close to zero when averaged across studies, surviving
-mainly for negative and intentional events, which is the case feedback actually concerns.]
+standard sources, not independently re-verified; note that Malle's 2006 meta-analysis of 173
+studies found the classic actor–observer asymmetry close to zero when averaged across them
+(d between −0.02 and 0.10), holding for negative events and reversing for positive ones. The
+negative half is the case feedback actually concerns, so the framing earns its place here —
+but as a way of describing what receivers report, not as a settled effect to lean on.]
 Feedback aimed at character therefore strikes the receiver as *factually wrong from the
 inside* — they can see their circumstances, and you are ignoring them — so they argue the verdict
 instead of hearing the observation. A described behavior sidesteps the whole fight:

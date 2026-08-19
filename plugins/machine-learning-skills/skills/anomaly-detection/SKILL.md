@@ -31,7 +31,9 @@ metadata:
 2. **Start statistical on single features.** For one numeric field, flag points beyond a threshold: the
    classic **z-score**, or better the **robust z-score** using **median and MAD** (resistant to the very
    outliers you're hunting), or the **IQR rule** (below Q1 − 1.5·IQR or above Q3 + 1.5·IQR). Simple, explainable,
-   and often enough. See `references/methods-and-thresholds.md`.
+   and often enough — but branch on the degenerate case first: once more than half the values are identical
+   (a zero-inflated count or refund series) both MAD and IQR go to 0, and the two rules return `inf`/`nan`
+   or flag every non-zero row. The fallbacks are in `references/methods-and-thresholds.md`.
 3. **For a time series, model the expected value, then flag the residual.** Forecast or decompose the series
    (`machine-learning-skills:time-series-forecasting`) and flag points whose **residual** is large relative to
    the local, season-aware spread — so a normal month-end spike isn't flagged, but an off-pattern one is.

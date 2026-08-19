@@ -30,8 +30,10 @@
    home (SOP edit, checklist line, next plan). Aim for a handful of each — ten vague
    items lose to three owned ones.
 
-Time split: roughly 25% on Q1, 25% on Q2, 50% on Q3+Q4. Most sessions die in Q2; the
-facilitator's main job is getting the room out of it with the timeline agreed.
+Time split: roughly 25% across Q1 and Q2 *together*, 25% on Q3, 50% on Q4 — the split
+Garvin records from the Army guidelines. Most sessions die in Q2; the facilitator's main
+job is getting the room out of it with the timeline agreed, so the causes and the changes
+get the three quarters of the session that carry the value.
 
 ## Ground rules (read them aloud)
 

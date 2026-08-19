@@ -105,8 +105,9 @@ All twelve points fall between 7.875% and 11.375% — inside the limits, no runs
 process is **stable at a bad level**, which is the only condition under which a later shift can be
 attributed to the change rather than to the process's own wandering. (Chart selection, limit
 formulas, and the overdispersion check that qualifies these limits are in
-`references/control-charts-and-control-plans.md`; that check returns σ_z ≈ 1.20 here — at the edge
-of acceptable, so the limits are usable but not generous.)
+`references/control-charts-and-control-plans.md`; that check returns σ_z ≈ 1.20 here, which on only
+12 subgroups is inside what a perfectly binomial process produces about one time in five — recorded
+and re-checked as data accumulates, not treated as evidence the limits are too tight.)
 
 **Capability read.** Reopen/not-reopen is attribute data, so Cp/Cpk do not apply — those need
 continuous measurements against two-sided specs (`continuous-improvement-skills:measurement-systems-analysis`

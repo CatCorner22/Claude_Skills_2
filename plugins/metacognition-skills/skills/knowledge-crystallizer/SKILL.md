@@ -52,7 +52,9 @@ crystallization pass are in `references/crystallization-protocol.md`.
    - **Evidence** — observed once, or repeatedly? Inferred, or confirmed by the user?
    - **Scope** — general enough to reuse, specific enough to act on?
    - **Leverage** — will knowing this actually change future behavior?
-   Items failing a gate wait as candidates or go to the user for confirmation.
+   A failed gate routes by which gate it was: a contradiction goes to the user, thin
+   evidence waits for another sighting, a badly scoped item is rewritten or split, and a
+   low-leverage one is dropped.
 3. **Distill** validated items into atomic, well-scoped entries — one idea per entry,
    phrased actionably in the shared grammar: `FACT:` / `PREFERENCE:` / `RULE:` / `LESSON:` /
    `PATTERN:` / `METHOD:` / `DIRECTIVE:`, each carrying evidence and confidence.

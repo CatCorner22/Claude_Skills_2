@@ -57,9 +57,14 @@ class PaymentNotFoundError(AppError):
     status = 404
 ```
 
-FastAPI: map the hierarchy once, so every error is the same shape.
+FastAPI: map the hierarchy once — and then map the framework's *own* errors into the same
+envelope, because the `AppError` handler alone does not reach them.
 
 ```python
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
 @app.exception_handler(AppError)
 async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
     log.warning("request_failed", code=exc.code, path=request.url.path)
@@ -67,7 +72,39 @@ async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
         status_code=exc.status,
         content={"error": {"code": exc.code, "message": str(exc)}},
     )
+
+@app.exception_handler(RequestValidationError)
+async def validation_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
+    # jsonable_encoder is load bearing: a validator that raises ValueError puts the exception
+    # object itself in errors()[i]["ctx"], and JSONResponse then dies with
+    # "Object of type ValueError is not JSON serializable" — a 500 from your 422 handler.
+    return JSONResponse(
+        status_code=422,
+        content={"error": {"code": "validation_error", "message": "Invalid request",
+                           "fields": jsonable_encoder(exc.errors())}},
+    )
+
+@app.exception_handler(StarletteHTTPException)
+async def http_error_handler(request: Request, exc: StarletteHTTPException) -> JSONResponse:
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": {"code": f"http_{exc.status_code}", "message": str(exc.detail)}},
+    )
 ```
+
+**Why the last two handlers are not optional.** With only the `AppError` handler registered,
+FastAPI's built-in paths keep their own shape: a 422 validation failure returns
+`{"detail": [...]}`, a raised `HTTPException` returns `{"detail": "..."}`, and an unrouted
+URL returns `{"detail": "Not Found"}` (all three verified on FastAPI 0.141). So "every error
+is the same shape" is a claim about three handlers, not one — a client written against
+`error.code` breaks on the first typo'd request body.
+
+Both envelopes are defensible; what is not defensible is shipping one service with two.
+`full-stack-dev-skills:backend-api-development` stays on FastAPI's native `{"detail": ...}`,
+which needs no re-wrapping and keeps `/docs` honest; this skill's `{"error": {"code", ...}}`
+buys a stable machine-readable `code` that survives message rewording, and costs the two
+handlers above. Pick one per service, write it in `references/your-environment.md`, and let
+every route follow it.
 
 Rules: catch the narrowest exception you can act on; re-raise with context
 (`raise DomainError(...) from exc`); never return 200 with an error body; never leak stack

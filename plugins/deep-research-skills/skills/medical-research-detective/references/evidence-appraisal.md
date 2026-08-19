@@ -110,7 +110,12 @@ Enough numeracy to avoid the standard traps:
 Predatory journals publish for a fee with little or no peer review, and they are indexed by broad
 search tools. Signals to check before trusting a source found only in a general web search:
 
-- Is the journal indexed in **MEDLINE/PubMed** or listed in the **DOAJ**? Absence is a caution flag.
+- Is the journal **selected for MEDLINE**, or listed in the **DOAJ**? Absence is a caution flag.
+  MEDLINE selection is a real quality screen — a committee reviews the journal against
+  published criteria. Being *in PubMed* is not the same thing: PubMed also carries whatever a
+  PMC-depositing journal sends, which is how predatory content reaches it. Check the journal in
+  the NLM Catalog and look for "Currently indexed for MEDLINE", rather than reading a PubMed
+  hit as a quality signal.
 - Does the publisher belong to a recognized body (e.g. COPE membership)?
 - Is there a real editorial board with identifiable, relevant experts?
 - Does the site promise implausibly fast review, or spam solicitations?
@@ -127,12 +132,17 @@ and in medicine that propagates directly into harm.
 
 Check by: looking for a retraction/expression-of-concern notice on the publisher's page and in the
 PubMed record (which flags "Retracted Publication" as a publication type), and searching retraction
-databases for the DOI/PMID. `scripts/verify_citation.py` flags retraction indicators it can see in
-the returned metadata.
+databases for the DOI/PMID. `scripts/verify_citation.py` does the machine-checkable part of this on
+every lookup: it reads PubMed's publication types, the Crossref `updated-by` annotations (Crossref
+carries the Retraction Watch database, refreshed on working days, so a DOI check sees a retraction
+even though the retracted record keeps its original title), and any retraction marker anchored at the
+start of the title. A clean result is still only as current as those records — a notice issued this
+week may not have propagated, so check the publisher page for anything load-bearing.
 
-Also check for **corrections/errata** — a paper can stand while a key number in it does not. If a
-retracted paper is nonetheless historically important to the story, you may mention it *labeled as
-retracted*, never as support for a claim.
+Also check for **corrections/errata** — a paper can stand while a key number in it does not; the
+script reports these separately, as a note rather than a failure. If a retracted paper is nonetheless
+historically important to the story, you may mention it *labeled as retracted*, never as support for
+a claim.
 
 ## Conflicts of interest and funding
 

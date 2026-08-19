@@ -88,9 +88,10 @@ are in `references/immune-tuning-method.md`.
 5. **Install the danger-signal gate on human paging.** Pages — the interrupt-a-human tier —
    require a danger signal: evidence of damage or consequence in context, not mere anomaly.
    "Unusual" goes to the queue; "unusual AND a customer/counterpart/system is visibly
-   affected" pages. This is danger theory operationalized (Matzinger's danger model;
-   Aickelin's dendritic-cell algorithm), which exists specifically to cut false positives by
-   requiring damage context rather than mere non-self [snippet-only].
+   affected" pages. This is danger theory operationalized (Matzinger's danger model; the
+   dendritic-cell algorithm of Greensmith, Aickelin & Cayzer, ICARIS 2005), which exists
+   specifically to cut false positives by requiring damage context rather than mere
+   non-self [snippet-only].
 6. **Induce tolerance at the source, with evidence and expiry.** For each verified-benign
    recurring pattern, add a tolerance-list entry carrying: the pattern, the evidence count
    (how many firings were dispositioned benign), the approver, and an **expiry date** that

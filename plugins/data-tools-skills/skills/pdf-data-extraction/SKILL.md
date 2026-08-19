@@ -36,8 +36,11 @@ metadata:
 2. **Pick the tool by table style.**
    - **pdfplumber** — the general workhorse: text with positions, and table extraction driven by
      ruling lines or alignment. Best when you need control or the layout is odd.
-   - **camelot** — table-specialist with two modes: `lattice` (tables with drawn cell borders)
-     and `stream` (whitespace-aligned tables, no borders). Quick win when the table is clean.
+   - **camelot** — table-specialist, selected by `flavor=`. `lattice` (the default) reads drawn
+     cell borders; `stream` reads whitespace alignment. Camelot 2.x adds `network` (borderless
+     tables via text-edge connectivity), `hybrid`, `ml` (a table-structure model, needs
+     `pip install 'camelot-py[ml]'`), and `auto` (per-page detection) — try those when
+     `stream` plateaus on a borderless table. Quick win when the table is clean.
    - Text-only needs (paragraphs, key-value fields on invoices) → pdfplumber `extract_text()`
      plus targeted regex.
 3. **Extract, then look at what you got:**
@@ -57,8 +60,10 @@ with pdfplumber.open("statement.pdf") as pdf:
    that matter and per-layout patterns.
 4. **Handle document structure explicitly.** Multi-page tables re-print headers (drop repeated
    header rows); statements interleave section headers ("Deposits", "Withdrawals") — capture
-   them as a column, not noise; multi-line descriptions belong to the row above (stitch by
-   detecting rows whose date/amount cells are empty).
+   them as a column, not noise, matching the wording the document actually prints rather than
+   a remembered list; multi-line descriptions belong to the row above (stitch by detecting rows
+   whose date/amount cells are empty, and log what you stitched — a heading you failed to
+   recognize lands in that log rather than corrupting a description in silence).
 5. **Type the result like a flat file.** Amounts arrive as strings with currency symbols, commas,
    parentheses-negatives, or trailing minus — normalize deliberately; dates per the document's
    locale; IDs as strings. (Same landmines as
@@ -83,14 +88,17 @@ tool is a property of the document, not of taste. It's also why extraction is in
 fragile: a slightly shifted column or a wrapped description changes the geometry, not the data.
 The antidote is the document's own arithmetic — statements and invoices are self-checking
 documents, and using their internal totals as an assertion converts "looks right" into "proves
-right." OCR adds one more layer of the same lesson: it *guesses* characters from pixels, so its
-numbers are hypotheses until a control total confirms them.
+right" for the quantities that enter the sum. Know the edge of that proof: labels, sections, and
+description text never touch the arithmetic, so a balance check that passes says nothing about
+them, and they need their own eyes-on pass when you first freeze a layout. OCR adds one more
+layer of the same lesson: it *guesses* characters from pixels, so its numbers are hypotheses
+until a control total confirms them.
 
 ## Common mistakes
 - Running table extraction on a scanned PDF and getting nothing → check for a text layer first; OCR, then extract.
 - One tool for every PDF → match tool/mode to the table's geometry (borders → lattice; alignment → stream/pdfplumber).
 - Ignoring repeated page headers in multi-page tables → phantom rows corrupt sums; drop them by pattern.
-- Letting multi-line descriptions become separate rows → stitch rows with empty date/amount cells to the row above.
+- Letting multi-line descriptions become separate rows → stitch rows with empty date/amount cells to the row above, and guard the first one: with nothing above it, `rows[-1]` raises.
 - Trusting extracted amounts without the balance check → dropped/doubled rows are the norm, not the exception.
 - Parsing `(1,234.56)` or `1.234,56` naively → normalize accounting negatives and locale decimals deliberately.
 - Re-tuning by hand every month → freeze a per-layout recipe with a totals assertion; re-tune only when it fails.

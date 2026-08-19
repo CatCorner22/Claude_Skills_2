@@ -64,7 +64,11 @@ def fetch_all(session, url, params, page=500, max_pages=1000):
    (advancing by `page` would silently skip the rows it withheld), an empty page ends the loop
    even when `hasMore` stays true, `max_pages` turns a server-side bug into an error instead
    of a hung script, and the `totalResults` assertion makes a short pull fail loudly rather
-   than look plausible.
+   than look plausible. Know what that last guard cannot see: offset pagination over a table
+   still being written to duplicates a row onto the next page for every insert ahead of your
+   offset and skips one for every delete, so a pull that does both matches the total while
+   holding wrong rows. Compare distinct key counts to `len(rows)` as well, and prefer cursor
+   pagination when the API offers it.
 
 5. **Retry transient failures with backoff; respect 429.** Wrap requests so 429 (honor
    `Retry-After`) and 5xx/timeouts retry with exponential backoff and a cap; 4xx other than 429

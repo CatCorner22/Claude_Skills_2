@@ -136,6 +136,13 @@ holding one thing constant at a time:
 - **Mix effect** — moving to the Year 2 mix at Year 2 rates: 6.0% − 3.0% = **+3.0 pp**.
 - Sum: −0.6 + 3.0 = +2.4 pp = the observed 3.6% → 6.0%. ✓
 
+The split depends on which period you hold fixed, so say which convention you used.
+Moving the mix first instead — Year 2 mix at Year 1 rates — gives
+0.40 × 2.0% + 0.60 × 10.0% = 0.8% + 6.0% = 6.8%, a mix effect of 6.8% − 3.6% =
+**+3.2 pp** and a rate effect of 6.0% − 6.8% = **−0.8 pp**, summing to the same +2.4 pp.
+The signs and the story are stable across both orderings; the exact attribution is not,
+because the interaction between the two moves has to be parked somewhere.
+
 Reading: quality genuinely improved (−0.6), but the product mix shifted toward the
 high-defect segment (+3.0). The honest headline names both; either alone misleads.
 

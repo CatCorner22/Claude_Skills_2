@@ -34,8 +34,10 @@ metadata:
 
 ## Do it
 1. **Look at the raw bytes before parsing.** `head -c 500 file.csv | xxd | head` — `xxd` ships
-   with vim, so on a box without it use `head -c 500 file.csv | od -An -tx1z | head`, which is
-   POSIX and always present (or open in a text editor showing invisibles). You're checking:
+   with vim, so on a box without it use `head -c 500 file.csv | od -An -tx1z | head`; `od` is
+   POSIX and always present, though the trailing `z` (the ASCII gutter beside the hex) is a GNU
+   extension, so drop it to plain `-tx1` if a BSD/macOS `od` rejects the type string (or open
+   the file in a text editor showing invisibles). You're checking:
    encoding clues (a `EF BB BF` UTF-8 BOM; high bytes suggesting Latin-1/Windows-1252), the
    actual delimiter (comma, semicolon, pipe, tab), quoting style, line endings, and whether
    there are title/footer rows around the data.
@@ -49,7 +51,9 @@ df = pd.read_csv(
     sep=",",                     # set it; don't let a sniffer guess in production
     dtype={"account_id": "string", "invoice_no": "string"},  # IDs are text!
     parse_dates=["posting_date"], dayfirst=False,
-    skiprows=0, skipfooter=0, engine="python",  # adjust for title/footer rows
+    skiprows=0, skipfooter=0,    # adjust for title/footer rows; leave the engine unset —
+                                 # skipfooter>0 makes pandas fall back to its python engine
+                                 # by itself, and pinning it costs ~6x on a large file
     thousands=",",               # if amounts come as "1,234.56"
     na_values=["", "NULL", "N/A"],
 )
@@ -101,7 +105,7 @@ thousand rows quietly vanish from an analysis.
 ## Common mistakes
 - Letting pandas infer ID columns → leading zeros lost, long IDs in scientific notation, join keys destroyed; `dtype="string"` for identifiers.
 - Guessing encoding until the error goes away → mojibake survives silently; inspect bytes, then declare.
-- Ignoring the BOM → a phantom `\ufeff` in the first column name breaks every rename; `utf-8-sig`.
+- Ignoring the BOM → an invisible marker rides on the first column name (`ï»¿account_id` once you fall back to `cp1252`, `\ufeffaccount_id` in readers that decode UTF-8 without stripping it, like the stdlib `csv` module) and every rename misses; declare `utf-8-sig` rather than relying on pandas, which happens to strip it for you.
 - Parsing European numbers as US → amounts off by orders of magnitude; set `decimal`/`thousands`.
 - `how="inner"` as the default join → unmatched keys silently dropped; outer + `indicator=True` first, then decide.
 - Skipping footer rows into the data → a "Total" row doubles your sum; `skipfooter`/filter it explicitly.

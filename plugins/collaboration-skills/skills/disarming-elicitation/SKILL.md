@@ -36,9 +36,9 @@ professions: motivational interviewing trains a detective-named version of it as
 clinical staple [clinical-pedagogy], the FBI's counterintelligence elicitation brochure
 lists "feigned ignorance" as a formal technique [gov], internal-investigations training
 teaches the same questioning style [industry], and technical writers use it for knowledge
-elicitation [practitioner]. Its exit move has a peer-reviewed clinical twin, the AAFP
+elicitation [practitioner]. Its exit move has a named clinical twin, the AAFP
 "doorknob phenomenon": the most important disclosure comes when the interview seems over
-[peer-reviewed, AAFP].
+[AAFP clinical commentary].
 
 **The ethics rail, named plainly:** this is a stance for making it *easy* for willing
 people to share what they know — surfacing tacit knowledge they would gladly give if
@@ -102,10 +102,10 @@ the expanded ethics rail are in `references/elicitation-method.md`.
 7. **Close formally — then the doorknob.** Thank them, shut the notebook, let the
    interview visibly end. Then, casually, one more question — the one you actually came
    for, or simply "is there something else I should have asked about?" — "something," not
-   "anything," because the negative phrasing invites a no and tested no better than not
+   "anything," because "any" is the word that invites a no and tested no better than not
    asking at all [peer-reviewed]. Post-closure answers are the least rehearsed of the
-   whole session; family medicine trains for exactly this moment because that is when the
-   real disclosure comes [peer-reviewed, AAFP].
+   whole session; family medicine has a name for exactly this moment because that is when
+   the real disclosure comes [AAFP clinical commentary].
 8. **Capture verbatim and replay for confirmation.** Record the expert's exact words —
    especially anything surfaced by a deliberate-error restatement — and read the key
    claims back before you rely on them, so the technique never leaves a wrong number
@@ -141,15 +141,18 @@ produce movement; prosecuted ones produce defense.
 
 The doorknob close works because rehearsal ends when the interview does. While the
 session is officially on, the expert manages an impression; the moment it visibly ends,
-the performance stops, and what surfaces next is unguarded. The AAFP literature
-documents this as the doorknob phenomenon — the most consequential disclosure arriving as
-the visit closes — and the trained remedy is deliberately inviting it rather than
-treating it as an interruption [peer-reviewed, AAFP]. The invitation's wording carries
-much of the effect: a randomized trial of that solicitation found "is there *something*
-else you want to address today?" left roughly 78% fewer concerns unmet, while the
-"*anything* else" form was indistinguishable from no prompt at all — "any" is a question
-shaped for the answer no [peer-reviewed]. The same mechanism is why the skill's last
-question is casual and why it comes *after* the notebook shuts.
+the performance stops, and what surfaces next is unguarded. The AAFP commentary names
+this the doorknob phenomenon — the most consequential disclosure arriving as the visit
+closes — and its advice is to treat that disclosure as material to pursue rather than an
+interruption to deflect [AAFP clinical commentary]. Inviting it on purpose is the
+adjacent move, and the invitation's wording carries much of the effect: a randomized
+trial of a mid-visit solicitation found "is there *something* else you want to address in
+the visit today?" left roughly 78% fewer concerns unmet, while the "*anything* else" form
+was indistinguishable from no prompt at all — a question built on "any" is shaped for the
+answer no [peer-reviewed]. Borrow the wording rather than the effect size: that trial solicited
+further concerns mid-visit from patients, not coverage of your questions from a colleague
+after the close. The same mechanism is why the skill's last question is casual and why it
+comes *after* the notebook shuts.
 
 The stance is symmetric, which is the final reason the rail matters: the identical moves
 appear in a counterintelligence warning brochure precisely because they work on people

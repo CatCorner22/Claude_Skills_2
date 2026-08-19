@@ -33,7 +33,13 @@ always the running value — that is why the +10%/−10% pair loses ground.
 
 ## 2. CAGR — two worked examples
 CAGR = (end/start)^(1/n) − 1, with n = the number of periods **between** the
-endpoints (five annual observations span four years).
+endpoints (five annual observations span four years). Both endpoints must be positive:
+a sign change leaves a negative ratio under the root, which a spreadsheet answers with
+#NUM! and a math library with a complex number, and two negative endpoints are worse
+still — they return a rate that reads as growth for a quantity that deteriorated, since
+−100 to −400 over two years computes as (−400/−100)^(1/2) − 1 = **+100% a year**. For
+series that cross or sit below zero (profit, net cash flow), quote the absolute change
+and drop the rate.
 
 **Exact example.** 40,000 grows to 58,564 in 4 years.
 - Ratio: 58,564 / 40,000 = 1.4641.
@@ -102,6 +108,14 @@ Worked: 5,000 growing at 12% per year; when does it reach 20,000?
 - Dimensionless ÷ per-period = periods. The answer is in whatever period r is quoted
   in — a monthly rate gives months, an annual rate gives years. If your formula does
   not survive this check, it is not a time.
+
+The domain matters as much as the dimensions. ln wants a positive ratio, so target and
+current must be nonzero and share a sign; ln(1+r) wants r > −1, and vanishes at r = 0,
+where the formula divides by zero because a flat quantity never arrives. When r points
+away from the target the formula still answers, with a negative t: 5,000 reaching 20,000
+at −5% a year gives ln(4)/ln(0.95) = −27.0. That is the same constant-rate law run
+backwards — the date the series would have passed 20,000 had it always been shrinking at
+5% — not a horizon. Check the direction of the move before reading t as a date.
 
 This same relation, applied to capacity margins, is the exhaustion-date formula in
 `safety-and-reliability-skills:weight-of-the-books`: t = ln(F/F_floor)/ln(1+g), where

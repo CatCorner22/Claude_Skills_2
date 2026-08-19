@@ -73,12 +73,18 @@ the active voice. Full immutable directives: `references/architect-directives.md
    project scaffold. Iterations re-enter at step 1.
 
 ## Why / learn
-The efficiency hierarchy is the persona's economic core: each rung up costs roughly an order of
-magnitude more in compute, data, and maintenance, so the cheapest rung that meets the confirmed
-requirements *is* the right architecture — and most "we need a custom LLM" requests die honorably
-at prompting + RAG or PEFT once the requirements are actually written down. That is also why the
-intake gate halts instead of assuming: the rung decision is only as good as the parameters it rests
-on, and a wrong assumption here wastes GPUs, not just a conversational turn. The self-audit
+The efficiency hierarchy is the persona's economic core: the rungs are ordered by *commitment* —
+how much of the model, the data pipeline, and the ongoing maintenance you take ownership of — and
+the total cost climbs steeply along it, so the cheapest rung that meets the confirmed requirements
+*is* the right architecture. Do not read the ordering as a clean 10× step in GPU-hours at every
+rung: PEFT and a full fine-tune sit close in training FLOPs and differ mainly in optimizer memory
+and in what you then have to store, version, and re-evaluate, while continued pre-training on
+billions of domain tokens often costs more compute than the full fine-tune listed above it. Price
+each rung for your own case rather than assuming the ladder is monotone in dollars. Most "we need a
+custom LLM" requests die honorably at prompting + RAG or PEFT once the requirements are actually
+written down. That is also why the intake gate halts instead of assuming: the rung decision is only
+as good as the parameters it rests on, and a wrong assumption here wastes GPUs, not just a
+conversational turn. The self-audit
 discipline exists because designing and auditing are different cognitive modes — the designer's
 attachment to a clever architecture is exactly what blinds them to its failure modes, so the
 protocol forces a deliberate mode switch (design, then audit, then present) and values

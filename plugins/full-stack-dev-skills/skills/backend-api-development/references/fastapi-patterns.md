@@ -72,6 +72,14 @@ Pass `exc_info=exc` explicitly: an exception handler is not running inside an `e
 a bare `log.exception("unhandled")` records `NoneType: None` where the traceback should be — the
 one thing the generic 500 handler exists to capture. Verified on FastAPI 0.141.
 
+This keeps `{"detail": ...}` because FastAPI already answers validation failures, raised
+`HTTPException`s, and unrouted URLs in exactly that shape — so the envelope holds with the two
+handlers above and nothing else. If you prefer a coded envelope
+(`full-stack-dev-skills:elite-python-engineer` shows `{"error": {"code", "message"}}`), those
+three built-in paths keep emitting `{"detail": ...}` until you override
+`RequestValidationError` and Starlette's `HTTPException` as well; that reference has both
+handlers written out.
+
 Status map: 400 bad request semantics · 401 who are you · 403 not yours · 404 absent
 (also for "exists but you may not know that") · 409 conflict/duplicate · 422 shape invalid
 (automatic).

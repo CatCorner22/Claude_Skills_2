@@ -102,8 +102,11 @@ correct and hilarious.
 ## Why / learn
 Gonzo was born of a blown deadline: Scanlan's, June 1970, the Kentucky Derby, a writer
 too wrecked to compose and ripping raw notebook pages to send instead — and the
-desperate move read truer than the finished thing would have. Bill Cardoso of the
-Boston Globe named it. The insight underneath survived its chaotic birth: when the
+desperate move read truer than the finished thing would have. Carry that story with the
+label the canon file puts on it: the published piece's raw texture is verifiable, the
+drama of its filing rests chiefly on Thompson's and Steadman's own retellings, and a
+skill that treats labeled legends as first-class does not get to launder its own
+founding one. Bill Cardoso of the Boston Globe named it. The insight underneath survived its chaotic birth: when the
 official version of events is managed theater, a visibly subjective narrator — who
 shows you his position, his failures, his fear — can be MORE honest than the view from
 nowhere. That's why the vibe was the work: the style isn't decoration on the

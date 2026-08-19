@@ -55,7 +55,7 @@ is real or decorative:
 | Boundary | Why it exists | The test that it is real |
 |---|---|---|
 | `main.py` ↔ features | Composition points one way: main knows every feature, no feature knows main | Import a feature's `service.py` in a plain script with no app object. If it fails, the framework has leaked into the domain |
-| `config.py` | One reader of the environment means one place to see every knob | `grep -rn "os.environ\|os.getenv" app/` returns `config.py` and nothing else |
+| `config.py` | One reader of the environment means one place to see every knob | `grep -rn "os.environ\|os.getenv" app/` returns nothing outside `config.py` — and with `pydantic-settings` reading the environment for you, usually nothing at all |
 | `db.py` (no models) | Models import the session base; if `db.py` imported models you get an import cycle the first time a feature is added | `db.py` imports nothing from `app.features` |
 | `platform/` | Holds what survives deleting every feature | Ask it of each file: email *transport* survives; the reminder email *template* does not |
 | `features/<x>/__init__.py` | The published surface; everything else in the folder is private | The boundary test below passes |
@@ -388,7 +388,8 @@ grep -rn "os.environ\|os.getenv" app/ | grep -v "^app/config.py"
 
 # 2. Fail fast and completely: an empty environment must fail in under a second,
 #    listing EVERY missing variable, not just the first one.
-env -i python -c "from app.config import Settings; Settings()"
+#    `_env_file=None` is load bearing — see below.
+env -i python -c "from app.config import Settings; Settings(_env_file=None)"
 
 # 3. The environments differ in values only. The NAME sets must be identical.
 diff <(sort staging.env.names) <(sort prod.env.names)
@@ -398,6 +399,15 @@ Check 2 is the one that catches the common half-migration: a `Settings` class th
 module still reads `os.environ` lazily on first use, so the app boots clean and dies an hour later
 on the first request that touches that path. Pydantic reports all missing fields at once precisely
 so that a fresh deploy tells you everything wrong in one attempt.
+
+Check 2 also has a way of quietly passing when it should fail, and `_env_file=None` is the
+guard. `env -i` clears the *environment*, not the working directory, so
+`model_config`'s `env_file=".env"` still finds the developer `.env` sitting next to it and the
+command boots clean — reported as "empty environment handled" when nothing was tested. Verified
+on pydantic-settings 2.15: with a populated `.env` present the bare form printed the database
+URL; with `_env_file=None` the same command raised the expected three missing-field errors. The
+override keeps the check honest wherever it runs — including CI, where a `.env` restored from a
+cache or written by a setup step would do the same thing.
 
 Check 3 is what makes staging predictive. The moment prod has a variable staging does not, staging
 stopped testing prod.

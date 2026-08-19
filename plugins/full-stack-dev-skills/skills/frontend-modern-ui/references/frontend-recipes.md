@@ -47,8 +47,11 @@ const base = import.meta.env.VITE_API_URL ?? "";
 
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
   const r = await fetch(base + path, {
-    headers: { "Content-Type": "application/json", ...authHeader() },
     ...init,
+    // headers merged LAST and per-key. `{headers: {...}, ...init}` looks equivalent and is not:
+    // one caller passing an Idempotency-Key replaces the whole object, dropping Content-Type
+    // and the auth header — a 401 on a call that reads correctly.
+    headers: { "Content-Type": "application/json", ...authHeader(), ...init?.headers },
   });
   if (!r.ok) {
     // Error bodies are not reliably JSON — an HTML 502 page, an empty 401. Parsing blind
@@ -58,6 +61,7 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
     try { detail = JSON.parse(body).detail ?? detail; } catch { /* not JSON — keep statusText */ }
     throw new ApiError(r.status, detail);
   }
+  if (r.status === 204) return undefined as T;   // a DELETE returning no body; r.json() throws
   return r.json();
 }
 

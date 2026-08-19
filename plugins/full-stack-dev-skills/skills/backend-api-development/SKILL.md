@@ -62,8 +62,13 @@ def create_invoice(data: InvoiceIn, db: Session = Depends(get_db)):
 5. **Make errors one shape everywhere.** Raise `HTTPException` (or a small domain exception
    mapped by one handler) so every error returns `{"detail": ...}` with the right status:
    422 validation (automatic), 401 unauthenticated, 403 forbidden, 404 absent, 409 conflict.
-   Never return 200-with-error-body; never leak stack traces (a generic 500 handler logs the
-   detail server-side).
+   `{"detail": ...}` is the default here because it is what FastAPI's own validation, routing,
+   and `HTTPException` paths already emit — nothing has to be re-wrapped for the shape to hold.
+   A custom envelope (`full-stack-dev-skills:elite-python-engineer` prefers
+   `{"error": {"code", "message"}}` for its stable machine-readable code) is equally valid but
+   only becomes "one shape" once the validation and `HTTPException` handlers are overridden too;
+   pick one per service rather than one per route. Never return 200-with-error-body; never leak
+   stack traces (a generic 500 handler logs the detail server-side).
 6. **Paginate every list endpoint from day one** — `limit`/`offset` params with a maximum,
    returning `{"items": [...], "total": n}` (cursor pagination only when data shifts under
    pagination — see the consumer-side view in `data-tools-skills:rest-api-data-pulls`).

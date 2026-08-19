@@ -18,12 +18,14 @@ metadata:
 
 # Deliberate practice (edge-of-ability drills)
 
-Experience is not practice. Ericsson's research on expert performance found that what
+Experience is not practice. Ericsson's research on expert performance argued that what
 separates experts is not accumulated hours on the job but structured training: one specific
 target just beyond current ability, full attention, immediate feedback, and repetition with
-refinement. Historically that required a coach and a training environment. This skill has
-the assistant supply both: it designs the drill, plays the opponent or the broken system,
-and closes the feedback loop in seconds instead of weeks.
+refinement. How much of expertise that claim actually explains is contested — *Why / learn*
+carries the calibration — but the design advice it yields holds up on its own. Historically
+that required a coach and a training environment. This skill has the assistant supply both:
+it designs the drill, plays the opponent or the broken system, and closes the feedback loop
+in seconds instead of weeks.
 
 ## When to use
 - Getting measurably better at a performable skill: debugging under pressure, tightening
@@ -60,9 +62,11 @@ feedback formula are in `references/drill-design.md`.
    counsel, the editor imposing a constraint on the next paragraph. Patterns per skill type
    are in the reference.
 4. **Run short reps with immediate, specific feedback.** After each rep — not at the end of
-   the session — feedback that names the gap and its location ("the turn-3 concession came
-   with nothing asked in return"), states what the stronger move was, and gives exactly one
-   instruction for the next rep. Feedback names the behavior, never the person.
+   the session — ask for the user's own read first ("what went wrong in that rep?"), then
+   give feedback that names the gap and its location ("the turn-3 concession came with
+   nothing asked in return"), states what the stronger move was, and gives exactly one
+   instruction for the next rep. Feedback names the behavior, never the person; the
+   self-diagnosis first is what keeps the reps aimed at the task rather than at the coach.
 5. **Raise difficulty only on demonstrated competence.** Define the ladder up front: which
    dimension scales (time pressure, ambiguity, opposition quality, scaffolds removed) and
    what earns the next rung — typically two or three *consecutive* clean reps. Failure at a
@@ -83,9 +87,9 @@ feedback formula are in `references/drill-design.md`.
 feedback loop tight, and holds the ladder's gate; the user supplies real attempts at full
 attention and honest self-report on what felt automatic versus effortful. Gate decisions
 come from observed reps, not self-assessment — "that felt fine" is fluency talking, and
-fluency is exactly the cue that misleads (see the sibling skill's treatment of it). What the
-user never has to supply is the historically scarce part: a sparring opponent with infinite
-patience and zero scheduling cost.
+fluency is exactly the cue that misleads (see `learning-skills:spaced-retrieval-learning` on
+the fluency illusion). What the user never has to supply is the historically scarce part: a
+sparring opponent with infinite patience and zero scheduling cost.
 
 ## Why / learn
 **Why experience plateaus and structured practice doesn't.** Skills automate. Once
@@ -103,12 +107,17 @@ drill here is really an exercise in building a representation; every piece of fe
 correction to one. That is also why watching, reading about, or being adjacent to expert work
 builds so little: representations form from one's own attempts being corrected.
 
-**Feedback latency is the active ingredient.** A representation updates against the attempt
-it just produced; the longer the gap between attempt and correction, the weaker the update
-and the longer a wrong pattern gets to consolidate. Most professional skills have miserable
-natural feedback loops — a negotiation tells you how it went weeks later, vaguely. The
-assistant-as-environment collapses that loop to seconds, which is the single biggest thing
-this skill buys.
+**Feedback latency is the lever this setup actually moves.** A representation updates against
+the attempt it just produced, and most professional skills have miserable natural feedback
+loops — a negotiation tells you how it went weeks later, vaguely. Collapsing that loop from
+weeks to seconds is the single biggest thing the assistant-as-environment buys. The claim
+stops there, though: "sooner is always better" is not established, and the known failure runs
+the other way. A learner corrected after every single rep can begin performing against the
+correction rather than against the task, so in-session scores climb while unaided performance
+doesn't — the guidance effect, most studied in motor learning and mixed in the recent
+meta-analyses, but cheap to guard against either way. The guard: ask for the self-diagnosis
+before delivering the verdict ("what went wrong in that rep?"), and re-baseline periodically
+with an unassisted rep, which is the only measurement that reflects transfer.
 
 **The 10,000-hour correction.** The "10,000-hour rule" is a popularization (Gladwell's
 *Outliers*) of Ericsson's violinist research, and Ericsson himself disputed it: the figure
@@ -116,6 +125,20 @@ was an *average* accumulated by one group at one age, not a threshold, and the h
 mattered were hours of structured, effortful, feedback-guided practice — not hours of
 anything. There is no magic number; practice quality and structure are the variables. Naive
 hours don't just fail to help — by deepening automaticity, they entrench the plateau.
+
+**How much of this the evidence actually supports.** The mechanism above is worth acting on;
+the effect size the popular telling attaches to it is not. Macnamara, Hambrick & Oswald's 2014
+meta-analysis found accumulated deliberate practice explaining roughly 26% of performance
+variance in games, 21% in music, 18% in sports, 4% in education — and under 1% in professions,
+which is precisely the category most of this skill's targets fall into. A 2019 preregistered
+replication of the founding violinist study (Macnamara & Maitra) then failed to reproduce its
+central result: the best group had not practised more than the merely good group. Ericsson
+contested both, largely over how faithfully "deliberate practice" was operationalized in the
+pooled studies, and that objection has real force. What survives the argument is narrow and
+still worth having: structured, targeted, feedback-corrected practice beats unstructured
+repetition of the same activity, and knowing which component you are training beats hoping.
+What does not survive is the promise that enough practice produces expertise, or that it is
+the main thing separating professionals. Offer the first claim; don't sell the second.
 
 ## Common mistakes
 - Practicing what already goes well → comfortable reps feel great and change nothing; the

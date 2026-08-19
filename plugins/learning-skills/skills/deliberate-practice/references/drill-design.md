@@ -2,7 +2,11 @@
 
 Research base: Ericsson's expert-performance research — deliberate practice, mental
 representations, and the purposeful/deliberate distinction. The "10,000-hour rule" is a
-popularization Ericsson disputed; hour counts appear nowhere in this file on purpose.
+popularization Ericsson disputed; hour counts appear nowhere in this file on purpose. How much
+of expert performance that base actually explains is contested — Macnamara et al.'s
+meta-analytic estimates are far below the popular telling, and the founding violinist study
+did not replicate in 2019; SKILL.md's "How much of this the evidence actually supports"
+carries the calibration. What follows is the design advice that survives the argument.
 
 ## Contents
 - [The session template](#the-session-template)
@@ -103,6 +107,11 @@ Rules that keep it working:
   information; omit ritual praise.
 - Immediate beats complete. A short correction now outperforms a thorough review at
   session's end, because each subsequent rep either reinforces or corrects the pattern.
+- Ask before telling. "What went wrong in that rep?" comes first, the observation second.
+  Feedback that lands before the learner has attempted a diagnosis trains reliance on the
+  feedback, and a rep run against the coach's last correction is not a rep run against the
+  task — which is why the re-baseline above (unassisted, no drill wrapper) is the number that
+  actually counts.
 
 ## The rep log
 

@@ -4,6 +4,7 @@
 Usage:
   python build_deck.py deck_spec.json -o output.pptx [--brand neutral|warm-accent] [--font NAME]
   python build_deck.py --schema         # print the spec format and the eight slide kinds
+  python build_deck.py --self-test      # build the awkward-input regression cases
 
 The builder encodes the geometry, typography, and colors verified in
 references/design-tokens.md, so slides come out compliant without measuring by
@@ -254,6 +255,12 @@ def build_chart(slide, spec, pal, font):
         pass
 
 
+def _first_run(cell):
+    """The cell's first run, created if the cell text was empty."""
+    para = cell.text_frame.paragraphs[0]
+    return para.runs[0] if para.runs else para.add_run()
+
+
 def build_table(slide, spec, pal, font):
     cols = spec.get("columns", [])
     rows = spec.get("rows", [])
@@ -265,17 +272,17 @@ def build_table(slide, spec, pal, font):
     for j, col in enumerate(cols):
         cell = gtable.cell(0, j)
         cell.text = str(col)
-        _style(cell.text_frame.paragraphs[0].add_run() if False else
-               cell.text_frame.paragraphs[0].runs[0], font, 14, pal["bg"], bold=True)
+        # An empty string leaves the paragraph with no runs, so reach for runs[0]
+        # only when there is one — a blank header (common on a row-label column)
+        # otherwise raises IndexError mid-build.
+        _style(_first_run(cell), font, 14, pal["bg"], bold=True)
         cell.fill.solid()
         cell.fill.fore_color.rgb = rgb(pal["ink"])
     for i, row in enumerate(rows, start=1):
         for j in range(ncols):
             cell = gtable.cell(i, j)
             cell.text = str(row[j]) if j < len(row) else ""
-            run = cell.text_frame.paragraphs[0].runs[0] if cell.text_frame.paragraphs[0].runs \
-                else cell.text_frame.paragraphs[0].add_run()
-            _style(run, font, 14, pal["ink"], bold=(emph == j))
+            _style(_first_run(cell), font, 14, pal["ink"], bold=(emph == j))
 
 
 def _column(slide, x, spec_col, pal, font):
@@ -397,10 +404,58 @@ def print_schema():
     print("\nEvery body slide also accepts: source (string), notes (speaker notes).")
 
 
+def self_test():
+    """Build the awkward specs in memory and report any that raise.
+
+    Regression cases, each of which crashed or misplaced content at some point:
+    a blank header cell and a short data row (empty cell text leaves a paragraph
+    with no runs), empty numbers/steps/series collections, and a headline over
+    the two-line budget, which must be refused rather than overflowed.
+    """
+    cases = [
+        ("blank header + short row", {"slides": [
+            {"kind": "table", "headline": "A blank header cell must not crash the build",
+             "columns": ["", "Blocker"], "rows": [["one cell only"], ["a", "b"]],
+             "emphasize_column": 0, "source": "Source: self-test"}]}),
+        ("empty collections", {"slides": [
+            {"kind": "magnitude", "headline": "No numbers still builds a slide", "numbers": []},
+            {"kind": "flow", "headline": "No steps still builds a slide", "steps": []},
+            {"kind": "chart", "headline": "No series still builds a chart frame",
+             "chart": {"type": "column", "categories": [], "series": []}}]}),
+        ("unicode body", {"slides": [
+            {"kind": "statement", "headline": "Unicode must survive the round trip",
+             "body": "naïve café 数据 🎯", "source": "Source: self-test"}]}),
+    ]
+    failures = []
+    for label, spec in cases:
+        try:
+            build(spec, "neutral", None)
+        except SystemExit as exc:
+            failures.append(f"{label}: build refused — {exc}")
+        except Exception as exc:                       # noqa: BLE001 - report, don't mask
+            failures.append(f"{label}: {type(exc).__name__}: {exc}")
+
+    long_head = {"slides": [{"kind": "statement", "headline": " ".join(["overlong"] * 30)}]}
+    try:
+        build(long_head, "neutral", None)
+        failures.append("over-budget headline: accepted, should have been refused")
+    except SystemExit:
+        pass
+
+    if failures:
+        for f in failures:
+            print("FAIL " + f, file=sys.stderr)
+        return 1
+    print(f"self-test passed ({len(cases) + 1} cases)")
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Build an assertion-evidence .pptx from a JSON spec.")
     ap.add_argument("spec", nargs="?", help="deck spec JSON file")
     ap.add_argument("-o", "--out", help="output .pptx path")
+    ap.add_argument("--self-test", action="store_true",
+                    help="build the awkward-input regression cases and exit")
     # default=None, NOT "neutral": the spec file's own brand applies only when the
     # flag is absent, and `--brand neutral` given explicitly has to win over a spec
     # that says otherwise. Defaulting to the string makes those two cases identical.
@@ -414,7 +469,9 @@ def main(argv=None):
 
     if args.schema:
         print_schema()
-        return
+        return 0
+    if args.self_test:
+        return self_test()
     if not args.spec or not args.out:
         ap.error("spec and -o/--out are required (or use --schema)")
 
@@ -429,7 +486,8 @@ def main(argv=None):
     prs = build(spec, brand, args.font)
     prs.save(args.out)
     print(f"wrote {args.out}  ({len(spec.get('slides', []))} slides, brand={brand})")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

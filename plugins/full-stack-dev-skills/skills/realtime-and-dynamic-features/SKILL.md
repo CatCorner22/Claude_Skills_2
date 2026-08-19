@@ -47,7 +47,16 @@ async def job_events(jid: str):
 ```
 
    Client: `new EventSource(url)` + one `onmessage` handler (or `hx-ext="sse"`). Send a
-   comment/heartbeat every ~15s so proxies don't kill idle streams.
+   comment/heartbeat every ~15s so proxies don't kill idle streams. **Check how the stream
+   authenticates before you commit to `EventSource`:** its only option is `withCredentials`, so
+   it sends cookies and nothing else — a `headers` option is accepted by the object literal and
+   silently dropped (verified against the spec-conformant implementation in Node 22; the server
+   saw no `Authorization` header at all). That is fine for the cookie-session app of
+   `full-stack-dev-skills:backend-api-development`, and a dead end for the SPA half of it, which
+   holds a JWT in an `Authorization` header. Options there, cheapest first: `fetch` with a
+   `ReadableStream` reader (carries any header, at the cost of writing your own reconnect —
+   which is the one thing `EventSource` was buying you); a short-lived single-use stream ticket
+   in the query string; or moving that surface onto the cookie.
 3. **Run long work as background jobs, never in the request.** Anything beyond a couple of
    seconds: enqueue, return `{job_id}` immediately (202), report progress via the job's
    status. In-process `BackgroundTasks`/asyncio for fire-and-forget on one node; a queue +

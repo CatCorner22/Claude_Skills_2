@@ -64,6 +64,15 @@ ANOVA splits total observed variance into components:
 These are the AIAG MSA-lineage thresholds; the process owner may set stricter ones. The
 threshold choice is a business decision (what's at stake when the metric lies), not a statistic.
 
+What the table cannot show is that **%GRR is itself an estimate, and a 10×3×3 study estimates it
+loosely.** Simulating the standard design, a system whose *true* %GRR is 8% reads anywhere from
+about 5% to 14% across repeat studies (90% of them), a true 15% reads 10–27%, and a true 28% reads
+19–45%. Every one of those ranges straddles a boundary above. So a single study landing near a
+threshold has not established which side of it the gauge is on — re-run it, or add parts and
+trials, before condemning or clearing a measurement system on a boundary reading. For the same
+reason, %GRR moving from 12% to 9% after a change is not by itself evidence the change worked. The
+thresholds sort; they do not adjudicate a close call.
+
 One arithmetic consequence worth knowing before you quote both numbers as independent evidence:
 when %GRR is taken against **study** variation, ndc = 1.41·√(1 − %GRR²)/%GRR, so the two criteria
 are the same fact twice — ndc ≥ 5 holds exactly while %GRR ≤ ~27%, and a 30% %GRR necessarily
@@ -145,8 +154,18 @@ across a threshold in the middle of the conditional band. Consequences for pract
   and say which is which. Do not swap κ for PABAK because PABAK is kinder: it earns the higher number
   by discarding real information about the marginals, and that criticism is the standard one made of
   it [background — verify].
-- **The verdict sentence, therefore, has three parts:** "p_o = 0.80 on a 70%-pass set, κ ≈ 0.52,
-  effectiveness 80% — conditional." Any one part alone is arguable in bad faith.
+- **Thirty items cannot carry a threshold verdict.** Prevalence is only half of why a bare κ
+  misleads; the other half is that κ is an *estimate*, and on a 30-item study its standard error runs
+  about **0.14–0.17**. Bootstrapping the two tables above gives 95% intervals of roughly
+  **[0.44, 1.00]** around a κ of 0.75 and **[0.15, 0.83]** around a κ of 0.52 — the second spans
+  every band in §4, from unusable through acceptable. So "κ = 0.52, therefore conditional" is a
+  sentence the arithmetic does not support. Quote the interval beside the point estimate, treat §4's
+  bars as coarse sorting rather than gates at this size, and enlarge the item set when a verdict has
+  to be defended. (The same caution applies to the §4 effectiveness percentage, which is one
+  proportion on 30 items.)
+- **The verdict sentence, therefore, carries four parts:** "p_o = 0.80 on a 70%-pass set, κ ≈ 0.52
+  (95% interval ≈ 0.15–0.83 on 30 items), effectiveness 80% — conditional, and 30 items cannot
+  settle it." Any one part alone is arguable in bad faith.
 
 ## 5. LLM-as-judge agreement protocol — worked example
 
@@ -180,17 +199,23 @@ p_e = (21/30)(22/30) + (9/30)(8/30) = 0.5133 + 0.0800 = 0.5933 →
 | **J1: fail** | 3 | 6 | (9) |
 | | (21) | (9) | 30 |
 
-p_e = 0.70² + 0.30² = 0.58 → **κ = (0.80 − 0.58)/(1 − 0.58) = 0.22/0.42 ≈ 0.52** — *conditional*,
-not acceptable. Effectiveness (share matching the reference) = 24/30 = **80%**, below the ≥ 90% bar.
+p_e = 0.70² + 0.30² = 0.58 → **κ = (0.80 − 0.58)/(1 − 0.58) = 0.22/0.42 ≈ 0.52** — nominally
+*conditional*, with the §4a caveat that on 30 items the interval reaches from 0.15 to 0.83.
+Effectiveness (share matching the reference) = 24/30 = **80%**, below the ≥ 90% bar.
 
-**Reading — and note the two numbers say different things.** Within-judge κ ≈ 0.75 sits exactly on
-the acceptance boundary: the judge is roughly repeatable with itself. Judge-vs-human κ ≈ 0.52 is
-squarely conditional. **Repeatable but not aligned** is a *reproducibility* diagnosis, not a
-repeatability one — the judge applies a stable rule that is not the human's rule, which points at the
-rubric's operational definitions rather than at decoding noise. And per §4a, both κ figures must be
-read with their base rates attached: at this 70% pass rate the same 80% agreement would score κ =
-0.60 on a balanced item set, so 0.52 is partly a property of the item mix, and the honest verdict
-line is "p_o = 0.80 on a 70%-pass set, κ ≈ 0.52, effectiveness 80% — conditional."
+**Reading — and note the two numbers say different things.** Within-judge κ ≈ 0.75 lands on the
+acceptance boundary and judge-vs-human κ ≈ 0.52 lands in the conditional band — but neither point
+estimate is what the study actually established, because at 30 items each carries an interval wide
+enough to cross bands (§4a). What survives is the *gap between them*: both figures come off the
+same 30 items at nearly the same base rate, so the item-mix effect §4a describes pushes on both
+alike and the comparison outlives it — the judge agrees with itself more than it agrees with the
+human. **Repeatable but not aligned** is a *reproducibility* diagnosis, not a repeatability one —
+the judge applies a stable rule that is not the human's rule, which points at the rubric's
+operational definitions rather than at decoding noise. And per §4a, both κ figures
+must be read with their base rates attached: at this 70% pass rate the same 80% agreement would
+score κ = 0.60 on a balanced item set, so 0.52 is partly a property of the item mix, and the honest
+verdict line is "p_o = 0.80 on a 70%-pass set, κ ≈ 0.52 (interval ≈ 0.15–0.83 on 30 items),
+effectiveness 80% — conditional, and this many items cannot settle it."
 
 Either way, the practical conclusion holds: the judge's scores can support coarse verdicts (clear
 passes/fails) but **cannot rank close alternatives** — a 2-point score delta between two prompts is

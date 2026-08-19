@@ -67,8 +67,8 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
 4. **Compact periodically** — after major milestones or roughly every 15–30 significant
    turns: distill Working → Episodic → Semantic. Promote what proved durable; drop what
    didn't. Anything recurring and validated is a candidate for permanence — hand it to
-   `metacognition-skills:knowledge-crystallizer`, whose four validation gates decide what
-   the semantic store keeps forever.
+   `metacognition-skills:knowledge-crystallizer`, whose validation gates — consistency,
+   evidence, scope, leverage — decide what the semantic store keeps forever.
 5. **Detect contradictions:** when a new fact conflicts with a stored one, flag it
    explicitly — annotate the stored entry with an UPDATE note, keep the original for
    provenance, and route resolution to the user (or a later consolidation pass) instead of

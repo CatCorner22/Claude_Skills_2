@@ -21,8 +21,10 @@ to still work six months later.
 
 Most corrections should be applied and forgotten. A durable entry is not free: every stored rule
 is scanned at every future session-start load, and the store is the one place noise cannot be
-tolerated, because it is read when there is no time to evaluate it. Run four questions in order
-and stop at the first that resolves.
+tolerated, because it is read when there is no time to evaluate it. Run four questions in order.
+Q1 can end it outright — nothing that recurs, nothing stored. The rest compose rather than
+short-circuit: Q2 decides what kind of entry, Q3 decides whether it is written now or held for a
+second sighting, and Q4 overrides the type when the correction contradicts evidence you verified.
 
 **Q1 — Will the situation recur?** Is the thing being corrected a *class* of work, or one artifact
 that will never exist again? "Drop the note about that vendor, the contract ended" governs nothing
@@ -234,9 +236,10 @@ not read at the moment of action, which is a design fact about the workflow, not
    at least one clause the user can refuse.
 2. **The correction visibly applied** — the affected part re-issued, not promised. A promise is
    indistinguishable from having missed the point.
-3. **Zero or one durable entries**, in the store's entry grammar, carrying the seven fields. Zero is
-   the common and correct outcome; two entries from one correction almost always means one of them
-   is an instance, not a rule.
+3. **Zero or one durable entries per correction**, in the store's entry grammar, carrying the seven
+   fields. Zero is the common and correct outcome; two entries from one correction almost always
+   means one of them is an instance, not a rule — a pass covering several corrections totals
+   accordingly.
 4. **A contradiction flag if one fired**, with both entries' provenance and an explicit resolution
    route (user-confirmed, or standing and visible).
 5. **Nothing else in the conversation.** The situation/outcome/strengths/weaknesses prose belongs in
@@ -286,7 +289,8 @@ deliverable and never said so. The entry is qualified, not flipped:
   (counterfactual: totals were transcribed from last period's file and spot-checked afterwards)
   (origin: <date> — three of six totals mismatched the export in the vendor summary)
   (status: user-stated, binding; 1 explicit occurrence)
-  (site: memory entry + the summary template's pre-send checklist line)
+  (site: memory entry — first occurrence, so the cheapest rung; the ladder below moves it if
+  the correction recurs)
 ```
 
 **The same record, read six months later.** Three questions arrive that the writer never

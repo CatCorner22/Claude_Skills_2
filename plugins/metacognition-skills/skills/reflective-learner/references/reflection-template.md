@@ -37,13 +37,14 @@ Categorizing makes patterns visible across reflections:
 **Situation:** Built a rolling forecast from AR/AP aging exports on request.
 **Outcome:** Numbers correct, but user had to ask twice for weekly (not monthly) buckets.
 **Strengths:** Variance columns anticipated the follow-up; tie-out totals matched.
-**Weaknesses / Errors:** Style mismatch — defaulted to monthly granularity despite
-"13-week" in the request naming the granularity implicitly.
+**Weaknesses / Errors:** Assumption error — defaulted to monthly granularity when
+"13-week" in the request had already named the bucket.
 **Root cause:** Pattern-matched to the more common monthly template instead of parsing
 the horizon the user actually named.
 **Lessons learned:** The horizon named in a forecasting request usually implies its bucket size.
 **Actionable updates:**
-- Memory update: user's forecasts are weekly-bucketed unless stated otherwise.
+- Memory update: none — the bucket size was derivable from the request, so the durable
+  item is the avoidance rule below, not a preference about the user's forecasts.
 - Avoidance rule: never default granularity when the request names a horizon.
 ```
 
@@ -63,8 +64,10 @@ applied count is the least informative number in the set; read the other two fir
 - **Partially applied** usually means the update was two updates wearing one sentence. Split it and
   re-audit; the half that keeps failing is the real one.
 - **Not applied** is diagnostic only when you distinguish *never fired* from *fired and lost*. An
-  update whose trigger situation never arose is not a failure and should not be counted as one — it
-  is evidence the update was written too narrowly to be worth its scan cost.
+  update whose trigger situation never arose is not a failure and should not be counted as one, and
+  it is not evidence against the update either — a rule guarding a rare, costly move earns its place
+  unfired. The question is whether the trigger could realistically arise at all: an update written
+  so narrowly that nothing will ever match it is the one paying scan cost for nothing.
 - **Repeats** are the number that matters: updates in this cycle restating something already
   recorded in an earlier one. Of the 14 above, 2 were repeats. A repeat is not a discipline problem;
   it is evidence the storage *site* was never read at the moment of action, and the fix is to move
@@ -79,4 +82,4 @@ a threshold rather than a mood.
 
 A lesson repeatedly "not applied" after relocation is a candidate for a stronger mechanism — a
 standing rule in project instructions, an automated check, or a skill update — via
-`knowledge-crystallizer`.
+`metacognition-skills:knowledge-crystallizer`.

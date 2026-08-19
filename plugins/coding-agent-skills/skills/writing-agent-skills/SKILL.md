@@ -37,9 +37,12 @@ plugins/<plugin>/skills/<skill-name>/
 Start by copying the template (run from the repo root; the source is addressed from the plugin
 root, per §4b below):
 ```
+mkdir -p plugins/<plugin>/skills/<name>
 cp "${CLAUDE_PLUGIN_ROOT}/skills/writing-agent-skills/assets/SKILL.template.md" \
    plugins/<plugin>/skills/<name>/SKILL.md
 ```
+(`cp` into a directory that does not exist yet fails with "No such file or directory", so the
+`mkdir` is part of the step rather than an assumption about it.)
 
 ### 2. Write compliant frontmatter
 ```yaml

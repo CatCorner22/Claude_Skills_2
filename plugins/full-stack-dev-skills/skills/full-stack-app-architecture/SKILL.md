@@ -73,7 +73,8 @@ tests/                 # only tests that cross features
    **no default**, so an empty environment fails at boot instead of running on the dev key; and
    config is only what varies *between deploys of the same code* — anything that varies per
    customer or tenant is data and belongs in the database. `grep -rn "os.environ" app/` should
-   return `config.py` and nothing else.
+   return nothing outside `config.py` — and once `pydantic-settings` is doing the reading, usually
+   nothing at all.
 6. **Decide the rendering split deliberately.** JSON API + React when the frontend is a real
    application (heavy interactivity, offline-ish state); server-rendered + htmx when it's
    CRUD screens (one language, no build pipeline for the UI, far fewer lines). Mixing is

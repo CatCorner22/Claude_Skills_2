@@ -66,9 +66,11 @@ before a real inspection. The operational shape:
    signifiers, navigation and mental models, forms (the 20-point field checklist),
    feedback/state/recovery (test slow, failed, duplicate, out-of-order responses),
    tables/filters/search, onboarding and engagement, accessibility (WCAG 2.2 AA default;
-   automated checks plus the 13 manual checks — automated success does not prove
-   accessibility), responsive and environmental behavior (320–1440 px widths, zoom,
-   reduced motion, offline, stale edits), performance (INP/LCP/CLS with p75 budgets;
+   automated checks plus the manual checks — the spec's thirteen, plus the three WCAG 2.2
+   additions in the house addendum in references/procedure.md: focus not obscured by sticky
+   chrome, a single-pointer alternative to every drag, and consistently placed help; automated
+   success does not prove accessibility), responsive and environmental behavior (320–1440 px
+   widths, zoom, reduced motion, offline, stale edits), performance (INP/LCP/CLS with p75 budgets;
    Lighthouse is a diagnostic, not the only measure), and privacy. Quantify tap-target
    and pointing findings with Fitts's index of difficulty (computed from DOM geometry —
    report `D`, `W`, and current-vs-proposed ID), and structure the cognitive-load pass

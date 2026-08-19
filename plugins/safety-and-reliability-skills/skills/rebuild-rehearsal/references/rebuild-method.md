@@ -4,7 +4,8 @@ Method lineage: the Shikinen Sengu of the Ise Grand Shrine — full reconstructi
 20 years since 690 CE, carpenters participating two or three times per working life
 (learn → lead → teach), a 200-year in-house forestry plan begun 1923, and a ~120-year
 lapse after the Ōnin War (Inner Shrine 1462–1585) revived by the fundraising nuns of
-Keikō-in with Oda Nobunaga's patronage [snippet-only: japanfs.org, Smithsonian,
+Keikō-in with warlord endowment behind them — Oda Nobunaga from 1569, though he died in
+1582 and the 1585 rebuild fell to his successors [snippet-only: japanfs.org, Smithsonian,
 woodcentral, Wikipedia]. Shinise footnote: Kongō Gumi, temple builders founded 578,
 independent until liquidation in 2006 [snippet-only: Wikipedia, INSEAD]. The pattern is
 domain-neutral: exercise the capability on a schedule shorter than a career, with the
@@ -134,9 +135,13 @@ The rehearsal is the documentation's test; the harvest is what makes the test pa
 The Ise cycle is often told as thirteen unbroken centuries. It was not. After the Ōnin
 War devastated the shrine's economic base, the Inner Shrine went roughly 120 years
 without rebuilding (1462–1585). What revived it was not reverence — reverence had never
-left — but money and named sponsorship: the nuns of Keikō-in fundraised across the
-country, and Oda Nobunaga's patronage backed the resumption [snippet-only]. The
-practice survived because someone made funding it their job.
+left — but money and named sponsorship, sustained across generations: the nuns of
+Keikō-in fundraised across the country for decades (the Uji bridge in 1545, the Outer
+Shrine in 1563), and warlord endowment backed them — Oda Nobunaga resumed funding the
+shrine in 1569 and died in 1582, so the 1585 Inner Shrine rebuild was completed by his
+successors [snippet-only]. That the revival outlasted its own patron is the point: it
+took a funding line, not one benefactor. The practice survived because someone made
+funding it their job — and kept making it someone's job.
 
 The transferable rule: **a renewal cycle without a funding owner silently lapses.**
 Renewal work has a structural weakness in every budget fight — skipping it costs
@@ -197,6 +202,6 @@ notes.
 - Smithsonian and Wood Central coverage of the rebuild practice and the in-house
   hinoki forestry program
 - Wikipedia: Ise Grand Shrine (the Ōnin-era interruption and 1585 revival; Keikō-in's
-  fundraising; Oda Nobunaga's backing), Kongō Gumi (founded 578; 2006 liquidation;
-  Takamatsu subsidiary)
+  fundraising; Oda Nobunaga's endowment from 1569 and his death in 1582), Kongō Gumi
+  (founded 578; 2006 liquidation; Takamatsu subsidiary)
 - INSEAD on shinise longevity — single-craft focus and flexible succession

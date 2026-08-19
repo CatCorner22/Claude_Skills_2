@@ -39,8 +39,9 @@ INTERPRETATIONS (conclusions drawn), and STAKES (what this version protects). Wo
 example — a production outage, three engineers, three contradictory write-ups:
 
 **Account A — on-call engineer (paged at 14:41, watching the alerting dashboard):**
-- Observations: page fired 14:41; error rate on the checkout service already elevated on
-  the graph when she opened it; database connection pool at ceiling by 14:50.
+- Observations: page fired 14:41; checkout errors were elevated when she opened the graph
+  at 14:49, and on its default window that graph showed them already climbing before the
+  14:35 deploy; database connection pool at ceiling by 14:50.
 - Interpretations: "The system was degrading before anyone did anything; the deploy just
   happened to land in the middle of it."
 - Stakes: she acknowledged the page eight minutes late; a timeline where degradation
@@ -63,7 +64,7 @@ metrics):**
 - Stakes: the pool sizing is his configuration; a code-leak story means the pool was
   fine.
 
-Note what the split already shows: A's "already elevated" is an observation with a
+Note what the split already shows: A's "already climbing" is an observation with a
 vantage (her graph's window); B's "the canary proved it" is an interpretation resting on
 a five-minute window; C's timeline is retrospective (he was in a call), read off a graph
 after hearing the deploy discussed. None of the three is lying.
@@ -104,9 +105,11 @@ after hearing the deploy discussed; his own first-hand window starts 14:47.
 Only genuine contradictions get adjudicated, and only against:
 1. **Physical evidence** — logs, metrics with timestamps, recordings, commit history,
    badge/access records, message timestamps. In the example: the metrics store shows
-   checkout error rate flat until 14:37, rising after — resolving the A-vs-B
-   contradiction against A's "already elevated" reading (her graph's default window had
-   smoothed the baseline) without impugning her honesty.
+   checkout error rate flat until 14:37, rising after the 14:35 deploy — resolving the
+   A-vs-B contradiction against A's "already climbing before the deploy" reading (her
+   graph's default window smoothed the baseline, so the rise looked older than it was)
+   without impugning her honesty. Note the scope of what was settled: A also observed
+   elevated errors when she opened the graph after 14:41, and that observation stands.
 2. **The invariant core** — a version inconsistent with what every account plus the
    record agrees on loses.
 

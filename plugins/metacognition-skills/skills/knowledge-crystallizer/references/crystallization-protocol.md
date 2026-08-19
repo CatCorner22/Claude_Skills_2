@@ -128,8 +128,10 @@ was read; work was briefly lost, then recovered.
 
 **Candidate B** — from working notes: the exact wording of a one-off status update the
 user liked.
-- Leverage gate fails: single occurrence, no evidence the phrasing generalizes.
-- **Discarded** (noted as episodic detail only). If it recurs, it re-nominates itself.
+- Leverage gate fails: the wording belongs to one artifact that will not exist again, so
+  knowing it changes nothing about future work.
+- **Discarded** (noted as episodic detail only). If the phrasing recurs, the episodic log
+  auto-nominates it.
 
 **Candidate C** — the user announces their role (recorded three weeks earlier as a high-
 confidence FACT) is ending, and issues a standing instruction about future work.

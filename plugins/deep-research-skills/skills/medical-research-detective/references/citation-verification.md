@@ -120,8 +120,10 @@ python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_
 ```
 
 It reports: existence, canonical metadata, field-by-field comparison against any claimed values,
-inferred country of origin (see `source-provenance.md`), and retraction indicators. It exits non-zero
-when a check fails, so it can gate a batch.
+inferred country of origin (see `source-provenance.md`), retraction indicators — including the
+Retraction Watch annotations Crossref carries on the work record — and, separately, any
+correction/erratum on file, which is a note rather than a failure. It exits non-zero when a check
+fails, so it can gate a batch.
 
 **When the network is unavailable** the script says so plainly rather than guessing — never interpret
 a network failure as verification. Fall back to the manual process below and mark the citations

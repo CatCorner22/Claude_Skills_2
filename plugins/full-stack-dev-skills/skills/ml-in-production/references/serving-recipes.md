@@ -43,13 +43,22 @@ pattern). The product reads the predictions table like any other data — no ser
 class PredictionLog(Base):
     __tablename__ = "prediction_log"                # required: SQLAlchemy 2.0 raises without it
     id: Mapped[int] = mapped_column(primary_key=True)
-    ts: Mapped[datetime] = mapped_column(server_default=func.now(), index=True)
+    ts: Mapped[datetime] = mapped_column(DateTime(timezone=True),
+                                         server_default=func.now(), index=True)
     model_version: Mapped[str] = mapped_column(index=True)
     inputs: Mapped[dict] = mapped_column(JSON)      # or input_hash where sensitive
     score: Mapped[float]
     outcome: Mapped[float | None]                   # backfilled when labels arrive
-    outcome_at: Mapped[datetime | None]
+    outcome_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 ```
+`DateTime(timezone=True)` on both timestamps, not the bare `Mapped[datetime]`: a bare
+annotation compiles to `TIMESTAMP WITHOUT TIME ZONE` on Postgres (verified on SQLAlchemy
+2.0.52), and the two timestamps here are the ones you subtract — a label backfilled by a job
+running in a different zone, or the hour a DST change lands, silently shifts every
+score-to-outcome delay by an hour. Same rule as
+`full-stack-dev-skills:database-and-orm`, whose SQLite→Postgres checklist lists portable
+`DateTime(timezone=True)` as a required item.
+
 This one table serves: debugging ("what did v3 say for input X?"), monitoring (score
 distribution by day), evaluation (score vs outcome once labels land), and the next
 training set. Retention per your data policy; hash inputs where they're sensitive.

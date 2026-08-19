@@ -5,6 +5,7 @@
 - Job-status pattern
 - WebSocket endpoint (when truly needed)
 - Optimistic mutation
+- Authenticating a stream
 - Liveness settings
 
 ## Transport decision table
@@ -12,8 +13,8 @@
 |---|---|---|
 | Dashboard fresh within ~10–60s | Polling | `refetchInterval` / `hx-trigger="every 30s"` |
 | Progress bar for a job | Polling the status row (or SSE if many watchers) | one query |
-| Live feed / notifications | SSE | `new EventSource(url)` |
-| Token/response streaming (LLM, logs) | SSE | EventSource or fetch-with-reader |
+| Live feed / notifications | SSE | `new EventSource(url)` — cookie auth only |
+| Token/response streaming (LLM, logs) | SSE | EventSource, or fetch-with-reader when the request needs a header |
 | Chat, co-editing, cursors | WebSocket | reconnect + heartbeat required |
 If in doubt: start one row higher (cheaper); upgrading later is localized because status is
 data (see below).
@@ -96,6 +97,21 @@ this — TypeScript types are erased at runtime, and the annotation is simply wr
 updater signature is `(oldData: T | undefined) => T | undefined`. For the same reason `ctx!.prev`
 in `onError` is a lie the compiler believes: if `onMutate` threw, `ctx` is `undefined` and the
 non-null assertion throws a second error inside the error handler.
+
+## Authenticating a stream
+`EventSourceInit` has exactly one member, `withCredentials`. Passing
+`new EventSource(url, {headers: {Authorization: "Bearer …"}})` throws no error, logs no warning,
+and sends no header — the stream connects unauthenticated and the server answers 401 on a
+transport that reconnects forever. Verified against Node 22's spec-conformant EventSource: the
+request arrived with `authorization: null`. So:
+
+- **Cookie session** (`SameSite=Lax`, `withCredentials: true` for a cross-origin stream) —
+  `EventSource` works unchanged, and this is why SSE and server-rendered apps pair so well.
+- **Bearer token** — use `fetch` with a `ReadableStream` reader, and accept that you now own
+  reconnect and `Last-Event-ID` resume, since that is precisely what `EventSource` was providing.
+- **Short-lived stream ticket** — a single-use, few-minute token minted by an authenticated
+  endpoint and passed in the query string, exchanged for the stream. Keeps `EventSource`, and
+  keeps the long-lived credential out of URLs, referrers, and access logs.
 
 ## Liveness settings
 - SSE: heartbeat comment (`: ping\n\n`) every 15s; event ids for resumable feeds.

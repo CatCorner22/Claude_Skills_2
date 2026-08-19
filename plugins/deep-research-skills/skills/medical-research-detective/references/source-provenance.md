@@ -74,15 +74,18 @@ itself when a source is load-bearing. Read its provenance line as one of four di
 
 | State | Means | What you must do |
 |---|---|---|
-| A country, no caveat | Every affiliation string resolved, and they agree | Proceed |
+| A country, no caveat | Every affiliation string resolved to a country the table knows, none of them excluded | Proceed (if two allowed countries are listed, it is a collaboration — note it) |
 | `PROVENANCE PARTIAL` | Some affiliations resolved, others named nothing the script knows | Read the paper's corresponding-author affiliation — the unresolved one may be the lead |
-| `PROVENANCE UNRECOGNIZED` | Affiliation data exists but names no country in the script's table | An unlisted country: judge it on the criteria above; **do not** read this as "excluded" |
+| `PROVENANCE UNRECOGNIZED` | Affiliation data exists but names nothing the script's table carries | Not a verdict in either direction. It may be an unlisted country, or a listed one named only by a city the table lacks ("Xijing Hospital, Xi'an, Shaanxi") or written in its own script. Resolve it from the paper, then apply the criteria above |
 | `PROVENANCE UNKNOWN` | No affiliation metadata at all (common for Crossref-only records) | Resolve from the paper itself |
 
-Two limits are structural. The script's country table covers common research countries only, so an
-unlisted country reads as *unrecognized*, never as excluded. And it uses a city name only when the
-affiliation names no country at all — because "Moscow, ID 83844, USA" is the University of Idaho, not
-Russia.
+Two limits are structural. The script's country table covers common research countries and their
+larger cities only, so anything outside it reads as *unrecognized* — which is a prompt to resolve it
+yourself, never a finding of "excluded" and never a clean pass. And a city is only ever a fallback
+signal: a country name in the same institution beats it, and a city sitting in a US postal address
+("Moscow, ID 83844") is read as American, because that one is the University of Idaho and not Russia.
+A city that resolves without either of those checks firing is still the weakest signal the script
+has — confirm it before letting it decide anything.
 
 ## Hard cases
 
@@ -134,8 +137,9 @@ Apply the filter **during** stage 4, as sources are collected, not at the end:
 3. **Excluded** → does it contain a lead absent from the allowed literature?
    - No → drop it silently.
    - Yes → quarantine appendix, with the confirm-path note.
-4. **Unclear** → try to resolve from the paper itself; if still unclear, treat as excluded, and say
-   so.
+4. **Unclear** → try to resolve from the paper itself. A country you *can* identify but the policy
+   does not list is not unclear — judge it on the criteria in [The policy](#the-policy). Only a
+   provenance you genuinely cannot determine falls back to excluded, and say so when it does.
 
 Then run one check at the end: **is any conclusion resting on a thin allowed-source base because the
 main literature on this topic is excluded-country?** If so, say it plainly — "the majority of

@@ -60,12 +60,15 @@ version that still keeps the exact meaning.
    said once, then explained immediately in plain words; the structure never makes the reader
    guess.
 5. **Check the grade.** 5th grade preferred: sentences average 10–14 words, everyday 1–2
-   syllable words, Flesch Reading Ease 90 or better (a floor, not a window — 105 is fine).
-   Flesch-Kincaid is a second opinion, not a restatement of the same target: at 10–14 words
-   per sentence, FRE 90–100 computes to FKGL ≈ 1.8–4.2, so never lengthen a sentence to
-   chase an FKGL of 5.0. Fall back to 8th grade (sentences up to 15–18 words) only where a
-   precise idea cannot stay accurate at 5th. Never above 8th. Never fuzz the meaning to hit
-   a lower grade — meaning always wins.
+   syllable words, and Flesch Reading Ease 90 or better **or** Flesch-Kincaid grade 5.0 or
+   below — either one passes (reference §1), and both are floors rather than windows, so
+   Reading Ease 105 is fine. They are two scales, not one number read twice: at 10–14 words
+   per sentence, FRE 90–100 computes to FKGL ≈ 1.8–4.2 while FKGL 5.0 sits at FRE ≈ 77–84,
+   so never lengthen a sentence to chase an FKGL of 5.0. Punctuate your bullet items before
+   scoring anything — most tools split sentences on `.!?` and read an unpunctuated list as
+   one huge sentence (reference §3). Fall back to 8th grade (sentences up to 15–18 words)
+   only where a precise idea cannot stay accurate at 5th. Never above 8th. Never fuzz the
+   meaning to hit a lower grade — meaning always wins.
 6. **Read it aloud.** It should sound like a clear adult talking to a smart 11-year-old:
    plain American English, second person, no regionalisms and no institutional voice. If
    your readers share a specific dialect, set it in `references/your-environment.md`.

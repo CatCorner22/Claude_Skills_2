@@ -29,9 +29,11 @@ its future rebuilds will need [snippet-only].
 
 And the cycle *broke*. After the Ōnin War, the Inner Shrine went roughly 120 years
 without rebuilding (1462–1585); the practice was revived only when the fundraising nuns
-of Keikō-in raised the money and Oda Nobunaga's patronage backed it [snippet-only]. That
-lapse is not a blemish on the story — it is half the lesson: a renewal cycle without a
-funding owner silently lapses, no matter how sacred everyone agrees it is. (The shinise
+of Keikō-in raised money across the country for decades, with warlord endowment behind
+them — Oda Nobunaga began funding the shrine again in 1569 and died in 1582, so the 1585
+rebuild was carried through by his successors [snippet-only]. That lapse is not a
+blemish on the story — it is half the lesson: a renewal cycle without a funding owner
+silently lapses, no matter how sacred everyone agrees it is. (The shinise
 footnote makes the same point from commerce: Kongō Gumi, temple builders founded 578,
 operated independently until liquidation in 2006, longevity built on single-craft focus
 and flexible succession [snippet-only].)
@@ -141,10 +143,10 @@ while the correction is still available.
 
 Finally, the honest half of the Ise story: the cycle ran on treasure, and when war
 destroyed the funding, the cycle stopped for four generations — revived not by
-reverence but by nuns who fundraised and a warlord who paid [snippet-only]. Renewal
-work never defends itself in a budget fight, because skipping it costs nothing today.
-It survives only as someone's named, funded responsibility. Budget the renewal or it
-silently lapses.
+reverence but by nuns who fundraised for decades and warlords who paid, across more than
+one lifetime [snippet-only]. Renewal work never defends itself in a budget fight,
+because skipping it costs nothing today. It survives only as someone's named, funded
+responsibility. Budget the renewal or it silently lapses.
 
 ## Common mistakes
 - Treating written docs as proof of survivability → docs are a claim; only a rebuild

@@ -5,6 +5,9 @@
 - **Line length / style deviations:** <if not the default 100>
 - **Mandated frameworks:** <e.g. FastAPI only, no Litestar; pandas required by team X>
 - **Logging sink and schema:** <where JSON logs ship, required field names, redaction rules>
+- **API error envelope:** <`{"error": {"code", "message"}}` with the validation/HTTPException
+  handlers re-wrapped, or FastAPI's native `{"detail": ...}` — one per service, named here so
+  clients and every new route agree>
 - **Coverage gate:** <if different from 95%>
 - **CI system:** <GitHub Actions / other — adjust the CI template accordingly>
 

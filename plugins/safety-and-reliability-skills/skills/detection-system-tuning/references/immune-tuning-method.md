@@ -2,8 +2,9 @@
 
 Method lineage: the artificial-immune-systems (AIS) engineering literature — negative
 selection (Forrest, self/non-self), clonal selection, immune networks, and danger
-theory/dendritic-cell algorithm (Aickelin, from Matzinger's danger model) — with documented
-intrusion- and anomaly-detection deployments and surveys [snippet-only]. The alarm-fatigue
+theory/dendritic-cell algorithm (Greensmith, Aickelin & Cayzer, ICARIS 2005, from
+Matzinger's danger model) — with documented intrusion- and anomaly-detection deployments
+and surveys [snippet-only]. The alarm-fatigue
 evidence and its numbers are quoted with their provenance marks; nothing here is rounded
 into new claims. Source list at the end of this file.
 
@@ -82,7 +83,14 @@ did about it. The audit turns it into per-rule autoimmunity rates.
    with no human touch). `unread` is a disposition — the most alarming one.
 3. **Compute per rule:** firings; autoimmunity rate = (benign-known + benign-new +
    duplicate + unread) / firings; flood contribution = that rule's non-actionable firings
-   as a share of the queue's total non-actionable firings.
+   as a share of the queue's total non-actionable firings. Both ratios are undefined when
+   their denominator is zero, and the zero cases carry the information: a rule with **no
+   firings this period** has no measurable rate — leave the cell blank rather than
+   recording 0%, and put the rule on the silent list, because a detector that broke looks
+   exactly like a detector whose risk went away, and only checking the rule still fires on
+   a known-positive tells them apart. A queue with **no non-actionable firings at all**
+   has no flood to apportion; skip the contribution column and audit for coverage
+   (immunodeficiency) instead of noise.
 4. **Rank by flood contribution** and take the top three rules as the working set.
 5. **For each, ask the default question:** who set this threshold or scope, for what
    population, and would anyone set it there today? Prefer recalibrating the default over
@@ -256,8 +264,8 @@ fetches were egress-blocked in the research sandbox. Per the library's research 
 - AML false-positive benchmark, PwC-attributed — via Facctum; Unit21 [snippet-only]
 - AIS literature — AIS survey (arXiv 1006.4949); negative-selection survey (Science
   Direct); Stibor et al., GECCO 2005 (ACM) [snippet-only]
-- Danger theory — Matzinger's danger model; Aickelin's dendritic-cell algorithm
-  [snippet-only]
+- Danger theory — Matzinger's danger model; the dendritic-cell algorithm introduced by
+  Greensmith, Aickelin & Cayzer at ICARIS 2005 [snippet-only]
 - Detection-as-code / postmortem-to-rule lifecycle — Splunk [snippet-only]
 - Suppression bias — Nature Communications (2024) [snippet-only]
 - Error budgets — Google SRE book, "Embracing Risk" [snippet-only]

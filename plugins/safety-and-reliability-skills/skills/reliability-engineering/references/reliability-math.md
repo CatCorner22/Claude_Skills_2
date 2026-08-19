@@ -184,7 +184,14 @@ observation that cumulative MTBF plots straight on log-log paper)
 
 > **β̂ = n ÷ Σᵢ ln(T / tᵢ)**  and  **λ̂ = n ÷ T^β̂**
 
-(If you stopped *at* the nth failure instead, use β̂ = (n−1) ÷ Σᵢ₌₁ⁿ⁻¹ ln(tₙ/tᵢ).)
+(If you stopped *at* the nth failure instead, the observation window is tₙ itself and the sum
+collapses to the n−1 earlier failures: β̂ = n ÷ Σᵢ₌₁ⁿ⁻¹ ln(tₙ/tᵢ).)
+Both of those are maximum-likelihood estimates and both lean **high** at small n —
+E[β̂] = β·n/(n−1) time-terminated, β·n/(n−2) failure-terminated — so below about ten failures
+quote the bias-corrected form beside the MLE: multiply β̂ by (n−1)/n when you stopped at a clock
+time, by (n−2)/n when you stopped at a failure. On §9's log that turns β̂ = 0.86 into 0.76,
+which does not change the reading (the interval straddles 1 either way) but does show which
+direction the small-sample error runs.
 An approximate standard error is SE(β̂) ≈ β̂/√n, so **n = 9 failures gives roughly ±30%** on β
 — enough to spot a strong trend, never enough to grade a weak one.
 

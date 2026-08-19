@@ -58,6 +58,12 @@ endeavor, remuneration*.
 - Estimate honestly when you can't compute: count words per sentence (the dominant lever)
   and watch for 3+ syllable words — swapping those two things moves the grade more than
   anything else.
+- **The sentence count is the fragile input, and this register attacks it.** The skill asks
+  for bullets, and most scorers find sentence boundaries by splitting on `.` `!` `?` only —
+  so a bulleted list whose items end without punctuation is read as one enormous sentence.
+  The same six lines scored Reading Ease 106.6 with terminal periods and 77.0 as
+  unpunctuated bullets (Flesch-Kincaid −0.2 against 11.2), on identical words. Punctuate the
+  bullet items, or score the prose alone, before you believe any number.
 - Scores are a check, not the goal. Choppy fragments can game a formula; they fail the
   read-aloud test. The read-aloud test is the judge: a clear adult talking to a smart
   11-year-old, in plain American English with no regionalisms. If your readers share a
@@ -73,6 +79,8 @@ endeavor, remuneration*.
 - [ ] Grade is 5th if possible, never higher than 8th.
 - [ ] A 5th-grader in your audience's own community could understand it without help.
 - [ ] The meaning is exactly what the source meant — nothing softened, nothing dropped.
+- [ ] Nothing added that the source doesn't support; every concrete detail the rewrite
+      supplies (a number, a step, a name) was confirmed against something real.
 
 ## §5 Where the targets come from
 
@@ -84,10 +92,15 @@ not full primary texts.
   the documents the public relies on in clear, straightforward language [snippet-only].
   Plain language for high-stakes reader-facing text is codified policy, not a stylistic
   indulgence.
-- **The Federal Plain Language Guidelines** (maintained at plainlanguage.gov) operationalize
-  the Act, leading with the same moves this skill drills: define your audience and write for
-  their needs, put the main point first, keep sentences short, prefer active voice and
-  everyday words [snippet-only].
+- **The Federal Plain Language Guidelines** operationalize the Act, leading with the same
+  moves this skill drills: define your audience and write for their needs, put the main
+  point first, keep sentences short, prefer active voice and everyday words [snippet-only].
+  Where to find them moved: GSA redirected plainlanguage.gov in September 2025 to a shorter
+  guide series on Digital.gov, and the Guidelines came down with the old site. The originals
+  live in the plainlanguage.gov GitHub archive, and the Center for Plain Language reposted
+  them (checked 2026-08-19). A citation that still reads "maintained at plainlanguage.gov"
+  is a small live demonstration of why the sibling `writing-skills:technical-documentation`
+  stamps "last verified" separately from "last edited."
 - **Flesch Reading Ease** was published by Rudolf Flesch in 1948 and scores text 0–100 from
   two surface features — average sentence length and average syllables per word — with
   higher scores meaning easier reading [snippet-only].
@@ -152,12 +165,19 @@ What the rewrite did, move by move:
 - **Meaning fully preserved:** the date, the requirement, the delivery channel, the safety
   rationale, and the fallback path all survive. Nothing was softened; the reader lost no
   rights and no obligations.
+- **Two details were added, and they are the part to check:** the phone number and "type it
+  on the sign-in page after your password" are not in the source. Concrete beats abstract, so
+  a plain rewrite pulls toward specifics — which is exactly the moment a rewrite invents one.
+  Every specific the rewrite supplies has to be confirmed before it ships; 555-0100 stands in
+  here for the number you would actually look up (it is a reserved fictional exchange).
 - **Not gamed:** the sentences are short because each carries one idea — not chopped
   fragments planted to fool the formula. Read it aloud: it sounds like a person.
 
 ## §7 The plain-word ladder
 
-Swap on sight; the left column adds syllables and legal fog, never meaning.
+Swap on sight; the left column adds syllables and legal fog, never meaning. Two entries
+carry a condition in the right column — read it, because those words have more than one
+sense and only one sense swaps cleanly.
 
 | Instead of | Say |
 |---|---|
@@ -170,9 +190,9 @@ Swap on sight; the left column adds syllables and legal fog, never meaning.
 | in the event that | if |
 | pursuant to | under |
 | in order to | to |
-| notwithstanding | even if |
+| notwithstanding | despite (before a noun); even though (before a clause) |
 | obtain | get |
-| provide | give |
+| provide | give — but "the contract provides that…" becomes "says" |
 | request | ask for |
 | regarding | about |
 | approximately | about |

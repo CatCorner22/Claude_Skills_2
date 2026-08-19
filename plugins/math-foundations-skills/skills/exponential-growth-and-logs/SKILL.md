@@ -112,8 +112,19 @@ drifts at both ends.
   the endpoint; the arithmetic one overstates whenever rates vary.
 - CAGR with n = count of data points → n is periods *between* endpoints; five annual
   observations span four years (fencepost).
+- Taking a CAGR across a zero or negative endpoint → end/start has to be positive.
+  A sign change makes the ratio negative, which a spreadsheet answers with #NUM! and a
+  math library with a complex number; two negative endpoints are worse, because they
+  hand back a healthy-looking rate for a quantity that got worse (−100 to −400 over two
+  years computes as (−400/−100)^(1/2) − 1 = +100% a year). Report the absolute change
+  instead.
 - Feeding a percent into the log (ln(1+12) instead of ln(1.12)) → r is the decimal
   rate; the dimensional check in step 5 catches this.
+- Reading a solve-for-time answer without checking that r points at the target →
+  t = ln(target/current)/ln(1+r) is undefined at r = 0 and goes negative when the rate
+  runs away from the target (5,000 reaching 20,000 at −5% a year returns
+  ln(4)/ln(0.95) = −27.0, which is the same law extrapolated backwards, not a
+  forecast). Confirm the direction before reading the number as a horizon.
 - Using the rule of 72 far outside 4–12% → compute ln 2/ln(1+r) instead.
 - Reading a straight line on a log chart as constant amounts → it means constant
   rate; the amounts are accelerating.

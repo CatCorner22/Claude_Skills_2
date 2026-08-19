@@ -30,6 +30,7 @@ def make_session():
   consecutive failures are in its history. If you need a delay on the first retry,
   urllib3's `Retry` cannot supply it — wrap the call yourself, or rely on `Retry-After`
   (`respect_retry_after_header` is already on).
+- The cap comes free: urllib3 clamps each sleep to `backoff_max`, 120 s by default.
 - Timeouts always (`timeout=60`); a hung request is worse than a failed one.
 - 4xx (except 429): read `r.json()` / `r.text` for the API's diagnostic and fix the request.
 
@@ -41,7 +42,9 @@ def make_session():
 | Cursor | body returns `next_cursor` | until cursor null |
 | Link header | `Link: <url>; rel="next"` | until no `next` link |
 Cursor pagination is safest under concurrent writes (no skipped/duplicated rows when data
-shifts between pages); with offset pagination, keep the pull window short and sort stable.
+shifts between pages); with offset pagination, keep the pull window short and sort stable —
+and note that a row-count reconciliation does not detect this failure, because one insert and
+one delete during the pull duplicate one row and skip another while the total still matches.
 The offset/`hasMore` loop is in the skill body; the other two styles:
 
 ```python
@@ -68,10 +71,15 @@ while next_url:
 ```python
 import pandas as pd
 parents = pd.json_normalize(rows, sep="_")                     # scalars + nested dicts
-lines = pd.json_normalize(rows, record_path="invoiceLines",    # child collection
-                          meta=["InvoiceId"], sep="_")
+lines = pd.json_normalize(
+    [r for r in rows if r.get("invoiceLines")],                # filter first: json_normalize
+    record_path="invoiceLines",                                # raises KeyError if ANY parent
+    meta=["InvoiceId"], sep="_")                               # lacks the key, and APIs omit
+                                                               # empty collections routinely
 ```
-- One table per level; join on the parent key at analysis time.
+- One table per level; join on the parent key at analysis time. Parents with no children are
+  absent from the child table by construction — use a left join, not an inner one, if the
+  parent count has to survive.
 - After flattening: IDs to `string`, dates parsed, amounts numeric — the flat-file rules apply.
 
 ## Run logging
