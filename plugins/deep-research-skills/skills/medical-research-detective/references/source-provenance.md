@@ -105,6 +105,16 @@ allowed-country review pools some excluded-country primary studies, the review m
 so, since the pooled effect partly rests on data the policy would otherwise set aside. If excluded-
 country studies dominate the pooled estimate, downgrade confidence and note it explicitly.
 
+  **Label that downgrade for what it is.** It is a **source-integrity policy adjustment**, not a
+  methodological assessment of the review. Say so in those words, because clinicians read a
+  confidence label as a judgement about *study quality* — and GRADE, the framework that vocabulary
+  comes from, has a risk-of-bias domain and no country domain. Writing a provenance penalty into a
+  GRADE-shaped label makes a policy decision look like a finding about the evidence, and the reader
+  cannot tell them apart. Report the methodological grade and the policy adjustment as two lines:
+  "GRADE: moderate (risk of bias, imprecision). Policy adjustment: downgraded — 7 of 9 pooled trials
+  originate outside the allowed source set." A reader who disagrees with the policy can then still
+  use the appraisal.
+
 **Diaspora affiliations.** Researchers at institutions in allowed countries are allowed-country
 sources regardless of nationality or where they trained. This policy is about institutional research
 systems, never about individuals' origins.
@@ -124,6 +134,19 @@ user should know exists. They go to a clearly-marked appendix under these rules:
   to a confidence grade.
 - They are listed **only** when they contain a lead found nowhere in the allowed literature — not to
   pad the output. If allowed sources already cover the point, the excluded one is simply dropped.
+- **Exception, and it is the important one: contrary evidence is never silently dropped.** An
+  excluded-country source that *contradicts* a live hypothesis — a null result, a failed
+  replication, a systematic review finding no association — is always quarantined and listed, even
+  though "it refutes the story" is not a *lead* under the rule above. Without this exception the two
+  rules compose into a bias engine: disconfirmation (dot-connection-method §4) tells you to hunt for
+  contrary evidence, the drop rule deletes the contrary evidence that happens to sit in the filtered
+  portion, and the hypothesis is then *upgraded* for surviving a kill attempt that was run on a
+  corpus with its refutations removed. Confirmation is filtered out harmlessly; refutation filtered
+  out is a manufactured survival.
+- **And such a source blocks the confidence upgrade.** Where quarantined evidence contradicts a
+  surviving hypothesis, say so on the hypothesis and hold its grade where it was: the disconfirmation
+  pass did not clear it, it was not fully run. That is a statement about what was searched, not an
+  endorsement of the excluded source — it still supports no conclusion in either direction.
 - Each entry states what the lead claims, why it was set aside, and — the actionable part — **what
   allowed-source evidence would be needed to confirm it**, so the thread can be picked up legitimately.
 - They are labeled `[X] Excluded-source — not verified, not supporting any conclusion`.
@@ -138,9 +161,11 @@ Apply the filter **during** stage 4, as sources are collected, not at the end:
 
 1. For each candidate source, determine provenance by the priority list above.
 2. **Allowed** → goes to the working set; proceed to appraisal and citation verification.
-3. **Excluded** → does it contain a lead absent from the allowed literature?
-   - No → drop it silently.
-   - Yes → quarantine appendix, with the confirm-path note.
+3. **Excluded** → does it contain a lead absent from the allowed literature, **or does it
+   contradict a live hypothesis**?
+   - Neither → drop it silently.
+   - Either → quarantine appendix, with the confirm-path note. Mark which of the two it is;
+     a contradicting entry also blocks that hypothesis's disconfirmation upgrade (above).
 4. **Unclear** → try to resolve from the paper itself. A country you *can* identify but the policy
    does not list is not unclear — judge it on the criteria in [The policy](#the-policy). Only a
    provenance you genuinely cannot determine falls back to excluded, and say so when it does.

@@ -1150,3 +1150,38 @@ retraction of the previous pass's headline mechanism claim.
   the per-phase data before publishing them.** I wrote phase 1's could-not-verify count (82) as the
   two-phase total; the real figure is 131. Caught by re-deriving, which is the only reason it did
   not ship.
+
+### Crystallization pass — 2026-08-19 (adversarial close-out: 42 mustFix + 7 ownerDecisions)
+
+- RULE: **shipped code gets a bar prose does not need.** Every finding rated critical in the
+  deepest review this library has had sat in executable content — two bundled scripts and about a
+  dozen copy-paste recipes — never in the prose, which by then had survived five passes. The
+  standing rule, now in `review-checklist.md`: every bundled script has a `--self-test` covering
+  the failure it exists to prevent; that suite is mutation-tested at least once; every copy-paste
+  recipe is RUN once against the failure case it describes; and a comment asserting an invariant
+  the code does not hold is worse than no comment.
+- RULE: **a test can pin a bug instead of catching it.** `search_pubmed.py`'s self-test asserted
+  that `phrasesnotfound` was a hard query error — the exact defect. Two `ae_lint` checks and three
+  `verify_citation` guards were likewise only proven real by deliberately breaking them. Assert on
+  the *distinguishing message*, not on category membership, or a sibling check masks the deletion.
+- RULE: **a guard's docstring is a claim, not a fact.** `_is_us_locality` said it "fails safe" and
+  suppressed excluded-country provenance whenever any two-letter English word after the city
+  happened to be a state code and "USA" appeared anywhere later ("Beijing, **Co**-affiliated with
+  Yale, … USA"). Test a guard against the case it claims to exclude, in both directions.
+- RULE: **when two rules compose, check the composition, not each rule.** The country filter drops
+  excluded sources with no unique lead; disconfirmation upgrades a hypothesis for surviving a kill
+  attempt. Together they delete refutations and then reward the survival. Neither rule is wrong.
+- RULE: **a version scheme that a script cannot parse is a defect, not a style choice.** Three
+  skills carried `"1.0"` / `"2026.09"`; that is precisely how an earlier bump run fell through to
+  its add-a-block branch and created duplicate `metadata:` keys. `validate.sh` now errors on a
+  missing or non-semver version and NOTEs a content change with no bump.
+- RULE: **never ship the repo's own review history as skill content.** `habit-design` shipped
+  "this environment could not reach the primary sources", which an installed user reads as a claim
+  about *their* environment — and the narration had taken the main verb from the step's actual
+  instruction. Audit trail belongs in git; the skill states what is known and what is not.
+- RULE: **the library supplies procedures whose professions treat a guardrail as inseparable.**
+  Five findings had that shape: a disposal schedule with no litigation hold, live-people drills
+  with no exercise control, a distressing exercise with no participation contract, clinical-record
+  editing with no amendment discipline, a seven-stage research protocol with no urgency triage.
+  House posture chosen and applied consistently: **carry the guardrail** (one paragraph, with the
+  provenance marks and the route-to-the-professional line), rather than disclaiming the whole area.

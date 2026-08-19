@@ -8,7 +8,7 @@ description: >-
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Writing Agent Skills (house standard)
