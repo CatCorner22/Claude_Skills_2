@@ -27,8 +27,15 @@ factor B (low)  |  (1)          (2)
 - Steps are deliberately small — small enough that output at every point stays in spec, and small
   enough that operations barely notices the pattern is running. If a step would need sign-off as a
   "change", it is too big for EVOP.
-- For three factors, use a 2³ (8 corners) or a half-fraction (4 corners) plus center. Beyond three
-  factors, the pattern stops being unobtrusive — that's designed-experiment territory
+- For three factors, use a 2³ (8 corners) or a half-fraction (4 corners) plus center. The
+  half-fraction — 2^(3−1), C = AB, so I = ABC — is **resolution III**: each main effect is aliased
+  with the two-factor interaction of the other two (A≡BC, B≡AC, C≡AB), and no interaction is
+  estimable from those four runs. That is an acceptable trade in EVOP, where you only need a
+  direction to move the center and the next phase re-measures at the new center — an effect that
+  was really an interaction fails to reproduce there. It is not acceptable as a statement about
+  which factor matters: quote such an effect as a direction, never as a clean main effect. If you
+  need the interactions, run all 8 corners. Beyond three factors, the pattern stops being
+  unobtrusive — that's designed-experiment territory
   (`continuous-improvement-skills:design-of-experiments`).
 
 ## 2. Cycles and phases

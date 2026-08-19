@@ -140,14 +140,22 @@ from five points.
 Arm rules deliberately. Each adds detection power and each adds false alarms, and the arithmetic
 is not intuitive.
 
-| Rule | Detects | False-alarm rate on a stable process |
-|---|---|---|
-| One point beyond 3σ | Large sudden shift | 2 × (1 − Φ(3)) ≈ 0.0027 → ~1 in 370 points |
-| 8 consecutive points on one side of the centerline | Sustained moderate shift | 2 × 0.5^8 = 0.0078125 → ~1 in 128 |
-| 2 of 3 consecutive beyond 2σ, same side | Moderate shift, faster than the 8-rule | ≈ 0.0031 → ~1 in 327 |
-| 4 of 5 consecutive beyond 1σ, same side | Small sustained shift | ≈ 0.0055 → ~1 in 181 |
+| Rule | Detects | Per-point probability the rule is firing | ARL₀: points between false alarms, this rule alone |
+|---|---|---|---|
+| One point beyond 3σ | Large sudden shift | 2 × (1 − Φ(3)) ≈ 0.0027 | ~370 |
+| 8 consecutive points on one side of the centerline | Sustained moderate shift | 2 × 0.5^8 = 0.0078125 | ~255 |
+| 2 of 3 consecutive beyond 2σ, same side | Moderate shift, faster than the 8-rule | ≈ 0.0031 | ~511 |
+| 4 of 5 consecutive beyond 1σ, same side | Small sustained shift | ≈ 0.0055 | ~291 |
 
-**The number nobody computes — and do not compute it by adding the column.** Summing the four
+**The two columns are reciprocals only in the first row.** A 3σ signal is an independent event
+point to point, so 1/0.0027 = 370 is both the firing probability's inverse and the average run
+length. The run rules re-fire while the run continues — once eight points sit on one side, the
+ninth on that side signals again — so their per-point firing probability counts alarm *states*,
+not investigations, and inverting it overstates how often you are actually sent to look
+(1/0.0078 = 128 against a true ARL₀ of 255; 1/0.0031 = 327 against 511). Budget against the ARL₀
+column, which comes from the run-length distribution.
+
+**The number nobody computes — and do not compute it by adding the probability column.** Summing the four
 rates (0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ 0.019, "one alarm every 52 points") is wrong, because
 the rules overlap heavily: a point beyond 3σ is also beyond 2σ and beyond 1σ and sits on one side
 of the centerline, so it can satisfy several rules at once, and the run rules share the same

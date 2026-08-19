@@ -153,9 +153,9 @@ That script counts characters and divides by ~3.7 chars/token, and the estimate 
 against the harness's own tokenizer: summing `claude plugin details <plugin>` across all 14 plugins
 gives **≈38,800 tokens ≈ 19.4% of a 200K context**, which is the number to plan an install against
 (method in `docs/live-routing-and-degradation-2026-08-18.md`). Figures are quoted to two or three
-significant digits on purpose — they move with every description edit, so re-run the script rather
-than trusting a number written down here. The
-`Triggers:` lists alone are 22% of that spend. This has two consequences worth designing around:
+significant digits on purpose — they move with every description edit, so re-run the script
+rather than trusting a number written down here. The `Triggers:` lists alone are 22% of that
+spend. This has two consequences worth designing around:
 
 - **The listing degrades before it errors, and the trigger is a character budget, not a skill
   count.** The budget is `floor(context_tokens × 4 × skillListingBudgetFraction)` — **8,000
