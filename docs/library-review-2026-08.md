@@ -290,13 +290,17 @@ Measured 2026-08-17: 121 skills' names + descriptions = **110,081 characters ≈
 of a 200K context**, present before the user asks anything. Two consequences:
 
 - **A full install is deep past the point where this starts, and the mechanism is worse than a
-  count threshold.** Verified live on 2026-08-18 (`docs/live-routing-and-degradation-2026-08-18.md`):
-  the real gate is a *character* budget (`skillListingBudgetFraction`) filled in listing order
-  with a hard cutoff, not a graceful per-skill trim of the least-used entries. With this
-  marketplace's 121 skills genuinely installed, **101 of them carried zero description text** —
-  silently, with no error, while `/plugin:skill` direct invocation keeps working. That is
-  precisely the path an author uses to test their own skill, so the failure is invisible from the
-  inside. Which 19 survived was a function of install order, not importance.
+  count threshold.** *(Mechanism corrected 2026-08-19 — see
+  `docs/live-routing-and-degradation-2026-08-18.md` §1–§2, which now carries the decompiled
+  algorithm and retracts the account originally given here.)* The real gate is a **character
+  budget**: `floor(context_tokens × 4 × skillListingBudgetFraction)`, i.e. **8,000 characters** at
+  the 200K/1% defaults, against **113,645** needed to render all 121 descriptions. Skills start as
+  bare names and are upgraded back to full text in **descending order of recent use**
+  (`usageCount × max(0.5^(days/7), 0.1)`, unused = 0), greedily, skipping any that do not fit.
+  Simulated against this library (`scripts/simulate-listing-budget.py`): **3 of 121 keep a
+  description on a default 200K session; 118 route on their bare name** — silently, with no error,
+  while `/plugin:skill` direct invocation keeps working. That is precisely the path an author uses
+  to test their own skill, so the failure is invisible from the inside.
 - **The lever is skills per install, not characters per description.** Trimming a description by 100
   characters saves ~27 tokens; not installing a 15-skill plugin saves ~3,900 — a 145× difference.
   This is the arithmetic the trimming pass of §9.2 should have run first.
@@ -684,8 +688,10 @@ available is depth, not removal.
 **The context-cost problem is not solved by deleting skills.** A full install costs ~19.4% of a
 200K window by the harness's own real tokenizer (not the 14.8-14.9% this repo's char-based
 estimate had reported — see `docs/live-routing-and-degradation-2026-08-18.md`), and the library
-sits deep past the point where the listing silently degrades — 101 of 121 skills reduced to bare
-names in a live 2026-08-18 test, not a rounded "~100 skills" folklore figure. Deleting the five
+sits deep past the point where the listing silently degrades — at the default 200K/1% budget of
+8,000 characters, only **3 of 121** skills keep a description (computed by
+`scripts/simulate-listing-budget.py`; an earlier live-introspection figure of "101 of 121" is
+withdrawn as unreproducible, and the mechanism account was corrected on 2026-08-19). Deleting the five
 thinnest skills would recover about 1,200 tokens — 0.6% of a context — while removing genuinely
 used content. Installing two plugins instead of fourteen recovers 11%.
 The lever is skills *per install*; `README.md` carries the measured per-plugin and per-bundle
@@ -766,15 +772,28 @@ and every case: `docs/live-routing-and-degradation-2026-08-18.md`.
 ### 13.2 The ~100-skill folklore, corrected
 
 The standing `MEMORY.md` lesson ("~100 installed skills trims least-used descriptions to
-name-only," one anecdotal 2026-07-18 observation from an unrelated project) is superseded, not
-merely caveated. The real mechanism, read from the CLI's own settings schema
-(`skillListingBudgetFraction`, default 1% of the context window **in characters**, filled in
-listing order with a hard cutoff) was verified live: with this marketplace's 121 skills
-genuinely installed, **101 of 121 carried zero description text**. The 19 survivors were not the
-shortest, least-triggered, or most-used — they were exactly the first 19 processed in
-(apparent) install order. This is more severe than the folklore suggested (a count threshold
-implies most survive; the real mechanism means most do not) and mechanistically different (order,
-not usage).
+name-only," one anecdotal 2026-07-18 observation from an unrelated project) is refined rather than
+superseded.
+
+> **This paragraph was itself wrong, and is corrected here (2026-08-19).** It originally declared
+> the folklore "superseded, not merely caveated," and asserted the mechanism was a fill in listing
+> order with a hard cutoff, "mechanistically different (order, not usage)." An independent audit —
+> run by agents that did not write these documents — sent me back to the shipped binary, where the
+> sort key turns out to be `usageCount × max(0.5^(daysSinceUse/7), 0.1)`. **The folklore named the
+> right variable and this "correction" replaced it with a wrong one.** The install-order pattern
+> that was observed is the degenerate all-zero-usage case: in a fresh session every score is 0, so
+> the stable sort preserves listing order. There is also no cutoff — the fill skips oversized
+> entries and continues. And the "101 of 121" figure came from a model introspecting its own
+> system reminder, an instrument that did not reproduce on re-test; it is withdrawn in favour of
+> `scripts/simulate-listing-budget.py`, which computes the answer from the algorithm.
+
+What survives, with the corrected numbers: the severity finding, and it is worse than published.
+At the genuine 200K default the budget is 8,000 characters against 113,645 needed, so **3 of 121
+skills keep a description and 118 route on bare names**. The earlier "19 survivors ≈ 2.3% of 200K"
+was measured in a session whose real budget was ~30,000 characters (a ~750K context) and then
+reported as a fraction of 200K, which understated the problem. The one mitigation the real
+mechanism supplies is that usage-weighting means a returning user's working set keeps its
+descriptions — the arbitrary case is a first session on a fresh install, not the steady state.
 
 Separately, `claude plugin details` gave a second, real-tokenizer-computed cost figure —
 **≈38,800 tokens (≈19.4% of 200K)** — about 30% above this repo's own chars/3.7 estimate

@@ -1,7 +1,8 @@
 # Trigger test protocol
 
-**Status: written 2026-08-17, revised 2026-08-18. Two blind-router simulation runs; the live
-fresh-session run specified below has still never been performed.**
+**Status: written 2026-08-17, revised 2026-08-18, corrected 2026-08-19. Two blind-router
+simulation runs plus one live run against the real harness (Run 3). Coverage is partial — 7 live
+cases out of 56 rows — so the protocol is *partially* met, not met.**
 
 - **Run 1 (2026-08-18) — 80/80 PASS, partly unearned.** Eight fresh agents, 121 name+description
   pairs, ten opaque-id prompts each, answer key withheld in a separate file. Results, method, and
@@ -19,7 +20,8 @@ fresh-session run specified below has still never been performed.**
   documented `CLAUDE_CODE_WALNUT_SPIRE=1` early-access flag, all 14 plugins genuinely installed,
   real `Skill`-tool invocations graded. This is the first execution of anything resembling the
   live fresh-session run this file has always called for. Full findings, including a live
-  degradation scan (101 of 121 skills reduced to bare names in this exact install) and seven real
+  degradation scan (most of the library reduced to bare names; the exact figure and the mechanism
+  were corrected on 2026-08-19 — 3 of 121 keep a description at the default budget) and seven real
   routing cases: [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
   **Headline: the D2/D9 seam repairs that Run 2 verified fail for real** when their target's
   description is degraded — zero `Skill` calls, not a wrong pick. Every PASS recorded by Runs 1
@@ -51,11 +53,16 @@ Three properties of the runtime make every cheaper substitute worthless:
    reach on its own. So the path an author naturally uses to test their own skill is exactly the path
    that cannot detect the failure.
 3. **The listing degrades silently at scale, and it is worse than a skill-count threshold
-   suggests.** The real mechanism (`skillListingBudgetFraction`, documented in the CLI's own
-   settings schema) is a *character* budget filled in listing order with a hard cutoff — not a
-   graceful trim of the least-used entries. Verified live on 2026-08-18 with this exact
-   marketplace installed: **101 of 121 skills carried zero description text**, and which 19
-   survived was a function of install order, not usage or importance. Full evidence:
+   suggests.** The real mechanism is a *character* budget:
+   `floor(context_tokens x 4 x skillListingBudgetFraction)` = **8,000 chars** at the 200K/1%
+   defaults, against **113,645** needed to render all 121 descriptions. Every skill starts as a
+   bare `- name` and is upgraded back to full text in **descending order of recent use**
+   (`usageCount x max(0.5^(days/7), 0.1)`, so anything unused scores 0), greedily, skipping
+   whatever does not fit. At the default budget **3 of 121** keep a description
+   (`scripts/simulate-listing-budget.py`). *An earlier version of this list item described a
+   "fill in listing order with a hard cutoff ... not a trim of the least-used entries" and cited
+   "101 of 121"; both were wrong and were corrected on 2026-08-19 — the ordering is by usage, and
+   the 101 figure came from unreproducible model self-introspection.* Full evidence:
    [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
    This library ships 121 skills (~29,700 tokens by this repo's own char-based estimate, or
    ~38,800 by the harness's real tokenizer — **≈19.4% of a 200K window**, not 14.8%; see
@@ -73,7 +80,8 @@ thing the test can usefully measure.
 
 1. **Choose and record an install set.** Either:
    - **Full install** (121 skills, ~19.4% of context by the real tokenizer) — tests the real
-     degradation regime; verified on 2026-08-18 to reduce 101 of 121 skills to bare names. Or
+     degradation regime; at the default 8,000-char listing budget only 3 of 121 keep a
+     description, so this is the regime a realistic user actually hits. Or
    - **Focused install** — the plugins covering the rows you are testing. Cheaper, cleaner
      attribution, but it will *not* reproduce the listing-budget cutoff.
 
@@ -118,11 +126,22 @@ boundary clause naming the seam in matching words.
 
 **Put the boundary in the description, not only in the body.** The router reads `name` +
 `description` and nothing else, so a `## When to use` → `Not for:` line cannot break a routing tie
-no matter how well it is written. Proven here on 2026-08-18: both failing pairs
-(`elite-python-engineer` ↔ `script-wizard`, `chicken-little-executive-advisor` ↔
-`sparring-partner`) already carried reciprocal body seams pointing at each other, and both
-misrouted anyway. Moving one clause each into the descriptions fixed both rows with zero
-regressions. Keep the body line too — it serves the reader once the skill is loaded — but it is
+no matter how well it is written.
+
+This is now established from the harness itself rather than by anecdote. The listing code renders
+each skill as either its full `name: description` form or, under budget pressure, as bare
+`- name` (cost `len(name) + 2`). No path exists by which any part of the skill *body* reaches the
+routing decision — the body is only read after the skill is invoked. Moving one clause each into
+the descriptions fixed both failing rows with zero regressions, which is consistent with that
+mechanism.
+
+> **Corrected 2026-08-19.** This paragraph previously claimed: *"Proven here on 2026-08-18: both
+> failing pairs … already carried reciprocal body seams pointing at each other, and both misrouted
+> anyway."* That was false, and it was the only evidence cited for the prescription. Git shows the
+> pre-repair state: `sparring-partner`'s body never mentioned `chicken-little-executive-advisor`
+> at all (0 occurrences), and the `script-wizard` → `elite-python-engineer` seam was
+> one-directional (1 occurrence vs 0 in the reverse). Neither pair was reciprocal. The
+> prescription stands on the mechanism above; the anecdote offered for it did not. Keep the body line too — it serves the reader once the skill is loaded — but it is
 not the routing fix. Do not fix a WRONG by deleting the loser's trigger — that is what created
 the orphaned-phrase defect recorded in Tier C.
 

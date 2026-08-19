@@ -60,16 +60,23 @@ Re-run the script after any description change — the char-based figure is dire
 | **all 14** | **121** | **29,718** | **14.86%** |
 
 There is a second, sharper reason to subset, and it is worse than a round "~100 skills" threshold
-suggests. **The real mechanism is a character budget (`skillListingBudgetFraction`, 1% of the
-context window by default), filled in listing order with a hard cutoff — not a graceful
-per-skill trim of the least-used entries.** Verified live on 2026-08-18 with this exact
-marketplace fully installed: **101 of 121 skills carried zero description text, reduced to a
-bare name** — not the shortest or least-triggered ones, but everything past wherever the budget
-ran out in installation order. `/plugin:skill` direct invocation still works past that point, but
-description-matching does not, and which skills survive is arbitrary — a function of install
-order, not importance. Full methodology and the live evidence:
+suggests. **The listing has a character budget**, and this library does not come close to fitting
+it. Read from the shipped CLI: the budget is
+`floor(context_tokens × 4 × skillListingBudgetFraction)`, which at the 200K/1% defaults is
+**8,000 characters**. Rendering all 121 skills with descriptions needs **113,645** — about 14× the
+budget. Under pressure every skill starts as a bare `- name` (5,575 chars for 121 of them) and is
+upgraded back to its full description only while budget remains, in **descending order of recent
+use** (`usageCount × max(0.5^(days/7), 0.1)`, so anything unused scores 0).
+
+Simulated against this library's real descriptions: at a default 200K session, **3 of 121 skills
+keep a description; 118 route on their bare name alone.** At 1M it is 38 of 121. `/plugin:skill`
+direct invocation still works throughout — it is description-matching that stops.
+
+The one piece of good news the mechanism gives you: because the ordering is usage-weighted, the
+skills you actually use keep their descriptions, so the worst case is a *first* session on a fresh
+install rather than the steady state. Full derivation, and a correction of an earlier and wronger
+account of this same mechanism:
 [`docs/live-routing-and-degradation-2026-08-18.md`](docs/live-routing-and-degradation-2026-08-18.md).
-A full install of this library is *deep* past the point where this starts, not marginally past it.
 
 Practical guidance:
 
@@ -157,10 +164,13 @@ why.
   and fails on the ones that disagree — the defect class that survived four hand review passes.
 - `python3 scripts/gen-catalog.py` regenerates `docs/SKILLS.md` and `docs/INDEX.md` from the skills
   themselves — never edit those two by hand.
-- **[`docs/trigger-test.md`](docs/trigger-test.md) — routing compliance, written and not yet run.**
-  Validation proves a skill is well-formed; it cannot prove the skill is *findable*, because routing
-  depends only on the description and cannot be tested from the session that authored it. That
-  protocol is the standing gap in this library's definition of done, and it is recorded as unmet
+- **[`docs/trigger-test.md`](docs/trigger-test.md) — routing compliance.** Validation proves a skill
+  is well-formed; it cannot prove the skill is *findable*, because routing depends only on the
+  description. The protocol has now been run three times — twice as a blind simulation and once
+  live against the real harness (`docs/trigger-test-results.md`,
+  `docs/trigger-test-tier-d-rerun.md`, `docs/live-routing-and-degradation-2026-08-18.md`). The live
+  run is the one that matters, and it found that fixes verified under a full listing fail once the
+  listing is degraded. Coverage is still partial, so this remains recorded as **partially met**
   rather than assumed passing.
 
 ## Recommended companion marketplaces

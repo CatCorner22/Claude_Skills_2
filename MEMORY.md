@@ -215,8 +215,14 @@ Never store secrets, credentials, account numbers, or client data here.
   competition, not string equality.
 - RULE (2026-08-17): **skills-per-install is the routing lever, not chars-per-description.** Trimming
   a description 100 chars saves ~27 tokens; skipping a 15-skill plugin saves ~3,900 — 145x. The full
-  121-skill library costs ~14.8% of a 200K window and sits past the ~100-skill point where the listing
-  silently trims descriptions to name-only. Recommend subsets; never defend trimming as budget work.
+  121-skill library costs ~19.4% of a 200K window by the real tokenizer (38,804 tokens; the
+  ~14.8%/29,718 figure is this repo's own chars/3.7 estimate, which runs ~30% light). Recommend
+  subsets; never defend trimming as budget work.
+  - CORRECTED 2026-08-19: the listing does **not** merely "trim past ~100 skills." The budget is
+    `floor(context_tokens × 4 × skillListingBudgetFraction)` = **8,000 chars** at the 200K/1%
+    default; candidates start name-only and are upgraded in descending order of
+    `usageCount × max(0.5^(days/7), 0.1)` (unused = 0), greedy, skip-and-continue. At 8,000 chars
+    only **3 of 121** keep a description. See `docs/live-routing-and-degradation-2026-08-18.md` §1–§2.
 - RULE (2026-08-17): **conformance and value are close to uncorrelated.** On a 14-skill expert sample,
   3 were NET-NEGATIVE and 6 MARGINAL against the test "does invoking this beat an unaided competent
   assistant?" — every one of them conformant, and rated passing by four prior passes. The failure mode
@@ -286,14 +292,17 @@ Never store secrets, credentials, account numbers, or client data here.
 - LESSON: With ~100 installed skills, the skill-listing context budget trims least-used
   descriptions to name-only; direct `/plugin:skill` invocation still works, and newly installed
   plugins appear in the listing only at the next refresh. (observed 2026-07-18)
-  - SUPERSEDED (2026-08-18, tested live for real, not caveated): the real mechanism is
-    `skillListingBudgetFraction` — a *character* budget (default 1% of the context window),
-    filled in **listing order** with a hard cutoff, not a usage-based trim of the least-used
-    entries. With this marketplace's 121 skills genuinely installed under
-    `CLAUDE_CODE_WALNUT_SPIRE=1` + `claude plugin eval`, **101 of 121 carried zero description
-    text**; the 19 survivors were exactly the first 19 processed in install order (verified:
-    `writing-skills` installed first = 5/5 full; `coding-agent-skills` second = first 14 of its
-    20 skills alphabetically full, last 6 name-only; all 12 plugins installed after = 0% full).
+  - REFINED (2026-08-19, read from the CLI binary — this replaces a 2026-08-18 entry that wrongly
+    declared the observation above "superseded, not usage-based"): the mechanism is
+    `skillListingBudgetFraction`, a *character* budget = `floor(context_tokens × 4 × 0.01)` =
+    **8,000 chars** by default. Candidates start name-only, bundled skills are protected, and the
+    rest are upgraded to full text in DESC order of `usageCount × max(0.5^(days/7), 0.1)`
+    (never-used = 0), greedily, skip-and-continue with no cutoff. **So the 2026-07-18 observation
+    above was essentially right — it is usage-based.** The install-order pattern seen on 2026-08-18
+    is the all-zero-usage degenerate case (fresh session → ties → stable sort keeps listing order).
+    At the default budget only **3 of 121** of this library keep a description; reproduce with
+    `scripts/simulate-listing-budget.py`. The "101 of 121" figure from that pass came from model
+    self-introspection, did not reproduce, and is withdrawn.
     Length and trigger count do not predict the outcome. Full evidence:
     `docs/live-routing-and-degradation-2026-08-18.md`. Do not re-cite "~100 skills" as the
     threshold — cite this instead.
@@ -406,7 +415,8 @@ Never store secrets, credentials, account numbers, or client data here.
     settled call defended by a checkable claim gets re-opened the next time someone checks —
     that lesson was learned here on 2026-08-17 with the chicken-little exception.
   - CONSEQUENCE: per-install subsetting is the only remaining lever on context cost. A full
-    install is ~14.8% of a 200K window and stays there. Recommend bundles, never trimming.
+    install is ~19.4% of a 200K window by the real tokenizer (~14.8% was the repo's own light
+    estimate) and stays there. Recommend bundles, never trimming.
   - CONSEQUENCE: the follow-through that survives the decision is **depth, not count** — the
     most-cited skills measured as the shallowest, and 25 of 121 have zero cross-plugin inbound
     citations. Deepen hubs and build seams; both improve the library without removing anything.
@@ -1046,11 +1056,52 @@ unexecuted; depth for the five hub-but-thin skills.
 
 2026-08-18 (later) — Live routing test against the real harness, using `claude plugin eval` under
 `CLAUDE_CODE_WALNUT_SPIRE=1` (documented early-access flag). All 14 plugins genuinely installed.
-Superseded the ~100-skill folklore: real mechanism is a character budget filled in listing order
-with a hard cutoff (101/121 skills reduced to bare names in this install, not usage-based). Real
-tokenizer cost (`claude plugin details`) is ~30% above this repo's chars/3.7 estimate — 38,800
-tokens / 19.4% of 200K, not 29,700 / 14.9%. Seven live routing cases (~$0.93 real spend): the D2/D9
-seam repairs verified by simulation fail for real once their target's description is degraded —
-zero Skill calls. Checked script-wizard's defect for a sibling; none found. New doc:
-docs/live-routing-and-degradation-2026-08-18.md. README/MEMORY/library-review/trigger-test docs
-corrected throughout.
+~~Superseded the ~100-skill folklore: real mechanism is a character budget filled in listing order
+with a hard cutoff (101/121 skills reduced to bare names in this install, not usage-based).~~
+**← THIS WAS WRONG; see the 2026-08-19 entry below.** Real tokenizer cost (`claude plugin details`)
+is ~30% above this repo's chars/3.7 estimate — 38,800 tokens / 19.4% of 200K, not 29,700 / 14.9%
+(this part held up under audit). Seven live routing cases (~$0.93 real spend): the D2/D9 seam
+repairs verified by simulation fail for real once their target's description is degraded — zero
+Skill calls. Checked script-wizard's defect for a sibling; none found. New doc:
+docs/live-routing-and-degradation-2026-08-18.md.
+
+- FACT (2026-08-19, decompiled from the shipped CLI v2.1.235 — supersedes the 2026-08-18 mechanism
+  claim above): **the skill-listing budget is usage-prioritised.** Budget =
+  `SLASH_COMMAND_TOOL_CHAR_BUDGET` if set, else `max(1, floor(context_tokens × 4 × fraction))`;
+  constants are chars/token = 4, default context = 200000, `skillListingBudgetFraction` = 0.01,
+  `skillListingMaxDescChars` = 1536. **Default budget = 8,000 chars.** Algorithm: every candidate
+  starts name-only (`len(name)+2`); **bundled skills are protected and never compete**; candidates
+  sort DESC by `usageCount × max(0.5^(daysSinceUse/7), 0.1)` with **never-used = 0**; then a greedy
+  upgrade to full text, **skip-and-continue, no cutoff**. This library needs 113,645 chars for all
+  121 descriptions, so at the default budget **3 of 121 keep a description**. Reproduce with
+  `scripts/simulate-listing-budget.py`.
+- LESSON (2026-08-19, the sharpest of this session): **I superseded correct folklore with a wrong
+  correction, and the confidence came from the word "live."** The 2026-07-18 note ("trims least-used
+  descriptions") named the right variable — usage. The 2026-08-18 pass replaced it with "listing
+  order, hard cutoff, *not* usage-based" on the strength of one live observation, and that
+  observation was the **degenerate all-zero-usage case** (fresh session → every score 0 → stable
+  sort keeps listing order). Rules that follow: (a) an observation of behaviour is not a mechanism —
+  read the code before declaring a mechanism, and say "observed" when only observed; (b) when
+  overturning a prior claim, explain why the *old* claim produced its evidence, because if it cannot
+  be explained the overturn is probably wrong; (c) "verified live" describes provenance, not
+  correctness, and does not license a stronger generalisation than the sample supports.
+- LESSON (2026-08-19): **never report a model's introspection of its own system prompt as a
+  measurement.** The "101 of 121 NAMEONLY" figure came from asking a session to read its own skill
+  listing; on re-test the same skill reported FULL then NAMEONLY and the reported skill count
+  varied. Withdrawn. Where the artefact is computable, compute it — the replacement is a 150-line
+  script that anyone can run offline, which is also what makes the claim falsifiable.
+- LESSON (2026-08-19): **a completeness claim must be grepped, not asserted.** The degradation doc
+  claimed "every place this repo quotes 14.8%/14.9% is now corrected"; two uncorrected instances
+  were still standing in this very file. Same failure class as the earlier `grep | head -20` privacy
+  sweep. Before writing "every", run the search that proves it.
+- LESSON (2026-08-19): **do not cite an anecdote as proof when the mechanism is available.**
+  `trigger-test.md` claimed both failing seam pairs "already carried reciprocal body seams"; git
+  shows one pair was one-directional and the other had no seam at all. The prescription (put the
+  boundary in the description) was right and is now grounded in the listing code, which never sends
+  the body to the router — a mechanical proof that needed no anecdote.
+- LESSON (2026-08-19, method that worked): **have the audit run by agents that did not write the
+  thing.** Three of four doc-audit targets came back OVERSTATED, all on claims I authored. But the
+  auditors were also wrong in places — one asserted `skillListingBudgetFraction` "occurs nowhere in
+  the CLI" (it occurs four times) and described an equal-share truncation the code does not contain,
+  and two auditors contradicted each other on the algorithm. Adversarial review finds real defects
+  *and* generates confident false ones; the tiebreaker is always the primary source.
