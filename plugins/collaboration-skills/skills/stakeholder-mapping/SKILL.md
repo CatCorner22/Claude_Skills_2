@@ -86,11 +86,12 @@ currencies catalog, the re-map protocol, and worked examples are in
    *before* the decision, informed means *promptly after*. RACI has no named inventor
    and no canonical origin paper — it descends from 1950s linear responsibility
    charting; say so rather than inventing a source [snippet-only].
-5. **Plan currencies for whoever you cannot compel.** Cohen & Bradford's *Influence
-   Without Authority* (1989; 2nd ed. 2005): influence is exchange, and the currencies —
-   inspiration, task, position, relationship, personal — are what the other party
-   actually values [snippet-only]. For each such stakeholder: what do they value that
-   you can genuinely offer, and what are you asking for?
+5. **Plan currencies for whoever you cannot compel.** Cohen & Bradford's exchange model
+   (*Organizational Dynamics*, 1989; the *Influence Without Authority* book, Wiley 1990,
+   3rd ed. 2017): influence is exchange, and the currencies — inspiration, task,
+   position, relationship, personal — are what the other party actually values
+   [snippet-only]. For each such stakeholder: what do they value that you can genuinely
+   offer, and what are you asking for?
 6. **Wire the moves to their instruments.** "Manage closely" mostly means designed
    decision forums (`collaboration-skills:meeting-design`) and real conversations —
    elicitation when you need what they know

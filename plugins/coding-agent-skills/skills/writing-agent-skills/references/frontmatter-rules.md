@@ -20,10 +20,14 @@
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
 - **Budget reality, re-measured 2026-08-18 (this replaces an earlier ~1%-of-context claim that the
-  library's own numbers contradict).** 121 skills' names + descriptions = **109,662 chars ≈
-  29,638 tokens ≈ 14.8% of a 200K window**, mean ~885 chars per description. Token figures are an
+  library's own numbers contradict).** 121 skills' names + descriptions = **≈110,000 chars ≈
+  29,700 tokens ≈ 14.9% of a 200K window**, mean ~890 chars per description. Token figures are an
   estimate at ~3.7 chars/token — stated, because an undisclosed divisor is exactly how this
-  paragraph and `README.md` came to publish two different percentages. Both now come from
+  paragraph and `README.md` came to publish two different percentages. That character estimate
+  is also ~30% light against the harness's real tokenizer, which puts the true listing cost at
+  **≈38,800 tokens ≈ 19.4% of a 200K window** (`claude plugin details <plugin>` summed across all
+  14 plugins; see `docs/live-routing-and-degradation-2026-08-18.md`) — quote that one when the
+  size of an install is the point. Both character figures come from
   `python3 scripts/measure-listing-cost.py`; re-run it rather than editing the figure by hand,
   because a hand-kept number in two places is a number that will disagree with itself again. A literal
   1%-of-context listing budget would fit about six of them, so ~1% cannot describe a

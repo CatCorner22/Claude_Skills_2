@@ -56,8 +56,8 @@ metadata:
      breaking points, and token waste; tear down and rebuild weak sections.
    - **Expert panel review** — scrutinize as a rigorous panel of advanced-AI, data
      structures, computer science, and technical-writing reviewers would: does the artifact
-     use current LLM capabilities well (tool/function calling, multi-turn memory,
-     self-verification loops), sound program logic, stable data handling?
+     use current LLM capabilities well (tool/function calling, structured output, multi-turn
+     memory, thinking/effort configuration), sound program logic, stable data handling?
    - **Adams/MSCD compliance pass** — Ken Adams's *A Manual of Style for Contract
      Drafting* (MSCD): name the actor in every instruction, enforce one term per concept,
      remove redundant couplets and bloat, demand clarity and concision (the full MSCD

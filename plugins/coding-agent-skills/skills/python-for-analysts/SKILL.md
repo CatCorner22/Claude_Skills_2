@@ -66,7 +66,8 @@ metadata:
    group, merge, write. The recurring operations and their gotchas are in
    `references/pandas-essentials.md`. Two rules that prevent most bugs: pass `parse_dates=` and
    check `df.dtypes` right after loading, and assign with `.loc[mask, col] = ...` (not chained
-   indexing) to avoid `SettingWithCopyWarning`.
+   indexing), which pandas 2 flags as `SettingWithCopyWarning` and pandas 3 as
+   `ChainedAssignmentError`.
 4. **Choose notebook vs script deliberately.** Notebook for exploration and narrative; script for
    anything scheduled, reused, or handed off. Before trusting a notebook result, **Restart & Run
    All** — out-of-order cells hide state and are the #1 source of "works for me" irreproducibility.
@@ -93,7 +94,9 @@ memory of what `df2` meant.
 
 ## Common mistakes
 - Installing packages globally with no `requirements.txt` → nobody can reproduce it. Use a venv + pins.
-- Chained indexing (`df[df.x>0]["y"] = 1`) → `SettingWithCopyWarning`, silent no-op. Use `.loc[mask, "y"]`.
+- Chained indexing (`df[df.x>0]["y"] = 1`) → silent no-op, warned as `SettingWithCopyWarning` on
+  pandas 2 and `ChainedAssignmentError` on pandas 3 (the old name is gone from `pd.errors` there).
+  Use `.loc[mask, "y"]`.
 - Trusting notebook output run out of order → phantom results. Restart & Run All before believing it.
 - `except: pass` or bare `except` → hides the bug that changes the answer. Catch specific exceptions.
 - Hard-coded absolute paths and magic numbers → breaks on the next machine. Use `pathlib` + parameters.

@@ -129,8 +129,9 @@ Create `evals/<plugin>/<skill>.md` with at least three scenarios:
 ### 8. Validate, then work the definition-of-done checklist
 Run `bash scripts/validate.sh` from the repo root, then `claude plugin validate plugins/<plugin>`.
 Fix every warning before committing. **Then open `references/review-checklist.md` and work it
-line by line** — the validator only checks what a script can see (frontmatter shape, section
-presence, cross-link resolution). The checklist carries the guards that a script cannot: the
+line by line** — the validator only checks what a script can see (frontmatter shape, body
+length, cross-link resolution; it does *not* check that the seven sections are present or in
+order). The checklist carries the guards that a script cannot: the
 arithmetic-verification pass on every worked example, the reciprocal-link pass on the *older*
 side of every new seam, the trigger-collision scan, and the fresh-session trigger test. Every
 defect class that has survived a review in this library's history was one the validator was
@@ -146,11 +147,14 @@ well-ordered instructions beat exhaustive ones.
 
 **Know what the listing actually costs, because it decides whether your skill is findable at
 all.** Measured in this library by `python3 scripts/measure-listing-cost.py`: 121 skills' names +
-descriptions come to **109,662 characters ≈ 29,638 tokens ≈ 14.8% of a 200K context**, at a mean of
-~885 chars (~240 tokens) per description — not the ~100 tokens per skill an earlier version of this section claimed.
-(Token figures here are an estimate at ~3.7 characters/token, stated because the number is quoted
-elsewhere in the repo and an undisclosed divisor is how the first version of this paragraph came to
-disagree with `README.md`. Count with your provider's tokenizer if the exact figure matters.) The
+descriptions come to **≈110,000 characters ≈ 29,700 tokens ≈ 14.9% of a 200K context**, at a mean of
+~890 chars (~240 tokens) per description — not the ~100 tokens per skill an earlier version of this section claimed.
+That script counts characters and divides by ~3.7 chars/token, and the estimate runs **~30% light**
+against the harness's own tokenizer: summing `claude plugin details <plugin>` across all 14 plugins
+gives **≈38,800 tokens ≈ 19.4% of a 200K context**, which is the number to plan an install against
+(method in `docs/live-routing-and-degradation-2026-08-18.md`). Figures are quoted to two or three
+significant digits on purpose — they move with every description edit, so re-run the script rather
+than trusting a number written down here. The
 `Triggers:` lists alone are 22% of that spend. This has two consequences worth designing around:
 
 - **The listing degrades before it errors, and the trigger is a character budget, not a skill
@@ -163,7 +167,7 @@ disagree with `README.md`. Count with your provider's tokenizer if the exact fig
   testing their own skill uses, so the degradation is invisible from the inside. A trimmed skill's
   "Use when…" clause and every trigger phrase are simply absent from the router's context.
   Run `scripts/simulate-listing-budget.py` to see where your own library lands; for reference,
-  this one needs 113,645 characters for 121 descriptions and keeps **3** at the default budget.
+  this one needs ≈113,700 characters for 121 descriptions and keeps **3** at the default budget.
 - **Therefore the name must carry task signal.** Under name-only trimming, a skill named for a
   metaphor or a persona is unroutable, while one named for its task survives. Evocative names are
   legitimate — this library has several by design, invoked deliberately — but a skill whose *only*

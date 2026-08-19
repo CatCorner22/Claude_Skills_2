@@ -133,9 +133,13 @@ Construction rules:
 
 ## 5. Currencies of exchange
 
-Allan R. Cohen & David L. Bradford, *Influence Without Authority* (Wiley, 1989; 2nd ed.
-2005): influence over people you cannot command is **exchange**, powered by the law of
-reciprocity, denominated in currencies — what the other party actually values
+Allan R. Cohen & David L. Bradford first published the model as "Influence without
+authority: the use of alliances, reciprocity, and exchange to accomplish work,"
+*Organizational Dynamics* 17(3), 1989, 5–17; the book of the same name came from Wiley
+after it — catalogued 1990, though its copyright year is 1989 and some vendor records
+carry that date, so cite the article for 1989 and the book by its edition (2nd ed. 2005,
+3rd ed. 2017). Influence over people you cannot command is **exchange**, powered by the
+law of reciprocity, denominated in currencies — what the other party actually values
 [snippet-only]. Their five families:
 
 | Currency family | Examples you can genuinely offer |
