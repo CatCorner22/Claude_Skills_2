@@ -28,6 +28,15 @@ language · §4 Dual self-audit checklist · §5 Interaction notes
 ## §2 Forbidden patterns (flag and rewrite on sight)
 
 - "indemnify and hold harmless against any and all claims arising out of or relating to…"
+  — **flag, but do not cut on this skill's authority.** This is a risk-allocation provision
+  (SKILL.md step 4, second carve-out): "any and all" and "arising out of or relating to" are
+  fair game as ambiguity, but the verbs are not interchangeable filler. **"Defend" is a
+  distinct and often broader obligation than "indemnify"** in many jurisdictions — triggered by
+  what is alleged, not by what is finally owed — so a triplet trimmed to "indemnify" can delete
+  a duty worth more than the indemnity. Whether "hold harmless" adds anything is contested
+  (Adams says no; some courts read it as broader), which is itself the reason to propose rather
+  than excise. Draft the clearer version alongside the original, price each cut, and route it
+  to a lawyer in the governing jurisdiction. [canon attribution, jurisdiction-dependent.]
 - "null and void", "last will and testament", "due and payable"
 - "herein", "hereinafter", "said" (as an adjective), "aforesaid", "witnesseth"
 - Vague quantifiers without definition ("reasonable", "material", "substantially") when
@@ -38,7 +47,9 @@ language · §4 Dual self-audit checklist · §5 Interaction notes
 - Template clone language — identical soft/hard-tissue descriptions across clinical visits.
 
 For each: prefer the direct modern equivalent that states the intended meaning without the
-historical baggage.
+historical baggage — except where the pattern sits inside a risk-allocation provision or text a
+rule prescribes verbatim, where the two carve-outs in SKILL.md step 4 apply and the move is to
+propose alongside, never to excise.
 
 ## §3 Categories of contract language
 

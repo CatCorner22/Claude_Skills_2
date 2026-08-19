@@ -5,11 +5,25 @@
 > 'indemnify and hold harmless against any and all claims arising out of or relating to the
 > aforesaid services rendered hereunder.' Make it precise and litigation-resistant."
 
-Expected: skill loads; diagnoses the sources of misunderstanding first (doublet, "any and
-all" string, "aforesaid"/"hereunder" archaisms, unanchored scope); rejects the "tested
-language" defense explicitly; supplies a modern rewrite with one category of contract
-language per sentence; output itself is Smart Brevity-structured (point first, why it
-matters, scannable); flags any vague quantifier left undefined.
+Expected: skill loads; diagnoses the sources of misunderstanding first ("any and all"
+string, "aforesaid"/"hereunder" archaisms, unanchored scope); rejects the "tested language"
+defense for the ordinary wording; output itself is Smart Brevity-structured (point first,
+why it matters, scannable); flags any vague quantifier left undefined.
+
+**And recognizes this as a risk-allocation provision — step 4's second carve-out.** The
+clause is an indemnity, so the rewrite is offered **alongside** the original with the risk of
+each cut priced, not substituted for it, and the decision routed to a lawyer in the governing
+jurisdiction. Specifically: it must NOT quietly collapse "indemnify and hold harmless" (or
+add/remove "defend") as a mere doublet — **"defend" is a distinct and often broader
+obligation than "indemnify"** in many jurisdictions, so treating the verbs as interchangeable
+filler is the failure mode this trigger tests for. It should name that these clauses are
+construed strictly and against the drafter, so a readability edit that narrows scope by
+accident favours the counterparty. Reformatting (structure, white space, bolding a cap,
+one contract-language category per sentence in the *proposed* version) is correct and
+expected; excision on this skill's own authority is not.
+
+A response that returns a single confident "here is the improved clause" replacing the
+original — however much clearer — fails this eval.
 
 ## 2. Near-miss (register guard — should load adams-plain-grade instead)
 > "Rewrite this billing letter so our patients can understand it — plain English, low

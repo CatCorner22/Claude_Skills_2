@@ -13,7 +13,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -66,6 +66,39 @@ governs document-level attention (lead with the point, format for scanning, stop
      the required text, and route the decision to a lawyer.** Never silently modernise language
      that a rule requires; the point of this skill is drafting that survives, and a clearer
      clause that forfeits a safe harbour has not survived.
+   - **Second carve-out: risk-allocation provisions, where the caselaw is the specification.**
+     Indemnities, defence obligations, limitations of liability, exculpatory and
+     hold-harmless clauses, warranty disclaimers, and insurance-procurement covenants are not
+     ordinary business terms whose litigation history is a failure log. They are the
+     provisions courts construe *strictly and against the drafter*, and their enforceability
+     often turns on the presence of particular words. Three consequences that cut directly
+     against this skill's default rules:
+     - **The doublet may not be a doublet.** "Indemnify, defend, and hold harmless" looks like
+       exactly the archaic triplet step 2 says to cut — but in many jurisdictions **"defend" is
+       a distinct and broader obligation than "indemnify"**: the duty to defend is triggered by
+       what is *alleged* and arises at the outset, while indemnity turns on what is ultimately
+       *owed*. Deleting the word as redundancy can silently delete a duty worth more than the
+       indemnity itself. (Whether "hold harmless" adds anything to "indemnify" is genuinely
+       contested — Adams argues it does not, and some courts read it as broader. That
+       disagreement is the reason to flag rather than to cut.) [canon attribution — the
+       defend/indemnify distinction is standard doctrine, stated here without re-verification;
+       it is jurisdiction-dependent.]
+     - **Some allocations require express, conspicuous words to work at all.** An indemnity
+       covering the indemnitee's *own* negligence must, in a number of jurisdictions, say so
+       expressly and conspicuously or it is unenforceable as to that risk — Texas's express
+       negligence doctrine is the sharpest form [canon attribution, not re-verified]. The
+       belt-and-suspenders phrasing that offends Adams is sometimes the element that makes the
+       clause operative.
+     - **Contra proferentem inverts the usual incentive.** Ambiguity in these clauses is
+       resolved against the party who drafted them, so tightening one for readability while
+       narrowing its scope by accident hands the counterparty the construction.
+     **So: in risk-allocation language, do not cut on this skill's authority.** Diagnose as
+     normal — name the ambiguity, the archaism, the buried actor — and produce the clearer
+     draft *alongside* the original, with the specific risk each proposed cut carries, for a
+     lawyer in the governing jurisdiction to decide. Reformatting for scanning (structure,
+     white space, defined terms, bold on a liability cap) is safe and valuable here; **excision
+     is not.** Where the skill's axiom and the caselaw disagree, the caselaw is the
+     specification.
 5. **Clinical notes**: controlled vocabulary, explicit
    findings-to-plan chains, zero ambiguous modifiers, no template-clone language (identical
    soft/hard-tissue descriptions across visits are a defensibility hole); Smart Brevity
@@ -82,7 +115,17 @@ Litigation over meaning is evidence that the wording left room to fight over —
 the courts" describes a failure history, not a warranty. A court's construction resolves one
 dispute on one record; it does not certify the words for your contract, your facts, or your
 jurisdiction. That is why the modern precise formulation is *safer* than the traditional
-one, not riskier: it leaves nothing to interpret. Smart Brevity is the same
+one, not riskier: it leaves nothing to interpret.
+
+**Know where that axiom stops.** It holds for language whose only job is to convey meaning —
+which is nearly everything. It does not hold for the two categories in step 4: text a rule
+prescribes word-for-word, and risk-allocation provisions whose effect is fixed by rules of
+construction rather than by ordinary reading. In that second category the relationship
+inverts. A clause has been litigated *because* it is the operative allocation of a real risk,
+and the resulting caselaw is not a record of drafting that failed — it is the specification
+telling you which words carry the allocation. Clarity there is still worth pursuing; it is
+simply no longer the thing that decides whether the clause works, so it stops being this
+skill's call to make alone. Smart Brevity is the same
 respect applied to attention instead of meaning — the reader under time pressure gets the
 point first, the reason second, and a scannable structure for everything else, because a
 precise document nobody finishes still fails. The two systems compose cleanly: Adams decides
@@ -92,7 +135,14 @@ itself, so this skill's own text follows its rules.
 
 ## Common mistakes
 - Defending a formula because it is "tested" or traditional → that history is the argument
-  against it; supply the modern equivalent.
+  against it; supply the modern equivalent — *unless* it is prescribed verbatim by a rule or
+  is a risk-allocation provision, the two carve-outs in step 4.
+- Cutting "indemnify, defend, and hold harmless" down to "indemnify" as a triplet → "defend"
+  is a separate and often broader obligation in many jurisdictions; propose, do not excise,
+  and let a lawyer in the governing jurisdiction decide.
+- Tightening an indemnity or liability cap for readability without pricing the scope change →
+  these clauses are construed strictly and against the drafter, so an accidental narrowing is
+  a gift to the counterparty; reformat freely, excise never.
 - Vague quantifiers ("reasonable", "material", "substantially") where precision is required
   → define them or replace them with the measurable intent.
 - Long introductory clauses that bury the main point → the point comes first, always.

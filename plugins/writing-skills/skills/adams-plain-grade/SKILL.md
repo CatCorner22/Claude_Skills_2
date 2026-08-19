@@ -12,7 +12,7 @@ description: >-
   simplify this letter, accessible language, patient materials, low literacy, simplest
   accurate version.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search
@@ -69,6 +69,17 @@ version that still keeps the exact meaning.
      **alongside** rather than instead of the required text, and route the decision to a
      lawyer. Same carve-out as `writing-skills:adams-smart-brevity`; a plain-language score is
      never worth a forfeited safe harbour.
+   - **Carve-out: risk-allocation provisions are out of scope for simplification too.**
+     Indemnities, defence obligations, liability caps, exculpatory and hold-harmless clauses,
+     warranty disclaimers and insurance covenants are construed strictly and against the
+     drafter, and some allocations require express, conspicuous wording to be enforceable at
+     all. Notably, **"defend" is a distinct and often broader obligation than "indemnify"** in
+     many jurisdictions, so trimming "indemnify, defend, and hold harmless" as a doublet can
+     delete a real duty. Plain-language *explanation* of such a clause is valuable — write it
+     next to the clause, never over it — and the reformatting this skill does best (structure,
+     white space, one idea per sentence, bolding a cap) is safe. Rewriting the operative words
+     is a lawyer's call in the governing jurisdiction. Same carve-out as
+     `writing-skills:adams-smart-brevity` step 4. [canon attribution, jurisdiction-dependent.]
 5. **Check the grade.** 5th grade preferred: sentences average 10–14 words, everyday 1–2
    syllable words, and Flesch Reading Ease 90 or better **or** Flesch-Kincaid grade 5.0 or
    below — either one passes (reference §1). Neither is a window, but they run in opposite
@@ -101,8 +112,12 @@ adult explaining something is doing the work the numbers only approximate.
 
 ## Common mistakes
 - Fuzzing the meaning to hit 5th grade → meaning always wins; take the 8th-grade fallback.
-- Reaching for "tested" or traditional formulas (herein, aforesaid, indemnify-and-hold-
-  harmless doublets) → use the simplest accurate modern word.
+- Reaching for "tested" or traditional formulas (herein, aforesaid) → use the simplest
+  accurate modern word.
+- Simplifying "indemnify, defend, and hold harmless" as a doublet → "defend" is a separate,
+  often broader duty in many jurisdictions; explain the clause in plain words beside it, do
+  not rewrite the operative words. Risk-allocation provisions are a carve-out, like
+  rule-prescribed text.
 - Explaining a technical term late, or never → say it once, explain it right away in plain
   words.
 - Long glue sentences with stacked clauses → one main idea per sentence; subject, verb,
