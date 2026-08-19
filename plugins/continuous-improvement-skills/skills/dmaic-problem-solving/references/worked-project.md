@@ -121,7 +121,10 @@ ordinary noise and must not be reported as success.
 
 **Tollgate outcome:** passed. Definition frozen and version-stamped, 12 subgroups of data (thin —
 the desk's rule is 20–25 subgroups before limits are trusted, so the limits were flagged
-provisional and recomputed at week 20 without material change).
+provisional and stayed provisional: the rollout landed before another eight to thirteen
+*pre-change* weeks could accumulate, and adding post-rollout weeks to a baseline would fold the
+improvement into the very limits it is being measured against. The first firm limits this project
+owns are the post-change ones computed in Control.)
 
 ---
 
