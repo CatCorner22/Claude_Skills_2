@@ -13,7 +13,7 @@ description: >-
   process map, SIPOC, lead time, cycle time, waste, flow, flow efficiency, eight wastes, %C&A,
   where does all the time go.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # Value stream mapping

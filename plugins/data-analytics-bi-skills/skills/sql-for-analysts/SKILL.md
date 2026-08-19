@@ -11,7 +11,7 @@ description: >-
   function, OVER clause, PARTITION BY, running total, moving average, rank, lag, lead, CTE, subquery,
   QUALIFY, slow query, optimize query, group by grain.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # SQL for analysts

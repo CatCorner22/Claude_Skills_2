@@ -106,6 +106,25 @@ for dir in plugins/*/skills/*/; do
     done <<< "$dupkeys"
   fi
 
+  # metadata.version: exactly one, three-part semver.
+  #
+  # Two real defects motivate both halves. A skill with no version cannot be bumped by any
+  # script and cannot tell an installed user their copy is stale. And a version written
+  # two-part ("1.0") or as a date ("2026.09") does not match a bump script's semver regex —
+  # which is precisely how an earlier bump run fell through to its "add a metadata block"
+  # branch and produced a SECOND `metadata:` key, silently discarding the first block's
+  # version and `author` while every gate stayed green.
+  vcount="$(printf '%s\n' "$fm" | grep -cE '^  version:' || true)"
+  if [ "$vcount" -eq 0 ]; then
+    err "$base: no metadata.version — every skill carries one so a change can be versioned"
+  elif [ "$vcount" -gt 1 ]; then
+    err "$base: $vcount version lines under metadata; expected exactly one"
+  else
+    ver="$(printf '%s\n' "$fm" | grep -m1 -oE '^  version: *"[^"]*"' | sed 's/.*"\(.*\)"/\1/')"
+    printf '%s' "$ver" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' \
+      || err "$base: version '$ver' is not three-part semver (a bump script will not match it)"
+  fi
+
   # name
   name="$(printf '%s\n' "$fm" | awk -F':' '/^name:/{sub(/^name:[[:space:]]*/,""); print; exit}' | tr -d '"'"'"' ' )"
   if [ -z "$name" ]; then
@@ -330,5 +349,20 @@ if [ -f scripts/check-trigger-test.py ] && [ -f docs/trigger-test.md ]; then
 fi
 
 echo
+# Advisory: a SKILL.md whose content changed against the base branch but whose version line
+# did not. The checklist requires the bump; nothing enforced it, so nine skills shipped a
+# content change with a stale version and it took a reviewer to notice. Skipped silently
+# outside a git checkout or when the base ref is not present (a fresh clone, a tarball).
+base_ref="${VALIDATE_BASE_REF:-origin/main}"
+if git rev-parse --git-dir >/dev/null 2>&1 && git rev-parse --verify -q "$base_ref" >/dev/null 2>&1; then
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    [ -f "$f" ] || continue           # deleted/renamed away
+    if ! git diff "$base_ref" -- "$f" | grep -qE '^[+-] *version:'; then
+      note "$(basename "$(dirname "$f")"): content changed vs $base_ref with no metadata.version bump"
+    fi
+  done <<< "$(git diff --name-only "$base_ref" -- 'plugins/*/skills/*/SKILL.md' 2>/dev/null)"
+fi
+
 echo "== Summary: $errors error(s), $warns warning(s), $notes note(s) =="
 [ "$errors" -eq 0 ]

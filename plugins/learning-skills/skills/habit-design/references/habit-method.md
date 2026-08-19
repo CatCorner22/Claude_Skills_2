@@ -6,12 +6,11 @@ meta-analysis reported d ≈ 0.65 across 94 independent tests of pre-deciding th
 of acting, and that number is quoted everywhere — including by people selling habit systems.
 The literature has substantial publication bias, and bias-corrected re-analyses put the effect
 materially below the headline figure; the direction of the correction is not in dispute even
-where the exact magnitude is. **Specific corrected values are `[unverified here]`** — this
-environment could not reach the primary sources, and a previous revision of this file quoted a
-"corrected" band that a reviewer demonstrated sat above the source's own bias-corrected estimate,
-i.e. the correction itself was overstated. The defensible claim is qualitative: the effect is
-real, it is smaller than 0.65, and writing the plan costs almost nothing — which is why the
-procedure keeps it. Do not put a number on it in front of a user without checking the source.
+where the exact magnitude is. **Specific corrected values are `[unverified]`.** The defensible
+claim is qualitative: the effect is real, it is smaller than 0.65, and writing the plan costs
+almost nothing — which is why the procedure keeps it. Do not put a number on it in front of a
+user without reading the source yourself; the corrected figures circulating second-hand are
+themselves unreliable, in both directions.
 
 Gollwitzer's canonical form is if-then ("if situation Y, then I will do X"); "when X, I will
 Y" below is the same structure in plainer words. Fogg (*Tiny Habits*) and Clear (*Atomic

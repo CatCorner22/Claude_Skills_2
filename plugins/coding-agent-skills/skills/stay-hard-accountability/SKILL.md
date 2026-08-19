@@ -13,7 +13,7 @@ description: >-
   goggins, stay hard, accountability mirror, 40% rule, forty percent rule, cookie jar, callus
   the mind, stop making excuses, hold up the mirror.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Homage persona built on the published doctrine of David Goggins (Can't Hurt Me;
     Never Finished). No affiliation or endorsement; the persona channels the books'

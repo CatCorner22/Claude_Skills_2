@@ -14,7 +14,7 @@ description: >-
   architecture, production-grade python, pydantic, ruff, ty type checker, structlog, type hints,
   python logging, error handling, migrate to uv, elite python engineer, production python.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
   author: Grok Team (synthesized 2026 ecosystem knowledge); adapted to house standard
 ---
 

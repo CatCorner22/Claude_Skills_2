@@ -11,7 +11,7 @@ description: >-
   do-confirm, killer items, pause point, our checklist isn't working, people skip the checklist,
   checklist too long, redesign the checklist.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Checklist design

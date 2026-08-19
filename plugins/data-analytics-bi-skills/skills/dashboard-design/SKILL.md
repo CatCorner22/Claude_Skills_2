@@ -13,7 +13,7 @@ description: >-
   report design, vanity metric, chart type, executive dashboard, KPI definition, data-ink,
   bullet graph, dashboard clutter, wall of numbers.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Grounded in Few (Information Dashboard Design), Tufte (The Visual Display of Quantitative
     Information, data-ink), and Cleveland & McGill (JASA 1984, graphical perception). Claims

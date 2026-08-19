@@ -12,7 +12,7 @@ description: >-
   barrier analysis, top event, lines of defense, what stops this from happening, escalation factor,
   HAZOP, guideword.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Bowtie barrier analysis

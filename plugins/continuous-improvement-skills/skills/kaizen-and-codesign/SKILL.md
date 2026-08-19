@@ -13,7 +13,7 @@ description: >-
   workshop, rapid improvement event, gemba, gemba walk, facilitation, continuous improvement
   event.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Kaizen and co-design

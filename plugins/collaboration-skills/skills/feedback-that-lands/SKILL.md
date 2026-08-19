@@ -15,7 +15,7 @@ description: >-
   feedback, SBI, feedback conversation, they got defensive, receiving feedback,
   performance conversation, code review tone, hard conversation with a teammate.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Feedback that lands (giving and receiving)

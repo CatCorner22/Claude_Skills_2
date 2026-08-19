@@ -13,7 +13,7 @@ description: >-
   rearrange the formula, algebra, linear equations, word problem, isolate the variable,
   breakeven, two unknowns, order of operations, PEMDAS.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Algebra and formulas

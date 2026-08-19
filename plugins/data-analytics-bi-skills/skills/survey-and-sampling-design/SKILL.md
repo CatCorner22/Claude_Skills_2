@@ -13,7 +13,7 @@ description: >-
   questionnaire, sample size, sampling plan, response rate, nonresponse bias, stratified
   sampling, quota sampling, convenience sample, question wording, Likert, margin of error.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §3), whose anchors were verified

@@ -13,7 +13,7 @@ description: >-
   class, base-rate anchor, base rate, optimism bias, planning fallacy, how long do projects
   like this actually take, uplift the estimate.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Reference-class forecasting (the outside view)

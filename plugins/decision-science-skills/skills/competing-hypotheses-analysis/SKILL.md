@@ -13,7 +13,7 @@ description: >-
   competing hypotheses, hypothesis matrix, which explanation fits the evidence, diagnostic
   evidence, rule out causes, weigh rival explanations, why is this break really happening.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Competing-hypotheses analysis (the hypothesis matrix)

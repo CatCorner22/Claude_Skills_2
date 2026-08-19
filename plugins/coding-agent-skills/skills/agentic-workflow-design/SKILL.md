@@ -10,7 +10,7 @@ description: >-
   or a multi-step LLM workflow. Triggers: agent, autonomous agent, agentic workflow, tool use,
   orchestration, multi-step, pipeline, human in the loop, guardrails.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Agentic workflow design

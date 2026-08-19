@@ -14,7 +14,7 @@ description: >-
   review this code, clean this up, audit this, scope this project, break into phases,
   stress test, improve this process, script wizard.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   author: User-drafted workflow spec; adapted to house standard
 ---
 

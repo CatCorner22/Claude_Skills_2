@@ -10,6 +10,8 @@ description: >-
   understood, pruned, or safely demolished, or when nobody knows which parts are alive.
   Triggers: software archaeology, excavate, dig into this legacy, harris matrix,
   stratigraphy, which of these are dead, scream test, who wrote this and why, safe to delete.
+metadata:
+  version: "1.0.0"
 ---
 
 # Software archaeology (excavate before you demolish)

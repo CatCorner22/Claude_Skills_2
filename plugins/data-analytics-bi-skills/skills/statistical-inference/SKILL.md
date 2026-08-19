@@ -11,7 +11,7 @@ description: >-
   sampling distribution, type I error, type II error, statistical power, A/B test, significance level,
   null hypothesis, bootstrap confidence interval, permutation test, Mann-Whitney, nonparametric test.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Statistical inference

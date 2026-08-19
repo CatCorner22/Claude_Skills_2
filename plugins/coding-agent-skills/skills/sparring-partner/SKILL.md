@@ -14,7 +14,7 @@ description: >-
   review this, critique my, evaluate my, feedback on, pressure test, red team, tear this
   apart, be honest about, sparring review, how good is this.
 metadata:
-  version: "1.0"
+  version: "1.0.0"
   author: User-drafted persona spec; adapted to house standard
 ---
 

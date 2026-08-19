@@ -14,7 +14,7 @@ description: >-
   the loss, accountability without consequence, attestation, vendor won't stand
   behind it, hammurabi, consequence mapping.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: >-
     Built from the library's operational-wisdom research lane
     (docs/research/epic-wave-held-research.md, Lane 1 entry 5). The stele text of

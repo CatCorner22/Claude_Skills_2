@@ -2,6 +2,13 @@
 
 A skill is done when every box is checked.
 
+## Contents
+- [Structure](#structure)
+- [Frontmatter](#frontmatter)
+- [Content (do + teach)](#content-do-teach)
+- [Evals & validation](#evals-validation)
+- [Trigger test (in a fresh session) — the only check that validates routing](#trigger-test-in-a-fresh-session-the-only-check-that-validates-routing)
+
 ## Structure
 - [ ] Folder is `plugins/<plugin>/skills/<skill-name>/` and contains `SKILL.md`.
 - [ ] `name` frontmatter equals the folder name.

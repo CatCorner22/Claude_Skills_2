@@ -14,7 +14,7 @@ description: >-
   categories, tidy data, reshape, pivot, join hygiene, fan-out, data quality fix, dirty
   data, unpivot, inconsistent categories, analysis-ready.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
   source: >-
     The tidy-data structure rules follow Wickham, "Tidy Data", Journal of Statistical
     Software (2014); the missing-data mechanism vocabulary (MCAR/MAR/MNAR) is Rubin's,

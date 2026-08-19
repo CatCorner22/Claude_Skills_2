@@ -14,7 +14,7 @@ description: >-
   down, I don't trust this number, navigate without instruments, what would we expect
   to see, position without the data, dead reckoning.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   source: >-
     Built from the library's operational-wisdom research lane
     (docs/research/epic-wave-held-research.md, Lane 1 entry 1). The mechanism is

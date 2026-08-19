@@ -13,7 +13,7 @@ description: >-
   excel python, pandas to_excel, format excel with python, excel report script, xlsxwriter,
   automate spreadsheet, excel formulas python, excel template python, ExcelWriter.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Excel automation with Python

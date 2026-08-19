@@ -10,7 +10,7 @@ description: >-
   five focusing steps, drum-buffer-rope, exploit the constraint, everything is waiting on X, the
   whole close waits on one task, throughput accounting.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Theory of constraints

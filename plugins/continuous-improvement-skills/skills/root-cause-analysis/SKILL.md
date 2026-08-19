@@ -10,7 +10,7 @@ description: >-
   sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and effect, Pareto, RCA, why did
   this happen, recurring problem, keeps happening, corrective action, containment, verify the cause.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Root-cause analysis

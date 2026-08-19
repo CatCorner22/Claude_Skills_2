@@ -14,7 +14,7 @@ description: >-
   negotiation, push back on this fee increase, renegotiate the contract, calibrated
   questions, tactical empathy, accusation audit, talk them down.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Principled negotiation

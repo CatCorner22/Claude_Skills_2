@@ -12,7 +12,7 @@ description: >-
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Pre-mortem (prospective hindsight)

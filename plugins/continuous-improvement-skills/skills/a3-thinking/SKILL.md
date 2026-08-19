@@ -14,7 +14,7 @@ description: >-
   report, A3 problem solving, PDCA, plan do check act, problem solving, countermeasure,
   one-page proposal, nemawashi.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # A3 thinking

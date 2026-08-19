@@ -14,7 +14,7 @@ description: >-
   reflective-learner instead. Triggers: after-action review, AAR, hot wash, team debrief,
   sustain and improve, what should we do differently next close.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # After-action review (AAR)
