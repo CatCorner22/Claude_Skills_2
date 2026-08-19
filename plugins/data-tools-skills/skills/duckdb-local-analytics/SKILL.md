@@ -56,14 +56,18 @@ SELECT * FROM read_csv('export.csv', header=true, delim=';',
 
 ```sql
 CREATE OR REPLACE TABLE recon AS
-SELECT ref_no,                       -- keep the key: break rows are NULL on one side
+SELECT ref_no,                       -- USING coalesces the key, so it is never NULL here
+       l.ref_no IS NULL AS stmt_only,   -- flag the break sides from the *keys*, not the amounts
+       s.ref_no IS NULL AS ledger_only,
        s.line_id, s.amount AS stmt_amt, l.amount AS ledger_amt,
        coalesce(s.amount,0) - coalesce(l.amount,0) AS diff
 FROM read_csv_auto('statement.csv') s
 FULL OUTER JOIN read_csv_auto('ledger.csv') l USING (ref_no);
--- Inspect the unmatched sides before trusting any inner join:
-SELECT count(*) FILTER (WHERE ledger_amt IS NULL) AS stmt_only,
-       count(*) FILTER (WHERE stmt_amt IS NULL)  AS ledger_only FROM recon;
+-- Inspect the unmatched sides before trusting any inner join. Count the flags, not
+-- `ledger_amt IS NULL`: a matched row whose amount cell was empty is a NULL amount, and
+-- counting it as unmatched inflates the break count and sends you hunting a row that joined.
+SELECT count(*) FILTER (WHERE stmt_only)   AS stmt_only,
+       count(*) FILTER (WHERE ledger_only) AS ledger_only FROM recon;
 ```
 
 5. **Persist results where the next step needs them.** `COPY recon TO 'recon.parquet'` (compact,
@@ -90,7 +94,7 @@ also why Parquet (columnar on disk) is its natural partner and why converting a 
 Parquet once pays back every subsequent query. And because it's still SQL over inferred schemas,
 the flat-file disciplines carry over unchanged: declare types where inference can lie (IDs!),
 and audit joins with unmatched counts, because a `FULL OUTER JOIN` is a reconciliation and the
-NULL sides are your breaks.
+rows that carry a key on only one side are your breaks.
 
 ## Common mistakes
 - Letting `read_csv_auto` type an ID column numeric → leading zeros gone; force `VARCHAR` in `types=`.

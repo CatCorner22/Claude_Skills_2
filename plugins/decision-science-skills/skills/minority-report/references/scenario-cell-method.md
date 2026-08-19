@@ -69,16 +69,21 @@ bar as the favorites:
   which restates objections before deciding.)
 
 ## 5. The one-variable turn
-Hold all else fixed; turn one variable; record what flips. Table format:
+Hold all else fixed; turn one variable; record what flips. What flips is the CHOICE,
+not the scenario label: turning a variable that is itself a scenario axis relocates
+you between scenarios by construction (growth flat → +50% with the vendor held at
+"stagnates" *is* the move from Steady State to Growth Squeeze), so a row written in
+scenario names can only ever read YES and says nothing about whether the variable
+earns monitoring. Rank the options under each resolution instead. Table format:
 
-| Variable turned | Turn applied | Ranking before | Ranking after | Flips? |
+| Variable turned | Turn applied | Best choice before | Best choice after | Flips? |
 |---|---|---|---|---|
-| Growth | flat → +50% | Steady State favored | Growth Squeeze favored | YES |
-| Vendor prices | stable → 3× at renewal | keep favored | portability-first favored | YES |
-| One dev leaves | staffed → short | build viable | build unviable | YES |
+| Growth | flat → +50% | keep (a build would be a luxury) | build (it now pays for itself) | YES |
+| Vendor prices | stable → 3× at renewal | keep | portability first | YES |
+| One dev leaves | staffed → short | build | keep (a build is unviable short-staffed) | YES |
 | Office paint color | any | — | — | no |
 
-Read the table two ways: variables that flip rankings deserve monitoring and
+Read the table two ways: variables that change the best choice deserve monitoring and
 option-preserving moves (the "Price Cliff" flip says: negotiate data export NOW,
 regardless of the build decision — a robust move that wins across futures);
 variables that flip nothing are officially allowed to stop consuming attention.
