@@ -82,8 +82,12 @@ itself when a source is load-bearing. Read its provenance line as one of four di
 Two limits are structural. The script's country table covers common research countries and their
 larger cities only, so anything outside it reads as *unrecognized* — which is a prompt to resolve it
 yourself, never a finding of "excluded" and never a clean pass. And a city is only ever a fallback
-signal: a country name in the same institution beats it, and a city sitting in a US postal address
-("Moscow, ID 83844") is read as American, because that one is the University of Idaho and not Russia.
+signal: a country name in the same institution beats it, and a city sitting in a *complete* US
+postal address ("Moscow, ID 83844, USA") is read as American, because that one is the University of
+Idaho and not Russia. Note the exact behaviour, which is deliberately conservative: the state code
+must sit immediately after the city AND be followed immediately by a ZIP or the country name. On a
+bare "Moscow, ID 83844" with no country, the script reports **UNRECOGNIZED** rather than either
+country — it will not guess, and the ambiguity comes to you.
 A city that resolves without either of those checks firing is still the weakest signal the script
 has — confirm it before letting it decide anything.
 
