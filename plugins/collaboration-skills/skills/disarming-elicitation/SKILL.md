@@ -15,7 +15,7 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
@@ -36,14 +36,15 @@ professions: motivational interviewing trains a detective-named version of it as
 clinical staple [clinical-pedagogy], the FBI's counterintelligence elicitation brochure
 lists "feigned ignorance" as a formal technique [gov], internal-investigations training
 teaches the same questioning style [industry], and technical writers use it for knowledge
-elicitation [practitioner]. Its exit move has a peer-reviewed clinical twin, the AAFP
+elicitation [practitioner]. Its exit move has a named clinical twin, the AAFP
 "doorknob phenomenon": the most important disclosure comes when the interview seems over
-[peer-reviewed, AAFP].
+[AAFP clinical commentary].
 
 **The ethics rail, named plainly:** this is a stance for making it *easy* for willing
 people to share what they know — surfacing tacit knowledge they would gladly give if
 asking were less costly. It is not for extracting secrets, and it never involves deception
-about who you are or why you are asking. The FBI brochure is cited because it proves the
+about who you are or why you are asking — including implied deception, which is what a
+confidentiality assurance becomes when the speaker cannot keep it (step 2). The FBI brochure is cited because it proves the
 stance is real and effective — it is a *warning* document, teaching readers to recognize
 elicitation used against them — evidence, not license. The rail is expanded in
 `references/elicitation-method.md`.
@@ -80,10 +81,24 @@ the expanded ethics rail are in `references/elicitation-method.md`.
    list of what the documents *cannot* tell you — that list is what the questions must
    surface. Check the rail here: the person is willing, and they know who you are and why
    you are asking. If either is false, stop; this skill has nothing for you.
-2. **Lower the stakes before the first question.** Open by signaling harmlessness: you
-   are there to learn, not to grade; their answers won't be quoted against them; you are
-   confused and they are the expert. Status runs downhill in an interview — hand it to
-   them and keep it there.
+2. **Lower the stakes before the first question — with a promise you can actually keep.**
+   Open by signaling harmlessness: you are there to learn, not to grade; you are confused
+   and they are the expert. Status runs downhill in an interview — hand it to them and keep
+   it there.
+   - **Say what you will do with the notes, not that nothing can happen.** "This is for my
+     own understanding — I'm not writing your name against anything" is a promise you
+     control. "Their answers won't be quoted against them" usually is not: you rarely own who
+     reads your notes, and you cannot bind a manager, a lawyer, or a court. A confidentiality
+     assurance you cannot honour is worse than none, because it is the assurance that made
+     them talk.
+   - **A second rail, alongside the willing/known-purpose one: if this is an investigation,
+     an HR, audit, compliance, or regulatory matter — or anything where what you learn may be
+     reported — say so, in those words, before the first question.** The disarming stance
+     works *because* the stakes are genuinely low; using it where they are not is the misuse
+     the FBI document cited below exists to warn people about. In those settings the honest
+     move is often not to run this skill at all, but to name the process, tell the person what
+     protections and obligations apply, and let them decide what to say — and if they may need
+     their own representation, to say that too.
 3. **Open naive.** "Help me understand how a request actually moves from X to Y" beats
    "walk me through the approval matrix." Broad, genuinely curious, jargon-free questions
    invite the expert to educate; precise official-sounding ones invite them to recite.
@@ -102,10 +117,10 @@ the expanded ethics rail are in `references/elicitation-method.md`.
 7. **Close formally — then the doorknob.** Thank them, shut the notebook, let the
    interview visibly end. Then, casually, one more question — the one you actually came
    for, or simply "is there something else I should have asked about?" — "something," not
-   "anything," because the negative phrasing invites a no and tested no better than not
+   "anything," because "any" is the word that invites a no and tested no better than not
    asking at all [peer-reviewed]. Post-closure answers are the least rehearsed of the
-   whole session; family medicine trains for exactly this moment because that is when the
-   real disclosure comes [peer-reviewed, AAFP].
+   whole session; family medicine has a name for exactly this moment because that is when
+   the real disclosure comes [AAFP clinical commentary].
 8. **Capture verbatim and replay for confirmation.** Record the expert's exact words —
    especially anything surfaced by a deliberate-error restatement — and read the key
    claims back before you rely on them, so the technique never leaves a wrong number
@@ -141,15 +156,18 @@ produce movement; prosecuted ones produce defense.
 
 The doorknob close works because rehearsal ends when the interview does. While the
 session is officially on, the expert manages an impression; the moment it visibly ends,
-the performance stops, and what surfaces next is unguarded. The AAFP literature
-documents this as the doorknob phenomenon — the most consequential disclosure arriving as
-the visit closes — and the trained remedy is deliberately inviting it rather than
-treating it as an interruption [peer-reviewed, AAFP]. The invitation's wording carries
-much of the effect: a randomized trial of that solicitation found "is there *something*
-else you want to address today?" left roughly 78% fewer concerns unmet, while the
-"*anything* else" form was indistinguishable from no prompt at all — "any" is a question
-shaped for the answer no [peer-reviewed]. The same mechanism is why the skill's last
-question is casual and why it comes *after* the notebook shuts.
+the performance stops, and what surfaces next is unguarded. The AAFP commentary names
+this the doorknob phenomenon — the most consequential disclosure arriving as the visit
+closes — and its advice is to treat that disclosure as material to pursue rather than an
+interruption to deflect [AAFP clinical commentary]. Inviting it on purpose is the
+adjacent move, and the invitation's wording carries much of the effect: a randomized
+trial of a mid-visit solicitation found "is there *something* else you want to address in
+the visit today?" left roughly 78% fewer concerns unmet, while the "*anything* else" form
+was indistinguishable from no prompt at all — a question built on "any" is shaped for the
+answer no [peer-reviewed]. Borrow the wording rather than the effect size: that trial solicited
+further concerns mid-visit from patients, not coverage of your questions from a colleague
+after the close. The same mechanism is why the skill's last question is casual and why it
+comes *after* the notebook shuts.
 
 The stance is symmetric, which is the final reason the rail matters: the identical moves
 appear in a counterintelligence warning brochure precisely because they work on people
@@ -161,6 +179,12 @@ with a memory.
 ## Common mistakes
 - Playing dumb theatrically → the stance is genuine curiosity with status handed over,
   not an act; experts smell performance and it reads as mockery.
+- Promising "this won't be used against you" when you don't control who reads your notes →
+  scope the promise to what you actually do with them; an assurance you cannot honour is the
+  thing that made them talk.
+- Running the disarming stance in an investigation, HR, audit, or regulatory conversation →
+  name the process instead; low stakes are what makes the stance honest, and asserting them
+  falsely is the misuse the source document warns against.
 - Prosecuting a contradiction ("but earlier you said…") → hold it as your own confusion;
   you want the discrepancy examined, not defended.
 - Filling silence → the pause after the first answer is where elaboration lives; count
@@ -190,7 +214,7 @@ git-ignored and never committed.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/disarming-elicitation.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/disarming-elicitation.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

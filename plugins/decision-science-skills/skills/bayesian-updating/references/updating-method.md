@@ -87,8 +87,9 @@ Readings that matter for the decision:
 - The alarm moved the belief from 2% to ~15.5% — a real update (LR = 9; see §5), *and*
   ~5 of every 6 fired flags are still false. Both statements are true at once; decisions
   need both.
-- Cross-check the table before trusting it: rows must sum (180+20 = 200; 980+8,820 =
-  9,800). A table that doesn't sum is a wrong posterior waiting to be quoted.
+- Cross-check the table before trusting it: each hypothesis column must sum to its header
+  (180+20 = 200; 980+8,820 = 9,800), and the flagged row to its total (180+980 = 1,160). A
+  table that doesn't sum is a wrong posterior waiting to be quoted.
 - The decision threshold is separate from the posterior: if investigating costs little and
   a missed issue costs much, 15.5% may warrant action; if investigation is expensive,
   maybe only a second, independent signal does. Write the threshold next to the question.

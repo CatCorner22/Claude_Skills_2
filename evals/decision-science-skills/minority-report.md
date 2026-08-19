@@ -9,10 +9,11 @@ Expected: loads the precog cell; frames the decision + horizon + good-outcome li
 first; sorts near-certainties from critical uncertainties; builds 3–5 named,
 structurally different, Tuesday-concrete futures (not best/expected/worst); files a
 full-strength minority report that dissents structurally from the room's lean; runs
-the one-variable turn (caseload doubling explicitly — which rankings flip); flags
-robust moves that win across futures; reflexivity line per scenario; probabilities
-only as base-rate bands or honest ranking; ends with armed tripwires
-(observable/watched/thresholded) and the decision log with a next review trigger.
+the one-variable turn (caseload doubling explicitly — which favored CHOICE it flips,
+not which scenario label); flags robust moves that win across futures; reflexivity
+line per scenario; probabilities only as base-rate bands or honest ranking; ends
+with armed tripwires (observable/watched/thresholded) and the decision log with a
+next review trigger.
 
 ## 2. Near-miss (adversary-play guard)
 > "Set up a war game where you play opposing counsel trying to beat our motion

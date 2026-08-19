@@ -319,6 +319,27 @@ Manual checks must include:
 
 Automated success does not prove accessibility.
 
+House addendum (not part of the verbatim spec): the thirteen checks above are a floor, and
+three criteria that WCAG 2.2 *added* are not among the things they name. Add them when the
+target is 2.2 AA, because nothing in the automated list catches them either:
+
+14. Verify focus is not entirely hidden by author content — sticky headers and footers,
+    cookie banners, chat widgets (**2.4.11 Focus Not Obscured (Minimum), AA**). Tab the
+    critical path with the sticky chrome present, not with it scrolled away.
+15. Verify every drag interaction has a single-pointer alternative — reorder, resize, slider,
+    kanban move (**2.5.7 Dragging Movements, AA**). This is a different question from the
+    discoverability of drag handles in the affordances pass.
+16. Verify help — contact, chat, self-help, a human — appears in the same relative order on
+    every page that offers it (**3.2.6 Consistent Help, A**).
+
+Two more 2.2 criteria are already covered obliquely and are worth naming in the report so the
+mapping is explicit: **3.3.7 Redundant Entry (A)** by the forms pass's "avoid asking for
+information already available", and **3.3.8 Accessible Authentication (Minimum) (AA)** by its
+"pasted values and password-manager behavior". Note also that **4.1.1 Parsing** is obsolete in
+2.2 and always considered satisfied — a duplicate-ID or nesting finding is still worth filing,
+but cite 1.3.1 Info and Relationships or 4.1.2 Name, Role, Value, because a report that cites
+4.1.1 is citing a removed criterion and invites the whole finding to be dismissed.
+
 ### Inspect responsive and environmental behavior
 
 Test representative widths and orientations, such as:

@@ -13,7 +13,7 @@ description: >-
   CUPED, variance reduction, guardrail metric, A/A test, overall evaluation criterion, OEC,
   Twyman's law, novelty effect.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: >-
     Built from docs/research/general-use-expansion-research.md §2 (general-use expansion wave
     dossier; Kohavi/Tang/Xu canon). Provenance marks carried from the dossier: [snippet-only,
@@ -203,7 +203,7 @@ metric values, client identifiers, or live results in `your-environment.private.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/ab-test-design.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/ab-test-design.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

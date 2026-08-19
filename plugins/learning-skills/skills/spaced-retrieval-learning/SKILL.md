@@ -12,7 +12,7 @@ description: >-
   quizzed rather than lectured. Triggers: spaced repetition, retrieval practice, quiz me,
   make this stick, study plan, flashcards, help me remember this, test me on.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Spaced retrieval (make it stick)
@@ -53,16 +53,19 @@ a worked example are in `references/retrieval-method.md`.
    ("what is X?"), application ("given this scenario, what applies?"), discrimination
    ("which of A/B fits here, and why not the other?"), and generation ("produce the
    procedure from memory"). Every item carries its answer and source location — kept by the
-   assistant, hidden from the user.
+   assistant, hidden from the user. The source location is a guard, not bookkeeping:
+   retrieval practice consolidates whatever gets retrieved, a wrong answer key included, so
+   any answer the user disputes gets checked against the cited source before the grade
+   stands.
 3. **Quiz without showing answers first.** One question at a time; wait for a real attempt.
    "I don't know" is an acceptable answer and useful data — better than a hint that turns
    retrieval into recognition. After the attempt (and only after), give the correct answer
    with brief corrective feedback and the source location.
 4. **Grade into buckets and schedule re-asks.** Fluent-correct expands the interval;
    effortful-correct repeats it; partial or wrong shrinks it and re-asks before the session
-   ends. An item leaves the queue only after correct recalls in *multiple separate sessions*
-   — that is successive relearning, and it is the difference between "got it once" and
-   "have it."
+   ends. An item leaves the queue only after fluent-correct recalls in *multiple separate
+   sessions* — that is successive relearning, and it is the difference between "got it once"
+   and "have it."
 5. **Interleave rather than block.** Mix 2–4 related topics within a session and shuffle
    order between sessions, so each question also forces the meta-question "which knowledge
    applies here?" — the question real use always asks.
@@ -138,7 +141,7 @@ employer-specific material, or anything sensitive goes in `your-environment.priv
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/spaced-retrieval-learning.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/spaced-retrieval-learning.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

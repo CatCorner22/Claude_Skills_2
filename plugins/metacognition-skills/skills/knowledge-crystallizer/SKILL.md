@@ -14,7 +14,7 @@ description: >-
   methods, clean up the knowledge base, merge duplicate notes, retire stale facts,
   capability map, crystallization pass.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Knowledge crystallizer
@@ -52,7 +52,9 @@ crystallization pass are in `references/crystallization-protocol.md`.
    - **Evidence** — observed once, or repeatedly? Inferred, or confirmed by the user?
    - **Scope** — general enough to reuse, specific enough to act on?
    - **Leverage** — will knowing this actually change future behavior?
-   Items failing a gate wait as candidates or go to the user for confirmation.
+   A failed gate routes by which gate it was: a contradiction goes to the user, thin
+   evidence waits for another sighting, a badly scoped item is rewritten or split, and a
+   low-leverage one is dropped.
 3. **Distill** validated items into atomic, well-scoped entries — one idea per entry,
    phrased actionably in the shared grammar: `FACT:` / `PREFERENCE:` / `RULE:` / `LESSON:` /
    `PATTERN:` / `METHOD:` / `DIRECTIVE:`, each carrying evidence and confidence.
@@ -115,7 +117,7 @@ secrets, credentials, account numbers, or client data — reference where they l
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/knowledge-crystallizer.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/knowledge-crystallizer.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

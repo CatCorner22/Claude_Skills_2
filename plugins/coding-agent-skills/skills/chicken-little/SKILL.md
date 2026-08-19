@@ -9,7 +9,7 @@ description: >-
   memorable enough to catch the next time it starts. Use when the user asks for Chicken Little or
   Aether by name. Triggers: chicken little, aether, chicken little mode, sky is falling.
 metadata:
-  version: "2026.3"
+  version: "2026.4"
   author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard
 ---
 
@@ -118,7 +118,7 @@ earns an andon pull). Never commit credentials, account numbers, or client data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

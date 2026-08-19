@@ -13,7 +13,7 @@ description: >-
   compact the context, working memory, episodic memory, semantic memory, MEMORY.md, memory
   layers, save for later, what do you remember, pick up where we left off.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Hierarchical memory manager
@@ -67,8 +67,8 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
 4. **Compact periodically** — after major milestones or roughly every 15–30 significant
    turns: distill Working → Episodic → Semantic. Promote what proved durable; drop what
    didn't. Anything recurring and validated is a candidate for permanence — hand it to
-   `metacognition-skills:knowledge-crystallizer`, whose four validation gates decide what
-   the semantic store keeps forever.
+   `metacognition-skills:knowledge-crystallizer`, whose validation gates — consistency,
+   evidence, scope, leverage — decide what the semantic store keeps forever.
 5. **Detect contradictions:** when a new fact conflicts with a stored one, flag it
    explicitly — annotate the stored entry with an UPDATE note, keep the original for
    provenance, and route resolution to the user (or a later consolidation pass) instead of
@@ -125,7 +125,7 @@ importantly — what must never be stored. Keep anything sensitive in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/hierarchical-memory-manager.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/hierarchical-memory-manager.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -14,7 +14,7 @@ description: >-
   adaptive adversary. Triggers: tabletop exercise, wargame the plan, run a drill,
   incident simulation, inject, BCP exercise, commander's intent.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Tabletop wargaming (with commander's intent)
@@ -42,7 +42,7 @@ metadata:
   `decision-science-skills:pre-mortem`. Epistemic validity audit of a test or benchmark →
   see `continuous-improvement-skills:project-command-center`
   (preserve-the-possibility-of-failure doctrine). The post-exercise debrief itself → see
-  `decision-science-skills:after-action-review` (the hand-off in step 7).
+  `decision-science-skills:after-action-review` (the hand-off in step 8).
 
 ## Do it
 1. **Define objectives and scenario.** What must the exercise reveal (decision gaps, call
@@ -60,14 +60,34 @@ metadata:
    a red cell plays the adversary or hostile environment; a white cell facilitates,
    adjudicates plausibility, tracks state, and keeps time. One person can hold white cell
    solo; red and white should not be the same human if avoidable.
-4. **Play turns: action → reaction → counteraction.** Blue acts on the critical event;
+4. **Set exercise control before play starts (non-negotiable).** From the next step on,
+   injects are spoofed executive email, bank and vendor alerts, and a phone call from someone
+   claiming to be the CFO, delivered to people operating the real process with their real
+   authorities — indistinguishable from a real attack unless you make it distinguishable on
+   purpose. Five controls, in full in `references/exercise-design.md`:
+   - **Every artifact carries an `EXERCISE EXERCISE EXERCISE — NO REAL ACTION` marking**, in
+     writing and spoken. Unmarked, a player wires the money for real — and the artifact turns
+     up in a mailbox six months later as evidence of a fraud that never happened.
+   - **One named exercise director holds ENDEX and abort authority**, and **anyone** may halt
+     play with the abort phrase (**"REAL WORLD, REAL WORLD"**). Real emergencies do not wait
+     for the scenario to end.
+   - **A written no-play list** — production payment rails, real customer records, the
+     regulator, the bank's actual fraud line, anyone not briefed — read aloud at the briefing.
+   - **Any action with an irreversible external effect is declared to white cell and
+     adjudicated, never executed.** Tell players that saying it counts as doing it, or they
+     will do it to be sure.
+   - **Pre-notify every third party whose name, number, or brand appears in an inject**, or
+     use a fictional counterparty. (Spoofing caller ID is regulated in many jurisdictions and
+     unlawful in some — a control to clear, not a detail to implement.)
+
+5. **Play turns: action → reaction → counteraction.** Blue acts on the critical event;
    red reacts as an intelligent adversary would; blue counters. Adjudicate each exchange
    before the next. Turns stop the exercise collapsing into a discussion of the plan.
-5. **Escalate with injects.** Deliver pre-scripted injects (spoofed emails, bank alerts,
-   news items, a caller claiming to be the CFO) at planned times, plus adaptive injects
-   responding to what players actually chose. Templates in
-   `references/exercise-design.md`.
-6. **Hold the safety discipline (non-negotiable, from documented LLM failure modes).**
+6. **Escalate with injects.** Deliver pre-scripted injects at planned times, plus adaptive
+   injects responding to what players actually chose — each carrying its EXERCISE marking.
+   Templates in `references/exercise-design.md`.
+7. **Hold the LLM safety discipline (non-negotiable, from documented LLM failure modes).**
+   This is the *model's* failure envelope; step 4 is the *people's*. Both apply.
    The LLM plays red cell and white cell as a SCENARIO GENERATOR, never a decision-maker:
    research on LLMs in wargame simulations reports sudden, hard-to-predict escalation
    dynamics [snippet-only], and default sycophancy erodes an adversary role into
@@ -76,7 +96,7 @@ metadata:
    cap red's escalation at the scenario's scripted bounds; and route every consequential
    adjudication — what "worked," what the outage broke, whether the fraud succeeded — to
    the human white cell. The LLM proposes; humans rule.
-7. **Capture and debrief.** White cell logs each turn: decision made, authority invoked,
+8. **Capture and debrief.** White cell logs each turn: decision made, authority invoked,
    information available, gaps exposed. Then hand the log to
    `decision-science-skills:after-action-review` — the four questions turn the exercise
    into sustained and improved practice.
@@ -126,7 +146,7 @@ is itself an incident.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/tabletop-wargaming.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/tabletop-wargaming.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

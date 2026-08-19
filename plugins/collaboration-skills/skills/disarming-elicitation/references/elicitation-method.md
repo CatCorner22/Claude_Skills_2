@@ -6,8 +6,10 @@ counterintelligence elicitation brochure's "feigned ignorance" technique, publis
 warning to potential targets [gov]; internal-investigations interview training
 [industry]; technical writers' knowledge elicitation [practitioner]; and the AAFP
 "doorknob phenomenon" — the most important disclosure comes when the interview seems
-over [clinical, AAFP — family-medicine practice literature; not verified here as having
-appeared in a peer-reviewed rather than an editorial AAFP venue]. Source links at the end of this file.
+over [AAFP — a *Curbside Consultation* piece in *American Family Physician*, a department
+the journal describes as peer reviewed; it is a ~1,000-word clinical commentary that
+names the phenomenon and advises on handling it, not a study that measures it]. Source
+links at the end of this file.
 
 ## Contents
 - [The four question-sequence patterns](#the-four-question-sequence-patterns)
@@ -72,14 +74,16 @@ After the formal close — thanks given, notebook shut, the interview visibly ov
 casual question.
 
 - Shape: "Oh — one thing I meant to ask…" followed by the question you most care about.
-- Shape (the trained clinical form): "Is there something else I should have asked
-  about?" The word is not decoration: in a randomized primary-care trial, physicians who
-  solicited further concerns with "is there *something* else you want to address today?"
-  left about 78% fewer concerns unmet, while the "*anything* else" version could not be
-  distinguished from asking nothing — a negatively phrased question carries its own
-  invitation to answer no [Heritage et al. 2007, peer-reviewed]. That trial tested a
-  mid-visit solicitation with patients, not a post-close question with a colleague, so
-  borrow the wording; the effect size does not transfer.
+- Shape (adapted from the clinical solicitation): "Is there something else I should have
+  asked about?" The word is not decoration: in a randomized primary-care trial, physicians
+  who solicited further concerns with "is there *something* else you want to address in
+  the visit today?" left about 78% fewer concerns unmet, while the "*anything* else"
+  version could not be distinguished from asking nothing — "any" is a negative-polarity
+  word, and the question it builds carries its own invitation to answer no
+  [Heritage et al. 2007, peer-reviewed]. Two gaps between that trial and this shape:
+  it tested a mid-visit solicitation with patients rather than a post-close question with
+  a colleague, and it asked for further *concerns* rather than for coverage of your
+  questions. Borrow the wording; the effect size does not transfer.
 - Why post-closure: impression management ends when the interview does; post-closure
   answers are the least rehearsed of the session.
 - Logistics: budget the minute for it — schedule the room five minutes past the formal
@@ -177,8 +181,11 @@ From the library's research dossier (Lane 2); provenance marks as recorded there
 - Tech-writer knowledge elicitation:
   [Ferri Benedetti](https://passo.uno/the-columbo-technique-for-technical-writers/)
   [practitioner]
-- Doorknob phenomenon:
-  [AAFP](https://www.aafp.org/pubs/afp/issues/2018/0701/p52.html) [peer-reviewed, AAFP]
+- Doorknob phenomenon: Faden & Gorton, "The Doorknob Phenomenon in Clinical Practice,"
+  *American Family Physician* 98(1), 2018, 52 — a *Curbside Consultation* commentary
+  ([AAFP](https://www.aafp.org/pubs/afp/issues/2018/0701/p52.html)) [AAFP; a department the
+  journal describes as peer reviewed, but commentary describing the phenomenon rather
+  than evidence measuring it]
 - "Some" beats "any" when soliciting further concerns: Heritage, Robinson, Elliott,
   Beckett & Wilkes, "Reducing patients' unmet concerns in primary care: the difference
   one word can make," *Journal of General Internal Medicine* 22(10), 2007, 1429–33

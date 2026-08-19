@@ -13,7 +13,7 @@ description: >-
   handoff, transition this work, coverage notes, read-back, closed-loop communication, graded
   assertiveness, PACE, speak up to the boss.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # SBAR structured communication
@@ -54,6 +54,14 @@ metadata:
 4. **Critical instructions = closed loop.** Sender states → receiver repeats it back → sender
    confirms ("that's correct"). Three turns — the sender's confirmation is the loop. Amounts,
    account digits, names, and doses are repeated item by item.
+   - **The loop verifies transmission, not correctness.** It catches a mishear — 30 heard as
+     13 — and nothing else. If the sender means the wrong thing, the readback confirms the
+     wrong thing in two voices and *adds* confidence to the error. So a closed loop is not a
+     wrong-site, wrong-patient, or wrong-account control: those need verification of the plan
+     against the source (chart, consent, imaging; the vendor's file and a phone-back on a
+     changed payee) and a stop point immediately before acting at which anyone may halt it.
+     Run both. A team that believes the readback covers wrong-site has swapped a control for
+     a slogan. `safety-and-reliability-skills:checklist-design` owns the pause-point structure.
 5. **Challenging upward = PACE graded assertiveness.** Climb in order: **Probe** ("do we know the
    fuel state?" / "did we verify the new bank details by phone?") → **Alert** ("I'm concerned
    this doesn't match the vendor's history") → **Challenge** ("I don't think we should release
@@ -109,7 +117,7 @@ to the actual relationships. If it names real people, accounts, or incidents, pu
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/sbar-structured-communication.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/sbar-structured-communication.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

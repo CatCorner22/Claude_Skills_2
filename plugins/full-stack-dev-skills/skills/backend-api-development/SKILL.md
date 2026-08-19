@@ -11,7 +11,7 @@ description: >-
   session, API error handling, HTTP status codes, pagination endpoint, OpenAPI schema,
   dependency injection fastapi, CRUD API.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Backend API development (FastAPI)
@@ -62,8 +62,13 @@ def create_invoice(data: InvoiceIn, db: Session = Depends(get_db)):
 5. **Make errors one shape everywhere.** Raise `HTTPException` (or a small domain exception
    mapped by one handler) so every error returns `{"detail": ...}` with the right status:
    422 validation (automatic), 401 unauthenticated, 403 forbidden, 404 absent, 409 conflict.
-   Never return 200-with-error-body; never leak stack traces (a generic 500 handler logs the
-   detail server-side).
+   `{"detail": ...}` is the default here because it is what FastAPI's own validation, routing,
+   and `HTTPException` paths already emit — nothing has to be re-wrapped for the shape to hold.
+   A custom envelope (`full-stack-dev-skills:elite-python-engineer` prefers
+   `{"error": {"code", "message"}}` for its stable machine-readable code) is equally valid but
+   only becomes "one shape" once the validation and `HTTPException` handlers are overridden too;
+   pick one per service rather than one per route. Never return 200-with-error-body; never leak
+   stack traces (a generic 500 handler logs the detail server-side).
 6. **Paginate every list endpoint from day one** — `limit`/`offset` params with a maximum,
    returning `{"items": [...], "total": n}` (cursor pagination only when data shifts under
    pagination — see the consumer-side view in `data-tools-skills:rest-api-data-pulls`).
@@ -107,7 +112,7 @@ so every new endpoint (human- or agent-written) matches the house shape.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/backend-api-development.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/backend-api-development.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

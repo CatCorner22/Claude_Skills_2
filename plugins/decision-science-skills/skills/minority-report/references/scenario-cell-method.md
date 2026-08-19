@@ -69,19 +69,36 @@ bar as the favorites:
   which restates objections before deciding.)
 
 ## 5. The one-variable turn
-Hold all else fixed; turn one variable; record what flips. Table format:
+Hold all else fixed; turn one variable; record what flips. What flips is the CHOICE,
+not the scenario label: turning a variable that is itself a scenario axis relocates
+you between scenarios by construction (growth flat → +50% with the vendor held at
+"stagnates" *is* the move from Steady State to Growth Squeeze), so a row written in
+scenario names can only ever read YES and says nothing about whether the variable
+earns monitoring. Rank the options under each resolution instead. State the baseline the
+rows turn away from, once, above the table — otherwise "before" quietly means something
+different in each row and the column stops being comparable. Baseline here: growth flat,
+vendor stagnating but cheap, fully staffed; best choice under it is **keep**. Table format:
 
-| Variable turned | Turn applied | Ranking before | Ranking after | Flips? |
+| Variable turned | Turn applied | Best choice before | Best choice after | Flips? |
 |---|---|---|---|---|
-| Growth | flat → +50% | Steady State favored | Growth Squeeze favored | YES |
-| Vendor prices | stable → 3× at renewal | keep favored | portability-first favored | YES |
-| One dev leaves | staffed → short | build viable | build unviable | YES |
+| Growth | flat → +50% | keep (a build would be a luxury) | build (it now pays for itself) | YES |
+| Vendor prices | stable → 3× at renewal | keep | portability first | YES |
+| One dev leaves, *on top of* the growth turn | staffed → short | build (row 1's answer) | keep (a build is unviable short-staffed) | YES |
 | Office paint color | any | — | — | no |
 
-Read the table two ways: variables that flip rankings deserve monitoring and
+Row 3 is the second kind of turn and is labelled as such: it starts from row 1's post-turn
+state rather than the baseline, which is how an interaction gets caught. Turned alone
+against the baseline, "one dev leaves" changes nothing — keep stays keep — so a
+one-at-a-time pass would have retired it.
+
+Read the table two ways: variables that change the best choice deserve monitoring and
 option-preserving moves (the "Price Cliff" flip says: negotiate data export NOW,
 regardless of the build decision — a robust move that wins across futures);
-variables that flip nothing are officially allowed to stop consuming attention.
+variables that flip nothing **on their own** drop to low-priority monitoring — not off the
+list. The row above is the reason for the qualifier: "one dev leaves" changes nothing when
+turned alone against the baseline, and flips the choice when turned jointly. Retire a variable
+only after it has failed to flip anything *in combination* with the others touching the same
+constraint.
 Robust moves — actions that pay off across ALL scenarios — are the cell's best
 product; list them explicitly.
 
@@ -101,7 +118,8 @@ foreknowledge.)
 
 ## 7. Probability discipline
 - Reference class exists → base-rate bands: "projects of this type slip their first
-  ship date in roughly 6 of 10 comparable cases" beats "70%."
+  ship date in roughly 6 of 10 comparable cases" beats "60%" — same estimate, but the
+  first carries its lineage and the second does not.
   (`decision-science-skills:reference-class-forecasting` owns the base-rate craft.)
 - No reference class → rank scenarios by plausibility, in words, and label the
   ranking as judgment. Ordinal honesty beats cardinal theater.

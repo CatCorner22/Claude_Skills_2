@@ -116,8 +116,15 @@ moving range of the z series, and compute σ_z = MR̄_z / 1.128. If σ_z ≈ 1 t
 Materially above 1 and the limits are too tight by that factor — multiply them by σ_z (this is the
 p′ chart, due to Laney) or chart the rate on an I-MR chart, which estimates variation empirically
 and sidesteps the assumption entirely. Around 1.2 is the usual "borderline, proceed with a note";
-by 1.4 switch. The worked project's baseline returns σ_z ≈ 1.20 — usable, flagged, and worth
-re-checking as data accumulates.
+by 1.4 switch. **Both thresholds assume the subgroup count item 3 asks for**, because σ_z is
+itself an estimate — built from k − 1 moving ranges — and at small k its own spread swallows
+them. Simulate a perfectly binomial p-chart (n = 800, p̄ = 0.095) and σ_z lands at or above 1.2
+on **22%** of runs at 12 subgroups, 14% at 25, and 7% at 50; at or above 1.4 on 8% of runs at 12
+subgroups and 2% at 25. So a single σ_z past 1.2 off a dozen periods is not evidence of
+overdispersion — it is what this statistic returns on clean data about one time in five. Below
+20–25 subgroups, record it and re-check; act on it only once the count supports it. The worked
+project's baseline returns σ_z ≈ 1.20 on 12 subgroups, which is squarely inside that noise: it
+is a flag to re-check as data accumulates, not a finding.
 
 **3. Too few subgroups.** Limits computed from a handful of subgroups carry so much sampling error
 *in the limits themselves* that the chart signals on its own estimation noise. The customary

@@ -14,7 +14,7 @@ description: >-
   choosing least-worst. Triggers: kobayashi maru, no-win, every option is bad,
   least-worst, damage control drill, degraded mode, can't win this one, loss triage.
 metadata:
-  version: "1.2.0"
+  version: "1.5.0"
   source: >-
     Homage to Star Trek's Kobayashi Maru, the Starfleet Academy simulation that cannot
     be won (the name lives in triggers only; no affiliation with or endorsement by the
@@ -78,9 +78,22 @@ in `references/no-win-method.md`, with a worked deadline-vs-quality-vs-scope exa
    in-world mechanism — then adversarially tries to win its own drill and patches any
    door it finds. This is the step humans reliably fail at: designers unconsciously
    leave themselves a way out.
-3. **Declare the contract before play.** Tell participants plainly: this drill has no
-   winning move; you are graded on decision process, not outcome. Hiding the no-win
-   nature teaches distrust of the trainer, not decision skill.
+3. **Declare the contract before play — both halves of it.** Tell participants plainly:
+   this drill has no winning move; you are graded on decision process, not outcome. Hiding
+   the no-win nature teaches distrust of the trainer, not decision skill.
+   **The participation half is not optional either.** This drill is deliberately
+   distressing, built from the participant's real domain, and step 6's emotional pass asks
+   them to say aloud when they privately gave up. So, stated at the briefing:
+   participation is **voluntary and anyone may withdraw at any point without explaining
+   why**; anyone who has **recently lived the real version** of this scenario is screened
+   out beforehand, privately, and "not this one" is accepted without a reason; the
+   emotional pass is **never graded, never reported, and does not leave the room**; the
+   debriefer should not also be the assessor where you can separate them; and anyone may
+   halt the drill instantly (the shared **"REAL WORLD, REAL WORLD"** abort from
+   `decision-science-skills:tabletop-wargaming`). If someone is genuinely distressed rather
+   than usefully uncomfortable, the drill stops and the facilitator points to real support.
+   The line the whole contract rests on: **uncomfortable is the mechanism; harmed is a
+   design failure.** Full contract in `references/no-win-method.md` §2b.
 4. **Play the escalating environment.** The LLM runs scripted deterioration beats;
    every player decision gets a consequence; conditions worsen on a clock regardless.
    One beat is a tempting door that costs more than it saves — door-testing under
@@ -90,12 +103,19 @@ in `references/no-win-method.md`, with a worked deadline-vs-quality-vs-scope exa
    the declaration: which constraint are you changing — physics or policy? Say it aloud,
    name who owns the consequences, and continue. Declared reframing is a legitimate,
    gradeable move; silent reframing is graded as what it is — hiding the change.
-6. **Debrief with process separated from outcome.** Grade four dimensions:
+6. **Debrief with process separated from outcome — under the contract from step 3.** The
+   emotional pass is offered, not required; a player who would rather not answer says so and
+   the debrief moves on. Grade four dimensions:
    loss-minimization (was total loss bounded?), explicit ordering of what to save (was a
    save order declared *before* acting?), communication under futility (were people told
-   the truth about the situation?), and the emotional debrief (what did futility feel
-   like, and what did it tempt?). State explicitly that a high process grade with a
-   total-loss outcome is the intended result of a well-run drill.
+   the truth about the situation?), and **frame honesty** (were any success redefinitions
+   declared aloud, which is legitimate, or slipped in silently, which is concealment?) —
+   that last one is this drill's signature check, and the reference's grading table
+   (`references/no-win-method.md`, Pass 2) is the authority on all four. The **emotional
+   debrief** is Pass 3, a separate conversation rather than a graded dimension: what did
+   futility feel like, and what did it tempt? Run it, but do not grade it. State explicitly
+   that a high process grade with a total-loss outcome is the intended result of a
+   well-run drill.
 7. **Run the Kirk blade deliberately when the stakes are real.** Before accepting an
    actual constraint set (a deadline, a budget, an exam's rules), audit it: physics or
    policy, who set it, who can change it, and what the transparency test requires if you
@@ -106,6 +126,15 @@ in `references/no-win-method.md`, with a worked deadline-vs-quality-vs-scope exa
 **Division of labor.** The LLM generates and escalates the drill and holds the
 declaration line; the humans make every in-drill decision and own the debrief
 conclusions. The drill is a scenario generator, never an adjudicator of real stakes.
+
+**Exercise control applies whenever a drill touches real people, real systems, or a real
+third party.** Mark every artifact `EXERCISE EXERCISE EXERCISE — NO REAL ACTION`; name one
+person who can call ENDEX, with an abort phrase (**"REAL WORLD, REAL WORLD"**) anyone may
+use; write a no-play list of systems, accounts, and people the drill may not touch; declare
+and adjudicate any action with an irreversible external effect instead of executing it; and
+pre-notify any third party whose name or number appears in the scenario. The full section is
+in `decision-science-skills:tabletop-wargaming`'s `references/exercise-design.md` — one
+discipline, shared by every exercise in this library.
 
 ## Why / learn
 The reason to remove the winning move is that its presence contaminates the lesson.
@@ -164,7 +193,7 @@ structural — real incidents, client names, or personnel details belong in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/no-win-drills.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/no-win-drills.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

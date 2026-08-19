@@ -294,7 +294,7 @@ of a 200K context**, present before the user asks anything. Two consequences:
   `docs/live-routing-and-degradation-2026-08-18.md` §1–§2, which now carries the decompiled
   algorithm and retracts the account originally given here.)* The real gate is a **character
   budget**: `floor(context_tokens × 4 × skillListingBudgetFraction)`, i.e. **8,000 characters** at
-  the 200K/1% defaults, against **113,645** needed to render all 121 descriptions. Skills start as
+  the 200K/1% defaults, against **113,677** needed to render all 121 descriptions. Skills start as
   bare names and are upgraded back to full text in **descending order of recent use**
   (`usageCount × max(0.5^(days/7), 0.1)`, unused = 0), greedily, skipping any that do not fit.
   Simulated against this library (`scripts/simulate-listing-budget.py`): **3 of 121 keep a
@@ -788,7 +788,7 @@ superseded.
 > `scripts/simulate-listing-budget.py`, which computes the answer from the algorithm.
 
 What survives, with the corrected numbers: the severity finding, and it is worse than published.
-At the genuine 200K default the budget is 8,000 characters against 113,645 needed, so **3 of 121
+At the genuine 200K default the budget is 8,000 characters against 113,677 needed, so **3 of 121
 skills keep a description and 118 route on bare names**. The earlier "19 survivors ≈ 2.3% of 200K"
 was measured in a session whose real budget was ~30,000 characters (a ~750K context) and then
 reported as a fraction of 200K, which understated the problem. The one mitigation the real
@@ -842,7 +842,7 @@ mistook the boundary condition for the mechanism.
 
 The severity was also misreported. "19 FULL ≈ 2.3% of a 200K window" was measured in a session
 whose real budget was ~30,000 characters (≈750K context) and then expressed as a fraction of 200K.
-At the genuine default the library needs 113,645 characters against 8,000 available, and **3 of 121
+At the genuine default the library needs 113,677 characters against 8,000 available, and **3 of 121
 skills keep a description**. The published figure understated the problem.
 
 And the "101 of 121 NAMEONLY" figure came from asking a model to introspect its own system

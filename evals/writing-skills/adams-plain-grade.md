@@ -27,6 +27,10 @@ failing.
 Expected: contract-drafting precision work — `writing-skills:adams-smart-brevity` owns it
 (same Adams discipline, professional register, contract-language categories). This skill
 should stay unloaded rather than push grade-level constraints onto operative legal drafting.
+Doubly so here: an indemnity is a risk-allocation provision, which both Adams skills carve
+out from rewriting. If this skill does load, it must explain the clause in plain words
+*beside* it rather than simplify the operative wording, and must not trim "indemnify,
+defend, and hold harmless" as a doublet — "defend" is a separate, often broader duty.
 
 ## 2c. Near-miss (explanation-design guard)
 > "Our onboarding doc explains the deployment pipeline but new hires still don't get it —

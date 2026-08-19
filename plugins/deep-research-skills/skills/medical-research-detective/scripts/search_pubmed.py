@@ -8,8 +8,10 @@ Usage:
   # Single query
   search_pubmed.py "metformin AND vitamin B12 deficiency"
 
-  # Co-occurrence search: the dot-connector. Every pair is searched.
-  search_pubmed.py --pairs "peripheral neuropathy" "metformin" "anemia"
+  # Co-occurrence search: the dot-connector. Every pair is searched. A term is
+  # quoted as a phrase unless it already carries query syntax (an OR block,
+  # truncation, a field tag), which is passed through as written.
+  search_pubmed.py --pairs "peripheral neuropathy" "metformin OR glucophage" "anemia"
 
   # Filters and output
   search_pubmed.py "query" --max 50 --years 10 --humans --type "Review"
@@ -95,11 +97,30 @@ def build_query(term: str, years: int | None = None, humans: bool = False,
     return q
 
 
+# Quotes, parentheses, field tags, truncation, or an uppercase boolean operator
+# mean the caller has already written a query block.
+_SEARCH_SYNTAX_RE = re.compile(r'["()\[\]*]|\b(?:AND|OR|NOT)\b')
+
+
+def as_query_block(term: str) -> str:
+    """Wrap one term as a query block for a pair search.
+
+    A plain phrase is quoted, so PubMed searches it as a phrase. A term that already
+    carries search syntax is passed through untouched, because quoting it changes
+    what it means: '("proton pump inhibitor OR PPI")' searches for that whole string
+    as a literal phrase, and '"neuropath*"' is a phrase search with the truncation
+    switched off — and OR-expanded, truncated concept blocks are exactly what
+    search-strategy.md tells you to build.
+    """
+    t = term.strip()
+    return f"({t})" if _SEARCH_SYNTAX_RE.search(t) else f'("{t}")'
+
+
 def pair_queries(terms: list[str]) -> list[tuple[str, str, str]]:
     """Every unordered pair, as (a, b, query) — the finding-matrix searches."""
     out = []
     for a, b in itertools.combinations([t for t in terms if t.strip()], 2):
-        out.append((a, b, f'("{a}") AND ("{b}")'))
+        out.append((a, b, f"{as_query_block(a)} AND {as_query_block(b)}"))
     return out
 
 
@@ -135,7 +156,7 @@ def parse_year(pubdate: str):
 
 
 def summarize_hit(pmid: str, rec: dict) -> dict:
-    authors = [a.get("name") for a in rec.get("authors", []) if a.get("name")]
+    authors = [a.get("name") for a in (rec.get("authors") or []) if a.get("name")]
     doi = None
     for aid in rec.get("articleids", []) or []:
         if aid.get("idtype") == "doi":
@@ -179,21 +200,77 @@ def search(query: str, retmax: int = 25, email=None, fetch=http_get_json) -> dic
     res = fetch(ESEARCH, {"db": "pubmed", "term": query, "retmax": str(retmax),
                           "sort": "relevance"}, email=email)
     esr = (res or {}).get("esearchresult", {})
+    # E-utilities reports an unexecutable query with HTTP 200 and zero results, putting the
+    # reason in ERROR / errorlist / warninglist. Without reading those, a typo'd field tag or
+    # an unmatched quoted phrase is indistinguishable from "the literature is silent on this"
+    # -- the worst possible confusion for a tool whose job is to find what exists.
+    #
+    # Not every entry in those blocks means the query failed. NCBI puts a term that
+    # simply is not in the index into `errorlist.phrasesnotfound`, and it puts
+    # "No items found." into `warninglist.outputmessages` on ORDINARY empty searches.
+    # Treating those as hard problems made the tool print "PubMed could not run the
+    # query as written" on a perfectly good search -- and, worse, suppressed the
+    # "NO HITS - a genuine gap is itself a finding" note on exactly the searches where
+    # the gap was real. So the blocks are classified, not copied wholesale:
+    #   hard  -> the query did not run as written: ERROR, and a field tag that does
+    #            not exist (`fieldsnotfound`). Suppresses the gap note.
+    #   note  -> the query ran; these terms matched nothing. Reported, because it often
+    #            explains the gap, but it does NOT suppress the gap note.
+    #   drop  -> pure status chatter ("No items found.") and empty lists.
+    HARD_FIELDS = {"fieldsnotfound"}
+    DROP_MESSAGES = {"no items found."}
+    problems, notes = [], []
+    if esr.get("ERROR"):
+        problems.append(str(esr["ERROR"]))
+    for key, label in (("errorlist", "error"), ("warninglist", "warning")):
+        block = esr.get(key) or {}
+        if not isinstance(block, dict):
+            continue
+        for field, vals in block.items():
+            if not vals:
+                continue
+            vals = vals if isinstance(vals, list) else [vals]
+            vals = [v for v in vals if str(v).strip().lower() not in DROP_MESSAGES]
+            if not vals:
+                continue
+            line = f"{label}: {field}={', '.join(map(str, vals))}"
+            (problems if field in HARD_FIELDS else notes).append(line)
     ids = esr.get("idlist", []) or []
     total = int(esr.get("count", 0) or 0)
     if not ids:
-        return {"query": query, "total": total, "hits": []}
+        return {"query": query, "total": total, "hits": [],
+                "problems": problems, "notes": notes}
     summ = fetch(ESUMMARY, {"db": "pubmed", "id": ",".join(ids)}, email=email)
     result = (summ or {}).get("result", {})
-    hits = [summarize_hit(p, result[p]) for p in result.get("uids", []) if p in result]
-    return {"query": query, "total": total, "hits": rank_hits(hits)}
+    hits = []
+    for pid in result.get("uids", []) or []:
+        rec = result.get(pid)
+        # E-utilities answers an unsummarizable UID with a stub carrying an "error"
+        # key. Without this it became a hit with a blank title and no year, sitting
+        # in the ranked list as though it were a paper.
+        if not isinstance(rec, dict) or rec.get("error"):
+            continue
+        hits.append(summarize_hit(pid, rec))
+    return {"query": query, "total": total, "hits": rank_hits(hits),
+            "problems": problems, "notes": notes}
 
 
 def format_human(res: dict, show_gap_note=True) -> str:
     L = [f"QUERY: {res['query']}",
          f"  {res['total']} total match(es) in PubMed; showing {len(res['hits'])}"]
+    # Surface query problems FIRST: a zero-hit result caused by a typo'd field tag reads
+    # exactly like a genuine gap, and acting on a fake gap is a research error.
+    for prob in res.get("problems") or []:
+        L.append(f"  !! QUERY PROBLEM — {prob}")
+    if res.get("problems"):
+        L.append("  PubMed could not run the query as written; fix it before concluding anything.")
+    for note in res.get("notes") or []:
+        L.append(f"  (note) {note}")
+    if res.get("notes"):
+        L.append("  The query ran; the terms above matched nothing in the index — which may be "
+                 "the reason for a thin result, not a fault in the query.")
     if not res["hits"]:
-        if show_gap_note:
+        if show_gap_note and not res.get("problems"):
             L.append("  NO HITS — a genuine gap is itself a finding. Record it in the search log,")
             L.append("  then try the bridge search (shared drug / nutrient / mechanism).")
         return "\n".join(L)
@@ -233,6 +310,17 @@ def self_test() -> int:
     check("3 terms -> 3 pairs", len(pairs) == 3)
     check("pair query shape", pairs[0][2] == '("a") AND ("b")')
     check("blank terms skipped", len(pair_queries(["a", "", "b"])) == 1)
+    # Regression: every term was quoted unconditionally, which silently broke the
+    # concept blocks search-strategy.md prescribes — an OR block became a literal
+    # phrase, truncation stopped truncating, and an already-quoted term doubled up.
+    check("OR block passed through",
+          pair_queries(["proton pump inhibitor OR PPI", "B12"])[0][2]
+          == '(proton pump inhibitor OR PPI) AND ("B12")')
+    check("already-quoted term not double-quoted",
+          pair_queries(['"peripheral neuropathy"', "metformin"])[0][2]
+          == '("peripheral neuropathy") AND ("metformin")')
+    check("truncation survives", as_query_block("neuropath*") == "(neuropath*)")
+    check("field tag survives", as_query_block("metformin[tiab]") == "(metformin[tiab])")
 
     # Type classification
     check("classify RCT", "RCT" in classify_types(["Randomized Controlled Trial"]))
@@ -290,6 +378,58 @@ def self_test() -> int:
     check("e2e doi captured", res["hits"][0]["doi"] == "10.1/x")
     check("e2e title cleaned", res["hits"][0]["title"] == "A meta-analysis of X")
     check("e2e year", res["hits"][0]["year"] == 2019)
+
+    # Regression: an unsummarizable UID comes back as an error stub, and was ranked
+    # as though it were a paper with a blank title.
+    def stub_error_record(url, params, email=None):
+        if url == ESEARCH:
+            return {"esearchresult": {"count": "2", "idlist": ["111", "999"]}}
+        return {"result": {
+            "uids": ["111", "999"],
+            "111": {"title": "A real paper.", "pubdate": "2020", "fulljournalname": "J",
+                    "pubtype": ["Journal Article"], "authors": [{"name": "Smith J"}],
+                    "articleids": []},
+            "999": {"uid": "999", "error": "cannot get document summary"}}}
+
+    res_err = search("x", fetch=stub_error_record)
+    check("error stub skipped", [h["pmid"] for h in res_err["hits"]] == ["111"])
+
+    # Regression: an unexecutable query returns HTTP 200 with zero hits and the reason in
+    # ERROR/errorlist/warninglist. Reported as a plain "no hits" it reads as a genuine gap.
+    # A genuinely unexecutable query: the field tag does not exist.
+    def stub_bad_query(url, params, email=None):
+        return {"esearchresult": {"count": "0", "idlist": [],
+                                  "errorlist": {"fieldsnotfound": ["[nonsense]"]}}}
+    res_bad = search("bad", fetch=stub_bad_query)
+    check("query problems captured", len(res_bad.get("problems") or []) == 1)
+    check("query problems named", any("fieldsnotfound" in p for p in res_bad["problems"]))
+    rendered = format_human(res_bad)
+    check("query problems rendered", "QUERY PROBLEM" in rendered)
+    check("fake gap not reported as a gap", "NO HITS" not in rendered)
+
+    # Regression, the other direction: NCBI returns `phrasesnotfound` for any term not in
+    # the index and `outputmessages: ["No items found."]` on ordinary empty searches. Read
+    # wholesale, those printed "PubMed could not run the query as written" on a perfectly
+    # good search AND suppressed the genuine-gap note — silencing the finding on exactly
+    # the searches where the gap was real.
+    def stub_benign_empty(url, params, email=None):
+        return {"esearchresult": {
+            "count": "0", "idlist": [],
+            "errorlist": {"phrasesnotfound": ["rare-compound-x"], "fieldsnotfound": []},
+            "warninglist": {"phrasesignored": [], "quotedphrasesnotfound": [],
+                            "outputmessages": ["No items found."]}}}
+    res_benign = search("rare-compound-x", fetch=stub_benign_empty)
+    check("benign empty search raises no hard problem", res_benign["problems"] == [])
+    check("term-not-in-index kept as an informational note",
+          any("phrasesnotfound" in n for n in res_benign["notes"]))
+    check("'No items found.' is dropped entirely",
+          not any("No items found" in n for n in res_benign["notes"]))
+    check("empty sub-lists produce nothing", len(res_benign["notes"]) == 1)
+    rendered_benign = format_human(res_benign)
+    check("genuine gap note survives a benign warning", "NO HITS" in rendered_benign)
+    check("benign empty search is not called unexecutable",
+          "could not run the query" not in rendered_benign)
+    check("the note is still shown to the user", "(note)" in rendered_benign)
 
     def stub_empty(url, params, email=None):
         return {"esearchresult": {"count": "0", "idlist": []}}

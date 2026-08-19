@@ -16,6 +16,8 @@ git-ignored. Commit only sanitized, structural examples.
 - **Baseline:** <naive | seasonal-naive | majority class | current rule>
 - **Calibration needed?** <yes, decisions use the probability | no, ranking is enough>
 - **Test-set size and positive count:** <rows; positives — the positives are what set the interval width>
+- **Independent units in the test set:** <rows, or entities/time blocks if the same entity or period
+  repeats> — this is the count to bootstrap over and to quote behind any interval
 - **Smallest improvement worth shipping:** <e.g. +2pp recall — compare it to the metric's CI, not to zero>
 - **Slices the decision touches:** <region, channel, product line, tenure, device, recent period, protected
   groups> — report the metric per slice with each slice's own n

@@ -30,8 +30,9 @@
   size of an install is the point. Both character figures come from
   `python3 scripts/measure-listing-cost.py`; re-run it rather than editing the figure by hand,
   because a hand-kept number in two places is a number that will disagree with itself again. A literal
-  1%-of-context listing budget would fit about six of them, so ~1% cannot describe a
-  full-description listing; it is consistent instead with a listing that has degraded to mostly
+  1%-of-context listing budget is 8,000 characters, and `scripts/simulate-listing-budget.py` reports
+  that it keeps **three** full descriptions here once the 121 bare names are paid for, so ~1% cannot
+  describe a full-description listing; it is consistent instead with a listing that has degraded to mostly
   **name-only**, which is the documented failure mode (see below). Keep descriptions tight
   because a tight description routes better — not because trimming fixes the budget. The lever
   that moves real tokens is how many plugins a user installs.

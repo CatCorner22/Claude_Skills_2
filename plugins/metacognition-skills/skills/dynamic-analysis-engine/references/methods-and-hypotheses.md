@@ -16,7 +16,7 @@
 - Formal tests (t/chi-square/ANOVA) via `data-analytics-bi-skills:statistical-inference`.
 - Simple models (regression, trees) when a relationship needs quantifying —
   see `machine-learning-skills:supervised-modeling`.
-- Time series: decomposition, changepoints, seasonality —
+- Time series: decomposition, seasonality, stationarity —
   see `machine-learning-skills:time-series-forecasting`.
 
 ### Text / documents
@@ -54,4 +54,8 @@ the test column must name something executable, not "look into it."
 - **High:** multiple independent lines of evidence agree; rivals tested and ruled out.
 - **Moderate:** consistent evidence, but a plausible rival remains untested.
 - **Low:** single source or untested assumption load-bearing; say what would raise it.
+- **Count the tests before assigning a level.** The log is the record of how many chances a
+  finding had; one born from looking at the data and confirmed on that same data does not reach
+  **High** on that evidence alone, however small its p-value. Say how many tests were run, and
+  treat the finding as exploratory until it survives held-out data or a fresh period.
 Always attach the *because* and the *unless*.

@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "continuous-improvement-skills",
   "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD), structured-ideation (brainwriting, SCAMPER, diverge/converge), and priority-and-wip (personal kanban, WIP limits, timeboxing).",
-  "version": "0.19.0"
+  "version": "0.20.0"
 }

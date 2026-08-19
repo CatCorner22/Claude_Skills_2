@@ -12,7 +12,7 @@
 | Situation | Tool/mode |
 |---|---|
 | Table with drawn cell borders | camelot `flavor="lattice"` |
-| Table aligned by whitespace, no borders | camelot `flavor="stream"` or pdfplumber text strategy |
+| Table aligned by whitespace, no borders | camelot `flavor="stream"`, or `"network"`/`"ml"` when stream plateaus, or pdfplumber text strategy |
 | Odd layouts, need coordinates/control | pdfplumber |
 | Key-value fields (invoice no, dates, totals) | pdfplumber `extract_text()` + regex |
 | Scanned/image pages | `ocrmypdf` first, then any of the above |
@@ -40,7 +40,7 @@ import camelot
 tables = camelot.read_pdf("doc.pdf", pages="1-end", flavor="stream",
                           table_areas=["50,700,550,80"],   # x1,y1,x2,y2 (PDF coords)
                           columns=["90,180,320,420,500"])  # explicit column x-positions
-tables[0].parsing_report   # accuracy/whitespace metrics — low accuracy = wrong flavor/areas
+tables[0].parsing_report   # accuracy/whitespace/confidence — low accuracy = wrong flavor/areas
 ```
 
 ## OCR pipeline for scanned PDFs
@@ -52,9 +52,11 @@ mandatory, and a human review threshold for low-confidence pages is reasonable p
 
 ## Bank-statement pattern
 1. Crop to the transaction table region per page (headers/footers/marketing out).
-2. Extract rows; keep section headings (Deposits / Withdrawals / Fees) as a `section` column.
+2. Extract rows; keep section headings (Deposits / Withdrawals / Fees) as a `section` column,
+   listing them exactly as this document prints them.
 3. Stitch continuation lines: a row with empty date and amount is description overflow —
-   append to previous row's description.
+   append to previous row's description, skipping blank spacer rows and refusing (loudly) to
+   stitch one that arrives before the first transaction.
 4. Normalize amounts (strip currency symbols/commas; parens or trailing minus → negative;
    debit/credit columns → one signed column with the sign convention documented).
 5. Assert: opening + sum(credits) − sum(debits) = closing (per the statement's own figures).
@@ -67,6 +69,11 @@ as the assertion:
 import pdfplumber, pandas as pd, re
 
 HDR = ("Date", "Description", "Amount")
+# The exact headings *this* statement prints — copy them off the document, don't recall
+# them. A heading you leave out (banks write "Electronic Withdrawals", "Deposits and
+# Other Credits") is invisible to the balance check below, because it only reads
+# amounts: the heading gets stitched onto the previous row's description and every
+# row after it keeps the stale `section`. The stitch log at the end is how you see that.
 SECTIONS = {"Deposits", "Withdrawals", "Fees"}
 
 def amount(s):            # "(750.25)" -> -750.25 ; "1,200.00-" -> -1200.0 ;
@@ -79,7 +86,7 @@ def amount(s):            # "(750.25)" -> -750.25 ; "1,200.00-" -> -1200.0 ;
     neg = (s.startswith("(") and s.endswith(")")) or s.startswith("-") or s.endswith("-")
     return (-1.0 if neg else 1.0) * float(re.sub(r"[()\-]", "", s))
 
-rows, section = [], None
+rows, section, stitched, orphans = [], None, [], []
 with pdfplumber.open("statement.pdf") as pdf:
     for page in pdf.pages:
         for tbl in page.extract_tables():
@@ -87,13 +94,28 @@ with pdfplumber.open("statement.pdf") as pdf:
                 date, desc, amt = [(x or "").strip() for x in r[:3]]
                 if (date, desc, amt) == HDR:              # repeated page header
                     continue
-                if not date and not amt and desc in SECTIONS:
-                    section = desc                        # section heading, not a row
-                elif not date and not amt:
-                    rows[-1]["description"] += " " + desc  # continuation line
+                if not date and not amt:
+                    if not desc:
+                        continue                          # blank spacer row
+                    if desc in SECTIONS:
+                        section = desc                    # section heading, not a row
+                    elif rows:
+                        rows[-1]["description"] += " " + desc  # continuation line
+                        stitched.append(desc)
+                    else:
+                        orphans.append(desc)              # nothing to attach it to
                 else:
                     rows.append({"section": section, "date": date,
                                  "description": desc, "amount": amount(amt)})
+
+# A dateless line before the first transaction means the crop or the heading list is
+# wrong, not that the statement has data there — say so instead of raising IndexError
+# on `rows[-1]` (a blank spacer row or an unlisted heading at the top does exactly that).
+assert not orphans, f"dateless text before the first transaction: {orphans}"
+if stitched:                  # read this once per layout before freezing the recipe
+    print("stitched as continuations (a heading in this list is a missing SECTIONS entry):")
+    for line in stitched:
+        print("   ", line)
 
 df = pd.DataFrame(rows)
 df["date"] = pd.to_datetime(df["date"], format="%Y-%m-%d")
@@ -106,6 +128,9 @@ assert abs(OPENING + df["amount"].sum() - CLOSING) < 0.005, \
 On a two-page statement whose rows are +2,500.00, +110.50, −750.25, −25.00, this yields four
 typed rows carrying their section, and `1,000.00 + 1,835.25 = 2,835.25` passes. Every failure
 of that assertion is a dropped, doubled, or mis-signed row — find it before shipping the table.
+Note the reach of the check, though: only amounts enter the arithmetic, so a wrong `section`
+label or a heading absorbed into a description passes it untouched. That is what the stitch log
+is for — it is the only signal that the `SECTIONS` list doesn't match the document.
 
 ## Invoice pattern
 1. Header fields by regex on text: invoice number, dates, PO number, supplier

@@ -17,10 +17,12 @@ retrieval-practice literature and combines the first two effects.
 
 ## Question-authoring patterns by material type
 
-Author from the source with the answer and its location recorded per item. Aim for items that
-are *atomic* (one retrievable fact or move each), *unambiguous* (a knowledgeable person gives
-one answer), and *cue-realistic* (the question resembles how the knowledge is actually
-summoned in use).
+Author from the source with the answer and its location recorded per item — the location is
+what lets a disputed answer be settled against the source rather than against the assistant's
+memory, which matters because retrieval practice consolidates a wrong key as readily as a
+right one. Aim for items that are *atomic* (one retrievable fact or move each),
+*unambiguous* (a knowledgeable person gives one answer), and *cue-realistic* (the question
+resembles how the knowledge is actually summoned in use).
 
 | Material | Good question forms |
 |---|---|
@@ -156,15 +158,16 @@ Source passage (short, work-flavored):
 
 > A wire transfer settles with immediate finality: once released, the sender cannot recall
 > it, only request its return. An ACH credit settles in batches and can be reversed by the
-> originator within five banking days, but only for specific error conditions — duplicate
-> entry, wrong amount, or wrong account. A check provides no finality at deposit; it can be
-> returned unpaid for many reasons, so funds availability is not funds finality.
+> originator within five banking days of settlement, but only for specific error conditions
+> — a duplicate entry, the wrong amount, the wrong account, or the wrong date. A check
+> provides no finality at deposit; it can be returned unpaid for many reasons, so funds
+> availability is not funds finality.
 
 Graded set the assistant would author (answers kept hidden during the quiz):
 
 - **Recall:** "What does 'finality' mean for a wire transfer once it is released?"
-- **Recall:** "Within what window, and for which error conditions, can an ACH credit be
-  reversed by its originator?"
+- **Recall:** "Within what window can an ACH credit be reversed by its originator?"
+- **Recall:** "Which error conditions permit an originator to reverse an ACH credit?"
 - **Application:** "A vendor payment went out this morning to the wrong account. It was sent
   by wire. What are your options?" (Then re-ask later with "…sent by ACH.")
 - **Discrimination:** "Your bank shows a deposited check as 'available.' A colleague says
@@ -173,8 +176,10 @@ Graded set the assistant would author (answers kept hidden during the quiz):
 - **Generation:** "From memory: rank wire, ACH credit, and check from most to least payment
   finality, and give the one-line reason for each rank."
 
-Notes on the authoring: the two recall items are atomic (one per instrument-fact); the
-application pair interleaves by re-running the same scenario across instruments; the
+Notes on the authoring: the three recall items are atomic — the ACH window and the ACH error
+conditions are deliberately *separate* items, because "within what window, and for which
+conditions…" is the omnibus form this file tells you to split; the application pair
+interleaves by re-running the same scenario across instruments; the
 discrimination item targets the passage's designed confusion (availability vs. finality);
 the generation item forces reconstruction of the whole structure. That progression — not
 five paraphrases of "what is a wire?" — is what a graded set means.

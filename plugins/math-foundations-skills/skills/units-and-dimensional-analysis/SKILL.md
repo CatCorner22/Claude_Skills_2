@@ -13,7 +13,7 @@ description: >-
   dimensional analysis, units don't match, per unit, annualize, factor-label, cancel the units,
   unit check, thousands vs millions.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Units and dimensional analysis
@@ -73,10 +73,14 @@ Worked chains, the full check protocol, and the trap catalog are in
 8. **Dimension-check any formula before trusting it.** Write the units of every symbol;
    work out the units of every term; every pair of added or subtracted terms shares a
    unit, both sides match, and anything inside exp, ln, or an exponent is dimensionless.
-   A formula that fails is wrong no matter how plausible its output looks — this
-   library's own `safety-and-reliability-skills:weight-of-the-books` had its
-   margin-exhaustion formula caught exactly this way in adversarial review (the worked
-   catch is in the reference file). Numbers can look right by luck; units cannot.
+   A formula that fails is wrong no matter how plausible its output looks — and one
+   whose units merely *resolve* still owes you the question of which law joins the
+   terms. This library's own `safety-and-reliability-skills:weight-of-the-books` had
+   its margin-exhaustion formula corrected in adversarial review by exactly that pair
+   of questions: the draft's units came out as years, and writing them down was what
+   exposed that nothing in it said how the quantity actually moved with time (the
+   worked catch is in the reference file). Numbers can look right by luck; writing the
+   units out is what makes the structure you actually wrote visible.
 9. **Scan for the standing traps:** per-month and per-year figures added in one sum;
    "$ thousands" columns read as raw dollars (a 1,000× error — write k$ and M$ as real
    units: 2,340 k$ = $2,340,000 = 2.34 M$); percent used as if it were a count
@@ -89,9 +93,12 @@ Worked chains, the full check protocol, and the trap catalog are in
 a unit *is* a symbol — "45 mi/hr" is the product 45 × mi × hr⁻¹. That is why the
 factor-label method works: each conversion factor equals 1 (5280 ft and 1 mi are the
 same length), so multiplying by it changes the representation and never the quantity.
-Carrying units through a calculation is therefore a proof that travels with the work:
-if the units resolve to the right thing, the *structure* of the calculation is correct,
-and only the arithmetic remains to be checked. Dropping units doesn't simplify the
+Carrying units through a calculation is therefore a check that travels with the work —
+but be precise about what it proves. **Units resolving does not make the structure
+correct.** It is a one-way test: wrong units prove the formula wrong, while right units
+leave a formula that can still carry a wrong constant, a wrong sign, a missing factor of
+two, or the right dimensions assembled the wrong way round. Treat a clean dimensional
+check as "not yet refuted", never as "verified". Dropping units doesn't simplify the
 work — it deletes the half of the answer that can catch the other half.
 
 **A dimensional check is the cheapest formula review that exists.** It needs no data,
@@ -102,7 +109,9 @@ wrong with certainty. That asymmetry is why it runs *before* trusting any formul
 after the numbers disappoint — plausible-looking output is precisely what a
 dimensionally broken formula produces, since nothing else constrains it. It works on
 authors, too: the weight-of-the-books catch above was an author's own formula, in this
-library, found by exactly this check.
+library, found when a reviewer wrote out the units of every term and asked what law
+joined them — the units came out as years, and the question they provoked was what
+convicted the formula.
 
 **Flows add; growth compounds.** Twelve months of a $2,350 cost is genuinely
 12 × 2,350, because dollars spent in different months pile up in one heap. Twelve months
@@ -141,7 +150,7 @@ structural — real rates, balances, or counterparty details belong in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/units-and-dimensional-analysis.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/units-and-dimensional-analysis.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -15,7 +15,7 @@ description: >-
   chicken little, strategic autopsy, operational autopsy, red team my business, blocker
   protocol, stand down.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"
 ---
 
@@ -63,7 +63,7 @@ and survivorship fallacies) · UI/UX and human emotion (where cognitive load, an
 confusion, or fatigue causes drop-off or error) · path dependency (map current state →
 future state; flag lock-in choices that make reversal prohibitively expensive) · MSCD
 technical writing (Adams's *A Manual of Style for Contract Drafting*: destroy ambiguity —
-syntactic, semantic, contextual; contain and explicitly define intentional vagueness).
+antecedent, syntactic, lexical, scope; contain and explicitly define intentional vagueness).
 
 **The output template (use this exact format for all evaluations):** the section order and
 headings are fixed, but a section is only filled when it has a finding that clears the evidence
@@ -105,7 +105,8 @@ after, and it spends the credibility the real findings need.
 #### 💥 MSCD LINGUISTIC FAILURES
 | Flaw Type | Specific Vulnerability | Why It Fails (Adams) | Required MSCD Correction |
 | :--- | :--- | :--- | :--- |
-| [Ambiguity/Vagueness] | [e.g., "System will reasonably scale…"] | [Semantic ambiguity; unenforceable] | [Precise condition using "shall/must"] |
+| [Ambiguity — antecedent / syntactic / lexical / scope] | [e.g., "notice to the vendor and its agents in Texas" — which noun does "in Texas" attach to?] | [Syntactic ambiguity; two readings, both defensible in court] | [Split the sentence so only one reading survives] |
+| [Vagueness — a different defect, per Adams] | [e.g., "System will reasonably scale…"] | [Vagueness, not ambiguity: one reading, no measurable boundary] | [Either a precise condition using "shall/must", or vagueness contained and explicitly defined] |
 
 #### 💡 THE PROACTIVE PIVOT
 *   **The Hard Way:** You are currently executing this via [suboptimal method].
@@ -142,7 +143,7 @@ constraints the sentinel should assume without re-asking.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little-executive-advisor.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little-executive-advisor.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -46,9 +46,24 @@ Invalidate on mutation; don't hand-update copies.
 const base = import.meta.env.VITE_API_URL ?? "";
 
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
+  // Merge through the Headers constructor, not object spread. `RequestInit["headers"]` is
+  // `HeadersInit = Headers | string[][] | Record<string, string>`, and spread only does the
+  // right thing for the third shape — all three are type-legal, so TypeScript accepts the
+  // broken ones silently. Verified in node:
+  //   {...new Headers({"X-Trace":"abc"})}  ->  {}                      caller's header GONE
+  //   {...[["X-Trace","abc"]]}             ->  {"0": [...]}            junk key, header GONE
+  // A caller passing `new Headers(...)` — the shape most fetch wrappers hand you — loses its
+  // header with no error, which is the worst version of this bug: it works in the test that
+  // passes a plain object.
+  const headers = new Headers({ "Content-Type": "application/json", ...authHeader() });
+  new Headers(init?.headers).forEach((v, k) => headers.set(k, v));   // caller wins, per key
+
   const r = await fetch(base + path, {
-    headers: { "Content-Type": "application/json", ...authHeader() },
     ...init,
+    // headers applied LAST. `{headers, ...init}` looks equivalent and is not: one caller
+    // passing an Idempotency-Key replaces the whole object, dropping Content-Type and the
+    // auth header — a 401 on a call that reads correctly.
+    headers,
   });
   if (!r.ok) {
     // Error bodies are not reliably JSON — an HTML 502 page, an empty 401. Parsing blind
@@ -58,6 +73,7 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
     try { detail = JSON.parse(body).detail ?? detail; } catch { /* not JSON — keep statusText */ }
     throw new ApiError(r.status, detail);
   }
+  if (r.status === 204) return undefined as T;   // a DELETE returning no body; r.json() throws
   return r.json();
 }
 

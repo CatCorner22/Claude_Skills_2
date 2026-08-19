@@ -97,6 +97,8 @@ with pd.ExcelWriter("out.xlsx") as xl:     # multiple sheets
 - **Merge fan-out**: duplicate keys on the "one" side multiply rows and inflate sums. Use `validate=`.
 - **Wrong dtypes**: IDs read as float lose leading zeros; dates read as strings won't compare. Set them at load.
 - **NaN in comparisons**: `NaN != NaN`; filters silently drop them. Handle with `.isna()` / `.fillna()` on purpose.
-- **`inplace=True`**: encourages hidden state and is being deprecated in places — prefer reassigning the result.
+- **`inplace=True`**: encourages hidden state, and under pandas 3's copy-on-write it no longer buys
+  the memory saving people reach for it for (the operation still copies when it must) — prefer
+  reassigning the result.
 - **Float equality**: `0.1 + 0.2 != 0.3`. Compare money with rounding or integer cents, not `==`.
 - **Silent index alignment**: arithmetic between two Series aligns on index, not position — reset indexes first if unsure.

@@ -13,7 +13,7 @@ description: >-
   probability, Bayes, Bayes' theorem, expected value, independent events, mutually exclusive,
   base rate neglect, likelihood of both, what are the odds.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Probability fundamentals
@@ -119,7 +119,7 @@ statements quietly swap denominators mid-sentence.
 Expected value is a long-run average, so it is the right summary exactly when you
 live in the long run: many repeats, each small enough that no single loss changes
 the game. One-shot decisions and ruinous stakes break both conditions — an average
-assumes you are still around to collect it. Ruin compounds: a repeated bet of
+assumes you are still around to collect it. Ruin compounds: a repeated fair-coin bet of
 +50%/−40% on your whole stake has EV +5% per flip, yet the typical path shrinks
 about 5.1% per flip, because repeated outcomes multiply and the geometric factor
 √(1.5 × 0.6) ≈ 0.949 governs — see sibling
@@ -158,7 +158,7 @@ data, or account-level numbers belong in `your-environment.private.md` (git-igno
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/probability-fundamentals.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/probability-fundamentals.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

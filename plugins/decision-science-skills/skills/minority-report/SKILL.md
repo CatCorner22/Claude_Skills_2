@@ -82,10 +82,12 @@ rule, and the one-variable turn are in `references/scenario-cell-method.md`.
    scenarios in a working plausibility order first (step 7 disciplines it; a rough order
    is enough to see movement), then hold everything else fixed, change ONE variable
    (the deadline slips a quarter; the ruling goes the other way; the key person leaves;
-   demand halves), and record which scenario rankings flip. Variables whose turn reorders
-   the outcomes deserve monitoring money; variables that flip nothing **on their own** drop to
-   low-priority monitoring — not off the list. One-at-a-time turning is blind to interactions by
-   construction: two variables that each change nothing alone can flip the ranking when they move
+   demand halves), and record whether the favored CHOICE changes. Rank the options, not the
+   scenario labels: turning a variable that is itself a scenario axis relocates you from one
+   scenario to another by construction, and a flip that cannot come out "no" carries no
+   information. Variables whose turn reorders the choices deserve monitoring money; variables
+   that flip nothing **on their own** drop to low-priority monitoring — not off the list.
+   One-at-a-time turning is blind to interactions by construction: two variables that each change nothing alone can flip the ranking when they move
    together, which is the ordinary case when both bear on the same constraint (a supply delay and a
    demand spike are individually absorbable and jointly fatal). Before retiring a variable, turn it
    jointly with each of the others that touch the same bottleneck; if the cell has more than a
@@ -166,7 +168,7 @@ Sensitive specifics go in `*.private.md` (git-ignored).
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/minority-report.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/minority-report.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

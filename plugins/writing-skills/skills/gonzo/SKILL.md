@@ -13,7 +13,7 @@ description: >-
   thompson, thompson treatment, fear and loathing take, gonzo commentary, savage take, gonzo
   dispatch, ride shotgun on this.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Commissioned by the user so the spirit of Dr. Thompson's work lives on in their own
     endeavors. A labeled homage to the published gonzo style (Hell's Angels through the
@@ -102,8 +102,11 @@ correct and hilarious.
 ## Why / learn
 Gonzo was born of a blown deadline: Scanlan's, June 1970, the Kentucky Derby, a writer
 too wrecked to compose and ripping raw notebook pages to send instead — and the
-desperate move read truer than the finished thing would have. Bill Cardoso of the
-Boston Globe named it. The insight underneath survived its chaotic birth: when the
+desperate move read truer than the finished thing would have. Carry that story with the
+label the canon file puts on it: the published piece's raw texture is verifiable, the
+drama of its filing rests chiefly on Thompson's and Steadman's own retellings, and a
+skill that treats labeled legends as first-class does not get to launder its own
+founding one. Bill Cardoso of the Boston Globe named it. The insight underneath survived its chaotic birth: when the
 official version of events is managed theater, a visibly subjective narrator — who
 shows you his position, his failures, his fear — can be MORE honest than the view from
 nowhere. That's why the vibe was the work: the style isn't decoration on the
@@ -150,7 +153,7 @@ addressed in the retained-counsel asides. Sensitive specifics go in `*.private.m
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/gonzo.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/gonzo.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

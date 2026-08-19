@@ -13,7 +13,7 @@ description: >-
   matches, exception queue drowning, tune the alerts, memory cell, everything is an
   exception, nobody looks at the alerts anymore.
 metadata:
-  version: "1.2.0"
+  version: "1.4.0"
   source: >-
     Built from the library's biological-systems research dossier
     (docs/research/epic-wave-held-research.md, Lane 3 top pick). The mechanism is the
@@ -66,14 +66,23 @@ deployments, and it documents exactly this failure trade [snippet-only].
 The disposition-audit protocol, worked example, templates, and the evidence retold in full
 are in `references/immune-tuning-method.md`.
 
-1. **Measure the empirical autoimmunity rate per rule.** Pull a period of firings (a month,
-   a quarter) with their dispositions — what a human actually did with each. For every rule,
-   compute the fraction of firings that needed **no action**. That fraction is the rule's
-   autoimmunity rate, and it is an observation, not an opinion: the queue's own history is
-   the dataset. No dispositions recorded? Start recording them today; a one-line disposition
-   per firing is the cheapest instrumentation this skill ever asks for.
-2. **Rank rules by alarm-flood contribution.** Autoimmunity rate × firing volume. Three
-   rules usually produce most of the flood; those three are the work.
+1. **Measure the empirical autoimmunity rate per rule — as a band, not a number.** Pull a
+   period of firings (a month, a quarter) with their dispositions — what a human actually did
+   with each. Per rule, the **floor** is firings *confirmed* to need no action, over firings;
+   the **ceiling** adds the firings that aged out unread. Report both, because **`unread` is
+   unknown, not benign**: counting it as a false alarm asserts the alert was harmless on the
+   evidence that nobody looked, and that error is biggest in the most flooded queue — the one
+   whose alerts age out. Since a high rate is this skill's argument for widening a threshold,
+   a point estimate hands the worst-drowned queue the strongest case for switching detection
+   off. **A rule may only be loosened or retired on floor evidence.** A wide band is itself
+   the finding: sample 30–50 unread firings, adjudicate them properly, and place the true
+   rate before any threshold moves. No dispositions recorded? Start recording them today; a
+   one-line disposition per firing is the cheapest instrumentation this skill ever asks for.
+2. **Rank rules by alarm-flood contribution.** Confirmed non-actionable firings × volume —
+   rank on the floor, so a rule cannot climb the work list on firings nobody read. Three
+   rules usually produce most of the flood; those three are the work. What a large unread
+   count *does* justify right away is routing (batch, digest, demote, give it an owner):
+   load comes down, coverage does not.
 3. **Recalibrate defaults before adding smarts.** The highest-leverage move on record is not
    a better detector — it is fixing default thresholds that were never set for this
    population. Boston Medical Center recalibrated *default* alarm limits and cut audible
@@ -88,9 +97,10 @@ are in `references/immune-tuning-method.md`.
 5. **Install the danger-signal gate on human paging.** Pages — the interrupt-a-human tier —
    require a danger signal: evidence of damage or consequence in context, not mere anomaly.
    "Unusual" goes to the queue; "unusual AND a customer/counterpart/system is visibly
-   affected" pages. This is danger theory operationalized (Matzinger's danger model;
-   Aickelin's dendritic-cell algorithm), which exists specifically to cut false positives by
-   requiring damage context rather than mere non-self [snippet-only].
+   affected" pages. This is danger theory operationalized (Matzinger's danger model; the
+   dendritic-cell algorithm of Greensmith, Aickelin & Cayzer, ICARIS 2005), which exists
+   specifically to cut false positives by requiring damage context rather than mere
+   non-self [snippet-only].
 6. **Induce tolerance at the source, with evidence and expiry.** For each verified-benign
    recurring pattern, add a tolerance-list entry carrying: the pattern, the evidence count
    (how many firings were dispositioned benign), the approver, and an **expiry date** that
@@ -114,13 +124,14 @@ are in `references/immune-tuning-method.md`.
    same idea at practice level — accept small failures continuously so risk surfaces instead
    of accumulating [snippet-only].
 
-**Deliverable.** A dated tuning audit: the period, the per-rule table (firings, autoimmunity rate,
+**Deliverable.** A dated tuning audit: the period, the per-rule table (firings, confirmed
+non-actionable, unread, the autoimmunity band floor–ceiling,
 flood contribution), the layer each rule now routes to, the tolerance entries with evidence counts
 and expiry dates, the memory cells minted, the replay result behind every threshold change, and the
 next audit date. It is the baseline the next audit is scored against.
 
 **Division of labor.** The assistant reads the disposition history and computes per-rule
-autoimmunity rates, drafts the tolerance list with evidence counts, converts postmortems into
+autoimmunity bands, drafts the tolerance list with evidence counts, converts postmortems into
 memory-cell rule drafts, and runs the threshold-change replay. The human owns every
 suppression decision and every expiry date — turning a detector down is a risk acceptance,
 and risk is accepted by people, not by tooling.
@@ -173,6 +184,12 @@ recalibration, not intelligence — most floods are configuration, not fate [sni
 - Measuring detector precision but never queue economics → the operating question is
   firings per operator-day versus what operators can genuinely disposition; precision per
   rule is an input, not the answer.
+- Counting `unread` firings as benign → an alert nobody opened is *unknown*, not a false
+  alarm; report the rate as a floor–ceiling band and loosen only on the floor.
+- Retiring a rule because most of its firings were never read → that is manufacturing a
+  coverage gap and calling it tuning; sample 30–50 of the unread, adjudicate, then decide.
+- Treating a wide band as a measurement nuisance → it is the headline finding: the queue
+  outran its humans, which is a triage and staffing answer, not a threshold answer.
 - Tuning once and declaring victory → populations drift and rules rot; the disposition
   audit is a cycle, not a project.
 
@@ -189,7 +206,7 @@ never committed.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/detection-system-tuning.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/detection-system-tuning.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

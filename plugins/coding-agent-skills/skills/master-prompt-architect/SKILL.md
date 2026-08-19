@@ -14,7 +14,7 @@ description: >-
   this prompt, prompt blueprint, token budget, backward design, triple audit, harden this
   prompt, production prompt.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   author: User-drafted persona spec (Master Prompt Architect); adapted to house standard
 ---
 
@@ -112,7 +112,7 @@ commit real credentials or client data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/master-prompt-architect.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/master-prompt-architect.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

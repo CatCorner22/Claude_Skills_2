@@ -4,7 +4,8 @@ Method lineage: the Shikinen Sengu of the Ise Grand Shrine — full reconstructi
 20 years since 690 CE, carpenters participating two or three times per working life
 (learn → lead → teach), a 200-year in-house forestry plan begun 1923, and a ~120-year
 lapse after the Ōnin War (Inner Shrine 1462–1585) revived by the fundraising nuns of
-Keikō-in with Oda Nobunaga's patronage [snippet-only: japanfs.org, Smithsonian,
+Keikō-in with warlord endowment behind them — Oda Nobunaga from 1569, though he died in
+1582 and the 1585 rebuild fell to his successors [snippet-only: japanfs.org, Smithsonian,
 woodcentral, Wikipedia]. Shinise footnote: Kongō Gumi, temple builders founded 578,
 independent until liquidation in 2006 [snippet-only: Wikipedia, INSEAD]. The pattern is
 domain-neutral: exercise the capability on a schedule shorter than a career, with the
@@ -59,7 +60,42 @@ nothing. Pick per capability type:
 - **Process** (client intake, onboarding, month-end close, matter opening) → run one
   real or realistic instance with the runbook and a newcomer driving. Success test:
   completion without an undocumented human intervention — every intervention is a
-  logged gap.
+  logged gap. **Screen the runbook for irreversibility first** — see below; this is the
+  one pattern in this list that can reach outside the rehearsal.
+
+### The irreversibility screen (Process rehearsals only)
+
+Every other pattern here is safe by construction: restores go to a scratch location,
+deliverables recreate a *past* period and diff, environments stand up on a clean machine.
+The Process pattern is the exception — it puts a newcomer, following a document, in the live
+system with real authority, on processes named as client intake, onboarding, month-end close
+and matter opening. Those contain steps that leave the building.
+
+Before the rehearsal, walk the runbook and mark every step:
+
+| Class | Examples | In rehearsal |
+|---|---|---|
+| Reversible | internal record created, draft saved, checklist ticked | **Execute** |
+| External, reversible with effort | an internal notification, a calendar hold | Execute only if the recipient is briefed |
+| **External and irreversible** | money moved, a filing submitted, a client or counterparty contacted, a record the retention schedule locks, a credential rotated, anything a regulator or third party sees | **Declare and simulate — never execute** |
+
+Two rules follow, and they invert the ordinary rehearsal discipline:
+
+- **The corrector speaks *before* an irreversible step, not after.** The default rule — stay
+  silent until the driver errs, then correct out loud — is exactly right for reversible work,
+  because the error is the finding. At an irreversible step the error is not recoverable, so
+  the corrector confirms the driver's intent before it executes. The gap is still logged; it is
+  simply logged without being paid for.
+- **Prefer a past period or a sandbox instance.** Re-running last month's intake against a
+  copy, or a genuinely fictitious matter marked as such, tests the same runbook with the
+  external edges removed. Use a live instance only when nothing else exercises the step, and
+  then only with the irreversible steps simulated.
+
+**Abort trigger, stated before the start:** the rehearsal hands back to the veteran the moment
+a real client, a real deadline, or a real counterparty is affected, or the driver cannot tell
+whether the next step is reversible. Handing back is a successful rehearsal that found its
+limit, not a failed one — and "we weren't sure, so we kept going" is the sentence this trigger
+exists to prevent.
 - **Relationship / negotiation knowledge** (the vendor history, the regulator context)
   → hardest to rebuild; the unit is a briefing the newcomer writes from the record and
   the veteran corrects. Weakest pattern; flag these rows for deliberate shadowing.
@@ -134,9 +170,13 @@ The rehearsal is the documentation's test; the harvest is what makes the test pa
 The Ise cycle is often told as thirteen unbroken centuries. It was not. After the Ōnin
 War devastated the shrine's economic base, the Inner Shrine went roughly 120 years
 without rebuilding (1462–1585). What revived it was not reverence — reverence had never
-left — but money and named sponsorship: the nuns of Keikō-in fundraised across the
-country, and Oda Nobunaga's patronage backed the resumption [snippet-only]. The
-practice survived because someone made funding it their job.
+left — but money and named sponsorship, sustained across generations: the nuns of
+Keikō-in fundraised across the country for decades (the Uji bridge in 1545, the Outer
+Shrine in 1563), and warlord endowment backed them — Oda Nobunaga resumed funding the
+shrine in 1569 and died in 1582, so the 1585 Inner Shrine rebuild was completed by his
+successors [snippet-only]. That the revival outlasted its own patron is the point: it
+took a funding line, not one benefactor. The practice survived because someone made
+funding it their job — and kept making it someone's job.
 
 The transferable rule: **a renewal cycle without a funding owner silently lapses.**
 Renewal work has a structural weakness in every budget fight — skipping it costs
@@ -197,6 +237,6 @@ notes.
 - Smithsonian and Wood Central coverage of the rebuild practice and the in-house
   hinoki forestry program
 - Wikipedia: Ise Grand Shrine (the Ōnin-era interruption and 1585 revival; Keikō-in's
-  fundraising; Oda Nobunaga's backing), Kongō Gumi (founded 578; 2006 liquidation;
-  Takamatsu subsidiary)
+  fundraising; Oda Nobunaga's endowment from 1569 and his death in 1582), Kongō Gumi
+  (founded 578; 2006 liquidation; Takamatsu subsidiary)
 - INSEAD on shinise longevity — single-craft focus and flexible succession

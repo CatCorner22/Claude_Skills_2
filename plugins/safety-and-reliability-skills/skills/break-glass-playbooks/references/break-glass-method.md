@@ -158,9 +158,15 @@ From the library's research dossier (Lane 2); provenance marks as recorded there
 - Yale HIPAA break-glass procedure:
   [hipaa.yale.edu](https://hipaa.yale.edu/security/break-glass-procedure-granting-emergency-access-critical-ephi-systems)
   [gov/compliance]
-- Break-glass testing mapped to NIST SP 800-53 / CIS 17:
+- Break-glass access under a control framework — pre-approval, documentation, logging,
+  and automatic expiry:
   [hoop.dev overview](https://hoop.dev/blog/break-glass-access-under-the-nist-cybersecurity-framework/)
-  [framework]
+  [framework]. That overview is written against the NIST *Cybersecurity Framework*; the
+  underlying catalog controls are NIST SP 800-53 Rev 5 **AC-2(2)** (automatically remove or
+  disable temporary and emergency accounts after an organization-defined period — the expiry
+  rule above) and **CP-4 / IR-3** (contingency-plan and incident-response testing — the drill
+  cadence). Cite those, not a CIS control number: emergency-account handling sits under CIS
+  account- and access-management, not the incident-response control.
 - Regulator-mandated contingency funding plans (early-warning indicators, graduated
   triggers, pre-approved action menus):
   [Fed SR 10-6](https://www.federalreserve.gov/boarddocs/srletters/2010/sr1006.htm),

@@ -12,7 +12,7 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.2.0"
+  version: "1.4.0"
 ---
 
 # DuckDB local analytics
@@ -55,16 +55,44 @@ SELECT * FROM read_csv('export.csv', header=true, delim=';',
 4. **Join across files like tables** — this replaces the VLOOKUP chain:
 
 ```sql
+-- Guard FIRST: a NULL or blank join key can never match anything, so it lands in the break
+-- buckets looking like a genuine one-sided item. Run this before the join, every time.
+SELECT 'statement' AS side, count(*) AS unkeyed FROM read_csv_auto('statement.csv')
+  WHERE ref_no IS NULL OR trim(ref_no) = ''
+UNION ALL
+SELECT 'ledger', count(*) FROM read_csv_auto('ledger.csv')
+  WHERE ref_no IS NULL OR trim(ref_no) = '';
+-- Non-zero on either side: fix the extract, or handle those rows as their own bucket.
+-- They are a data-quality finding, not a reconciliation difference.
+
 CREATE OR REPLACE TABLE recon AS
-SELECT ref_no,                       -- keep the key: break rows are NULL on one side
+WITH s AS (SELECT *, TRUE AS in_stmt   FROM read_csv_auto('statement.csv')
+             WHERE ref_no IS NOT NULL AND trim(ref_no) <> ''),
+     l AS (SELECT *, TRUE AS in_ledger FROM read_csv_auto('ledger.csv')
+             WHERE ref_no IS NOT NULL AND trim(ref_no) <> '')
+SELECT ref_no,
+       l.in_ledger IS NULL AS stmt_only,   -- flag from a side-present marker, never the key
+       s.in_stmt   IS NULL AS ledger_only,
        s.line_id, s.amount AS stmt_amt, l.amount AS ledger_amt,
        coalesce(s.amount,0) - coalesce(l.amount,0) AS diff
-FROM read_csv_auto('statement.csv') s
-FULL OUTER JOIN read_csv_auto('ledger.csv') l USING (ref_no);
--- Inspect the unmatched sides before trusting any inner join:
-SELECT count(*) FILTER (WHERE ledger_amt IS NULL) AS stmt_only,
-       count(*) FILTER (WHERE stmt_amt IS NULL)  AS ledger_only FROM recon;
+FROM s FULL OUTER JOIN l USING (ref_no);
+-- Inspect the unmatched sides before trusting any inner join. Count the flags, not
+-- `ledger_amt IS NULL`: a matched row whose amount cell was empty is a NULL amount, and
+-- counting it as unmatched inflates the break count and sends you hunting a row that joined.
+SELECT count(*) FILTER (WHERE stmt_only)   AS stmt_only,
+       count(*) FILTER (WHERE ledger_only) AS ledger_only FROM recon;
 ```
+
+   **Why the marker and not the key.** `USING (ref_no)` coalesces the key column, which reads
+   as "so it can never be NULL in the result" — and that is false. A NULL key never *matches*,
+   so the row still comes through the FULL OUTER JOIN with the coalesced `ref_no` NULL, and
+   `l.ref_no IS NULL` and `s.ref_no IS NULL` are then **both true**. Verified in DuckDB 1.5.5:
+   one statement row with a blank `ref_no` is counted once as `stmt_only` and again as
+   `ledger_only` — the same row inflating both sides of the break report, while claiming to
+   exist only in the statement *and* only in the ledger. Deriving each flag from a marker that
+   exists solely on its own side (`in_stmt` / `in_ledger`, or any column guaranteed non-null
+   there) cannot produce that contradiction. The guard above stops the unkeyed rows from
+   reaching the join at all, so they are reported as what they are.
 
 5. **Persist results where the next step needs them.** `COPY recon TO 'recon.parquet'` (compact,
    typed — the best interchange format), `COPY ... TO 'out.csv' (HEADER)` for spreadsheet users,
@@ -90,7 +118,7 @@ also why Parquet (columnar on disk) is its natural partner and why converting a 
 Parquet once pays back every subsequent query. And because it's still SQL over inferred schemas,
 the flat-file disciplines carry over unchanged: declare types where inference can lie (IDs!),
 and audit joins with unmatched counts, because a `FULL OUTER JOIN` is a reconciliation and the
-NULL sides are your breaks.
+rows that carry a key on only one side are your breaks.
 
 ## Common mistakes
 - Letting `read_csv_auto` type an ID column numeric → leading zeros gone; force `VARCHAR` in `types=`.
@@ -107,7 +135,7 @@ and the recurring analysis scripts. **Never commit the data files themselves.**
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/duckdb-local-analytics.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/duckdb-local-analytics.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

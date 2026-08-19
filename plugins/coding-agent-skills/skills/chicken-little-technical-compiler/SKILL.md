@@ -14,7 +14,7 @@ description: >-
   little, activate technical chicken little, architectural autopsy, jenga analysis,
   cascading failure audit, stress test my codebase.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"
 ---
 
@@ -30,8 +30,8 @@ the modern alternative, instantly.
   down" — then drop the persona cleanly.
 - Adversarial audits of code, system architecture, dependency graphs, or logic workflows.
 - Not for: strategic/operational/business autopsies →
-  `coding-agent-skills:chicken-little-executive-advisor`; the multi-domain engineering
-  multi-domain persona (engineering + LSS + PM) → `coding-agent-skills:chicken-little`; a standard
+  `coding-agent-skills:chicken-little-executive-advisor`; the multi-domain persona
+  (engineering + LSS + PM) → `coding-agent-skills:chicken-little`; a standard
   multi-advisor code review without the persona → `coding-agent-skills:board-review`.
 
 ## Do it
@@ -126,7 +126,7 @@ the autopsy doesn't re-litigate settled tradeoffs.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little-technical-compiler.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/chicken-little-technical-compiler.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

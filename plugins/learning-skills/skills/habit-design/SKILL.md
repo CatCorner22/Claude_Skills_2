@@ -2,8 +2,8 @@
 name: habit-design
 description: >-
   Designs one habit at a time as cue → routine → reward: writes an implementation intention
-  ("when X happens, I will Y" — Gollwitzer's well-replicated effect), stacks the routine onto
-  an existing stable habit, engineers friction so the good path gets one step shorter and the
+  ("when X happens, I will Y" — Gollwitzer's if-then effect), stacks the routine onto an
+  existing stable habit, engineers friction so the good path gets one step shorter and the
   bad path one step longer, starts below the failure threshold and scales only after
   stability, tracks presence rather than streaks (a missed day is data, not a moral event),
   and schedules a renegotiation date so the habit is kept, resized, or retired deliberately.
@@ -12,7 +12,7 @@ description: >-
   implementation intention, habit stacking, make it automatic, build a routine, stop doing X
   every time, keep forgetting to.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Habit design (make it automatic)
@@ -20,7 +20,7 @@ metadata:
 A behavior repeated by decision is paid for every single time; a behavior repeated by habit
 is paid for once, at design time. This skill does the design: cue, routine, reward, written
 as an implementation intention — Gollwitzer's if-then form, rendered here as "when X happens,
-I will Y," one of the better-replicated effects in behavior-change research — stacked onto
+I will Y," one of the most heavily tested effects in behavior-change research — stacked onto
 something stable, sized below the failure threshold, and given a scheduled renegotiation so
 it never becomes clutter.
 
@@ -59,11 +59,21 @@ renegotiation protocol, and the failure-mode table are in `references/habit-meth
    ("after I pour the first coffee…"). Also workable: a fixed event or place. Not workable:
    a time of day the user doesn't already notice, or "in the morning" (too vague to fire).
 4. **Write the implementation intention verbatim.** "When <cue>, I will <tiny routine> in
-   <place>." Gollwitzer & Sheeran's 2006 meta-analysis found that pre-deciding the
-   when-where-how of acting substantially raises the rate of actually doing it: d ≈ 0.65,
-   medium-to-large, across 94 independent tests — a strong return on one written sentence.
-   Have the user say it back; write it into the worksheet. Add a coping form for the known
-   obstacle: "if <obstacle>, then <planned response>."
+   <place>." Pre-deciding the when-where-how of acting raises the rate of actually doing it:
+   Gollwitzer & Sheeran's 2006 meta-analysis put the effect at d ≈ 0.65 across 94 tests, and
+   that figure is the one everyone quotes. **Do not plan around it.** The literature carries
+   substantial publication bias, and bias-corrected re-analyses put the effect materially
+   lower — plausibly a small effect rather than a medium-to-large one. [The specific corrected
+   values are `[unverified here]`: this environment could not reach the primary sources, and an
+   earlier version of this passage quoted a corrected band that a reviewer showed sat *above*
+   the paper's own bias-corrected estimate. Quote no number from this skill without checking it.]
+   The honest planning assumption: writing the plan is nearly free and the effect is real but
+   small, so do it — and do not promise anyone a 0.65. What gets a plan to the better end of
+   whatever the true effect is happens to be what this step already specifies: a contingent
+   if-then form rather than a resolution, genuine motivation for the underlying goal, and the
+   plan rehearsed rather than written once — which is why the user says it back rather than
+   nodding at it. Write it into the worksheet, and add a coping form for the
+   known obstacle: "if <obstacle>, then <planned response>."
 5. **Engineer the friction.** Make the good path one step shorter (stage it the night
    before: worksheet already open, shoes by the door) and the competing path one step longer
    (app logged out, snack not in the house). The friction audit in the reference walks the
@@ -83,13 +93,19 @@ renegotiation protocol, and the failure-mode table are in `references/habit-meth
    a legitimate outcome, not a failure.
 
 ## Why / learn
-**Why willpower is the wrong tool for repeated behavior.** Every fresh decision to act draws
-on a limited budget of attention and self-command, and repeated behaviors present the
-decision daily — including on the depleted days, which is exactly when decisions go wrong.
-Automaticity removes the decision: the cue fires the routine the way the doorway fires
-reaching for the light switch. The goal of habit design is not stronger resolve; it is a
-behavior that no longer consults resolve at all. Spend design effort once so willpower can be
-spent where only willpower works — which is why the hard-goal push belongs to
+**Why willpower is the wrong tool for repeated behavior.** A behavior that needs a fresh
+decision every time inherits the variance of whatever the day supplies — attention, time,
+mood, competing demands — and a repeated behavior presents that decision daily, including on
+the days with least to spare. The durable finding underneath is the gap between intention and
+action: people who fully intend to act often don't, and the failure concentrates at the
+moment of initiation rather than in the wanting. What it is *not* is the older "willpower is
+a fuel tank that runs down" story — ego depletion is one of the field's most public
+replication failures (Hagger et al.'s 23-lab registered replication, d ≈ 0.04; Vohs et al.'s
+36-lab follow-up, a non-significant d ≈ 0.06), so nothing here rests on it. Automaticity
+removes the decision: the cue fires the routine the way the doorway fires reaching for the
+light switch. The goal of habit design is not stronger resolve; it is a behavior that no
+longer consults resolve at all. Spend design effort once so effort is reserved for what only
+effort can do — which is why the hard-goal push belongs to
 `coding-agent-skills:stay-hard-accountability` and the repetition belongs here.
 
 **Habits live in environments.** The cue-routine link is learned in a context — a place, a
@@ -103,7 +119,10 @@ task, not a character verdict.
 to the environment: the decision is made once, in advance, and the cue thereafter triggers
 the act without in-the-moment deliberation — the fragile step where good intentions
 historically die. That mechanism is why the wording is concrete and situational ("when I
-close the 9:30 stand-up") rather than aspirational ("I'll do it daily").
+close the 9:30 stand-up") rather than aspirational ("I'll do it daily"). It is also why the
+sentence converts motivation into action rather than manufacturing it: the effect is larger
+in people who actually want the goal, so a plan written for a goal the user does not hold is
+the one case where this machinery reliably does nothing.
 
 **Why streak-guilt backfires.** A streak makes the record the point. One miss then destroys
 the accumulated asset, and the rational-feeling response to a destroyed asset is abandonment
@@ -153,7 +172,7 @@ file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/habit-design.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/habit-design.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -15,7 +15,7 @@ description: >-
   RACI, responsibility matrix, influence without authority, buy-in, who needs to sign
   off, stakeholder management, who can block this.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Built from the general-use expansion dossier
     (docs/research/general-use-expansion-research.md §7 stakeholder-mapping) —
@@ -176,7 +176,7 @@ never committed. A leaked power map damages every relationship on it.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/stakeholder-mapping.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/stakeholder-mapping.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

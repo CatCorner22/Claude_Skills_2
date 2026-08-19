@@ -14,7 +14,7 @@ description: >-
   the data, first look at data, distribution, outliers, correlation, cross-tab, missing data,
   data quality check, get to know the data, what does one row represent, Anscombe.
 metadata:
-  version: "1.2.1"
+  version: "1.3.0"
   source: >-
     The stance and sequence follow Tukey, Exploratory Data Analysis (1977); the
     plot-before-trusting-summaries demonstration is Anscombe's quartet (The American
@@ -114,7 +114,7 @@ grain of your common tables, and any domain validity rules. To then *fix* what y
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/exploratory-data-analysis.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/exploratory-data-analysis.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

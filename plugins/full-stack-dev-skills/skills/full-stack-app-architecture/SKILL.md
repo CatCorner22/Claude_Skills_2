@@ -10,7 +10,7 @@ description: >-
   folder layout, where should this code live, new web app setup, scaffold project, module
   boundaries, config management app.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Full-stack application architecture
@@ -73,7 +73,8 @@ tests/                 # only tests that cross features
    **no default**, so an empty environment fails at boot instead of running on the dev key; and
    config is only what varies *between deploys of the same code* — anything that varies per
    customer or tenant is data and belongs in the database. `grep -rn "os.environ" app/` should
-   return `config.py` and nothing else.
+   return nothing outside `config.py` — and once `pydantic-settings` is doing the reading, usually
+   nothing at all.
 6. **Decide the rendering split deliberately.** JSON API + React when the frontend is a real
    application (heavy interactivity, offline-ish state); server-rendered + htmx when it's
    CRUD screens (one language, no build pipeline for the UI, far fewer lines). Mixing is
@@ -123,7 +124,7 @@ split criteria — so future changes (and agents) follow the same shape.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/full-stack-app-architecture.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/full-stack-app-architecture.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

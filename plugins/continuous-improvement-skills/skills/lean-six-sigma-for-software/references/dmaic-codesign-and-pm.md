@@ -90,8 +90,8 @@ Software's version of the kaizen principle that those who do the work design the
    managers as proxies.
 2. **Go to their gemba first** — watch current work before any mockup exists. Count clicks,
    note workarounds, capture the *words they use for things* — those words become your labels
-   (this is where UI-vocabulary sync starts; see the
-   archived design-language skill — `continuous-improvement-skills:curve-hero-design-language`, restorable from `archive/skills/`).
+   (this is where UI-vocabulary sync starts; a fully worked design-language map for one dense
+   clinical-SaaS product is archived, restorable from `archive/skills/`).
 3. **Design in their language, together** — paper/low-fi mockups the users mark up; card-sort
    the navigation; let them arrange the workflow. Facilitate for equal voice — the quietest
    user often holds the critical edge case.

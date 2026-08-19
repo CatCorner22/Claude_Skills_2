@@ -55,7 +55,7 @@ is real or decorative:
 | Boundary | Why it exists | The test that it is real |
 |---|---|---|
 | `main.py` ↔ features | Composition points one way: main knows every feature, no feature knows main | Import a feature's `service.py` in a plain script with no app object. If it fails, the framework has leaked into the domain |
-| `config.py` | One reader of the environment means one place to see every knob | `grep -rn "os.environ\|os.getenv" app/` returns `config.py` and nothing else |
+| `config.py` | One reader of the environment means one place to see every knob | `grep -rn "os.environ\|os.getenv" app/` returns nothing outside `config.py` — and with `pydantic-settings` reading the environment for you, usually nothing at all |
 | `db.py` (no models) | Models import the session base; if `db.py` imported models you get an import cycle the first time a feature is added | `db.py` imports nothing from `app.features` |
 | `platform/` | Holds what survives deleting every feature | Ask it of each file: email *transport* survives; the reminder email *template* does not |
 | `features/<x>/__init__.py` | The published surface; everything else in the folder is private | The boundary test below passes |
@@ -382,22 +382,82 @@ Five decisions in twenty lines, each of which is the point:
 
 **Three checks that prove the config is actually twelve-factor**, run them in CI:
 
+These are literal CI steps, so each must exit **non-zero only when the config is wrong**. Two of
+the three invert if you write them the obvious way — `grep` succeeds when it finds the thing you
+do not want, and check 2's healthy behaviour is to *raise*:
+
 ```bash
+set -euo pipefail
+
 # 1. One reader of the environment. Anything else here is a config leak.
-grep -rn "os.environ\|os.getenv" app/ | grep -v "^app/config.py"
+#    grep exits 0 when it FINDS something, so negate it: a hit must fail the build.
+if grep -rn "os\.environ\|os\.getenv" app/ | grep -v "^app/config\.py:"; then
+  echo "config leak: the environment is read outside app/config.py" >&2
+  exit 1
+fi
 
 # 2. Fail fast and completely: an empty environment must fail in under a second,
 #    listing EVERY missing variable, not just the first one.
-env -i python -c "from app.config import Settings; Settings()"
+#    `_env_file=None` is load bearing — see below.
+#    Assert the SPECIFIC exception. "Any non-zero exit" is not the assertion you want:
+#    a typo'd import path, a missing dependency and a missing interpreter all exit
+#    non-zero too, and each would be read as the check succeeding.
+if ! env -i python - <<'PY'
+import sys
+try:
+    from pydantic import ValidationError
+    from app.config import Settings
+except Exception as e:                       # bad path, missing dep, wrong working dir
+    print(f"check 2 COULD NOT RUN: {type(e).__name__}: {e}", file=sys.stderr)
+    sys.exit(2)
+try:
+    Settings(_env_file=None)
+except ValidationError:
+    sys.exit(0)                              # the only PASS: it refused to start
+except Exception as e:
+    print(f"check 2: unexpected {type(e).__name__}: {e}", file=sys.stderr)
+    sys.exit(2)
+print("config did not fail on an empty environment — defaults are hiding required vars",
+      file=sys.stderr)
+sys.exit(1)
+PY
+then
+  exit 1
+fi
 
 # 3. The environments differ in values only. The NAME sets must be identical.
+#    diff already exits non-zero on a difference, so this one is correct as written.
 diff <(sort staging.env.names) <(sort prod.env.names)
 ```
+
+Verified: written without the negation, check 1 exits 0 on a tree that *does* leak
+(`app/leak.py` calling `os.getenv`) and exits 1 on a clean tree — i.e. it fails healthy builds and
+passes broken ones. Check 2 inverts the same way, because a correctly-configured app raises on an
+empty environment and a bare command turns that raise into a red build.
 
 Check 2 is the one that catches the common half-migration: a `Settings` class that exists while some
 module still reads `os.environ` lazily on first use, so the app boots clean and dies an hour later
 on the first request that touches that path. Pydantic reports all missing fields at once precisely
 so that a fresh deploy tells you everything wrong in one attempt.
+
+**Check 2 had a second way of quietly passing, and it is the reason the check is a script
+rather than a one-liner.** Written as `if env -i python -c "…"; then fail; fi`, the branch that
+means "passed" is simply *any non-zero exit* — and a typo'd import path, an uninstalled
+dependency, and a missing interpreter (rc=127) all exit non-zero, indistinguishable from the
+`ValidationError` the check exists to assert. With `2>/dev/null` on the end, nobody could see
+which had happened. Reproduced: `from app.confgi import Settings` exits 1 and the check reports
+success. The script form asserts the exception by type and separates three outcomes — passed
+(exit 0), genuinely broken config (exit 1), and *could not run* (exit 2) — and keeps stderr, so
+a failure says which one it was.
+
+Check 2 also has a way of quietly passing when it should fail, and `_env_file=None` is the
+guard. `env -i` clears the *environment*, not the working directory, so
+`model_config`'s `env_file=".env"` still finds the developer `.env` sitting next to it and the
+command boots clean — reported as "empty environment handled" when nothing was tested. Verified
+on pydantic-settings 2.15: with a populated `.env` present the bare form printed the database
+URL; with `_env_file=None` the same command raised the expected three missing-field errors. The
+override keeps the check honest wherever it runs — including CI, where a `.env` restored from a
+cache or written by a setup step would do the same thing.
 
 Check 3 is what makes staging predictive. The moment prod has a variable staging does not, staging
 stopped testing prod.

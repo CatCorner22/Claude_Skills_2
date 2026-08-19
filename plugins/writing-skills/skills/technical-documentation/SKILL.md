@@ -4,8 +4,8 @@ description: >-
   Structures technical documentation as typed artifacts, not prose: routes docs through
   Procida's Diátaxis framework (tutorial, how-to, reference, explanation — forms that
   fail when blended), shapes the README around a newcomer's first screen, records decisions as
-  Nygard-style ADRs (context/decision/consequences, superseded never
-  edited), keeps a human-readable changelog keyed to SemVer, and holds API and
+  Nygard-style ADRs (context/decision/consequences, superseded rather than
+  rewritten), keeps a human-readable changelog keyed to SemVer, and holds API and
   reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the
   document types; register stays with writing-skills:adams-smart-brevity,
   explanation craft with writing-skills:explanation-design. Gives every page an owner, a cadence,
@@ -14,7 +14,7 @@ description: >-
   ADR, architecture decision record, changelog, Diátaxis, how-to guide, tutorial vs reference,
   API docs, docs as code, semantic versioning, our docs are out of date.
 metadata:
-  version: "1.2.1"
+  version: "1.3.0"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §5 technical-documentation).
@@ -85,8 +85,11 @@ Templates, the quadrant audit protocol, worked examples, and per-type rules are 
 3. **Record each significant decision as an ADR.** Nygard's template: Title, Status,
    Context, Decision, Consequences [snippet-only]. Number them, keep them with the
    project, and treat accepted ADRs as immutable — a reversed decision gets a *new* ADR
-   that supersedes the old, never an edit. Context is the payload: it is what stops
-   successors from re-litigating a decision whose constraints they can't see.
+   that supersedes the old, never an edit to Context, Decision, or Consequences. The Status
+   line is the one field that still moves, to "Superseded by ADR-00NN" (reference §4); that
+   pointer is what makes the trail navigable rather than a pile of contradictory records.
+   Context is the payload: it is what stops successors from re-litigating a decision whose
+   constraints they can't see.
 4. **Keep the changelog for humans, keyed to versions.** Keep a Changelog categories —
    Added / Changed / Deprecated / Removed / Fixed / Security — newest first, ISO dates,
    an Unreleased section on top [snippet-only]. File by what happened to the *name*, not by the
@@ -226,7 +229,7 @@ file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/technical-documentation.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/technical-documentation.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

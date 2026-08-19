@@ -19,8 +19,12 @@
     `inf` (the zeros come out `nan`). Zero-inflated operational series — error counts, refund amounts,
     queue depths that are usually empty — hit this routinely, and it is the *typical* case for exactly
     the sparse-event data anomaly work targets. Guard it: if `MAD == 0`, fall back to a scale that
-    tolerates ties (mean absolute deviation from the median, or an IQR/percentile rule), or declare the
-    series constant-dominated and score by *distinctness from the mode* instead. Never ship
+    survives the ties — the **mean** absolute deviation from the median still works on the example above
+    (8.93). The IQR rule does **not** rescue this case, which is the trap inside the guard: on the same
+    data `Q1 = Q3 = 0`, so the upper fence sits at 0 and the rule flags every non-zero row (on a series
+    that is 80% zeros that is 20 alerts per 100 rows — alert fatigue by construction). For zero-inflated
+    data the cleaner move is to split the question: model *whether* the value is non-zero as a rate, and
+    score *how extreme* it is using percentiles of the non-zero values only. Never ship
     `0.6745·(x−med)/MAD` without the `MAD == 0` branch.
 - **IQR rule:** flag below `Q1 − 1.5·IQR` or above `Q3 + 1.5·IQR` (widen to 3·IQR for "far out"). Distribution-free.
 - **Percentile / rank:** flag the top/bottom p% — transparent and easy to tie to an alert budget.

@@ -72,16 +72,49 @@ can verify afterward that nobody could have. Mechanics, simplest first:
    draw is checkable by hand:
 
    ```
-   while read -r id; do
+   while read -r id || [ -n "$id" ]; do
      printf '%s  %s\n' "$(printf '%s|%s' "$SEED" "$id" | sha256sum | cut -c1-64)" "$id"
    done < items.txt | sort | head -8
    ```
+
+   **`|| [ -n "$id" ]` is load-bearing, not defensive habit.** `read` returns non-zero at
+   end-of-file, so a plain `while read -r id` never runs the body for a final line with no
+   trailing newline — the normal output of a spreadsheet export or a hand-edited file. That
+   item is silently excluded from the draw: it can never be selected, the draw still returns
+   a full N, and it still re-runs reproducibly, so neither the operator nor a verifier can
+   see anything wrong. Verified: a three-line file without a trailing newline iterates twice.
+   The clause reruns the body on the leftover partial line.
+
+   **Check the list before publishing it — both of these fail silently.** A line the
+   export duplicated consumes two draw slots, so a draw of 8 comes back with 7 distinct
+   items and nobody notices. A blank line hashes to a rank of its own and can be "drawn".
+   A space-padded line is the subtler one: `read -r` **trims** leading and trailing
+   whitespace, so ` a-02 ` is read as `a-02` and hashes *identically* to the published id —
+   the draw itself is fine, and the problem is that the raw file and the published list
+   disagree about how many items there are, which is exactly what a verifier recomputing
+   from the published list cannot reconcile. One line catches all three — it must equal the
+   raw line count:
+
+   ```
+   grep -vE '^[[:space:]]*$' items.txt | grep -vE '^[[:space:]]|[[:space:]]$' | sort -u | wc -l
+   ```
+
+   `wc -l` counts newlines, so compare against `grep -c '' items.txt`, which counts a final
+   unterminated line too — otherwise the check has the same blind spot as the loop it guards.
 
    **Stratified odds, same primitive.** To draw a class at k× the base probability, give
    each of its items k tickets — `SHA256("<seed>|<item id>|0")` … `|k-1` — rank all
    tickets together, walk the sorted list, and take an item the first time any of its
    tickets appears, stopping at N. Eligibility stays universal (every item keeps at
    least one ticket); only the odds move.
+
+   **What k× actually delivers.** An item is taken once however many of its tickets rank
+   high, so the realised advantage is below the nominal k, and it falls as the draw grows
+   relative to the population. At k = 3 over 120 items: drawing 8 gives about 2.85×,
+   drawing 24 about 2.55×, drawing 40 about 2.3× (stable across how many items sit in the
+   weighted class). Keep the draw under roughly a fifth of the population and k reads as
+   written; above that, state the realised ratio rather than the nominal k, or the
+   published odds overstate the weighting.
 3. **External public value.** Index the list by a number nobody controls and nobody
    knows yet: the hash of tomorrow's publicly posted figure (a lottery number, a
    published closing value). Strongest against insider steering, since even the

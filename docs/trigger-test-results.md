@@ -94,7 +94,7 @@ tested it.
 > **UPDATE (2026-08-18, revised 2026-08-19): it has now been tested live — and the first account
 > of the mechanism was wrong.** The real gate is a *character* budget of
 > `floor(context_tokens x 4 x skillListingBudgetFraction)` = **8,000 chars** at the 200K/1%
-> defaults, against 113,645 needed for all 121 descriptions. Skills start as bare names and are
+> defaults, against 113,677 needed for all 121 descriptions. Skills start as bare names and are
 > upgraded in **descending order of recent use** (`usageCount x max(0.5^(days/7), 0.1)`, unused = 0),
 > greedily, skipping what does not fit. So it **is** usage-based — the "~100 skills / least-used"
 > folklore named the right variable, and this file's earlier claim that it was "not usage-based"

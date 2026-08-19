@@ -14,7 +14,7 @@ description: >-
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.2.0"
+  version: "1.5.0"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)
@@ -29,9 +29,11 @@ its future rebuilds will need [snippet-only].
 
 And the cycle *broke*. After the Ōnin War, the Inner Shrine went roughly 120 years
 without rebuilding (1462–1585); the practice was revived only when the fundraising nuns
-of Keikō-in raised the money and Oda Nobunaga's patronage backed it [snippet-only]. That
-lapse is not a blemish on the story — it is half the lesson: a renewal cycle without a
-funding owner silently lapses, no matter how sacred everyone agrees it is. (The shinise
+of Keikō-in raised money across the country for decades, with warlord endowment behind
+them — Oda Nobunaga began funding the shrine again in 1569 and died in 1582, so the 1585
+rebuild was carried through by his successors [snippet-only]. That lapse is not a
+blemish on the story — it is half the lesson: a renewal cycle without a funding owner
+silently lapses, no matter how sacred everyone agrees it is. (The shinise
 footnote makes the same point from commerce: Kongō Gumi, temple builders founded 578,
 operated independently until liquidation in 2006, longevity built on single-craft focus
 and flexible succession [snippet-only].)
@@ -93,7 +95,16 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    what actually moves the capability between generations.
 5. **Run it for real, newcomer driving.** The person with the least knowledge executes
    from the written record alone; the veteran stays silent until something goes wrong,
-   then corrects out loud. Every question the driver has to ask a human is a gap in
+   then corrects out loud — **except at a step whose effect leaves the building**, where the
+   corrector speaks *before* it runs. Classify the runbook first: money moved, a filing
+   submitted, a client or counterparty contacted, a credential rotated, a record the retention
+   schedule locks — those are declared and simulated, never executed, and a past period or a
+   sandbox instance is preferred to the live one. State an abort trigger before starting: hand
+   back to the veteran the moment a real client, deadline or counterparty is affected, or the
+   driver cannot tell whether the next step is reversible. Handing back is a rehearsal that
+   found its limit, not a failed one. (The screen is in `references/rebuild-method.md`; every
+   other rebuild pattern here is safe by construction, this one is not.)
+   Every question the driver has to ask a human is a gap in
    the docs — log each one verbatim as it happens.
 6. **Harvest every gap into the record.** The rehearsal is the documentation's test:
    each logged question, missing step, stale credential, or dead link becomes a doc fix
@@ -113,6 +124,15 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    Division of labor: the assistant finds doc gaps cheaply and often; the humans still
    run the real rehearsal on schedule, because only reality tests the backup, the
    access, and the hands.
+
+   **Exercise control applies whenever a drill touches real people, real systems, or a real
+   third party.** Mark every artifact `EXERCISE EXERCISE EXERCISE — NO REAL ACTION`; name one
+   person who can call ENDEX, with an abort phrase (**"REAL WORLD, REAL WORLD"**) anyone may
+   use; write a no-play list of systems, accounts, and people the drill may not touch; declare
+   and adjudicate any action with an irreversible external effect instead of executing it; and
+   pre-notify any third party whose name or number appears in the scenario. The full section is
+   in `decision-science-skills:tabletop-wargaming`'s `references/exercise-design.md` — one
+   discipline, shared by every exercise in this library.
 
 ## Why / learn
 Capability decays by a mechanism, not by bad luck. Skills that aren't exercised fade;
@@ -141,10 +161,10 @@ while the correction is still available.
 
 Finally, the honest half of the Ise story: the cycle ran on treasure, and when war
 destroyed the funding, the cycle stopped for four generations — revived not by
-reverence but by nuns who fundraised and a warlord who paid [snippet-only]. Renewal
-work never defends itself in a budget fight, because skipping it costs nothing today.
-It survives only as someone's named, funded responsibility. Budget the renewal or it
-silently lapses.
+reverence but by nuns who fundraised for decades and warlords who paid, across more than
+one lifetime [snippet-only]. Renewal work never defends itself in a budget fight,
+because skipping it costs nothing today. It survives only as someone's named, funded
+responsibility. Budget the renewal or it silently lapses.
 
 ## Common mistakes
 - Treating written docs as proof of survivability → docs are a claim; only a rebuild
@@ -176,7 +196,7 @@ or access details. Real names, system paths, and anything sensitive belong in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/rebuild-rehearsal.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/rebuild-rehearsal.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -105,8 +105,20 @@ Three turns. The third turn is the loop — without it, a mishear survives silen
 
 Use for: payment amounts and account digits (read digit by digit), cutoff times, dosage or
 chart entries, anything irreversible. Dental: "Extract number 30" → "Confirming extraction,
-tooth three-zero, lower right first molar" → "Correct." The receiver names the tooth in words,
-not just the number — transposition is the classic wrong-site error.
+tooth three-zero, lower right first molar" → "Correct." Naming the tooth in words as well as
+the number is what catches a **transposition in transmission** — 30 heard as 13.
+
+**Be precise about what that buys, because the obvious overclaim is dangerous here.** A closed
+loop verifies that the instruction *arrived intact*. It says nothing about whether the
+instruction was *right*. If the sender means the wrong tooth, the readback confirms the wrong
+tooth in two voices and adds confidence to the error — the loop closed perfectly around a
+wrong plan. Wrong-site prevention is a different control entirely: pre-procedure verification
+of the plan against the chart, the consent and the imaging, site marking where it applies, and
+a team time-out immediately before starting, at which anyone may stop. Run the loop *and* that
+verification; neither substitutes for the other, and a team that believes the readback covers
+wrong-site has replaced a control with a slogan.
+`safety-and-reliability-skills:checklist-design` carries the three-pause-point structure
+(before induction, before incision, before leaving) that the verification belongs to.
 
 ## §5 PACE (graded assertiveness)
 

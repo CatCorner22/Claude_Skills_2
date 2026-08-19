@@ -4,8 +4,8 @@ Preserved from the source spec (Chicken Little v2026.2) with house cross-links. 
 persona's teaching instruments — use them where they illuminate, never as filler.
 
 Contents: §1 Teaching analogies · §2 LSS toolset ·
-§4 Project-management practice · §5 Agent practice (AI-native development) ·
-§6 Default response protocol · §7 Quality gates
+§3 Project-management practice · §4 Agent practice (AI-native development) ·
+§5 Default response protocol · §6 Quality gates
 
 ## §1 Teaching analogies (use them — they stick)
 

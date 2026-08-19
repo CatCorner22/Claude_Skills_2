@@ -157,7 +157,7 @@ no model introspection involved, name-only cost taken exactly as `len(name) + 2`
 
 The name-only baseline for 121 skills is **5,575 characters**, so at the default budget only
 ~2,400 characters remain for descriptions — roughly three of them. The full undegraded listing
-for this library is **113,645 characters**, i.e. **14.2%** of a 200K window's character
+for this library is **113,677 characters**, i.e. **14.2%** of a 200K window's character
 equivalent.
 
 Three things follow:
@@ -272,15 +272,30 @@ searched for a second skill carrying the same defect signature: an explicit, unq
 breadth claim in the description ("any work of real substance," "even when phrased casually," or
 equivalent). Only `script-wizard` carries it. The next-broadest candidate,
 `coding-agent-skills:sparring-partner` ("any work product"), was checked against the same
-standard that flagged `script-wizard` and found meaningfully different: it already carries two
-reciprocal boundary clauses repaired this session (against `script-wizard` itself and against
+standard that flagged `script-wizard` and found meaningfully different: it carries **one**
+description-level boundary clause repaired this session (against
 `chicken-little-executive-advisor`), and no narrower same-purpose sibling exists in this library
 for generic single-artifact critique — unlike `script-wizard`, whose breadth competed directly
 with specific-purpose siblings that own more precise vocabulary (`data-cleaning`,
 `git-and-code-review`, `rule-stress-testing`, `value-stream-mapping`).
 
-**Conclusion: no second skill warrants a new guard row.** This check is recorded so a future
-pass does not re-run the same search and re-derive the same negative result.
+**Conclusion: no second skill warrants a new guard row** — but see the correction below before
+relying on that.
+
+> **Corrected 2026-08-19.** This section originally claimed `sparring-partner` "already carries
+> two reciprocal boundary clauses repaired this session (against `script-wizard` itself and
+> against `chicken-little-executive-advisor`)". Checked: its description contains **zero**
+> mentions of `script-wizard` and one of `chicken-little-executive-advisor`, and
+> `script-wizard`'s description does not name `sparring-partner` either. The only
+> `script-wizard` reference lives in `sparring-partner`'s **body** — which §1 and §4 of this
+> same document establish the router never reads. This is the identical error class retracted at
+> the top of this file: a body-level seam counted as a routing-level one. It recurred here in a
+> different section, which is itself the finding — one correction did not sweep to its siblings.
+>
+> The conclusion survives on its other leg (no narrower same-purpose sibling competes for generic
+> single-artifact critique, unlike `script-wizard`), but it is now standing on one leg rather than
+> two. **The `script-wizard` ↔ `sparring-partner` seam is unguarded at the description level and
+> has never been tested live.** Treat that as an open item, not a settled negative.
 
 ## 6. What this changes going forward
 

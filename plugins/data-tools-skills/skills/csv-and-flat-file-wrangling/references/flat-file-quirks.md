@@ -16,7 +16,7 @@
 ## Reading the raw bytes (the 60-second pre-parse)
 
 ```bash
-head -c 500 export.csv | xxd | head -20   # bytes (no xxd? od -An -tx1z works)
+head -c 500 export.csv | xxd | head -20   # bytes (no xxd? od -An -tx1z; -tx1 on BSD/macOS)
 file export.csv                           # one-line encoding guess
 head -5 export.csv; tail -5 export.csv    # title rows above, total rows below
 awk -F',' '{print NF}' export.csv | sort | uniq -c | head   # field counts per line
@@ -34,7 +34,7 @@ What to look for:
 |---|---|---|
 | `UnicodeDecodeError` on load | File isn't UTF-8 (often Windows-1252 from Excel/ERP) | `encoding="cp1252"` (or `latin-1`); verify accented names look right after |
 | `Ã©`, `â€™` in text | Latin-1/Win-1252 bytes decoded as UTF-8 (or double-encoded) | Reload with correct encoding; if double-encoded, `s.encode("cp1252").decode("utf-8")` |
-| First column named `\ufeffAccount` | UTF-8 BOM | `encoding="utf-8-sig"` |
+| First column named `ï»¿Account` (or `\ufeffAccount` from a reader that decodes UTF-8 without stripping the mark — pandas strips it, the stdlib `csv` module does not) | UTF-8 BOM | `encoding="utf-8-sig"` |
 | Every row is one giant column | Wrong delimiter assumed | Inspect a raw line; set `sep=";"` / `"\|"` / `"\t"` |
 | `latin-1` "works" on everything | It maps every byte to *something* — it can't fail | That silence is the trap: verify text visually; prefer declaring `cp1252` when the source is Windows |
 
@@ -116,10 +116,16 @@ For any recurring feed, promote the parse into a function that proves itself on 
 def load_feed(path, expected_cols, min_rows, control_total=None):
     df = pd.read_csv(path, encoding="utf-8-sig", sep=",",
                      dtype={"item_id": "string"}, parse_dates=["date"],
-                     na_values=["", "NULL", "N/A"])
+                     thousands=",", na_values=["", "NULL", "N/A"])
     assert list(df.columns) == expected_cols, f"layout changed: {list(df.columns)}"
     assert len(df) >= min_rows, f"suspiciously few rows: {len(df)}"
     assert df["item_id"].notna().all(), "null keys in feed"
+    # Prove the amount column is numeric before summing it. One European "1.234,56",
+    # one "N/A " the na_values list misses, or a text "Total" footer leaves the column
+    # as object — and `.sum()` on object strings *concatenates* them, so the control
+    # check below dies on `str - float` instead of reporting a mismatch.
+    assert pd.api.types.is_numeric_dtype(df["amount"]), \
+        f"amount parsed as {df['amount'].dtype}: check decimal/thousands, na_values, footer rows"
     if control_total is not None:
         assert abs(df["amount"].sum() - control_total) < 0.005, "control total mismatch"
     print(f"{path}: {len(df)} rows, total {df['amount'].sum():,.2f}")

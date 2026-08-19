@@ -88,7 +88,8 @@ unknown.
 - **Exhaustion date** — when the projected load reaches capacity ÷ floor. With current
   load L₀, capacity C, factor F = C/L₀, and floor F_floor:
   - compound growth at rate g: t = ln(F / F_floor) / ln(1 + g) years
-    (template row 1: ln(3.1/1.5)/ln(1.12) ≈ 6.4 years);
+    (template row 1's peak-only factor: ln(3.1/1.5)/ln(1.12) ≈ 6.4 years — the date the
+    row does *not* record, because its special lot governs and puts it at a STOP);
   - linear growth of ΔL per year: t = (C/F_floor − L₀) / ΔL years — equivalently
     L₀·(F/F_floor − 1)/ΔL (template row 3: (480/1.5 − 120)/80 = 2.5 years).
   Write the floor down; an EXHAUSTS date with no floor is uninterpretable.
@@ -127,9 +128,13 @@ conversion is 1.9M while the go-forward retention grows toward ~140M lines over 
 years (38k/day ≈ 13.9M/yr, compounding at +12%/yr) — the staging schema's true size is
 the archive, not the day). Load path: parser
 → staging table; governing member measured as the index rebuild at 589k lines/day.
-Factor 3.1× on peak with floor 1.5 → exhaustion ≈ 6.4 years at +12%/yr; partition key
-flagged one-way door (changing it post-load = the retrofit). Loaded tests: backfile
-replay + batch-window soak.
+Factor, per the minimum rule: peak alone gives 589k/190k = 3.1× against a 1.5 floor,
+which would project ≈ 6.4 years of headroom at +12%/yr — but the special lot governs,
+589k/1.9M = **0.31×**, so the row records 0.31× and a design-time STOP, not the 6.4-year
+date. Resolve it before sign-off by writing an amortization window for the backfile into
+the manifest (and showing that arithmetic) or by resizing the path. Partition key flagged
+one-way door (changing it post-load = the retrofit). Loaded tests: backfile replay +
+batch-window soak.
 
 **Dental imaging storage.** Payload rows: images/patient/visit, patients/day at the
 Monday peak, peak write rate, single-scan special lot (2 GB CBCT export), horizon total

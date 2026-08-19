@@ -12,7 +12,7 @@ description: >-
   simplify this letter, accessible language, patient materials, low literacy, simplest
   accurate version.
 metadata:
-  version: "1.2.0"
+  version: "1.5.0"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search
@@ -59,13 +59,39 @@ version that still keeps the exact meaning.
    doublets or triplets, no ambiguity; the simplest accurate modern word; a technical term is
    said once, then explained immediately in plain words; the structure never makes the reader
    guess.
+   - **Carve-out: wording a law or rule requires verbatim is out of scope for every rule
+     above.** Statutory or regulatory text prescribed word-for-word, safe-harbour language
+     whose protection depends on tracking the statute, conspicuousness requirements (a warranty
+     disclaimer that must say "merchantability" under UCC 2-316), required notices in consumer,
+     employment, securities or medical-consent documents, and defined terms already in force
+     elsewhere in the same instrument are archaic *and* load-bearing. Simplifying them can void
+     the protection they exist to create. Flag them, offer the plain-language version
+     **alongside** rather than instead of the required text, and route the decision to a
+     lawyer. Same carve-out as `writing-skills:adams-smart-brevity`; a plain-language score is
+     never worth a forfeited safe harbour.
+   - **Carve-out: risk-allocation provisions are out of scope for simplification too.**
+     Indemnities, defence obligations, liability caps, exculpatory and hold-harmless clauses,
+     warranty disclaimers and insurance covenants are construed strictly and against the
+     drafter, and some allocations require express, conspicuous wording to be enforceable at
+     all. Notably, **"defend" is a distinct and often broader obligation than "indemnify"** in
+     many jurisdictions, so trimming "indemnify, defend, and hold harmless" as a doublet can
+     delete a real duty. Plain-language *explanation* of such a clause is valuable — write it
+     next to the clause, never over it — and the reformatting this skill does best (structure,
+     white space, one idea per sentence, bolding a cap) is safe. Rewriting the operative words
+     is a lawyer's call in the governing jurisdiction. Same carve-out as
+     `writing-skills:adams-smart-brevity` step 4. [canon attribution, jurisdiction-dependent.]
 5. **Check the grade.** 5th grade preferred: sentences average 10–14 words, everyday 1–2
-   syllable words, Flesch Reading Ease 90 or better (a floor, not a window — 105 is fine).
-   Flesch-Kincaid is a second opinion, not a restatement of the same target: at 10–14 words
-   per sentence, FRE 90–100 computes to FKGL ≈ 1.8–4.2, so never lengthen a sentence to
-   chase an FKGL of 5.0. Fall back to 8th grade (sentences up to 15–18 words) only where a
-   precise idea cannot stay accurate at 5th. Never above 8th. Never fuzz the meaning to hit
-   a lower grade — meaning always wins.
+   syllable words, and Flesch Reading Ease 90 or better **or** Flesch-Kincaid grade 5.0 or
+   below — either one passes (reference §1). Neither is a window, but they run in opposite
+   directions: Reading Ease is a **floor** (higher is easier, so 105 is fine and there is no
+   upper bound to fear), while Flesch-Kincaid grade is a **ceiling** (lower is easier, so 2.0
+   is fine and 6.0 is not). They are two scales, not one number read twice: at 10–14 words
+   per sentence, FRE 90–100 computes to FKGL ≈ 1.8–4.2 while FKGL 5.0 sits at FRE ≈ 77–84,
+   so never lengthen a sentence to chase an FKGL of 5.0. Punctuate your bullet items before
+   scoring anything — most tools split sentences on `.!?` and read an unpunctuated list as
+   one huge sentence (reference §3). Fall back to 8th grade (sentences up to 15–18 words)
+   only where a precise idea cannot stay accurate at 5th. Never above 8th. Never fuzz the
+   meaning to hit a lower grade — meaning always wins.
 6. **Read it aloud.** It should sound like a clear adult talking to a smart 11-year-old:
    plain American English, second person, no regionalisms and no institutional voice. If
    your readers share a specific dialect, set it in `references/your-environment.md`.
@@ -86,8 +112,12 @@ adult explaining something is doing the work the numbers only approximate.
 
 ## Common mistakes
 - Fuzzing the meaning to hit 5th grade → meaning always wins; take the 8th-grade fallback.
-- Reaching for "tested" or traditional formulas (herein, aforesaid, indemnify-and-hold-
-  harmless doublets) → use the simplest accurate modern word.
+- Reaching for "tested" or traditional formulas (herein, aforesaid) → use the simplest
+  accurate modern word.
+- Simplifying "indemnify, defend, and hold harmless" as a doublet → "defend" is a separate,
+  often broader duty in many jurisdictions; explain the clause in plain words beside it, do
+  not rewrite the operative words. Risk-allocation provisions are a carve-out, like
+  rule-prescribed text.
 - Explaining a technical term late, or never → say it once, explain it right away in plain
   words.
 - Long glue sentences with stacked clauses → one main idea per sentence; subject, verb,
@@ -111,7 +141,7 @@ identifying real patients or clients out of git — raw detail goes in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/adams-plain-grade.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/adams-plain-grade.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

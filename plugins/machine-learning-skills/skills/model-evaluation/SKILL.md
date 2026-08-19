@@ -12,7 +12,7 @@ description: >-
   RMSE, R2, data leakage, train test split, confusion matrix, threshold, calibration, subgroup
   performance, slice evaluation, label quality.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Model evaluation
@@ -61,7 +61,10 @@ metadata:
    The checklist is in `references/metrics-and-leakage.md`.
 8. **Put an uncertainty band on the headline number.** A single point estimate hides how much of it is
    test-set luck. Report a confidence interval: a binomial interval for a rate (precision, recall,
-   accuracy), a bootstrap over test rows for AUC, RMSE, or any composite. Ask whether the test set is big
+   accuracy), a bootstrap over test rows for AUC, RMSE, or any composite. Both assume the test rows are
+   **independent**, so if the test set repeats entities or is one contiguous stretch of time, resample
+   whole entities or time blocks rather than rows — a row-level interval on clustered data comes out
+   roughly half its honest width. Ask whether the test set is big
    enough — for a rare positive class the sample size that matters is the **count of positives**, not the
    row count, so 40 positives put roughly ±12 points on a recall of 80% (worked in the reference). If a
    claimed improvement is smaller than that band, you have not measured an improvement.
@@ -144,7 +147,7 @@ are charging to the model is really disagreement in the ground truth.
 - Trusting a suspiciously high score → usually leakage. Trace features back to the prediction time before celebrating.
 - Hunting leakage only when the score looks too good → leakage that lands on a plausible number ships. Run the checklist every time and record what it found.
 - Explaining ROC AUC's imbalance problem as "the negative class inflates the true-negative rate" → false; TPR/FPR/TNR are within-class rates and AUC is prevalence-invariant. It is *precision* that collapses.
-- Reporting a bare point estimate → give a CI, and check the effective n (positives, not rows). A gain inside the band is not a gain.
+- Reporting a bare point estimate → give a CI, and check the effective n (positives, not rows; entities or time blocks, not rows, when the same entity repeats). A gain inside the band is not a gain.
 - Reporting only the aggregate metric → an average hides the slice where the model underperforms its own baseline. Score by segment with per-slice n.
 - Treating labels as ground truth → labels are measurements with an error rate. Get agreement evidence, and re-review a sample of confident "errors."
 
@@ -159,7 +162,7 @@ itself, run `continuous-improvement-skills:measurement-systems-analysis`.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/model-evaluation.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/model-evaluation.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

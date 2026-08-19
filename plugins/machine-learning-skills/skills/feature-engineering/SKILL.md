@@ -9,7 +9,7 @@ description: >-
   encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
   datetime features, lag features, rolling features, feature selection, interactions, impute features.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Feature engineering
@@ -27,10 +27,15 @@ metadata:
    only from data the model is allowed to see.
 2. **Encode categoricals to match cardinality.** **One-hot** for low-cardinality fields; **ordinal** for
    genuinely ordered categories; **frequency/count** or **target (mean) encoding** for high-cardinality
-   fields (merchant, GL account, vendor). Target encoding must be computed **within cross-validation folds**
-   (or with smoothing/out-of-fold) or it leaks the label straight into the feature. See `references/transforms-and-leakage.md`.
+   fields (merchant, GL account, vendor). Target encoding must be computed **out-of-fold** — each row
+   encoded from rows other than its own — or it leaks the label straight into the feature. Smoothing toward
+   the global mean shrinks that leak but does not remove it: the row's own label is still inside its
+   category's mean, and on a pure-noise 800-level column, heavily smoothed full-training-set encoding still
+   manufactures a train AUC of 0.79 that is 0.52 on test. See `references/transforms-and-leakage.md`.
 3. **Scale numerics when the model needs it.** **Standardize** (z-score) or **min-max** for linear, distance,
-   and regularized models and anything gradient-based; tree ensembles are scale-invariant and don't need it.
+   and regularized models and anything trained by gradient descent on the raw inputs (neural nets,
+   SGD-fitted linear); tree ensembles split on order alone and are scale-invariant — gradient boosting
+   included, despite the name.
    Fit the scaler on train only. Consider a **log/Box-Cox** transform for heavily skewed monetary values.
 4. **Build datetime and lag/rolling features — carefully.** From a timestamp derive day-of-week, month,
    quarter-end, business-day, holiday, and payroll-cycle flags. For time series add **lags** (`y_{t-1}`,
@@ -74,7 +79,7 @@ in-sample information; if you couldn't, it isn't a feature, it's a leak.
 
 ## Common mistakes
 - Fitting a scaler/encoder/imputer on the whole dataset before splitting → leakage. Fit on train inside a pipeline.
-- Naive target encoding on the full data → the label leaks into the feature. Encode out-of-fold or with smoothing.
+- Naive target encoding on the full data → the label leaks into the feature. Encode out-of-fold; smoothing alone still leaves a row's own label in its encoding.
 - Rolling/lag features that include the current or future rows → temporal leakage. Use strictly past windows.
 - One-hot encoding a 1,000-category field → an explosion of sparse columns. Use frequency/target encoding instead.
 - Scaling features for a tree model → wasted effort (trees are scale-invariant); scale for linear/distance models.
@@ -90,7 +95,7 @@ its generic transforms onto your columns, and hands the model choice to `machine
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/feature-engineering.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/feature-engineering.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

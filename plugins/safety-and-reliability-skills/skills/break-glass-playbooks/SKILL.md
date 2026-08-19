@@ -15,7 +15,7 @@ description: >-
   hits, emergency access, runbook, kill switch, tripwire, covenant trip, we'd be
   scrambling, sealed instructions.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Homage to Asimov's Foundation — pre-recorded guidance that unseals when predicted
     crises arrive — an homage only, no affiliation with the estate or rights holders.
@@ -125,6 +125,15 @@ and the failure-mode table are in `references/break-glass-method.md`.
    playing the cold reader. The humans own the thresholds, the authority grants, the
    chair, and the drill calendar — arming a playbook is a command decision.
 
+   **Exercise control applies whenever a drill touches real people, real systems, or a real
+   third party.** Mark every artifact `EXERCISE EXERCISE EXERCISE — NO REAL ACTION`; name one
+   person who can call ENDEX, with an abort phrase (**"REAL WORLD, REAL WORLD"**) anyone may
+   use; write a no-play list of systems, accounts, and people the drill may not touch; declare
+   and adjudicate any action with an irreversible external effect instead of executing it; and
+   pre-notify any third party whose name or number appears in the scenario. The full section is
+   in `decision-science-skills:tabletop-wargaming`'s `references/exercise-design.md` — one
+   discipline, shared by every exercise in this library.
+
 ## Why / learn
 Pre-authoring works because judgment quality is a perishable resource: the same person
 writes better instructions on a quiet Tuesday than mid-alarm, so the playbook banks
@@ -190,7 +199,7 @@ which is git-ignored and never committed.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/break-glass-playbooks.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/break-glass-playbooks.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

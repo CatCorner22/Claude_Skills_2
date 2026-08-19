@@ -94,8 +94,11 @@ enormous value without ever receiving medical advice.
 
 ## Red flags: the urgent-care list
 
-Always include a red-flag section. Tailor it to the case, and always cover the general categories —
-symptoms that warrant prompt evaluation rather than more research:
+**This list is a triage gate, not a report section.** Run it against the presented findings as
+stage 0 — before framing, hypotheses, or searching (SKILL.md). When one is present it leads the
+reply; it does not wait at the bottom of a long report. Always include the section in the written
+output as well. Tailor it to the case, and always cover the general categories — symptoms that
+warrant prompt evaluation rather than more research:
 
 - Chest pain or pressure; sudden shortness of breath
 - Sudden weakness/numbness on one side, facial droop, trouble speaking, or the worst headache of
@@ -107,6 +110,19 @@ symptoms that warrant prompt evaluation rather than more research:
 - New severe shortness of breath at rest, or a rapidly swelling limb
 - Any symptom that is sudden, severe, and unlike anything experienced before
 - Thoughts of self-harm
+
+Time-critical presentations that are easy to research past because each looks like a common
+complaint until it is asked about specifically:
+
+- **New back pain with saddle numbness, new urinary retention or incontinence, or bowel
+  incontinence** — cauda equina syndrome; the window for surgery is measured in hours
+- **New headache in an adult over ~50 with scalp tenderness, jaw pain on chewing, or any visual
+  change** — giant cell arteritis; untreated, vision loss can be sudden and permanent
+- **Rapid-onset hives, lip or tongue swelling, wheeze, or faintness after an exposure** — anaphylaxis
+- **A first seizure at any age**
+- **Sudden severe testicular pain or scrotal swelling** — testicular torsion; also hours, not days
+- **Bleeding, severe abdominal pain, severe headache, or visual change in pregnancy or within six
+  weeks of delivery**
 
 Phrase it plainly: "These are reasons to seek care now rather than research further. If any of these
 are present, contact emergency services or go to an emergency department."

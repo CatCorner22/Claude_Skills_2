@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Measurement systems analysis and process capability
@@ -51,10 +51,13 @@ metadata:
 3. **Judge against the acceptance table:** %GRR **< 10%** and number of distinct categories
    (ndc) **≥ 5** → acceptable; 10–30% → conditional, only with a documented reason and an
    improvement plan; **> 30%** → the metric cannot support decisions; fix the measurement system
-   before touching the process (§3). For the pass/fail (attribute) variant the bars are κ > 0.75
+   before touching the process (§3) — reading %GRR near a boundary settles nothing, because a
+   10×3×3 study estimates it loosely enough to straddle one (§3). For the pass/fail (attribute) variant the bars are κ > 0.75
    and effectiveness ≥ 90% — but **kappa is prevalence-sensitive**, so quote it only with its base
    rate and its 2×2 table beside it, and never compare kappas across item sets with different base
-   rates (§4a).
+   rates (§4a). At the 30–50 items step 1 asks for, κ's own standard error is around 0.15 — wide
+   enough to cross those bars — so quote its interval too and treat the bars as coarse sorting
+   rather than gates at that size (§4a).
 4. **For LLM-as-judge scoring, measure agreement before trusting scores — and define a repeat
    trial correctly.** Hold the configuration fixed (model version, prompt, decoding parameters —
    *the one you will ship*) and get your repeat signal by re-randomizing **presentation**: swap the
@@ -127,6 +130,8 @@ and which happens to be the cleanest mitigation for the paradox too.
 - Unblinded or un-randomized trials → operators (and judges) remember items; %GRR comes out
   flattered. Blind and shuffle.
 - Treating 10–30% GRR as a pass → it's conditional: document why and plan the fix.
+- Condemning or clearing a gauge on a single boundary %GRR → the study's own spread straddles the
+  boundary. Re-run, or add parts and trials, before the number decides anything.
 - Back-solving spec limits from the data → limits are the voice of the customer/owner; the data
   is the voice of the process. Never let the process grade itself.
 - Trusting single-run LLM-judge scores → repeat runs and multiple judges first; report kappa,
@@ -146,6 +151,9 @@ and which happens to be the cleanest mitigation for the paradox too.
 - Quoting kappa without its base rate and 2×2 table → skewed marginals depress kappa (the same
   80% agreement gives 0.52 at a 70% base rate and 0.60 at 50%). Report p_o, prevalence, and the
   table; never compare kappas across differently-balanced item sets.
+- Reading a 30-item kappa against the acceptance bars as a verdict → at that size the interval
+  spans whole bands (roughly 0.15–0.83 around a κ of 0.52). Quote the interval, and enlarge the
+  item set before a threshold call has to be defended.
 - Swapping kappa for PABAK because PABAK is kinder → it buys the higher number by discarding the
   marginals. Report it beside kappa, labelled, if at all.
 - Attacking variance before centering → centering is usually free and raises Cpk toward Cp;
@@ -159,7 +167,7 @@ limits, or reviewer names). Never commit real transaction or personnel data — 
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/measurement-systems-analysis.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/measurement-systems-analysis.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

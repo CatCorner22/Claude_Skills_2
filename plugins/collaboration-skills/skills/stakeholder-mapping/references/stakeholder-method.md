@@ -195,7 +195,7 @@ truth (§2); the re-map triggers are the last bullet below.
 | Legal/compliance | High | Low→? | Keep satisfied | Unknown — not yet told |
 | Intake staff (3 teams) | Low-med | High | Keep informed | Mixed (survey) |
 | IT platform owner | Med | Med | Manage closely (borderline) | Supporter if scoped (evidence) |
-| Audit (inheritor) | Med | Low | Keep informed (was: monitor — see the pre-mortem below) | Unknown |
+| Audit (inheritor) | Low-med | Low→High (pre-mortem) | Keep informed (was: monitor — see the pre-mortem below) | Unknown |
 
 Moves that follow:
 - **Claims team lead (opponent, manage closely)**: not a broadcast target — a
@@ -216,12 +216,13 @@ Moves that follow:
   §4 cross-check pass: without it the COO — a manage-closely sponsor — held nothing but
   an "I", which is a placement error in one of the two artifacts.)
 - **Pre-mortem narrative that changed the map**: "it failed because audit's
-  record-retention requirement surfaced in week ten" → audit moved from monitor to
-  keep-informed, and was added as a **C on the routing-rules row** before it froze. Both
-  edits are shown above, in the grid row and in the routing-rules row — that is the point:
-  a re-map that does not reach the RACI has not actually changed anything anyone will do,
-  so if you can read the change in the narrative but not in the two artifacts, the re-map
-  did not happen.
+  record-retention requirement surfaced in week ten" → their *interest* was the
+  under-rated axis, not their power (the migration touches records they inherit), so audit
+  moved from monitor to keep-informed and was added as a **C on the routing-rules row**
+  before it froze. Both edits are shown above, in the grid row and in the routing-rules
+  row — that is the point: a re-map that does not reach the RACI has not actually changed
+  anything anyone will do, so if you can read the change in the narrative but not in the
+  two artifacts, the re-map did not happen.
 - **Re-map triggers**: pilot end, go-live, and any reorg of the three intake teams.
 
 ## 8. Two more shapes — multi-party matter, deprecation without authority

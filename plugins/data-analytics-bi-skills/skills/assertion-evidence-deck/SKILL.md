@@ -11,7 +11,7 @@ description: >-
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Assertion-evidence deck
@@ -151,7 +151,7 @@ color is not automatically an accessible one.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/assertion-evidence-deck.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/assertion-evidence-deck.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
@@ -165,5 +165,5 @@ own rather than in a cache you may not realise is disposable.
 > Paths use `${CLAUDE_PLUGIN_ROOT}` so they resolve from **any** working directory once the
 > plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
 > repo, which is not where a user runs these.
-- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|warm-accent` and `--font` control theme.
-- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; exits non-zero on error.
+- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py` — deck spec (JSON) → compliant `.pptx`. `--schema` prints the spec format and eight slide kinds; `--brand neutral|warm-accent` and `--font` control theme; `--self-test` builds the awkward-input regression cases.
+- `${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/ae_lint.py` — audits any `.pptx` against the assertion-evidence checklist. `--json` for machine output; `--self-test` checks each rule still fires where it should; exits non-zero on error.

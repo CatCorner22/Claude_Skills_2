@@ -13,7 +13,7 @@ description: >-
   measure, begin with the end in mind, adversarial release gauntlet, WCAG-conformant app
   build, stability and redundancy, co-design the UI.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Lean Six Sigma for software
@@ -25,8 +25,7 @@ metadata:
   with DMAIC instead of vibes.
 - Making a product's UI feel native to users of a reference product — vocabulary, fields, and
   patterns synced via the sync audit in step 3. (A fully worked design-language map for one
-  such product is archived: `continuous-improvement-skills:curve-hero-design-language`,
-  restorable from `archive/skills/`.)
+  dense clinical-SaaS product is archived, restorable from `archive/skills/`.)
 - Installing engineering standards: accessibility, stability/redundancy, full-stack quality
   gates, adversarial test gauntlets.
 - Not for: facilitating the improvement workshop itself →
@@ -53,8 +52,8 @@ metadata:
    pattern mirroring, live-tenant verification, standardization — and keep one term per
    concept everywhere. Build the map for YOUR reference product: harvest its
    vocabulary from its own UI and docs, verify each term in the live product before adopting
-   it, and mark unverified terms. (A complete worked map for one product is archived:
-   `continuous-improvement-skills:curve-hero-design-language`, restorable from `archive/skills/`.)
+   it, and mark unverified terms. (A complete worked map for one product is archived,
+   restorable from `archive/skills/`.)
 4. **Design beautiful, accessible, dense-but-calm UI from tokens.** Build on the design system
    in `references/accessible-ui-design-system.md`: token-driven color/type/spacing, WCAG 2.2
    AA engineered in (contrast, focus, keyboard, target size, redundant-entry elimination),
@@ -141,7 +140,7 @@ or patient data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/lean-six-sigma-for-software.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/lean-six-sigma-for-software.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
