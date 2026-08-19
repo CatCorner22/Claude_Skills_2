@@ -55,7 +55,7 @@ Three properties of the runtime make every cheaper substitute worthless:
 3. **The listing degrades silently at scale, and it is worse than a skill-count threshold
    suggests.** The real mechanism is a *character* budget:
    `floor(context_tokens x 4 x skillListingBudgetFraction)` = **8,000 chars** at the 200K/1%
-   defaults, against **113,645** needed to render all 121 descriptions. Every skill starts as a
+   defaults, against **113,677** needed to render all 121 descriptions. Every skill starts as a
    bare `- name` and is upgraded back to full text in **descending order of recent use**
    (`usageCount x max(0.5^(days/7), 0.1)`, so anything unused scores 0), greedily, skipping
    whatever does not fit. At the default budget **3 of 121** keep a description
