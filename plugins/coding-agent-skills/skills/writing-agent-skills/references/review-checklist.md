@@ -45,6 +45,21 @@ A skill is done when every box is checked.
       neighbours while receiving zero inbound citations is a discovery dead-end: nobody starting
       from an existing skill will ever learn it exists. Add the `Not for:` line to the
       established skill, not just the new one.
+- [ ] **When you fix a defect, grep the library for the same defect and fix every sibling in the
+      same pass — including elsewhere in the skill you just fixed.** A fix applied to one skill
+      does not propagate on its own, and the library has now been bitten by this twice.
+      `fmea` was repaired for multiplicative risk scoring (a severity ceiling was added so a rare
+      catastrophic failure cannot be averaged away), and `pre-mortem` went on ranking by
+      likelihood × damage × detection-lateness for months — propagating downstream, because
+      `break-glass-playbooks` selects which crises to arm from `pre-mortem`'s ranking. Then, fixing
+      `pre-mortem`'s SKILL.md and method reference *still* missed the same formula sitting in its
+      own `references/your-environment.md`, and a third copy in
+      `lean-six-sigma-for-software`'s risk register.
+      The procedure: name the defect as a *pattern* rather than a location, grep the whole tree for
+      that pattern (`plugins/**` including `references/`, `assets/`, `scripts/`, and every
+      `your-environment.md` template), and fix or explicitly clear each hit before you close the
+      task. A template that still teaches the defect is the worst hit of all, because it is the
+      thing users copy.
 - [ ] Every cited `plugin:skill` resolves to a live skill directory; archived targets use the
       explicit `(archived: plugin:skill, restorable from archive/)` form.
       **`scripts/validate.sh` now enforces this** — it resolves every `plugin:skill` reference
