@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "data-analytics-bi-skills",
   "description": "SQL, exploratory analysis, data cleaning, descriptive statistics, statistical inference, dashboard design, spreadsheet modeling, and assertion-evidence presentations for business intelligence \u2014 plus causal inference (DAGs, DiD/IV/RDD), A/B test design (SRM, peeking, MDE, variance reduction), and survey and sampling design (total survey error, nonresponse).",
-  "version": "0.12.0"
+  "version": "0.13.0"
 }

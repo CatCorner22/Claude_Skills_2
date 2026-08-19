@@ -12,7 +12,7 @@ description: >-
   implementation intention, habit stacking, make it automatic, build a routine, stop doing X
   every time, keep forgetting to.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Habit design (make it automatic)
