@@ -12,7 +12,7 @@ description: >-
   model monitoring, drift detection production, ml pipeline app, score in real time,
   put the model into the app, works in the notebook.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # ML in production
@@ -40,6 +40,12 @@ metadata:
    (version, training-data window, metrics at validation, feature list, hash). Save the
    **whole pipeline** (preprocessing + model, e.g. sklearn `Pipeline`), never a bare
    estimator plus "remember to scale."
+   - **The decision threshold ships in the sidecar too**, with the split it was chosen on and
+     the FP/FN costs or alert budget that set it (`machine-learning-skills:model-evaluation`
+     fits and freezes it). It is a fitted parameter, not a constant: leaving it in application
+     code means the one number that converts scores into actions is versionless, and a
+     threshold frozen at training prevalence silently changes precision as prevalence moves —
+     so record the prevalence it assumed and monitor that too.
 3. **Serve it thin, validated, and versioned:**
 
 ```python
@@ -69,8 +75,20 @@ def predict(x: PredictIn):
 6. **Monitor like the model is drifting, because it is:** input distributions vs the
    training window (drift on key features), score distribution over time, and true
    performance once labels land. Alert on shift, review on schedule, and define *before
-   launch* what triggers retraining or rollback. (`machine-learning-skills:anomaly-detection`
-   patterns apply to the monitoring itself.)
+   launch* what triggers retraining or rollback.
+   - **Drift is a two-sample question, so name the statistic.** Compare the live window against
+     the frozen training window: population stability index (PSI) over fixed bins, or a
+     two-sample KS for continuous features and chi-square for categorical ones. The usual PSI
+     reading is < 0.1 stable, 0.1–0.25 worth investigating, > 0.25 a real shift — a convention,
+     not a test, so calibrate it on your own history before it gates a rollback. Bin edges must
+     be frozen with the training window or the index measures your binning, not the data.
+   - **A per-feature alarm rate becomes a queue.** Fifty features at a 5% per-feature false rate
+     is ~2.5 false alerts a day, so monitor a ranked drift report rather than paging on each
+     feature, and run that queue with `safety-and-reliability-skills:detection-system-tuning`.
+     Score-distribution drift on the model's own output is usually the earlier, quieter signal.
+   - Anomaly *scoring* methods for individual records live in
+     `machine-learning-skills:anomaly-detection`; that skill tunes one detector and does not
+     compare two distributions, which is what drift needs.
 7. **Ship new models like code:** new version = new artifact, deployed alongside; compare on
    logged traffic (shadow) or a slice (canary) against the incumbent *on the product metric*;
    promote or roll back by config. `references/serving-recipes.md` has the artifact layout,

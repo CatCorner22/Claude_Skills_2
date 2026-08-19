@@ -142,6 +142,14 @@ says can't happen.
 The law, for a stable system: **average WIP = throughput × average cycle time**. Solve for
 cycle time: average cycle time = average WIP ÷ throughput.
 
+**Term warning — "cycle time" means something different here than in value-stream mapping.**
+In Little's Law it is the *end-to-end* time an item spends in the system from start to finish,
+including every wait — days or weeks. In `continuous-improvement-skills:value-stream-mapping`
+"cycle time" is the *hands-on touch time of one step*, minutes or hours, and the end-to-end
+quantity is called **lead time**. Same two words, quantities an order of magnitude apart. If
+you are drawing a value-stream map, use that skill's vocabulary; the law below is about lead
+time in its sense.
+
 One person finishing about five items a week:
 - **WIP = 3** → average cycle time ≈ 3/5 of a week. Things come back in days.
 - **WIP = 15** → average cycle time ≈ 3 weeks. Same person, same effort, same weekly output —

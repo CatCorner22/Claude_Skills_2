@@ -80,8 +80,13 @@ Each cycle yields one estimate of each effect, so after n cycles you have n repl
 
 - effect = mean of the n per-cycle effects
 - s = standard deviation of the per-cycle effects; **SE = s / √n**
-- rule of thumb: act only when |effect| > **2 × SE** (≈ 95% two-sided for the shop floor; with n
-  as small as 3, a t-critical near 4.3 is the honest bar — say which one you used).
+- rule of thumb: act only when |effect| > **2 × SE** — the shop-floor bar. The familiar "≈ 95%
+  two-sided" attached to 2×SE is the *large-sample* figure and does not survive small n: at
+  n = 3 (df = 2) a ±2×SE interval covers about **82%**, not 95%, and the 95% t-critical is 4.30.
+  Quote the honest bar alongside it and say which one you used. Note also that a 2×2 phase tests
+  three effects (two mains plus the interaction), so at ~82% per-effect coverage the chance of at
+  least one spurious signal in a phase is ~46% — which is why the bounded step size and the
+  owner's ratification, not the bar alone, are what keep EVOP from tampering.
 
 For the example: T effect 0.80, s ≈ 0.13, SE ≈ 0.076 → 0.80 ≫ 2×0.076: **signal**. W effect
 0.53, s ≈ 0.16, SE ≈ 0.093 → clears 2×SE and barely clears the small-n t bar (4.3 × 0.093 ≈

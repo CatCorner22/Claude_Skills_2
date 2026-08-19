@@ -12,7 +12,7 @@ description: >-
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Pre-mortem (prospective hindsight)
@@ -59,9 +59,14 @@ metadata:
 5. **Round-robin.** Each person (and each LLM bucket) contributes one reason per pass, no
    rebuttals, recorded verbatim, until the room is empty. Duplicates are consolidated, not
    argued.
-6. **Rank — and the humans rank.** The LLM may cluster reasons and propose criteria
-   (likelihood × damage × how late you'd detect it), but ordering the list and accepting
-   items onto it belongs to the team; ranking encodes responsibility.
+6. **Rank — and the humans rank.** The LLM may cluster reasons and propose criteria — how
+   bad it would be, how likely the cause is, and how late you would detect it — but rank by
+   **dominance, not by multiplying the three into one score**. A rare, detectable
+   near-catastrophe must not sort below a common, invisible nuisance because the product came
+   out lower; sort on damage first, then break ties inside a damage band by likelihood and
+   detection lateness. (`continuous-improvement-skills:fmea` prices that arithmetic failure in
+   detail — it is why that skill's own scoring carries a severity ceiling.) Ordering the list
+   and accepting items onto it belongs to the team; ranking encodes responsibility.
 7. **Strengthen the plan against the top items.** For each: change the plan, add a
    detection tripwire, or accept the risk explicitly — and assign a named owner and date.
    A tripwire is a concrete observable with a check date ("if unreconciled lines exceed

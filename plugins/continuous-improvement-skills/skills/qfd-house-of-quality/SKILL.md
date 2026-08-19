@@ -13,7 +13,7 @@ description: >-
   deployment, translate customer needs to specs, requirements matrix, what should we build
   first, voice of customer to CTQ, customer needs to engineering characteristics.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # QFD — the House of Quality
@@ -36,7 +36,10 @@ metadata:
 ## Do it
 1. **Gather the WHATs and weight them.** Pull customer needs from interview notes, co-design
    output, support logs — stated in the customer's words, grouped into a short hierarchy (aim
-   for 10–25 leaf needs). Weight each (1–5 or 1–10). **The human gate: weightings are ratified
+   for 10–25 leaf needs). Weight each (1–5 or 1–10) — but rating scales cluster at the top
+   (most needs land on 4–5 and stop discriminating); distributing a fixed 100 points across the
+   leaves forces the harder choice, and separate segments get separate weight columns rather
+   than one averaged into mush. **The human gate: weightings are ratified
    by actual customers/users, not invented by the team or the LLM** — draft them as a proposal
    and take them back to the people they claim to represent.
 2. **List the HOWs** — technical characteristics the team can measure and set: each needs a

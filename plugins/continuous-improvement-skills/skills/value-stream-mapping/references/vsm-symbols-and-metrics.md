@@ -49,7 +49,11 @@ No special software needed — a whiteboard or one slide works. The conventions 
 ## Data-box metrics
 
 Under each process step:
-- **Cycle time (CT):** hands-on time to do the step once (minutes/hours).
+- **Cycle time (CT):** hands-on time to do the step once (minutes/hours). Note the clash with
+  queueing usage: in Little's Law — and in `continuous-improvement-skills:priority-and-wip`,
+  which applies it — "cycle time" means the *end-to-end* time an item spends in the system,
+  which is what a value-stream map calls **lead time**. Say which sense you mean when both
+  skills are in play.
 - **%Complete & Accurate (%C&A):** share of outputs the *next* step can use with no
   correction, clarification, or rework. Ask the downstream step, not the doer.
 - **Wait / queue time:** elapsed time the item sits *before* this step starts (record
