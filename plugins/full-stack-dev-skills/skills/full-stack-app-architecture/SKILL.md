@@ -9,6 +9,8 @@ description: >-
   Triggers: app architecture, project structure, monolith vs microservices, choose the stack,
   folder layout, where should this code live, new web app setup, scaffold project, module
   boundaries, config management app.
+metadata:
+  version: "1.1.0"
 ---
 
 # Full-stack application architecture

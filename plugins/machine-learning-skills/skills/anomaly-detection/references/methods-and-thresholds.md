@@ -13,6 +13,15 @@
   inflated by outliers**, so it loses sensitivity in the messy data you care about.
 - **Robust z-score:** `0.6745 · (x − median) / MAD`, where MAD is the median absolute deviation. Resistant to
   outliers; prefer it over plain z-score for anomaly work.
+  - **Failure envelope — MAD can be exactly 0, and then this detector breaks silently.** Whenever more
+    than half the values are identical the MAD is 0 and every other point divides by zero: with
+    `[0]*12 + [5, 9, 120]` the median and MAD are both 0, and the robust z of every non-zero point is
+    `inf` (the zeros come out `nan`). Zero-inflated operational series — error counts, refund amounts,
+    queue depths that are usually empty — hit this routinely, and it is the *typical* case for exactly
+    the sparse-event data anomaly work targets. Guard it: if `MAD == 0`, fall back to a scale that
+    tolerates ties (mean absolute deviation from the median, or an IQR/percentile rule), or declare the
+    series constant-dominated and score by *distinctness from the mode* instead. Never ship
+    `0.6745·(x−med)/MAD` without the `MAD == 0` branch.
 - **IQR rule:** flag below `Q1 − 1.5·IQR` or above `Q3 + 1.5·IQR` (widen to 3·IQR for "far out"). Distribution-free.
 - **Percentile / rank:** flag the top/bottom p% — transparent and easy to tie to an alert budget.
 Use these when a single quantity (a fee, a balance change, a transaction amount) carries the signal.

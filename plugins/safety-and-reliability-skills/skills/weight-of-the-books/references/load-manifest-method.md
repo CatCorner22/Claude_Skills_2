@@ -20,7 +20,7 @@ concurrent us. sessions   6       22 (Mon 8a)       flat         audit week: 40 
 attachments    GB total   120     writes 4GB/day pk +80GB/yr     2GB single scan   PACS export
 
 LOAD PATH [governing member: capacity]           FACTOR(min) FLOOR  EXHAUSTS   ONE-WAY DOOR?
-stmt lns → parser → staging [idx rebuild:        3.1x        1.5    ~6.4 yr    partition key: YES
+stmt lns → parser → staging [idx rebuild:        0.31x†      1.5    STOP†     partition key: YES
   589k lines/day]
 concurrent → app pool [pool: 50 sessions]        1.25x*      1.5    STOP*      no
 attachments → object store [provision: 480GB]    4.0x        1.5    ~2.5 yr    bucket layout: no
@@ -28,6 +28,15 @@ attachments → object store [provision: 480GB]    4.0x        1.5    ~2.5 yr   
 * concurrent factor is the MINIMUM across governing cases: peak 50/22 = 2.3x, but
   special lot (audit week, 40) gives 50/40 = 1.25x — below the 1.5 floor. That is a
   design-time STOP: raise the pool or write the audit-week mitigation before sign-off.
+
+† statement-line factor is likewise the MINIMUM, and this row is the reason the rule exists.
+  Peak alone looks comfortable — 589k/190k = 3.1x, which would project ~6.4 yr of headroom —
+  but the special lot (1.9M-line backfile) gives 589k/1.9M = 0.31x, four-fifths *below* the
+  1.5 floor. No amortization window is written into the manifest, so per the factor-basis rule
+  it is a single-period load and 0.31x governs. Recording 3.1x here would be the exact error
+  the manifest exists to prevent: a path that passes on the load you measured every day and
+  fails on the one you do once. Either write the backfile window into the manifest (and show
+  the amortized arithmetic) or treat the backfile as a design-time STOP.
 
 LOADED-TEST PLAN                                        STATUS
 replay largest real file (1.9M backfile)                pass <yyyy-mm>

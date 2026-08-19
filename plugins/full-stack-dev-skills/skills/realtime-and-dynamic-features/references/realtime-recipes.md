@@ -67,16 +67,35 @@ const toggle = useMutation({
   mutationFn: patchDone,
   onMutate: async (vars) => {
     await qc.cancelQueries({ queryKey: ["todos"] });
-    const prev = qc.getQueryData(["todos"]);
-    qc.setQueryData(["todos"], (old: Todo[]) =>
-      old.map(t => t.id === vars.id ? { ...t, done: vars.done } : t));
+    const prev = qc.getQueryData<Todo[]>(["todos"]);
+    // The updater is called with `undefined` when the key is not cached — guard it.
+    qc.setQueryData<Todo[]>(["todos"], (old) =>
+      old?.map(t => (t.id === vars.id ? { ...t, done: vars.done } : t)));
     return { prev };
   },
-  onError: (_e, _v, ctx) => qc.setQueryData(["todos"], ctx!.prev),
+  onError: (_e, _v, ctx) => {
+    // ctx is undefined if onMutate itself threw; only roll back what we captured.
+    if (ctx?.prev !== undefined) qc.setQueryData(["todos"], ctx.prev);
+  },
   onSettled: () => qc.invalidateQueries({ queryKey: ["todos"] }),
 });
 ```
 Use for near-always-successful writes; skip for meaningful-failure writes.
+
+**Type the updater `T | undefined`, and never dereference `old` bare.** TanStack Query v5 invokes
+the functional updater with `undefined` whenever the query key holds no cached data — a first
+render, after `queryClient.clear()`, or once the entry is garbage-collected. Verified against
+`@tanstack/query-core@5.101.4`: `setQueryData(['todos'], (old) => old.map(...))` on an empty
+cache calls the updater with `undefined` and throws
+`TypeError: Cannot read properties of undefined (reading 'map')`.
+
+That throw is the dangerous part, because it happens *inside* `onMutate`: the mutation is
+rejected before `mutationFn` ever runs, so **the server write silently never happens** while the
+UI shows the user's click as accepted. Annotating the parameter `(old: Todo[])` does not prevent
+this — TypeScript types are erased at runtime, and the annotation is simply wrong for v5, whose
+updater signature is `(oldData: T | undefined) => T | undefined`. For the same reason `ctx!.prev`
+in `onError` is a lie the compiler believes: if `onMutate` threw, `ctx` is `undefined` and the
+non-null assertion throws a second error inside the error handler.
 
 ## Liveness settings
 - SSE: heartbeat comment (`: ping\n\n`) every 15s; event ids for resumable feeds.

@@ -79,6 +79,16 @@ import ast, pathlib
 FEATURES = pathlib.Path("app/features")
 
 
+def _submodule_names(feature: str) -> set[str]:
+    """The modules and subpackages inside a feature — i.e. its private insides."""
+    d = FEATURES / feature
+    if not d.is_dir():
+        return set()
+    names = {p.stem for p in d.glob("*.py") if p.name != "__init__.py"}
+    names |= {p.name for p in d.iterdir() if p.is_dir() and (p / "__init__.py").exists()}
+    return names
+
+
 def test_features_touch_each_other_only_through_their_public_surface():
     violations = []
     for py in FEATURES.rglob("*.py"):
@@ -89,16 +99,35 @@ def test_features_touch_each_other_only_through_their_public_surface():
             parts = node.module.split(".")            # app, features, <other>, <leaf>
             if len(parts) < 3 or parts[:2] != ["app", "features"]:
                 continue
-            if parts[2] != owner and len(parts) > 3:  # deeper than the package = private
+            other = parts[2]
+            if other == owner:                        # a feature may touch its own insides
+                continue
+            if len(parts) > 3:                        # deeper than the package = private
                 violations.append(f"{py}: imports {node.module}")
+                continue
+            # `from app.features.customers import models` is ALSO a private import:
+            # `from pkg import name` binds a SUBMODULE when name is one.
+            for alias in node.names:
+                if alias.name in _submodule_names(other):
+                    violations.append(
+                        f"{py}: imports submodule {node.module}.{alias.name}")
     assert not violations, violations
 ```
 
-The rule is positional, not a list of forbidden filenames: `from app.features.customers import
-contact_email` addresses the package — therefore `__init__.py` — and passes; anything deeper fails.
-The version most people write first is a denylist of the insides (`{"models", "routes", "rules"}`),
-and it quietly permits whatever filename someone adds next — including `service.py`, which is
-exactly where the public function's body lives.
+The rule is positional, not a list of forbidden filenames. The version most people write first is a
+denylist of the insides (`{"models", "routes", "rules"}`), and it quietly permits whatever filename
+someone adds next — including `service.py`, which is exactly where the public function's body lives.
+
+**Checking the dotted path alone is not enough, and the earlier version of this test was wrong to
+imply it was.** It claimed `from app.features.customers import <x>` "addresses the package —
+therefore `__init__.py`". That holds only when `<x>` is an attribute defined in `__init__.py`. When
+`<x>` is a *submodule*, Python's import system binds the submodule instead, so
+`from app.features.customers import models` reaches straight into the private module while
+`node.module` stays three parts long and a `len(parts) > 3` guard never fires. Verified on a real
+tree: with `invoices/service.py` importing `customers.models` and reading `models.Customer.email`,
+the original test reported **zero violations** while the private access genuinely worked. The
+`_submodule_names` lookup above closes it, and still passes the legitimate
+`from app.features.customers import contact_email`.
 
 Three things this does not catch, and the fix for each:
 

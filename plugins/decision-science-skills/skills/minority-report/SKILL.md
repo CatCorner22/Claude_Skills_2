@@ -14,7 +14,7 @@ description: >-
   uncertainty. Triggers: precog, precognition, minority report, run the scenarios,
   future outcomes, what happens if X changes, scenario planning, branch the futures.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Commissioned by the user, inspired by the precogs of Minority Report (Philip K.
     Dick's story and the film — homage in triggers and teaching only; no affiliation).
@@ -83,8 +83,13 @@ rule, and the one-variable turn are in `references/scenario-cell-method.md`.
    is enough to see movement), then hold everything else fixed, change ONE variable
    (the deadline slips a quarter; the ruling goes the other way; the key person leaves;
    demand halves), and record which scenario rankings flip. Variables whose turn reorders
-   the outcomes deserve monitoring money; variables that flip nothing can stop
-   consuming meeting time. Then list the ROBUST MOVES — actions that pay off in every
+   the outcomes deserve monitoring money; variables that flip nothing **on their own** drop to
+   low-priority monitoring — not off the list. One-at-a-time turning is blind to interactions by
+   construction: two variables that each change nothing alone can flip the ranking when they move
+   together, which is the ordinary case when both bear on the same constraint (a supply delay and a
+   demand spike are individually absorbable and jointly fatal). Before retiring a variable, turn it
+   jointly with each of the others that touch the same bottleneck; if the cell has more than a
+   handful of variables, turn the plausible *pairs* rather than all combinations. Then list the ROBUST MOVES — actions that pay off in every
    scenario, the minority report included. These are the cell's highest-value product:
    decisions you can make now without resolving any uncertainty (in the reference's
    worked case, negotiating data export wins whether you build, keep, or get squeezed).

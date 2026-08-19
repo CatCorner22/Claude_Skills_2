@@ -4,7 +4,8 @@ description: >-
   Facilitates the Army's four-question after-action review (AAR): a blameless, rank-free
   team debrief asking what was SUPPOSED to happen, what ACTUALLY happened (ground truth
   before interpretation), WHY the difference, and what to SUSTAIN and IMPROVE — roughly a
-  quarter of the time on each of the first two questions and half on causes and fixes.
+  quarter of the time on the first two questions together, a quarter on why, and half on
+  what to do about it.
   The LLM reconstructs the what-actually-happened timeline from logs, emails, and
   tickets, keeps discussion on the four rails, and converts sustain/improve items into
   standard-work updates; it facilitates and never adjudicates blame. Use after a project
@@ -13,7 +14,7 @@ description: >-
   reflective-learner instead. Triggers: after-action review, AAR, hot wash, team debrief,
   sustain and improve, what should we do differently next close.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # After-action review (AAR)
@@ -47,7 +48,13 @@ timeline-reconstruction protocol are in `references/aar-method.md`.
 
 1. **Frame the session.** State the event under review, the ground rules (blameless,
    rank-free, everyone talks, no grades), and the four questions on the wall. Budget the
-   time roughly 25% / 25% / 50% across supposed-to / actually-happened / why-plus-fixes.
+   time roughly 25% / 25% / 50% — a quarter across questions 1 and 2 *together*, a quarter on
+   question 3 (why the difference), and half on question 4 (what to do about it). [canon
+   attribution: Garvin's account of the Army guidelines states "roughly 25 percent of the time
+   should be devoted to the first two questions, 25 percent to the third, and 50 percent to the
+   fourth." An earlier version of this skill read the split as 25/25/50 across Q1 / Q2 / Q3+Q4,
+   which front-loads the reconstruction and halves the time on causes — the opposite of the
+   source's intent.]
 2. **Question 1 — what was SUPPOSED to happen?** Restate the plan, the standard, or the
    close checklist as it existed before the event. Pull the actual documents; memory of
    the plan is already contaminated by the outcome.

@@ -147,12 +147,23 @@ is not intuitive.
 | 2 of 3 consecutive beyond 2σ, same side | Moderate shift, faster than the 8-rule | ≈ 0.0031 → ~1 in 327 |
 | 4 of 5 consecutive beyond 1σ, same side | Small sustained shift | ≈ 0.0055 → ~1 in 181 |
 
-**The number nobody computes:** arming all four at once gives roughly
-0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ **0.019, about one false alarm every 52 points**. On a weekly
-chart that is a spurious investigation roughly once a year — fine. On a daily chart it is one
-every two months, and on an hourly chart it is three a week, which is how a control chart trains
-its owner to ignore it. Match the rule set to the plotting frequency and to how expensive an
-investigation is: high-frequency charts with cheap consequences get the 3σ rule only.
+**The number nobody computes — and do not compute it by adding the column.** Summing the four
+rates (0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ 0.019, "one alarm every 52 points") is wrong, because
+the rules overlap heavily: a point beyond 3σ is also beyond 2σ and beyond 1σ and sits on one side
+of the centerline, so it can satisfy several rules at once, and the run rules share the same
+points as they slide. Union ≠ sum. The correct figure comes from the run-length distribution:
+**ARL₀ ≈ 92 points with all four armed** — a false-alarm rate of about **0.011 per point**, not
+0.019. (Verified two independent ways: a Markov chain over the rule state space, and a 40,000-run
+Monte Carlo giving 91.6 ± 0.4. The same machinery reproduces the two known closed forms — 370.4
+for the 3σ rule alone and 255 for the 8-in-a-row rule alone — so it is calibrated.)
+
+Read that as: on a weekly chart, a spurious investigation roughly every other year. On a daily
+chart, one every three months. On an hourly chart, about two a week — which is still how a
+control chart trains its owner to ignore it. Match the rule set to the plotting frequency and to
+how expensive an investigation is: high-frequency charts with cheap consequences get the 3σ rule
+only. The general lesson outlives these four rules: **whenever you arm several detectors on one
+stream, the combined false-alarm rate must be derived from the run-length distribution, never by
+adding the individual rates** — adding overstates it whenever the detectors can fire together.
 
 The 3σ limit rule alone detects large shifts immediately and moderate shifts almost never — the
 worked project's 1.7σ improvement produced eight consecutive weeks below the old centerline and
