@@ -14,7 +14,7 @@ description: >-
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)
@@ -115,6 +115,15 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    Division of labor: the assistant finds doc gaps cheaply and often; the humans still
    run the real rehearsal on schedule, because only reality tests the backup, the
    access, and the hands.
+
+   **Exercise control applies whenever a drill touches real people, real systems, or a real
+   third party.** Mark every artifact `EXERCISE EXERCISE EXERCISE — NO REAL ACTION`; name one
+   person who can call ENDEX, with an abort phrase (**"REAL WORLD, REAL WORLD"**) anyone may
+   use; write a no-play list of systems, accounts, and people the drill may not touch; declare
+   and adjudicate any action with an irreversible external effect instead of executing it; and
+   pre-notify any third party whose name or number appears in the scenario. The full section is
+   in `decision-science-skills:tabletop-wargaming`'s `references/exercise-design.md` — one
+   discipline, shared by every exercise in this library.
 
 ## Why / learn
 Capability decays by a mechanism, not by bad luck. Skills that aren't exercised fade;

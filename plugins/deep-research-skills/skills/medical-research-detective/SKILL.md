@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.6.0"
+  version: "1.7.0"
 ---
 
 # Medical research detective
@@ -40,8 +40,18 @@ does not give doses. See `references/output-format.md` for the standing safety f
   `references/output-format.md`, which routes to urgent care.
 
 ## Do it
-Work the case in seven stages. Depth is the point: a shallow pass is the failure mode. Do not stop at
+Screen for urgency (stage 0), then work the case in seven stages. Depth is the point: a shallow pass is the failure mode. Do not stop at
 the first plausible answer — the whole value is in stage 2 and the disconfirmation pass in stage 5.
+
+0. **Screen for urgency before anything else.** Read the presented findings against the red-flag
+   list in `references/output-format.md` *first* — before framing, before hypotheses, before a
+   single search. If any red flag is present, **say so as the first thing in the reply, name
+   which one, and tell the user to seek care now**; do not lead with a differential, and do not
+   make the urgent-care note the eleventh item of a stage-7 report the user may never scroll to.
+   Research and urgency are not alternatives — offer to continue the research afterwards, and
+   continue it if they want, but the routing comes first. This skill is slow by design and its
+   users bring real presentations; a seven-stage investigation is the wrong shape of answer to a
+   time-critical one, and being right three thousand words later is not being right.
 
 1. **Frame the case.** Collect what is actually known before searching: the findings (symptoms, labs,
    imaging, diagnoses) with **onset dates and sequence**; every drug, supplement, and dose change

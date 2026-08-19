@@ -14,7 +14,7 @@ description: >-
   choosing least-worst. Triggers: kobayashi maru, no-win, every option is bad,
   least-worst, damage control drill, degraded mode, can't win this one, loss triage.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: >-
     Homage to Star Trek's Kobayashi Maru, the Starfleet Academy simulation that cannot
     be won (the name lives in triggers only; no affiliation with or endorsement by the
@@ -111,6 +111,15 @@ in `references/no-win-method.md`, with a worked deadline-vs-quality-vs-scope exa
 **Division of labor.** The LLM generates and escalates the drill and holds the
 declaration line; the humans make every in-drill decision and own the debrief
 conclusions. The drill is a scenario generator, never an adjudicator of real stakes.
+
+**Exercise control applies whenever a drill touches real people, real systems, or a real
+third party.** Mark every artifact `EXERCISE EXERCISE EXERCISE — NO REAL ACTION`; name one
+person who can call ENDEX, with an abort phrase (**"REAL WORLD, REAL WORLD"**) anyone may
+use; write a no-play list of systems, accounts, and people the drill may not touch; declare
+and adjudicate any action with an irreversible external effect instead of executing it; and
+pre-notify any third party whose name or number appears in the scenario. The full section is
+in `decision-science-skills:tabletop-wargaming`'s `references/exercise-design.md` — one
+discipline, shared by every exercise in this library.
 
 ## Why / learn
 The reason to remove the winning move is that its presence contaminates the lesson.
