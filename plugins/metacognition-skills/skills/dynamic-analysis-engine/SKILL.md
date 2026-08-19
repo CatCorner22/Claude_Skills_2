@@ -11,7 +11,7 @@ description: >-
   explore this dataset, form a hypothesis, root cause the numbers, multi-angle analysis,
   iterative analysis, adaptive analysis, why did this change.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Dynamic analysis engine

@@ -11,7 +11,7 @@ description: >-
   seasonality, backtesting, rolling forecast, rolling origin, predict future values, trend and
   seasonality, prediction interval, forecast uncertainty.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Time-series forecasting

@@ -11,7 +11,7 @@ description: >-
   session, API error handling, HTTP status codes, pagination endpoint, OpenAPI schema,
   dependency injection fastapi, CRUD API.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Backend API development (FastAPI)

@@ -13,7 +13,7 @@ description: >-
   Triggers: deliberate practice, practice drill, kata, rehearse with me, get better at,
   practice session, play the opponent, stopped getting better.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Deliberate practice (edge-of-ability drills)

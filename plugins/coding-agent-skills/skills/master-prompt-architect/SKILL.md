@@ -14,7 +14,7 @@ description: >-
   this prompt, prompt blueprint, token budget, backward design, triple audit, harden this
   prompt, production prompt.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   author: User-drafted persona spec (Master Prompt Architect); adapted to house standard
 ---
 

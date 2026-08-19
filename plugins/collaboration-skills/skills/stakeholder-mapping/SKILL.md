@@ -15,7 +15,7 @@ description: >-
   RACI, responsibility matrix, influence without authority, buy-in, who needs to sign
   off, stakeholder management, who can block this.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Built from the general-use expansion dossier
     (docs/research/general-use-expansion-research.md §7 stakeholder-mapping) —

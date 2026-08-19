@@ -20,6 +20,8 @@ metadata:
     references/self-audit-protocol.md — the checklist there is reconstructed from the spec's own
     stated principles and can be replaced when the user supplies the original remainder (which the
     spec's description says also covered a Techniques Catalog and full 2026 ML pipelines).
+metadata:
+  version: "1.1.0"
 ---
 
 # Bespoke LLM architect

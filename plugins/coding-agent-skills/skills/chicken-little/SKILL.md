@@ -11,6 +11,8 @@ description: >-
 metadata:
   version: "2026.3"
   author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard
+metadata:
+  version: "1.1.0"
 ---
 
 # Chicken Little (Aether)

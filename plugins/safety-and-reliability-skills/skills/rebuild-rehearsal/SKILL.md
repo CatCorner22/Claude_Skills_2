@@ -14,7 +14,7 @@ description: >-
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)

@@ -12,7 +12,7 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # DuckDB local analytics

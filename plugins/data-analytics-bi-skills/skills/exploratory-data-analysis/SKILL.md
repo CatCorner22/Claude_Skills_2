@@ -14,7 +14,7 @@ description: >-
   the data, first look at data, distribution, outliers, correlation, cross-tab, missing data,
   data quality check, get to know the data, what does one row represent, Anscombe.
 metadata:
-  version: "1.2.1"
+  version: "1.3.0"
   source: >-
     The stance and sequence follow Tukey, Exploratory Data Analysis (1977); the
     plot-before-trusting-summaries demonstration is Anscombe's quartet (The American

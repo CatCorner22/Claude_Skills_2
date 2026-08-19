@@ -256,6 +256,32 @@ fi
 # ignores cells under a "Wrong way" column, because a checker that cries wolf on
 # a deliberate trap table teaches authors to stop reading it.
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Cross-claims (advisory).
+#
+# check-cross-claims.py finds COUNTED claims one skill makes about another
+# ("the four-step protocol"), which resolve fine as links but go silently false
+# when the target gains a step. It was written, documented in the review
+# checklist, and then never wired to anything -- so it only ran when someone
+# remembered it, which is the same as not having it. Advisory by design: it
+# reports, it does not gate, because a legitimate count is common enough that
+# erroring would train authors to ignore the output.
+# ---------------------------------------------------------------------------
+if [ -f scripts/check-cross-claims.py ]; then
+  xc_out=$(python3 scripts/check-cross-claims.py 2>&1)
+  xc_rc=$?
+  if [ "$xc_rc" -gt 1 ]; then
+    err "cross-claims check failed to run (exit $xc_rc) — treat as UNCHECKED, not as clean: $xc_out"
+  elif [ -n "$xc_out" ]; then
+    while IFS= read -r line; do
+      case "$line" in
+        ""|"=="*) ;;
+        *) note "cross-claim: $line" ;;
+      esac
+    done <<< "$xc_out"
+  fi
+fi
+
 if [ -f scripts/check-arithmetic.py ]; then
   arith_out=$(python3 scripts/check-arithmetic.py 2>&1)
   arith_rc=$?

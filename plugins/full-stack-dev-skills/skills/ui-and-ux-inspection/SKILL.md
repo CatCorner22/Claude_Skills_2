@@ -14,7 +14,7 @@ description: >-
   accessibility audit, cognitive load, form review, navigation review, simplify a
   workflow, remediation backlog, playwright accessibility tests, heuristic evaluation.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Adapted from the user's ui-and-ux-inspection spec (2026-08-04), itself distilled
     from their report 'Eye Tracking, Web-App Usability, and Cognitive Design'; the

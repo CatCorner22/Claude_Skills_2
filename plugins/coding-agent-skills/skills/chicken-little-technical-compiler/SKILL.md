@@ -14,7 +14,7 @@ description: >-
   little, activate technical chicken little, architectural autopsy, jenga analysis,
   cascading failure audit, stress test my codebase.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Technical Compiler Edition spec"
 ---
 

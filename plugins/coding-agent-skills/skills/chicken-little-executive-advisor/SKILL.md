@@ -15,7 +15,7 @@ description: >-
   chicken little, strategic autopsy, operational autopsy, red team my business, blocker
   protocol, stand down.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: "Adapted from the user's Forward-Deployed Chicken Little: Executive Polymath Edition spec"
 ---
 

@@ -13,7 +13,7 @@ description: >-
   thompson, thompson treatment, fear and loathing take, gonzo commentary, savage take, gonzo
   dispatch, ride shotgun on this.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Commissioned by the user so the spirit of Dr. Thompson's work lives on in their own
     endeavors. A labeled homage to the published gonzo style (Hell's Angels through the

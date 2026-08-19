@@ -13,7 +13,7 @@ description: >-
   measure, begin with the end in mind, adversarial release gauntlet, WCAG-conformant app
   build, stability and redundancy, co-design the UI.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Lean Six Sigma for software

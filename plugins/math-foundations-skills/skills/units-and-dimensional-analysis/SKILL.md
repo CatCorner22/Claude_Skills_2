@@ -13,7 +13,7 @@ description: >-
   dimensional analysis, units don't match, per unit, annualize, factor-label, cancel the units,
   unit check, thousands vs millions.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Units and dimensional analysis
