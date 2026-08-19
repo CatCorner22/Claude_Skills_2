@@ -23,8 +23,11 @@ A good response:
   datetime/lag/rolling features, handles missing values as information, and assembles a train-only-fit pipeline.
 - **Teaches:** explains *why* good features can beat fancier algorithms and *why* every learned transform must
   be fit on training data only — not just a list of transforms.
-- **Safe:** never fits transforms on the full dataset, never target-encodes without out-of-fold/smoothing, and
-  never builds rolling/lag features that include the current or future rows.
+- **Safe:** never fits transforms on the full dataset, never target-encodes without **out-of-fold**
+  encoding, and never builds rolling/lag features that include the current or future rows. Smoothing is
+  not an acceptable substitute for out-of-fold — it shrinks a category's estimate but still leaves the
+  row's own label inside its own encoding, so a response offering smoothing *instead of* out-of-fold has
+  failed this item.
 - **Delivers the contract:** the output includes a feature dictionary (name, source, transform, fit-on),
   a single fit-on-train-only pipeline, a per-feature knowable-at-prediction-time leakage audit, and the
   keep/cut selection result with reasons.

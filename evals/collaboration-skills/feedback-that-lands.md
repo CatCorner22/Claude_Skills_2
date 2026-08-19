@@ -41,8 +41,10 @@ tighten the seam.
   situation-behavior-evidence specificity; rehearsal offered with the assistant as
   receiver; on receiving-side asks, runs the protocol — separate data from delivery,
   name the firing trigger, ask for the behavior behind the label, close the loop.
-- **Teaches**: the fundamental attribution error named plainly as why
-  character-language triggers defense and behavior-language doesn't; why
+- **Teaches**: the **actor–observer asymmetry** named as why character-language triggers defense
+  and behavior-language doesn't — naming it "the fundamental attribution error" instead is the
+  common error and fails this item, since FAE is the one-sided version; a response that also
+  flags the replication caveat scores higher; why
   impact-as-my-experience is undeniable while impact-as-accusation is debatable; why
   feedback hoarded for the formal review arrives too late to use; that the receiver
   controls whether feedback becomes change, so receiving is taught with equal weight.

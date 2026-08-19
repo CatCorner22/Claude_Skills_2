@@ -213,11 +213,24 @@ for md in glob.glob("plugins/**/*.md", recursive=True):
         ref = f"{m.group(1)}:{m.group(2)}"
         if ref in active or ref in agents:
             continue
-        if "archiv" in text[max(0, m.start() - WINDOW):m.start()].lower():
-            continue          # archived pointer, honestly labelled
+        marked = "archiv" in text[max(0, m.start() - WINDOW):m.start()].lower()
+        # The mark alone is not enough: the target must ACTUALLY be in archive/.
+        # Previously the mark short-circuited the check, so any reference in a
+        # deleted plugin's namespace passed as long as the word "archived" sat
+        # nearby -- `accounting-skills:this-skill-never-existed` validated clean.
+        # That is exactly how a typo or an invented skill name ships, and the
+        # domain plugins were DELETED rather than archived, so their namespace
+        # has no valid targets at all.
+        if marked and ref in archived:
+            continue          # archived pointer, honestly labelled, target real
         lineno = text.count("\n", 0, m.start()) + 1
-        bad.append(f"{md}:{lineno}: unresolved cross-link `{ref}`"
-                   + (" (target is archived — mark it as archived)" if ref in archived else ""))
+        if marked and ref not in archived:
+            reason = " (marked archived, but no such skill exists in archive/ — the target was deleted, or the name is wrong)"
+        elif ref in archived:
+            reason = " (target is archived — mark it as archived)"
+        else:
+            reason = ""
+        bad.append(f"{md}:{lineno}: unresolved cross-link `{ref}`{reason}")
 for b in bad:
     print(b)
 PY

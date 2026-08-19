@@ -1,6 +1,6 @@
 # Accessible UI design system (beautiful, WCAG 2.2 AA, data-dense)
 
-A design system for professional operational software — the Curve-Hero-class genre: busy
+A design system for professional operational software — the dense-vertical-SaaS genre: busy
 users, dense data, all day in the app. Beauty here means calm, ordered, and fast to read;
 accessibility is engineered in as poka-yoke, not audited in at the end. Target conformance:
 **WCAG 2.2 Level AA**.
@@ -159,9 +159,9 @@ Power users live on the keyboard; so do assistive-tech users. Same investment se
 
 ## §9 Content style (the words are part of the design system)
 
-- Labels in the **user's professional vocabulary** — harvested at the gemba and from the
-  reference product (see the archived `continuous-improvement-skills:curve-hero-design-language`
-  skill), one term per concept everywhere
+- Labels in the **user's professional vocabulary** — harvested at the gemba and from whichever
+  product the users already know (the archived design-language skill records one worked example),
+  one term per concept everywhere
   (if the reference says "Recare," the app never says "Recall" in one screen and "Recare" in
   another).
 - Buttons say the verb + object ("Post Payment", "Save Treatment Plan"), never "OK"/"Submit".

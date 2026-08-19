@@ -44,8 +44,8 @@ A good response:
   to `learning-skills:spaced-retrieval-learning`.
 - **Teaches:** explains why experience plateaus (automaticity stops generating learning
   signal) and why drills de-automate; presents mental representations (Ericsson) as what
-  expertise actually is and feedback latency as the active ingredient the assistant-as-
-  environment shortens; corrects the 10,000-hour popularization — a Gladwell-popularized
+  expertise actually is, and feedback latency as *one* active ingredient the assistant-as-environment
+  shortens rather than the whole mechanism; corrects the 10,000-hour popularization — a Gladwell-popularized
   average Ericsson himself disputed, not a threshold; quality and structure of practice
   matter, not an hour count.
 - **Stays honest:** calls the self-designed loop purposeful practice rather than claiming
