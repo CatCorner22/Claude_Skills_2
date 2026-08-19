@@ -41,8 +41,11 @@ signals that the slide has no point. That is worth discovering while drafting ra
 
 ### Typography
 1. Use a bold sans-serif typeface such as Calibri.
-2. Use 28-point type for the headline, 18–24 point for body text, and 12–14 point (not bold) for
-   reference listings.
+2. Use 28-point type for the headline, 18–24 point for **prose** body text, and 12–14 point (not
+   bold) for reference listings. Dense layouts are the documented exception: table cells and
+   flow-step labels at 14 point, two-column and three-row items at 16 point — they are scanned as
+   tokens, not read as sentences (`references/design-tokens.md`). Prose is never shrunk to fit; a
+   statement slide that needs 14-point body has too much on it, and the finding is to split it.
 3. Avoid all capital letters, italics, and underline.
 
 ### Layout

@@ -105,6 +105,9 @@ prefer ONNX or a pure-data format for those.
 
 ## Pre-launch checklist
 - [ ] Whole pipeline serialized (no external preprocessing steps to "remember")
+- [ ] **Decision threshold in the sidecar**, with the split it was chosen on, the FP/FN costs
+      or alert budget that set it, and the prevalence it assumed — it is a fitted parameter,
+      and left in application code the one number that turns scores into actions is versionless
 - [ ] Feature code shared between training and serving (one function, imported twice)
 - [ ] Input schema validated at the endpoint (types, ranges, categories)
 - [ ] Model loads at startup; version in every response
@@ -112,7 +115,9 @@ prefer ONNX or a pure-data format for those.
       pickle executes code, so this is the same control as verifying a deployed binary
 - [ ] Artifact-store write access limited to whoever may ship code
 - [ ] Prediction logging on, day one
-- [ ] Drift checks defined: which features, what threshold, who's alerted
+- [ ] Drift checks defined: which features, what statistic (PSI / KS / chi-square) at what
+      threshold, and who's alerted — plus prevalence, since a threshold frozen at training
+      prevalence silently changes precision as prevalence moves
 - [ ] Retrain trigger and rollback trigger written down and agreed
 - [ ] Shadow/canary plan for the *next* version already sketched
 - [ ] Framing sanity check: would a rule/heuristic hit 90% of this value? (ml-project-framing)

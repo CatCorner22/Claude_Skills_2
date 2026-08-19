@@ -10,7 +10,7 @@ description: >-
   htmx, vite setup, form handling react, UI architecture, frontend too complex, SPA vs server
   rendered, component design.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Frontend: modern, dynamic, lean

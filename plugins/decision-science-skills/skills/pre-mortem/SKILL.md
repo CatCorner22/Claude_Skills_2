@@ -12,7 +12,7 @@ description: >-
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
 metadata:
-  version: "1.2.1"
+  version: "1.3.0"
 ---
 
 # Pre-mortem (prospective hindsight)
@@ -113,6 +113,20 @@ wish, and because what a team ranks highest reveals what it actually fears.
   silent-writing round anonymously.
 - Confusing it with adversarial challenge of a live plan → that is
   `continuous-improvement-skills:project-command-center`; this runs before commitment.
+
+**Where the event may be litigated, regulated, or claimed against, run this at counsel's
+direction.** A ranked list of ~20 written narratives of how the plan fails, produced *before* commitment is a business record from the moment it exists, and it is discoverable —
+it is contemporaneous proof of what the organisation foresaw and when — which is the element a negligence or foreseeability argument has to establish. It is not privileged because it sits in a private file or carries a confidentiality
+label; in the U.S. the protections that can apply are attorney-client privilege and the
+work-product doctrine, and both generally depend on counsel directing the work and on the
+document being marked and handled accordingly from the start. Retrofitting that afterwards
+rarely works. So: where a dispute, claim, audit or regulatory inquiry is reasonably
+anticipated, involve counsel before the exercise rather than after, and mark the output as
+they direct. This is orientation on how to route the question, not legal advice — and it is
+not a reason to skip the exercise or to write it dishonestly, which is worse on every axis
+including the legal one. (Related:
+`safety-and-reliability-skills:split-tally-evidence` step 7 for the preservation half —
+the same trigger suspends any retention schedule covering these documents.)
 
 ## Tailor to your environment
 Record in `references/your-environment.md`: the go-live gates that should always get a
