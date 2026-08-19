@@ -93,9 +93,12 @@ Worked chains, the full check protocol, and the trap catalog are in
 a unit *is* a symbol — "45 mi/hr" is the product 45 × mi × hr⁻¹. That is why the
 factor-label method works: each conversion factor equals 1 (5280 ft and 1 mi are the
 same length), so multiplying by it changes the representation and never the quantity.
-Carrying units through a calculation is therefore a proof that travels with the work:
-if the units resolve to the right thing, the *structure* of the calculation is correct,
-and only the arithmetic remains to be checked. Dropping units doesn't simplify the
+Carrying units through a calculation is therefore a check that travels with the work —
+but be precise about what it proves. **Units resolving does not make the structure
+correct.** It is a one-way test: wrong units prove the formula wrong, while right units
+leave a formula that can still carry a wrong constant, a wrong sign, a missing factor of
+two, or the right dimensions assembled the wrong way round. Treat a clean dimensional
+check as "not yet refuted", never as "verified". Dropping units doesn't simplify the
 work — it deletes the half of the answer that can catch the other half.
 
 **A dimensional check is the cheapest formula review that exists.** It needs no data,

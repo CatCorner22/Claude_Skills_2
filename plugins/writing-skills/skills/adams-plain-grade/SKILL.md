@@ -59,6 +59,16 @@ version that still keeps the exact meaning.
    doublets or triplets, no ambiguity; the simplest accurate modern word; a technical term is
    said once, then explained immediately in plain words; the structure never makes the reader
    guess.
+   - **Carve-out: wording a law or rule requires verbatim is out of scope for every rule
+     above.** Statutory or regulatory text prescribed word-for-word, safe-harbour language
+     whose protection depends on tracking the statute, conspicuousness requirements (a warranty
+     disclaimer that must say "merchantability" under UCC 2-316), required notices in consumer,
+     employment, securities or medical-consent documents, and defined terms already in force
+     elsewhere in the same instrument are archaic *and* load-bearing. Simplifying them can void
+     the protection they exist to create. Flag them, offer the plain-language version
+     **alongside** rather than instead of the required text, and route the decision to a
+     lawyer. Same carve-out as `writing-skills:adams-smart-brevity`; a plain-language score is
+     never worth a forfeited safe harbour.
 5. **Check the grade.** 5th grade preferred: sentences average 10–14 words, everyday 1–2
    syllable words, and Flesch Reading Ease 90 or better **or** Flesch-Kincaid grade 5.0 or
    below — either one passes (reference §1). Neither is a window, but they run in opposite

@@ -21,6 +21,12 @@ jobs:
       - run: ruff check . && ruff format --check .
       - run: alembic upgrade head          # migrations apply cleanly to a scratch DB
         env: { APP_DATABASE_URL: "sqlite:///./ci.db" }
+        # This env var only works if alembic/env.py reads it. Stock Alembic takes the URL
+        # from `sqlalchemy.url` in alembic.ini and never consults the environment, so a
+        # scratch-DB check wired this way silently runs against whatever alembic.ini names
+        # — often a real database. Make env.py read it explicitly:
+        #     config.set_main_option("sqlalchemy.url", os.environ["APP_DATABASE_URL"])
+        # and leave `sqlalchemy.url` blank in alembic.ini so a missing var fails loudly.
       - run: pytest -q
         env: { TEST_DATABASE_URL: "sqlite:///./ci.db" }
   deploy:

@@ -200,10 +200,24 @@ def search(query: str, retmax: int = 25, email=None, fetch=http_get_json) -> dic
     res = fetch(ESEARCH, {"db": "pubmed", "term": query, "retmax": str(retmax),
                           "sort": "relevance"}, email=email)
     esr = (res or {}).get("esearchresult", {})
+    # E-utilities reports an unexecutable query with HTTP 200 and zero results, putting the
+    # reason in ERROR / errorlist / warninglist. Without reading those, a typo'd field tag or
+    # an unmatched quoted phrase is indistinguishable from "the literature is silent on this"
+    # -- the worst possible confusion for a tool whose job is to find what exists.
+    problems = []
+    if esr.get("ERROR"):
+        problems.append(str(esr["ERROR"]))
+    for key, label in (("errorlist", "error"), ("warninglist", "warning")):
+        block = esr.get(key) or {}
+        if isinstance(block, dict):
+            for field, vals in block.items():
+                if vals:
+                    vals = vals if isinstance(vals, list) else [vals]
+                    problems.append(f"{label}: {field}={', '.join(map(str, vals))}")
     ids = esr.get("idlist", []) or []
     total = int(esr.get("count", 0) or 0)
     if not ids:
-        return {"query": query, "total": total, "hits": []}
+        return {"query": query, "total": total, "hits": [], "problems": problems}
     summ = fetch(ESUMMARY, {"db": "pubmed", "id": ",".join(ids)}, email=email)
     result = (summ or {}).get("result", {})
     hits = []
@@ -215,14 +229,20 @@ def search(query: str, retmax: int = 25, email=None, fetch=http_get_json) -> dic
         if not isinstance(rec, dict) or rec.get("error"):
             continue
         hits.append(summarize_hit(pid, rec))
-    return {"query": query, "total": total, "hits": rank_hits(hits)}
+    return {"query": query, "total": total, "hits": rank_hits(hits), "problems": problems}
 
 
 def format_human(res: dict, show_gap_note=True) -> str:
     L = [f"QUERY: {res['query']}",
          f"  {res['total']} total match(es) in PubMed; showing {len(res['hits'])}"]
+    # Surface query problems FIRST: a zero-hit result caused by a typo'd field tag reads
+    # exactly like a genuine gap, and acting on a fake gap is a research error.
+    for prob in res.get("problems") or []:
+        L.append(f"  !! QUERY PROBLEM — {prob}")
+    if res.get("problems"):
+        L.append("  PubMed could not run the query as written; fix it before concluding anything.")
     if not res["hits"]:
-        if show_gap_note:
+        if show_gap_note and not res.get("problems"):
             L.append("  NO HITS — a genuine gap is itself a finding. Record it in the search log,")
             L.append("  then try the bridge search (shared drug / nutrient / mechanism).")
         return "\n".join(L)
@@ -345,6 +365,19 @@ def self_test() -> int:
 
     res_err = search("x", fetch=stub_error_record)
     check("error stub skipped", [h["pmid"] for h in res_err["hits"]] == ["111"])
+
+    # Regression: an unexecutable query returns HTTP 200 with zero hits and the reason in
+    # ERROR/errorlist/warninglist. Reported as a plain "no hits" it reads as a genuine gap.
+    def stub_bad_query(url, params, email=None):
+        return {"esearchresult": {"count": "0", "idlist": [],
+                                  "errorlist": {"phrasesnotfound": ["metformin b12"]},
+                                  "warninglist": {"quotedphrasesnotfound": ["\"nonsense tag\""]}}}
+    res_bad = search("bad", fetch=stub_bad_query)
+    check("query problems captured", len(res_bad.get("problems") or []) == 2)
+    check("query problems named", any("phrasesnotfound" in p for p in res_bad["problems"]))
+    rendered = format_human(res_bad)
+    check("query problems rendered", "QUERY PROBLEM" in rendered)
+    check("fake gap not reported as a gap", "NO HITS" not in rendered)
 
     def stub_empty(url, params, email=None):
         return {"esearchresult": {"count": "0", "idlist": []}}

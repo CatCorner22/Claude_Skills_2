@@ -67,7 +67,10 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
    swap the deps stage for `COPY pyproject.toml uv.lock ./` plus
    `ENV UV_PROJECT_ENVIRONMENT=/opt/venv` and `uv sync --locked --no-dev` (that variable is what
    puts the environment at `/opt/venv` instead of the project's `.venv`), and the CI
-   `pip install` step for `uv sync --locked`. Every other line of the shape is unchanged.
+   `pip install` step for `uv sync --locked`. **`uv` is not in the `python:3.12-slim` base
+   image** — the deps stage fails with `uv: not found` unless you put it there first, so add
+   `COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv` (pin the tag in real use) to
+   that stage, and install it in CI too. Everything downstream of the deps stage is unchanged.
 2. **Shape CI as lint → test → build → migrate → deploy, failing fast and cheap first.** One
    workflow: ruff/type-check (seconds) → pytest with the real test DB
    (`full-stack-dev-skills:testing-strategy`) → build the image once, tag with the git SHA →

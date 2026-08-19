@@ -93,9 +93,14 @@ in `references/no-win-method.md`, with a worked deadline-vs-quality-vs-scope exa
 6. **Debrief with process separated from outcome.** Grade four dimensions:
    loss-minimization (was total loss bounded?), explicit ordering of what to save (was a
    save order declared *before* acting?), communication under futility (were people told
-   the truth about the situation?), and the emotional debrief (what did futility feel
-   like, and what did it tempt?). State explicitly that a high process grade with a
-   total-loss outcome is the intended result of a well-run drill.
+   the truth about the situation?), and **frame honesty** (were any success redefinitions
+   declared aloud, which is legitimate, or slipped in silently, which is concealment?) —
+   that last one is this drill's signature check, and the reference's grading table
+   (`references/no-win-method.md`, Pass 2) is the authority on all four. The **emotional
+   debrief** is Pass 3, a separate conversation rather than a graded dimension: what did
+   futility feel like, and what did it tempt? Run it, but do not grade it. State explicitly
+   that a high process grade with a total-loss outcome is the intended result of a
+   well-run drill.
 7. **Run the Kirk blade deliberately when the stakes are real.** Before accepting an
    actual constraint set (a deadline, a budget, an exam's rules), audit it: physics or
    policy, who set it, who can change it, and what the transparency test requires if you

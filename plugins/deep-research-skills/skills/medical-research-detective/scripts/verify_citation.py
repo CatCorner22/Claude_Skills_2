@@ -97,8 +97,16 @@ _COUNTRY_HINTS = [
     ("belgium", ["belgium"], ["brussels", "leuven", "ghent"]),
     ("austria", ["austria"], ["vienna", "wien"]),
     ("poland", ["poland"], ["warsaw", "krakow"]),
-    ("taiwan", ["taiwan"], ["taipei"]),
+    ("taiwan", ["taiwan", "republic of china", "r.o.c"], ["taipei"]),
 ]
+
+# "Taiwan, Republic of China" is the standard Taiwanese affiliation, and the bare
+# substring "china" inside it flagged Academia Sinica papers as excluded-country --
+# a false positive that quietly removes legitimate research from a review. Taiwan is
+# resolved first and, when it is present, a china hit that rests ONLY on the
+# "republic of china" wording is dropped. A mainland signal in the same string
+# (an explicit "china" elsewhere, or a mainland city) still stands on its own.
+_TAIWAN_ROC_RE = re.compile(r"\b(?:taiwan|r\.?o\.?c\.?)\b", re.I)
 
 RETRACTION_MARKERS = [
     "retracted", "retraction", "withdrawn",
@@ -418,6 +426,16 @@ def infer_provenance(affiliations) -> dict:
             for c in city_hits:
                 if c in EXCLUDED_COUNTRIES and c not in seg_hits:
                     seg_hits = seg_hits + [c]
+            # Taiwan/ROC disambiguation, applied after the excluded-country backstop so
+            # it can only remove a hit that rests solely on the "Republic of China" form.
+            if "china" in seg_hits and _TAIWAN_ROC_RE.search(seg):
+                mainland = _hit(["chinese", "p.r.c", "prc"], seg) or any(
+                    _hit([city], seg)
+                    for _c, _n, cities in _COUNTRY_HINTS if _c == "china"
+                    for city in cities)
+                bare_china = re.search(r"(?<!republic of )\bchina\b", seg)
+                if not mainland and not bare_china:
+                    seg_hits = [c for c in seg_hits if c != "china"]
             hits.extend(seg_hits)
         if not hits:
             unrecognized.append(aff)
@@ -896,6 +914,15 @@ def self_test() -> int:
     check("Russian St. Petersburg still resolves",
           infer_countries(["St. Petersburg State University, 199034 St. Petersburg"])
           == ["russia"])
+    # Taiwan/ROC: "Taiwan, Republic of China" is the standard Taiwanese affiliation and
+    # must not be excluded as mainland China -- a false positive here silently removes
+    # legitimate research from a review.
+    check("Taiwan ROC is Taiwan, not China",
+          infer_countries(["Academia Sinica, Taipei, Taiwan, Republic of China"]) == ["taiwan"])
+    check("plain Taiwan is Taiwan",
+          infer_countries(["National Taiwan University Hospital, Taipei, Taiwan"]) == ["taiwan"])
+    check("mainland China still resolves",
+          infer_countries(["Chinese Academy of Sciences, Beijing, China"]) == ["china"])
     check("New South Wales is not the UK",
           infer_countries(["University of New South Wales, Kensington NSW 2052"]) == [])
     check("qualified Wales still resolves to uk",

@@ -382,18 +382,38 @@ Five decisions in twenty lines, each of which is the point:
 
 **Three checks that prove the config is actually twelve-factor**, run them in CI:
 
+These are literal CI steps, so each must exit **non-zero only when the config is wrong**. Two of
+the three invert if you write them the obvious way — `grep` succeeds when it finds the thing you
+do not want, and check 2's healthy behaviour is to *raise*:
+
 ```bash
+set -euo pipefail
+
 # 1. One reader of the environment. Anything else here is a config leak.
-grep -rn "os.environ\|os.getenv" app/ | grep -v "^app/config.py"
+#    grep exits 0 when it FINDS something, so negate it: a hit must fail the build.
+if grep -rn "os\.environ\|os\.getenv" app/ | grep -v "^app/config\.py:"; then
+  echo "config leak: the environment is read outside app/config.py" >&2
+  exit 1
+fi
 
 # 2. Fail fast and completely: an empty environment must fail in under a second,
 #    listing EVERY missing variable, not just the first one.
 #    `_env_file=None` is load bearing — see below.
-env -i python -c "from app.config import Settings; Settings(_env_file=None)"
+#    Raising is the PASS condition here, so assert the failure rather than running it bare.
+if env -i python -c "from app.config import Settings; Settings(_env_file=None)" 2>/dev/null; then
+  echo "config did not fail on an empty environment — defaults are hiding required vars" >&2
+  exit 1
+fi
 
 # 3. The environments differ in values only. The NAME sets must be identical.
+#    diff already exits non-zero on a difference, so this one is correct as written.
 diff <(sort staging.env.names) <(sort prod.env.names)
 ```
+
+Verified: written without the negation, check 1 exits 0 on a tree that *does* leak
+(`app/leak.py` calling `os.getenv`) and exits 1 on a clean tree — i.e. it fails healthy builds and
+passes broken ones. Check 2 inverts the same way, because a correctly-configured app raises on an
+empty environment and a bare command turns that raise into a red build.
 
 Check 2 is the one that catches the common half-migration: a `Settings` class that exists while some
 module still reads `os.environ` lazily on first use, so the app boots clean and dies an hour later
