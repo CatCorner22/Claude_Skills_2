@@ -13,7 +13,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -30,9 +30,11 @@ governs document-level attention (lead with the point, format for scanning, stop
   legal analysis, emails, reports, prompts, code comments, or professional communications.
 - Requests for clear, brief, precise, or litigation-resistant language; language audits,
   ambiguity checks, style improvements.
-- Clinical documentation defensibility work — this skill governs the quality of the language
-  itself; a separate litigation-avoidance pass (a content reviewer, not in this library) flags
-  sparse or incomplete content.
+- Clinical documentation defensibility work — this skill governs the quality of the *language*
+  only. Whether the content is adequate — the right findings, the pertinent negatives, the
+  consent discussion — is a clinician's review, and **this library does not contain one**; do
+  not treat that gap as covered by a later pass. See step 5 for the record-integrity rules
+  (amend, never edit) that apply before any editing begins.
 - Not for: audiences that need the most accessible register (patients, low-literacy, "plain
   English") → `writing-skills:adams-plain-grade` (same Adams core, 5th-grade target).
   Building a master prompt end to end → `coding-agent-skills:master-prompt-architect`
@@ -99,10 +101,29 @@ governs document-level attention (lead with the point, format for scanning, stop
      white space, defined terms, bold on a liability cap) is safe and valuable here; **excision
      is not.** Where the skill's axiom and the caselaw disagree, the caselaw is the
      specification.
-5. **Clinical notes**: controlled vocabulary, explicit
+5. **Clinical and other filed records**: controlled vocabulary, explicit
    findings-to-plan chains, zero ambiguous modifiers, no template-clone language (identical
    soft/hard-tissue descriptions across visits are a defensibility hole); Smart Brevity
    structure so the note stays usable under clinical time pressure.
+   - **Never edit a signed or filed record — amend it.** Once a note, chart entry, or client
+     record is signed or filed, the correction is a **dated, attributed addendum that leaves
+     the original legible**, not a revision of the text. This overrides everything else in this
+     skill for that document. A cleaner version of a filed note, with the original gone, is the
+     single worst outcome an editing pass can produce: the improvement is invisible and the
+     alteration is not, and the record's value as evidence depends on its integrity rather than
+     its prose. Most systems audit-log this; the ones that silently overwrite are the dangerous
+     ones. (`safety-and-reliability-skills:split-tally-evidence` is the same principle applied
+     to record design.)
+   - **Brevity does not cut the defensive content.** "Cut everything that is not new, necessary,
+     or actionable" is a rule about *prose*, and it pulls hard against the items whose whole
+     value is that they are on the record: **pertinent negatives, the differential considered
+     and rejected and why, the consent discussion, documented non-adherence or refusal, and
+     advice given.** They look redundant to an editor and decisive to a reviewer years later.
+     Tighten how they are written; do not decide they are surplus.
+   - **Whether the content is complete is a clinician's judgment, not this skill's.** This skill
+     governs the language. Nothing in this library reviews a clinical record for adequacy of
+     content, and no other skill is waiting to catch it — say so plainly rather than implying a
+     later pass will.
 6. **Stay intellectually honest**: never invent clinical facts, consent language, or legal
    conclusions. Precision includes honesty about what is and isn't established.
 7. **In reviews, diagnose before fixing**: identify the sources of potential

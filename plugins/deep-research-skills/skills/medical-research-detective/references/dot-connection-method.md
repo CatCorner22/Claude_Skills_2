@@ -122,8 +122,13 @@ State prevalence context whenever you name a rare candidate, so the reader can w
 
 For each surviving hypothesis at stage 5, run this pass explicitly and report the results:
 
-1. **What would we expect to see if this were true that we do not see?** Missing expected features
-   are strong evidence against.
+1. **What would we expect to see if this were true that we do not see?** A missing feature is
+   evidence against **only in proportion to how sensitive it is** — how large a share of true cases
+   actually show it. A feature present in 95% of cases, absent, is strong evidence against. A
+   feature present in 40%, absent, is close to no evidence at all, and treating it as a kill is the
+   most common way a correct hypothesis gets discarded. So the question has two halves: what do we
+   not see, *and* what fraction of real cases would have shown it? If you cannot answer the second
+   half, the absence is a question for the record, not a refutation.
 2. **What finding does this hypothesis fail to explain?** Note the residual; a hypothesis explaining
    3 of 5 findings should be labeled as such, not sold as complete.
 3. **Does the timing actually work?** Check onset sequence and known latency. A cause that started
@@ -178,10 +183,19 @@ carried forward, not dismissed because the unifying story is prettier.
 **Base-rate check:** both the deficiency and diabetic neuropathy are common. This is a horse, not a
 zebra — which is a point in the hypothesis's favor and makes it worth checking early.
 
-**Disconfirmation:** does the timing fit the medication history? Does the anemia's red-cell size match
-the proposed deficiency or contradict it? Is there a documented normal level of that nutrient on
-recent labs — and was it measured with a test sensitive enough to be trusted? Any of these could kill
-it.
+**Disconfirmation:** does the timing fit the medication history? Is there a documented normal level of
+that nutrient on recent labs — and was it measured with a test sensitive enough to be trusted? Either
+of those could kill it.
+
+Red-cell size is the instructive near-miss, and the sensitivity rule above is why. A raised MCV is
+the classic textbook signal, so "the MCV is normal" reads like a refutation — and it is not. The
+enlargement is frequently absent: it can be masked by a co-existing cause of *small* cells (iron
+deficiency, thalassaemia trait, chronic disease), the neurological damage can precede any blood
+change entirely, and a normal MCV is an average that a mixed population of large and small cells
+produces routinely. Treat the red-cell size as a **supporting datum** — raised, it strengthens the
+case; normal, it costs the hypothesis almost nothing — and never as one of the findings that could
+kill it. [clinical haematology, canon attribution — the direction is well established; treat the
+specific proportions as a question for the sources, not a number to quote from here.]
 
 **Next step it produces:** not "take a supplement" — but "the literature links these medications to
 this deficiency, which produces this triad; ask the clinician whether testing that nutrient (and the

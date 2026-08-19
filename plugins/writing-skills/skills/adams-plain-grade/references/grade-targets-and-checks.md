@@ -150,7 +150,7 @@ the read-aloud test the judge):
 >
 > This keeps your account safer.
 >
-> Can't get text messages? Call us at 555-0100. We will set up another way for you.
+> Can't get text messages? Call us at 555-0100 and we can set up another way.
 
 What the rewrite did, move by move:
 - **Main point first:** "We are changing how you sign in" replaces a buried lead behind
@@ -162,9 +162,20 @@ What the rewrite did, move by move:
   not survive at all — the reader needs the behavior, not the term.
 - **Actor named, active voice:** "We will text it to your phone" instead of "which shall be
   transmitted via SMS."
-- **Meaning fully preserved:** the date, the requirement, the delivery channel, the safety
-  rationale, and the fallback path all survive. Nothing was softened; the reader lost no
-  rights and no obligations.
+- **Meaning preserved, including the *category* of each statement:** the date, the requirement,
+  the delivery channel, the safety rationale, and the fallback path all survive, and each stays
+  the same *kind* of statement it was.
+- **The category check is the one this example nearly failed — run it explicitly.** The source
+  says alternative arrangements "**may be made**": that is discretion, and the company is not
+  bound. An earlier version of this rewrite read "Call us at 555-0100. **We will set up another
+  way for you**" — which is an *obligation*, and it hands the reader a commitment the source
+  never made. It reads better, it scores better, and it is a different document. The current
+  wording ("we **can** set up another way") keeps the discretion. Plain-language rewriting pulls
+  toward the confident, concrete, active form, and the confident form of a discretion is an
+  obligation — so on anything with legal or contractual weight, test every sentence for the
+  category it belongs to before you certify that nothing changed. The categories, and which verb
+  forms signal which, are in `writing-skills:adams-smart-brevity`'s
+  `references/adams-and-brevity-checks.md` §3.
 - **Two details were added, and they are the part to check:** the phone number and "type it
   on the sign-in page after your password" are not in the source. Concrete beats abstract, so
   a plain rewrite pulls toward specifics — which is exactly the moment a rewrite invents one.

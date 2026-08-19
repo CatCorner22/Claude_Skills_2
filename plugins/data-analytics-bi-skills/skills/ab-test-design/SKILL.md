@@ -13,7 +13,7 @@ description: >-
   CUPED, variance reduction, guardrail metric, A/A test, overall evaluation criterion, OEC,
   Twyman's law, novelty effect.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: >-
     Built from docs/research/general-use-expansion-research.md §2 (general-use expansion wave
     dossier; Kohavi/Tang/Xu canon). Provenance marks carried from the dossier: [snippet-only,
