@@ -116,7 +116,8 @@ highest.
 4. *Rejoining ritual:* at each payment milestone — and at engagement end — hashes are
    recomputed against the manifest and the acceptance chain is read back. Result recorded
    in one line each time.
-5. *Alteration test (run once at design time):* silently replace one delivered file with
+5. *Alteration test (run once at design time, on a copy — see
+   [The alteration test](#the-alteration-test)):* silently replace one delivered file with
    an edited version, then run the ritual. The recomputed hash must fail against both
    halves. If anyone can swap the file and pass, the design is broken — e.g., the manifest
    was stored only on the shared drive both parties can edit.
@@ -197,8 +198,26 @@ Tamper-evidence only pays when someone looks. The ritual is the looking, on a sc
 
 ## The alteration test
 
-Every split gets tested by playing the forger — once at design time, and again whenever the
-medium or custody changes:
+**Run it on a copy. Never on live records.** This test asks you to forge a record, and the
+records in scope are, by construction, the ones that matter — client files, accounting
+entries, clinical notes, the evidence chain itself. Falsifying a live one is not a test, it
+is the thing the skill exists to prevent, and a covert alteration of a real record you
+"meant to undo" is indistinguishable afterwards from one you did not. Three rules, before
+step 1:
+
+- **Test against a copy of the store, a sandbox instance, or a purpose-made synthetic record
+  set** that mirrors the real structure. If the design can only be tested against production,
+  that is itself a finding about the design.
+- **Label every test artifact as a test at the moment it is created** — in the filename, in
+  the record body, and in the log — so it can never later be mistaken for, or presented as,
+  a genuine record. An unlabelled forged record is a liability you manufactured.
+- **Where the test touches a counterparty's systems, get written authorisation from both
+  sides first.** "Silently" applies to the *operator* being tested, not to the organisations
+  whose systems you are probing. Unauthorised alteration of someone else's records is not a
+  methodology question.
+
+With that in place, every split gets tested by playing the forger — once at design time, and
+again whenever the medium or custody changes:
 
 1. **Enumerate the attackers honestly:** each party (including you), plus anyone with admin
    rights over the stores involved. The test is about capability, not suspicion.

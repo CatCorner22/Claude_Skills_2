@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.2.2"
+  version: "1.3.0"
 ---
 
 # Reliability engineering
@@ -89,6 +89,17 @@ metadata:
    rate, because a service erroring on 3% of calls logs zero minutes of downtime. The two
    definitions don't convert unless traffic is uniform in time — say which one the SLO is written
    against.
+   - **None of this applies to something that only acts on demand.** MTTR is clocked from
+     when you *noticed*, and a dormant protective function — the interlock, the relief valve,
+     the alarm, the failover path, the backup restore, the escalation that fires only when the
+     primary misses — fails **hidden**: nothing tells you, because nothing has asked it to
+     act. Its governing quantity is the **probability of failure on demand**, approximately
+     **λT/2** for a constant hazard λ and a proof-test interval T. The lever is **T** — how
+     often you deliberately exercise it — not repair speed and not redundancy, and the β ≈ 1
+     row of the decision table ("run to failure, attack MTTR, scheduled replacement buys
+     nothing") is exactly backwards for these: it means never find out. Redundancy multiplies
+     only across channels that are independently tested; a test that does not invoke the real
+     path is not a proof test. See `references/reliability-math.md` §4b.
 6. **Do the system arithmetic.** Series (every part needed): R = ∏Rᵢ — chains multiply badly;
    two 99% components in series give 98.01%. **That product assumes independent failures too:**
    it is the no-overlap end of the range (fully overlapping outages would give 99%), so it is
@@ -166,6 +177,11 @@ common cause.
 - Scheduled replacement under β ≈ 1 → pure waste; random failure calls for redundancy and fast
   repair, not calendars.
 - Time-based availability on a request-serving service → partial failure logs as zero downtime.
+- Applying MTBF/MTTR/availability to a dormant protective function → its failures are hidden, so
+  MTTR is meaningless; price it as probability of failure on demand (~λT/2) and manage the
+  proof-test interval T.
+- Adding a redundant channel to a protective function nobody tests → two things that can be
+  silently dead, sharing whatever common cause killed the first.
   Count events (good ÷ valid) and spend an error budget.
 - Multiplying a series chain without naming the independence assumption → the product is the
   no-overlap end of the range; still audit shared causes, which are what widen the blast radius.

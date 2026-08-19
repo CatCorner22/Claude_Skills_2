@@ -14,7 +14,7 @@ description: >-
   someone alter this after the fact, does our half fit their half, hash anchor, dual
   custody, evidence design, litigation hold, legal hold, spoliation, duty to preserve.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Built from the library's operational-wisdom research dossier
     (docs/research/epic-wave-held-research.md, Lane 1 entry 2: split tally sticks, English
@@ -85,10 +85,15 @@ ritual, alteration test, and the second-keeper section are in
    each period end, or before reliance (renewal, payment, filing). The ritual is literal —
    recompute the hash against the anchor, read the terms against the counterpart's
    confirmation — and its result is recorded. A split that is never rejoined is decoration.
-5. **Test the split by attempting alteration.** Play the forger against your own design:
-   change the record, then run the ritual. If any party can change the record without the
-   mismatch showing at rejoining, the design failed — fix the split, not the procedure
-   around it.
+5. **Test the split by attempting alteration — on a copy, never on live records.** Play the
+   forger against your own design: change the record, then run the ritual. If any party can
+   change the record without the mismatch showing at rejoining, the design failed — fix the
+   split, not the procedure around it. **The forging is done against a copy of the store, a
+   sandbox, or a synthetic record set**, every test artifact is labelled as a test when it is
+   created, and any test reaching a counterparty's systems needs written authorisation from
+   both sides first. "Silently" describes what the operator under test is not told; it does
+   not describe altering real client, accounting, or clinical records, which is the act this
+   whole skill exists to make detectable.
 6. **For critical numbers, add a second keeper (the khipu pattern).** Independent parallel
    derivation: a second person or process re-derives the number from raw source, without
    seeing the first result, and agreement is checked result-against-result. The Inka ran
@@ -193,6 +198,9 @@ improvised one.
   first rejoining should not happen at the dispute.
 - Skipping the alteration test → an untested split is a hoped-for one; play the forger
   before relying on it.
+- Running the alteration test on live records → you have forged a real record to prove you
+  could; use a copy or synthetic set, label every test artifact as a test at creation, and get
+  written authorisation before touching a counterparty's systems.
 - Splitting everything → splits cost relationship and upkeep; the risk inventory ranks by
   stakes, and low-stakes flows keep ordinary records.
 - Treating the second keeper as double bookkeeping → it is for the few critical computed

@@ -14,7 +14,7 @@ description: >-
   choosing least-worst. Triggers: kobayashi maru, no-win, every option is bad,
   least-worst, damage control drill, degraded mode, can't win this one, loss triage.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   source: >-
     Homage to Star Trek's Kobayashi Maru, the Starfleet Academy simulation that cannot
     be won (the name lives in triggers only; no affiliation with or endorsement by the
@@ -78,9 +78,22 @@ in `references/no-win-method.md`, with a worked deadline-vs-quality-vs-scope exa
    in-world mechanism — then adversarially tries to win its own drill and patches any
    door it finds. This is the step humans reliably fail at: designers unconsciously
    leave themselves a way out.
-3. **Declare the contract before play.** Tell participants plainly: this drill has no
-   winning move; you are graded on decision process, not outcome. Hiding the no-win
-   nature teaches distrust of the trainer, not decision skill.
+3. **Declare the contract before play — both halves of it.** Tell participants plainly:
+   this drill has no winning move; you are graded on decision process, not outcome. Hiding
+   the no-win nature teaches distrust of the trainer, not decision skill.
+   **The participation half is not optional either.** This drill is deliberately
+   distressing, built from the participant's real domain, and step 6's emotional pass asks
+   them to say aloud when they privately gave up. So, stated at the briefing:
+   participation is **voluntary and anyone may withdraw at any point without explaining
+   why**; anyone who has **recently lived the real version** of this scenario is screened
+   out beforehand, privately, and "not this one" is accepted without a reason; the
+   emotional pass is **never graded, never reported, and does not leave the room**; the
+   debriefer should not also be the assessor where you can separate them; and anyone may
+   halt the drill instantly (the shared **"REAL WORLD, REAL WORLD"** abort from
+   `decision-science-skills:tabletop-wargaming`). If someone is genuinely distressed rather
+   than usefully uncomfortable, the drill stops and the facilitator points to real support.
+   The line the whole contract rests on: **uncomfortable is the mechanism; harmed is a
+   design failure.** Full contract in `references/no-win-method.md` §2b.
 4. **Play the escalating environment.** The LLM runs scripted deterioration beats;
    every player decision gets a consequence; conditions worsen on a clock regardless.
    One beat is a tempting door that costs more than it saves — door-testing under
@@ -90,7 +103,9 @@ in `references/no-win-method.md`, with a worked deadline-vs-quality-vs-scope exa
    the declaration: which constraint are you changing — physics or policy? Say it aloud,
    name who owns the consequences, and continue. Declared reframing is a legitimate,
    gradeable move; silent reframing is graded as what it is — hiding the change.
-6. **Debrief with process separated from outcome.** Grade four dimensions:
+6. **Debrief with process separated from outcome — under the contract from step 3.** The
+   emotional pass is offered, not required; a player who would rather not answer says so and
+   the debrief moves on. Grade four dimensions:
    loss-minimization (was total loss bounded?), explicit ordering of what to save (was a
    save order declared *before* acting?), communication under futility (were people told
    the truth about the situation?), and **frame honesty** (were any success redefinitions

@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "safety-and-reliability-skills",
   "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry), and break-glass-playbooks (Seldon-crisis homage: watched numeric tripwires, sealed first moves, expiring logged authority, scheduled unsealing drills).",
-  "version": "0.14.0"
+  "version": "0.15.0"
 }

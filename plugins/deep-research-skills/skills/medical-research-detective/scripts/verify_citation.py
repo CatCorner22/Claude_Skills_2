@@ -366,7 +366,12 @@ _US_STATE_CODES = {
 # Shanghai as an American town and report the paper as clean US provenance. That is
 # the failure this module's header calls the worst possible one, so the guard is
 # deliberately narrow: it suppresses only the adjacent "Moscow, ID 83844" shape.
-_US_TAIL_RE = re.compile(r"[\s,]*([a-z]{2})\b\s*(\d{5})?")
+_US_TAIL_RE = re.compile(r"[\s,]*([a-z]{2})\b[\s,]*(\d{5})?")
+# What may follow the state code (and optional ZIP) for the tail to read as a US address.
+# Anchored, because "does 'usa' appear anywhere in this line?" is not a test of adjacency:
+# in "Institute of X, Beijing, Co-affiliated with Yale, New Haven, CT 06510, USA" the token
+# after "Beijing" is "Co" (Colorado) and "USA" is 50 characters away at the end of the line.
+_US_COUNTRY_TAIL_RE = re.compile(r"[\s,.]*(?:usa|u\.?s\.?a|united states)\b")
 
 
 def _is_us_locality(low: str, city: str) -> bool:
@@ -375,11 +380,13 @@ def _is_us_locality(low: str, city: str) -> bool:
     A US state code immediately after the city settles it, and covers the whole
     family: Moscow ID, St. Petersburg FL, Vienna VA, Berlin NH.
 
-    **This guard fails safe.** It suppresses a city hit only when that city is
-    directly followed by a state code, and never when the string independently
-    names an excluded country. A multi-site collaboration ("Moscow and Boise, ID,
-    USA") therefore still reports the excluded country for a human to confirm —
-    a false flag costs a reviewer seconds, whereas a false clear silently defeats
+    **This guard fails safe, and the adjacency is what makes that true.** It suppresses a
+    city hit only when the city is immediately followed by a state code AND that code is
+    immediately followed by a ZIP or by the country name — never on the strength of "USA"
+    appearing somewhere else in the string, and never when the string independently names
+    an excluded country. The cost is accepted in the right direction: an unusual tail the
+    pattern does not recognise leaves the excluded country reported for a human to wave
+    off, because a false flag costs a reviewer seconds while a false clear silently defeats
     the provenance policy the caller is relying on.
     """
     # Backstop: an explicit excluded-country NAME anywhere outranks any locality guess.
@@ -390,7 +397,22 @@ def _is_us_locality(low: str, city: str) -> bool:
         tail = _US_TAIL_RE.match(low, m.end())
         if not tail or tail.group(1) not in _US_STATE_CODES:
             continue
-        if tail.group(2) or _hit(["usa", "u.s.a", "united states"], low):
+        # A ZIP immediately after the state code settles it. Otherwise the country marker
+        # must sit immediately after the state code — NOT merely somewhere in the string.
+        #
+        # The earlier `or _hit(["usa"], low)` form was a hole wide enough to drive the whole
+        # provenance policy through: any two-letter English word that happens to be a state
+        # code, followed anywhere later by "USA", suppressed the city. Verified leaks —
+        #   "Institute of X, Beijing, Co-affiliated with Yale, New Haven, CT 06510, USA"
+        #     -> "Co" reads as Colorado, "USA" sits at the end of the line -> ['usa'] only
+        #   "Tianjin Medical University, Tianjin, In collaboration with NIH, Bethesda, MD ..."
+        #     -> "In" reads as Indiana                                     -> ['usa'] only
+        # Both suppressed the excluded-country city BEFORE the carry-through in
+        # infer_provenance could see it, so the paper verified clean. Adjacency closes it:
+        # "Co-affiliated" is followed by neither a ZIP nor a country name.
+        if tail.group(2):
+            return True
+        if _US_COUNTRY_TAIL_RE.match(low, tail.end()):
             return True
     return False
 
@@ -1217,6 +1239,24 @@ def self_test() -> int:
           infer_provenance(
               ["Department of Medicine, Mayo Clinic, Rochester, MN, USA"]
           )["unrecognized"] == [])
+    # --- Regression: `_is_us_locality` accepted any two-letter English word that happens to
+    # be a state code, as long as "USA" appeared ANYWHERE later in the string. Real-shaped
+    # affiliations leaked through and verified clean.
+    for aff, must in (
+        ("Institute of X, Beijing, Co-affiliated with Yale, New Haven, CT 06510, USA", "china"),
+        ("Tianjin Medical University, Tianjin, In collaboration with NIH, "
+         "Bethesda, MD 20892, USA", "china"),
+        ("Wuhan Institute, Wuhan, Or partnered with OHSU, Portland, OR 97239, USA", "china"),
+    ):
+        check(f"non-adjacent 'usa' no longer suppresses {must} ({aff[:18]}...)",
+              must in infer_provenance([aff])["countries"])
+    # ...and the shapes the guard exists for are still suppressed.
+    for aff in ("Moscow, ID 83844, USA", "University of Idaho, Moscow, ID, USA",
+                "St. Petersburg, FL 33701, USA"):
+        c = infer_provenance([aff])["countries"]
+        check(f"US namesake still resolved: {aff[:24]}",
+              "russia" not in c and "usa" in c)
+
     # The existing excluded-country pins must survive the change.
     check("excluded-country city still carried through a comma-only string",
           set(infer_provenance(
