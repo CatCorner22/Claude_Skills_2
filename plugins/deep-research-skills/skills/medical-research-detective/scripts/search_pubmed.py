@@ -204,20 +204,42 @@ def search(query: str, retmax: int = 25, email=None, fetch=http_get_json) -> dic
     # reason in ERROR / errorlist / warninglist. Without reading those, a typo'd field tag or
     # an unmatched quoted phrase is indistinguishable from "the literature is silent on this"
     # -- the worst possible confusion for a tool whose job is to find what exists.
-    problems = []
+    #
+    # Not every entry in those blocks means the query failed. NCBI puts a term that
+    # simply is not in the index into `errorlist.phrasesnotfound`, and it puts
+    # "No items found." into `warninglist.outputmessages` on ORDINARY empty searches.
+    # Treating those as hard problems made the tool print "PubMed could not run the
+    # query as written" on a perfectly good search -- and, worse, suppressed the
+    # "NO HITS - a genuine gap is itself a finding" note on exactly the searches where
+    # the gap was real. So the blocks are classified, not copied wholesale:
+    #   hard  -> the query did not run as written: ERROR, and a field tag that does
+    #            not exist (`fieldsnotfound`). Suppresses the gap note.
+    #   note  -> the query ran; these terms matched nothing. Reported, because it often
+    #            explains the gap, but it does NOT suppress the gap note.
+    #   drop  -> pure status chatter ("No items found.") and empty lists.
+    HARD_FIELDS = {"fieldsnotfound"}
+    DROP_MESSAGES = {"no items found."}
+    problems, notes = [], []
     if esr.get("ERROR"):
         problems.append(str(esr["ERROR"]))
     for key, label in (("errorlist", "error"), ("warninglist", "warning")):
         block = esr.get(key) or {}
-        if isinstance(block, dict):
-            for field, vals in block.items():
-                if vals:
-                    vals = vals if isinstance(vals, list) else [vals]
-                    problems.append(f"{label}: {field}={', '.join(map(str, vals))}")
+        if not isinstance(block, dict):
+            continue
+        for field, vals in block.items():
+            if not vals:
+                continue
+            vals = vals if isinstance(vals, list) else [vals]
+            vals = [v for v in vals if str(v).strip().lower() not in DROP_MESSAGES]
+            if not vals:
+                continue
+            line = f"{label}: {field}={', '.join(map(str, vals))}"
+            (problems if field in HARD_FIELDS else notes).append(line)
     ids = esr.get("idlist", []) or []
     total = int(esr.get("count", 0) or 0)
     if not ids:
-        return {"query": query, "total": total, "hits": [], "problems": problems}
+        return {"query": query, "total": total, "hits": [],
+                "problems": problems, "notes": notes}
     summ = fetch(ESUMMARY, {"db": "pubmed", "id": ",".join(ids)}, email=email)
     result = (summ or {}).get("result", {})
     hits = []
@@ -229,7 +251,8 @@ def search(query: str, retmax: int = 25, email=None, fetch=http_get_json) -> dic
         if not isinstance(rec, dict) or rec.get("error"):
             continue
         hits.append(summarize_hit(pid, rec))
-    return {"query": query, "total": total, "hits": rank_hits(hits), "problems": problems}
+    return {"query": query, "total": total, "hits": rank_hits(hits),
+            "problems": problems, "notes": notes}
 
 
 def format_human(res: dict, show_gap_note=True) -> str:
@@ -241,6 +264,11 @@ def format_human(res: dict, show_gap_note=True) -> str:
         L.append(f"  !! QUERY PROBLEM — {prob}")
     if res.get("problems"):
         L.append("  PubMed could not run the query as written; fix it before concluding anything.")
+    for note in res.get("notes") or []:
+        L.append(f"  (note) {note}")
+    if res.get("notes"):
+        L.append("  The query ran; the terms above matched nothing in the index — which may be "
+                 "the reason for a thin result, not a fault in the query.")
     if not res["hits"]:
         if show_gap_note and not res.get("problems"):
             L.append("  NO HITS — a genuine gap is itself a finding. Record it in the search log,")
@@ -368,16 +396,40 @@ def self_test() -> int:
 
     # Regression: an unexecutable query returns HTTP 200 with zero hits and the reason in
     # ERROR/errorlist/warninglist. Reported as a plain "no hits" it reads as a genuine gap.
+    # A genuinely unexecutable query: the field tag does not exist.
     def stub_bad_query(url, params, email=None):
         return {"esearchresult": {"count": "0", "idlist": [],
-                                  "errorlist": {"phrasesnotfound": ["metformin b12"]},
-                                  "warninglist": {"quotedphrasesnotfound": ["\"nonsense tag\""]}}}
+                                  "errorlist": {"fieldsnotfound": ["[nonsense]"]}}}
     res_bad = search("bad", fetch=stub_bad_query)
-    check("query problems captured", len(res_bad.get("problems") or []) == 2)
-    check("query problems named", any("phrasesnotfound" in p for p in res_bad["problems"]))
+    check("query problems captured", len(res_bad.get("problems") or []) == 1)
+    check("query problems named", any("fieldsnotfound" in p for p in res_bad["problems"]))
     rendered = format_human(res_bad)
     check("query problems rendered", "QUERY PROBLEM" in rendered)
     check("fake gap not reported as a gap", "NO HITS" not in rendered)
+
+    # Regression, the other direction: NCBI returns `phrasesnotfound` for any term not in
+    # the index and `outputmessages: ["No items found."]` on ordinary empty searches. Read
+    # wholesale, those printed "PubMed could not run the query as written" on a perfectly
+    # good search AND suppressed the genuine-gap note — silencing the finding on exactly
+    # the searches where the gap was real.
+    def stub_benign_empty(url, params, email=None):
+        return {"esearchresult": {
+            "count": "0", "idlist": [],
+            "errorlist": {"phrasesnotfound": ["rare-compound-x"], "fieldsnotfound": []},
+            "warninglist": {"phrasesignored": [], "quotedphrasesnotfound": [],
+                            "outputmessages": ["No items found."]}}}
+    res_benign = search("rare-compound-x", fetch=stub_benign_empty)
+    check("benign empty search raises no hard problem", res_benign["problems"] == [])
+    check("term-not-in-index kept as an informational note",
+          any("phrasesnotfound" in n for n in res_benign["notes"]))
+    check("'No items found.' is dropped entirely",
+          not any("No items found" in n for n in res_benign["notes"]))
+    check("empty sub-lists produce nothing", len(res_benign["notes"]) == 1)
+    rendered_benign = format_human(res_benign)
+    check("genuine gap note survives a benign warning", "NO HITS" in rendered_benign)
+    check("benign empty search is not called unexecutable",
+          "could not run the query" not in rendered_benign)
+    check("the note is still shown to the user", "(note)" in rendered_benign)
 
     def stub_empty(url, params, email=None):
         return {"esearchresult": {"count": "0", "idlist": []}}

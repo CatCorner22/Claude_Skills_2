@@ -12,7 +12,7 @@ description: >-
   not, brittle tests, flaky test, test isolation, slow test suite, playwright e2e, test coverage
   target, regression test, test pyramid, integration vs unit, testcontainers.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Testing strategy: minimal and effective

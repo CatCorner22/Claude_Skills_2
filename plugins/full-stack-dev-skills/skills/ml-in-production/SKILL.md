@@ -12,7 +12,7 @@ description: >-
   model monitoring, drift detection production, ml pipeline app, score in real time,
   put the model into the app, works in the notebook.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # ML in production
@@ -40,6 +40,14 @@ metadata:
    (version, training-data window, metrics at validation, feature list, hash). Save the
    **whole pipeline** (preprocessing + model, e.g. sklearn `Pipeline`), never a bare
    estimator plus "remember to scale."
+   - **The hash is not decoration, because loading the artifact runs code.** `joblib.load`
+     and `pickle.load` execute the stream rather than reading it, so whoever can write to
+     the artifact store — or steer the pointer — can run code inside the serving process.
+     Record the artifact's SHA-256 in the sidecar and **verify it before loading**, keep the
+     manifest signed or held where the store's writers cannot reach it (a hash beside the
+     file it describes proves nothing), and restrict write access to the artifact store to
+     whoever may ship code. Models from outside your own training pipeline should not be
+     pickle at all — prefer ONNX or a pure-data format.
    - **The decision threshold ships in the sidecar too**, with the split it was chosen on and
      the FP/FN costs or alert budget that set it (`machine-learning-skills:model-evaluation`
      fits and freezes it). It is a fitted parameter, not a constant: leaving it in application
@@ -119,6 +127,7 @@ the notebook.
 - No prediction logging "until we need it" → the incident arrives before the logs; day one.
 - Responses without model version → undebuggable mixtures during rollouts; version every response.
 - Loading the model per request → latency and memory churn; load at startup, reload on version change.
+- Treating "promotion is just a config change" as meaning it is not a code change → unpickling executes code; the pointer flip is as privileged as a deploy and usually has none of a deploy's review.
 - Promoting on validation metrics alone → shadow/canary on the product metric first.
 - No retraining/rollback triggers defined → drift becomes a debate instead of a runbook; decide before launch.
 - ML where a rule would do → the leanest model is no model; re-check the framing skill.
