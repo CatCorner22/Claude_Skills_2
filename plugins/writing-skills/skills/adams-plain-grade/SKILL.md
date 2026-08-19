@@ -61,8 +61,10 @@ version that still keeps the exact meaning.
    guess.
 5. **Check the grade.** 5th grade preferred: sentences average 10–14 words, everyday 1–2
    syllable words, and Flesch Reading Ease 90 or better **or** Flesch-Kincaid grade 5.0 or
-   below — either one passes (reference §1), and both are floors rather than windows, so
-   Reading Ease 105 is fine. They are two scales, not one number read twice: at 10–14 words
+   below — either one passes (reference §1). Neither is a window, but they run in opposite
+   directions: Reading Ease is a **floor** (higher is easier, so 105 is fine and there is no
+   upper bound to fear), while Flesch-Kincaid grade is a **ceiling** (lower is easier, so 2.0
+   is fine and 6.0 is not). They are two scales, not one number read twice: at 10–14 words
    per sentence, FRE 90–100 computes to FKGL ≈ 1.8–4.2 while FKGL 5.0 sits at FRE ≈ 77–84,
    so never lengthen a sentence to chase an FKGL of 5.0. Punctuate your bullet items before
    scoring anything — most tools split sentences on `.!?` and read an unpunctuated list as

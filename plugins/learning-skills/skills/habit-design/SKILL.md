@@ -61,13 +61,18 @@ renegotiation protocol, and the failure-mode table are in `references/habit-meth
 4. **Write the implementation intention verbatim.** "When <cue>, I will <tiny routine> in
    <place>." Pre-deciding the when-where-how of acting raises the rate of actually doing it:
    Gollwitzer & Sheeran's 2006 meta-analysis put the effect at d ≈ 0.65 across 94 tests, and
-   the 2025 successor (Sheeran, Listrom & Gollwitzer, 642 tests) still finds it after
-   correcting for a substantial publication bias in the literature — but across a range,
-   .27 ≤ d ≤ .66, rather than at the 2006 figure. Treat 0.65 as the top of the band, not the
-   expectation. What moves a plan toward that top is what this step already specifies: a
-   contingent if-then form rather than a resolution, genuine motivation for the underlying
-   goal, and the plan rehearsed rather than written once — which is why the user says it back
-   rather than nodding at it. Write it into the worksheet, and add a coping form for the
+   that figure is the one everyone quotes. **Do not plan around it.** The literature carries
+   substantial publication bias, and bias-corrected re-analyses put the effect materially
+   lower — plausibly a small effect rather than a medium-to-large one. [The specific corrected
+   values are `[unverified here]`: this environment could not reach the primary sources, and an
+   earlier version of this passage quoted a corrected band that a reviewer showed sat *above*
+   the paper's own bias-corrected estimate. Quote no number from this skill without checking it.]
+   The honest planning assumption: writing the plan is nearly free and the effect is real but
+   small, so do it — and do not promise anyone a 0.65. What gets a plan to the better end of
+   whatever the true effect is happens to be what this step already specifies: a contingent
+   if-then form rather than a resolution, genuine motivation for the underlying goal, and the
+   plan rehearsed rather than written once — which is why the user says it back rather than
+   nodding at it. Write it into the worksheet, and add a coping form for the
    known obstacle: "if <obstacle>, then <planned response>."
 5. **Engineer the friction.** Make the good path one step shorter (stage it the night
    before: worksheet already open, shoes by the door) and the competing path one step longer

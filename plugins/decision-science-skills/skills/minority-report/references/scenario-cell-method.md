@@ -94,7 +94,11 @@ one-at-a-time pass would have retired it.
 Read the table two ways: variables that change the best choice deserve monitoring and
 option-preserving moves (the "Price Cliff" flip says: negotiate data export NOW,
 regardless of the build decision — a robust move that wins across futures);
-variables that flip nothing are officially allowed to stop consuming attention.
+variables that flip nothing **on their own** drop to low-priority monitoring — not off the
+list. The row above is the reason for the qualifier: "one dev leaves" changes nothing when
+turned alone against the baseline, and flips the choice when turned jointly. Retire a variable
+only after it has failed to flip anything *in combination* with the others touching the same
+constraint.
 Robust moves — actions that pay off across ALL scenarios — are the cell's best
 product; list them explicitly.
 

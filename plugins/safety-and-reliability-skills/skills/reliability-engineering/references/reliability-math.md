@@ -189,7 +189,11 @@ collapses to the n−1 earlier failures: β̂ = n ÷ Σᵢ₌₁ⁿ⁻¹ ln(tₙ
 Both of those are maximum-likelihood estimates and both lean **high** at small n —
 E[β̂] = β·n/(n−1) time-terminated, β·n/(n−2) failure-terminated — so below about ten failures
 quote the bias-corrected form beside the MLE: multiply β̂ by (n−1)/n when you stopped at a clock
-time, by (n−2)/n when you stopped at a failure. On §9's log that turns β̂ = 0.86 into 0.76,
+time, by (n−2)/n when you stopped at a failure. **The failure-terminated factor needs n ≥ 3 and
+is still violent at n = 3**: it multiplies by (n−2)/n, which is 0 at n = 2 (any β̂ collapses to
+zero) and 1/3 at n = 3, so a β̂ of 1.00 reads as 0.33. Below about five failures report the raw
+MLE with its interval and say the small-sample bias runs high; do not publish a "corrected"
+number that the correction itself has destroyed. On §9's log that turns β̂ = 0.86 into 0.76,
 which does not change the reading (the interval straddles 1 either way) but does show which
 direction the small-sample error runs.
 An approximate standard error is SE(β̂) ≈ β̂/√n, so **n = 9 failures gives roughly ±30%** on β

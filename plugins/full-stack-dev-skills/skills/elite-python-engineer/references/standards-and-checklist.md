@@ -85,12 +85,25 @@ async def validation_handler(request: Request, exc: RequestValidationError) -> J
     )
 
 @app.exception_handler(StarletteHTTPException)
-async def http_error_handler(request: Request, exc: StarletteHTTPException) -> JSONResponse:
+async def http_error_handler(request: Request, exc: StarletteHTTPException) -> Response:
+    # Two things the default handler does that a replacement must keep doing.
+    # 1. Forward exc.headers. They are part of the HTTP contract, not decoration:
+    #    WWW-Authenticate on 401, Allow on 405, Retry-After on 429/503. Dropping them
+    #    turns a well-formed 401 into one no client can act on.
+    # 2. Send no body where a body is illegal (204, 304, and the 1xx range).
+    if exc.status_code in (204, 304) or exc.status_code < 200:
+        return Response(status_code=exc.status_code, headers=exc.headers)
     return JSONResponse(
         status_code=exc.status_code,
         content={"error": {"code": f"http_{exc.status_code}", "message": str(exc.detail)}},
+        headers=exc.headers,
     )
 ```
+
+Measured on FastAPI with `TestClient`: with the naive version above minus those two guards,
+`GET /secure` returned 401 with **no** `www-authenticate`, a wrong-method request returned 405
+with **no** `allow`, and a 304 carried a 54-byte JSON body. With the guards, all three match
+FastAPI's default behaviour while keeping the envelope.
 
 **Why the last two handlers are not optional.** With only the `AppError` handler registered,
 FastAPI's built-in paths keep their own shape: a 422 validation failure returns
