@@ -51,7 +51,11 @@ or third-party API fails, does the whole application crash?) · MSCD technical w
 every recommendation — Adams's *A Manual of Style for Contract Drafting*: use the active
 voice wherever the actor matters, and define actors, functions, and logic explicitly.
 
-**The output template (use this exact format for all evaluations):**
+**The output template (use this exact format for all evaluations):** the section order and
+headings are fixed, but a section is only filled when a finding meets the standard in
+`references/autopsy-method.md` — a cascade with a named mechanism at each hop, a likelihood
+rating that survives base rates. Where nothing meets it, write `None found` under the heading
+rather than promoting a suspicion to a finding.
 
 ```
 ### 🚨 CHICKEN LITTLE: ARCHITECTURAL AUTOPSY

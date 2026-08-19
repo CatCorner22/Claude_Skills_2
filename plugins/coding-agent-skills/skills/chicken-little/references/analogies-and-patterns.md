@@ -41,6 +41,23 @@ coaches at Master Black Belt level.
 - Risk: FMEA with RPN; risk registers.
 - Control: control charts (I-MR, X̄-R, p, np, c, u), SPC, visual management, standard work,
   poka-yoke (→ `continuous-improvement-skills:standard-work`).
+- **The escalation rules, stated** — the persona invokes them in almost every answer, so they
+  belong on the page rather than in recall. With limits at ±3σ, a point is special cause when:
+  one point falls beyond 3σ; two of three consecutive points fall beyond 2σ on the same side;
+  four of five fall beyond 1σ on the same side; or eight consecutive points fall on one side of
+  the centerline. Those four are the Western Electric set. Nelson adds: six points trending
+  steadily up or down; fourteen alternating up and down; fifteen in a row inside 1σ (limits
+  computed wrong, or stratified data); and eight in a row with none inside 1σ (two streams
+  mixed). Nelson's run rule is nine points on one side where Western Electric says eight — pick
+  one convention and name it. Anything else is common cause: a single red point inside the
+  limits is the acorn.
+- **Capability thresholds, stated**: `Cp = (USL − LSL) / (6σ)` and
+  `Cpk = min(USL − μ, μ − LSL) / (3σ)`, σ estimated from within-subgroup variation (Pp/Ppk use
+  overall σ, which is why Ppk is the honest one to quote to a customer). Cpk ≥ 1.33 is the
+  conventional "capable" bar and ≥ 1.67 the bar for safety- or compliance-critical
+  characteristics; below 1.0 the process is producing defects as centered, and Cp much larger
+  than Cpk means it is off-centre rather than too variable. Capability is meaningless on an
+  out-of-control process — establish stability first.
 - Other: 5S, Kanban/pull, Theory of Constraints awareness.
 - Software application: treat code quality, test coverage, cycle time, defect escape rate, and
   performance as measurable processes; automated tests and Ruff are control mechanisms; VSM the
@@ -73,9 +90,11 @@ Building production agents and multi-agent systems in Python:
 - Frameworks by fit: **PydanticAI** (type-safe agents, DI style), **Instructor** (structured
   extraction/tool calling), **LangGraph** (stateful graphs, cycles, human-in-the-loop,
   checkpointing), **LlamaIndex** (RAG + data agents over documents/extracts), **CrewAI**
-  (role-based crews, e.g. an "Exception Triage Crew"), **AutoGen** and **Semantic Kernel**
-  (Microsoft ecosystem), plus DSPy (program optimization) and Outlines/Guidance (constrained
-  generation). Verify currency before recommending — this landscape moves fast.
+  (role-based crews, e.g. an "Exception Triage Crew"), **Microsoft Agent Framework** (the
+  Microsoft ecosystem choice since its 1.0 GA in April 2026 — it merges AutoGen and Semantic
+  Kernel, both of which are now in maintenance mode, so name it rather than either predecessor),
+  plus DSPy (program optimization) and Outlines/Guidance (constrained generation). Verify
+  currency before recommending — this landscape moves fast.
 - Engineering discipline: proper tool schemas; retries with tenacity; observability
   (OpenTelemetry, LangSmith/Phoenix); evaluation harnesses; human-approval gates where risk
   warrants; parameterized queries only, never string-built SQL.

@@ -42,8 +42,17 @@ correction teach.
 - What it buys: correction is effortless for the expert and arrives loaded with the
   differentiating detail ("no, no — it has to go *before*, otherwise the batch locks
   the record, that's why we all do it by 9:40").
+- Where it fails: someone who defers — junior to you, unsure what the interview is for,
+  or simply agreeable — may accept the wrong detail rather than correct it, and their
+  agreement reads exactly like confirmation. Treat a bare "yes, that's right" to a
+  planted detail as unconfirmed: re-source it from a document, a second person, or an
+  open question that makes them state the fact in their own words. Where the status gap
+  is wide enough that correcting you would feel costly, use a naive open instead — you
+  lose the shortcut, not the answer.
 - Hygiene: every deliberately wrong detail gets read back correctly in the verbatim
   replay at the close, so the technique never leaves a planted error standing in notes.
+  The replay catches errors the expert corrected; it cannot catch one they agreed to,
+  which is why agreement gets re-sourced rather than replayed.
 
 ### 3. Discrepancy held as your own confusion
 Two of the expert's statements conflict, or their account conflicts with the data. The
@@ -63,8 +72,14 @@ After the formal close — thanks given, notebook shut, the interview visibly ov
 casual question.
 
 - Shape: "Oh — one thing I meant to ask…" followed by the question you most care about.
-- Shape (the trained clinical form): "Is there anything I should have asked about and
-  didn't?" [peer-reviewed, AAFP]
+- Shape (the trained clinical form): "Is there something else I should have asked
+  about?" The word is not decoration: in a randomized primary-care trial, physicians who
+  solicited further concerns with "is there *something* else you want to address today?"
+  left about 78% fewer concerns unmet, while the "*anything* else" version could not be
+  distinguished from asking nothing — a negatively phrased question carries its own
+  invitation to answer no [Heritage et al. 2007, peer-reviewed]. That trial tested a
+  mid-visit solicitation with patients, not a post-close question with a colleague, so
+  borrow the wording; the effect size does not transfer.
 - Why post-closure: impression management ends when the interview does; post-closure
   answers are the least rehearsed of the session.
 - Logistics: budget the minute for it — schedule the room five minutes past the formal
@@ -118,8 +133,9 @@ For a finished interview (transcript or detailed notes), the assistant marks:
 3. **Unplayed patterns** — contradictions in the transcript that were never raised
    (candidates for discrepancy-as-confusion next time), and answers accepted at the
    rehearsed first layer with no silence after.
-4. **Capture hygiene** — key claims not recorded verbatim, and any
-   deliberate-error restatement not corrected on the record.
+4. **Capture hygiene** — key claims not recorded verbatim; any deliberate-error
+   restatement not corrected on the record; and any the expert simply agreed with, which
+   is a fact to re-source rather than a fact confirmed.
 
 Output: a short list of next-contact questions, each tagged with its pattern, plus one
 sentence on the single biggest stance improvement.
@@ -163,3 +179,7 @@ From the library's research dossier (Lane 2); provenance marks as recorded there
   [practitioner]
 - Doorknob phenomenon:
   [AAFP](https://www.aafp.org/pubs/afp/issues/2018/0701/p52.html) [peer-reviewed, AAFP]
+- "Some" beats "any" when soliciting further concerns: Heritage, Robinson, Elliott,
+  Beckett & Wilkes, "Reducing patients' unmet concerns in primary care: the difference
+  one word can make," *Journal of General Internal Medicine* 22(10), 2007, 1429–33
+  ([PubMed](https://pubmed.ncbi.nlm.nih.gov/17674111/)) [peer-reviewed]

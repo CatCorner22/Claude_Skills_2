@@ -31,8 +31,8 @@ git blame path/to/file                  # who last changed each line, and in whi
 
 ## Stage and commit
 ```bash
-git add -p                              # stage hunk by hunk (review as you stage)
-git add path/to/file                    # stage a specific file
+git add -p                              # stage hunk by hunk (interactive — needs a terminal)
+git add path/to/file                    # stage a specific file (the non-interactive route)
 git commit -m "Imperative subject line"
 git commit                              # opens editor for subject + body (use for the 'why')
 git commit --amend                      # fix the most recent commit (only if not yet pushed/shared)

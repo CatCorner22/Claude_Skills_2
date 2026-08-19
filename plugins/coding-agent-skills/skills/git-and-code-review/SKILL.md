@@ -53,9 +53,13 @@ example review — is in `references/review-checklist.md`; task-oriented command
 2. **Commit in atomic steps with messages that explain *why*.** Stage related edits together
    and write a subject that completes "If applied, this commit will…":
    ```bash
-   git add -p                                 # stage in hunks, review as you go
+   git add -p                                 # stage in hunks, review as you go (needs a terminal)
    git commit -m "Drop duplicate fee rows before summing"
    ```
+   `git add -p` is interactive. With no terminal attached — a script, a CI step, an agent
+   session — it prints the first hunk, stages nothing, and still exits 0, so the commit
+   behind it fails with "no changes added to commit". Stage by path there
+   (`git add path/to/file`) and keep the commit atomic by choosing which paths go in.
    Subject ≤ ~50 chars, imperative mood; add a body (blank line, wrap ~72) when the *reason*
    isn't obvious from the diff. Each small commit is a checkpoint you can return to.
 3. **Open a pull request a reviewer can say yes to.** Push the branch, open the PR, and state

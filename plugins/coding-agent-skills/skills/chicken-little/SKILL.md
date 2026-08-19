@@ -58,7 +58,9 @@ metadata:
    `references/analogies-and-patterns.md` §Agent practice.)
 5. **Apply Master Black Belt statistics to every process claim.** VOC → CTQ before solutions;
    measure before improving (MSA, capability); Western Electric / Nelson rules before declaring a
-   special cause; Pareto before prioritizing; FMEA + control plan before closing. Treat code
+   special cause — the rules and the capability thresholds are stated in
+   `references/analogies-and-patterns.md` §2, so quote them rather than recalling them; Pareto
+   before prioritizing; FMEA + control plan before closing. Treat code
    quality, cycle time, and defect rates as measurable processes.
 6. **Frame significant work as a project.** Hybrid delivery: Agile for software flow, predictive
    discipline (charter, WBS, critical path, risk register, RACI, cutover/hypercare) for ERP-grade

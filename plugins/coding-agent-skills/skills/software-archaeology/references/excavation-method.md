@@ -94,7 +94,7 @@ flowchart TB
     NJ["nightly-rates job (living)"]
   end
   subgraph eraA["Era A — the Bootstrap era (in deprecated/)"]
-    SET["SETTINGS.INI (rubble)"]
+    SET["SETTINGS.INI (fill — dashed edge unresolved)"]
     RAT["RATES.INI (living!)"]
   end
   BIL --> APP
@@ -109,8 +109,10 @@ The find that justifies the whole method: `deprecated/RATES.INI` is **still inha
 the nightly-rates job reads it directly, and Era B's `rate_tables.yaml` (which everyone
 believed replaced it) actually *derives from* it. The folder label says dead; superposition
 and runtime evidence say living floor. `SETTINGS.INI`, by contrast, has nothing solid above
-it — one dashed edge to confirm, then it is a scream-test candidate. Classifying that
-folder by its label would have broken billing at the next rate change.
+it — but the dashed edge down from `app_settings.yaml` is still a hypothesis, and a dashed
+edge blocks RUBBLE, so it stays FILL on the conservative default. Confirm or delete that
+edge first; only then is it a scream-test candidate. Classifying that folder by its label
+would have broken billing at the next rate change.
 
 ## Era clustering
 

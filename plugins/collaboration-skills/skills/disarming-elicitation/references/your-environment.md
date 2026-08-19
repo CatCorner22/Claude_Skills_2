@@ -25,4 +25,5 @@ no org politics, no client data. Anything sensitive goes in
 
 ## House phrasing
 - Stakes-lowering opener that fits your culture: <your standard two sentences>
-- Your natural doorknob form: <e.g., "what should I have asked about?">
+- Your natural doorknob form: <e.g., "is there something else I should have asked
+  about?" — "something," not "anything"; see the method file>
