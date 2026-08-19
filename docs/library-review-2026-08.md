@@ -290,13 +290,17 @@ Measured 2026-08-17: 121 skills' names + descriptions = **110,081 characters ≈
 of a 200K context**, present before the user asks anything. Two consequences:
 
 - **A full install is deep past the point where this starts, and the mechanism is worse than a
-  count threshold.** Verified live on 2026-08-18 (`docs/live-routing-and-degradation-2026-08-18.md`):
-  the real gate is a *character* budget (`skillListingBudgetFraction`) filled in listing order
-  with a hard cutoff, not a graceful per-skill trim of the least-used entries. With this
-  marketplace's 121 skills genuinely installed, **101 of them carried zero description text** —
-  silently, with no error, while `/plugin:skill` direct invocation keeps working. That is
-  precisely the path an author uses to test their own skill, so the failure is invisible from the
-  inside. Which 19 survived was a function of install order, not importance.
+  count threshold.** *(Mechanism corrected 2026-08-19 — see
+  `docs/live-routing-and-degradation-2026-08-18.md` §1–§2, which now carries the decompiled
+  algorithm and retracts the account originally given here.)* The real gate is a **character
+  budget**: `floor(context_tokens × 4 × skillListingBudgetFraction)`, i.e. **8,000 characters** at
+  the 200K/1% defaults, against **113,645** needed to render all 121 descriptions. Skills start as
+  bare names and are upgraded back to full text in **descending order of recent use**
+  (`usageCount × max(0.5^(days/7), 0.1)`, unused = 0), greedily, skipping any that do not fit.
+  Simulated against this library (`scripts/simulate-listing-budget.py`): **3 of 121 keep a
+  description on a default 200K session; 118 route on their bare name** — silently, with no error,
+  while `/plugin:skill` direct invocation keeps working. That is precisely the path an author uses
+  to test their own skill, so the failure is invisible from the inside.
 - **The lever is skills per install, not characters per description.** Trimming a description by 100
   characters saves ~27 tokens; not installing a 15-skill plugin saves ~3,900 — a 145× difference.
   This is the arithmetic the trimming pass of §9.2 should have run first.
@@ -384,9 +388,9 @@ model to do less than it would have done unaided. The NET-NEGATIVE cases were no
   risk-ranked rows, exact prompts, near-misses, and a pass/fail log. Executing it needs fresh
   interactive sessions, so the protocol is the deliverable and the compliance record is **empty**.
   Nothing in this library's history establishes that any skill routes.
-- **Only 14 of 121 skills received expert substance review.** The value-test verdicts above are a
-  sample, not a census. Extrapolating them is not warranted; neither is assuming the unreviewed 107
-  are better.
+- ~~**Only 14 of 121 skills received expert substance review.**~~ **CLOSED 2026-08-19 — the census
+  ran. See §14.** All 121 were reviewed: **80 NET-POSITIVE, 41 MARGINAL, 0 NET-NEGATIVE.** The
+  14-skill sample did not generalise, and it was right not to extrapolate it — in either direction.
 - **111 whole-word description collisions remain.** They are recorded and measured, not fixed. Fixing them
   means naming seams reciprocally, one pair at a time, and the trigger test is what identifies which
   pairs actually mis-route.
@@ -684,8 +688,10 @@ available is depth, not removal.
 **The context-cost problem is not solved by deleting skills.** A full install costs ~19.4% of a
 200K window by the harness's own real tokenizer (not the 14.8-14.9% this repo's char-based
 estimate had reported — see `docs/live-routing-and-degradation-2026-08-18.md`), and the library
-sits deep past the point where the listing silently degrades — 101 of 121 skills reduced to bare
-names in a live 2026-08-18 test, not a rounded "~100 skills" folklore figure. Deleting the five
+sits deep past the point where the listing silently degrades — at the default 200K/1% budget of
+8,000 characters, only **3 of 121** skills keep a description (computed by
+`scripts/simulate-listing-budget.py`; an earlier live-introspection figure of "101 of 121" is
+withdrawn as unreproducible, and the mechanism account was corrected on 2026-08-19). Deleting the five
 thinnest skills would recover about 1,200 tokens — 0.6% of a context — while removing genuinely
 used content. Installing two plugins instead of fourteen recovers 11%.
 The lever is skills *per install*; `README.md` carries the measured per-plugin and per-bundle
@@ -766,15 +772,28 @@ and every case: `docs/live-routing-and-degradation-2026-08-18.md`.
 ### 13.2 The ~100-skill folklore, corrected
 
 The standing `MEMORY.md` lesson ("~100 installed skills trims least-used descriptions to
-name-only," one anecdotal 2026-07-18 observation from an unrelated project) is superseded, not
-merely caveated. The real mechanism, read from the CLI's own settings schema
-(`skillListingBudgetFraction`, default 1% of the context window **in characters**, filled in
-listing order with a hard cutoff) was verified live: with this marketplace's 121 skills
-genuinely installed, **101 of 121 carried zero description text**. The 19 survivors were not the
-shortest, least-triggered, or most-used — they were exactly the first 19 processed in
-(apparent) install order. This is more severe than the folklore suggested (a count threshold
-implies most survive; the real mechanism means most do not) and mechanistically different (order,
-not usage).
+name-only," one anecdotal 2026-07-18 observation from an unrelated project) is refined rather than
+superseded.
+
+> **This paragraph was itself wrong, and is corrected here (2026-08-19).** It originally declared
+> the folklore "superseded, not merely caveated," and asserted the mechanism was a fill in listing
+> order with a hard cutoff, "mechanistically different (order, not usage)." An independent audit —
+> run by agents that did not write these documents — sent me back to the shipped binary, where the
+> sort key turns out to be `usageCount × max(0.5^(daysSinceUse/7), 0.1)`. **The folklore named the
+> right variable and this "correction" replaced it with a wrong one.** The install-order pattern
+> that was observed is the degenerate all-zero-usage case: in a fresh session every score is 0, so
+> the stable sort preserves listing order. There is also no cutoff — the fill skips oversized
+> entries and continues. And the "101 of 121" figure came from a model introspecting its own
+> system reminder, an instrument that did not reproduce on re-test; it is withdrawn in favour of
+> `scripts/simulate-listing-budget.py`, which computes the answer from the algorithm.
+
+What survives, with the corrected numbers: the severity finding, and it is worse than published.
+At the genuine 200K default the budget is 8,000 characters against 113,645 needed, so **3 of 121
+skills keep a description and 118 route on bare names**. The earlier "19 survivors ≈ 2.3% of 200K"
+was measured in a session whose real budget was ~30,000 characters (a ~750K context) and then
+reported as a fraction of 200K, which understated the problem. The one mitigation the real
+mechanism supplies is that usage-weighting means a returning user's working set keeps its
+descriptions — the arbitrary case is a first session on a fresh install, not the steady state.
 
 Separately, `claude plugin details` gave a second, real-tokenizer-computed cost figure —
 **≈38,800 tokens (≈19.4% of 200K)** — about 30% above this repo's own chars/3.7 estimate
@@ -792,3 +811,117 @@ this session, and no narrower same-purpose sibling in this library for generic s
 critique — unlike `script-wizard`, whose breadth competed directly with siblings owning more
 precise vocabulary. **No second skill warrants a new guard row.** Recorded so this search is not
 repeated.
+
+---
+
+## 14. Addendum (2026-08-19): the substance census, and a correction to this document
+
+Two things happened in this pass. The census that §9.7 recorded as unmet was run to completion,
+and an independent audit found that the *previous* pass's headline finding — published in this
+document as verified fact — was wrong. The second is the more important result, so it comes first.
+
+### 14.1 This document's own mechanism claim was wrong, and the folklore it "corrected" was right
+
+§9.3, §12.3 and §13.2 asserted that the skill-listing degradation is "a character budget filled in
+listing order with a hard cutoff … **not** a priority ordering by usage," and on that basis
+declared a 2026-07-18 note ("trims least-used descriptions") superseded.
+
+Read out of the shipped CLI binary (v2.1.235), the selection is:
+
+```
+budget   = SLASH_COMMAND_TOOL_CHAR_BUDGET, else floor(context_tokens × 4 × 0.01) = 8,000 chars
+baseline = every non-bundled skill rendered "- name"      (bundled skills are protected)
+order    = DESC by usageCount × max(0.5^(daysSinceUse/7), 0.1)     (never used ⇒ 0)
+fill     = greedy upgrade to full text; if it does not fit, SKIP IT AND CONTINUE
+```
+
+It **is** usage-ordered, there is no cutoff, and the folklore named the right variable. The
+install-order pattern the previous pass observed was real but was the degenerate all-zero-usage
+case: in a fresh session every score is 0, so a stable sort preserves listing order. The pass
+mistook the boundary condition for the mechanism.
+
+The severity was also misreported. "19 FULL ≈ 2.3% of a 200K window" was measured in a session
+whose real budget was ~30,000 characters (≈750K context) and then expressed as a fraction of 200K.
+At the genuine default the library needs 113,645 characters against 8,000 available, and **3 of 121
+skills keep a description**. The published figure understated the problem.
+
+And the "101 of 121 NAMEONLY" figure came from asking a model to introspect its own system
+reminder. It did not reproduce on re-test. It is withdrawn, and replaced by
+`scripts/simulate-listing-budget.py`, which computes the answer from the algorithm and can be run
+by anyone offline. Two further defects of the same family were found and fixed: a completeness
+claim ("every place this repo quotes 14.8% is now corrected") that was false when written, and a
+"proof" in `trigger-test.md` that both failing seam pairs "already carried reciprocal body seams" —
+git shows one pair was one-directional and the other had no seam at all.
+
+**The lesson worth keeping** is not "check your numbers." It is that the word *live* did the
+damage: a real measurement, honestly obtained, licensed a generalisation the measurement could not
+support, and the provenance made it feel unfalsifiable. An observation of behaviour is not a
+mechanism. And when you overturn a prior claim, you owe an account of why the old claim produced
+the evidence it did — here that account was missing, which is exactly where the error hid.
+
+The auditors were wrong in places too, which is part of the record: one asserted
+`skillListingBudgetFraction` does not exist in the CLI (it occurs four times, and the CLI's own
+warning names it), and two auditors gave contradictory accounts of the algorithm. Adversarial
+review manufactures confident false findings alongside true ones. The primary source settles it.
+
+### 14.2 The census: 121 of 121, closing D6
+
+Run in two phases — 83 quantitative skills verified by executing code, 38 qualitative skills judged
+against a strong unaided baseline — with every finding adversarially refuted by a second expert and
+every value verdict independently re-formed.
+
+| | Reviewed | NET-POSITIVE | MARGINAL | NET-NEGATIVE |
+|---|---:|---:|---:|---:|
+| Phase 1 (quantitative) | 83 | 59 | 24 | 0 |
+| Phase 2 (qualitative) | 38 | 21 | 17 | 0 |
+| **Total** | **121** | **80** | **41** | **0** |
+
+Findings: **134 raised → 69 confirmed** (22 major, 47 minor), **65 refuted**, and **131 claims
+recorded as "could not verify in this environment"** rather than asserted — that last number being
+the one that most distinguishes this pass from the four that preceded it.
+
+**The 14-skill sample did not generalise.** It returned 3 NET-NEGATIVE and 6 MARGINAL — nearly
+two-thirds marginal-or-worse — and the census returns **zero** NET-NEGATIVE across 121. §9.7 was
+right to refuse to extrapolate it, and right that assuming the unreviewed 107 were better was not
+warranted either. Both cautions held; the answer simply came out better than the sample implied.
+Part of that is real improvement (the NET-NEGATIVE cases in the sample were *fixed* in that pass),
+and part is that the sample was deliberately drawn toward fast-decaying technical skills.
+
+The honest caveat: **41 MARGINAL is a third of the library**, and that is the number to act on. A
+MARGINAL verdict means the skill mostly restates what a competent current-generation assistant
+already does. It is not a defect, and the owner has already declined a trim — but it is the
+strongest available signal about where depth would pay.
+
+### 14.3 What the census found that conformance could not
+
+The high-severity defects were, without exception, invisible to every previous pass because they
+required *running something*:
+
+- **`dmaic-problem-solving`** computed a combined false-alarm rate by adding four per-rule rates.
+  The rules overlap, so union ≠ sum: true ARL₀ ≈ 92 points, not 52 — the published rate was ~75%
+  too high. Confirmed by a Markov chain and an independent 40,000-run Monte Carlo (91.58 ± 0.43),
+  both calibrated against the known closed forms 370.4 and 255.
+- **`realtime-and-dynamic-features`** shipped an optimistic-mutation recipe that throws on a cache
+  miss *inside* `onMutate`, so the mutation is rejected and `mutationFn` never runs — the server
+  write silently does not happen while the UI shows the click as accepted. Verified against
+  `@tanstack/query-core@5.101.4`.
+- **`full-stack-app-architecture`** shipped an import-boundary test with a false negative: built on
+  a real tree, it reported zero violations while one feature genuinely imported and read another's
+  private module. `from pkg import name` binds a submodule when the name is one.
+- **`medical-research-detective`** flagged ordinary papers as retracted by unanchored substring
+  match — and the caller turns any signal into "do not use as support," i.e. it told researchers to
+  discard valid evidence.
+- **`git-and-code-review`** taught `git merge main`, which merges a stale local ref and prints
+  "Already up to date." with exit 0 while the real `origin/main` has moved.
+- **`adams-smart-brevity`** told the assistant to rewrite litigated phrasing wherever it appears,
+  with no carve-out for language a rule requires verbatim — where clarity can void a safe harbour.
+
+Cross-plugin coherence was swept separately, because batching by domain makes a defect spanning two
+plugins invisible to every batch: 41 alleged contradictions, **1 upheld** (`pre-mortem` multiplying
+risk dimensions in the exact way `fmea`'s reference generalises a prohibition against — the defect
+already fixed in `fmea` and never swept to its sibling), plus five under-specification seams worth
+fixing.
+
+**A defect class worth naming: fixes do not propagate to siblings.** `pre-mortem` carried the
+arithmetic `fmea` had already been repaired for. Whatever is fixed in one skill should be grepped
+for across the others that share the technique.

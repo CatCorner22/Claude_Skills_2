@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Reliability engineering

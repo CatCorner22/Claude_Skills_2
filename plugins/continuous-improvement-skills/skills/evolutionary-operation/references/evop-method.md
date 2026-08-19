@@ -27,8 +27,15 @@ factor B (low)  |  (1)          (2)
 - Steps are deliberately small — small enough that output at every point stays in spec, and small
   enough that operations barely notices the pattern is running. If a step would need sign-off as a
   "change", it is too big for EVOP.
-- For three factors, use a 2³ (8 corners) or a half-fraction (4 corners) plus center. Beyond three
-  factors, the pattern stops being unobtrusive — that's designed-experiment territory
+- For three factors, use a 2³ (8 corners) or a half-fraction (4 corners) plus center. The
+  half-fraction — 2^(3−1), C = AB, so I = ABC — is **resolution III**: each main effect is aliased
+  with the two-factor interaction of the other two (A≡BC, B≡AC, C≡AB), and no interaction is
+  estimable from those four runs. That is an acceptable trade in EVOP, where you only need a
+  direction to move the center and the next phase re-measures at the new center — an effect that
+  was really an interaction fails to reproduce there. It is not acceptable as a statement about
+  which factor matters: quote such an effect as a direction, never as a clean main effect. If you
+  need the interactions, run all 8 corners. Beyond three factors, the pattern stops being
+  unobtrusive — that's designed-experiment territory
   (`continuous-improvement-skills:design-of-experiments`).
 
 ## 2. Cycles and phases
@@ -80,8 +87,13 @@ Each cycle yields one estimate of each effect, so after n cycles you have n repl
 
 - effect = mean of the n per-cycle effects
 - s = standard deviation of the per-cycle effects; **SE = s / √n**
-- rule of thumb: act only when |effect| > **2 × SE** (≈ 95% two-sided for the shop floor; with n
-  as small as 3, a t-critical near 4.3 is the honest bar — say which one you used).
+- rule of thumb: act only when |effect| > **2 × SE** — the shop-floor bar. The familiar "≈ 95%
+  two-sided" attached to 2×SE is the *large-sample* figure and does not survive small n: at
+  n = 3 (df = 2) a ±2×SE interval covers about **82%**, not 95%, and the 95% t-critical is 4.30.
+  Quote the honest bar alongside it and say which one you used. Note also that a 2×2 phase tests
+  three effects (two mains plus the interaction), so at ~82% per-effect coverage the chance of at
+  least one spurious signal in a phase is ~46% — which is why the bounded step size and the
+  owner's ratification, not the bar alone, are what keep EVOP from tampering.
 
 For the example: T effect 0.80, s ≈ 0.13, SE ≈ 0.076 → 0.80 ≫ 2×0.076: **signal**. W effect
 0.53, s ≈ 0.16, SE ≈ 0.093 → clears 2×SE and barely clears the small-n t bar (4.3 × 0.093 ≈

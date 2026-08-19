@@ -1,9 +1,29 @@
 # Live routing and listing-degradation findings — 2026-08-18
 
-This document replaces folklore with measurement. Everything in it was produced by the real
-Claude Code harness — the actual skill-loading mechanism and the actual `Skill` tool — not by a
-simulation. Method, tooling, and every number are recorded so the next person can reproduce or
-falsify any of it.
+> ## ⚠ CORRECTED 2026-08-19 — this document's central mechanism claim was wrong
+>
+> An independent audit of this file (deliberately run by agents that did **not** write it, because
+> its author could not check its own numbers) found that §1 and §2 as originally published were
+> wrong in mechanism and wrong in severity. Both sections have been rewritten below and the
+> superseded text is quoted inline so the error stays legible. In summary:
+>
+> | Originally published | Actually true (read from the shipped binary, v2.1.235) |
+> |---|---|
+> | "a **sequential fill in listing order, with a hard cutoff** … **not** a priority ordering by usage" | It **is** a priority ordering by usage: candidates are sorted descending by `usageCount × max(0.5^(daysSinceUse/7), 0.1)`, then greedily upgraded, **skipping and continuing** rather than cutting off. |
+> | The 2026-07-18 folklore ("trims least-used descriptions") is "corrected" | The folklore was **closer to the truth than this document's correction of it.** It named the right variable. |
+> | "19 FULL … about **2.3% of a 200K-token window**" | Measured in a session whose real budget was ~30,000 chars, i.e. a ~750K context. At the genuine 200K default the budget is **8,000 chars** and only **3 of 121** skills keep a description. The published figure *understated* the problem. |
+> | "**101 of 121 NAMEONLY**" | Obtained by asking a model to introspect its own system reminder — an instrument that does not reproduce reliably. Superseded by the mechanical simulation in §2. |
+>
+> What survived the audit: the two settings named below are real and their defaults are correct
+> (one auditor wrongly reported that `skillListingBudgetFraction` does not exist in the CLI; it
+> does, four times, and the CLI's own over-budget warning tells the user to raise it). The
+> tokenizer cost figures in §3 reproduced to the digit. The live routing results in §4 stand.
+
+This document records measurement, and now also records where that measurement was
+over-generalized. Everything in §3–§5 was produced by the real Claude Code harness — the actual
+skill-loading mechanism and the actual `Skill` tool — not by a simulation. Method, tooling, and
+every number are recorded so the next person can reproduce or falsify any of it; §1 and §2 are
+the worked example of why that matters.
 
 ## 0. How this was run
 
@@ -27,54 +47,85 @@ Total real spend across everything below: **≈ $0.93** (one $0.33 baseline run 
 was correctly resolved, plus seven $0.06–$0.11 live routing cases). Disclosed in full because
 `claude plugin eval` spends real money per run and the number should be checkable.
 
-## 1. The real degradation mechanism — not what the record said
+## 1. The real degradation mechanism — read from the code, not inferred from behaviour
 
 `MEMORY.md` carried a single anecdotal lesson from 2026-07-18, from an unrelated prior project:
 *"With ~100 installed skills, the skill-listing context budget trims least-used descriptions to
-name-only."* That claim was never tested against this repository's own skills. It is now
-corrected on two counts.
+name-only."* The 2026-08-18 pass declared that folklore corrected. **The folklore was closer to
+the truth.** It named the right variable — usage — and the "correction" replaced it with a wrong
+one. What follows is decompiled from the shipped binary rather than inferred from observed
+output, which is why it can be stated without hedging.
 
-**The real settings**, read directly from the compiled CLI's own settings schema (`claude plugin
---help` documents the commands; the settings themselves surface via their `describe()` text):
+**The settings** (real, and their `describe()` text is the product's own documentation):
 
-- `skillListingBudgetFraction` — default `0.01` (1% of the context window, **measured in
-  characters**) reserved for the skill listing sent to Claude.
-- `skillListingMaxDescChars` — default `1536` characters per-skill description cap.
-- Official behavior, quoted verbatim: *"When the listing exceeds this, descriptions are
-  shortened to fit."*
+- `skillListingBudgetFraction` — default `0.01`, the fraction of the context window (**in
+  characters**) reserved for the skill listing. The CLI's own over-budget warning names it:
+  *"descriptions will be truncated. Run /skills to disable some, or raise
+  skillListingBudgetFraction in settings."*
+- `skillListingMaxDescChars` — default `1536`, per-skill description cap.
 
-**What was actually observed live, today, does not match "least-used" or "shortened."** A
-fresh non-interactive session (`claude -p "..."`) was asked to read its own current skill
-listing — not recall from training — and report, skill by skill, whether each of the 121
-marketplace skills carries a real description or has been reduced to a bare name. Full
-methodology: ask for `plugin:skill<TAB>FULL|NAMEONLY` pairs explicitly (a first attempt that
-asked for unlabeled status lines produced answers that could not be reliably aligned back to
-skill names — recorded as a methodology note in §4).
+**The budget, exactly.** `SLASH_COMMAND_TOOL_CHAR_BUDGET` wins if set; otherwise the budget is
+`max(1, floor(context_tokens × 4 × fraction))`, where `4` is the harness's chars-per-token
+constant and the default context is `200000`. So:
 
-**Result: 101 of 121 NAMEONLY, 19 FULL, 1 not applicable.**
+> **default budget = 200,000 × 4 × 0.01 = 8,000 characters.**
+
+**The algorithm, exactly.** Reconstructed from the shipped code path:
+
+1. Start from a baseline where **every** candidate skill is rendered name-only as `- name`
+   (cost `len(name) + 2`), plus one newline per entry.
+2. **Bundled skills are protected** and always keep their full text — they are added to the
+   protected set before any trimming and never compete. Only plugin and user skills are
+   candidates. *(This is a finding the original pass missed entirely, and it matters: the
+   built-in skills you did not install are not what is crowding out the ones you did.)*
+3. Sort the candidates **descending by a usage score**:
+   `usageCount × max(0.5^(daysSinceUse / 7), 0.1)` — a 7-day half-life, floored at 0.1. **A skill
+   that has never been used scores exactly 0.**
+4. Walk that sorted list and greedily upgrade each candidate from name-only to full **if its
+   incremental cost fits the remaining budget; otherwise skip it and continue.** There is no
+   cutoff — a long description can be skipped while a shorter one later in the order still fits.
+5. Emit each entry as its full form if protected or upgraded, else as `- name`.
+
+So the listing genuinely is a **mixed** set of full and name-only entries, prioritised by recent
+usage. Two consequences the original pass got backwards:
+
+- **It is usage-prioritised.** The superseded text asserted the pattern was "**not** a priority
+  ordering by usage, importance, or size." That is false.
+- **The install-order pattern that was observed is real but is the degenerate case.** In a fresh
+  session nothing has been used, so every candidate scores 0; with all keys tied, the sort is
+  stable and the candidates retain their original listing order. That is why an install-order
+  fill was observed. It is what the usage algorithm does *when there is no usage yet* — not a
+  different algorithm. The practical implication is the opposite of what was published: the
+  arbitrariness is **temporary**, and a returning user's frequently-used skills do keep their
+  descriptions.
+
+**On the original live observation (101 of 121 NAMEONLY, 19 FULL).** That came from asking a
+fresh non-interactive session to introspect its own skill listing and report
+`plugin:skill<TAB>FULL|NAMEONLY` pairs. The independent audit re-ran that instrument and could
+not reproduce it stably (the same skill reported FULL in one run and NAMEONLY in another, and
+the reported skill count varied). **The instrument is not trustworthy for this purpose and the
+figure is withdrawn**; §2 replaces it with a simulation of the algorithm above, which needs no
+introspection. The direction of the original finding — that most of this library loses its
+descriptions on a full install — survives, and gets worse.
+
+One detail from the original scan does stand independently:
+`machine-learning-skills:bespoke-llm-architect` sets `disable-model-invocation: true` and does
+not appear in the general listing at all, consistent with its by-design invoke-only status.
 
 The one not applicable is `machine-learning-skills:bespoke-llm-architect`, which sets
 `disable-model-invocation: true` — it does not appear in the general listing at all, consistent
 with its by-design invoke-only status (already known from the trigger-test protocol's Tier D
 exclusion).
 
-The 19 FULL skills are **not** the shortest, the most-triggered, or in any way distinguished by
-content:
-
-| Plugin | Full | Total |
-|---|---:|---:|
-| `writing-skills` | 5 | 5 |
-| `coding-agent-skills` | 14 | 20 |
-| every other plugin (12 of them) | 0 | 96 |
-
-Within `coding-agent-skills`, the 14 FULL skills are exactly its first 14 skills in alphabetical
-directory order, and the 6 NAMEONLY ones are exactly the last 6. Sorting the entire 121-skill set
-by description length shows FULL and NAMEONLY interleaved at every length from 484 to 1019
-characters — length does not predict the outcome. Install order does: `writing-skills` was
-installed first (during initial tool setup), `coding-agent-skills` second, and the other 12
-followed in a loop. The pattern is a **sequential fill in listing order, with a hard cutoff** —
-everything before the cutoff keeps its full text, everything after loses it entirely — not a
-priority ordering by usage, importance, or size.
+> **Superseded text, kept for the record.** The original §1 continued: *"The pattern is a
+> **sequential fill in listing order, with a hard cutoff** — everything before the cutoff keeps
+> its full text, everything after loses it entirely — not a priority ordering by usage,
+> importance, or size."* Both halves are wrong: the fill skips-and-continues rather than cutting
+> off, and the ordering *is* by usage. The supporting observation — that within
+> `coding-agent-skills` the FULL skills were its first 14 in alphabetical order and the NAMEONLY
+> ones the last 6 — is consistent with the all-zero-usage degenerate case, and the apparent
+> clean "cutoff" is explained by those descriptions being of similar length, not by a cutoff
+> existing in the code.
 
 **Reproducibility check.** A second, differently-worded query without explicit name-tagging
 produced answers that did not match the first scan — investigated, and the mismatch was a
@@ -87,26 +138,42 @@ of live-introspection question in a form that lets the model drop the label — 
 occurrences in this protocol of "the test prompt was the defect" all trace to the same root
 cause, an under-specified prompt.**
 
-## 2. The measured floor, and why "~100 skills" understates the real risk
+## 2. The real severity, computed from the algorithm rather than introspected
 
-Summing the name+description character length of exactly the 19 FULL skills: **17,104
-characters** — about **2.3% of a 200K-token window** at this repo's own 3.7 chars/token
-estimate, and that is a *lower* bound, since this session's own ~20-30 personal skills also
-compete for the same budget and were not separately measured.
+The original §2 reported **17,104 characters / 19 FULL skills ≈ 2.3% of a 200K window**. That
+framing does not hold: the session it was measured in had a real budget of ~30,000 characters
+(the harness's own over-budget log recorded `129115 chars > 30000 budget`), which corresponds to a
+context of roughly 750K, not 200K. Reporting a large-context measurement as a fraction of 200K
+made the situation look **milder than it is**.
 
-Two things follow, and both matter more than the number itself:
+Simulating the §1 algorithm directly against this library's 121 real frontmatter descriptions —
+no model introspection involved, name-only cost taken exactly as `len(name) + 2` from the code:
 
-1. **The old framing ("past ~100 skills, some get name-only'd") is not wrong in direction but is
-   wrong in mechanism and severity.** It is not a graceful degradation that spares the
-   important ones. In this exact, realistic full-install configuration, **83% of the library's
-   skills carry zero routing signal beyond their bare name** — far more severe than "~100" as a
-   count-based threshold suggests, because the real constraint is a *character budget*, and 121
-   skills' worth of good-faith, information-dense descriptions blow through it after roughly
-   one and a half plugins' worth of content.
-2. **Which skills survive is arbitrary, not meaningful.** It is a function of install order, not
-   of what a person actually needs. A user who installs `math-foundations-skills` first would
-   see an entirely different 19 survive. There is no way to install "the important skills first"
-   as a mitigation, because nothing in the product surfaces this ordering to the installer.
+| Context window | Budget (1%) | Skills keeping a full description | Name-only |
+|---|---:|---:|---:|
+| **200K (the default)** | **8,000 chars** | **3** | **118** |
+| 750K | 30,000 chars | 27 | 94 |
+| 1M | 40,000 chars | 38 | 83 |
+
+The name-only baseline for 121 skills is **5,575 characters**, so at the default budget only
+~2,400 characters remain for descriptions — roughly three of them. The full undegraded listing
+for this library is **113,645 characters**, i.e. **14.2%** of a 200K window's character
+equivalent.
+
+Three things follow:
+
+1. **On a default 200K session, a full install of this library routes on bare names alone**, for
+   118 of 121 skills. That is the honest headline, and it is considerably worse than the
+   withdrawn 83% figure.
+2. **The arbitrariness is temporary, not permanent.** Which skills survive is decided by recent
+   usage, so a returning user's working set does keep its descriptions. A *first* session with a
+   fresh install is the worst case, not the steady state. The original claim that "there is no
+   way to install the important skills first as a mitigation" is true as far as it goes, but the
+   mitigation that does exist is simpler: use the skills you care about, and they win the budget.
+3. **Subsetting is still the right lever, and now for a precise reason.** Not because descriptions
+   are too long — trimming them was the wrong pass — but because 121 skills cannot fit any
+   plausible budget, while a 20–30 skill subset fits 8,000 characters comfortably. The per-plugin
+   cost table in §3 is the tool for choosing that subset.
 
 ## 3. Real token cost, cross-checked against a second, independent measurement
 
@@ -142,8 +209,15 @@ noise in one plugin, it is a systematic property of this prose style under the r
 (38,804 / 200,000), using the harness's own accounting rather than this repo's estimate. The
 `3.7 chars/token` divisor `measure-listing-cost.py` uses is documented as an *estimate*, and this
 is the first time it has been checked against the real tokenizer — the check shows the estimate
-runs consistently light for this library's prose. Every place this repo quotes 14.8%/14.9% is
-now corrected to cite both figures, with the real one primary.
+runs consistently light for this library's prose.
+
+> **Corrected 2026-08-19.** This paragraph originally claimed *"Every place this repo quotes
+> 14.8%/14.9% is now corrected to cite both figures, with the real one primary."* That was false
+> when written — the audit found two uncorrected instances still standing in `MEMORY.md`
+> (lines 218 and 409), one of which also restated the superseded mechanism. Both are now fixed.
+> The lesson is narrow and worth keeping: **a sweep is not done because the sweeper says it is.**
+> Claiming "every place" requires actually grepping every place, and this document asserted
+> completeness it had not verified.
 
 ## 4. Live routing tests via the real `Skill` tool — 7 cases, real agent turns
 
@@ -210,10 +284,15 @@ pass does not re-run the same search and re-derive the same negative result.
 
 ## 6. What this changes going forward
 
-1. `README.md`, `MEMORY.md`, `docs/library-review-2026-08.md`, and `docs/trigger-test.md` are
-   corrected to cite the real mechanism (character-budget sequential fill, not usage-based
-   name-only trimming) and the real cost figure (harness-tokenizer-computed, ~30% above this
-   repo's own chars/token estimate).
+1. `README.md`, `MEMORY.md`, `docs/library-review-2026-08.md`, `docs/trigger-test.md` and
+   `docs/trigger-test-results.md` cite the real mechanism — a character budget of
+   `floor(context_tokens × 4 × 0.01)` filled by a **usage-ranked** greedy upgrade with no cutoff —
+   and the real cost figure (harness-tokenizer-computed, ~30% above this repo's own chars/token
+   estimate). *This item originally said the mechanism was a "sequential fill, not usage-based
+   name-only trimming"; that was the error this document now retracts at the top.*
+   `scripts/simulate-listing-budget.py` reimplements the algorithm so every number in §2 can be
+   re-derived offline in one command — the answer to the fair criticism that this document's
+   original evidence lived only in an uncommitted plugin cache.
 2. Every PASS this protocol has ever recorded — including the freshly-repaired D2/D9 seams — is
    now understood to be conditional on full-listing visibility, which a realistic full install
    does not provide. This is the single most consequential correction from this pass: **the

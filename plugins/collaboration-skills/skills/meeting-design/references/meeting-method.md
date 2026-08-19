@@ -75,7 +75,7 @@ finding, not a problem.
 | Rule | How it closes | Use when | Failure mode if unnamed |
 |---|---|---|---|
 | **Single owner** | The owner decides; the room may not even meet | Reversible calls inside one person's remit | The room relitigates what was never theirs |
-| **Consent** | Proceed unless someone states a principled objection (not a preference) | Low-risk changes where speed beats polish | Preferences masquerade as vetoes |
+| **Consent** | Proceed unless someone states a principled objection (not a preference) | Low-risk changes where speed beats polish | Preferences masquerade as vetoes; or silence gets counted as assent when objecting in front of the room is costly |
 | **Consult-then-decide** | The owner hears the room, then calls it — in the meeting, out loud | Most real decisions: one accountable owner, several informed voices | Fake consensus: discussion runs until fatigue looks like agreement |
 | **Vote** | Majority (or a stated threshold) binds | Genuine peer decisions with no natural owner | Politicking replaces argument if used where an owner exists |
 
@@ -117,8 +117,11 @@ carries the argument; the meeting starts where the document ends.**
   date), goes async, lands on a future agenda, or is dropped by name.
 - **Calling the decision**: at the timebox, the rule executes. Consult-then-decide:
   the owner decides aloud, now. Consent: "any principled objection?" — silence is
-  consent. If new information genuinely blocks the call, the fallback is explicit:
-  named blocker, owner, date, and the decision question returns on a stated agenda.
+  consent, which holds only where objecting is genuinely safe; when the room is mixed in
+  seniority or the topic is touchy, put the question to each person in turn instead of to
+  the room, so an unspoken objection has somewhere to land. If new information genuinely
+  blocks the call, the fallback is explicit: named blocker, owner, date, and the decision
+  question returns on a stated agenda.
 - **The close** (protected, ~5 minutes): read back each decision with its rule, each
   action with owner and date, each parked item with its disposition. Read-back
   surfaces misunderstandings while they are still cheap — people who heard different

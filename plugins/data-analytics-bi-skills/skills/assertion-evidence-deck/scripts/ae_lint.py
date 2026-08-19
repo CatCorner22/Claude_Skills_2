@@ -6,9 +6,11 @@ Usage:
 
 Reports headline violations, bullet characters, body word-count overruns, banned
 formatting (italics, underline, shouting caps), missing source tags on slides
-that carry figures, and unexpected fonts. Exits non-zero when it finds an ERROR
-(warnings do not fail the run). Fix the generator and rebuild rather than
-hand-patching the packed XML.
+that carry figures, and unexpected fonts. The formatting and font checks cover
+the headline and the body; the bottom zone (source tags, slide numbers) is
+exempt, since reference listings are conventionally set apart. Exits non-zero
+when it finds an ERROR (warnings do not fail the run). Fix the generator and
+rebuild rather than hand-patching the packed XML.
 
 Requires: python-pptx  (pip install python-pptx)
 """
@@ -116,7 +118,9 @@ def lint_slide(idx, slide, fnd, max_words):
                 fnd.add(idx, "warn", "bullet",
                         "paragraph carries a bullet/auto-number format; use spatial layout instead")
             for run in para.runs:
-                if sh is headline_shape or is_bottom:
+                # The headline is checked like any other text; only the bottom zone
+                # (source tags, slide numbers) is exempt from the formatting checks.
+                if is_bottom:
                     continue
                 if run.font.italic:
                     fnd.add(idx, "error", "format", f"italic text: {run.text.strip()[:40]!r}")

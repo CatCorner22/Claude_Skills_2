@@ -33,9 +33,12 @@ Scrutinize the draft as a rigorous panel spanning advanced AI, data structures, 
 science, and technical writing would:
 
 - **Modern LLM capability use** — does the artifact leverage tool/function calling,
-  structured output, multi-turn memory, and self-verification loops where they beat prose
-  instructions? An instruction to "always return JSON" is weaker than a schema-enforced
-  tool call.
+  structured output, multi-turn memory, and thinking/effort configuration where they beat
+  prose instructions? An instruction to "always return JSON" is weaker than a schema-enforced
+  tool call. Prompted self-verification is the one to check in the other direction: current
+  models verify unprompted, and "double-check your work" — or a separate verification step in
+  the harness — now buys over-verification rather than accuracy, so ask whether it can be
+  deleted (`coding-agent-skills:prompt-engineering` carries the current list).
 - **Programmatic logic** — conditions are exhaustive and mutually exclusive where they
   must be; sequences are ordered by dependency; state the artifact relies on is state it
   actually has.

@@ -140,19 +140,38 @@ from five points.
 Arm rules deliberately. Each adds detection power and each adds false alarms, and the arithmetic
 is not intuitive.
 
-| Rule | Detects | False-alarm rate on a stable process |
-|---|---|---|
-| One point beyond 3σ | Large sudden shift | 2 × (1 − Φ(3)) ≈ 0.0027 → ~1 in 370 points |
-| 8 consecutive points on one side of the centerline | Sustained moderate shift | 2 × 0.5^8 = 0.0078125 → ~1 in 128 |
-| 2 of 3 consecutive beyond 2σ, same side | Moderate shift, faster than the 8-rule | ≈ 0.0031 → ~1 in 327 |
-| 4 of 5 consecutive beyond 1σ, same side | Small sustained shift | ≈ 0.0055 → ~1 in 181 |
+| Rule | Detects | Per-point probability the rule is firing | ARL₀ — mean points between false alarms |
+|---|---|---|---|
+| One point beyond 3σ | Large sudden shift | 2 × (1 − Φ(3)) ≈ 0.0027 | ~370 |
+| 8 consecutive points on one side of the centerline | Sustained moderate shift | 2 × 0.5^8 = 0.0078125 | ~255 |
+| 2 of 3 consecutive beyond 2σ, same side | Moderate shift, faster than the 8-rule | ≈ 0.0031 | ~511 |
+| 4 of 5 consecutive beyond 1σ, same side | Small sustained shift | ≈ 0.0055 | ~291 |
 
-**The number nobody computes:** arming all four at once gives roughly
-0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ **0.019, about one false alarm every 52 points**. On a weekly
-chart that is a spurious investigation roughly once a year — fine. On a daily chart it is one
-every two months, and on an hourly chart it is three a week, which is how a control chart trains
-its owner to ignore it. Match the rule set to the plotting frequency and to how expensive an
-investigation is: high-frequency charts with cheap consequences get the 3σ rule only.
+**The two columns are reciprocals only in the first row.** A 3σ signal is an independent event
+point to point, so 1/0.0027 = 370 is both the firing probability's inverse and the average run
+length. The run rules re-fire while the run continues — once eight points sit on one side, the
+ninth on that side signals again — so their per-point firing probability counts alarm *states*,
+not investigations, and inverting it overstates how often you are actually sent to look
+(1/0.0078 = 128 against a true ARL₀ of 255; 1/0.0031 = 327 against 511). Budget against the ARL₀
+column, which comes from the run-length distribution.
+
+**The number nobody computes — and do not compute it by adding the probability column.** Summing
+the four rates (0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ 0.019, "one alarm every 52 points") is
+wrong, because the rules overlap heavily: a point beyond 3σ is also beyond 2σ and beyond 1σ and
+sits on one side of the centerline, so it can satisfy several rules at once, and the run rules
+share the same points as they slide. Union ≠ sum. The correct figure comes from the run-length distribution:
+**ARL₀ ≈ 92 points with all four armed** — a false-alarm rate of about **0.011 per point**, not
+0.019. (Verified two independent ways: a Markov chain over the rule state space, and a 40,000-run
+Monte Carlo giving 91.6 ± 0.4. The same machinery reproduces the two known closed forms — 370.4
+for the 3σ rule alone and 255 for the 8-in-a-row rule alone — so it is calibrated.)
+
+Read that as: on a weekly chart, a spurious investigation roughly every other year. On a daily
+chart, one every three months. On an hourly chart, about two a week — which is still how a
+control chart trains its owner to ignore it. Match the rule set to the plotting frequency and to
+how expensive an investigation is: high-frequency charts with cheap consequences get the 3σ rule
+only. The general lesson outlives these four rules: **whenever you arm several detectors on one
+stream, the combined false-alarm rate must be derived from the run-length distribution, never by
+adding the individual rates** — adding overstates it whenever the detectors can fire together.
 
 The 3σ limit rule alone detects large shifts immediately and moderate shifts almost never — the
 worked project's 1.7σ improvement produced eight consecutive weeks below the old centerline and

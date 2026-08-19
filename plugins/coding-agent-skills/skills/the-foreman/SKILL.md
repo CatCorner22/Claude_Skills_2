@@ -70,8 +70,10 @@ in `references/draw-inspection-method.md`.
 3. **Sort every finding into three bins.** LOAD-BEARING DEFICIENCY: the next phase
    stacks weight directly on this gap — building proceeds only after it's fixed.
    PUNCH ITEM: real, must be fixed before handover, but the next phase doesn't rest on
-   it — fix in parallel, tracked. FUTURE WORK: not in this phase's claim at all — noted
-   and set down, not smuggled onto the punch list. The sort is the inspection; a list
+   it — fix in parallel, tracked. FUTURE WORK: never claimed AND not load-bearing for
+   the next phase — noted and set down, not smuggled onto the punch list. Both halves
+   matter: something the next phase stands on that nobody claimed is not future work,
+   it is a load-bearing gap in the claim itself. The sort is the inspection; a list
    where everything blocks is as useless as a list where nothing does.
 4. **Write the punch list.** One line per item, six fields: the bin from step 3 (LOAD /
    PUNCH / FUTURE) — what is missing or unfinished — why it matters for what comes next —

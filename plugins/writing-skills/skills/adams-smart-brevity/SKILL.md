@@ -13,7 +13,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -55,6 +55,17 @@ governs document-level attention (lead with the point, format for scanning, stop
 4. **Flag litigated or traditional phrasing** wherever it appears and supply the clearer
    modern alternative (offender list in the reference §2). Treat caselaw as cautionary tales
    of drafting that failed, never as validation.
+   - **Carve-out: some wording is legally required to appear verbatim, and clarity does not
+     override it.** Statutory or regulatory language a rule prescribes word-for-word,
+     safe-harbour text whose protection depends on tracking the statute, conspicuousness
+     requirements (a warranty disclaimer that must mention "merchantability" under UCC 2-316),
+     required notices in consumer, employment, securities, or medical-consent documents, and
+     defined terms already in force elsewhere in the same instrument — all of these are archaic
+     *and* load-bearing. Rewriting them for clarity can void the protection they exist to
+     create. **Flag them, propose the plain-language version alongside rather than instead of
+     the required text, and route the decision to a lawyer.** Never silently modernise language
+     that a rule requires; the point of this skill is drafting that survives, and a clearer
+     clause that forfeits a safe harbour has not survived.
 5. **Clinical notes**: controlled vocabulary, explicit
    findings-to-plan chains, zero ambiguous modifiers, no template-clone language (identical
    soft/hard-tissue descriptions across visits are a defensibility hole); Smart Brevity

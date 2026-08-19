@@ -108,12 +108,14 @@ Importance = Σ(weight × cell), per column:
 
 Verdict: **eligibility auto-check leads** — it serves three weighted needs at once, which is
 exactly the kind of unglamorous, high-leverage characteristic gut-feel prioritization skips in
-favor of visible features. Roof: eligibility auto-check **+** estimate accuracy (verified
-coverage feeds better estimates) and **+** check-in time; reminder volume **−** non-spammy
-reminders (more reminders serve booking but burn the no-spam need — resolve with preference-
-driven cadence rather than more sends). Targets (the CTQs): steps-to-book ≤ 3; ≥ 90% of
-estimates within $25; ≥ 80% of visits eligibility-verified untouched; every channel individually
-opt-out-able; check-in ≤ 2 minutes. The numbers here are illustrative — the *procedure* (ratified
+favor of visible features. Roof (HOW × HOW only — a WHAT never appears here): eligibility
+auto-check **+** estimate accuracy (verified coverage feeds better estimates) and **+** check-in
+time; reminder configurability **−** steps-to-book (every channel and opt-out control the patient
+can set is one more decision in the booking flow — resolve with sensible defaults applied at
+first booking and the granular controls moved to a settings screen, rather than trading the
+no-spam need away). Targets (the CTQs): steps-to-book ≤ 3; ≥ 90% of estimates within $25;
+≥ 80% of visits eligibility-verified untouched; every channel individually opt-out-able;
+check-in ≤ 2 minutes. The numbers here are illustrative — the *procedure* (ratified
 weights → 9/3/1 → column sums → roof → targets) is the deliverable.
 
 ## 8. Cascade mechanics — house to house

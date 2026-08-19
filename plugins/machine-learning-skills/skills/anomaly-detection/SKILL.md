@@ -9,7 +9,7 @@ description: >-
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Anomaly detection

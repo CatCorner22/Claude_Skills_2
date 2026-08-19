@@ -91,7 +91,9 @@ with pd.ExcelWriter("out.xlsx") as xl:     # multiple sheets
 ```
 
 ## Gotchas that change your numbers
-- **Chained indexing** (`df[m]["col"] = ...`) may write to a copy → no effect. Use `df.loc[m, "col"]`.
+- **Chained indexing** (`df[m]["col"] = ...`) writes to a copy → no effect on `df`. Use
+  `df.loc[m, "col"]`. The warning is `SettingWithCopyWarning` on pandas 2 and
+  `ChainedAssignmentError` on pandas 3, where copy-on-write makes the no-op unconditional.
 - **Merge fan-out**: duplicate keys on the "one" side multiply rows and inflate sums. Use `validate=`.
 - **Wrong dtypes**: IDs read as float lose leading zeros; dates read as strings won't compare. Set them at load.
 - **NaN in comparisons**: `NaN != NaN`; filters silently drop them. Handle with `.isna()` / `.fillna()` on purpose.

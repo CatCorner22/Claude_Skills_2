@@ -13,7 +13,7 @@ description: >-
   project, reduce defects, reduce variation, CTQ, project charter, tollgate, control plan,
   voice of the customer, prove the fix worked.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # DMAIC problem solving
@@ -73,9 +73,9 @@ runs the arithmetic; the human owns the data's provenance, tollgate sign-off, an
    chart / SPC or a simple KPI with limits), define the response plan when it drifts, and hand off
    ownership to a **named individual and a deputy** — not a team, not a dashboard. Confirm the
    improvement holds: the 3σ limit rule catches large shifts instantly and moderate ones almost never,
-   so arm run rules too (eight points on one side of the centerline, ~1 false alarm in 128 points, is
-   usually what proves a real shift). Chart selection, limit formulas, the conditions under which a
-   chart can tell you nothing, and the eleven-field control-plan contract are in
+   so arm run rules too (eight points on one side of the centerline — about one false alarm every 255
+   points — is usually what proves a real shift). Chart selection, limit formulas, the conditions
+   under which a chart can tell you nothing, and the eleven-field control-plan contract are in
    `references/control-charts-and-control-plans.md`. Output: a control plan, a documented owned
    sustained result, and a closure statement saying plainly whether the goal was met, partially met,
    or missed.

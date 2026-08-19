@@ -74,6 +74,8 @@ then move one notch toward center, not to the opposite extreme.
 
 - **Down**: the team's failure is your briefing failure until proven otherwise. If they
   did the wrong thing, the intent wasn't clear; fix the brief before judging the team.
+  "Until proven otherwise" is a default, not a rule without an exit: misconduct, an
+  unsafe act, or anything that belongs in a report leaves this frame immediately.
 - **Up**: the boss's "bad call" is your communication failure until you've delivered the
   full picture in their language — SBAR format
   (`safety-and-reliability-skills:sbar-structured-communication`), a recommendation, and

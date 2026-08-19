@@ -106,6 +106,15 @@ quantity (B10, MTTF, a survival probability at some age):
 1. Fit β̂, η̂ from your data.
 2. Draw a synthetic sample of the **same size n** from Weibull(β̂, η̂):
    t = η̂ · (−ln U)^(1/β̂) with U uniform on (0,1).
+   - **If your data are censored, you must simulate the censoring too, or the interval is wrong.**
+     This draw produces complete lifetimes only. Resampling a censored fit as if every unit had
+     failed throws away the suspensions, so the synthetic samples carry more information than the
+     real one and the resulting interval comes out **too narrow** — it will understate the
+     uncertainty in β exactly where reliability decisions are most sensitive to it. Simulate the
+     observation scheme, not just the lifetimes: draw t as above, draw or reuse each unit's censoring
+     time c (its real inspection age or time in service), and record `min(t, c)` with the indicator
+     `t <= c`. Then step 3's "same estimator" is genuinely the same estimator — the censored MLE —
+     applied to data of the same shape.
 3. Refit with **the same estimator** and record β*, η*, B10*.
 4. Repeat a few thousand times. The 2.5th and 97.5th percentiles of each collection are a 95%
    percentile interval. Report the number of resamples — the last digit is Monte Carlo noise.

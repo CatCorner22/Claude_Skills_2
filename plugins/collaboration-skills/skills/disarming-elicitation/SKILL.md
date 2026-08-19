@@ -2,8 +2,8 @@
 name: disarming-elicitation
 description: >-
   Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented
-  in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed
-  doorknob phenomenon (the key disclosure arrives as the interview seems over): lower
+  in motivational interviewing, the FBI elicitation brochure, and the clinically
+  documented doorknob phenomenon (the key disclosure arrives as the interview seems over): lower
   the stakes so the expert educates rather than defends, restate their words slightly
   wrong so correction does the teaching, hold contradictions as the interviewer's own
   confusion, let silence work, then ask one casual question after the formal close.
@@ -15,13 +15,13 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
     skill channels the documented practices the persona inspired: the clinical-training
     approach in motivational interviewing named for the character, the FBI elicitation
-    brochure's feigned-ignorance technique, and the peer-reviewed AAFP doorknob
+    brochure's feigned-ignorance technique, and the AAFP-documented doorknob
     phenomenon.
 ---
 
@@ -90,7 +90,9 @@ the expanded ethics rail are in `references/elicitation-method.md`.
 4. **Restate their words slightly wrong — on purpose.** "So the reroute happens *after*
    the batch posts?" when you suspect it is before. Correction is effortless teaching:
    people fix an error instantly and add detail they would never volunteer to an
-   open-ended "tell me more."
+   open-ended "tell me more." If they agree with your wrong version instead of correcting
+   it, that is not confirmation — deference produces the same "yes" as knowledge does, so
+   re-source the fact rather than banking it.
 5. **Hold contradictions as your own confusion.** When two statements clash, the framing
    is "what I can't figure out is how both of these fit" — never "you said two different
    things." The discrepancy gets examined either way; only one framing keeps the expert
@@ -99,9 +101,11 @@ the expanded ethics rail are in `references/elicitation-method.md`.
    the elaboration that follows an unhurried pause is where the tacit material lives.
 7. **Close formally — then the doorknob.** Thank them, shut the notebook, let the
    interview visibly end. Then, casually, one more question — the one you actually came
-   for, or simply "is there anything I should have asked about?" Post-closure answers are
-   the least rehearsed of the whole session; family medicine trains for exactly this
-   moment because that is when the real disclosure comes [peer-reviewed, AAFP].
+   for, or simply "is there something else I should have asked about?" — "something," not
+   "anything," because the negative phrasing invites a no and tested no better than not
+   asking at all [peer-reviewed]. Post-closure answers are the least rehearsed of the
+   whole session; family medicine trains for exactly this moment because that is when the
+   real disclosure comes [peer-reviewed, AAFP].
 8. **Capture verbatim and replay for confirmation.** Record the expert's exact words —
    especially anything surfaced by a deliberate-error restatement — and read the key
    claims back before you rely on them, so the technique never leaves a wrong number
@@ -139,10 +143,13 @@ The doorknob close works because rehearsal ends when the interview does. While t
 session is officially on, the expert manages an impression; the moment it visibly ends,
 the performance stops, and what surfaces next is unguarded. The AAFP literature
 documents this as the doorknob phenomenon — the most consequential disclosure arriving as
-the visit closes — and the trained remedy is deliberately inviting it ("is there anything
-else?") rather than treating it as an interruption [peer-reviewed, AAFP]. The same
-mechanism is why the skill's last question is casual and why it comes *after* the
-notebook shuts.
+the visit closes — and the trained remedy is deliberately inviting it rather than
+treating it as an interruption [peer-reviewed, AAFP]. The invitation's wording carries
+much of the effect: a randomized trial of that solicitation found "is there *something*
+else you want to address today?" left roughly 78% fewer concerns unmet, while the
+"*anything* else" form was indistinguishable from no prompt at all — "any" is a question
+shaped for the answer no [peer-reviewed]. The same mechanism is why the skill's last
+question is casual and why it comes *after* the notebook shuts.
 
 The stance is symmetric, which is the final reason the rail matters: the identical moves
 appear in a counterintelligence warning brochure precisely because they work on people
@@ -162,6 +169,9 @@ with a memory.
   the session; shorten the middle, never the close.
 - Leaving a deliberate error uncorrected in your notes → replay key claims verbatim at
   the end so the technique never plants a wrong fact.
+- Treating agreement with a planted error as confirmation → a deferential expert says yes
+  to be agreeable; re-source anything they agreed to rather than corrected, since the
+  closing replay only catches the corrections.
 - Stacked multi-part questions → one naive question at a time; a stack signals an agenda
   and gets the shortest branch answered.
 - Using the sequence on someone who has declined to share → that is manipulation, not

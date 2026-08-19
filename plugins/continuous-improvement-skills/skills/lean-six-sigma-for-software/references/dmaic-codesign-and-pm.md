@@ -109,8 +109,13 @@ both deliberately:
 
 - **Charter** every significant effort: problem/opportunity with a number, scope (and
   explicitly out-of-scope), sponsor, team, timebox, success criteria, top risks. One page.
-- **Risk register**, reviewed on cadence: risk, likelihood×impact, owner, mitigation, trigger.
-  FMEA (Action-Priority ranked) for the technical risks; plain register for the rest.
+- **Risk register**, reviewed on cadence: risk, likelihood, impact, owner, mitigation, trigger —
+  sorted by **impact first, then likelihood**, not by a likelihood×impact product. A product lets
+  the dimension you least afford to ignore be averaged away: a catastrophic-but-unlikely risk
+  scores below a moderate-and-frequent one and drops down the register. Same argument, and the
+  same fix, as the Action Priority table that replaced RPN — see
+  `continuous-improvement-skills:fmea`. FMEA (Action-Priority ranked) for the technical risks;
+  plain register for the rest.
   Swiss-cheese the big ones (multiple independent mitigations).
 - **RACI** only where handoffs are ambiguous — co-design shrinks the need.
 - **Iterative core**: WIP-limited flow, small batches, demo working software on cadence,

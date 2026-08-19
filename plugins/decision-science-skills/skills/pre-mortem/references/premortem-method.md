@@ -24,9 +24,14 @@ Total time: 35–45 minutes. Works with 3–12 people who know the plan.
 4. **Round-robin (10–15 min).** Go around the room; each person reads ONE reason per
    pass. Record each verbatim on a shared list. No rebuttals, no "that can't happen,"
    no solutioning yet. Continue passes until everyone says "pass."
-5. **Consolidate and rank (10 min).** Merge duplicates. Rank the list — a workable frame
-   is likelihood × damage × how late you would detect it. The team ranks; a facilitator
-   or LLM may cluster and propose, never decide.
+5. **Consolidate and rank (10 min).** Merge duplicates. Rank the list on three dimensions —
+   damage, likelihood, and how late you would detect it — ordered by **dominance rather than
+   multiplied into a single score**. Take damage first and break ties within a band by the
+   other two. Do not compute damage × likelihood × lateness: a severity-9 item that is rare
+   (2) and detectable (3) scores 54, while a severity-3 nuisance that is common (6) and
+   invisible (6) scores 108, so the product ranks the near-catastrophe *below* the nuisance.
+   `continuous-improvement-skills:fmea` documents that failure and the severity ceiling that
+   blocks it. The team ranks; a facilitator or LLM may cluster and propose, never decide.
 6. **Strengthen (10 min).** For each of the top 3–7 items decide: change the plan, add a
    detection tripwire, or accept explicitly. Assign a named owner and a date to each.
 7. **Close.** File the output with the plan; schedule the after-action review now.

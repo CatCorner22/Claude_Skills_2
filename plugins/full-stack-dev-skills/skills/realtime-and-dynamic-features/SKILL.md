@@ -10,7 +10,7 @@ description: >-
   live updates, streaming response, real-time dashboard, background job progress, optimistic
   UI, long running task API, push updates, live refresh, stream LLM tokens.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Realtime and dynamic features

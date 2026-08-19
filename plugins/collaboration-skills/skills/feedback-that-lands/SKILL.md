@@ -15,7 +15,7 @@ description: >-
   feedback, SBI, feedback conversation, they got defensive, receiving feedback,
   performance conversation, code review tone, hard conversation with a teammate.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Feedback that lands (giving and receiving)
@@ -94,11 +94,17 @@ whether to have the conversation at all — and then has it.
 
 ## Why / learn
 Behavior-language lands where character-language triggers defense because of the
-fundamental attribution error, social psychology's name for a stubborn asymmetry: we
-explain other people's actions by their character ("late because he's careless") and
-our own by our circumstances ("late because of the pileup"). Feedback aimed at
-character therefore strikes the receiver as *factually wrong from the inside* — they
-can see their circumstances, and you are ignoring them — so they argue the verdict
+**actor–observer asymmetry** (Jones & Nisbett, 1971): we explain other people's actions by
+their character ("late because he's careless") and our own by our circumstances ("late
+because of the pileup"). The closely related *fundamental attribution error* (Ross, 1977)
+is the one-sided version — over-weighting disposition when explaining someone else's
+behaviour — and it is the term most people reach for, but the self-versus-other contrast
+described here is the actor–observer effect specifically. [canon attribution — named to the
+standard sources, not independently re-verified; note that Malle's 2006 meta-analysis found
+the classic actor–observer asymmetry close to zero when averaged across studies, surviving
+mainly for negative and intentional events, which is the case feedback actually concerns.]
+Feedback aimed at character therefore strikes the receiver as *factually wrong from the
+inside* — they can see their circumstances, and you are ignoring them — so they argue the verdict
 instead of hearing the observation. A described behavior sidesteps the whole fight:
 "you answered before she finished, three times" is checkable, specific, and shares
 the interpretation problem with the receiver instead of pre-convicting them.

@@ -91,11 +91,16 @@ reason to state that 121 skills are degraded and 99 are not. The threshold could
 rather than count-driven, could vary by client, and could have changed since. Nothing in this run
 tested it.
 
-> **UPDATE (2026-08-18, same day, later): it has now been tested, live, for real.** The "~100
-> skills" anecdote is superseded, not merely caveated. The real mechanism is a *character* budget
-> filled in listing order with a hard cutoff, not a count threshold or a usage-based trim, and it
-> is more severe: with this exact 121-skill marketplace genuinely installed, **101 of 121 skills
-> carried zero description text**. Full method and evidence, including live `Skill`-tool routing
+> **UPDATE (2026-08-18, revised 2026-08-19): it has now been tested live — and the first account
+> of the mechanism was wrong.** The real gate is a *character* budget of
+> `floor(context_tokens x 4 x skillListingBudgetFraction)` = **8,000 chars** at the 200K/1%
+> defaults, against 113,645 needed for all 121 descriptions. Skills start as bare names and are
+> upgraded in **descending order of recent use** (`usageCount x max(0.5^(days/7), 0.1)`, unused = 0),
+> greedily, skipping what does not fit. So it **is** usage-based — the "~100 skills / least-used"
+> folklore named the right variable, and this file's earlier claim that it was "not usage-based"
+> was the error. At the default budget **3 of 121** keep a description. The earlier live figure of
+> "101 of 121" came from model self-introspection and did not reproduce; it is withdrawn in favour
+> of `scripts/simulate-listing-budget.py`. Full method and evidence, including live `Skill`-tool routing
 > cases showing the D2/D9 seam repairs below fail for real once their target's description is
 > degraded: [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
 
@@ -395,10 +400,11 @@ agent's self-reported confidence 1–5, recorded before scoring. Row ids map to 
 2. ~~**Run the degraded regime.**~~ **DONE 2026-08-18.** Not by presenting a name-only listing to a
    simulated router — by installing the real marketplace under the real harness
    (`claude plugin eval`, `CLAUDE_CODE_WALNUT_SPIRE=1`) and reading the real listing state and
-   real `Skill`-tool calls. Result: 101 of 121 skills reduced to bare names, mechanism is a
-   character-budget sequential fill with a hard cutoff (not usage-based), and the D2/D9 seam
-   repairs below fail for real when their target is degraded. This supersedes the `~100 skills`
-   landmark rather than merely putting a number on it. Full writeup:
+   real `Skill`-tool calls. Result: most of the library reduced to bare names, and the D2/D9 seam
+   repairs below fail for real when their target is degraded. The mechanism as first written here
+   ("sequential fill with a hard cutoff, not usage-based") was **wrong** and was corrected on
+   2026-08-19: it is a usage-ranked greedy fill with no cutoff, and at the default 8,000-char
+   budget 3 of 121 skills keep a description. Full writeup:
    [`live-routing-and-degradation-2026-08-18.md`](live-routing-and-degradation-2026-08-18.md).
 3. **Fix Tier D before re-running it.** Rewrite the in-scope column so no prompt contains a substring
    of the target's trigger list (§4). As written it cannot detect name-only reachability.
