@@ -6,7 +6,7 @@ credentials, account numbers, or client data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it. Copy it into your own
-project — `.claude/skills-env/chicken-little.md` works well — and point the skill at that copy.
+project — `.claude/skills-env/chicken-little.private.md` works well — and point the skill at that copy.
 
 ## The systems in scope
 - Primary system(s) of record, and what each one owns:

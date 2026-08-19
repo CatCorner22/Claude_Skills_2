@@ -168,7 +168,7 @@ in `your-environment.private.md` (git-ignored), never in a committed file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/feedback-that-lands.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/feedback-that-lands.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
