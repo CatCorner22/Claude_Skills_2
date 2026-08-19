@@ -1105,3 +1105,43 @@ docs/live-routing-and-degradation-2026-08-18.md.
   the CLI" (it occurs four times) and described an equal-share truncation the code does not contain,
   and two auditors contradicted each other on the algorithm. Adversarial review finds real defects
   *and* generates confident false ones; the tiebreaker is always the primary source.
+
+2026-08-19 — Deep-dive review pass: the substance census (D6), a cross-plugin coherence sweep, a
+mechanical audit, and an independent honesty audit of this repo's own review docs. Four workflows,
+56 agents, ~6.2M subagent tokens. Net: 20 confirmed defects fixed across 20 skills, plus a full
+retraction of the previous pass's headline mechanism claim.
+
+- FACT (2026-08-19): **the substance census is complete — 121 of 121 skills reviewed.**
+  80 NET-POSITIVE, 41 MARGINAL, **0 NET-NEGATIVE**. Findings: 134 raised → 69 confirmed (22 major,
+  47 minor), 65 refuted, 131 recorded as "could not verify here". Closes D6. The old 14-skill
+  sample (3 NET-NEGATIVE / 6 MARGINAL) did **not** generalise — but note it was drawn toward
+  fast-decaying technical skills and its NET-NEGATIVEs were fixed in that same pass. The number to
+  act on now is **41 MARGINAL**, i.e. a third of the library mostly restates what a strong unaided
+  assistant already does. That is the depth backlog, not a deletion case (the owner has declined a
+  trim; see docs/trim-recommendation-2026-08.md).
+- LESSON (2026-08-19): **"fixes do not propagate to siblings" is a defect class.** `pre-mortem`
+  ranked risk by likelihood × damage × detection-lateness — the exact arithmetic `fmea` had already
+  been repaired for, and whose reference explicitly generalises the prohibition to "any scheme".
+  It even propagated downstream, since `break-glass-playbooks` picks which crises to arm from
+  `pre-mortem`'s ranking. **When a defect is fixed in one skill, grep the library for the technique
+  and fix every sibling in the same pass.**
+- LESSON (2026-08-19): **domain-batched review cannot see cross-plugin defects.** Every prior pass
+  batched by domain, so a contradiction spanning two plugins passed every batch. Sweeping by
+  *shared question* instead of by domain found six real seams. Do both: batch by domain for depth,
+  then sweep by question for coherence.
+- LESSON (2026-08-19): **adversarial verification is worth its cost, in both directions.** Across
+  the three review workflows, 65 of 134 substance findings and 40 of 41 alleged contradictions were
+  refuted — including sweep agents that had paraphrased skills into conflicts they do not state.
+  But refuters also produced confident false claims (one asserted a CLI setting "occurs nowhere"
+  when it occurs four times). **Neither the finder nor the refuter is authoritative; the primary
+  source is.** Re-verify anything you are about to act on.
+- LESSON (2026-08-19): **the highest-severity defects all required running something.** A false
+  ARL₀ from adding overlapping false-alarm rates; a React Query recipe that silently drops the
+  server write; an import-boundary test with a false negative; a retraction detector that flags
+  ordinary papers; `git merge main` merging a stale ref. Not one was visible to reading, and four
+  conformance passes had rated every one of these skills as passing. **Conformance and correctness
+  are close to uncorrelated — verify by execution or do not claim verification.**
+- RULE (2026-08-19): when a census or sweep reports aggregate counts, **recompute the totals from
+  the per-phase data before publishing them.** I wrote phase 1's could-not-verify count (82) as the
+  two-phase total; the real figure is 131. Caught by re-deriving, which is the only reason it did
+  not ship.
