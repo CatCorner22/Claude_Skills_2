@@ -101,6 +101,36 @@ RETRACTION_MARKERS = [
     "expression of concern", "editorial expression of concern",
 ]
 
+# Nobiliary and compound-surname particles. These belong to the surname, so
+# "van der Berg J" and "van der Berg" must resolve to the same key.
+NAME_PARTICLES = {
+    "van", "von", "de", "del", "della", "der", "den", "des", "du", "da", "das",
+    "dos", "la", "le", "di", "do", "ter", "ten", "af", "av", "bin", "ibn", "al",
+    "abu", "mac", "mc", "st", "san", "santa",
+}
+
+# Publication types are authoritative: PubMed assigns these deliberately.
+RETRACTION_PUBTYPES = {
+    "retracted publication",
+    "retraction of publication",
+    "expression of concern",
+    "editorial expression of concern",
+}
+
+# Titles are NOT authoritative, so the marker must be anchored at the start and
+# followed by the punctuation a real notice uses ("RETRACTED: <original title>",
+# "Retraction of: <original>", "WITHDRAWN: ..."). A bare substring search flags
+# ordinary papers -- "Retraction of consent in emergency research", "Patients
+# withdrawn from therapy", "Expression of concern among caregivers" were all
+# reported as retracted before this was anchored, and the caller turns any signal
+# into "do not use as support", i.e. it makes the researcher discard good evidence.
+_TITLE_RETRACTION_RE = re.compile(
+    r"^\s*\[?\s*"
+    r"(editorial expression of concern|expression of concern|retracted|retraction|withdrawn)"
+    r"\b\s*(?:article)?\s*(?:of)?\s*[:\-–—]",
+    re.I,
+)
+
 
 class VerificationError(Exception):
     pass
@@ -170,8 +200,20 @@ def titles_match(a: str, b: str, threshold: float = 0.85) -> bool:
     return overlap >= threshold
 
 
+def _is_initials(tok: str) -> bool:
+    """True for 'J', 'J.', 'JA', 'J.A.' — an initials token, not a name."""
+    t = tok.replace(".", "")
+    return 0 < len(t) <= 3 and t.isalpha() and t.isupper()
+
+
 def surname_of(author: str) -> str:
-    """Best-effort surname from 'Smith J', 'J. Smith', or 'Smith, John A.'."""
+    """Best-effort surname from 'Smith J', 'J. Smith', 'Smith, John A.', 'van der Berg J'.
+
+    Multi-particle surnames are kept whole. The previous version returned parts[0]
+    whenever the last token was initials, so 'van der Berg J' -> 'van' while the same
+    person written 'van der Berg' -> 'berg', and authors_match then failed on two
+    renderings of one name.
+    """
     if not author:
         return ""
     a = author.strip()
@@ -180,12 +222,23 @@ def surname_of(author: str) -> str:
     parts = [p for p in re.split(r"\s+", a) if p]
     if not parts:
         return ""
-    # 'Smith J' / 'Smith JA' -> first token is the surname when the last token
-    # is a short initial-like token; otherwise assume 'John Smith'.
-    if len(parts) > 1 and len(parts[-1]) <= 3 and parts[-1].replace(".", "").isalpha() \
-            and parts[-1].isupper():
-        return parts[0].lower()
-    return parts[-1].lower()
+
+    # 'Smith J' / 'van der Berg JA' -> trailing initials; surname is everything before them
+    if len(parts) > 1 and _is_initials(parts[-1]):
+        return " ".join(parts[:-1]).lower()
+
+    # 'J. Smith' / 'J A Smith' -> leading initials; surname is everything after them
+    lead = 0
+    while lead < len(parts) - 1 and _is_initials(parts[lead]):
+        lead += 1
+    if lead:
+        return " ".join(parts[lead:]).lower()
+
+    # 'van der Berg' -> absorb the nobiliary/compound particles before the final token
+    i = len(parts) - 1
+    while i > 0 and parts[i - 1].lower().strip(".") in NAME_PARTICLES:
+        i -= 1
+    return " ".join(parts[i:]).lower()
 
 
 def authors_match(claimed: str, actual_first_author: str) -> bool:
@@ -258,15 +311,26 @@ def excluded_countries_in(countries) -> list[str]:
 
 
 def detect_retraction(record: dict) -> list[str]:
-    """Look for retraction/EoC signals in title and publication types."""
-    signals = []
-    haystacks = [str(record.get("title") or "")]
-    haystacks += [str(t) for t in (record.get("publication_types") or [])]
-    for h in haystacks:
-        low = h.lower()
-        for marker in RETRACTION_MARKERS:
-            if marker in low and marker not in signals:
-                signals.append(marker)
+    """Look for retraction/EoC signals in publication types (authoritative) and title (anchored).
+
+    Publication types are matched exactly against the set PubMed actually assigns.
+    Titles are matched only when the marker is the *leading* token and is followed by
+    notice punctuation, because an unanchored substring search reports ordinary
+    papers as retracted -- and the caller treats any signal as "do not use as support".
+    """
+    signals: list[str] = []
+
+    for t in (record.get("publication_types") or []):
+        low = str(t).strip().lower()
+        if low in RETRACTION_PUBTYPES and low not in signals:
+            signals.append(low)
+
+    m = _TITLE_RETRACTION_RE.match(str(record.get("title") or ""))
+    if m:
+        marker = m.group(1).lower()
+        if marker not in signals:
+            signals.append(marker)
+
     return signals
 
 
@@ -551,6 +615,15 @@ def self_test() -> int:
     check("surname 'Polack, Fernando'", surname_of("Polack, Fernando") == "polack")
     check("authors match", authors_match("Polack", "Polack FP"))
     check("authors mismatch", not authors_match("Smith", "Polack FP"))
+    # Regression: multi-particle surnames must survive both citation styles.
+    # 'van der Berg J' previously returned 'van' while 'van der Berg' returned
+    # 'berg', so one person written two ways failed authors_match.
+    check("surname 'van der Berg J'", surname_of("van der Berg J") == "van der berg")
+    check("surname 'van der Berg'", surname_of("van der Berg") == "van der berg")
+    check("particle surname matches across styles",
+          authors_match("van der Berg", "van der Berg J"))
+    check("compound surname kept whole", surname_of("Garcia Lopez M") == "garcia lopez")
+    check("surname 'de la Cruz A'", surname_of("de la Cruz A") == "de la cruz")
 
     # Year tolerance
     check("year exact", years_match(2020, 2020))
@@ -610,6 +683,25 @@ def self_test() -> int:
         {"title": "Expression of Concern: A study", "publication_types": []}))
     check("clean paper", not detect_retraction(
         {"title": "A normal study", "publication_types": ["Journal Article"]}))
+    # Regression: title markers must be ANCHORED. An unanchored substring search
+    # flagged all three of these ordinary papers as retracted, and the caller turns
+    # any signal into "do not use as support" — i.e. it discarded valid evidence.
+    check("no false retraction: 'Retraction of consent...'", not detect_retraction(
+        {"title": "Retraction of consent in emergency research: an ethical analysis",
+         "publication_types": ["Journal Article"]}))
+    check("no false retraction: 'Patients withdrawn from therapy'", not detect_retraction(
+        {"title": "Patients withdrawn from therapy: a cohort study",
+         "publication_types": ["Journal Article"]}))
+    check("no false retraction: 'Expression of concern among caregivers'",
+          not detect_retraction(
+              {"title": "Expression of concern among caregivers: a qualitative study",
+               "publication_types": ["Journal Article"]}))
+    check("real notice 'Retraction of: X'", detect_retraction(
+        {"title": "Retraction of: Original Title Here", "publication_types": []}))
+    check("real notice 'WITHDRAWN: X'", detect_retraction(
+        {"title": "WITHDRAWN: Duplicate submission", "publication_types": []}))
+    check("pubtype 'Expression of Concern'", detect_retraction(
+        {"title": "A study", "publication_types": ["Expression of Concern"]}))
 
     # End-to-end with a stubbed fetcher (no network)
     def stub_ok(url, params=None, mailto=None):

@@ -8,7 +8,7 @@ description: >-
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Writing Agent Skills (house standard)
@@ -153,15 +153,26 @@ elsewhere in the repo and an undisclosed divisor is how the first version of thi
 disagree with `README.md`. Count with your provider's tokenizer if the exact figure matters.) The
 `Triggers:` lists alone are 22% of that spend. This has two consequences worth designing around:
 
-- **The listing degrades before it errors.** Observed at roughly 100 installed skills: the
-  listing trims the least-used skills' descriptions to **name-only**. Nothing fails loudly —
-  `/plugin:skill` direct invocation keeps working, which is exactly the path an author testing
-  their own skill uses, so the degradation is invisible from the inside. A trimmed skill's
+- **The listing degrades before it errors, and the trigger is a character budget, not a skill
+  count.** The budget is `floor(context_tokens × 4 × skillListingBudgetFraction)` — **8,000
+  characters** at the 200K/1% defaults. Over budget, every non-bundled skill drops to a bare
+  `- name` and is then upgraded back to its full description in **descending order of recent use**
+  (`usageCount × max(0.5^(daysSinceUse/7), 0.1)`, so a never-used skill scores 0), greedily,
+  skipping whatever no longer fits. Bundled skills are protected and never compete. Nothing fails
+  loudly — `/plugin:skill` direct invocation keeps working, which is exactly the path an author
+  testing their own skill uses, so the degradation is invisible from the inside. A trimmed skill's
   "Use when…" clause and every trigger phrase are simply absent from the router's context.
+  Run `scripts/simulate-listing-budget.py` to see where your own library lands; for reference,
+  this one needs 113,645 characters for 121 descriptions and keeps **3** at the default budget.
 - **Therefore the name must carry task signal.** Under name-only trimming, a skill named for a
   metaphor or a persona is unroutable, while one named for its task survives. Evocative names are
   legitimate — this library has several by design, invoked deliberately — but a skill whose *only*
   intended path is automatic matching should be named for what it does.
+- **A brand-new skill starts at the back of the queue.** Because the ranking is by *recent use*
+  and an unused skill scores exactly zero, a skill you just wrote is among the first to lose its
+  description on a crowded install — and it stays there until someone invokes it by name enough
+  times to earn a place. Ship new skills with a name that routes on its own, and expect the
+  description to be doing nothing for you in a large library until the skill has a usage history.
 
 The practical lever is **skills per install, not characters per description**. Trimming a
 description from 1000 to 900 chars saves ~27 tokens; not installing a 15-skill plugin saves

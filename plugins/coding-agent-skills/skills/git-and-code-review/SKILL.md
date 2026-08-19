@@ -13,7 +13,7 @@ description: >-
   review, rebase, version control, commit message, force push, git blame, revert, review this
   diff.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: >-
     Review-size and review-rate figures come from the SmartBear/Cisco peer-review study
     (2,500 reviews, 3.2M LOC), verified via web search snippets — claims carrying those
@@ -65,13 +65,21 @@ example review — is in `references/review-checklist.md`; task-oriented command
    out anything you're unsure about so review attention lands there. A diff shows changes,
    not completion: when a PR claims a whole phase is done and the next phase will build on
    it, verify the claim with `coding-agent-skills:the-foreman` before relying on it.
-4. **Integrate with merge or rebase — on purpose.** To update your branch with the latest main:
-   - `git merge main` preserves exactly what happened and adds a merge commit — safe,
+4. **Integrate with merge or rebase — on purpose.** First `git fetch origin`, then integrate
+   against the *remote-tracking* ref:
+   - `git merge origin/main` preserves exactly what happened and adds a merge commit — safe,
      truthful history.
-   - `git rebase main` replays your commits on top of main for a linear history — cleaner,
-     but it rewrites your commit hashes. Only rebase commits you have not shared (or that
-     no one has based work on): force-pushing a rewritten shared branch breaks everyone
+   - `git rebase origin/main` replays your commits on top of main for a linear history —
+     cleaner, but it rewrites your commit hashes. Only rebase commits you have not shared (or
+     that no one has based work on): force-pushing a rewritten shared branch breaks everyone
      else's copy.
+
+   **Merge `origin/main`, not `main`.** Your local `main` only moves when you fetch or pull it,
+   so on a branch cut days ago `git merge main` merges a stale ref and prints *"Already up to
+   date."* with exit code 0 while the real `origin/main` has moved on — a silent no-op that
+   looks like success. Verified: with `origin/main` two commits ahead, `git merge main` reported
+   up-to-date and left the new file absent from the tree; `git fetch origin && git merge
+   origin/main` brought it in. Fetch first, every time.
 5. **Resolve conflicts calmly.** A conflict just means two branches changed the same lines;
    git marks them with `<<<<<<<`, `=======`, `>>>>>>>`. For each: open the file, decide the
    *correct combined* result (not blindly "keep mine"), delete the markers, then `git add`

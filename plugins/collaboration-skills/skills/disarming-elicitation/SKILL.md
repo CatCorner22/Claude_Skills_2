@@ -2,8 +2,8 @@
 name: disarming-elicitation
 description: >-
   Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented
-  in motivational interviewing, the FBI elicitation brochure, and the peer-reviewed
-  doorknob phenomenon (the key disclosure arrives as the interview seems over): lower
+  in motivational interviewing, the FBI elicitation brochure, and the clinically
+  documented doorknob phenomenon (the key disclosure arrives as the interview seems over): lower
   the stakes so the expert educates rather than defends, restate their words slightly
   wrong so correction does the teaching, hold contradictions as the interviewer's own
   confusion, let silence work, then ask one casual question after the formal close.
@@ -15,13 +15,13 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
     skill channels the documented practices the persona inspired: the clinical-training
     approach in motivational interviewing named for the character, the FBI elicitation
-    brochure's feigned-ignorance technique, and the peer-reviewed AAFP doorknob
+    brochure's feigned-ignorance technique, and the AAFP-documented doorknob
     phenomenon.
 ---
 

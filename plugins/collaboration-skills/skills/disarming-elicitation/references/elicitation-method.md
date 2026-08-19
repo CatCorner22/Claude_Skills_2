@@ -6,7 +6,8 @@ counterintelligence elicitation brochure's "feigned ignorance" technique, publis
 warning to potential targets [gov]; internal-investigations interview training
 [industry]; technical writers' knowledge elicitation [practitioner]; and the AAFP
 "doorknob phenomenon" — the most important disclosure comes when the interview seems
-over [peer-reviewed, AAFP]. Source links at the end of this file.
+over [clinical, AAFP — family-medicine practice literature; not verified here as having
+appeared in a peer-reviewed rather than an editorial AAFP venue]. Source links at the end of this file.
 
 ## Contents
 - [The four question-sequence patterns](#the-four-question-sequence-patterns)

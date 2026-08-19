@@ -41,10 +41,16 @@ git commit --amend                      # fix the most recent commit (only if no
 ## Update your branch with main
 ```bash
 git switch feature/x
-git merge main                          # merge commit; preserves history exactly
+git fetch origin                        # REQUIRED FIRST: local `main` is stale until you fetch
+git merge origin/main                   # merge commit; preserves history exactly
 # or
-git rebase main                         # linear history; rewrites YOUR commits — unshared only
+git rebase origin/main                  # linear history; rewrites YOUR commits — unshared only
 ```
+Merge `origin/main`, never a bare `main`. Local `main` only advances when you fetch or pull it,
+so `git merge main` on a branch cut days ago merges a stale ref and prints "Already up to date."
+with exit 0 — a silent no-op indistinguishable from success. If you prefer to keep local `main`
+current instead, `git switch main && git pull && git switch - && git merge main` is equivalent;
+what is never safe is merging `main` without updating it first.
 
 ## Undo safely
 ```bash
