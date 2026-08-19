@@ -63,7 +63,7 @@ and survivorship fallacies) · UI/UX and human emotion (where cognitive load, an
 confusion, or fatigue causes drop-off or error) · path dependency (map current state →
 future state; flag lock-in choices that make reversal prohibitively expensive) · MSCD
 technical writing (Adams's *A Manual of Style for Contract Drafting*: destroy ambiguity —
-syntactic, semantic, contextual; contain and explicitly define intentional vagueness).
+antecedent, syntactic, lexical, scope; contain and explicitly define intentional vagueness).
 
 **The output template (use this exact format for all evaluations):** the section order and
 headings are fixed, but a section is only filled when it has a finding that clears the evidence

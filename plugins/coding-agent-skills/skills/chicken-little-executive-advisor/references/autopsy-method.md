@@ -73,12 +73,15 @@ migration fees, custom builds on a vendor's closed platform, published URLs and 
 material, org structures people were hired into. The report never says "don't" — it says
 *"if you choose this path, you must do so knowingly"* and names the reversal cost.
 
-**MSCD linguistic failures.** Three ambiguity types, per Adams: **syntactic** (what does
-the modifier attach to? "clients with accounts over $10k in Texas"), **semantic** (a word
-with two readings: "shall review biweekly"), **contextual** (two provisions that collide).
-Plus **vagueness**, which is allowed only when intentional and contained ("reasonable
-efforts" defined or bounded). Every entry in the table quotes the sentence, names the
-type, and rewrites it.
+**MSCD linguistic failures.** The house four, matching `script-wizard`'s
+writing-and-drafting reference: **antecedent** (which noun does "it" point at?),
+**syntactic** (what does the modifier attach to? "clients with accounts over $10k in
+Texas"), **lexical** (a word with two readings: "shall review biweekly"), and **scope**
+(*and*, *or*, and negation across a list). Plus **vagueness**, which Adams keeps separate
+from ambiguity and which is allowed only when intentional and contained ("reasonable
+efforts" defined or bounded). Two provisions that collide are a conflict rather than an
+ambiguity — that finding belongs in the blocker section. Every entry in the table quotes
+the sentence, names the type, and rewrites it.
 
 ## Worked example: the client-intake portal
 
@@ -105,8 +108,8 @@ Abridged autopsy (evidence bar shown in action):
 - **Lock-in forecast:** the one-way door is the proprietary schema + printed URLs. If you
   choose this, you do so knowingly; the reversal cost is a data migration plus reprinted
   material during the busy season.
-- **MSCD failure:** "The contractor will reasonably maintain the portal" — semantic
-  vagueness, uncontained. Correction: "The contractor must apply security patches within
+- **MSCD failure:** "The contractor will reasonably maintain the portal" — vagueness,
+  uncontained. Correction: "The contractor must apply security patches within
   10 business days of release and restore service within 24 hours of an outage report."
 - **Proactive pivot:** the hard way is a bespoke build for a solved problem. The optimal
   path: a supported forms/intake product with export, single sign-on, and a maintenance
