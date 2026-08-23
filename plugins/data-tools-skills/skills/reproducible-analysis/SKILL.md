@@ -14,7 +14,7 @@ description: >-
   rerun this, rerun the analysis, replication crisis, reproducibility crisis, random
   seed, data lineage, data provenance, literate programming, FAIR data.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §8 reproducible-analysis).

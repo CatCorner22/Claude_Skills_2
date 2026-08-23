@@ -141,6 +141,18 @@ For each surviving hypothesis at stage 5, run this pass explicitly and report th
 A hypothesis that survives this pass gets a materially higher confidence grade — and you should say
 *why* it survived.
 
+**The upgrade is only earned if the pass was actually run on the whole corpus.** Two ways it is not,
+both of which must block the upgrade rather than pass unnoticed:
+- **The country filter removed refuting evidence.** Excluded-country sources that *contradict* a
+  hypothesis are quarantined and listed, not dropped (`references/source-provenance.md`), precisely
+  so this cannot happen silently. Where such an entry exists, hold the grade and say the
+  disconfirmation pass was incomplete.
+- **The searches that would have refuted it were never run**, or returned nothing under a filter that
+  hides recent work (a MeSH restriction excludes anything not yet indexed — see
+  `references/search-strategy.md`). "We looked and found nothing" and "we could not have found it"
+  produce the same empty result and warrant opposite conclusions.
+Surviving a test is evidence in proportion to how hard the test could have hit.
+
 ## Grading a connection
 
 Label every dot-connection with its strength, using the evidence behind it (details in

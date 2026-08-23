@@ -14,7 +14,7 @@ description: >-
   analysis, what-if, data table, hardcoded formula, model review, scenario toggle,
   spreadsheet error, one formula per row.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Grounded in the documented spreadsheet-error research collected by EuSpRIG (Panko's
     field-audit synthesis) and FAST-style structured-modeling conventions. Claims marked

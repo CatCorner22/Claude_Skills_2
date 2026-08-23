@@ -13,7 +13,7 @@ description: >-
   format, structured output, JSON output, prompt injection, reasoning model, extended thinking,
   prompt caching, flaky prompt, prompt not working, improve a prompt.
 metadata:
-  version: "2.0.0"
+  version: "2.0.1"
 ---
 
 # Prompt engineering

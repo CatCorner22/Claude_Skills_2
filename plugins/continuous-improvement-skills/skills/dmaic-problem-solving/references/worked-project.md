@@ -124,8 +124,14 @@ ordinary noise and must not be reported as success.
 the desk's rule is 20–25 subgroups before limits are trusted, so the limits were flagged
 provisional and stayed provisional: the rollout landed before another eight to thirteen
 *pre-change* weeks could accumulate, and adding post-rollout weeks to a baseline would fold the
-improvement into the very limits it is being measured against. The first firm limits this project
-owns are the post-change ones computed in Control.)
+improvement into the very limits it is being measured against. And the post-change limits computed
+in Control are **also provisional** — that window is eight weeks, which is thinner still than these
+twelve. Saying otherwise would be the same error one phase later. This project never owns firm
+limits inside its own lifetime: they become firm when the post-change chart reaches 20–25 subgroups
+under the new process, roughly three months past rollout, which is the process owner's job under
+the control plan and is written into it as a dated recompute. Until then every limit on this
+project's charts carries the word *provisional*, and every verdict drawn from one is read as
+sorting rather than as a gate.)
 
 ---
 

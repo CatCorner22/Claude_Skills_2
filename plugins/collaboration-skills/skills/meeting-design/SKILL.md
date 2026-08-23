@@ -14,7 +14,7 @@ description: >-
   meeting agenda, run this meeting, too many meetings, this should be an email, action
   items, decision protocol, pre-read, standing meeting audit, fix the agenda.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Meeting design (decisions, not topics)

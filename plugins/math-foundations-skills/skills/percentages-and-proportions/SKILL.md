@@ -12,6 +12,8 @@ description: >-
   quoting basis points, or when a percent-based claim looks off. Triggers: percent change,
   percentage points, percent vs percentage points, basis points, weighted average, markup vs
   margin, proportion, per capita, rate per, of what base, index and rebase.
+metadata:
+  version: "1.0.0"
 ---
 
 # Percentages and proportions

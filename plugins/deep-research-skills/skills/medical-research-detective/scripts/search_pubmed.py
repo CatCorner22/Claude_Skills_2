@@ -270,7 +270,15 @@ def format_human(res: dict, show_gap_note=True) -> str:
         L.append("  The query ran; the terms above matched nothing in the index — which may be "
                  "the reason for a thin result, not a fault in the query.")
     if not res["hits"]:
-        if show_gap_note and not res.get("problems"):
+        if res.get("mesh_filtered"):
+            # A MeSH filter can manufacture a gap: MeSH terms are assigned at indexing time,
+            # so the filter excludes everything not yet MEDLINE-indexed — the newest work,
+            # which is usually what a zero-hit search is being read as absent.
+            L.append("  NO HITS UNDER A MeSH FILTER — this is not a gap finding. MeSH terms are")
+            L.append("  assigned during indexing, so the filter excluded every record not yet")
+            L.append("  MEDLINE-indexed, i.e. the most recent literature. Re-run without the")
+            L.append("  filter before concluding anything about what exists.")
+        elif show_gap_note and not res.get("problems"):
             L.append("  NO HITS — a genuine gap is itself a finding. Record it in the search log,")
             L.append("  then try the bridge search (shared drug / nutrient / mechanism).")
         return "\n".join(L)
@@ -437,6 +445,13 @@ def self_test() -> int:
     res0 = search("nothing", fetch=stub_empty)
     check("e2e empty handled", res0["hits"] == [] and res0["total"] == 0)
     check("e2e empty note", "NO HITS" in format_human(res0))
+    # Regression: a MeSH filter excludes everything not yet MEDLINE-indexed, so a zero-hit
+    # run under --humans is not evidence of a gap and must not be reported as one.
+    res_mesh = dict(res0, mesh_filtered=True)
+    check("MeSH-filtered empty is not sold as a gap",
+          "not a gap finding" in format_human(res_mesh))
+    check("MeSH-filtered empty does not print the gap note",
+          "a genuine gap is itself a finding" not in format_human(res_mesh))
 
     def stub_down(url, params, email=None):
         raise SearchError("network unavailable (blocked) — PubMed could not be searched")
@@ -465,7 +480,12 @@ def main(argv=None):
                     help="search every pair of these terms (the dot-connector)")
     ap.add_argument("--max", type=int, default=25, help="max results per query (default 25)")
     ap.add_argument("--years", type=int, help="limit to the last N years")
-    ap.add_argument("--humans", action="store_true", help="limit to human studies")
+    ap.add_argument("--humans", action="store_true",
+                    help="limit to human studies via humans[MeSH Terms]. NOTE: MeSH terms are "
+                         "assigned during indexing, so this silently excludes every record "
+                         "not yet MEDLINE-indexed — i.e. the most recent literature, which is "
+                         "often what you are looking for. A zero-hit result under this flag is "
+                         "not evidence of a gap.")
     ap.add_argument("--type", dest="pubtype", help='e.g. "Review", "Randomized Controlled Trial"')
     ap.add_argument("--language", help="e.g. english")
     ap.add_argument("--email", help="your e-mail; NCBI asks callers to identify themselves")
@@ -477,6 +497,22 @@ def main(argv=None):
         return self_test()
     if not args.query and not args.pairs:
         ap.error("provide a query or --pairs")
+    if args.pairs is not None and len(args.pairs) < 2:
+        # One term makes zero pairs, so the run searched nothing — and printed the closing
+        # footer over an empty result, which reads exactly like "the literature is silent".
+        ap.error("--pairs needs at least two terms (it searches every pair of them)")
+
+    if args.humans:
+        # The flag stays — a human-only search is a legitimate thing to want — but it cannot be
+        # used SILENTLY. MeSH terms are assigned at indexing time, so this restriction excludes
+        # every not-yet-indexed record: the most recent literature, which is exactly where an
+        # emerging safety signal lives. Printed to stderr on every run so it survives piping the
+        # results, and so a reader of the output knows the corpus was cut.
+        print("NOTE: --humans adds humans[MeSH Terms]. MeSH is assigned at indexing time, so "
+              "this excludes\n      every record not yet MEDLINE-indexed — i.e. the newest "
+              "work, which is where an emerging\n      safety signal appears first. Re-run "
+              "without it before concluding anything about what exists.",
+              file=sys.stderr)
 
     jobs = []
     if args.query:
@@ -492,6 +528,7 @@ def main(argv=None):
         for label, q in jobs:
             res = search(q, retmax=args.max, email=args.email)
             res["label"] = label
+            res["mesh_filtered"] = bool(args.humans)
             results.append(res)
     except SearchError as e:
         print(f"ERROR: {e}", file=sys.stderr)

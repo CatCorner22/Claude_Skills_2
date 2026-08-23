@@ -11,7 +11,7 @@ description: >-
   standard deviation, variance, range, percentile, quartile, IQR, coefficient of variation, skewness,
   kurtosis, distribution shape, central tendency, spread.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Descriptive statistics

@@ -15,7 +15,7 @@ description: >-
   feedback, SBI, feedback conversation, they got defensive, receiving feedback,
   performance conversation, code review tone, hard conversation with a teammate.
 metadata:
-  version: "1.3.0"
+  version: "1.5.0"
 ---
 
 # Feedback that lands (giving and receiving)
@@ -108,8 +108,13 @@ described here is the actor–observer effect specifically. [canon attribution �
 standard sources, not independently re-verified; note that Malle's 2006 meta-analysis of 173
 studies found the classic actor–observer asymmetry close to zero when averaged across them
 (d between −0.02 and 0.10), holding for negative events and reversing for positive ones. The
-negative half is the case feedback actually concerns, so the framing earns its place here —
-but as a way of describing what receivers report, not as a settled effect to lean on.]
+negative half is the case *criticism* concerns, so the framing earns its place for the
+giving-criticism and receiving halves of this skill — as a way of describing what receivers
+report, not as a settled effect to lean on. **It does not carry the praise sections.** By this
+same evidence the asymmetry reverses for positive events, so the case for specific praise
+(step 5, and the praise items in Common mistakes and reference §5) does not rest on it: praise
+is specific because a behaviour nobody named cannot be repeated on purpose, which is a
+different mechanism and needs no attribution research behind it.]
 Feedback aimed at character therefore strikes the receiver as *factually wrong from the
 inside* — they can see their circumstances, and you are ignoring them — so they argue the verdict
 instead of hearing the observation. A described behavior sidesteps the whole fight:

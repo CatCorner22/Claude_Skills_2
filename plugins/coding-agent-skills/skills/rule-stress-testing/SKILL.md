@@ -13,7 +13,7 @@ description: >-
   conflict, stress test the rules, loophole hunt, what breaks this policy, clause conflict,
   conflicting rules, malicious compliance, specification gaming.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Commissioned by the user, inspired by Isaac Asimov's robot stories — homage in
     triggers and teaching only; no affiliation. The stories are cited as fiction that

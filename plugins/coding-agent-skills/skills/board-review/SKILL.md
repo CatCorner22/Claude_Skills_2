@@ -11,6 +11,8 @@ description: >-
   multi-angle code audit. Triggers: board review, board of advisors, run the board, full
   optimization review, performance and accuracy audit, deep code audit, multi-agent review,
   suboptimal code audit, optimize this code thoroughly.
+metadata:
+  version: "1.0.0"
 ---
 
 # Board of Advisors review

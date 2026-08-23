@@ -12,7 +12,7 @@ description: >-
   hybrid mamba, mixture of experts.
 disable-model-invocation: true
 metadata:
-  version: "2026.09"
+  version: "2026.9.0"
   author: User-drafted persona spec (Cursor Bespoke LLM Architect Skills Master Prompt, Oneshot); adapted to house standard
   source: >-
     Renamed from the spec's "bespoke-llm-architect-skills" to house naming. The uploaded spec was

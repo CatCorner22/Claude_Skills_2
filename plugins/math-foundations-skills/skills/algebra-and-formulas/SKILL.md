@@ -13,7 +13,7 @@ description: >-
   rearrange the formula, algebra, linear equations, word problem, isolate the variable,
   breakeven, two unknowns, order of operations, PEMDAS.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Algebra and formulas
@@ -135,8 +135,11 @@ means making them visible again.
 - Forgetting the flip when dividing an inequality by a negative → check the boundary and
   one point beyond it; the numbers will confess.
 - Rearranging a formula correctly but never unit-checking it →
-  `math-foundations-skills:units-and-dimensional-analysis`; units are a second,
-  independent proof.
+  `math-foundations-skills:units-and-dimensional-analysis`; units are a second, independent
+  **check — necessary, not sufficient.** A formula can be dimensionally perfect and still
+  wrong by a factor of two, a sign, or the wrong variable of the right kind; units catch the
+  large structural error and are silent on all three. That skill spends a paragraph on
+  exactly this limit.
 - Trusting spreadsheet precedence to match written math → `=-2^2` is 4 in Excel;
   `=A1+B1/2` halves only B1. Parenthesize what you mean.
 - Solving before rough-sizing → an answer of 700 hours on a $145 invoice should never

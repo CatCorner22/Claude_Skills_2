@@ -12,7 +12,7 @@ description: >-
   model monitoring, drift detection production, ml pipeline app, score in real time,
   put the model into the app, works in the notebook.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # ML in production

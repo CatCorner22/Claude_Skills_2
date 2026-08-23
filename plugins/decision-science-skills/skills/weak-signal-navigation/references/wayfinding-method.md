@@ -101,6 +101,15 @@ independent sources is a real signal; one weak cue alone is noise.
 5. Attach a confidence word calibrated to the cue set: *high* only when several
    independent groups agree and at least one is strong; *moderate* when groups agree
    but none is strong; *low* when groups conflict or the set is thin. Say which.
+   - **Grade the cue that sizes the quantity, not the cue set as a whole.** Broad agreement
+     across groups tells you the *direction* — the thing is progressing, the risk is not
+     materialising. It does not tell you the *number*. Where a single cue supplies the
+     magnitude, the confidence word tracks that cue, and drops a band when it is **aged**,
+     **weak or moderate**, or **from the same source family as your anchor** — three ways for
+     an estimate to inherit one source's error twice while looking corroborated. The worked
+     example in §5 is exactly this shape: five groups agree and one is Strong, which reads as
+     *high* on the rule above, but the only cue sizing the increment is a moderate, aged,
+     same-family-as-the-floor cue, so it publishes **moderate**. Say which cue you graded.
 6. Write the navigator's commentary (section 6) — the leaned-on cue and its failure
    story.
 7. Write the confirm/deny line: the instrument reading that would confirm the band,
@@ -133,9 +142,12 @@ stands. All figures below are illustrative, not benchmarks.
 **Fusion:** floor 30 (group A, aged) + rhythm says +4–6 (group A history, aged the
 same way) + independent groups B, C, D, E all consistent with continued normal
 progress, none suggesting a stall. Position: **"34 to 36 of 50 items complete, most
-likely around 35 — moderate confidence."** Band width: rhythm is the only cue that
-sizes the increment, and it is a moderate-grade cue from the same source family as
-the floor.
+likely around 35 — moderate confidence."** Why *moderate* and not *high*, when five
+independent groups agree and one of them is Strong: the agreeing groups establish the
+direction (work flowed, nothing stalled) and none of them sizes the increment. Rhythm is the
+only cue that does, and it is moderate-grade, aged the same way the floor is, and from the
+same source family as the floor — so the floor and the increment share one source's error.
+That is the rule-5 clause, and it sets both the band width and the confidence word.
 
 **Confirm/deny:** when the owner returns or the tracker is updated, a count of 33–37
 confirms the method; below 33 means a stall the side channels missed — investigate

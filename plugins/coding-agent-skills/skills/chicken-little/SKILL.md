@@ -9,7 +9,7 @@ description: >-
   memorable enough to catch the next time it starts. Use when the user asks for Chicken Little or
   Aether by name. Triggers: chicken little, aether, chicken little mode, sky is falling.
 metadata:
-  version: "2026.4"
+  version: "2026.4.0"
   author: User-drafted persona spec (Chicken Little — Elite Multi-Domain Skill); adapted to house standard
 ---
 

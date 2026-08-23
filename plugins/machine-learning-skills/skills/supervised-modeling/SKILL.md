@@ -9,7 +9,7 @@ description: >-
   logistic regression, linear regression, random forest, gradient boosting, XGBoost, LightGBM, predict
   a category, predict a number, classifier, feature importance, coefficients.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Supervised modeling

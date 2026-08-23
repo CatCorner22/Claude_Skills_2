@@ -14,7 +14,7 @@ description: >-
   clone, copy-paste bug, everywhere else this appears, outbreak, this bug again, trace the
   clones, quarantine the template.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Defect epidemiology (contact-trace the bug you just found)

@@ -14,7 +14,7 @@ description: >-
   probability, prior probability, superforecasting, superforecaster, perpetual beta, how
   much should this evidence move me.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §4), whose anchors were verified

@@ -925,3 +925,94 @@ fixing.
 **A defect class worth naming: fixes do not propagate to siblings.** `pre-mortem` carried the
 arithmetic `fmea` had already been repaired for. Whatever is fixed in one skill should be grepped
 for across the others that share the technique.
+
+---
+
+## §15 — Adversarial close-out (2026-08-19)
+
+A red-team pass whose job was to attack the library rather than confirm it, followed by working its
+verified backlog to zero. **253 attack prompts failed to break the library**; 11 skills were rated
+BROKEN on substance and 3 held up under direct attack. It produced **42 `mustFix` findings and 7
+`ownerDecisions`**. All 42 are now closed, each proven by a failing case before the fix and — where
+the fix was a guard — mutation-tested after.
+
+### 15.1 What the pass was actually for
+
+The prose in this library has been through five review passes and holds up. **Every finding rated
+critical this round sat in executable content** — two bundled scripts and about a dozen copy-paste
+recipes — which had never had a review of comparable depth. Reading code is not reviewing it: each
+of these read fine.
+
+| Found only by running it | What it did |
+|---|---|
+| `verify_citation.py` Europe PMC fallback | Accepted a *search's* top hit unchecked, so a fabricated DOI could return `exists: True` carrying a real paper's title and authors — inverting the tool's headline verdict |
+| `verify_citation.py` retraction check | "No signal found" and "nothing was consulted" both printed **clean** |
+| `verify_citation.py` provenance | `unrecognized` tracked per affiliation *string*, so a Chinese lead affiliation co-authored with a US site verified CLEAN |
+| `_is_us_locality` | "Beijing, **Co**-affiliated with Yale, … USA" → `['usa']`: any two-letter English word that is also a state code, plus "USA" anywhere later, suppressed the excluded country |
+| `search_pubmed.py` | Ordinary empty searches reported as unexecutable queries — which also **suppressed the genuine-gap note**, silencing the finding exactly where the gap was real |
+| `build_deck.py` | A title slide the validator deliberately allows crashed with a raw `KeyError` traceback |
+| `full-stack-app-architecture` check 2 | The branch meaning "passed" was *any* non-zero exit — a typo'd import, a missing dep, rc=127 all reported success |
+| `duckdb-local-analytics` recon | A row with a blank key was counted as a break on **both** sides, under a comment asserting the key "is never NULL here" |
+| `sortition-review` draw | Silently dropped the last item of any file without a trailing newline — the normal output of a spreadsheet export |
+| `frontend-modern-ui` client | Spreading a `Headers` instance yields `{}`; the caller's headers vanished, silently, for two of three type-legal shapes |
+
+### 15.2 Missing professional guardrails
+
+Five findings shared a shape: a competent procedure shipped without the guardrail its profession
+treats as inseparable from it. The house posture chosen — and applied consistently — is to **carry
+the guardrail**, one paragraph, provenance-marked, with the route to the professional who owns the
+decision.
+
+- **`split-tally-evidence`** scheduled a mutually documented destruction of exactly the records it
+  defines as evidence. No form of "litigation hold", "spoliation" or "duty to preserve" appeared
+  anywhere in the repository.
+- **`tabletop-wargaming`** and three sibling drills delivered spoofed executive email and vendor
+  calls to people operating the real process with real authorities, with **zero** exercise-control
+  discipline in the library — no EXERCISE marking, no ENDEX, no no-play list.
+- **`no-win-drills`** ran a deliberately distressing exercise and then asked participants, in a
+  group, when they privately gave up — with zero occurrences of consent, opt out, or withdraw.
+- **`adams-smart-brevity`** applied Smart Brevity to clinical records with no amendment discipline,
+  and its "cut what is not new" rule pulls directly against the content that defends a claim.
+- **`medical-research-detective`** treated red flags as report section 7-of-11 rather than a triage
+  gate, and omitted six time-critical presentations.
+
+### 15.3 The two systemic gates added
+
+Findings are cheap; the gate that stops the class recurring is not.
+
+1. **`validate.sh` now errors** on a missing or non-semver `metadata.version` and **NOTEs** a
+   SKILL.md whose content changed against the base ref without a version bump. This is the check
+   that would have caught 66 unbumped skills without a reviewer. All three guards mutation-tested.
+2. **`review-checklist.md` gained an "Executable content" section** — self-test coverage of the
+   failure the code exists to prevent, one mutation test, every copy-paste recipe run once, and
+   comments checked against what the code actually does.
+
+### 15.4 Owner decisions
+
+Five of the seven were resolvable and are done: the disconfirmation/quarantine composition defect
+(refuting evidence in the filtered corpus was deleted, then the hypothesis was *upgraded* for
+surviving a kill attempt run on a corpus with its refutations removed) is fixed; the GRADE-shaped
+country downgrade is now labelled as a source-integrity policy adjustment rather than a
+methodological finding; the code review bar and the provenance-mark legend are adopted; and the
+dormant-protective-function gap got the full treatment (PFD, proof-test interval, common-cause)
+rather than the minimal caveat.
+
+**The remaining two were decided by the owner on 2026-08-19, both toward the cheaper option:**
+
+- **Adams orthodoxy (decision 2) — do not split the contract material into a lawyers-only skill;
+  add the disagreement register instead.** Splitting would duplicate the Adams core and bury the
+  contract guidance behind a routing problem, for a benefit the carve-out already delivers. What
+  was missing was honesty about *which* positions are contested, so reference **§3b** now maps
+  five of them against the standard counter-case — "hold harmless", "defend", "represents and
+  warrants", how far to restrict "shall", and doublets in risk allocation — with the house rule
+  per row. Presenting a contested position as settled is how a drafter takes a rule to a partner,
+  finds it is a live argument, and stops trusting the method. §3b explicitly does **not** shelter
+  the archaisms with no contested defence.
+- **`--humans` (decision 7) — keep the flag, but make silent use impossible.** Removing it would
+  break a legitimate search, and the real defect was that it cut the corpus invisibly. It now
+  prints its caveat to **stderr on every run that uses it**, so the warning survives piping the
+  results and a reader of the output can tell the corpus was restricted. Combined with the earlier
+  fixes — the help text, and a zero-hit run under a MeSH filter no longer being reported as a gap
+  — the flag can no longer manufacture a false absence quietly.
+
+**All 7 owner decisions are now closed.**

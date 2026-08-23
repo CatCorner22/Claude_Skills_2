@@ -15,7 +15,7 @@ description: >-
   remembers it differently, whose story is right, reconcile the statements, contradictory
   testimony.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: >-
     Commissioned by the user, named for the Rashomon effect — the scholarly term (Karl G.
     Heider, American Anthropologist, 1988) that honors Kurosawa's film Rashomon (1950),

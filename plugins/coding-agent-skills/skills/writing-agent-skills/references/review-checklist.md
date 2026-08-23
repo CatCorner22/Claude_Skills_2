@@ -2,6 +2,14 @@
 
 A skill is done when every box is checked.
 
+## Contents
+- [Structure](#structure)
+- [Frontmatter](#frontmatter)
+- [Content (do + teach)](#content-do-teach)
+- [Evals & validation](#evals-validation)
+- [Executable content — the bar prose does not need](#executable-content-the-bar-prose-does-not-need)
+- [Trigger test (in a fresh session) — the only check that validates routing](#trigger-test-in-a-fresh-session-the-only-check-that-validates-routing)
+
 ## Structure
 - [ ] Folder is `plugins/<plugin>/skills/<skill-name>/` and contains `SKILL.md`.
 - [ ] `name` frontmatter equals the folder name.
@@ -69,7 +77,28 @@ A skill is done when every box is checked.
       thing still worth eyeballing is whether the *prose around* the link describes the target
       accurately, which no script can tell you.
 - [ ] Any external number or attribution carries a provenance mark or an honest hedge; no
-      invented statistics.
+      invented statistics. **Use the house vocabulary, which means these and only these:**
+      - `[snippet-only]` — taken from search snippets, primary source not opened. Add
+        `, cross-checked` when independent snippets agreed, or `, ×N` for the number that did.
+      - `[canon attribution]` — named to the standard source everyone cites, not
+        independently re-verified. Use for "Klein's pre-mortem", "Rubin's taxonomy".
+      - `[background — verify]` — general knowledge stated for orientation; the reader should
+        confirm before relying on it.
+      - `[unverified]` — a specific value that could not be confirmed. **Never quote a number
+        beside this mark.** Say what is unknown, not what you half-remember.
+      - `[rule text]` — quoted or closely paraphrased from a statute, rule, or standard, with
+        the instrument named and its jurisdiction stated.
+- [ ] **Epistemic hedging sits in the right section, and the Do-it step keeps its verb.** A
+      `## Do it` step is an instruction: it carries the action plus at most a bracketed mark.
+      The reasoning, the caveat, and the reason the number is doubted belong in `## Why / learn`
+      or the reference. This is a real failure mode here — a step whose instruction ("have the
+      user say it back") got demoted to a subordinate clause while three sentences of
+      uncertainty about an effect size took the main verb.
+- [ ] **Never ship the repo's own review history as skill content.** "An earlier version of
+      this file said…" is legitimate when it teaches a trap the reader could fall into; "a
+      reviewer showed…" and "this environment could not reach the sources" are not — the second
+      reads to an installed user as a claim about *their* environment. State what is known and
+      what is not; the audit trail belongs in git.
 - [ ] **Every runnable path is written for the installed shape**, i.e. addressed from
       `${CLAUDE_PLUGIN_ROOT}` (or from the user's own project), never as a bare `scripts/…`
       relative to this repo. `validate.sh` errors on the bare form. Nothing else in this repo
@@ -86,6 +115,37 @@ A skill is done when every box is checked.
 - [ ] `claude plugin validate plugins/<plugin>` passes.
 - [ ] Plugin `version` bumped in `plugins/<plugin>/.claude-plugin/plugin.json` — installed
       copies are version-pinned snapshots and pick up nothing without a bump.
+- [ ] Skill `metadata.version` bumped for any content change (three-part semver;
+      `validate.sh` errors on a missing or malformed one and NOTEs an unbumped change).
+
+## Executable content — the bar prose does not need
+
+Prose survives a careless reader; code does not. Every finding rated critical in this
+library's deepest review sat in executable content — two bundled scripts and about a dozen
+copy-paste recipes — never in the prose, which by then had been through five passes. Reading
+code is not reviewing it: each of these read fine.
+
+- [ ] **Every bundled script has a `--self-test`, and it covers the failure the script exists
+      to prevent** — not just its happy path. A citation verifier's self-test must include a
+      fabricated identifier; a linter's must include a deck that violates each rule.
+- [ ] **The self-test is mutation-tested at least once.** Break each guard deliberately and
+      confirm the suite fails. A suite that passes with the check deleted is not a suite. Two
+      real cases here: a linter whose five checks could each be removed with `--self-test`
+      still exiting 0, and a script whose test asserted the buggy behaviour, so the bug was
+      pinned rather than caught.
+- [ ] **Every copy-paste recipe has been RUN once, against the failure case it describes** —
+      in the actual language and library, not read. Found only by running: a `KeyError` on a
+      spec the validator deliberately allows, a shell loop silently dropping the last line of
+      a file with no trailing newline, a CI check whose "pass" branch was every kind of
+      failure, a `FULL OUTER JOIN` counting one row as a break on both sides, and a header
+      merge that discarded the caller's headers for two of three legal input shapes.
+- [ ] **The recipe's own comments are checked against what the code does.** A comment
+      asserting an invariant the code does not hold ("the key is never NULL here", "headers
+      merge per-key") is worse than no comment: it stops the next reader looking.
+- [ ] **Credentials, destructive operations, and deserialization are called out where they
+      appear.** A session-scoped `drop_all`, a credential on a session that follows
+      server-supplied URLs, and `joblib.load` on a settings path are each one line to guard
+      and a bad afternoon to discover.
 
 ## Trigger test (in a fresh session) — the only check that validates routing
 Everything above can pass on a skill that never loads. This is the one item that proves the

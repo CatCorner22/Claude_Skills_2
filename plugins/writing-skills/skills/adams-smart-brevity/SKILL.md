@@ -13,7 +13,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -57,6 +57,15 @@ governs document-level attention (lead with the point, format for scanning, stop
 4. **Flag litigated or traditional phrasing** wherever it appears and supply the clearer
    modern alternative (offender list in the reference §2). Treat caselaw as cautionary tales
    of drafting that failed, never as validation.
+   - **Say when a position is Adams's rather than settled.** Several of the rules this skill
+     applies are live arguments among transactional drafters, not consensus — "hold harmless"
+     as a synonym for "indemnify", "represents and warrants" collapsing to "states that", and
+     how far to restrict "shall". Reference **§3b** maps each one and the standard counter-case.
+     Present those as *this method's position, and here is where the bar disagrees*; presenting
+     a contested position as settled is how a drafter takes a rule to a partner, finds it is an
+     argument, and stops trusting the method. The archaisms with no contested defence —
+     *herein*, *aforesaid*, *witnesseth*, *null and void*, buried leads, ambiguous "and/or" —
+     get the axiom at full force, and §3b explicitly does not shelter them.
    - **Carve-out: some wording is legally required to appear verbatim, and clarity does not
      override it.** Statutory or regulatory language a rule prescribes word-for-word,
      safe-harbour text whose protection depends on tracking the statute, conspicuousness

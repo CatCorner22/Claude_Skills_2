@@ -13,7 +13,7 @@ description: >-
   loop, stock and flow, leverage point, unintended consequences, vicious cycle, virtuous cycle,
   second-order effects, the problem keeps coming back, policy resistance.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Systems thinking (the structure behind recurring problems)

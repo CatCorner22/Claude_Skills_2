@@ -13,7 +13,7 @@ description: >-
   prediction task, unit of prediction, baseline model, is this an ML problem, does ML fit,
   feasibility, well-posed, can we predict, framing spec, scope an ML project.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     The framing discipline descends from CRISP-DM's Business Understanding phase (the
     late-1990s NCR/DaimlerChrysler/SPSS/OHRA consortium process model), verified via

@@ -173,6 +173,24 @@ why.
   listing is degraded. Coverage is still partial, so this remains recorded as **partially met**
   rather than assumed passing.
 
+### Reading the provenance marks
+
+External claims in these skills carry a bracketed mark saying how well the claim was checked.
+They are there so you can tell a verified figure from a remembered one without opening the
+source yourself:
+
+| Mark | Means |
+|---|---|
+| `[snippet-only]` | Taken from search snippets; the primary source was not opened. `, cross-checked` or `, ×N` means that many independent snippets agreed |
+| `[canon attribution]` | Named to the source everyone cites for it, not independently re-verified |
+| `[background — verify]` | General knowledge, stated for orientation — confirm before relying on it |
+| `[unverified]` | A specific value that could not be confirmed. No number is quoted beside this mark, deliberately |
+| `[rule text]` | Quoted or closely paraphrased from a named statute, rule, or standard, with its jurisdiction stated |
+
+An unmarked factual claim should be one you can check from the skill itself — a worked
+example's arithmetic, a code path, a definition. If you find an unmarked external statistic,
+that is a defect worth reporting.
+
 ## Recommended companion marketplaces
 
 These skills complement (and deliberately don't duplicate) Anthropic's own marketplace:

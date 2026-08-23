@@ -13,7 +13,7 @@ description: >-
   timeboxing, too many priorities, drowning in tasks, context switching, Eisenhower matrix,
   finish before starting.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # Priority and WIP (personal lean)

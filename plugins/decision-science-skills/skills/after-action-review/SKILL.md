@@ -14,7 +14,7 @@ description: >-
   reflective-learner instead. Triggers: after-action review, AAR, hot wash, team debrief,
   sustain and improve, what should we do differently next close.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # After-action review (AAR)
@@ -114,6 +114,20 @@ no controlled trials; be candid about that when asked for evidence].
   `continuous-improvement-skills:root-cause-analysis` from question 3.
 - Running the assistant's self-critique as an "AAR" → that seam belongs to
   `metacognition-skills:reflective-learner`.
+
+**Where the event may be litigated, regulated, or claimed against, run this at counsel's
+direction.** A sourced causal timeline of an incident, with named contributing factors is a business record from the moment it exists, and it is discoverable —
+an opposing party's first request in an incident case is exactly this document, and it is the most useful thing in the file to them. It is not privileged because it sits in a private file or carries a confidentiality
+label; in the U.S. the protections that can apply are attorney-client privilege and the
+work-product doctrine, and both generally depend on counsel directing the work and on the
+document being marked and handled accordingly from the start. Retrofitting that afterwards
+rarely works. So: where a dispute, claim, audit or regulatory inquiry is reasonably
+anticipated, involve counsel before the exercise rather than after, and mark the output as
+they direct. This is orientation on how to route the question, not legal advice — and it is
+not a reason to skip the exercise or to write it dishonestly, which is worse on every axis
+including the legal one. (Related:
+`safety-and-reliability-skills:split-tally-evidence` step 7 for the preservation half —
+the same trigger suspends any retention schedule covering these documents.)
 
 ## Tailor to your environment
 Record in `references/your-environment.md`: the events that always get an AAR (each

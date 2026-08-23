@@ -10,7 +10,7 @@ description: >-
   simplify this code, too much boilerplate, do we need this abstraction, code review
   simplicity, delete code, small diff, keep it simple.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Lean-code principles

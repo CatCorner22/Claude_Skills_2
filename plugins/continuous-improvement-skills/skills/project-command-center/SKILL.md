@@ -13,7 +13,7 @@ description: >-
   intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
   constructive paranoia, now next later watch.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 

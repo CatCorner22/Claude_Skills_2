@@ -12,7 +12,7 @@ description: >-
   implementation intention, habit stacking, make it automatic, build a routine, stop doing X
   every time, keep forgetting to.
 metadata:
-  version: "1.2.0"
+  version: "1.4.0"
 ---
 
 # Habit design (make it automatic)
@@ -58,15 +58,16 @@ renegotiation protocol, and the failure-mode table are in `references/habit-meth
 3. **Choose a cue that already happens reliably.** Best: stack onto an existing stable habit
    ("after I pour the first coffee…"). Also workable: a fixed event or place. Not workable:
    a time of day the user doesn't already notice, or "in the morning" (too vague to fire).
-4. **Write the implementation intention verbatim.** "When <cue>, I will <tiny routine> in
-   <place>." Pre-deciding the when-where-how of acting raises the rate of actually doing it:
+4. **Write the implementation intention verbatim, and have the user say it back.** "When
+   <cue>, I will <tiny routine> in <place>." The say-back is the step, not a flourish: a plan
+   the user cannot repeat from memory is a plan they will not recognise when the cue arrives.
+   Pre-deciding the when-where-how of acting raises the rate of actually doing it:
    Gollwitzer & Sheeran's 2006 meta-analysis put the effect at d ≈ 0.65 across 94 tests, and
    that figure is the one everyone quotes. **Do not plan around it.** The literature carries
    substantial publication bias, and bias-corrected re-analyses put the effect materially
-   lower — plausibly a small effect rather than a medium-to-large one. [The specific corrected
-   values are `[unverified here]`: this environment could not reach the primary sources, and an
-   earlier version of this passage quoted a corrected band that a reviewer showed sat *above*
-   the paper's own bias-corrected estimate. Quote no number from this skill without checking it.]
+   lower — plausibly a small effect rather than a medium-to-large one. [Direction of the
+   correction: not in dispute. Magnitude: **`[unverified]` — quote no corrected number from
+   this skill without reading the source yourself.**]
    The honest planning assumption: writing the plan is nearly free and the effect is real but
    small, so do it — and do not promise anyone a 0.65. What gets a plan to the better end of
    whatever the true effect is happens to be what this step already specifies: a contingent

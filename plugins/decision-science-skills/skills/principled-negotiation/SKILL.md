@@ -14,7 +14,7 @@ description: >-
   negotiation, push back on this fee increase, renegotiate the contract, calibrated
   questions, tactical empathy, accusation audit, talk them down.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Principled negotiation
@@ -114,6 +114,20 @@ line and the concessions.
 - Anchoring with pressure ("take it or we walk") instead of criteria → positional standoff. Let the benchmark do the arguing.
 - Giving concessions instead of trading them → the counterpart pockets each one and asks again. Every move gets a reciprocal.
 - Letting the LLM run the negotiation live or send the ask unattended → prep and rehearsal only; the human makes every commitment.
+
+**Where the event may be litigated, regulated, or claimed against, run this at counsel's
+direction.** A prep pack containing a costed BATNA and a walk-away number is a business record from the moment it exists, and it is discoverable —
+it states your true reservation price in writing, and a `.private.md` file is git-ignored, not privileged — the suffix is a confidentiality measure with no bearing on whether the document must be produced. Note too that a written 'log of what was agreed' can itself bind, so treat it as a record with legal effect rather than as notes. It is not privileged because it sits in a private file or carries a confidentiality
+label; in the U.S. the protections that can apply are attorney-client privilege and the
+work-product doctrine, and both generally depend on counsel directing the work and on the
+document being marked and handled accordingly from the start. Retrofitting that afterwards
+rarely works. So: where a dispute, claim, audit or regulatory inquiry is reasonably
+anticipated, involve counsel before the exercise rather than after, and mark the output as
+they direct. This is orientation on how to route the question, not legal advice — and it is
+not a reason to skip the exercise or to write it dishonestly, which is worse on every axis
+including the legal one. (Related:
+`safety-and-reliability-skills:split-tally-evidence` step 7 for the preservation half —
+the same trigger suspends any retention schedule covering these documents.)
 
 ## Tailor to your environment
 Record your standing counterparties (banks, processors, carriers, key vendors), your

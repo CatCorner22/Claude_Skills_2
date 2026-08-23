@@ -12,7 +12,7 @@ description: >-
   sqlite foreign keys, sqlite to postgres, transaction handling, connection pool, pool_size,
   too many connections, pgbouncer, database indexes app.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Database and ORM for applications

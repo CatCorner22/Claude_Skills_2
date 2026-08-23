@@ -14,7 +14,7 @@ description: >-
   engineer, space pen, is there a pencil, simpler solution, better faster cheaper, are we
   overengineering this, streamline our direction.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   source: >-
     Original house persona commissioned by the user, built on the space-pen legend and its
     debunking. The legend's falsity is load-bearing: simplicity as search strategy,

@@ -532,8 +532,13 @@ decision-document architecture; the two compose and both descriptions should say
   (documented from the 1950s) via 1970s "responsibility assignment matrix"/"decision rights
   matrix" practice; the RACI acronym has **no named inventor and no canonical origin paper**.
   [snippet-only, multiple convergent]
-- **Influence without authority.** Allan R. Cohen & David L. Bradford, *Influence Without
-  Authority* (Wiley, 1989; 2nd ed. 2005) — exchange and the law of reciprocity; "currencies"
+- **Influence without authority.** Allan R. Cohen & David L. Bradford, "Influence without
+  authority: the use of alliances, reciprocity, and exchange to accomplish work,"
+  *Organizational Dynamics* 17(3), 1989, 5–17 — the model's first publication. The book of
+  the same name followed from Wiley, catalogued 1990 though its copyright year is 1989, so
+  some vendor records carry the earlier date; **cite the article for 1989 and the book by
+  its edition** (2nd ed. 2005, 3rd ed. 2017). An earlier line here read "Wiley, 1989",
+  which conflates the two. — exchange and the law of reciprocity; "currencies"
   (inspiration, task, position, relationship, personal) as the medium of influence; a 4-step
   ally-building model. [snippet-only]
 

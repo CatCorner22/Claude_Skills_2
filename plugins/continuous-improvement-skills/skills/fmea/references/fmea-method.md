@@ -90,7 +90,8 @@ Working logic — a **Severity-dominant simplification**, not the published look
 AIAG-VDA table, calibrate against it and use that. Apply the three rules in order and stop at the
 first that fires:
 
-1. **High** — S 9–10 (unless O and D are both ≤ 3); **or** S 7–8 with O ≥ 4 **or** D ≥ 4;
+1. **High** — S 9–10 (unless O and D are both ≤ 3 **and both scores are evidenced** — see the
+   note under rule 3); **or** S 7–8 with O ≥ 4 **or** D ≥ 4;
    **or** S 4–6 with O ≥ 4 **and** D ≥ 7 (a frequent cause with no working control).
    Action is required, or the current risk is explicitly accepted by the owner in writing.
 2. **Low** — S 1–3; **or** S ≤ 6 with O ≤ 3 **and** D ≤ 3 (moderate at worst, rare, and caught
@@ -98,6 +99,32 @@ first that fires:
    catastrophic-but-rare-and-detectable mode (S 9, O 2, D 3) would fall to Low, which is exactly
    the averaging-away this table exists to prevent — severity 7+ never rates Low here.
 3. **Medium** — everything else. Action should be taken; justify in the register if it isn't.
+
+**The rule-1 carve-out needs evidence, or it becomes the loophole this table exists to close.**
+Two paragraphs above, the file diagnoses teams that "learned to argue Detection down a point to
+duck a threshold". The `S 9–10 unless O and D are both ≤ 3` exception is that same lever with the
+sign flipped, and it is worse, because it rides on the two least defensible numbers on the sheet:
+
+- **Occurrence for a catastrophic mode is 1–3 almost by construction.** The shipped anchor for
+  O 1–2 is "never seen here; barely conceivable given current controls" — which is the honest
+  description of most catastrophes right up until the first one.
+- **Detection is rated against the control as *claimed*.** Nothing else in this method requires
+  that the control was ever tested.
+
+Two low numbers, neither of which anyone has to prove, drop a catastrophic mode from High to
+Medium — and Medium says "justify in the register if it isn't [actioned]", which is a sentence
+teams write. So condition the carve-out:
+
+> **A mode with S 9–10 stays High unless *both* the O ≤ 3 and the D ≤ 3 are evidenced** — the
+> occurrence rating backed by data (an incident history, a population base rate, a physical
+> argument), and the detection control **assurance-tested or sampled, not merely named**. Where
+> either is an assertion, the mode is High and the action is required.
+
+`safety-and-reliability-skills:bowtie-barrier-analysis` carries the assurance test this leans on:
+a barrier nobody has exercised is a claimed barrier, and
+`safety-and-reliability-skills:reliability-engineering` §4b prices exactly this — a protective
+control that is never exercised fails hidden, so a confident Detection score on an untested
+control is the number least connected to reality on the whole sheet.
 
 Note what rule 1 encodes: severity earns High on its own, but a *moderate* severity still reaches
 High when the cause is common **and** the control is blind — silent, frequent failure is the case

@@ -12,7 +12,7 @@ description: >-
   back-of-the-envelope, order of magnitude, rough number, ballpark, does this number make
   sense, significant figures, rounding, quick math, eyeball the math.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Number sense and estimation

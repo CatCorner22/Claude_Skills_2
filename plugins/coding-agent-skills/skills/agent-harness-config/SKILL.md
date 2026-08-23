@@ -9,7 +9,7 @@ description: >-
   Triggers: settings.json, permissions, allow this command, hooks, run automatically,
   whenever X do Y, MCP server, .mcp.json, configure Claude Code, harness config.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Configuring the Claude Code harness

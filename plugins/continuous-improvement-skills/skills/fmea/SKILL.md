@@ -10,7 +10,7 @@ description: >-
   to test hardest. Triggers: FMEA, failure modes, failure mode and effects analysis, severity
   occurrence detection, action priority, RPN, risk priority number, rank what could go wrong.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # FMEA (failure mode and effects analysis)
@@ -53,12 +53,24 @@ rating scales, and a worked bank-reconciliation FMEA table.
 5. **Prioritize with the Action Priority table** (High/Medium/Low), not by multiplying S×O×D into
    an RPN. AP reads the three ratings in order of dominance — Severity first — so a catastrophic
    failure can never be averaged away by arithmetic.
+   - **The one exception is where the gaming moved to, so gate it on evidence.** A severity 9–10
+     mode drops out of High only when Occurrence and Detection are *both* ≤ 3 — and those are the
+     two least defensible numbers on the sheet. Occurrence for a catastrophe is 1–3 nearly by
+     construction ("never seen here; barely conceivable"), and Detection is scored against the
+     control as *claimed*. So require both to be evidenced: Occurrence backed by incident history,
+     a base rate, or a physical argument, and the detection control **assurance-tested or sampled,
+     not merely named** (`safety-and-reliability-skills:bowtie-barrier-analysis`). Where either is
+     an assertion, the mode stays High. Otherwise the same instinct that once argued Detection down
+     a point to duck an RPN threshold argues two numbers down to move a catastrophic mode to
+     Medium, where "justify in the register if it isn't actioned" is a sentence teams write.
 6. **Act, then re-rate.** Actions cut **Occurrence** (prevention: remove or error-proof the cause)
    or improve **Detection** (a control that surfaces the failure sooner); Severity rarely moves
    without redesigning the process itself. Re-rate the row after the action lands and keep both
    ratings, so the register shows risk actually retired — not just actions listed.
 7. **Keep it living.** Re-run after every incident and process change. An incident is feedback: a
-   mode you missed, an Occurrence rated too low, or a Detection rated too optimistically.
+   mode you missed, an Occurrence rated too low, or a Detection rated too optimistically — and if
+   the mode was rated S 9–10 but held out of High by an unevidenced O/D pair, the incident is the
+   evidence that the carve-out was wrong.
 
 ## Why / learn
 The heart of the method is the **mode → effect → cause chain**: a mode is not a cause (duplicate

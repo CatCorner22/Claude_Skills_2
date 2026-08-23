@@ -59,7 +59,7 @@ query.
 ## Missing-value strategies and their bias
 | Strategy | When reasonable | Bias / cost |
 |---|---|---|
-| Drop rows (listwise) | Few missing, missing completely at random (MCAR) | Shrinks sample; skews summaries once missingness is non-random |
+| Drop rows (listwise) | Few missing and MCAR — **or** MAR when the output is a model of `y` on the observed columns the missingness depends on (see the mechanism notes below; not for marginal figures) | Shrinks sample; any mean, total or rate read off the survivors is biased once missingness is non-random, even where a fitted model is not |
 | Drop column | Column mostly empty or not usable | Loses a variable |
 | Mean/median impute | Numeric, roughly central, low missingness | Shrinks variance; weakens correlations; median safer on skew |
 | Mode impute | Categorical | Over-weights the majority class |

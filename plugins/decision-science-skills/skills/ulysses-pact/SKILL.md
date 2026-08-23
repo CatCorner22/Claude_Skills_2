@@ -15,7 +15,7 @@ description: >-
   broke our own rule again, bind my future self, cooling-off rule, no force-push after
   midnight.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: >-
     Named for Odysseus lashed to the mast (public domain; "Ulysses pact" / "Ulysses
     contract" is the established clinical term). Channels the documented practices:

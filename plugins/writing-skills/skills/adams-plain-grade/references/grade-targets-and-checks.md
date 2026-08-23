@@ -1,7 +1,9 @@
 # Grade targets, Adams rules, and the self-check
 
-§1–§4 are preserved from the source spec (adams-plain-grade v1.0.0, 2026-08-04), organized
-for use; §5–§8 are house additions.
+§1 and §2 are preserved from the source spec (adams-plain-grade v1.0.0, 2026-08-04),
+organized for use. §5–§8 are house additions, and **§3 and §4 now carry house content too**
+(the measurement mechanics and the discretion/obligation check in the self-check are not from
+the source) — so do not read this file as a verbatim record of the spec beyond §1–§2.
 
 Contents: §1 Grade targets · §2 The Adams rules · §3 Measuring the grade · §4 Self-check ·
 §5 Where the targets come from · §6 Worked example (before/after) · §7 The plain-word
@@ -17,8 +19,10 @@ ladder · §8 Routing within the register family
 - Concrete examples.
 - Target: Flesch Reading Ease 90 or higher, **or** Flesch-Kincaid grade at or below 5.0 —
   two separate scales, not two readings of the same number (§3). Either one is a pass, and
-  both are floors, not windows: Reading Ease runs past 100, and scoring 105 is not "too
-  easy," it is easy. Only the read-aloud test can fail a text for being too simple.
+  **neither is a window — but they run in opposite directions.** Reading Ease is a *floor*
+  (higher is easier: 105 is not "too easy", it is easy) and Flesch-Kincaid grade is a
+  *ceiling* (lower is easier: 2.0 is fine, 6.0 is not). Overshooting in the easy direction is
+  never the failure; only the read-aloud test can fail a text for being too simple.
 
 **Fallback — 8th grade (only when precision requires it)**
 - Sentences may reach 15–18 words.

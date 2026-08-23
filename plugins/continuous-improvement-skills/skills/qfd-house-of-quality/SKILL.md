@@ -13,7 +13,7 @@ description: >-
   deployment, translate customer needs to specs, requirements matrix, what should we build
   first, voice of customer to CTQ, customer needs to engineering characteristics.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # QFD — the House of Quality

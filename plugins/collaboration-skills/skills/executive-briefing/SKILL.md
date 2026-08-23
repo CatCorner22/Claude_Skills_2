@@ -15,7 +15,7 @@ description: >-
   decision memo, one-pager, SCQA, pyramid principle, completed staff work, brief the
   board.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from the general-use expansion dossier
     (docs/research/general-use-expansion-research.md §6 executive-briefing) —

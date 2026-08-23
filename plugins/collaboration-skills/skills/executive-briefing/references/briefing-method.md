@@ -182,7 +182,8 @@ OPTIONS:
 
 RECOMMENDATION: B — it is the only option that removes the cause rather than
 paying for the symptom, and the setup cost is one-time: 40 hours against the ~8
-hours a week option A burns is a five-week payback, then it is free.
+hours a week option A burns is five weeks of savings to repay it, starting after
+the two-week transition — about seven weeks from approval, then it is free.
 
 IF NOTHING IS DECIDED BY THE 15TH: the transition slips past quarter close and
 we carry the SLA misses through the quarter-end reporting cycle.

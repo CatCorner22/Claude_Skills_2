@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Measurement systems analysis and process capability
@@ -55,11 +55,19 @@ metadata:
    10×3×3 study estimates it loosely enough to straddle one (§3). For the pass/fail (attribute) variant the bars are κ > 0.75
    and effectiveness ≥ 90% — but **kappa is prevalence-sensitive**, so quote it only with its base
    rate and its 2×2 table beside it, and never compare kappas across item sets with different base
-   rates (§4a). At the 30–50 items step 1 asks for, κ's own standard error is around 0.15 — wide
-   enough to cross those bars — so quote its interval too and treat the bars as coarse sorting
-   rather than gates at that size (§4a).
+   rates (§4a). κ is also an *estimate*, and at the low end of the 30–50 items step 1 asks for its
+   own standard error runs about **0.14–0.17** — wide enough to cross those bars. It shrinks with
+   the item count (SE scales as 1/√n, so ~0.12 by 50 items), which is the argument for the top of
+   that range whenever a verdict rides on the number. Quote the interval alongside the point
+   estimate either way, and treat the bars as coarse sorting rather than gates at that size (§4a).
 4. **For LLM-as-judge scoring, measure agreement before trusting scores — and define a repeat
-   trial correctly.** Hold the configuration fixed (model version, prompt, decoding parameters —
+   trial correctly.** First, identify what the gauge's settable parameters actually *are* on your
+   model: several current generations **reject `temperature`/`top_p`/`top_k` outright**
+   (`coding-agent-skills:prompt-engineering`), so on those the gauge settings are the prompt and
+   rubric version, the effort/thinking configuration, the context policy, and the model version —
+   not decoding parameters. Where the knobs do not exist, the traps below still apply, with those
+   settings substituted for "temperature". Hold the configuration fixed (model version, prompt,
+   decoding parameters where they exist —
    *the one you will ship*) and get your repeat signal by re-randomizing **presentation**: swap the
    A/B order and require the verdict to hold, re-shuffle item order, score each item in a fresh
    context. Do **not** vary temperature between trials — that changes the gauge rather than

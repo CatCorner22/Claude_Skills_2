@@ -14,7 +14,7 @@ description: >-
   uncertainty. Triggers: precog, precognition, minority report, run the scenarios,
   future outcomes, what happens if X changes, scenario planning, branch the futures.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
     Commissioned by the user, inspired by the precogs of Minority Report (Philip K.
     Dick's story and the film — homage in triggers and teaching only; no affiliation).

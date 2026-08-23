@@ -11,7 +11,7 @@ description: >-
   prod, secrets management app, health check endpoint, structured logging, rollback deploy,
   container image size, run migrations on deploy, observability basics, containerize.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Deploy and operate

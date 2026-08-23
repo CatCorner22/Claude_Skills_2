@@ -13,22 +13,38 @@ on: { push: { branches: [main] }, pull_request: {} }
 jobs:
   checks:
     runs-on: ubuntu-latest
+    services:
+      postgres:                            # the engine the migration step is proved against
+        image: postgres:17
+        env: { POSTGRES_PASSWORD: postgres, POSTGRES_DB: ci_test }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s
+          --health-timeout 5s --health-retries 10
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with: { python-version: "3.12", cache: pip }
       - run: pip install -r requirements.txt -r requirements-dev.txt
       - run: ruff check . && ruff format --check .
+      # Migrations and constraint behaviour are proved on the ENGINE YOU DEPLOY, not on
+      # SQLite. testing-strategy's own rule; ignoring it here means the one CI step whose
+      # job is "will this migration apply in production" runs against a different database
+      # than production — server_default, ALTER semantics, NUMERIC precision, deferrable
+      # constraints and every Postgres-only type differ, and SQLite silently drops much of
+      # what it does not support.
       - run: alembic upgrade head          # migrations apply cleanly to a scratch DB
-        env: { APP_DATABASE_URL: "sqlite:///./ci.db" }
+        env: { APP_DATABASE_URL: "postgresql+psycopg://postgres:postgres@localhost:5432/ci_test" }
         # This env var only works if alembic/env.py reads it. Stock Alembic takes the URL
         # from `sqlalchemy.url` in alembic.ini and never consults the environment, so a
         # scratch-DB check wired this way silently runs against whatever alembic.ini names
         # — often a real database. Make env.py read it explicitly:
         #     config.set_main_option("sqlalchemy.url", os.environ["APP_DATABASE_URL"])
         # and leave `sqlalchemy.url` blank in alembic.ini so a missing var fails loudly.
-      - run: pytest -q
-        env: { TEST_DATABASE_URL: "sqlite:///./ci.db" }
+      - run: pytest -q                     # fast pass: own-logic tests on SQLite
+        env: { TEST_DATABASE_URL: "sqlite:///./ci_test.db" }
+      - run: pytest -q -m "engine"         # the truthful pass: constraints, locking, types
+        env: { TEST_DATABASE_URL: "postgresql+psycopg://postgres:postgres@localhost:5432/ci_test" }
   deploy:
     needs: checks
     if: github.ref == 'refs/heads/main'

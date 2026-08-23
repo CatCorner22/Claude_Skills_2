@@ -184,7 +184,12 @@ def add_notes(slide, text):
 
 # --- Slide builders -------------------------------------------------------
 def build_title(slide, spec, pal, font):
-    add_headline(slide, spec["headline"], pal, font, title_slide=True)
+    # `.get`, not `[...]`: the preflight deliberately exempts title slides from the
+    # missing-headline check, so a title slide with only a subtitle is a VALID spec that
+    # reached this line and died with a raw KeyError traceback instead of the script's own
+    # "build refused:" message. A subtitle-only title slide is legitimate — a cover with the
+    # deck's name in the subtitle and nothing above it.
+    add_headline(slide, spec.get("headline", ""), pal, font, title_slide=True)
     if spec.get("subtitle"):
         _, tf = _textbox(slide, 0.0, 4.0, CANVAS_W, 1.0)
         _set_para(tf, spec["subtitle"], font, 22, pal["muted"], align=PP_ALIGN.CENTER)
@@ -422,6 +427,14 @@ def self_test():
             {"kind": "flow", "headline": "No steps still builds a slide", "steps": []},
             {"kind": "chart", "headline": "No series still builds a chart frame",
              "chart": {"type": "column", "categories": [], "series": []}}]}),
+        # Regression: the preflight exempts title slides from the missing-headline check,
+        # so this spec is valid — and build_title indexed spec["headline"] and died with a
+        # raw KeyError traceback instead of the script's own "build refused:" message.
+        # --self-test exercised table/magnitude/flow/chart/statement and never a title slide.
+        ("title slide with no headline", {"slides": [
+            {"kind": "title", "subtitle": "A subtitle only — a legitimate cover slide"}]}),
+        ("title slide with both", {"slides": [
+            {"kind": "title", "headline": "A cover with both", "subtitle": "and a subtitle"}]}),
         ("unicode body", {"slides": [
             {"kind": "statement", "headline": "Unicode must survive the round trip",
              "body": "naïve café 数据 🎯", "source": "Source: self-test"}]}),
