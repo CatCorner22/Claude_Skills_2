@@ -1185,3 +1185,11 @@ retraction of the previous pass's headline mechanism claim.
   editing with no amendment discipline, a seven-stage research protocol with no urgency triage.
   House posture chosen and applied consistently: **carry the guardrail** (one paragraph, with the
   provenance marks and the route-to-the-professional line), rather than disclaiming the whole area.
+- RULE (2026-08-19, owner-decided): when a skill renders one authority's contested positions,
+  **say which are contested and map the counter-case** rather than splitting the material into a
+  specialist skill. Presenting a live argument as settled is how a practitioner takes the rule to a
+  colleague, finds it is an argument, and stops trusting the whole method. Applied as
+  `adams-smart-brevity` reference §3b; the register must not shelter the uncontested rules.
+- RULE (2026-08-19, owner-decided): a flag that silently narrows a corpus **prints its caveat to
+  stderr on every run**, not just in `--help`. Removing the flag breaks a legitimate use; the defect
+  was invisibility. stderr so the warning survives piping the results.

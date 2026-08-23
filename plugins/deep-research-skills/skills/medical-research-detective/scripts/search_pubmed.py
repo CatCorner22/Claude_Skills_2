@@ -502,6 +502,18 @@ def main(argv=None):
         # footer over an empty result, which reads exactly like "the literature is silent".
         ap.error("--pairs needs at least two terms (it searches every pair of them)")
 
+    if args.humans:
+        # The flag stays — a human-only search is a legitimate thing to want — but it cannot be
+        # used SILENTLY. MeSH terms are assigned at indexing time, so this restriction excludes
+        # every not-yet-indexed record: the most recent literature, which is exactly where an
+        # emerging safety signal lives. Printed to stderr on every run so it survives piping the
+        # results, and so a reader of the output knows the corpus was cut.
+        print("NOTE: --humans adds humans[MeSH Terms]. MeSH is assigned at indexing time, so "
+              "this excludes\n      every record not yet MEDLINE-indexed — i.e. the newest "
+              "work, which is where an emerging\n      safety signal appears first. Re-run "
+              "without it before concluding anything about what exists.",
+              file=sys.stderr)
+
     jobs = []
     if args.query:
         jobs.append(("query", build_query(args.query, args.years, args.humans,

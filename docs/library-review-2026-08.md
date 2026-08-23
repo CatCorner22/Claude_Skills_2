@@ -997,9 +997,22 @@ methodological finding; the code review bar and the provenance-mark legend are a
 dormant-protective-function gap got the full treatment (PFD, proof-test interval, common-cause)
 rather than the minimal caveat.
 
-**Two remain genuinely the owner's:** (a) how far to go on Adams orthodoxy versus transactional-bar
-practice — the substance-vs-style boundary is in, but whether to split the contract material into a
-lawyers-only skill is a question about what the library is *for*; and (b) whether `--humans` should
-exist at all in the medical search tool, given that any MeSH restriction hides the newest,
-not-yet-indexed literature, which is where an emerging safety signal lives. It is opt-in and now
-carries the warning, and a zero-hit run under it is no longer reported as a gap.
+**The remaining two were decided by the owner on 2026-08-19, both toward the cheaper option:**
+
+- **Adams orthodoxy (decision 2) — do not split the contract material into a lawyers-only skill;
+  add the disagreement register instead.** Splitting would duplicate the Adams core and bury the
+  contract guidance behind a routing problem, for a benefit the carve-out already delivers. What
+  was missing was honesty about *which* positions are contested, so reference **§3b** now maps
+  five of them against the standard counter-case — "hold harmless", "defend", "represents and
+  warrants", how far to restrict "shall", and doublets in risk allocation — with the house rule
+  per row. Presenting a contested position as settled is how a drafter takes a rule to a partner,
+  finds it is a live argument, and stops trusting the method. §3b explicitly does **not** shelter
+  the archaisms with no contested defence.
+- **`--humans` (decision 7) — keep the flag, but make silent use impossible.** Removing it would
+  break a legitimate search, and the real defect was that it cut the corpus invisibly. It now
+  prints its caveat to **stderr on every run that uses it**, so the warning survives piping the
+  results and a reader of the output can tell the corpus was restricted. Combined with the earlier
+  fixes — the help text, and a zero-hit run under a MeSH filter no longer being reported as a gap
+  — the flag can no longer manufacture a false absence quietly.
+
+**All 7 owner decisions are now closed.**
