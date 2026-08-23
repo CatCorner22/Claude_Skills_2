@@ -1,0 +1,25 @@
+{
+  "extraKnownMarketplaces": {
+    "treasury-analyst-skills": {
+      "source": {
+        "source": "github",
+        "repo": "CatCorner22/Claude_Skills_2"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "data-analytics-bi-skills@treasury-analyst-skills": true,
+    "data-tools-skills@treasury-analyst-skills": true,
+    "machine-learning-skills@treasury-analyst-skills": true,
+    "continuous-improvement-skills@treasury-analyst-skills": true,
+    "full-stack-dev-skills@treasury-analyst-skills": true,
+    "coding-agent-skills@treasury-analyst-skills": true,
+    "metacognition-skills@treasury-analyst-skills": true,
+    "deep-research-skills@treasury-analyst-skills": true,
+    "writing-skills@treasury-analyst-skills": true,
+    "safety-and-reliability-skills@treasury-analyst-skills": true,
+    "collaboration-skills@treasury-analyst-skills": true,
+    "math-foundations-skills@treasury-analyst-skills": true,
+    "decision-science-skills@treasury-analyst-skills": true
+  }
+}
