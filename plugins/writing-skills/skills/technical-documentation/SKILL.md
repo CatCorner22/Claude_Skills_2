@@ -14,7 +14,7 @@ description: >-
   ADR, architecture decision record, changelog, Diátaxis, how-to guide, tutorial vs reference,
   API docs, docs as code, semantic versioning, our docs are out of date.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §5 technical-documentation).
@@ -57,8 +57,8 @@ is not "restructured wholesale" [snippet-only].
 - Not for: crisis playbooks with tripwires and sealed authority →
   `safety-and-reliability-skills:break-glass-playbooks` (it owns "runbook"); a full
   method doc with sequence, timing, and key points →
-  `continuous-improvement-skills:standard-work`; the checklist card itself →
-  `safety-and-reliability-skills:checklist-design`.
+  the archived `continuous-improvement-skills:standard-work`; the checklist card itself →
+  the archived `safety-and-reliability-skills:checklist-design`.
 - Not for: authoring Agent Skills → `coding-agent-skills:writing-agent-skills`.
 - Not for: commit-message and PR prose → `coding-agent-skills:git-and-code-review`.
 

@@ -13,7 +13,7 @@ description: >-
   competing hypotheses, hypothesis matrix, which explanation fits the evidence, diagnostic
   evidence, rule out causes, weigh rival explanations, why is this break really happening.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Competing-hypotheses analysis (the hypothesis matrix)
@@ -34,7 +34,7 @@ own it). Write "competing hypotheses" or "the hypothesis matrix" — in prose, h
   line vs. matching-rule gap vs. bank error vs. keying error — or a works-in-test-fails-in-prod
   production mystery.
 - Any analysis at risk of confirmation bias: an incident with multiple suspects, rival readings of
-  a prompt during a `coding-agent-skills:master-prompt-architect` audit, or generalizing the
+  a prompt during a the archived `coding-agent-skills:master-prompt-architect` audit, or generalizing the
   disconfirmation pass of `deep-research-skills:medical-research-detective` beyond medicine.
 - Deciding what evidence to gather next — the matrix shows which observation would actually
   discriminate between the surviving rivals.

@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
 ---
 
 # Measurement systems analysis and process capability
@@ -31,7 +31,7 @@ metadata:
   or reduce its variance.
 - Not for: building the control chart that establishes stability → the SPC coverage in
   `continuous-improvement-skills:dmaic-problem-solving` (Control phase) and
-  `continuous-improvement-skills:lean-six-sigma-for-software` owns the charts — stability is
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` owns the charts — stability is
   their gate; whether the stable process meets spec is this skill's question. Broad ML model
   evaluation (metric choice, cross-validation, leakage) →
   `machine-learning-skills:model-evaluation`; this skill adds the inter-rater rigor on top.

@@ -15,7 +15,7 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
@@ -63,15 +63,15 @@ elicitation used against them — evidence, not license. The rail is expanded in
   `collaboration-skills:meeting-design` builds the container (purpose, timebox, roles);
   this skill runs the conversation inside it.
 - Not for: choosing WHAT to ask in voice-of-customer work → see
-  `continuous-improvement-skills:kaizen-and-codesign`, which owns VOC content and
+  the archived `continuous-improvement-skills:kaizen-and-codesign`, which owns VOC content and
   workshop facilitation; this skill owns the stance that gets any question answered.
 - Not for: interest-based bargaining → see
-  `decision-science-skills:principled-negotiation`; bargaining trades on interests and
+  the archived `decision-science-skills:principled-negotiation`; bargaining trades on interests and
   positions, elicitation surfaces knowledge — mixing them poisons both.
 - Not for: delivering a hard message about someone's behavior → see
-  `collaboration-skills:feedback-that-lands`.
+  the archived `collaboration-skills:feedback-that-lands`.
 - Not for: escalating a problem or transferring work under time pressure → see
-  `safety-and-reliability-skills:sbar-structured-communication`.
+  the archived `safety-and-reliability-skills:sbar-structured-communication`.
 
 ## Do it
 Full question-sequence patterns, the rehearsal script, the transcript-audit protocol, and
@@ -202,7 +202,7 @@ with a memory.
   elicitation; the rail says stop.
 - Interviewing for VOC content with no content plan → this skill carries the stance;
   bring the question substance from
-  `continuous-improvement-skills:kaizen-and-codesign`.
+  the archived `continuous-improvement-skills:kaizen-and-codesign`.
 
 ## Tailor to your environment
 Record your standing interview landscape in `references/your-environment.md`: the experts

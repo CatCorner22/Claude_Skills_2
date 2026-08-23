@@ -120,7 +120,7 @@ teams write. So condition the carve-out:
 > argument), and the detection control **assurance-tested or sampled, not merely named**. Where
 > either is an assertion, the mode is High and the action is required.
 
-`safety-and-reliability-skills:bowtie-barrier-analysis` carries the assurance test this leans on:
+the archived `safety-and-reliability-skills:bowtie-barrier-analysis` carries the assurance test this leans on:
 a barrier nobody has exercised is a claimed barrier, and
 `safety-and-reliability-skills:reliability-engineering` §4b prices exactly this — a protective
 control that is never exercised fails hidden, so a confident Detection score on an untested

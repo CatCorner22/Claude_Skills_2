@@ -32,4 +32,4 @@ and never committed.
 - Register/grade-level rewrites of finished explanations: <who owns plain-language output —
   route via `writing-skills:adams-plain-grade`>
 - Long-term retention follow-up (schedules, prompts): route via
-  `learning-skills:spaced-retrieval-learning`.
+  the archived `learning-skills:spaced-retrieval-learning`.

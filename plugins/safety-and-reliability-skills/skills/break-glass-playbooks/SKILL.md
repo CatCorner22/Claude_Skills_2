@@ -15,7 +15,7 @@ description: >-
   hits, emergency access, runbook, kill switch, tripwire, covenant trip, we'd be
   scrambling, sealed instructions.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Homage to Asimov's Foundation — pre-recorded guidance that unseals when predicted
     crises arrive — an homage only, no affiliation with the estate or rights holders.
@@ -57,14 +57,14 @@ The design question throughout: **what must already exist when the alarm sounds?
   tripwire-plus-playbook pair. Run them as a pair — a pre-mortem without this stage
   produces a list; this stage without a pre-mortem produces playbooks for the wrong
   crises.
-- Sibling `safety-and-reliability-skills:bowtie-barrier-analysis` places these
+- Sibling the archived `safety-and-reliability-skills:bowtie-barrier-analysis` places these
   playbooks on the map: they are recovery-side (mitigative) barriers on the consequence
   side of the bowtie, and drawing them there exposes which consequence lines still have
   no barrier at all.
 - Not for: finding the failure modes in the first place → see
   `decision-science-skills:pre-mortem`.
 - Not for: the checklist form of the steps themselves → see
-  `safety-and-reliability-skills:checklist-design`; a playbook's read-do steps follow
+  the archived `safety-and-reliability-skills:checklist-design`; a playbook's read-do steps follow
   its rules (killer items only, imperative voice, anchored pause points).
 - Not for: rehearsing against an adaptive adversary → see
   `decision-science-skills:tabletop-wargaming`; the drill here tests the *unsealing
@@ -97,7 +97,7 @@ and the failure-mode table are in `references/break-glass-method.md`.
    graduated-trigger pattern from contingency-plan practice [regulatory].
 3. **Pre-author the first ten moves at calm-headed quality.** These are the sealed
    instructions: the first ten concrete moves, written now, while heads are cool, in
-   read-do form (`safety-and-reliability-skills:checklist-design` supplies the form).
+   read-do form (the archived `safety-and-reliability-skills:checklist-design` supplies the form).
    Write for a cold reader under stress — the author may be on a plane when it fires.
    Ten moves buys the first hour; it does not script the whole crisis.
 4. **Pre-grant the emergency authority — with automatic expiry and full logging.**
@@ -115,7 +115,7 @@ and the failure-mode table are in `references/break-glass-method.md`.
    make testing a requirement, not a nicety [framework]. Log every drill: date, time
    to unseal, what failed, what was fixed.
 7. **After any real firing, feed the after-action findings back.** Run
-   `decision-science-skills:after-action-review` on the response, then re-arm: update
+   the archived `decision-science-skills:after-action-review` on the response, then re-arm: update
    the instructions, reset the authority, confirm the tripwire threshold still sits
    where the crisis actually announced itself, and re-seal. A fired playbook that is
    never re-armed protects against the previous crisis.
@@ -178,7 +178,8 @@ not absorb it is aging fiction with a good filing system.
   in every drill.
 - Instructions that assume the author responds → write for a cold reader; run the
   drill with someone who did not write them.
-- Ten vague moves → read-do specificity, per checklist-design; "assess and
+- Ten vague moves → read-do specificity — verb-first, executable (checklist canon; the
+  checklist-design skill is archived); "assess and
   communicate" is not a move.
 - Confusing the unsealing drill with adversarial rehearsal → the drill tests
   mechanics; playing a thinking adversary belongs to

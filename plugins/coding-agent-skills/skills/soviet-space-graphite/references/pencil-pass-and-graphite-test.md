@@ -32,7 +32,7 @@ doctrine come from this record:
 6. **The spreadsheet, not the app** — for low-volume, low-concurrency, trusted-user work.
 7. **The cron job, not the platform** — one scheduled script before an orchestration layer.
 8. **The checklist, not the workflow engine** — human process before automated process
-   (`safety-and-reliability-skills:checklist-design` builds it properly).
+   (the archived `safety-and-reliability-skills:checklist-design` builds it properly).
 9. **The phone call, not the integration** — for low-frequency cross-org exchanges.
 10. **Build the simple version** — smallest thing that delivers the stated what
     (Gall's law: evolve it from something that works).
@@ -94,9 +94,9 @@ mandatory — the history of the existing solution is read before it is called w
 **Case: "Replace the wire-approval step; it slows everything down."**
 - THE PENCIL: rung 2 — delete the requirement.
 - THE GRAPHITE: Chesterton's fence check finds the approval step IS a preventive barrier
-  on the BEC bowtie (`safety-and-reliability-skills:bowtie-barrier-analysis`). Candidate
+  on the BEC bowtie (the archived `safety-and-reliability-skills:bowtie-barrier-analysis`). Candidate
   killed. Verdict: the delay is real; attack it by exploiting the constraint (batch
-  approval windows, `continuous-improvement-skills:theory-of-constraints`), never by
+  approval windows, the archived `continuous-improvement-skills:theory-of-constraints`), never by
   removing the barrier.
 
 ## §6 Voice card

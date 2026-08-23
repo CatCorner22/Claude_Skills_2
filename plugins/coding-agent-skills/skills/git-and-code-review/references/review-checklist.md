@@ -94,7 +94,7 @@ Tone rules that keep the review a collaboration:
 - Praise specifically: name the behavior that's good and why it works, with the same
   precision as criticism.
 - If a drafted comment reads as a verdict on the author, rewrite it with
-  `collaboration-skills:feedback-that-lands` before posting.
+  the archived `collaboration-skills:feedback-that-lands` before posting.
 
 ## Severity labels
 Label every comment so the author can triage:

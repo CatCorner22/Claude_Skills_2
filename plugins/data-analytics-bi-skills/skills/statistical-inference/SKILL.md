@@ -11,7 +11,7 @@ description: >-
   sampling distribution, type I error, type II error, statistical power, A/B test, significance level,
   null hypothesis, bootstrap confidence interval, permutation test, Mann-Whitney, nonparametric test.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Statistical inference
@@ -21,7 +21,7 @@ metadata:
 - Comparing groups: two means (t-test), several means (ANOVA), or categorical association (chi-square).
 - Putting a confidence interval around a sample estimate to quantify its uncertainty.
 - Not for: describing the sample you already hold (center, spread, shape) → see
-  `data-analytics-bi-skills:descriptive-statistics`. For scoring a predictive model's performance →
+  the archived `data-analytics-bi-skills:descriptive-statistics`. For scoring a predictive model's performance →
   see `machine-learning-skills:model-evaluation`. For framing the whole improvement project
   around the analysis → see `continuous-improvement-skills:dmaic-problem-solving`.
 - Not for: designing and operating the experiment itself — randomization unit and interference,

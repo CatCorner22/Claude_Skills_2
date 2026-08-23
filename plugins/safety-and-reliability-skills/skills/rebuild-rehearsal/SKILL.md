@@ -14,7 +14,7 @@ description: >-
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)
@@ -62,7 +62,7 @@ alive to correct the next ones. The artifact is disposable; the capability is th
   skill rehearses the *capability* (could we still build the thing at all, slow and
   thorough). A team can pass one and fail the other.
 - Not for: one person retaining studied material → see
-  `learning-skills:spaced-retrieval-learning`; successive relearning is this skill's
+  the archived `learning-skills:spaced-retrieval-learning`; successive relearning is this skill's
   personal-scale twin — same mechanism (exercise before the memory dies), different
   unit (a fact in a head vs. a capability in a team).
 - Not for: writing or fixing the documentation itself → see

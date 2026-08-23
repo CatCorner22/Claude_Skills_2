@@ -231,6 +231,6 @@ Four registers, one library — the audience picks the skill:
 - **`writing-skills:explanation-design`** — when the job is building *understanding* of a
   concept, not delivering a notice: audience model, entry analogy, teach-back. Design the
   explanation there; bring its words down to grade here.
-- **`writing-skills:gonzo`** — the deliberately wild register, engaged by name only, for
+- **the archived `writing-skills:gonzo`** — the deliberately wild register, engaged by name only, for
   commentary that polite registers can't reach. Never for anything a patient or client must
   rely on.

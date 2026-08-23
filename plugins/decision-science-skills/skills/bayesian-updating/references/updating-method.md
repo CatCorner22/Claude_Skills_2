@@ -95,7 +95,7 @@ Readings that matter for the decision:
   maybe only a second, independent signal does. Write the threshold next to the question.
 
 (The count-table format itself — natural frequencies — is taught in
-`math-foundations-skills:probability-fundamentals`; this skill applies it to live
+the archived `math-foundations-skills:probability-fundamentals`; this skill applies it to live
 decisions.)
 
 ## 5. The odds shortcut and chaining

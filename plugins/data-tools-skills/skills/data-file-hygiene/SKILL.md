@@ -10,7 +10,7 @@ description: >-
   version data files, sanitize data, anonymize spreadsheet, remove sensitive data, what can I
   commit, data retention files, raw vs processed, safe to share.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Data-file hygiene
@@ -20,11 +20,11 @@ metadata:
   what gets versioned where.
 - Preparing any dataset, workbook, or example to share (email, git, a skill's references) when
   the source contains sensitive data.
-- Not for: cleaning the *contents* of a dataset → see `data-analytics-bi-skills:data-cleaning`.
+- Not for: cleaning the *contents* of a dataset → see the archived `data-analytics-bi-skills:data-cleaning`.
   For git mechanics → see `coding-agent-skills:git-and-code-review`.
 - Not for: making the analysis itself rerunnable — seeds, pinned environments, a one-command
   rebuild, and the delete-everything-downstream-of-raw regenerate test → see
-  `data-tools-skills:reproducible-analysis`. This skill owns where files live and what is safe
+  the archived `data-tools-skills:reproducible-analysis`. This skill owns where files live and what is safe
   to share; that one owns whether rerunning them reproduces the number.
 
 ## Do it

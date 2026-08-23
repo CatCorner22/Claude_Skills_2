@@ -10,25 +10,25 @@
     {
       "name": "data-analytics-bi-skills",
       "source": "./plugins/data-analytics-bi-skills",
-      "description": "SQL, exploratory analysis, data cleaning, descriptive statistics, statistical inference, dashboard design, spreadsheet modeling, and assertion-evidence presentations for business intelligence — plus causal inference (DAGs, DiD/IV/RDD), A/B test design (SRM, peeking, MDE, variance reduction), and survey and sampling design (total survey error, nonresponse).",
+      "description": "Statistical inference done honestly, causal inference (DAGs, DiD/IV/RDD), A/B test design (SRM, peeking, MDE, variance reduction), survey and sampling design (total survey error, nonresponse), spreadsheet modeling discipline, and assertion-evidence presentations with a build-and-lint toolchain.",
       "category": "data"
     },
     {
       "name": "data-tools-skills",
       "source": "./plugins/data-tools-skills",
-      "description": "Practical data plumbing for analysts: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible analysis (seeds, pinned environments, one-command rebuild).",
+      "description": "Hands-on data plumbing that survives real files: DuckDB local analytics with a null-key-guarded reconciliation pattern, PDF table extraction hardened against full-width headings and dateless rows, REST API pulls with bounded pagination and per-request credentials, CSV/flat-file wrangling, and data-file hygiene.",
       "category": "data"
     },
     {
       "name": "machine-learning-skills",
       "source": "./plugins/machine-learning-skills",
-      "description": "Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).",
+      "description": "Applied machine learning with honest evaluation: project framing (the leanest model is no model), supervised modeling, feature engineering, model evaluation (threshold as a fitted parameter), time-series forecasting with horizon-aware backtest sizing and measured interval coverage, and anomaly detection with the degenerate-case floor.",
       "category": "data"
     },
     {
       "name": "continuous-improvement-skills",
       "source": "./plugins/continuous-improvement-skills",
-      "description": "Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD), structured-ideation (brainwriting, SCAMPER, diverge/converge), and priority-and-wip (personal kanban, WIP limits, timeboxing).",
+      "description": "The improvement methods with teeth: DMAIC with a fully worked control-chart project (provisional-limits discipline included), FMEA with the evidence-gated Action Priority table, measurement systems analysis extended to LLM-as-judge gauge studies, design of experiments, evolutionary operation (EVOP), root cause analysis, and the project command center doctrine.",
       "category": "operations"
     },
     {
@@ -40,7 +40,7 @@
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, software-archaeology, defect-epidemiology, rule-stress-testing, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).",
+      "description": "Claude Code craft for working engineers: authoring Agent Skills (the library's own standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors multi-agent code review (board-review + six specialist subagents), defect-epidemiology (treat a confirmed bug as evidence about a population), rule-stress-testing, software-archaeology, Comrade Engineer's pencil pass, The Foreman's draw inspection, and Chicken Little (Aether) — the multi-domain persona with forward-deployed advisor and compiler autopsy modes.",
       "category": "development"
     },
     {
@@ -58,37 +58,31 @@
     {
       "name": "writing-skills",
       "source": "./plugins/writing-skills",
-      "description": "Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) — both rejecting litigated \"tested language\" and ambiguity — gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask, explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).",
+      "description": "Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing, with the risk-allocation carve-outs and the where-the-bar-disagrees register), adams-plain-grade (5th-8th grade accessible register with the discretion/obligation check), explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).",
       "category": "writing"
     },
     {
       "name": "safety-and-reliability-skills",
       "source": "./plugins/safety-and-reliability-skills",
-      "description": "High-hazard-industry methods transplanted to operations and software: checklist design (read-do/do-confirm, killer items), bowtie barrier analysis with HAZOP guidewords, SBAR/I-PASS structured communication with PACE assertiveness, reliability engineering math (Weibull, MTBF, availability), and weight-of-the-books design-basis load review (the Load Manifest: size systems against the payload they exist to carry), and break-glass-playbooks (Seldon-crisis homage: watched numeric tripwires, sealed first moves, expiring logged authority, scheduled unsealing drills).",
+      "description": "Safety engineering for records, alarms, and dormant protections: split-tally evidence design with the litigation-hold rail, detection-system tuning by empirical disposition audit (floor-ceiling autoimmunity band), reliability math including probability-of-failure-on-demand for dormant protective functions, rebuild rehearsal with an irreversibility screen, break-glass playbooks, and hash-rank sortition review.",
       "category": "operations"
-    },
-    {
-      "name": "learning-skills",
-      "source": "./plugins/learning-skills",
-      "description": "Learning science applied, with the LLM removing each method's historical labor barrier: spaced-retrieval-learning (the testing effect, spacing, and interleaving — retrieval prompts authored and scheduled for you), deliberate-practice (edge-of-ability drills with immediate feedback — the drill built and the environment played for you), and habit-design (implementation intentions, habit stacking, friction engineering). Each skill both runs the method and teaches why it works.",
-      "category": "research"
     },
     {
       "name": "collaboration-skills",
       "source": "./plugins/collaboration-skills",
-      "description": "Working-with-humans core: meeting-design (the agenda as a decision list, pre-reads with silent start, named decision rules before discussion opens, actions that leave with owners and dates), feedback-that-lands (SBI/COIN structure, behavior-not-person, feedforward, and receiving feedback as well as giving it), and disarming-elicitation (the Columbo-homage stance for surfacing tacit knowledge — low-stakes questions, deliberate-error restatement, the doorknob question — with a plainly named ethics rail), executive-briefing (BLUF, Minto SCQA, completed staff work), and stakeholder-mapping (power-interest grid, RACI, who can block this). All do the task and teach the reasoning.",
+      "description": "Two collaboration instruments that earn their slots: disarming-elicitation (the FBI counter-elicitation stance inverted for willing experts, with the scoped-promise and investigation rails) and meeting-design (decisions extracted as owner-and-date read-backs, not vibes).",
       "category": "operations"
     },
     {
       "name": "math-foundations-skills",
       "source": "./plugins/math-foundations-skills",
-      "description": "Statistics and basic-math foundations, domain-neutral and portable: number sense and Fermi estimation, percentages and proportions (percent change vs points, weighted means, mix effects), algebra and formula rearrangement, unit conversion and dimensional analysis, exponential growth and logarithms (CAGR, doubling time, log scales), and probability fundamentals (conditional probability, Bayes' theorem via natural frequencies, expected value). Each skill both does the math and teaches the reasoning.",
+      "description": "Unit conversion and dimensional analysis — the factor-label method, unit checks as a necessary-not-sufficient guard on every formula, and the unit-driven catch for formula rearrangement errors. The broader basic-math set is archived; this is the one that catches real errors models and humans both make.",
       "category": "data"
     },
     {
       "name": "decision-science-skills",
       "source": "./plugins/decision-science-skills",
-      "description": "Structured-judgment methods from intelligence, military, forecasting, and system-dynamics practice: competing-hypotheses analysis, reference-class forecasting (outside view), pre-mortem, after-action review, tabletop wargaming with commander's intent, principled negotiation (Fisher/Ury + Voss), the-challenger revision review, systems-thinking (stocks/flows, loops, leverage points), bayesian-updating (natural frequencies, likelihood ratios, update discipline), plus the fiction-anchored set — minority-report (the precog scenario cell: structurally different futures, the one-variable turn, the dissenting scenario always filed), no-win-drills (Kobayashi Maru least-worst training with the physics-vs-policy audit), ulysses-pact (calm-state self-binding with unbinding criteria), and rashomon-effect (reconciling contradictory good-faith accounts).",
+      "description": "Decision discipline under uncertainty: pre-mortem (with the counsel rail), tabletop wargaming and no-win drills under full exercise control, weak-signal navigation with cue-graded confidence, Bayesian updating via natural frequencies, reference-class forecasting, competing hypotheses analysis, minority-report dissent capture, the Rashomon-effect protocol for conflicting recollections, and The Challenger.",
       "category": "research"
     }
   ]

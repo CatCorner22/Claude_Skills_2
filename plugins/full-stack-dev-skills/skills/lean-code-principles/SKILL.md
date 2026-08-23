@@ -10,7 +10,7 @@ description: >-
   simplify this code, too much boilerplate, do we need this abstraction, code review
   simplicity, delete code, small diff, keep it simple.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Lean-code principles
@@ -21,7 +21,7 @@ metadata:
 - Deciding whether to add a dependency, abstraction, service, or config option.
 - Simplifying a module that has grown past understanding.
 - Not for: prompt/agent design → see `coding-agent-skills:prompt-engineering` and
-  `coding-agent-skills:agentic-workflow-design`. Review *process* (PRs, diffs) → see
+  the archived `coding-agent-skills:agentic-workflow-design`. Review *process* (PRs, diffs) → see
   `coding-agent-skills:git-and-code-review`.
 
 ## Do it

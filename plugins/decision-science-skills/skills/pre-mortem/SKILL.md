@@ -12,7 +12,7 @@ description: >-
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Pre-mortem (prospective hindsight)
@@ -30,7 +30,7 @@ metadata:
   find out which.
 - Not for: adversarially attacking a live plan or auditing a benchmark's validity → see
   `continuous-improvement-skills:project-command-center`. Looking BACK at what actually
-  happened → see `decision-science-skills:after-action-review`. The assistant reflecting
+  happened → see the archived `decision-science-skills:after-action-review`. The assistant reflecting
   on its own corrections → see `metacognition-skills:reflective-learner`.
 - Not for: the period *before* there is a plan to attack — noticing faint early signals against a
   noisy background and deciding which deserve attention → see
@@ -74,7 +74,9 @@ metadata:
    that ends at a list changed nothing.
 8. **File and connect.** Put the ranked list and mitigations where the project is
    commanded (the project-command-center watch list or go-live checklist), and set the
-   after-action-review date now — pre-mortem before, AAR after, same plan.
+   post-event debrief date now — pre-mortem before, debrief after, same plan (the four-question
+   AAR format lives in the archived `decision-science-skills:after-action-review`, restorable
+   from `archive/`).
 
 ## Why / learn
 The exercise rests on a 1989 finding by Mitchell, Russo, and Pennington: *prospective

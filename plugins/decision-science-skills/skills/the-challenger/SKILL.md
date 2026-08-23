@@ -15,7 +15,7 @@ description: >-
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.1.3"
+  version: "1.1.4"
   source: >-
     Commissioned by the user to prevent momentum and sunk costs from holding a project to
     a timeline when revision would be optimal. Anchored on the documented record of the
@@ -42,10 +42,10 @@ namesake earned that.
   (this skill runs mid-flight, when momentum exists); the epistemics of tests and
   intervention logs → `continuous-improvement-skills:project-command-center` (any
   criteria change this review produces is logged there, openly, never silently);
-  driving effort on the chosen plan → `coding-agent-skills:stay-hard-accountability`
+  driving effort on the chosen plan → the archived `coding-agent-skills:stay-hard-accountability`
   (see Why / learn for the seam: The Mirror governs effort, The Challenger governs
   whether the plan still deserves it); the blocker-hunting autopsy persona →
-  `coding-agent-skills:chicken-little-executive-advisor`.
+  the archived `coding-agent-skills:chicken-little-executive-advisor`.
 
 ## Do it
 The facilitation script, the Challenger record held soberly, the bias literature, a worked
@@ -74,19 +74,19 @@ go-live-that-should-slip example, and the decision-log template are in
    evidence of safety.
 5. **Cost both branches honestly, forward-looking only.** Revision has real costs —
    contracts, dependencies, credibility, morale — and continuation-while-wrong has the
-   retrofit clock (`safety-and-reliability-skills:weight-of-the-books`). Discipline the
+   retrofit clock (the archived `safety-and-reliability-skills:weight-of-the-books`). Discipline the
    optimism on both sides with the base rates: what actually happened the last several
    times this team "made up the schedule later"
    (`decision-science-skills:reference-class-forecasting`)?
 6. **Widen the options beyond stop/continue.** Slip the date; descope to the pencil
    (`coding-agent-skills:soviet-space-graphite`); phase the launch (partial go-live);
    attack the constraint instead of the calendar
-   (`continuous-improvement-skills:theory-of-constraints`); or change acceptance
+   (the archived `continuous-improvement-skills:theory-of-constraints`); or change acceptance
    criteria OPENLY, as a logged intervention — never silently. Binary framing is
    momentum's favorite trick: it makes revision look like surrender.
 7. **Guarantee the dissent channel.** The objecting engineer gets a named path
    (PACE graded assertiveness —
-   `safety-and-reliability-skills:sbar-structured-communication`), a written objection,
+   the archived `safety-and-reliability-skills:sbar-structured-communication`), a written objection,
    and this rule: the decision-maker must restate the dissent to the dissenter's
    satisfaction BEFORE deciding. An objection that was never restated was never heard —
    it was survived.
@@ -133,7 +133,7 @@ nature cannot be fooled.
   violation; do it openly or not at all.
 - A continue decision with no next trigger → deciding has ended; momentum is steering.
 - Using this review to dodge hard work the plan legitimately needs → route effort
-  questions to `coding-agent-skills:stay-hard-accountability`; the two are partners,
+  questions to the archived `coding-agent-skills:stay-hard-accountability`; the two are partners,
   not exits from each other.
 
 ## Tailor to your environment

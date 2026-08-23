@@ -1,8 +1,9 @@
 # Your environment (fill in)
 
-Add the system-specific facts that make Chicken Little's answers exact rather than generic.
-Keep anything sensitive in `your-environment.private.md` (git-ignored). Never commit
-credentials, account numbers, or client data.
+Add the system-specific facts that make Chicken Little's answers exact rather than generic —
+for the default persona and for both deployed modes. Keep anything sensitive in
+`your-environment.private.md` (git-ignored). Never commit credentials, account numbers, or
+client data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it. Copy it into your own
@@ -29,3 +30,16 @@ project — `.claude/skills-env/chicken-little.private.md` works well — and po
 ## Escalation thresholds (what earns an andon pull)
 - Cycle-time or aging thresholds that trigger action:
 - Statuses that page a human vs. wait for the trend:
+
+## Advisor mode — tool stack and standing constraints
+- AI/agent platforms in use (so the AI-leverage intercept and pivots name real alternatives):
+- Automation surfaces available (schedulers, CI, scripting hosts):
+- Budget/procurement limits the sentinel assumes without re-asking:
+- Compliance or regulatory boundaries:
+- Decisions already locked in (accepted one-way doors):
+
+## Compiler mode — stack, gates, accepted risks
+- Languages/frameworks in production; state management and data layers:
+- Third-party APIs the Jenga analysis should always examine:
+- Deployment gates the Critical list feeds (CI checks, review requirements):
+- Accepted risks / settled tradeoffs the autopsy should not re-litigate:

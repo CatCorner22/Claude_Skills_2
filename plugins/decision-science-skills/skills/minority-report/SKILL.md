@@ -14,7 +14,7 @@ description: >-
   uncertainty. Triggers: precog, precognition, minority report, run the scenarios,
   future outcomes, what happens if X changes, scenario planning, branch the futures.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
   source: >-
     Commissioned by the user, inspired by the precogs of Minority Report (Philip K.
     Dick's story and the film — homage in triggers and teaching only; no affiliation).
@@ -64,7 +64,7 @@ rule, and the one-variable turn are in `references/scenario-cell-method.md`.
    versus CRITICAL UNCERTAINTIES (variables that could genuinely go multiple ways and
    matter most). The uncertainties become the scenario axes; the certainties appear
    in every scenario. If systems structure is doing the driving, draft the loops
-   first (`decision-science-skills:systems-thinking`).
+   first (the archived `decision-science-skills:systems-thinking`).
 3. **Build 3–5 structurally different futures.** Not best/expected/worst — that is
    one future at three volumes. Take the two or three critical uncertainties and
    build scenarios where they resolve DIFFERENTLY: each future internally coherent,

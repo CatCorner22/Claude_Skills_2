@@ -62,7 +62,7 @@ A skill is done when every box is checked.
       `break-glass-playbooks` selects which crises to arm from `pre-mortem`'s ranking. Then, fixing
       `pre-mortem`'s SKILL.md and method reference *still* missed the same formula sitting in its
       own `references/your-environment.md`, and a third copy in
-      `lean-six-sigma-for-software`'s risk register.
+      `lean-six-sigma-for-software`'s risk register (that skill has since been archived; the lesson has not).
       The procedure: name the defect as a *pattern* rather than a location, grep the whole tree for
       that pattern (`plugins/**` including `references/`, `assets/`, `scripts/`, and every
       `your-environment.md` template), and fix or explicitly clear each hit before you close the

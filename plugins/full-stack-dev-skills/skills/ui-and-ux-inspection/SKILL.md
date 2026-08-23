@@ -14,7 +14,7 @@ description: >-
   accessibility audit, cognitive load, form review, navigation review, simplify a
   workflow, remediation backlog, playwright accessibility tests, heuristic evaluation.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
   source: >-
     Adapted from the user's ui-and-ux-inspection spec (2026-08-04), itself distilled
     from their report 'Eye Tracking, Web-App Usability, and Cognitive Design'; the
@@ -31,7 +31,7 @@ metadata:
   accessibility tests; comparing an implementation with design heuristics; creating a
   remediation backlog.
 - Not for: building a new accessible UI or design system from scratch → see
-  `continuous-improvement-skills:lean-six-sigma-for-software` (and its
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` (and its
   references/accessible-ui-design-system.md). Syncing UI vocabulary to a reference product → the
   worked method lives in an archived design-language skill for one dense clinical-SaaS product,
   restorable from `archive/skills/`.

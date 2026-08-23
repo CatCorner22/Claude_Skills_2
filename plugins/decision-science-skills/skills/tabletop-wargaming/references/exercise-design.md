@@ -15,7 +15,7 @@ Each starter is stated in portable form first, then instantiated for one concret
 domain (payments operations) so the shape is visible. Re-instantiate for yours: swap
 the irreversible action, the counterparty, and the deadline.
 
-**1. The impersonated urgent instruction** (pairs with `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
+**1. The impersonated urgent instruction** (pairs with the archived `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
 - Setup: an out-of-band instruction arrives from a named authority, demanding an
   irreversible action under time pressure, timed against the usual approver's known
   absence. The action is whatever your organization cannot take back: a payment
@@ -172,4 +172,4 @@ Examples (sanitize before use; model on your real formats):
 | Turn | Blue action | Red reaction | Counteraction | White ruling (human) | Authority invoked | Gap exposed |
 |------|-------------|--------------|---------------|----------------------|-------------------|-------------|
 
-Hand the completed log to `decision-science-skills:after-action-review` for the debrief.
+Hand the completed log to the archived `decision-science-skills:after-action-review` for the debrief.

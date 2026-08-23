@@ -12,7 +12,7 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # DuckDB local analytics
@@ -22,7 +22,7 @@ metadata:
   reconciliations across exports, million-row aggregations, repeatable analysis queries.
 - Datasets that make Excel crawl or pandas run out of memory.
 - Not for: SQL *language* skills (joins, windows, CTEs) → see
-  `data-analytics-bi-skills:sql-for-analysts`. For getting messy files parseable in the first
+  the archived `data-analytics-bi-skills:sql-for-analysts`. For getting messy files parseable in the first
   place → see `data-tools-skills:csv-and-flat-file-wrangling`.
 
 ## Do it
