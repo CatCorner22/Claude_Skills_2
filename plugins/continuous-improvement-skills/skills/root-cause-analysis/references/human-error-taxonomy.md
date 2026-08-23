@@ -39,7 +39,7 @@ Violations subdivide, and the subtype matters:
 | Error type | What works | What does not |
 |---|---|---|
 | Slip | **Forcing functions / poka-yoke**: make the wrong action impossible or immediately visible — input masks, confirmation of high-risk values, constraints that reject the transposition | "Be more careful" reminders, retraining (the person already knew) |
-| Lapse | **Checklists and system-carried memory**: read-do or challenge-confirm checklists, required fields, workflow steps that cannot be skipped — see `safety-and-reliability-skills:checklist-design` | Relying on vigilance; punishing the forgetter |
+| Lapse | **Checklists and system-carried memory**: read-do or challenge-confirm checklists, required fields, workflow steps that cannot be skipped — see the archived `safety-and-reliability-skills:checklist-design` | Relying on vigilance; punishing the forgetter |
 | Mistake (rule-based) | **Fix or retire the bad rule; decision support** at the point of choice — better criteria, examples of the boundary cases | Adding another rule on top of the misfiring one |
 | Mistake (knowledge-based) | **Training and better mental models**: teach the mechanism, give reference material and escalation paths for novel cases | Punishment (they were reasoning in good faith with a bad map) |
 | Violation | **Culture and incentives**: make the compliant path as fast as the shortcut, remove the tolerated normalization, fix the conflicting pressures — never just restate the rule | More rules and sternly worded memos (the rule was already known and declined) |

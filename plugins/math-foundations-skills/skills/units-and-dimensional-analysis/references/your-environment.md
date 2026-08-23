@@ -13,7 +13,7 @@ structural and sanitized — real balances, rates, or counterparty details go in
 
 ## Period conventions
 - Which recurring figures arrive monthly, quarterly, annually — and which get ×12'd.
-- Rates that compound (route to `math-foundations-skills:exponential-growth-and-logs`)
+- Rates that compound (route to the archived `math-foundations-skills:exponential-growth-and-logs`)
   vs flows that add.
 
 ## Standing conversions

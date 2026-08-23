@@ -13,7 +13,7 @@ description: >-
   review, rebase, version control, commit message, force push, git blame, revert, review this
   diff.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
   source: >-
     Review-size and review-rate figures come from the SmartBear/Cisco peer-review study
     (2,500 reviews, 3.2M LOC), verified via web search snippets — claims carrying those
@@ -28,12 +28,12 @@ metadata:
 - Resolving a merge conflict, or deciding between merge and rebase.
 - Reading history to understand a change — blame, log, when did this break.
 - Not for: automating git behavior in the Claude Code harness (hooks that run on commit,
-  allow-listing `git push`) → see `coding-agent-skills:agent-harness-config`.
+  allow-listing `git push`) → see the archived `coding-agent-skills:agent-harness-config`.
 - Not for: a deep multi-angle audit of a module by parallel specialists →
   `coding-agent-skills:board-review` (routine PR review stays here; "run the board"
   goes there).
 - Not for: critiquing a whole submitted work product — a plan, document, or script judged
-  as a deliverable → `coding-agent-skills:sparring-partner`; review here is scoped to a diff
+  as a deliverable → the archived `coding-agent-skills:sparring-partner`; review here is scoped to a diff
   against a base.
 - Not for: excavating an accreted system nobody understands before demolition →
   `coding-agent-skills:software-archaeology` (this skill reads the history around one
@@ -104,7 +104,7 @@ example review — is in `references/review-checklist.md`; task-oriented command
    nice-to-have (`nit:` prefix), ask questions where you might lack context, praise what's
    genuinely good, and approve when the change is correct and clear — not when it is
    perfect. When a comment reads as a verdict on the author rather than the code, rewrite
-   it with `collaboration-skills:feedback-that-lands` (behavior, impact, request — never
+   it with the archived `collaboration-skills:feedback-that-lands` (behavior, impact, request — never
    inferred character).
 
 ## Why / learn

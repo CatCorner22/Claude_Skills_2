@@ -90,7 +90,7 @@ pydantic repr you would see in Python; JavaScript never produces that form. Eith
 the client (`Array.isArray(detail) ? detail.map(e => e.msg).join("; ") : detail`, which
 `frontend-recipes.md`'s client now does) or override `RequestValidationError` so the server emits
 one shape. If you prefer a coded envelope
-(`full-stack-dev-skills:elite-python-engineer` shows `{"error": {"code", "message"}}`), those
+(the archived `full-stack-dev-skills:elite-python-engineer` shows `{"error": {"code", "message"}}`), those
 three built-in paths keep emitting `{"detail": ...}` until you override
 `RequestValidationError` and Starlette's `HTTPException` as well; that reference has both
 handlers written out.

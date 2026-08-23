@@ -316,7 +316,7 @@ be made to look good.
 **Precondition — stability.** Capability assumes one process with one mean and one σ. Confirm
 in-control on a control chart first (the SPC coverage in
 `continuous-improvement-skills:dmaic-problem-solving` /
-`continuous-improvement-skills:lean-six-sigma-for-software` owns the charts). An unstable
+the archived `continuous-improvement-skills:lean-six-sigma-for-software` owns the charts). An unstable
 process has no single σ — any index computed from it is fiction.
 
 - **Cp = (USL − LSL) / 6σ** — *potential* capability: could the spread fit the spec if perfectly

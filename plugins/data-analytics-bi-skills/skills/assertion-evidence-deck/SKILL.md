@@ -11,7 +11,7 @@ description: >-
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Assertion-evidence deck
@@ -29,7 +29,7 @@ one claim in a full sentence and proves it with a picture; every number carries 
   XML-level `.pptx` editing the builder can't express → the `pptx`
   skill. This skill turns *verified* output into slides; run the analysis under its own skill first.
 - Not for: getting a decision from one written page — the answer-first decision memo (BLUF, costed
-  options, an ask the reader can sign) → `collaboration-skills:executive-briefing`. That skill owns
+  options, an ask the reader can sign) → the archived `collaboration-skills:executive-briefing`. That skill owns
   the one-page decision document and routes here when the briefing becomes slides; this skill owns
   the slide deck.
 

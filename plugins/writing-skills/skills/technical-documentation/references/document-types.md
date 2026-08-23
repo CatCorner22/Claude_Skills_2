@@ -248,9 +248,9 @@ Route away what only looks like a procedure doc:
   moves → `safety-and-reliability-skills:break-glass-playbooks` (that skill owns the
   word "runbook").
 - A full method with sequence, timing, key points and reasons, trained and reviewed →
-  `continuous-improvement-skills:standard-work`.
+  the archived `continuous-improvement-skills:standard-work`.
 - A 5–9-item card at a pause point guarding killer items →
-  `safety-and-reliability-skills:checklist-design`.
+  the archived `safety-and-reliability-skills:checklist-design`.
 
 ## 7. API and reference-doc discipline
 

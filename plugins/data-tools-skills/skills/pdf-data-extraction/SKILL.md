@@ -11,7 +11,7 @@ description: >-
   pdfplumber, camelot, parse bank statement pdf, pdf invoice data, scanned pdf, OCR pdf,
   pdf text extraction, table extraction python.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # PDF data extraction
@@ -22,7 +22,7 @@ metadata:
 - Not for: understanding statement *formats* like BAI2/camt.053 — those are data files, not PDFs
   — format-specific banking knowledge this library does not carry. For cleaning
   after a good extraction → see
-  `data-analytics-bi-skills:data-cleaning`. If you have Anthropic's official `pdf` skill (from
+  the archived `data-analytics-bi-skills:data-cleaning`. If you have Anthropic's official `pdf` skill (from
   `anthropics/skills`), prefer it for creating/filling PDFs; this skill is about getting *data
   out*.
 

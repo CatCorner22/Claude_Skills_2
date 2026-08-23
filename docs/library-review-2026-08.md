@@ -1016,3 +1016,60 @@ rather than the minimal caveat.
   — the flag can no longer manufacture a false absence quietly.
 
 **All 7 owner decisions are now closed.**
+
+---
+
+## §16 — The blank-slate consolidation (2026-08-23)
+
+The owner asked the closing question directly: *from a blank slate, which of these 121 skills
+would you keep because they are objectively useful, creative, or unique?* — and then approved
+executing the answer. A 14-agent review applied the listing-slot value test (*does invoking this
+beat an unaided, competent frontier model?*) to every skill not already placed by the tier
+assessment; I adjudicated each verdict and executed the cuts by hand.
+
+**Result: 121 skills / 14 plugins → 71 / 13. Fifty skills archived — none deleted**, every one
+restorable with two `git mv` commands (`archive/README.md` carries the full table and
+instructions).
+
+### What the verdicts said
+
+Of 75 skills judged: 16 KEEP_STRONG (named unique mechanism), 23 KEEP_JUSTIFIED (earned rails,
+hub roles, verified recipes, or direct professional value), 36 ARCHIVE. Added to the 14 cuts
+named in the tier assessment (five of six math-foundations skills, the learning-skills plugin,
+two Chicken Little variants, elite-python-engineer, gonzo, descriptive-statistics,
+dashboard-design), that made 50.
+
+I adjudicated five verdicts I initially doubted — sparring-partner, after-action-review,
+principled-negotiation, checklist-design, bowtie-barrier-analysis — and accepted all five
+ARCHIVE calls after reading the reasoning: each "loss" was duplicated in a kept skill (the
+counsel rail lives in pre-mortem; preservation mechanics in split-tally-evidence), inlineable in
+a sentence (the assurance-test concept, now stated inline in fmea and reliability-engineering),
+or restorable. One verdict caught a live standing-directive violation: principled-negotiation's
+worked example was still mounted on the deleted bank-fee domain.
+
+### Structure changes
+
+- **Chicken Little: three skills → one, at the owner's direction ("keep one — I love its
+  personality").** The calm, evidence-gated Aether base persona survives verbatim; the two
+  Forward-Deployed editions became its "deploy advisor" / "deploy compiler" modes with their
+  exact templates, session semantics (persist until stand-down, one autopsy per target), the
+  shared Accountability Engine stance, and the None-found evidence discipline. Merged
+  description 1,023/1,024 chars; all mode triggers collision-checked.
+- **toolchain-2026.md relocated** to backend-api-development (deploy-and-operate and
+  chicken-little build on it); elite-python-engineer archived without it.
+- **164 dangling cross-references repaired** (validator-driven mechanical pass + 13 hand-written
+  prose seams), 9 trigger-test Tier D rows retired with the reason recorded, all 13 marketplace
+  and plugin.json descriptions rewritten to enumerate only surviving skills.
+
+### What consolidation bought, measured
+
+| | Before | After |
+|---|---|---|
+| Active skills / plugins | 121 / 14 | 71 / 13 |
+| Full-listing cost (est.) | 29,796 tok ≈ 14.9% of 200K | 17,334 tok ≈ 8.7% |
+| Fresh-session descriptions surviving the 8K-char budget | 3 of 121 | 5 of 71 |
+| At 1M context | 38 of 121 | 40 of 71 |
+
+The deeper gain is qualitative: every listing slot is now held by a skill that passed an
+adversarial value test on its own text, and the survivor set matches the named install profiles
+in `README.md`, so a working day's plugins keep essentially every description.

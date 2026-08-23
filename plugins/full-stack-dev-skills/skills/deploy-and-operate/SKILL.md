@@ -11,7 +11,7 @@ description: >-
   prod, secrets management app, health check endpoint, structured logging, rollback deploy,
   container image size, run migrations on deploy, observability basics, containerize.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
 ---
 
 # Deploy and operate
@@ -62,8 +62,9 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
    learns about it is `ModuleNotFoundError` from a container that pulled and started fine.
    `/opt/venv` leaves the two `FROM` tags as the only strings to keep in step, and drops the
    `/usr/local/bin` copy that was quietly mixing two images' console scripts.
-   This is the pip/`requirements.txt` shape. On a project built to
-   `full-stack-dev-skills:elite-python-engineer`'s toolchain there is no `requirements.txt` —
+   This is the pip/`requirements.txt` shape. On a project built to the plugin's toolchain
+   standard (`full-stack-dev-skills:backend-api-development`'s `references/toolchain-2026.md`)
+   there is no `requirements.txt` —
    swap the deps stage for `COPY pyproject.toml uv.lock ./` plus
    `ENV UV_PROJECT_ENVIRONMENT=/opt/venv` and `uv sync --locked --no-dev` (that variable is what
    puts the environment at `/opt/venv` instead of the project's `.venv`), and the CI

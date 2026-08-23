@@ -13,7 +13,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -37,7 +37,7 @@ governs document-level attention (lead with the point, format for scanning, stop
   (amend, never edit) that apply before any editing begins.
 - Not for: audiences that need the most accessible register (patients, low-literacy, "plain
   English") → `writing-skills:adams-plain-grade` (same Adams core, 5th-grade target).
-  Building a master prompt end to end → `coding-agent-skills:master-prompt-architect`
+  Building a master prompt end to end → the archived `coding-agent-skills:master-prompt-architect`
   (whose Adams compliance audit this skill reinforces when both apply).
 
 ## Do it

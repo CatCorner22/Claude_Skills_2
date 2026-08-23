@@ -11,7 +11,7 @@ description: >-
   session, API error handling, HTTP status codes, pagination endpoint, OpenAPI schema,
   dependency injection fastapi, CRUD API.
 metadata:
-  version: "1.5.0"
+  version: "1.6.0"
 ---
 
 # Backend API development (FastAPI)
@@ -24,8 +24,10 @@ metadata:
   Streaming/WebSocket endpoints → see `full-stack-dev-skills:realtime-and-dynamic-features`.
 - Not for: whole-project Python rigor around the service — the 2026 toolchain (uv, Ruff,
   strict type checking), packaging/CI layout, and ship-ready hardening of an entire codebase
-  → invoke the "Pythagoras" persona in `full-stack-dev-skills:elite-python-engineer`. This
-  skill stays at the endpoint and contract level.
+  → the toolchain standard now lives here, in `references/toolchain-2026.md` (relocated from the
+  archived `full-stack-dev-skills:elite-python-engineer`, whose "Pythagoras" persona is restorable
+  from `archive/skills/`). This skill stays at the endpoint and contract level; the reference
+  carries the stack-wide bar.
 
 ## Do it
 1. **Let Pydantic models be the whole validation layer.** One request model and one response
@@ -64,7 +66,7 @@ def create_invoice(data: InvoiceIn, db: Session = Depends(get_db)):
    422 validation (automatic), 401 unauthenticated, 403 forbidden, 404 absent, 409 conflict.
    `{"detail": ...}` is the default here because it is what FastAPI's own validation, routing,
    and `HTTPException` paths already emit — nothing has to be re-wrapped for the shape to hold.
-   A custom envelope (`full-stack-dev-skills:elite-python-engineer` prefers
+   A custom envelope (the archived `full-stack-dev-skills:elite-python-engineer` prefers
    `{"error": {"code", "message"}}` for its stable machine-readable code) is equally valid but
    only becomes "one shape" once the validation and `HTTPException` handlers are overridden too;
    pick one per service rather than one per route. Never return 200-with-error-body; never leak
@@ -118,4 +120,8 @@ own rather than in a cache you may not realise is disposable.
 
 ## References
 - references/fastapi-patterns.md — auth recipes (sessions + JWT), error handler, pagination helper, endpoint checklist
+- references/toolchain-2026.md — the production Python toolchain standard (uv, Ruff,
+  Pyright-strict/ty, Pydantic v2, pytest+Hypothesis, Polars/DuckDB; `requires-python >= 3.14`) —
+  relocated here when the elite-python-engineer persona was archived, because deploy-and-operate's
+  image guidance and chicken-little's engineering bar both build on it
 - references/your-environment.md — your auth, conventions, limits (fill in)

@@ -14,7 +14,7 @@ description: >-
   spot-check by lot, they know which ones get looked at, same person always reviews,
   rotate reviewers, end-of-term handover, draw at random, unriggable selection.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Sortition review (euthynai and the ballotino)
@@ -60,7 +60,7 @@ gatekeeper.
   `decision-science-skills:tabletop-wargaming`; sortition is selection design, not
   adversarial testing.
 - Not for: designing the control architecture around a hazard → see
-  `safety-and-reliability-skills:bowtie-barrier-analysis`; a sortition draw is one
+  the archived `safety-and-reliability-skills:bowtie-barrier-analysis`; a sortition draw is one
   barrier that skill might place, not the map.
 
 ## Do it

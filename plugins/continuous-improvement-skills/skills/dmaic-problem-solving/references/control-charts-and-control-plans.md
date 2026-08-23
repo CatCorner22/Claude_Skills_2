@@ -34,7 +34,7 @@ that wrong, and both are expensive:
 The chart's whole value is that it decides between the two by a rule set in advance, before anyone
 has an interest in the answer. That is also why the rules must be written into the control plan
 rather than left to judgement: a rule chosen after seeing the point is not a rule.
-(`continuous-improvement-skills:lean-six-sigma-for-software` carries this same material translated
+(the archived `continuous-improvement-skills:lean-six-sigma-for-software` carries this same material translated
 to delivery metrics and pipelines.)
 
 ## §2 Choosing the chart
@@ -234,8 +234,8 @@ ownerless plan is a document, not a control.
 plan in a working session where they run the extraction themselves, read the current chart, and
 state aloud what they would do at a signal. If they cannot do those three things unaided, the
 handoff has not happened regardless of what was signed.
-(`safety-and-reliability-skills:sbar-structured-communication` supplies a format for the handoff
-itself; `continuous-improvement-skills:standard-work` owns the document the change is encoded in,
+(the archived `safety-and-reliability-skills:sbar-structured-communication` supplies a format for the handoff
+itself; the archived `continuous-improvement-skills:standard-work` owns the document the change is encoded in,
 which must carry a revision number so a later drift can be dated.)
 
 **The three ways ownership fails, and what each looks like:**

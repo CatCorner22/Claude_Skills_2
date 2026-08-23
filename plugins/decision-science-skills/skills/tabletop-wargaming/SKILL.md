@@ -14,7 +14,7 @@ description: >-
   adaptive adversary. Triggers: tabletop exercise, wargame the plan, run a drill,
   incident simulation, inject, BCP exercise, commander's intent.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Tabletop wargaming (with commander's intent)
@@ -23,7 +23,7 @@ metadata:
 - Rehearsing a plan against an *adaptive* opposition or environment: an out-of-band
   urgent instruction from a named authority, timed against the approver's absence — a
   payment release, an access grant, a data export (pair with
-  `safety-and-reliability-skills:bowtie-barrier-analysis` — it maps the barriers the
+  the archived `safety-and-reliability-skills:bowtie-barrier-analysis` — it maps the barriers the
   drill exercises); a critical-vendor connectivity outage on a hard-deadline day
   (`safety-and-reliability-skills:break-glass-playbooks` arms the contingency path the
   drill tests); ransomware landing during a period-close or release freeze; a cutover
@@ -42,7 +42,7 @@ metadata:
   `decision-science-skills:pre-mortem`. Epistemic validity audit of a test or benchmark →
   see `continuous-improvement-skills:project-command-center`
   (preserve-the-possibility-of-failure doctrine). The post-exercise debrief itself → see
-  `decision-science-skills:after-action-review` (the hand-off in step 8).
+  the archived `decision-science-skills:after-action-review` (the hand-off in step 8).
 
 ## Do it
 1. **Define objectives and scenario.** What must the exercise reveal (decision gaps, call
@@ -98,7 +98,7 @@ metadata:
    the human white cell. The LLM proposes; humans rule.
 8. **Capture and debrief.** White cell logs each turn: decision made, authority invoked,
    information available, gaps exposed. Then hand the log to
-   `decision-science-skills:after-action-review` — the four questions turn the exercise
+   the archived `decision-science-skills:after-action-review` — the four questions turn the exercise
    into sustained and improved practice.
 
 ## Why / learn

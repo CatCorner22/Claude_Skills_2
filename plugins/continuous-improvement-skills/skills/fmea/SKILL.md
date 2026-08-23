@@ -10,7 +10,7 @@ description: >-
   to test hardest. Triggers: FMEA, failure modes, failure mode and effects analysis, severity
   occurrence detection, action priority, RPN, risk priority number, rank what could go wrong.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # FMEA (failure mode and effects analysis)
@@ -28,11 +28,11 @@ metadata:
 - The Improve phase of `continuous-improvement-skills:dmaic-problem-solving` names FMEA as its
   new-risk check — this skill is that method, defined.
 - Prioritizing what an adversarial release gauntlet fuzzes and property-tests hardest, by Action
-  Priority (see `continuous-improvement-skills:lean-six-sigma-for-software`).
+  Priority (see the archived `continuous-improvement-skills:lean-six-sigma-for-software`).
 - Not for: finding the cause of one incident that already happened → see
   `continuous-improvement-skills:root-cause-analysis` (FMEA anticipates; RCA autopsies). Mapping a
   hazard's full prevention/mitigation barrier architecture with escalation factors and barrier
-  owners → see `safety-and-reliability-skills:bowtie-barrier-analysis`.
+  owners → see the archived `safety-and-reliability-skills:bowtie-barrier-analysis`.
 
 ## Do it
 Work the seven steps in order — `references/fmea-method.md` has each step expanded, the anchored
@@ -59,7 +59,7 @@ rating scales, and a worked bank-reconciliation FMEA table.
      construction ("never seen here; barely conceivable"), and Detection is scored against the
      control as *claimed*. So require both to be evidenced: Occurrence backed by incident history,
      a base rate, or a physical argument, and the detection control **assurance-tested or sampled,
-     not merely named** (`safety-and-reliability-skills:bowtie-barrier-analysis`). Where either is
+     not merely named** (the archived `safety-and-reliability-skills:bowtie-barrier-analysis`). Where either is
      an assertion, the mode stays High. Otherwise the same instinct that once argued Detection down
      a point to duck an RPN threshold argues two numbers down to move a catastrophic mode to
      Medium, where "justify in the register if it isn't actioned" is a sentence teams write.

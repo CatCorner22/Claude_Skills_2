@@ -25,10 +25,10 @@ A candidate is anything that might matter beyond today. Sweep, in order:
 2. The Episodic log — anything that has now appeared 2+ times is auto-nominated.
 3. Reflection outputs from `metacognition-skills:reflective-learner` — its "actionable
    updates" section is pre-shaped for this pass.
-4. Analysis conclusions from `metacognition-skills:dynamic-analysis-engine` — durable
+4. Analysis conclusions from the archived `metacognition-skills:dynamic-analysis-engine` — durable
    findings, not intermediate numbers.
 5. Team-debrief outputs — an after-action review's sustain/improve list
-   (`decision-science-skills:after-action-review`) is prime input: "sustain" items become
+   (the archived `decision-science-skills:after-action-review`) is prime input: "sustain" items become
    PATTERNs, "improve" items become RULEs or METHOD updates.
 
 ## Validation gates

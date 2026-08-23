@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "data-tools-skills",
-  "description": "Practical data plumbing for analysts: Excel automation with Python, CSV/flat-file wrangling, DuckDB local analytics, PDF data extraction, REST API data pulls, data-file hygiene, and reproducible analysis (seeds, pinned environments, one-command rebuild).",
-  "version": "0.14.0"
+  "description": "Hands-on data plumbing that survives real files: DuckDB local analytics with a null-key-guarded reconciliation pattern, PDF table extraction hardened against full-width headings and dateless rows, REST API pulls with bounded pagination and per-request credentials, CSV/flat-file wrangling, and data-file hygiene.",
+  "version": "0.15.0"
 }

@@ -10,7 +10,7 @@ description: >-
   htmx, vite setup, form handling react, UI architecture, frontend too complex, SPA vs server
   rendered, component design.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Frontend: modern, dynamic, lean
@@ -21,7 +21,7 @@ metadata:
 - Not for: the rendering-split *architecture* decision → made in
   `full-stack-dev-skills:full-stack-app-architecture` (this skill executes it). Realtime
   updates (WebSockets/SSE) → `full-stack-dev-skills:realtime-and-dynamic-features`.
-  Dashboard/visualization design → `data-analytics-bi-skills:dashboard-design`.
+  Dashboard/visualization design → the archived `data-analytics-bi-skills:dashboard-design`.
 - Not for: auditing an interface you have already built — usability, accessibility and
   cognitive-load defects with severity- and confidence-rated findings → see
   `full-stack-dev-skills:ui-and-ux-inspection`. This skill builds to the floor; that one

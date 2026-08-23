@@ -1193,3 +1193,29 @@ retraction of the previous pass's headline mechanism claim.
 - RULE (2026-08-19, owner-decided): a flag that silently narrows a corpus **prints its caveat to
   stderr on every run**, not just in `--help`. Removing the flag breaks a legitimate use; the defect
   was invisibility. stderr so the warning survives piping the results.
+
+### Crystallization pass — 2026-08-23 (blank-slate consolidation: 121 → 71)
+
+- DECISION (owner, 2026-08-23): the library was consolidated to **71 skills / 13 plugins** by the
+  listing-slot value test ("does invoking it beat an unaided competent model?"); 50 skills
+  archived to `archive/skills/` (restorable, never deleted — table in `archive/README.md`). The
+  owner's one named carve-out: keep one Chicken Little — the trio merged into
+  `coding-agent-skills:chicken-little` with "deploy advisor" / "deploy compiler" modes.
+- RULE: **agents judge, I edit.** The 14-agent review supplied verdicts with reasons; every file
+  mutation was mine, validator-driven. This is the division of labor the ~11% agent-edit damage
+  rate taught, and it held: 164 dangling references repaired to 0 errors in two passes.
+- RULE: **never mutate `plugins/` while read-only review agents are in flight** — moving files
+  under the readers corrupts the verdicts being produced. Prep in scratchpad; execute after the
+  completion notification.
+- RULE: when archiving a skill, check what it HOSTS before moving it — `elite-python-engineer`
+  carried `toolchain-2026.md`, which two surviving skills build on; the reference relocated to
+  `backend-api-development` first, then the skill archived. A skill directory is a home for
+  shared assets, not just its own body.
+- FACT: post-consolidation listing economics — full library ≈ 17.3K tokens ≈ 8.7% of 200K
+  (was 29.8K / 14.9%); fresh-session description survival 5 of 71 (was 3 of 121); named install
+  profiles in README each keep essentially every description. Re-derive with
+  `scripts/measure-listing-cost.py` and `scripts/simulate-listing-budget.py`.
+- LESSON: my own five overrule instincts (sparring-partner, AAR, principled-negotiation,
+  checklist-design, bowtie) were all wrong on inspection — each "irreplaceable" loss was
+  duplicated in a kept skill, inlineable in one sentence, or restorable. Memory of a skill's
+  value is not evidence of it; the agents had read the current text and I had not.

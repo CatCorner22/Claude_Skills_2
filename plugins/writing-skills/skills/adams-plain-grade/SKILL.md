@@ -12,7 +12,7 @@ description: >-
   simplify this letter, accessible language, patient materials, low literacy, simplest
   accurate version.
 metadata:
-  version: "1.6.0"
+  version: "1.6.1"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search
@@ -38,10 +38,10 @@ version that still keeps the exact meaning.
   teach-back) → `writing-skills:explanation-design`; that skill decides what the words must
   do, this one brings the words down to grade.
 - Not for: the other ask-for-it-by-name register in this family — participatory, savage
-  commentary → `writing-skills:gonzo`.
+  commentary → the archived `writing-skills:gonzo`.
 - Not for: escalations, handoffs, and instructions between professionals, where the fix is
   structure (SBAR, read-back), not reading level →
-  `safety-and-reliability-skills:sbar-structured-communication`.
+  the archived `safety-and-reliability-skills:sbar-structured-communication`.
 
 ## Do it
 1. **Find the one most important point.** Say it first, in the simplest true sentence. (If
@@ -52,7 +52,7 @@ version that still keeps the exact meaning.
 3. **Add the rest** in short bullets or very short paragraphs — one main idea per sentence,
    subject–verb–object kept close, active voice, concrete examples. If part of the text is
    steps the reader must *perform* (not prose to understand), give that part checklist form —
-   `safety-and-reliability-skills:checklist-design` owns the format for action items; this
+   the archived `safety-and-reliability-skills:checklist-design` owns the format for action items; this
    skill keeps the surrounding prose at grade.
 4. **Enforce the Adams rules while you write** (full list in
    `references/grade-targets-and-checks.md`): no litigated formulas, no archaisms, no

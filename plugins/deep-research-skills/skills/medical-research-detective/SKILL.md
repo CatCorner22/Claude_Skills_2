@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.12.0"
+  version: "1.12.1"
 ---
 
 # Medical research detective
@@ -72,7 +72,7 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    typically) and aim for at least 5–8 candidates, the boring ones included. This is the medical
    edition of a domain-general discipline: `decision-science-skills:competing-hypotheses-analysis`
    owns the full hypothesis-matrix method (judge by disconfirmation, never by accumulation), and the
-   base-rate check is `math-foundations-skills:probability-fundamentals` applied to disease
+   base-rate check is the archived `math-foundations-skills:probability-fundamentals` applied to disease
    frequency.
 
 3. **Build an explicit search strategy.** For each hypothesis, write the PICO-style question, then

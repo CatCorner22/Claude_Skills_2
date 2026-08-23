@@ -223,6 +223,13 @@ casual phrasing whose substance another skill owns. Its cost, if these fail, is 
 
 ## Tier D — persona-named skills
 
+**Retired rows (2026-08-23 consolidation):** D1, D2, D4, D8, D11, D12, D13 target skills now
+archived (restorable from `archive/skills/`); D9 and D10 target the two Forward-Deployed
+editions, which merged into `coding-agent-skills:chicken-little` — its "deploy advisor" /
+"deploy compiler" modes carry those routes now, so a future protocol revision should test the
+merged skill's mode triggers instead. Retired rows are struck, not deleted, because the Run 1–2
+logs below reference them.
+
 This library deliberately contains skills named for a persona rather than a task. That is a valid
 design *provided* the name reaches the skill, the skill is still findable by someone who does not
 know the name, and it does not squat on work outside its scope. Those are three different questions,
@@ -255,19 +262,19 @@ a real route. The in-scope column now makes that a **PASS**, and only the third 
 
 | # | By-name (must load) | In-scope paraphrase (**should** load) | Out-of-scope (must NOT load) | Skill |
 |---|---|---|---|---|
-| D1 | `Get gonzo on this quarterly report.` | `Write this up the way a magazine columnist would — first person, in the room, no corporate hedging.` | `Proofread this quarterly report for typos and grammar.` | `writing-skills:gonzo` |
-| D2 | `Bring in Pythagoras for this module.` | `This module works but I would not put it in front of a paying customer. Bring it up to the bar you would hold yourself to.` | `What's the difference between a list and a tuple in Python?` | `full-stack-dev-skills:elite-python-engineer` |
+| ~~D1~~ retired | `Get gonzo on this quarterly report.` | `Write this up the way a magazine columnist would — first person, in the room, no corporate hedging.` | `Proofread this quarterly report for typos and grammar.` | `writing-skills:gonzo` |
+| ~~D2~~ retired | `Bring in Pythagoras for this module.` | `This module works but I would not put it in front of a paying customer. Bring it up to the bar you would hold yourself to.` | `What's the difference between a list and a tuple in Python?` | `full-stack-dev-skills:elite-python-engineer` |
 | D3 | `Chicken Little, look at this integration.` | `Three dashboards went red this morning and everyone is in a war room. Is this actually an emergency?` | `What could go wrong with this integration?` | `coding-agent-skills:chicken-little` |
-| D4 | `Be my sparring partner on this strategy.` | `I have talked myself into this plan and I no longer trust my own judgement on it. Push back hard.` | `Summarize this strategy document in three bullets.` | `coding-agent-skills:sparring-partner` |
+| ~~D4~~ retired | `Be my sparring partner on this strategy.` | `I have talked myself into this plan and I no longer trust my own judgement on it. Push back hard.` | `Summarize this strategy document in three bullets.` | `coding-agent-skills:sparring-partner` |
 | D5 | `Run precog on the next two quarters.` | `Give me three genuinely different ways the next two quarters could go, not a best and worst case.` | `What were last quarter's actual numbers?` | `decision-science-skills:minority-report` |
 | D6 | `Deploy the Foreman on this codebase.` | `The team says this feature is done. I do not believe them. How do I check what is actually finished?` | `Write the release notes for this version.` | `coding-agent-skills:the-foreman` |
 | D7 | `Comrade Engineer — is there a pencil for this?` | `We have three engineers on a six-month build for something I suspect a spreadsheet could do.` | `Implement the design we agreed on last week.` | `coding-agent-skills:soviet-space-graphite` |
-| D8 | `Weight of the books on this schema.` | `It flies in staging with our seed data. What happens in March when the real volume shows up?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
-| D9 | `Deploy advisor on our new pricing model.` | `Tear our new pricing model apart like someone who wants it to fail — where does the whole thing come undone?` | `Summarize the pricing model in a paragraph for the board deck.` | `coding-agent-skills:chicken-little-executive-advisor` |
-| D10 | `Deploy compiler on this service.` | `Which single dependency in this service, if it went away tomorrow, takes everything down with it?` | `Add a health-check endpoint to this service.` | `coding-agent-skills:chicken-little-technical-compiler` |
-| D11 | `Bring in The Commander on this postmortem.` | `This writeup blames three other teams. Rewrite it so we own our part.` | `Who on the team has capacity to pick up this ticket?` | `coding-agent-skills:extreme-ownership` |
-| D12 | `Hold up the mirror on this project.` | `Status says green but I know it isn't. Tell me the real state in plain words.` | `How many hours of sleep should I be getting?` | `coding-agent-skills:stay-hard-accountability` |
-| D13 | `Master prompt architect: build me a system prompt.` | `I need a system prompt for a customer-facing agent, and I want the requirements pinned down before you write a line of it.` | `Why does my prompt sometimes return prose instead of JSON?` | `coding-agent-skills:master-prompt-architect` |
+| ~~D8~~ retired | `Weight of the books on this schema.` | `It flies in staging with our seed data. What happens in March when the real volume shows up?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
+| ~~D9~~ retired | `Deploy advisor on our new pricing model.` | `Tear our new pricing model apart like someone who wants it to fail — where does the whole thing come undone?` | `Summarize the pricing model in a paragraph for the board deck.` | `coding-agent-skills:chicken-little-executive-advisor` |
+| ~~D10~~ retired | `Deploy compiler on this service.` | `Which single dependency in this service, if it went away tomorrow, takes everything down with it?` | `Add a health-check endpoint to this service.` | `coding-agent-skills:chicken-little-technical-compiler` |
+| ~~D11~~ retired | `Bring in The Commander on this postmortem.` | `This writeup blames three other teams. Rewrite it so we own our part.` | `Who on the team has capacity to pick up this ticket?` | `coding-agent-skills:extreme-ownership` |
+| ~~D12~~ retired | `Hold up the mirror on this project.` | `Status says green but I know it isn't. Tell me the real state in plain words.` | `How many hours of sleep should I be getting?` | `coding-agent-skills:stay-hard-accountability` |
+| ~~D13~~ retired | `Master prompt architect: build me a system prompt.` | `I need a system prompt for a customer-facing agent, and I want the requirements pinned down before you write a line of it.` | `Why does my prompt sometimes return prose instead of JSON?` | `coding-agent-skills:master-prompt-architect` |
 | D14 | `Run adams-plain-grade over this notice.` | `Rewrite this so someone who left school at fourteen can act on it without asking anyone.` | `Tighten this memo for the executive team — they have two minutes.` | `writing-skills:adams-plain-grade` |
 | D15 | `Run the board on this module.` | `I want several specialists looking at this from different angles at once, not one opinion.` | `Is this function's variable naming consistent with the rest of the file?` | `coding-agent-skills:board-review` |
 

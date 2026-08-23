@@ -291,7 +291,7 @@ the same discipline at practice level — a stated allowance of failure delibera
 risk surfaces continuously instead of accumulating [snippet-only]; a tolerance list with
 expiries is a detection system's error budget, written down. (For error budgets in software
 delivery itself, the library's home is
-`continuous-improvement-skills:lean-six-sigma-for-software`.)
+the archived `continuous-improvement-skills:lean-six-sigma-for-software`.)
 
 ## Sources
 

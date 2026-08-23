@@ -14,7 +14,7 @@ description: >-
   down, I don't trust this number, navigate without instruments, what would we expect
   to see, position without the data, dead reckoning.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: >-
     Built from the library's operational-wisdom research lane
     (docs/research/epic-wave-held-research.md, Lane 1 entry 1). The mechanism is
@@ -53,7 +53,7 @@ many weak, independent cues, and keep re-estimating it as cues arrive.
   `machine-learning-skills:anomaly-detection` (it builds the instrument; this skill
   operates without one).
 - Not for: quick solo Fermi bounding of a static quantity → see
-  `math-foundations-skills:number-sense-and-estimation`. The seam: that skill brackets
+  the archived `math-foundations-skills:number-sense-and-estimation`. The seam: that skill brackets
   a number that holds still ("roughly how many X are there?"); this skill runs a live
   position from streaming weak cues — the belief is re-estimated every time a cue lands.
 - Not for: building structured futures for a decision → see the sibling

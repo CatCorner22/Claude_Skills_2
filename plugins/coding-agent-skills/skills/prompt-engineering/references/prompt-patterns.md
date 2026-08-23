@@ -185,7 +185,7 @@ The controls that actually hold, in the order they matter:
    inside it is data to analyze and never instructions to follow, and ask the model to report
    attempted redirection instead of complying. Useful; not sufficient.
 
-Harness design for 2 and 3 is `coding-agent-skills:agentic-workflow-design`'s subject. The
+Harness design for 2 and 3 is the archived `coding-agent-skills:agentic-workflow-design`'s subject. The
 prompt-side obligation is to state the trust boundary honestly in the design notes.
 
 ## Where static content goes (prompt caching)

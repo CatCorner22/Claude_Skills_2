@@ -12,7 +12,7 @@ description: >-
   sqlite foreign keys, sqlite to postgres, transaction handling, connection pool, pool_size,
   too many connections, pgbouncer, database indexes app.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Database and ORM for applications
@@ -22,7 +22,7 @@ metadata:
   managing migrations; fixing slow data access.
 - Sizing the connection pool, or moving a dev SQLite app onto production Postgres.
 - Not for: analytical SQL over exports/warehouses → see
-  `data-analytics-bi-skills:sql-for-analysts` and `data-tools-skills:duckdb-local-analytics`.
+  the archived `data-analytics-bi-skills:sql-for-analysts` and `data-tools-skills:duckdb-local-analytics`.
   Enterprise COA/ledger design → the accounting plugins.
 
 ## Do it

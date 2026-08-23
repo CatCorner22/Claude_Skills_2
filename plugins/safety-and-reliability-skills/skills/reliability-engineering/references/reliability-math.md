@@ -215,7 +215,7 @@ Three consequences worth carrying:
 - **Staggered testing beats simultaneous testing.** Proof-testing every channel on the same
   day maximises the window in which they are all equally stale.
 
-Cross-references: `safety-and-reliability-skills:bowtie-barrier-analysis` requires an assurance
+Cross-references: the archived `safety-and-reliability-skills:bowtie-barrier-analysis` requires an assurance
 test per barrier and defaults to quarterly — `PFD_avg ≈ λT/2` is the arithmetic behind
 choosing that interval rather than inheriting it, and it is how you tell which barriers deserve
 a shorter one. `safety-and-reliability-skills:rebuild-rehearsal` is the same idea applied to
@@ -349,7 +349,7 @@ Two cautions worth stating out loud:
   against before comparing anything to the table above.
 - **The budget is a governance mechanism, not just a number** — spend it on releases, stop
   releasing when it is gone. That policy layer is
-  `continuous-improvement-skills:lean-six-sigma-for-software` (its stability-and-redundancy
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` (its stability-and-redundancy
   reference, §1); this file supplies the arithmetic underneath it.
 
 ## §7 Series/parallel arithmetic
@@ -469,7 +469,7 @@ nine times. It is **recurrent-event data, not nine lifetimes**, so §5 applies a
 - Event-based SLIs (good events ÷ valid events), error budgets, and burn-rate alerting come
   from the site-reliability-engineering literature `[background — verify before citing]`.
 - The "untested failover is scenery" doctrine originates in this library's
-  `continuous-improvement-skills:lean-six-sigma-for-software` stability-and-redundancy
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` stability-and-redundancy
   reference (§4 and §7 there); this file supplies the arithmetic that makes it a theorem, and
   that reference (§1) owns the error budget as a release-governance mechanism.
 - Every number in §3, §5, §6, §7, §8 and §9 was recomputed from the inputs shown; the bootstrap

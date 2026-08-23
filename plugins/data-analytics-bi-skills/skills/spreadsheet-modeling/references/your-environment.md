@@ -18,4 +18,4 @@ sanitized, structural examples.
 - **Domain methods the models depend on:** <e.g. the forecasting method behind the numbers,
   and where it's documented>
 - **When models graduate:** <your threshold for moving a recurring workbook to a script or a
-  query — see data-tools-skills:excel-automation-python / duckdb-local-analytics>
+  query — see data-tools-skills:duckdb-local-analytics; the Excel-automation skill is archived>

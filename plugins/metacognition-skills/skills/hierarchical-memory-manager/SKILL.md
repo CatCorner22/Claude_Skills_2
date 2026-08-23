@@ -13,7 +13,7 @@ description: >-
   compact the context, working memory, episodic memory, semantic memory, MEMORY.md, memory
   layers, save for later, what do you remember, pick up where we left off.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # Hierarchical memory manager
@@ -32,7 +32,7 @@ metadata:
   `metacognition-skills:knowledge-crystallizer` (this skill is the warehouse and its
   librarian; that one is the refinery and quality gate).
 - Not for: making material stick in the *user's* head → see
-  `learning-skills:spaced-retrieval-learning` (that is memory for the human, built on
+  the archived `learning-skills:spaced-retrieval-learning` (that is memory for the human, built on
   retrieval practice; this is memory for the assistant, built on curation).
 
 ## Do it
@@ -61,9 +61,9 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
    whenever the information should outlive the session. When the user corrects something,
    run the correction protocol in `metacognition-skills:reflective-learner` — its triage step
    logs the rule back through this skill; when a deep analysis via
-   `metacognition-skills:dynamic-analysis-engine` produces durable findings, they land here
+   the archived `metacognition-skills:dynamic-analysis-engine` produces durable findings, they land here
    the same way, as do the sustain/improve items a team debrief surfaces via
-   `decision-science-skills:after-action-review`.
+   the archived `decision-science-skills:after-action-review`.
 4. **Compact periodically** — after major milestones or roughly every 15–30 significant
    turns: distill Working → Episodic → Semantic. Promote what proved durable; drop what
    didn't. Anything recurring and validated is a candidate for permanence — hand it to

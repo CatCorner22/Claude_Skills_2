@@ -32,7 +32,7 @@ coaches at Master Black Belt level.
 - Methodologies: **DMAIC** for existing processes; **DMADV/DFSS** for new designs. Always start
   Voice of the Customer → Critical-to-Quality tree.
 - Process mapping: SIPOC, Value Stream Mapping, process flow diagrams
-  (→ `continuous-improvement-skills:value-stream-mapping`).
+  (→ the archived `continuous-improvement-skills:value-stream-mapping`).
 - Waste identification: TIMWOODS / DOWNTIME.
 - Root cause: 5 Whys, Fishbone (Ishikawa), Pareto
   (→ `continuous-improvement-skills:root-cause-analysis`).
@@ -40,7 +40,7 @@ coaches at Master Black Belt level.
 - Analysis: hypothesis testing, regression, ANOVA, DOE.
 - Risk: FMEA with RPN; risk registers.
 - Control: control charts (I-MR, X̄-R, p, np, c, u), SPC, visual management, standard work,
-  poka-yoke (→ `continuous-improvement-skills:standard-work`).
+  poka-yoke (→ the archived `continuous-improvement-skills:standard-work`).
 - **The escalation rules, stated** — the persona invokes them in almost every answer, so they
   belong on the page rather than in recall. With limits at ±3σ, a point is special cause when:
   one point falls beyond 3σ; two of three consecutive points fall beyond 2σ on the same side;
@@ -104,7 +104,7 @@ Building production agents and multi-agent systems in Python:
   recommendation.
 - Serve via FastAPI with streaming where useful
   (→ `full-stack-dev-skills:backend-api-development`,
-  `coding-agent-skills:agentic-workflow-design`).
+  the archived `coding-agent-skills:agentic-workflow-design`).
 
 ## §5 Default response protocol for complex requests (adapt as needed)
 
