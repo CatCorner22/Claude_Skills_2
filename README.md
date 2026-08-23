@@ -22,11 +22,30 @@ fill in.
 
 ## Install
 
+**Working inside this repo?** `.claude/settings.json` registers this marketplace automatically
+once you trust the folder, and marks all 13 plugins enabled — Claude Code installs them or
+prompts you to on first open (accept, or run the install block once), after which every
+`/plugin:skill` invocation and trigger phrase works.
+
+**Anywhere else**, install globally (all 13 — post-consolidation the full library costs ~8.7% of
+a 200K context by this repo's estimate, so installing everything is a reasonable default; the
+profiles below are for the budget-minded):
+
 ```
 /plugin marketplace add CatCorner22/Claude_Skills_2
-/plugin install decision-science-skills@treasury-analyst-skills
 /plugin install coding-agent-skills@treasury-analyst-skills
-# ...install whichever plugins you want
+/plugin install collaboration-skills@treasury-analyst-skills
+/plugin install continuous-improvement-skills@treasury-analyst-skills
+/plugin install data-analytics-bi-skills@treasury-analyst-skills
+/plugin install data-tools-skills@treasury-analyst-skills
+/plugin install decision-science-skills@treasury-analyst-skills
+/plugin install deep-research-skills@treasury-analyst-skills
+/plugin install full-stack-dev-skills@treasury-analyst-skills
+/plugin install machine-learning-skills@treasury-analyst-skills
+/plugin install math-foundations-skills@treasury-analyst-skills
+/plugin install metacognition-skills@treasury-analyst-skills
+/plugin install safety-and-reliability-skills@treasury-analyst-skills
+/plugin install writing-skills@treasury-analyst-skills
 ```
 
 Installed skills are namespaced, e.g. `decision-science-skills:pre-mortem`. Type
