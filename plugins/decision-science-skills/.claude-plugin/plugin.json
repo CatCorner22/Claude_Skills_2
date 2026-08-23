@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "decision-science-skills",
   "description": "Decision discipline under uncertainty: pre-mortem (with the counsel rail), tabletop wargaming and no-win drills under full exercise control, weak-signal navigation with cue-graded confidence, Bayesian updating via natural frequencies, reference-class forecasting, competing hypotheses analysis, minority-report dissent capture, the Rashomon-effect protocol for conflicting recollections, and The Challenger.",
-  "version": "0.20.0"
+  "version": "0.20.1"
 }

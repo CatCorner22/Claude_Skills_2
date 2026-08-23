@@ -147,6 +147,26 @@ the orphaned-phrase defect recorded in Tier C.
 
 ---
 
+## Consolidation notice (2026-08-23)
+
+The library was consolidated from 121 skills to 71; 50 skills moved to `archive/skills/`
+(restorable — see `archive/README.md`). **31 rows across Tiers A–D target skills that are now
+archived and are struck as `~~retired~~`.** They are struck rather than deleted because the Run 1–3
+logs below cite them by ID, and deleting the rows would orphan those records.
+
+What this means for anyone running the protocol now:
+
+- **The retired rows are not failures.** Skip them. A retired row's finding, where it had one,
+  is preserved in the run logs.
+- **Tiers A and B are largely spent.** Both existed to test phrase hand-offs between skills that
+  have since been archived — the collision they guarded cannot recur, because one side is gone.
+  Trigger-phrase collisions among the surviving 71 currently measure **0**.
+- **D9/D10 are superseded rather than merely retired**: the two Forward-Deployed editions merged
+  into `coding-agent-skills:chicken-little`, whose `deploy advisor` / `deploy compiler` modes now
+  own those routes. A future revision should add live rows testing the merged skill's mode
+  triggers — that is the one genuine coverage gap this consolidation opened.
+- The live rows that remain still test what they always tested, against skills that still exist.
+
 ## Tier A — routes that gave up their most natural phrases (highest risk)
 
 These nine skills lost trigger phrases during this session's collision surgery. Each row uses the
@@ -155,17 +175,17 @@ surgery broke a live route.
 
 | # | Prompt (paste verbatim) | Must load | Near-miss prompt | Must NOT load |
 |---|---|---|---|---|
-| A1 | `Review this Python module and tell me what a principal engineer would change before it ships.` | `full-stack-dev-skills:elite-python-engineer` | `Walk me through reviewing a teammate's pull request without being a jerk about it.` | elite-python-engineer (should be `git-and-code-review`) |
-| A2 | `Give me a production-grade FastAPI service layout — typing, logging, error handling, the works.` | `full-stack-dev-skills:elite-python-engineer` | `What HTTP status code should I return when validation fails on a POST?` | elite-python-engineer (should be `backend-api-development`) |
-| A3 | `I've got a CSV I've never opened. What should I look at first before I trust any number from it?` | `data-analytics-bi-skills:exploratory-data-analysis` | `Which is the defensible measure of a typical value when the distribution is badly skewed?` | exploratory-data-analysis (should be `descriptive-statistics`) |
-| A4 | `Report the centre and spread of this column and justify the choice for publication.` | `data-analytics-bi-skills:descriptive-statistics` | `What does one row of this table actually represent?` | descriptive-statistics (should be `exploratory-data-analysis`) |
+| ~~A1~~ retired | `Review this Python module and tell me what a principal engineer would change before it ships.` | `full-stack-dev-skills:elite-python-engineer` | `Walk me through reviewing a teammate's pull request without being a jerk about it.` | elite-python-engineer (should be `git-and-code-review`) |
+| ~~A2~~ retired | `Give me a production-grade FastAPI service layout — typing, logging, error handling, the works.` | `full-stack-dev-skills:elite-python-engineer` | `What HTTP status code should I return when validation fails on a POST?` | elite-python-engineer (should be `backend-api-development`) |
+| ~~A3~~ retired | `I've got a CSV I've never opened. What should I look at first before I trust any number from it?` | `data-analytics-bi-skills:exploratory-data-analysis` | `Which is the defensible measure of a typical value when the distribution is badly skewed?` | exploratory-data-analysis (should be `descriptive-statistics`) |
+| ~~A4~~ retired | `Report the centre and spread of this column and justify the choice for publication.` | `data-analytics-bi-skills:descriptive-statistics` | `What does one row of this table actually represent?` | descriptive-statistics (should be `exploratory-data-analysis`) |
 | A5 | `Put my numeric predictors on the same scale before I fit the model.` | `machine-learning-skills:feature-engineering` | `Half my rows have blanks in three columns and I need to fix the file itself.` | feature-engineering (should be `data-cleaning`) |
-| A6 | `The city column has "NY", "N.Y." and "New York" all meaning the same thing. Make it consistent.` | `data-analytics-bi-skills:data-cleaning` | `Write the one-page instruction sheet so everyone runs this the same way.` | data-cleaning (should be `standard-work`) |
-| A7 | `Everyone on the team does this differently. Write it down so there's one way.` | `continuous-improvement-skills:standard-work` | `Normalize these category labels so the group-by stops splitting.` | standard-work (should be `data-cleaning`) |
+| ~~A6~~ retired | `The city column has "NY", "N.Y." and "New York" all meaning the same thing. Make it consistent.` | `data-analytics-bi-skills:data-cleaning` | `Write the one-page instruction sheet so everyone runs this the same way.` | data-cleaning (should be `standard-work`) |
+| ~~A7~~ retired | `Everyone on the team does this differently. Write it down so there's one way.` | `continuous-improvement-skills:standard-work` | `Normalize these category labels so the group-by stops splitting.` | standard-work (should be `data-cleaning`) |
 | A8 | `Turn this finding into a short deck for the leadership meeting on Thursday.` | `data-analytics-bi-skills:assertion-evidence-deck` | `Write the two-paragraph bottom-line-first memo for the exec, no slides.` | assertion-evidence-deck (should be `executive-briefing`) |
 | A9 | `Score this classifier — I need to know if it's actually any good before we ship it.` | `machine-learning-skills:model-evaluation` | `Set up the weekly status cadence and intervention log for this project.` | model-evaluation (should be `project-command-center`) |
 | A10 | `I need to pull all the records out of a vendor's API, but it only returns 100 at a time.` | `data-tools-skills:rest-api-data-pulls` | `Design the paginated endpoint my own API should expose.` | rest-api-data-pulls (should be `backend-api-development`) |
-| A11 | `Compute a running total per customer ordered by date in SQL.` | `data-analytics-bi-skills:sql-for-analysts` | `This query takes 40 seconds and the ORM generated it.` | sql-for-analysts (should be `database-and-orm`) |
+| ~~A11~~ retired | `Compute a running total per customer ordered by date in SQL.` | `data-analytics-bi-skills:sql-for-analysts` | `This query takes 40 seconds and the ORM generated it.` | sql-for-analysts (should be `database-and-orm`) |
 
 ## Tier B — did the moved phrases land with their new owner?
 
@@ -175,11 +195,11 @@ supposed to *gain* it. A MISS here means a phrase was taken from one skill and d
 | # | Prompt (paste verbatim) | Must load | Why it's at risk |
 |---|---|---|---|
 | B1 | `Standardize this.` | *(nothing, or a clarifying question)* | **Known defect.** Three skills each held the bare word `standardize`; collision surgery qualified all three, so the bare phrase now has **no trigger owner**. Testing whether a bare ambiguous verb *should* route is the point — a clarifying question is the correct outcome, a confident wrong pick is not. |
-| B2 | `Give me the five-number summary and the coefficient of variation.` | `data-analytics-bi-skills:descriptive-statistics` | Received `summary statistics`, `central tendency`, `spread` from exploratory-data-analysis. |
+| ~~B2~~ retired | `Give me the five-number summary and the coefficient of variation.` | `data-analytics-bi-skills:descriptive-statistics` | Received `summary statistics`, `central tendency`, `spread` from exploratory-data-analysis. |
 | B3 | `Show me the confusion matrix and pick an operating threshold.` | `machine-learning-skills:model-evaluation` | Received `confusion matrix`, which `project-command-center` had held incorrectly. |
-| B4 | `Which fields are missing and should I impute or drop those rows?` | `data-analytics-bi-skills:data-cleaning` | Retained `missing values` after feature-engineering yielded it. |
+| ~~B4~~ retired | `Which fields are missing and should I impute or drop those rows?` | `data-analytics-bi-skills:data-cleaning` | Retained `missing values` after feature-engineering yielded it. |
 | B5 | `Read this diff and tell me if it's safe to merge.` | `coding-agent-skills:git-and-code-review` | Holds `code review`, which elite-python-engineer yielded — but elite-python-engineer still advertises "code review" in its description *prose*, so both compete in the router. |
-| B6 | `Write me a pandas script to summarize this spreadsheet.` | `coding-agent-skills:python-for-analysts` | Sole owner of bare `python` after elite-python-engineer yielded it. If A1/A2 MISS **and** B6 PASSes, the split is wrong: analyst-grade Python is absorbing production-grade requests. |
+| ~~B6~~ retired | `Write me a pandas script to summarize this spreadsheet.` | `coding-agent-skills:python-for-analysts` | Sole owner of bare `python` after elite-python-engineer yielded it. If A1/A2 MISS **and** B6 PASSes, the split is wrong: analyst-grade Python is absorbing production-grade requests. |
 
 ## Tier C — over-trigger guards (bare common words)
 
@@ -202,20 +222,20 @@ casual phrasing whose substance another skill owns. Its cost, if these fail, is 
 |---|---|---|---|
 | C1 | `Which branch of the company handles refunds?` | `coding-agent-skills:git-and-code-review` | `branch`, `commit` |
 | C2 | `I need to commit to a decision by Friday — help me think it through.` | `coding-agent-skills:git-and-code-review` | `commit` |
-| C3 | `Who should lead this project, and what's the lag before we see results?` | `data-analytics-bi-skills:sql-for-analysts` | `lead`, `lag` |
-| C4 | `What's the range of salaries we should offer, and is remote on the table?` | `data-analytics-bi-skills:descriptive-statistics` | `range`, `mode` |
-| C5 | `Rank these three vendors for me on price and support.` | `data-analytics-bi-skills:sql-for-analysts` | `rank`, `qualify` |
+| ~~C3~~ retired | `Who should lead this project, and what's the lag before we see results?` | `data-analytics-bi-skills:sql-for-analysts` | `lead`, `lag` |
+| ~~C4~~ retired | `What's the range of salaries we should offer, and is remote on the table?` | `data-analytics-bi-skills:descriptive-statistics` | `range`, `mode` |
+| ~~C5~~ retired | `Rank these three vendors for me on price and support.` | `data-analytics-bi-skills:sql-for-analysts` | `rank`, `qualify` |
 | C6 | `Give me feedback on my cover letter.` | `metacognition-skills:reflective-learner` | `feedback` |
 | C7 | `My memory is terrible — how do I stop forgetting people's names?` | `metacognition-skills:hierarchical-memory-manager` | `memory` |
-| C8 | `Book me a travel agent for the Denver trip.` | `coding-agent-skills:agentic-workflow-design` | `agent` |
-| C9 | `There's too much waste in our packaging — can we use less cardboard?` | `continuous-improvement-skills:value-stream-mapping` | `waste`, `flow` |
-| C10 | `Refactor this paragraph so it reads better.` | `full-stack-dev-skills:elite-python-engineer` | `refactor` (bare, and the skill's broadest remaining route) |
-| C11 | `What are the visitor permissions for the building on weekends?` | `coding-agent-skills:agent-harness-config` | `permissions`, `hooks` |
-| C12 | `Investigate why the office coffee order keeps arriving late.` | `metacognition-skills:dynamic-analysis-engine` | `investigate` |
-| C13 | `Half the rows in this export have blanks and the dates come in three different formats. Clean this up.` | `coding-agent-skills:script-wizard` | `clean this up` (should be `data-analytics-bi-skills:data-cleaning`) |
-| C14 | `Here's the diff for my branch — review this code before I open the PR.` | `coding-agent-skills:script-wizard` | `review this code` (should be `coding-agent-skills:git-and-code-review`) |
-| C15 | `Our onboarding takes eleven days and nobody can say why. Improve this process.` | `coding-agent-skills:script-wizard` | `improve this process` (should be a continuous-improvement method) |
-| C16 | `Our refund policy has an edge case people keep exploiting. Stress test it.` | `coding-agent-skills:script-wizard` | `stress test` (shared with `coding-agent-skills:rule-stress-testing`) |
+| ~~C8~~ retired | `Book me a travel agent for the Denver trip.` | `coding-agent-skills:agentic-workflow-design` | `agent` |
+| ~~C9~~ retired | `There's too much waste in our packaging — can we use less cardboard?` | `continuous-improvement-skills:value-stream-mapping` | `waste`, `flow` |
+| ~~C10~~ retired | `Refactor this paragraph so it reads better.` | `full-stack-dev-skills:elite-python-engineer` | `refactor` (bare, and the skill's broadest remaining route) |
+| ~~C11~~ retired | `What are the visitor permissions for the building on weekends?` | `coding-agent-skills:agent-harness-config` | `permissions`, `hooks` |
+| ~~C12~~ retired | `Investigate why the office coffee order keeps arriving late.` | `metacognition-skills:dynamic-analysis-engine` | `investigate` |
+| ~~C13~~ retired | `Half the rows in this export have blanks and the dates come in three different formats. Clean this up.` | `coding-agent-skills:script-wizard` | `clean this up` (should be `data-analytics-bi-skills:data-cleaning`) |
+| ~~C14~~ retired | `Here's the diff for my branch — review this code before I open the PR.` | `coding-agent-skills:script-wizard` | `review this code` (should be `coding-agent-skills:git-and-code-review`) |
+| ~~C15~~ retired | `Our onboarding takes eleven days and nobody can say why. Improve this process.` | `coding-agent-skills:script-wizard` | `improve this process` (should be a continuous-improvement method) |
+| ~~C16~~ retired | `Our refund policy has an edge case people keep exploiting. Stress test it.` | `coding-agent-skills:script-wizard` | `stress test` (shared with `coding-agent-skills:rule-stress-testing`) |
 
 > A single OVER here is not automatically a defect — a slightly pushy skill that offers itself and is
 > waved off costs one line. An OVER on **C6, C7, C8 or C12** is more serious, because those skills
