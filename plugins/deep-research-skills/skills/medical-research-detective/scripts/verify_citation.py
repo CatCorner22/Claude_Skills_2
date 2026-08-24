@@ -97,8 +97,37 @@ _COUNTRY_HINTS = [
     ("belgium", ["belgium"], ["brussels", "leuven", "ghent"]),
     ("austria", ["austria"], ["vienna", "wien"]),
     ("poland", ["poland"], ["warsaw", "krakow"]),
-    ("taiwan", ["taiwan"], ["taipei"]),
+    # "republic of china" is deliberately NOT a plain hint: it is a substring of the PRC's
+    # own formal name, so "...Beijing, People's Republic of China" resolved to BOTH china and
+    # taiwan and invented a cross-strait collaboration. The ROC form is matched separately,
+    # below, with the "People's" prefix excluded. _TAIWAN_ROC_RE could not save it — neither
+    # "taiwan" nor "roc" appears in that string.
+    ("taiwan", ["taiwan", "r.o.c"], ["taipei"]),
 ]
+
+# "Taiwan, Republic of China" is the standard Taiwanese affiliation, and the bare
+# substring "china" inside it flagged Academia Sinica papers as excluded-country --
+# a false positive that quietly removes legitimate research from a review. Taiwan is
+# resolved first and, when it is present, a china hit that rests ONLY on the
+# "republic of china" wording is dropped. A mainland signal in the same string
+# (an explicit "china" elsewhere, or a mainland city) still stands on its own.
+_TAIWAN_ROC_RE = re.compile(r"\b(?:taiwan|r\.?o\.?c\.?)\b", re.I)
+
+_ROC_NAME_RE = re.compile(r"\brepublic of china\b", re.I)
+_PEOPLES_PREFIX_RE = re.compile(r"people'?s?\s*$", re.I)
+
+
+def _names_roc(seg: str) -> bool:
+    """True when the segment uses "Republic of China" as TAIWAN's name.
+
+    False for "People's Republic of China", which is the PRC. The distinction is one word
+    and the two readings are opposite countries, one of them on the excluded list.
+    """
+    for m in _ROC_NAME_RE.finditer(seg):
+        if _PEOPLES_PREFIX_RE.search(seg[max(0, m.start() - 12):m.start()]):
+            continue
+        return True
+    return False
 
 RETRACTION_MARKERS = [
     "retracted", "retraction", "withdrawn",
@@ -316,6 +345,18 @@ def years_match(claimed, actual) -> bool:
 # and PubMed's numbered-superscript separators.
 _SEGMENTS = re.compile(r";|/|\band\b|(?<=\D)\d\s*[.)]\s")
 
+# Words that mark a segment as naming an *institution* rather than a department,
+# a role, or the tail of a name split across an " and ". Used to decide whether an
+# unresolved segment is a real second institution worth reporting. "department",
+# "division", "unit" are deliberately absent: they head sub-units of the
+# institution named later in the same string.
+_INSTITUTION_WORDS = (
+    "university", "universite", "universidad", "universita", "universitat",
+    "hospital", "hopital", "hospitalier", "institute", "institut", "college",
+    "school", "center", "centre", "clinic", "klinik", "academy", "academia",
+    "laboratory", "laboratoire", "foundation", "polytechnic", "faculty",
+)
+
 
 def _hit(hints, low: str) -> bool:
     """Word-bounded substring test on an accent-folded string.
@@ -346,7 +387,12 @@ _US_STATE_CODES = {
 # Shanghai as an American town and report the paper as clean US provenance. That is
 # the failure this module's header calls the worst possible one, so the guard is
 # deliberately narrow: it suppresses only the adjacent "Moscow, ID 83844" shape.
-_US_TAIL_RE = re.compile(r"[\s,]*([a-z]{2})\b\s*(\d{5})?")
+_US_TAIL_RE = re.compile(r"[\s,]*([a-z]{2})\b[\s,]*(\d{5})?")
+# What may follow the state code (and optional ZIP) for the tail to read as a US address.
+# Anchored, because "does 'usa' appear anywhere in this line?" is not a test of adjacency:
+# in "Institute of X, Beijing, Co-affiliated with Yale, New Haven, CT 06510, USA" the token
+# after "Beijing" is "Co" (Colorado) and "USA" is 50 characters away at the end of the line.
+_US_COUNTRY_TAIL_RE = re.compile(r"[\s,.]*(?:usa|u\.?s\.?a|united states)\b")
 
 
 def _is_us_locality(low: str, city: str) -> bool:
@@ -355,11 +401,13 @@ def _is_us_locality(low: str, city: str) -> bool:
     A US state code immediately after the city settles it, and covers the whole
     family: Moscow ID, St. Petersburg FL, Vienna VA, Berlin NH.
 
-    **This guard fails safe.** It suppresses a city hit only when that city is
-    directly followed by a state code, and never when the string independently
-    names an excluded country. A multi-site collaboration ("Moscow and Boise, ID,
-    USA") therefore still reports the excluded country for a human to confirm —
-    a false flag costs a reviewer seconds, whereas a false clear silently defeats
+    **This guard fails safe, and the adjacency is what makes that true.** It suppresses a
+    city hit only when the city is immediately followed by a state code AND that code is
+    immediately followed by a ZIP or by the country name — never on the strength of "USA"
+    appearing somewhere else in the string, and never when the string independently names
+    an excluded country. The cost is accepted in the right direction: an unusual tail the
+    pattern does not recognise leaves the excluded country reported for a human to wave
+    off, because a false flag costs a reviewer seconds while a false clear silently defeats
     the provenance policy the caller is relying on.
     """
     # Backstop: an explicit excluded-country NAME anywhere outranks any locality guess.
@@ -370,7 +418,22 @@ def _is_us_locality(low: str, city: str) -> bool:
         tail = _US_TAIL_RE.match(low, m.end())
         if not tail or tail.group(1) not in _US_STATE_CODES:
             continue
-        if tail.group(2) or _hit(["usa", "u.s.a", "united states"], low):
+        # A ZIP immediately after the state code settles it. Otherwise the country marker
+        # must sit immediately after the state code — NOT merely somewhere in the string.
+        #
+        # The earlier `or _hit(["usa"], low)` form was a hole wide enough to drive the whole
+        # provenance policy through: any two-letter English word that happens to be a state
+        # code, followed anywhere later by "USA", suppressed the city. Verified leaks —
+        #   "Institute of X, Beijing, Co-affiliated with Yale, New Haven, CT 06510, USA"
+        #     -> "Co" reads as Colorado, "USA" sits at the end of the line -> ['usa'] only
+        #   "Tianjin Medical University, Tianjin, In collaboration with NIH, Bethesda, MD ..."
+        #     -> "In" reads as Indiana                                     -> ['usa'] only
+        # Both suppressed the excluded-country city BEFORE the carry-through in
+        # infer_provenance could see it, so the paper verified clean. Adjacency closes it:
+        # "Co-affiliated" is followed by neither a ZIP nor a country name.
+        if tail.group(2):
+            return True
+        if _US_COUNTRY_TAIL_RE.match(low, tail.end()):
             return True
     return False
 
@@ -387,7 +450,7 @@ def infer_provenance(affiliations) -> dict:
     Within one affiliation string a country name beats a city, so
     "Moscow, ID 83844, USA" resolves to usa, not russia.
     """
-    found, unrecognized = [], []
+    found, unrecognized, unresolved_segments = [], [], []
     for aff in affiliations or []:
         low = fold_accents(aff or "")
         if not low.strip():
@@ -403,6 +466,8 @@ def infer_provenance(affiliations) -> dict:
             if not seg.strip():
                 continue
             named = [c for c, names, _ in _COUNTRY_HINTS if _hit(names, seg)]
+            if _names_roc(seg) and "taiwan" not in named:
+                named.append("taiwan")
             city_hits = [
                 c for c, _, cities in _COUNTRY_HINTS
                 if any(_hit([city], seg) and not _is_us_locality(low, city)
@@ -418,12 +483,48 @@ def infer_provenance(affiliations) -> dict:
             for c in city_hits:
                 if c in EXCLUDED_COUNTRIES and c not in seg_hits:
                     seg_hits = seg_hits + [c]
+            # Taiwan/ROC disambiguation, applied after the excluded-country backstop so
+            # it can only remove a hit that rests solely on the "Republic of China" form.
+            if "china" in seg_hits and _TAIWAN_ROC_RE.search(seg):
+                mainland = _hit(["chinese", "p.r.c", "prc"], seg) or any(
+                    _hit([city], seg)
+                    for _c, _n, cities in _COUNTRY_HINTS if _c == "china"
+                    for city in cities)
+                bare_china = re.search(r"(?<!republic of )\bchina\b", seg)
+                if not mainland and not bare_china:
+                    seg_hits = [c for c in seg_hits if c != "china"]
             hits.extend(seg_hits)
+            # An affiliation string routinely lists several institutions. Until
+            # this check existed, `unrecognized` was decided for the WHOLE string:
+            # if any one segment resolved, the string counted as resolved and every
+            # unresolvable institution inside it vanished. That produced a clean
+            # `provenance_allowed: True` on
+            #   "Xiangya Hospital, Central South University, Changsha, Hunan;
+            #    and Massachusetts General Hospital, Boston, MA, USA"
+            # — the excluded-country lead affiliation silently dropped because the
+            # US co-author's segment resolved. That is the exact failure the
+            # segmentation above was introduced to prevent, arriving one level up.
+            #
+            # A segment counts as an unresolved institution only when it names an
+            # institution AND carries a comma (so it has locality structure of its
+            # own). "Massachusetts General Hospital" split off an " and " has no
+            # comma and is treated as a continuation, not a second site.
+            if not seg_hits and "," in seg and any(w in seg for w in _INSTITUTION_WORDS):
+                frag = seg.strip(" ,.;")
+                if frag and frag not in unresolved_segments:
+                    unresolved_segments.append(frag)
         if not hits:
             unrecognized.append(aff)
         for c in hits:
             if c not in found:
                 found.append(c)
+    # Unresolved institutions inside an otherwise-resolved string are reported
+    # through the same channel as a wholly unresolved affiliation: the caller's
+    # PROVENANCE PARTIAL branch, which asks a human to read the paper's
+    # affiliations rather than issuing a pass.
+    for frag in unresolved_segments:
+        if frag not in unrecognized:
+            unrecognized.append(frag)
     return {"countries": found, "unrecognized": unrecognized}
 
 
@@ -553,8 +654,20 @@ def fetch_pubmed(pmid: str, mailto=None, fetch=http_get_json):
                    url=f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/")
 
 
-def fetch_europepmc(query: str, mailto=None, fetch=http_get_json):
-    """Europe PMC fallback; also the best free source of affiliation strings."""
+def fetch_europepmc(query: str, mailto=None, fetch=http_get_json,
+                    expect_doi=None, expect_pmid=None):
+    """Europe PMC fallback; also the best free source of affiliation strings.
+
+    `expect_doi` / `expect_pmid` are REQUIRED whenever the query names an
+    identifier. This endpoint is a **search**, not a lookup: it returns the
+    best-scoring hit for the query string, and DOIs carry characters the query
+    language treats as syntax (slashes, parentheses, colons, hyphens), so a
+    `DOI:...` query can return a *different* paper rather than nothing at all.
+    Accepting that hit unchecked makes a fabricated identifier come back as
+    `exists: True` with a real paper's title and authors attached — inverting the
+    single verdict this tool exists to deliver. When the returned record does not
+    carry the identifier that was asked for, that is a miss, not a match.
+    """
     data = fetch(EUROPEPMC, {"query": query, "format": "json", "pageSize": "1",
                              "resultType": "core"})
     if not data:
@@ -563,6 +676,10 @@ def fetch_europepmc(query: str, mailto=None, fetch=http_get_json):
     if not results:
         return None
     r = results[0]
+    if expect_doi and str(r.get("doi") or "").strip().lower() != str(expect_doi).strip().lower():
+        return None
+    if expect_pmid and str(r.get("pmid") or "").strip() != str(expect_pmid).strip():
+        return None
     affs = []
     if r.get("affiliation"):
         affs.append(r["affiliation"])
@@ -597,15 +714,19 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
     }
 
     record = None
+    crossref_answered = False
     try:
         if doi:
             record = fetch_crossref(doi, mailto=mailto, fetch=fetch)
+            crossref_answered = record is not None
             if record is None:
-                record = fetch_europepmc(f"DOI:{doi}", mailto=mailto, fetch=fetch)
+                record = fetch_europepmc(f"DOI:{doi}", mailto=mailto, fetch=fetch,
+                                         expect_doi=doi)
         elif pmid:
             record = fetch_pubmed(pmid, mailto=mailto, fetch=fetch)
             if record is None:
-                record = fetch_europepmc(f"EXT_ID:{pmid}", mailto=mailto, fetch=fetch)
+                record = fetch_europepmc(f"EXT_ID:{pmid}", mailto=mailto, fetch=fetch,
+                                         expect_pmid=pmid)
     except VerificationError as e:
         out["errors"].append(str(e))
         return out
@@ -616,28 +737,61 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
             "IDENTIFIER DOES NOT RESOLVE — treat as fabricated/incorrect and REMOVE the citation")
         return out
 
-    # Enrich affiliations from Europe PMC when the primary source lacks them.
-    if not record["affiliations"] and (record.get("doi") or record.get("pmid")):
-        try:
-            q = f"DOI:{record['doi']}" if record.get("doi") else f"EXT_ID:{record['pmid']}"
-            extra = fetch_europepmc(q, mailto=mailto, fetch=fetch)
-            if extra and extra["affiliations"]:
-                record["affiliations"] = extra["affiliations"]
-                if not record.get("publication_types"):
-                    record["publication_types"] = extra["publication_types"]
-        except VerificationError:
-            pass  # enrichment is best-effort
+    # Enrich from Europe PMC when the primary source lacks affiliations OR the richer
+    # publication types.
+    #
+    # Crossref sets publication_types to ["journal-article"] for every article, so on the DOI
+    # path `if not record["publication_types"]` was dead code and PubMed's "Retracted
+    # Publication" type could never be reached — the one retraction signal that survives when
+    # Crossref carries no `updated-by` annotation. The types are now MERGED (Crossref's coarse
+    # type kept, Europe PMC's specific ones added) rather than used only as a fallback.
+    if record.get("doi") or record.get("pmid"):
+        want_affs = not record["affiliations"]
+        want_types = set(t.lower() for t in (record.get("publication_types") or [])) <= {
+            "journal-article", "journal article"}
+        if want_affs or want_types:
+            try:
+                if record.get("doi"):
+                    q, exp = f"DOI:{record['doi']}", {"expect_doi": record["doi"]}
+                else:
+                    q, exp = f"EXT_ID:{record['pmid']}", {"expect_pmid": record["pmid"]}
+                extra = fetch_europepmc(q, mailto=mailto, fetch=fetch, **exp)
+                if extra:
+                    if want_affs and extra["affiliations"]:
+                        record["affiliations"] = extra["affiliations"]
+                    for t in extra.get("publication_types") or []:
+                        if t not in (record.get("publication_types") or []):
+                            record.setdefault("publication_types", []).append(t)
+            except VerificationError:
+                pass  # enrichment is best-effort
 
     # A PMID lookup sees PubMed's publication types, which lag a retraction notice
     # by weeks. Crossref's Retraction Watch annotations do not, so pick them up
     # whenever the record carries a DOI and the lookup did not come from Crossref.
+    #
+    # `authoritative_retraction_source` records whether the Retraction Watch feed
+    # actually answered. Without it, "no signal found" and "nothing was consulted"
+    # both printed as `not_retracted: True` — a clean bill of health issued by a
+    # check that never ran. That happens on two ordinary paths: a DOI Crossref
+    # 404s (so the lookup falls through to Europe PMC and the Crossref top-up
+    # below 404s again on the same DOI), and a PMID with no DOI at all, where the
+    # only evidence is the PubMed publication types this comment already says lag
+    # by weeks.
+    authoritative_retraction_source = record["source"] == "crossref"
     if record["source"] != "crossref" and record.get("doi") and not record.get("updates"):
-        try:
-            cr = fetch_crossref(record["doi"], mailto=mailto, fetch=fetch)
-            if cr and cr.get("updates"):
-                record["updates"] = cr["updates"]
-        except VerificationError:
-            pass  # enrichment is best-effort
+        # Saved round-trip only: Crossref already declined this exact DOI, so the
+        # retry would 404 again. Skipping it changes latency, not the verdict —
+        # `authoritative_retraction_source` stays False either way.
+        if not (doi and not crossref_answered
+                and str(record["doi"]).strip().lower() == str(doi).strip().lower()):
+            try:
+                cr = fetch_crossref(record["doi"], mailto=mailto, fetch=fetch)
+                if cr is not None:
+                    authoritative_retraction_source = True
+                    if cr.get("updates"):
+                        record["updates"] = cr["updates"]
+            except VerificationError:
+                pass  # enrichment is best-effort
 
     out["exists"] = True
     out["checks"]["existence"] = True
@@ -706,8 +860,18 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
         out["flags"].append(
             f"RETRACTION INDICATOR ({', '.join(signals)}) — do not use as support; "
             f"verify on the publisher page")
-    else:
+    elif authoritative_retraction_source:
         out["checks"]["not_retracted"] = True
+    else:
+        # No signal, but the Retraction Watch feed never answered for this record.
+        # Reported as unknown (like the provenance states above), not as a pass:
+        # silence from a source that was never asked is not evidence of anything.
+        out["checks"]["not_retracted"] = None
+        out["flags"].append(
+            "RETRACTION STATUS UNVERIFIED — Crossref/Retraction Watch did not answer for "
+            "this record, so the only evidence is publication-type metadata, which lags a "
+            "retraction notice by weeks. Check the publisher page and Retraction Watch "
+            "before relying on this source")
 
     # A correction is not a retraction: the paper stands, but a number in it may
     # not (evidence-appraisal.md). Reported, never a check failure.
@@ -719,6 +883,13 @@ def verify(doi=None, pmid=None, claim_title=None, claim_author=None, claim_year=
 
     hard = [v for k, v in out["checks"].items() if v is False]
     out["passed"] = not hard
+    # A filtered source and a fabricated one are not the same finding, and a batch gate that
+    # exits 1 on both deletes them at the same gate. source-provenance.md asks for quarantine
+    # with a confirm path, so the caller gets a distinguishable outcome.
+    out["quarantine_only"] = bool(
+        out["checks"].get("provenance_allowed") is False
+        and all(v is not False for k, v in out["checks"].items()
+                if k != "provenance_allowed"))
     out["reminder"] = ("Checks 1-2 only. Check 3 (does the source actually state your claim?) "
                        "requires reading the text — quote the supporting sentence.")
     return out
@@ -758,7 +929,9 @@ def format_human(res: dict) -> str:
     elif not countries:
         country_line = "unknown (no affiliation data)"
     L.append(f"      Country : {country_line}")
-    L.append(f"  [-] Retraction check.. {'clean' if res['checks'].get('not_retracted') else 'FLAGGED'}")
+    _nr = res["checks"].get("not_retracted")
+    _nr_word = {True: "clean", False: "FLAGGED"}.get(_nr, "UNVERIFIED (source did not answer)")
+    L.append(f"  [-] Retraction check.. {_nr_word}")
     if res["flags"]:
         L.append("")
         for f in res["flags"]:
@@ -896,6 +1069,15 @@ def self_test() -> int:
     check("Russian St. Petersburg still resolves",
           infer_countries(["St. Petersburg State University, 199034 St. Petersburg"])
           == ["russia"])
+    # Taiwan/ROC: "Taiwan, Republic of China" is the standard Taiwanese affiliation and
+    # must not be excluded as mainland China -- a false positive here silently removes
+    # legitimate research from a review.
+    check("Taiwan ROC is Taiwan, not China",
+          infer_countries(["Academia Sinica, Taipei, Taiwan, Republic of China"]) == ["taiwan"])
+    check("plain Taiwan is Taiwan",
+          infer_countries(["National Taiwan University Hospital, Taipei, Taiwan"]) == ["taiwan"])
+    check("mainland China still resolves",
+          infer_countries(["Chinese Academy of Sciences, Beijing, China"]) == ["china"])
     check("New South Wales is not the UK",
           infer_countries(["University of New South Wales, Kensington NSW 2052"]) == [])
     check("qualified Wales still resolves to uk",
@@ -1072,6 +1254,146 @@ def self_test() -> int:
     check("e2e network error reported", bool(res_net["errors"]))
     check("e2e network error not a pass", res_net["passed"] is False)
 
+    # --- Regression: an unresolvable institution inside an otherwise-resolved
+    # affiliation string used to disappear, because `unrecognized` was decided for
+    # the whole string. A Chinese lead affiliation co-authored with a US site
+    # therefore verified CLEAN — the failure this module exists to prevent.
+    prov_mixed = infer_provenance([
+        "Xiangya Hospital, Central South University, Changsha, Hunan; "
+        "and Massachusetts General Hospital, Boston, MA, USA"])
+    check("mixed-site: unresolved institution is reported",
+          len(prov_mixed["unrecognized"]) == 1)
+    check("mixed-site: resolved country still found",
+          prov_mixed["countries"] == ["usa"])
+    prov_ru = infer_provenance([
+        "Department of Neurology, Sechenov University, Ulyanovsk; "
+        "and Mayo Clinic, Rochester, MN, USA"])
+    check("mixed-site: unlisted Russian city segment reported",
+          len(prov_ru["unrecognized"]) == 1)
+    # ...without inventing a second site out of an institution name split on "and".
+    check("no false unresolved from 'and' inside one institution name",
+          infer_provenance(
+              ["Massachusetts General Hospital and Harvard Medical School, "
+               "Boston, MA, USA"])["unrecognized"] == [])
+    check("no false unresolved from Brigham and Women's",
+          infer_provenance(
+              ["Brigham and Women's Hospital, Boston, MA, USA"])["unrecognized"] == [])
+    check("no false unresolved from a plain department prefix",
+          infer_provenance(
+              ["Department of Medicine, Mayo Clinic, Rochester, MN, USA"]
+          )["unrecognized"] == [])
+    # --- Regression: `_is_us_locality` accepted any two-letter English word that happens to
+    # be a state code, as long as "USA" appeared ANYWHERE later in the string. Real-shaped
+    # affiliations leaked through and verified clean.
+    for aff, must in (
+        ("Institute of X, Beijing, Co-affiliated with Yale, New Haven, CT 06510, USA", "china"),
+        ("Tianjin Medical University, Tianjin, In collaboration with NIH, "
+         "Bethesda, MD 20892, USA", "china"),
+        ("Wuhan Institute, Wuhan, Or partnered with OHSU, Portland, OR 97239, USA", "china"),
+    ):
+        check(f"non-adjacent 'usa' no longer suppresses {must} ({aff[:18]}...)",
+              must in infer_provenance([aff])["countries"])
+    # ...and the shapes the guard exists for are still suppressed.
+    for aff in ("Moscow, ID 83844, USA", "University of Idaho, Moscow, ID, USA",
+                "St. Petersburg, FL 33701, USA"):
+        c = infer_provenance([aff])["countries"]
+        check(f"US namesake still resolved: {aff[:24]}",
+              "russia" not in c and "usa" in c)
+
+    # --- Regression: Crossref stamps every article "journal-article", so the old
+    # `if not record["publication_types"]` fallback was dead code on the DOI path and
+    # PubMed/Europe PMC's "Retracted Publication" type could never be reached.
+    def stub_pubtype_only_in_epmc(url, params=None, mailto=None):
+        if url.startswith(CROSSREF):
+            return {"message": {
+                "DOI": "10.1000/rp", "title": ["An ordinary-looking title"],
+                "container-title": ["J"], "issued": {"date-parts": [[2021]]},
+                "type": "journal-article",
+                "author": [{"family": "Smith", "given": "A", "affiliation": [
+                    {"name": "Mayo Clinic, Rochester, MN, USA"}]}]}}
+        return {"resultList": {"result": [{
+            "doi": "10.1000/rp", "pmid": "7",
+            "title": "An ordinary-looking title", "pubYear": "2021",
+            "authorList": {"author": [{"fullName": "A Smith"}]},
+            "journalInfo": {"journal": {"title": "J"}},
+            "pubTypeList": {"pubType": ["Journal Article", "Retracted Publication"]}}]}}
+
+    res_rp = verify(doi="10.1000/rp", fetch=stub_pubtype_only_in_epmc)
+    check("retraction pubtype reachable on the DOI path",
+          res_rp["checks"]["not_retracted"] is False)
+
+    # --- Regression: "People's Republic of China" is the PRC, not Taiwan. "republic of
+    # china" as a plain Taiwan hint made it resolve to BOTH, inventing a collaboration.
+    check("People's Republic of China is not Taiwan",
+          infer_provenance(["Chinese PLA General Hospital, Beijing, "
+                            "People's Republic of China"])["countries"] == ["china"])
+    check("Taiwan's ROC form still resolves to taiwan",
+          infer_provenance(["National Taiwan University, Taipei, "
+                            "Republic of China"])["countries"] == ["taiwan"])
+
+    # The existing excluded-country pins must survive the change.
+    check("excluded-country city still carried through a comma-only string",
+          set(infer_provenance(
+              ["Zhongshan Hospital, Shanghai, and Cleveland Clinic, OH, USA"]
+          )["countries"]) == {"china", "usa"})
+
+    def stub_mixed(url, params=None, mailto=None):
+        return {"message": {
+            "DOI": "10.1000/m", "title": ["A study"], "container-title": ["J"],
+            "issued": {"date-parts": [[2022]]}, "type": "journal-article",
+            "author": [{"family": "Li", "given": "X", "affiliation": [{"name":
+                "Xiangya Hospital, Central South University, Changsha, Hunan; "
+                "and Massachusetts General Hospital, Boston, MA, USA"}]}]}}
+
+    res_m = verify(doi="10.1000/m", fetch=stub_mixed)
+    check("e2e mixed-site is not a clean provenance pass",
+          res_m["checks"]["provenance_allowed"] is None)
+    check("e2e mixed-site flags PARTIAL",
+          any("PROVENANCE PARTIAL" in f for f in res_m["flags"]))
+
+    # --- Regression: Europe PMC's endpoint is a SEARCH. Returning its top hit
+    # without checking the identifier made a fabricated DOI resolve to a real paper.
+    def stub_epmc_wrong_paper(url, params=None, mailto=None):
+        if url.startswith(CROSSREF):
+            return None                      # Crossref 404s the fabricated DOI
+        return {"resultList": {"result": [{
+            "doi": "10.1016/j.real-different-paper", "pmid": "12345678",
+            "title": "An entirely different real paper", "pubYear": "2019",
+            "authorList": {"author": [{"fullName": "Real Author"}]},
+            "journalInfo": {"journal": {"title": "J"}}}]}}
+
+    res_w = verify(doi="10.9999/fabricated", fetch=stub_epmc_wrong_paper)
+    check("europepmc: mismatched DOI is not accepted as the record",
+          res_w["exists"] is False)
+    check("europepmc: mismatched DOI still flagged as unresolved",
+          any("DOES NOT RESOLVE" in f for f in res_w["flags"]))
+
+    def stub_epmc_right_paper(url, params=None, mailto=None):
+        if url.startswith(CROSSREF):
+            return None
+        return {"resultList": {"result": [{
+            "doi": "10.9999/only-in-epmc", "pmid": "999",
+            "title": "A paper Crossref does not carry", "pubYear": "2019",
+            "authorList": {"author": [{"fullName": "Some Author"}]},
+            "journalInfo": {"journal": {"title": "J"}},
+            "affiliation": "Mayo Clinic, Rochester, MN, USA"}]}}
+
+    res_e = verify(doi="10.9999/only-in-epmc", fetch=stub_epmc_right_paper)
+    check("europepmc: matching DOI is accepted", res_e["exists"] is True)
+
+    # --- Regression: "no retraction signal" and "nothing was consulted" both
+    # printed as a clean retraction check. On the Europe PMC fallback path the
+    # Retraction Watch feed never answered, so the verdict must be unknown.
+    check("retraction status is UNVERIFIED when Crossref never answered",
+          res_e["checks"]["not_retracted"] is None)
+    check("unverified retraction is flagged",
+          any("RETRACTION STATUS UNVERIFIED" in f for f in res_e["flags"]))
+    check("unverified retraction does not fail the citation", res_e["passed"] is True)
+    check("crossref path still reports a real clean check",
+          res["checks"]["not_retracted"] is True)
+    check("formatter renders the unverified state",
+          "UNVERIFIED" in format_human(res_e))
+
     total = len(ran)
     print(f"self-test: {total - len(failures)}/{total} checks passed")
     if failures:
@@ -1107,7 +1429,11 @@ def main(argv=None):
     print(json.dumps(res, indent=2) if args.json else format_human(res))
     if res["errors"]:
         return 2
-    return 0 if res["passed"] else 1
+    # 0 = passed, 3 = real paper, real metadata, excluded-country provenance (quarantine and
+    # confirm), 1 = anything genuinely disqualifying. A batch gate must not treat 3 like 1.
+    if res["passed"]:
+        return 0
+    return 3 if res.get("quarantine_only") else 1
 
 
 if __name__ == "__main__":

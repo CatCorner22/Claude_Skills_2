@@ -13,7 +13,7 @@ description: >-
   delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
   zeros lost, csv broken columns, mojibake, flat file feed.
 metadata:
-  version: "1.3.0"
+  version: "1.4.1"
 ---
 
 # CSV and flat-file wrangling
@@ -24,11 +24,12 @@ metadata:
   (shifted columns, mojibake, lost zeros).
 - Merging or appending multiple flat files into one dataset for analysis.
 - Not for: deep cleaning after a correct parse (dedupe, outliers, imputation) → see
-  `data-analytics-bi-skills:data-cleaning`. Statement-specific formats (BAI2, camt.053, MT940) are
+  the archived `data-analytics-bi-skills:data-cleaning`. Statement-specific formats (BAI2, camt.053, MT940) are
   format-specific knowledge (a banking-domain topic this library does not carry; formerly at
   `archive/`), not general flat-file wrangling.
-- Not for: sources that aren't flat files — a workbook (.xlsx) → see
-  `data-tools-skills:excel-automation-python`; a PDF report or statement → see
+- Not for: sources that aren't flat files — a workbook (.xlsx) → openpyxl/pandas directly (the
+  archived `data-tools-skills:excel-automation-python` carries the full recipes, restorable
+  from `archive/`); a PDF report or statement → see
   `data-tools-skills:pdf-data-extraction`. Both hand their output back to this skill's typing
   discipline.
 
@@ -80,7 +81,7 @@ df = pd.read_csv(
    sniffer can mistype IDs exactly like pandas.
 7. **Harden the recurring feed.** Wrap the load in a function that runs the step-3 checks and
    raises on violation; log filename, row count, and totals per run — structure the script per
-   `coding-agent-skills:python-for-analysts`. Keep the raw export pristine and separate from
+   the archived `coding-agent-skills:python-for-analysts`. Keep the raw export pristine and separate from
    processed outputs per `data-tools-skills:data-file-hygiene`; when the vendor changes the
    layout (they will), the load fails at the door instead of poisoning the analysis.
 
@@ -122,7 +123,7 @@ quirks, and the control totals you validate against. Sanitized structural exampl
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/csv-and-flat-file-wrangling.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/csv-and-flat-file-wrangling.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

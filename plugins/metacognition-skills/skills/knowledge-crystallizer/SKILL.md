@@ -14,13 +14,13 @@ description: >-
   methods, clean up the knowledge base, merge duplicate notes, retire stale facts,
   capability map, crystallization pass.
 metadata:
-  version: "1.2.0"
+  version: "1.3.1"
 ---
 
 # Knowledge crystallizer
 
 ## When to use
-- After a significant analysis (`metacognition-skills:dynamic-analysis-engine`) or
+- After a significant analysis (the archived `metacognition-skills:dynamic-analysis-engine`) or
   reflection (`metacognition-skills:reflective-learner`) cycle has produced insights worth
   keeping.
 - When the same pattern, preference, or fix has recurred across 2+ interactions.
@@ -32,10 +32,10 @@ metadata:
   `metacognition-skills:hierarchical-memory-manager`; this skill is the *refinery* that
   turns its raw material into permanent, validated knowledge.
 - Not for: running the team debrief that surfaces the lessons → see
-  `decision-science-skills:after-action-review` (its sustain/improve items are prime
+  the archived `decision-science-skills:after-action-review` (its sustain/improve items are prime
   harvest input for this pass).
 - Not for: getting a crystallized rule into the *user's* unaided recall → see
-  `learning-skills:spaced-retrieval-learning` (permanence in the store is this skill;
+  the archived `learning-skills:spaced-retrieval-learning` (permanence in the store is this skill;
   permanence in a human head is retrieval practice).
 
 ## Do it
@@ -44,7 +44,7 @@ crystallization pass are in `references/crystallization-protocol.md`.
 
 1. **Harvest.** Collect candidate insights from recent Working/Episodic memory, reflection
    outputs from `metacognition-skills:reflective-learner`, analysis findings from
-   `metacognition-skills:dynamic-analysis-engine`, and any after-action review's
+   the archived `metacognition-skills:dynamic-analysis-engine`, and any after-action review's
    sustain/improve list. A candidate is anything that might matter beyond today.
 2. **Validate each candidate against the four gates** before it becomes permanent:
    - **Consistency** — does it contradict existing semantic memory? If so, flag the
@@ -117,7 +117,7 @@ secrets, credentials, account numbers, or client data — reference where they l
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/knowledge-crystallizer.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/knowledge-crystallizer.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

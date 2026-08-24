@@ -294,7 +294,7 @@ of a 200K context**, present before the user asks anything. Two consequences:
   `docs/live-routing-and-degradation-2026-08-18.md` §1–§2, which now carries the decompiled
   algorithm and retracts the account originally given here.)* The real gate is a **character
   budget**: `floor(context_tokens × 4 × skillListingBudgetFraction)`, i.e. **8,000 characters** at
-  the 200K/1% defaults, against **113,645** needed to render all 121 descriptions. Skills start as
+  the 200K/1% defaults, against **113,677** needed to render all 121 descriptions. Skills start as
   bare names and are upgraded back to full text in **descending order of recent use**
   (`usageCount × max(0.5^(days/7), 0.1)`, unused = 0), greedily, skipping any that do not fit.
   Simulated against this library (`scripts/simulate-listing-budget.py`): **3 of 121 keep a
@@ -788,7 +788,7 @@ superseded.
 > `scripts/simulate-listing-budget.py`, which computes the answer from the algorithm.
 
 What survives, with the corrected numbers: the severity finding, and it is worse than published.
-At the genuine 200K default the budget is 8,000 characters against 113,645 needed, so **3 of 121
+At the genuine 200K default the budget is 8,000 characters against 113,677 needed, so **3 of 121
 skills keep a description and 118 route on bare names**. The earlier "19 survivors ≈ 2.3% of 200K"
 was measured in a session whose real budget was ~30,000 characters (a ~750K context) and then
 reported as a fraction of 200K, which understated the problem. The one mitigation the real
@@ -842,7 +842,7 @@ mistook the boundary condition for the mechanism.
 
 The severity was also misreported. "19 FULL ≈ 2.3% of a 200K window" was measured in a session
 whose real budget was ~30,000 characters (≈750K context) and then expressed as a fraction of 200K.
-At the genuine default the library needs 113,645 characters against 8,000 available, and **3 of 121
+At the genuine default the library needs 113,677 characters against 8,000 available, and **3 of 121
 skills keep a description**. The published figure understated the problem.
 
 And the "101 of 121 NAMEONLY" figure came from asking a model to introspect its own system
@@ -925,3 +925,151 @@ fixing.
 **A defect class worth naming: fixes do not propagate to siblings.** `pre-mortem` carried the
 arithmetic `fmea` had already been repaired for. Whatever is fixed in one skill should be grepped
 for across the others that share the technique.
+
+---
+
+## §15 — Adversarial close-out (2026-08-19)
+
+A red-team pass whose job was to attack the library rather than confirm it, followed by working its
+verified backlog to zero. **253 attack prompts failed to break the library**; 11 skills were rated
+BROKEN on substance and 3 held up under direct attack. It produced **42 `mustFix` findings and 7
+`ownerDecisions`**. All 42 are now closed, each proven by a failing case before the fix and — where
+the fix was a guard — mutation-tested after.
+
+### 15.1 What the pass was actually for
+
+The prose in this library has been through five review passes and holds up. **Every finding rated
+critical this round sat in executable content** — two bundled scripts and about a dozen copy-paste
+recipes — which had never had a review of comparable depth. Reading code is not reviewing it: each
+of these read fine.
+
+| Found only by running it | What it did |
+|---|---|
+| `verify_citation.py` Europe PMC fallback | Accepted a *search's* top hit unchecked, so a fabricated DOI could return `exists: True` carrying a real paper's title and authors — inverting the tool's headline verdict |
+| `verify_citation.py` retraction check | "No signal found" and "nothing was consulted" both printed **clean** |
+| `verify_citation.py` provenance | `unrecognized` tracked per affiliation *string*, so a Chinese lead affiliation co-authored with a US site verified CLEAN |
+| `_is_us_locality` | "Beijing, **Co**-affiliated with Yale, … USA" → `['usa']`: any two-letter English word that is also a state code, plus "USA" anywhere later, suppressed the excluded country |
+| `search_pubmed.py` | Ordinary empty searches reported as unexecutable queries — which also **suppressed the genuine-gap note**, silencing the finding exactly where the gap was real |
+| `build_deck.py` | A title slide the validator deliberately allows crashed with a raw `KeyError` traceback |
+| `full-stack-app-architecture` check 2 | The branch meaning "passed" was *any* non-zero exit — a typo'd import, a missing dep, rc=127 all reported success |
+| `duckdb-local-analytics` recon | A row with a blank key was counted as a break on **both** sides, under a comment asserting the key "is never NULL here" |
+| `sortition-review` draw | Silently dropped the last item of any file without a trailing newline — the normal output of a spreadsheet export |
+| `frontend-modern-ui` client | Spreading a `Headers` instance yields `{}`; the caller's headers vanished, silently, for two of three type-legal shapes |
+
+### 15.2 Missing professional guardrails
+
+Five findings shared a shape: a competent procedure shipped without the guardrail its profession
+treats as inseparable from it. The house posture chosen — and applied consistently — is to **carry
+the guardrail**, one paragraph, provenance-marked, with the route to the professional who owns the
+decision.
+
+- **`split-tally-evidence`** scheduled a mutually documented destruction of exactly the records it
+  defines as evidence. No form of "litigation hold", "spoliation" or "duty to preserve" appeared
+  anywhere in the repository.
+- **`tabletop-wargaming`** and three sibling drills delivered spoofed executive email and vendor
+  calls to people operating the real process with real authorities, with **zero** exercise-control
+  discipline in the library — no EXERCISE marking, no ENDEX, no no-play list.
+- **`no-win-drills`** ran a deliberately distressing exercise and then asked participants, in a
+  group, when they privately gave up — with zero occurrences of consent, opt out, or withdraw.
+- **`adams-smart-brevity`** applied Smart Brevity to clinical records with no amendment discipline,
+  and its "cut what is not new" rule pulls directly against the content that defends a claim.
+- **`medical-research-detective`** treated red flags as report section 7-of-11 rather than a triage
+  gate, and omitted six time-critical presentations.
+
+### 15.3 The two systemic gates added
+
+Findings are cheap; the gate that stops the class recurring is not.
+
+1. **`validate.sh` now errors** on a missing or non-semver `metadata.version` and **NOTEs** a
+   SKILL.md whose content changed against the base ref without a version bump. This is the check
+   that would have caught 66 unbumped skills without a reviewer. All three guards mutation-tested.
+2. **`review-checklist.md` gained an "Executable content" section** — self-test coverage of the
+   failure the code exists to prevent, one mutation test, every copy-paste recipe run once, and
+   comments checked against what the code actually does.
+
+### 15.4 Owner decisions
+
+Five of the seven were resolvable and are done: the disconfirmation/quarantine composition defect
+(refuting evidence in the filtered corpus was deleted, then the hypothesis was *upgraded* for
+surviving a kill attempt run on a corpus with its refutations removed) is fixed; the GRADE-shaped
+country downgrade is now labelled as a source-integrity policy adjustment rather than a
+methodological finding; the code review bar and the provenance-mark legend are adopted; and the
+dormant-protective-function gap got the full treatment (PFD, proof-test interval, common-cause)
+rather than the minimal caveat.
+
+**The remaining two were decided by the owner on 2026-08-19, both toward the cheaper option:**
+
+- **Adams orthodoxy (decision 2) — do not split the contract material into a lawyers-only skill;
+  add the disagreement register instead.** Splitting would duplicate the Adams core and bury the
+  contract guidance behind a routing problem, for a benefit the carve-out already delivers. What
+  was missing was honesty about *which* positions are contested, so reference **§3b** now maps
+  five of them against the standard counter-case — "hold harmless", "defend", "represents and
+  warrants", how far to restrict "shall", and doublets in risk allocation — with the house rule
+  per row. Presenting a contested position as settled is how a drafter takes a rule to a partner,
+  finds it is a live argument, and stops trusting the method. §3b explicitly does **not** shelter
+  the archaisms with no contested defence.
+- **`--humans` (decision 7) — keep the flag, but make silent use impossible.** Removing it would
+  break a legitimate search, and the real defect was that it cut the corpus invisibly. It now
+  prints its caveat to **stderr on every run that uses it**, so the warning survives piping the
+  results and a reader of the output can tell the corpus was restricted. Combined with the earlier
+  fixes — the help text, and a zero-hit run under a MeSH filter no longer being reported as a gap
+  — the flag can no longer manufacture a false absence quietly.
+
+**All 7 owner decisions are now closed.**
+
+---
+
+## §16 — The blank-slate consolidation (2026-08-23)
+
+The owner asked the closing question directly: *from a blank slate, which of these 121 skills
+would you keep because they are objectively useful, creative, or unique?* — and then approved
+executing the answer. A 14-agent review applied the listing-slot value test (*does invoking this
+beat an unaided, competent frontier model?*) to every skill not already placed by the tier
+assessment; I adjudicated each verdict and executed the cuts by hand.
+
+**Result: 121 skills / 14 plugins → 71 / 13. Fifty skills archived — none deleted**, every one
+restorable with two `git mv` commands (`archive/README.md` carries the full table and
+instructions).
+
+### What the verdicts said
+
+Of 75 skills judged: 16 KEEP_STRONG (named unique mechanism), 23 KEEP_JUSTIFIED (earned rails,
+hub roles, verified recipes, or direct professional value), 36 ARCHIVE. Added to the 14 cuts
+named in the tier assessment (five of six math-foundations skills, the learning-skills plugin,
+two Chicken Little variants, elite-python-engineer, gonzo, descriptive-statistics,
+dashboard-design), that made 50.
+
+I adjudicated five verdicts I initially doubted — sparring-partner, after-action-review,
+principled-negotiation, checklist-design, bowtie-barrier-analysis — and accepted all five
+ARCHIVE calls after reading the reasoning: each "loss" was duplicated in a kept skill (the
+counsel rail lives in pre-mortem; preservation mechanics in split-tally-evidence), inlineable in
+a sentence (the assurance-test concept, now stated inline in fmea and reliability-engineering),
+or restorable. One verdict caught a live standing-directive violation: principled-negotiation's
+worked example was still mounted on the deleted bank-fee domain.
+
+### Structure changes
+
+- **Chicken Little: three skills → one, at the owner's direction ("keep one — I love its
+  personality").** The calm, evidence-gated Aether base persona survives verbatim; the two
+  Forward-Deployed editions became its "deploy advisor" / "deploy compiler" modes with their
+  exact templates, session semantics (persist until stand-down, one autopsy per target), the
+  shared Accountability Engine stance, and the None-found evidence discipline. Merged
+  description 1,023/1,024 chars; all mode triggers collision-checked.
+- **toolchain-2026.md relocated** to backend-api-development (deploy-and-operate and
+  chicken-little build on it); elite-python-engineer archived without it.
+- **164 dangling cross-references repaired** (validator-driven mechanical pass + 13 hand-written
+  prose seams), 9 trigger-test Tier D rows retired with the reason recorded, all 13 marketplace
+  and plugin.json descriptions rewritten to enumerate only surviving skills.
+
+### What consolidation bought, measured
+
+| | Before | After |
+|---|---|---|
+| Active skills / plugins | 121 / 14 | 71 / 13 |
+| Full-listing cost (est.) | 29,796 tok ≈ 14.9% of 200K | 17,334 tok ≈ 8.7% |
+| Fresh-session descriptions surviving the 8K-char budget | 3 of 121 | 5 of 71 |
+| At 1M context | 38 of 121 | 40 of 71 |
+
+The deeper gain is qualitative: every listing slot is now held by a skill that passed an
+adversarial value test on its own text, and the survivor set matches the named install profiles
+in `README.md`, so a working day's plugins keep essentially every description.

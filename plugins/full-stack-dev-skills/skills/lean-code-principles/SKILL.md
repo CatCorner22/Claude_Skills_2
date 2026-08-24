@@ -10,7 +10,7 @@ description: >-
   simplify this code, too much boilerplate, do we need this abstraction, code review
   simplicity, delete code, small diff, keep it simple.
 metadata:
-  version: "1.1.0"
+  version: "1.1.2"
 ---
 
 # Lean-code principles
@@ -21,7 +21,7 @@ metadata:
 - Deciding whether to add a dependency, abstraction, service, or config option.
 - Simplifying a module that has grown past understanding.
 - Not for: prompt/agent design → see `coding-agent-skills:prompt-engineering` and
-  `coding-agent-skills:agentic-workflow-design`. Review *process* (PRs, diffs) → see
+  the archived `coding-agent-skills:agentic-workflow-design`. Review *process* (PRs, diffs) → see
   `coding-agent-skills:git-and-code-review`.
 
 ## Do it
@@ -136,7 +136,7 @@ team uses, banned patterns, and where you deliberately deviate (and why).
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/lean-code-principles.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/lean-code-principles.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

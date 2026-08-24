@@ -11,7 +11,7 @@ description: >-
   pdfplumber, camelot, parse bank statement pdf, pdf invoice data, scanned pdf, OCR pdf,
   pdf text extraction, table extraction python.
 metadata:
-  version: "1.2.0"
+  version: "1.4.1"
 ---
 
 # PDF data extraction
@@ -22,7 +22,7 @@ metadata:
 - Not for: understanding statement *formats* like BAI2/camt.053 — those are data files, not PDFs
   — format-specific banking knowledge this library does not carry. For cleaning
   after a good extraction → see
-  `data-analytics-bi-skills:data-cleaning`. If you have Anthropic's official `pdf` skill (from
+  the archived `data-analytics-bi-skills:data-cleaning`. If you have Anthropic's official `pdf` skill (from
   `anthropics/skills`), prefer it for creating/filling PDFs; this skill is about getting *data
   out*.
 
@@ -111,7 +111,7 @@ invoices.**
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/pdf-data-extraction.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/pdf-data-extraction.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

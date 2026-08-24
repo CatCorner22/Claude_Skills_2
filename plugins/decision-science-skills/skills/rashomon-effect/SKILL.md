@@ -15,7 +15,7 @@ description: >-
   remembers it differently, whose story is right, reconcile the statements, contradictory
   testimony.
 metadata:
-  version: "1.1.0"
+  version: "1.1.2"
   source: >-
     Commissioned by the user, named for the Rashomon effect — the scholarly term (Karl G.
     Heider, American Anthropologist, 1988) that honors Kurosawa's film Rashomon (1950),
@@ -52,7 +52,7 @@ memory, and stakes before it is evidence of anyone lying.
   testimonies into one account of what happened; that one weighs rival explanations of
   why. A reconciled account is often its best input.
 - Not for: the structured team debrief after an event →
-  `decision-science-skills:after-action-review` (four questions, sustain and improve; it
+  the archived `decision-science-skills:after-action-review` (four questions, sustain and improve; it
   can call this skill when its what-actually-happened step hits contradictions).
 - Not for: tracing a failure's causal chain →
   `continuous-improvement-skills:root-cause-analysis`.
@@ -173,7 +173,7 @@ client matters, and personnel specifics stay in `your-environment.private.md`
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/rashomon-effect.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/rashomon-effect.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

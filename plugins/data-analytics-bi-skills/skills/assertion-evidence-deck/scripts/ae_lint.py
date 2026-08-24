@@ -24,7 +24,7 @@ import sys
 
 try:
     from pptx import Presentation
-    from pptx.util import Inches
+    from pptx.util import Inches, Pt
 except ImportError:
     sys.exit("python-pptx is required: pip install python-pptx")
 
@@ -154,6 +154,35 @@ def lint_slide(idx, slide, fnd, max_words):
         if getattr(sh, "has_chart", False) and sh.has_chart:
             has_figure = True
 
+    # Font-size floors. Nothing checked these, so decks whose prose sat at source-tag size
+    # passed stage 6 clean. The floors follow design-tokens.md: 28 pt headline, 18 pt prose
+    # body, and a documented exception for dense layouts — 16 pt for two-column/three-row
+    # items and 14 pt for table cells and flow-step labels, which are scanned as tokens rather
+    # than read as sentences. Runs with no explicit size inherit from the layout and cannot be
+    # judged here, so they are skipped rather than guessed at.
+    for sh, _top in texts:
+        in_table_or_step = getattr(sh, "has_table", False)
+        for para in sh.text_frame.paragraphs:
+            for run in para.runs:
+                pt = run.font.size.pt if run.font.size is not None else None
+                if pt is None or not run.text.strip():
+                    continue
+                if sh is headline_shape:
+                    if pt < 24:
+                        fnd.add(idx, "warn", "fontsize",
+                                f"headline set at {pt:g} pt (28 pt is the standard; below 24 pt "
+                                f"it stops reading as the assertion)")
+                elif pt < 14:
+                    fnd.add(idx, "error", "fontsize",
+                            f"body text at {pt:g} pt — below the 14 pt floor even for dense "
+                            f"layouts; that is source-tag size: {run.text.strip()[:40]!r}")
+                elif pt < 18 and not in_table_or_step and len(run.text.split()) > 12:
+                    fnd.add(idx, "warn", "fontsize",
+                            f"prose run at {pt:g} pt (prose body is 18-24 pt; 14-16 pt is the "
+                            f"dense-layout exception for table cells, step labels and column "
+                            f"items). Shrinking prose to fit means the slide has too much on "
+                            f"it: {run.text.strip()[:40]!r}")
+
     if body_words > max_words:
         fnd.add(idx, "error", "wordcount",
                 f"{body_words} body words (max {max_words}); the claim is too big — split it")
@@ -185,7 +214,7 @@ def self_test():
     """
     import tempfile, os
     from pptx import Presentation
-    from pptx.util import Inches
+    from pptx.util import Inches, Pt
 
     prs = Presentation()
     prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
@@ -221,6 +250,19 @@ def self_test():
 
     fd, path = tempfile.mkstemp(suffix=".pptx")
     os.close(fd)
+    # Slide 3 exercises the font-size floors, which nothing checked before: prose shrunk to
+    # source-tag size passed stage 6 clean. One run below the hard floor (error), one prose
+    # run in the dense-layout band (warn), and one legitimate 14 pt short label that must NOT
+    # warn — so the exception is tested as well as the rule.
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    box(0.92, 0.62, 11.52, 1.20, "Body type below the floor must be an error", size=Pt(28))
+    box(0.92, 2.00, 11.52, 0.60, "prose squeezed down to source-tag size to make it fit",
+        size=Pt(12))
+    box(0.92, 3.00, 11.52, 0.60,
+        "a full prose sentence set at sixteen point which is more than twelve words long",
+        size=Pt(16))
+    box(0.92, 4.00, 3.00, 0.40, "Intake", size=Pt(14))          # legitimate step label
+
     try:
         prs.save(path)
         found = lint(path).items
@@ -237,7 +279,9 @@ def self_test():
                       ("headline:error", "an over-long headline must be an error"),
                       ("wordcount:error", "a body over the word budget must be an error"),
                       ("source:warn", "a figure with no Source: tag must warn"),
-                      ("caps:warn", "an all-caps word above the bottom zone must warn")):
+                      ("caps:warn", "an all-caps word above the bottom zone must warn"),
+                      ("fontsize:error", "body text below the 14 pt floor must be an error"),
+                      ("fontsize:warn", "long prose in the dense-layout band must warn")):
         if want not in checks:
             failures.append(f"missing {want} — {why}")
     # The bottom zone stays exempt: slide 1's source tag shouts EPICOR GENERAL and
@@ -254,6 +298,10 @@ def self_test():
                       ("underlined text:", "the underline check must fire on underlined text")):
         if frag not in msgs:
             failures.append(f"missing {frag!r} — {why}")
+    # The dense-layout exception must hold: a short 14 pt label is legitimate and must not
+    # be flagged, or the check just re-imposes the blanket rule the docs retired.
+    if any(f["check"] == "fontsize" and "Intake" in f["message"] for f in found):
+        failures.append("a short 14 pt step label must NOT be flagged (dense-layout exception)")
 
     if failures:
         for f in failures:

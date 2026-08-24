@@ -12,7 +12,7 @@ description: >-
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
 metadata:
-  version: "1.2.0"
+  version: "1.3.1"
 ---
 
 # Pre-mortem (prospective hindsight)
@@ -30,7 +30,7 @@ metadata:
   find out which.
 - Not for: adversarially attacking a live plan or auditing a benchmark's validity → see
   `continuous-improvement-skills:project-command-center`. Looking BACK at what actually
-  happened → see `decision-science-skills:after-action-review`. The assistant reflecting
+  happened → see the archived `decision-science-skills:after-action-review`. The assistant reflecting
   on its own corrections → see `metacognition-skills:reflective-learner`.
 - Not for: the period *before* there is a plan to attack — noticing faint early signals against a
   noisy background and deciding which deserve attention → see
@@ -74,7 +74,9 @@ metadata:
    that ends at a list changed nothing.
 8. **File and connect.** Put the ranked list and mitigations where the project is
    commanded (the project-command-center watch list or go-live checklist), and set the
-   after-action-review date now — pre-mortem before, AAR after, same plan.
+   post-event debrief date now — pre-mortem before, debrief after, same plan (the four-question
+   AAR format lives in the archived `decision-science-skills:after-action-review`, restorable
+   from `archive/`).
 
 ## Why / learn
 The exercise rests on a 1989 finding by Mitchell, Russo, and Pennington: *prospective
@@ -114,6 +116,20 @@ wish, and because what a team ranks highest reveals what it actually fears.
 - Confusing it with adversarial challenge of a live plan → that is
   `continuous-improvement-skills:project-command-center`; this runs before commitment.
 
+**Where the event may be litigated, regulated, or claimed against, run this at counsel's
+direction.** A ranked list of ~20 written narratives of how the plan fails, produced *before* commitment is a business record from the moment it exists, and it is discoverable —
+it is contemporaneous proof of what the organisation foresaw and when — which is the element a negligence or foreseeability argument has to establish. It is not privileged because it sits in a private file or carries a confidentiality
+label; in the U.S. the protections that can apply are attorney-client privilege and the
+work-product doctrine, and both generally depend on counsel directing the work and on the
+document being marked and handled accordingly from the start. Retrofitting that afterwards
+rarely works. So: where a dispute, claim, audit or regulatory inquiry is reasonably
+anticipated, involve counsel before the exercise rather than after, and mark the output as
+they direct. This is orientation on how to route the question, not legal advice — and it is
+not a reason to skip the exercise or to write it dishonestly, which is worse on every axis
+including the legal one. (Related:
+`safety-and-reliability-skills:split-tally-evidence` step 7 for the preservation half —
+the same trigger suspends any retention schedule covering these documents.)
+
 ## Tailor to your environment
 Record in `references/your-environment.md`: the go-live gates that should always get a
 pre-mortem, your stakeholder roster for the solo role-play variant, a sanitized catalog of
@@ -123,7 +139,7 @@ suffix is git-ignored. Never commit real client or bank data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/pre-mortem.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/pre-mortem.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

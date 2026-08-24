@@ -14,7 +14,7 @@ description: >-
   probability, prior probability, superforecasting, superforecaster, perpetual beta, how
   much should this evidence move me.
 metadata:
-  version: "1.2.0"
+  version: "1.2.2"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §4), whose anchors were verified
@@ -43,7 +43,7 @@ story?", move the belief by that much and no more, and keep the log.
 - Keeping a live question honestly under review — "will the vendor deliver by Q3?" — with
   small, frequent, logged updates instead of one dramatic reversal.
 - Not for: the probability *mechanics* — conditional probability, Bayes' theorem itself,
-  and natural-frequency teaching belong to `math-foundations-skills:probability-fundamentals`.
+  and natural-frequency teaching belong to the archived `math-foundations-skills:probability-fundamentals`.
   The seam, named plainly: that skill teaches the math of a single computation; this skill
   is the decision practice layered above it — priors owned in advance, evidence graded as
   it arrives, updates logged and scored over the life of a real question.
@@ -136,7 +136,7 @@ from about 16% to about 46% — when problems were recast from probabilities to 
 frequencies ("out of 10,000 people…"), a gain replicated with experienced physicians
 [snippet-only]. Hold the honest limit: a majority still failed. Natural frequencies help;
 they do not fix. (The teaching of that format itself belongs to
-`math-foundations-skills:probability-fundamentals`; this skill just refuses to let a
+the archived `math-foundations-skills:probability-fundamentals`; this skill just refuses to let a
 formula stand where a count table would be checkable.)
 
 The discipline half comes from the forecasting-tournament record: what separated
@@ -215,7 +215,7 @@ structural — real case names, client matters, or account-level numbers belong 
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/bayesian-updating.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/bayesian-updating.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

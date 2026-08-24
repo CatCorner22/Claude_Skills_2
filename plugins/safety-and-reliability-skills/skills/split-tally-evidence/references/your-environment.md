@@ -36,3 +36,19 @@ suffix is git-ignored and never committed.
 ## Retirement
 - Retention per flow: <term + dispute window>
 - Disposal confirmation: <how both sides confirm, in writing>
+
+## Hold rail (suspends everything above)
+- Trigger owner: <role who can trip a hold today> / backstop: <role when they are away>
+- Trigger events recognized: <demand or preservation letter, threat to sue, internal
+  complaint, regulator inquiry or subpoena, insurer notice, counterpart's counsel appearing,
+  our own decision to claim>
+- Notice recipients: <every holder of every half, **including the counterpart**>
+- Automation to switch off and verify per hold: <retention policies, log rotation, mailbox
+  purges, expiring links, storage lifecycle rules — list them structurally, by system role>
+- Scope checklist: <primary halves, anchors, third-party lodgements, append-only logs and
+  their rotation, ritual result log, second-keeper working papers>
+- Release authority: <role who can lift a hold in writing>
+- Hold log location: <where trigger / notice / automation-confirmation / release dates are
+  recorded — the ritual log works>
+- Counsel contact for live preservation questions: <role; real names go in the
+  `.private.md` twin>

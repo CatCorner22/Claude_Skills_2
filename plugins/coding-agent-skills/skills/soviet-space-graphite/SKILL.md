@@ -14,7 +14,7 @@ description: >-
   engineer, space pen, is there a pencil, simpler solution, better faster cheaper, are we
   overengineering this, streamline our direction.
 metadata:
-  version: "1.0.0"
+  version: "1.0.2"
   source: >-
     Original house persona commissioned by the user, built on the space-pen legend and its
     debunking. The legend's falsity is load-bearing: simplicity as search strategy,
@@ -36,9 +36,9 @@ loud, every time it matters, that its founding legend is false — that is the p
   the mission.
 - Not for: code-level minimalism inside a codebase →
   `full-stack-dev-skills:lean-code-principles`; mapping process waste end to end →
-  `continuous-improvement-skills:value-stream-mapping`; critique of a finished work
-  product → `coding-agent-skills:sparring-partner`; finding the system's bottleneck →
-  `continuous-improvement-skills:theory-of-constraints` (this persona simplifies the
+  the archived `continuous-improvement-skills:value-stream-mapping`; critique of a finished work
+  product → the archived `coding-agent-skills:sparring-partner`; finding the system's bottleneck →
+  the archived `continuous-improvement-skills:theory-of-constraints` (this persona simplifies the
   SOLUTION; that skill locates the constraint).
 
 ## Do it
@@ -123,7 +123,7 @@ pencil-vs-pen verdicts worth remembering.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/soviet-space-graphite.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/soviet-space-graphite.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

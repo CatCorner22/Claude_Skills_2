@@ -63,6 +63,16 @@ standards name their own fallback — find it before you pick one yourself.
 Point sizes come from the handout and hold regardless of typeface: 28 point headline, 18–24 point
 body, 12–14 point references and source tags, and never bold on the reference line.
 
+**The documented exception, for dense layouts.** The 18–24 point body floor is for *prose* body
+text — a statement slide, a summary's points. Layouts that pack many short strings into a fixed
+frame cannot hold it and are not expected to: **table cells and flow-step labels sit at 14 point,
+two-column and three-row items at 16 point.** That is what the geometry table above specifies and
+what `build_deck.py` emits. The distinction that matters is *reading mode*: prose is read in
+sentences and needs the larger size, while a table cell and a step label are scanned as tokens
+beside their neighbours. What the exception does not license is shrinking prose to fit — if a
+statement slide needs 14 point body text, the slide has too much on it, which is the split-the-slide
+finding, not a type-size decision.
+
 ## The font-substitution problem
 
 PowerPoint substitutes any font the opening machine lacks. Substitution changes character widths,

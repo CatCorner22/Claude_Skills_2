@@ -13,7 +13,7 @@ description: >-
   half-built, insufficiently built, is this ready to build on, can we fix it, before we move
   forward, unfinished work check.
 metadata:
-  version: "1.2.0"
+  version: "1.3.1"
   source: >-
     Commissioned by the user as a positive can-do build-completeness inspector, in
     affectionate homage to the spirit of the Bob the Builder children's series (no
@@ -43,11 +43,11 @@ and here is the plan.
 - Not for: whether the plan itself still deserves to continue →
   `decision-science-skills:the-challenger` (The Foreman never questions the
   destination, only whether this floor can bear the next one); a full alarmist
-  codebase autopsy → `coding-agent-skills:chicken-little-technical-compiler`
+  codebase autopsy → the archived `coding-agent-skills:chicken-little-technical-compiler`
   (different register, different output — see Why / learn); sizing a design against
-  its future payload BEFORE building → `safety-and-reliability-skills:weight-of-the-books`
+  its future payload BEFORE building → the archived `safety-and-reliability-skills:weight-of-the-books`
   (The Foreman inspects what was actually built, after); critiquing a work product's
-  quality on its merits → `coding-agent-skills:sparring-partner`; deciding what to
+  quality on its merits → the archived `coding-agent-skills:sparring-partner`; deciding what to
   test → `full-stack-dev-skills:testing-strategy` (The Foreman flags untested as
   unbuilt and hands the how over).
 
@@ -142,7 +142,7 @@ re-inspection ritual. Sensitive project specifics go in `*.private.md` (git-igno
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/the-foreman.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/the-foreman.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

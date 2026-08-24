@@ -12,7 +12,7 @@ description: >-
   sqlite foreign keys, sqlite to postgres, transaction handling, connection pool, pool_size,
   too many connections, pgbouncer, database indexes app.
 metadata:
-  version: "1.2.0"
+  version: "1.2.2"
 ---
 
 # Database and ORM for applications
@@ -22,7 +22,7 @@ metadata:
   managing migrations; fixing slow data access.
 - Sizing the connection pool, or moving a dev SQLite app onto production Postgres.
 - Not for: analytical SQL over exports/warehouses → see
-  `data-analytics-bi-skills:sql-for-analysts` and `data-tools-skills:duckdb-local-analytics`.
+  the archived `data-analytics-bi-skills:sql-for-analysts` and `data-tools-skills:duckdb-local-analytics`.
   Enterprise COA/ledger design → the accounting plugins.
 
 ## Do it
@@ -178,7 +178,7 @@ their indexes — so new tables and queries match the house shape.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/database-and-orm.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/database-and-orm.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

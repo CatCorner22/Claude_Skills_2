@@ -68,7 +68,7 @@ FIRST TEN MOVES (read-do; a cold reader under stress is the audience)
 Rules for the moves:
 
 - **Read-do form** — each step read aloud, done, confirmed, in order; the form and its
-  killer-item discipline come from the checklist-design skill.
+  killer-item discipline come from checklist canon (the checklist-design skill, since archived).
 - **Ten moves buys the first hour.** The playbook is not a script for the whole
   crisis; it is the bridge from alarm to functioning command.
 - **Each move names its actor** (role) and its "done" condition.
@@ -127,7 +127,8 @@ A playbook with an empty drill log is unarmed regardless of how good its prose i
 
 After every real firing — and every drill that found anything:
 
-1. Run the after-action ritual (the after-action-review skill owns the format): what
+1. Run the after-action ritual (four questions — intended, actual, why, change; the
+   after-action-review skill that owned the format is archived, restorable): what
    was supposed to happen, what actually happened, why the difference.
 2. Update the moves where reality diverged; retire moves nobody used; add the move
    everyone improvised.
@@ -149,7 +150,7 @@ and now defends against the previous crisis.
 | Authority without expiry | Emergency access that never re-locked | Automatic expiry + full logging; extension is a logged chair decision |
 | Playbook nobody can find | Stored only on the system that is down, or in the author's drive | Two locations, one out-of-band; watcher names them cold at every drill |
 | Author-dependent instructions | Steps only the writer can execute | Cold-reader drill; each move names an actor role and a done-condition |
-| Vague moves | "Assess the situation and communicate" | Read-do specificity per checklist-design; verb-first, executable |
+| Vague moves | "Assess the situation and communicate" | Read-do specificity (checklist canon); verb-first, executable |
 | Never re-armed | Fired once, never updated | Re-arm loop after every firing; version bump + new drill date |
 
 ## Sources

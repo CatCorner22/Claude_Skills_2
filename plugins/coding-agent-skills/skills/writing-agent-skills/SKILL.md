@@ -8,7 +8,7 @@ description: >-
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
 metadata:
-  version: "1.2.0"
+  version: "1.4.0"
 ---
 
 # Writing Agent Skills (house standard)
@@ -113,7 +113,12 @@ your environment`, instruct the user to drop their specifics into
 `references/your-environment.md`, framed "wire in your current role here" so the skill survives
 a job change. **Then tell them to keep the filled-in copy outside the plugin** — the shipped file is
 a template living in the plugin cache, which `/plugin marketplace update` can overwrite; the house
-wording points them at `.claude/skills-env/<skill-name>.md` in their own project. Every skill in this
+wording points them at **`.claude/skills-env/<skill-name>.private.md`** in their own project.
+**The `.private` suffix is load-bearing, not decoration.** The paragraph promises the file is
+git-ignored, and `.gitignore` here matches `*.private.*` — a file written to
+`.claude/skills-env/<skill-name>.md` without that suffix is NOT ignored and will be committed,
+which is precisely the leak the sentence claims to prevent. Tell the user to confirm their own
+repo ignores the pattern too; their project's `.gitignore` is not this one. Every skill in this
 library carries that paragraph; copy it verbatim. **Never commit raw real data.** Commit only sanitized, structural examples. Raw
 artifacts go in files matching `.gitignore` patterns (`*.private.md`,
 `references/*.local.*`).
@@ -207,7 +212,7 @@ If you adopt house conventions of your own (naming, extra sections), record them
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/writing-agent-skills.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/writing-agent-skills.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

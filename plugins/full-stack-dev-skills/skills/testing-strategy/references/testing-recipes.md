@@ -28,6 +28,8 @@ from sqlalchemy.orm import Session
 from app.db import Base, get_db
 from app.main import app
 
+from urllib.parse import urlsplit
+
 TEST_DB_URL = os.environ.get("TEST_DATABASE_URL", "sqlite:///./test.db")
 
 
@@ -45,8 +47,28 @@ def _make_sqlite_behave(eng):
         conn.exec_driver_sql("BEGIN")              # (2) makes SAVEPOINTs reliable
 
 
+def _refuse_non_test_database(url: str) -> bool:
+    """This fixture ends in drop_all(). Make it impossible to point at a real database.
+
+    TEST_DATABASE_URL is an ordinary environment variable — set in a CI workflow beside
+    APP_DATABASE_URL, exported in a shell, pasted from a runbook. One wrong value and the
+    teardown below drops every table the app defines, against production, with no prompt.
+    The guard costs four lines and removes the whole class of accident.
+    """
+    if url.startswith("sqlite"):
+        return True
+    name = urlsplit(url).path.lstrip("/").split("?")[0]
+    return name == "test" or name.endswith(("_test", "-test")) or name.startswith("test_")
+
+
 @pytest.fixture(scope="session")
 def engine():
+    if not _refuse_non_test_database(TEST_DB_URL) and os.environ.get(
+            "ALLOW_DESTRUCTIVE_TESTS") != "1":
+        raise RuntimeError(
+            f"refusing to create_all/drop_all against {TEST_DB_URL!r}: the database name is "
+            f"not a test name (expected sqlite, 'test', or a *_test / test_* name). "
+            f"Set ALLOW_DESTRUCTIVE_TESTS=1 only if you are certain this database is disposable.")
     is_sqlite = TEST_DB_URL.startswith("sqlite")
     eng = create_engine(TEST_DB_URL,
                         connect_args={"check_same_thread": False} if is_sqlite else {})
@@ -151,6 +173,12 @@ One flag, two answers, chosen per behavior:
 pytest                                             # fast: SQLite file, own-logic tests
 TEST_DATABASE_URL=postgresql+psycopg://…/test pytest   # truthful: the engine you deploy
 ```
+**The database name matters.** The session fixture ends in `drop_all()`, so it refuses any
+URL whose database is not named as a test (`test`, `*_test`, `test_*`, or SQLite). Point
+`TEST_DATABASE_URL` at a real database — a stray CI variable, a runbook paste, a shell that
+still had the app's URL exported — and without that guard the suite drops every table the
+app defines. Use a dedicated disposable database per branch or per CI job, never a schema
+inside a database that holds anything you would miss.
 - **SQLite is fine** for endpoint contracts, business rules in your own code, serialization
   shapes, auth wiring — anything where your code, not the database, decides the answer.
 - **The production engine is required** for FK/UNIQUE/CHECK/deferred-constraint behavior,

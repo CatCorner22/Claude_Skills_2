@@ -5,6 +5,7 @@ or accounts.
 
 Contents: §1 First question: repairable or not · §2 The Weibull model (non-repairable) ·
 §3 Fitting failure data, checking the fit, and bounding it · §4 The β decision table ·
+§4b Dormant protective functions and the proof-test interval ·
 §5 Recurrent failures of one repairable system: the power-law NHPP · §6 MTBF, MTTR,
 availability (time-based and event-based), and the SLO downtime-budget table ·
 §7 Series/parallel arithmetic · §8 Weibayes (tiny samples) · §9 Worked case: an overnight
@@ -154,6 +155,11 @@ attached, and no interval without saying how it was produced.**
 Read this table only for a **non-repairable** fit (§2–§3) — for one repaired system, use §5's
 interpretation instead.
 
+**And only for an item whose failure is *announced*.** Everything in this table assumes you
+find out when the thing breaks — that is what makes "run to failure" a policy rather than a
+gamble. A protective function that sits idle and acts only on demand (see §4b) breaks the
+assumption completely, and the β ≈ 1 row is actively wrong for it.
+
 | β | Regime | Typical causes | Policy |
 |---|--------|----------------|--------|
 | β < 1 | Infant mortality | Bad installs, fresh patches, config errors, manufacturing defects | Burn-in / shake-down before trusting; fix the defect source; no scheduled replacement |
@@ -167,6 +173,59 @@ up in the days after each patch window, the answer is a burn-in step (run agains
 before trusting the window), not more redundancy. Note the modelling care that claim needs —
 "time since patch" is only a lifetime clock if each patch cycle is treated as a unit in its own
 right, with cycles that survived the whole window entered as censored (§9).
+
+## §4b Dormant protective functions: the failure you do not hear about
+
+Every model above is for something that runs. A large class of the things reliability work
+actually cares about does not run: the interlock, the relief valve, the alarm, the failover
+path, the backup restore, the smoke detector, the escalation rule that fires only when the
+primary misses. These sit idle and are asked to act **on demand**. Their failures are
+**hidden** — nothing tells you the valve seized, because nothing has asked it to move.
+
+That breaks the table's arithmetic in a specific way. `A = MTBF/(MTBF + MTTR)` prices repair
+time, and MTTR is measured from when you *noticed*. For a dormant item nobody notices, so the
+"down" period is not the repair — it is everything from the moment it failed until the moment
+someone next exercises it. The β ≈ 1 row therefore reads exactly backwards: "run-to-failure,
+attack MTTR, scheduled replacement buys nothing" is sound advice for a running item with a
+constant hazard, and for a dormant one it means *never find out*.
+
+**The governing quantity is the probability of failure on demand (PFD): the chance the
+function is already broken when it is finally called.** For a constant hazard rate λ and a
+proof-test interval T — the interval at which you deliberately exercise the function and
+repair what you find — the standard approximation is
+
+> **PFD_avg ≈ λT / 2**
+
+with the average taken over the interval, because the item is fresh just after a test and
+worst just before the next one. The lever in that expression is not λ and not repair speed.
+**It is T.** Halving the test interval roughly halves the average unavailability; adding
+redundancy without ever testing it adds a second thing that can be silently dead. This is why
+"how often do we actually exercise it?" is the only question that moves the number, and why an
+untested backup, an untested failover and an untested escalation path are all the same object.
+
+Three consequences worth carrying:
+
+- **A test that does not exercise the real function is not a proof test.** Checking that the
+  monitoring job ran green is not testing the alarm; restoring a file is testing the backup.
+  The test must invoke the same path the demand would.
+- **Redundancy multiplies only if the redundant elements are tested and fail independently.**
+  Two channels on the same power supply, the same firmware, or the same untested assumption
+  are one channel. Common-cause failure is what dominates redundant protective systems in
+  practice.
+- **Staggered testing beats simultaneous testing.** Proof-testing every channel on the same
+  day maximises the window in which they are all equally stale.
+
+Cross-references: the archived `safety-and-reliability-skills:bowtie-barrier-analysis` requires an assurance
+test per barrier and defaults to quarterly — `PFD_avg ≈ λT/2` is the arithmetic behind
+choosing that interval rather than inheriting it, and it is how you tell which barriers deserve
+a shorter one. `safety-and-reliability-skills:rebuild-rehearsal` is the same idea applied to
+knowledge and process: a capability nobody exercises is a dormant function, and its rehearsal
+cadence is its proof-test interval.
+
+[The PFD_avg ≈ λT/2 approximation and the proof-test framing are standard functional-safety
+material (the IEC 61508 / 61511 family). Canon attribution — stated here for the shape of the
+reasoning, not re-derived; a system with a safety-integrity-level requirement needs the full
+treatment and a competent assessor, not this paragraph.]
 
 ## §5 Recurrent failures of one repairable system: the power-law NHPP
 
@@ -189,7 +248,11 @@ collapses to the n−1 earlier failures: β̂ = n ÷ Σᵢ₌₁ⁿ⁻¹ ln(tₙ
 Both of those are maximum-likelihood estimates and both lean **high** at small n —
 E[β̂] = β·n/(n−1) time-terminated, β·n/(n−2) failure-terminated — so below about ten failures
 quote the bias-corrected form beside the MLE: multiply β̂ by (n−1)/n when you stopped at a clock
-time, by (n−2)/n when you stopped at a failure. On §9's log that turns β̂ = 0.86 into 0.76,
+time, by (n−2)/n when you stopped at a failure. **The failure-terminated factor needs n ≥ 3 and
+is still violent at n = 3**: it multiplies by (n−2)/n, which is 0 at n = 2 (any β̂ collapses to
+zero) and 1/3 at n = 3, so a β̂ of 1.00 reads as 0.33. Below about five failures report the raw
+MLE with its interval and say the small-sample bias runs high; do not publish a "corrected"
+number that the correction itself has destroyed. On §9's log that turns β̂ = 0.86 into 0.76,
 which does not change the reading (the interval straddles 1 either way) but does show which
 direction the small-sample error runs.
 An approximate standard error is SE(β̂) ≈ β̂/√n, so **n = 9 failures gives roughly ±30%** on β
@@ -286,7 +349,7 @@ Two cautions worth stating out loud:
   against before comparing anything to the table above.
 - **The budget is a governance mechanism, not just a number** — spend it on releases, stop
   releasing when it is gone. That policy layer is
-  `continuous-improvement-skills:lean-six-sigma-for-software` (its stability-and-redundancy
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` (its stability-and-redundancy
   reference, §1); this file supplies the arithmetic underneath it.
 
 ## §7 Series/parallel arithmetic
@@ -406,7 +469,7 @@ nine times. It is **recurrent-event data, not nine lifetimes**, so §5 applies a
 - Event-based SLIs (good events ÷ valid events), error budgets, and burn-rate alerting come
   from the site-reliability-engineering literature `[background — verify before citing]`.
 - The "untested failover is scenery" doctrine originates in this library's
-  `continuous-improvement-skills:lean-six-sigma-for-software` stability-and-redundancy
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` stability-and-redundancy
   reference (§4 and §7 there); this file supplies the arithmetic that makes it a theorem, and
   that reference (§1) owns the error budget as a release-governance mechanism.
 - Every number in §3, §5, §6, §7, §8 and §9 was recomputed from the inputs shown; the bootstrap

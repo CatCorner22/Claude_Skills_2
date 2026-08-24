@@ -13,7 +13,7 @@ description: >-
   competing hypotheses, hypothesis matrix, which explanation fits the evidence, diagnostic
   evidence, rule out causes, weigh rival explanations, why is this break really happening.
 metadata:
-  version: "1.1.0"
+  version: "1.1.3"
 ---
 
 # Competing-hypotheses analysis (the hypothesis matrix)
@@ -34,7 +34,8 @@ own it). Write "competing hypotheses" or "the hypothesis matrix" — in prose, h
   line vs. matching-rule gap vs. bank error vs. keying error — or a works-in-test-fails-in-prod
   production mystery.
 - Any analysis at risk of confirmation bias: an incident with multiple suspects, rival readings of
-  a prompt during a `coding-agent-skills:master-prompt-architect` audit, or generalizing the
+  a prompt during a master-prompt audit (the archived `coding-agent-skills:master-prompt-architect`
+  ran these), or generalizing the
   disconfirmation pass of `deep-research-skills:medical-research-detective` beyond medicine.
 - Deciding what evidence to gather next — the matrix shows which observation would actually
   discriminate between the surviving rivals.
@@ -127,7 +128,7 @@ hypotheses. Keep it structural — real account numbers, amounts, or names belon
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/competing-hypotheses-analysis.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/competing-hypotheses-analysis.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

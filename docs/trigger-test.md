@@ -55,7 +55,7 @@ Three properties of the runtime make every cheaper substitute worthless:
 3. **The listing degrades silently at scale, and it is worse than a skill-count threshold
    suggests.** The real mechanism is a *character* budget:
    `floor(context_tokens x 4 x skillListingBudgetFraction)` = **8,000 chars** at the 200K/1%
-   defaults, against **113,645** needed to render all 121 descriptions. Every skill starts as a
+   defaults, against **113,677** needed to render all 121 descriptions. Every skill starts as a
    bare `- name` and is upgraded back to full text in **descending order of recent use**
    (`usageCount x max(0.5^(days/7), 0.1)`, so anything unused scores 0), greedily, skipping
    whatever does not fit. At the default budget **3 of 121** keep a description
@@ -147,6 +147,26 @@ the orphaned-phrase defect recorded in Tier C.
 
 ---
 
+## Consolidation notice (2026-08-23)
+
+The library was consolidated from 121 skills to 71; 50 skills moved to `archive/skills/`
+(restorable — see `archive/README.md`). **31 rows across Tiers A–D target skills that are now
+archived and are struck as `~~retired~~`.** They are struck rather than deleted because the Run 1–3
+logs below cite them by ID, and deleting the rows would orphan those records.
+
+What this means for anyone running the protocol now:
+
+- **The retired rows are not failures.** Skip them. A retired row's finding, where it had one,
+  is preserved in the run logs.
+- **Tiers A and B are largely spent.** Both existed to test phrase hand-offs between skills that
+  have since been archived — the collision they guarded cannot recur, because one side is gone.
+  Trigger-phrase collisions among the surviving 71 currently measure **0**.
+- **D9/D10 are superseded rather than merely retired**: the two Forward-Deployed editions merged
+  into `coding-agent-skills:chicken-little`, whose `deploy advisor` / `deploy compiler` modes now
+  own those routes. A future revision should add live rows testing the merged skill's mode
+  triggers — that is the one genuine coverage gap this consolidation opened.
+- The live rows that remain still test what they always tested, against skills that still exist.
+
 ## Tier A — routes that gave up their most natural phrases (highest risk)
 
 These nine skills lost trigger phrases during this session's collision surgery. Each row uses the
@@ -155,17 +175,17 @@ surgery broke a live route.
 
 | # | Prompt (paste verbatim) | Must load | Near-miss prompt | Must NOT load |
 |---|---|---|---|---|
-| A1 | `Review this Python module and tell me what a principal engineer would change before it ships.` | `full-stack-dev-skills:elite-python-engineer` | `Walk me through reviewing a teammate's pull request without being a jerk about it.` | elite-python-engineer (should be `git-and-code-review`) |
-| A2 | `Give me a production-grade FastAPI service layout — typing, logging, error handling, the works.` | `full-stack-dev-skills:elite-python-engineer` | `What HTTP status code should I return when validation fails on a POST?` | elite-python-engineer (should be `backend-api-development`) |
-| A3 | `I've got a CSV I've never opened. What should I look at first before I trust any number from it?` | `data-analytics-bi-skills:exploratory-data-analysis` | `Which is the defensible measure of a typical value when the distribution is badly skewed?` | exploratory-data-analysis (should be `descriptive-statistics`) |
-| A4 | `Report the centre and spread of this column and justify the choice for publication.` | `data-analytics-bi-skills:descriptive-statistics` | `What does one row of this table actually represent?` | descriptive-statistics (should be `exploratory-data-analysis`) |
+| ~~A1~~ retired | `Review this Python module and tell me what a principal engineer would change before it ships.` | `full-stack-dev-skills:elite-python-engineer` | `Walk me through reviewing a teammate's pull request without being a jerk about it.` | elite-python-engineer (should be `git-and-code-review`) |
+| ~~A2~~ retired | `Give me a production-grade FastAPI service layout — typing, logging, error handling, the works.` | `full-stack-dev-skills:elite-python-engineer` | `What HTTP status code should I return when validation fails on a POST?` | elite-python-engineer (should be `backend-api-development`) |
+| ~~A3~~ retired | `I've got a CSV I've never opened. What should I look at first before I trust any number from it?` | `data-analytics-bi-skills:exploratory-data-analysis` | `Which is the defensible measure of a typical value when the distribution is badly skewed?` | exploratory-data-analysis (should be `descriptive-statistics`) |
+| ~~A4~~ retired | `Report the centre and spread of this column and justify the choice for publication.` | `data-analytics-bi-skills:descriptive-statistics` | `What does one row of this table actually represent?` | descriptive-statistics (should be `exploratory-data-analysis`) |
 | A5 | `Put my numeric predictors on the same scale before I fit the model.` | `machine-learning-skills:feature-engineering` | `Half my rows have blanks in three columns and I need to fix the file itself.` | feature-engineering (should be `data-cleaning`) |
-| A6 | `The city column has "NY", "N.Y." and "New York" all meaning the same thing. Make it consistent.` | `data-analytics-bi-skills:data-cleaning` | `Write the one-page instruction sheet so everyone runs this the same way.` | data-cleaning (should be `standard-work`) |
-| A7 | `Everyone on the team does this differently. Write it down so there's one way.` | `continuous-improvement-skills:standard-work` | `Normalize these category labels so the group-by stops splitting.` | standard-work (should be `data-cleaning`) |
+| ~~A6~~ retired | `The city column has "NY", "N.Y." and "New York" all meaning the same thing. Make it consistent.` | `data-analytics-bi-skills:data-cleaning` | `Write the one-page instruction sheet so everyone runs this the same way.` | data-cleaning (should be `standard-work`) |
+| ~~A7~~ retired | `Everyone on the team does this differently. Write it down so there's one way.` | `continuous-improvement-skills:standard-work` | `Normalize these category labels so the group-by stops splitting.` | standard-work (should be `data-cleaning`) |
 | A8 | `Turn this finding into a short deck for the leadership meeting on Thursday.` | `data-analytics-bi-skills:assertion-evidence-deck` | `Write the two-paragraph bottom-line-first memo for the exec, no slides.` | assertion-evidence-deck (should be `executive-briefing`) |
 | A9 | `Score this classifier — I need to know if it's actually any good before we ship it.` | `machine-learning-skills:model-evaluation` | `Set up the weekly status cadence and intervention log for this project.` | model-evaluation (should be `project-command-center`) |
 | A10 | `I need to pull all the records out of a vendor's API, but it only returns 100 at a time.` | `data-tools-skills:rest-api-data-pulls` | `Design the paginated endpoint my own API should expose.` | rest-api-data-pulls (should be `backend-api-development`) |
-| A11 | `Compute a running total per customer ordered by date in SQL.` | `data-analytics-bi-skills:sql-for-analysts` | `This query takes 40 seconds and the ORM generated it.` | sql-for-analysts (should be `database-and-orm`) |
+| ~~A11~~ retired | `Compute a running total per customer ordered by date in SQL.` | `data-analytics-bi-skills:sql-for-analysts` | `This query takes 40 seconds and the ORM generated it.` | sql-for-analysts (should be `database-and-orm`) |
 
 ## Tier B — did the moved phrases land with their new owner?
 
@@ -175,11 +195,11 @@ supposed to *gain* it. A MISS here means a phrase was taken from one skill and d
 | # | Prompt (paste verbatim) | Must load | Why it's at risk |
 |---|---|---|---|
 | B1 | `Standardize this.` | *(nothing, or a clarifying question)* | **Known defect.** Three skills each held the bare word `standardize`; collision surgery qualified all three, so the bare phrase now has **no trigger owner**. Testing whether a bare ambiguous verb *should* route is the point — a clarifying question is the correct outcome, a confident wrong pick is not. |
-| B2 | `Give me the five-number summary and the coefficient of variation.` | `data-analytics-bi-skills:descriptive-statistics` | Received `summary statistics`, `central tendency`, `spread` from exploratory-data-analysis. |
+| ~~B2~~ retired | `Give me the five-number summary and the coefficient of variation.` | `data-analytics-bi-skills:descriptive-statistics` | Received `summary statistics`, `central tendency`, `spread` from exploratory-data-analysis. |
 | B3 | `Show me the confusion matrix and pick an operating threshold.` | `machine-learning-skills:model-evaluation` | Received `confusion matrix`, which `project-command-center` had held incorrectly. |
-| B4 | `Which fields are missing and should I impute or drop those rows?` | `data-analytics-bi-skills:data-cleaning` | Retained `missing values` after feature-engineering yielded it. |
+| ~~B4~~ retired | `Which fields are missing and should I impute or drop those rows?` | `data-analytics-bi-skills:data-cleaning` | Retained `missing values` after feature-engineering yielded it. |
 | B5 | `Read this diff and tell me if it's safe to merge.` | `coding-agent-skills:git-and-code-review` | Holds `code review`, which elite-python-engineer yielded — but elite-python-engineer still advertises "code review" in its description *prose*, so both compete in the router. |
-| B6 | `Write me a pandas script to summarize this spreadsheet.` | `coding-agent-skills:python-for-analysts` | Sole owner of bare `python` after elite-python-engineer yielded it. If A1/A2 MISS **and** B6 PASSes, the split is wrong: analyst-grade Python is absorbing production-grade requests. |
+| ~~B6~~ retired | `Write me a pandas script to summarize this spreadsheet.` | `coding-agent-skills:python-for-analysts` | Sole owner of bare `python` after elite-python-engineer yielded it. If A1/A2 MISS **and** B6 PASSes, the split is wrong: analyst-grade Python is absorbing production-grade requests. |
 
 ## Tier C — over-trigger guards (bare common words)
 
@@ -202,26 +222,33 @@ casual phrasing whose substance another skill owns. Its cost, if these fail, is 
 |---|---|---|---|
 | C1 | `Which branch of the company handles refunds?` | `coding-agent-skills:git-and-code-review` | `branch`, `commit` |
 | C2 | `I need to commit to a decision by Friday — help me think it through.` | `coding-agent-skills:git-and-code-review` | `commit` |
-| C3 | `Who should lead this project, and what's the lag before we see results?` | `data-analytics-bi-skills:sql-for-analysts` | `lead`, `lag` |
-| C4 | `What's the range of salaries we should offer, and is remote on the table?` | `data-analytics-bi-skills:descriptive-statistics` | `range`, `mode` |
-| C5 | `Rank these three vendors for me on price and support.` | `data-analytics-bi-skills:sql-for-analysts` | `rank`, `qualify` |
+| ~~C3~~ retired | `Who should lead this project, and what's the lag before we see results?` | `data-analytics-bi-skills:sql-for-analysts` | `lead`, `lag` |
+| ~~C4~~ retired | `What's the range of salaries we should offer, and is remote on the table?` | `data-analytics-bi-skills:descriptive-statistics` | `range`, `mode` |
+| ~~C5~~ retired | `Rank these three vendors for me on price and support.` | `data-analytics-bi-skills:sql-for-analysts` | `rank`, `qualify` |
 | C6 | `Give me feedback on my cover letter.` | `metacognition-skills:reflective-learner` | `feedback` |
 | C7 | `My memory is terrible — how do I stop forgetting people's names?` | `metacognition-skills:hierarchical-memory-manager` | `memory` |
-| C8 | `Book me a travel agent for the Denver trip.` | `coding-agent-skills:agentic-workflow-design` | `agent` |
-| C9 | `There's too much waste in our packaging — can we use less cardboard?` | `continuous-improvement-skills:value-stream-mapping` | `waste`, `flow` |
-| C10 | `Refactor this paragraph so it reads better.` | `full-stack-dev-skills:elite-python-engineer` | `refactor` (bare, and the skill's broadest remaining route) |
-| C11 | `What are the visitor permissions for the building on weekends?` | `coding-agent-skills:agent-harness-config` | `permissions`, `hooks` |
-| C12 | `Investigate why the office coffee order keeps arriving late.` | `metacognition-skills:dynamic-analysis-engine` | `investigate` |
-| C13 | `Half the rows in this export have blanks and the dates come in three different formats. Clean this up.` | `coding-agent-skills:script-wizard` | `clean this up` (should be `data-analytics-bi-skills:data-cleaning`) |
-| C14 | `Here's the diff for my branch — review this code before I open the PR.` | `coding-agent-skills:script-wizard` | `review this code` (should be `coding-agent-skills:git-and-code-review`) |
-| C15 | `Our onboarding takes eleven days and nobody can say why. Improve this process.` | `coding-agent-skills:script-wizard` | `improve this process` (should be a continuous-improvement method) |
-| C16 | `Our refund policy has an edge case people keep exploiting. Stress test it.` | `coding-agent-skills:script-wizard` | `stress test` (shared with `coding-agent-skills:rule-stress-testing`) |
+| ~~C8~~ retired | `Book me a travel agent for the Denver trip.` | `coding-agent-skills:agentic-workflow-design` | `agent` |
+| ~~C9~~ retired | `There's too much waste in our packaging — can we use less cardboard?` | `continuous-improvement-skills:value-stream-mapping` | `waste`, `flow` |
+| ~~C10~~ retired | `Refactor this paragraph so it reads better.` | `full-stack-dev-skills:elite-python-engineer` | `refactor` (bare, and the skill's broadest remaining route) |
+| ~~C11~~ retired | `What are the visitor permissions for the building on weekends?` | `coding-agent-skills:agent-harness-config` | `permissions`, `hooks` |
+| ~~C12~~ retired | `Investigate why the office coffee order keeps arriving late.` | `metacognition-skills:dynamic-analysis-engine` | `investigate` |
+| ~~C13~~ retired | `Half the rows in this export have blanks and the dates come in three different formats. Clean this up.` | `coding-agent-skills:script-wizard` | `clean this up` (should be `data-analytics-bi-skills:data-cleaning`) |
+| ~~C14~~ retired | `Here's the diff for my branch — review this code before I open the PR.` | `coding-agent-skills:script-wizard` | `review this code` (should be `coding-agent-skills:git-and-code-review`) |
+| ~~C15~~ retired | `Our onboarding takes eleven days and nobody can say why. Improve this process.` | `coding-agent-skills:script-wizard` | `improve this process` (should be a continuous-improvement method) |
+| ~~C16~~ retired | `Our refund policy has an edge case people keep exploiting. Stress test it.` | `coding-agent-skills:script-wizard` | `stress test` (shared with `coding-agent-skills:rule-stress-testing`) |
 
 > A single OVER here is not automatically a defect — a slightly pushy skill that offers itself and is
 > waved off costs one line. An OVER on **C6, C7, C8 or C12** is more serious, because those skills
 > load large always-on bodies.
 
 ## Tier D — persona-named skills
+
+**Retired rows (2026-08-23 consolidation):** D1, D2, D4, D8, D11, D12, D13 target skills now
+archived (restorable from `archive/skills/`); D9 and D10 target the two Forward-Deployed
+editions, which merged into `coding-agent-skills:chicken-little` — its "deploy advisor" /
+"deploy compiler" modes carry those routes now, so a future protocol revision should test the
+merged skill's mode triggers instead. Retired rows are struck, not deleted, because the Run 1–2
+logs below reference them.
 
 This library deliberately contains skills named for a persona rather than a task. That is a valid
 design *provided* the name reaches the skill, the skill is still findable by someone who does not
@@ -255,19 +282,19 @@ a real route. The in-scope column now makes that a **PASS**, and only the third 
 
 | # | By-name (must load) | In-scope paraphrase (**should** load) | Out-of-scope (must NOT load) | Skill |
 |---|---|---|---|---|
-| D1 | `Get gonzo on this quarterly report.` | `Write this up the way a magazine columnist would — first person, in the room, no corporate hedging.` | `Proofread this quarterly report for typos and grammar.` | `writing-skills:gonzo` |
-| D2 | `Bring in Pythagoras for this module.` | `This module works but I would not put it in front of a paying customer. Bring it up to the bar you would hold yourself to.` | `What's the difference between a list and a tuple in Python?` | `full-stack-dev-skills:elite-python-engineer` |
+| ~~D1~~ retired | `Get gonzo on this quarterly report.` | `Write this up the way a magazine columnist would — first person, in the room, no corporate hedging.` | `Proofread this quarterly report for typos and grammar.` | `writing-skills:gonzo` |
+| ~~D2~~ retired | `Bring in Pythagoras for this module.` | `This module works but I would not put it in front of a paying customer. Bring it up to the bar you would hold yourself to.` | `What's the difference between a list and a tuple in Python?` | `full-stack-dev-skills:elite-python-engineer` |
 | D3 | `Chicken Little, look at this integration.` | `Three dashboards went red this morning and everyone is in a war room. Is this actually an emergency?` | `What could go wrong with this integration?` | `coding-agent-skills:chicken-little` |
-| D4 | `Be my sparring partner on this strategy.` | `I have talked myself into this plan and I no longer trust my own judgement on it. Push back hard.` | `Summarize this strategy document in three bullets.` | `coding-agent-skills:sparring-partner` |
+| ~~D4~~ retired | `Be my sparring partner on this strategy.` | `I have talked myself into this plan and I no longer trust my own judgement on it. Push back hard.` | `Summarize this strategy document in three bullets.` | `coding-agent-skills:sparring-partner` |
 | D5 | `Run precog on the next two quarters.` | `Give me three genuinely different ways the next two quarters could go, not a best and worst case.` | `What were last quarter's actual numbers?` | `decision-science-skills:minority-report` |
 | D6 | `Deploy the Foreman on this codebase.` | `The team says this feature is done. I do not believe them. How do I check what is actually finished?` | `Write the release notes for this version.` | `coding-agent-skills:the-foreman` |
 | D7 | `Comrade Engineer — is there a pencil for this?` | `We have three engineers on a six-month build for something I suspect a spreadsheet could do.` | `Implement the design we agreed on last week.` | `coding-agent-skills:soviet-space-graphite` |
-| D8 | `Weight of the books on this schema.` | `It flies in staging with our seed data. What happens in March when the real volume shows up?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
-| D9 | `Deploy advisor on our new pricing model.` | `Tear our new pricing model apart like someone who wants it to fail — where does the whole thing come undone?` | `Summarize the pricing model in a paragraph for the board deck.` | `coding-agent-skills:chicken-little-executive-advisor` |
-| D10 | `Deploy compiler on this service.` | `Which single dependency in this service, if it went away tomorrow, takes everything down with it?` | `Add a health-check endpoint to this service.` | `coding-agent-skills:chicken-little-technical-compiler` |
-| D11 | `Bring in The Commander on this postmortem.` | `This writeup blames three other teams. Rewrite it so we own our part.` | `Who on the team has capacity to pick up this ticket?` | `coding-agent-skills:extreme-ownership` |
-| D12 | `Hold up the mirror on this project.` | `Status says green but I know it isn't. Tell me the real state in plain words.` | `How many hours of sleep should I be getting?` | `coding-agent-skills:stay-hard-accountability` |
-| D13 | `Master prompt architect: build me a system prompt.` | `I need a system prompt for a customer-facing agent, and I want the requirements pinned down before you write a line of it.` | `Why does my prompt sometimes return prose instead of JSON?` | `coding-agent-skills:master-prompt-architect` |
+| ~~D8~~ retired | `Weight of the books on this schema.` | `It flies in staging with our seed data. What happens in March when the real volume shows up?` | `Write the migration to add this column.` | `safety-and-reliability-skills:weight-of-the-books` |
+| ~~D9~~ retired | `Deploy advisor on our new pricing model.` | `Tear our new pricing model apart like someone who wants it to fail — where does the whole thing come undone?` | `Summarize the pricing model in a paragraph for the board deck.` | `coding-agent-skills:chicken-little-executive-advisor` |
+| ~~D10~~ retired | `Deploy compiler on this service.` | `Which single dependency in this service, if it went away tomorrow, takes everything down with it?` | `Add a health-check endpoint to this service.` | `coding-agent-skills:chicken-little-technical-compiler` |
+| ~~D11~~ retired | `Bring in The Commander on this postmortem.` | `This writeup blames three other teams. Rewrite it so we own our part.` | `Who on the team has capacity to pick up this ticket?` | `coding-agent-skills:extreme-ownership` |
+| ~~D12~~ retired | `Hold up the mirror on this project.` | `Status says green but I know it isn't. Tell me the real state in plain words.` | `How many hours of sleep should I be getting?` | `coding-agent-skills:stay-hard-accountability` |
+| ~~D13~~ retired | `Master prompt architect: build me a system prompt.` | `I need a system prompt for a customer-facing agent, and I want the requirements pinned down before you write a line of it.` | `Why does my prompt sometimes return prose instead of JSON?` | `coding-agent-skills:master-prompt-architect` |
 | D14 | `Run adams-plain-grade over this notice.` | `Rewrite this so someone who left school at fourteen can act on it without asking anyone.` | `Tighten this memo for the executive team — they have two minutes.` | `writing-skills:adams-plain-grade` |
 | D15 | `Run the board on this module.` | `I want several specialists looking at this from different angles at once, not one opinion.` | `Is this function's variable naming consistent with the rest of the file?` | `coding-agent-skills:board-review` |
 
@@ -342,6 +369,10 @@ Date: ..............   Client + version: ..............................
 | C10 | | | |
 | C11 | | | |
 | C12 | | | |
+| C13 | | | |
+| C14 | | | |
+| C15 | | | |
+| C16 | | | |
 | D1 | | | |
 | D2 | | | |
 | D3 | | | |
@@ -350,6 +381,13 @@ Date: ..............   Client + version: ..............................
 | D6 | | | |
 | D7 | | | |
 | D8 | | | |
+| D9 | | | |
+| D10 | | | |
+| D11 | | | |
+| D12 | | | |
+| D13 | | | |
+| D14 | | | |
+| D15 | | | |
 | E1 | | | |
 | E2 | | | |
 | E3 | | | |

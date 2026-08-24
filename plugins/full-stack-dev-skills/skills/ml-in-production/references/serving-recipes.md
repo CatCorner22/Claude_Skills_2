@@ -13,13 +13,28 @@ models/churn/
 ├── 2026-07-15_v3/
 │   ├── pipeline.joblib          # the WHOLE sklearn Pipeline (preprocess + model)
 │   └── meta.json                # version, trained_at, data_window, feature list,
-│                                # validation metrics, git SHA of training code, hash
+│                                # validation metrics, git SHA of training code,
+│                                # decision threshold + the split it was fit on,
+│                                # sha256 of pipeline.joblib (verified at load)
 └── current -> 2026-07-15_v3/    # promotion = move the pointer (or a config value)
 ```
 ```python
+import hashlib, hmac, io, json
+from pathlib import Path
+
+
 def load_model(path: Path) -> Model:
-    m = joblib.load(path / "pipeline.joblib")
-    m.meta = Meta(**json.loads((path / "meta.json").read_text()))
+    # joblib.load() unpickles: loading an artifact EXECUTES code from it. Verify the
+    # artifact is the one you published before handing it the interpreter.
+    blob = (path / "pipeline.joblib").read_bytes()
+    meta = Meta(**json.loads((path / "meta.json").read_text()))
+    digest = hashlib.sha256(blob).hexdigest()
+    if not hmac.compare_digest(digest, meta.sha256):
+        raise RuntimeError(
+            f"model artifact hash mismatch at {path}: meta.json says {meta.sha256}, "
+            f"file is {digest} — refusing to load")
+    m = joblib.load(io.BytesIO(blob))
+    m.meta = meta
     return m
 ```
 Store artifacts wherever ops lives (object storage, a models/ volume); the pointer/config is
@@ -69,16 +84,40 @@ training set. Retention per your data policy; hash inputs where they're sensitiv
 | Shadow | New model scores logged, incumbent's answer served | Cheapest safety; always first |
 | Canary | New model serves a small slice (user %, segment) | Product metric needs live traffic |
 | A/B | Formal split + significance on the product metric | The decision is close or high-stakes |
-Promotion/rollback = config change (the pointer), never a redeploy of code. Compare on the
+Promotion/rollback = config change (the pointer), no rebuild of the image. Compare on the
 *product* metric (conversion, loss rate), not just AUC — the validation metric is a proxy.
+
+**But it is still a code change, so treat the artifact store as a production-code path.**
+`joblib.load()` and `pickle.load()` do not read data — they *execute* the stream, calling
+whatever constructors and `__reduce__` hooks it names. Anyone who can write to the artifact
+store, or influence the pointer, can run arbitrary code inside the serving process. That
+makes "promotion is only a config change" true about your build pipeline and false about
+your threat model: the pointer flip is as privileged as a deploy, and it usually has none
+of a deploy's review.
+
+So: restrict write access to the artifact store to the same set that can ship code; record
+the artifact's SHA-256 in `meta.json` at training time and **verify it before loading**
+(above), with the manifest signed or held somewhere the store's writers cannot reach —
+a hash sitting beside the file it describes protects nothing, exactly as with the split
+tally's anchor; and never load an artifact from a path a request can influence. If models
+arrive from outside your own training pipeline, pickle is the wrong format entirely —
+prefer ONNX or a pure-data format for those.
 
 ## Pre-launch checklist
 - [ ] Whole pipeline serialized (no external preprocessing steps to "remember")
+- [ ] **Decision threshold in the sidecar**, with the split it was chosen on, the FP/FN costs
+      or alert budget that set it, and the prevalence it assumed — it is a fitted parameter,
+      and left in application code the one number that turns scores into actions is versionless
 - [ ] Feature code shared between training and serving (one function, imported twice)
 - [ ] Input schema validated at the endpoint (types, ranges, categories)
 - [ ] Model loads at startup; version in every response
+- [ ] Model artifact integrity verified at load (SHA-256 vs the signed manifest) — loading a
+      pickle executes code, so this is the same control as verifying a deployed binary
+- [ ] Artifact-store write access limited to whoever may ship code
 - [ ] Prediction logging on, day one
-- [ ] Drift checks defined: which features, what threshold, who's alerted
+- [ ] Drift checks defined: which features, what statistic (PSI / KS / chi-square) at what
+      threshold, and who's alerted — plus prevalence, since a threshold frozen at training
+      prevalence silently changes precision as prevalence moves
 - [ ] Retrain trigger and rollback trigger written down and agreed
 - [ ] Shadow/canary plan for the *next* version already sketched
 - [ ] Framing sanity check: would a rule/heuristic hit 90% of this value? (ml-project-framing)

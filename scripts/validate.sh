@@ -94,6 +94,37 @@ for dir in plugins/*/skills/*/; do
   fm="$(awk 'NR==1 && $0=="---"{f=1; next} f && $0=="---"{exit} f{print}' "$md")"
   [ -n "$fm" ] || { err "$base: no frontmatter"; continue; }
 
+  # Duplicate top-level frontmatter keys. YAML parsers silently keep the LAST one, so a
+  # second `metadata:` block does not error anywhere — it just discards the first block's
+  # version and provenance. A version-bump script that appended instead of editing did
+  # exactly that to two skills, destroying a `2026.3` scheme and an `author:` field while
+  # every gate stayed green.
+  dupkeys="$(printf '%s\n' "$fm" | grep -E '^[A-Za-z_][A-Za-z0-9_-]*:' | sed 's/:.*//' | sort | uniq -d)"
+  if [ -n "$dupkeys" ]; then
+    while IFS= read -r k; do
+      [ -n "$k" ] && err "$base: duplicate frontmatter key '$k' — YAML keeps only the last, silently dropping the first"
+    done <<< "$dupkeys"
+  fi
+
+  # metadata.version: exactly one, three-part semver.
+  #
+  # Two real defects motivate both halves. A skill with no version cannot be bumped by any
+  # script and cannot tell an installed user their copy is stale. And a version written
+  # two-part ("1.0") or as a date ("2026.09") does not match a bump script's semver regex —
+  # which is precisely how an earlier bump run fell through to its "add a metadata block"
+  # branch and produced a SECOND `metadata:` key, silently discarding the first block's
+  # version and `author` while every gate stayed green.
+  vcount="$(printf '%s\n' "$fm" | grep -cE '^  version:' || true)"
+  if [ "$vcount" -eq 0 ]; then
+    err "$base: no metadata.version — every skill carries one so a change can be versioned"
+  elif [ "$vcount" -gt 1 ]; then
+    err "$base: $vcount version lines under metadata; expected exactly one"
+  else
+    ver="$(printf '%s\n' "$fm" | grep -m1 -oE '^  version: *"[^"]*"' | sed 's/.*"\(.*\)"/\1/')"
+    printf '%s' "$ver" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' \
+      || err "$base: version '$ver' is not three-part semver (a bump script will not match it)"
+  fi
+
   # name
   name="$(printf '%s\n' "$fm" | awk -F':' '/^name:/{sub(/^name:[[:space:]]*/,""); print; exit}' | tr -d '"'"'"' ' )"
   if [ -z "$name" ]; then
@@ -213,11 +244,24 @@ for md in glob.glob("plugins/**/*.md", recursive=True):
         ref = f"{m.group(1)}:{m.group(2)}"
         if ref in active or ref in agents:
             continue
-        if "archiv" in text[max(0, m.start() - WINDOW):m.start()].lower():
-            continue          # archived pointer, honestly labelled
+        marked = "archiv" in text[max(0, m.start() - WINDOW):m.start()].lower()
+        # The mark alone is not enough: the target must ACTUALLY be in archive/.
+        # Previously the mark short-circuited the check, so any reference in a
+        # deleted plugin's namespace passed as long as the word "archived" sat
+        # nearby -- `accounting-skills:this-skill-never-existed` validated clean.
+        # That is exactly how a typo or an invented skill name ships, and the
+        # domain plugins were DELETED rather than archived, so their namespace
+        # has no valid targets at all.
+        if marked and ref in archived:
+            continue          # archived pointer, honestly labelled, target real
         lineno = text.count("\n", 0, m.start()) + 1
-        bad.append(f"{md}:{lineno}: unresolved cross-link `{ref}`"
-                   + (" (target is archived — mark it as archived)" if ref in archived else ""))
+        if marked and ref not in archived:
+            reason = " (marked archived, but no such skill exists in archive/ — the target was deleted, or the name is wrong)"
+        elif ref in archived:
+            reason = " (target is archived — mark it as archived)"
+        else:
+            reason = ""
+        bad.append(f"{md}:{lineno}: unresolved cross-link `{ref}`{reason}")
 for b in bad:
     print(b)
 PY
@@ -243,6 +287,32 @@ fi
 # ignores cells under a "Wrong way" column, because a checker that cries wolf on
 # a deliberate trap table teaches authors to stop reading it.
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Cross-claims (advisory).
+#
+# check-cross-claims.py finds COUNTED claims one skill makes about another
+# ("the four-step protocol"), which resolve fine as links but go silently false
+# when the target gains a step. It was written, documented in the review
+# checklist, and then never wired to anything -- so it only ran when someone
+# remembered it, which is the same as not having it. Advisory by design: it
+# reports, it does not gate, because a legitimate count is common enough that
+# erroring would train authors to ignore the output.
+# ---------------------------------------------------------------------------
+if [ -f scripts/check-cross-claims.py ]; then
+  xc_out=$(python3 scripts/check-cross-claims.py 2>&1)
+  xc_rc=$?
+  if [ "$xc_rc" -gt 1 ]; then
+    err "cross-claims check failed to run (exit $xc_rc) — treat as UNCHECKED, not as clean: $xc_out"
+  elif [ -n "$xc_out" ]; then
+    while IFS= read -r line; do
+      case "$line" in
+        ""|"=="*) ;;
+        *) note "cross-claim: $line" ;;
+      esac
+    done <<< "$xc_out"
+  fi
+fi
+
 if [ -f scripts/check-arithmetic.py ]; then
   arith_out=$(python3 scripts/check-arithmetic.py 2>&1)
   arith_rc=$?
@@ -279,5 +349,20 @@ if [ -f scripts/check-trigger-test.py ] && [ -f docs/trigger-test.md ]; then
 fi
 
 echo
+# Advisory: a SKILL.md whose content changed against the base branch but whose version line
+# did not. The checklist requires the bump; nothing enforced it, so nine skills shipped a
+# content change with a stale version and it took a reviewer to notice. Skipped silently
+# outside a git checkout or when the base ref is not present (a fresh clone, a tarball).
+base_ref="${VALIDATE_BASE_REF:-origin/main}"
+if git rev-parse --git-dir >/dev/null 2>&1 && git rev-parse --verify -q "$base_ref" >/dev/null 2>&1; then
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    [ -f "$f" ] || continue           # deleted/renamed away
+    if ! git diff "$base_ref" -- "$f" | grep -qE '^[+-] *version:'; then
+      note "$(basename "$(dirname "$f")"): content changed vs $base_ref with no metadata.version bump"
+    fi
+  done <<< "$(git diff --name-only "$base_ref" -- 'plugins/*/skills/*/SKILL.md' 2>/dev/null)"
+fi
+
 echo "== Summary: $errors error(s), $warns warning(s), $notes note(s) =="
 [ "$errors" -eq 0 ]

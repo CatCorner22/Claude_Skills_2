@@ -45,7 +45,9 @@ rail). If it loads here, tighten the boundary.
   defensiveness); why correction is cheaper than composition, so the wrong restatement
   out-teaches the open question; why discrepancies held as the interviewer's confusion
   get examined instead of defended; why post-closure answers are the least rehearsed
-  (the AAFP doorknob phenomenon, cited as peer-reviewed).
+  (the AAFP-documented doorknob phenomenon, with its provenance stated at the strength the
+  source actually supports — a claim tagged `[peer-reviewed]` when the venue has not been
+  verified as peer-reviewed fails this item).
 - **Stays honest**: the ethics rail is stated plainly and unprompted — willing people,
   declared identity and purpose, tacit knowledge not secrets; the FBI brochure is
   presented as a warning document proving the mechanism, never as license; the

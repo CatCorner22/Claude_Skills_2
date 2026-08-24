@@ -60,8 +60,9 @@ operational procedure docs and hands off anything crisis-shaped.
 ## 3. Quality rubric
 - **Does**: routes content through Diátaxis before writing (one form per document,
   misfits split or moved); README first screen in the five-part order; ADRs in
-  Context/Decision/Consequences with Status, one decision each, superseded never
-  edited; changelog in the six categories, newest first, ISO dates, connected to the
+  Context/Decision/Consequences with Status, one decision each, and a superseded ADR whose
+  *body* is never rewritten — its Status line is updated to point at the successor, which is the
+  one edit a superseded ADR does receive; changelog in the six categories, newest first, ISO dates, connected to the
   versioning scheme, **with removals filed under Removed even when something replaced them** (a
   substitution earns two entries) and deprecations carrying a removal date; reference/API entries
   examples-first, versioned with the

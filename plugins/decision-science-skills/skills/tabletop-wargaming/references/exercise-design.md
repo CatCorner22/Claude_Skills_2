@@ -15,7 +15,7 @@ Each starter is stated in portable form first, then instantiated for one concret
 domain (payments operations) so the shape is visible. Re-instantiate for yours: swap
 the irreversible action, the counterparty, and the deadline.
 
-**1. The impersonated urgent instruction** (pairs with `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
+**1. The impersonated urgent instruction** (pairs with the archived `safety-and-reliability-skills:bowtie-barrier-analysis` — the barrier map is the drill's test plan)
 - Setup: an out-of-band instruction arrives from a named authority, demanding an
   irreversible action under time pressure, timed against the usual approver's known
   absence. The action is whatever your organization cannot take back: a payment
@@ -59,7 +59,60 @@ the irreversible action, the counterparty, and the deadline.
   unreachable during an investigation.
 - Regulator/auditor arrives mid-incident: evidence preservation vs. operational speed.
 
+## Exercise control (run this before any inject reaches a person)
+
+Blue players operate the real process with their real authorities, and the injects are spoofed
+executive email, bank and vendor alerts, news items, and a phone call from someone claiming to
+be the CFO. That combination is indistinguishable from an actual attack unless you make it
+distinguishable on purpose. Five controls, all cheap, none optional.
+
+**1. Every artifact carries an EXERCISE marking.** First line, last line, subject line: `**
+EXERCISE EXERCISE EXERCISE — NO REAL ACTION **`. Every email, every document, every alert, and
+spoken at the start and end of every phone inject. The marking is what stops a player from
+actually wiring the money, and — just as important — what stops the artifact from causing a
+real incident *later*, when someone finds the spoofed CFO email in a mailbox six months on and
+escalates it as genuine fraud. An exercise artifact that survives without its marking has
+become real evidence of a crime that did not happen.
+
+**2. One named exercise director, with ENDEX and abort authority.** Named before start,
+announced to every participant, reachable throughout. That person calls `ENDEX` (end of
+exercise) and can abort instantly. State the abort phrase out loud at the briefing and make it
+unambiguous and un-scriptable — **"REAL WORLD, REAL WORLD"** halts play immediately, and anyone
+may call it, not just the director. Real emergencies do not wait for a scenario to finish, and
+a participant who cannot stop the game to deal with one will either freeze or play through it.
+
+**3. A no-play list, written before start.** People, systems, accounts, and counterparties the
+exercise may not touch under any circumstances: production payment rails, real customer records,
+the regulator, the actual bank fraud line, anyone on leave or unwell, anyone not briefed. Read
+it aloud at the briefing. "We assumed nobody would actually call the bank" is the postmortem
+sentence this list exists to prevent.
+
+**4. Anything with an irreversible external effect is declared, not executed.** If a blue player
+decides to freeze an account, file a report, notify a regulator, page a vendor, or send a real
+message outside the exercise room, they say so to white cell and white cell adjudicates the
+result. The decision is what the exercise is testing; the execution is not. Write this into the
+brief in exactly those terms — players must know that *saying* it counts as *doing* it, or they
+will do it to be sure it counted.
+
+**5. Pre-notify every third party whose name, number, or brand appears in an inject.** The
+executive being impersonated, the bank, the vendor whose caller ID you are matching. Two reasons:
+they may otherwise trigger their own incident response against you, and impersonating a real
+party without their knowledge is a decision they are entitled to make, not one you take on their
+behalf. Where you cannot get that agreement, use a fictional counterparty — the exercise loses
+nothing that matters. Note that spoofing caller ID is regulated in many jurisdictions and
+unlawful in some; treat "match the vendor's number" as a control to clear, not a detail to
+implement.
+
+**Log the controls with the turns.** The director's name, the briefing time, the no-play list,
+the ENDEX call, and every declared-not-executed action belong in the turn log
+([Turn log template](#turn-log-template)). A debrief that cannot show the exercise was bounded
+cannot distinguish a finding from an incident.
+
 ## Inject templates
+
+Every template below is written *without* its EXERCISE marking so the shape is readable.
+Nothing goes to a person that way — apply the marking from **Exercise control** above to each
+one before it is delivered.
 
 Pre-scripted injects are written before play, with delivery times; each states its
 purpose. Format:
@@ -119,4 +172,4 @@ Examples (sanitize before use; model on your real formats):
 | Turn | Blue action | Red reaction | Counteraction | White ruling (human) | Authority invoked | Gap exposed |
 |------|-------------|--------------|---------------|----------------------|-------------------|-------------|
 
-Hand the completed log to `decision-science-skills:after-action-review` for the debrief.
+Hand the completed log to the archived `decision-science-skills:after-action-review` for the debrief.

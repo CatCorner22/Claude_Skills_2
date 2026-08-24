@@ -11,6 +11,7 @@
 import requests, os
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from urllib.parse import urlsplit
 
 def make_session():
     s = requests.Session()
@@ -22,9 +23,26 @@ def make_session():
         allowed_methods=["GET"],
     )
     s.mount("https://", HTTPAdapter(max_retries=retry))
-    s.auth = (os.environ["FUSION_USER"], os.environ["FUSION_PASSWORD"])  # or token header
     s.headers["Accept"] = "application/json"
     return s
+
+
+# Keep the credential OFF the Session and pass it per request.
+#
+# `Session.auth` is applied to every request made through that session, whatever the
+# host and whatever the scheme. That is fine while you control the URL — but the
+# Link-header loop below follows a URL the *server* chose, so a `next` link pointing at
+# `http://` sends the Basic credential in cleartext, and one pointing at another host
+# sends it to that host. This is not the redirect case: `requests` strips auth across
+# hosts on redirects (`Session.rebuild_auth`), and that never runs here, because the
+# loop issues a brand-new request to a URL it read out of the response.
+AUTH = (os.environ["FUSION_USER"], os.environ["FUSION_PASSWORD"])  # or a token header
+
+
+def same_origin(candidate: str, base: str) -> bool:
+    """A server-supplied URL is untrusted input. Follow it only back to where you started."""
+    c, b = urlsplit(candidate), urlsplit(base)
+    return c.scheme == "https" and (c.scheme, c.netloc) == (b.scheme, b.netloc)
 ```
 - The first retry fires immediately: `Retry.get_backoff_time()` returns 0 until two
   consecutive failures are in its history. If you need a delay on the first retry,
@@ -47,25 +65,41 @@ and note that a row-count reconciliation does not detect this failure, because o
 one delete during the pull duplicate one row and skip another while the total still matches.
 The offset/`hasMore` loop is in the skill body; the other two styles:
 
+Both loops below are bounded by `max_pages`, like the offset loop in the skill body — a
+server that keeps handing back a cursor, or a `next` link that cycles, must not be able to
+spin the pull forever.
+
 ```python
 # Cursor: the body carries the next cursor; absent/null means done.
 rows, cursor = [], None
-while True:
-    r = s.get(url, params={"cursor": cursor} if cursor else {}, timeout=60)
+for _ in range(max_pages):                          # never an unbounded while True
+    r = s.get(url, params={"cursor": cursor} if cursor else {}, timeout=60, auth=AUTH)
     r.raise_for_status(); body = r.json()
     rows += body["items"]
     cursor = body.get("next_cursor")
     if not cursor:
         break
+else:
+    raise RuntimeError(f"cursor pagination hit max_pages={max_pages} without finishing")
 
 # Link header: requests parses it for you — no header string parsing needed.
 rows, next_url, params = [], url, {"per_page": 100}
-while next_url:
-    r = s.get(next_url, params=params, timeout=60); r.raise_for_status()
+for _ in range(max_pages):
+    if not same_origin(next_url, url):              # the server chose this URL, not you
+        raise RuntimeError(f"refusing to send credentials to {next_url!r}")
+    r = s.get(next_url, params=params, timeout=60, auth=AUTH)
+    r.raise_for_status()
     rows += r.json()
     next_url = r.links.get("next", {}).get("url")   # already absolute; carries its own query
     params = None                                   # don't re-append params to the next URL
+    if not next_url:
+        break
+else:
+    raise RuntimeError(f"link pagination hit max_pages={max_pages} without finishing")
 ```
+
+**The rule behind both:** a URL or cursor that came from the response is untrusted input.
+Bound the loop that consumes it, and check where it points before attaching a credential.
 
 ## Flattening nested JSON
 ```python

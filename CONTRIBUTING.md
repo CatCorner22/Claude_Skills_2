@@ -35,9 +35,11 @@ Never commit real client, bank, or account data. Sanitize to structural examples
 artifacts in `*.private.md` or `references/*.local.*` (git-ignored).
 
 ## Build status (waves)
-Current state: **121 active skills across 14 plugins** (plus 6 subagents, all in
-`coding-agent-skills`), with **9 plugins / 66 skills archived** to
-[`archive/`](archive/README.md) and 2 more archived at skill level. `validate.sh` is clean —
+Current state: **71 active skills across 13 plugins** (plus 6 subagents, all in
+`coding-agent-skills`). Nine domain plugins / 66 skills were archived in 2026-08, and the Oracle
+and finance/treasury sets among them were then **deleted outright** on owner direction
+(2026-08-18) — `archive/plugins/` no longer exists and they survive only in git history. Two
+skills remain archived at skill level under [`archive/`](archive/README.md). `validate.sh` is clean —
 0 errors, 0 warnings (the remaining `NOTE` lines are the non-gating near-cap description warnings).
 
 Many waves have shipped since the original ten below: the **KSA waves A–D** (industrial

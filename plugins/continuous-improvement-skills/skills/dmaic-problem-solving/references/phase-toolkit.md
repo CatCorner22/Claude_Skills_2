@@ -94,8 +94,8 @@ refuted it; the gap arithmetic — what fraction of the charter gap this cause c
 (`continuous-improvement-skills:root-cause-analysis`); Pareto to prioritize; stratified comparison,
 correlation, and hypothesis tests to *test* them (`data-analytics-bi-skills:statistical-inference`);
 value-stream mapping when the problem is delay rather than defect
-(`continuous-improvement-skills:value-stream-mapping`); constraint analysis when the problem is
-throughput (`continuous-improvement-skills:theory-of-constraints`).
+(the archived `continuous-improvement-skills:value-stream-mapping`); constraint analysis when the problem is
+throughput (the archived `continuous-improvement-skills:theory-of-constraints`).
 
 **Two rules that do most of the work:**
 - **Pareto on counts, but always with denominators beside them.** Counts tell you where the volume
@@ -133,7 +133,7 @@ novelty check; a new-risk review of the change itself; the projected effect on t
 stated as a projection.
 
 **Tools:** solution generation against the *verified* cause
-(`continuous-improvement-skills:structured-ideation`); error-proofing (poka-yoke) preferred over
+(the archived `continuous-improvement-skills:structured-ideation`); error-proofing (poka-yoke) preferred over
 added inspection; impact/effort or PICK selection; a reversible pilot;
 `continuous-improvement-skills:fmea` on the change to catch risks it introduces; a designed
 experiment when several candidate changes interact and one-at-a-time piloting would take too long
@@ -164,13 +164,13 @@ whether a customer of the process would notice any difference.
 
 **Deliverable contract.** Control plan with all eleven fields per row
 (`references/control-charts-and-control-plans.md` §7); revised standard work with a revision number
-(`continuous-improvement-skills:standard-work`); a named individual owner and deputy; post-rollout
+(the archived `continuous-improvement-skills:standard-work`); a named individual owner and deputy; post-rollout
 chart with sustain evidence and recomputed, provenance-stamped limits; a closure statement saying
 whether the goal was met, partially met, or missed, and what happened to the residual.
 
 **Tools:** control chart / SPC with an explicitly chosen rule set; poka-yoke and automated checks
 in preference to added review steps; a formal handoff working session
-(`safety-and-reliability-skills:sbar-structured-communication` for the format); 30/60/90 audits.
+(the archived `safety-and-reliability-skills:sbar-structured-communication` for the format); 30/60/90 audits.
 
 **Tollgate questions, with the failing answer:**
 - *"Name the person — not the team — who looks at this chart, and on what day."* — **Failing
@@ -252,11 +252,11 @@ DMAIC is expensive machinery and it has an operating envelope. Route elsewhere w
   do not draw control limits from five points.
 - **The cause is already known and the fix is obvious.** Just do it. The rigor exists to prevent
   changing the wrong thing, and when the right thing is not in doubt the rigor is pure cost →
-  `continuous-improvement-skills:kaizen-and-codesign`.
+  the archived `continuous-improvement-skills:kaizen-and-codesign`.
 - **Nothing exists yet.** DMAIC improves a process that runs; designing a new one is DMADV/DFSS
   territory, where the customer requirement is decomposed into a design rather than a baseline
-  (`continuous-improvement-skills:qfd-house-of-quality` for the requirement decomposition,
-  `continuous-improvement-skills:lean-six-sigma-for-software` for the software case).
+  (the archived `continuous-improvement-skills:qfd-house-of-quality` for the requirement decomposition,
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` for the software case).
 - **The process is wildly unstable.** With large special-cause variation there is no single
   baseline to improve against. Remove the special causes first — usually faster and more valuable
   than the project you were planning.
@@ -264,8 +264,8 @@ DMAIC is expensive machinery and it has an operating envelope. Route elsewhere w
   spec someone else has to set. Settle the requirement first.
 - **The problem is flow, not defects.** Long queues and waiting are usually a constraint or a
   batching problem, and the constraint analysis gets there faster
-  (`continuous-improvement-skills:theory-of-constraints`,
-  `continuous-improvement-skills:value-stream-mapping`).
+  (the archived `continuous-improvement-skills:theory-of-constraints`,
+  the archived `continuous-improvement-skills:value-stream-mapping`).
 - **The organization needs the story on one page.** The rigor still applies; the artifact is an A3
-  (`continuous-improvement-skills:a3-thinking`), which can summarize a DMAIC project without
+  (the archived `continuous-improvement-skills:a3-thinking`), which can summarize a DMAIC project without
   replacing it.

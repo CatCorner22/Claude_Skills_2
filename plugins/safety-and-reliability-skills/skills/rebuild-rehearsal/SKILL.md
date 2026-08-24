@@ -14,7 +14,7 @@ description: >-
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.2.0"
+  version: "1.5.1"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)
@@ -62,7 +62,7 @@ alive to correct the next ones. The artifact is disposable; the capability is th
   skill rehearses the *capability* (could we still build the thing at all, slow and
   thorough). A team can pass one and fail the other.
 - Not for: one person retaining studied material → see
-  `learning-skills:spaced-retrieval-learning`; successive relearning is this skill's
+  the archived `learning-skills:spaced-retrieval-learning`; successive relearning is this skill's
   personal-scale twin — same mechanism (exercise before the memory dies), different
   unit (a fact in a head vs. a capability in a team).
 - Not for: writing or fixing the documentation itself → see
@@ -95,7 +95,16 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    what actually moves the capability between generations.
 5. **Run it for real, newcomer driving.** The person with the least knowledge executes
    from the written record alone; the veteran stays silent until something goes wrong,
-   then corrects out loud. Every question the driver has to ask a human is a gap in
+   then corrects out loud — **except at a step whose effect leaves the building**, where the
+   corrector speaks *before* it runs. Classify the runbook first: money moved, a filing
+   submitted, a client or counterparty contacted, a credential rotated, a record the retention
+   schedule locks — those are declared and simulated, never executed, and a past period or a
+   sandbox instance is preferred to the live one. State an abort trigger before starting: hand
+   back to the veteran the moment a real client, deadline or counterparty is affected, or the
+   driver cannot tell whether the next step is reversible. Handing back is a rehearsal that
+   found its limit, not a failed one. (The screen is in `references/rebuild-method.md`; every
+   other rebuild pattern here is safe by construction, this one is not.)
+   Every question the driver has to ask a human is a gap in
    the docs — log each one verbatim as it happens.
 6. **Harvest every gap into the record.** The rehearsal is the documentation's test:
    each logged question, missing step, stale credential, or dead link becomes a doc fix
@@ -115,6 +124,15 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    Division of labor: the assistant finds doc gaps cheaply and often; the humans still
    run the real rehearsal on schedule, because only reality tests the backup, the
    access, and the hands.
+
+   **Exercise control applies whenever a drill touches real people, real systems, or a real
+   third party.** Mark every artifact `EXERCISE EXERCISE EXERCISE — NO REAL ACTION`; name one
+   person who can call ENDEX, with an abort phrase (**"REAL WORLD, REAL WORLD"**) anyone may
+   use; write a no-play list of systems, accounts, and people the drill may not touch; declare
+   and adjudicate any action with an irreversible external effect instead of executing it; and
+   pre-notify any third party whose name or number appears in the scenario. The full section is
+   in `decision-science-skills:tabletop-wargaming`'s `references/exercise-design.md` — one
+   discipline, shared by every exercise in this library.
 
 ## Why / learn
 Capability decays by a mechanism, not by bad luck. Skills that aren't exercised fade;
@@ -178,7 +196,7 @@ or access details. Real names, system paths, and anything sensitive belong in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/rebuild-rehearsal.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/rebuild-rehearsal.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

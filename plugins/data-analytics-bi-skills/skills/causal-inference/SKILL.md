@@ -14,7 +14,7 @@ description: >-
   confounder, confounding, collider bias, difference-in-differences, staggered rollout,
   instrumental variable, regression discontinuity, natural experiment.
 metadata:
-  version: "1.2.0"
+  version: "1.2.2"
   source: >-
     Built from docs/research/general-use-expansion-research.md §1 (general-use expansion wave
     dossier). Provenance marks carried from the dossier: [snippet-only, cross-checked] =
@@ -36,7 +36,7 @@ metadata:
   studies: `continuous-improvement-skills:design-of-experiments`; online/field variant tests:
   `data-analytics-bi-skills:ab-test-design`. Testing whether an association is distinguishable
   from noise (hypothesis tests, p-values, A/B analysis) → `data-analytics-bi-skills:statistical-inference`.
-  A recurring mess driven by feedback structure → `decision-science-skills:systems-thinking` —
+  A recurring mess driven by feedback structure → the archived `decision-science-skills:systems-thinking` —
   and note the seam by name: a causal-*loop* diagram maps feedback structure (which loops exist,
   which way they push); it is **not** causal identification and never licenses an effect estimate.
   One incident's cause chain → `continuous-improvement-skills:root-cause-analysis`. Predicting an
@@ -191,7 +191,7 @@ proof. Keep anything naming real clients, cases, or figures in `your-environment
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/causal-inference.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/causal-inference.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

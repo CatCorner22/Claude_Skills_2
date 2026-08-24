@@ -82,8 +82,20 @@ Enough numeracy to avoid the standard traps:
 - **p-values.** p < 0.05 means "unlikely under the null," not "important" or "true." It says nothing
   about effect size, and it is heavily gamed.
 - **Effect size and NNT.** Statistically significant ≠ clinically meaningful. Number needed to treat
-  (or harm) translates an effect into human terms: NNT 8 is a strong treatment; NNT 400 usually is
-  not, whatever the p-value.
+  translates an effect into human terms — but **an NNT is meaningless as a bare number**, and a
+  bright line like "8 is strong, 400 is not" is the wrong instrument. Three things have to travel
+  with it before it means anything:
+  - **Which outcome.** NNT 400 to prevent a stroke or a death is not the same claim as NNT 400 to
+    shorten a cold.
+  - **Over what horizon.** NNT is a rate over a period. NNT 300 over five years is roughly NNT 60
+    per year of treatment; quoting the five-year figure against a one-year comparator makes a good
+    treatment look useless.
+  - **Against which harms** — the number needed to *harm* for the same population and horizon, and
+    the cost and burden of treating. NNT 300 over five years against death can be an excellent
+    trade; NNT 8 for a transient symptom, with a serious adverse-effect profile, can be a poor one.
+
+  So: report NNT as "NNT *n* to prevent *outcome* over *period*, against NNH *m* for *harm*", or do
+  not report it as a verdict at all.
 - **Multiple comparisons / p-hacking.** Testing many outcomes guarantees some "significant" results
   by chance. Prefer pre-registered primary outcomes; be suspicious when the headline finding is a
   subgroup or a secondary endpoint.

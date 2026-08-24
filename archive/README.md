@@ -1,6 +1,6 @@
 # Archive
 
-**This directory no longer holds any plugins.** What remains is two individual skills, a set of
+**This directory holds no runnable plugins.** What remains is the archived-skill store (52 skills), a set of
 standalone applications, and the record of what was removed.
 
 ## Deleted, not archived (2026-08-18, owner-directed)
@@ -43,6 +43,84 @@ restorable archive — a pointer to something that no longer exists is worse tha
 finds the removal commits, and any deleted file can be recovered from the commit before them.
 Locally installed copies of these plugins keep working — installs are version-pinned snapshots —
 but they will never update and no longer appear in the marketplace listing.
+
+## The blank-slate consolidation (2026-08-23) — 50 skills archived
+
+The owner ran a blank-slate review of all 121 active skills against one test: *does invoking
+this skill beat an unaided, competent frontier model?* Fifty did not — competent summaries of
+well-known canon (Army AAR, Fisher/Ury negotiation, Checklist Manifesto, Lean/TPS methods,
+basic math, persona shells without distinct machinery) that a strong model reproduces ~90%
+unaided. All fifty are **archived, not deleted**: restorable with the two `git mv` commands
+below, evals included. The active library went from 121 skills / 14 plugins to **71 / 13**.
+
+Notable structure changes made in the same pass:
+
+- **The Chicken Little family merged into one skill.** `chicken-little-executive-advisor` and
+  `chicken-little-technical-compiler` are archived; their full autopsy templates, session
+  semantics, and evidence bars live on inside the active `coding-agent-skills:chicken-little`
+  as its "deploy advisor" / "deploy compiler" modes (references `executive-autopsy.md` and
+  `technical-autopsy.md`). The archived copies remain complete for restorability.
+- **The Python toolchain standard moved, not archived.** `elite-python-engineer` is archived,
+  but its `references/toolchain-2026.md` — which `deploy-and-operate` and `chicken-little`
+  build on — was relocated to
+  `plugins/full-stack-dev-skills/skills/backend-api-development/references/toolchain-2026.md`.
+- **The `learning-skills` plugin is gone entirely** (all three skills archived); its
+  `plugin.json` is preserved at `archive/skills/learning-skills/plugin.json` for restoration.
+- **`math-foundations-skills` survives with one skill** (`units-and-dimensional-analysis` —
+  the one that catches real errors); the other five are archived.
+
+| Skill | From plugin | Where it lives now |
+|---|---|---|
+| `agent-harness-config` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `agentic-workflow-design` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `chicken-little-executive-advisor` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `chicken-little-technical-compiler` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `extreme-ownership` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `master-prompt-architect` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `python-for-analysts` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `script-wizard` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `sparring-partner` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `stay-hard-accountability` | coding-agent-skills | `archive/skills/coding-agent-skills/` |
+| `executive-briefing` | collaboration-skills | `archive/skills/collaboration-skills/` |
+| `feedback-that-lands` | collaboration-skills | `archive/skills/collaboration-skills/` |
+| `stakeholder-mapping` | collaboration-skills | `archive/skills/collaboration-skills/` |
+| `a3-thinking` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `kaizen-and-codesign` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `lean-six-sigma-for-software` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `priority-and-wip` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `qfd-house-of-quality` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `standard-work` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `structured-ideation` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `theory-of-constraints` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `value-stream-mapping` | continuous-improvement-skills | `archive/skills/continuous-improvement-skills/` |
+| `dashboard-design` | data-analytics-bi-skills | `archive/skills/data-analytics-bi-skills/` |
+| `data-cleaning` | data-analytics-bi-skills | `archive/skills/data-analytics-bi-skills/` |
+| `descriptive-statistics` | data-analytics-bi-skills | `archive/skills/data-analytics-bi-skills/` |
+| `exploratory-data-analysis` | data-analytics-bi-skills | `archive/skills/data-analytics-bi-skills/` |
+| `sql-for-analysts` | data-analytics-bi-skills | `archive/skills/data-analytics-bi-skills/` |
+| `excel-automation-python` | data-tools-skills | `archive/skills/data-tools-skills/` |
+| `reproducible-analysis` | data-tools-skills | `archive/skills/data-tools-skills/` |
+| `after-action-review` | decision-science-skills | `archive/skills/decision-science-skills/` |
+| `principled-negotiation` | decision-science-skills | `archive/skills/decision-science-skills/` |
+| `skin-in-the-game` | decision-science-skills | `archive/skills/decision-science-skills/` |
+| `systems-thinking` | decision-science-skills | `archive/skills/decision-science-skills/` |
+| `ulysses-pact` | decision-science-skills | `archive/skills/decision-science-skills/` |
+| `elite-python-engineer` | full-stack-dev-skills | `archive/skills/full-stack-dev-skills/` |
+| `deliberate-practice` | learning-skills | `archive/skills/learning-skills/` |
+| `habit-design` | learning-skills | `archive/skills/learning-skills/` |
+| `spaced-retrieval-learning` | learning-skills | `archive/skills/learning-skills/` |
+| `bespoke-llm-architect` | machine-learning-skills | `archive/skills/machine-learning-skills/` |
+| `algebra-and-formulas` | math-foundations-skills | `archive/skills/math-foundations-skills/` |
+| `exponential-growth-and-logs` | math-foundations-skills | `archive/skills/math-foundations-skills/` |
+| `number-sense-and-estimation` | math-foundations-skills | `archive/skills/math-foundations-skills/` |
+| `percentages-and-proportions` | math-foundations-skills | `archive/skills/math-foundations-skills/` |
+| `probability-fundamentals` | math-foundations-skills | `archive/skills/math-foundations-skills/` |
+| `dynamic-analysis-engine` | metacognition-skills | `archive/skills/metacognition-skills/` |
+| `bowtie-barrier-analysis` | safety-and-reliability-skills | `archive/skills/safety-and-reliability-skills/` |
+| `checklist-design` | safety-and-reliability-skills | `archive/skills/safety-and-reliability-skills/` |
+| `sbar-structured-communication` | safety-and-reliability-skills | `archive/skills/safety-and-reliability-skills/` |
+| `weight-of-the-books` | safety-and-reliability-skills | `archive/skills/safety-and-reliability-skills/` |
+| `gonzo` | writing-skills | `archive/skills/writing-skills/` |
 
 ## Archived individual skills (2026-08-11, still archived)
 

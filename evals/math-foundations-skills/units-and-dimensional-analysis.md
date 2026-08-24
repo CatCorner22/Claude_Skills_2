@@ -52,7 +52,8 @@ A good response:
   arguments dimensionless), and states the verdict before touching numbers. All shown
   arithmetic is correct and reproducible from the page.
 - **Teaches:** explains that units multiply, divide, and cancel like symbols, so a
-  carried unit is a free structural proof; why a conversion factor equals 1 and
+  carried unit is a one-way check that travels with the work — wrong units refute a
+  formula, right units only fail to refute it; why a conversion factor equals 1 and
   therefore preserves value; why a dimensional check is the cheapest formula review
   (fails with certainty, passes only provisionally); why flows add but growth
   compounds; and cites the library's own weight-of-the-books formula catch as evidence

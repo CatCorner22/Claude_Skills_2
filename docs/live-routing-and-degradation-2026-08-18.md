@@ -157,7 +157,7 @@ no model introspection involved, name-only cost taken exactly as `len(name) + 2`
 
 The name-only baseline for 121 skills is **5,575 characters**, so at the default budget only
 ~2,400 characters remain for descriptions — roughly three of them. The full undegraded listing
-for this library is **113,645 characters**, i.e. **14.2%** of a 200K window's character
+for this library is **113,677 characters**, i.e. **14.2%** of a 200K window's character
 equivalent.
 
 Three things follow:

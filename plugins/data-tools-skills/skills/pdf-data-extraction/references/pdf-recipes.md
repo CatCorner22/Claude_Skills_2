@@ -75,6 +75,7 @@ HDR = ("Date", "Description", "Amount")
 # amounts: the heading gets stitched onto the previous row's description and every
 # row after it keeps the stale `section`. The stitch log at the end is how you see that.
 SECTIONS = {"Deposits", "Withdrawals", "Fees"}
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")     # match the format you actually parse below
 
 def amount(s):            # "(750.25)" -> -750.25 ; "1,200.00-" -> -1200.0 ;
                           # "-750.25" -> -750.25 ; "" -> None
@@ -86,13 +87,22 @@ def amount(s):            # "(750.25)" -> -750.25 ; "1,200.00-" -> -1200.0 ;
     neg = (s.startswith("(") and s.endswith(")")) or s.startswith("-") or s.endswith("-")
     return (-1.0 if neg else 1.0) * float(re.sub(r"[()\-]", "", s))
 
-rows, section, stitched, orphans = [], None, [], []
+rows, section, stitched, orphans, unparsed = [], None, [], [], []
 with pdfplumber.open("statement.pdf") as pdf:
     for page in pdf.pages:
         for tbl in page.extract_tables():
             for r in tbl:
                 date, desc, amt = [(x or "").strip() for x in r[:3]]
                 if (date, desc, amt) == HDR:              # repeated page header
+                    continue
+                # A full-width heading arrives as ["Deposits", None, None] — the heading is
+                # in the FIRST cell, not the second. Every case below tests `desc` only, so
+                # that row failed `not date and not amt` (date is truthy), was appended as a
+                # transaction with date="Deposits", bypassed both the orphan assert and the
+                # stitch log, and died forty lines later inside pd.to_datetime with an opaque
+                # parse error. Catch it where the other headings are caught.
+                if date in SECTIONS and not desc and not amt:
+                    section = date                        # full-width section heading
                     continue
                 if not date and not amt:
                     if not desc:
@@ -104,6 +114,11 @@ with pdfplumber.open("statement.pdf") as pdf:
                         stitched.append(desc)
                     else:
                         orphans.append(desc)              # nothing to attach it to
+                elif not DATE_RE.match(date):
+                    # Anything whose "date" is not shaped like one is a heading, a running
+                    # balance line, or a layout surprise — never a transaction. Collect it
+                    # rather than letting pd.to_datetime fail on it later with no context.
+                    unparsed.append(tuple(r[:3]))
                 else:
                     rows.append({"section": section, "date": date,
                                  "description": desc, "amount": amount(amt)})
@@ -112,6 +127,9 @@ with pdfplumber.open("statement.pdf") as pdf:
 # wrong, not that the statement has data there — say so instead of raising IndexError
 # on `rows[-1]` (a blank spacer row or an unlisted heading at the top does exactly that).
 assert not orphans, f"dateless text before the first transaction: {orphans}"
+assert not unparsed, (
+    "rows whose first cell is not a date and not a known section heading — a heading missing "
+    f"from SECTIONS, a running-balance line, or a column shift: {unparsed[:5]}")
 if stitched:                  # read this once per layout before freezing the recipe
     print("stitched as continuations (a heading in this list is a missing SECTIONS entry):")
     for line in stitched:

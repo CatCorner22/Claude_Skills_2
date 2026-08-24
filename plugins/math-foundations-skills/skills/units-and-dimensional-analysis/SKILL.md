@@ -13,7 +13,7 @@ description: >-
   dimensional analysis, units don't match, per unit, annualize, factor-label, cancel the units,
   unit check, thousands vs millions.
 metadata:
-  version: "1.1.0"
+  version: "1.2.1"
 ---
 
 # Units and dimensional analysis
@@ -28,13 +28,13 @@ metadata:
 - Checking a formula's dimensional consistency *before* trusting it: yours, a
   colleague's, or one inherited inside a spreadsheet.
 - Not for: sizing a system against its payload and growth curve (the Load Manifest
-  method) → see `safety-and-reliability-skills:weight-of-the-books`. This skill checks
+  method) → see the archived `safety-and-reliability-skills:weight-of-the-books`. This skill checks
   that the sizing formulas are dimensionally sound; that one runs the design review.
 - Not for: measurement instrument error — repeatability, reproducibility, Gage R&R →
   see `continuous-improvement-skills:measurement-systems-analysis`. Wrong units are a
   translation defect; noisy gauges are a measurement defect.
-- Siblings: `math-foundations-skills:algebra-and-formulas` (unit-check every formula it
-  rearranges) and `math-foundations-skills:number-sense-and-estimation` (units confirm
+- Siblings: the archived `math-foundations-skills:algebra-and-formulas` (unit-check every formula it
+  rearranges) and the archived `math-foundations-skills:number-sense-and-estimation` (units confirm
   the kind of thing; that skill confirms the size of it).
 
 ## Do it
@@ -69,13 +69,13 @@ Worked chains, the full check protocol, and the trap catalog are in
    *flow* adds across months: $2,350/month × 12 months/year = $28,200/year, and
    $46,800/year ÷ 12 = $3,900/month. A *rate of return* does not add — 1% per month is
    (1.01)¹² − 1 ≈ 12.68% per year, not 12%. This skill's job is the distinction and the
-   ×12 case; the (1+r)ⁿ math belongs to `math-foundations-skills:exponential-growth-and-logs`.
+   ×12 case; the (1+r)ⁿ math belongs to the archived `math-foundations-skills:exponential-growth-and-logs`.
 8. **Dimension-check any formula before trusting it.** Write the units of every symbol;
    work out the units of every term; every pair of added or subtracted terms shares a
    unit, both sides match, and anything inside exp, ln, or an exponent is dimensionless.
    A formula that fails is wrong no matter how plausible its output looks — and one
    whose units merely *resolve* still owes you the question of which law joins the
-   terms. This library's own `safety-and-reliability-skills:weight-of-the-books` had
+   terms. This library's own the archived `safety-and-reliability-skills:weight-of-the-books` had
    its margin-exhaustion formula corrected in adversarial review by exactly that pair
    of questions: the draft's units came out as years, and writing them down was what
    exposed that nothing in it said how the quantity actually moved with time (the
@@ -93,9 +93,12 @@ Worked chains, the full check protocol, and the trap catalog are in
 a unit *is* a symbol — "45 mi/hr" is the product 45 × mi × hr⁻¹. That is why the
 factor-label method works: each conversion factor equals 1 (5280 ft and 1 mi are the
 same length), so multiplying by it changes the representation and never the quantity.
-Carrying units through a calculation is therefore a proof that travels with the work:
-if the units resolve to the right thing, the *structure* of the calculation is correct,
-and only the arithmetic remains to be checked. Dropping units doesn't simplify the
+Carrying units through a calculation is therefore a check that travels with the work —
+but be precise about what it proves. **Units resolving does not make the structure
+correct.** It is a one-way test: wrong units prove the formula wrong, while right units
+leave a formula that can still carry a wrong constant, a wrong sign, a missing factor of
+two, or the right dimensions assembled the wrong way round. Treat a clean dimensional
+check as "not yet refuted", never as "verified". Dropping units doesn't simplify the
 work — it deletes the half of the answer that can catch the other half.
 
 **A dimensional check is the cheapest formula review that exists.** It needs no data,
@@ -105,7 +108,8 @@ doesn't prove a formula right (a constant can still be wrong), but failing prove
 wrong with certainty. That asymmetry is why it runs *before* trusting any formula, not
 after the numbers disappoint — plausible-looking output is precisely what a
 dimensionally broken formula produces, since nothing else constrains it. It works on
-authors, too: the weight-of-the-books catch above was an author's own formula, in this
+authors, too: the weight-of-the-books catch above (from a sizing skill since archived, the
+worked example kept here) was an author's own formula, in this
 library, found when a reviewer wrote out the units of every term and asked what law
 joined them — the units came out as years, and the question they provoked was what
 convicted the formula.
@@ -126,7 +130,7 @@ exponent, where only dimensionless things belong.
 - Dividing rates on different time bases ($/day ÷ items/hour) → convert both to one
   base, then divide.
 - Annualizing a growth rate with ×12 → ×12 is for flows; rates compound — route to
-  `math-foundations-skills:exponential-growth-and-logs`.
+  the archived `math-foundations-skills:exponential-growth-and-logs`.
 - Adding per-month and per-year figures in one total ($1,800/mo rent + $2,400/yr
   insurance ≠ $4,200 of anything; it is $21,600 + $2,400 = $24,000/yr) → convert to a
   common period before any sum.
@@ -147,7 +151,7 @@ structural — real rates, balances, or counterparty details belong in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/units-and-dimensional-analysis.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/units-and-dimensional-analysis.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

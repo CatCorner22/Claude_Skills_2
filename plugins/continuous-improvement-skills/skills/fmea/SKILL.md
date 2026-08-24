@@ -10,7 +10,7 @@ description: >-
   to test hardest. Triggers: FMEA, failure modes, failure mode and effects analysis, severity
   occurrence detection, action priority, RPN, risk priority number, rank what could go wrong.
 metadata:
-  version: "1.1.0"
+  version: "1.2.1"
 ---
 
 # FMEA (failure mode and effects analysis)
@@ -28,11 +28,11 @@ metadata:
 - The Improve phase of `continuous-improvement-skills:dmaic-problem-solving` names FMEA as its
   new-risk check — this skill is that method, defined.
 - Prioritizing what an adversarial release gauntlet fuzzes and property-tests hardest, by Action
-  Priority (see `continuous-improvement-skills:lean-six-sigma-for-software`).
+  Priority (see the archived `continuous-improvement-skills:lean-six-sigma-for-software`).
 - Not for: finding the cause of one incident that already happened → see
   `continuous-improvement-skills:root-cause-analysis` (FMEA anticipates; RCA autopsies). Mapping a
   hazard's full prevention/mitigation barrier architecture with escalation factors and barrier
-  owners → see `safety-and-reliability-skills:bowtie-barrier-analysis`.
+  owners → see the archived `safety-and-reliability-skills:bowtie-barrier-analysis`.
 
 ## Do it
 Work the seven steps in order — `references/fmea-method.md` has each step expanded, the anchored
@@ -53,12 +53,24 @@ rating scales, and a worked bank-reconciliation FMEA table.
 5. **Prioritize with the Action Priority table** (High/Medium/Low), not by multiplying S×O×D into
    an RPN. AP reads the three ratings in order of dominance — Severity first — so a catastrophic
    failure can never be averaged away by arithmetic.
+   - **The one exception is where the gaming moved to, so gate it on evidence.** A severity 9–10
+     mode drops out of High only when Occurrence and Detection are *both* ≤ 3 — and those are the
+     two least defensible numbers on the sheet. Occurrence for a catastrophe is 1–3 nearly by
+     construction ("never seen here; barely conceivable"), and Detection is scored against the
+     control as *claimed*. So require both to be evidenced: Occurrence backed by incident history,
+     a base rate, or a physical argument, and the detection control **assurance-tested or sampled,
+     not merely named** (the archived `safety-and-reliability-skills:bowtie-barrier-analysis`). Where either is
+     an assertion, the mode stays High. Otherwise the same instinct that once argued Detection down
+     a point to duck an RPN threshold argues two numbers down to move a catastrophic mode to
+     Medium, where "justify in the register if it isn't actioned" is a sentence teams write.
 6. **Act, then re-rate.** Actions cut **Occurrence** (prevention: remove or error-proof the cause)
    or improve **Detection** (a control that surfaces the failure sooner); Severity rarely moves
    without redesigning the process itself. Re-rate the row after the action lands and keep both
    ratings, so the register shows risk actually retired — not just actions listed.
 7. **Keep it living.** Re-run after every incident and process change. An incident is feedback: a
-   mode you missed, an Occurrence rated too low, or a Detection rated too optimistically.
+   mode you missed, an Occurrence rated too low, or a Detection rated too optimistically — and if
+   the mode was rated S 9–10 but held out of High by an unevidenced O/D pair, the incident is the
+   evidence that the carve-out was wrong.
 
 ## Why / learn
 The heart of the method is the **mode → effect → cause chain**: a mode is not a cause (duplicate
@@ -95,7 +107,7 @@ sanitize to structure only.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/fmea.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/fmea.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

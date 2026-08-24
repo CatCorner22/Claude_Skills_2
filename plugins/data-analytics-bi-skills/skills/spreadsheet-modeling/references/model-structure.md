@@ -46,7 +46,7 @@ calcs don't produce, the fix is a new calc row, not a formula on the output shee
 
 Add a **cover/README** sheet: purpose, owner, version, date, key assumptions, and a change
 log. If raw data feeds the model (an extract, an export), land it on a marked **data** sheet
-as values — cleaned first (`data-analytics-bi-skills:data-cleaning`) — and reference it from
+as values — cleaned first (the archived `data-analytics-bi-skills:data-cleaning`) — and reference it from
 calcs; never paste raw data into the middle of logic.
 
 ## Formatting conventions
@@ -97,7 +97,7 @@ what-if run.
 - Check for **circular references** (status bar) and remove unless iterative calc is intended.
 - Stress inputs to extremes and confirm outputs and check cells behave sensibly; then
   gut-check the headline number — sign, magnitude, units, and a rough independent
-  re-derivation (`math-foundations-skills:number-sense-and-estimation`).
+  re-derivation (the archived `math-foundations-skills:number-sense-and-estimation`).
 - Google Sheets equivalents: named ranges (Data → Named ranges), `FORMULATEXT`, and
   conditional formatting all exist; data tables don't — emulate with a small scenario grid
   or an Apps Script.

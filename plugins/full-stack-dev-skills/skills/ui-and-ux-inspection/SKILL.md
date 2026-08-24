@@ -14,7 +14,7 @@ description: >-
   accessibility audit, cognitive load, form review, navigation review, simplify a
   workflow, remediation backlog, playwright accessibility tests, heuristic evaluation.
 metadata:
-  version: "1.2.0"
+  version: "1.3.1"
   source: >-
     Adapted from the user's ui-and-ux-inspection spec (2026-08-04), itself distilled
     from their report 'Eye Tracking, Web-App Usability, and Cognitive Design'; the
@@ -31,10 +31,10 @@ metadata:
   accessibility tests; comparing an implementation with design heuristics; creating a
   remediation backlog.
 - Not for: building a new accessible UI or design system from scratch → see
-  `continuous-improvement-skills:lean-six-sigma-for-software` (and its
-  references/accessible-ui-design-system.md). Syncing UI vocabulary to a reference product → the worked method lives in the archived
-  design-language skill (archived: `continuous-improvement-skills:curve-hero-design-language`,
-  restorable from `archive/skills/`).
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` (and its
+  references/accessible-ui-design-system.md). Syncing UI vocabulary to a reference product → the
+  worked method lives in an archived design-language skill for one dense clinical-SaaS product,
+  restorable from `archive/skills/`.
 
 ## Do it
 The full step-by-step procedure is preserved verbatim in references/procedure.md — read it
@@ -154,7 +154,7 @@ references/your-environment.private.md — git-ignored, never committed.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/ui-and-ux-inspection.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/ui-and-ux-inspection.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

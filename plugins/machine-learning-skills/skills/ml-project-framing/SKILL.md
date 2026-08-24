@@ -13,7 +13,7 @@ description: >-
   prediction task, unit of prediction, baseline model, is this an ML problem, does ML fit,
   feasibility, well-posed, can we predict, framing spec, scope an ML project.
 metadata:
-  version: "1.2.0"
+  version: "1.2.2"
   source: >-
     The framing discipline descends from CRISP-DM's Business Understanding phase (the
     late-1990s NCR/DaimlerChrysler/SPSS/OHRA consortium process model), verified via
@@ -29,10 +29,10 @@ metadata:
 - Reviewing an existing model that underperforms in production to find a framing flaw.
 - Not for: choosing metrics and validation once the task is framed → see
   `machine-learning-skills:model-evaluation`. For profiling the data to test feasibility → see
-  `data-analytics-bi-skills:exploratory-data-analysis`.
+  the archived `data-analytics-bi-skills:exploratory-data-analysis`.
 - Not for: architecting a bespoke or fine-tuned language model once framing says a generic one
   will not do — the prompting/RAG/PEFT/full-tune ladder, data budget, and eval harness → see
-  `machine-learning-skills:bespoke-llm-architect`.
+  the archived `machine-learning-skills:bespoke-llm-architect`.
 
 ## Do it
 1. **State the decision first, not the model.** Write one sentence: *who* acts, *what* action changes
@@ -67,7 +67,7 @@ metadata:
    how efforts like this actually perform rather than on the demo's optimism.
 7. **Run feasibility and leakage checks.** Confirm there is enough labeled history, plausible signal in
    the features, a relationship stable enough to persist, and that the target is genuinely available for
-   past periods. Use `data-analytics-bi-skills:exploratory-data-analysis` to test signal before committing.
+   past periods. Use the archived `data-analytics-bi-skills:exploratory-data-analysis` to test signal before committing.
 8. **Write a one-page framing spec.** Capture decision, target, grain, prediction time, feature list,
    metric + baseline, data availability, and known risks. This page is the contract the project is
    built against — see `references/framing-spec.md` for the template and worked examples across
@@ -110,7 +110,7 @@ onto your specific problem and hands the framed task to `machine-learning-skills
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/ml-project-framing.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/ml-project-framing.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

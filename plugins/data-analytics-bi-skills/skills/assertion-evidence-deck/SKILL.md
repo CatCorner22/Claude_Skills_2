@@ -11,7 +11,7 @@ description: >-
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
 metadata:
-  version: "1.1.0"
+  version: "1.3.1"
 ---
 
 # Assertion-evidence deck
@@ -29,7 +29,7 @@ one claim in a full sentence and proves it with a picture; every number carries 
   XML-level `.pptx` editing the builder can't express → the `pptx`
   skill. This skill turns *verified* output into slides; run the analysis under its own skill first.
 - Not for: getting a decision from one written page — the answer-first decision memo (BLUF, costed
-  options, an ask the reader can sign) → `collaboration-skills:executive-briefing`. That skill owns
+  options, an ask the reader can sign) → the archived `collaboration-skills:executive-briefing`. That skill owns
   the one-page decision document and routes here when the briefing becomes slides; this skill owns
   the slide deck.
 
@@ -151,7 +151,7 @@ color is not automatically an accessible one.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/assertion-evidence-deck.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/assertion-evidence-deck.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

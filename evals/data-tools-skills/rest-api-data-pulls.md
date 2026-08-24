@@ -22,4 +22,5 @@ A good response:
 - **Teaches:** why partial data is the default failure mode (exhaustion + proof), the
   retry-what's-transient / fail-fast-on-4xx split, and why polite queries are reliable queries.
 - **Safe:** no credentials in code or git; doesn't retry 400s blindly; reconciles fetched count
-  against a server-side total instead of assuming completeness.
+  against a server-side total *and* recognises that the count alone is not sufficient — a total that
+  moves during pagination, or a short page returned while the cursor still advances, defeats it.

@@ -25,6 +25,9 @@ tolerated, because it is read when there is no time to evaluate it. Run four que
 Q1 can end it outright — nothing that recurs, nothing stored. The rest compose rather than
 short-circuit: Q2 decides what kind of entry, Q3 decides whether it is written now or held for a
 second sighting, and Q4 overrides the type when the correction contradicts evidence you verified.
+Q3 does not bind every branch — where the routing table's Explicit column reads *either*, the
+entry is written on the first sighting regardless of how Q3 answered, because a missing check is
+worth recording before it recurs.
 
 **Q1 — Will the situation recur?** Is the thing being corrected a *class* of work, or one artifact
 that will never exist again? "Drop the note about that vendor, the contract ended" governs nothing
@@ -289,7 +292,7 @@ deliverable and never said so. The entry is qualified, not flipped:
   (counterfactual: totals were transcribed from last period's file and spot-checked afterwards)
   (origin: <date> — three of six totals mismatched the export in the vendor summary)
   (status: user-stated, binding; 1 explicit occurrence)
-  (site: memory entry — first occurrence, so the cheapest rung; the ladder below moves it if
+  (site: memory entry — first occurrence, so the cheapest rung; the enforcement ladder above moves it if
   the correction recurs)
 ```
 

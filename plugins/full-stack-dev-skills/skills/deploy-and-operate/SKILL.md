@@ -11,7 +11,7 @@ description: >-
   prod, secrets management app, health check endpoint, structured logging, rollback deploy,
   container image size, run migrations on deploy, observability basics, containerize.
 metadata:
-  version: "1.2.0"
+  version: "1.5.1"
 ---
 
 # Deploy and operate
@@ -62,12 +62,25 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
    learns about it is `ModuleNotFoundError` from a container that pulled and started fine.
    `/opt/venv` leaves the two `FROM` tags as the only strings to keep in step, and drops the
    `/usr/local/bin` copy that was quietly mixing two images' console scripts.
-   This is the pip/`requirements.txt` shape. On a project built to
-   `full-stack-dev-skills:elite-python-engineer`'s toolchain there is no `requirements.txt` —
+   This is the pip/`requirements.txt` shape. On a project built to the plugin's toolchain
+   standard (`full-stack-dev-skills:backend-api-development`'s `references/toolchain-2026.md`)
+   there is no `requirements.txt` —
    swap the deps stage for `COPY pyproject.toml uv.lock ./` plus
    `ENV UV_PROJECT_ENVIRONMENT=/opt/venv` and `uv sync --locked --no-dev` (that variable is what
    puts the environment at `/opt/venv` instead of the project's `.venv`), and the CI
-   `pip install` step for `uv sync --locked`. Every other line of the shape is unchanged.
+   `pip install` step for `uv sync --locked`. **`uv` is not in the `python:3.12-slim` base
+   image** — the deps stage fails with `uv: not found` unless you put it there first, so add
+   `COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv` (pin the tag in real use) to
+   that stage, and install it in CI too. **And move both `FROM` tags off 3.12**: that toolchain
+   pins `requires-python = ">=3.14"` and its CI installs 3.14, so `uv sync --locked` on a
+   `python:3.12-slim` base has no interpreter that satisfies the constraint. It does not fail
+   cleanly — uv downloads a 3.14 interpreter and builds `/opt/venv` against it, the deps stage
+   goes green, and the runtime stage's 3.12 image then has a venv whose `pyvenv.cfg` names a
+   home that image does not contain. Use `python:3.14-slim` for both stages, or build on
+   `ghcr.io/astral-sh/uv:python3.14-bookworm-slim` and skip the separate uv copy. The
+   version-agreement rule from the pip path is the same rule here, one layer up: **the two
+   `FROM` tags and the project's `requires-python` must all name the same minor version**, and
+   nothing downstream of the deps stage changes *once they do*.
 2. **Shape CI as lint → test → build → migrate → deploy, failing fast and cheap first.** One
    workflow: ruff/type-check (seconds) → pytest with the real test DB
    (`full-stack-dev-skills:testing-strategy`) → build the image once, tag with the git SHA →
@@ -132,7 +145,7 @@ you consider sensitive, or tokens.**
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/deploy-and-operate.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/deploy-and-operate.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

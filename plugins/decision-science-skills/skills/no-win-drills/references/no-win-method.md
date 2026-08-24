@@ -3,6 +3,7 @@
 Contents:
 1. [Design rules — closing every exit honestly](#1-design-rules--closing-every-exit-honestly)
 2. [The escalation script](#2-the-escalation-script)
+2b. [The participation contract](#2b-the-participation-contract-agree-it-before-the-first-inject)
 3. [The debrief protocol — process, not outcome](#3-the-debrief-protocol--process-not-outcome)
 4. [The physics-vs-policy constraint audit](#4-the-physics-vs-policy-constraint-audit)
 5. [Worked example — deadline vs quality vs scope](#5-worked-example--deadline-vs-quality-vs-scope)
@@ -81,6 +82,41 @@ Running notes for the LLM:
 - Communication is part of play: if there are stakeholders in the fiction (a customer, a
   boss, a patient's family), the players must actually compose what they tell them.
 
+## 2b. The participation contract (agree it before the first inject)
+
+This drill is deliberately distressing. It is built from the participant's own domain,
+escalated on a clock, with every exit closed on purpose, and Pass 3 then asks them to say
+out loud, in a group, when they privately gave up and what that tempted them toward. That
+is a real cost, and it is only defensible when the person chose it knowing what it was.
+Five terms, stated at the briefing, not buried in a document:
+
+1. **Participation is voluntary, and anyone may withdraw at any point without explaining
+   why.** Say it in those words. A right to withdraw that costs a justification is not one —
+   and in a drill about futility, "I need to stop" is exactly the signal you must not make
+   expensive.
+2. **Screen for recent lived experience of the scenario.** Someone who has just been through
+   the real version — the layoff, the loss, the failed close, the death — is not getting a
+   rehearsal, they are getting a re-run. Ask privately before the drill, offer the observer
+   seat, and take "not this one" at face value without a reason. This is the screen most
+   likely to be skipped and most likely to cause harm.
+3. **Pass 3 does not leave the room, and it is never graded.** What someone says about giving
+   up is not performance data, does not reach a manager or a file, and is not referred to
+   afterwards outside the debrief. Say what will be written down and what will not.
+4. **Separate the debriefer from the assessor where you can.** If the drill is being scored
+   at all, the person running the emotional debrief should not be the person grading — the
+   two roles ask for opposite things from the participant, and combining them quietly turns
+   candour into evidence.
+5. **Name the stop and the escalation before you start.** One person can halt the drill
+   instantly; anyone may call it (the shared abort phrase — **"REAL WORLD, REAL WORLD"** —
+   from `decision-science-skills:tabletop-wargaming`'s exercise-control section applies here
+   too). And if someone is genuinely distressed rather than usefully uncomfortable, the drill
+   stops, the debrief becomes a conversation, and the facilitator points to whatever real
+   support exists — occupational health, EAP, a manager, a clinician. A facilitator who
+   cannot tell those apart should not run this drill.
+
+The distinction the whole contract rests on: this drill is meant to be *uncomfortable*, and
+is not meant to be *harmful*. Discomfort is the mechanism; harm is a design failure.
+
 ## 3. The debrief protocol — process, not outcome
 
 The debrief is where the educational benefit of a death scenario is realized — the
@@ -108,7 +144,10 @@ the player entered.
 privately conclude there was no exit, and what did that feeling tempt them toward
 (freezing, thrashing, goalpost-moving, gallows detachment)? This pass is why the drill
 exists: the first encounter with those temptations should happen where they are
-discussable.
+discussable. **It runs under the participation contract in §2b** — offered, never required;
+never graded; and it does not leave the room. A player who would rather not answer says so
+and the debrief moves on, because a compulsory account of your own moment of despair, given
+to colleagues, is not a debrief.
 
 ## 4. The physics-vs-policy constraint audit
 

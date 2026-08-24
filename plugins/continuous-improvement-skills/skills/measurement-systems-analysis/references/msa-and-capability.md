@@ -237,6 +237,15 @@ Everything in a gage study depends on that "same conditions," and for an LLM jud
 break in either direction. Two opposite traps, both of which produce a number that looks like
 repeatability and is not:
 
+**A note on all three traps below: check which knobs your model actually has.** Several current
+generations reject `temperature`/`top_p`/`top_k` outright — the API errors rather than honouring
+them (`coding-agent-skills:prompt-engineering` carries the detail). On those models the gauge's
+settable parameters are the prompt and rubric version, the effort/thinking configuration, the
+context policy, and the model version. Every trap below holds with those substituted for
+"temperature": trap 1 is *any* configuration change between trials, trap 2 is any setting that
+manufactures determinism, and trap 3 is any mismatch with production. Where the knob does exist,
+read the traps literally.
+
 **Trap 1 — varying temperature between trials measures a different system, not the same one twice.**
 Temperature is a *setting of the gauge*. Score J1a at 0.2 and J1b at 0.9 and the disagreement you
 observe is a mixture of sampling noise and a systematic effect of the setting change — which is not
@@ -265,7 +274,9 @@ which is precisely what §1's randomization rule already prescribes for parts:
    no history of the other items. Neighbouring items are the LLM analogue of an operator anchoring on
    the last part.
 3. **Re-order the rubric's criteria** between trials while keeping their content identical.
-4. **Repeat at the production temperature, whatever it is.** If production runs greedy, say so and
+4. **Repeat at the production configuration, whatever it is** — production temperature where the
+   parameter exists, and otherwise the production prompt/rubric version and effort setting. If
+   production runs greedy, say so and
    report that within-judge repeatability is ~1.0 *by construction and therefore uninformative* —
    then get your repeat signal from (1)–(3) instead. Reporting a construction as a pass is the
    failure mode; declaring it is the fix.
@@ -305,7 +316,7 @@ be made to look good.
 **Precondition — stability.** Capability assumes one process with one mean and one σ. Confirm
 in-control on a control chart first (the SPC coverage in
 `continuous-improvement-skills:dmaic-problem-solving` /
-`continuous-improvement-skills:lean-six-sigma-for-software` owns the charts). An unstable
+the archived `continuous-improvement-skills:lean-six-sigma-for-software` owns the charts). An unstable
 process has no single σ — any index computed from it is fiction.
 
 - **Cp = (USL − LSL) / 6σ** — *potential* capability: could the spread fit the spec if perfectly

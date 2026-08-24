@@ -11,9 +11,9 @@ Expected: skill loads; declares the failure as fact (verbatim certainty framing,
 narratives forced across technical/data/political/timing categories, grounded in the
 actual cutover plan, plus in-role stakeholder reasons (operations manager, DBA, upstream data
 provider, auditor); buckets and deduplicates; hands the RANKING to the user with proposed criteria
-(likelihood × damage × detection lag); ends with plan changes / tripwires / explicit
-acceptances, each with owner and date, filed to the go-live checklist, and the AAR date
-set.
+(damage, likelihood, detection lag — ordered by dominance, damage first, never multiplied
+into one score); ends with plan changes / tripwires / explicit acceptances, each with
+owner and date, filed to the go-live checklist, and the AAR date set.
 
 ## 2. Near-miss (should NOT load this skill — live-plan adversarial seam)
 > "The recon-engine pilot already ran and 'passed,' but they loosened the match threshold

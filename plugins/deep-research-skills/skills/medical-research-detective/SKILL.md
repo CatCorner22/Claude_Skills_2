@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.4.0"
+  version: "1.12.1"
 ---
 
 # Medical research detective
@@ -40,8 +40,18 @@ does not give doses. See `references/output-format.md` for the standing safety f
   `references/output-format.md`, which routes to urgent care.
 
 ## Do it
-Work the case in seven stages. Depth is the point: a shallow pass is the failure mode. Do not stop at
+Screen for urgency (stage 0), then work the case in seven stages. Depth is the point: a shallow pass is the failure mode. Do not stop at
 the first plausible answer — the whole value is in stage 2 and the disconfirmation pass in stage 5.
+
+0. **Screen for urgency before anything else.** Read the presented findings against the red-flag
+   list in `references/output-format.md` *first* — before framing, before hypotheses, before a
+   single search. If any red flag is present, **say so as the first thing in the reply, name
+   which one, and tell the user to seek care now**; do not lead with a differential, and do not
+   make the urgent-care note the eleventh item of a stage-7 report the user may never scroll to.
+   Research and urgency are not alternatives — offer to continue the research afterwards, and
+   continue it if they want, but the routing comes first. This skill is slow by design and its
+   users bring real presentations; a seven-stage investigation is the wrong shape of answer to a
+   time-critical one, and being right three thousand words later is not being right.
 
 1. **Frame the case.** Collect what is actually known before searching: the findings (symptoms, labs,
    imaging, diagnoses) with **onset dates and sequence**; every drug, supplement, and dose change
@@ -62,7 +72,7 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    typically) and aim for at least 5–8 candidates, the boring ones included. This is the medical
    edition of a domain-general discipline: `decision-science-skills:competing-hypotheses-analysis`
    owns the full hypothesis-matrix method (judge by disconfirmation, never by accumulation), and the
-   base-rate check is `math-foundations-skills:probability-fundamentals` applied to disease
+   base-rate check is the archived `math-foundations-skills:probability-fundamentals` applied to disease
    frequency.
 
 3. **Build an explicit search strategy.** For each hypothesis, write the PICO-style question, then
@@ -94,6 +104,15 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` on each DOI/PMID. A citation that fails any check is removed, not
    softened. If verification is impossible (no network, paywalled full text), label the claim
    **unverified** and say exactly what could not be checked.
+   - **Read the tool's three-state answers as three states.** Each check returns pass, fail, or
+     *unknown*, and unknown is not a quiet pass. `PROVENANCE PARTIAL` / `UNRECOGNIZED` /
+     `UNKNOWN` mean an affiliation did not resolve — including one institution inside a
+     multi-site string whose other institutions did — so the country question is still open and
+     you resolve it from the paper. `RETRACTION STATUS UNVERIFIED` means the Retraction Watch
+     feed never answered for that record and the only evidence was publication-type metadata,
+     which lags a notice by weeks; check the publisher page before relying on the source. The
+     tool is built to fail toward "look at this," so treating an unknown as a pass converts its
+     one designed safety margin into the failure it was margin against.
 
 7. **Assemble the case file.** Produce the structure in `references/output-format.md` using
    `assets/case-file-template.md`: plain-language summary first, then hypotheses ranked with
@@ -169,7 +188,7 @@ no record numbers).
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/medical-research-detective.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/medical-research-detective.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
@@ -187,4 +206,4 @@ own rather than in a cache you may not realise is disposable.
 > plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
 > repo, which is not where a user runs these.
 - `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/search_pubmed.py` — searches PubMed via the free NCBI E-utilities API; returns structured hits (PMID, DOI, title, first author, journal, year, publication type, retraction flag) as text or JSON, ranked by evidence hierarchy. Country of origin is **not** in PubMed's summary metadata — run `verify_citation.py` on the hits you keep to do the stage-4 affiliation-country pass. `--help` for options; no API key required.
-- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. `--self-test` runs the offline logic tests.
+- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. Provenance and retraction are **three-state** (pass / fail / unverified), because Europe PMC's endpoint is a search rather than a lookup and the Retraction Watch feed does not answer for every record; an "unverified" is a question for you, not a pass. `--self-test` runs the offline logic tests (104 checks).

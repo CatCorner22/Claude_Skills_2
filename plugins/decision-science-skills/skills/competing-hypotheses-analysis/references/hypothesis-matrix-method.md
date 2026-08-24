@@ -127,7 +127,7 @@ designed to look like the innocent explanation — at face value the evidence wi
   verifying load-bearing items at a source the potential deceiver could not shape.
 - Include one whenever an actor has **means, motive, and opportunity** to shape what you are
   seeing — in payments work, business-email compromise and mandate fraud are engineered precisely
-  so the evidence reads as routine (`safety-and-reliability-skills:bowtie-barrier-analysis` maps
+  so the evidence reads as routine (the archived `safety-and-reliability-skills:bowtie-barrier-analysis` maps
   the barriers such schemes are built to defeat).
 - Weak disconfirmation is not clearance. If a deception hypothesis survives to the final ranking,
   say so plainly and route it to escalation/verification, never to quiet closure.

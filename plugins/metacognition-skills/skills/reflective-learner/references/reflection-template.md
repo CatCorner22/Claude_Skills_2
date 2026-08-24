@@ -43,8 +43,10 @@ Categorizing makes patterns visible across reflections:
 the horizon the user actually named.
 **Lessons learned:** The horizon named in a forecasting request usually implies its bucket size.
 **Actionable updates:**
-- Memory update: none — the bucket size was derivable from the request, so the durable
-  item is the avoidance rule below, not a preference about the user's forecasts.
+- Memory update: `RULE:` read the granularity off the horizon the request names — the bucket
+  size was derivable, so the durable item is a rule, not a preference about the user's
+  forecasts. (The field takes the fact/preference/rule being stored; "none" would be wrong
+  here, because a rule *is* being stored — it is just not a `PREFERENCE:`.)
 - Avoidance rule: never default granularity when the request names a horizon.
 ```
 

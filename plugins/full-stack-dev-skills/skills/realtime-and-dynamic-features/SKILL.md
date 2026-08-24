@@ -10,7 +10,7 @@ description: >-
   live updates, streaming response, real-time dashboard, background job progress, optimistic
   UI, long running task API, push updates, live refresh, stream LLM tokens.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Realtime and dynamic features
@@ -78,6 +78,18 @@ async def job_events(jid: str):
    heartbeat + reconnect-with-backoff; both need server timeouts and connection caps.
    `references/realtime-recipes.md` has the WebSocket endpoint, job-status table, optimistic
    mutation, and the transport decision table.
+7. **Authorize the long-lived connection before you open it — and remember CORS does not
+   apply here.** A stream endpoint carries the same authorization burden as any other route,
+   but two things make it easier to get wrong. First, `await ws.accept()` is the point of no
+   return: authenticate the caller *and* authorize them for the specific resource in the path
+   (`/ws/room/{room}` needs a `may_join(user, room)` check, or any authenticated user reaches
+   every room by editing the URL) before that line, not after. Second, **the same-origin policy
+   and CORS do not govern WebSocket handshakes** — any page anywhere may open a socket to your
+   server, with cookies attached subject only to `SameSite`, so a cookie-authenticated socket
+   without an explicit `Origin` allowlist is hijackable cross-site. Prefer a short-lived
+   single-use ticket minted over authenticated HTTP (the same pattern the SSE section uses),
+   validate every inbound frame with a Pydantic model, and broadcast a server-built envelope so
+   identity comes from the session rather than from the payload.
 
 ## Why / learn
 "Realtime" is a spectrum of freshness guarantees, and the engineering cost is exponential in
@@ -105,6 +117,10 @@ just stop, so liveness must be manufactured.
 - Optimistic UI on failure-prone writes → rollback whiplash; spinner honesty there.
 - Live features that re-query the world each tick → design "what changed since t" queries; keep the tick cheap.
 - WebSocket state on one node with multiple replicas → fan-out needs shared pub/sub (Redis) or sticky sessions; see deploy-and-operate.
+- `await ws.accept()` before any authorization → the socket is live before you decided the caller may have it; authenticate and authorize first, then accept.
+- Authenticating the socket but not checking the resource in its path → any logged-in user joins any room by editing the URL; the path parameter needs its own check.
+- Assuming CORS protects a WebSocket → it does not; add an explicit `Origin` allowlist, or authenticate with a ticket instead of ambient cookies.
+- Broadcasting the client's JSON as received → validate each frame, cap its size, and build the outgoing envelope server-side so senders cannot forge identity.
 
 ## Tailor to your environment
 Record your realtime map in `references/your-environment.md`: which surfaces use which
@@ -113,7 +129,7 @@ settings, and the multi-node fan-out mechanism if any.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/realtime-and-dynamic-features.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/realtime-and-dynamic-features.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

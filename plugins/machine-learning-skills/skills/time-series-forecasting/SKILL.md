@@ -11,7 +11,7 @@ description: >-
   seasonality, backtesting, rolling forecast, rolling origin, predict future values, trend and
   seasonality, prediction interval, forecast uncertainty.
 metadata:
-  version: "1.2.0"
+  version: "1.4.0"
 ---
 
 # Time-series forecasting
@@ -71,7 +71,16 @@ metadata:
    take their quantiles — e.g. the 10th and 90th percentiles of the h-step errors added to the h-step point
    forecast give an 80% interval. Model-based ARIMA/ETS intervals are a fallback, and treat them as a
    lower bound on the true width (step 10).
-10. **Check the interval's coverage, then state it.** Count how often the backtest actual fell inside the
+10. **Check the interval's coverage, then state it — and size the backtest for the horizon.** An
+   empirical band from overlapping rolling origins is systematically too narrow, because two
+   consecutive *h*-step errors share *h*−1 of their steps: the effective sample is roughly
+   origins ÷ h, not origins. Measured on a random walk, a nominal 80% band from **30 overlapping
+   origins realises 0.565 coverage at h = 13** (0.756 from 30 *non-overlapping* errors, so overlap
+   is most of the gap; the rest is that 30 points is too few to estimate a 10/90 quantile at all —
+   even at h = 1, where nothing overlaps, 30 errors give ~0.74). Budget **~30·h origins** for a
+   usable floor and ~100 effective errors before a buffer or a limit rests on the band; the
+   arithmetic and the full table are in `references/models-and-backtesting.md`.
+   Count how often the backtest actual fell inside the
    interval at each horizon and compare with the nominal level: 48 of 60 h-step actuals inside a nominal
    95% interval is **80% coverage**, and the interval is too narrow — widen it or report the measured
    coverage instead of the label. Report interval width too: an interval can only be honest *and* useful if
@@ -146,6 +155,7 @@ a false guarantee.
 - Treating MASE < 1 as the pass mark → it scales *h*-step out-of-sample error by an *in-sample* naive error at a fixed lag, so the number floats with the horizon and with which lag the library used: a good long-horizon model on a random walk scores near √h, while a bare seasonal-naive forecast on a seasonal series scored against the lag-1 default scores well under 1. Decide on the model-vs-baseline ratio at your actual horizon; use MASE to compare across series.
 - Searching ARIMA orders (or tuning anything) on the full series before backtesting → selection has seen every holdout. Re-select inside each origin, or freeze the order before the first origin.
 - Shipping a point forecast with no interval, or quoting the model's own 95% interval unchecked → ARIMA/ETS intervals ignore parameter and selection uncertainty and run too narrow. Build empirical intervals from per-horizon backtest quantiles and measure coverage.
+- Counting rolling origins as if they were independent errors → overlapping h-step errors share h−1 steps, so the effective sample is ~origins ÷ h and the band comes out too narrow, worst at the longest horizon you most wanted it for. Budget ~30·h origins, and let the coverage check decide.
 - Pooling backtest errors across horizons to make one interval → h=1 and h=13 errors have different spreads; the interval is too wide early and too narrow late. Quantile per horizon step.
 - Additive model on a multiplicative series (seasonal swing grows with level) → biased. Log-transform or model it multiplicatively.
 - Feeding future-only information as an exogenous feature → leakage. Use only drivers known at forecast time (or forecast them too).
@@ -163,7 +173,7 @@ forecast of a driver series (e.g. collections) back as an input there.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/time-series-forecasting.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/time-series-forecasting.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -28,9 +28,10 @@ A good response:
 - **Teaches:** explains *why* temporal order must be respected (no shuffling) and why beating a baseline
   precedes adding complexity — not just which function to call.
 - **Gets MASE right:** treats MASE as a **scale-free comparison** metric and *not* as a decision threshold,
-  because its denominator is an in-sample **one-step** naive error while the numerator is h-step
-  out-of-sample — so a good long-horizon model can score above 1 while comfortably beating a same-horizon
-  seasonal-naive. A response that states "MASE < 1 means the model is worth shipping" has failed this item.
+  because its denominator is the **in-sample naive error at a fixed lag** (lag 1 for a non-seasonal
+  series, the seasonal lag *m* for a seasonal one) while the numerator is h-step out-of-sample — the two
+  are measured at different lags with no fixed relationship, so a good long-horizon model can score above
+  1 while comfortably beating a same-horizon seasonal-naive. A response that states "MASE < 1 means the model is worth shipping" has failed this item.
   The decision rule it should give: model MAE(h) ÷ baseline MAE(h) on the same origins at the real horizon.
 - **Keeps selection out of the holdouts:** does not run auto-ARIMA on the whole series and then present the
   rolling backtest as out-of-sample; either re-selects inside each origin or freezes the order before the

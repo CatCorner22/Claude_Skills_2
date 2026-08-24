@@ -13,7 +13,7 @@ description: >-
   tune the matching rules, can't take it offline to test, keep improving in production, which
   tolerance is best, improve without stopping the process.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Evolutionary operation (EVOP)
@@ -100,7 +100,7 @@ names, or bounds). Never commit real transaction data — structure only.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/evolutionary-operation.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/evolutionary-operation.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

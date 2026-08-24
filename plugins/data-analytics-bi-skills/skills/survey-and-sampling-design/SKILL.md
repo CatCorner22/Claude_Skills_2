@@ -13,7 +13,7 @@ description: >-
   questionnaire, sample size, sampling plan, response rate, nonresponse bias, stratified
   sampling, quota sampling, convenience sample, question wording, Likert, margin of error.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §3), whose anchors were verified
@@ -153,7 +153,7 @@ file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/survey-and-sampling-design.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/survey-and-sampling-design.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

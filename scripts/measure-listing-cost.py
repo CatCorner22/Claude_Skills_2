@@ -34,8 +34,14 @@ BUNDLES = {
 def listing_chars(path: str) -> int:
     """Characters Claude sees for one skill: its name plus its description."""
     text = open(path, encoding="utf-8", errors="replace").read()
-    end = text.find("\n---", 3)
-    front = text[3:end]
+    # Keep the frontmatter's trailing newline. `text[3:text.find("\n---", 3)]` drops it, and
+    # the description regex below requires a newline to close its final line -- so the last
+    # line of any description that sits last in the frontmatter would be silently omitted
+    # from the measurement. Latent today (every skill carries `metadata:` after
+    # `description:`), wrong the moment one does not. simulate-listing-budget.py already
+    # bounds it this way.
+    m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+    front = (m.group(1) + "\n") if m else text[3:text.find("\n---", 3)]
     name = re.search(r"^name:\s*(.+)$", front, re.M)
     desc = re.search(r"description:\s*>-\s*\n((?:[ \t]{2,}.*\n)+)", front)
     if not name or not desc:

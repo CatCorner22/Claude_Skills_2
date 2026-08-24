@@ -1,7 +1,9 @@
 # Grade targets, Adams rules, and the self-check
 
-§1–§4 are preserved from the source spec (adams-plain-grade v1.0.0, 2026-08-04), organized
-for use; §5–§8 are house additions.
+§1 and §2 are preserved from the source spec (adams-plain-grade v1.0.0, 2026-08-04),
+organized for use. §5–§8 are house additions, and **§3 and §4 now carry house content too**
+(the measurement mechanics and the discretion/obligation check in the self-check are not from
+the source) — so do not read this file as a verbatim record of the spec beyond §1–§2.
 
 Contents: §1 Grade targets · §2 The Adams rules · §3 Measuring the grade · §4 Self-check ·
 §5 Where the targets come from · §6 Worked example (before/after) · §7 The plain-word
@@ -17,8 +19,10 @@ ladder · §8 Routing within the register family
 - Concrete examples.
 - Target: Flesch Reading Ease 90 or higher, **or** Flesch-Kincaid grade at or below 5.0 —
   two separate scales, not two readings of the same number (§3). Either one is a pass, and
-  both are floors, not windows: Reading Ease runs past 100, and scoring 105 is not "too
-  easy," it is easy. Only the read-aloud test can fail a text for being too simple.
+  **neither is a window — but they run in opposite directions.** Reading Ease is a *floor*
+  (higher is easier: 105 is not "too easy", it is easy) and Flesch-Kincaid grade is a
+  *ceiling* (lower is easier: 2.0 is fine, 6.0 is not). Overshooting in the easy direction is
+  never the failure; only the read-aloud test can fail a text for being too simple.
 
 **Fallback — 8th grade (only when precision requires it)**
 - Sentences may reach 15–18 words.
@@ -150,7 +154,7 @@ the read-aloud test the judge):
 >
 > This keeps your account safer.
 >
-> Can't get text messages? Call us at 555-0100. We will set up another way for you.
+> Can't get text messages? Call us at 555-0100 and we can set up another way.
 
 What the rewrite did, move by move:
 - **Main point first:** "We are changing how you sign in" replaces a buried lead behind
@@ -162,9 +166,20 @@ What the rewrite did, move by move:
   not survive at all — the reader needs the behavior, not the term.
 - **Actor named, active voice:** "We will text it to your phone" instead of "which shall be
   transmitted via SMS."
-- **Meaning fully preserved:** the date, the requirement, the delivery channel, the safety
-  rationale, and the fallback path all survive. Nothing was softened; the reader lost no
-  rights and no obligations.
+- **Meaning preserved, including the *category* of each statement:** the date, the requirement,
+  the delivery channel, the safety rationale, and the fallback path all survive, and each stays
+  the same *kind* of statement it was.
+- **The category check is the one this example nearly failed — run it explicitly.** The source
+  says alternative arrangements "**may be made**": that is discretion, and the company is not
+  bound. An earlier version of this rewrite read "Call us at 555-0100. **We will set up another
+  way for you**" — which is an *obligation*, and it hands the reader a commitment the source
+  never made. It reads better, it scores better, and it is a different document. The current
+  wording ("we **can** set up another way") keeps the discretion. Plain-language rewriting pulls
+  toward the confident, concrete, active form, and the confident form of a discretion is an
+  obligation — so on anything with legal or contractual weight, test every sentence for the
+  category it belongs to before you certify that nothing changed. The categories, and which verb
+  forms signal which, are in `writing-skills:adams-smart-brevity`'s
+  `references/adams-and-brevity-checks.md` §3.
 - **Two details were added, and they are the part to check:** the phone number and "type it
   on the sign-in page after your password" are not in the source. Concrete beats abstract, so
   a plain rewrite pulls toward specifics — which is exactly the moment a rewrite invents one.
@@ -216,6 +231,6 @@ Four registers, one library — the audience picks the skill:
 - **`writing-skills:explanation-design`** — when the job is building *understanding* of a
   concept, not delivering a notice: audience model, entry analogy, teach-back. Design the
   explanation there; bring its words down to grade here.
-- **`writing-skills:gonzo`** — the deliberately wild register, engaged by name only, for
+- **the archived `writing-skills:gonzo`** — the deliberately wild register, engaged by name only, for
   commentary that polite registers can't reach. Never for anything a patient or client must
   rely on.

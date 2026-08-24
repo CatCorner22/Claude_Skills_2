@@ -9,7 +9,7 @@ description: >-
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
 metadata:
-  version: "1.3.1"
+  version: "1.4.0"
 ---
 
 # Anomaly detection
@@ -31,9 +31,16 @@ metadata:
 2. **Start statistical on single features.** For one numeric field, flag points beyond a threshold: the
    classic **z-score**, or better the **robust z-score** using **median and MAD** (resistant to the very
    outliers you're hunting), or the **IQR rule** (below Q1 − 1.5·IQR or above Q3 + 1.5·IQR). Simple, explainable,
-   and often enough — but branch on the degenerate case first: once more than half the values are identical
-   (a zero-inflated count or refund series) both MAD and IQR go to 0, and the two rules return `inf`/`nan`
-   or flag every non-zero row. The fallbacks are in `references/methods-and-thresholds.md`.
+   and often enough — but branch on the degenerate case first, and note the two rules degrade at
+   *different* points and in different ways (measured on a 10,000-row zero-inflated series):
+   - **MAD goes to 0 just past 50% ties** — the median absolute deviation from the median is itself
+     the median of a mostly-zero vector — and the robust z-score then divides by zero.
+   - **IQR survives much longer: until the tied block reaches the 75th percentile (~75% ties).** At
+     51%, 60% and 74% ties the IQR was still 2400, 1500 and 100. When it finally collapses, the
+     failure is *not* `inf`/`nan`: Q1 = Q3 = 0 gives a fence of exactly [0, 0], and the rule then
+     flags **every non-zero row** — a "100% of rows are anomalies" result that looks like a finding.
+   Zero-inflated counts and refund series are where this bites. The fallbacks are in
+   `references/methods-and-thresholds.md`.
 3. **For a time series, model the expected value, then flag the residual.** Forecast or decompose the series
    (`machine-learning-skills:time-series-forecasting`) and flag points whose **residual** is large relative to
    the local, season-aware spread — so a normal month-end spike isn't flagged, but an off-pattern one is.
@@ -107,7 +114,7 @@ unusualness, point it at whatever reconciliation process you already run.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/anomaly-detection.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/anomaly-detection.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

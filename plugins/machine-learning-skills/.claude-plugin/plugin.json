@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "machine-learning-skills",
-  "description": "Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).",
-  "version": "0.12.0"
+  "description": "Applied machine learning with honest evaluation: project framing (the leanest model is no model), supervised modeling, feature engineering, model evaluation (threshold as a fitted parameter), time-series forecasting with horizon-aware backtest sizing and measured interval coverage, and anomaly detection with the degenerate-case floor.",
+  "version": "0.17.0"
 }

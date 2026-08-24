@@ -10,7 +10,7 @@ description: >-
   sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and effect, Pareto, RCA, why did
   this happen, recurring problem, keeps happening, corrective action, containment, verify the cause.
 metadata:
-  version: "1.2.0"
+  version: "1.2.2"
 ---
 
 # Root-cause analysis
@@ -21,7 +21,7 @@ metadata:
 - Prioritizing which of many problem types to attack first (Pareto).
 - Not for: running a full data-driven improvement project with baseline and controls → see
   `continuous-improvement-skills:dmaic-problem-solving`. To tell the whole problem-solving story on one
-  page for alignment → see `continuous-improvement-skills:a3-thinking`.
+  page for alignment → see the archived `continuous-improvement-skills:a3-thinking`.
 
 ## Do it
 A finished RCA is five artifacts: a quantified problem statement, a containment action labeled as
@@ -99,7 +99,7 @@ sanitize to structure only.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/root-cause-analysis.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/root-cause-analysis.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

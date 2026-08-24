@@ -14,7 +14,7 @@ description: >-
   down, I don't trust this number, navigate without instruments, what would we expect
   to see, position without the data, dead reckoning.
 metadata:
-  version: "1.0.1"
+  version: "1.1.1"
   source: >-
     Built from the library's operational-wisdom research lane
     (docs/research/epic-wave-held-research.md, Lane 1 entry 1). The mechanism is
@@ -53,7 +53,7 @@ many weak, independent cues, and keep re-estimating it as cues arrive.
   `machine-learning-skills:anomaly-detection` (it builds the instrument; this skill
   operates without one).
 - Not for: quick solo Fermi bounding of a static quantity → see
-  `math-foundations-skills:number-sense-and-estimation`. The seam: that skill brackets
+  the archived `math-foundations-skills:number-sense-and-estimation`. The seam: that skill brackets
   a number that holds still ("roughly how many X are there?"); this skill runs a live
   position from streaming weak cues — the belief is re-estimated every time a cue lands.
 - Not for: building structured futures for a decision → see the sibling
@@ -162,7 +162,7 @@ sensitive (real balances, client or matter names, incident details) goes in
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/weak-signal-navigation.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/weak-signal-navigation.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -10,6 +10,8 @@ description: >-
   understood, pruned, or safely demolished, or when nobody knows which parts are alive.
   Triggers: software archaeology, excavate, dig into this legacy, harris matrix,
   stratigraphy, which of these are dead, scream test, who wrote this and why, safe to delete.
+metadata:
+  version: "1.0.0"
 ---
 
 # Software archaeology (excavate before you demolish)
@@ -151,7 +153,7 @@ never in a committed file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/software-archaeology.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/software-archaeology.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

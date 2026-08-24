@@ -14,7 +14,7 @@ description: >-
   technique, analogy for, teach this concept, curse of knowledge, make this intuitive,
   teach-back, explain to a newcomer.
 metadata:
-  version: "1.1.2"
+  version: "1.1.4"
 ---
 
 # Explanation design
@@ -41,7 +41,7 @@ know something, you cannot easily simulate not knowing it, and that asymmetry �
   reader who already has the background → see `writing-skills:adams-smart-brevity`. Brevity
   serves a reader deciding what to act on; explanation serves a reader building understanding.
 - Not for: making understood material stick over time → see
-  `learning-skills:spaced-retrieval-learning`. This skill gets the concept *in*; that one keeps
+  the archived `learning-skills:spaced-retrieval-learning`. This skill gets the concept *in*; that one keeps
   it there.
 - Not for: authoring Agent Skills → see `coding-agent-skills:writing-agent-skills`.
 
@@ -142,7 +142,7 @@ file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/explanation-design.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/explanation-design.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

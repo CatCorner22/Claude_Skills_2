@@ -11,6 +11,8 @@ description: >-
   multi-angle code audit. Triggers: board review, board of advisors, run the board, full
   optimization review, performance and accuracy audit, deep code audit, multi-agent review,
   suboptimal code audit, optimize this code thoroughly.
+metadata:
+  version: "1.0.1"
 ---
 
 # Board of Advisors review
@@ -22,7 +24,7 @@ description: >-
 - A significant module is about to be optimized, hardened, or refactored and the owner wants
   the complete picture before touching it.
 - Not for: routine PR review → see `coding-agent-skills:git-and-code-review`. Designing
-  multi-agent systems in general → see `coding-agent-skills:agentic-workflow-design`.
+  multi-agent systems in general → see the archived `coding-agent-skills:agentic-workflow-design`.
 
 ## Do it
 1. **Extract goals and scope first — the board reviews against goals, not taste.** Identify
@@ -96,7 +98,7 @@ to the swarm.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/board-review.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/board-review.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

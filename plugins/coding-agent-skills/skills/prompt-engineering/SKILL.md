@@ -13,7 +13,7 @@ description: >-
   format, structured output, JSON output, prompt injection, reasoning model, extended thinking,
   prompt caching, flaky prompt, prompt not working, improve a prompt.
 metadata:
-  version: "2.0.0"
+  version: "2.0.2"
 ---
 
 # Prompt engineering
@@ -24,7 +24,7 @@ metadata:
 - Debugging a flaky prompt — inconsistent between runs, wrong format, ignores an instruction.
 - Turning a vague ask into a specific, testable instruction.
 - Not for: orchestrating a multi-step or autonomous workflow, tool contracts, and the guardrails
-  that gate consequential actions → see `coding-agent-skills:agentic-workflow-design`; packaging
+  that gate consequential actions → see the archived `coding-agent-skills:agentic-workflow-design`; packaging
   instructions as a reusable skill with frontmatter → see
   `coding-agent-skills:writing-agent-skills`; optimizing several prompt factors at once and reading
   their interactions → see `continuous-improvement-skills:design-of-experiments`; qualifying a
@@ -130,7 +130,7 @@ skill is that reference for Anthropic models; every mechanism named below was ch
      (allowlist, not blocklist), keep credentials out of reach of the model's execution context, and
      put a human in front of hard-to-reverse actions — sending, paying, deleting, publishing.
      Reversibility is the criterion. Those harness controls are
-     `coding-agent-skills:agentic-workflow-design`'s subject; the prompt-side job is to state the
+     the archived `coding-agent-skills:agentic-workflow-design`'s subject; the prompt-side job is to state the
      trust boundary and not to overclaim.
    - **Prompt-level mitigations, ranked as mitigation:** label the block untrusted, say that content
      inside it is data to analyze and never instructions to follow, and ask the model to report
@@ -267,7 +267,7 @@ tasks.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/prompt-engineering.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/prompt-engineering.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

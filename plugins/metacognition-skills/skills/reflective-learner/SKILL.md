@@ -10,7 +10,7 @@ description: >-
   what went wrong, post-mortem, error analysis, self-review, you got this wrong, that's not what
   I meant, feedback, correction, improve your approach, do better next time.
 metadata:
-  version: "1.1.0"
+  version: "1.1.2"
 ---
 
 # Reflective learner
@@ -21,7 +21,7 @@ metadata:
 - When high uncertainty, a suboptimal outcome, or a detected error warrants examination.
 - Briefly at session start (recall recent lessons) and fully at session end or on request.
 - Not for: analyzing external data or documents → see
-  `metacognition-skills:dynamic-analysis-engine`; this skill analyzes *the work itself*.
+  the archived `metacognition-skills:dynamic-analysis-engine`; this skill analyzes *the work itself*.
 
 ## Do it
 The full reflection template, the weakness categories, and a worked example are in
@@ -115,7 +115,7 @@ sensitive in `your-environment.private.md` (git-ignored); never commit real data
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/reflective-learner.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/reflective-learner.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

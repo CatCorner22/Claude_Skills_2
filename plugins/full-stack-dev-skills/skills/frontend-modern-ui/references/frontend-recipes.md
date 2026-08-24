@@ -45,21 +45,52 @@ Invalidate on mutation; don't hand-update copies.
 // api.ts — the only file that knows fetch
 const base = import.meta.env.VITE_API_URL ?? "";
 
+// Defined here so this file is copy-and-runnable. `authHeader()` and `<ErrorBox>` are
+// app-supplied: authHeader returns whatever your auth scheme puts on a request (often
+// `{}` for cookie sessions), and ErrorBox is your own component — both are named rather
+// than specified because they are the two things that differ per app.
+export class ApiError extends Error {
+  constructor(readonly status: number, message: string) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
+  // Merge through the Headers constructor, not object spread. `RequestInit["headers"]` is
+  // `HeadersInit = Headers | string[][] | Record<string, string>`, and spread only does the
+  // right thing for the third shape — all three are type-legal, so TypeScript accepts the
+  // broken ones silently. Verified in node:
+  //   {...new Headers({"X-Trace":"abc"})}  ->  {}                      caller's header GONE
+  //   {...[["X-Trace","abc"]]}             ->  {"0": [...]}            junk key, header GONE
+  // A caller passing `new Headers(...)` — the shape most fetch wrappers hand you — loses its
+  // header with no error, which is the worst version of this bug: it works in the test that
+  // passes a plain object.
+  const headers = new Headers({ "Content-Type": "application/json", ...authHeader() });
+  new Headers(init?.headers).forEach((v, k) => headers.set(k, v));   // caller wins, per key
+
   const r = await fetch(base + path, {
     ...init,
-    // headers merged LAST and per-key. `{headers: {...}, ...init}` looks equivalent and is not:
-    // one caller passing an Idempotency-Key replaces the whole object, dropping Content-Type
-    // and the auth header — a 401 on a call that reads correctly.
-    headers: { "Content-Type": "application/json", ...authHeader(), ...init?.headers },
+    // headers applied LAST. `{headers, ...init}` looks equivalent and is not: one caller
+    // passing an Idempotency-Key replaces the whole object, dropping Content-Type and the
+    // auth header — a 401 on a call that reads correctly.
+    headers,
   });
   if (!r.ok) {
     // Error bodies are not reliably JSON — an HTML 502 page, an empty 401. Parsing blind
     // throws a SyntaxError that hides the status, exactly when the caller needs it most.
     const body = await r.text();
-    let detail = r.statusText;
+    let detail: unknown = r.statusText;
     try { detail = JSON.parse(body).detail ?? detail; } catch { /* not JSON — keep statusText */ }
-    throw new ApiError(r.status, detail);
+    // FastAPI's 422 sends `detail` as an ARRAY of pydantic error objects, not a string.
+    // Unnormalised, a UI that renders it shows "[object Object]" — or React throws
+    // "Objects are not valid as a React child" — on the most common error a form produces.
+    // (See backend-api-development's fastapi-patterns.md for the three shapes the server
+    // emits; the alternative is overriding RequestValidationError so there is only one.)
+    const message = Array.isArray(detail)
+      ? detail.map((e: { msg?: string }) => e.msg ?? String(e)).join("; ")
+      : typeof detail === "string" ? detail : JSON.stringify(detail);
+    throw new ApiError(r.status, message);
   }
   if (r.status === 204) return undefined as T;   // a DELETE returning no body; r.json() throws
   return r.json();

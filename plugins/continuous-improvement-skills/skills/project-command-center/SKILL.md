@@ -13,7 +13,7 @@ description: >-
   intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
   constructive paranoia, now next later watch.
 metadata:
-  version: "1.2.0"
+  version: "1.2.2"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 
@@ -33,8 +33,8 @@ reality, never to the preferred answer.**
 - Evaluating risk claims, diagnostic/classifier metrics, or statistical assertions.
 - Preparing releases, reviewing AI systems, or running incident response.
 - Not for: the full software-build discipline (charters, control charts, WCAG, adversarial
-  gauntlet) → `continuous-improvement-skills:lean-six-sigma-for-software`; facilitating
-  the improvement workshop → `continuous-improvement-skills:kaizen-and-codesign`;
+  gauntlet) → the archived `continuous-improvement-skills:lean-six-sigma-for-software`; facilitating
+  the improvement workshop → the archived `continuous-improvement-skills:kaizen-and-codesign`;
   multi-advisor code review → `coding-agent-skills:board-review`; a themed
   adversarial autopsy persona → the chicken-little skills in `coding-agent-skills`.
 
@@ -130,7 +130,7 @@ severity levels, and the statistical reporting template your org requires.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/project-command-center.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/project-command-center.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

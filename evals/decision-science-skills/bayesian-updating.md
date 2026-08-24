@@ -62,7 +62,8 @@ pure establish-the-base-rate ask, tighten the boundary.
 - **Does**: question framed with decision and resolution date; prior explicit, sourced
   (reference-class handoff offered), written as probability and odds; likelihood question
   asked in both directions per evidence item; update computed by count table or odds
-  shortcut with the arithmetic checkable (rows sum); evidence graded in Bayes-factor
+  shortcut with the arithmetic checkable (the counts cross-check — each hypothesis column
+  sums to its header, the flagged row to its total); evidence graded in Bayes-factor
   vocabulary with the bands read as boundaries (3 / 20 / 150 are the doors, so an LR of 20
   is the entry to *strong*, not the middle of *positive*); journal entry produced with the
   both-directions column; the hypothesis list checked for exhaustiveness and a catch-all

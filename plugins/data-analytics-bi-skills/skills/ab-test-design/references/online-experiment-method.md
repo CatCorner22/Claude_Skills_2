@@ -105,8 +105,9 @@ Experimenters," KDD 2014): **n ≈ 16σ²/δ² per arm** for two-sided α = 0.05
 
 Consequences to confront *now*:
 - At 1,000 letters/week total, that is ~13 weeks. If that's unacceptable, the moves in order are:
-  **cut the variance** (§5 — CUPED/stratification on a pre-period covariate, which at ρ = 0.7 takes
-  6,400/arm to ~3,264/arm without touching the MDE), then a **bigger MDE** (declare "we can only detect
+  **cut the variance** (§5 — CUPED/stratification on a pre-period covariate; measure ρ on your own
+  history before assuming a reduction, because a binary response rate like this one typically sits at
+  ρ ≈ 0.1–0.3 and buys ~9%, not the ~49% a continuous metric would), then a **bigger MDE** (declare "we can only detect
   ≥4-point swings" — n drops 4× to ~1,600/arm), then a **more sensitive OEC**, then **more traffic**.
   The dishonest move is running 3 weeks and "seeing."
 - Calibrate ambition: the canon's practice guidance is that relative MDEs above ~5% are usually
@@ -142,9 +143,21 @@ Y' = Y − θ (X − X̄)          with θ = Cov(Y, X) / Var(X),  X̄ and θ poo
 | 0.7 | 0.51 | 51% | 3,264 |
 | 0.9 | 0.19 | 19% | 1,216 |
 
-Each row is `6,400 × (1 − ρ²)`: 0.91 → 5,824; 0.75 → 4,800; 0.51 → 3,264; 0.19 → 1,216. At ρ ≈ 0.7 —
-routine for a stable per-unit metric with a decent pre-period — CUPED roughly **halves** the required
-sample on the same traffic.
+Each row is `6,400 × (1 − ρ²)`: 0.91 → 5,824; 0.75 → 4,800; 0.51 → 3,264; 0.19 → 1,216.
+
+**Which row you are on depends on the metric type, and §4's worked example is not on the ρ = 0.7 row.**
+ρ ≈ 0.5–0.8 is routine for a *continuous* per-unit metric — spend, sessions, revenue — where a unit's
+pre-period value genuinely predicts its in-test value. §4 sizes a **binary response rate** (p = 0.20),
+and a 0/1 indicator across waves typically correlates with its own pre-period at **ρ ≈ 0.1–0.3**: the
+outcome carries one bit, most of its variance is irreducible Bernoulli noise, and there is no
+per-unit magnitude for the covariate to track. That is the top row — a **9% reduction, to ~5,824/arm**,
+not 51%. For a fresh outreach campaign it is usually worse, because the same bullet below applies: units
+with no pre-period take X = 0 and dilute ρ further, and on a new campaign that is most of the file.
+
+So do not carry a number down from this table into a plan. **Measure ρ on your own history first, then
+re-size** — it is a single regression of this period's metric on the prior period's for the same units,
+and it costs less than discovering mid-test that the sample was set for a variance reduction that never
+arrived.
 
 - **Where ρ comes from:** measure it on history *before* the test (regress this period's metric on the
   prior period's for the same units). Units with no pre-period (new users, first-time cases) get X = 0 or

@@ -8,7 +8,7 @@ description: >-
   call api python, paginate an api, saas api export, pagination, api rate limit, 429 retry,
   requests python, extract data from api, api to csv, json to dataframe, oauth token api.
 metadata:
-  version: "1.1.0"
+  version: "1.3.0"
 ---
 
 # REST API data pulls
@@ -70,6 +70,18 @@ def fetch_all(session, url, params, page=500, max_pages=1000):
    holding wrong rows. Compare distinct key counts to `len(rows)` as well, and prefer cursor
    pagination when the API offers it.
 
+   **A fifth guard, for cursor and `next`-link pagination: the URL came from the server.**
+   Those styles follow a URL or cursor out of the response body or the `Link` header, which
+   makes it untrusted input. Two consequences. Bound the loop the same way — a cursor the
+   server keeps re-issuing spins forever otherwise. And **keep the credential off the
+   `Session`**: `requests` applies `Session.auth` to every request through it, whatever the
+   host and whatever the scheme, so a `next` link on `http://` sends Basic credentials in
+   cleartext and one on another host sends them to that host. (The protection you may be
+   thinking of, `Session.rebuild_auth`, only strips auth across *redirects* — it never runs
+   here, because the loop issues a fresh request to a URL it read.) Pass `auth=` per request
+   and check the next URL's scheme and host against the one you started from before
+   following it. `references/api-patterns.md` has both loops written that way.
+
 5. **Retry transient failures with backoff; respect 429.** Wrap requests so 429 (honor
    `Retry-After`) and 5xx/timeouts retry with exponential backoff and a cap; 4xx other than 429
    are *your* bug (bad filter, bad auth) — fail fast and read the error body.
@@ -112,7 +124,7 @@ outputs land. **Never commit tokens, passwords, or real pulled data.**
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/rest-api-data-pulls.md` works well — fill it in
+a dirty tree. Copy it into your own project — `.claude/skills-env/rest-api-data-pulls.private.md` works well — fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 

@@ -124,8 +124,14 @@ ordinary noise and must not be reported as success.
 the desk's rule is 20–25 subgroups before limits are trusted, so the limits were flagged
 provisional and stayed provisional: the rollout landed before another eight to thirteen
 *pre-change* weeks could accumulate, and adding post-rollout weeks to a baseline would fold the
-improvement into the very limits it is being measured against. The first firm limits this project
-owns are the post-change ones computed in Control.)
+improvement into the very limits it is being measured against. And the post-change limits computed
+in Control are **also provisional** — that window is eight weeks, which is thinner still than these
+twelve. Saying otherwise would be the same error one phase later. This project never owns firm
+limits inside its own lifetime: they become firm when the post-change chart reaches 20–25 subgroups
+under the new process, roughly three months past rollout, which is the process owner's job under
+the control plan and is written into it as a dated recompute. Until then every limit on this
+project's charts carries the word *provisional*, and every verdict drawn from one is read as
+sorting rather than as a gate.)
 
 ---
 
@@ -219,7 +225,7 @@ a reporting change wearing a solution's clothes.
 
 **The sync fix is out of scope** (engineering backlog). The sponsor escalated rather than
 descoping the project — an SBAR handoff to the engineering lead
-(`safety-and-reliability-skills:sbar-structured-communication` supplies the format). The
+(the archived `safety-and-reliability-skills:sbar-structured-communication` supplies the format). The
 escalation carried the day-8-to-12 fingerprint, which is why it was prioritized: it named a
 specific defect with evidence, not a complaint about reopens.
 
@@ -332,7 +338,7 @@ A DMAIC project is done when a stranger can audit it from these artifacts alone.
 12. **New-risk review** (FMEA) of the change itself, with any guard added.
 13. **Control plan** — the full contract in `references/control-charts-and-control-plans.md` §7.
 14. **Standard work revision number** encoding the change
-    (`continuous-improvement-skills:standard-work`).
+    (the archived `continuous-improvement-skills:standard-work`).
 15. **Named owner** — an individual, a review cadence, and a written if-then response rule.
 16. **Post-rollout chart with the sustain evidence** and the recomputed limits, dated.
 17. **Closure statement** saying plainly whether the goal was met, partially met, or missed, and
