@@ -1,6 +1,6 @@
 # Skills Library — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **121 skills across 14 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **122 skills across 14 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
 
 ## How to trigger a skill
 
@@ -27,7 +27,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`machine-learning-skills`](#machine-learning-skills) (7) — Practical machine learning for analysts: project framing, feature engineering, supervised modeling, model evaluation, time-series forecasting, anomaly detection, and self-auditing bespoke LLM architecture (PEFT/QLoRA, efficiency hierarchy, safety by design).
 - [`continuous-improvement-skills`](#continuous-improvement-skills) (16) — Lean, Toyota Production System, Six Sigma, and co-design: value-stream mapping, root-cause analysis (with Reason's error taxonomy), DMAIC, standard work, A3, kaizen, Lean Six Sigma for software, the project-command doctrine, the industrial-engineering methods set (FMEA, theory of constraints, design of experiments, EVOP, measurement systems analysis, QFD), structured-ideation (brainwriting, SCAMPER, diverge/converge), and priority-and-wip (personal kanban, WIP limits, timeboxing).
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (11) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
-- [`coding-agent-skills`](#coding-agent-skills) (20) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, software-archaeology, defect-epidemiology, rule-stress-testing, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
+- [`coding-agent-skills`](#coding-agent-skills) (21) — Python for analysts, Claude Code harness config, autonomous agent design, prompt engineering, git/code review, the Board of Advisors multi-agent code review (board-review + six specialist subagents), authoring Agent Skills, software-archaeology, defect-epidemiology, rule-stress-testing, and expert personas (script wizard, sparring partner, master prompt architect, the Chicken Little family, the leadership pair, Comrade Engineer, and The Foreman).
 - [`metacognition-skills`](#metacognition-skills) (4) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
 - [`deep-research-skills`](#deep-research-skills) (1) — True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Starting with medical-research-detective for published medical literature.
 - [`writing-skills`](#writing-skills) (5) — Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing) and adams-plain-grade (5th-8th grade accessible register) — both rejecting litigated "tested language" and ambiguity — gonzo, the Hunter S. Thompson-homage participatory commentary dispatch (four mixed registers, narrator in the story, facts kept true, hyperbole kept cognizable as hyperbole), engaged on explicit ask, explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).
@@ -553,6 +553,12 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Triggers:** `jocko`, `extreme ownership`, `laws of combat`, `cover and move`, `prioritize and execute`, `decentralized command`, `discipline equals freedom`, `own this project`
 
+### `coding-agent-skills:fitness-nutrition-science`
+
+**Invoke:** `/coding-agent-skills:fitness-nutrition-science` — or just describe the task.
+
+**What it does:** Acts as an evidence-based fitness and nutrition advisor rooted in peer-reviewed research, statistical literacy, and mechanistic understanding — distinguishes cutting-edge science from outdated dogma by citing specific studies, interpreting effect sizes and confidence intervals, and building protocols from first principles. Covers fat loss, muscle hypertrophy, strength gain, cardiovascular adaptation, mobility enhancement, and nutrition science with the rigor of authorities like Huberman, Attia, Patrick, Bell, Norton. Interprets medical journal abstracts, critiques methodology, and flags effect-size inflation. Use when designing evidence-based fitness programs, resolving contradictory claims, interpreting research findings, or validating protocol effectiveness
+
 ### `coding-agent-skills:git-and-code-review`
 
 **Invoke:** `/coding-agent-skills:git-and-code-review` — or just describe the task.
@@ -743,7 +749,7 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **Invoke:** `/writing-skills:technical-documentation` — or just describe the task.
 
-**What it does:** Structures technical documentation as typed artifacts, not prose: routes docs through Procida's Diátaxis framework (tutorial, how-to, reference, explanation — forms that fail when blended), shapes the README around a newcomer's first screen, records decisions as Nygard-style ADRs (context/decision/consequences, superseded never edited), keeps a human-readable changelog keyed to SemVer, and holds API and reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the document types; register stays with writing-skills:adams-smart-brevity, explanation craft with writing-skills:explanation-design. Gives every page an owner, a cadence, and a last-verified date. Use when writing or restructuring docs for a project, method, or process.
+**What it does:** Structures technical documentation as typed artifacts, not prose: routes docs through Procida's Diátaxis framework (tutorial, how-to, reference, explanation — forms that fail when blended), shapes the README around a newcomer's first screen, records decisions as Nygard-style ADRs (context/decision/consequences, superseded rather than rewritten), keeps a human-readable changelog keyed to SemVer, and holds API and reference docs to examples-first, versioned, generated-vs-hand-written discipline. Owns the document types; register stays with writing-skills:adams-smart-brevity, explanation craft with writing-skills:explanation-design. Gives every page an owner, a cadence, and a last-verified date. Use when writing or restructuring docs for a project, method, or process.
 
 **Triggers:** `technical documentation`, `write the README`, `ADR`, `architecture decision record`, `changelog`, `Diátaxis`, `how-to guide`, `tutorial vs reference`, `API docs`, `docs as code`, `semantic versioning`, `our docs are out of date`
 
@@ -851,7 +857,7 @@ Install: `/plugin install learning-skills@treasury-analyst-skills`
 
 **Invoke:** `/learning-skills:habit-design` — or just describe the task.
 
-**What it does:** Designs one habit at a time as cue → routine → reward: writes an implementation intention ("when X happens, I will Y" — Gollwitzer's well-replicated effect), stacks the routine onto an existing stable habit, engineers friction so the good path gets one step shorter and the bad path one step longer, starts below the failure threshold and scales only after stability, tracks presence rather than streaks (a missed day is data, not a moral event), and schedules a renegotiation date so the habit is kept, resized, or retired deliberately. Use when the user wants a repeated behavior to run without willpower, keeps forgetting a recurring task, or wants a personal routine built or repaired.
+**What it does:** Designs one habit at a time as cue → routine → reward: writes an implementation intention ("when X happens, I will Y" — Gollwitzer's if-then effect), stacks the routine onto an existing stable habit, engineers friction so the good path gets one step shorter and the bad path one step longer, starts below the failure threshold and scales only after stability, tracks presence rather than streaks (a missed day is data, not a moral event), and schedules a renegotiation date so the habit is kept, resized, or retired deliberately. Use when the user wants a repeated behavior to run without willpower, keeps forgetting a recurring task, or wants a personal routine built or repaired.
 
 **Triggers:** `habit`, `implementation intention`, `habit stacking`, `make it automatic`, `build a routine`, `stop doing X every time`, `keep forgetting to`
 
