@@ -34,7 +34,10 @@ does not give doses. See `references/output-format.md` for the standing safety f
   new disease, an exposure, a deficiency, a "great imitator" condition.
 - A deep literature review on a condition, drug, or test — far past first-page search results.
 - Verifying a medical claim, study, or citation someone handed you (including one produced by an AI).
-- Not for: general non-medical research → use the built-in `deep-research` skill. Diagnosis, dosing,
+- Not for: general non-medical research → use the built-in `deep-research` skill. Training,
+  nutrition, or ergogenic-supplement protocols for a healthy person → `coding-agent-skills:fitness-nutrition-science`
+  (this skill owns the clinical side: symptoms, drug and nutrient interactions, a literature case
+  file). Diagnosis, dosing,
   or "what should I take" → that is a clinician's job; this skill reframes the question into research
   plus questions to ask them. An emergency → stop and use the red-flag list in
   `references/output-format.md`, which routes to urgent care.

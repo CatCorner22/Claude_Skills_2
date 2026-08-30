@@ -1,22 +1,21 @@
 ---
 name: fitness-nutrition-science
 description: >-
-  Acts as an evidence-based fitness and nutrition advisor rooted in peer-reviewed
-  research, statistical literacy, and mechanistic understanding — distinguishes
-  cutting-edge science from outdated dogma by citing specific studies, interpreting
-  effect sizes and confidence intervals, and building protocols from first principles.
-  Covers fat loss, muscle hypertrophy, strength gain, cardiovascular adaptation,
-  mobility enhancement, and nutrition science with the rigor of authorities like
-  Huberman, Attia, Patrick, Bell, Norton. Interprets medical journal abstracts,
-  critiques methodology, and flags effect-size inflation. Use when designing
-  evidence-based fitness programs, resolving contradictory claims, interpreting
-  research findings, or validating protocol effectiveness.
+  Acts as an evidence-based fitness and nutrition advisor grounded in peer-reviewed
+  research and statistical literacy — separates current exercise science from outdated
+  gym dogma by citing specific studies, reading effect sizes and confidence intervals,
+  and building protocols from mechanism rather than folklore. Covers fat loss, muscle
+  hypertrophy, strength, cardiovascular adaptation, mobility, macronutrient targets, and
+  ergogenic-supplement evidence. Use when designing a training or nutrition protocol,
+  resolving a contradictory fitness claim, or checking what a study actually shows; for
+  clinical symptoms, drug interactions, or a medical literature case file, see
+  deep-research-skills:medical-research-detective. Triggers: evidence-based fitness,
+  peer-reviewed nutrition, research-backed training, hypertrophy research, rep range for
+  muscle, protein requirements, training volume, cardio detraining, ergogenic supplement
+  evidence, interpret this fitness study.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   source: "Peer-reviewed fitness research integration for tracker ecosystem"
-Triggers: evidence-based fitness, peer-reviewed nutrition, research-backed training,
-  mechanistic fitness, interpret fitness study, fitness science advisor, training
-  protocols, research-based exercise, journal article fitness
 ---
 
 # Evidence-Based Fitness & Nutrition Science

@@ -372,7 +372,9 @@ Install: `/plugin install coding-agent-skills@treasury-analyst-skills`
 
 **Invoke:** `/coding-agent-skills:fitness-nutrition-science` — or just describe the task.
 
-**What it does:** Acts as an evidence-based fitness and nutrition advisor rooted in peer-reviewed research, statistical literacy, and mechanistic understanding — distinguishes cutting-edge science from outdated dogma by citing specific studies, interpreting effect sizes and confidence intervals, and building protocols from first principles. Covers fat loss, muscle hypertrophy, strength gain, cardiovascular adaptation, mobility enhancement, and nutrition science with the rigor of authorities like Huberman, Attia, Patrick, Bell, Norton. Interprets medical journal abstracts, critiques methodology, and flags effect-size inflation. Use when designing evidence-based fitness programs, resolving contradictory claims, interpreting research findings, or validating protocol effectiveness
+**What it does:** Acts as an evidence-based fitness and nutrition advisor grounded in peer-reviewed research and statistical literacy — separates current exercise science from outdated gym dogma by citing specific studies, reading effect sizes and confidence intervals, and building protocols from mechanism rather than folklore. Covers fat loss, muscle hypertrophy, strength, cardiovascular adaptation, mobility, macronutrient targets, and ergogenic-supplement evidence. Use when designing a training or nutrition protocol, resolving a contradictory fitness claim, or checking what a study actually shows; for clinical symptoms, drug interactions, or a medical literature case file, see deep-research-skills:medical-research-detective.
+
+**Triggers:** `evidence-based fitness`, `peer-reviewed nutrition`, `research-backed training`, `hypertrophy research`, `rep range for muscle`, `protein requirements`, `training volume`, `cardio detraining`, `ergogenic supplement evidence`, `interpret this fitness study`
 
 ### `coding-agent-skills:git-and-code-review`
 
