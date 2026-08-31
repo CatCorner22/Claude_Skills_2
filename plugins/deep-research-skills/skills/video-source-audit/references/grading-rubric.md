@@ -222,9 +222,11 @@ NO COMPOSITE GRADE — see §6.
 two auditors who differ by a single claim look like they disagree about the grade when they
 actually agree about the video.
 
-The full report additionally carries the logical-form summary, the claim ledger, the scored
-checklist, the statistics findings with plain-language translations, the computed highest-leverage
-fix, the limitations, and the further-reading set.
+This block is **section 3** of the six-section report. The full deliverable — executive summary,
+hyper-thorough analysis, this grade block, the statistics breakdown, the independent research
+findings, and a linked conclusion — is specified in `report-template.md`, including the rule that
+all six headings survive a `NOT-GRADED` or `INCOMPLETE` outcome rather than collapsing to a
+one-line apology.
 
 ---
 

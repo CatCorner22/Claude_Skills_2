@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "deep-research-skills",
   "description": "True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Covers published medical literature (medical-research-detective) and auditing video claims against the primary sources they cite, with A+ to F grading on source fidelity, comprehensiveness, and statistics (video-source-audit).",
-  "version": "0.20.0"
+  "version": "0.21.0"
 }

@@ -11,7 +11,7 @@ description: >-
   audit this video, check this video's sources, is this video accurate, grade this video, does
   this video misrepresent the study, debunk this video.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from a seven-stream research pass with adversarial verification. Statistical
     arithmetic independently recomputed; citations verified against retrieved index data
@@ -43,12 +43,12 @@ evidence, rather than producing a confident letter out of vibes.
   A statistics question with no video attached → `data-analytics-bi-skills:statistical-inference`.
   Auditing your own project's metrics and benchmark claims →
   `continuous-improvement-skills:project-command-center`.
-- **Not a summarizer.** Summarizing is step 2 of nine, not the deliverable. If someone wants a
+- **Not a summarizer.** Summarizing is one early stage of the audit, not the deliverable. If someone wants a
   plain recap with no source-checking, give them that and do not run the audit machinery.
 
 ## Do it
 
-Work the nine stages in order. Stages 1 and 4 can fail, and failing them honestly is the point —
+Work the stages in order. Preflight and source-tracing can fail, and failing them honestly is the point —
 a grade issued without reaching the sources is the exact output this skill exists to prevent.
 
 1. **Preflight, and be willing to stop here.** Probe reachability *before* promising an audit.
@@ -108,20 +108,45 @@ a grade issued without reaching the sources is the exact output this skill exist
    check — relative for the benefit, absolute for the harm — because it catches videos in which
    every individual number is correct.
 
-9. **Grade, flag, and report.** Three letters, one per axis, each with its provenance. Apply the
-   cap ladder and the interlock flags; emit `INCOMPLETE` or `NOT-GRADED` where the preconditions
-   fail. **Never emit a composite grade** — averaging the three axes hands a textbook
-   cherry-picking video a B+. Instrument and output contract: `references/grading-rubric.md`.
-   Close with the plain-language statistics translations and the further-reading set from
-   `references/further-reading.md`.
+9. **Run the independent literature pass.** Auditing only what the video cited answers "did they
+   quote it right", which is half the job. Now go find what the video did **not** cite: is its
+   evidence representative of the body, is there a systematic review or meta-analysis that
+   supersedes its primary studies, is there contradicting work, has anything it relied on been
+   retracted or failed to replicate, and what does the weight of evidence actually say? This is
+   what turns the report from a fact-check into an audit, and it is the only way to score
+   comprehensiveness item 8 (representativeness) honestly. Method, search strategy, and the
+   stopping rule: `references/acquisition-and-sources.md` §7.
 
-**Deliverable contract.** The report carries, in this order: the logical-form summary; the three
-letter grades with provenance lines; any interlock flags; the claim ledger (timecode, claim,
-weight, source, fidelity code, evidence); the comprehensiveness checklist scored; the statistics
-findings with plain-language translations; the single highest-leverage fix, *computed* by re-running
-the score with each unit set to clean rather than guessed at; limitations and what could not be
-checked; and the verified further-reading list. A reader must be able to disagree with any grade by
-pointing at a specific row.
+10. **Grade, flag, and report.** Three letters, one per axis, each with its provenance. Apply the
+    cap ladder and the interlock flags; emit `INCOMPLETE` or `NOT-GRADED` where the preconditions
+    fail. **Never emit a composite grade** — averaging the three axes hands a textbook
+    cherry-picking video a B+. Instrument: `references/grading-rubric.md`.
+
+**Deliverable contract — six sections, in this order, every time.**
+Full template, what belongs in each section, and a worked skeleton: `references/report-template.md`.
+
+1. **Executive summary** — plain language, no notation, readable by someone who reads nothing else.
+   What the video claims, what the audit found, the three grades, and whether a reasonable person
+   should act on the video.
+2. **Hyper-thorough analysis** — the logical-form summary, the full claim ledger (timecode, claim,
+   weight, source, tier read, locked comparison target, fidelity code, reasoning), the scored
+   comprehensiveness checklist, and what could not be checked.
+3. **The grade and reasoning** — three letters with provenance lines, which caps fired, boundary
+   disclosures, interlock flags, the explicit no-composite statement, and the highest-leverage fix
+   *computed* by re-scoring rather than guessed at.
+4. **Statistics breakdown** — every statistical statement: what the video said, what the source
+   said, which taxonomy move it is, the corrected figure, the absolute-vs-relative reconstruction
+   with its arithmetic shown, and a natural-frequency translation. Includes the asymmetric-framing
+   table.
+5. **Additional research findings** — the independent literature pass, broken down thoroughly: what
+   the wider literature says, what supersedes or contradicts the video's sources, and whether its
+   evidence was representative. Every finding carries a resolvable identifier and how it was verified.
+6. **Conclusion** — the verdict in a few sentences, then the linked reference list: the video's own
+   sources **and** the independent research, each with a working identifier, plus further reading.
+
+**This structure holds even when the audit fails.** A `NOT-GRADED` or `INCOMPLETE` report keeps all
+six headings and says under each what could not be determined and why. Collapsing to a one-line
+apology is how a reader loses track of what was actually established.
 
 ## Why / learn
 
@@ -185,6 +210,15 @@ comprehension effect, not a stylistic preference.
   repair by re-scoring; the intuitive fix frequently gains nothing because a cap still holds.
 - Letting the audit's own confidence exceed its evidence → an audit of three claims is not a
   verdict on a creator. Say what the sample was.
+- Dropping the six-section structure when the audit fails → keep every heading and say under each
+  what could not be determined; a one-line apology hides what *was* established.
+- Skipping the independent literature pass because the video's own sources checked out → that
+  answers "did they quote it right", not "is this the right picture". Section 5 is where
+  cherry-picking becomes visible.
+- Letting the independent pass become a prosecution → the job is to characterise the evidence. If
+  the wider literature supports the video, report that just as prominently.
+- Grading the video down for research published after it → report post-dating work to the reader,
+  but never let it lower the accuracy grade.
 
 ## Tailor to your environment
 Record in `references/your-environment.md`: the creators, channels, and subject domains you audit
@@ -204,8 +238,11 @@ ordinary criticism of published work; keep it to what they published, and keep p
 out of it entirely.
 
 ## References
+- references/report-template.md — the six-section deliverable: what belongs in each section, the
+  rule that the structure survives a failed audit, and a worked skeleton
 - references/acquisition-and-sources.md — reachability preflight, transcript fetch and
-  de-duplication, the source-tracing pipeline, the resolver ladder, and how each step fails
+  de-duplication, the source-tracing pipeline, the resolver ladder, how each step fails, and the
+  independent literature pass that goes beyond what the video cited
 - references/claim-audit-method.md — claim decomposition, the claim typology, locking the
   comparison target, the fidelity precedence ladder with the conclusion-change test, and the
   bounded comprehensiveness checklist

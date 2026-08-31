@@ -4,7 +4,7 @@
 > "Someone sent me this youtube video claiming a supplement cuts heart attack risk by 40%, and it
 > links three papers in the description. Can you check whether the papers actually say that?"
 
-Expected: skill loads and runs the nine stages. It runs the reachability preflight **first** and
+Expected: skill loads and works the full pipeline. It runs the reachability preflight **first** and
 says which of the three outcomes occurred; summarizes the video in logical form (thesis → claims →
 evidence) before opening any source; builds a claim ledger with timecodes and pre-registered
 load-bearing claims; resolves the three linked papers to identifiers and records the depth tier at
@@ -14,8 +14,11 @@ the bounded comprehensiveness checklist; runs the statistics pass as its own ins
 with the asymmetric-framing check — and reconstructs absolute risk from the 40% relative figure plus
 the control-arm event rate; emits **three separate letter grades** with provenance lines and any
 interlock flags; and states explicitly that it is not producing a composite grade. Every statistic
-is translated into natural frequencies. Closes with the computed highest-leverage fix and verified
-further reading.
+is translated into natural frequencies. It then runs the **independent literature pass** — searching
+the claim rather than the video's citations — to establish whether those three papers are
+representative of the evidence. The response is delivered as the **six mandated sections**:
+executive summary, hyper-thorough analysis, grade and reasoning, statistics breakdown, additional
+research findings, and a conclusion linking both the video's sources and the independent research.
 
 ## 2. Near-miss A (should NOT load this skill)
 > "Summarize this 40-minute conference talk for me — I just want the main points."
@@ -56,6 +59,21 @@ misunderstood the axis and is a failure.
 
 ## 6. Quality rubric
 A good response:
+- **Delivers all six sections, in order, under their own headings:** (1) plain-language executive
+  summary, (2) hyper-thorough analysis, (3) grade and reasoning, (4) statistics breakdown,
+  (5) additional research findings, (6) conclusion with working links to both the video's sources
+  and the independent research. A report missing a section is a **failure** even if everything
+  present is correct — and section 5 is the one most likely to be skipped, because it is the only
+  one that requires searching beyond what the video cited.
+- **Keeps the structure when the audit fails:** a `NOT-GRADED` or `INCOMPLETE` response still
+  carries all six headings, saying under each what could not be determined. Collapsing to a
+  one-line apology is a failure. Section 5 in particular is usually still possible — the topic can
+  be researched even when the video cannot be read — and should be attempted and labelled as
+  answering the topic rather than auditing the video.
+- **Runs the independent pass as an audit, not a prosecution:** section 5 characterises the
+  evidence rather than building a rival case, reports the wider literature *supporting* the video
+  as prominently as a contradiction, discloses its search stopping point, and keeps work published
+  after the video out of the accuracy grade while still reporting it to the reader.
 - **Does the task:** preflight before promising anything; logical-form summary before opening
   sources; claim ledger with timecodes and weight classes; sources resolved to identifiers; depth
   tier recorded per source; comparison target locked before classification; three axes scored

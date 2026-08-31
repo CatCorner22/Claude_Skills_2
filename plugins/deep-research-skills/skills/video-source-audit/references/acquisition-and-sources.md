@@ -10,6 +10,7 @@ that matters most — how each of these fails and what to do instead of guessing
 - §4 Reading the source: depth tiers
 - §5 Detecting a source that does not exist
 - §6 Failure modes, and what the audit says when they fire
+- §7 The independent literature pass — beyond what the video cited
 
 ---
 
@@ -187,3 +188,69 @@ have no fabrication finding to make.
 | The "source" is another video | Follow one hop to *its* sources. If the chain never reaches primary literature, that is the finding. |
 | Non-English video | Audit only if the transcript is reliable; translation error is indistinguishable from misrepresentation, so say which language and how the transcript was obtained. |
 | Fewer than five checkable claims | `INCOMPLETE` on the rate-based axes — but a proven cap still fires (see the grading rubric's precedence rule). |
+
+---
+
+## §7 The independent literature pass — beyond what the video cited
+
+Stages 1–8 answer *"did the video quote its sources correctly?"* This stage answers the question a
+reader actually cares about: **"is the video's picture of the evidence the right one?"** A video can
+quote three real papers with perfect fidelity and still be badly wrong about the state of the
+question, because it picked three papers out of forty. Nothing in the fidelity ladder can detect
+that — only going and looking can.
+
+This pass is what feeds report section 5, and it is the only honest way to score comprehensiveness
+checklist item 8 (representativeness).
+
+### The five questions, in order
+
+1. **Is the cited evidence representative?** Search the video's own claim — not its citations — and
+   see what comes back. If the video cites three small trials and the search surfaces a Cochrane
+   review pooling thirty, the video did not report the evidence; it reported a selection from it.
+2. **Is there a higher tier of evidence the video ignored?** A systematic review or meta-analysis
+   supersedes the primary studies beneath it. A video citing a 2015 primary trial when a 2021
+   meta-analysis exists is not lying, but its viewer is left believing something the field has
+   moved past.
+3. **Is there contradicting work?** Search *against* the video's thesis deliberately. This mirrors
+   the disconfirmation discipline in `deep-research-skills:medical-research-detective` and
+   `decision-science-skills:competing-hypotheses-analysis`: evidence that survives an attempt to
+   kill it is worth far more than evidence that merely accumulated.
+4. **Has anything the video relied on been retracted, corrected, or failed to replicate?** Check
+   each load-bearing source for a retraction notice, an expression of concern, a published
+   correction, and a replication attempt. A retraction routes to comprehensiveness O7 and the
+   `FAITHFUL-TO-BAD-SOURCE` flag — never to accuracy.
+5. **What does the weight of evidence actually say?** State it plainly, with its own confidence,
+   *including* "this is genuinely unsettled" where that is the truth. Manufacturing a clean answer
+   the literature does not support repeats the video's own sin in the auditor's voice.
+
+### Search strategy
+
+Search the **claim**, not the citation. The video's reference list is precisely the biased sample
+under examination, so starting from it inherits the bias. Build queries from the claim's substance
+plus the population and the outcome, then:
+
+- Look for the review tier first (systematic review, meta-analysis, Cochrane, practice guideline) —
+  it is the cheapest way to learn what the body of evidence looks like.
+- Chain backward through the best paper's reference list, and forward through "cited by" to find
+  what superseded it.
+- Search the negation explicitly: the claim plus "no association", "null", "failed to replicate",
+  "does not".
+- Resolve everything through the §3 ladder, and record how each item was verified. **The §3 rule
+  about retrieved records versus generated prose applies with full force here** — this pass produces
+  citations the video never made, so every one of them is the auditor's own responsibility.
+
+### The stopping rule, and the honesty rule
+
+**Stop at saturation, not at sufficiency** — when new queries stop returning new work, not when you
+have enough to make a point. Then **say where you stopped**: how many queries, which databases,
+what date range, and what you could not reach. An independent pass with an undisclosed stopping
+point is an opinion with a bibliography.
+
+**Two failure modes to name explicitly**, because both are tempting:
+
+- **Building a rival case instead of an audit.** The job is to characterise the evidence, not to
+  win an argument against the creator. If the wider literature supports the video, that is a
+  finding, and it must be reported as prominently as a contradiction would be.
+- **Grading the video against evidence it could not have had.** Work published after the video is
+  relevant to the *reader* and is worth reporting in section 5, but it cannot lower the video's
+  accuracy grade. Note the publication dates and keep the two uses separate.
