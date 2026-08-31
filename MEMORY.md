@@ -1219,3 +1219,46 @@ retraction of the previous pass's headline mechanism claim.
   checklist-design, bowtie) were all wrong on inspection — each "irreplaceable" loss was
   duplicated in a kept skill, inlineable in one sentence, or restorable. Memory of a skill's
   value is not evidence of it; the agents had read the current text and I had not.
+
+- 2026-08-31 — two new skills (`fitness-nutrition-science`, `video-source-audit`) plus a shipped-bug
+  fix. Library 71 -> 73 skills / 13 plugins; validator 0 errors, 0 warnings.
+  - RULE: **`Triggers:` belongs at the END OF THE DESCRIPTION, never as its own frontmatter key.**
+    I shipped fitness-nutrition-science with `Triggers:` as a top-level key. `validate.sh` passed it
+    (it checks for duplicate keys and the description cap, not this), and all nine trigger phrases
+    were invisible to the router, which reads name+description only. The tell was the generated
+    catalog: every other skill shows phrases in INDEX.md's trigger column and this one showed the
+    invoke path. **Read your new skill's generated INDEX row — it is the cheapest routing check
+    there is, and it catches what the validator structurally cannot.** Greped the tree: no sibling
+    had the defect.
+  - RULE (generalises the 2026-08-18 planted-error lesson): **a self-test must exercise the string
+    the PRODUCER builds, not just the strings the test author thinks of.** `verify_citation.py`
+    rendered Crossref's structured family/given as `"Greenland Sander"`, which `surname_of` resolved
+    to the *given* name, so every Crossref lookup reported AUTHOR MISMATCH for a correctly-cited
+    first author — 5/5 in test — while the same authors passed via PubMed's `"Greenland S"`. 113
+    passing checks missed it because none had ever fed the parser a space-joined
+    surname-plus-spelled-out-given-name. Fixed to the comma form; added six checks asserting the
+    built string, negative-controlled (4 of 6 fail against the old builder).
+  - RULE: **a web-search tool returns retrieved records AND generated prose; only the records are
+    evidence.** The prose states confident publisher, year, volume, pages and DOI for items that
+    returned no supporting link. An agent caught three that way and dropped them; I caught one of my
+    own (asserting a publisher that appeared only in prose). Standard now: an identifier ships only
+    if it appears inside a returned URL or record.
+  - FACT (this sandbox, and it shaped the whole pass): the egress proxy 403s **every** scholarly
+    resolver and video host — Crossref, OpenAlex, PubMed/E-utilities, Europe PMC, Semantic Scholar,
+    arXiv, OpenLibrary, Unpaywall, DataCite, YouTube and its mirrors. `WebFetch` is blocked too.
+    **`WebSearch` works.** So citation verification here is search-record-based, never resolver-based,
+    and any agent claiming "I curl'd Crossref" or "I ran yt-dlp on video X" is reporting something
+    the network could not do. Check the claim against `curl -sS "$HTTPS_PROXY/__agentproxy/status"`.
+  - CORRECTION (to my own prior belief, overturned by an adversarial verifier): **OpenAlex
+    authenticates with an API key; its mailto "polite pool" is deprecated.** Crossref's polite pool
+    is still mailto-keyed and Unpaywall still requires an email. I had written all three as alike.
+    Do not assume scholarly APIs share an identification convention.
+  - LESSON: the brief-defect instruction paid off again, harder than before. My own brief told agents
+    to cross-link `math-foundations-skills:probability-fundamentals` and
+    `data-analytics-bi-skills:descriptive-statistics` — **both archived in the consolidation.**
+    A coordinator's mental model of the library goes stale within days of a structural change; verify
+    a cross-link target is active before instructing anyone to cite it.
+  - DESIGN PRECEDENT worth reusing: **never average independent quality axes into one grade.** A
+    cherry-picking video scores A+/A/C- and the mean is exactly B+. AMSTAR 2 solved the same problem
+    by rating from critical-domain failures rather than summed points. Carry cross-axis meaning in
+    named flags, not in an average.
