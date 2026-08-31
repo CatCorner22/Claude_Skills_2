@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "coding-agent-skills",
   "description": "Claude Code craft for working engineers: authoring Agent Skills (the library's own standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors multi-agent code review (board-review + six specialist subagents), defect-epidemiology (treat a confirmed bug as evidence about a population), rule-stress-testing, software-archaeology, Comrade Engineer's pencil pass, The Foreman's draw inspection, and Chicken Little (Aether) — the multi-domain persona with forward-deployed advisor and compiler autopsy modes.",
-  "version": "0.29.0"
+  "version": "0.30.0"
 }

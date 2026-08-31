@@ -328,6 +328,30 @@ These bodies changed enough that their descriptions were rewritten with them. Un
 
 ---
 
+## Tier F — skills added since the consolidation (never routed)
+
+Brand-new vocabulary with zero usage history, so these are the first to lose their descriptions to
+the listing budget on a full install (see the degradation note in Setup). **Record the install set
+for these rows especially** — a pass on a four-plugin install says nothing about a full one.
+
+F1 deliberately omits the word "youtube" even though it is the skill's strongest trigger, because a
+prompt containing the trigger passes by construction. It therefore measures whether the skill is
+reachable by someone describing the *task* rather than naming the platform.
+
+F2 is the highest-risk seam in the library for these skills: same plugin, adjacent vocabulary,
+separated only by whether a video is the object of the analysis. The seam is currently stated in
+both **bodies** and in video-source-audit's **description**, but not in medical-research-detective's
+description, which has no headroom for it. If F2 fails, that is the evidence needed to justify
+trimming medical-research-detective's description to make room — do not trim it on speculation.
+
+| # | Prompt (paste verbatim) | Must load | Near-miss prompt | Must NOT load |
+|---|---|---|---|---|
+| F1 | `Someone sent me a clip claiming a supplement cuts heart attack risk by 40%, and the description links three papers. Do the papers actually say that?` | `deep-research-skills:video-source-audit` | `Summarize this 40-minute conference talk for me — I just want the main points.` | video-source-audit (plain summarization is a no-skill task) |
+| F2 | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. What could link these?` | `deep-research-skills:medical-research-detective` | `This health channel's video says the paper proved it. Does the paper say that?` | medical-research-detective (should be `video-source-audit`) |
+| F3 | `Is it the number of reps that builds muscle, or the total amount of work per week?` | `coding-agent-skills:fitness-nutrition-science` | `Run a paired t-test on these two columns and tell me whether the difference is significant.` | fitness-nutrition-science (should be `statistical-inference`) |
+
+---
+
 ## Log
 
 Copy this table and fill it in. **Record the install set** — results are not comparable across
