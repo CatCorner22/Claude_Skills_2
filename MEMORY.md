@@ -133,6 +133,14 @@ Never store secrets, credentials, account numbers, or client data here.
 - FACT: PRs in this repo are squash-merged — branch commits are not ancestors of main after
   merge; equivalence must be checked by content diff, not ancestry. (evidence: PR #1/#2 merges;
   confidence: high)
+  - CORRECTION (2026-08-31, measured on PR #51): **the merge style is not uniform.** #51 landed as
+    a true MERGE COMMIT (`5b3f48d`), so its branch tip `9b0aa59` *is* an ancestor of main. The
+    consequence is procedural: the post-merge branch restart was a clean fast-forward
+    (`git checkout -B <branch> origin/main`) with **no force-push needed**, where the squash
+    assumption would have predicted one. Do not assume either style — **check
+    `git merge-base --is-ancestor <branch-tip> origin/main` after every merge** and pick the
+    restart accordingly. The content-diff habit stays correct regardless and is still the way to
+    prove nothing was lost; it is the *force-push* half of the old rule that was over-general.
 - FACT: `FusionCash Architect` is a standalone tool (built 2026-07-19 from the user's
   `FusionCash_App_Design.pdf` + 5 real CM config `.xlsx` extracts): a Python engine
   (ingest→analyze→simulate→report) that emits one self-contained offline HTML app with 4
