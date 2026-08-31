@@ -610,7 +610,18 @@ def fetch_crossref(doi: str, mailto=None, fetch=http_get_json):
     authors = []
     affs = []
     for a in m.get("author", []) or []:
-        name = " ".join(x for x in [a.get("family"), a.get("given")] if x)
+        # Crossref gives structured family/given. Render as "Family, Given" — the
+        # comma form surname_of resolves first and unambiguously. The previous
+        # space-joined "Family Given" was parsed as leading-initials-then-surname
+        # only when the given name looked like initials; a spelled-out given name
+        # ("Greenland Sander") made surname_of return the GIVEN name, so
+        # authors_match disqualified correctly-cited first authors on every
+        # Crossref lookup while the same author passed via PubMed's "Greenland S".
+        family, given = a.get("family"), a.get("given")
+        if family and given:
+            name = f"{family}, {given}"
+        else:
+            name = family or given or a.get("name") or ""
         if name:
             authors.append(name)
         for aff in a.get("affiliation", []) or []:
@@ -995,6 +1006,31 @@ def self_test() -> int:
     check("surname accent-folded", surname_of("Müller-Lissner S") == "muller-lissner")
     check("accented author matches ascii rendering",
           authors_match("Muller-Lissner", "Müller-Lissner S"))
+    # Regression: the name string fetch_crossref actually BUILDS. Crossref returns
+    # structured family/given, and the old space-join produced "Greenland Sander",
+    # which surname_of read as initials-then-surname and resolved to the given name
+    # — so every Crossref lookup reported AUTHOR MISMATCH for a correctly-cited
+    # first author, while PubMed's "Greenland S" for the same person passed. These
+    # checks assert the built form, not just the parser, because the parser was
+    # never wrong on any string the self-test had previously fed it.
+    def _crossref_author(family, given):
+        """Mirror of the name rendering in fetch_crossref."""
+        if family and given:
+            return f"{family}, {given}"
+        return family or given or ""
+
+    check("crossref spelled-out given name",
+          authors_match("Greenland", _crossref_author("Greenland", "Sander")))
+    check("crossref given name with initials",
+          authors_match("Wasserstein", _crossref_author("Wasserstein", "Ronald L.")))
+    check("crossref multi-initial given name",
+          authors_match("Ioannidis", _crossref_author("Ioannidis", "John P. A.")))
+    check("crossref particle surname",
+          authors_match("van der Berg", _crossref_author("van der Berg", "Jan")))
+    check("crossref family-only author",
+          authors_match("Sumner", _crossref_author("Sumner", None)))
+    check("crossref still rejects a real mismatch",
+          not authors_match("Smith", _crossref_author("Greenland", "Sander")))
 
     # Year tolerance
     check("year exact", years_match(2020, 2020))

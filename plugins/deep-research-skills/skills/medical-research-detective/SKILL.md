@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.12.1"
+  version: "1.13.0"
 ---
 
 # Medical research detective
