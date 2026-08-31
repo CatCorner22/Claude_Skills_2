@@ -40,7 +40,7 @@
     {
       "name": "coding-agent-skills",
       "source": "./plugins/coding-agent-skills",
-      "description": "Claude Code craft for working engineers: authoring Agent Skills (the library's own standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors multi-agent code review (board-review + six specialist subagents), defect-epidemiology (treat a confirmed bug as evidence about a population), rule-stress-testing, software-archaeology, Comrade Engineer's pencil pass, The Foreman's draw inspection, and Chicken Little (Aether) — the multi-domain persona with forward-deployed advisor and compiler autopsy modes.",
+      "description": "Claude Code craft for working engineers: authoring Agent Skills (the library's own standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors multi-agent code review (board-review + six specialist subagents), defect-epidemiology (treat a confirmed bug as evidence about a population), rule-stress-testing, software-archaeology, Comrade Engineer's pencil pass, The Foreman's draw inspection, and Chicken Little (Aether) \u2014 the multi-domain persona with forward-deployed advisor and compiler autopsy modes.",
       "category": "development"
     },
     {
@@ -52,7 +52,7 @@
     {
       "name": "deep-research-skills",
       "source": "./plugins/deep-research-skills",
-      "description": "True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Starting with medical-research-detective for published medical literature.",
+      "description": "True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Covers published medical literature (medical-research-detective) and auditing video claims against the primary sources they cite, with A+ to F grading on source fidelity, comprehensiveness, and statistics (video-source-audit).",
       "category": "research"
     },
     {
@@ -76,7 +76,7 @@
     {
       "name": "math-foundations-skills",
       "source": "./plugins/math-foundations-skills",
-      "description": "Unit conversion and dimensional analysis — the factor-label method, unit checks as a necessary-not-sufficient guard on every formula, and the unit-driven catch for formula rearrangement errors. The broader basic-math set is archived; this is the one that catches real errors models and humans both make.",
+      "description": "Unit conversion and dimensional analysis \u2014 the factor-label method, unit checks as a necessary-not-sufficient guard on every formula, and the unit-driven catch for formula rearrangement errors. The broader basic-math set is archived; this is the one that catches real errors models and humans both make.",
       "category": "data"
     },
     {
