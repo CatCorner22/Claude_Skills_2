@@ -69,25 +69,44 @@ a C/T site reported on the opposite strand appears as G/A, and C/T versus G/A is
 the pair `{A,T}` returns `{A,T}`, so **allele identity alone cannot tell you the orientation**, and a
 flipped call inverts which allele is the risk allele.
 
-**The subtlety that defeats a naive detector: ambiguity is a property of the SITE, not of the
-observed genotype.** A heterozygous `AT` call reveals that the site is palindromic, so it can be
-flagged from the genotype alone. A *homozygous* call reveals nothing — `AA` could sit at an A/T site,
-where it is unresolvable because the other strand reads `TT`, or at an A/G site, where it is fine.
-**So a homozygote at a palindromic site is both the most dangerous call in the file and invisible to
-any check that looks only at the genotype.** The bundled script's first implementation had exactly
-this defect: it returned "not ambiguous" for `AA` and silently passed it. It now reports three states
-— `AMBIGUOUS`, `CLEAR`, `UNDETERMINED` — and a homozygote without external allele data is
-`UNDETERMINED`, never `CLEAR`.
+**Two things get conflated here, and this file conflated them in both directions before getting it
+right.** Separate them:
+
+- **Unorientability is a property of the SITE.** An A/T or C/G site is its own reverse complement,
+  so allele identity alone cannot tell you which strand the file reports.
+- **Ambiguity of a CALL is a property of the (site, genotype) pair** — and that is what matters,
+  because what gets interpreted is a **dosage**.
+
+Work it at a C/G site where C is the risk allele. A **heterozygous** `CG` call carries one copy of
+each allele; flip the strand and the C reads as G and the G as C — still one copy each. **The dosage
+is 1 either way, so a heterozygote at a palindromic site is fully usable.** A **homozygous** `CC`
+call is 2 copies on one orientation and 0 on the other, and that is the genuinely unresolvable case.
+
+```
+ site    call   under a flip   dosage      verdict
+ C/G     C/G    G/C            1 either way   CLEAR        <- usable
+ C/G     C/C    G/G            2 or 0         AMBIGUOUS    <- the dangerous one
+ C/T     C/C    G/G            distinguishable pair         CLEAR
+ unknown C/C    ?              ?              UNDETERMINED
+```
+
+**So the only unresolvable class is a homozygote at a palindromic site** — and it is invisible to any
+check that looks at the genotype without knowing the site's pair, because `CC` could sit at a C/G
+site or a C/T one. The bundled script's first implementation returned "not ambiguous" for a
+homozygote and passed it silently; its second returned AMBIGUOUS for *every* call at a palindromic
+site once the pair was known, which told the reader not to count a heterozygote that was never in
+doubt. **Both directions are errors, and only the first is loud** — the second quietly suppresses
+real findings.
 
 Practical consequence: **to resolve a homozygote you need the site's allele pair from an external
-reference.** Without it, the honest output is that ambiguity could not be ruled out.
+reference.** Without it, the honest output is that ambiguity could not be ruled out. A heterozygote
+needs nothing.
 
 **Resolution, in order of reliability:** use the platform's own documented strand convention for that
 array version; check allele frequency against a population reference and see which assignment is
 consistent (works only when the frequencies are asymmetric enough to discriminate); or use a
-flanking-sequence match. **When orientation cannot be resolved, report the site as unresolved rather
-than picking.** The bundled script flags every A/T and C/G genotype it extracts for exactly this
-reason.
+flanking-sequence match. **When orientation cannot be resolved, report the call as unresolved rather
+than picking** — and note that this is needed only for the homozygous case.
 
 ---
 

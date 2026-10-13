@@ -253,37 +253,56 @@ def parse(path: str) -> dict:
 
 
 def strand_ambiguity(geno: str | None, site_alleles: set[str] | None = None) -> str:
-    """Three-state strand-ambiguity assessment.
+    """Three-state assessment of whether a call's RISK-ALLELE DOSAGE survives a strand flip.
 
     Returns 'AMBIGUOUS', 'CLEAR', or 'UNDETERMINED'.
 
-    **Ambiguity is a property of the SITE, not of the observed genotype.** A site whose two
-    alleles are A/T or C/G is palindromic: reverse-complementing the pair returns the same pair,
-    so orientation cannot be recovered from allele identity. That is true regardless of what this
-    person's genotype happens to be.
+    **Two different things get conflated here, and an earlier version of this function conflated
+    them in the direction that suppresses real findings.**
 
-    The consequence, and the reason this function is three-state rather than boolean: a
-    *heterozygous* A/T call reveals the site is palindromic, so it can be flagged from the
-    genotype alone. A *homozygous* call reveals nothing — `AA` could sit at an A/T site (where it
-    is unresolvable, since the other strand reads TT) or at an A/G site (where it is fine). An
-    earlier boolean version of this function returned False for `AA` and therefore silently passed
-    the single most dangerous class of call in the file. Without the site's allele pair the honest
-    answer is UNDETERMINED, not CLEAR.
+    - *Unorientability* is a property of the SITE. A site whose alleles are A/T or C/G is
+      palindromic: reverse-complementing the pair returns the same pair, so allele identity alone
+      cannot say which strand the file is reporting.
+    - *Ambiguity of a CALL* is a property of the (site, genotype) pair, and it is what actually
+      matters, because what gets interpreted is a **dosage**.
 
-    Pass `site_alleles` when the site's two alleles are known from an external reference; then the
-    answer is definite either way.
+    Work it through at a C/G site where C is the risk allele. A **heterozygous** `CG` call carries
+    one copy of each allele; flip the strand and the C reads as G and the G reads as C — still one
+    copy each, so **the dosage is 1 under either orientation and the call is CLEAR.** A
+    **homozygous** `CC` call is 2 copies on one orientation and 0 on the other, so it is genuinely
+    **AMBIGUOUS**.
+
+    So: any two-allele heterozygous call is dosage-invariant. A homozygous call is AMBIGUOUS at a
+    known palindromic site, CLEAR at a known non-palindromic one, and UNDETERMINED when the site's
+    allele pair is not known — because then palindromy cannot be ruled out.
+
+    (A previous version returned AMBIGUOUS for *every* call at a palindromic site once the pair was
+    supplied, which told the reader not to count a heterozygote that was never in doubt. The
+    version before that had the opposite defect, returning "not ambiguous" for a homozygote. Both
+    directions are errors, and only one of them is loud.)
+
+    Pass `site_alleles` when the site's two alleles are known from an external reference.
     """
-    if not geno:
+    g = _norm_geno(geno)
+    if not g or set(g) <= {"-", ".", "0"}:
         return "UNDETERMINED"
-    observed = set(geno.upper())
+    observed = set(g)
+    if len(g) == 2 and len(observed) == 2:
+        # Heterozygous: one copy of each allele, which no strand flip can change.
+        return "CLEAR"
     if site_alleles:
         pair = {a.upper() for a in site_alleles}
         return "AMBIGUOUS" if any(pair == amb for amb in AMBIGUOUS_PAIRS) else "CLEAR"
-    if len(observed) == 2:
-        # Heterozygous: the observed pair IS the site pair.
-        return "AMBIGUOUS" if any(observed == amb for amb in AMBIGUOUS_PAIRS) else "CLEAR"
-    # Homozygous, no site data: the site pair is unknown, so ambiguity cannot be ruled out.
+    # Homozygous or non-diploid, with no external allele pair: palindromy cannot be ruled out.
     return "UNDETERMINED"
+
+
+def site_is_palindromic(site_alleles: set[str] | None) -> bool | None:
+    """True / False / None (unknown) for the SITE's orientability, independent of any genotype."""
+    if not site_alleles:
+        return None
+    pair = {a.upper() for a in site_alleles}
+    return any(pair == amb for amb in AMBIGUOUS_PAIRS)
 
 
 def apoe_diplotypes(rs429358: str | None, rs7412: str | None) -> dict:
@@ -484,14 +503,21 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
             rec["status"] = "called"
         amb = strand_ambiguity(rec["genotype"], site_alleles)
         rec["strand"] = amb
+        rec["site_palindromic"] = site_is_palindromic(site_alleles)
         if amb == "AMBIGUOUS":
-            rec["strand_note"] = ("PALINDROMIC site (A/T or C/G): reverse-complement returns the same "
-                                  "allele pair, so orientation cannot be recovered from the genotype. "
-                                  "Do not count risk alleles here until orientation is established.")
+            rec["strand_note"] = ("HOMOZYGOUS call at a PALINDROMIC site (A/T or C/G): the allele "
+                                  "pair is its own reverse complement, so this call is 2 copies on "
+                                  "one orientation and 0 on the other. Do not count risk alleles "
+                                  "here until the platform's orientation is established.")
         elif amb == "UNDETERMINED":
-            rec["strand_note"] = ("Homozygous call and this site's allele pair is NOT verified in the "
-                                  "catalogue, so palindromic ambiguity cannot be ruled out. Establish "
-                                  "the site's alleles before interpreting.")
+            rec["strand_note"] = ("Homozygous or non-diploid call, and this site's allele pair is "
+                                  "NOT verified in the catalogue, so palindromy cannot be ruled "
+                                  "out. Establish the site's alleles before interpreting.")
+        elif rec["site_palindromic"]:
+            rec["strand_note"] = ("This site IS palindromic, but the call is heterozygous — one "
+                                  "copy of each allele under either orientation — so the DOSAGE is "
+                                  "unambiguous and the call is usable. Only the allele labels "
+                                  "depend on orientation.")
         out["catalog"][rsid] = rec
 
     # Free consistency check: the two APOE sites are 138 bp apart in every build, so a different
@@ -640,27 +666,49 @@ def self_test() -> int:
     check("build undeclared returns None", detect_build(["# some unrelated comment"]) is None)
     check("build undeclared on empty header", detect_build([]) is None)
 
-    # --- Strand ambiguity. Three-state, because ambiguity is a property of the SITE. ---
-    check("het A/T is AMBIGUOUS", strand_ambiguity("AT") == "AMBIGUOUS")
-    check("het C/G is AMBIGUOUS", strand_ambiguity("CG") == "AMBIGUOUS")
-    check("allele order irrelevant", strand_ambiguity("GC") == "AMBIGUOUS")
+    # --- Strand ambiguity. Three-state, and about DOSAGE rather than about the site alone. ---
+    # A heterozygote at a palindromic site carries one copy of each allele under either
+    # orientation, so its dosage is 1 either way. Only a homozygote is genuinely ambiguous.
+    # Both earlier versions of this function got this wrong, in opposite directions.
+    check("het A/T is CLEAR — dosage 1 under either orientation",
+          strand_ambiguity("AT") == "CLEAR")
+    check("het C/G is CLEAR — same reason", strand_ambiguity("CG") == "CLEAR")
+    check("allele order irrelevant", strand_ambiguity("GC") == strand_ambiguity("CG"))
     check("het A/G is CLEAR", strand_ambiguity("AG") == "CLEAR")
     check("None is UNDETERMINED", strand_ambiguity(None) == "UNDETERMINED")
-    # REGRESSION, and the reason this function was rewritten: a boolean version returned False
-    # for a homozygous call, silently passing the most dangerous class of site in the file.
-    # A homozygote carries no information about the site's allele pair.
+    check("no-call is UNDETERMINED", strand_ambiguity("--") == "UNDETERMINED")
+    # REGRESSION 1: a boolean version returned False for a homozygous call, silently passing the
+    # most dangerous class of call in the file. A homozygote tells you nothing about the pair.
     check("homozygous AA is UNDETERMINED, not CLEAR", strand_ambiguity("AA") == "UNDETERMINED")
     check("homozygous CC is UNDETERMINED, not CLEAR", strand_ambiguity("CC") == "UNDETERMINED")
     check("homozygous GG is UNDETERMINED, not CLEAR", strand_ambiguity("GG") == "UNDETERMINED")
-    # With the site's alleles supplied the answer is definite either way, for any genotype.
+    # With the site's alleles supplied, a HOMOZYGOTE resolves definitively either way.
     check("homozygote at a known A/T site is AMBIGUOUS",
           strand_ambiguity("AA", {"A", "T"}) == "AMBIGUOUS")
+    check("homozygote at a known C/G site is AMBIGUOUS",
+          strand_ambiguity("CC", {"C", "G"}) == "AMBIGUOUS")
     check("homozygote at a known A/G site is CLEAR",
           strand_ambiguity("AA", {"A", "G"}) == "CLEAR")
-    check("het at a known C/G site is AMBIGUOUS",
-          strand_ambiguity("CG", {"C", "G"}) == "AMBIGUOUS")
-    check("site data overrides the genotype heuristic",
-          strand_ambiguity("AT", {"A", "T"}) == "AMBIGUOUS")
+    # REGRESSION 2, the opposite error and the reason for this rewrite: supplying the pair made
+    # the function return AMBIGUOUS for EVERY call at a palindromic site, including a
+    # heterozygote whose dosage was never in doubt — suppressing a real finding.
+    check("het at a known C/G site is CLEAR, not AMBIGUOUS",
+          strand_ambiguity("CG", {"C", "G"}) == "CLEAR")
+    check("het at a known A/T site is CLEAR, not AMBIGUOUS",
+          strand_ambiguity("AT", {"A", "T"}) == "CLEAR")
+    check("het verdict does not depend on whether the pair was supplied",
+          strand_ambiguity("AT") == strand_ambiguity("AT", {"A", "T"}) == "CLEAR")
+    # The site property is reported separately, because it is still worth saying.
+    check("site palindromy reported independently of genotype",
+          site_is_palindromic({"C", "G"}) is True and site_is_palindromic({"C", "T"}) is False)
+    check("unknown pair gives unknown palindromy", site_is_palindromic(None) is None)
+    # And the catalogue's own two palindromic sites must be identified as such.
+    check("catalogue flags rs1799945 as a palindromic site",
+          site_is_palindromic(CATALOG["rs1799945"][2]) is True)
+    check("catalogue flags rs9939609 as a palindromic site",
+          site_is_palindromic(CATALOG["rs9939609"][2]) is True)
+    check("catalogue flags rs1800562 as non-palindromic",
+          site_is_palindromic(CATALOG["rs1800562"][2]) is False)
 
     with tempfile.TemporaryDirectory() as td:
         # --- 23andMe parsing, including a no-call and a lost-'#' header line ---

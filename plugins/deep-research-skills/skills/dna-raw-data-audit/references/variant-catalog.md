@@ -79,10 +79,10 @@ is strictly safer than an instruction that cannot be executed, and the grading i
 | Variant | Anchored figures | Grade |
 | :--- | :--- | :--- |
 | **HFE C282Y homozygosity** (rs1800562) | Documented iron-overload-related disease in **28.4% of male homozygotes (95% CI 18.8–40.2)** and **1.2% of females (95% CI 0.03–6.5)**, in 31,192 people of northern European descent aged 40–69 — Allen et al. 2008, *NEJM* 358(3):221–230 ([PMID 18199861](https://pubmed.ncbi.nlm.nih.gov/18199861/)). The sex asymmetry is the headline, and the female interval is very wide on few events | **[R/p]** |
-| **F5 Factor V Leiden heterozygosity** (rs6025) | First-event incidence about **0.45%/year (CI 0.28–0.61)** in carrier relatives vs **0.10%/year (CI 0.02–0.19)** in non-carrier relatives; an independent prospective cohort of asymptomatic carriers gave **0.58%/year (CI 0.26–1.10)** over 1,564 observation-years ([PMID 11583312](https://pubmed.ncbi.nlm.nih.gov/11583312/); systematic review [PMID 19531787](https://pubmed.ncbi.nlm.nih.gov/19531787/)) | **[R/p]** |
+| **F5 Factor V Leiden heterozygosity** (rs6025) | First-event incidence about **0.45%/year** in carrier relatives vs **0.10%/year** in non-carrier relatives, and about **0.58%/year** in a prospective cohort of asymptomatic carriers. **Identifier withdrawn:** this row cited `PMID 11583312`, which a verification pass resolved to a **pooled case-control analysis reporting odds ratios** — a different study and a different estimand, incapable of supporting an annual-incidence claim. The figures belong to a family-member incidence study and an asymptomatic-carrier cohort that were named in that pass but not re-resolved here, so **they ship with no identifier and must be re-sourced before use.** The systematic review [PMID 19531787](https://pubmed.ncbi.nlm.nih.gov/19531787/) resolved and is the place to start | **[p]** — figure only, no record |
 | ↳ *what that means over a horizon* | At 0.45%/yr vs 0.10%/yr: **10 years** 4.41% vs 1.00% (ARR 3.41 pp, 34 extra per 1,000, NNH ⌈1/0.0341⌉ = 30); **20 years** 8.63% vs 1.98% (ARR 6.64 pp, 66 extra per 1,000, NNH ⌈1/0.0664⌉ = 16). So **96 of 100 carriers are event-free at 10 years and 91 of 100 at 20** — which is why heterozygosity alone does not warrant anticoagulation. Note the relative risk *shrinks* with horizon (4.5 per-year → 4.43 at 10 years → 4.35 at 20) as both risks compound toward 1, so **state the horizon with the multiple** | **[calc]** |
-| **APOE** (rs429358 + rs7412) | Lifetime Alzheimer's risk to age 85, from a semi-dominant model: baseline **11% male / 14% female**; **e3/e4 23% / 30%**; **e4/e4 51% / 60%** — Genin et al. 2011, *Molecular Psychiatry* ([PMC3162068](https://pmc.ncbi.nlm.nih.gov/articles/PMC3162068/), [10.1038/mp.2011.52](https://doi.org/10.1038/mp.2011.52)). **Quote these as the high end of a range, with the design named:** this analysis combined relative risks from case-control data with absolute risks from cohort studies, and cohort-based 20-year cumulative dementia incidence in e4/e4 runs materially lower (roughly 31–40%). Those measure different quantities and are not interchangeable | **[R/p]** |
-| ↳ *the dose effect, and its complement* | e3/e4 is **+12 pp male / +16 pp female** over baseline (2.1×); e4/e4 is **+40 pp / +46 pp** (4.6× / 4.3×). Going from one e4 to two roughly **doubles** the heterozygote's absolute risk (2.2× male, 2.0× female). And on the same figures, **49 per 100 male and 40 per 100 female e4/e4 homozygotes reach 85 unaffected** — report that in the same breath, every time | **[calc]** |
+| **APOE** (rs429358 + rs7412) | Lifetime Alzheimer's risk to age 85, from a semi-dominant model: **all-genotype population baseline 11% male / 14% female** (this is *not* the ε3/ε3 risk); **e3/e4 23% / 30%**; **e4/e4 51% / 60%** — Genin et al. 2011, *Molecular Psychiatry* ([PMC3162068](https://pmc.ncbi.nlm.nih.gov/articles/PMC3162068/), [10.1038/mp.2011.52](https://doi.org/10.1038/mp.2011.52)). **Quote these as the high end of a range, with the design named:** this analysis combined relative risks from case-control data with absolute risks from cohort studies, and cohort-based cumulative-incidence estimates over a fixed follow-up are generally **lower**, because they measure a different quantity than lifetime risk to 85. *(A specific percentage for that comparison was removed: it carried no identifier at all, and an unsourced number that revises a risk estimate **downward** is the most consequential kind in this file — it is the one a reader quotes as reassurance.)* Get the cohort figure from the literature at analysis time | **[R/p]** |
+| ↳ *the dose effect, its complement, and the comparator trap* | e3/e4 is **+12 pp male / +16 pp female** over baseline (2.1×); e4/e4 is **+40 pp / +46 pp** (4.6× / 4.3×). Going from one e4 to two roughly **doubles** the heterozygote's absolute risk (2.2× male, 2.0× female). And on the same figures, **49 per 100 male and 40 per 100 female e4/e4 homozygotes reach 85 unaffected** — report that in the same breath, every time. **Critically: the 11%/14% baseline is the ALL-GENOTYPE population figure, so every multiple here is genotype-versus-population.** Published APOE relative risks are almost always computed against **ε3/ε3**, which is lower than the population mean because the population contains the ε4 carriers — so those multiples are larger and **are not comparable to these.** State the referent, or a reader will conclude one of the two sources is wrong | **[calc]** |
 
 **Everything else in this file stays unfrozen.** The carve-out is three variants, not a precedent for
 a fourth: it exists because these are the ones a person will insist on a number for, and because a
@@ -134,11 +134,15 @@ other, and collapsing them is the commonest interpretation error.
 - **R1** Common variant, directly probed, well-clustered. Trust the call; still confirm before
   clinical action.
 - **R2** Probed but orientation- or context-sensitive (an A/T or C/G site, or near an indel).
-  The sites in this catalogue verified as palindromic are **rs1799945** (HFE H63D, C/G — and it
-  sits in the actionable tier) and **rs9939609** (FTO, A/T). The bundled script carries the
-  verified allele pair for each site it knows, so it can say `AMBIGUOUS` or `CLEAR` rather than
-  guessing; where the pair is not verified it reports `UNDETERMINED`, which is a statement about
-  the catalogue rather than about the site.
+  **R2 marks the SITE as unorientable; it does not condemn every call at that site.** A
+  heterozygote at a palindromic site carries one copy of each allele under either orientation, so
+  its **dosage is unambiguous and the call is usable**; only a **homozygote** there is
+  unresolvable. The sites in this catalogue verified as palindromic are **rs1799945** (HFE H63D,
+  C/G — and it sits in the actionable tier) and **rs9939609** (FTO, A/T). The bundled script
+  carries each known site's allele pair and grades the **call**: `CLEAR` for any heterozygote,
+  `AMBIGUOUS` for a homozygote at a palindromic site, `UNDETERMINED` where the pair is not
+  verified — see `data-formats-and-parsing.md` §2 for the worked table and for the two opposite
+  errors the script had to shed.
 - **R3** Rare variant on an array — elevated false-positive rate. Treat as a prompt for a
   confirmatory test, never as a result.
 - **R4** Requires phase, copy number, or specialised typing the platform cannot provide. **Do not
@@ -155,7 +159,7 @@ anchored APOE figures in §0 for the last):
 ```
  typical GWAS hit      per-allele OR 1.10, 0 -> 2 copies      1.8 pp
  strong GWAS hit       per-allele OR 1.50, 0 -> 2 copies      8.2 pp
- APOE e4/e4 vs e3/e3   lifetime to 85, male                  40    pp
+ APOE e4/e4 vs POPULATION baseline, lifetime to 85, male     40    pp
 ```
 
 That is a **23-fold span** from the typical GWAS hit to APOE. **A report that presents both in the
@@ -171,7 +175,8 @@ These can change medical management. **All of them require clinical-grade confir
 
 | Gene / variant | What it is | Typical grade | Action if confirmed |
 | :--- | :--- | :--- | :--- |
-| **HFE** C282Y (rs1800562), H63D (rs1799945) | Hereditary haemochromatosis risk alleles. C282Y homozygosity is the main genotype of interest; penetrance is incomplete and lower than early estimates implied. **H63D is c.187C>G — a palindromic C/G site**, so a homozygous call there cannot be oriented from the genotype alone | E1 / R1 (C282Y) · E1 / **R2** (H63D) | Iron studies (ferritin, transferrin saturation) — a cheap phenotype test that settles the question far better than the genotype does. This is the model case: the genotype's value is prompting a *measurement* |
+| **HFE** C282Y (rs1800562) — **homozygous** | The genotype of interest in hereditary haemochromatosis. Penetrance is incomplete and lower than early estimates implied, and sex-asymmetric by more than an order of magnitude (§0 carries the anchored figures) | E1 / R1 | Iron studies (ferritin, transferrin saturation) — a cheap phenotype test that settles the question far better than the genotype does. **This is the model case: the genotype's value is prompting a *measurement*** |
+| **HFE** H63D (rs1799945) | **Graded down deliberately, and it matters because this allele is common** (roughly one in ten European-ancestry chromosomes), so it fires on a large fraction of real files. **H63D homozygosity is not an established cause of clinically significant iron overload**, and C282Y/H63D compound heterozygotes develop iron-overload disease at low frequency; variant databases carry H63D as a risk factor rather than a penetrant allele. Presenting it in the same cell and at the same evidence grade as C282Y homozygosity is exactly the error §1's effect-size ladder warns about. **Also c.187C>G — a palindromic site**, so a *homozygous* call cannot be oriented from the genotype alone (a heterozygous one can; §1, R2) | **E3** / R2 | The same cheap action, which is the saving grace: iron studies. They cost little and settle either allele. **Do not report H63D as haemochromatosis** |
 | **F5** Factor V Leiden (rs6025) | Commonest inherited thrombophilia allele | E2 / R1 | Context for a clinician around thrombosis risk, surgery, oestrogen exposure. Does **not** by itself warrant anticoagulation |
 | **BRCA1 / BRCA2** founder variants | Some platforms probe a small number of founder variants only | E1 / R3 | Confirmation, then genetics referral. **Critically:** a negative consumer result is near-meaningless here, because only a handful of thousands of possible variants were probed ([PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/)) |
 | **G6PD** deficiency variants | X-linked; causes haemolysis on oxidative triggers. **X-linkage is the whole interpretation, not a caveat:** a heterozygous female is an X-inactivation mosaic whose enzyme activity can land anywhere, and a genotype cannot say where | E1 / R2–R3 | A real contraindication list for specific drugs and foods (`pharmacogenomics.md` §4 names them). Confirm by quantitative enzyme activity — **better than genotype in hemizygous males and homozygous females, but NOT definitive:** heterozygous females often read normal despite a deficient red-cell population, and reticulocytosis or recent transfusion can falsely normalise anyone's result. A normal assay is not clearance |
@@ -192,6 +197,7 @@ Full treatment, including the callable-versus-not split and what to hand a presc
 
 | Gene | Sites | Grade | Note |
 | :--- | :--- | :--- | :--- |
+| **APOE** | rs429358 + rs7412 (§7) | E1 / R1 | **ε4 dose stratifies ARIA risk with anti-amyloid monoclonal antibodies**, and the labelling for that class directs establishing ApoE ε4 status before treatment. Relevant only if that drug class is ever under consideration — and then it is decision-relevant, which is why APOE appears here as well as in §7. Check the current labelling rather than quoting this row |
 | **CYP2C19** | rs4244285 (*2), rs4986893 (*3), rs12248560 (*17) | E1 / R1 for these SNPs | The common no-function and increased-function alleles are capturable; the diplotype inference still needs care |
 | **CYP2C9** | rs1799853 (*2), rs1057910 (*3) | E1 / R1 | Pairs with VKORC1 for warfarin dosing algorithms |
 | **VKORC1** | rs9923231 | E1 / R1 | |
@@ -313,11 +319,28 @@ the one variant where this file carries anchored figures** (§0, carve-out): quo
 with the design named and the provenance grade attached, alongside the share of homozygotes who
 reach 85 unaffected — and add whatever the live pass can actually resolve for this person's ancestry
 and age (`risk-communication.md`). What makes APOE genuinely hard is that **no intervention has been shown
-to change the genotype's effect.** That makes it the clearest case in the whole catalogue where the
-correct output is information and support for decisions the person may want to make — planning,
-insurance, research participation, whether they wanted to know at all — and *not* a supplement or
-peptide protocol. Any tool that answers an ε4 result with a stack recommendation is selling
-something. Grade **E2 / R1**: called reliably, established, no carrier-specific intervention.
+to reduce the ε4-attributable increment in Alzheimer's *incidence*.** That makes it the clearest case
+in the whole catalogue where the correct output is information and support for decisions the person
+may want to make — planning, insurance, research participation, whether they wanted to know at all —
+and *not* a supplement or peptide protocol. Any tool that answers an ε4 result with a stack
+recommendation is selling something.
+
+**But the flat claim "no intervention attaches to APOE" is now false, and the exception is the single
+most actionable APOE fact available to someone who finds ε4/ε4 in raw data.** ε4 dose is the
+principal risk stratifier for **amyloid-related imaging abnormalities (ARIA)** with the anti-amyloid
+monoclonal antibodies: ARIA rates rise steeply with ε4 copy number, and the product labelling for
+that class directs that ApoE ε4 status be established before treatment specifically to inform that
+risk. That is a **carrier-specific, prescribing-relevant consequence** — so APOE has a
+pharmacogenomic axis as well as a risk axis:
+
+- **Alzheimer's incidence axis: E2 / R1** — established, called reliably, no intervention shown to
+  change the outcome in carriers.
+- **Pharmacogenomic axis (anti-amyloid mAb ARIA risk): E1 / R1** — an intervention decision that
+  turns on carrier status. It is **only relevant if the person is ever considering that drug class**,
+  which most are not, and the raw-data call still needs clinical confirmation first.
+
+*Treat the specifics as a live regulatory fact: name the mechanism and check the current labelling
+rather than quoting figures from this file (`pharmacogenomics.md` §4's rule).*
 
 This is also the variant most likely to be genuinely unwelcome news, which is why the
 `your-environment.md` question about what the person does *not* want surfaced is not a formality.
