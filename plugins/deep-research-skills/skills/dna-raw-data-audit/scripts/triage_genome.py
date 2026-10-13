@@ -179,14 +179,38 @@ def parse(path: str) -> dict:
     raise ValueError(f"{path}: not a recognised 23andMe-style or VCF format")
 
 
-def is_strand_ambiguous(geno: str | None) -> bool:
-    """A/T and C/G genotypes cannot be oriented by allele identity alone."""
+def strand_ambiguity(geno: str | None, site_alleles: set[str] | None = None) -> str:
+    """Three-state strand-ambiguity assessment.
+
+    Returns 'AMBIGUOUS', 'CLEAR', or 'UNDETERMINED'.
+
+    **Ambiguity is a property of the SITE, not of the observed genotype.** A site whose two
+    alleles are A/T or C/G is palindromic: reverse-complementing the pair returns the same pair,
+    so orientation cannot be recovered from allele identity. That is true regardless of what this
+    person's genotype happens to be.
+
+    The consequence, and the reason this function is three-state rather than boolean: a
+    *heterozygous* A/T call reveals the site is palindromic, so it can be flagged from the
+    genotype alone. A *homozygous* call reveals nothing — `AA` could sit at an A/T site (where it
+    is unresolvable, since the other strand reads TT) or at an A/G site (where it is fine). An
+    earlier boolean version of this function returned False for `AA` and therefore silently passed
+    the single most dangerous class of call in the file. Without the site's allele pair the honest
+    answer is UNDETERMINED, not CLEAR.
+
+    Pass `site_alleles` when the site's two alleles are known from an external reference; then the
+    answer is definite either way.
+    """
     if not geno:
-        return False
-    s = set(geno.upper())
-    return any(s == pair for pair in AMBIGUOUS_PAIRS) or (
-        len(s) == 1 and any(s <= pair for pair in AMBIGUOUS_PAIRS) and False
-    )
+        return "UNDETERMINED"
+    observed = set(geno.upper())
+    if site_alleles:
+        pair = {a.upper() for a in site_alleles}
+        return "AMBIGUOUS" if any(pair == amb for amb in AMBIGUOUS_PAIRS) else "CLEAR"
+    if len(observed) == 2:
+        # Heterozygous: the observed pair IS the site pair.
+        return "AMBIGUOUS" if any(observed == amb for amb in AMBIGUOUS_PAIRS) else "CLEAR"
+    # Homozygous, no site data: the site pair is unknown, so ambiguity cannot be ruled out.
+    return "UNDETERMINED"
 
 
 def apoe_diplotypes(rs429358: str | None, rs7412: str | None) -> dict:
@@ -289,9 +313,16 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
             rec["status"] = f"DISCORDANT between files: {hits} — do not interpret until resolved"
         else:
             rec["status"] = "called"
-        if is_strand_ambiguous(rec["genotype"]):
-            rec["strand_ambiguous"] = ("A/T or C/G genotype: allele identity alone cannot establish "
-                                       "strand orientation. Confirm orientation before interpreting.")
+        amb = strand_ambiguity(rec["genotype"])
+        rec["strand"] = amb
+        if amb == "AMBIGUOUS":
+            rec["strand_note"] = ("PALINDROMIC site (A/T or C/G): reverse-complement returns the same "
+                                  "allele pair, so orientation cannot be recovered from the genotype. "
+                                  "Do not count risk alleles here until orientation is established.")
+        elif amb == "UNDETERMINED":
+            rec["strand_note"] = ("Homozygous call: this site's allele pair is not known to the script, "
+                                  "so palindromic ambiguity cannot be ruled out. Check the site's "
+                                  "alleles before interpreting.")
         out["catalog"][rsid] = rec
 
     g1 = out["catalog"].get("rs429358", {}).get("genotype")
@@ -325,8 +356,8 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
         if catalog_only and r.get("genotype") is None:
             continue
         print(f"  {rsid:<12} {r['gene']:<10} {str(r.get('genotype') or '--'):<4} {r['status']}")
-        if "strand_ambiguous" in r:
-            print(f"               ^ {r['strand_ambiguous']}")
+        if "strand_note" in r:
+            print(f"               ^ [{r['strand']}] {r['strand_note']}")
     print("\n=== APOE ===")
     a = out["apoe"]
     print(f"  diplotype: {a['resolved'] or 'unresolved'} · {a['note']}")
@@ -377,13 +408,27 @@ def self_test() -> int:
     check("build undeclared returns None", detect_build(["# some unrelated comment"]) is None)
     check("build undeclared on empty header", detect_build([]) is None)
 
-    # --- Strand ambiguity ---
-    check("A/T flagged ambiguous", is_strand_ambiguous("AT"))
-    check("C/G flagged ambiguous", is_strand_ambiguous("CG"))
-    check("G/C flagged regardless of order", is_strand_ambiguous("GC"))
-    check("A/G not flagged", not is_strand_ambiguous("AG"))
-    check("homozygous AA not flagged", not is_strand_ambiguous("AA"))
-    check("None not flagged", not is_strand_ambiguous(None))
+    # --- Strand ambiguity. Three-state, because ambiguity is a property of the SITE. ---
+    check("het A/T is AMBIGUOUS", strand_ambiguity("AT") == "AMBIGUOUS")
+    check("het C/G is AMBIGUOUS", strand_ambiguity("CG") == "AMBIGUOUS")
+    check("allele order irrelevant", strand_ambiguity("GC") == "AMBIGUOUS")
+    check("het A/G is CLEAR", strand_ambiguity("AG") == "CLEAR")
+    check("None is UNDETERMINED", strand_ambiguity(None) == "UNDETERMINED")
+    # REGRESSION, and the reason this function was rewritten: a boolean version returned False
+    # for a homozygous call, silently passing the most dangerous class of site in the file.
+    # A homozygote carries no information about the site's allele pair.
+    check("homozygous AA is UNDETERMINED, not CLEAR", strand_ambiguity("AA") == "UNDETERMINED")
+    check("homozygous CC is UNDETERMINED, not CLEAR", strand_ambiguity("CC") == "UNDETERMINED")
+    check("homozygous GG is UNDETERMINED, not CLEAR", strand_ambiguity("GG") == "UNDETERMINED")
+    # With the site's alleles supplied the answer is definite either way, for any genotype.
+    check("homozygote at a known A/T site is AMBIGUOUS",
+          strand_ambiguity("AA", {"A", "T"}) == "AMBIGUOUS")
+    check("homozygote at a known A/G site is CLEAR",
+          strand_ambiguity("AA", {"A", "G"}) == "CLEAR")
+    check("het at a known C/G site is AMBIGUOUS",
+          strand_ambiguity("CG", {"C", "G"}) == "AMBIGUOUS")
+    check("site data overrides the genotype heuristic",
+          strand_ambiguity("AT", {"A", "T"}) == "AMBIGUOUS")
 
     with tempfile.TemporaryDirectory() as td:
         # --- 23andMe parsing, including a no-call and a lost-'#' header line ---

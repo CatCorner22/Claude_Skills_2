@@ -105,42 +105,90 @@ that decides what to do.
 
 **This is the most important section in the skill.**
 
-Direct-to-consumer raw data carries a materially elevated false-positive rate for rare, clinically
-significant variants. The anchoring study sent variants first seen in DTC raw data for clinical
-confirmation and found a substantial fraction were false positives; it also found variants reported
-as "increased risk" that laboratories classified as benign, often because they are common in
-population databases
-([PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/), with companion commentaries at
-[PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/) and
-[PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/)). Third-party interpretation services
-carry their own error burden ([PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/)), and the
-limitation has been examined specifically for hereditary breast and ovarian cancer
-([PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/)).
+### The anchoring evidence
 
-*The specific percentages reported in that literature are not quoted here: they appeared only in
-search-tool prose rather than in a retrieved record during verification, and `variant-catalog.md` §0
-explains why that disqualifies a number from shipping. The direction and the clinical consequence are
-firmly established and are what the rule rests on.*
+The strongest study is a **population-scale** one: a retrospective diagnostic evaluation of
+**≈49,908 people in UK Biobank who had both SNP-chip and next-generation-sequencing data**, plus a
+small set of people who shared consumer test data
+([PMID 33753354](https://pubmed.ncbi.nlm.nih.gov/33753354/) /
+[PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/), BMJ 2021). Its shape is the finding:
 
-**The mechanism, which matters more than the number.** Genotyping arrays are optimised for common
-variants. Calling a genotype from an array means assigning a sample to a cluster, and cluster
-separation depends on having many samples of each genotype class. For a rare variant almost no
-samples carry it, the clusters are poorly defined, and the assignment degrades — with no orthogonal
-method to catch the error. The probe was designed for a different job.
+- For **common** variants, chip genotyping performed **well** — sensitivity, specificity, PPV and NPV
+  all above 99% across >100,000 common variants. Arrays are not broken.
+- For **very rare** variants the positive predictive value collapsed, and only a small minority of
+  heterozygous chip genotypes were confirmed by sequencing.
+- BRCA1/2 served as the clinically-actionable exemplar.
 
-**The rule, stated without softening:**
+A smaller, earlier clinical-laboratory series reached the same conclusion from the confirmation side
+([PMID 29565420](https://pubmed.ncbi.nlm.nih.gov/29565420/) /
+[PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/)), with companion commentaries
+([PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/),
+[PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/)) and a later analysis of the public-health
+consequence ([PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/)). Third-party interpretation
+adds its own error burden ([PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/)), and a
+professional-society committee opinion addresses consumer disease-risk testing directly
+([PMID 33399428](https://pubmed.ncbi.nlm.nih.gov/33399428/)).
 
-> **No clinically significant raw-data finding supports action until a clinical-grade laboratory
-> confirms it.**
+*Specific percentages from this literature are not quoted here: they appeared only in search-tool
+prose rather than in a retrieved record during verification, and `variant-catalog.md` §0 explains why
+that disqualifies a number from shipping. The direction, the common-versus-rare split, and the
+clinical consequence are firmly established and are what the rule rests on.*
 
-**And say it every time, as the finding rather than as a disclaimer.** The sentence that works is
-"this needs confirming", not "I have this". Before recording any variant as present:
+### The mechanism — and the primary cause is not the one people name
+
+Probe design and genotype-cluster separation are real contributors: arrays are optimised for common
+variants, and cluster assignment degrades when almost no samples carry the rare allele.
+
+**But the dominant mechanism is Bayesian and cannot be engineered away.** Positive predictive value
+depends on prevalence, not just on assay quality. Take an excellent assay — 99% sensitivity, 99.9%
+specificity — applied to a variant carried by 1 in 50,000 people:
+
+```
+ per 1,000,000 people tested:
+   true carriers        20      -> ~20 detected
+   non-carriers    999,980      -> ~1,000 false positives at 99.9% specificity
+   positives            ~1,020  of which ~20 are real
+   PPV ≈ 2%
+```
+
+**The test is 99.9% specific and still wrong about 98% of the people it flags**, purely because the
+variant is rare. This is the same arithmetic as the screening-test case in
+`deep-research-skills:video-source-audit` → `references/statistics-taxonomy.md` §4, and it is why no
+amount of array improvement removes the need for confirmation on rare variants.
+
+### Array and sequencing are not the same problem
+
+**Do not transfer the array false-positive literature to sequencing data.** If one of the files is
+whole-genome sequencing, the evidence above does not describe it: the failure modes differ, and
+short-read sequencing is strong exactly where arrays are weak for single-nucleotide variants.
+
+The confirmation rule still applies to sequencing, for **different** reasons:
+- Consumer sequencing is not performed or reported under clinical-laboratory conditions, and the
+  provider's own documentation typically says the data is not for clinical use.
+- Short-read sequencing remains weak or blind for **repeat expansions, large structural variants,
+  segmental duplications and pseudogene-confounded loci** — so "whole genome" does not mean
+  "everything was seen".
+- A variant call still needs orthogonal confirmation before it drives a clinical decision, which is
+  a statement about the reporting context rather than about the assay's accuracy.
+
+**Grade the two file types separately in the ledger**, and never let an array's weakness be cited
+against a sequencing call or vice versa.
+
+### The rule, stated without softening
+
+> **No clinically significant finding from consumer raw data — array or sequencing — supports action
+> until a clinical-grade laboratory confirms it.**
+
+**Say it every time, as the finding rather than as a disclaimer.** The sentence that works is "this
+needs confirming", not "I have this". Before recording any variant as present:
 
 1. Check it was **called, not no-called** (`data-formats-and-parsing.md` §3).
-2. Check **concordance** if a second platform is available (§5 there).
-3. Check the **strand** if it is an A/T or C/G site.
-4. Check the **population frequency** against the claimed pathogenicity (§2).
-5. Grade **array reliability** and state it.
+2. Check **concordance and sample identity** if a second file exists (§5 there).
+3. Check the **strand** if the site is or may be palindromic — and note that a homozygous call cannot
+   establish this on its own.
+4. Check the **population frequency** against the claimed pathogenicity (§2), and compute the PPV
+   implied by that frequency.
+5. Grade **array reliability** (or sequencing limitation) and state it.
 6. State the **confirmatory test**.
 
 **Never convert a tooling or data limitation into a statement about the person.** "The assay did not

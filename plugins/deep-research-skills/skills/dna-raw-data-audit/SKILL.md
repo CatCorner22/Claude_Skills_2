@@ -10,7 +10,7 @@ description: >-
   or dosing. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from an eight-stream research pass with adversarial verification. Citations verified
     against retrieved index records only, never a search tool's generated prose; the APOE
@@ -86,12 +86,17 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    called unreliably is not a finding; it is a prompt for a confirmatory test.
    `references/variant-triage.md` §2–3.
 
-7. **Apply the confirmation rule to anything clinically significant.** Direct-to-consumer raw data
-   carries a materially elevated false-positive rate for rare pathogenic variants, for a mechanical
-   reason: arrays are optimised for common variants and a probe designed for a common site performs
-   poorly on a rare one, with no orthogonal confirmation. **No clinically significant raw-data
-   finding supports action until a clinical-grade laboratory confirms it.** Say this every time —
-   not as a disclaimer, as the finding. `references/variant-triage.md` §4.
+7. **Apply the confirmation rule to anything clinically significant.** The reason differs by data
+   type and both must be stated correctly. For **arrays**, a population-scale study of ~49,908
+   people with both chip and sequencing data found chip genotyping performs well for *common*
+   variants and collapses in positive predictive value for *very rare* ones — and the dominant
+   mechanism is Bayesian, not fixable by better probes: at a rare variant's prevalence, even a
+   99.9%-specific assay is wrong about most of the people it flags. For **sequencing**, that
+   literature does not transfer; the reason is instead that consumer sequencing is not reported
+   under clinical-laboratory conditions, and short reads stay weak for repeat expansions, large
+   structural variants and pseudogene-confounded loci. Either way: **no clinically significant
+   finding from consumer data supports action until a clinical-grade laboratory confirms it.** Say
+   it every time — not as a disclaimer, as the finding. `references/variant-triage.md` §4.
 
 8. **Do pharmacogenomics properly, which means refusing most of it.** This is where consumer data
    comes closest to being decision-relevant and also where it fails in ways users do not expect.
@@ -270,3 +275,12 @@ file.
   ones. `--self-test` runs the offline parsing and algebra tests, including the APOE ambiguity case.
 - Citation checking reuses this plugin's existing verifier under the same plugin root:
   `python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --doi <doi>`
+  **Use it for existence and metadata checks only.** That script hard-codes a
+  country-of-origin exclusion policy (`EXCLUDED_COUNTRIES`) belonging to
+  `deep-research-skills:medical-research-detective`, where it is a deliberate data-integrity control
+  for that skill's use case. **This skill does not adopt it**, as an explicit decision rather than by
+  inheritance: genomics research is produced at scale in the excluded jurisdictions, so applying the
+  filter here would silently bias the evidence base of the very literature the skill depends on. Read
+  the verifier's resolution and retraction output; **ignore its provenance line.** This skill's
+  anti-fabrication standard is whether an identifier resolves to a retrieved record, not where the
+  authors work.

@@ -65,14 +65,22 @@ Consumer platforms report alleles relative to one strand; database entries may b
 to the other. For most sites this is resolvable, because the two possible allele pairs differ:
 a C/T site reported on the opposite strand appears as G/A, and C/T versus G/A is distinguishable.
 
-**The dangerous class is A/T and C/G sites** — "ambiguous" or "palindromic". An A/T site reported on
-the other strand is *still* an A/T site, so **allele identity alone cannot tell you the orientation**,
-and a flipped call inverts which allele is the risk allele.
+**The dangerous class is A/T and C/G sites** — "ambiguous" or "palindromic". Reverse-complementing
+the pair `{A,T}` returns `{A,T}`, so **allele identity alone cannot tell you the orientation**, and a
+flipped call inverts which allele is the risk allele.
 
-Worked: a site whose risk allele is `A`. The file reports `AT` — heterozygous either way, so no
-problem. But where the file reports a homozygote, `AA` on the reported strand is `TT` on the other,
-which is the opposite genotype. Interpreting it without resolving orientation is a coin flip
-presented as a result.
+**The subtlety that defeats a naive detector: ambiguity is a property of the SITE, not of the
+observed genotype.** A heterozygous `AT` call reveals that the site is palindromic, so it can be
+flagged from the genotype alone. A *homozygous* call reveals nothing — `AA` could sit at an A/T site,
+where it is unresolvable because the other strand reads `TT`, or at an A/G site, where it is fine.
+**So a homozygote at a palindromic site is both the most dangerous call in the file and invisible to
+any check that looks only at the genotype.** The bundled script's first implementation had exactly
+this defect: it returned "not ambiguous" for `AA` and silently passed it. It now reports three states
+— `AMBIGUOUS`, `CLEAR`, `UNDETERMINED` — and a homozygote without external allele data is
+`UNDETERMINED`, never `CLEAR`.
+
+Practical consequence: **to resolve a homozygote you need the site's allele pair from an external
+reference.** Without it, the honest output is that ambiguity could not be ruled out.
 
 **Resolution, in order of reliability:** use the platform's own documented strand convention for that
 array version; check allele frequency against a population reference and see which assignment is
@@ -142,6 +150,23 @@ available without ordering a new test.
   share a design limitation or a reference panel. Agreement raises confidence; it does not establish
   truth, and it does not substitute for clinical confirmation.
 
+### Sample identity comes before concordance, and before any interpretation
+
+A low concordance rate has two very different explanations, and conflating them wastes an audit:
+genotyping error, or **the two files are not the same person**. Mislabelled kits, a relative's
+export, and a file saved under the wrong name are all realistic.
+
+**Check identity first.** Count sites where the two files give genotypes sharing **no allele** —
+one file homozygous for one allele and the other homozygous for the other. For the same individual
+this should be essentially zero, bounded only by error rate; for two different people it rises
+sharply, and for unrelated people it is large. Restrict the count to autosomal, both-called,
+diploid, **non-palindromic** sites, because palindromic sites can appear to disagree purely from
+orientation and would manufacture a false identity failure.
+
+**If identity fails, stop.** Report it and interpret nothing — an audit of two people's data merged
+as one is worse than no audit. If identity passes but concordance is still poor, you have a quality
+problem to characterise rather than an identity problem.
+
 ---
 
 ## §6 Running the bundled script
@@ -164,8 +189,16 @@ python3 "${CLAUDE_PLUGIN_ROOT}/skills/dna-raw-data-audit/scripts/triage_genome.p
 
 **What it reports:** format and declared build per file, total sites, no-call count and rate,
 chromosome count, cross-platform concordance with the discordant sites named, genotypes at the
-catalogued sites with absent ones labelled, strand-ambiguity flags, and the APOE diplotype including
-the one ambiguous combination.
+catalogued sites with absent ones labelled, a three-state strand assessment per site
+(`AMBIGUOUS` / `CLEAR` / `UNDETERMINED`), and the APOE diplotype including the one ambiguous
+combination.
+
+**Two format details it does not special-case, and you should know about:** 23andMe codes
+insertions and deletions as `DD`/`DI`/`II` rather than as bases, and carries internal
+platform-specific marker IDs that are not rsIDs and have no stable external meaning. The script
+reads both without crashing, but a conversion pipeline that silently discards them — some public
+converters do — loses a whole variant class. If indels matter to a question you are asking, verify
+they survived whatever produced your file.
 
 **What it refuses to do:** assign risk, assign pathogenicity, or recommend anything. It dispatches on
 file *content* rather than extension, because extensions lie, and it rejects unrecognised input

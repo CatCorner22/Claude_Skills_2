@@ -42,11 +42,17 @@ it, and whether any action attaches — and the skill's Do-it stage 11 requires 
 for the numbers, resolved at analysis time. **If you find yourself wanting to quote an effect size
 from this file, that is the signal to go and get it from the literature instead.**
 
+**Verified identifier form.** In practice **PMIDs and PMCIDs appear inside returned URLs routinely;
+bare DOIs almost never do.** So prefer a PMID or PMCID as the shipping identifier, and treat a DOI
+as verified only when it appears inside a publisher URL that was itself returned. A DOI quoted from
+prose alone does not ship, however real the paper is.
+
 ### Anchors that are verified and stable enough to state
 
 | Claim | Record |
 | :--- | :--- |
-| Direct-to-consumer raw data carries a materially elevated false-positive rate for rare variants, and clinical confirmation is required before action | [PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/) — "False-positive results released by direct-to-consumer genetic tests highlight the importance of clinical confirmation testing for appropriate patient care"; companion commentaries [PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/), [PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/) |
+| Direct-to-consumer raw data carries a materially elevated false-positive rate for rare variants, and clinical confirmation is required before action | **Population-scale, the strongest anchor:** [PMID 33753354](https://pubmed.ncbi.nlm.nih.gov/33753354/) / [PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/) — ~49,908 people with both chip and sequencing data; chips perform well on common variants and collapse in PPV on very rare ones. **Clinical-laboratory series:** [PMID 29565420](https://pubmed.ncbi.nlm.nih.gov/29565420/) / [PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/), with commentaries [PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/), [PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/) and the public-health consequence [PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/) |
+| A professional society has addressed consumer disease-risk testing directly | [PMID 33399428](https://pubmed.ncbi.nlm.nih.gov/33399428/) |
 | Third-party interpretation of DTC raw data carries its own burden of error | [PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/) |
 | DTC screening is limited for hereditary breast/ovarian cancer specifically | [PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/) |
 | Routine MTHFR polymorphism testing is advised against | [PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205) (practice guideline), amended by [PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351); concurring [PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/), [PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/) |
@@ -100,7 +106,7 @@ These can change medical management. **All of them require clinical-grade confir
 | **F5** Factor V Leiden (rs6025) | Commonest inherited thrombophilia allele | E2 / R1 | Context for a clinician around thrombosis risk, surgery, oestrogen exposure. Does **not** by itself warrant anticoagulation |
 | **BRCA1 / BRCA2** founder variants | Some platforms probe a small number of founder variants only | E1 / R3 | Confirmation, then genetics referral. **Critically:** a negative consumer result is near-meaningless here, because only a handful of thousands of possible variants were probed ([PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/)) |
 | **G6PD** deficiency variants | X-linked; causes haemolysis on oxidative triggers | E1 / R2–R3 | A real contraindication list for specific drugs and foods. Confirm by enzyme assay, which is definitive where genotype is not |
-| **Genes on a professional actionable-secondary-findings list** | A curated, versioned set of genes where incidental findings are considered medically actionable | E1 / R3 | Use the list as the filter for "is this worth acting on at all". Name the instrument and its version rather than treating it as fixed |
+| **Genes on a professional actionable-secondary-findings list** | A curated, versioned set of genes a clinical laboratory is advised to report back when doing exome or genome sequencing, even when unrelated to the original indication | E1 / R3 | **Read it for what it is: a laboratory *reporting* instrument, not an actionability filter.** It answers "what should a lab tell the ordering clinician?", not "what should this person act on?" — a distinction worth keeping, because treating it as a personal action list both over-reads it and misses actionable findings outside it. Name the instrument and its version rather than treating it as fixed |
 
 **The HFE pattern generalises and is worth internalising:** the most useful genetic findings are
 the ones that point at a cheap, decisive *phenotype* measurement. Iron studies for HFE, an enzyme

@@ -106,9 +106,15 @@ So the rule is **not** "family-based estimates are inflated, discount them". It 
    situation, and it is the consumer-genomics situation by definition.
 2. **Use family-informed estimates when there is a family history**, because then the family burden
    is real information.
-3. **Quote a range, not a point.** Any single penetrance figure presented as *the* number is
+3. **Never quote only one figure, in either direction.** This cuts both ways, and the second
+   direction is the one usually missed: quoting only the *population* figure to someone who **does**
+   have a strong family history **under-warns them**, and that is its own safety failure. Family-based
+   estimates have run materially above population-based ones for the same gene, so the gap is large
+   enough for the choice to matter clinically.
+4. **Quote a range, not a point.** Any single penetrance figure presented as *the* number is
    overstating what the literature supports.
-4. **Report which kind of estimate you used and why.**
+5. **Report which kind of estimate you used and why** — and, where family history is unknown, report
+   both and say which applies under which assumption rather than silently picking.
 
 ### Age-conditioning: the birth figure overstates for anyone past young adulthood
 
