@@ -3,7 +3,7 @@
 Fill this in before the first analysis. Several of these answers change the result, and one of them
 should be decided *before* anything is read rather than after.
 
-**Keep the filled-in copy at `.claude/skills-env/dna-raw-data-audit.md` in your own project, and put
+**Keep the filled-in copy at `.claude/skills-env/dna-raw-data-audit.private.md` in your own project, and put
 genetic and health detail in the git-ignored `.private.md` twin.** This file ships as a template
 inside the installed plugin, where a `/plugin marketplace update` can overwrite it.
 
@@ -38,6 +38,12 @@ request, without naming it.
 | **Nebula product tier** | _____ **(low-pass + imputation, or 30×+ WGS — this materially changes what the data supports; confirm from your account, not from the file)** |
 | Any other raw data | _____ (Ancestry, MyHeritage, FTDNA, a clinical report) |
 | Where the files live | _____ (keep them **outside** any repository or shared drive) |
+
+**Test, do not assume, that the file is ignored.** `git check-ignore -v <file>` must print a
+matching rule. Two traps proven by execution while this skill was being reviewed: the tailoring file
+must carry the **`.private.md`** suffix to be ignored (the plain `.md` form is not), and **the file
+your provider hands you is a `.zip`** — so an archive pattern is needed as well as the
+extension patterns. Neither protection exists in your repository unless you put it there.
 
 **Confirm before proceeding:** the files are not in a git repository, not in a synced cloud folder
 shared with anyone, and have not been uploaded to a third-party interpretation service.
@@ -152,10 +158,10 @@ _____
 **A genome is the most sensitive data this library handles.** It identifies you permanently, it
 cannot be rotated like a password, and it is partly information about people who never consented.
 
-- **Never commit a genome file.** The repository's `.gitignore` covers the common genomic extensions
-  (VCF, gVCF, BCF, BAM/CRAM, FASTQ, PLINK) and a `genomes/` directory. Verify with
-  `git check-ignore -v <file>` before the file goes anywhere near version control. **This repository
-  is public.**
+- **Never commit a genome file.** The marketplace repository this skill ships from ignores the common
+  genomic extensions (VCF, gVCF, BCF, BAM/CRAM, FASTQ, PLINK), the provider download archives, and a
+  `genomes/` directory — **and none of that travels with the installed plugin.** In *your*
+  repository, assume nothing is ignored until `git check-ignore -v <file>` prints a rule.
 - **Health and genetic detail belongs in the `.private.md` twin**, which is git-ignored — never in
   this committed template.
 - **Do not paste raw data into third-party interpretation services.** Their error rates are

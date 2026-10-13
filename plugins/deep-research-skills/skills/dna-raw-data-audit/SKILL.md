@@ -55,8 +55,11 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
 1. **Set up privately, before reading anything.** A genome is the most identifying data a person
    has, it implicates biological relatives who did not consent, and it cannot be rotated like a
    password. Keep the file out of any repository, any shared drive, and any paste into a third-party
-   service. This repo's `.gitignore` covers the common genomic extensions and a `genomes/`
-   directory; confirm the file is ignored before it sits anywhere near version control.
+   service. **Do not assume any repository ignores these files — yours almost certainly does not.**
+   The marketplace repository this skill ships from ignores the common genomic extensions, the
+   download archives (`.zip`, `.tar.gz`) and a `genomes/` directory, but **that protection does not
+   travel with the installed plugin.** Before a genome file goes anywhere near version control, run
+   `git check-ignore -v <file>` and get a hit; if you do not, add the patterns first.
    `references/your-environment.md` carries the full posture.
 
 2. **Identify what you actually have, and detect the build.** 23andMe exports and Nebula outputs are
@@ -264,7 +267,7 @@ some have no action attached. Decide what you want to know before the analysis, 
 
 **Keep your filled-in copy outside the plugin, and keep the genome outside it entirely.** This file
 ships as a *template* inside the installed plugin, where a `/plugin marketplace update` can
-overwrite it. Copy it to `.claude/skills-env/dna-raw-data-audit.md` in your own project — and note
+overwrite it. Copy it to `.claude/skills-env/dna-raw-data-audit.private.md` in your own project — and note
 that genetic and health detail belongs in the git-ignored `.private.md` twin, never in a committed
 file.
 

@@ -197,7 +197,7 @@ closure by making the reasoning transparent and the success criteria testable.
 
 Record your athlete population, their goals (fat loss vs hypertrophy vs strength vs
 sport-specific performance), their training history, and your tracker's measurement
-resolution in `.claude/skills-env/fitness-nutrition-science.md`:
+resolution in `.claude/skills-env/fitness-nutrition-science.private.md`:
 - Sample: "Beginners (< 2 years training); primary goals are fat loss with muscle
   retention and general fitness; tracker measures bodyweight daily, workout volume weekly,
   protein intake daily; strength benchmarks tracked every 4 weeks."
@@ -205,7 +205,7 @@ resolution in `.claude/skills-env/fitness-nutrition-science.md`:
   surplus; an advanced lifter, 0.25 kg/month).
 
 Keep your filled-in copy outside the plugin. Copy this skill to
-`.claude/skills-env/fitness-nutrition-science.md`, fill in your athlete cohort and
+`.claude/skills-env/fitness-nutrition-science.private.md`, fill in your athlete cohort and
 tracker capabilities, and reference that copy. Your specifics then survive updates and stay
 where you own them.
 

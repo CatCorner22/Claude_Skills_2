@@ -59,5 +59,14 @@ genomes/
 *.fam
 *.23andme.txt
 genome_*.txt
+# The download is an ARCHIVE, and that is the form a user actually has on disk first:
+# 23andMe and AncestryDNA both hand over a .zip. No .zip is tracked in this repo, so this is
+# safe to blanket-ignore, and the archive is the file most likely to be dropped in by mistake.
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.gz
 genome.txt
 *_Full_*.txt
