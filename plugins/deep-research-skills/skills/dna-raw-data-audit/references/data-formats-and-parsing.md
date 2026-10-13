@@ -51,8 +51,11 @@ dangerous.
 Coordinates differ between GRCh37/hg19 and GRCh38. **A position lookup against the wrong build
 returns a different variant, silently.**
 
-- **Detect, never assume.** The bundled script reads the declared build from the header and
-  **refuses to proceed** (exit 3) when none is declared, because the alternative is guessing.
+- **Detect, never assume.** The bundled script reads the declared build from the header and, when
+  none is declared, **warns, proceeds on rsID-keyed lookups only, and signals exit 3** — in text
+  mode and under `--json` alike. **It does not refuse**, which an earlier version of this sentence
+  claimed; what it refuses is any *positional* interpretation, and no positional lookup may be
+  attempted on such a file.
 - **Prefer rsIDs over positions** when cross-referencing. An rsID is build-independent; a position is
   not. This single habit eliminates most build errors.
 - **Never compare positions across files declaring different builds** without liftover. rsID-based

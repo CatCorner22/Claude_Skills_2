@@ -359,9 +359,9 @@ Records that resolved (see §0 of `variant-catalog.md` for what "resolved" means
 | :--- | :--- | :--- |
 | Martin et al. 2019, *Nat Genet* — clinical use of current scores may exacerbate disparities | [PMC6563838](https://pmc.ncbi.nlm.nih.gov/articles/PMC6563838/); preprint [bioRxiv 10.1101/441261](https://www.biorxiv.org/content/10.1101/441261) | The statement of the problem |
 | Martin et al. 2017, *AJHG* — demographic history impacts risk prediction | [PMC5384097](https://pmc.ncbi.nlm.nih.gov/articles/PMC5384097/) | The mechanism, from population history |
-| Privé et al. 2022, *AJHG* — portability of 245 scores across 9 ancestry groups | [PMC8764121](https://pmc.ncbi.nlm.nih.gov/articles/PMC8764121/), correction [PMC8874215](https://pmc.ncbi.nlm.nih.gov/articles/PMC8874215/) | **Strongest design:** training and testing inside one cohort, which removes environmental and genotyping confounding |
+| Privé et al. 2022, *AJHG* — portability of 245 scores across 9 ancestry groups | [PMC8764121](https://pmc.ncbi.nlm.nih.gov/articles/PMC8764121/), correction [PMC8874215](https://pmc.ncbi.nlm.nih.gov/articles/PMC8874215/) | **Strongest design available:** training and testing inside one cohort, which removes genotyping-platform confounding and **reduces** environmental confounding without eliminating it — the groups still differ socioeconomically and geographically, and the paper's own hedge is "reduce the risk of". Upgrading a source's hedge is what this file polices |
 | Ding et al. 2023, *Nature* — accuracy varies across the genetic ancestry continuum | **Named, not cited with a verified identifier.** Its DOI appeared in prose and inside an aggregator URL rather than inside a returned publisher URL, so by `variant-catalog.md` §0's own rule it does not ship as a citation | The decline is **continuous along genetic distance, not stepwise between labelled groups — so it is present within a single labelled ancestry** |
-| Duncan et al. 2019, *Nat Commun* — usage and performance across diverse populations | **Named, not cited with a verified identifier**, for the same reason | A census of the literature: the great majority of polygenic-scoring studies were exclusively European-ancestry *(figure from the abstract)* |
+| Duncan et al. 2019, *Nat Commun* — usage and performance across diverse populations | **Named, not cited with a verified identifier**, for the same reason | A census of the literature: **about two thirds** of polygenic-scoring studies used exclusively European-ancestry participants, with a further fifth exclusively East Asian *(figures from the abstract)* |
 
 **What portability does to the person's number**, propagated through the table above. The retained
 fraction is a **sensitivity sweep chosen to show the shape** — not a published multiplier, because
@@ -401,7 +401,7 @@ risk-allele frequency of 0.30:
      1.05        9.74 / 10.17 / 10.63%     +0.44 pp    +0.89 pp          0.508
      1.10        9.48 / 10.33 / 11.25%     +0.85 pp    +1.77 pp          0.516
      1.20        9.01 / 10.62 / 12.48%     +1.61 pp    +3.47 pp          0.531
-     1.50        7.81 / 11.27 / 16.01%     +3.46 pp    +8.20 pp          0.570
+     1.50        7.81 / 11.27 / 16.00%     +3.46 pp    +8.20 pp          0.570
 ```
 
 A typical hit (OR ≈ 1.10) moves one carrier from roughly **95 in 1,000 to roughly 103 in 1,000**,
@@ -417,7 +417,9 @@ hedging. For a panel probing a subset of causal alleles, the post-negative carri
 P(carrier | negative) = p·(1 − c) / (1 − p·c)
 ```
 
-where `p` is the pre-test carrier probability and `c` the fraction of causal alleles probed. With
+where `p` is the pre-test carrier probability and `c` the **fraction of carriers in this person's
+ancestry whose variant the panel probes — its clinical sensitivity, not the fraction of distinct
+causal alleles** (the paragraph below is why that distinction decides the answer). With
 `p = 1/400` and 70% coverage:
 
 ```

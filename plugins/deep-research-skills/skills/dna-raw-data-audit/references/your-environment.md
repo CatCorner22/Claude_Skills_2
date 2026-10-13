@@ -4,7 +4,9 @@ Fill this in before the first analysis. Several of these answers change the resu
 should be decided *before* anything is read rather than after.
 
 **Keep the filled-in copy at `.claude/skills-env/dna-raw-data-audit.private.md` in your own project, and put
-genetic and health detail in the git-ignored `.private.md` twin.** This file ships as a template
+genetic and health detail in the `.private.md` file — **that suffix is what keeps it out of git, and
+the plain `.md` form is NOT ignored**, so confirm with `git check-ignore -v` before writing into
+it.** This file ships as a template
 inside the installed plugin, where a `/plugin marketplace update` can overwrite it.
 
 ---
@@ -162,8 +164,9 @@ cannot be rotated like a password, and it is partly information about people who
   genomic extensions (VCF, gVCF, BCF, BAM/CRAM, FASTQ, PLINK), the provider download archives, and a
   `genomes/` directory — **and none of that travels with the installed plugin.** In *your*
   repository, assume nothing is ignored until `git check-ignore -v <file>` prints a rule.
-- **Health and genetic detail belongs in the `.private.md` twin**, which is git-ignored — never in
-  this committed template.
+- **Health and genetic detail belongs in the `.private.md` file**, which is git-ignored — never in
+  this committed template, and never in the plain `.md`, **which is not ignored.** Prove it with
+  `git check-ignore -v <file>` rather than trusting the suffix convention.
 - **Do not paste raw data into third-party interpretation services.** Their error rates are
   documented ([PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/)) and the data-handling terms
   are frequently worse than the interpretation.

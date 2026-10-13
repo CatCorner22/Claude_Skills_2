@@ -111,6 +111,17 @@ WGS is **"run a purpose-built caller on the alignment, or order a clinical panel
 whole-genome data, so CYP2D6 is covered"*. And even a purpose-built caller is imperfect: the
 published comparisons report high but not complete concordance against truth sets.
 
+**One open question, recorded rather than resolved.** A verification pass argued that a *homozygous*
+no-function call at the `*4` tag leaves no functional allele, so "your data cannot determine your
+CYP2D6 status" understates it and suppresses a poor-metabolizer flag. The pharmacology is right.
+**What is not settled is whether the call can be trusted:** array allele dropout and
+cluster-boundary error turn a true `*1/*4` heterozygote into an apparent homozygote, which is
+exactly how a confident poor-metabolizer call would be manufactured. **Until the platform's
+heterozygote-miscall behaviour at that probe is established, this skill does not make the call.**
+If it is ever adopted, adopt only the narrow form — "*likely* poor metabolizer, a flag for
+confirmation, not a determined phenotype; copy number and hybrids still need a clinical panel" —
+and reconcile `SKILL.md`, this file and `variant-catalog.md` Tier B in the same change.
+
 **The output for CYP2D6 is a stated limitation**, phrased so the person can act on it: *"Your data
 cannot determine your CYP2D6 metabolizer status. If a prescriber is considering a drug where that
 matters, a clinical pharmacogenomic panel can test it properly."* That is more useful than a guess,
@@ -156,13 +167,13 @@ confirmation rule:
 
 | Gene | Commonly probed | Reliability (`variant-catalog.md` §3) | Caveat |
 | :--- | :--- | :--- | :--- |
-| **CYP2C19** | `*2` (rs4244285), `*3` (rs4986893), `*17` (rs12248560) | R1 | Covers the common no-function and increased-function alleles. **But `*17` cannot be assumed to confer increased function without phase:** sitting in cis with a no-function variant it does not, and unphased data cannot tell |
+| **CYP2C19** | `*2` (rs4244285), `*3` (rs4986893), `*17` (rs12248560) | R1 | Covers the common no-function and increased-function alleles **in European and East Asian ancestry. `*35` (rs12769205, a splice defect with no function) and `*9` are more frequent in African-ancestry populations and are not on this list, so a `*2`/`*3`/`*17`-negative result is NOT a normal-metabolizer call** — which matters because §5's worked handoff hangs on this gene. **And `*17` cannot be assumed to confer increased function without phase:** sitting in cis with a no-function variant it does not, and unphased data cannot tell |
 | **CYP2C9** | `*2` (rs1799853), `*3` (rs1057910) | R1 | Additional alleles matter more in non-European ancestries |
 | **VKORC1** | rs9923231 | R1 | Used jointly with CYP2C9 |
 | **CYP3A5** | `*3` (rs776746) | R1 | The cleanest array-callable case in pharmacogenomics: one SNP, and `*3` homozygosity (non-expresser) is the common state in European ancestry while expresser status is much more common in African ancestry — so ancestry changes what the result means |
-| **SLCO1B1** | `*5` (rs4149056) | R1 | |
+| **SLCO1B1** | decreased-function **c.521T>C (rs4149056)** | R1 | rs4149056 is shared by `*5`, `*15` and `*17`; `*15` additionally carries c.388A>G (rs2306283), which is common — so a lone rs4149056 carrier is more often `*15`/`*17` than `*5`. The star allele cannot be assigned without rs2306283 **and phase**, which is this table's own §1 problem appearing inside it. **Report the variant and its decreased function, not a star name.** All three are decreased-function, so the *phenotype* call survives the nomenclature gap |
 | **TPMT** | `*3B` (rs1800460), `*3C` (rs1142345), and `*2` (rs1800462) where the platform carries it | R1–R2 | **The best counterexample to this table's own heading.** `*3A` is `*3B` + `*3C` in cis and is the commonest no-function allele in European ancestry, so heterozygous at both sites is phase-ambiguous: `*1/*3A` (intermediate) versus `*3B/*3C` (poor). Cis is assumed on linkage-disequilibrium grounds — **state the assumption, never leave it silent.** Must be read with NUDT15, and omitting `*2` understates both the callable set and how little a negative means |
-| **NUDT15** | `*3` (rs116855232) | R2 | Especially important in East Asian ancestry; absent from older panels |
+| **NUDT15** | `*3` (rs116855232) | R2 | Especially important in **East Asian, Hispanic/Latino and Indigenous-American** ancestry — roughly 6–10% allele frequency against well under 1% in European ancestry — and absent from older panels. Understating that scope on a pathway whose failure mode is severe myelosuppression is the kind of omission that reads as reassurance |
 | **DPYD** | `*2A` (rs3918290) and other no-function alleles | R2–R3 | **A negative at one or two sites does not clear a person** — several relevant alleles exist, and the consequence of missing one is severe |
 
 **The asymmetry to hold onto:** a *detected* no-function allele at a reliably-called site is
@@ -255,7 +266,7 @@ reaches a prescriber.
 | **CYP2C19** | Clopidogrel; also several proton-pump inhibitors and antidepressants | **The direction inverts across this one row, so never carry it across.** Clopidogrel is a *prodrug* requiring CYP2C19 activation, so reduced function means *less* active metabolite and reduced antiplatelet efficacy. For drugs CYP2C19 *clears*, the same reduced function means *higher* exposure. State which mechanism applies to the drug in question |
 | **DPYD** | Fluoropyrimidines (5-FU, capecitabine) | Deficiency causes severe, occasionally fatal toxicity. One of the strongest cases for pre-treatment testing anywhere in medicine |
 | **TPMT / NUDT15** | Thiopurines (azathioprine, mercaptopurine) | Reduced activity causes myelosuppression. Both genes must be considered |
-| **HLA-B\*57:01** | Abacavir | Strongly associated with hypersensitivity; pre-treatment testing is standard practice. **Requires proper HLA typing** |
+| **HLA-B\*57:01** | Abacavir | Strongly associated with hypersensitivity; screening before abacavir is guideline- and label-level — **name the guideline and check it live rather than asserting a practice state**, which is this file's own §3 rule and the library's no-time-anchored-claims rule. **Requires proper HLA typing** |
 | **HLA-B\*15:02** | Carbamazepine — **and also oxcarbazepine and phenytoin** | Associated with severe cutaneous reactions, with substantial ancestry-dependent allele frequency variation. **Naming only carbamazepine invites the wrong inference** that oxcarbazepine or phenytoin is a safe alternative. **Requires proper HLA typing** |
 | **HLA-A\*31:01** | Carbamazepine | The carbamazepine hypersensitivity allele that matters in European and Japanese ancestry, where `*15:02` is rare. Without it, a European-ancestry reader concludes no HLA allele applies to them. **Requires proper HLA typing** |
 | **MT-RNR1** (m.1555A>G) | Aminoglycosides | Causes irreversible hearing loss, and guideline-level. **Unlike most of this list it may actually be present in the file** — some consumer platforms genotype mitochondrial sites. Mitochondrial heteroplasmy and platform-specific mtDNA handling make the call unreliable, so it is a prompt for proper testing, not a result |

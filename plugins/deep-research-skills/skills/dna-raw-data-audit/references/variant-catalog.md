@@ -75,6 +75,10 @@ is strictly safer than an instruction that cannot be executed, and the grading i
 > **figure itself was read from search-result prose** and not from the record — treat it as an
 > order-of-magnitude anchor, quote it as a range, and re-verify before it reaches a person.
 > **[calc]** computed here from the figures beside it; the derivation is shown so it can be checked.
+> **[p]** the figure came from search-result prose and **no identifier resolved for it at all** —
+> the weakest grade here. A `[p]` figure is a placeholder for a number someone must still go and
+> get, and **it does not reach a person.** **[calc from [p]]** correct arithmetic on unsourced
+> inputs: the computation is checkable, the magnitude is not.
 
 | Variant | Anchored figures | Grade |
 | :--- | :--- | :--- |
@@ -99,7 +103,7 @@ range with stated provenance beats both silence and invention.
 | Routine MTHFR polymorphism testing is advised against | [PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205) (practice guideline), with the recommendation standing through a later addendum the society lists by title; **[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) is the correction notice *about* that addendum, not the addendum** — do not cite it as the amendment. Echoed by a call to action in the thrombosis literature ([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/), a single-author commentary — not a second society position), and the clinical-utility question has been revisited ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)) |
 | CYP2D6 cannot be called reliably from array data: pseudogene similarity, CYP2D7 hybrids, CNV, and a phasing requirement | [PMC5591463](https://pmc.ncbi.nlm.nih.gov/articles/PMC5591463/), [PMC7997805](https://pmc.ncbi.nlm.nih.gov/articles/PMC7997805/) (WGS-based calling), [PMC7398905](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7398905/) (callers disagree on structural variants), [PMC8881578](https://pmc.ncbi.nlm.nih.gov/articles/PMC8881578/) |
 | Polygenic scores derived in predominantly European-ancestry cohorts transfer poorly, and the decline is continuous along genetic distance rather than stepwise between labelled groups | [PMC6563838](https://pmc.ncbi.nlm.nih.gov/articles/PMC6563838/) (Martin 2019) and its preprint [bioRxiv 10.1101/441261](https://www.biorxiv.org/content/10.1101/441261); [PMC5384097](https://pmc.ncbi.nlm.nih.gov/articles/PMC5384097/) (Martin 2017); [PMC8764121](https://pmc.ncbi.nlm.nih.gov/articles/PMC8764121/) with correction [PMC8874215](https://pmc.ncbi.nlm.nih.gov/articles/PMC8874215/) (Privé 2022 — strongest design, one cohort for training and testing); [10.1038/s41586-023-06079-4](https://doi.org/10.1038/s41586-023-06079-4) (Ding 2023); [10.1038/s41467-019-11112-0](https://doi.org/10.1038/s41467-019-11112-0) (Duncan 2019). `risk-communication.md` §4 has the table. Cite the dispute over magnitude, not one side |
-| Family-ascertained penetrance exceeds population-based penetrance, with the gap narrowing in larger studies | [PMC2447846](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2447846/) (family-based; its title states the point), [PMID 11044354](https://pubmed.ncbi.nlm.nih.gov/11044354/) / [PMC2408797](https://pmc.ncbi.nlm.nih.gov/articles/PMC2408797/) (population-based), [PMID 25192939](https://pubmed.ncbi.nlm.nih.gov/25192939) (population screening), [PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695) |
+| Family-ascertained penetrance exceeds population-based penetrance, with the gap narrowing in larger studies | [PMC2447846](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2447846/) (family-based; its title states the point), [PMID 11044354](https://pubmed.ncbi.nlm.nih.gov/11044354/) / [PMC2408797](https://pmc.ncbi.nlm.nih.gov/articles/PMC2408797/) (population-based), [PMID 25192939](https://pubmed.ncbi.nlm.nih.gov/25192939) (population screening — **counter-evidence in this row: it found population-ascertained risks comparable to family-ascertained ones**, in founder-variant carriers ascertained through healthy relatives), [PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695) (a large US series putting absolute cumulative risks at the lower end of the published range, with wide intervals) |
 | Injectable peptides sold outside regulation carry risks independent of efficacy | [PMC13585006](https://pmc.ncbi.nlm.nih.gov/articles/PMC13585006) |
 
 **Dropped for failing the standard**, recorded because the drops are as informative as the keeps:
@@ -172,12 +176,12 @@ magnitude across these tiers (computed in `risk-communication.md` §4 for the GW
 anchored APOE figures in §0 for the last):
 
 ```
- typical GWAS hit      per-allele OR 1.10, 0 -> 2 copies      1.8 pp
+ typical GWAS hit      per-allele OR 1.10, 0 -> 2 copies      1.77 pp
  strong GWAS hit       per-allele OR 1.50, 0 -> 2 copies      8.2 pp
  APOE e4/e4 vs POPULATION baseline, lifetime to 85, male     40    pp
 ```
 
-That is a **23-fold span** from the typical GWAS hit to APOE. **A report that presents both in the
+That is a **22-fold span** from the typical GWAS hit to APOE (40 / 1.77). **A report that presents both in the
 same visual register — same row height, same colour, same confident sentence shape — is actively
 misinforming**, and that ratio is the whole reason this catalogue is tiered rather than listed.
 
@@ -214,7 +218,7 @@ Full treatment, including the callable-versus-not split and what to hand a presc
 | :--- | :--- | :--- | :--- |
 | **APOE** | rs429358 + rs7412 (§7) | E1 / R1 | **ε4 dose stratifies ARIA risk with anti-amyloid monoclonal antibodies**, and the labelling for that class directs establishing ApoE ε4 status before treatment. Relevant only if that drug class is ever under consideration — and then it is decision-relevant, which is why APOE appears here as well as in §7. Check the current labelling rather than quoting this row |
 | **CYP2C19** | rs4244285 (*2), rs4986893 (*3), rs12248560 (*17) | E1 / R1 for these SNPs | The common no-function and increased-function alleles are capturable; the diplotype inference still needs care |
-| **CYP2C9** | rs1799853 (*2), rs1057910 (*3) | E1 / R1 | Pairs with VKORC1 for warfarin dosing algorithms |
+| **CYP2C9** | rs1799853 (*2), rs1057910 (*3) | E1 / R1 | Pairs with VKORC1 for warfarin dosing algorithms — **and those two are not the whole set:** CYP4F2 (rs2108622) also feeds them, and rs12777823 matters specifically in African-ancestry patients, so a two-gene warfarin answer is ancestry-incomplete |
 | **VKORC1** | rs9923231 | E1 / R1 | |
 | **SLCO1B1** | rs4149056 (*5) | E1 / R1 | Statin myopathy risk |
 | **TPMT** | rs1800460 (*3B), rs1142345 (*3C) | E1 / R1–R2 | Thiopurine dosing. **NUDT15 must be read alongside it** |
@@ -222,6 +226,12 @@ Full treatment, including the callable-versus-not split and what to hand a presc
 | **DPYD** | rs3918290 (*2A) and other no-function alleles | E1 / R2–R3 | Fluoropyrimidine toxicity. A *negative* result at one or two sites does **not** clear a person — several relevant alleles exist |
 | **CYP2D6** | rs3892097 and others are present on arrays | **E1 / R4 — do not call** | Deletions, duplications, CYP2D7 hybrids and a phasing requirement place the diplotype beyond array data (§0 anchor). Report the limitation, not a phenotype |
 | **RYR1 / CACNA1S** | — | E1 / R3 | **The highest-acuity pair in the skill, and the one the person cannot raise in the moment** — malignant-hyperthermia susceptibility with volatile anaesthetics and succinylcholine. Consumer arrays probe few of the relevant variants and call rare ones poorly, so a flag is a prompt for diagnostic testing and a **pre-operative** conversation, and a negative is not clearance (`pharmacogenomics.md` §4) |
+| **TPMT `*2`** | rs1800462 | E1 / R1–R2 | A further no-function allele; omitting it understates the callable set and how little a negative means |
+| **CYP3A5 `*3`** | rs776746 | E1 / R1 | Tacrolimus. The sibling file calls this the cleanest array-callable case; expresser frequency differs greatly by ancestry, so ancestry changes what the result means |
+| **MT-RNR1** | m.1555A>G | E1 / R3 | Aminoglycosides, irreversible hearing loss. **Some platforms genotype mitochondrial sites, so unlike most of this table it may actually be in the file** — heteroplasmy and platform-specific mtDNA handling make the call unreliable, so it is a prompt for proper testing |
+| **UGT1A1 `*28`** | tag SNPs only | E1 / **R4** | Irinotecan. `*28` is a promoter TA-repeat, so an array carries a *tag*, not the allele (`pharmacogenomics.md` §2) |
+| **HLA-A\*31:01** | — | E1 / R4 unless typed | Carbamazepine, in European and Japanese ancestry where `*15:02` is rare |
+| **HLA-B\*58:01** | — | E1 / R4 unless typed | Allopurinol — the third HLA pair, and strongly ancestry-dependent |
 | **HLA-B** alleles (e.g. \*57:01, \*15:02) | — | E1 / R4 unless specifically typed | HLA typing is its own assay. Do not infer an HLA allele from array tag SNPs without validation evidence for that specific platform |
 
 ---
@@ -248,7 +258,7 @@ Report them with that framing rather than manufacturing an action.
 
 | Gene / variant | What it is | Grade | Honest action |
 | :--- | :--- | :--- | :--- |
-| **ALDH2** rs671 | Reduced aldehyde dehydrogenase activity; the flushing variant. Carries an established association with alcohol-related cancer risk, and the association is **drinking-stratified** — it is a gene-*environment* effect, not a standalone risk ([PMC2684609](https://pmc.ncbi.nlm.nih.gov/articles/PMC2684609/)). **Ship the direction and the stratification, not an odds ratio:** widely-quoted heterozygote ORs in the 3.7–18.1 range come from consumer-facing summaries, while a 31-study meta-analysis pooled a much lower heterozygote OR near 1.4 — a real discrepancy, and a number quoted from either end alone is indefensible | E1 / R1 | Genuinely actionable in one direction only: it strengthens the case for reducing alcohol. No supplement addresses it. Note the self-undermining fact: **flushing is itself a reliable marker, so asking the person beats genotyping them** |
+| **ALDH2** rs671 | Reduced aldehyde dehydrogenase activity; the flushing variant. Carries an established association with alcohol-related cancer risk, and the association is **drinking-stratified** — it is a gene-*environment* effect, not a standalone risk ([PMC2684609](https://pmc.ncbi.nlm.nih.gov/articles/PMC2684609/)). **Ship the direction and the stratification, not an odds ratio** — and note *why* the published figures differ, because it is not a dispute. The large odds ratios come from **drinking-stratified** analyses; a pooled estimate that does not stratify dilutes a gene–environment effect across non-drinkers in whom it is near-null. **They are not rival estimates of one quantity.** So quote a stratified figure with its stratum named, and **never a pooled figure to someone who drinks.** No figure ships here: this row sits outside §0's three-variant carve-out, and the pooled estimate carries no identifier | E1 / R1 | Genuinely actionable in one direction only: it strengthens the case for reducing alcohol. No supplement addresses it. Note the self-undermining fact: **flushing is itself a reliable marker, so asking the person beats genotyping them** |
 | **MCM6 / LCT** rs4988235 | Lactase persistence regulatory variant | E1 / R1 | Explains a phenotype the person already knows. Dietary choice follows symptoms, not genotype |
 | **CYP1A2** rs762551 | Caffeine metabolism | E3 / R1 | Weaker than marketed. Observed caffeine tolerance beats the genotype |
 | **FTO** rs9939609 | Commonest BMI-associated locus | E2 / R2 (A/T site — strand-ambiguous) | **None.** The important finding is that it does not appear to blunt response to lifestyle intervention — so the advice is unchanged by genotype |
@@ -369,8 +379,14 @@ pharmacogenomic axis as well as a risk axis:
   turns on carrier status. It is **only relevant if the person is ever considering that drug class**,
   which most are not, and the raw-data call still needs clinical confirmation first.
 
-*Treat the specifics as a live regulatory fact: name the mechanism and check the current labelling
-rather than quoting figures from this file (`pharmacogenomics.md` §4's rule).*
+**No identifier ships with this axis**, and the disclosure matters in a file whose first sentence is
+that every citation was verified against a retrieved record: the labelling is a living regulatory
+document and none resolved to a retrieved record here. **Name the drug class and the labelling
+section, and read the version in force at analysis time** rather than quoting figures from this file
+(`pharmacogenomics.md` §4's rule).
+
+**And non-carriage is not clearance:** ARIA occurs in ε4 non-carriers too, so ε3/ε3 changes the
+*intensity* of the monitoring conversation, not whether it happens.
 
 ### ε2 exists, and a section headed "in full" has to say so
 

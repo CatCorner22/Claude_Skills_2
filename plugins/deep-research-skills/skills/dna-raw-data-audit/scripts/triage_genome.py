@@ -57,6 +57,18 @@ from collections import Counter
 # else None. Supplying it lets strand_ambiguity() be definitive for a homozygous call, which it
 # cannot otherwise be (see that function's docstring). None means "not verified" — never guessed,
 # because a wrong allele pair would turn a correct CLEAR into a wrong AMBIGUOUS or vice versa.
+# ALLELE-PAIR CONVENTION. Pairs are given on the **dbSNP plus strand**, which is what consumer
+# arrays emit — because the whole point of carrying a pair is settling orientation, so an
+# inconsistent convention here would be worse than carrying no pair at all. Two entries below are
+# labelled in **cDNA** orientation (`C677T`, `-13910C>T`) for genes transcribed from the minus
+# strand; the *label* is cDNA and the *pair* must be plus-strand, and those two are flagged inline
+# as needing confirmation against dbSNP. **Where a pair is not confirmed, it is `None`** — the
+# script then reports UNDETERMINED, which is a statement about this catalogue rather than about the
+# site. A wrong pair is worse than `None`.
+#
+# This catalogue is a deliberate SUBSET of references/variant-catalog.md: single-SNP sites a
+# consumer file plausibly contains. RYR1/CACNA1S, MT-RNR1, the HLA alleles and the BRCA founder
+# variants are not here and must be looked up by hand.
 CATALOG = {
     "rs429358": ("APOE", "APOE haplotype-defining site (Cys112Arg)", {"T", "C"}),
     "rs7412":   ("APOE", "APOE haplotype-defining site (Arg158Cys)", {"C", "T"}),
@@ -65,10 +77,14 @@ CATALOG = {
     "rs1799945": ("HFE", "HFE H63D (c.187C>G — palindromic site)", {"C", "G"}),
     "rs1800562": ("HFE", "HFE C282Y (c.845G>A)", {"G", "A"}),
     "rs6025":    ("F5", "Factor V Leiden", None),
-    "rs1801133": ("MTHFR", "MTHFR C677T — see the MTHFR corrective before interpreting", {"C", "T"}),
+    # cDNA-labelled, minus-strand gene: the C/T pair below is the cDNA orientation and is NOT
+    # confirmed plus-strand, so it is withheld rather than asserted. Neither orientation is
+    # palindromic, so no current verdict changes — this is a latent trap, not a live one.
+    "rs1801133": ("MTHFR", "MTHFR C677T (cDNA label; plus-strand pair unconfirmed) — see the MTHFR corrective before interpreting", None),
     "rs1801131": ("MTHFR", "MTHFR A1298C — see the MTHFR corrective before interpreting", None),
     "rs671":     ("ALDH2", "ALDH2 Glu504Lys (c.1510G>A)", {"G", "A"}),
-    "rs4988235": ("MCM6/LCT", "lactase persistence regulatory variant (-13910C>T)", {"C", "T"}),
+    # Same situation as rs1801133: cDNA label, minus-strand gene, pair withheld pending dbSNP.
+    "rs4988235": ("MCM6/LCT", "lactase persistence regulatory variant (-13910C>T, cDNA label; plus-strand pair unconfirmed)", None),
     "rs762551":  ("CYP1A2", "CYP1A2 -163C>A", None),
     # FTO rs9939609 is an A/T site (A is the risk allele relative to T) -> PALINDROMIC.
     "rs9939609": ("FTO", "FTO intron 1 (A/T — palindromic site)", {"A", "T"}),
@@ -84,6 +100,14 @@ CATALOG = {
     "rs1142345": ("TPMT", "TPMT *3C", None),
     "rs116855232": ("NUDT15", "NUDT15 *3", None),
     "rs3918290": ("DPYD", "DPYD *2A", None),
+    # Added after a cross-file audit found these named in the references but absent from the funnel.
+    "rs776746":  ("CYP3A5", "CYP3A5 *3 — the cleanest array-callable PGx site; ancestry changes what it means", None),
+    "rs1800462": ("TPMT", "TPMT *2 — a further no-function allele; omitting it understates how little a negative means", None),
+    "rs2108622": ("CYP4F2", "CYP4F2 V433M — feeds warfarin dosing algorithms alongside CYP2C9/VKORC1", None),
+    "rs12777823": ("CYP2C-cluster", "warfarin dose-associated variant of particular relevance in African ancestry", None),
+    "rs601338":  ("FUT2", "FUT2 secretor status — changes how a serum B12 level is interpreted, not the requirement", None),
+    "rs1050828": ("G6PD", "G6PD A- (V68M) — X-LINKED: a heterozygous female is a mosaic and a genotype cannot resolve her activity", None),
+    "rs1050829": ("G6PD", "G6PD A (N126D) — X-LINKED, read with rs1050828; enzyme activity is the better test and is still not definitive", None),
 }
 
 AMBIGUOUS_PAIRS = ({"A", "T"}, {"C", "G"})
@@ -495,12 +519,21 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
                                     "status": absent_status}
             continue
         genos = {g for _, g in hits}
-        rec = {"gene": gene, "site": what, "genotype": sorted(genos)[0],
+        # A discordant site has no genotype. Returning one — the alphabetically first, as an
+        # earlier version did — let the APOE stage read a call the row beside it had already
+        # condemned, and print "e4/e4 · uniquely determined" from two files that disagreed.
+        discordant = len({frozenset(g) for g in genos}) > 1
+        rec = {"gene": gene, "site": what,
+               "genotype": None if discordant else sorted(genos)[0],
+               "observed": sorted(genos) if discordant else None,
                "sources": [p for p, _ in hits]}
-        if len({frozenset(g) for g in genos}) > 1:
-            rec["status"] = f"DISCORDANT between files: {hits} — do not interpret until resolved"
-        else:
-            rec["status"] = "called"
+        rec["status"] = (f"DISCORDANT between files: {hits} — do not interpret until resolved"
+                         if discordant else "called")
+        # A discordant site has no genotype to orient, so a strand verdict there is noise that
+        # distracts from the actual finding.
+        if discordant:
+            out["catalog"][rsid] = rec
+            continue
         amb = strand_ambiguity(rec["genotype"], site_alleles)
         rec["strand"] = amb
         rec["site_palindromic"] = site_is_palindromic(site_alleles)
@@ -534,16 +567,29 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
                     "file until that is explained."
                 )
 
-    g1 = out["catalog"].get("rs429358", {}).get("genotype")
-    g2 = out["catalog"].get("rs7412", {}).get("genotype")
-    out["apoe"] = apoe_diplotypes(g1, g2)
+    discordant_apoe = [r for r in ("rs429358", "rs7412")
+                       if str(out["catalog"].get(r, {}).get("status", "")).startswith("DISCORDANT")]
+    if discordant_apoe:
+        out["apoe"] = {"resolved": None, "candidates": [],
+                       "note": ("unresolved — the two files disagree at "
+                                + ", ".join(discordant_apoe)
+                                + ", so neither call can be used until that is explained")}
+    else:
+        g1 = out["catalog"].get("rs429358", {}).get("genotype")
+        g2 = out["catalog"].get("rs7412", {}).get("genotype")
+        out["apoe"] = apoe_diplotypes(g1, g2)
 
     if len(parsed) == 2:
         out["concordance"] = concordance(parsed[0], parsed[1])
 
+    # The exit code is a property of the data, not of the output format. An earlier version
+    # returned 3 in text mode and 0 under --json for the same undeclared-build file, so a
+    # pipeline reading the exit status got the opposite answer from a human reading the report.
+    exit_code = 3 if any("build NOT declared" in w for w in out["warnings"]) else 0
     if as_json:
+        out["exit_code"] = exit_code
         print(json.dumps(out, indent=2))
-        return 0
+        return exit_code
 
     print("=== Files ===")
     for e in out["files"]:
@@ -569,14 +615,23 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
             print(f"  discordant examples: {', '.join(c['discordant_examples'])}")
     print("\n=== Catalogued sites ===")
     for rsid, r in out["catalog"].items():
-        if catalog_only and r.get("genotype") is None:
+        # --catalog-only hides sites with nothing to say. A DISCORDANT site has plenty to say and
+        # now carries no genotype (by design), so filtering on genotype alone would hide the
+        # finding — which is the opposite of what this flag is for.
+        if (catalog_only and r.get("genotype") is None
+                and not str(r.get("status", "")).startswith("DISCORDANT")):
             continue
-        print(f"  {rsid:<12} {r['gene']:<10} {str(r.get('genotype') or '--'):<4} {r['status']}")
+        shown = r.get("genotype") or ("/".join(r["observed"]) if r.get("observed") else "--")
+        print(f"  {rsid:<12} {r['gene']:<10} {shown:<8} {r['status']}")
         if "strand_note" in r:
             print(f"               ^ [{r['strand']}] {r['strand_note']}")
     print("\n=== APOE ===")
     a = out["apoe"]
     print(f"  diplotype: {a['resolved'] or 'unresolved'} · {a['note']}")
+    for r in ("rs429358", "rs7412"):
+        st = str(out["catalog"].get(r, {}).get("status", ""))
+        if st.startswith("DISCORDANT"):
+            print(f"  ! {r} is discordant between the files — no APOE call is possible")
     if a.get("caution"):
         print(f"  ! caution: {a['caution']}")
     if out["warnings"]:
@@ -585,7 +640,7 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
             print(f"  ! {w}")
     print("\nThis output is what the DATA says. It assigns no risk and no pathogenicity, and")
     print("recommends nothing. Interpretation belongs to the skill's references.")
-    return 3 if any("build NOT declared" in w for w in out["warnings"]) else 0
+    return exit_code
 
 
 # --------------------------------------------------------------------------------------
@@ -821,6 +876,48 @@ def self_test() -> int:
         check("report warns against inferring e3/e3 from absence",
               "never infer e3/e3 from absence" in txt)
         check("report never prints a bare risk verdict", "assigns no risk" in txt)
+
+        # --- REGRESSION: a discordant catalogue site must yield no genotype, and no APOE call.
+        # Measured old behaviour: the row said "DISCORDANT ... do not interpret" and the same run
+        # printed "diplotype: e4/e4 - uniquely determined", built from the alphabetically first
+        # of the two disagreeing calls. Fabrication at the highest-stakes locus in the skill.
+        pd1 = os.path.join(td, "disc_a.txt")
+        with open(pd1, "w") as fh:
+            fh.write("# build 37\nrs429358\t19\t45411941\tTT\nrs7412\t19\t45412079\tCC\n")
+        pd2 = os.path.join(td, "disc_b.txt")
+        with open(pd2, "w") as fh:
+            fh.write("# build 37\nrs429358\t19\t45411941\tCC\nrs7412\t19\t45412079\tCC\n")
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([pd1, pd2], False, True)
+        txt = buf.getvalue()
+        check("discordant APOE site yields no diplotype", "e4/e4" not in txt)
+        check("discordant APOE site is named in the APOE block",
+              "rs429358 is discordant between the files" in txt)
+        check("discordant site still reported as discordant", "DISCORDANT between files" in txt)
+        # And the JSON path must agree, including on the exit code.
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([pd1, pd2], True, True)
+        j = json.loads(buf.getvalue())
+        check("discordant site carries no genotype in JSON",
+              j["catalog"]["rs429358"]["genotype"] is None)
+        check("discordant site records what was observed",
+              j["catalog"]["rs429358"]["observed"] == ["CC", "TT"])
+        check("JSON APOE unresolved on discordance", j["apoe"]["resolved"] is None)
+
+        # --- REGRESSION: the exit code is a property of the data, not the output format ---
+        nb = os.path.join(td, "nobuild2.txt")
+        with open(nb, "w") as fh:
+            fh.write("rs6025\t1\t169519049\tGG\n")
+        with contextlib.redirect_stdout(io.StringIO()):
+            rc_text = report([nb], False, False)
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc_json = report([nb], True, False)
+        check("undeclared build exits 3 in text mode", rc_text == 3)
+        check("undeclared build exits 3 under --json too", rc_json == 3)
+        check("JSON carries the exit code", json.loads(buf.getvalue())["exit_code"] == 3)
 
         # --- APOE spacing invariant: 138 bp in every build ---
         pgap = os.path.join(td, "gap.txt")

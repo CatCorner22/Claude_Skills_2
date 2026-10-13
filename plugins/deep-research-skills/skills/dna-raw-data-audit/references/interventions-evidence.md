@@ -239,7 +239,10 @@ folate.** All three were missing from this file until a safety review named them
 pathway genotype — and note *why*: the vitamin D pathway variants explain part of someone's
 **baseline** 25(OH)D, not their **response to supplementation**, which is the quantity a
 supplementation decision needs. A variant that predicts where you start and not where you end up is
-a G3 finding however well replicated it is. Ferritin and transferrin saturation beat HFE. A B12 level beats an MTHFR result.
+a G3 finding however well replicated it is. Ferritin and transferrin saturation beat HFE. **Plasma homocysteine — with folate, and B12 — beats
+an MTHFR result**, because homocysteine is the measured intermediate the whole MTHFR story runs
+through and the analyte the guidance substitutes; B12 belongs there as the co-measurement, for the
+masking reason in boundary 3 above, rather than as the headline substitute.
 Where a cheap decisive phenotype test exists, the genotype's only real value is prompting it.
 
 **Where the general recommendation does not change based on genotype — the common case — say so.**
@@ -253,7 +256,7 @@ The owner asked for this explicitly, so it gets a real assessment rather than a 
 assessment is structural: **grade the class, name what is actually established, and apply §2.**
 
 **The GLP-1 contrast case, first, because it calibrates everything else.** GLP-1 receptor agonists
-are approved medicines with large randomised trials — **T1, approved**. That is what real evidence
+**and the dual GIP/GLP-1 agonist tirzepatide** are approved medicines with large randomised trials — **T1, approved**. That is what real evidence
 for a peptide looks like, and every class below should be read against it; the gap is large.
 
 **But do not lump them, because their outcome evidence is not the same *shape*** — which is the
@@ -269,7 +272,8 @@ the heart-failure component
 with a reconstructed PMID*).
 
 Its **general-population** cardiovascular-outcome trial is a different animal again: run against an
-active comparator (another GLP-1 agonist with established benefit) and reporting **noninferiority**
+active comparator (a GLP-1 receptor agonist with established placebo-controlled benefit) and
+reporting **noninferiority**
 rather than placebo-controlled superiority — which is the sharper and more durable distinction
 between the two drugs.
 
@@ -280,8 +284,11 @@ teaching against it.
 
 Their genetic evidence is **G2 at best and not usable** (§2): a genotype does not select them.
 
-**Growth-hormone secretagogues and GHRH analogues** — ipamorelin, CJC-1295, sermorelin, tesamorelin,
-and MK-677 (frequently sold alongside peptides but not itself a peptide). Evidence for the commonly
+**Growth-hormone secretagogues and GHRH analogues** — ipamorelin, CJC-1295, sermorelin, tesamorelin
+— whose approved indication is narrow and should be *named* rather than called narrow: **reduction
+of excess abdominal fat in adults with HIV-associated lipodystrophy**, with the label itself ruling
+out what people want it for (not indicated for weight loss, effect on body weight neutral, long-term
+cardiovascular safety not established; confirm the wording at source) — and MK-677 (frequently sold alongside peptides but not itself a peptide). Evidence for the commonly
 marketed uses is **T3–T6**, and concerns centre on sustained IGF-1 elevation. **G4.**
 
 **This class spans three different regulatory categories, and collapsing them is a real error:** a
@@ -367,10 +374,10 @@ licensed indication, approved** — not a grey-market unknown, and an earlier ve
 misclassified it. **Two things follow, and the second is the one that matters:** the licensed
 indication is narrow and the published effect sizes are modest, and **material sold online as
 "PT-141" is not the approved product** — it is the same molecule name attached to an unregulated
-supply chain, which is a §5 product-integrity problem rather than an efficacy question. **G4.**
+supply chain, which is the product-integrity problem below (item 1) rather than an efficacy question. **G4.**
 
 **Three risks that are independent of whether any molecule works**, and which the marketing never
-addresses:
+addresses — followed by a fourth item that is a *method* rail rather than a risk the user carries:
 1. **Product integrity.** Grey-market injectables carry contamination, mislabelling, dosing-error
    and sterility risk. Review literature on unregulated injectable peptide use documents real harm
    ([PMC13585006](https://pmc.ncbi.nlm.nih.gov/articles/PMC13585006)).
@@ -396,7 +403,8 @@ addresses:
    more useful than a laundered one.
 
 **What the skill does with a peptide question.** Explain the grading, state the evidence honestly,
-name the safety and regulatory considerations, and say clearly that **the genome contributes nothing
+name the safety and regulatory considerations, and say clearly that **for the peptides this market
+sells the genome contributes nothing
 to the decision** — because that is the accurate answer and it is the one thing a genetics tool is
 uniquely positioned to say. Then route the actual decision to a clinician who can see the whole
 person. **No doses. No sourcing. No protocols.**

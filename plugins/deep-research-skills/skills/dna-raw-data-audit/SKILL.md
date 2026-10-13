@@ -10,7 +10,7 @@ description: >-
   or dosing. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   source: >-
     Built from an eight-stream research pass, then re-audited by a perspective-diverse adversarial
     pass that found defects in the shipped version and is the reason several claims here are
@@ -97,14 +97,16 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    `references/variant-triage.md` §2–3.
 
 7. **Apply the confirmation rule to anything clinically significant.** The reason differs by data
-   type and both must be stated correctly. For **arrays**, a population-scale study of ~49,908
+   type and both must be stated correctly. For **arrays**, a population-scale study of **roughly fifty thousand**
    people with both chip and sequencing data found chip genotyping performs well for *common*
    variants and collapses in positive predictive value for *very rare* ones — and the dominant
    mechanism is Bayesian, not fixable by better probes: at a rare variant's prevalence, even a
-   99.9%-specific assay is wrong about most of the people it flags. For **sequencing**, that
-   literature does not transfer; the reason is instead that consumer sequencing is not reported
-   under clinical-laboratory conditions, and short reads stay weak for repeat expansions, large
-   structural variants and pseudogene-confounded loci. Either way: **no clinically significant
+   99.9%-specific assay is wrong about most of the people it flags. For **high-depth sequencing**, the chip-specific
+   clustering literature does not transfer — **but the prevalence arithmetic above does, to any
+   imperfect assay.** What is additionally true of sequencing: it is not reported under
+   clinical-laboratory conditions, and short reads stay weak for repeat expansions, large
+   structural variants and pseudogene-confounded loci. **And a low-pass-plus-imputation product is
+   not high-depth sequencing** — its rare-variant calls inherit the array argument in full. Either way: **no clinically significant
    finding from consumer data supports action until a clinical-grade laboratory confirms it.** Say
    it every time — not as a disclaimer, as the finding. `references/variant-triage.md` §4.
 
@@ -143,9 +145,13 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
     `references/variant-catalog.md` §0 — quoted as ranges, with their grade and design stated — not
     a number you cannot source. **An unsourceable figure is reported as unavailable.**
 
-12. **Decide actionability honestly, then report.** An intervention must exist, and it must have
-    been shown to change the outcome *in carriers specifically*, before a genotype is actionable.
-    Most findings fail that test and should say so. Then assemble the six-section report in
+12. **Decide actionability honestly, then report.** An intervention must exist with evidence at
+    **T1 or T2 — or at T3 where the intervention is avoidance of a documented hazard and a
+    randomised trial is unobtainable or unethical** — and it must have been shown to change the
+    outcome *in carriers specifically*. **State which case you are in.** Most findings fail this
+    test and should say so; the avoidance cases are the ones that pass (HFE and iron, G6PD and
+    oxidant triggers including high-dose or intravenous vitamin C, ALDH2 and alcohol).
+    `references/interventions-evidence.md` §2. Then assemble the six-section report in
     `references/report-template.md`.
 
 **Deliverable contract — six sections, every time, including when the audit cannot proceed.**
@@ -176,13 +182,36 @@ These are not hedges. Each exists because violating it causes a specific harm.
   diagnose. This rail is what stops the skill becoming a genotype-flavoured supplement storefront,
   which is its most likely failure mode. `references/interventions-evidence.md` §2 has the
   counterexample and why it strengthens the rule.
+- **Never advise stopping, starting or changing a prescribed medication** — including one the data
+  appears to flag, and especially then. Abrupt discontinuation carries its own risk, and the
+  prescriber holds context the genome does not. This is the condition under which consumer
+  pharmacogenetic reporting is permitted to exist at all, not a house style. All three reference
+  files carried this; the file guaranteed to load did not. `references/pharmacogenomics.md` §5,
+  `references/report-template.md` §7.
 - **Confirmation before action** on any clinically significant finding, always stated.
 - **A variant of uncertain significance is not a finding to act on.** Report it as uncertain and
   leave it there.
-- **Absent from the file ≠ absent from the person.** Never offer a negative result as reassurance
-  without saying what was and was not probed.
-- **No star-allele call without the data to support it** — no phase, no call; no copy-number
-  assay, no CYP2D6 call.
+- **No clinical finding rests on an imputed call.** A low-pass-plus-imputation product is not
+  high-depth sequencing: its rare-variant calls are statistical inferences, and they inherit the
+  array false-positive argument in full. Establish the product tier from the provider before
+  applying either reading. `references/data-formats-and-parsing.md` §4.
+- **A negative is never clearance**, and "absent from the file ≠ absent from the person" is only
+  half of it. A site **never probed** yields *no* information — not weak reassurance. A site probed
+  and called reference is bounded by what was probed, and bounded again by ancestry. State the
+  probed set, give the post-negative carrier probability using **ancestry-specific clinical
+  sensitivity**, report the **negative likelihood ratio** rather than NPV for anything rare, and
+  never let a negative stand as clearance for a condition the person has a family history of.
+  `references/risk-communication.md` §5. *(The earlier wording — "never offer reassurance without
+  saying what was probed" — licensed the harm: list the probed set, then reassure.)*
+- **No star-allele call the data cannot support — which is not the same as "no phase, no call".**
+  Where no defined haplotype carries both observed variants in cis, the diplotype *is* determined:
+  report it (CYP2C19 heterozygous at `*2` and `*17` is the worked case). Where two or more defined
+  diplotypes are consistent, enumerate them, say whether the ambiguity is **nomenclatural or
+  clinical**, and name the assay that settles it (TPMT `*3B`/`*3C`). Where the call needs copy
+  number or structure — CYP2D6 — do not call. **State any cis assumption rather than leaving it
+  silent.** `references/pharmacogenomics.md` §1. *(The absolute form banned everything, since no
+  consumer file is phased — and that reference file says in terms that a skill which always reports
+  ambiguity is as wrong as one that never does.)*
 - **Population-based penetrance** for a person tested without a family history. Family-ascertained
   estimates answer a different question. `references/risk-communication.md` §3.
 - **Regulatory and sport-prohibition status is named by mechanism, never frozen as fact.** It moves.
@@ -191,8 +220,24 @@ These are not hedges. Each exists because violating it causes a specific harm.
   before disclosing, and never volunteer inferred family structure — relatedness, consanguinity, or
   non-paternity — as an aside. If the data implies it, say that such inferences are possible and ask
   whether the person wants them addressed at all.
-- **Serious findings get a named handoff, not a paragraph.** If something genuinely urgent surfaces,
-  say so first, plainly, with the route to a clinician — do not bury it in section 5 of a long report.
+- **Serious findings get a named handoff, not a paragraph — and "serious" needs defining, because
+  this is the file an agent always loads.** A finding is urgent when **the exposure is live or
+  scheduled**: a drug the person is currently taking or about to start, a booked operation or
+  anaesthetic, a first chemotherapy dose — or a reliably-called, high-penetrance, actionable
+  variant. Then: say it in the first sentence; name the confirmation step and the clinician; do
+  **not** advise stopping or changing a medication; state the unconfirmed-consumer-data uncertainty
+  in the same breath; and flag the relatives implication. `references/report-template.md` §7.
+- **Establish whose genome this is before reading it.** If the data subject is not the person
+  asking, say what changes: they have not consented to this analysis, and findings about them are
+  not the requester's to receive. **For a minor's file, do not report predictive adult-onset
+  findings** — that decision belongs to the person when they can make it. Route to a clinical
+  genetics service. *(A relative's export is a realistic input;
+  `references/data-formats-and-parsing.md` §5 treats it as one.)*
+- **An exclusion request — "do not tell me about X" — is honoured in full for findings with no
+  action attached.** It is overridden only for a reliably-called, actionable, **time-critical**
+  finding, and then the report says that an excluded-category finding exists and needs a
+  conversation, names the clinician route, and **does not detail it.** Ask before reading the file,
+  not after.
 
 ## Why / learn
 
@@ -246,8 +291,10 @@ resolved citations and what the evidence does and does not support.
 - Interpreting before running the quality pass → a no-call or a discordant site interpreted as a
   genotype is a fabricated finding.
 - Looking up a position without checking the genome build → silently returns a different variant.
-- Ignoring strand orientation on A/T and C/G sites → these are the ambiguous class, and a flipped
-  call inverts the result. See `references/data-formats-and-parsing.md` §2.
+- Treating every call at an A/T or C/G site as unusable → the unresolvable case is a **homozygote**
+  there (2 copies on one orientation, 0 on the other). A **heterozygote** carries one copy of each
+  allele either way, so its dosage is 1 and the call is usable; discarding it is the opposite error
+  and suppresses real findings. `references/data-formats-and-parsing.md` §2.
 - Reading "not in my file" as "I don't have it" → the array never asked. In a variants-only VCF it is
   worse: absence and homozygous-reference are the same observation, so reading silence as a reference
   call fabricates a genotype — the APOE e3/e3 case is the one that bites.
@@ -280,8 +327,8 @@ some have no action attached. Decide what you want to know before the analysis, 
 **Keep your filled-in copy outside the plugin, and keep the genome outside it entirely.** This file
 ships as a *template* inside the installed plugin, where a `/plugin marketplace update` can
 overwrite it. Copy it to `.claude/skills-env/dna-raw-data-audit.private.md` in your own project — and note
-that genetic and health detail belongs in the git-ignored `.private.md` twin, never in a committed
-file.
+that **the `.private.md` suffix is what keeps it out of git — the plain `.md` form is NOT
+ignored**, so confirm with `git check-ignore -v` before writing anything into it.
 
 ## References
 - references/data-formats-and-parsing.md — 23andMe and Nebula formats, build detection, strand
@@ -306,7 +353,10 @@ file.
 > not where a user runs these.
 - `python3 "${CLAUDE_PLUGIN_ROOT}/skills/dna-raw-data-audit/scripts/triage_genome.py" <file> [<file2>]` —
   parses 23andMe-format and VCF input, detects the genome build, reports total sites and no-call
-  rate, checks concordance when two files are given, and extracts only the catalogued sites. It
+  rate, checks concordance when two files are given, and extracts the sites in **its own
+  catalogue — a named subset of `references/variant-catalog.md`, not the whole funnel.**
+  RYR1/CACNA1S, MT-RNR1 m.1555A>G, the HLA alleles and the BRCA founder variants are **not** in it
+  and must be looked up by hand (stage 5 says the same). It
   deliberately does **not** compute risk, assign pathogenicity, or recommend anything: it establishes
   what the data says so the interpretation is done against verified genotypes rather than assumed
   ones. It validates ploidy before calling anything, refuses genotypes from gVCF reference blocks
@@ -314,6 +364,12 @@ file.
   138 bp spacing between the two APOE sites, and reports strand state as
   `AMBIGUOUS`/`CLEAR`/`UNDETERMINED`. `--self-test` runs the offline parsing and algebra tests —
   including the APOE ambiguity case and a regression assertion for each of those refusals.
+- **Test reachability before relying on the citation verifier.** Where the scholarly resolvers are
+  blocked — the normal case in this environment — it returns `ERROR: network unavailable` and
+  verifies nothing. The operative standard is then `references/variant-catalog.md` §0: an
+  identifier counts as verified only when it appears inside a returned URL **and** the record's
+  title was returned beside it. Report unverifiable identifiers as unverified, and say in report
+  §5 that the live pass could not be performed.
 - Citation checking reuses this plugin's existing verifier under the same plugin root:
   `python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --doi <doi>`
   **Use it for existence and metadata checks only.** That script hard-codes a
