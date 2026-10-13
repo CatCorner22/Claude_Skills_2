@@ -134,6 +134,16 @@ prose rather than in a retrieved record during verification, and `variant-catalo
 that disqualifies a number from shipping. The direction, the common-versus-rare split, and the
 clinical consequence are firmly established and are what the rule rests on.*
 
+**Correct the famous figure rather than repeating it.** The number people arrive with — that a large
+fraction of consumer raw-data variants are false positives — traces to the small clinical-laboratory
+series above. That study is real and its direction is right, but its sample was a few dozen
+specimens from one laboratory, **selected because someone had already sought confirmation of a
+flagged variant**. A rate measured on samples chosen that way does not estimate the rate in anyone's
+file, and it does **not** transfer to common pharmacogenomic SNPs, which the population-scale study
+found are called well. So the honest reply to "isn't 40% of this data wrong?" is: *the false-positive
+problem is real and concentrated in rare variants; that particular percentage describes a selected
+referral series, not your file* — and then the PPV arithmetic below, which does apply.
+
 ### The mechanism — and the primary cause is not the one people name
 
 Probe design and genotype-cluster separation are real contributors: arrays are optimised for common

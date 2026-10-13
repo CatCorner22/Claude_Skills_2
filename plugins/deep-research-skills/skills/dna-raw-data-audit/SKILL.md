@@ -107,7 +107,11 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    Star alleles are diplotypes: calling them generally needs *phase* — which variants sit on the
    same chromosome copy — and for some genes *copy number*. An unphased genotype list supplies
    neither. CYP2D6 is the canonical refusal: deletions, duplications and CYP2D6/CYP2D7 hybrids put
-   it beyond array data. Work the callable-versus-not split in `references/pharmacogenomics.md`,
+   it beyond array data — **and beyond a plain VCF from whole-genome sequencing too, because the
+   limitation is the representation rather than the depth.** The route is a purpose-built caller run
+   against the alignment, or a clinical panel with a copy-number assay. Grade callability on three
+   axes, not two: phase, structure, **and allele frequency** — a rare variant on a single probe is a
+   hypothesis however cleanly it was called. Work the callable-versus-not split in `references/pharmacogenomics.md`,
    and route anything real to a clinical PGx panel ordered by the prescriber.
 
 9. **Convert every risk number into absolute terms before reporting it.** A relative figure without

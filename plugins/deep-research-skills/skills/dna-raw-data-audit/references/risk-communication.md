@@ -64,24 +64,40 @@ because it looks like a rounding convention**, so recompute them rather than rea
 ### Case-control designs report odds ratios, and genetic studies are full of them
 
 Much genetic association data comes from case-control designs, which yield **odds ratios**, not risk
-ratios. An OR read as an RR always overstates. Converting at a known baseline p₀:
+ratios. Converting at a known baseline p₀:
 
 ```
 RR = OR / (1 − p₀ + p₀·OR)
 ```
 
-For **OR = 2.0** this simplifies to `RR = 2/(1 + p₀)`, so the relative overstatement from misreading
-it equals the baseline risk exactly:
+**The error from reading an OR as an RR has an exact signed form:**
 
-| Baseline | True RR at OR 2.0 | Overstatement from reading OR as RR |
-| ---: | ---: | ---: |
-| 1% | 1.980 | 1.0% |
-| 10% | 1.818 | 10.0% |
-| 30% | 1.538 | 30.0% |
+```
+ (OR − RR) / RR  =  p₀ · (OR − 1)
+```
 
-Safe to approximate when the outcome is rare; degrades exactly as fast as the baseline rises.
-**Always check which measure the source reported** — a paper saying "OR" and a report saying "times
-the risk" are not the same claim.
+Read that carefully, because it says two things the usual advice misses:
+
+1. **It is signed.** For `OR > 1` the OR overstates the risk ratio. **For a protective `OR < 1` it
+   UNDERSTATES it** — the true RR is closer to 1 than the OR, so the variant looks more protective
+   than it is. Protective ORs are everywhere in genetic data, since the same variant is reported
+   with either allele as reference, and this is the **false-reassurance** direction.
+2. **It scales with `(OR − 1)`, not with the baseline alone.** At OR = 2 the relative overstatement
+   happens to equal p₀ exactly, which is why that case gets quoted as the rule — but at OR = 3 it is
+   twice the baseline and at OR = 5 it is four times.
+
+| OR | Baseline p₀ | True RR | Error from reading OR as RR |
+| ---: | ---: | ---: | ---: |
+| 2.0 | 1% | 1.980 | +1.0% |
+| 2.0 | 10% | 1.818 | +10.0% |
+| 2.0 | 30% | 1.538 | +30.0% |
+| 3.0 | 30% | 1.875 | +60.0% |
+| 5.0 | 30% | 2.273 | +120.0% |
+| **0.5** | **30%** | **0.588** | **−15.0%** — "halves your risk" overstates the benefit |
+
+Safe to approximate when the outcome is rare *and* the OR is near 1; it degrades in proportion to
+both the baseline and `(OR − 1)`. **Always check which measure the source reported** — a paper
+saying "OR" and a report saying "times the risk" are not the same claim.
 
 ---
 
@@ -105,9 +121,26 @@ series ([PMID 11044354](https://pubmed.ncbi.nlm.nih.gov/11044354/) /
 [PMC2408797](https://pmc.ncbi.nlm.nih.gov/articles/PMC2408797/)). **But newer and larger estimates
 overlap considerably**, and at least one population-screening study found risks in
 population-ascertained carriers comparable to family-ascertained ones
-([PMID 25192939](https://pubmed.ncbi.nlm.nih.gov/25192939)). There is also more variation *between
-families carrying the same variant* than between positions within a gene
-([PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695)).
+([PMID 25192939](https://pubmed.ncbi.nlm.nih.gov/25192939)), and a large US series put absolute
+cumulative risks at the lower end of the published range with wide intervals
+([PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695)) — which is an argument for rule 4 below.
+
+**Two disciplines on this comparison, both learned by getting it wrong here:**
+
+- **The gap is a BRCA1 result in the records cited, not a both-genes result.** Scope the claim to the
+  gene you can support it for, and do not let "for the same gene" stand in for "for either gene".
+- **The two records are not comparable on age horizon** — one reports penetrance to 70, the other to
+  80. Comparing across horizons is precisely the error the next subsection forbids, and it was
+  committed inside the paragraph that establishes this file's safety argument. **Read the horizon off
+  each record and state it beside each figure.** The figures are not reproduced here because they did
+  not resolve to a retrieved record in this environment (`variant-catalog.md` §0); get them from the
+  records, with their intervals and their carrier counts, which are small.
+
+*Withdrawn on re-check: an earlier version of this paragraph claimed, citing PMID 16484695, that
+variation between families carrying the same variant exceeds variation between positions within a
+gene. A verification pass could not find that result in the cited paper, which is a
+penetrance-estimation study rather than a variance partition. The claim is withdrawn rather than
+rehedged, and the record is kept for what it does establish.*
 
 So the rule is **not** "family-based estimates are inflated, discount them". It is:
 
@@ -117,9 +150,9 @@ So the rule is **not** "family-based estimates are inflated, discount them". It 
    is real information.
 3. **Never quote only one figure, in either direction.** This cuts both ways, and the second
    direction is the one usually missed: quoting only the *population* figure to someone who **does**
-   have a strong family history **under-warns them**, and that is its own safety failure. Family-based
-   estimates have run materially above population-based ones for the same gene, so the gap is large
-   enough for the choice to matter clinically.
+   have a strong family history **under-warns them**, and that is its own safety failure. For BRCA1,
+   family-ascertained estimates have run well above population-based ones, and that gap is large
+   enough for the choice to matter clinically — quote both, with their age horizons.
 4. **Quote a range, not a point.** Any single penetrance figure presented as *the* number is
    overstating what the literature supports.
 5. **Report which kind of estimate you used and why** — and, where family history is unknown, report
@@ -128,16 +161,37 @@ So the rule is **not** "family-based estimates are inflated, discount them". It 
 ### Age-conditioning: the birth figure overstates for anyone past young adulthood
 
 Lifetime risk quoted "from birth" includes years the person has already passed without the outcome.
-Illustrative, with hazard distributed across decades summing to a 12.0% lifetime risk:
+**Conditioning is a division, and it is the step that gets skipped:**
 
 ```
- lifetime risk from birth          12.0%
- remaining risk from age 50        10.5%
- quoting the birth figure to a 50-year-old overstates remaining risk by 14.3% (relative)
+ remaining risk from age a  =  ( F(end) − F(a) )  /  ( 1 − F(a) )
 ```
 
-The gap widens sharply with age and with conditions whose incidence is front-loaded. **Always
-age-condition when the literature provides the data, and say so when it does not.**
+where `F` is cumulative incidence. Worked on an explicit, checkable distribution — incidence
+(unconditional probability of a first event in that decade), summing to a 12.0% lifetime risk:
+
+| by 40 | 40–49 | 50–59 | 60–69 | 70–79 | 80–89 | total |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0.5% | 1.0% | 1.5% | 2.5% | 3.5% | 3.0% | 12.0% |
+
+```
+ lifetime risk from birth                              12.00%
+ unconditional risk after 50 (the decades summed)      10.50%   <- NOT the answer
+ realised by 50                                         1.50%
+ remaining risk GIVEN event-free at 50 = 10.5 / 98.5   10.66%   <- the answer
+ so the birth figure overstates a 50-year-old's remaining risk by 12.6%
+ the same arithmetic at 70:  6.5 / 94.5 = 6.88%,  overstating by 74.5%
+```
+
+**Dividing by the probability of having reached that age event-free is the whole operation**, and
+skipping it — reporting the summed post-index decades as though they were conditional — is an easy
+and quiet error. The gap widens sharply with age and with conditions whose incidence is front-loaded.
+
+**Two caveats on this arithmetic.** Summed decade *incidence* is not the same as summed *hazard*: if
+a source gives hazards, cumulative incidence is `1 − exp(−Σh)`, which for Σh = 0.12 is 11.3%, not
+12.0%. And past 50, **competing mortality** matters — some of the people in the denominator will die
+of something else first, so a figure that ignores it overstates again. **Always age-condition when
+the literature provides the data, and say so when it does not.**
 
 ---
 
@@ -268,16 +322,26 @@ where `p` is the pre-test carrier probability and `c` the fraction of causal all
  relative reduction              69.9%  — reduced, NOT eliminated
 ```
 
-Coverage is the whole story, and for many conditions it is far below 70% on a consumer array.
+Coverage dominates the result, and for many conditions it is far below 70% on a consumer array.
 **Never report "no variants detected" without stating what was probed**, and never let it stand as
 clearance for a condition the person has a family history of.
 
-**One assumption inside that formula, which has to be stated when the formula is used.** It is exact
-only if `c` is the fraction of carrier *probability mass* probed, not the fraction of the *allele
-list*. Panels probe the commonest alleles first, so mass-coverage exceeds list-coverage — which
-means using a list-coverage figure for `c` **overstates** the residual risk. That direction is
-conservative and therefore acceptable, but say which quantity you used, because the two can differ
-by a lot for a gene with one dominant allele and a long tail.
+**`c` is clinical sensitivity, not a count of alleles — and conflating the two breaks the formula in
+both directions.** `c` must be *the fraction of carriers in this person's ancestry whose variant the
+panel probes*, not the fraction of distinct causal alleles probed. Those two quantities differ by
+orders of magnitude in exactly the case this skill is about: a consumer panel probing three BRCA1/2
+founder variants covers a negligible fraction of known pathogenic alleles, yet detects the large
+majority of carriers **in the founder population** and a small minority outside it. So:
+
+- plug in the **allele-count** fraction and the post-negative probability barely moves — overstating
+  residual risk, which at least errs safe;
+- plug in a **founder panel's headline sensitivity** for someone outside that population and the
+  number is falsely reassuring, which does not.
+
+**The error is ancestry-dependent, so state the ancestry with the figure.** And treat the result as a
+**floor**, not an estimate: probe failures, no-calls and imperfect analytic sensitivity all push the
+true residual higher than the formula's output. "Coverage dominates" is the honest version of
+"coverage is the whole story".
 
 ### The number a reproductive decision actually turns on is the couple's, not the person's
 
@@ -329,3 +393,33 @@ Use this for every quantitative genetic finding. All five elements, in this orde
   independent axes is a defect this library has already measured elsewhere.
 - **End on the action, or on its absence.** A risk number with no attached decision is alarm without
   information, and "nothing changes" is a complete and frequently correct ending.
+
+### Carrying the interval through the conversion
+
+The template demands an interval, and the conversion is where intervals get dropped. **Multiply the
+baseline by each confidence limit**, then report the absolute range:
+
+```
+ baseline            5 per 1,000
+ reported RR         3.0  (95% CI 1.8 to 5.1)
+ absolute risk      15 per 1,000   (95% CI  9 to 26)
+ extra cases        10 per 1,000   (95% CI  4 to 21)
+```
+
+**A five-fold span on the extra cases is the finding**, and it is invisible if only the point
+estimate survives the conversion. Where the source reports an interval that wide — and penetrance
+estimates off a handful of carriers routinely do — **the interval is the headline and the point
+estimate is decoration.**
+
+### Two findings bearing on the same outcome
+
+The ban on composite scores leaves a real case open, so state the substitute. When two findings bear
+on **the same** outcome, the correct output is **one combined absolute estimate from a model that
+included both**, not two relative multiples side by side — a reader will multiply them, and that is
+usually wrong.
+
+**If no joint estimate exists, do not build one.** Multiplying two relative figures assumes the
+effects are independent *and* that the variants are not in linkage disequilibrium with each other;
+when they are correlated the product double-counts the same signal. Report them separately, say they
+bear on the same outcome, and say explicitly that they cannot be combined from the data in hand.
+That is a complete answer, and it is more useful than a number that cannot be defended.
