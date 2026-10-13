@@ -290,11 +290,57 @@ teaching against it.
 Their genetic evidence is **G2 at best and not usable** (§2): a genotype does not select them.
 
 **Growth-hormone secretagogues and GHRH analogues** — ipamorelin, CJC-1295, sermorelin, tesamorelin
-— whose approved indication is narrow and should be *named* rather than called narrow: **reduction
-of excess abdominal fat in adults with HIV-associated lipodystrophy**, with the label itself ruling
-out what people want it for (not indicated for weight loss, effect on body weight neutral, long-term
-cardiovascular safety not established; confirm the wording at source) — and MK-677 (frequently sold alongside peptides but not itself a peptide). Evidence for the commonly
-marketed uses is **T3–T6**, and concerns centre on sustained IGF-1 elevation. **G4.**
+— among which the approved indication is **tesamorelin's alone**, and should be *named* rather than
+called narrow: in substance, reduction of excess abdominal fat in adults with HIV-associated
+lipodystrophy, with the label also ruling out what people want it for (not indicated for weight
+loss, weight-neutral effect, long-term cardiovascular safety not established). Those limitations are
+corroborated close to the label's own words; **which labelled product they belong to, and the exact
+wording, come from the provenance note immediately below — there is more than one tesamorelin label
+and they are not interchangeable.** And MK-677 (frequently sold alongside peptides but
+not itself a peptide). Evidence for the commonly marketed uses is **T3–T6**, and concerns centre on
+sustained IGF-1 elevation. **G4.**
+
+**Label provenance for tesamorelin — and a provenance distinction worth keeping.** A search channel
+can establish a document's **identity** without returning a word of its **content**, and those are
+two different grades. Both were tested here, and the result is mostly the second:
+
+- **Verified with title (a secondary host of the label, not the label):** `Egrifta SV Prescribing
+  Information` ([drugs.com/pro/egrifta-sv.html](https://drugs.com/pro/egrifta-sv.html)) and
+  `EGRIFTA SV` ([medlibrary.org](https://medlibrary.org/lib/rx/meds/egrifta-sv/)). These are
+  republishers. They are good enough to establish that a US prescribing information exists for this
+  product and what it is broadly about; they are **not** the label of record, and a copy carries
+  whatever date its host last refreshed.
+- **Corroborated by a returned record, in close to the label's own words:** the product is a
+  growth-hormone-releasing-factor analogue indicated for **reduction of excess abdominal fat in
+  HIV-infected adult patients with lipodystrophy**, and the Limitations of Use rule out what people
+  want it for — *not indicated for weight loss management as it has a weight neutral effect*, and
+  *long-term cardiovascular safety has not been established*.
+- **Corroborated, and the part most likely to be got wrong: there is more than one labelled
+  tesamorelin product, and they are not interchangeable.** A returned record states in terms that
+  the 1 mg-per-vial and 2 mg-per-vial products differ in dosage, number of vials per dose,
+  reconstitution and storage, and therefore carry **separate labels**. So "the tesamorelin label" is
+  not a thing that exists: any quotation has to name the product. (A third, later-marketed name
+  appears in secondary sources; it did not return here and is not asserted.)
+- **UNAVAILABLE here:** the label of record itself. `accessdata.fda.gov` and `dailymed.nlm.nih.gov`
+  fail at **DNS** in this environment — not TLS, not 403 — so no primary label text is fetchable, and
+  no DailyMed SPL set ID is quoted here, because an identifier this channel never returned is not
+  one to write down. Read the current label by product name at DailyMed or FDA, and take the exact
+  indication sentence, the contraindications, the malignancy warning and anything about the effect
+  persisting only while treatment continues **from there, never from this paragraph**.
+- **The maintenance question is url-only, so no claim attaches to it.** Two PubMed identifiers
+  resolve — [20101189](https://pubmed.ncbi.nlm.nih.gov/20101189/) (a PubMed URL returned) and
+  20554713 (only a mirror returned, titled merely "Journal Article") — but **neither record's title
+  came back in a result link**, only in generated prose. Under §0 of `variant-catalog.md` that is
+  `url-only`: the identifiers exist, what the papers *are* is unestablished here, and the trial
+  design read out of that prose is therefore not reported. Resolve them before citing either.
+
+*Two live observations, recorded because they are this file's own hazards happening rather than
+being described.* The generated prose **contradicted itself inside one session** — asserting a
+pregnancy contraindication, then saying it could not confirm one, then asserting it again, and
+answering a question about visceral adipose tissue with a trunk-fat figure. And the searches
+surfaced **peptide-vendor wikis and supplier "research" pages** among the results for a prescription
+drug, which is the vendor-dominated-search hazard §5 warns about, arriving unprompted. Both are
+reasons the grades above are stated flatly instead of hedged.
 
 **This class spans three different regulatory categories, and collapsing them is a real error:** a
 product with a *narrow approved indication* (tesamorelin), a product that was approved historically

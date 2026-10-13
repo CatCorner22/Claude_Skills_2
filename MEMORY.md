@@ -358,6 +358,26 @@ Never store secrets, credentials, account numbers, or client data here.
   instead (python-pptx: reopen, count slides, dump shape positions/text vs the geometry tokens) and
   say plainly the pixel render was unavailable. (observed 2026-07-22 building assertion-evidence-deck)
 
+- LESSON (2026-10-13, tesamorelin label pass): **a search channel can verify a document's IDENTITY
+  without ever returning its CONTENT, and the two are separate provenance grades.** Record the
+  document as verified and the wording as unavailable; never let the first grade carry the second.
+  **The pass that produced this lesson then failed it**, which is why the rule is worth having: the
+  agent wrote two DailyMed SPL set IDs into a shipped reference as title-verified, and a check from
+  the main thread could not corroborate them — DailyMed did not return at all, only republishers
+  (drugs.com, medlibrary.org) did, and those are a secondary host of a label, not the label. It also
+  graded two PMIDs title-verified whose titles appeared **only in generated prose**, which is exactly
+  `url-only`. Standing rule, now twice-earned: **an identifier a channel never returned is not one to
+  write down**, and a subagent's provenance grade is a claim to re-check, not a result to inherit.
+- LESSON (2026-10-13): **in this sandbox `accessdata.fda.gov` and `dailymed.nlm.nih.gov` fail at DNS
+  (`getaddrinfo ENOTFOUND`), not at TLS or 403** — so no regulatory label text is fetchable, and
+  WebSearch is the only channel. Test the fetch rather than assuming the block, then say which layer
+  refused: "blocked" and "does not resolve" invite different workarounds.
+- LESSON (2026-10-13): **generated search prose contradicted itself inside one session**, which is
+  the cleanest live demonstration of this library's §0 rule yet: it asserted a pregnancy
+  contraindication for one tesamorelin product, then said it could not confirm one, then asserted it
+  again, and answered a visceral-adipose-tissue question with a trunk-fat figure. When prose is the
+  only channel, quote nothing from it — name the document and route the reader there.
+
 ## Successful Patterns / Working Methods
 - PATTERN: Parallel subagent authoring works well when each agent first reads the committed
   standard + exemplar and self-checks against the validator rules; batch-validate and commit
