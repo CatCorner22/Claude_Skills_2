@@ -130,10 +130,14 @@ Either both ship or neither does, and the rule has to bind the numbers an author
 
 A smaller, earlier clinical-laboratory series reached the same conclusion from the confirmation side
 ([PMID 29565420](https://pubmed.ncbi.nlm.nih.gov/29565420/) /
-[PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/)), with companion commentaries
-([PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/),
-[PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/)) and a later analysis of the public-health
-consequence ([PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/)). Third-party interpretation
+[PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/)), and it drew a published
+exchange worth presenting as an exchange: a commentary
+([PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/)) and a correspondence reply
+([PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/)) — **that reply is authored from inside
+the company whose data was criticised, so it is a party's response rather than independent
+commentary, and an earlier version of this file listed both as "companion commentaries" without
+saying so.** A later analysis addresses the public-health consequence
+([PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/)). Third-party interpretation
 adds its own error burden ([PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/)), and a
 professional-society committee opinion addresses consumer disease-risk testing directly
 ([PMID 33399428](https://pubmed.ncbi.nlm.nih.gov/33399428/)).

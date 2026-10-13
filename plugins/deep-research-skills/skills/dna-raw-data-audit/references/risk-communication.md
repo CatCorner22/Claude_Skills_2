@@ -78,8 +78,13 @@ carrier risk — not the 36% the shortcut gives. On the rare column, a 0.5% popu
 0.42% in non-carriers and **1.25%** in carriers, so the extra risk is 0.83 pp and the NNH is 120,
 not 100.
 
-> **The shortcut is adequate only when the risk genotype is rare** — at a carrier frequency of a few
-> percent the correction is within rounding. Above that, divide by `1 + f·(RR − 1)` first. **And say
+> **"Baseline" and `p₀` mean the risk in people WITHOUT the variant throughout this file** — the
+> reference-genotype group, never the population average. For a **rare** high-penetrance variant the
+> two coincide to within rounding, which is why the columns above are safe as written. For a
+> **common** risk allele they do not, and the gap runs in the alarming direction.
+>
+> **So the shortcut is adequate only when the risk genotype is rare** — at a carrier frequency of a
+> few percent the correction is within rounding. Above that, divide by `1 + f·(RR − 1)` first. **And say
 > which baseline you used**, because §4 of this file calibrates the other way (genotype-weighted mean
 > equal to the prevalence), and a file that uses both conventions silently is a file that will be
 > quoted wrongly.
@@ -458,10 +463,16 @@ majority of carriers **in the founder population** and a small minority outside 
 - plug in a **founder panel's headline sensitivity** for someone outside that population and the
   number is falsely reassuring, which does not.
 
-**The error is ancestry-dependent, so state the ancestry with the figure.** And treat the result as a
-**floor**, not an estimate: probe failures, no-calls and imperfect analytic sensitivity all push the
-true residual higher than the formula's output. "Coverage dominates" is the honest version of
-"coverage is the whole story".
+**The error is ancestry-dependent, so state the ancestry with the figure.**
+
+**And there is a second assumption, which errs the other way — so the two do not cancel.** The
+formula also assumes the panel **never misses an allele it does probe** and **never miscalls a
+non-carrier**: perfect analytic sensitivity on the probed set, perfect specificity. On a consumer
+array none of that holds — no-calls, low-confidence calls, strand-ambiguous sites and plain
+genotyping error all produce a negative in a true carrier. Every one of those pushes the true
+residual probability **up**, while the mass-versus-list approximation pushes the reported figure up
+too. **So the output is a floor, not a bound.** Where the panel reports an analytic sensitivity, use
+it in `c`. "Coverage dominates" is the honest version of "coverage is the whole story".
 
 ### The number a reproductive decision actually turns on is the couple's, not the person's
 
@@ -494,8 +505,8 @@ name quoted from memory is not.
 
 Use this for every quantitative genetic finding. All five elements, in this order.
 
-> **[Finding].** Among people [matched on the relevant axes — ancestry, sex, age], roughly
-> **[baseline] in 1,000** develop [outcome] by age [X]. With this genotype that figure is about
+> **[Finding].** Among people [matched on the relevant axes — ancestry, sex, age] **who do not carry
+> this variant**, roughly **[baseline] in 1,000** develop [outcome] by age [X]. With this genotype that figure is about
 > **[carrier] in 1,000** — a difference of **[n] per 1,000 people**, or **[pp] percentage points**.
 > In relative terms that is **[RR/OR][, reported as an odds ratio from a case-control design]**.
 > The estimate comes from **[population-based / family-informed]** data in **[ancestry]** cohorts
@@ -507,8 +518,8 @@ Use this for every quantitative genetic finding. All five elements, in this orde
 
 **Worked, using the rare-outcome column from §2:**
 
-> Among people matched on ancestry, sex and age, roughly **5 in 1,000** develop this outcome by age
-> 80. With this genotype it is about **15 in 1,000** — **10 more people per 1,000**, or **1.0
+> Among people matched on ancestry, sex and age who do not carry this variant, roughly **5 in 1,000**
+> develop this outcome by age 80. With this genotype it is about **15 in 1,000** — **10 more people per 1,000**, or **1.0
 > percentage point**. In relative terms, three times the baseline. The estimate is population-based
 > in European-ancestry cohorts with a wide interval. The call is a directly-probed common variant
 > (R1) and is **unconfirmed consumer raw data**. **What follows: confirm the genotype in a clinical

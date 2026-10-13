@@ -1270,3 +1270,76 @@ retraction of the previous pass's headline mechanism claim.
     cherry-picking video scores A+/A/C- and the mean is exactly B+. AMSTAR 2 solved the same problem
     by rating from critical-domain failures rather than summed points. Carry cross-axis meaning in
     named flags, not in an average.
+- 2026-10-13 — `dna-raw-data-audit` (Digital DNA Agent) shipped, then re-audited twice by
+  perspective-diverse adversarial passes that found defects in the shipped version and in the
+  fixes. Library 73 -> 74 skills / 13 plugins; validator 0 errors, 0 warnings; the skill's script
+  self-test 48 -> 89 checks. The entries below are the ones that generalise past this skill.
+  - RULE (upgrades the 2026-08-31 records-versus-prose rule): **a returned URL proves an identifier
+    EXISTS; it does not prove what the paper IS.** Attach a specific claim only to a record whose
+    **title** was returned. Two citations I shipped passed the old rule and failed this one: a bare
+    `pmc.../articles/PMCxxxxxxx` link with no title beside it, which two later passes described
+    differently; and an ID **adjacent** to a real one (…21 / …23), cited for a paper that turns out
+    to be reported entirely within its neighbour. **Adjacent identifiers are what a guessed ID looks
+    like** — treat a near-miss numeric neighbour as suspect until its title returns.
+  - RULE: **an invariant enforced in one section of a document fails silently everywhere else.**
+    `check-trigger-test.py` guarded the no-verbatim-trigger rule inside `## Tier D` only, via a
+    hardcoded section regex. A Tier F row then shipped pasting two of its target's twelve triggers
+    and validate.sh stayed green. Widening the gate to every tier (matching table columns by header
+    cell, not position) took the checked set from 14 to 21 prompts and immediately found a second
+    leak **in a row I had written myself**. Generalisation: when a gate takes a section argument,
+    ask what the other sections are doing.
+  - RULE: **legitimate exceptions to a mechanical gate need a written reason the gate reads, and a
+    stale exemption must fail too.** Four trigger overlaps were genuinely unavoidable ("prompt" for
+    prompt-engineering; a pasted database error). They now carry inline `trigger-overlap-ok` comments
+    with reasons, and the gate fails an exemption whose prompt no longer contains the phrase — which
+    it proved by catching one of mine minutes later. An allow-list without a reason rots into
+    decoration.
+  - LESSON, measured: **a fix is as likely to introduce a defect as the original text was.** Three
+    corrections I committed this session were themselves wrong and were caught within the hour by
+    the next lens: a coeliac caution stated backwards (HLA typing is unaffected by diet — it is
+    serology and biopsy that go falsely negative off gluten, which is exactly why HLA is the usable
+    rule-out in someone already gluten-free); a claim that tirzepatide had no completed hard-outcome
+    trial; and a safety citation misattributed to a nomenclature letter. **Re-attack the fix, not
+    just the original**, and expect the second pass to find more than the first.
+  - RULE: **"always/never" directional claims in applied statistics are usually conditional, and the
+    exception is usually the unsafe direction.** Three in one file: "an OR read as an RR always
+    overstates" is false for protective ORs, where it overstates the *protection* (the signed
+    identity is `(OR−RR)/RR = p₀(OR−1)`); "a from-birth lifetime figure overstates a 50-year-old's
+    remaining risk" reverses for a late-onset condition once competing mortality is in the model
+    (verified on a Gompertz–Makeham life table: 12.54% remaining against a 12.00% birth figure);
+    and "AUC is invariant to prevalence" is false — AUC is invariant to a **sample's** case:control
+    mix, and under a fixed liability model a 5%-variance score gives AUC 0.62 at 10% prevalence and
+    0.67 at 1%. Check the sign before writing "always".
+  - RULE: **a published relative risk is measured against the referent group, not the population.**
+    Multiplying a population baseline by a published RR inflates the carrier's absolute risk,
+    because the population average already contains the carriers: `r₀ = K / (1 + f·(RR−1))`. The
+    shortcut is safe only when the risk genotype is rare. Define "baseline" once per document — the
+    same file had §2 using the population convention and §4 calibrating genotype-weighted, silently.
+  - RULE: **`.claude/skills-env/<skill>.md` is NOT git-ignored; only the `.private.md` form is.**
+    All three skills authored in this session named the un-ignored path as the place to keep health,
+    genetic or environment detail — 8 occurrences — while every archived skill had it right. Prove
+    the claim with `git check-ignore -v`, never from the naming convention. Related: the genome
+    download is a **`.zip`**, and no archive pattern existed; and a SKILL.md that says "this repo's
+    .gitignore covers it" is false once the plugin is installed elsewhere.
+  - TOOLING: `validate.sh` over-counted every folded-scalar (`>-`) description by exactly one
+    character (`buf=buf" "$0` prepends a space to the first content line), so the enforced cap was
+    1023, not 1024 — fixed, and one skill sits exactly at the boundary. And the two listing-cost
+    scripts **answer different questions**: `measure-listing-cost.py` counts name+description
+    (66,771 chars), `simulate-listing-budget.py` counts the harness's render including plugin
+    prefix, punctuation and newlines (68,846). The gap is exactly
+    `sum(len(plugin)) + 5·skills + (skills−1)`; quote the simulator for "what a session pays".
+  - DESIGN PRECEDENT: **when a rule defers a number to a live lookup the environment cannot perform,
+    the rule manufactures invention.** This skill's catalogue deliberately froze no effect sizes and
+    deferred them to a literature pass — in an environment where every scholarly resolver is
+    blocked, that instruction resolves to a hallucinated percentage at the worst variant. The fix
+    was a small, explicitly **provenance-graded** carve-out (figure-from-record vs
+    figure-from-prose vs computed-here) for the three variants where a number is unavoidable. A
+    stated range with its provenance beats both silence and invention.
+  - DOMAIN FACTS worth keeping (each cost a verification cycle): APOE's two sites are both T/C, so a
+    strand flip there is **detectable** and must be refused rather than complemented, unlike FTO
+    rs9939609 (A/T); HFE H63D (rs1799945) is c.187C>G, **palindromic and in the actionable tier**;
+    the two APOE sites are 138 bp apart in every build (c.526 − c.388, both exon 4), which is a free
+    coordinate check; comparing genotypes as **sets** collapses ploidy (`set("C") == set("CC")`), so
+    a half-call becomes a confident homozygote — it produced a false e4/e4; and a **variants-only
+    VCF cannot distinguish homozygous-reference from never-covered**, which makes an APOE e3/e3
+    person invisible and a gVCF reference block a fabricated reference call.
