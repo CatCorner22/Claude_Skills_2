@@ -67,11 +67,18 @@ Anything frozen here would be wrong by the time someone read it.
 
 Nearly nothing clears both. The honest consequence:
 
-- **For peptides, the genetic evidence is G4 across the board.** There is essentially no established
-  gene–interaction evidence for the peptides people ask about. A genotype therefore supplies **no
-  basis at all** for recommending one. This rail is what prevents the skill's most likely failure
-  mode — becoming a genotype-flavoured supplement and peptide storefront, which is what most of this
-  market actually is.
+- **For peptides the genetic evidence is G4 for nearly all of them — and the rail must rest on
+  non-actionability, not on absence of evidence**, because "none at all" is overstated and a single
+  counterexample would otherwise appear to break it. The counterexample is real: **GLP1R rs6923761**
+  has reported, partially replicated gene–response data including pre-specified analyses within
+  randomised trials ([PMC6003833](https://pmc.ncbi.nlm.nih.gov/articles/PMC6003833),
+  [PMC9335902](https://pmc.ncbi.nlm.nih.gov/articles/PMC9335902/)). The findings are small,
+  inconsistent in direction across endpoints — better weight response in carriers in some analyses,
+  *worse* metabolic response in others — and nowhere near a guideline, so it grades **G2 at best and
+  is not clinically usable.** That is the honest shape: **evidence exists and still does not select
+  the drug.** A genotype therefore supplies no basis for recommending any peptide, which is what the
+  rail needs. This is what prevents the skill's most likely failure mode — becoming a
+  genotype-flavoured supplement and peptide storefront, which is what most of this market is.
 - **For supplements, it is G3 or G4 with narrow exceptions** (§4).
 - **For medicines, pharmacogenomics is the real G1 answer** (§3), and it routes to a prescriber.
 
@@ -141,17 +148,42 @@ The owner asked for this explicitly, so it gets a real assessment rather than a 
 assessment is structural: **grade the class, name what is actually established, and apply §2.**
 
 **The GLP-1 contrast case, first, because it calibrates everything else.** GLP-1 receptor agonists
-(semaglutide, tirzepatide) are approved medicines with large randomised outcome trials — **T1,
-approved**. That is what real evidence for a peptide looks like. Every other class below should be
-read against it, and the gap is large. Their genetic evidence is still **G4**: a genotype does not
-select them.
+are approved medicines with large randomised trials — **T1, approved**. That is what real evidence
+for a peptide looks like, and every class below should be read against it; the gap is large.
 
-**Growth-hormone secretagogues and GHRH analogues** — ipamorelin, CJC-1295, sermorelin, tesamorelin
-(which has a narrow approved indication; name it precisely rather than generalising), and MK-677
-(frequently sold alongside peptides but not itself a peptide). Evidence for the commonly marketed
-uses is **T3–T6**. Theoretical and real concerns centre on sustained IGF-1 elevation. **G4.**
+**But do not lump them, because their outcome evidence is not the same.** Semaglutide has a
+placebo-controlled cardiovascular-outcome trial reporting superiority on major adverse cardiovascular
+events; tirzepatide, at the time of writing, does not have an equivalent completed outcome trial.
+Both are approved and both are T1 for their licensed indications, **and only one of them supports a
+cardiovascular-benefit claim.** Check each drug's own outcome evidence rather than inheriting it from
+the class — this is the same error as inheriting a guideline across a gene–drug pair.
 
-**BPC-157.** Marketed heavily; evidence overwhelmingly preclinical (**T4–T5**). It has been placed
+Their genetic evidence is **G2 at best and not usable** (§2): a genotype does not select them.
+
+**Growth-hormone secretagogues and GHRH analogues** — ipamorelin, CJC-1295, sermorelin, tesamorelin,
+and MK-677 (frequently sold alongside peptides but not itself a peptide). Evidence for the commonly
+marketed uses is **T3–T6**, and concerns centre on sustained IGF-1 elevation. **G4.**
+
+**This class spans three different regulatory categories, and collapsing them is a real error:** a
+product with a *narrow approved indication* (tesamorelin), a product that was approved historically
+and is **no longer marketed** in some jurisdictions, and compounds **never approved for human use at
+all**. "Peptide" is not a regulatory category. Establish each one's current status at source.
+
+**MK-677 is the strongest concrete case in the class, and it argues against use.** A two-year
+randomised, double-blind trial in healthy older adults exists
+([PMC2757071](https://pmc.ncbi.nlm.nih.gov/articles/PMC2757071/)) — which already puts it above most
+of this market on evidence *availability*. What it found is the point: fat-free mass rose, **hard
+functional outcomes were not demonstrated, and glucose handling worsened.** So the best-studied
+member of the class moved a surrogate (T2) while raising a metabolic concern, and the honest reading
+is a negative one. *The specific effect sizes are not quoted here: they appeared only in secondary
+summaries that disagreed with each other, and the primary record was not retrievable in this
+environment — read them from the paper.*
+
+**BPC-157.** Marketed heavily; evidence overwhelmingly preclinical (**T4–T5**) — one systematic
+review of the literature included 36 studies of which **35 were preclinical and 1 clinical**, a ratio
+that describes the field better than any adjective. *(That count is read from a review's own text
+rather than from a retrieved primary record — treat it as an anchor to re-verify, per
+`variant-catalog.md` §0.)* It has been placed
 by a regulator in a category identifying substances that **may present significant safety risks**
 for use in compounding, with concerns including immunogenicity for certain routes of administration
 and peptide-impurity characterisation
@@ -165,21 +197,59 @@ paragraph.** **G4.**
 individual human evidence is thin (**T4–T6**), with occasional narrow exceptions worth checking
 individually rather than assuming. **G4.**
 
-**Melanotan I/II and PT-141** — melanocortin agonists. Melanotan carries a specific, concrete
-concern about naevi and melanoma that distinguishes it from the "unproven but probably inert"
-category. **G4.**
+**Melanotan I/II — and PT-141, which is a different situation entirely.** Both are melanocortin
+agonists, and shipping them as one line was an error worth naming.
+
+**Melanotan I/II** carries a specific, concrete concern about naevi that distinguishes it from the
+"unproven but probably inert" category: published case reports describe **eruptive naevi and
+darkening of pre-existing naevi after use**, in one report within 24 hours of a single injection
+([PMC3663356](https://pmc.ncbi.nlm.nih.gov/articles/PMC3663356);
+[10.2340/00015555-1130](https://medicaljournals.se/acta/download/10.2340/00015555-1130)). **State
+what this evidence is and is not:** case reports establish temporal association, not causation — a
+melanoma report in this literature explicitly declined to claim a causal relationship. The honest
+version is that a drug which drives melanogenesis in people who are also tanning, with documented
+naevus changes, warrants dermatological review rather than reassurance. **T6 on efficacy for the
+marketed use, with a named safety signal. G4.**
+
+**PT-141 is bremelanotide, and it is an approved drug** — marketed as Vyleesi for a narrow
+indication (acquired, generalised hypoactive sexual desire disorder in premenopausal women), with
+randomised placebo-controlled trials behind it
+([PMID 31893927](https://pubmed.ncbi.nlm.nih.gov/31893927/), whose title records the approval;
+[PMID 27181790](https://pubmed.ncbi.nlm.nih.gov/27181790/) dose-finding RCT;
+[PMID 31599847](https://pubmed.ncbi.nlm.nih.gov/31599847/) long-term extension;
+[PMC6819021](https://pmc.ncbi.nlm.nih.gov/articles/PMC6819021/) /
+[PMC6819023](https://pmc.ncbi.nlm.nih.gov/articles/PMC6819023/) phase 3). So it is **T1/T2 for its
+licensed indication, approved** — not a grey-market unknown, and an earlier version of this file
+misclassified it. **Two things follow, and the second is the one that matters:** the licensed
+indication is narrow and the published effect sizes are modest, and **material sold online as
+"PT-141" is not the approved product** — it is the same molecule name attached to an unregulated
+supply chain, which is a §5 product-integrity problem rather than an efficacy question. **G4.**
 
 **Three risks that are independent of whether any molecule works**, and which the marketing never
 addresses:
 1. **Product integrity.** Grey-market injectables carry contamination, mislabelling, dosing-error
    and sterility risk. Review literature on unregulated injectable peptide use documents real harm
    ([PMC13585006](https://pmc.ncbi.nlm.nih.gov/articles/PMC13585006)).
-2. **Sport prohibition.** Peptide hormones, growth factors and related substances sit in the WADA
-   prohibited classification, with growth-hormone releasing factors prohibited at all times. **Name
-   the mechanism and send an athlete to the current published list** — the list is versioned and the
+2. **Sport prohibition, and there are TWO mechanisms, not one.** Peptide hormones, growth factors
+   and related substances sit in their own prohibited class, with growth-hormone releasing factors
+   prohibited at all times. **But the catch-all is the one that sweeps in most of this market:** a
+   separate class covers **substances not approved by any governmental regulatory health authority
+   for human therapeutic use** — which is precisely what a research-only or grey-market peptide is,
+   whatever its pharmacology. So "it isn't on the named-substance list" is not a defence. **Name both
+   mechanisms and send an athlete to the current published list** — the list is versioned and the
    edition in force changes.
 3. **Unknown interactions** with prescribed medication, which nobody is monitoring in a self-sourced
    protocol.
+4. **A hazard in the research step itself, which is this skill's own exposure.** For grey-market
+   peptides the searchable literature is **outnumbered by vendor content** — clinic pages, supplement
+   wikis and seller "research" write-ups that imitate the form of evidence and are what a search
+   returns first. Three consequences, all of which bit while this file was being verified: a search
+   summary can be built almost entirely from commercial sources; the same figure appears in several
+   vendor pages with different values, creating false corroboration; and the primary regulatory
+   sources that would settle it are often unreachable. **So for this class, restrict the search to
+   index and publisher domains, treat a vendor page as zero evidence rather than weak evidence, and
+   report "no retrievable primary source" as the finding** — which is usually the true answer and is
+   more useful than a laundered one.
 
 **What the skill does with a peptide question.** Explain the grading, state the evidence honestly,
 name the safety and regulatory considerations, and say clearly that **the genome contributes nothing

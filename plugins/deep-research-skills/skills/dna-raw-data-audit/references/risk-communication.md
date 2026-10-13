@@ -158,7 +158,7 @@ So the rule is **not** "family-based estimates are inflated, discount them". It 
 5. **Report which kind of estimate you used and why** — and, where family history is unknown, report
    both and say which applies under which assumption rather than silently picking.
 
-### Age-conditioning: the birth figure overstates for anyone past young adulthood
+### Age-conditioning: condition first, then state the direction — it is not always downward
 
 Lifetime risk quoted "from birth" includes years the person has already passed without the outcome.
 **Conditioning is a division, and it is the step that gets skipped:**
@@ -187,11 +187,77 @@ where `F` is cumulative incidence. Worked on an explicit, checkable distribution
 skipping it — reporting the summed post-index decades as though they were conditional — is an easy
 and quiet error. The gap widens sharply with age and with conditions whose incidence is front-loaded.
 
-**Two caveats on this arithmetic.** Summed decade *incidence* is not the same as summed *hazard*: if
-a source gives hazards, cumulative incidence is `1 − exp(−Σh)`, which for Σh = 0.12 is 11.3%, not
-12.0%. And past 50, **competing mortality** matters — some of the people in the denominator will die
-of something else first, so a figure that ignores it overstates again. **Always age-condition when
-the literature provides the data, and say so when it does not.**
+**Summed decade *incidence* is not summed *hazard*.** If a source gives hazards, cumulative incidence
+is `1 − exp(−Σh)`, which for Σh = 0.12 is 11.3%, not 12.0%.
+
+### The direction is not fixed, and assuming it is was an error in this file
+
+The block above has no **competing mortality** in it, and that omission is what makes the answer look
+one-directional. In reality two forces oppose each other: the person has **passed through some
+incidence** (which lowers their remaining risk) and has also **survived the other-cause mortality
+that would have removed them from the denominator** (which raises it). Which wins depends on where
+the incidence sits relative to the mortality curve.
+
+Computed on a discrete competing-risk life table (Gompertz–Makeham other-cause mortality, two
+disease-hazard shapes each calibrated to a **12.00%** birth-cohort lifetime risk):
+
+| Age | Mid-onset condition | Late-onset condition (nothing before 60) |
+| ---: | :--- | :--- |
+| 40 | 12.10% — birth figure **understates** by 0.8% | 12.34% — **understates** by 2.7% |
+| 50 | 11.47% — **overstates** by 4.6% | 12.54% — **understates** by 4.3% |
+| 60 | 9.96% — **overstates** by 20.5% | 12.94% — **understates** by 7.3% |
+| 70 | 7.52% — **overstates** by 59.5% | 12.74% — **understates** by 5.8% |
+| 80 | 4.69% — **overstates** by 156.0% | 11.05% — **overstates** by 8.6% |
+
+**For a late-onset condition, quoting the from-birth lifetime figure to a 50-year-old UNDERSTATES
+their remaining risk** — the opposite of the intuition, and the under-warning direction. For a
+mid-onset condition past 50 the usual intuition holds, and the overstatement becomes large with age.
+
+**And naive subtraction is biased, always downward, with the bias growing in exactly the range where
+age-conditioning matters.** On the mid-onset shape above, subtracting pre-index incidence from the
+lifetime total gives 10.85% at 50 against a correct 11.47%, and 6.09% at 70 against 7.52%. Dividing
+by the probability of being alive and event-free is not a refinement; it is the calculation.
+
+> **The rule, direction-neutral: age-condition, then say which way it went and why.** Never assert
+> that a from-birth figure overstates — check it against the condition's onset profile, and say so
+> when the literature does not give you enough to check.
+
+### Three more ways a published ratio is not the multiplier it looks like
+
+**1. A hazard ratio is not a multiplier on lifetime penetrance.** Under proportional hazards the
+survival function is raised to the power of the HR, so the risk ratio you can report is always
+*smaller* than the HR, and the gap widens as the baseline rises:
+
+| Baseline lifetime risk | HR 2 → carrier risk (actual risk ratio) | HR 3 | HR 5 |
+| ---: | :--- | :--- | :--- |
+| 5% | 9.75% (1.95×) | 14.26% (2.85×) | 22.62% (4.52×) |
+| 12% | 22.56% (1.88×) | 31.85% (2.65×) | 47.23% (3.94×) |
+| 30% | 51.00% (1.70×) | 65.70% (2.19×) | 83.19% (2.77×) |
+
+So "HR 3 on a 12% baseline" is a **31.9% absolute risk and a 2.65× risk ratio** — not 36% and not
+3×. Multiplying a baseline penetrance by an HR overstates, mildly for rare outcomes and materially
+for common ones.
+
+**2. Check what the ratio is measured against.** Genotype relative risks silently switch comparators
+between *versus non-carriers* and *versus the population average*, and the population average
+already contains the carriers. With a 20% carrier frequency, a 5% non-carrier risk and a 3× carrier
+effect, the population average is 7.0% — so the same finding is "3× " against non-carriers and
+"2.1× " against the population. **A 40% difference in the headline, with no disagreement about the
+biology.** Report the comparator, every time.
+
+**3. `OR²` for a homozygote is a small-effect approximation, and it breaks loudly.** The log-additive
+model says the per-allele odds ratio squares for two copies — on the **odds** scale. Treating `OR²`
+as a multiplier on *risk* works only while risks are small:
+
+```
+ per-allele OR 2.0, baseline  5%:   OR^2 as a risk multiplier 20.0%   on the odds scale 17.4%
+ per-allele OR 2.0, baseline 20%:                             80.0%                      50.0%
+ per-allele OR 4.0, baseline 20%:                            320.0%  <- impossible       80.0%
+```
+
+**Convert on the odds scale and back, and if a figure comes out above 100% that is the model failing,
+not the person's risk.** For the high-OR rare variants this skill triages, the approximation is
+unusable.
 
 ---
 
@@ -322,9 +388,30 @@ where `p` is the pre-test carrier probability and `c` the fraction of causal all
  relative reduction              69.9%  — reduced, NOT eliminated
 ```
 
+**70% coverage flatters the case, and the realistic consumer figure is starker.** A consumer panel
+probing selected variants rather than sequencing the gene may detect a small minority of carriers
+outside a founder population. At the same pre-test probability:
+
+```
+ c = 70%   post-negative 0.075%   reduction 69.9%
+ c = 30%   post-negative 0.175%   reduction 29.9%
+ c = 10%   post-negative 0.225%   reduction 10.0%
+```
+
+At 10% coverage the negative has moved the question by a tenth. **The reduction equals the coverage
+almost exactly** at these small pre-test probabilities — which is the clearest way to say it: *a
+negative result is worth exactly what the panel's coverage is worth, and nothing more.*
+
 Coverage dominates the result, and for many conditions it is far below 70% on a consumer array.
 **Never report "no variants detected" without stating what was probed**, and never let it stand as
 clearance for a condition the person has a family history of.
+
+**And do not report NPV for a rare variant.** Negative predictive value is near 100% for anything
+rare whatever the test does — it is dominated by the prior, so it reads as reassurance and carries
+almost no information. **Report the negative likelihood ratio** — `(1 − sensitivity) / specificity` —
+**and the post-test odds**, which say how much the negative actually moved the question. The same
+caution applies to the HLA-proxy NPV column in `pharmacogenomics.md` §2: it is high because the
+allele is uncommon, not because the proxy is good.
 
 **`c` is clinical sensitivity, not a count of alleles — and conflating the two breaks the formula in
 both directions.** `c` must be *the fraction of carriers in this person's ancestry whose variant the

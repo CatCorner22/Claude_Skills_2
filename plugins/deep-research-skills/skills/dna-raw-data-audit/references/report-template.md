@@ -119,7 +119,8 @@ reader unable to tell whether the audit was attempted.
 
 **The serious-finding path, which needs stating because improvisation here does harm.** If something
 genuinely urgent surfaces — a reliably-called, high-penetrance, actionable variant, or a
-pharmacogenomic flag against a drug the person is **currently taking**:
+pharmacogenomic flag against a drug the person is **currently taking, or is scheduled to start**
+(a first chemotherapy dose and a booked operation are the cases where deferral is the harm):
 
 1. **Say it first**, in the first sentence of §1, plainly. Do not bury it in a long report.
 2. **Name the confirmation step and the clinician to take it to.** The action is a conversation and a

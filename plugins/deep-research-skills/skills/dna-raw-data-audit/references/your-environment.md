@@ -103,6 +103,31 @@ Determines how much of the audit can reach an actionable conclusion rather than 
 
 ---
 
+## Network reachability — what this environment can actually verify
+
+**Fill this in before the literature pass, because it decides whether the pass is possible.** The
+skill's design defers effect sizes to a live literature search (`variant-catalog.md` §0), and that
+instruction is unexecutable where the network blocks the sources. Where it is unexecutable, **a
+search tool's prose will happily supply a confident invented number** — so the reachability answer
+is a safety control, not an infrastructure note.
+
+Test rather than assume, then record:
+
+- Can you reach a literature index directly (PubMed / PMC / Europe PMC / Crossref)? _____
+- Can a page be fetched, or only searched? _____ — search results give *identifiers* inside returned
+  URLs; the *numbers* usually live only in generated prose, and those are not the same evidence
+- Regulatory sources — a medicines regulator's site, an anti-doping list? _____ *(in the environment
+  this skill was built in, both were blocked, which is why `interventions-evidence.md` names
+  mechanisms and sends you to the live list instead of quoting it)*
+- Your provider's own account pages, for establishing which product tier produced your file? _____
+
+**If the indexes are unreachable:** report it in the report's own research section, take numbers only
+from the anchored, provenance-graded figures in `variant-catalog.md` §0, quote them as ranges with
+their grade, and **state that the live pass could not be performed** rather than producing figures
+that look as though it had.
+
+---
+
 ## Output preferences
 
 - Report length: _____ (executive summary only / full six-section report / clinician page only)

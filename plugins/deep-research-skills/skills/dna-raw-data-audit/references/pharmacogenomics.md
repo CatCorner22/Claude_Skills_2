@@ -154,16 +154,16 @@ For several pharmacogenes, a small number of common variants accounts for most f
 alleles in most populations. These are genuinely capturable — with care, and still subject to the
 confirmation rule:
 
-| Gene | Commonly probed | Caveat |
-| :--- | :--- | :--- |
-| **CYP2C19** | `*2` (rs4244285), `*3` (rs4986893), `*17` (rs12248560) | Covers the common no-function and increased-function alleles |
-| **CYP2C9** | `*2` (rs1799853), `*3` (rs1057910) | Additional alleles matter more in non-European ancestries |
-| **VKORC1** | rs9923231 | Used jointly with CYP2C9 |
-| **CYP3A5** | `*3` (rs776746) | The cleanest array-callable case in pharmacogenomics: one SNP, and `*3` homozygosity (non-expresser) is the common state in European ancestry while expresser status is much more common in African ancestry — so ancestry changes what the result means |
-| **SLCO1B1** | `*5` (rs4149056) | |
-| **TPMT** | `*3B` (rs1800460), `*3C` (rs1142345), and `*2` (rs1800462) where the platform carries it | Must be read with NUDT15. Omitting `*2` understates both the callable set and how little a negative means |
-| **NUDT15** | `*3` (rs116855232) | Especially important in East Asian ancestry; absent from older panels |
-| **DPYD** | `*2A` (rs3918290) and other no-function alleles | **A negative at one or two sites does not clear a person** — several relevant alleles exist, and the consequence of missing one is severe |
+| Gene | Commonly probed | Reliability (`variant-catalog.md` §3) | Caveat |
+| :--- | :--- | :--- | :--- |
+| **CYP2C19** | `*2` (rs4244285), `*3` (rs4986893), `*17` (rs12248560) | R1 | Covers the common no-function and increased-function alleles. **But `*17` cannot be assumed to confer increased function without phase:** sitting in cis with a no-function variant it does not, and unphased data cannot tell |
+| **CYP2C9** | `*2` (rs1799853), `*3` (rs1057910) | R1 | Additional alleles matter more in non-European ancestries |
+| **VKORC1** | rs9923231 | R1 | Used jointly with CYP2C9 |
+| **CYP3A5** | `*3` (rs776746) | R1 | The cleanest array-callable case in pharmacogenomics: one SNP, and `*3` homozygosity (non-expresser) is the common state in European ancestry while expresser status is much more common in African ancestry — so ancestry changes what the result means |
+| **SLCO1B1** | `*5` (rs4149056) | R1 | |
+| **TPMT** | `*3B` (rs1800460), `*3C` (rs1142345), and `*2` (rs1800462) where the platform carries it | R1–R2 | **The best counterexample to this table's own heading.** `*3A` is `*3B` + `*3C` in cis and is the commonest no-function allele in European ancestry, so heterozygous at both sites is phase-ambiguous: `*1/*3A` (intermediate) versus `*3B/*3C` (poor). Cis is assumed on linkage-disequilibrium grounds — **state the assumption, never leave it silent.** Must be read with NUDT15, and omitting `*2` understates both the callable set and how little a negative means |
+| **NUDT15** | `*3` (rs116855232) | R2 | Especially important in East Asian ancestry; absent from older panels |
+| **DPYD** | `*2A` (rs3918290) and other no-function alleles | R2–R3 | **A negative at one or two sites does not clear a person** — several relevant alleles exist, and the consequence of missing one is severe |
 
 **The asymmetry to hold onto:** a *detected* no-function allele at a reliably-called site is
 informative (pending confirmation). A *negative* result is only as good as the panel's coverage, and
@@ -204,13 +204,26 @@ until a guideline writing group evaluates them.
 guideline set as versioned — pairs are added and recommendations revised, so check the current
 publication rather than quoting a remembered state.
 
-**PharmGKB** curates variant–drug annotations on its own **levels of evidence (1A through 4)**, which
-are a separate system again from either CPIC scale. **Read the tier definitions from PharmGKB itself
-rather than from this file**: they could not be verified against a retrieved source in this
-environment, and a paraphrased definition of someone else's grading system is exactly the kind of
-claim that drifts. The usable shape is directional and safe to rely on: a level-4 annotation is a
-research lead, not a prescribing input,
-and the distance between 1A and 4 is the distance between medicine and speculation.
+**PharmGKB** curates variant–drug annotations on **clinical-annotation levels of evidence — 1A, 1B,
+2A, 2B, 3 and 4** — a separate system again from either CPIC scale. The shape, which an earlier
+version of this file got wrong in two places:
+
+| Level | What it means |
+| :--- | :--- |
+| **1A** | The variant–drug pair appears in a PGx guideline (e.g. CPIC or a medical society) or is implemented in a major health system |
+| **1B** | Strong, replicated evidence — **but no such guideline**. Collapsing 1B into 1A overstates the pair |
+| **2A / 2B** | Moderate evidence; 2A additionally sits in a known pharmacogene |
+| **3** | A **single significant, not-yet-replicated** study — or multiple studies lacking clear evidence of association |
+| **4** | A case report, a non-significant study, or in vitro / molecular / functional evidence only |
+
+**The two errors to avoid are specific:** "level 4 = a single study" (that is level **3**), and
+"well-replicated = 1A" (without a guideline that is **1B**). A level-3 or level-4 annotation is a
+research lead, not a prescribing input, and the distance between 1A and 4 is the distance between
+medicine and speculation.
+
+**Read the current definitions at source rather than quoting this table.** It could not be verified
+against a retrieved record in this environment, and a paraphrase of someone else's grading system is
+exactly the kind of claim that drifts — which is how the earlier version's swap survived review.
 
 **Report the framework level alongside the finding.** "CPIC level A" and "PharmGKB level 3" demand
 entirely different language, and a report that omits the level implies more than the evidence
@@ -222,6 +235,14 @@ carries.
 
 Each of these is clinically significant, has guideline-level support, and is worth mentioning to a
 prescriber — **as a flag for proper testing**, never as a dosing instruction.
+
+**No identifiers in this section or the next, deliberately and with a cost.** The framework
+documentation and the per-pair guidelines are maintained as living web resources, and none resolved
+to a retrieved record in this environment (`variant-catalog.md` §0). So §3 and §4 carry *mechanisms*,
+which are stable, and no citations — and the live pass must attach the specific guideline record for
+any pair actually being reported. **That gap is why the PharmGKB level definitions above were wrong
+until a verification pass caught them:** an unsourced claim about someone else's framework has
+nothing holding it in place.
 
 **Check the guideline status live; do not quote it from this file.** Which pairs carry a guideline,
 at what strength, and with what recommendation changes as guidelines are published and revised. This
@@ -235,10 +256,12 @@ reaches a prescriber.
 | **DPYD** | Fluoropyrimidines (5-FU, capecitabine) | Deficiency causes severe, occasionally fatal toxicity. One of the strongest cases for pre-treatment testing anywhere in medicine |
 | **TPMT / NUDT15** | Thiopurines (azathioprine, mercaptopurine) | Reduced activity causes myelosuppression. Both genes must be considered |
 | **HLA-B\*57:01** | Abacavir | Strongly associated with hypersensitivity; pre-treatment testing is standard practice. **Requires proper HLA typing** |
-| **HLA-B\*15:02** | Carbamazepine | Associated with severe cutaneous reactions, with substantial ancestry-dependent allele frequency variation. **Requires proper HLA typing** |
+| **HLA-B\*15:02** | Carbamazepine — **and also oxcarbazepine and phenytoin** | Associated with severe cutaneous reactions, with substantial ancestry-dependent allele frequency variation. **Naming only carbamazepine invites the wrong inference** that oxcarbazepine or phenytoin is a safe alternative. **Requires proper HLA typing** |
+| **HLA-A\*31:01** | Carbamazepine | The carbamazepine hypersensitivity allele that matters in European and Japanese ancestry, where `*15:02` is rare. Without it, a European-ancestry reader concludes no HLA allele applies to them. **Requires proper HLA typing** |
+| **MT-RNR1** (m.1555A>G) | Aminoglycosides | Causes irreversible hearing loss, and guideline-level. **Unlike most of this list it may actually be present in the file** — some consumer platforms genotype mitochondrial sites. Mitochondrial heteroplasmy and platform-specific mtDNA handling make the call unreliable, so it is a prompt for proper testing, not a result |
 | **SLCO1B1** | Statins (notably simvastatin) | Reduced transporter function raises systemic exposure and myopathy risk |
-| **CYP2C9 + VKORC1** | Warfarin | Both feed published dosing algorithms; the classic multi-gene case |
-| **G6PD** | **Named triggers, because "oxidative drugs" is not actionable:** rasburicase (contraindicated in deficiency), primaquine and tafenoquine, dapsone, nitrofurantoin, methylene blue, and — classically, outside medicine — fava beans | Deficiency causes haemolysis on oxidative challenge. **X-linked, which has a consequence this file previously left implicit:** a heterozygous female is a mosaic, her enzyme activity can fall anywhere from near-normal to deficient, and **a genotype cannot resolve where** — so a heterozygous female call is a prompt for an enzyme assay, never reassurance. Enzyme assay is definitive where genotype is partial, and it is also cheap |
+| **CYP2C9 + VKORC1** | Warfarin | Both feed published dosing algorithms; the classic multi-gene case. **Not the whole set:** CYP4F2 (rs2108622) also feeds them, and rs12777823 matters specifically in African-ancestry patients — so a two-gene warfarin answer is ancestry-incomplete |
+| **G6PD** | **Named triggers, because "oxidative drugs" is not actionable:** rasburicase (contraindicated in deficiency), primaquine and tafenoquine, dapsone, nitrofurantoin, methylene blue, and — classically, outside medicine — fava beans | Deficiency causes haemolysis on oxidative challenge. **X-linked, which has a consequence this file previously left implicit:** a heterozygous female is a mosaic, her enzyme activity can fall anywhere from near-normal to deficient, and **a genotype cannot resolve where** — so a heterozygous female call is a prompt for an enzyme assay, never reassurance. **Quantitative enzyme activity is the better test in hemizygous males and homozygous females, but it is NOT definitive** — a heterozygous female is frequently reported *normal* despite a clinically relevant deficient red-cell population, and reticulocytosis (in newborns, or after any haemolytic episode) and recent transfusion can all falsely normalise the result. **So in a heterozygous female the genotype adds information the assay does not, and a normal enzyme activity is never clearance.** Draw it away from an acute episode |
 | **CYP2D6** | Codeine, tamoxifen, many antidepressants and antipsychotics | Clinically major — **and not callable from this data** (§2). The finding is the limitation |
 | **HLA-B\*58:01** | Allopurinol | Associated with severe cutaneous adverse reactions, with strongly ancestry-dependent carriage. **Requires proper HLA typing** — and it is the third HLA pair, alongside abacavir and carbamazepine, that belongs on any list of this kind |
 | **CYP3A5** | Tacrolimus | A transplant-immunosuppression dosing gene, and the one genuinely array-callable pair here (§2): expressers clear tacrolimus faster and reach lower trough concentrations on a standard dose |
@@ -249,19 +272,32 @@ reaches a prescriber.
 
 ## §5 What to hand a prescriber
 
-A pharmacogenomic result is useful only if it reaches the person who prescribes. The deliverable:
+A pharmacogenomic result is useful only if it reaches the person who prescribes.
 
-1. **The question first.** "I have unconfirmed consumer genotype data suggesting a CYP2C19
-   reduced-function allele. If clopidogrel is ever considered for me, would you want a clinical
-   pharmacogenomic panel first?"
-2. **The variant**, its rsID, the observed genotype, the platform, and the explicit statement that it
+**Step one is a branch, not a sentence — and it fires on exposure.** Before writing anything, ask:
+**is the person currently taking, or scheduled to start, a drug this flag bears on?**
+
+- **Yes → the serious-finding path** (`report-template.md` §7): say it first, name the clinician, and
+  make the contact **prompt rather than deferred to a routine visit**. Still never advise stopping or
+  changing the drug. This branch exists because the routine future-conditional handoff below reads as
+  "no hurry", and for a DPYD flag before a first fluoropyrimidine dose, or an MH flag before
+  scheduled surgery, deferral is the harm.
+- **No → the prospective handoff**, which is the common case and is deliberately unhurried.
+
+**The deliverable, in this order:**
+
+1. **Current medications, supplements and any scheduled procedure** — first, because it decides the
+   branch above and makes every flag concrete rather than hypothetical.
+2. **The question.** "I have unconfirmed consumer genotype data suggesting a CYP2C19 reduced-function
+   allele. If clopidogrel is ever considered for me, would you want a clinical pharmacogenomic panel
+   first?"
+3. **The variant**, its rsID, the observed genotype, the platform, and the explicit statement that it
    is **unconfirmed consumer raw data**.
-3. **The framework level** for the gene–drug pair (§3), so the clinician can calibrate without
-   looking it up.
-4. **The array-reliability grade**, so they know how much to trust the call itself.
-5. **The limitations**, named: no phasing, no copy number, CYP2D6 not determinable, HLA not typed,
+4. **The framework level** for the gene–drug pair (§3), so the clinician can calibrate without
+   looking it up — named by system, since "level A" alone is ambiguous between three scales.
+5. **The array-reliability grade** from §2's table, so they know how much to trust the call itself.
+6. **The limitations**, named: no phasing, no copy number, CYP2D6 not determinable, HLA not typed,
    and which relevant alleles the platform does not probe.
-6. **Current medications and supplements**, so the flags are concrete rather than hypothetical.
 7. **Nothing else.** No suggested dose, no suggested drug, no suggested change to an existing
    prescription. The skill's job ends at a well-formed question.
 

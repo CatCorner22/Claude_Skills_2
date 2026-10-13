@@ -107,11 +107,20 @@ that decides what to do.
 
 ### The anchoring evidence
 
-The strongest study is a **population-scale** one: a retrospective diagnostic evaluation of
-**≈49,908 people in UK Biobank who had both SNP-chip and next-generation-sequencing data**, plus a
-small set of people who shared consumer test data
-([PMID 33753354](https://pubmed.ncbi.nlm.nih.gov/33753354/) /
-[PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/), BMJ 2021). Its shape is the finding:
+The strongest study is a **population-scale** one: a retrospective diagnostic evaluation of roughly
+**fifty thousand UK Biobank participants who had both SNP-chip and next-generation-sequencing data**,
+plus a small set of people who shared consumer test data — *"Use of SNP chips to detect rare
+pathogenic variants: retrospective, population based diagnostic evaluation"*
+([PMID 33589468](https://pubmed.ncbi.nlm.nih.gov/33589468/) /
+[PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/) /
+[BMJ 2021;372:n214](https://www.bmj.com/content/372/bmj.n214)). Its shape is the finding:
+
+*Two corrections recorded here rather than silently applied. **The PMID was wrong**: this file cited
+`33753354`, which resolves to nothing matching; a re-check returned `33589468` carrying the exact
+title, in two independent searches. **And the participant count was a self-inconsistency** — the
+paragraph below declines to quote percentages because they reached us only through search-tool prose,
+while the precise figure `49,908` reached us the same way. It is now stated as an approximation.
+Either both ship or neither does, and the rule has to bind the numbers an author likes too.*
 
 - For **common** variants, chip genotyping performed **well** — sensitivity, specificity, PPV and NPV
   all above 99% across >100,000 common variants. Arrays are not broken.
