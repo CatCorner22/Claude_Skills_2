@@ -1343,3 +1343,20 @@ retraction of the previous pass's headline mechanism claim.
     a half-call becomes a confident homozygote — it produced a false e4/e4; and a **variants-only
     VCF cannot distinguish homozygous-reference from never-covered**, which makes an APOE e3/e3
     person invisible and a gVCF reference block a fabricated reference call.
+  - ADDENDUM (same session, after the adjudicated adversarial pass — these four generalise):
+    - **A rule that nothing implements cannot fail.** A reference file said "sample identity comes
+      before concordance, and before any interpretation… if identity fails, stop", no pipeline
+      stage required it, and the function it would have lived in computed four numbers none of
+      which could fail. **When a document says "if X fails, stop", check that something can detect
+      X** — otherwise the rule reads as a safeguard and functions as decoration.
+    - **The summary file drifts from the references it summarises, and drifts toward absolutes.**
+      Four of ten hard rails in the always-loaded file were stated in forms the reference files had
+      since corrected, so the top-level file simultaneously **over-refused** (banning star-allele
+      calls that are determined, avoidance findings, usable palindromic heterozygotes) and
+      **under-warned** (negatives as "weak reassurance", no imputation rail, no consent gate).
+      After correcting a reference, re-read the file that summarises it in the same change.
+    - **An exit code is a property of the data, not of the output format.** The same undeclared-build
+      file exited 3 in text mode and 0 under `--json`, so a pipeline reading the status got the
+      opposite answer from a human reading the report.
+    - **A dash in a table's identifier column reads as "no such thing exists".** Three rows meant
+      "not reachable from this data type, and here is the referral"; they said `—`. Say which.
