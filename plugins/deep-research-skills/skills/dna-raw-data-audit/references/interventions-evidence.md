@@ -89,7 +89,12 @@ Nearly nothing clears both. The honest consequence:
   **The decisive counterexample is a different drug, and naming it makes the rail stronger rather
   than weaker.** **Setmelanotide** is a peptide whose approved indication is *gated on genotype*:
   chronic weight management in obesity due to POMC, PCSK1 or LEPR deficiency, with the deficiency
-  established by an approved test, plus a Bardet–Biedl syndrome indication
+  established by genetic testing, plus a Bardet–Biedl syndrome indication. **One detail worth
+  checking against the label, because if it holds it is the single real exception to this skill's
+  VUS rail:** a secondary drug-profile source describes the gate as admitting variants interpreted
+  as pathogenic, likely pathogenic **or of uncertain significance** — a weaker and more interesting
+  gate than "pathogenic only". *Prose-sourced and not confirmed against the label here; read the
+  label before relying on it*
   ([approval announcement](https://www.biospace.com/rhythm-pharmaceuticals-announces-fda-approval-of-imcivree-setmelanotide-as-first-ever-therapy-for-chronic-weight-management-in-patients-with-obesity-due-to-pomc-pcsk1-or-lepr-deficiency)).
   That is a label-level gene–intervention pair — **G1 by this file's own definition, for a peptide** —
   and it carries the point alone. (**Metreleptin is not a second example**, though an earlier version
@@ -232,7 +237,7 @@ folate.** All three were missing from this file until a safety review named them
 | **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it. **Name the genotype that carries the risk, because it is not the obvious one: heterozygotes.** One inactive allele clears acetaldehyde poorly but leaves alcohol tolerable enough to keep drinking; homozygotes usually self-limit. In meta-analysis the heterozygote-plus-heavy-drinking combination carried a large elevated risk while heterozygotes who drink little or not at all showed no significant elevation — effect modification, not a bare association *(figures prose-sourced; ship the direction)* | **G2** / **T3** for the behaviour — **regraded on both axes.** T1 was wrong because the evidence for alcohol reduction with hard outcomes is observational plus Mendelian randomisation, not randomised. And G3 was wrong because: this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which contradicted both the action in the cell beside it and `variant-catalog.md`'s own entry |
 | **MCM6/LCT** rs4988235 | Explains lactose intolerance — **in European ancestry only.** This variant tags the European lactase-persistence haplotype; independent persistence alleles exist elsewhere, so a "non-persistent" call outside that ancestry is frequently a **false negative**. Dietary choice follows symptoms, which the person already knows | G2 / T2 |
 | **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions, and the second is the reverse of what an earlier version of this file said: sensitivity is high but **not** 100%, so do not promise a perfect rule-out — and **diet does not affect this test.** Serology and biopsy go falsely negative once gluten has been withdrawn; a genotype does not change with diet, **which is exactly why HLA typing is the usable rule-out in someone already eating gluten-free, and why it can spare them a gluten challenge.** Telling such a reader the test is uninterpretable removes their one usable option and pushes them toward a challenge that has real symptomatic cost | G2 / T2, as a rule-out |
-| **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
+| **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. **The reported direction is *higher* measured serum B12 in non-secretors — which would make a normal B12 weaker reassurance in one — but that direction could not be confirmed against a retrieved record here, so treat it as unverified rather than as the finding.** "Different" alone is unactionable; an unverified direction, labelled, is at least a question someone can take to a clinician. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
 | **Confirmed deficiency on a blood test** | The actual basis for supplementing — and it is a *measurement*, not a genotype | — / T1–T2 |
 
 **The pattern worth stating plainly: measure, don't infer.** Serum 25-OH-D beats any vitamin D
@@ -383,10 +388,14 @@ addresses — followed by a fourth item that is a *method* rail rather than a ri
    ([PMC13585006](https://pmc.ncbi.nlm.nih.gov/articles/PMC13585006)).
 2. **Sport prohibition, and there are TWO mechanisms, not one.** Peptide hormones, growth factors
    and related substances sit in their own prohibited class, with growth-hormone releasing factors
-   prohibited at all times. **But the catch-all is the one that sweeps in most of this market:** a
-   separate class covers **substances not approved by any governmental regulatory health authority
-   for human therapeutic use** — which is precisely what a research-only or grey-market peptide is,
-   whatever its pharmacology. So "it isn't on the named-substance list" is not a defence. **Name both
+   prohibited at all times. **And a separate class covers substances not approved by any governmental regulatory health
+   authority for human therapeutic use** — which is what a research-only peptide is, whatever its
+   pharmacology. **Read that class as residual, not as an overlap:** it covers what no other
+   section addresses, so a growth-hormone secretagogue is caught by the peptide-hormone section
+   rather than by the catch-all, and the two are mutually exclusive by construction. (An earlier
+   version of this item said the catch-all "sweeps in most of this market", which the list's own
+   structure makes doubtful.) Either way the conclusion stands: **"it isn't on the named-substance
+   list" is not a defence.** Check the edition in force. **Name both
    mechanisms and send an athlete to the current published list** — the list is versioned and the
    edition in force changes.
 3. **Unknown interactions** with prescribed medication, which nobody is monitoring in a self-sourced

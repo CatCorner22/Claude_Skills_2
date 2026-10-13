@@ -115,6 +115,8 @@ reader unable to tell whether the audit was attempted.
 | Only one of two files supplied | Proceed, and state that no concordance check was possible — a named reduction in confidence |
 | Data is low-pass/imputed | Proceed, and grade every finding accordingly; no clinical finding rests on an imputed call |
 | Ancestry unknown | Proceed, but §4 reports every estimate with the portability caveat unresolved rather than silently assuming European-ancestry applicability |
+| **The literature pass cannot run** — scholarly resolvers unreachable, which is the normal case in some environments | **This is a reportable failure, not a silent one.** §5 then says: which identifiers were checked and against what, that no live pass was possible, and that any number quoted comes from the anchored provenance-graded figures in `variant-catalog.md` §0 with its grade attached. **It must not contain figures that look as though a live pass produced them** — that is where fabrication enters |
+| **Sample identity fails, or cannot be tested** | **Stop.** §1 says so in the first sentence and no findings appear anywhere. If identity could not be tested for lack of overlapping sites, say that the cross-platform comparison cannot be treated as coming from one person |
 | Funnel empties | **Report the empty funnel.** §1 says nothing changes; §2 shows the numbers that emptied it. This is a complete report, not a failed one |
 
 **The serious-finding path, which needs stating because improvisation here does harm.** If something

@@ -403,6 +403,78 @@ def apoe_diplotypes(rs429358: str | None, rs7412: str | None) -> dict:
     return out
 
 
+AUTOSOMES = {str(i) for i in range(1, 23)} | {f"chr{i}" for i in range(1, 23)}
+
+# Thresholds for the identity gate below. These are heuristics with a stated basis, not published
+# cut-offs: consumer genotyping error rates run well under one percent, while the
+# opposite-homozygote rate between two *unrelated* people is a few percent — a gap of roughly an
+# order of magnitude, which is what makes the test usable at all. The minimum-sites floor matters
+# more than the rate: a handful of overlapping sites cannot support any verdict.
+IDENTITY_MIN_SITES = 1000
+IDENTITY_FAIL_RATE = 0.01
+IDENTITY_SUSPECT_RATE = 0.001
+
+
+def sample_identity(a: dict, b: dict) -> dict:
+    """Are these two files the same person? Ask BEFORE interpreting anything.
+
+    `data-formats-and-parsing.md` §5 states the rule — "sample identity comes before concordance,
+    and before any interpretation… if identity fails, stop" — and nothing implemented it, so the
+    rule could not fail. A low concordance rate has two very different explanations: genotyping
+    error, or **two different people**. Mislabelled kits, a relative's export and a file saved
+    under the wrong name are all realistic.
+
+    The measure is **opposite homozygotes**: sites where one file is homozygous for one allele and
+    the other homozygous for a different allele, so the two genotypes share no allele at all. For
+    one person that is bounded by the error rate; for two people it rises sharply.
+
+    Restricted to autosomal, both-called, diploid, **non-palindromic** sites, because a palindromic
+    site can appear to disagree purely from orientation and would manufacture a false failure.
+    """
+    checked = opposite = 0
+    examples: list[str] = []
+    for k in sorted(set(a["calls"]) & set(b["calls"])):
+        ca, cb = a["calls"][k], b["calls"][k]
+        ga, gb = _norm_geno(ca["geno"]), _norm_geno(cb["geno"])
+        if not ga or not gb or len(ga) != 2 or len(gb) != 2:
+            continue
+        if str(ca.get("chrom")) not in AUTOSOMES:
+            continue
+        sa, sb = set(ga), set(gb)
+        if len(sa) != 1 or len(sb) != 1:
+            continue                      # only homozygote-vs-homozygote is informative here
+        if any((sa | sb) == amb for amb in AMBIGUOUS_PAIRS):
+            continue                      # palindromic: apparent disagreement may be orientation
+        checked += 1
+        if not (sa & sb):
+            opposite += 1
+            if len(examples) < 20:
+                examples.append(k)
+    rate = (opposite / checked) if checked else None
+    if checked < IDENTITY_MIN_SITES:
+        verdict = "INSUFFICIENT_DATA"
+        note = (f"only {checked} comparable homozygous autosomal sites (need "
+                f"{IDENTITY_MIN_SITES}); identity was NOT tested, so do not treat the "
+                "cross-platform comparison as coming from one person")
+    elif rate is not None and rate > IDENTITY_FAIL_RATE:
+        verdict = "IDENTITY_FAILURE"
+        note = (f"{opposite} of {checked} sites share no allele ({rate*100:.2f}%). For one person "
+                "this is bounded by the error rate. **These files are probably not the same "
+                "person — STOP. Interpret nothing.** An audit of two people's data merged as one "
+                "is worse than no audit")
+    elif rate is not None and rate > IDENTITY_SUSPECT_RATE:
+        verdict = "SUSPECT"
+        note = (f"{opposite} of {checked} sites share no allele ({rate*100:.3f}%) — above a "
+                "plausible genotyping-error rate and below an unrelated-person rate. Explain it "
+                "before interpreting: a quality problem, a relative, or a sample mix-up")
+    else:
+        verdict = "CONSISTENT"
+        note = (f"{opposite} of {checked} sites share no allele ({(rate or 0)*100:.3f}%), "
+                "consistent with one person. Note this is identity, not accuracy")
+    return {"verdict": verdict, "checked_sites": checked, "opposite_homozygotes": opposite,
+            "rate": rate, "note": note, "examples": examples}
+
+
 def concordance(a: dict, b: dict) -> dict:
     """Compare two files site by site.
 
@@ -580,7 +652,10 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
         out["apoe"] = apoe_diplotypes(g1, g2)
 
     if len(parsed) == 2:
+        out["identity"] = sample_identity(parsed[0], parsed[1])
         out["concordance"] = concordance(parsed[0], parsed[1])
+        if out["identity"]["verdict"] == "IDENTITY_FAILURE":
+            out["warnings"].insert(0, "SAMPLE IDENTITY FAILURE: " + out["identity"]["note"])
 
     # The exit code is a property of the data, not of the output format. An earlier version
     # returned 3 in text mode and 0 under --json for the same undeclared-build file, so a
@@ -601,12 +676,28 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
         if e.get("vcf_kind"):
             print(f"    vcf kind {e['vcf_kind']} · {e.get('reference_blocks', 0)} reference blocks · "
                   f"{e.get('zero_depth_discarded', 0)} zero-depth calls discarded")
+    if out.get("identity"):
+        i = out["identity"]
+        print("\n=== Sample identity (asked BEFORE concordance, and before any interpretation) ===")
+        print(f"  {i['verdict']} · {i['note']}")
+        # Only show the sites when the verdict rests on them. Printing them under
+        # INSUFFICIENT_DATA reads as evidence of failure when the finding is "not tested".
+        if i["examples"] and i["verdict"] in ("IDENTITY_FAILURE", "SUSPECT"):
+            print(f"  sites sharing no allele: {', '.join(i['examples'])}")
     if out["concordance"]:
         c = out["concordance"]
         rate = "n/a" if c["rate"] is None else f"{c['rate']*100:.3f}%"
         print("\n=== Cross-platform concordance ===")
         print(f"  shared {c['shared_sites']} · comparable {c['comparable_sites']} · "
               f"concordant {c['concordant']} · discordant {c['discordant']} · rate {rate}")
+        if any(d.get("vcf_kind") == "variants-only" for d in parsed):
+            print("  ! one input is a variants-only VCF, so this rate is NOT comparable to an "
+                  "array-vs-array figure: the overlap is only the sites that file chose to record, "
+                  "which are disproportionately non-reference. Read it as a rate over that "
+                  "overlap, not over the genome.")
+        if c["comparable_sites"] < 1000:
+            print(f"  ! only {c['comparable_sites']} comparable sites — too few for the rate to "
+                  "mean anything. Report the count, not the percentage.")
         if c.get("non_diploid_excluded"):
             print(f"  {c['non_diploid_excluded']} non-diploid comparison(s) excluded (haploid "
                   "sex-chromosome/mitochondrial calls, or truncated fields) — these cannot be "
@@ -933,6 +1024,54 @@ def self_test() -> int:
         with contextlib.redirect_stdout(buf):
             report([p23], False, False)
         check("correct APOE spacing not warned", "bp apart in every build" not in buf.getvalue())
+
+        # --- Sample identity: the rule the references state and nothing implemented ---
+        def _synth(path, flip_fraction, n=4000):
+            """Two synthetic genomes: `flip_fraction` of sites made opposite homozygotes."""
+            with open(path, "w") as fh:
+                fh.write("# build 37\n")
+                for i in range(n):
+                    # Deterministic, no RNG: every k-th site is flipped to the other homozygote.
+                    flip = flip_fraction and (i % max(1, int(1 / flip_fraction)) == 0)
+                    geno = "AA" if not flip else "GG"
+                    fh.write(f"rsid{i}\t{(i % 22) + 1}\t{1000 + i}\t{geno}\n")
+        base = os.path.join(td, "id_base.txt")
+        _synth(base, 0.0)
+        same = os.path.join(td, "id_same.txt")
+        _synth(same, 0.0)
+        idr = sample_identity(parse(base), parse(same))
+        check("identity CONSISTENT for two identical files", idr["verdict"] == "CONSISTENT")
+        check("identity checked enough sites to judge", idr["checked_sites"] >= 1000)
+        other = os.path.join(td, "id_other.txt")
+        _synth(other, 0.05)          # 5% opposite homozygotes — two different people
+        idf = sample_identity(parse(base), parse(other))
+        check("identity FAILURE on 5% opposite homozygotes", idf["verdict"] == "IDENTITY_FAILURE")
+        check("identity failure says stop", "STOP" in idf["note"])
+        suspect = os.path.join(td, "id_suspect.txt")
+        _synth(suspect, 0.005)       # 0.5% — above error, below unrelated
+        check("identity SUSPECT in the middle band",
+              sample_identity(parse(base), parse(suspect))["verdict"] == "SUSPECT")
+        # The floor matters more than the rate: a handful of sites supports no verdict at all.
+        check("identity refuses to judge on too few sites",
+              sample_identity(parse(p23), parse(pb))["verdict"] == "INSUFFICIENT_DATA")
+        # Palindromic sites must be excluded, or orientation manufactures a false failure.
+        pal_a = os.path.join(td, "pal_a.txt")
+        pal_b = os.path.join(td, "pal_b.txt")
+        for path, geno in ((pal_a, "AA"), (pal_b, "TT")):
+            with open(path, "w") as fh:
+                fh.write("# build 37\n")
+                for i in range(2000):
+                    fh.write(f"rsid{i}\t{(i % 22) + 1}\t{1000 + i}\t{geno}\n")
+        check("palindromic sites excluded from the identity test",
+              sample_identity(parse(pal_a), parse(pal_b))["verdict"] == "INSUFFICIENT_DATA")
+        # And an identity failure must reach the report as the first warning.
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([base, other], False, True)
+        rep = buf.getvalue()
+        check("report leads with the identity failure", "SAMPLE IDENTITY FAILURE" in rep)
+        check("report prints the identity section before concordance",
+              rep.index("Sample identity") < rep.index("Cross-platform concordance"))
 
         # --- Format rejection: must fail loudly, not parse garbage into findings ---
         bad = os.path.join(td, "bad.csv")

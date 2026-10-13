@@ -70,10 +70,20 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    silently returns the wrong variant. Detect rather than assume. Formats, build detection, and the
    array-versus-sequencing distinction: `references/data-formats-and-parsing.md` §1–2.
 
-3. **Run the quality pass, and report it before any interpretation.** No-call rate, total sites,
-   and — if both files are present — concordance between them. Two platforms genotyping the same
-   person is a genuine quality signal, and a discordant call at a site you were about to interpret
-   is a finding in itself. The bundled script does this pass; see **Scripts**.
+3. **Run the quality pass, and report it before any interpretation — starting with a blocking
+   question: are these two files the same person?** A low concordance rate has two very different
+   explanations, and conflating them wastes an audit: genotyping error, or **two different people**.
+   Mislabelled kits, a relative's export and a file saved under the wrong name are all realistic.
+   The test is **opposite homozygotes** — sites where the two files share no allele at all —
+   restricted to autosomal, both-called, diploid, non-palindromic sites, because a palindromic site
+   can appear to disagree purely from orientation. **If identity fails, stop and report that: an
+   audit of two people's data merged as one is worse than no audit.** The bundled script implements
+   this gate and refuses to judge it on too few overlapping sites.
+
+   Then the rest of the pass: no-call rate, total sites, and concordance. Two platforms genotyping
+   the same person is a genuine quality signal, and a discordant call at a site you were about to
+   interpret is a finding in itself — the script reports such a site as discordant and takes **no**
+   genotype from it. See **Scripts**. `references/data-formats-and-parsing.md` §5.
 
 4. **Internalise what the file cannot answer, and say it up front.** An array probes a chosen subset
    of sites: a variant's absence from the file is *not* evidence of its absence from the person, and
