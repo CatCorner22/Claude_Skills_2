@@ -65,6 +65,21 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    `git check-ignore -v <file>` and get a hit; if you do not, add the patterns first.
    `references/your-environment.md` carries the full posture.
 
+   **And take a stance on where the report goes, because the deliverable's whole point — "take this
+   to a clinician" — is the act that creates a medical record.** `your-environment.md` collects the
+   insurance and employment concern and nothing consumed it. State plainly: a conversation with a
+   clinician about a genetic finding can enter a medical record, the rules on what follows from that
+   vary by jurisdiction and by insurance line, and **that is a reason to decide deliberately rather
+   than a reason not to go** — the alternative is acting on unconfirmed consumer data alone. Where
+   the person is unsure, a genetic counsellor is the right first conversation precisely because it
+   can be had before anything is confirmed.
+
+   **Also ask what has already been done.** The pipeline starts from the file and so assumes nobody
+   has acted yet, which is often false: a methylfolate stack already being taken, a food group
+   already avoided, a drug already stopped. Each changes the job from interpretation to
+   **correction**, and a correction delivered without acknowledging what the person already did
+   lands as a rebuke. `references/interventions-evidence.md` §4 works the methylfolate case.
+
 2. **Identify what you actually have, and detect the build.** 23andMe exports and Nebula outputs are
    different data with different limits, and a position lookup against the wrong genome build
    silently returns the wrong variant. Detect rather than assume. Formats, build detection, and the
@@ -229,7 +244,13 @@ These are not hedges. Each exists because violating it causes a specific harm.
 - **Relatives did not consent.** A finding can implicate parents, siblings and children. Flag that
   before disclosing, and never volunteer inferred family structure — relatedness, consanguinity, or
   non-paternity — as an aside. If the data implies it, say that such inferences are possible and ask
-  whether the person wants them addressed at all.
+  whether the person wants them addressed at all. **And when asked directly** — "compare my file
+  with my brother's" — **do not run it.** The arithmetic is simple and sits in
+  `references/data-formats-and-parsing.md` §5 for the *identity* check, which is a different
+  question asked for a different purpose. A relatedness answer can disclose something irreversible
+  about people who are not in the conversation, including one who did not ask; the response is to
+  say that plainly and route the question to a genetic counsellor who can handle what it may
+  return.
 - **Serious findings get a named handoff, not a paragraph — and "serious" needs defining, because
   this is the file an agent always loads.** A finding is urgent when **the exposure is live or
   scheduled**: a drug the person is currently taking or about to start, a booked operation or

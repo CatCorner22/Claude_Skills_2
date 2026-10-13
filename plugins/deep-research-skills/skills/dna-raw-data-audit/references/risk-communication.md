@@ -408,6 +408,18 @@ A typical hit (OR ≈ 1.10) moves one carrier from roughly **95 in 1,000 to roug
 and even a strong common-variant hit leaves an individual predictor under AUC 0.57. Reporting one
 as personal information is the genetic equivalent of reporting a coin flip as a forecast.
 
+**And the published figure is biased upward, for a reason specific to how these variants get
+found — the winner's curse.** A variant enters the literature because its *estimate* cleared a
+significance threshold in the discovery sample, so the estimate is drawn from the high end of its own
+sampling distribution. The true effect is systematically smaller, and the bias is largest exactly
+where it does most damage: the smallest studies and the newest associations, which is what a
+consumer report is most likely to be quoting.
+
+**Two consequences to apply.** Prefer a **replication or meta-analytic** estimate over a discovery
+one, and say which you used. And when only a discovery estimate exists, **report it as an upper
+bound rather than a point** — "no more than about this, and probably less" is both more useful and
+more honest than a number that will shrink the next time someone looks.
+
 ## §5 Negative results and what a panel did not probe
 
 **A negative consumer result is weak reassurance**, and quantifying how weak is more honest than
