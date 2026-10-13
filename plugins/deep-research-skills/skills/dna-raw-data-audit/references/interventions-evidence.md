@@ -112,7 +112,8 @@ a phenotype measurement to request, or a flag to raise with a prescriber.
 **Pharmacogenomics is the legitimate intersection**, and `pharmacogenomics.md` owns it. The short
 version for this file:
 
-- Gene–drug pairs with guideline-level support are **G1** — the only intervention class in this
+- Gene–drug pairs with guideline-level support are **G1** — and, with the setmelanotide exception in
+  §2, effectively the only intervention class in this
   entire file that reaches it.
 - The action is **never** "change your dose". It is: raise the flag with the prescriber, who can
   order a clinical-grade pharmacogenomic panel and act on a validated result.
@@ -161,11 +162,15 @@ probability is the argument, and it is why "your report found three actionable v
 expected outcome of testing many.
 
 **Then the MTHFR correction**, because it is the field's emblematic case and getting it right
-is a good test of whether a tool is trustworthy. A professional-society practice guideline advised
+is a good test of whether a tool is trustworthy. A professional society advised
 against routine MTHFR polymorphism testing on minimal-clinical-utility grounds
 ([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)), with the recommendation standing through
-a later **addendum**, which the society lists by title on its own practice-resources page and which
-is **not** the same record as
+a later **addendum** — and **what that addendum did matters: it reaffirmed the recommendation while
+reclassifying the document itself from an evidence-based practice guideline to a clinical practice
+resource**, because it no longer met the college's criteria for the former. So the direction survived
+and the document's evidentiary standing was downgraded; describe it accordingly rather than citing
+"a practice guideline" indefinitely. The addendum is listed by title on the society's own
+practice-resources page and is **not** the same record as
 [PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) — **that is a correction notice *about* the
 addendum.** An earlier version of this file cited the erratum as its evidence for what the addendum
 said, inside the paragraph it calls the field's emblematic case.
@@ -190,15 +195,29 @@ The methylfolate-protocol industry built on MTHFR is **G3 at best and largely G4
 arrives already taking a stack because of an MTHFR result, the useful service is the correction —
 delivered without contempt, because they were sold this by people who sounded authoritative.
 
+**Three boundaries the correction must carry, because without them it can be heard as advice to stop
+folate.** All three were missing from this file until a safety review named them:
+
+1. **Ring-fence periconceptional folic acid.** It is recommended for anyone who could become
+   pregnant **regardless of MTHFR genotype**, and nothing in this correction touches it. "The
+   methylfolate industry is G4" must never be heard as "folate does not matter".
+2. **Severe biallelic MTHFR deficiency is a different thing entirely** — a rare, real and *treatable*
+   inborn error with a homocystinuria-like phenotype. The guidance against testing concerns the
+   common C677T/A1298C polymorphisms; do not let a corrective about those over-generalise into
+   dismissing a genuine diagnosis.
+3. **Folate can mask B12 deficiency while neurological damage continues.** This is the actionable
+   half of "a B12 level beats an MTHFR result": the reason to measure B12 *before* supplementing
+   folate is not tidiness, it is that the supplement can hide the deficiency it does not treat.
+
 **The narrow set with genuine substance**, and note how modest it is:
 
 | Genotype | What it supports | Grade |
 | :--- | :--- | :--- |
 | **HFE** C282Y homozygous (confirmed) | Changes iron advice in the *opposite* direction to the default — avoid iron supplementation, and get iron studies. One of the few places a genotype genuinely redirects a supplement decision | G2 / T1 |
-| **G6PD** deficiency (confirmed) | A real avoidance list — specific drugs, and fava beans. Avoidance, not supplementation | G1 / T1 |
-| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it | **G2** / T1 for the behaviour — **regraded from G3:** this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which contradicted both the action in the cell beside it and `variant-catalog.md`'s own entry |
+| **G6PD** deficiency (confirmed) | **An avoidance list is only useful if it names things, and this is the supplements table, so name the supplement first: high-dose or intravenous vitamin C.** Published haemolysis cases on high-dose vitamin C are concentrated in G6PD deficiency, including a fatal one and cases of methaemoglobinaemia with haemolytic anaemia, and authors have proposed G6PD deficiency as a contraindication to high-dose vitamin C therapy — a mass-market supplement and an IV-clinic staple, which makes this the one row here where naming the item could prevent a crisis. Then the drugs (`pharmacogenomics.md` §4 carries them): rasburicase, contraindicated; primaquine and tafenoquine, dapsone, nitrofurantoin, methylene blue. And fava beans. **Avoidance, not supplementation** | G1 / T1 |
+| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it. **Name the genotype that carries the risk, because it is not the obvious one: heterozygotes.** One inactive allele clears acetaldehyde poorly but leaves alcohol tolerable enough to keep drinking; homozygotes usually self-limit. In meta-analysis the heterozygote-plus-heavy-drinking combination carried a large elevated risk while heterozygotes who drink little or not at all showed no significant elevation — effect modification, not a bare association *(figures prose-sourced; ship the direction)* | **G2** / T1 for the behaviour — **regraded from G3:** this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which contradicted both the action in the cell beside it and `variant-catalog.md`'s own entry |
 | **MCM6/LCT** rs4988235 | Explains lactose intolerance — **in European ancestry only.** This variant tags the European lactase-persistence haplotype; independent persistence alleles exist elsewhere, so a "non-persistent" call outside that ancestry is frequently a **false negative**. Dietary choice follows symptoms, which the person already knows | G2 / T2 |
-| **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions: sensitivity is high but **not** 100%, so do not promise a perfect rule-out, and the test cannot be interpreted at all after a gluten-free diet has already started | G2 / T2, as a rule-out |
+| **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions, and the second is the reverse of what an earlier version of this file said: sensitivity is high but **not** 100%, so do not promise a perfect rule-out — and **diet does not affect this test.** Serology and biopsy go falsely negative once gluten has been withdrawn; a genotype does not change with diet, **which is exactly why HLA typing is the usable rule-out in someone already eating gluten-free, and why it can spare them a gluten challenge.** Telling such a reader the test is uninterpretable removes their one usable option and pushes them toward a challenge that has real symptomatic cost | G2 / T2, as a rule-out |
 | **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
 | **Confirmed deficiency on a blood test** | The actual basis for supplementing — and it is a *measurement*, not a genotype | — / T1–T2 |
 
@@ -235,6 +254,11 @@ the heart-failure component
 *the primary publication's identifier did not resolve here, so the trial is named rather than cited
 with a reconstructed PMID*).
 
+Its **general-population** cardiovascular-outcome trial is a different animal again: run against an
+active comparator (another GLP-1 agonist with established benefit) and reporting **noninferiority**
+rather than placebo-controlled superiority — which is the sharper and more durable distinction
+between the two drugs.
+
 **So both support a cardiovascular-benefit claim, and what differs is the population and the
 comparator.** Check each drug's own outcome evidence rather than inheriting it from the class — the
 same error as inheriting a guideline across a gene–drug pair, and one this paragraph committed while
@@ -265,15 +289,21 @@ environment — read them from the paper.*
 review of the literature included 36 studies of which **35 were preclinical and 1 clinical**, a ratio
 that describes the field better than any adjective. *(That count is read from a review's own text
 rather than from a retrieved primary record — treat it as an anchor to re-verify, per
-`variant-catalog.md` §0.)* It has been placed
-by a regulator in a category identifying substances that **may present significant safety risks**
-for use in compounding, with concerns including immunogenicity for certain routes of administration
-and peptide-impurity characterisation
-([FDA bulk-substances safety-risk page](https://www.fda.gov/drugs/human-drug-compounding/certain-bulk-drug-substances-use-compounding-may-present-significant-safety-risks);
+`variant-catalog.md` §0.)* It has been
+considered by a regulator in the process that identifies bulk substances which **may present
+significant safety risks** in compounding
+([regulator's bulk-substances page](https://www.fda.gov/drugs/human-drug-compounding/certain-bulk-drug-substances-use-compounding-may-present-significant-safety-risks);
 reviews at [PMC12313605](https://pmc.ncbi.nlm.nih.gov/articles/PMC12313605/) and
-[PMC12446177](https://pmc.ncbi.nlm.nih.gov/articles/PMC12446177/)). **The specific category and
-nomination status have changed over time — re-check the live source rather than quoting this
-paragraph.** **G4.**
+[PMC12446177](https://pmc.ncbi.nlm.nih.gov/articles/PMC12446177/)).
+
+**State this substance's OWN documented concerns, which an earlier version of this file got wrong by
+importing another peptide's.** The concerns recorded for BPC-157 are about **identity and
+characterisation**: it has no standardised pharmacopoeial name, and the review found missing
+characterisation data — impurities, aggregates, bioburden, bacterial endotoxins. *Immunogenicity by
+route of administration* is the stated rationale for a different nominated peptide, and attaching it
+here was a misattribution. **The category, the nomination status and the stated rationale have all
+moved over time, and they are per-substance — re-check the live source rather than quoting this
+paragraph, and never carry one substance's rationale across to another.** **G4.**
 
 **TB-500/thymosin beta-4, thymosin alpha-1, epitalon, GHK-Cu, and similar** — assess as a class:
 individual human evidence is thin (**T4–T6**), with occasional narrow exceptions worth checking
@@ -286,13 +316,15 @@ agonists, and shipping them as one line was an error worth naming.
 "unproven but probably inert" category: published case reports describe **eruptive naevi and
 darkening of pre-existing naevi after use** — one of them titled for the finding, *"Eruptive naevi
 and darkening of preexisting naevi 24 h after a single mono-dose injection of melanotan II"*
-([repository record](https://research.uni-luebeck.de/en/publications/eruptive-naevi-and-darkening-of-preexisting-naevi-24-h-after-a-si/)),
-alongside a dermatology letter describing naevus and lentigo changes after self-injection
-([10.2340/00015555-1130](https://medicaljournals.se/acta/download/10.2340/00015555-1130)).
-**One identifier was withdrawn here:** an earlier version cited `PMC3663356` for the 24-hour detail.
-That ID appeared in a returned URL but with **no title beside it**, a re-check could not resolve it,
-and the specific detail belongs to the title-bearing record above. See §0 of `variant-catalog.md`:
-a bare URL proves an identifier exists, not what it is. **State
+([repository record](https://research.uni-luebeck.de/en/publications/eruptive-naevi-and-darkening-of-preexisting-naevi-24-h-after-a-si/)).
+
+**Two identifiers were withdrawn from this sentence, and the reason is the standard rather than the
+substance.** One was a bare PMC URL returned with no title beside it, which two later passes
+described differently — so what it is cannot be established here. The other was an Acta DOI that a
+verification pass identified as a letter about *nomenclature* — which molecule the street name
+"melanotan" actually denotes — not a case report at all. **A claim now rests only on the record whose
+title was returned**, and the case-report literature beyond it is real but is not cited here with
+identifiers this environment could not confirm (`variant-catalog.md` §0). **State
 what this evidence is and is not:** case reports establish temporal association, not causation — a
 melanoma report in this literature explicitly declined to claim a causal relationship. The honest
 version is that a drug which drives melanogenesis in people who are also tanning, with documented

@@ -231,9 +231,10 @@ study supports. Where the general recommendation does not change based on genoty
 common case — saying so is the correct, useful answer.
 
 **The most over-interpreted variant in consumer genetics is MTHFR**, and getting it right is a good
-test of whether a genetics tool is trustworthy. A professional-society practice guideline advised
+test of whether a genetics tool is trustworthy. A professional society advised
 against routine MTHFR polymorphism testing on the grounds of minimal clinical utility, and the
-recommendation stood through a later addendum. The position is echoed elsewhere in the literature —
+recommendation stood through a later addendum — which also reclassified the document from an
+evidence-based practice guideline to a clinical practice resource, so quote it as that. The position is echoed elsewhere in the literature —
 though by a commentary rather than by a second society, which is a distinction this skill got wrong
 once and now states carefully. `references/interventions-evidence.md` carries the
 resolved citations and what the evidence does and does not support.

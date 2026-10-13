@@ -239,10 +239,12 @@ Report them with that framing rather than manufacturing an action.
 Report these primarily to *correct* the interpretation the person has probably already encountered.
 
 **MTHFR C677T (rs1801133) and A1298C (rs1801131).** The single most over-interpreted pair in
-consumer genetics. A professional-society practice guideline advised against routine MTHFR
+consumer genetics. A professional society advised against routine MTHFR
 polymorphism testing on the grounds of minimal clinical utility
 ([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)); the recommendation stood through a later
-addendum, and **[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) is the correction notice
+addendum **which simultaneously reclassified the document from an evidence-based practice guideline
+to a clinical practice resource** — the direction survived, its evidentiary standing was downgraded —
+and **[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) is the correction notice
 about that addendum rather than the addendum itself** — an earlier version of this file cited the
 erratum as the amendment. The position is echoed by a call to action in the thrombosis literature
 ([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)), **a single-author commentary, so
