@@ -1,5 +1,13 @@
 # CLAUDE.md — treasury-analyst-skills
 
+**If any skill in this library appears to be missing, the plugins are not installed in this
+session — run `bash scripts/bootstrap-plugins.sh` before concluding anything else.** The committed
+`.claude/settings.json` is inert on its own: verified against a clean HOME, a fresh clone carrying
+those settings reports `No plugins installed`, so every skill is absent rather than trimmed.
+Registering the marketplace alone is also not enough, because `enabledPlugins` does not trigger an
+install. A skill is always reachable by its full address (`/deep-research-skills:dna-raw-data-audit`)
+once installed, even when the listing budget has trimmed its description away.
+
 This repo is the `treasury-analyst-skills` plugin marketplace (the name is kept for install
 compatibility; the active library is general-use and career-portable — 100+ skills across the
 active plugins, with the finance/Oracle/treasury domain plugins preserved in `archive/`, see
