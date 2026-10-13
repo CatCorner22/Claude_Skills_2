@@ -14,7 +14,7 @@ description: >-
   muscle, protein requirements, training volume, cardio detraining, ergogenic supplement
   evidence, interpret this fitness study.
 metadata:
-  version: "1.0.1"
+  version: "1.1.0"
   source: "Peer-reviewed fitness research integration for tracker ecosystem"
 ---
 
@@ -42,6 +42,10 @@ mechanism instead of broscience, and routes outdated claims to their graves with
 - Nutrition science: macro/micronutrient requirements by goal, food-quality tradeoffs,
   supplementation evidence, or hormonal effects of specific dietary patterns.
 - Not for: medical diagnosis, injury treatment, or pharmacology → route to a clinician.
+- Not for: interpreting a personal genome raw data file (23andMe, Nebula, a VCF) and what its
+  alleles support → `deep-research-skills:dna-raw-data-audit`. Note that for nutrition and training
+  the honest finding is usually that genotype does *not* change the recommendation, so this skill's
+  parameters stand regardless.
 - Not for: pure workout programming as exercise selection → that is a skill owned by
   coaching; this skill provides the research-backed *parameters* that coaches design within.
 

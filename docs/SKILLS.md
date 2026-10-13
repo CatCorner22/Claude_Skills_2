@@ -1,6 +1,6 @@
 # Skills Library — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **73 skills across 13 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **74 skills across 13 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
 
 ## How to trigger a skill
 
@@ -29,7 +29,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`full-stack-dev-skills`](#full-stack-dev-skills) (10) — Full-stack application development with a lean-code philosophy: architecture, FastAPI backends, databases/ORM, modern dynamic frontends, realtime features, ML in production, testing strategy, deployment, and evidence-based UI/UX inspection with severity-rated findings and human-factors instruments (Fitts, NASA-TLX).
 - [`coding-agent-skills`](#coding-agent-skills) (11) — Claude Code craft for working engineers: authoring Agent Skills (the library's own standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors multi-agent code review (board-review + six specialist subagents), defect-epidemiology (treat a confirmed bug as evidence about a population), rule-stress-testing, software-archaeology, Comrade Engineer's pencil pass, The Foreman's draw inspection, and Chicken Little (Aether) — the multi-domain persona with forward-deployed advisor and compiler autopsy modes.
 - [`metacognition-skills`](#metacognition-skills) (3) — Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
-- [`deep-research-skills`](#deep-research-skills) (2) — True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Covers published medical literature (medical-research-detective) and auditing video claims against the primary sources they cite, with A+ to F grading on source fidelity, comprehensiveness, and statistics (video-source-audit).
+- [`deep-research-skills`](#deep-research-skills) (3) — True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Covers published medical literature (medical-research-detective), auditing video claims against the primary sources they cite with A+ to F grading (video-source-audit), and interpreting personal genome raw data against the literature with absolute-risk framing and hard clinical-confirmation rails (dna-raw-data-audit).
 - [`writing-skills`](#writing-skills) (4) — Writing registers and explanation craft: adams-smart-brevity (Adams + Axios Smart Brevity for professional, technical, legal, and clinical writing, with the risk-allocation carve-outs and the where-the-bar-disagrees register), adams-plain-grade (5th-8th grade accessible register with the discretion/obligation check), explanation-design (audience models, break-point-marked analogies, the Feynman loop, teach-back), and technical-documentation (Diataxis routing, ADRs, and the owner/cadence/last-verified discipline that keeps a page true).
 - [`safety-and-reliability-skills`](#safety-and-reliability-skills) (6) — Safety engineering for records, alarms, and dormant protections: split-tally evidence design with the litigation-hold rail, detection-system tuning by empirical disposition audit (floor-ceiling autoimmunity band), reliability math including probability-of-failure-on-demand for dormant protective functions, rebuild rehearsal with an irreversibility screen, break-glass playbooks, and hash-rank sortition review.
 - [`collaboration-skills`](#collaboration-skills) (2) — Two collaboration instruments that earn their slots: disarming-elicitation (the FBI counter-elicitation stance inverted for willing experts, with the scoped-promise and investigation rails) and meeting-design (decisions extracted as owner-and-date read-backs, not vibes).
@@ -464,9 +464,17 @@ Install: `/plugin install metacognition-skills@treasury-analyst-skills`
 
 ## `deep-research-skills`
 
-True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Covers published medical literature (medical-research-detective) and auditing video claims against the primary sources they cite, with A+ to F grading on source fidelity, comprehensiveness, and statistics (video-source-audit).
+True deep research skills that go beyond surface search: extensive multi-database literature investigation, cross-domain dot-connection, source-provenance control, evidence appraisal, and citation verification. Covers published medical literature (medical-research-detective), auditing video claims against the primary sources they cite with A+ to F grading (video-source-audit), and interpreting personal genome raw data against the literature with absolute-risk framing and hard clinical-confirmation rails (dna-raw-data-audit).
 
 Install: `/plugin install deep-research-skills@treasury-analyst-skills`
+
+### `deep-research-skills:dna-raw-data-audit`
+
+**Invoke:** `/deep-research-skills:dna-raw-data-audit` — or just describe the task.
+
+**What it does:** Audits a personal genome against the published literature — reads 23andMe and Nebula raw data, resolves which alleles the files actually support, grades each finding by evidence strength and array reliability, and reports risk in absolute terms beside relative. Covers pharmacogenomics, carrier status, supplements, medicines, peptides and lifestyle factors, and says plainly when a genotype changes nothing. Use for interpreting a DNA raw data file, checking what a gene variant actually means, or preparing a genetics question for a clinician. Research only — never diagnosis or dosing.
+
+**Triggers:** `23andme`, `nebula`, `my dna`, `raw genetic data`, `digital dna agent`, `my genome`, `genetic risk`, `apoe`, `mthfr`, `pharmacogenomic`, `carrier status`, `polygenic risk score`
 
 ### `deep-research-skills:medical-research-detective`
 
@@ -480,7 +488,7 @@ Install: `/plugin install deep-research-skills@treasury-analyst-skills`
 
 **Invoke:** `/deep-research-skills:video-source-audit` — or just describe the task.
 
-**What it does:** Audits a video against the primary sources it cites — pulls the transcript, traces every linked and spoken source to the literature, reads what those sources actually say, then grades the video A+ to F on three separate axes: fidelity to its sources, comprehensiveness, and portrayal of statistics. Translates every statistic into plain language, absolute risk beside relative. Use for a YouTube, podcast, lecture, or conference-talk link whose claims need checking, or when a video's numbers look too good; for a clinical symptom question see deep-research-skills:medical-research-detective.
+**What it does:** Audits a video against the primary sources it cites — pulls the transcript, traces every linked and spoken source to the literature, reads what those sources actually say, then grades the video A+ to F on three separate axes: fidelity to its sources, comprehensiveness, and portrayal of statistics. Translates every statistic into plain language, absolute risk beside relative. Use for a YouTube, podcast, lecture, or conference-talk link whose claims need checking, or when a video's numbers look too good; for a clinical symptom question see deep-research-skills:medical-research-detective, and for your own genome file see deep-research-skills:dna-raw-data-audit.
 
 **Triggers:** `youtube`, `fact check this video`, `audit this video`, `check this video's sources`, `is this video accurate`, `grade this video`, `does this video misrepresent the study`, `debunk this video`
 

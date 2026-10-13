@@ -349,6 +349,8 @@ trimming medical-research-detective's description to make room — do not trim i
 | F1 | `Someone sent me a clip claiming a supplement cuts heart attack risk by 40%, and the description links three papers. Do the papers actually say that?` | `deep-research-skills:video-source-audit` | `Summarize this 40-minute conference talk for me — I just want the main points.` | video-source-audit (plain summarization is a no-skill task) |
 | F2 | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. What could link these?` | `deep-research-skills:medical-research-detective` | `This health channel's video says the paper proved it. Does the paper say that?` | medical-research-detective (should be `video-source-audit`) |
 | F3 | `Is it the number of reps that builds muscle, or the total amount of work per week?` | `coding-agent-skills:fitness-nutrition-science` | `Run a paired t-test on these two columns and tell me whether the difference is significant.` | fitness-nutrition-science (should be `statistical-inference`) |
+| F4 | `I exported my raw data from 23andMe and Nebula. What in there is actually worth knowing?` | `deep-research-skills:dna-raw-data-audit` | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. What could link these?` | dna-raw-data-audit (should be `medical-research-detective`) |
+| F5 | `A relative was found to carry a BRCA2 variant — can you check whether my own file shows it?` | `deep-research-skills:dna-raw-data-audit` | `This health channel's video says a study proved the supplement works. Did the study say that?` | dna-raw-data-audit (should be `video-source-audit`) |
 
 ---
 

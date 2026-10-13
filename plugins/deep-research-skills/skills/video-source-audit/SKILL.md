@@ -7,11 +7,12 @@ description: >-
   and portrayal of statistics. Translates every statistic into plain language, absolute risk
   beside relative. Use for a YouTube, podcast, lecture, or conference-talk link whose claims
   need checking, or when a video's numbers look too good; for a clinical symptom question see
-  deep-research-skills:medical-research-detective. Triggers: youtube, fact check this video,
+  deep-research-skills:medical-research-detective, and for your own genome file see
+  deep-research-skills:dna-raw-data-audit. Triggers: youtube, fact check this video,
   audit this video, check this video's sources, is this video accurate, grade this video, does
   this video misrepresent the study, debunk this video.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from a seven-stream research pass with adversarial verification. Statistical
     arithmetic independently recomputed; citations verified against retrieved index data
