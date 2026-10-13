@@ -92,6 +92,28 @@ AMBIGUOUS_PAIRS = ({"A", "T"}, {"C", "G"})
 # reason one genotype combination is ambiguous.
 APOE_HAP = {"e1": ("C", "T"), "e2": ("T", "T"), "e3": ("T", "C"), "e4": ("C", "C")}
 
+# The two APOE sites are c.388 and c.526, both in exon 4 with no intron between them, so they sit
+# 526 - 388 = 138 bp apart in every build. The spacing is therefore a free, build-independent
+# consistency check on a file's own coordinates — unlike the absolute positions, which must be read
+# from the file's header and never assumed.
+APOE_SITE_GAP_BP = 138
+
+# A gVCF reference block records "no variant called across this interval". It is not a genotype.
+SYMBOLIC_REF_ALTS = ("<NON_REF>", "<*>")
+
+
+def _norm_geno(geno: str | None) -> str | None:
+    """Normalise a genotype to a sorted allele string, dropping VCF phase separators.
+
+    Sorting makes "AG" and "GA" the same genotype, which is correct. It deliberately does NOT
+    collapse ploidy: "C" stays one character and "CC" stays two, so a half-call can never be
+    mistaken for a homozygote downstream.
+    """
+    if not geno:
+        return None
+    g = re.sub(r"[/|]", "", geno.strip().upper())
+    return "".join(sorted(g)) if g else None
+
 
 def _open(path: str):
     if path.endswith((".gz", ".bgz")):
@@ -134,35 +156,79 @@ def parse_23andme(path: str) -> dict:
 
 
 def parse_vcf(path: str) -> dict:
+    """Read a VCF, keeping the distinction between a genotype and the absence of one.
+
+    Three VCF-specific traps are handled here because each one turns absence into a confident
+    call downstream:
+
+    - **Variants-only vs all-sites.** A variants-only file has no line at a reference site, so
+      "homozygous reference" and "never covered" are the same observation: nothing. The file kind
+      is recorded so the report can say that instead of reading absence as reference.
+    - **Reference blocks.** A gVCF block (symbolic `<NON_REF>`/`<*>` ALT, or an `END=` interval)
+      asserts that no variant was called across a span. It is not a genotype at any position
+      inside it, so no genotype is taken from one.
+    - **Zero depth.** A pipeline can emit `0/0` with `DP=0`. A call with no supporting reads is
+      no information, and is discarded rather than counted as a reference call.
+    """
     header, calls = [], {}
-    nocall = 0
+    nocall = ref_blocks = zero_depth = 0
+    all_sites = False
     with _open(path) as fh:
         for line in fh:
-            if line.startswith("##"):
-                header.append(line.rstrip("\n"))
-                continue
-            if line.startswith("#CHROM"):
+            if line.startswith("##") or line.startswith("#CHROM"):
                 header.append(line.rstrip("\n"))
                 continue
             parts = line.rstrip("\n").split("\t")
             if len(parts) < 10:
                 continue
-            chrom, pos, vid, ref, alt = parts[0], parts[1], parts[2], parts[3], parts[4]
-            gt_field = parts[9].split(":")[0]
-            alleles = [ref] + alt.split(",")
+            chrom, pos, vid, ref, alt, info = parts[0], parts[1], parts[2], parts[3], parts[4], parts[7]
+            field = dict(zip(parts[8].split(":"), parts[9].split(":")))
+            gt_field = field.get("GT", ".")
+            dp = int(field["DP"]) if field.get("DP", "").isdigit() else None
+            key = vid if vid.startswith("rs") else f"{chrom}:{pos}"
+            rec = {"chrom": chrom, "pos": pos, "geno": None, "ploidy": None, "dp": dp}
+
+            if any(sym in alt for sym in SYMBOLIC_REF_ALTS) or "END=" in info:
+                all_sites = True
+                ref_blocks += 1
+                rec["kind"] = "reference-block"
+                rec["note"] = ("reference block, not a site call: homozygous-reference cannot be "
+                               "asserted at a catalogued position from a block record")
+                calls[key] = rec
+                continue
             if gt_field in (".", "./.", ".|."):
                 nocall += 1
-                geno = None
-            else:
-                idx = re.split(r"[/|]", gt_field)
-                try:
-                    geno = "".join(sorted(alleles[int(i)] for i in idx if i != "."))
-                except (ValueError, IndexError):
-                    geno = None
-                    nocall += 1
-            key = vid if vid.startswith("rs") else f"{chrom}:{pos}"
-            calls[key] = {"chrom": chrom, "pos": pos, "geno": geno}
-    return {"format": "vcf", "header": header, "calls": calls, "nocall": nocall}
+                rec["kind"] = "no-call"
+                calls[key] = rec
+                continue
+            alleles = [ref] + alt.split(",")
+            idx = [i for i in re.split(r"[/|]", gt_field) if i != "."]
+            try:
+                obs = sorted(alleles[int(i)] for i in idx)
+            except (ValueError, IndexError):
+                nocall += 1
+                rec["kind"] = "unparseable-GT"
+                calls[key] = rec
+                continue
+            if not obs:
+                nocall += 1
+                rec["kind"] = "no-call"
+                calls[key] = rec
+                continue
+            if dp == 0:
+                zero_depth += 1
+                rec["kind"] = "zero-depth"
+                rec["note"] = ("a genotype was emitted with DP=0 — no supporting reads, therefore no "
+                               "information, and not a reference call")
+                calls[key] = rec
+                continue
+            rec["geno"] = "".join(obs)
+            rec["ploidy"] = len(obs)
+            rec["kind"] = "call" if len(obs) == 2 else "non-diploid call"
+            calls[key] = rec
+    return {"format": "vcf", "header": header, "calls": calls, "nocall": nocall,
+            "ref_blocks": ref_blocks, "zero_depth": zero_depth,
+            "vcf_kind": "gvcf-or-all-sites" if all_sites else "variants-only"}
 
 
 def parse(path: str) -> dict:
@@ -227,10 +293,38 @@ def apoe_diplotypes(rs429358: str | None, rs7412: str | None) -> dict:
     diplotypes are uniquely determined. Exactly one combination is formally ambiguous once the
     rare e1 haplotype is admitted, and this reports it rather than silently picking the likely
     answer. Verified by enumerating every haplotype pair.
+
+    Ploidy is validated before anything else. An earlier version compared `set(geno)`, and
+    set("C") == set("CC"), so a half-call or a truncated field was read as a homozygote and
+    returned a confident **e4/e4** — the most consequential call this script makes, fabricated
+    from a single observed allele. Anything that is not a two-allele diploid call is refused.
     """
+    out: dict = {"resolved": None, "candidates": [], "note": ""}
     if not rs429358 or not rs7412:
-        return {"resolved": None, "candidates": [], "note": "one or both defining sites missing or no-called"}
-    g1, g2 = set(rs429358.upper()), set(rs7412.upper())
+        out["note"] = "one or both defining sites missing or no-called"
+        return out
+
+    norm = {}
+    for site, raw in (("rs429358", rs429358), ("rs7412", rs7412)):
+        g = _norm_geno(raw)
+        if g is None or set(g) <= {"-", ".", "0"}:
+            out["note"] = f"{site} is a no-call — APOE cannot be called, and absence is not a genotype"
+            return out
+        if len(g) != 2:
+            out["note"] = (f"{site} is not a diploid call ({raw!r}): APOE cannot be resolved from one "
+                           "observed allele, and reading one allele as a homozygote is exactly how a "
+                           "false e4/e4 gets reported. Establish the genotype before interpreting.")
+            return out
+        if not set(g) <= {"T", "C"}:
+            out["note"] = (f"{site} carries {sorted(set(g))}. Both APOE sites are T/C, and the "
+                           "complement set A/G is disjoint from it — so a strand flip here is "
+                           "DETECTABLE rather than ambiguous. This is a parsing, mapping or "
+                           "strand-handling error, not a genotype, and it is refused rather than "
+                           "complemented into something plausible.")
+            return out
+        norm[site] = g
+
+    g1, g2 = set(norm["rs429358"]), set(norm["rs7412"])
     cands = []
     haps = sorted(APOE_HAP)
     for i, h1 in enumerate(haps):
@@ -238,30 +332,66 @@ def apoe_diplotypes(rs429358: str | None, rs7412: str | None) -> dict:
             a, b = APOE_HAP[h1], APOE_HAP[h2]
             if {a[0], b[0]} == g1 and {a[1], b[1]} == g2:
                 cands.append(f"{h1}/{h2}")
+    out["candidates"] = cands
     if not cands:
-        return {"resolved": None, "candidates": [],
-                "note": "genotype combination matches no APOE haplotype pair — check strand orientation and build"}
+        out["note"] = ("genotype combination matches no APOE haplotype pair — check that both calls "
+                       "come from the intended sites and the intended build")
+        return out
+
     common = [c for c in cands if "e1" not in c]
     if len(cands) == 1:
-        return {"resolved": cands[0], "candidates": cands, "note": "uniquely determined"}
-    return {"resolved": common[0] if len(common) == 1 else None, "candidates": cands,
-            "note": ("ambiguous: " + " or ".join(cands) +
-                     f". {common[0]} is far more likely (e1 is rare) but phasing is required to exclude the alternative."
-                     if common else "ambiguous")}
+        out["resolved"] = cands[0]
+        if common:
+            out["note"] = "uniquely determined"
+        else:
+            # Formally unique, but only because e1 was admitted. e1 is rare, so the likelier
+            # explanation of such an observation is an error at one of the two sites.
+            out["note"] = (f"{cands[0]} is the only diplotype consistent with these calls, but it "
+                           "invokes the rare e1 haplotype. A genotyping error at one of the two "
+                           "sites is the more likely explanation — re-check both calls rather than "
+                           "reporting a confident rare diplotype.")
+            out["caution"] = "rare-haplotype-or-genotyping-error"
+        return out
+
+    out["resolved"] = common[0] if len(common) == 1 else None
+    out["note"] = ("ambiguous: " + " or ".join(cands) +
+                   (f". {common[0]} is far more likely (e1 is rare) but phasing is required to "
+                    "exclude the alternative." if len(common) == 1 else ""))
+    return out
 
 
 def concordance(a: dict, b: dict) -> dict:
+    """Compare two files site by site.
+
+    Both sides are normalised and required to be diploid before comparison. An earlier version
+    compared `set(geno)`, which scored a homozygote against a half-call at the same allele
+    ("CC" vs "C") as agreement — inflating the very quality gate the audit depends on. Comparing
+    sorted strings keeps "AG" == "GA" without collapsing ploidy.
+
+    Non-diploid comparisons are excluded and counted rather than resolved: a haploid
+    sex-chromosome or mitochondrial call and a truncated field look identical here, and neither
+    can be compared as a diploid genotype.
+    """
     shared = set(a["calls"]) & set(b["calls"])
-    comparable = [k for k in shared if a["calls"][k]["geno"] and b["calls"][k]["geno"]]
-    agree = [k for k in comparable if set(a["calls"][k]["geno"]) == set(b["calls"][k]["geno"])]
-    disagree = sorted(set(comparable) - set(agree))
+    comparable, agree, disagree, non_diploid = [], [], [], []
+    for k in sorted(shared):
+        ga, gb = _norm_geno(a["calls"][k]["geno"]), _norm_geno(b["calls"][k]["geno"])
+        if not ga or not gb:
+            continue
+        if len(ga) != 2 or len(gb) != 2:
+            non_diploid.append(k)
+            continue
+        comparable.append(k)
+        (agree if ga == gb else disagree).append(k)
     return {
         "shared_sites": len(shared),
         "comparable_sites": len(comparable),
         "concordant": len(agree),
         "discordant": len(disagree),
+        "non_diploid_excluded": len(non_diploid),
         "rate": (len(agree) / len(comparable)) if comparable else None,
         "discordant_examples": disagree[:20],
+        "non_diploid_examples": non_diploid[:20],
     }
 
 
@@ -288,11 +418,34 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
             "no_call_rate": round(d["nocall"] / total, 6) if total else None,
             "chromosomes": len({c["chrom"] for c in d["calls"].values()}),
         }
+        if d["format"] == "vcf":
+            entry["vcf_kind"] = d.get("vcf_kind")
+            entry["reference_blocks"] = d.get("ref_blocks", 0)
+            entry["zero_depth_discarded"] = d.get("zero_depth", 0)
         out["files"].append(entry)
         if d["build"] is None:
             out["warnings"].append(
                 f"{d['path']}: genome build NOT declared in the file. Positions cannot be looked up "
                 "safely. Determine the build from the provider before interpreting any position."
+            )
+        if d.get("vcf_kind") == "variants-only":
+            out["warnings"].append(
+                f"{d['path']}: variants-only VCF. A catalogued site with no line in this file is NOT a "
+                "homozygous-reference call — homozygous-reference and never-covered are the same "
+                "observation here, which is no observation. In particular, an APOE e3/e3 person is "
+                "reference at BOTH defining sites and is therefore invisible in a variants-only file: "
+                "never infer e3/e3 from absence."
+            )
+        if d.get("ref_blocks"):
+            out["warnings"].append(
+                f"{d['path']}: {d['ref_blocks']} reference-block record(s). A block asserts that no "
+                "variant was called across an interval; it asserts no genotype at any catalogued "
+                "position inside it, and none was taken from one."
+            )
+        if d.get("zero_depth"):
+            out["warnings"].append(
+                f"{d['path']}: {d['zero_depth']} genotype(s) emitted with DP=0 and discarded. A call "
+                "with no supporting reads is no information, not a reference call."
             )
 
     builds = {d["build"] for d in parsed if d["build"]}
@@ -301,6 +454,15 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
             f"Files declare DIFFERENT builds ({', '.join(sorted(builds))}). Do not compare positions "
             "across them without liftover; rsID-based comparison is safe, positional is not."
         )
+
+    # What "absent" means differs by file kind, and conflating the two is how a variants-only
+    # VCF's silence becomes a reference call.
+    if any(d.get("vcf_kind") == "variants-only" for d in parsed):
+        absent_status = ("absent: no line in a variants-only VCF (and no array call) — "
+                         "homozygous-reference and never-covered are indistinguishable, so this is "
+                         "no information rather than a reference genotype")
+    else:
+        absent_status = "not present or no-called — the array may never have probed it"
 
     merged = {}
     for d in parsed:
@@ -311,7 +473,7 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
         hits = merged.get(rsid)
         if not hits:
             out["catalog"][rsid] = {"gene": gene, "site": what, "genotype": None,
-                                    "status": "not present or no-called — the array may never have probed it"}
+                                    "status": absent_status}
             continue
         genos = {g for _, g in hits}
         rec = {"gene": gene, "site": what, "genotype": sorted(genos)[0],
@@ -332,6 +494,20 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
                                   "the site's alleles before interpreting.")
         out["catalog"][rsid] = rec
 
+    # Free consistency check: the two APOE sites are 138 bp apart in every build, so a different
+    # spacing in the file's own coordinates means a row is mapped to the wrong place.
+    for d in parsed:
+        a1, a2 = d["calls"].get("rs429358"), d["calls"].get("rs7412")
+        if a1 and a2 and str(a1["pos"]).isdigit() and str(a2["pos"]).isdigit():
+            gap = abs(int(a1["pos"]) - int(a2["pos"]))
+            if gap != APOE_SITE_GAP_BP:
+                out["warnings"].append(
+                    f"{d['path']}: the two APOE sites are {gap} bp apart in this file; they are "
+                    f"{APOE_SITE_GAP_BP} bp apart in every build (c.526 − c.388, both in exon 4). One "
+                    "of the two rows is mapped to the wrong position — do not call APOE from this "
+                    "file until that is explained."
+                )
+
     g1 = out["catalog"].get("rs429358", {}).get("genotype")
     g2 = out["catalog"].get("rs7412", {}).get("genotype")
     out["apoe"] = apoe_diplotypes(g1, g2)
@@ -350,12 +526,19 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
               f"{e['sites']} sites · {e['no_calls']} no-calls "
               f"({'' if e['no_call_rate'] is None else format(e['no_call_rate']*100, '.3f') + '%'}) · "
               f"{e['chromosomes']} chromosomes")
+        if e.get("vcf_kind"):
+            print(f"    vcf kind {e['vcf_kind']} · {e.get('reference_blocks', 0)} reference blocks · "
+                  f"{e.get('zero_depth_discarded', 0)} zero-depth calls discarded")
     if out["concordance"]:
         c = out["concordance"]
         rate = "n/a" if c["rate"] is None else f"{c['rate']*100:.3f}%"
         print("\n=== Cross-platform concordance ===")
         print(f"  shared {c['shared_sites']} · comparable {c['comparable_sites']} · "
               f"concordant {c['concordant']} · discordant {c['discordant']} · rate {rate}")
+        if c.get("non_diploid_excluded"):
+            print(f"  {c['non_diploid_excluded']} non-diploid comparison(s) excluded (haploid "
+                  "sex-chromosome/mitochondrial calls, or truncated fields) — these cannot be "
+                  "compared as diploid genotypes")
         if c["discordant_examples"]:
             print(f"  discordant examples: {', '.join(c['discordant_examples'])}")
     print("\n=== Catalogued sites ===")
@@ -368,6 +551,8 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
     print("\n=== APOE ===")
     a = out["apoe"]
     print(f"  diplotype: {a['resolved'] or 'unresolved'} · {a['note']}")
+    if a.get("caution"):
+        print(f"  ! caution: {a['caution']}")
     if out["warnings"]:
         print("\n=== Warnings ===")
         for w in out["warnings"]:
@@ -381,6 +566,8 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
 # Offline self-test
 # --------------------------------------------------------------------------------------
 def self_test() -> int:
+    import contextlib
+    import io
     import tempfile
     failures: list[str] = []
     total = 0
@@ -408,6 +595,44 @@ def self_test() -> int:
     # Order independence: genotype strings may arrive in either allele order.
     check("APOE genotype order independent",
           apoe_diplotypes("TC", "CC")["resolved"] == apoe_diplotypes("CT", "CC")["resolved"])
+    # REGRESSION, the worst defect this script has had: `set("C") == set("CC")`, so a half-call was
+    # read as a homozygote and reported as a confident e4/e4 — a fabricated finding at the single
+    # most consequential site. Each of these resolved under the old code.
+    half_e4 = apoe_diplotypes("C", "CC")
+    check("APOE half-call does NOT resolve to e4/e4", half_e4["resolved"] is None)
+    check("APOE half-call says why", "diploid" in half_e4["note"])
+    check("APOE half-call at the other site does NOT resolve",
+          apoe_diplotypes("T", "CC")["resolved"] is None)
+    check("APOE three-allele field refused", apoe_diplotypes("CTT", "CC")["resolved"] is None)
+    check("APOE half-call on the second site refused",
+          apoe_diplotypes("CC", "C")["resolved"] is None)
+    # A no-call must be diagnosed as a no-call, not as a strand or build problem.
+    nc = apoe_diplotypes("--", "CC")
+    check("APOE no-call refused", nc["resolved"] is None)
+    check("APOE no-call diagnosed as a no-call", "no-call" in nc["note"])
+    check("APOE no-call not misdiagnosed as strand/build", "orientation" not in nc["note"])
+    # Both APOE sites are T/C and the complement set A/G is disjoint, so a flip is DETECTABLE.
+    flip = apoe_diplotypes("AG", "CC")
+    check("APOE non-T/C allele refused", flip["resolved"] is None)
+    check("APOE flip reported as detectable", "DETECTABLE" in flip["note"])
+    # VCF separators must survive normalisation.
+    check("APOE accepts VCF separators", apoe_diplotypes("C/T", "C|C")["resolved"] == "e3/e4")
+    # The three observations that resolve uniquely ONLY by invoking the rare e1 haplotype must
+    # carry a caution, because an error at one of the two sites is the likelier explanation.
+    e1 = apoe_diplotypes("CC", "CT")
+    check("APOE e1/e4 resolves", e1["resolved"] == "e1/e4")
+    check("APOE e1 resolution carries a caution", e1.get("caution") is not None)
+    check("APOE e1 caution names the error explanation", "genotyping error" in e1["note"])
+    check("APOE e1/e1 carries a caution", apoe_diplotypes("CC", "TT").get("caution") is not None)
+    check("APOE e1/e2 carries a caution", apoe_diplotypes("CT", "TT").get("caution") is not None)
+    check("APOE common diplotype carries NO caution",
+          apoe_diplotypes("TT", "CC").get("caution") is None)
+
+    # --- Genotype normalisation: sorts alleles, keeps ploidy ---
+    check("norm sorts alleles", _norm_geno("GA") == "AG")
+    check("norm strips VCF separators", _norm_geno("C|T") == "CT")
+    check("norm preserves a half-call's length", _norm_geno("C") == "C")
+    check("norm passes None through", _norm_geno(None) is None)
 
     # --- Build detection. Must never guess. ---
     check("build GRCh37 from hg19", detect_build(["# build 37, hg19 coordinates"]) == "GRCh37/hg19")
@@ -489,6 +714,80 @@ def self_test() -> int:
         check("concordance catches the planted disagreement", c["discordant"] == 1)
         check("concordance names the discordant site", c["discordant_examples"] == ["rs6025"])
         check("concordance rate computed", abs(c["rate"] - 2 / 3) < 1e-9)
+        # REGRESSION: set() comparison scored a homozygote against a half-call at the same allele
+        # as agreement, inflating the audit's own quality gate.
+        ph = os.path.join(td, "half.txt")
+        with open(ph, "w") as fh:
+            fh.write("# build 37\n")
+            fh.write("rs429358\t19\t45411941\tT\n")     # half-call vs TT above
+            fh.write("rs7412\t19\t45412079\tCC\n")      # agrees
+            fh.write("rs6025\t1\t169519049\tGG\n")      # agrees
+        ch = concordance(parse(p23), parse(ph))
+        check("half-call excluded from comparable sites", ch["comparable_sites"] == 2)
+        check("half-call NOT scored as concordant", ch["concordant"] == 2)
+        check("half-call counted as a non-diploid exclusion", ch["non_diploid_excluded"] == 1)
+        check("half-call named", ch["non_diploid_examples"] == ["rs429358"])
+        # Heterozygote allele order must still agree — the property set() got right.
+        pord = os.path.join(td, "order.txt")
+        with open(pord, "w") as fh:
+            fh.write("# build 37\nrs6025\t1\t169519049\tGA\n")
+        pord2 = os.path.join(td, "order2.txt")
+        with open(pord2, "w") as fh:
+            fh.write("# build 37\nrs6025\t1\t169519049\tAG\n")
+        check("het allele order still concordant",
+              concordance(parse(pord), parse(pord2))["concordant"] == 1)
+
+        # --- VCF semantics: absence, reference blocks, and zero depth ---
+        check("variants-only VCF identified", v["vcf_kind"] == "variants-only")
+        pg = os.path.join(td, "g.vcf")
+        with open(pg, "w") as fh:
+            fh.write("##fileformat=VCFv4.2\n##reference=GRCh38\n")
+            fh.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\n")
+            # The APOE region as a zero-coverage reference block: an e3/e3 person looks identical.
+            fh.write("19\t44908684\trs429358\tT\t<NON_REF>\t.\t.\tEND=44908900\tGT:DP\t0/0:0\n")
+            fh.write("19\t44908822\trs7412\tC\t<NON_REF>\t.\t.\tEND=44908900\tGT:DP\t0/0:0\n")
+            # A called variant with no supporting reads.
+            fh.write("1\t169519049\trs6025\tG\tA\t.\tPASS\t.\tGT:DP\t0/1:0\n")
+            # A haploid call.
+            fh.write("12\t111803962\trs671\tG\tA\t.\tPASS\t.\tGT:DP\t1:30\n")
+        gv = parse(pg)
+        check("gVCF identified as all-sites", gv["vcf_kind"] == "gvcf-or-all-sites")
+        check("reference blocks counted", gv["ref_blocks"] == 2)
+        check("reference block yields NO genotype", gv["calls"]["rs429358"]["geno"] is None)
+        check("reference block labelled", gv["calls"]["rs7412"]["kind"] == "reference-block")
+        check("zero-depth genotype discarded", gv["calls"]["rs6025"]["geno"] is None)
+        check("zero-depth counted", gv["zero_depth"] == 1)
+        check("haploid call kept but marked", gv["calls"]["rs671"]["ploidy"] == 1)
+        check("haploid call not a diploid call", gv["calls"]["rs671"]["kind"] == "non-diploid call")
+        # THE FABRICATION THIS GUARDS: a zero-coverage APOE region must not become e3/e3.
+        check("no APOE call from reference blocks",
+              apoe_diplotypes(gv["calls"]["rs429358"]["geno"],
+                              gv["calls"]["rs7412"]["geno"])["resolved"] is None)
+
+        # --- End-to-end: the report must SAY that absence in a variants-only VCF is not reference
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([pvcf], False, False)
+        txt = buf.getvalue()
+        check("report flags variants-only semantics", "variants-only VCF" in txt)
+        check("report warns against inferring e3/e3 from absence",
+              "never infer e3/e3 from absence" in txt)
+        check("report never prints a bare risk verdict", "assigns no risk" in txt)
+
+        # --- APOE spacing invariant: 138 bp in every build ---
+        pgap = os.path.join(td, "gap.txt")
+        with open(pgap, "w") as fh:
+            fh.write("# build 37\n")
+            fh.write("rs429358\t19\t45411941\tTT\n")
+            fh.write("rs7412\t19\t45413079\tCC\n")   # 1,138 bp away — mis-mapped
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([pgap], False, False)
+        check("mis-mapped APOE spacing warned", "138 bp apart in every build" in buf.getvalue())
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([p23], False, False)
+        check("correct APOE spacing not warned", "bp apart in every build" not in buf.getvalue())
 
         # --- Format rejection: must fail loudly, not parse garbage into findings ---
         bad = os.path.join(td, "bad.csv")

@@ -10,7 +10,7 @@ description: >-
   or dosing. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   source: >-
     Built from an eight-stream research pass with adversarial verification. Citations verified
     against retrieved index records only, never a search tool's generated prose; the APOE
@@ -73,6 +73,10 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    of sites: a variant's absence from the file is *not* evidence of its absence from the person, and
    a negative consumer result is weak reassurance. Imputed genotypes are statistical inferences, not
    measurements, and imputation degrades precisely for the rare variants people most want checked.
+   **A VCF adds its own version of this, and it is worse:** in a variants-only file a missing site is
+   homozygous-reference *or* never covered, indistinguishably — so an APOE e3/e3 person, who is
+   reference at both defining sites, is invisible in such a file. Never read a VCF's silence as a
+   reference call, and never take a genotype from a gVCF reference block or a `DP=0` line.
    `references/data-formats-and-parsing.md` §3–4.
 
 5. **Triage down to what could matter.** Hundreds of thousands of genotypes reduce to a handful that
@@ -121,6 +125,13 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
     replicate, and whether a newer and larger estimate supersedes the one you were about to quote.
     Resolve every citation against a retrieved record — a search tool's generated prose will state
     confident identifiers for papers that returned no result.
+
+    **When the channel cannot return a number, say so instead of producing one.** This is the stage
+    where fabrication is most likely: the instruction asks for a figure, and in environments where
+    scholarly resolvers and direct fetches are blocked, a search tool's prose will supply a
+    confident invention. The fallback is the three anchored, provenance-graded figures in
+    `references/variant-catalog.md` §0 — quoted as ranges, with their grade and design stated — not
+    a number you cannot source. **An unsourceable figure is reported as unavailable.**
 
 12. **Decide actionability honestly, then report.** An intervention must exist, and it must have
     been shown to change the outcome *in carriers specifically*, before a genotype is actionable.
@@ -218,7 +229,14 @@ resolved citations and what the evidence does and does not support.
 - Looking up a position without checking the genome build → silently returns a different variant.
 - Ignoring strand orientation on A/T and C/G sites → these are the ambiguous class, and a flipped
   call inverts the result. See `references/data-formats-and-parsing.md` §2.
-- Reading "not in my file" as "I don't have it" → the array never asked.
+- Reading "not in my file" as "I don't have it" → the array never asked. In a variants-only VCF it is
+  worse: absence and homozygous-reference are the same observation, so reading silence as a reference
+  call fabricates a genotype — the APOE e3/e3 case is the one that bites.
+- Treating one observed allele as a homozygote → comparing genotypes as *sets* makes `C` and `CC`
+  identical, which turns a half-call into a confident homozygous call. The bundled script refused
+  this only after it had shipped the bug.
+- Leading with a polygenic score's AUC → AUC is invariant to prevalence and the person's question is
+  not. Lead with the top-decile *absolute* risk and the share of cases outside the flagged group.
 - Calling an APOE diplotype from one SNP → it needs both rs429358 and rs7412, and one specific
   combination is formally ambiguous. The catalogue states which.
 - Quoting a star allele from unphased genotypes → not supported; say so instead.
@@ -272,7 +290,11 @@ file.
   rate, checks concordance when two files are given, and extracts only the catalogued sites. It
   deliberately does **not** compute risk, assign pathogenicity, or recommend anything: it establishes
   what the data says so the interpretation is done against verified genotypes rather than assumed
-  ones. `--self-test` runs the offline parsing and algebra tests, including the APOE ambiguity case.
+  ones. It validates ploidy before calling anything, refuses genotypes from gVCF reference blocks
+  and `DP=0` lines, flags a variants-only VCF's absence semantics, checks the build-independent
+  138 bp spacing between the two APOE sites, and reports strand state as
+  `AMBIGUOUS`/`CLEAR`/`UNDETERMINED`. `--self-test` runs the offline parsing and algebra tests —
+  including the APOE ambiguity case and a regression assertion for each of those refusals.
 - Citation checking reuses this plugin's existing verifier under the same plugin root:
   `python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py" --doi <doi>`
   **Use it for existence and metadata checks only.** That script hard-codes a

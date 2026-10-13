@@ -110,6 +110,33 @@ distinguishes them, labelling absent catalogue sites explicitly as possibly neve
 quality problem affecting everything downstream; a no-call at a site you were about to interpret
 means that finding does not exist.
 
+### A VCF's silence is not a reference call — and this is where fabricated genotypes come from
+
+**An array file and a VCF have different semantics for absence, and treating them alike manufactures
+genotypes.** On an array every probed site has a row, so absence means "never probed". A
+**variants-only VCF carries variant lines only**, so a site with no row is either homozygous reference
+*or* never covered — **the same observation, which is no observation.**
+
+**The case that makes this concrete, and it is the worst one in the skill:** an APOE **e3/e3** person
+is reference at *both* defining sites. Their APOE is therefore **entirely invisible in a
+variants-only VCF** — and a parser that reads absence as reference reports a confident e3/e3 for
+someone whose APOE region was never sequenced. The bundled script's first version did exactly this
+from a zero-coverage gVCF block; its self-test now asserts the refusal, and the negative control
+confirms the old logic produced `e3/e3`.
+
+Three VCF-specific traps, each of which turns absence into a confident call:
+
+| Trap | What it looks like | The honest reading |
+| :--- | :--- | :--- |
+| **Variants-only file** | No line at the site | No information. Not a reference genotype |
+| **Reference block (gVCF)** | A line with a symbolic ALT (`<NON_REF>`, `<*>`) or an `END=` interval, usually `GT 0/0` | The block asserts *no variant was called across a span*. It asserts nothing about any particular position inside it |
+| **Zero depth** | `GT 0/0` (or even `0/1`) with `DP=0` | A genotype emitted with no supporting reads. No information, and emphatically not a reference call |
+
+**So establish which kind of VCF you have before reading a single genotype out of it**, and when the
+file is variants-only, record every catalogued site that is missing as *unobserved* rather than as
+reference. The script does this and refuses to call APOE from absence; a hand-rolled lookup, or a
+spreadsheet import, will not.
+
 ---
 
 ## §4 Imputation
@@ -192,6 +219,27 @@ chromosome count, cross-platform concordance with the discordant sites named, ge
 catalogued sites with absent ones labelled, a three-state strand assessment per site
 (`AMBIGUOUS` / `CLEAR` / `UNDETERMINED`), and the APOE diplotype including the one ambiguous
 combination.
+
+**The refusals are the valuable part.** Each of these was a defect first and is now an assertion in
+the self-test:
+
+- **Ploidy is validated before anything is called.** Comparing `set(genotype)` makes
+  `set("C") == set("CC")`, so a half-call, a truncated field or a haploid `GT` was read as a
+  homozygote — and at APOE that produced a confident **e4/e4 from a single observed allele**. Any
+  genotype that is not a two-allele diploid call is now refused with the reason.
+- **Concordance excludes non-diploid comparisons instead of scoring them.** The same `set()` collapse
+  made `CC` and `C` agree, inflating the audit's own quality gate. Allele order still agrees
+  (`AG` == `GA`), which is the property worth keeping.
+- **A reference block or a `DP=0` call yields no genotype**, and a variants-only VCF triggers an
+  explicit warning that absence is not reference (§3).
+- **Non-T/C alleles at either APOE site are refused, not complemented.** Both sites are T/C and the
+  complement set A/G is disjoint from it, so a strand flip there is *detectable* — an A or G is a
+  parsing or mapping error. (Contrast FTO rs9939609, A/T, where a flip is undetectable in principle.)
+- **A diplotype that resolves only by invoking the rare e1 haplotype carries a caution**, because a
+  genotyping error at one of the two sites is the likelier explanation than a rare haplotype.
+- **The two APOE sites are 138 bp apart in every build** (c.526 − c.388, both in exon 4), so the
+  script checks the spacing in the file's own coordinates and warns when a row is mis-mapped. The
+  spacing is build-independent; the absolute positions are not, and are never assumed.
 
 **Two format details it does not special-case, and you should know about:** 23andMe codes
 insertions and deletions as `DD`/`DI`/`II` rather than as bases, and carries internal

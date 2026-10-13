@@ -47,6 +47,37 @@ bare DOIs almost never do.** So prefer a PMID or PMCID as the shipping identifie
 as verified only when it appears inside a publisher URL that was itself returned. A DOI quoted from
 prose alone does not ship, however real the paper is.
 
+### The one carve-out: three variants where a number is unavoidable
+
+**The no-frozen-numbers rule has a failure mode, and it has to be named.** It defers every figure to
+a live literature pass — and in this environment that pass cannot return a figure. Scholarly
+resolvers and direct page fetches are blocked by the egress proxy (see `your-environment.md`); the
+only working channel is a search tool whose *records* yield identifiers but whose *numbers* live in
+model-written prose. So "go and get the number at analysis time" resolves, in practice, to either
+nothing or a confidently-stated invention — and it fails hardest at APOE, where the news is least
+welcome and a wrong figure is least likely to be challenged.
+
+**So three variants carry anchored figures here**, each with its provenance graded explicitly. This
+is strictly safer than an instruction that cannot be executed, and the grading is the point:
+
+> **Provenance grades used below.** **[R]** the identifier resolved to a retrieved record *and* the
+> figure came from that record. **[R/p]** the identifier resolved to a retrieved record, but the
+> **figure itself was read from search-result prose** and not from the record — treat it as an
+> order-of-magnitude anchor, quote it as a range, and re-verify before it reaches a person.
+> **[calc]** computed here from the figures beside it; the derivation is shown so it can be checked.
+
+| Variant | Anchored figures | Grade |
+| :--- | :--- | :--- |
+| **HFE C282Y homozygosity** (rs1800562) | Documented iron-overload-related disease in **28.4% of male homozygotes (95% CI 18.8–40.2)** and **1.2% of females (95% CI 0.03–6.5)**, in 31,192 people of northern European descent aged 40–69 — Allen et al. 2008, *NEJM* 358(3):221–230 ([PMID 18199861](https://pubmed.ncbi.nlm.nih.gov/18199861/)). The sex asymmetry is the headline, and the female interval is very wide on few events | **[R/p]** |
+| **F5 Factor V Leiden heterozygosity** (rs6025) | First-event incidence about **0.45%/year (CI 0.28–0.61)** in carrier relatives vs **0.10%/year (CI 0.02–0.19)** in non-carrier relatives; an independent prospective cohort of asymptomatic carriers gave **0.58%/year (CI 0.26–1.10)** over 1,564 observation-years ([PMID 11583312](https://pubmed.ncbi.nlm.nih.gov/11583312/); systematic review [PMID 19531787](https://pubmed.ncbi.nlm.nih.gov/19531787/)) | **[R/p]** |
+| ↳ *what that means over a horizon* | At 0.45%/yr vs 0.10%/yr: **10 years** 4.41% vs 1.00% (ARR 3.41 pp, 34 extra per 1,000, NNH ⌈1/0.0341⌉ = 30); **20 years** 8.63% vs 1.98% (ARR 6.64 pp, 66 extra per 1,000, NNH ⌈1/0.0664⌉ = 16). So **96 of 100 carriers are event-free at 10 years and 91 of 100 at 20** — which is why heterozygosity alone does not warrant anticoagulation. Note the relative risk *shrinks* with horizon (4.5 per-year → 4.43 at 10 years → 4.35 at 20) as both risks compound toward 1, so **state the horizon with the multiple** | **[calc]** |
+| **APOE** (rs429358 + rs7412) | Lifetime Alzheimer's risk to age 85, from a semi-dominant model: baseline **11% male / 14% female**; **e3/e4 23% / 30%**; **e4/e4 51% / 60%** — Genin et al. 2011, *Molecular Psychiatry* ([PMC3162068](https://pmc.ncbi.nlm.nih.gov/articles/PMC3162068/), [10.1038/mp.2011.52](https://doi.org/10.1038/mp.2011.52)). **Quote these as the high end of a range, with the design named:** this analysis combined relative risks from case-control data with absolute risks from cohort studies, and cohort-based 20-year cumulative dementia incidence in e4/e4 runs materially lower (roughly 31–40%). Those measure different quantities and are not interchangeable | **[R/p]** |
+| ↳ *the dose effect, and its complement* | e3/e4 is **+12 pp male / +16 pp female** over baseline (2.1×); e4/e4 is **+40 pp / +46 pp** (4.6× / 4.3×). Going from one e4 to two roughly **doubles** the heterozygote's absolute risk (2.2× male, 2.0× female). And on the same figures, **49 per 100 male and 40 per 100 female e4/e4 homozygotes reach 85 unaffected** — report that in the same breath, every time | **[calc]** |
+
+**Everything else in this file stays unfrozen.** The carve-out is three variants, not a precedent for
+a fourth: it exists because these are the ones a person will insist on a number for, and because a
+range with stated provenance beats both silence and invention.
+
 ### Anchors that are verified and stable enough to state
 
 | Claim | Record |
@@ -57,7 +88,7 @@ prose alone does not ship, however real the paper is.
 | DTC screening is limited for hereditary breast/ovarian cancer specifically | [PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/) |
 | Routine MTHFR polymorphism testing is advised against | [PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205) (practice guideline), amended by [PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351); concurring [PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/), [PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/) |
 | CYP2D6 cannot be called reliably from array data: pseudogene similarity, CYP2D7 hybrids, CNV, and a phasing requirement | [PMC5591463](https://pmc.ncbi.nlm.nih.gov/articles/PMC5591463/), [PMC7997805](https://pmc.ncbi.nlm.nih.gov/articles/PMC7997805/) (WGS-based calling), [PMC7398905](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7398905/) (callers disagree on structural variants), [PMC8881578](https://pmc.ncbi.nlm.nih.gov/articles/PMC8881578/) |
-| Polygenic scores derived in predominantly European-ancestry cohorts transfer poorly | preprint [bioRxiv 10.1101/441261](https://www.biorxiv.org/content/10.1101/441261.full.pdf); [PMID 39218908](https://pubmed.ncbi.nlm.nih.gov/39218908/); contested in part by a [medRxiv analysis](https://www.medrxiv.org/content/10.1101/2025.09.18.25336069.full.pdf) — cite the dispute, not one side |
+| Polygenic scores derived in predominantly European-ancestry cohorts transfer poorly, and the decline is continuous along genetic distance rather than stepwise between labelled groups | [PMC6563838](https://pmc.ncbi.nlm.nih.gov/articles/PMC6563838/) (Martin 2019) and its preprint [bioRxiv 10.1101/441261](https://www.biorxiv.org/content/10.1101/441261); [PMC5384097](https://pmc.ncbi.nlm.nih.gov/articles/PMC5384097/) (Martin 2017); [PMC8764121](https://pmc.ncbi.nlm.nih.gov/articles/PMC8764121/) with correction [PMC8874215](https://pmc.ncbi.nlm.nih.gov/articles/PMC8874215/) (Privé 2022 — strongest design, one cohort for training and testing); [10.1038/s41586-023-06079-4](https://doi.org/10.1038/s41586-023-06079-4) (Ding 2023); [10.1038/s41467-019-11112-0](https://doi.org/10.1038/s41467-019-11112-0) (Duncan 2019). `risk-communication.md` §4 has the table. Cite the dispute over magnitude, not one side |
 | Family-ascertained penetrance exceeds population-based penetrance, with the gap narrowing in larger studies | [PMC2447846](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2447846/) (family-based; its title states the point), [PMID 11044354](https://pubmed.ncbi.nlm.nih.gov/11044354/) / [PMC2408797](https://pmc.ncbi.nlm.nih.gov/articles/PMC2408797/) (population-based), [PMID 25192939](https://pubmed.ncbi.nlm.nih.gov/25192939) (population screening), [PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695) |
 | Injectable peptides sold outside regulation carry risks independent of efficacy | [PMC13585006](https://pmc.ncbi.nlm.nih.gov/articles/PMC13585006) |
 
@@ -67,6 +98,13 @@ the ACMG/AMP sequence-variant interpretation guideline (Richards et al.) and the
 record in this environment, though both are clearly real and are referenced by many records that
 did resolve. They are cited here **by framework name with resolvable secondary literature**, never
 with an identifier reconstructed from memory.
+
+**Withdrawn on re-check:** an earlier version of this file cited `PMID 39218908` as the
+portability anchor and a 2025 medRxiv preprint as the counterweight. A later verification pass
+could not re-resolve that PMID to any record, and anchoring one side of a live dispute on a single
+non-peer-reviewed preprint is weak on its own terms. Both were replaced by the five records above,
+each of which resolved in two independent searches. **An identifier that no longer resolves is
+withdrawn, not downgraded to a hedge** — and recording the withdrawal is what stops it reappearing.
 
 ---
 
@@ -97,6 +135,22 @@ other, and collapsing them is the commonest interpretation error.
   call.**
 
 Report both grades, always. "E1/R3" and "E1/R1" demand completely different responses.
+
+### Why the tiers exist, quantitatively
+
+The maximum absolute-risk shift attributable to **one** genotype spans more than an order of
+magnitude across these tiers (computed in `risk-communication.md` §4 for the GWAS rows, and from the
+anchored APOE figures in §0 for the last):
+
+```
+ typical GWAS hit      per-allele OR 1.10, 0 -> 2 copies      1.8 pp
+ strong GWAS hit       per-allele OR 1.50, 0 -> 2 copies      8.2 pp
+ APOE e4/e4 vs e3/e3   lifetime to 85, male                  40    pp
+```
+
+That is a **23-fold span** from the typical GWAS hit to APOE. **A report that presents both in the
+same visual register — same row height, same colour, same confident sentence shape — is actively
+misinforming**, and that ratio is the whole reason this catalogue is tiered rather than listed.
 
 ---
 
@@ -161,7 +215,7 @@ Report them with that framing rather than manufacturing an action.
 
 | Gene / variant | What it is | Grade | Honest action |
 | :--- | :--- | :--- | :--- |
-| **ALDH2** rs671 | Reduced aldehyde dehydrogenase activity; the flushing variant. Carries an established association with alcohol-related cancer risk | E1 / R1 | Genuinely actionable in one direction only: it strengthens the case for reducing alcohol. No supplement addresses it |
+| **ALDH2** rs671 | Reduced aldehyde dehydrogenase activity; the flushing variant. Carries an established association with alcohol-related cancer risk, and the association is **drinking-stratified** — it is a gene-*environment* effect, not a standalone risk ([PMC2684609](https://pmc.ncbi.nlm.nih.gov/articles/PMC2684609/)). **Ship the direction and the stratification, not an odds ratio:** widely-quoted heterozygote ORs in the 3.7–18.1 range come from consumer-facing summaries, while a 31-study meta-analysis pooled a much lower heterozygote OR near 1.4 — a real discrepancy, and a number quoted from either end alone is indefensible | E1 / R1 | Genuinely actionable in one direction only: it strengthens the case for reducing alcohol. No supplement addresses it. Note the self-undermining fact: **flushing is itself a reliable marker, so asking the person beats genotyping them** |
 | **MCM6 / LCT** rs4988235 | Lactase persistence regulatory variant | E1 / R1 | Explains a phenotype the person already knows. Dietary choice follows symptoms, not genotype |
 | **CYP1A2** rs762551 | Caffeine metabolism | E3 / R1 | Weaker than marketed. Observed caffeine tolerance beats the genotype |
 | **FTO** rs9939609 | Commonest BMI-associated locus | E2 / R2 (A/T site — strand-ambiguous) | **None.** The important finding is that it does not appear to blunt response to lifestyle intervention — so the advice is unchanged by genotype |
@@ -218,11 +272,31 @@ with both **ε2/ε4** and **ε1/ε3**. ε1 is rare, so ε2/ε4 is overwhelmingly
 cannot be *excluded* without phasing, and the honest report says so. The script flags this case
 rather than silently resolving it.
 
+**Three further observations resolve "uniquely" only because ε1 was admitted**, and they deserve a
+caution rather than a confident answer: `(C/C, C/T) → ε1/ε4`, `(C/C, T/T) → ε1/ε1`, and
+`(C/T, T/T) → ε1/ε2`. Since ε1 is rare, **a genotyping error at one of the two sites is the likelier
+explanation than a true ε1 haplotype** — so re-check both calls before reporting one of these. The
+script resolves them and attaches that caution.
+
+**Two technical facts worth carrying, because both are free checks:**
+
+- **A strand flip at either APOE site is DETECTABLE.** Both sites are T/C, and the complement set
+  A/G is disjoint from it — so an A or a G at either position is a parsing, mapping or
+  strand-handling error, not a genotype, and must be refused rather than complemented into something
+  plausible. This is the opposite of FTO rs9939609 (A/T), where the allele set equals its own
+  complement and a flip cannot be detected at all (§1, R2).
+- **The two sites are 138 bp apart in every build** — c.526 − c.388, both in exon 4 with no intron
+  between them. The *spacing* is therefore build-independent and makes a free consistency check on a
+  file's own coordinates; the *absolute* positions are build-specific and must be read from the
+  file's header, never assumed. A different spacing means a row is mis-mapped.
+
 **On actionability, be careful and be honest.** ε4 carries an established association with
 Alzheimer's risk, dose-dependent between heterozygotes and homozygotes, and the absolute lifetime
-figures are what matter — a relative multiple quoted alone is close to meaningless here, and the
-numbers must come from the live literature pass with the person's ancestry and age accounted for
-(`risk-communication.md`). What makes APOE genuinely hard is that **no intervention has been shown
+figures are what matter — a relative multiple quoted alone is close to meaningless here. **This is
+the one variant where this file carries anchored figures** (§0, carve-out): quote them as a range,
+with the design named and the provenance grade attached, alongside the share of homozygotes who
+reach 85 unaffected — and add whatever the live pass can actually resolve for this person's ancestry
+and age (`risk-communication.md`). What makes APOE genuinely hard is that **no intervention has been shown
 to change the genotype's effect.** That makes it the clearest case in the whole catalogue where the
 correct output is information and support for decisions the person may want to make — planning,
 insurance, research participation, whether they wanted to know at all — and *not* a supplement or
