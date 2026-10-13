@@ -350,17 +350,34 @@ naevus signal below actually implies.
 signal attaches to: the case report cited below is titled for melanotan II specifically. It carries
 a specific, concrete concern about naevi that distinguishes it from the
 "unproven but probably inert" category: published case reports describe **eruptive naevi and
-darkening of pre-existing naevi after use** — one of them titled for the finding, *"Eruptive naevi
-and darkening of preexisting naevi 24 h after a single mono-dose injection of melanotan II"*
-([repository record](https://research.uni-luebeck.de/en/publications/eruptive-naevi-and-darkening-of-preexisting-naevi-24-h-after-a-si/)).
+darkening of pre-existing naevi after use**, now with three records each carrying its returned
+title:
 
-**Two identifiers were withdrawn from this sentence, and the reason is the standard rather than the
-substance.** One was a bare PMC URL returned with no title beside it, which two later passes
-described differently — so what it is cannot be established here. The other was an Acta DOI that a
-verification pass identified as a letter about *nomenclature* — which molecule the street name
-"melanotan" actually denotes — not a case report at all. **A claim now rests only on the record whose
-title was returned**, and the case-report literature beyond it is real but is not cited here with
-identifiers this environment could not confirm (`variant-catalog.md` §0). **State
+- *"Eruptive naevi and darkening of preexisting naevi 24 h after a single mono-dose injection of
+  melanotan II"*
+  ([repository record](https://research.uni-luebeck.de/en/publications/eruptive-naevi-and-darkening-of-preexisting-naevi-24-h-after-a-si/))
+  — the single-dose case.
+- *"Changes of melanocytic lesions induced by Melanotan injections and sun bed use in a teenage
+  patient with FAMMM syndrome"* ([PMC3663356](https://pmc.ncbi.nlm.nih.gov/articles/PMC3663356)) —
+  a teenager with a familial melanoma syndrome who both injected and used a sun bed, which is the
+  **compound** exposure rather than the drug alone.
+- An Acta letter describing lentigines and naevi augmented after self-injection
+  ([10.2340/00015555-0928](https://medicaljournals.se/acta/download/10.2340/00015555-0928)) — over
+  roughly 150 injections, not one.
+
+**And a review of this literature reports a melanoma case while explicitly declining to claim
+causation**, noting that the patients shared fair skin, many naevi and tanning-bed use. That is the
+honest shape of the signal: a drug that drives melanogenesis in people who are also tanning, with
+documented naevus change and no established causal link to melanoma. **The action is dermatological
+review, not reassurance** — and for the *approved* melanotan I product, periodic full-body skin
+examination is what its own labelling calls for.
+
+*Citation history, kept because the corrections went both ways.* Two identifiers were withdrawn from
+this sentence when a pass could not resolve them; a later re-source returned `PMC3663356` **with its
+title**, so it is restored — and it is a different journal from the one that pass named. The other
+withdrawal stands and was sharpened: `10.2340/00015555-1130` is a letter about *nomenclature* —
+which molecule the street name denotes — while **`10.2340/00015555-0928`** is the naevus letter. Two
+adjacent DOIs at one journal, one on point and one not (`variant-catalog.md` §0). **State
 what this evidence is and is not:** case reports establish temporal association, not causation — a
 melanoma report in this literature explicitly declined to claim a causal relationship. The honest
 version is that a drug which drives melanogenesis in people who are also tanning, with documented
