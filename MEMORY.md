@@ -1396,3 +1396,41 @@ retraction of the previous pass's headline mechanism claim.
       answers it in one command, and the force-push afterwards is safe only once a **separate**
       step shows the remote tip's content is already contained in the local branch
       (`git diff --stat origin/<branch> HEAD` empty). Follow-up work gets a **new** PR either way.
+    - **A fixture that does not reach the code path asserts nothing — assert on WHICH item was
+      flagged, not that the category fired.** `ae_lint.py` had two sibling loops over the same
+      shapes; the second bound the shape's top coordinate to `_top` and so never computed the
+      bottom-zone exemption, and **every deck the skill's own builder produced failed the skill's
+      own stage-6 gate** — 11 errors on the shipped example spec, each one a source tag or slide
+      number that is *meant* to be 12 pt. The suite stayed green for two reasons worth separating:
+      the fixture's source box set no explicit font size, so `run.font.size is None` and the run
+      was skipped **before** reaching the check; and the assertion was `"fontsize:error" in checks`,
+      which is satisfied by the check firing on the WRONG runs. Both fixes are now in: an explicit
+      size in the exempt zone, and an assertion on the message text that names the offending run,
+      plus the negative control (a 12 pt run *above* the zone must still error) without which
+      exempting the zone is indistinguishable from not checking at all. Mutation-verified: revert
+      the fix and the suite fails.
+    - **Stale self-measurement is internally consistent, so no arithmetic gate can catch it.** The
+      authoring standard every skill is written against still quoted "121 skills ≈110,000
+      characters ≈14.9% of a 200K context" and "14 plugins" against a measured 74 skills / 66,771
+      characters / 9.0% / 13 plugins — a reader planning an install would have over-estimated by
+      two thirds. `check-arithmetic.py` passed because the stale cluster adds up. Rule: **do not
+      write a measured figure into the document that tells you to run the measurement** — name the
+      script and quote nothing but the mean, which generalises. Corollary: a cross-check whose
+      command's output format has changed (`claude plugin details` now prints a summary, not the
+      descriptions) measures nothing, and is worse than no cross-check because it reads as
+      corroboration.
+    - **The library is past the listing budget: 52 of 74 skills reach a session as a bare name.**
+      Verified against two sessions' own available-skills listings, which kept a *different* 22 —
+      the sort key is `usageCount × max(0.5^(days/7), 0.1)`, so the count is stable and the
+      membership is not. Name-only skills stay invocable as `/plugin:skill` and are invisible to
+      automatic routing, and nothing fails loudly. Two levers, both already in the repo's own
+      documents and both unenforced: install fewer plugins (`README.md`), and name a skill for its
+      task rather than a metaphor when automatic matching is its only intended path (~14 skills
+      fail this). `simulate-listing-budget.py` is the only instrument and **under-predicts by ~4x**
+      (5 predicted, 22 observed), so use it for the comparative question, never as a promise.
+    - **Two invariants held by author discipline alone and are now gated** in `validate.sh`: every
+      description must carry its `Triggers:` clause *inside the description* (a `triggers:`
+      frontmatter key is never read by the router, so the skill silently stops routing while every
+      other gate stays green), and every cited `references/*.md` must exist (depth was checked;
+      existence never was). Mutation-verified in an isolated copy of the repo — all three failure
+      modes caught, live tree untouched.

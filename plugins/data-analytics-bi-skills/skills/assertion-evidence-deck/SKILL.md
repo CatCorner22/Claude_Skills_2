@@ -11,7 +11,7 @@ description: >-
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
 metadata:
-  version: "1.3.1"
+  version: "1.4.0"
 ---
 
 # Assertion-evidence deck
@@ -88,7 +88,10 @@ label words, the source tag, and the speaker note carrying the scuba detail. Mat
 claim — distribution → chart, sequence → flow diagram, magnitude → 2–4 large numbers, structure →
 labeled diagram. Over ~40 body words means the claim is too big — split the slide.
 
-**Stage 5 — Build the file.** Prefer **Path A**, the bundled builder: write a deck spec as JSON and
+**Stage 5 — Build the file.** Both bundled scripts require **python-pptx** (`pip install
+python-pptx`) and exit with that message if it is missing — install it before you start building
+rather than discovering it halfway through, because nothing earlier in the pipeline needs it.
+Prefer **Path A**, the bundled builder: write a deck spec as JSON and
 run `python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py" deck_spec.json -o output.pptx` (neutral palette by default;
 `--brand warm-accent` to match that brand instead). It encodes the geometry, typography, and
 colors in `references/design-tokens.md`, so

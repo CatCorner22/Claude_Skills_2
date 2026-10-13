@@ -170,12 +170,46 @@ for dir in plugins/*/skills/*/; do
   body_lines=$(awk '/^---$/ && seen<2 {seen++; next} seen==2 {c++} END{print c+0}' "$md")
   [ "$body_lines" -lt 500 ] || warn "$base: body is $body_lines lines (keep under 500)"
 
-  # references one level deep
+  # The description must carry its triggers, and carry them INSIDE the description.
+  #
+  # The router matches a request against the description alone, so a `Triggers:` clause that
+  # drifted into its own frontmatter key, or was dropped in an edit, removes the skill from
+  # automatic routing while every other gate stays green and `/plugin:skill` keeps working —
+  # which is the path an author testing their own skill uses, so the loss is invisible from the
+  # inside. Verified ungated: this held across all 74 skills by author discipline alone.
+  if [ -n "$desc" ] && ! printf '%s' "$desc" | grep -q 'Triggers:'; then
+    err "$base: description carries no 'Triggers:' clause — the router reads the description and nothing else, so the skill is invocable by name but unroutable"
+  fi
+  if grep -qE '^[[:space:]]*triggers:' "$md"; then
+    err "$base: 'triggers:' is a separate frontmatter key — the router never reads it; the trigger phrases belong inside the description"
+  fi
+
+  # references one level deep, and every referenced file must exist.
+  #
+  # Depth was the only thing checked here. A SKILL.md that points at a references/ file which
+  # was renamed or never written fails at the moment of use, in the middle of someone's task,
+  # with nothing upstream saying so. Resolution was 100% when measured — an observation, not an
+  # enforced invariant, and the next typo regresses it silently.
   if [ -d "$skill/references" ]; then
     if [ -n "$(find "$skill/references" -mindepth 1 -type d 2>/dev/null)" ]; then
       err "$base: references/ must be one level deep (no subdirectories)"
     fi
   fi
+  # `*.private.md` is user-supplied and git-ignored by design: a skill that shipped one would
+  # be the defect. A path qualified with another skill's directory is that skill's to own.
+  for ref in $(grep -ohE '`references/[A-Za-z0-9_.-]+\.md`' "$md" 2>/dev/null | tr -d '`' | sort -u); do
+    case "$ref" in *.private.md) continue;; esac
+    if [ ! -f "$skill/$ref" ]; then
+      # Cross-skill citations name their owner in the same sentence; accept the reference if
+      # exactly one skill anywhere in the library (or the archive) actually carries the file.
+      hits=$(find plugins archive -path "*/$ref" -type f 2>/dev/null | head -2 | wc -l | tr -d ' ')
+      if [ "$hits" -eq 0 ]; then
+        err "$base: cites $ref, which exists in no skill — it will fail at the moment of use"
+      else
+        note "$base: cites $ref from another skill (resolved elsewhere in the library)"
+      fi
+    fi
+  done
 
   [ "$errors" -eq "$pre_errors" ] && ok "$base" || true
 done

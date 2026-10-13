@@ -100,7 +100,7 @@ Full-stack application development with a lean-code philosophy: architecture, Fa
 
 ### `coding-agent-skills`
 
-Claude Code craft for working engineers: authoring Agent Skills (the library's own standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors multi-agent code review (board-review + six specialist subagents), defect-epidemiology (treat a confirmed bug as evidence about a population), rule-stress-testing, software-archaeology, Comrade Engineer's pencil pass, The Foreman's draw inspection, and Chicken Little (Aether) — the multi-domain persona with forward-deployed advisor and compiler autopsy modes.
+Claude Code craft for working engineers: authoring Agent Skills (the library's own standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors multi-agent code review (board-review + five specialist subagents and a chair), defect-epidemiology (treat a confirmed bug as evidence about a population), rule-stress-testing, software-archaeology, fitness-nutrition-science, Comrade Engineer's pencil pass, The Foreman's draw inspection, and Chicken Little (Aether) — the multi-domain persona with forward-deployed advisor and compiler autopsy modes.
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
@@ -118,7 +118,7 @@ Claude Code craft for working engineers: authoring Agent Skills (the library's o
 
 ### `metacognition-skills`
 
-Composed meta-cognition suite: hierarchical memory management, reflective learning, adaptive analysis, and knowledge crystallization for cumulative improvement across sessions.
+Composed meta-cognition suite: hierarchical memory management, reflective learning, and knowledge crystallization for cumulative improvement across sessions.
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|

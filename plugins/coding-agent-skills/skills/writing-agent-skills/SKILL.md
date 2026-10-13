@@ -8,7 +8,7 @@ description: >-
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Writing Agent Skills (house standard)
@@ -154,16 +154,21 @@ body persists in context across the turn, so every line is a recurring cost: con
 well-ordered instructions beat exhaustive ones.
 
 **Know what the listing actually costs, because it decides whether your skill is findable at
-all.** Measured in this library by `python3 scripts/measure-listing-cost.py`: 121 skills' names +
-descriptions come to **≈110,000 characters ≈ 29,700 tokens ≈ 14.9% of a 200K context**, at a mean of
-~890 chars (~240 tokens) per description — not the ~100 tokens per skill an earlier version of this section claimed.
-That script counts characters and divides by ~3.7 chars/token, and the estimate runs **~30% light**
-against the harness's own tokenizer: summing `claude plugin details <plugin>` across all 14 plugins
-gives **≈38,800 tokens ≈ 19.4% of a 200K context**, which is the number to plan an install against
-(method in `docs/live-routing-and-degradation-2026-08-18.md`). Figures are quoted to two or three
-significant digits on purpose — they move with every description edit, so re-run the script
-rather than trusting a number written down here. The `Triggers:` lists alone are 22% of that
-spend. This has two consequences worth designing around:
+all.** Run `python3 scripts/measure-listing-cost.py` and read ITS number. **Do not write the figure
+down here** — an earlier version of this paragraph did, and the numbers it quoted (121 skills,
+≈110,000 characters, 14.9% of a 200K context, 14 plugins) outlived the library they described by
+enough that a reader planning an install would have over-estimated the cost by two thirds. No gate
+caught it, because a stale cluster of figures is internally consistent; `check-arithmetic.py` only
+checks that a chain adds up, not that its inputs are still true. The mean is what generalises:
+~900 characters (~240 tokens) per description, so the total tracks the skill count almost linearly,
+and the `Triggers:` lists are roughly a fifth of the spend.
+
+The script counts characters and divides by ~3.7 chars/token, which is a floor rather than an
+estimate — the harness's own tokenizer charges more. The cross-check that used to be quoted here
+(summing `claude plugin details <plugin>`) **no longer reproduces**: that command now prints a
+compact per-plugin summary rather than the descriptions, so the comparison measures nothing. Until
+a live listing is measured against a tokenizer again, treat the script's figure as a lower bound and
+plan with headroom. This has two consequences worth designing around:
 
 - **The listing degrades before it errors, and the trigger is a character budget, not a skill
   count.** The budget is `floor(context_tokens × 4 × skillListingBudgetFraction)` — **8,000
@@ -174,8 +179,14 @@ spend. This has two consequences worth designing around:
   loudly — `/plugin:skill` direct invocation keeps working, which is exactly the path an author
   testing their own skill uses, so the degradation is invisible from the inside. A trimmed skill's
   "Use when…" clause and every trigger phrase are simply absent from the router's context.
-  Run `scripts/simulate-listing-budget.py` to see where your own library lands; for reference,
-  this one needs ≈113,700 characters for 121 descriptions and keeps **3** at the default budget.
+  Run `scripts/simulate-listing-budget.py` to see where your own library lands — but **calibrate
+  it before you trust it.** It models the budget as a straight character sum and, measured against
+  a real session's own listing, **under-predicts by about four times**: it predicted 5 full
+  descriptions at the 8,000-character default where that session actually carried 22 (the other 52
+  arrived name-only). The *count* is therefore advisory and the *membership* is not predictable at
+  all, because the real sort key is recent use — two sessions on the same library kept different
+  22. What the simulator is still good for is the comparative question: how much worse a larger
+  install gets, and how much a 750K or 1M context buys.
 - **Therefore the name must carry task signal.** Under name-only trimming, a skill named for a
   metaphor or a persona is unroutable, while one named for its task survives. Evocative names are
   legitimate — this library has several by design, invoked deliberately — but a skill whose *only*
