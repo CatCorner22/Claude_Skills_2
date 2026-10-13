@@ -12,6 +12,16 @@ stale within a day of being measured by hand, which is why it is a script.
 Tokens are estimated at 3.7 characters/token — measured against this library's
 own prose, not assumed. Treat the percentages as accurate to a tenth.
 
+WHAT THIS EXCLUDES, so the next person reconciling two numbers does not assume
+one script is broken. This counts `len(bare_name) + len(description)`.
+`simulate-listing-budget.py` counts what the harness actually renders,
+`"- {plugin}:{name}: {desc}"` plus a newline between entries — so it includes the
+plugin prefix, the four punctuation characters and the newlines. The gap is
+exactly sum(len(plugin)) + 5*skills + (skills - 1): at 74 skills that is
+1632 + 370 + 73 = 2075 characters, and the two scripts' totals differ by exactly
+that. Neither is wrong; the simulator's figure is the one to quote for "what the
+listing costs in a real session", and it runs about 3% above this one.
+
     python3 scripts/measure-listing-cost.py
 """
 import collections

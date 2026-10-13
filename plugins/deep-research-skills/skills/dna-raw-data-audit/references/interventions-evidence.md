@@ -110,7 +110,38 @@ indication, age, weight, and goals. A genome contains none of that.
 
 ## §4 Supplements and the nutrigenomics correction
 
-**Start from the MTHFR correction**, because it is the field's emblematic case and getting it right
+**Lead with the trial that settles the general question, because it is stronger than any
+variant-by-variant argument.** Food4Me was an internet-delivered randomised trial across seven
+European countries (1,269 completers) with four arms: conventional advice, personalised on diet
+alone, diet plus **phenotype** (anthropometry and blood biomarkers), and diet plus phenotype plus
+**genotype** (five diet-responsive variants)
+([PMID 27524815](https://pubmed.ncbi.nlm.nih.gov/27524815/),
+[10.1093/ije/dyw186](https://doi.org/10.1093/ije/dyw186)). The personalised arms did change
+behaviour — less red meat, salt and saturated fat — **and the trial reported no evidence that adding
+phenotypic, or phenotypic plus genotypic, information enhanced that effect** *(the conclusion is read
+from the abstract; the identifier is record-verified)*.
+
+**That is the finding to lead with: in a real randomised personalised-nutrition intervention, the
+genotype layer added nothing on top of phenotype.** So "the recommendation does not change based on
+this genotype" is not this skill's caution — it is the trial result.
+
+**And the structural reason a commercial panel always has something to tell you is arithmetic, not
+argument.** At an uncorrected α = 0.05 across a candidate panel:
+
+```
+   5 SNPs   expected spurious hits 0.25   P(at least one) 22.6%
+  20 SNPs                          1.00                   64.2%
+  38 SNPs                          1.90                   85.8%
+  70 SNPs                          3.50                   97.2%
+ 100 SNPs                          5.00                   99.4%
+```
+
+A panel of the size these products typically report will find something to say about **roughly two
+of its variants by chance even if none of them does anything.** No debunking citation is needed; the
+probability is the argument, and it is why "your report found three actionable variants" is the
+expected outcome of testing many.
+
+**Then the MTHFR correction**, because it is the field's emblematic case and getting it right
 is a good test of whether a tool is trustworthy. A professional-society practice guideline advised
 against routine MTHFR polymorphism testing on minimal-clinical-utility grounds
 ([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)), later amended
@@ -118,6 +149,15 @@ against routine MTHFR polymorphism testing on minimal-clinical-utility grounds
 standing through the amendment; multiple other professional bodies concur
 ([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)), and the clinical-utility question
 has been revisited ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
+
+**The causal loop the MTHFR story depends on is also closed at the other end.** The story runs
+*variant → higher homocysteine → cardiovascular risk → so lower homocysteine*. But the
+homocysteine-lowering trials, pooled, did not reduce cardiovascular events
+([PMID 21069462](https://pubmed.ncbi.nlm.nih.gov/21069462/)) — B-vitamin allocation moved the
+biomarker and not the outcome. **So even granting every step of the mechanism, the intervention it
+implies has been tested and does not work**, which is a stronger objection than disputing the
+genotype's effect size. *(The pooled figures are prose-sourced; the review's identifier is
+record-verified.)*
 
 The methylfolate-protocol industry built on MTHFR is **G3 at best and largely G4**. If a person
 arrives already taking a stack because of an MTHFR result, the useful service is the correction —
@@ -130,11 +170,16 @@ delivered without contempt, because they were sold this by people who sounded au
 | **HFE** C282Y homozygous (confirmed) | Changes iron advice in the *opposite* direction to the default — avoid iron supplementation, and get iron studies. One of the few places a genotype genuinely redirects a supplement decision | G2 / T1 |
 | **G6PD** deficiency (confirmed) | A real avoidance list — specific drugs, and fava beans. Avoidance, not supplementation | G1 / T1 |
 | **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it | G3 / T1 for the behaviour |
-| **MCM6/LCT** rs4988235 | Explains lactose intolerance. Dietary choice follows symptoms | G2 / T2 |
+| **MCM6/LCT** rs4988235 | Explains lactose intolerance — **in European ancestry only.** This variant tags the European lactase-persistence haplotype; independent persistence alleles exist elsewhere, so a "non-persistent" call outside that ancestry is frequently a **false negative**. Dietary choice follows symptoms, which the person already knows | G2 / T2 |
+| **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions: sensitivity is high but **not** 100%, so do not promise a perfect rule-out, and the test cannot be interpreted at all after a gluten-free diet has already started | G2 / T2, as a rule-out |
+| **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
 | **Confirmed deficiency on a blood test** | The actual basis for supplementing — and it is a *measurement*, not a genotype | — / T1–T2 |
 
 **The pattern worth stating plainly: measure, don't infer.** Serum 25-OH-D beats any vitamin D
-pathway genotype. Ferritin and transferrin saturation beat HFE. A B12 level beats an MTHFR result.
+pathway genotype — and note *why*: the vitamin D pathway variants explain part of someone's
+**baseline** 25(OH)D, not their **response to supplementation**, which is the quantity a
+supplementation decision needs. A variant that predicts where you start and not where you end up is
+a G3 finding however well replicated it is. Ferritin and transferrin saturation beat HFE. A B12 level beats an MTHFR result.
 Where a cheap decisive phenotype test exists, the genotype's only real value is prompting it.
 
 **Where the general recommendation does not change based on genotype — the common case — say so.**
