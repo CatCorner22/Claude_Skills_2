@@ -86,6 +86,11 @@ other, and collapsing them is the commonest interpretation error.
 - **R1** Common variant, directly probed, well-clustered. Trust the call; still confirm before
   clinical action.
 - **R2** Probed but orientation- or context-sensitive (an A/T or C/G site, or near an indel).
+  The sites in this catalogue verified as palindromic are **rs1799945** (HFE H63D, C/G — and it
+  sits in the actionable tier) and **rs9939609** (FTO, A/T). The bundled script carries the
+  verified allele pair for each site it knows, so it can say `AMBIGUOUS` or `CLEAR` rather than
+  guessing; where the pair is not verified it reports `UNDETERMINED`, which is a statement about
+  the catalogue rather than about the site.
 - **R3** Rare variant on an array — elevated false-positive rate. Treat as a prompt for a
   confirmatory test, never as a result.
 - **R4** Requires phase, copy number, or specialised typing the platform cannot provide. **Do not
@@ -102,7 +107,7 @@ These can change medical management. **All of them require clinical-grade confir
 
 | Gene / variant | What it is | Typical grade | Action if confirmed |
 | :--- | :--- | :--- | :--- |
-| **HFE** C282Y (rs1800562), H63D (rs1799945) | Hereditary haemochromatosis risk alleles. C282Y homozygosity is the main genotype of interest; penetrance is incomplete and lower than early estimates implied | E1 / R1 | Iron studies (ferritin, transferrin saturation) — a cheap phenotype test that settles the question far better than the genotype does. This is the model case: the genotype's value is prompting a *measurement* |
+| **HFE** C282Y (rs1800562), H63D (rs1799945) | Hereditary haemochromatosis risk alleles. C282Y homozygosity is the main genotype of interest; penetrance is incomplete and lower than early estimates implied. **H63D is c.187C>G — a palindromic C/G site**, so a homozygous call there cannot be oriented from the genotype alone | E1 / R1 (C282Y) · E1 / **R2** (H63D) | Iron studies (ferritin, transferrin saturation) — a cheap phenotype test that settles the question far better than the genotype does. This is the model case: the genotype's value is prompting a *measurement* |
 | **F5** Factor V Leiden (rs6025) | Commonest inherited thrombophilia allele | E2 / R1 | Context for a clinician around thrombosis risk, surgery, oestrogen exposure. Does **not** by itself warrant anticoagulation |
 | **BRCA1 / BRCA2** founder variants | Some platforms probe a small number of founder variants only | E1 / R3 | Confirmation, then genetics referral. **Critically:** a negative consumer result is near-meaningless here, because only a handful of thousands of possible variants were probed ([PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/)) |
 | **G6PD** deficiency variants | X-linked; causes haemolysis on oxidative triggers | E1 / R2–R3 | A real contraindication list for specific drugs and foods. Confirm by enzyme assay, which is definitive where genotype is not |

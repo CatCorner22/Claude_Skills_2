@@ -53,30 +53,37 @@ from collections import Counter
 # Effect sizes, array reliability, and actionability live in references/variant-catalog.md,
 # where they can carry citations, absolute-risk framing, and the caveats a dict cannot hold.
 # --------------------------------------------------------------------------------------
+# Third element is the site's allele pair where it has been VERIFIED against a retrieved record,
+# else None. Supplying it lets strand_ambiguity() be definitive for a homozygous call, which it
+# cannot otherwise be (see that function's docstring). None means "not verified" — never guessed,
+# because a wrong allele pair would turn a correct CLEAR into a wrong AMBIGUOUS or vice versa.
 CATALOG = {
-    "rs429358": ("APOE", "APOE haplotype-defining site (Cys112Arg)"),
-    "rs7412":   ("APOE", "APOE haplotype-defining site (Arg158Cys)"),
-    "rs1799945": ("HFE", "HFE H63D"),
-    "rs1800562": ("HFE", "HFE C282Y"),
-    "rs6025":    ("F5", "Factor V Leiden"),
-    "rs1801133": ("MTHFR", "MTHFR C677T — see the MTHFR corrective before interpreting"),
-    "rs1801131": ("MTHFR", "MTHFR A1298C — see the MTHFR corrective before interpreting"),
-    "rs671":     ("ALDH2", "ALDH2 Glu504Lys"),
-    "rs4988235": ("MCM6/LCT", "lactase persistence regulatory variant"),
-    "rs762551":  ("CYP1A2", "CYP1A2 -163C>A"),
-    "rs9939609": ("FTO", "FTO intron 1"),
-    "rs4149056": ("SLCO1B1", "SLCO1B1 *5 (Val174Ala)"),
-    "rs4244285": ("CYP2C19", "CYP2C19 *2"),
-    "rs4986893": ("CYP2C19", "CYP2C19 *3"),
-    "rs12248560": ("CYP2C19", "CYP2C19 *17"),
-    "rs1799853": ("CYP2C9", "CYP2C9 *2"),
-    "rs1057910": ("CYP2C9", "CYP2C9 *3"),
-    "rs9923231": ("VKORC1", "VKORC1 -1639G>A"),
-    "rs3892097": ("CYP2D6", "CYP2D6 *4 tag — NOT sufficient to call a CYP2D6 diplotype"),
-    "rs1800460": ("TPMT", "TPMT *3B"),
-    "rs1142345": ("TPMT", "TPMT *3C"),
-    "rs116855232": ("NUDT15", "NUDT15 *3"),
-    "rs3918290": ("DPYD", "DPYD *2A"),
+    "rs429358": ("APOE", "APOE haplotype-defining site (Cys112Arg)", {"T", "C"}),
+    "rs7412":   ("APOE", "APOE haplotype-defining site (Arg158Cys)", {"C", "T"}),
+    # HFE H63D is c.187C>G -> a C/G site, therefore PALINDROMIC. It sits in the actionable tier,
+    # so this is exactly the combination the skill warns about: high stakes, unresolvable strand.
+    "rs1799945": ("HFE", "HFE H63D (c.187C>G — palindromic site)", {"C", "G"}),
+    "rs1800562": ("HFE", "HFE C282Y (c.845G>A)", {"G", "A"}),
+    "rs6025":    ("F5", "Factor V Leiden", None),
+    "rs1801133": ("MTHFR", "MTHFR C677T — see the MTHFR corrective before interpreting", {"C", "T"}),
+    "rs1801131": ("MTHFR", "MTHFR A1298C — see the MTHFR corrective before interpreting", None),
+    "rs671":     ("ALDH2", "ALDH2 Glu504Lys (c.1510G>A)", {"G", "A"}),
+    "rs4988235": ("MCM6/LCT", "lactase persistence regulatory variant (-13910C>T)", {"C", "T"}),
+    "rs762551":  ("CYP1A2", "CYP1A2 -163C>A", None),
+    # FTO rs9939609 is an A/T site (A is the risk allele relative to T) -> PALINDROMIC.
+    "rs9939609": ("FTO", "FTO intron 1 (A/T — palindromic site)", {"A", "T"}),
+    "rs4149056": ("SLCO1B1", "SLCO1B1 *5 (Val174Ala)", None),
+    "rs4244285": ("CYP2C19", "CYP2C19 *2", None),
+    "rs4986893": ("CYP2C19", "CYP2C19 *3", None),
+    "rs12248560": ("CYP2C19", "CYP2C19 *17", None),
+    "rs1799853": ("CYP2C9", "CYP2C9 *2", None),
+    "rs1057910": ("CYP2C9", "CYP2C9 *3", None),
+    "rs9923231": ("VKORC1", "VKORC1 -1639G>A", None),
+    "rs3892097": ("CYP2D6", "CYP2D6 *4 tag — NOT sufficient to call a CYP2D6 diplotype", None),
+    "rs1800460": ("TPMT", "TPMT *3B", None),
+    "rs1142345": ("TPMT", "TPMT *3C", None),
+    "rs116855232": ("NUDT15", "NUDT15 *3", None),
+    "rs3918290": ("DPYD", "DPYD *2A", None),
 }
 
 AMBIGUOUS_PAIRS = ({"A", "T"}, {"C", "G"})
@@ -300,7 +307,7 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
         for rsid, c in d["calls"].items():
             if rsid in CATALOG and c["geno"]:
                 merged.setdefault(rsid, []).append((d["path"], c["geno"]))
-    for rsid, (gene, what) in CATALOG.items():
+    for rsid, (gene, what, site_alleles) in CATALOG.items():
         hits = merged.get(rsid)
         if not hits:
             out["catalog"][rsid] = {"gene": gene, "site": what, "genotype": None,
@@ -313,16 +320,16 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
             rec["status"] = f"DISCORDANT between files: {hits} — do not interpret until resolved"
         else:
             rec["status"] = "called"
-        amb = strand_ambiguity(rec["genotype"])
+        amb = strand_ambiguity(rec["genotype"], site_alleles)
         rec["strand"] = amb
         if amb == "AMBIGUOUS":
             rec["strand_note"] = ("PALINDROMIC site (A/T or C/G): reverse-complement returns the same "
                                   "allele pair, so orientation cannot be recovered from the genotype. "
                                   "Do not count risk alleles here until orientation is established.")
         elif amb == "UNDETERMINED":
-            rec["strand_note"] = ("Homozygous call: this site's allele pair is not known to the script, "
-                                  "so palindromic ambiguity cannot be ruled out. Check the site's "
-                                  "alleles before interpreting.")
+            rec["strand_note"] = ("Homozygous call and this site's allele pair is NOT verified in the "
+                                  "catalogue, so palindromic ambiguity cannot be ruled out. Establish "
+                                  "the site's alleles before interpreting.")
         out["catalog"][rsid] = rec
 
     g1 = out["catalog"].get("rs429358", {}).get("genotype")
