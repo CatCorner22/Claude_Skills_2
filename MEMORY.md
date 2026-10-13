@@ -1369,3 +1369,30 @@ retraction of the previous pass's headline mechanism claim.
       on-point case letter and one nomenclature letter — so adjacency is a reason to check, not a
       verdict either way. Net: do not let "withdrawn" harden into "fabricated", and re-verify the
       fix with the same standard as the original.
+    - **A script that has only ever run on fixtures has not been measured.** `triage_genome.py`
+      passed 115 self-tests and would have been handed to a user with a 232 MB whole-genome VCF.
+      It retained every record: **537 bytes per record, linear** (500k → 256 MiB, 1M → 512 MiB), so
+      a 4–6M-record call set is 2–3 GB resident before any interpretation. Measure resource use at
+      **real scale** before telling someone to run something on their own data — a green test suite
+      says the logic is right, not that the program finishes. Fix shape: retain only the keys
+      something downstream actually reads, keep the counters over the whole file, and **disclose
+      the restriction** so no reported figure is quietly computed over a subset.
+    - **An empty finding list is not a negative result — check that the join key exists.** A
+      provider VCF often ships with `ID` as `.`; a catalogue keyed on rsIDs then matches **zero**
+      records, and the report reads as a person who carries nothing. **Absence of annotation is not
+      absence of variant**, which is "absence of a line is not a reference call" made one layer
+      further out. Generalise: before reading any all-absent result, verify the identifier the join
+      depends on is present in both sides. Where a fallback key exists (positions from the other
+      file's own rows), it is usable only within one declared build, only for comparable record
+      shapes, and **never from a coordinate asserted from memory**.
+    - **The most serious verdict a tool can reach must reach its exit status.** Sample-identity
+      failure — the gate added precisely because it had existed only as prose — returned **0**, so
+      a caller reading the status was told a non-audit had gone fine. Pair every blocking condition
+      with a non-zero exit and a named reason, and say in the output that a clean-looking finding
+      list is not a negative result.
+    - **A merged PR cannot track follow-up work, and the restart depends on how it merged.** #52
+      merged as a **merge commit**, not a squash, so the branch tip was a genuine ancestor of
+      `main` and a plain rebase sufficed. Check which: `git merge-base --is-ancestor <tip> origin/main`
+      answers it in one command, and the force-push afterwards is safe only once a **separate**
+      step shows the remote tip's content is already contained in the local branch
+      (`git diff --stat origin/<branch> HEAD` empty). Follow-up work gets a **new** PR either way.
