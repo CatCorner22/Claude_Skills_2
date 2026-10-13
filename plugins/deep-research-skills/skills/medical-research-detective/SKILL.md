@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.13.0"
+  version: "1.14.0"
 ---
 
 # Medical research detective
@@ -38,7 +38,10 @@ does not give doses. See `references/output-format.md` for the standing safety f
   nutrition, or ergogenic-supplement protocols for a healthy person →
   `coding-agent-skills:fitness-nutrition-science`. Checking whether a *video* represented its
   cited sources faithfully, and grading it → `deep-research-skills:video-source-audit` (its object
-  is the video; this skill's object is the clinical question). This skill owns the clinical side
+  is the video; this skill's object is the clinical question). Interpreting a personal genome raw
+  data file — 23andMe, Nebula, a VCF — against the literature →
+  `deep-research-skills:dna-raw-data-audit` (its object is the data file; bring its findings back
+  here when a clinical question follows). This skill owns the clinical side
   throughout: symptoms, drug and nutrient interactions, a literature case file. Diagnosis, dosing,
   or "what should I take" → that is a clinician's job; this skill reframes the question into research
   plus questions to ask them. An emergency → stop and use the red-flag list in

@@ -155,8 +155,8 @@ Once filled in, this environment guide:
 
 1. **Fill in this template with your specific data** (demographics, measurement capabilities,
    success criteria).
-2. **Copy to `.claude/skills-env/fitness-nutrition-science.md`** in your project repo
+2. **Copy to `.claude/skills-env/fitness-nutrition-science.private.md`** in your project repo
    (git-ignore if sensitive).
 3. **Reference this copy** when invoking the skill (e.g., "Use my environment profile at
-   `.claude/skills-env/fitness-nutrition-science.md`").
+   `.claude/skills-env/fitness-nutrition-science.private.md`").
 4. **Update quarterly:** As your cohort evolves, refresh success criteria and adherence notes.

@@ -74,6 +74,23 @@ Corollary: pasting a trigger phrase verbatim proves nothing. Every prompt below 
 written in *natural user language* that avoids the exact trigger string, because that is the only
 thing the test can usefully measure.
 
+`scripts/check-trigger-test.py` enforces this across **every** tier. It originally guarded Tier D
+alone, which is how a Tier F row came to paste two of its target's twelve triggers verbatim and stay
+green; widening it to all tiers immediately surfaced a second leak in Tier F and four overlaps that
+are legitimate.
+
+**Legitimate overlaps carry a written reason, and the gate reads it.** A stale exemption — one whose
+prompt no longer contains the phrase — fails the gate too, so the list cannot rot into decoration.
+
+<!-- trigger-overlap-ok: B3 "confusion matrix" — the phrase IS the test: B3 exists to confirm that this trigger now routes to model-evaluation after project-command-center held it incorrectly. -->
+<!-- trigger-overlap-ok: B3 "threshold" — same row, same reason, and an operating-threshold question cannot be asked in words that avoid the word. -->
+<!-- trigger-overlap-ok: E1 "prompt" — ordinary vocabulary for prompt-engineering: no natural request about an extraction prompt avoids the word. -->
+<!-- E2 carries no exemption on purpose: its three overlaps ("prompt", "system prompt", "reasoning
+     model", and then "instructions" on the first rewrite) were all avoidable, so the row was
+     reworded twice instead. That is the preferred outcome — an exemption is the fallback. -->
+<!-- trigger-overlap-ok: E4 "too many connections" — a realistic verbatim paste of a database error, which is exactly what that trigger exists to catch. -->
+<!-- trigger-overlap-ok: E5 "forecast" — ordinary vocabulary for time-series-forecasting; the test is whether MASE-versus-seasonal-naive routing works, not whether the word appears. -->
+
 ---
 
 ## Setup
@@ -318,7 +335,7 @@ These bodies changed enough that their descriptions were rewritten with them. Un
 | # | Prompt (paste verbatim) | Must load | Near-miss prompt | Must NOT load |
 |---|---|---|---|---|
 | E1 | `My extraction prompt returns valid JSON about 70% of the time. How do I make it reliable?` | `coding-agent-skills:prompt-engineering` | `My agent loops forever calling tools — how do I bound it?` | prompt-engineering (should be `agentic-workflow-design`) |
-| E2 | `We're moving this system prompt to a reasoning model. It says "think step by step" — what changes?` | `coding-agent-skills:prompt-engineering` | `Before my grader model picks a prompt version, how do I show its scores can be trusted?` | prompt-engineering (should be `measurement-systems-analysis`) |
+| E2 | `We're moving the wording we feed the model over to one of the newer ones that works things through before it answers. Our text says "think step by step" — does that still earn its place?` | `coding-agent-skills:prompt-engineering` | `Before my grader model picks a prompt version, how do I show its scores can be trusted?` | prompt-engineering (should be `measurement-systems-analysis`) |
 | E3 | `My tests pass individually but fail when run together, and rows leak between them.` | `full-stack-dev-skills:testing-strategy` | `Why is SQLite ignoring my foreign key constraint?` | testing-strategy (should be `database-and-orm`) |
 | E4 | `Postgres says too many connections and my app has eight workers.` | `full-stack-dev-skills:database-and-orm` | `How do I test that a 409 comes back on a duplicate insert?` | database-and-orm (should be `testing-strategy`) |
 | E5 | `My forecast beats seasonal-naive on MASE — is it good enough to ship?` | `machine-learning-skills:time-series-forecasting` | `How wide should the error bars on this single average be?` | time-series-forecasting (should be `statistical-inference`) |
@@ -344,11 +361,29 @@ both **bodies** and in video-source-audit's **description**, but not in medical-
 description, which has no headroom for it. If F2 fails, that is the evidence needed to justify
 trimming medical-research-detective's description to make room — do not trim it on speculation.
 
+**F4 was rewritten after review, and the reason is the protocol's own corollary.** Its first version
+read *"I exported my raw data from 23andMe and Nebula"* — which pastes two of the skill's trigger
+phrases verbatim and therefore passes by construction, measuring nothing. The replacement describes
+the task in the words someone actually uses before they have learned the vocabulary. **Check new
+rows against the skill's own trigger list before adding them**; a positive prompt that contains a
+trigger string is not a test.
+
+**F6 and F7 test the seam in the direction that actually fails.** The risk for this skill is not
+that it fires too widely — it is that a genotype question gets taken by
+`medical-research-detective` (any health question) or `fitness-nutrition-science` (anything about
+supplements). Both seams are currently stated in the **bodies** of those skills, and **the router
+reads only name and description**, so a body-only seam cannot route anything. F6 and F7 exist to
+produce the evidence before any description is trimmed to make room — the same discipline F2 states.
+
 | # | Prompt (paste verbatim) | Must load | Near-miss prompt | Must NOT load |
 |---|---|---|---|---|
 | F1 | `Someone sent me a clip claiming a supplement cuts heart attack risk by 40%, and the description links three papers. Do the papers actually say that?` | `deep-research-skills:video-source-audit` | `Summarize this 40-minute conference talk for me — I just want the main points.` | video-source-audit (plain summarization is a no-skill task) |
-| F2 | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. What could link these?` | `deep-research-skills:medical-research-detective` | `This health channel's video says the paper proved it. Does the paper say that?` | medical-research-detective (should be `video-source-audit`) |
+| F2 | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. Is there one explanation that ties those together?` | `deep-research-skills:medical-research-detective` | `This health channel's video says the paper proved it. Does the paper say that?` | medical-research-detective (should be `video-source-audit`) |
 | F3 | `Is it the number of reps that builds muscle, or the total amount of work per week?` | `coding-agent-skills:fitness-nutrition-science` | `Run a paired t-test on these two columns and tell me whether the difference is significant.` | fitness-nutrition-science (should be `statistical-inference`) |
+| F4 | `I paid for one of those spit-in-a-tube ancestry tests a while back and downloaded the big text file it gave me. Can you work out what in it actually matters?` | `deep-research-skills:dna-raw-data-audit` | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. What could link these?` | dna-raw-data-audit (should be `medical-research-detective`) |
+| F5 | `A relative was found to carry a BRCA2 variant — can you check whether my own file shows it?` | `deep-research-skills:dna-raw-data-audit` | `This health channel's video says a study proved the supplement works. Did the study say that?` | dna-raw-data-audit (should be `video-source-audit`) |
+| F6 | `My doctor mentioned a gene result in passing and I want to understand what it means before my next appointment — I have the lab PDF and my own test file.` | `deep-research-skills:dna-raw-data-audit` | `My B12 is low, I'm tired all the time, and I take metformin — what's the mechanism?` | dna-raw-data-audit (should be `medical-research-detective`) |
+| F7 | `Should I be taking a different form of folate? Something about my results came up and the supplement shop says it matters.` | `deep-research-skills:dna-raw-data-audit` | `What's the evidence for creatine timing around training?` | dna-raw-data-audit (should be `fitness-nutrition-science`) |
 
 ---
 

@@ -1,7 +1,7 @@
 # Your environment — video source audit
 
 Fill this in so the audit matches what you actually audit and what you can actually reach.
-Keep the filled-in copy at `.claude/skills-env/video-source-audit.md` in your own project, not
+Keep the filled-in copy at `.claude/skills-env/video-source-audit.private.md` in your own project, not
 here — this file lives in the plugin cache and a marketplace update can overwrite it.
 
 ## What you audit

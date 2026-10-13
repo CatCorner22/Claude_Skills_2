@@ -141,8 +141,12 @@ for dir in plugins/*/skills/*/; do
     desc="$(printf '%s\n' "$fm" | awk '
       /^description:/{flag=1; sub(/^description:[[:space:]]*/,""); gsub(/^[>|]-?[[:space:]]*$/,""); buf=$0; next}
       flag && /^[a-zA-Z_-]+:([[:space:]]|$)/{flag=0}
-      flag{gsub(/^[[:space:]]+/,""); buf=buf" "$0}
+      flag{gsub(/^[[:space:]]+/,""); buf=(buf==""?$0:buf" "$0)}
       END{print buf}')"
+    # The ternary above is not cosmetic: a folded block scalar (`description: >-`) leaves buf
+    # empty on the marker line, so a plain `buf=buf" "$0` prepended a space to the first content
+    # line and over-counted every such description by exactly 1 character. The enforced cap was
+    # therefore 1023, not 1024 — which matters only at the boundary, and one skill sits there.
     # Count CHARACTERS, not bytes. `wc -m` silently degrades to bytes under the C/POSIX
     # locale, which over-counts every em dash and arrow by 2 — so the "1024-char" cap was
     # really a byte cap on most runners. Prefer python3 (already required above for JSON).

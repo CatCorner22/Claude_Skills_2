@@ -33,3 +33,40 @@ tsconfig.tsbuildinfo
 *.xlsx
 *.xlsm
 *.xls
+
+# Genomic data — the most sensitive class this library touches, and this repo is PUBLIC.
+# Raw genotype and sequence files must NEVER be committed. Keep them outside the repo entirely
+# where possible; if a file must sit beside the work, put it in genomes/ (ignored below) or give
+# it a .private.* suffix. Only synthetic, structural fixtures belong in git.
+genomes/
+*.vcf
+*.vcf.gz
+*.vcf.bgz
+*.vcf.gz.tbi
+*.vcf.bgz.tbi
+*.gvcf
+*.gvcf.gz
+*.bcf
+*.bam
+*.bai
+*.cram
+*.crai
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bim
+*.fam
+*.23andme.txt
+genome_*.txt
+# The download is an ARCHIVE, and that is the form a user actually has on disk first:
+# 23andMe and AncestryDNA both hand over a .zip. No .zip is tracked in this repo, so this is
+# safe to blanket-ignore, and the archive is the file most likely to be dropped in by mistake.
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.gz
+genome.txt
+*_Full_*.txt

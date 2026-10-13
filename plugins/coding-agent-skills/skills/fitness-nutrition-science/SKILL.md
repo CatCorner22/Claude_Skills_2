@@ -14,7 +14,7 @@ description: >-
   muscle, protein requirements, training volume, cardio detraining, ergogenic supplement
   evidence, interpret this fitness study.
 metadata:
-  version: "1.0.1"
+  version: "1.1.0"
   source: "Peer-reviewed fitness research integration for tracker ecosystem"
 ---
 
@@ -42,6 +42,10 @@ mechanism instead of broscience, and routes outdated claims to their graves with
 - Nutrition science: macro/micronutrient requirements by goal, food-quality tradeoffs,
   supplementation evidence, or hormonal effects of specific dietary patterns.
 - Not for: medical diagnosis, injury treatment, or pharmacology → route to a clinician.
+- Not for: interpreting a personal genome raw data file (23andMe, Nebula, a VCF) and what its
+  alleles support → `deep-research-skills:dna-raw-data-audit`. Note that for nutrition and training
+  the honest finding is usually that genotype does *not* change the recommendation, so this skill's
+  parameters stand regardless.
 - Not for: pure workout programming as exercise selection → that is a skill owned by
   coaching; this skill provides the research-backed *parameters* that coaches design within.
 
@@ -193,7 +197,7 @@ closure by making the reasoning transparent and the success criteria testable.
 
 Record your athlete population, their goals (fat loss vs hypertrophy vs strength vs
 sport-specific performance), their training history, and your tracker's measurement
-resolution in `.claude/skills-env/fitness-nutrition-science.md`:
+resolution in `.claude/skills-env/fitness-nutrition-science.private.md`:
 - Sample: "Beginners (< 2 years training); primary goals are fat loss with muscle
   retention and general fitness; tracker measures bodyweight daily, workout volume weekly,
   protein intake daily; strength benchmarks tracked every 4 weeks."
@@ -201,7 +205,7 @@ resolution in `.claude/skills-env/fitness-nutrition-science.md`:
   surplus; an advanced lifter, 0.25 kg/month).
 
 Keep your filled-in copy outside the plugin. Copy this skill to
-`.claude/skills-env/fitness-nutrition-science.md`, fill in your athlete cohort and
+`.claude/skills-env/fitness-nutrition-science.private.md`, fill in your athlete cohort and
 tracker capabilities, and reference that copy. Your specifics then survive updates and stay
 where you own them.
 
