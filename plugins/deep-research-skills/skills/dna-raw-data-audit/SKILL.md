@@ -10,7 +10,7 @@ description: >-
   or dosing. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   source: >-
     Built from an eight-stream research pass, then re-audited by a perspective-diverse adversarial
     pass that found defects in the shipped version and is the reason several claims here are
@@ -395,6 +395,18 @@ ignored**, so confirm with `git check-ignore -v` before writing anything into it
   138 bp spacing between the two APOE sites, and reports strand state as
   `AMBIGUOUS`/`CLEAR`/`UNDETERMINED`. `--self-test` runs the offline parsing and algebra tests —
   including the APOE ambiguity case and a regression assertion for each of those refusals.
+  **It runs on a whole-genome file**: a retained VCF record costs 537 bytes (measured, linear), so
+  a 4–6M-record call set would be 2–3 GB held whole; the parse retains only the keys anything
+  downstream reads and discloses the restriction, which puts a 5M-record VCF beside a 640k-site
+  array at 574 MiB. **Check the `ID` column before reading any finding list from a VCF.** A
+  provider file with `ID` as `.` matches an rsID-keyed catalogue zero times, and that failure
+  presents as a person who carries nothing — so *nothing keyable* is a **blocking** condition
+  (exit 3, named in a `BLOCKING` section), alongside an undeclared build and a sample-identity
+  failure. Each means the audit did not happen, not that it came back clean. The fix is dbSNP
+  annotation; the fallback is keying by position from an array file's own rows, which the script
+  will do only within one declared build, only for SNV-shaped records, and never from a
+  coordinate asserted from memory. Identity and concordance compare exactly two files — hand it
+  three and it says that neither ran rather than printing a report that looks complete.
 - **Test reachability before relying on the citation verifier.** Where the scholarly resolvers are
   blocked — the normal case in this environment — it returns `ERROR: network unavailable` and
   verifies nothing. The operative standard is then `references/variant-catalog.md` §0: an

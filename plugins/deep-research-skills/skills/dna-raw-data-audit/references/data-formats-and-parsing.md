@@ -62,6 +62,45 @@ returns a different variant, silently.**
   comparison across builds is safe; positional comparison is not. The script warns when two inputs
   declare different builds.
 
+### The `ID` column — the file that matches nothing, and reads as a clean result
+
+A corollary of "prefer rsIDs" that only shows up on real provider data: **a sequencing VCF often
+ships with `ID` as `.`** — the caller emits coordinates, and dbSNP annotation is a separate step the
+provider may or may not have run. A catalogue keyed on rsIDs then matches **zero** records in such a
+file.
+
+That failure is dangerous in a specific way. It does not look like an error; it looks like a person
+who carries none of the catalogued variants. Every row reads *absent*, the APOE diplotype reads
+*unresolved*, the finding list comes back empty — and an empty finding list from a whole-genome file
+is exactly what reassurance looks like. **Absence of annotation is not absence of variant**, and this
+belongs beside "absence of a line is not a reference call" (§3) as the same class of mistake made one
+layer further out.
+
+So, before reading any finding list from a VCF, check how many of its records carry an rsID. The
+script counts them, says so, and treats *nothing keyable* as a **blocking** condition with a non-zero
+exit rather than as an empty result. Two ways out:
+
+- **Annotate the file.** `bcftools annotate -c ID -a <dbSNP.vcf.gz> -o annotated.vcf.gz in.vcf.gz`,
+  with a dbSNP release **in the same build as the VCF**. This is the right fix: it restores the
+  build-independent key everything downstream uses.
+- **Key by position from another file's own rows — and only then.** An array export carries
+  `(rsID, chromosome, position)` in every row, which is a position map that nobody had to assert
+  from memory. The script will use it to key an unannotated VCF, under three restrictions, each of
+  which exists because dropping it produces a confident wrong answer:
+  1. **Both files must declare the same build.** A GRCh37 coordinate and a GRCh38 coordinate are
+     different places. The script refuses to build the map across declared builds, and refuses
+     entirely when either build is undeclared.
+  2. **SNV-shaped records only.** An indel, a symbolic allele or a spanning deletion sitting at a
+     catalogued SNP's position is not that SNP, and comparing its genotype against an array call
+     manufactures a discordance at the one site someone is reading.
+  3. **A position claimed by two different rsIDs is dropped, not guessed at.**
+
+  And one consequence to carry forward: the identity gate (§5) reads **opposite homozygotes**, so an
+  array probe reporting the opposite strand at a non-palindromic site becomes an apparent opposite
+  homozygote under positional keying. Weigh a borderline `SUSPECT` verdict with that in mind before
+  concluding a sample mix-up. **Never hand-build this map from remembered coordinates** — asserting a
+  variant's position from memory is the fabrication this whole skill exists to catch.
+
 ### Strand orientation
 
 Consumer platforms report alleles relative to one strand; database entries may be reported relative
@@ -274,5 +313,30 @@ they survived whatever produced your file.
 file *content* rather than extension, because extensions lie, and it rejects unrecognised input
 loudly (exit 2) rather than parsing garbage into plausible-looking findings.
 
-**Exit codes:** `0` parsed · `2` unreadable, empty, or unrecognised format · `3` build undeclared,
-so positional interpretation would be unsafe · `5` bad usage.
+**Exit codes:** `0` parsed · `2` unreadable, empty, or unrecognised format · `3` **blocking** — the
+audit did not complete on the data as supplied · `5` bad usage.
+
+**The three blocking conditions**, each reported by name in a `BLOCKING` section and in the JSON's
+`blocking` array, because each one means *the audit did not happen* rather than *it came back clean*,
+and a caller reading only the exit status would otherwise conclude the opposite:
+
+1. **Build undeclared** — every position lookup is unsafe.
+2. **Sample identity failure** — two people's data were about to be merged as one (§5).
+3. **Nothing keyable** — no rsIDs and no usable position map, so the file was never examined. Its
+   catalogue rows say *unexamined*, not *negative*.
+
+**It will run on a whole-genome file, and that took work.** A retained VCF record costs **537 bytes**,
+measured, and the cost is linear in record count: 500k records → 256 MiB, 1M → 512 MiB. A 30x
+whole-genome variant call set is 4–6M records, so holding it whole is 2–3 GB resident **before any
+interpretation** — on many machines, the difference between an audit and an OOM kill. Nothing
+downstream reads genotypes at arbitrary keys (the catalogue, the APOE pair, and the sites the other
+file genotypes are the whole demand), so the parse retains only that union and counts the rest.
+Measured end to end on synthetic HaplotypeCaller-shaped records: a 5M-record VCF alongside a
+640k-site array export peaks at **574 MiB in 45 s**, against ~3 GB unrestricted. The file-level
+counts (sites, no-calls, reference blocks, chromosomes) are still taken over every record, the
+restriction is disclosed in the warnings, and no reported figure changes. Two sequencing files get a
+**key-only prepass** — identifiers, not records — so the comparison costs the intersection rather
+than two genomes.
+
+**Identity and concordance compare exactly two files.** Hand it three and neither runs; the script
+says so in a warning rather than printing a report that looks complete. Re-run pairwise.

@@ -139,6 +139,35 @@ def _norm_geno(geno: str | None) -> str | None:
     return "".join(sorted(g)) if g else None
 
 
+def _norm_chrom(c) -> str:
+    """Normalise a chromosome label, so "chr1", "1" and "CHR1" are one chromosome.
+
+    Positional matching between two files that use different conventions finds nothing, and
+    finding nothing looks exactly like two files with no sites in common.
+    """
+    s = str(c).strip()
+    if s.lower().startswith("chr"):
+        s = s[3:]
+    s = s.upper()
+    return "MT" if s in ("M", "MT") else s
+
+
+def read_header(path: str) -> list[str]:
+    """Read the leading comment block only — enough to detect the build without parsing a body.
+
+    The build has to be known *before* the body is read, because it decides whether positions from
+    one file may be used to key another, and a whole-genome body is the thing worth not reading
+    twice.
+    """
+    out = []
+    with _open(path) as fh:
+        for line in fh:
+            if not line.startswith("#"):
+                break
+            out.append(line.rstrip("\n"))
+    return out
+
+
 def _open(path: str):
     if path.endswith((".gz", ".bgz")):
         return io.TextIOWrapper(gzip.open(path, "rb"), encoding="utf-8", errors="replace")
@@ -159,7 +188,8 @@ def detect_build(header_lines: list[str]) -> str | None:
 
 def parse_23andme(path: str) -> dict:
     header, calls = [], {}
-    nocall = 0
+    nocall = total = 0
+    chroms = set()
     with _open(path) as fh:
         for line in fh:
             if line.startswith("#"):
@@ -171,15 +201,93 @@ def parse_23andme(path: str) -> dict:
             rsid, chrom, pos, geno = parts[0], parts[1], parts[2], parts[3].strip().upper()
             if rsid.lower() in ("rsid", "# rsid"):
                 continue  # a column header line that lost its '#'
+            total += 1
+            chroms.add(_norm_chrom(chrom))
             if not geno or set(geno) <= {"-", "0", "."}:
                 nocall += 1
                 calls[rsid] = {"chrom": chrom, "pos": pos, "geno": None}
                 continue
             calls[rsid] = {"chrom": chrom, "pos": pos, "geno": geno}
-    return {"format": "23andme", "header": header, "calls": calls, "nocall": nocall}
+    return {"format": "23andme", "header": header, "calls": calls, "nocall": nocall,
+            "sites": total, "chrom_count": len(chroms), "retained": len(calls),
+            "restricted": False}
 
 
-def parse_vcf(path: str) -> dict:
+SNV_ALLELES = set("ACGT")
+
+
+def position_index(d: dict) -> dict:
+    """Map (chromosome, position) → rsID using the coordinates a file carries itself.
+
+    The coordinates come from the data, never from this script. Asserting a catalogued variant's
+    coordinates from memory is the exact fabrication this audit exists to catch, and a position
+    quoted in the wrong build silently returns a different variant. A position claimed by two
+    different rsIDs is dropped rather than guessed at.
+    """
+    idx, dropped = {}, set()
+    for rsid, c in d["calls"].items():
+        if not rsid.startswith("rs") or not str(c["pos"]).strip().isdigit():
+            continue
+        k = (_norm_chrom(c["chrom"]), str(c["pos"]).strip())
+        if k in idx and idx[k] != rsid:
+            dropped.add(k)
+        idx[k] = rsid
+    for k in dropped:
+        idx.pop(k, None)
+    return idx
+
+
+def _vcf_key(chrom, pos, vid, ref, alt, pos_index):
+    """Resolve the key a VCF record is filed under, and report how it was resolved.
+
+    An rsID when the file carries one. Otherwise a position, but **only** when another file has
+    supplied a (chromosome, position) → rsID map drawn from its own rows and declaring the same
+    build. Otherwise "chrom:pos", which matches nothing in the catalogue — correctly, because
+    nothing has identified it.
+
+    This matters because a sequencing provider's VCF often ships with `ID` as `.`, and a catalogue
+    keyed on rsIDs then matches zero records: every finding reads as absent for a reason of
+    annotation rather than of biology.
+
+    Positional resolution is restricted to SNV-shaped records. An indel, a symbolic allele or a
+    spanning deletion at a catalogued SNP's position is not that SNP, and comparing its genotype
+    against an array call would manufacture a discordance at the one site someone is reading.
+    """
+    if vid.startswith("rs"):
+        return vid, "rsid"
+    if pos_index:
+        alts = alt.split(",")
+        if (len(ref) == 1 and ref.upper() in SNV_ALLELES
+                and all(len(a) == 1 and a.upper() in SNV_ALLELES for a in alts)):
+            hit = pos_index.get((_norm_chrom(chrom), str(pos).strip()))
+            if hit:
+                return hit, "position"
+    return f"{chrom}:{pos}", "coordinate"
+
+
+def vcf_keys(path: str, pos_index: dict | None = None, within: set | None = None) -> set:
+    """Key-only pass over a VCF: the identifiers, none of the records.
+
+    Comparing two whole-genome VCFs needs each file's site list, and holding both files' records
+    to get it is the cost the restriction in `report` exists to avoid. `within` narrows the pass
+    to an already-known key set, so the second file's pass costs the intersection rather than the
+    genome.
+    """
+    out = set()
+    with _open(path) as fh:
+        for line in fh:
+            if line.startswith("#"):
+                continue
+            parts = line.rstrip("\n").split("\t")
+            if len(parts) < 10:
+                continue
+            key, _ = _vcf_key(parts[0], parts[1], parts[2], parts[3], parts[4], pos_index)
+            if within is None or key in within:
+                out.add(key)
+    return out
+
+
+def parse_vcf(path: str, keep: set | None = None, pos_index: dict | None = None) -> dict:
     """Read a VCF, keeping the distinction between a genotype and the absence of one.
 
     Three VCF-specific traps are handled here because each one turns absence into a confident
@@ -193,9 +301,20 @@ def parse_vcf(path: str) -> dict:
       inside it, so no genotype is taken from one.
     - **Zero depth.** A pipeline can emit `0/0` with `DP=0`. A call with no supporting reads is
       no information, and is discarded rather than counted as a reference call.
+
+    `keep` bounds what is held in memory. Measured on HaplotypeCaller-shaped records, a retained
+    record costs 537 bytes and the cost is linear in record count, so a 30x whole-genome VCF's
+    4-6 million records is 2-3 GB resident before a single line of interpretation — on many
+    machines that is the difference between an audit and an OOM kill. Nothing downstream reads
+    `calls` at an arbitrary key: the catalogue, the APOE pair and the other file's sites are the
+    whole demand, so restricting retention to that union changes no reported number. The counters
+    below are still taken over **every** record, because the quality pass describes the file and
+    not the retained subset.
     """
     header, calls = [], {}
     nocall = ref_blocks = zero_depth = 0
+    total = rsid_records = pos_matched = 0
+    chroms = set()
     all_sites = False
     with _open(path) as fh:
         for line in fh:
@@ -206,11 +325,19 @@ def parse_vcf(path: str) -> dict:
             if len(parts) < 10:
                 continue
             chrom, pos, vid, ref, alt, info = parts[0], parts[1], parts[2], parts[3], parts[4], parts[7]
+            total += 1
+            chroms.add(_norm_chrom(chrom))
+            if vid.startswith("rs"):
+                rsid_records += 1
             field = dict(zip(parts[8].split(":"), parts[9].split(":")))
             gt_field = field.get("GT", ".")
             dp = int(field["DP"]) if field.get("DP", "").isdigit() else None
-            key = vid if vid.startswith("rs") else f"{chrom}:{pos}"
-            rec = {"chrom": chrom, "pos": pos, "geno": None, "ploidy": None, "dp": dp}
+            key, keyed_by = _vcf_key(chrom, pos, vid, ref, alt, pos_index)
+            if keyed_by == "position":
+                pos_matched += 1
+            wanted = keep is None or key in keep
+            rec = {"chrom": chrom, "pos": pos, "geno": None, "ploidy": None, "dp": dp,
+                   "keyed_by": keyed_by}
 
             if any(sym in alt for sym in SYMBOLIC_REF_ALTS) or "END=" in info:
                 all_sites = True
@@ -218,12 +345,14 @@ def parse_vcf(path: str) -> dict:
                 rec["kind"] = "reference-block"
                 rec["note"] = ("reference block, not a site call: homozygous-reference cannot be "
                                "asserted at a catalogued position from a block record")
-                calls[key] = rec
+                if wanted:
+                    calls[key] = rec
                 continue
             if gt_field in (".", "./.", ".|."):
                 nocall += 1
                 rec["kind"] = "no-call"
-                calls[key] = rec
+                if wanted:
+                    calls[key] = rec
                 continue
             alleles = [ref] + alt.split(",")
             idx = [i for i in re.split(r"[/|]", gt_field) if i != "."]
@@ -232,31 +361,42 @@ def parse_vcf(path: str) -> dict:
             except (ValueError, IndexError):
                 nocall += 1
                 rec["kind"] = "unparseable-GT"
-                calls[key] = rec
+                if wanted:
+                    calls[key] = rec
                 continue
             if not obs:
                 nocall += 1
                 rec["kind"] = "no-call"
-                calls[key] = rec
+                if wanted:
+                    calls[key] = rec
                 continue
             if dp == 0:
                 zero_depth += 1
                 rec["kind"] = "zero-depth"
                 rec["note"] = ("a genotype was emitted with DP=0 — no supporting reads, therefore no "
                                "information, and not a reference call")
-                calls[key] = rec
+                if wanted:
+                    calls[key] = rec
                 continue
             rec["geno"] = "".join(obs)
             rec["ploidy"] = len(obs)
             rec["kind"] = "call" if len(obs) == 2 else "non-diploid call"
-            calls[key] = rec
+            if wanted:
+                calls[key] = rec
     return {"format": "vcf", "header": header, "calls": calls, "nocall": nocall,
             "ref_blocks": ref_blocks, "zero_depth": zero_depth,
-            "vcf_kind": "gvcf-or-all-sites" if all_sites else "variants-only"}
+            "vcf_kind": "gvcf-or-all-sites" if all_sites else "variants-only",
+            "sites": total, "chrom_count": len(chroms), "rsid_records": rsid_records,
+            "pos_matched": pos_matched, "retained": len(calls), "restricted": keep is not None}
 
 
-def parse(path: str) -> dict:
-    """Dispatch on content, not on the extension — extensions lie."""
+def sniff(path: str) -> str:
+    """Decide the format from content, not from the extension — extensions lie.
+
+    Separated from `parse` so the caller can learn what a file is before reading its body: the
+    array files have to be parsed first to supply the position map and the key set that bound the
+    sequencing file's parse.
+    """
     if not os.path.exists(path):
         raise FileNotFoundError(path)
     with _open(path) as fh:
@@ -265,15 +405,22 @@ def parse(path: str) -> dict:
     if not blob.strip():
         raise ValueError(f"{path}: file is empty")
     if "##fileformat=VCF" in blob or blob.startswith("##"):
-        return parse_vcf(path)
+        return "vcf"
     # A 23andMe-style body line: rsid, chromosome, integer position, genotype.
     for line in blob.splitlines():
         if line.startswith("#"):
             continue
         p = line.split("\t")
         if len(p) >= 4 and p[2].strip().isdigit():
-            return parse_23andme(path)
+            return "23andme"
     raise ValueError(f"{path}: not a recognised 23andMe-style or VCF format")
+
+
+def parse(path: str, keep: set | None = None, pos_index: dict | None = None) -> dict:
+    """Dispatch on content, not on the extension — extensions lie."""
+    if sniff(path) == "vcf":
+        return parse_vcf(path, keep=keep, pos_index=pos_index)
+    return parse_23andme(path)
 
 
 def strand_ambiguity(geno: str | None, site_alleles: set[str] | None = None) -> str:
@@ -511,33 +658,144 @@ def concordance(a: dict, b: dict) -> dict:
 
 
 def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
-    parsed = []
+    # The parse is staged by format rather than run file by file, for two reasons that both only
+    # show up on real data.
+    #
+    # Memory: a retained VCF record costs 537 bytes (measured, linear in record count), so a 30x
+    # whole-genome VCF's 4-6 million records is 2-3 GB resident before any interpretation. The
+    # array files are parsed first so their site list can bound what the sequencing file keeps.
+    #
+    # Keying: a provider's VCF frequently ships with `ID` as `.`, and this catalogue is keyed on
+    # rsIDs, so such a file matches *nothing* and every finding reads as absent. The array files
+    # carry (rsID, chromosome, position) in their own rows, which is a position map that does not
+    # depend on this script asserting any coordinate from memory — usable, and only usable, where
+    # both files declare the same build.
+    kinds = []
     for p in files:
         try:
-            d = parse(p)
+            kinds.append((p, sniff(p)))
         except FileNotFoundError:
             print(f"Cannot read {p}: no such file.", file=sys.stderr); return 2
         except ValueError as e:
             print(str(e), file=sys.stderr); return 2
-        d["path"] = p
-        d["build"] = detect_build(d["header"])
-        parsed.append(d)
+
+    by_path, staging_warnings = {}, []
+    for p, kind in kinds:
+        if kind == "vcf":
+            continue
+        d = parse_23andme(p)
+        d["path"], d["build"] = p, detect_build(d["header"])
+        by_path[p] = d
+        if d["sites"] > len(d["calls"]):
+            staging_warnings.append(
+                f"{p}: {d['sites'] - len(d['calls'])} duplicate rsID row(s) collapsed — the later "
+                "row won. Two rows for one rsID is a provider or concatenation artefact; if the "
+                "duplicates disagree, the genotype reported here is arbitrary."
+            )
+
+    indexes: dict[str, dict] = {}
+    for d in by_path.values():
+        if d["build"]:
+            indexes.setdefault(d["build"], {}).update(position_index(d))
+
+    def _pos_index_for(path: str):
+        """The position map usable for this VCF: same declared build on both sides, or none."""
+        b = detect_build(read_header(path))
+        return (indexes.get(b), b) if b else (None, None)
+
+    keep = set(CATALOG)
+    for d in by_path.values():
+        keep |= set(d["calls"])
+
+    # Identity and concordance are computed for exactly two files (below), so cross-file keys are
+    # only needed then. Two sequencing files get a key-only prepass — strings, not records.
+    vcfs = [p for p, kind in kinds if kind == "vcf"]
+    if len(files) == 2 and len(vcfs) == 2:
+        first = vcf_keys(vcfs[0], _pos_index_for(vcfs[0])[0])
+        shared = vcf_keys(vcfs[1], _pos_index_for(vcfs[1])[0], within=first)
+        first = None
+        keep |= shared
+        staging_warnings.append(
+            f"Two sequencing files: {len(shared)} site key(s) are present in both and were "
+            "retained for the identity and concordance pass. Sites unique to one file are counted "
+            "but not held, since a comparison cannot use them."
+        )
+
+    for p in vcfs:
+        pi, pi_build = _pos_index_for(p)
+        d = parse_vcf(p, keep=keep, pos_index=pi)
+        d["path"], d["build"] = p, detect_build(d["header"])
+        d["pos_index_build"] = pi_build if pi else None
+        by_path[p] = d
+
+    parsed = [by_path[p] for p in files]
 
     out = {"files": [], "catalog": {}, "apoe": {}, "concordance": None, "warnings": []}
 
+    out["warnings"].extend(staging_warnings)
+    if len(parsed) > 2:
+        out["warnings"].append(
+            f"{len(parsed)} files were supplied. The identity gate and the concordance pass compare "
+            "exactly two files, so NEITHER RAN. Re-run pairwise before interpreting anything "
+            "cross-platform: an audit that merges two people's data as one is worse than no audit, "
+            "and that is the check that was skipped."
+        )
+
     for d in parsed:
-        total = len(d["calls"])
+        total = d.get("sites") or len(d["calls"])
         entry = {
             "path": d["path"], "format": d["format"], "build": d["build"],
             "sites": total, "no_calls": d["nocall"],
             "no_call_rate": round(d["nocall"] / total, 6) if total else None,
-            "chromosomes": len({c["chrom"] for c in d["calls"].values()}),
+            "chromosomes": d.get("chrom_count", len({c["chrom"] for c in d["calls"].values()})),
         }
         if d["format"] == "vcf":
             entry["vcf_kind"] = d.get("vcf_kind")
             entry["reference_blocks"] = d.get("ref_blocks", 0)
             entry["zero_depth_discarded"] = d.get("zero_depth", 0)
+            entry["records_with_rsid"] = d.get("rsid_records", 0)
+            entry["records_keyed_by_position"] = d.get("pos_matched", 0)
+            entry["records_retained"] = d.get("retained", len(d["calls"]))
         out["files"].append(entry)
+        if d["format"] == "vcf" and not d.get("rsid_records") and not d.get("pos_matched"):
+            out["warnings"].append(
+                f"{d['path']}: the ID column carries NO dbSNP rsIDs (0 of {total} records) and no "
+                "position map was usable, so NOTHING in this file could be matched to the "
+                "catalogue or to the other file. Every catalogue row below reads as absent for a "
+                "reason of ANNOTATION, NOT BIOLOGY, and the identity gate had nothing to compare. "
+                "This is a blocking defect, not a finding: annotate the file against dbSNP "
+                "(`bcftools annotate -c ID -a <dbSNP.vcf.gz> -o out.vcf.gz`) and re-run, or supply "
+                "an array export from the same person in the SAME declared build so positions can "
+                "key it. Do not hand-match positions across builds: a GRCh37 coordinate and a "
+                "GRCh38 coordinate are different places in the genome."
+            )
+        elif d["format"] == "vcf" and 0 < d.get("rsid_records", 0) < total / 2:
+            out["warnings"].append(
+                f"{d['path']}: only {d['rsid_records']} of {total} records carry an rsID. A "
+                "catalogued variant that happens to sit on an unannotated record cannot be matched "
+                "and will read as absent, so treat absence in this file as unresolved rather than "
+                "as a reference call."
+            )
+        if d.get("pos_matched"):
+            out["warnings"].append(
+                f"{d['path']}: {d['pos_matched']} record(s) were keyed to an rsID BY POSITION, "
+                f"using coordinates taken from the other file's own rows with both files declaring "
+                f"{d.get('pos_index_build')}, and restricted to SNV-shaped records. Two "
+                "consequences to hold onto. The identity gate reads opposite homozygotes, and an "
+                "array probe that reports the opposite strand at a non-palindromic site becomes an "
+                "apparent opposite homozygote under positional keying — so weigh a borderline "
+                "SUSPECT verdict with that in mind rather than concluding a sample mix-up. And a "
+                "position is only as good as the build declaration it rests on."
+            )
+        if d.get("restricted") and total > d.get("retained", total):
+            out["warnings"].append(
+                f"{d['path']}: {d['retained']} of {total} records were held in memory — the "
+                "catalogue, the APOE pair, and the sites the other file genotypes. A whole-genome "
+                "file cannot be held whole (537 bytes per retained record, measured), and nothing "
+                "here reads a genotype outside that set, so every reported figure is unchanged. "
+                "The file-level counts above (sites, no-calls, reference blocks, chromosomes) are "
+                "taken over the WHOLE file, not over the retained subset."
+            )
         if d["build"] is None:
             out["warnings"].append(
                 f"{d['path']}: genome build NOT declared in the file. Positions cannot be looked up "
@@ -578,6 +836,14 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
                          "no information rather than a reference genotype")
     else:
         absent_status = "not present or no-called — the array may never have probed it"
+    # A file nothing could be keyed in has not reported absence; it has reported nothing. Saying
+    # "absent" of such a file states a fact about the person that the data never addressed.
+    unkeyed = [d["path"] for d in parsed
+               if d["format"] == "vcf" and not d.get("rsid_records") and not d.get("pos_matched")]
+    if unkeyed:
+        absent_status += ("; and nothing in " + ", ".join(unkeyed) + " could be keyed at all "
+                          "(no rsIDs, no usable position map), so this row is unexamined rather "
+                          "than negative")
 
     merged = {}
     for d in parsed:
@@ -660,7 +926,21 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
     # The exit code is a property of the data, not of the output format. An earlier version
     # returned 3 in text mode and 0 under --json for the same undeclared-build file, so a
     # pipeline reading the exit status got the opposite answer from a human reading the report.
-    exit_code = 3 if any("build NOT declared" in w for w in out["warnings"]) else 0
+    #
+    # Three conditions are blocking, and each one means the audit did not happen rather than that
+    # it came back clean — which is exactly what a caller reading only the status would otherwise
+    # conclude. An undeclared build makes every position lookup unsafe. A sample-identity failure
+    # means two people's data were about to be merged as one. A file nothing could be keyed in
+    # examined nothing, so its empty finding list is not a negative result.
+    blocking = []
+    if any("build NOT declared" in w for w in out["warnings"]):
+        blocking.append("genome build not declared")
+    if any(w.startswith("SAMPLE IDENTITY FAILURE") for w in out["warnings"]):
+        blocking.append("sample identity failure")
+    if any("NO dbSNP rsIDs" in w for w in out["warnings"]):
+        blocking.append("no variant identifiers could be keyed")
+    out["blocking"] = blocking
+    exit_code = 3 if blocking else 0
     if as_json:
         out["exit_code"] = exit_code
         print(json.dumps(out, indent=2))
@@ -729,6 +1009,12 @@ def report(files: list[str], as_json: bool, catalog_only: bool) -> int:
         print("\n=== Warnings ===")
         for w in out["warnings"]:
             print(f"  ! {w}")
+    if out["blocking"]:
+        print("\n=== BLOCKING ===")
+        print("  This audit did not complete on the data as supplied: "
+              + "; ".join(out["blocking"]) + ".")
+        print("  An empty or clean finding list above is NOT a negative result — resolve the")
+        print("  blocking item and re-run before anything here is interpreted.")
     print("\nThis output is what the DATA says. It assigns no risk and no pathogenicity, and")
     print("recommends nothing. Interpretation belongs to the skill's references.")
     return exit_code
@@ -1094,6 +1380,134 @@ def self_test() -> int:
             fh.write("# provider export\nrs6025\t1\t169519049\tGG\n")
         d2 = parse(nob)
         check("undeclared build detected as None", detect_build(d2["header"]) is None)
+
+        # --- Chromosome-label normalisation. "chr1" and "1" are one chromosome, and a positional
+        # match that silently finds nothing looks exactly like two files with no shared sites. ---
+        check("chrom label normalised", _norm_chrom("chr7") == _norm_chrom("7") == "7")
+        check("mitochondrial aliases unified", _norm_chrom("chrM") == _norm_chrom("MT") == "MT")
+
+        # --- Memory restriction. The counters must describe the FILE; retention must not. ---
+        wide = os.path.join(td, "wide.vcf")
+        with open(wide, "w") as fh:
+            fh.write("##fileformat=VCFv4.2\n##reference=GRCh38\n")
+            fh.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\n")
+            fh.write("19\t44908684\trs429358\tT\tC\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")
+            for i in range(500):
+                fh.write(f"1\t{200000 + i}\trs9{i:06d}\tA\tG\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")
+        full = parse_vcf(wide)
+        lean = parse_vcf(wide, keep={"rs429358"})
+        check("restriction keeps only the wanted key", set(lean["calls"]) == {"rs429358"})
+        check("restriction does not change the genotype",
+              lean["calls"]["rs429358"]["geno"] == full["calls"]["rs429358"]["geno"])
+        check("restricted parse still counts the whole file", lean["sites"] == full["sites"] == 501)
+        check("restricted parse reports what it dropped", lean["retained"] == 1)
+        check("restriction is disclosed", lean["restricted"] is True and full["restricted"] is False)
+        check("rsID records counted", lean["rsid_records"] == 501)
+
+        # --- A VCF with no rsIDs: the failure mode that silently empties the whole report. ---
+        bare = os.path.join(td, "bare.vcf")
+        with open(bare, "w") as fh:
+            fh.write("##fileformat=VCFv4.2\n##reference=GRCh37\n")
+            fh.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\n")
+            fh.write("19\t45411941\t.\tT\tC\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")
+            fh.write("19\t45412079\t.\tC\tT\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")
+            fh.write("1\t169519049\t.\tGTT\tG\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")
+        unkeyed = parse_vcf(bare, keep=set(CATALOG))
+        check("no-rsID VCF matches nothing", unkeyed["calls"] == {})
+        check("no-rsID VCF says so", unkeyed["rsid_records"] == 0)
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([bare], False, True)
+        bare_out = buf.getvalue()
+        check("no-rsID VCF raises the annotation warning", "NO dbSNP rsIDs" in bare_out)
+        check("no-rsID warning names the remedy", "bcftools annotate" in bare_out)
+        # --catalog-only hides absent rows, so the per-row wording is checked on the full report.
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([bare], False, False)
+        check("no-rsID absence is not reported as negative", "unexamined rather" in buf.getvalue())
+
+        # --- Positional keying rescues it, but only from the data and only in the same build. ---
+        idx = position_index(parse(p23))           # p23 declares build 37; rows carry positions
+        keyed = parse_vcf(bare, keep=set(CATALOG), pos_index=idx)
+        check("position keying recovers a catalogued site",
+              set(keyed["calls"]) == {"rs429358", "rs7412"})
+        check("position keying is recorded on the record",
+              keyed["calls"]["rs429358"]["keyed_by"] == "position")
+        check("position keying counted", keyed["pos_matched"] == 2)
+        check("an indel at a catalogued position is NOT keyed to it", "rs6025" not in keyed["calls"])
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([p23, bare], False, True)
+        pos_out = buf.getvalue()
+        check("positional keying is disclosed in the report", "BY POSITION" in pos_out)
+        check("positional keying warns about strand-flipped probes", "opposite strand" in pos_out)
+        # And it must NOT happen across builds: bare declares 37 here, so a 38 array must not key it.
+        p38 = os.path.join(td, "arr38.txt")
+        with open(p38, "w") as fh:
+            fh.write("# build 38\nrsid\tchromosome\tposition\tgenotype\n")
+            fh.write("rs429358\t19\t45411941\tTT\n")
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([p38, bare], False, True)
+        xb = buf.getvalue()
+        check("no positional keying across declared builds", "BY POSITION" not in xb)
+        check("cross-build mismatch still warned", "DIFFERENT builds" in xb)
+
+        # --- A position claimed by two rsIDs is dropped, not guessed at. ---
+        dup = os.path.join(td, "dup.txt")
+        with open(dup, "w") as fh:
+            fh.write("# build 37\nrsid\tchromosome\tposition\tgenotype\n")
+            fh.write("rs111\t1\t500\tAA\n")
+            fh.write("rs222\t1\t500\tAA\n")
+            fh.write("rs333\t1\t600\tAA\n")
+        didx = position_index(parse(dup))
+        check("conflicting position dropped", ("1", "500") not in didx)
+        check("unambiguous position kept", didx.get(("1", "600")) == "rs333")
+
+        # --- Duplicate rsID rows are collapsed, and that must be said out loud. ---
+        dup2 = os.path.join(td, "dup2.txt")
+        with open(dup2, "w") as fh:
+            fh.write("# build 37\nrsid\tchromosome\tposition\tgenotype\n")
+            fh.write("rs6025\t1\t169519049\tGG\n")
+            fh.write("rs6025\t1\t169519049\tAG\n")
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([dup2], False, True)
+        check("duplicate rsID rows disclosed", "duplicate rsID row" in buf.getvalue())
+
+        # --- Key-only prepass: identifiers, no records. ---
+        ks = vcf_keys(wide)
+        check("key prepass returns every key", len(ks) == 501 and "rs429358" in ks)
+        check("key prepass honours `within`",
+              vcf_keys(wide, within={"rs429358", "rsX"}) == {"rs429358"})
+
+        # --- Blocking conditions must reach the EXIT STATUS, not only the prose. A caller that
+        # reads the status and not the report must not be told a non-audit went fine. ---
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc_id = report([base, other], True, True)
+        check("identity failure is a blocking exit", rc_id == 3)
+        check("blocking reasons carried in JSON",
+              "sample identity failure" in json.loads(buf.getvalue())["blocking"])
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            check("unkeyable file is a blocking exit", report([bare], True, True) == 3)
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            check("a keyable, build-declaring pair exits 0", report([p23, wide], True, True) == 0)
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([bare], False, True)
+        check("blocking section printed in text mode", "=== BLOCKING ===" in buf.getvalue())
+        check("blocking section refuses the clean reading",
+              "NOT a negative result" in buf.getvalue())
+
+        # --- Three files: the identity gate cannot run, and silence about that is the bug. ---
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([p23, pb, wide], False, True)
+        check("three files warn that identity did NOT run", "NEITHER RAN" in buf.getvalue())
 
     print(f"self-test: {total - len(failures)}/{total} checks passed")
     for f in failures:
