@@ -38,11 +38,13 @@ panel that probed a subset. Those four are this file's contribution; everything 
 A genotype's relative risk is routinely published against a population baseline the reader does not
 know, so the multiple alone conveys almost nothing.
 
-**The same multiple, two baselines** (RR 3.0 throughout):
+**The same multiple, two baselines** (RR 3.0 throughout). **Read the first row carefully: it is the
+risk in NON-carriers, the referent group the ratio was measured against** — not the population
+average, which already contains the carriers:
 
 | | Rare outcome | Common outcome |
 | :--- | ---: | ---: |
-| Baseline absolute risk | 0.5% | 12.0% |
+| Baseline absolute risk **in non-carriers** | 0.5% | 12.0% |
 | Carrier absolute risk | 1.5% | 36.0% |
 | Absolute increase | 1.00 pp | 24.00 pp |
 | Per 1,000 people | 5 → 15 (10 extra) | 120 → 360 (240 extra) |
@@ -60,6 +62,27 @@ formed as `baseline + 1/n` minus `baseline`, the bare `ceil()` is off by one for
 0.5% baseline, 37% at 1% and 47% at 10%** — and `ceil(round(1/arr, 9))` gets all of them right.
 The lesson generalises past this cell: **an off-by-one in a derived integer is invisible to review
 because it looks like a rounding convention**, so recompute them rather than reading them.
+
+### Multiplying a POPULATION baseline by a relative risk inflates the answer
+
+The shortcut everyone takes — population baseline × the published RR — is wrong in the unsafe
+direction, because a population average already includes the carriers. With carrier frequency `f` and
+carrier risk `RR × r₀`:
+
+```
+ K = (1 − f)·r₀ + f·RR·r₀        so        r₀ = K / (1 + f·(RR − 1))
+```
+
+At RR 3.0 and f = 0.10, a 12.0% *population* risk implies a **10.0%** non-carrier risk and a 30.0%
+carrier risk — not the 36% the shortcut gives. On the rare column, a 0.5% population risk implies
+0.42% in non-carriers and **1.25%** in carriers, so the extra risk is 0.83 pp and the NNH is 120,
+not 100.
+
+> **The shortcut is adequate only when the risk genotype is rare** — at a carrier frequency of a few
+> percent the correction is within rounding. Above that, divide by `1 + f·(RR − 1)` first. **And say
+> which baseline you used**, because §4 of this file calibrates the other way (genotype-weighted mean
+> equal to the prevalence), and a file that uses both conventions silently is a file that will be
+> quoted wrongly.
 
 ### Case-control designs report odds ratios, and genetic studies are full of them
 
@@ -269,17 +292,20 @@ means anything for this person, and it is not a caveat to append at the end.
 ### Lead with the absolute number, not the AUC
 
 AUC is the figure that gets published, and the one that sounds impressive. It is the wrong headline
-for a person, because **AUC is invariant to prevalence and the question is not.** The same score,
-the same person:
+for a person, and the precise reason matters: **AUC does not depend on how many cases are in the
+study sample, so it cannot be read as this person's risk.** (It is *not* independent of prevalence
+under a fixed model — that is a common misstatement, and this file made it. Moving the liability
+threshold changes the score distributions themselves.) The same score, two prevalences:
 
 ```
  score explaining 5% of liability variance, top decile flagged
-   outcome affecting 1 in 10     baseline 10.0%  ->  top decile 18.2%   (1.8x)
-   outcome affecting 1 in 100    baseline  1.0%  ->  top decile  2.4%   (2.4x)
+   outcome affecting 1 in 10     baseline 10.0%  ->  top decile 18.2%   (1.8x)   AUC 0.62
+   outcome affecting 1 in 100    baseline  1.0%  ->  top decile  2.4%   (2.4x)   AUC 0.67
 ```
 
-Identical discrimination. The *multiple* is larger in the second case while the absolute risk is a
-seventh of it — which is exactly why the multiple is the wrong thing to lead with.
+The *multiple* is larger in the second case while the absolute risk is a seventh of it — and the AUC
+is *higher* there too, which makes the point sharper rather than weaker: **the figure that improved
+is the one that tells the person least.**
 
 **The quantities to report are the top-decile absolute risk and the share of cases that fall
 outside the flagged group.** Computed under a liability-threshold model with a normally distributed
@@ -303,10 +329,17 @@ dropped:
 - the headline multiple is substantially a **choice of cutpoint**, not a property of the person:
   top 20% → 16.2% (1.6×), top 10% → 18.2% (1.8×), top 5% → 20.1% (2.0×), top 1% → 24.1% (2.4×).
 
-**So a claim of the form "the top 8% of people are at threefold risk" is a statement about an
-extreme tail, not about the score's accuracy for the person in front of you.** The same score, for
-the same person, can support "three times the average" while explaining a modest share of total
-liability. Ask which cutpoint produced the multiple before repeating it.
+**So ask for the cutpoint *and* the variance explained before repeating a multiple — and do the
+check, because the two constrain each other.** A claim that "the top 8% of people are at threefold
+risk" cannot come from a modest score: at 10% prevalence it requires a score explaining about **19%**
+of liability variance (AUC ≈ 0.73), stronger than every row of the table above bar the last. For the
+5%-variance score this section has been using, threefold is first reached at roughly the **top
+0.1%** (top 1% gives 2.4×, top 0.1% gives 2.9×).
+
+So a big multiple at a *wide* cutpoint means a genuinely strong score, and a big multiple at a very
+narrow one is a tail statement. **Neither is the person's risk**, which is the absolute number — but
+dismissing the first as a cutpoint artefact would be wrong, and an earlier version of this file
+invited exactly that.
 
 ### Portability, and what it does to the number
 
@@ -447,9 +480,13 @@ frequency 1/25 and a 1-in-4 transmission risk when both are carriers:
 panel *for that gene* — the residual risk after the weaker test is **7.9× higher** than after the
 stronger one. A consumer array probes selected variants rather than sequencing the gene, so its
 detection rate for most recessive conditions is unknown-to-low. **A reproductive decision needs
-clinical-grade carrier screening**, and the tiered professional carrier-screening framework (named,
-not cited with a reconstructed identifier — no record for it resolved in this environment) is the
-instrument to point at.
+clinical-grade carrier screening.** The professional instrument is a **tiered carrier-screening
+framework** that sets which conditions should be offered by carrier frequency — but no record for it
+resolved in this environment, and an earlier version of this paragraph promised a name in place of an
+identifier and then supplied neither. **So the followable instruction is the one to give: ask a
+genetic counsellor or the ordering clinician which tier of carrier screening applies, and what the
+panel's detection rate is for this person's ancestry.** That question is answerable; a framework
+name quoted from memory is not.
 
 ---
 
@@ -463,17 +500,25 @@ Use this for every quantitative genetic finding. All five elements, in this orde
 > In relative terms that is **[RR/OR][, reported as an odds ratio from a case-control design]**.
 > The estimate comes from **[population-based / family-informed]** data in **[ancestry]** cohorts
 > and carries **[interval]**; [state the portability caveat if the person's ancestry differs].
-> **What follows from it: [specific action, or "nothing changes"].**
+> The call itself is **[array-reliability grade]** and is **[unconfirmed consumer raw data /
+> clinically confirmed]**.
+> **What follows from it: [confirm the genotype first, then the specific action — or "nothing
+> changes"].**
 
 **Worked, using the rare-outcome column from §2:**
 
 > Among people matched on ancestry, sex and age, roughly **5 in 1,000** develop this outcome by age
 > 80. With this genotype it is about **15 in 1,000** — **10 more people per 1,000**, or **1.0
 > percentage point**. In relative terms, three times the baseline. The estimate is population-based
-> in European-ancestry cohorts with a wide interval. **What follows: one screening conversation with
-> a clinician — and no change to anything else.**
+> in European-ancestry cohorts with a wide interval. The call is a directly-probed common variant
+> (R1) and is **unconfirmed consumer raw data**. **What follows: confirm the genotype in a clinical
+> laboratory, and if confirmed, one screening conversation with a clinician — and no change to
+> anything else.**
 
-**Three rules the template enforces:**
+**Four rules the template enforces:**
+- **The confirmation status travels with the number.** A template that can emit a genotype, an
+  absolute risk and an action without stating that the call is an unconfirmed array probe defeats the
+  skill's own hard rail, and this one could until a review caught it.
 - **Natural frequencies before percentages.** Counts of people, never percentages of percentages.
 - **No composite "genetic risk score" across findings.** Conditions have independent baselines and
   independent evidence quality; a single number summarising them is uninterpretable, and averaging

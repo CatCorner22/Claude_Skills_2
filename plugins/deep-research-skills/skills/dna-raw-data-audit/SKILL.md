@@ -218,9 +218,12 @@ Estimates drawn from families selected *because* they had many affected members 
 families. Someone who finds the same variant incidentally, with no family history, is a different
 case — and the honest literature shows the older family-based figures running well above
 population-based ones, with newer and larger estimates overlapping more than the early contrast
-suggested. There is also more variation *between* families carrying the same variant than between
-positions within a gene, which is itself an argument against quoting any single number as *the*
-penetrance.
+suggested. **Two disciplines follow:** quote the **age horizon** with every penetrance figure, because
+comparing a to-70 estimate against a to-80 one manufactures a gap; and quote a **range**, because
+large series have put absolute cumulative risks at the lower end of the published spread with wide
+intervals. *(An earlier version of this section also claimed that variation between families carrying
+the same variant exceeds variation between positions within a gene. The record cited for it does not
+visibly support it, so the claim is withdrawn rather than rehedged — see `risk-communication.md` §3.)*
 
 **Actionability is a higher bar than association, and almost nothing clears it.** A variant can be
 genuinely associated with an outcome and still be useless, because the question is not "does this
@@ -251,8 +254,8 @@ resolved citations and what the evidence does and does not support.
 - Treating one observed allele as a homozygote → comparing genotypes as *sets* makes `C` and `CC`
   identical, which turns a half-call into a confident homozygous call. The bundled script refused
   this only after it had shipped the bug.
-- Leading with a polygenic score's AUC → AUC is invariant to prevalence and the person's question is
-  not. Lead with the top-decile *absolute* risk and the share of cases outside the flagged group.
+- Leading with a polygenic score's AUC → AUC says nothing about how many cases are in the study
+  sample, so it cannot be read as this person's risk. Lead with the top-decile *absolute* risk and the share of cases outside the flagged group.
 - Calling an APOE diplotype from one SNP → it needs both rs429358 and rs7412, and one specific
   combination is formally ambiguous. The catalogue states which.
 - Quoting a star allele from unphased genotypes → not supported; say so instead.
