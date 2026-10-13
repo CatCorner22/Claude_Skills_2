@@ -61,7 +61,11 @@ Anything frozen here would be wrong by the time someone read it.
 
 **Two conditions must both hold before a genotype supports an intervention:**
 
-1. An intervention exists, with evidence at **T1 or T2**.
+1. An intervention exists, with evidence at **T1 or T2** — **or at T3 where the intervention is
+   avoidance of a documented hazard and a randomised trial is unobtainable or unethical.** That
+   carve-out is necessary rather than convenient: without it the rail disqualifies this file's own
+   three strongest findings (HFE, G6PD, ALDH2), none of which has a randomised trial and none of
+   which ever will. **State which case you are in.**
 2. That intervention has been shown to change the outcome **in carriers specifically** — i.e. the
    genetic evidence is **G1 or G2**, not G3.
 
@@ -88,8 +92,11 @@ Nearly nothing clears both. The honest consequence:
   established by an approved test, plus a Bardet–Biedl syndrome indication
   ([approval announcement](https://www.biospace.com/rhythm-pharmaceuticals-announces-fda-approval-of-imcivree-setmelanotide-as-first-ever-therapy-for-chronic-weight-management-in-patients-with-obesity-due-to-pomc-pcsk1-or-lepr-deficiency)).
   That is a label-level gene–intervention pair — **G1 by this file's own definition, for a peptide** —
-  and metreleptin for congenital leptin deficiency is a second. A rail resting on "no peptide has
-  gene-interaction evidence" would simply be false.
+  and it carries the point alone. (**Metreleptin is not a second example**, though an earlier version
+  of this file said it was: its approved indication is the complications of leptin deficiency in
+  *generalised lipodystrophy* — gated on a **phenotype**, with no gene named, and that condition is
+  itself genetically heterogeneous.) A rail resting on "no peptide has gene-interaction evidence"
+  would still be false on setmelanotide alone.
 
   **So state it precisely.** The peptides this market sells have **no** genotype indication; the
   peptides that *are* genotype-selected are prescription drugs for **rare monogenic disease a
@@ -184,12 +191,19 @@ question has also been revisited
 
 **The causal loop the MTHFR story depends on is also closed at the other end.** The story runs
 *variant → higher homocysteine → cardiovascular risk → so lower homocysteine*. But the
-homocysteine-lowering trials, pooled, did not reduce cardiovascular events
-([PMID 21069462](https://pubmed.ncbi.nlm.nih.gov/21069462/)) — B-vitamin allocation moved the
-biomarker and not the outcome. **So even granting every step of the mechanism, the intervention it
-implies has been tested and does not work**, which is a stronger objection than disputing the
-genotype's effect size. *(The pooled figures are prose-sourced; the review's identifier is
-record-verified.)*
+homocysteine-lowering trials, pooled, **did not reduce myocardial infarction or all-cause
+mortality** — B-vitamin allocation moved the biomarker and not those outcomes. **So even granting
+every step of the mechanism, the intervention it implies has been tested and does essentially nothing
+for the outcome the MTHFR story is sold on**, which is a stronger objection than disputing the
+genotype's effect size.
+
+**State the one exception rather than overclaiming, because it is the only part of the causal loop
+that did not close:** a modest reduction in **stroke** does survive pooling in that literature, and
+stroke is also the one endpoint where the homocysteine Mendelian-randomisation work has shown
+anything. A blanket "no cardiovascular benefit" erases it. *(No identifier ships with this paragraph:
+the review previously cited here did not re-resolve on re-check, and the Cochrane review of
+homocysteine-lowering interventions is the record to retrieve when a resolver is reachable. The
+pooled figures are prose-sourced either way.)*
 
 The methylfolate-protocol industry built on MTHFR is **G3 at best and largely G4**. If a person
 arrives already taking a stack because of an MTHFR result, the useful service is the correction —
@@ -213,9 +227,9 @@ folate.** All three were missing from this file until a safety review named them
 
 | Genotype | What it supports | Grade |
 | :--- | :--- | :--- |
-| **HFE** C282Y homozygous (confirmed) | Changes iron advice in the *opposite* direction to the default — avoid iron supplementation, and get iron studies. One of the few places a genotype genuinely redirects a supplement decision | G2 / T1 |
-| **G6PD** deficiency (confirmed) | **An avoidance list is only useful if it names things, and this is the supplements table, so name the supplement first: high-dose or intravenous vitamin C.** Published haemolysis cases on high-dose vitamin C are concentrated in G6PD deficiency, including a fatal one and cases of methaemoglobinaemia with haemolytic anaemia, and authors have proposed G6PD deficiency as a contraindication to high-dose vitamin C therapy — a mass-market supplement and an IV-clinic staple, which makes this the one row here where naming the item could prevent a crisis. Then the drugs (`pharmacogenomics.md` §4 carries them): rasburicase, contraindicated; primaquine and tafenoquine, dapsone, nitrofurantoin, methylene blue. And fava beans. **Avoidance, not supplementation** | G1 / T1 |
-| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it. **Name the genotype that carries the risk, because it is not the obvious one: heterozygotes.** One inactive allele clears acetaldehyde poorly but leaves alcohol tolerable enough to keep drinking; homozygotes usually self-limit. In meta-analysis the heterozygote-plus-heavy-drinking combination carried a large elevated risk while heterozygotes who drink little or not at all showed no significant elevation — effect modification, not a bare association *(figures prose-sourced; ship the direction)* | **G2** / T1 for the behaviour — **regraded from G3:** this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which contradicted both the action in the cell beside it and `variant-catalog.md`'s own entry |
+| **HFE** C282Y homozygous (confirmed) | Changes iron advice in the *opposite* direction to the default — avoid iron supplementation, and get iron studies. One of the few places a genotype genuinely redirects a supplement decision | G2 / **T3** — the downgrade is honest rather than pedantic: there is no randomised trial of iron-supplement avoidance with hard outcomes in C282Y homozygotes, and the evidence is cohort, registry and mechanistic |
+| **G6PD** deficiency (confirmed) | **An avoidance list is only useful if it names things, and this is the supplements table, so name the supplement first: high-dose or intravenous vitamin C.** Published haemolysis cases on high-dose vitamin C are concentrated in G6PD deficiency, including a fatal one and cases of methaemoglobinaemia with haemolytic anaemia, and authors have proposed G6PD deficiency as a contraindication to high-dose vitamin C therapy — a mass-market supplement and an IV-clinic staple, which makes this the one row here where naming the item could prevent a crisis. Then the drugs (`pharmacogenomics.md` §4 carries them): rasburicase, contraindicated; primaquine and tafenoquine, dapsone, nitrofurantoin, methylene blue. And fava beans. **Avoidance, not supplementation** | G1 / **T3** — case series and pharmacovigilance, because a randomised trial of oxidant-trigger avoidance in deficient people would be unethical. **Say why the tier is unachievable rather than borrowing a higher one** |
+| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it. **Name the genotype that carries the risk, because it is not the obvious one: heterozygotes.** One inactive allele clears acetaldehyde poorly but leaves alcohol tolerable enough to keep drinking; homozygotes usually self-limit. In meta-analysis the heterozygote-plus-heavy-drinking combination carried a large elevated risk while heterozygotes who drink little or not at all showed no significant elevation — effect modification, not a bare association *(figures prose-sourced; ship the direction)* | **G2** / **T3** for the behaviour — **regraded on both axes.** T1 was wrong because the evidence for alcohol reduction with hard outcomes is observational plus Mendelian randomisation, not randomised. And G3 was wrong because: this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which contradicted both the action in the cell beside it and `variant-catalog.md`'s own entry |
 | **MCM6/LCT** rs4988235 | Explains lactose intolerance — **in European ancestry only.** This variant tags the European lactase-persistence haplotype; independent persistence alleles exist elsewhere, so a "non-persistent" call outside that ancestry is frequently a **false negative**. Dietary choice follows symptoms, which the person already knows | G2 / T2 |
 | **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions, and the second is the reverse of what an earlier version of this file said: sensitivity is high but **not** 100%, so do not promise a perfect rule-out — and **diet does not affect this test.** Serology and biopsy go falsely negative once gluten has been withdrawn; a genotype does not change with diet, **which is exactly why HLA typing is the usable rule-out in someone already eating gluten-free, and why it can spare them a gluten challenge.** Telling such a reader the test is uninterpretable removes their one usable option and pushes them toward a challenge that has real symptomatic cost | G2 / T2, as a rule-out |
 | **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
@@ -309,10 +323,20 @@ paragraph, and never carry one substance's rationale across to another.** **G4.*
 individual human evidence is thin (**T4–T6**), with occasional narrow exceptions worth checking
 individually rather than assuming. **G4.**
 
-**Melanotan I/II — and PT-141, which is a different situation entirely.** Both are melanocortin
-agonists, and shipping them as one line was an error worth naming.
+**Three different situations under one street name, and collapsing them is the error this very file
+warns about twice** ("peptide is not a regulatory category"). Taken separately:
 
-**Melanotan I/II** carries a specific, concrete concern about naevi that distinguishes it from the
+**Melanotan I is afamelanotide, an APPROVED product with a narrow indication** — reducing
+phototoxicity in erythropoietic protoporphyria, authorised on randomised placebo-controlled
+evidence. Its regulatory status is "approved, narrow indication" and its tier for the approved use is
+**T1/T2**, not unapproved and not T6; an earlier version of this file graded it as grey-market
+alongside melanotan II. **Material sold online as "melanotan I" is not that product.** The approved
+product's own labelling calls for periodic full-body skin examination — which is the monitoring the
+naevus signal below actually implies.
+
+**Melanotan II is unapproved**, is **T6** for the use it is marketed for, and is the one the naevus
+signal attaches to: the case report cited below is titled for melanotan II specifically. It carries
+a specific, concrete concern about naevi that distinguishes it from the
 "unproven but probably inert" category: published case reports describe **eruptive naevi and
 darkening of pre-existing naevi after use** — one of them titled for the finding, *"Eruptive naevi
 and darkening of preexisting naevi 24 h after a single mono-dose injection of melanotan II"*
@@ -387,9 +411,14 @@ Worth stating because it is the honest anchor for almost every report: the inter
 strongest outcome evidence are **not genotype-tailored**, and they dominate anything a consumer
 genome will suggest.
 
-Physical activity including resistance training, sleep duration and regularity, alcohol reduction,
-smoking cessation, and dietary pattern all sit at **T1 for hard outcomes** and apply **regardless of
-genotype**. `coding-agent-skills:fitness-nutrition-science` owns the training and nutrition detail;
+**Smoking cessation, dietary pattern and physical activity** (including resistance training) sit at
+**T1 for hard outcomes** — long-term mortality, events, and major mobility disability as a function
+endpoint. **Sleep duration and regularity, and alcohol reduction, sit at T3**: large and consistent
+observational evidence, with randomised work limited to surrogate endpoints such as blood pressure.
+An earlier version of this paragraph graded all five T1, inflating the tier in the file's own
+favoured direction — the error it polices everywhere else. All five apply **regardless of
+genotype**, which is the actual point, and none becomes better supported by being
+genotype-tailored. `coding-agent-skills:fitness-nutrition-science` owns the training and nutrition detail;
 this skill's job is to avoid implying that a genotype-tailored variation on them is better supported
 than the baseline, because it is not.
 
