@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.14.0"
+  version: "1.14.1"
 ---
 
 # Medical research detective
@@ -214,4 +214,4 @@ own rather than in a cache you may not realise is disposable.
 > plugin is installed. A bare `scripts/…` path only works inside a clone of the marketplace
 > repo, which is not where a user runs these.
 - `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/search_pubmed.py` — searches PubMed via the free NCBI E-utilities API; returns structured hits (PMID, DOI, title, first author, journal, year, publication type, retraction flag) as text or JSON, ranked by evidence hierarchy. Country of origin is **not** in PubMed's summary metadata — run `verify_citation.py` on the hits you keep to do the stage-4 affiliation-country pass. `--help` for options; no API key required.
-- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. Provenance and retraction are **three-state** (pass / fail / unverified), because Europe PMC's endpoint is a search rather than a lookup and the Retraction Watch feed does not answer for every record; an "unverified" is a question for you, not a pass. `--self-test` runs the offline logic tests (104 checks).
+- `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` — resolves a DOI or PMID against Crossref/PubMed/Europe PMC, returns canonical metadata, compares it to a claimed title/author/year, and flags mismatches, excluded-country provenance, and retractions. Provenance and retraction are **three-state** (pass / fail / unverified), because Europe PMC's endpoint is a search rather than a lookup and the Retraction Watch feed does not answer for every record; an "unverified" is a question for you, not a pass. `--self-test` runs the offline logic tests (119 checks).

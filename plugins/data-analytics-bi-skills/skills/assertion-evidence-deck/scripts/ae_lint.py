@@ -160,7 +160,17 @@ def lint_slide(idx, slide, fnd, max_words):
     # items and 14 pt for table cells and flow-step labels, which are scanned as tokens rather
     # than read as sentences. Runs with no explicit size inherit from the layout and cannot be
     # judged here, so they are skipped rather than guessed at.
-    for sh, _top in texts:
+    for sh, top in texts:
+        # The bottom zone holds source tags and slide numbers, which are MEANT to be small —
+        # the floors below describe body text. The sibling loop exempts them (`is_bottom`);
+        # this loop bound the coordinate to `_top` and never computed the exemption, so every
+        # deck this skill's own builder produced failed this skill's own stage-6 gate on its
+        # own source tags: 11 errors on the shipped example spec, each one a source tag or a
+        # slide number at top=6.95in. The regression suite could not see it because the
+        # fixture's source box set no explicit size, so `run.font.size is None` and the run
+        # was skipped before reaching the floor.
+        if top >= BOTTOM_ZONE_IN:
+            continue
         in_table_or_step = getattr(sh, "has_table", False)
         for para in sh.text_frame.paragraphs:
             for run in para.runs:
@@ -262,6 +272,11 @@ def self_test():
         "a full prose sentence set at sixteen point which is more than twelve words long",
         size=Pt(16))
     box(0.92, 4.00, 3.00, 0.40, "Intake", size=Pt(14))          # legitimate step label
+    # The bottom zone must be exempt from the floors too, and this needs an EXPLICIT size:
+    # the slide-1 source tag sets none, so its run is skipped before the floor is reached,
+    # which is exactly why the broken loop above linted clean for as long as it did.
+    box(0.92, 6.95, 8.00, 0.40, "Source: ledger export, 2026-08-19", size=Pt(12))
+    box(12.80, 6.95, 0.40, 0.40, "3", size=Pt(12))
 
     try:
         prs.save(path)
@@ -290,6 +305,26 @@ def self_test():
     if caps_s1:
         failures.append(
             f"bottom-zone caps must be exempt, got {[c['message'] for c in caps_s1]}")
+    # The font-size floors are exempt in the bottom zone as well. Slide 3 carries a 12 pt
+    # source tag and a 12 pt slide number down there, both with explicit sizes, and a 12 pt
+    # prose run ABOVE the zone — so the error must fire for the one and not for the others.
+    # Asserting only "fontsize:error exists" is what let the defect ship: it fired on the
+    # wrong runs. The message carries the offending text, which is what tells them apart.
+    bottom_fontsize = [f for f in found
+                       if f["check"] == "fontsize"
+                       and ("Source: ledger export" in f["message"] or "'3'" in f["message"])]
+    if bottom_fontsize:
+        failures.append(
+            "bottom-zone runs must be exempt from the font-size floors, got "
+            f"{[c['message'] for c in bottom_fontsize]}")
+    # The fragment must fall inside the first 40 characters: the message truncates the
+    # offending run with `[:40]`, so a tail fragment can never match and the assertion would
+    # fail on its own wording rather than on the code.
+    if not any(f["check"] == "fontsize" and "prose squeezed down to" in f["message"]
+               for f in found):
+        failures.append(
+            "the 14 pt floor must still fire on a 12 pt prose run ABOVE the bottom zone — "
+            "without this, exempting the zone is indistinguishable from not checking at all")
     # italic and underline both emit check "format", so category membership cannot
     # tell them apart — deleting either one left the other still firing format:error
     # and the mutation went unnoticed. Assert on the distinguishing message text.
