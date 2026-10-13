@@ -1360,3 +1360,12 @@ retraction of the previous pass's headline mechanism claim.
       opposite answer from a human reading the report.
     - **A dash in a table's identifier column reads as "no such thing exists".** Three rows meant
       "not reachable from this data type, and here is the referral"; they said `—`. Say which.
+    - **A withdrawal is provisional in the same way an identifier is, and a proposed correction is a
+      claim that gets checked too.** Three citations were re-sourced once a search budget reset.
+      One withdrawal turned out to be **wrong** — the identifier came back with its title, and the
+      verifier that had named it gave the wrong journal. One *proposed* correction was also wrong:
+      a verifier attributed a figure to a paper that did not contain it, when it belonged to the
+      same author's earlier study. And two **adjacent DOIs at one journal** turned out to be one
+      on-point case letter and one nomenclature letter — so adjacency is a reason to check, not a
+      verdict either way. Net: do not let "withdrawn" harden into "fabricated", and re-verify the
+      fix with the same standard as the original.
