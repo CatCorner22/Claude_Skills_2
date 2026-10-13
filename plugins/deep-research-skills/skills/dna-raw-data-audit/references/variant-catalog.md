@@ -80,7 +80,7 @@ is strictly safer than an instruction that cannot be executed, and the grading i
 | :--- | :--- | :--- |
 | **HFE C282Y homozygosity** (rs1800562) | Documented iron-overload-related disease in **28.4% of male homozygotes (95% CI 18.8–40.2)** and **1.2% of females (95% CI 0.03–6.5)**, in 31,192 people of northern European descent aged 40–69 — Allen et al. 2008, *NEJM* 358(3):221–230 ([PMID 18199861](https://pubmed.ncbi.nlm.nih.gov/18199861/)). The sex asymmetry is the headline, and the female interval is very wide on few events | **[R/p]** |
 | **F5 Factor V Leiden heterozygosity** (rs6025) | First-event incidence about **0.45%/year** in carrier relatives vs **0.10%/year** in non-carrier relatives, and about **0.58%/year** in a prospective cohort of asymptomatic carriers. **Identifier withdrawn:** this row cited `PMID 11583312`, which a verification pass resolved to a **pooled case-control analysis reporting odds ratios** — a different study and a different estimand, incapable of supporting an annual-incidence claim. The figures belong to a family-member incidence study and an asymptomatic-carrier cohort that were named in that pass but not re-resolved here, so **they ship with no identifier and must be re-sourced before use.** The systematic review [PMID 19531787](https://pubmed.ncbi.nlm.nih.gov/19531787/) resolved and is the place to start | **[p]** — figure only, no record |
-| ↳ *what that means over a horizon* | At 0.45%/yr vs 0.10%/yr: **10 years** 4.41% vs 1.00% (ARR 3.41 pp, 34 extra per 1,000, NNH ⌈1/0.0341⌉ = 30); **20 years** 8.63% vs 1.98% (ARR 6.64 pp, 66 extra per 1,000, NNH ⌈1/0.0664⌉ = 16). So **96 of 100 carriers are event-free at 10 years and 91 of 100 at 20** — which is why heterozygosity alone does not warrant anticoagulation. Note the relative risk *shrinks* with horizon (4.5 per-year → 4.43 at 10 years → 4.35 at 20) as both risks compound toward 1, so **state the horizon with the multiple** | **[calc]** |
+| ↳ *what that means over a horizon* | **These derive from figures that currently carry no identifier (row above), so they are shape, not magnitude — do not quote "96 of 100" to a person until the inputs are re-sourced, and note that the conclusion about anticoagulation rests on clinical guidance rather than on these two rates.** The arithmetic itself reproduces exactly and stands as a worked illustration. At 0.45%/yr vs 0.10%/yr: **10 years** 4.41% vs 1.00% (ARR 3.41 pp, 34 extra per 1,000, NNH ⌈1/0.0341⌉ = 30); **20 years** 8.63% vs 1.98% (ARR 6.64 pp, 66 extra per 1,000, NNH ⌈1/0.0664⌉ = 16). So **96 of 100 carriers are event-free at 10 years and 91 of 100 at 20** — which is why heterozygosity alone does not warrant anticoagulation. Note the relative risk *shrinks* with horizon (4.5 per-year → 4.43 at 10 years → 4.35 at 20) as both risks compound toward 1, so **state the horizon with the multiple** | **[calc from [p]]** — correct arithmetic on unsourced inputs. A `[calc]` grade asserts only that the computation is right; **it cannot launder the provenance of what went into it** |
 | **APOE** (rs429358 + rs7412) | Lifetime Alzheimer's risk to age 85, from a semi-dominant model: **all-genotype population baseline 11% male / 14% female** (this is *not* the ε3/ε3 risk); **e3/e4 23% / 30%**; **e4/e4 51% / 60%** — Genin et al. 2011, *Molecular Psychiatry* ([PMC3162068](https://pmc.ncbi.nlm.nih.gov/articles/PMC3162068/), [10.1038/mp.2011.52](https://doi.org/10.1038/mp.2011.52)). **Quote these as the high end of a range, with the design named:** this analysis combined relative risks from case-control data with absolute risks from cohort studies, and cohort-based cumulative-incidence estimates over a fixed follow-up are generally **lower**, because they measure a different quantity than lifetime risk to 85. *(A specific percentage for that comparison was removed: it carried no identifier at all, and an unsourced number that revises a risk estimate **downward** is the most consequential kind in this file — it is the one a reader quotes as reassurance.)* Get the cohort figure from the literature at analysis time | **[R/p]** |
 | ↳ *the dose effect, its complement, and the comparator trap* | e3/e4 is **+12 pp male / +16 pp female** over baseline (2.1×); e4/e4 is **+40 pp / +46 pp** (4.6× / 4.3×). Going from one e4 to two roughly **doubles** the heterozygote's absolute risk (2.2× male, 2.0× female). And on the same figures, **49 per 100 male and 40 per 100 female e4/e4 homozygotes reach 85 unaffected** — report that in the same breath, every time. **Critically: the 11%/14% baseline is the ALL-GENOTYPE population figure, so every multiple here is genotype-versus-population.** Published APOE relative risks are almost always computed against **ε3/ε3**, which is lower than the population mean because the population contains the ε4 carriers — so those multiples are larger and **are not comparable to these.** State the referent, or a reader will conclude one of the two sources is wrong | **[calc]** |
 
@@ -122,6 +122,21 @@ withdrawn, not downgraded to a hedge** — and recording the withdrawal is what 
 
 Grade every finding on **two independent axes**. A finding can be strong on one and worthless on the
 other, and collapsing them is the commonest interpretation error.
+
+**Both axes assume a European-ancestry reference, and neither is portable without thought.** The
+grades, allele frequencies and penetrance anchors in this file come predominantly from
+European-ancestry cohorts. The consequence lands on the *reliability* axis, not only on the
+risk numbers, and it is easy to miss:
+
+- **A negative result at an ancestry-specific allele conveys almost nothing outside that ancestry.**
+  F5 Factor V Leiden and HFE C282Y are both essentially European-ancestry variants, so "no Factor V
+  Leiden" tells a non-European reader little about inherited thrombophilia.
+- **A positive call at an allele that is rare in the person's ancestry is a rare-variant call**, and
+  §0's PPV argument applies to it: effectively **R3 for that person**, whatever this file's row says.
+  Reliability is a property of the assay *and* of the prior.
+
+So read every R grade as "R-grade in a population where this allele is common", and downgrade it when
+it is not. `risk-communication.md` §4 carries the portability arithmetic.
 
 **Evidence strength** — what the literature establishes:
 - **E1** Established, with an intervention tested in carriers.
@@ -206,6 +221,7 @@ Full treatment, including the callable-versus-not split and what to hand a presc
 | **NUDT15** | rs116855232 (*3) | E1 / R2 | Particularly important in East Asian ancestry; omitted from older panels |
 | **DPYD** | rs3918290 (*2A) and other no-function alleles | E1 / R2–R3 | Fluoropyrimidine toxicity. A *negative* result at one or two sites does **not** clear a person — several relevant alleles exist |
 | **CYP2D6** | rs3892097 and others are present on arrays | **E1 / R4 — do not call** | Deletions, duplications, CYP2D7 hybrids and a phasing requirement place the diplotype beyond array data (§0 anchor). Report the limitation, not a phenotype |
+| **RYR1 / CACNA1S** | — | E1 / R3 | **The highest-acuity pair in the skill, and the one the person cannot raise in the moment** — malignant-hyperthermia susceptibility with volatile anaesthetics and succinylcholine. Consumer arrays probe few of the relevant variants and call rare ones poorly, so a flag is a prompt for diagnostic testing and a **pre-operative** conversation, and a negative is not clearance (`pharmacogenomics.md` §4) |
 | **HLA-B** alleles (e.g. \*57:01, \*15:02) | — | E1 / R4 unless specifically typed | HLA typing is its own assay. Do not infer an HLA allele from array tag SNPs without validation evidence for that specific platform |
 
 ---
@@ -260,9 +276,23 @@ clinical-utility question has been revisited since
 Grade **E5 / R1** — the genotype is called reliably; the interpretation industry built on it is the
 problem. Report the guideline, not a methylfolate protocol.
 
-**"Detox", "methylation" and "mitochondrial" SNP panels.** Collections of variants with mechanistic
-stories and no carrier-specific intervention evidence. Grade E4 at best. The honest output is that
-no action follows.
+**And name the measurement, because this file's own pattern offers one where the MTHFR section
+otherwise stops at a refusal:** a **plasma homocysteine level** is the cheap, decisive test, and the
+guidance cited above makes exactly that substitution — measure the phenotype rather than genotyping
+the pathway. That is the same move as iron studies for HFE and an enzyme assay for G6PD. *(And see
+`interventions-evidence.md` §4 for what follows if it is raised: the homocysteine-lowering trials
+did not reduce myocardial infarction or mortality.)*
+
+**"Detox", "methylation", and mitochondrial *haplogroup* or "mito-optimisation" panels.**
+Collections of variants with mechanistic stories and no carrier-specific intervention evidence.
+Grade E4 at best. The honest output is that no action follows.
+
+**One exception, and it is not optional.** An earlier version of this item said "mitochondrial SNP
+panels" without qualification, which would file the single highest-consequence mitochondrial finding
+in the domain under "no action follows". **MT-RNR1 m.1555A>G is a genuine, guideline-level
+aminoglycoside contraindication causing irreversible hearing loss, and some consumer platforms do
+genotype mitochondrial sites** (`pharmacogenomics.md` §4); m.3243A>G is a second real variant. **A
+mitochondrial panel is Tier E by default, not by rule — check for MT-RNR1 before dismissing it.**
 
 **Vitamin D pathway variants.** Associations exist; the intervention question is whether genotype
 changes what to do, and the answer has not been established. A serum 25-OH-D measurement is cheap,
@@ -341,6 +371,35 @@ pharmacogenomic axis as well as a risk axis:
 
 *Treat the specifics as a live regulatory fact: name the mechanism and check the current labelling
 rather than quoting figures from this file (`pharmacogenomics.md` §4's rule).*
+
+### ε2 exists, and a section headed "in full" has to say so
+
+ε2 appeared nowhere in this section except inside the haplotype algebra, which leaves an ε2 carrier
+to infer their own result from a discussion of ε4. Two things to report:
+
+- **ε2 carriage is associated with *lower* Alzheimer's risk** than ε3/ε3. For someone who came
+  looking for an ε4 answer, that is the finding, and omitting it is its own kind of mis-report.
+- **ε2/ε2 has a lipid axis of its own.** It is the genotype underlying **familial
+  dysbetalipoproteinaemia** (type III hyperlipoproteinaemia): a severe mixed hyperlipidaemia with
+  premature atherosclerosis that responds well to lipid-lowering therapy. **Most ε2/ε2 people never
+  express it** — penetrance is low and generally needs a second metabolic hit — so this is a
+  *prompt*, not a diagnosis. Both defining SNPs are R1 and the script resolves ε2/ε2 directly.
+
+So APOE carries a **third axis**:
+
+- **Lipid axis — ε2/ε2 only: E2–E3 / R1.** The resolving action is a **fasting lipid panel**, which
+  is §2's "the genotype's value is prompting a *measurement*" pattern exactly — the same shape as
+  iron studies for HFE. §2 even names "a lipid panel for a lipid variant" without previously
+  connecting it to the one APOE genotype that fits.
+
+### When only one of the two sites is called
+
+**A single-site APOE call is not a partial answer; it is no answer.** rs7412 alone cannot distinguish
+ε4 from ε3, and rs429358 alone cannot distinguish ε2 from ε3 — which is why the haplotypes are
+defined jointly. If one site is a no-call, or absent from a variants-only VCF, **report the
+limitation rather than the likely diplotype.** The bundled script refuses here and says which site
+failed; the honest sentence is "your APOE could not be determined from this file, and here is why",
+not a hedged guess.
 
 This is also the variant most likely to be genuinely unwelcome news, which is why the
 `your-environment.md` question about what the person does *not* want surfaced is not a formality.
