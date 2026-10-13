@@ -42,6 +42,16 @@ it, and whether any action attaches — and the skill's Do-it stage 11 requires 
 for the numbers, resolved at analysis time. **If you find yourself wanting to quote an effect size
 from this file, that is the signal to go and get it from the literature instead.**
 
+**A returned URL proves an identifier EXISTS. It does not prove what the paper IS.** This
+distinction cost two citations in this skill, both withdrawn above and in
+`interventions-evidence.md`: a PMC ID returned as a bare `pmc.ncbi.nlm.nih.gov/articles/PMCxxxxxxx`
+link with **no title beside it**, which a later pass could not re-resolve; and an ID adjacent to a
+real one, cited for a paper that turns out to be reported entirely within its neighbour. So:
+
+> **Attach a specific claim only to a record whose TITLE was returned.** A bare URL supports "this
+> identifier resolves"; a returned title supports "this identifier is *that* paper". Adjacent
+> identifiers (…21 / …23) deserve particular suspicion, because that is what a guessed ID looks like.
+
 **Verified identifier form.** In practice **PMIDs and PMCIDs appear inside returned URLs routinely;
 bare DOIs almost never do.** So prefer a PMID or PMCID as the shipping identifier, and treat a DOI
 as verified only when it appears inside a publisher URL that was itself returned. A DOI quoted from
@@ -86,7 +96,7 @@ range with stated provenance beats both silence and invention.
 | A professional society has addressed consumer disease-risk testing directly | [PMID 33399428](https://pubmed.ncbi.nlm.nih.gov/33399428/) |
 | Third-party interpretation of DTC raw data carries its own burden of error | [PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/) |
 | DTC screening is limited for hereditary breast/ovarian cancer specifically | [PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/) |
-| Routine MTHFR polymorphism testing is advised against | [PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205) (practice guideline), amended by [PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351); concurring [PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/), [PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/) |
+| Routine MTHFR polymorphism testing is advised against | [PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205) (practice guideline), with the recommendation standing through a later addendum the society lists by title; **[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) is the correction notice *about* that addendum, not the addendum** — do not cite it as the amendment. Echoed by a call to action in the thrombosis literature ([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/), a single-author commentary — not a second society position), and the clinical-utility question has been revisited ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)) |
 | CYP2D6 cannot be called reliably from array data: pseudogene similarity, CYP2D7 hybrids, CNV, and a phasing requirement | [PMC5591463](https://pmc.ncbi.nlm.nih.gov/articles/PMC5591463/), [PMC7997805](https://pmc.ncbi.nlm.nih.gov/articles/PMC7997805/) (WGS-based calling), [PMC7398905](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7398905/) (callers disagree on structural variants), [PMC8881578](https://pmc.ncbi.nlm.nih.gov/articles/PMC8881578/) |
 | Polygenic scores derived in predominantly European-ancestry cohorts transfer poorly, and the decline is continuous along genetic distance rather than stepwise between labelled groups | [PMC6563838](https://pmc.ncbi.nlm.nih.gov/articles/PMC6563838/) (Martin 2019) and its preprint [bioRxiv 10.1101/441261](https://www.biorxiv.org/content/10.1101/441261); [PMC5384097](https://pmc.ncbi.nlm.nih.gov/articles/PMC5384097/) (Martin 2017); [PMC8764121](https://pmc.ncbi.nlm.nih.gov/articles/PMC8764121/) with correction [PMC8874215](https://pmc.ncbi.nlm.nih.gov/articles/PMC8874215/) (Privé 2022 — strongest design, one cohort for training and testing); [10.1038/s41586-023-06079-4](https://doi.org/10.1038/s41586-023-06079-4) (Ding 2023); [10.1038/s41467-019-11112-0](https://doi.org/10.1038/s41467-019-11112-0) (Duncan 2019). `risk-communication.md` §4 has the table. Cite the dispute over magnitude, not one side |
 | Family-ascertained penetrance exceeds population-based penetrance, with the gap narrowing in larger studies | [PMC2447846](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2447846/) (family-based; its title states the point), [PMID 11044354](https://pubmed.ncbi.nlm.nih.gov/11044354/) / [PMC2408797](https://pmc.ncbi.nlm.nih.gov/articles/PMC2408797/) (population-based), [PMID 25192939](https://pubmed.ncbi.nlm.nih.gov/25192939) (population screening), [PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695) |
@@ -231,11 +241,14 @@ Report these primarily to *correct* the interpretation the person has probably a
 **MTHFR C677T (rs1801133) and A1298C (rs1801131).** The single most over-interpreted pair in
 consumer genetics. A professional-society practice guideline advised against routine MTHFR
 polymorphism testing on the grounds of minimal clinical utility
-([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)); it was subsequently amended
-([PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351)) and the recommendation against testing
-stood through the amendment. Other professional bodies reached the same position
-([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)), and the clinical-utility question
-has been revisited since ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
+([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)); the recommendation stood through a later
+addendum, and **[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) is the correction notice
+about that addendum rather than the addendum itself** — an earlier version of this file cited the
+erratum as the amendment. The position is echoed by a call to action in the thrombosis literature
+([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)), **a single-author commentary, so
+"other professional bodies reached the same position" claimed more than that citation supports.** The
+clinical-utility question has been revisited since
+([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
 Grade **E5 / R1** — the genotype is called reliably; the interpretation industry built on it is the
 problem. Report the guideline, not a methylfolate protocol.
 

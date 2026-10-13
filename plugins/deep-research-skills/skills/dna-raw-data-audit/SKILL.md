@@ -10,12 +10,15 @@ description: >-
   or dosing. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   source: >-
-    Built from an eight-stream research pass with adversarial verification. Citations verified
-    against retrieved index records only, never a search tool's generated prose; the APOE
-    diplotype algebra and all arithmetic were recomputed by execution. See
-    references/variant-catalog.md for the verification standard and what was dropped.
+    Built from an eight-stream research pass, then re-audited by a perspective-diverse adversarial
+    pass that found defects in the shipped version and is the reason several claims here are
+    narrower than they were. Citations are verified against retrieved index records, never a
+    search tool's generated prose, and a claim attaches only to a record whose title was returned
+    — a bare URL proves an identifier exists, not what it is. All arithmetic was recomputed by
+    execution. See references/variant-catalog.md §0 for the standard, the anchored-figure
+    carve-out, and every citation withdrawn on re-check.
 ---
 
 # Digital DNA Agent — DNA raw-data audit
@@ -165,10 +168,14 @@ These are not hedges. Each exists because violating it causes a specific harm.
 
 - **No doses. Ever.** Not for a drug, not for a supplement, not for a peptide. Dosing is a
   prescriber's act informed by the whole person.
-- **No genotype-based recommendation of a drug, supplement, or peptide.** For peptides in
-  particular there is essentially no established gene-interaction evidence, so a genotype supplies
-  no basis for recommending one. This rail is what stops the skill becoming a genotype-flavoured
-  supplement storefront, which is its most likely failure mode.
+- **No genotype-based recommendation of a drug, supplement, or peptide.** The rail rests on
+  **non-actionability, not on absence of evidence** — "no peptide has gene-interaction evidence"
+  is false, and a rail resting on a false premise breaks on one counterexample. The accurate form:
+  **the peptides this market sells have no genotype indication**, and the peptides that *are*
+  genotype-selected are prescription drugs for rare monogenic disease a consumer array cannot
+  diagnose. This rail is what stops the skill becoming a genotype-flavoured supplement storefront,
+  which is its most likely failure mode. `references/interventions-evidence.md` §2 has the
+  counterexample and why it strengthens the rule.
 - **Confirmation before action** on any clinically significant finding, always stated.
 - **A variant of uncertain significance is not a finding to act on.** Report it as uncertain and
   leave it there.
@@ -225,9 +232,10 @@ common case — saying so is the correct, useful answer.
 
 **The most over-interpreted variant in consumer genetics is MTHFR**, and getting it right is a good
 test of whether a genetics tool is trustworthy. A professional-society practice guideline advised
-against routine MTHFR polymorphism testing on the grounds of minimal clinical utility; it was later
-amended, and the recommendation against testing stood through the amendment. Multiple other
-professional bodies reached the same position. `references/interventions-evidence.md` carries the
+against routine MTHFR polymorphism testing on the grounds of minimal clinical utility, and the
+recommendation stood through a later addendum. The position is echoed elsewhere in the literature —
+though by a commentary rather than by a second society, which is a distinction this skill got wrong
+once and now states carefully. `references/interventions-evidence.md` carries the
 resolved citations and what the evidence does and does not support.
 
 ## Common mistakes

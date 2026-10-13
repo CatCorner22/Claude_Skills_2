@@ -68,17 +68,36 @@ Anything frozen here would be wrong by the time someone read it.
 Nearly nothing clears both. The honest consequence:
 
 - **For peptides the genetic evidence is G4 for nearly all of them — and the rail must rest on
-  non-actionability, not on absence of evidence**, because "none at all" is overstated and a single
-  counterexample would otherwise appear to break it. The counterexample is real: **GLP1R rs6923761**
-  has reported, partially replicated gene–response data including pre-specified analyses within
-  randomised trials ([PMC6003833](https://pmc.ncbi.nlm.nih.gov/articles/PMC6003833),
-  [PMC9335902](https://pmc.ncbi.nlm.nih.gov/articles/PMC9335902/)). The findings are small,
-  inconsistent in direction across endpoints — better weight response in carriers in some analyses,
-  *worse* metabolic response in others — and nowhere near a guideline, so it grades **G2 at best and
-  is not clinically usable.** That is the honest shape: **evidence exists and still does not select
-  the drug.** A genotype therefore supplies no basis for recommending any peptide, which is what the
-  rail needs. This is what prevents the skill's most likely failure mode — becoming a
-  genotype-flavoured supplement and peptide storefront, which is what most of this market is.
+  non-actionability, not on absence of evidence**, because "none at all" is false and a single
+  counterexample would otherwise appear to break the rail.
+
+  **The weak candidate first, because reading it carefully is the lesson.** **GLP1R rs6923761** has
+  gene–response data: a pilot pharmacogenetics study found a genotype effect on **gastric emptying**
+  — a pharmacodynamic surrogate — with a *non-significant* difference in weight loss
+  ([PMC6003833](https://pmc.ncbi.nlm.nih.gov/articles/PMC6003833)), and a randomised pharmacogenomic
+  analysis found reduced percentage body fat at **p = 0.062**, not significant, with no significant
+  genotype association with weight
+  ([PMC9335902](https://pmc.ncbi.nlm.nih.gov/articles/PMC9335902/)). On the endpoint that matters,
+  then, the two are a surrogate hit and a borderline null: **G3 to weak G2, not replication** — and
+  the disagreement is on the *same* endpoint, not across different ones. An earlier version of this
+  file called it "reported and replicated", which those citations do not support.
+
+  **The decisive counterexample is a different drug, and naming it makes the rail stronger rather
+  than weaker.** **Setmelanotide** is a peptide whose approved indication is *gated on genotype*:
+  chronic weight management in obesity due to POMC, PCSK1 or LEPR deficiency, with the deficiency
+  established by an approved test, plus a Bardet–Biedl syndrome indication
+  ([approval announcement](https://www.biospace.com/rhythm-pharmaceuticals-announces-fda-approval-of-imcivree-setmelanotide-as-first-ever-therapy-for-chronic-weight-management-in-patients-with-obesity-due-to-pomc-pcsk1-or-lepr-deficiency)).
+  That is a label-level gene–intervention pair — **G1 by this file's own definition, for a peptide** —
+  and metreleptin for congenital leptin deficiency is a second. A rail resting on "no peptide has
+  gene-interaction evidence" would simply be false.
+
+  **So state it precisely.** The peptides this market sells have **no** genotype indication; the
+  peptides that *are* genotype-selected are prescription drugs for **rare monogenic disease a
+  consumer array cannot diagnose** — single-gene deficiencies needing clinical sequencing and expert
+  interpretation, not a tagged SNP. **For the peptides anyone is being sold, the genotype supplies no
+  basis at all**, and the exception shows the shape of the rule rather than breaking it. This is what
+  prevents the skill's most likely failure mode — becoming a genotype-flavoured supplement and
+  peptide storefront, which is what most of this market is.
 - **For supplements, it is G3 or G4 with narrow exceptions** (§4).
 - **For medicines, pharmacogenomics is the real G1 answer** (§3), and it routes to a prescriber.
 
@@ -144,11 +163,19 @@ expected outcome of testing many.
 **Then the MTHFR correction**, because it is the field's emblematic case and getting it right
 is a good test of whether a tool is trustworthy. A professional-society practice guideline advised
 against routine MTHFR polymorphism testing on minimal-clinical-utility grounds
-([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)), later amended
-([PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351)) with the recommendation against testing
-standing through the amendment; multiple other professional bodies concur
-([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)), and the clinical-utility question
-has been revisited ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
+([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)), with the recommendation standing through
+a later **addendum**, which the society lists by title on its own practice-resources page and which
+is **not** the same record as
+[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) — **that is a correction notice *about* the
+addendum.** An earlier version of this file cited the erratum as its evidence for what the addendum
+said, inside the paragraph it calls the field's emblematic case.
+
+The position is echoed in the thrombosis literature by a call to action arguing MTHFR should not form
+part of inherited-thrombophilia testing
+([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)) — **a single-author commentary, so
+"multiple professional bodies concur" overstated what that citation carries.** The clinical-utility
+question has also been revisited
+([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
 
 **The causal loop the MTHFR story depends on is also closed at the other end.** The story runs
 *variant → higher homocysteine → cardiovascular risk → so lower homocysteine*. But the
@@ -169,7 +196,7 @@ delivered without contempt, because they were sold this by people who sounded au
 | :--- | :--- | :--- |
 | **HFE** C282Y homozygous (confirmed) | Changes iron advice in the *opposite* direction to the default — avoid iron supplementation, and get iron studies. One of the few places a genotype genuinely redirects a supplement decision | G2 / T1 |
 | **G6PD** deficiency (confirmed) | A real avoidance list — specific drugs, and fava beans. Avoidance, not supplementation | G1 / T1 |
-| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it | G3 / T1 for the behaviour |
+| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it | **G2** / T1 for the behaviour — **regraded from G3:** this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which contradicted both the action in the cell beside it and `variant-catalog.md`'s own entry |
 | **MCM6/LCT** rs4988235 | Explains lactose intolerance — **in European ancestry only.** This variant tags the European lactase-persistence haplotype; independent persistence alleles exist elsewhere, so a "non-persistent" call outside that ancestry is frequently a **false negative**. Dietary choice follows symptoms, which the person already knows | G2 / T2 |
 | **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions: sensitivity is high but **not** 100%, so do not promise a perfect rule-out, and the test cannot be interpreted at all after a gluten-free diet has already started | G2 / T2, as a rule-out |
 | **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
@@ -196,12 +223,22 @@ assessment is structural: **grade the class, name what is actually established, 
 are approved medicines with large randomised trials — **T1, approved**. That is what real evidence
 for a peptide looks like, and every class below should be read against it; the gap is large.
 
-**But do not lump them, because their outcome evidence is not the same.** Semaglutide has a
-placebo-controlled cardiovascular-outcome trial reporting superiority on major adverse cardiovascular
-events; tirzepatide, at the time of writing, does not have an equivalent completed outcome trial.
-Both are approved and both are T1 for their licensed indications, **and only one of them supports a
-cardiovascular-benefit claim.** Check each drug's own outcome evidence rather than inheriting it from
-the class — this is the same error as inheriting a guideline across a gene–drug pair.
+**But do not lump them, because their outcome evidence is not the same *shape*** — which is the
+honest statement, and not the one an earlier version of this file made: that tirzepatide had no
+equivalent outcome trial. It does. Semaglutide has a placebo-controlled cardiovascular-outcome trial
+reporting superiority on major adverse cardiovascular events in a broad at-risk population.
+Tirzepatide's placebo-controlled hard-outcome evidence sits in a **specific** population —
+obesity-related heart failure with preserved ejection fraction, where the SUMMIT trial (n = 731)
+reported a reduction in the composite of cardiovascular death or worsening heart failure, driven by
+the heart-failure component
+([society trial summary](https://www.acc.org/Latest-in-Cardiology/Articles/2024/11/13/21/17/sat-959am-summit-aha-2024);
+*the primary publication's identifier did not resolve here, so the trial is named rather than cited
+with a reconstructed PMID*).
+
+**So both support a cardiovascular-benefit claim, and what differs is the population and the
+comparator.** Check each drug's own outcome evidence rather than inheriting it from the class — the
+same error as inheriting a guideline across a gene–drug pair, and one this paragraph committed while
+teaching against it.
 
 Their genetic evidence is **G2 at best and not usable** (§2): a genotype does not select them.
 
@@ -247,9 +284,15 @@ agonists, and shipping them as one line was an error worth naming.
 
 **Melanotan I/II** carries a specific, concrete concern about naevi that distinguishes it from the
 "unproven but probably inert" category: published case reports describe **eruptive naevi and
-darkening of pre-existing naevi after use**, in one report within 24 hours of a single injection
-([PMC3663356](https://pmc.ncbi.nlm.nih.gov/articles/PMC3663356);
-[10.2340/00015555-1130](https://medicaljournals.se/acta/download/10.2340/00015555-1130)). **State
+darkening of pre-existing naevi after use** — one of them titled for the finding, *"Eruptive naevi
+and darkening of preexisting naevi 24 h after a single mono-dose injection of melanotan II"*
+([repository record](https://research.uni-luebeck.de/en/publications/eruptive-naevi-and-darkening-of-preexisting-naevi-24-h-after-a-si/)),
+alongside a dermatology letter describing naevus and lentigo changes after self-injection
+([10.2340/00015555-1130](https://medicaljournals.se/acta/download/10.2340/00015555-1130)).
+**One identifier was withdrawn here:** an earlier version cited `PMC3663356` for the 24-hour detail.
+That ID appeared in a returned URL but with **no title beside it**, a re-check could not resolve it,
+and the specific detail belongs to the title-bearing record above. See §0 of `variant-catalog.md`:
+a bare URL proves an identifier exists, not what it is. **State
 what this evidence is and is not:** case reports establish temporal association, not causation — a
 melanoma report in this literature explicitly declined to claim a causal relationship. The honest
 version is that a drug which drives melanogenesis in people who are also tanning, with documented
@@ -262,8 +305,8 @@ randomised placebo-controlled trials behind it
 ([PMID 31893927](https://pubmed.ncbi.nlm.nih.gov/31893927/), whose title records the approval;
 [PMID 27181790](https://pubmed.ncbi.nlm.nih.gov/27181790/) dose-finding RCT;
 [PMID 31599847](https://pubmed.ncbi.nlm.nih.gov/31599847/) long-term extension;
-[PMC6819021](https://pmc.ncbi.nlm.nih.gov/articles/PMC6819021/) /
-[PMC6819023](https://pmc.ncbi.nlm.nih.gov/articles/PMC6819023/) phase 3). So it is **T1/T2 for its
+[PMC6819021](https://pmc.ncbi.nlm.nih.gov/articles/PMC6819021/), which reports **both** phase 3
+trials in one paper — so the adjacent ID an earlier version cited beside it was withdrawn). So it is **T1/T2 for its
 licensed indication, approved** — not a grey-market unknown, and an earlier version of this file
 misclassified it. **Two things follow, and the second is the one that matters:** the licensed
 indication is narrow and the published effect sizes are modest, and **material sold online as
