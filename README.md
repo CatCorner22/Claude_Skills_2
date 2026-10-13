@@ -22,14 +22,30 @@ fill in.
 
 ## Install
 
-**Working inside this repo?** `.claude/settings.json` registers this marketplace automatically
-once you trust the folder, and marks all 13 plugins enabled — Claude Code installs them or
-prompts you to on first open (accept, or run the install block once), after which every
-`/plugin:skill` invocation and trigger phrase works.
+**Working inside this repo? Run the bootstrap — nothing happens on its own.**
 
-**Anywhere else**, install globally (all 13 — post-consolidation the full library costs ~8.7% of
-a 200K context by this repo's estimate, so installing everything is a reasonable default; the
-profiles below are for the budget-minded):
+```
+bash scripts/bootstrap-plugins.sh                              # all 13
+bash scripts/bootstrap-plugins.sh deep-research-skills         # or just what you need
+```
+
+`.claude/settings.json` declares the marketplace and marks all 13 plugins enabled, and **that
+configuration is inert until the marketplace is registered.** Verified against a clean HOME: a
+fresh clone with those settings in place reports `No plugins installed`, so every skill in the
+library is *absent* from that session — not trimmed to a bare name, absent. Registering the
+marketplace is not sufficient either, because `enabledPlugins` does not trigger an install. The
+script does both halves, is idempotent, and verifies afterwards that the plugins are being read
+from your checkout rather than from a stale cache. *(An earlier version of this paragraph claimed
+the settings file installs the plugins or prompts you on first open. It does not, and that
+mistaken belief is how a session ends up unable to find any skill in this library.)*
+
+It registers **this checkout** as a directory marketplace, so there is no network dependency and
+what loads is the tree you are editing. The GitHub form below is for installing somewhere you have
+not cloned.
+
+**Anywhere else**, install globally. Run `python3 scripts/measure-listing-cost.py` for what the
+full set currently costs — and read the subset section below before defaulting to all 13, because
+the listing budget bites well before the context does:
 
 ```
 /plugin marketplace add CatCorner22/Claude_Skills_2
@@ -54,11 +70,20 @@ Installed skills are namespaced, e.g. `decision-science-skills:pre-mortem`. Type
 ### Install a subset — and there are named profiles
 
 **Install the plugins you will actually use, not all thirteen.** Every installed skill's `name` and
-`description` sit in the system prompt for the whole session, whether or not you use it. This
-repo's own estimate, from `python3 scripts/measure-listing-cost.py` across all 71 skills:
-**64,136 characters ≈ 17,334 tokens ≈ 8.7% of a 200K context** (tokens estimated at ~3.7
-chars/token; the harness's real tokenizer has historically run ~30% heavier than this estimate, so
-budget ~22.5K tokens ≈ 11%). Re-run the script after any description change.
+`description` sit in the system prompt for the whole session, whether or not you use it. Run
+`python3 scripts/measure-listing-cost.py` for the current figure rather than trusting one written
+down here — figures quoted in prose go stale silently, and this paragraph used to carry three that
+had (a skill count, a character total and a tokenizer correction factor whose cross-check no longer
+reproduces).
+
+**The binding limit is not the context window, it is the skill-listing budget** — about 8,000
+characters at the defaults. The full library overruns it, so most skills reach the session as a
+bare `- name` with no description and no trigger phrases, and **automatic matching cannot route to
+a trimmed skill.** It stays invocable by its full address (`/deep-research-skills:dna-raw-data-audit`),
+which is the reliable way to reach any skill regardless. Which skills survive trimming is not
+predictable: the order is by recent use, so two sessions on the same install keep different ones.
+`python3 scripts/simulate-listing-budget.py` shows the shape of it, but it under-predicts how many
+survive — use it comparatively, not as a promise.
 
 | Plugin | Skills | ~Tokens | % of 200K |
 |---|---|---|---|
@@ -84,7 +109,7 @@ listing slots, where a scattershot install decays everything equally.
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 |---|---|---|---|---|
 | Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,838 | 1.42% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 20 | 4,603 | 2.30% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 21 | 4,871 | 2.44% |
 | Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,368 | 1.68% |
 | Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,186 | 2.09% |
 
@@ -93,16 +118,21 @@ There is a second, sharper reason to subset, and it is worse than a round "~100 
 suggests. **The listing has a character budget**, and this library does not come close to fitting
 it. Read from the shipped CLI: the budget is
 `floor(context_tokens × 4 × skillListingBudgetFraction)`, which at the 200K/1% defaults is
-**8,000 characters**. Rendering all 71 skills with descriptions needs **64,136** — about 8× the
-budget. Under pressure every skill starts as a bare `- name` and is
-upgraded back to its full description only while budget remains, in **descending order of recent
-use** (`usageCount × max(0.5^(days/7), 0.1)`, so anything unused scores 0).
+**8,000 characters**, and rendering the whole library with descriptions needs roughly eight times
+that (`python3 scripts/measure-listing-cost.py` for today's figure). Under pressure every skill
+starts as a bare `- name` and is upgraded back to its full description only while budget remains,
+in **descending order of recent use** (`usageCount × max(0.5^(days/7), 0.1)`, so anything unused
+scores 0).
 
-Simulated against this library's real descriptions: at a default 200K session, **5 of 71 skills
-keep a description; 66 route on their bare name alone** (the consolidation nearly doubled
-survival — it was 3 of 121). At 1M it is 40 of 71, and a two-plugin profile install keeps
-essentially every description. `/plugin:skill` direct invocation still works throughout — it is
-description-matching that stops.
+**Measured in a real session on a full install: 22 skills kept a description and 52 arrived
+name-only.** Two sessions on the same library kept a *different* 22, which is the ordering doing
+exactly what it says — so the count is stable and the membership is not predictable at all.
+`scripts/simulate-listing-budget.py` models this, and **under-predicts by about four times** (it
+said 5 would survive where 22 did), so read it comparatively — how much worse a bigger install
+gets, how much a 1M context buys — and never as a promise about a particular skill. A two-plugin
+profile keeps essentially every description. `/plugin:skill` direct invocation works throughout —
+it is description-matching that stops, which is why a skill you rely on is worth invoking by its
+full address.
 
 The one piece of good news the mechanism gives you: because the ordering is usage-weighted, the
 skills you actually use keep their descriptions, so the worst case is a *first* session on a fresh
