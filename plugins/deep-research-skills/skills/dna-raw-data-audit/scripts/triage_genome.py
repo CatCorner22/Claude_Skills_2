@@ -1716,6 +1716,142 @@ def self_test() -> int:
               "NOT a negative result" in buf.getvalue())
 
         # ===================================================================================
+        # Controls for the ORIGINAL whole-genome patch's own features. The review's sharpest
+        # finding was that the suite shipped with that patch was decorative: four different wrong
+        # keep-unions, five of the seven counters, and every one of its disclosure warnings could
+        # be broken with the suite still green. These assertions are what make them load-bearing.
+        # ===================================================================================
+
+        ctl = os.path.join(td, "ctl.vcf")
+        with open(ctl, "w") as fh:
+            fh.write("##fileformat=VCFv4.2\n##reference=GRCh38\n")
+            fh.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\n")
+            fh.write("19\t44908684\trs429358\tT\tC\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")   # catalogued
+            fh.write("1\t100\trs90001\tA\tG\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")          # array-shared
+            fh.write("1\t200\trs90002\tA\tG\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")          # neither
+            fh.write("1\t300\trs90003\tA\t<NON_REF>\t.\t.\tEND=400\tGT:DP\t0/0:30\n")   # ref block
+            fh.write("1\t500\trs90004\tA\tG\t.\tPASS\tDP=0\tGT:DP\t0/1:0\n")            # zero depth
+            fh.write("1\t600\trs90005\tA\tG\t.\tPASS\t.\tGT\t./.\n")                    # no-call
+        ctl_arr = os.path.join(td, "ctl_arr.txt")
+        with open(ctl_arr, "w") as fh:
+            fh.write("# build 38\nrsid\tchromosome\tposition\tgenotype\n")
+            fh.write("rs90001\t1\t100\tAG\n")
+
+        # --- The keep-union is exactly (catalogue) ∪ (the other file's keys), no more, no less. ---
+        full = parse_vcf(ctl)
+        lean = parse_vcf(ctl, keep=set(CATALOG) | {"rs90001"})
+        check("keep-union retains the catalogued site", "rs429358" in lean["calls"])
+        check("keep-union retains the other file's site", "rs90001" in lean["calls"])
+        check("keep-union drops what neither file needs", "rs90002" not in lean["calls"])
+        check("restriction changes no genotype it keeps",
+              lean["calls"]["rs429358"]["geno"] == full["calls"]["rs429358"]["geno"])
+
+        # --- All SEVEN per-file counters are taken over the WHOLE file, not the retained subset. ---
+        for name in ("sites", "chrom_count", "rsid_records", "nocall", "ref_blocks",
+                     "zero_depth", "pos_matched"):
+            check(f"counter '{name}' is unchanged by the keep restriction",
+                  lean[name] == full[name])
+        check("counters actually counted something",
+              full["sites"] == 6 and full["ref_blocks"] == 1 and full["zero_depth"] == 1
+              and full["nocall"] == 1 and full["rsid_records"] == 6)
+        check("retention really was restricted", lean["retained"] < full["retained"])
+
+        # The checks above drive parse_vcf directly, so they cannot see a wrong union BUILT in
+        # report(). These go end to end, which is the control the review said was missing.
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([ctl], True, False)
+        e2e = json.loads(buf.getvalue())
+        check("end-to-end: the catalogue is still in report()'s keep-union",
+              e2e["catalog"]["rs429358"]["genotype"] is not None)
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([ctl_arr, ctl], True, False)
+        pair = json.loads(buf.getvalue())
+        check("end-to-end: the other file's sites are in report()'s keep-union",
+              pair["concordance"]["shared_sites"] >= 1
+              and pair["concordance"]["comparable_sites"] >= 1)
+
+        # `sites` must be the file's record count, never the retained count.
+        check("the 'sites' counter is the file's, not the retained subset's",
+              lean["sites"] == 6 and lean["retained"] < 6)
+
+        # read_header must STOP at the body. A concatenated or malformed file with a '##' line
+        # below the body would otherwise be read as declaring a build the report denies.
+        liar = os.path.join(td, "liar.vcf")
+        with open(liar, "w") as fh:
+            fh.write("##fileformat=VCFv4.2\n")
+            fh.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\n")
+            fh.write("19\t44908684\trs429358\tT\tC\t.\tPASS\t.\tGT\t0/1\n")
+            fh.write("##reference=GRCh37\n")          # below the body: must NOT be read
+        check("read_header does not read past the body",
+              detect_build(read_header(liar)) is None)
+
+        # --- An UNDECLARED build must disable positional keying, not merely a differing one. ---
+        nob_vcf = os.path.join(td, "nobuild.vcf")
+        with open(nob_vcf, "w") as fh:
+            fh.write("##fileformat=VCFv4.2\n")          # no reference line at all
+            fh.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\n")
+            fh.write("19\t45411941\t.\tT\tC\t.\tPASS\tDP=30\tGT:DP\t0/1:30\n")
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([p23, nob_vcf], True, True)
+        nb = json.loads(buf.getvalue())
+        check("an undeclared VCF build disables positional keying",
+              nb["files"][1]["records_keyed_by_position"] == 0)
+        check("an undeclared build is still blocking",
+              "genome build not declared" in nb["blocking"])
+
+        # --- The SNV-shape gate must reject a MIXED multi-allelic ALT, not just a pure indel. ---
+        mixed_key, mixed_how = _vcf_key("19", "45411941", ".", "T", "C,TA",
+                                        {("19", "45411941"): "rs429358"})
+        check("a mixed SNV+indel ALT is not keyed by position", mixed_how == "coordinate")
+        pure_key, pure_how = _vcf_key("19", "45411941", ".", "T", "C",
+                                      {("19", "45411941"): "rs429358"})
+        check("a clean SNV still IS keyed by position", pure_how == "position")
+        gv_key, gv_how = _vcf_key("19", "45411941", ".", "T", "C,<NON_REF>",
+                                  {("19", "45411941"): "rs429358"})
+        check("a gVCF SNV with <NON_REF> is still keyed by position", gv_how == "position")
+        star_key, star_how = _vcf_key("19", "45411941", ".", "T", "C,*",
+                                      {("19", "45411941"): "rs429358"})
+        check("a spanning-deletion ALT is not keyed by position", star_how == "coordinate")
+
+        # --- read_header must stop at the body AND collect only ##/#CHROM. ---
+        hdr = read_header(ctl)
+        check("read_header stops at the first body line", len(hdr) == 3)
+        check("read_header collects the #CHROM line", any(h.startswith("#CHROM") for h in hdr))
+        check("read_header agrees with parse_vcf's own header",
+              detect_build(hdr) == detect_build(parse_vcf(ctl)["header"]))
+
+        # --- vcf_keys(within=) is the two-whole-genome memory bound; it must actually bound. ---
+        allk = vcf_keys(ctl)
+        bounded = vcf_keys(ctl, within={"rs429358"})
+        check("vcf_keys(within=) returns only the intersection", bounded == {"rs429358"})
+        check("vcf_keys(within=) is strictly smaller than the full pass", len(bounded) < len(allk))
+
+        # --- Every disclosure warning the patch added needs a negative control. ---
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([ctl_arr, ctl], False, False)
+        disc = buf.getvalue()
+        for frag, why in (
+            ("records were held in memory", "the memory-restriction disclosure"),
+            ("reference-block record", "the reference-block disclosure"),
+            ("DP=0 and discarded", "the zero-depth disclosure"),
+        ):
+            check(f"disclosure present: {why}", frag in disc)
+        # ctl.vcf carries an END= block, so it is a gVCF; the variants-only disclosure is a
+        # property of a DIFFERENT file kind and has to be asserted against one.
+        check("a file with a reference block is not called variants-only",
+              parse_vcf(ctl)["vcf_kind"] == "gvcf-or-all-sites")
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            report([wide], False, False)
+        check("disclosure present: the variants-only absence-semantics disclosure",
+              "variants-only VCF" in buf.getvalue()
+              and parse_vcf(wide)["vcf_kind"] == "variants-only")
+
+        # ===================================================================================
         # Regressions from the adversarial review of the whole-genome patch. Each one shipped,
         # each was reproduced by execution, and each assertion below fails if the fix is reverted.
         # ===================================================================================
