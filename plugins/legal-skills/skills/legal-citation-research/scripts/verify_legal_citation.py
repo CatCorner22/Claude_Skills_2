@@ -40,8 +40,9 @@ Exit codes:
   0  every case citation VERIFIED, or no citation found by either parser after CourtListener
      was consulted
   1  at least one NOT FOUND, AMBIGUOUS or UNRECOGNIZED -- needs attention before filing
-  3  at least one UNVERIFIED -- the check could not be completed, including a text in which
-     nothing parsed locally and CourtListener was not consulted or did not answer
+  3  at least one UNVERIFIED -- the check could not be completed, including a document scan in
+     which no case citation parsed locally and CourtListener was not consulted or did not answer
+     (an explicit --cite input is exempt: the user named exactly what to check)
   2  input unreadable
   5  bad usage
 Stdlib only.
@@ -59,7 +60,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 ENDPOINT = "https://www.courtlistener.com/api/rest/v4/citation-lookup/"
 SITE = "https://www.courtlistener.com"
 USER_AGENT = "legal-citation-research/1.0 (citation verification; stdlib urllib)"
@@ -316,7 +317,11 @@ def _verdict(status, clusters, error_message) -> tuple[str, str]:
     return "UNVERIFIED", f"unexpected status {status!r} ({error_message or 'no message'})"
 
 
-def verify(text: str, tbl: dict, token: str | None, endpoint: str = ENDPOINT, offline: bool = False) -> dict:
+def verify(text: str, tbl: dict, token: str | None, endpoint: str = ENDPOINT, offline: bool = False,
+           document: bool = True) -> dict:
+    """`document` is True for a whole-text scan (a brief, a memo), where the local parser may have
+    missed a case citation and the absence of a remote check must not read as clean; it is False
+    for explicit `--cite` inputs, where the user named exactly what to check."""
     entries = parse_citations(text, tbl)
     cases = [e for e in entries if e["kind"] == "case"]
     mode = "offline" if offline else ("no-token" if not token else "live")
@@ -348,12 +353,20 @@ def verify(text: str, tbl: dict, token: str | None, endpoint: str = ENDPOINT, of
         reason = {"offline": "--offline", "no-token": "no COURTLISTENER_API_TOKEN"}.get(mode, failure)
         for e in cases:
             e["status"], e["detail"] = "UNVERIFIED", f"not checked: {reason}"
-        if not cases and text.strip():
-            # Nothing parsed locally and no remote parser ran: that is "could not verify", not
-            # "nothing to verify" -- a brief whose citations all fall outside the local table
-            # looks exactly like this, and it must not exit clean.
+        if document and not cases and text.strip():
+            # A document scan in which no case citation parsed locally and no remote parser ran:
+            # that is "could not verify", not "nothing to verify" -- a brief whose case citations
+            # all fall outside the local table looks exactly like this, and it must not exit clean.
+            # Explicit --cite inputs skip this: the user named exactly what to check.
+            if failure:
+                how = f"CourtListener was contacted but the lookup failed: {failure}"
+            else:
+                how = f"CourtListener was not consulted ({reason})"
+            others = [e for e in entries if e["kind"] != "case"]
+            tail = ("; the statute, regulation, rule or database citations listed above were "
+                    "classified, not verified" if others else "")
             remote_scan = {"status": "UNVERIFIED",
-                           "detail": f"no citation parsed locally and CourtListener was not consulted: {reason}"}
+                           "detail": f"no case citation parsed locally and {how}{tail}"}
     counts = {}
     for e in entries + extras:
         counts[e["status"]] = counts.get(e["status"], 0) + 1
@@ -622,6 +635,14 @@ def self_test() -> int:
         rep16 = verify("prose with no citations and no token", tbl, None, url)
         check("no token + nothing parsed locally -> UNVERIFIED (not consulted), exit 3, said in the output",
               exit_code(rep16) == 3 and "not consulted" in format_human(rep16, "x"))
+        check("a failed live request says 'contacted', never 'not consulted'",
+              "contacted" in rep13["remote_scan"]["detail"] and "not consulted" not in rep13["remote_scan"]["detail"])
+        rep18 = verify("see 42 U.S.C. § 1983 and nothing else", tbl, None, url, document=True)
+        check("document scan, statute only, no token -> sentinel says the statute was classified, not verified; exit 3",
+              exit_code(rep18) == 3 and "classified, not verified" in rep18["remote_scan"]["detail"]
+              and "no case citation" in rep18["remote_scan"]["detail"])
+        rep19 = verify("42 U.S.C. § 1983", tbl, None, url, document=False)
+        check("explicit --cite of a statute, offline/no token -> no sentinel, exit 0", rep19["remote_scan"] is None and exit_code(rep19) == 0)
         rep17 = verify("prose with no citations, consulted", tbl, "secret-token-abc", url)
         check("nothing found by either parser after CourtListener answered -> exit 0", exit_code(rep17) == 0)
         big = ("x" * 70_000) + " 678 F. Supp. 3d 443 and 999 F.3d 9999"
@@ -657,6 +678,9 @@ def self_test() -> int:
             check("--cite path: fabricated citation -> exit 1 and NOT FOUND printed", rc_cite == 1 and "NOT FOUND" in out)
             rc_none, _, _ = run([])
             check("no arguments -> exit 5", rc_none == 5)
+            rc_st, out_st, _ = run(["--cite", "42 U.S.C. § 1983", "--offline"])
+            check("--cite of a statute with --offline exits 0 and does not claim nothing was parsed",
+                  rc_st == 0 and "STATUTE" in out_st and "no case citation" not in out_st)
             rc_tf, _, err = run(["--cite", "1 U.S. 1", "--token-file", os.path.join(td, "nope")])
             check("missing --token-file -> exit 2", rc_tf == 2 and "token-file" in err)
     finally:
@@ -719,7 +743,7 @@ def main(argv: list[str]) -> int:
     except LookupFailure as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 2
-    rep = verify(text, tbl, token, args.endpoint, offline=args.offline)
+    rep = verify(text, tbl, token, args.endpoint, offline=args.offline, document=bool(args.file))
     if args.json:
         print(json.dumps({"source": source, **rep}, indent=2, ensure_ascii=False))
     else:

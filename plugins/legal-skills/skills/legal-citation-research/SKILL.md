@@ -174,8 +174,9 @@ own rather than in a cache you may not realise is disposable.
   CourtListener), UNVERIFIED (no token, no network, rate-limited, malformed reply, or a 200 with no
   decision attached — never a false VERIFIED). Every non-verified case citation prints the manual
   route. Exit 0 all verified (or nothing found by either parser after CourtListener answered), 1
-  any NOT FOUND / AMBIGUOUS / UNRECOGNIZED, 3 any UNVERIFIED — including a text in which nothing
-  parsed locally and CourtListener was not consulted — 2 unreadable input. The token is read from the environment or a file, is sent only as
+  any NOT FOUND / AMBIGUOUS / UNRECOGNIZED, 3 any UNVERIFIED — including a document scan in which
+  no case citation parsed locally and CourtListener was not consulted or did not answer — 2
+  unreadable input. The token is read from the environment or a file, is sent only as
   the `Authorization` header, and is never printed. `--self-test` runs the parser fixtures and a
   local mock of the endpoint, including a fabricated citation that must come back NOT FOUND, a
   rejected token, a dead network and a malformed reply, each of which must come back UNVERIFIED.
