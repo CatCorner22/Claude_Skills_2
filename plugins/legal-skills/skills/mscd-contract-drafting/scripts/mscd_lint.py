@@ -79,7 +79,7 @@ import sys
 import tempfile
 import zipfile
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 W_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
@@ -526,7 +526,7 @@ TIME_RULES = [
      "say whether the boundary dates are included", "flag"),
     (re.compile(rf"\bby\s+{DATE}\b"),
      "'no later than' -- 'by' leaves open whether the deadline day itself counts", "info"),
-    (re.compile(r"\bmidnight\b", re.I), "which day? state '11:59 p.m. on [date]' or '12:00 a.m. on [date]'", "flag"),
+    (re.compile(r"\bmidnight\b", re.I), "which of the day's two midnights? 'midnight at the end of [date]' or 'at the beginning of [date]', with the time zone", "flag"),
     (re.compile(r"\bbi-?(?:weekly|monthly|annual(?:ly)?)\b", re.I),
      "ambiguous (twice per period, or every two periods): state the interval in words", "flag"),
 ]
@@ -725,7 +725,8 @@ def rule_phrases(idx, text, ctx):
         out.append(_finding("MAY-NOT", "edit", idx, _snip(text, m),
                             "'shall not' for a prohibition; 'is not entitled to' / 'is not required to' "
                             "if the point is absence of discretion",
-                            "'may not' can mean either, and a court has to pick.", m.span()))
+                            "'may not' can mean a prohibition, the absence of a right, or a mere "
+                            "possibility ('might not'), and a court has to pick.", m.span()))
     for m in AND_OR_RE.finditer(text):
         out.append(_finding("AND-OR", "edit", idx, _snip(text, m),
                             "'A or B, or both' / 'one or more of A and B' -- state the combination you mean",
@@ -773,10 +774,11 @@ def rule_phrases(idx, text, ctx):
                                 "Plain words carry the same meaning with less reader effort.", m.span()))
     for m in INCLUDING_RE.finditer(text):
         out.append(_finding("INCLUDING", "edit", idx, _snip(text, m),
-                            "'including' -- and, once, an interpretation provision: '\"including\" "
-                            "means including without limitation'",
-                            "The tail is meant to defeat a restrictive reading (ejusdem generis); "
-                            "repeating it in every clause is clutter, and a drafter who omits it once "
+                            "'including' -- and where a restrictive reading would hurt, restructure so "
+                            "the general class stands on its own",
+                            "The tail is meant to defeat a restrictive reading (ejusdem generis), but "
+                            "courts have read 'including' restrictively with and without it, and an "
+                            "interpretation provision is no more reliable; omitting the tail once also "
                             "invites the inference that the omission meant something.", m.span()))
     for m in EFFORTS_RE.finditer(text):
         out.append(_finding("EFFORTS", "flag", idx, _snip(text, m),

@@ -29,7 +29,7 @@ label.
 | **Obligation on the subject** | a duty on the party that is the sentence's subject | *shall* (house alternative: *must*) | *Zenith shall deliver the report by …* | Replace *shall* with *has a duty to*: the sentence must still make sense |
 | **Obligation on another / requirement** | a duty whose subject is a thing, or a requirement that functions as a condition | *must* | *Any notice must be in writing.* *The Work must conform to the Specifications.* | Who actually does it is stated elsewhere, or the sentence is really a condition (§3) |
 | **Discretion** | grants a choice | *may*; *is entitled to* when the point is a right against someone | *Acme may terminate …* | Would *has the option to* fit? Then *may*, never *shall be entitled to* |
-| **Prohibition** | forbids | *shall not* (house: *must not*); *Neither party shall* | *Zenith shall not assign …* | *may not* is ambiguous between prohibition and absence of a right: avoid it |
+| **Prohibition** | forbids | *shall not* (house: *must not*); *Neither party shall* | *Zenith shall not assign …* | *may not* is ambiguous — prohibition, absence of a right, or possibility (*might not*): avoid it |
 | **Policy** | a rule of the contract with no actor | present tense; *will* for a future event | *This agreement terminates on …*; *"Fee" means …*; *Interest accrues at …* | The subject cannot have a duty, so *shall* is wrong |
 | **Declaration** | a fact a party asserts or accepts | *states that*; *acknowledges that* | *Acme states that it is duly organised …*; *Zenith acknowledges that the Fee is not refundable.* | Is it a fact at signing? Then it is not a duty, however it is worded |
 | **Belief** | what a party believes | *believes that* | rare; mostly in recitals | — |

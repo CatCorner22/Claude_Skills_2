@@ -26,7 +26,8 @@ happened.
 5. **Interviews.** Two people present; open questions; no promises of confidentiality beyond "as
    confidential as the process allows" — a blanket confidentiality instruction to non-supervisory
    employees can collide with their rights to discuss working conditions, and the Board's standard
-   has moved (ledger §2) [snippet-only]. Record each interview the same day. Ask each witness about
+   on confidentiality during an open investigation has moved more than once (ledger §2, the
+   *Apogee Retail* row) [background — verify]. Record each interview the same day. Ask each witness about
    retaliation and how to reach them.
 6. **Findings.** For each allegation: substantiated, not substantiated, inconclusive — with the
    evidence relied on and credibility reasoning (consistency, corroboration, motive, demeanour
@@ -75,7 +76,7 @@ Work every line before the meeting, and keep the worked checklist in the file.
 | Release scope | claims through the signing date; known and unknown claims with the state-required language where applicable (California Civil Code § 1542 waiver) [rule text]; no release of claims that cannot be released (unemployment, workers' compensation, vested benefits, future claims) | state law |
 | Carve-outs | the right to file an agency charge and participate in an investigation (with a waiver of monetary recovery where permitted); whistleblower rights and awards (SEC Rule 21F-17) [canon attribution]; rights to discuss working conditions (NLRA § 7) [rule text] | federal and state law |
 | OWBPA (age 40 and over) | plain language; written advice to consult a lawyer; 21 days to consider (45 for a group program, plus the written disclosure of the decisional unit, eligibility factors, job titles and ages); 7 days to revoke after signing; the release refers to the ADEA | 29 U.S.C. § 626(f) [rule text] |
-| Confidentiality and non-disparagement | narrow, with the carve-outs above; a broad clause for a non-supervisory employee is at risk under the Board's current position, which is under reconsideration (ledger §2) [snippet-only]; sexual-harassment pre-dispute NDAs limited by the Speak Out Act and state laws [canon attribution; background — verify] | NLRA; federal and state statutes |
+| Confidentiality and non-disparagement | narrow, with the carve-outs above; a broad clause for a non-supervisory employee is at risk under *McLaren Macomb*, which is under reconsideration before a Board majority able to overrule it (ledger §2) [snippet-only]; sexual-harassment pre-dispute NDAs limited by the Speak Out Act and state laws [canon attribution; background — verify] | NLRA; federal and state statutes |
 | Trade secrets | DTSA whistleblower-immunity notice if the agreement governs confidential information (18 U.S.C. § 1833(b)) [rule text] | DTSA |
 | No-rehire, cooperation, return of property, transition | state limits on no-rehire clauses in some states [background — verify]; cooperation clauses with reimbursement | state law |
 | Tax and Medicare | withholding on severance; reporting; Medicare secondary-payer reporting where a medical claim is released [background — verify] | IRS; CMS |

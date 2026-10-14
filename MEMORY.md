@@ -414,6 +414,17 @@ Never store secrets, credentials, account numbers, or client data here.
   de-duplication changed which rule "owned" a phrase, which turned a passing positive check into
   a false expectation. A surviving mutant means *add the test*; a newly failing check after a
   design change means *re-read the expectation*, not the code.
+- LESSON (2026-10-14, legal-skills review): **a ledger entry dated the day it was written can
+  already be stale, and the test that finds it is "check each status against its own check
+  date."** An adversarial reviewer briefed to verify figures found 13 defects; the four that
+  mattered were all *currency* errors in a file whose only job is currency (EEOC harassment
+  guidance rescinded Jan 2026, not "challenged"; NLRB majority seated Aug 2026, not "pending";
+  DOL contractor NPRM published Feb 2026, not "signalled"; PWFA rule partly vacated May 2025),
+  plus two MSCD rows that prescribed the practice Adams criticises (11:59 p.m. for midnight;
+  expire vs terminate). Each was corroborated by a second search before it was applied. Two
+  briefing rules follow: name the "test each dated status" step explicitly, and tell the
+  reviewer up front that when the primary layer is blocked no mark can be upgraded, only
+  contradicted. The author's own blog is the reachable source for MSCD positions.
 - PATTERN (2026-10-14): the "flag, don't cut" carve-outs from `adams-smart-brevity` translate
   cleanly into a linter as **rails** — paragraph-level vocabulary (indemnify, hold harmless,
   warranty, insurance, release; an all-caps run, a § reference) that downgrades every `edit` in
@@ -1507,6 +1518,8 @@ retraction of the previous pass's headline mechanism claim.
   of their target's triggers. `claude plugin eval` routing run (six cases, `--runs 1
   --ablation none`): **6/6 passed, overall score 1.0, $0.38, 132 s** — all three skills fired on
   task-worded prompts and none fired on its near-miss; the three `llm` rail graders passed.
+  Post-review follow-up commit applied 13 reviewer findings (4 ledger-currency, 2 MSCD, 7
+  citation/mark fixes), each re-checked by search first.
 - Not stored here on purpose: the employment-law moving parts (FTC non-compete rule removed from the
   CFR Feb 2026; FLSA 2024 threshold rule rescinded May 2026; NLRB precedents under GC
   reconsideration Aug 2026). Those are dated entries in the skill's own ledger file, where the

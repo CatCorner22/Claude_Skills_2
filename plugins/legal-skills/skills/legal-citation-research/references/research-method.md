@@ -29,8 +29,9 @@ memo says which authorities are binding and which are persuasive.
    ambiguous statute under *Chevron* [canon attribution]; an agency interpretation is persuasive to
    the extent it persuades, and the statute's text decides.
 4. **Caselaw**: the highest court of the jurisdiction, then its intermediate appellate courts, then
-   trial courts (not binding on other trial courts). Federal courts applying state law follow the
-   state's highest court and predict it where it has not spoken (*Erie*) [canon attribution].
+   trial courts (not binding on other trial courts). Federal courts applying state law apply the
+   state's substantive law (*Erie*), following its highest court and predicting its answer where it
+   has not spoken — the prediction duty comes from later cases, not *Erie* itself [canon attribution].
    Federal questions: the Supreme Court, then the circuit. Check the local rule on citing
    unpublished opinions.
 5. **Persuasive authority**: other jurisdictions (weight by similarity of statute and reasoning),

@@ -106,8 +106,9 @@ one name for both) and keep the naming consistent; one sentence incorporating th
 and exhibits are part of this agreement*) does the work that *attached hereto and incorporated
 herein by reference* repeats in every clause.
 
-**Internal rules of interpretation.** One short section if needed: what *including* means, that
-headings are for convenience, that the singular includes the plural. Keep it short; a long
+**Internal rules of interpretation.** One short section if needed: that headings are for
+convenience, that the singular includes the plural. An *including* provision is a weak cure for a
+restrictive reading (usages §1); restructure the clause instead. Keep it short; a long
 interpretation section creates arguments faster than it settles them.
 
 Linter: `XREF-DANGLING`, `XREF-VAGUE`, `SENTENCE` (tabulation hints), `INCLUDING`.
