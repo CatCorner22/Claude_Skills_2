@@ -19,7 +19,7 @@ Contents: §1 Hiring · §2 Classification · §3 Wage and hour · §4 Leave and
 | Job posting content: pay ranges, "no criminal history", age signals, citizenship | state and local pay-transparency laws [background — verify]; ban-the-box ordinances; ADEA; IRCA anti-discrimination (8 U.S.C. § 1324b) | which states and cities the role is posted in and their posting requirements | the posting, the requisition | multi-state postings; any citizenship-status requirement |
 | Background checks | FCRA: stand-alone disclosure and written authorization; pre-adverse-action notice with the report and the summary of rights, then adverse-action notice (15 U.S.C. § 1681b(b); the post-decision notice is § 1681m(a)) [rule text]; state and local fair-chance laws | the state's limits on what may be considered and when; the local fair-chance process | the disclosure form, the authorization, the vendor contract | any adverse decision based on a report; a fair-chance jurisdiction |
 | Drug and medical testing | ADA (medical exams only post-offer, 42 U.S.C. § 12112(d)) [rule text]; state drug-testing and cannabis laws [background — verify] | the state's rule on off-duty cannabis and on testing timing | the policy, the offer sequence | safety-sensitive roles; positive cannabis tests |
-| I-9 and work authorization | Form I-9 completed within three business days of the start of work (8 C.F.R. § 274a.2) [rule text]; E-Verify where required | the current form edition; state E-Verify mandates | the I-9 file, audit history | a notice of inspection; a mismatch letter |
+| I-9 and work authorization | Form I-9 has two deadlines: the employee completes Section 1 no later than the first day of employment, and the employer completes Section 2 within three business days after it (both by the first day if the job lasts fewer than three business days) (8 C.F.R. § 274a.2(b)(1)) [rule text]; E-Verify where required | the current form edition; state E-Verify mandates | the I-9 file, audit history | a notice of inspection; a mismatch letter |
 | Offer letters | at-will statement; no promises of duration or process; contingencies stated; state final-pay and commission rules | state wage-theft notice requirements (written notice of pay rate and payday) [background — verify] | the template | executive offers with equity or guaranteed terms |
 
 ## §2 Classification
@@ -135,7 +135,7 @@ The checklist is `investigation-and-termination-playbook.md` §2–§3.
 | EEOC charge | 180 days; 300 days in deferral states | 42 U.S.C. § 2000e-5(e)(1) [rule text] |
 | OWBPA consideration / revocation | 21 days (45 for a group program) / 7 days | 29 U.S.C. § 626(f) [rule text] |
 | WARN notice | 60 days before the closing or layoff | 29 U.S.C. § 2102 [rule text] |
-| I-9 completion | three business days from the start of work | 8 C.F.R. § 274a.2 [rule text] |
+| I-9, Section 1 / Section 2 | the employee's Section 1 by the first day of employment; the employer's Section 2 within three business days after it | 8 C.F.R. § 274a.2(b)(1) [rule text] |
 | FMLA eligibility and designation notices | five business days, generally, from the request or from enough information to know leave is FMLA-qualifying | 29 C.F.R. § 825.300 [rule text] |
 | COBRA election notice | plan administrator's notice window after the qualifying event | 29 U.S.C. § 1166; 29 C.F.R. § 2590.606-4 [rule text] |
 | Final pay | state-specific; immediately in some states for involuntary separations | state statute [background — verify] |

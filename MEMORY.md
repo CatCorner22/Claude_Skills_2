@@ -425,6 +425,19 @@ Never store secrets, credentials, account numbers, or client data here.
   briefing rules follow: name the "test each dated status" step explicitly, and tell the
   reviewer up front that when the primary layer is blocked no mark can be upgraded, only
   contradicted. The author's own blog is the reachable source for MSCD positions.
+- LESSON (2026-10-14, post-merge bot review of PR #59): **a bounded digit run (`\d{1,6}`)
+  without a digit fence silently truncates** — "2015 WL 2375225" came out as "2015 WL 237522",
+  a wrong identifier handed to the user as something to verify. Fence it (`\d{1,9}(?!\d)`) so an
+  over-long number fails to match rather than matching a prefix. Same family as the pinpoint
+  fence above: regexes that end in a quantified class need a boundary on the right.
+- RULE (2026-10-14): **a local pre-filter must never gate a remote check that has its own, broader
+  parser.** The verifier skipped CourtListener whenever its regex found no cases, so a brief whose
+  citations all fell outside the local reporter table came back "nothing to verify, exit 0" — a
+  false clean from the one component meant to catch what the local parser misses.
+- FACT (2026-10-14): this repository's review bot (`chatgpt-codex-connector`) posts P1/P2 inline
+  findings roughly twenty minutes after a push, which can be *after* the owner has merged (PR #59
+  merged 25 minutes after opening; the bot posted 6 minutes before the merge). Read a merged PR's
+  review threads anyway and carry real findings into a follow-up PR; two of its three were real.
 - PATTERN (2026-10-14): the "flag, don't cut" carve-outs from `adams-smart-brevity` translate
   cleanly into a linter as **rails** — paragraph-level vocabulary (indemnify, hold harmless,
   warranty, insurance, release; an all-caps run, a § reference) that downgrades every `edit` in
@@ -1520,6 +1533,9 @@ retraction of the previous pass's headline mechanism claim.
   task-worded prompts and none fired on its near-miss; the three `llm` rail graders passed.
   Post-review follow-up commit applied 13 reviewer findings (4 ledger-currency, 2 MSCD, 7
   citation/mark fixes), each re-checked by search first.
+  PR #59 merged at 13:46Z. The review bot's three post-push findings (I-9 two deadlines; the
+  empty-local-parse skip; digit truncation) went into a follow-up PR from a branch restarted on
+  `origin/main` (content diff against main proved the merge before the force-push).
 - Not stored here on purpose: the employment-law moving parts (FTC non-compete rule removed from the
   CFR Feb 2026; FLSA 2024 threshold rule rescinded May 2026; NLRB precedents under GC
   reconsideration Aug 2026). Those are dated entries in the skill's own ledger file, where the

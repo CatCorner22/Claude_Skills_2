@@ -26,7 +26,9 @@ WHAT THIS DOES
         400 -> UNRECOGNIZED  the reporter string was not recognised
         429 -> UNVERIFIED    rate-limited; retry later
      and anything else -- no token, transport failure, HTTP error, malformed JSON, a 200 with no
-     clusters -- is UNVERIFIED. Citations CourtListener finds that the parser missed are listed too.
+     clusters -- is UNVERIFIED. Citations CourtListener finds that the parser missed are listed too,
+     and the text is posted even when the local parser finds nothing, so a brief whose citations
+     all fall outside the local table still gets CourtListener's own parser.
   4. Prints the manual fallback for every citation that is not VERIFIED.
 
 WHAT THIS DELIBERATELY DOES NOT DO
@@ -55,7 +57,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 ENDPOINT = "https://www.courtlistener.com/api/rest/v4/citation-lookup/"
 SITE = "https://www.courtlistener.com"
 USER_AGENT = "legal-citation-research/1.0 (citation verification; stdlib urllib)"
@@ -110,7 +112,7 @@ def load_reporters(path: str = TABLE) -> dict:
     alternation = "|".join(parts)
     cite_re = re.compile(
         r"(?<![\w§/.-])(\d{1,4})\s+(" + alternation + r")\s+"
-        r"(\d{1,6}(?:-[A-Za-z0-9]+)?|_{2,}|—+|–+|-{2,})"
+        r"(\d{1,9}(?!\d)(?:-[A-Za-z0-9]+)?|_{2,}|—+|–+|-{2,})"
         r"(?:,\s*(?:at\s+)?(\d+(?:[-–]\d+)?)(?![\d\s,]*[A-Za-z]))?"
         r"(?:\s*\(([^()]*?\b((?:1[6-9]|20)\d{2})\b[^()]*)\))?")
     return {"editions": editions, "exact": exact, "compact": compact, "squash": squash, "re": cite_re}
@@ -317,9 +319,16 @@ def verify(text: str, tbl: dict, token: str | None, endpoint: str = ENDPOINT, of
     mode = "offline" if offline else ("no-token" if not token else "live")
     extras: list[dict] = []
     failure = None
-    if mode == "live" and cases:
-        chunks = [text] if len(text) <= MAX_TEXT and len(cases) <= MAX_CITES else [
-            "\n".join(e["cite"] for e in cases[i:i + MAX_CITES]) for i in range(0, len(cases), MAX_CITES)]
+    if mode == "live" and (cases or text.strip()):
+        # Post even when the local parser found nothing: CourtListener runs its own, broader
+        # parser, and a text whose citations all fall outside the local regex must not come back
+        # as "nothing to verify".
+        if len(text) <= MAX_TEXT and len(cases) <= MAX_CITES:
+            chunks = [text]
+        elif cases:
+            chunks = ["\n".join(e["cite"] for e in cases[i:i + MAX_CITES]) for i in range(0, len(cases), MAX_CITES)]
+        else:
+            chunks = [text[i:i + MAX_TEXT] for i in range(0, len(text), MAX_TEXT)]
         results: list = []
         for n, chunk in enumerate(chunks):
             if n:
@@ -459,6 +468,9 @@ def _mock_server():
             if "12 F.3d 34" in text:
                 out.append({"citation": "12 F.3d 34", "normalized_citations": ["12 F.3d 34"], "status": 200,
                             "error_message": "", "clusters": []})
+            if "EXTRA404" in text:
+                out.append({"citation": "6 Haw. 6", "normalized_citations": ["6 Haw. 6"], "status": 404,
+                            "error_message": "Citation not found", "clusters": []})
             if "EXTRA" in text:
                 out.append({"citation": "5 Haw. 5", "normalized_citations": ["5 Haw. 5"], "status": 200,
                             "error_message": "", "clusters": [{"id": 4, "case_name": "E v. F", "date_filed": "1850-01-01",
@@ -512,6 +524,11 @@ def self_test() -> int:
     check("slip placeholder page classified", "slip" in kinds and kinds["slip"]["page"] is None)
     check("statute digits are not re-parsed as a case ('42 U.S.C.' is not '42 U.S.')",
           not [e for e in ents if e["kind"] == "case"])
+    wl = [e for e in parse_citations("Bob v. Carol, 2015 WL 2375225 (N.D. Ill. May 18, 2015)", tbl) if e["kind"] == "database"]
+    check("a database identifier keeps all its digits ('2015 WL 2375225', not '237522')",
+          wl and wl[0]["cite"].startswith("2015 WL 2375225") and wl[0]["page"] == "2375225")
+    check("a page of more than nine digits is not truncated into a false citation",
+          not parse_citations("see 1 U.S. 1234567890 for nothing", tbl))
     dup = parse_citations("678 F. Supp. 3d 443 ... again 678 F. Supp. 3d 443 ... and 678 F.Supp.3d 443", tbl)
     check("duplicates collapse to one entry with a count", len(dup) == 1 and dup[0]["count"] == 3)
 
@@ -560,6 +577,15 @@ def self_test() -> int:
         rep8 = verify("EXTRA 678 F. Supp. 3d 443", tbl, "secret-token-abc", url)
         check("a citation CourtListener finds that the parser missed is reported as courtlistener-only",
               rep8["courtlistener_only"] and rep8["courtlistener_only"][0]["cite"] == "5 Haw. 5")
+        rep11 = verify("Plain prose with no reporter citation the local table knows. EXTRA", tbl, "secret-token-abc", url)
+        check("live mode still posts when the local parser finds no cases, and reports the API-only result",
+              rep11["mode"] == "live" and rep11["courtlistener_only"] and rep11["courtlistener_only"][0]["cite"] == "5 Haw. 5"
+              and rep11["counts"].get("VERIFIED") == 1)
+        rep12 = verify("More prose, nothing parsed locally. EXTRA404", tbl, "secret-token-abc", url)
+        check("an API-only NOT FOUND counts toward the exit code", rep12["counts"].get("NOT FOUND") == 1 and exit_code(rep12) == 1)
+        before2 = state["requests"]
+        verify("   ", tbl, "secret-token-abc", url)
+        check("blank text makes no request", state["requests"] == before2)
         big = ("x" * 70_000) + " 678 F. Supp. 3d 443 and 999 F.3d 9999"
         rep9 = verify(big, tbl, "secret-token-abc", url)
         check("oversize text is sent as citation strings, and still resolves",
