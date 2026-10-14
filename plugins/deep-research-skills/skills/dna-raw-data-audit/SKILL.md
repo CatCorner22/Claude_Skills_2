@@ -10,7 +10,7 @@ description: >-
   or dosing. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.5.1"
+  version: "1.6.0"
   source: >-
     Built from an eight-stream research pass, then re-audited by a perspective-diverse adversarial
     pass that found defects in the shipped version and is the reason several claims here are
@@ -397,16 +397,22 @@ ignored**, so confirm with `git check-ignore -v` before writing anything into it
   including the APOE ambiguity case and a regression assertion for each of those refusals.
   **It runs on a whole-genome file**: a retained VCF record costs 537 bytes (measured, linear), so
   a 4–6M-record call set would be 2–3 GB held whole; the parse retains only the keys anything
-  downstream reads and discloses the restriction, which puts a 5M-record VCF beside a 640k-site
-  array at 574 MiB. **Check the `ID` column before reading any finding list from a VCF.** A
+  downstream reads and discloses the restriction. Re-measure rather than quoting a figure — the
+  peak depends on how much of the array the VCF matches, and two whole-genome VCFs are the case
+  this does not solve. **Check the `ID` column before reading any finding list from a VCF.** A
   provider file with `ID` as `.` matches an rsID-keyed catalogue zero times, and that failure
-  presents as a person who carries nothing — so *nothing keyable* is a **blocking** condition
-  (exit 3, named in a `BLOCKING` section), alongside an undeclared build and a sample-identity
-  failure. Each means the audit did not happen, not that it came back clean. The fix is dbSNP
-  annotation; the fallback is keying by position from an array file's own rows, which the script
-  will do only within one declared build, only for SNV-shaped records, and never from a
-  coordinate asserted from memory. Identity and concordance compare exactly two files — hand it
-  three and it says that neither ran rather than printing a report that looks complete.
+  presents as a person who carries nothing. **Five conditions are blocking** (exit 3, named in a
+  `BLOCKING` section, decided where they occur rather than by searching the warning text): an
+  undeclared build, a sample-identity failure, nothing keyable, **no genotypes extracted at all**,
+  and **more than one sample in the file** — a trio VCF read as one person is a confident report
+  about the wrong human. Each means the audit did not happen, not that it came back clean. The fix
+  for an unannotated file is dbSNP annotation; the fallback is keying by position from an array
+  file's own rows, only within one declared build, only for SNV-shaped records, never from a
+  coordinate asserted from memory, and the result is refused if the observed alleles fall outside
+  the catalogue's own verified pair. **A coordinate is not an identifier:** `chrom:pos` keys are
+  excluded from the identity gate and the concordance rate unless both files declare the same
+  build, because comparing them across builds has both manufactured a false mix-up and let two
+  different people pass as one.
 - **Test reachability before relying on the citation verifier.** Where the scholarly resolvers are
   blocked — the normal case in this environment — it returns `ERROR: network unavailable` and
   verifies nothing. The operative standard is then `references/variant-catalog.md` §0: an

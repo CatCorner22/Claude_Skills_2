@@ -316,7 +316,7 @@ loudly (exit 2) rather than parsing garbage into plausible-looking findings.
 **Exit codes:** `0` parsed · `2` unreadable, empty, or unrecognised format · `3` **blocking** — the
 audit did not complete on the data as supplied · `5` bad usage.
 
-**The three blocking conditions**, each reported by name in a `BLOCKING` section and in the JSON's
+**The five blocking conditions**, each reported by name in a `BLOCKING` section and in the JSON's
 `blocking` array, because each one means *the audit did not happen* rather than *it came back clean*,
 and a caller reading only the exit status would otherwise conclude the opposite:
 
@@ -324,19 +324,52 @@ and a caller reading only the exit status would otherwise conclude the opposite:
 2. **Sample identity failure** — two people's data were about to be merged as one (§5).
 3. **Nothing keyable** — no rsIDs and no usable position map, so the file was never examined. Its
    catalogue rows say *unexamined*, not *negative*.
+4. **No genotypes extracted** — every record was a reference block, a `DP=0` line, a no-call, or
+   unkeyable. "Nothing was examined" is not only an unannotated ID column, and each of the other
+   routes to it used to exit 0 with a clean-looking empty report.
+5. **More than one sample in the file** — a trio or family VCF. Only the first sample column is
+   read, so an unflagged multi-sample file is a confident report about one person attributed to
+   another, and nothing in the output would look wrong.
+
+**These are decided where they occur, never by searching the warning text.** An earlier version
+derived them by substring-matching the warnings list — and every per-file warning begins with the
+file's path, so a file whose *name* contained "NO dbSNP rsIDs" forged a blocking condition that had
+not happened, including "sample identity failure" on a single file where the gate never ran.
 
 **It will run on a whole-genome file, and that took work.** A retained VCF record costs **537 bytes**,
 measured, and the cost is linear in record count: 500k records → 256 MiB, 1M → 512 MiB. A 30x
 whole-genome variant call set is 4–6M records, so holding it whole is 2–3 GB resident **before any
 interpretation** — on many machines, the difference between an audit and an OOM kill. Nothing
 downstream reads genotypes at arbitrary keys (the catalogue, the APOE pair, and the sites the other
-file genotypes are the whole demand), so the parse retains only that union and counts the rest.
-Measured end to end on synthetic HaplotypeCaller-shaped records: a 5M-record VCF alongside a
-640k-site array export peaks at **574 MiB in 45 s**, against ~3 GB unrestricted. The file-level
-counts (sites, no-calls, reference blocks, chromosomes) are still taken over every record, the
-restriction is disclosed in the warnings, and no reported figure changes. Two sequencing files get a
-**key-only prepass** — identifiers, not records — so the comparison costs the intersection rather
-than two genomes.
+file genotypes are the whole demand), so the parse retains only that union and counts the rest. The
+file-level counts (sites, no-calls, reference blocks, chromosomes) are still taken over every
+record, the restriction is disclosed in the warnings, and no reported figure changes.
+
+**The headline figure, re-measured, and the correction matters more than the number.** A 5M-record
+VCF alongside a 640k-site array export peaks at **~740 MiB in ~50 s** here. An earlier version of
+this paragraph said 574 MiB; an independent re-measurement got 877 MiB on the same code, and the
+figure moved again when the code changed. **It depends on how much of the array the VCF actually
+matches**, which varies by file, so treat it as an order of magnitude rather than a constant — and
+re-measure rather than quoting this sentence.
+
+**The array path is NOT restricted, and on two array files it is the dominant cost** — two 640k-site
+exports peak at ~700 MiB between them, more than the whole-genome file beside them. Records are
+dicts; nothing here is tuned for it.
+
+**Two whole-genome VCFs are the case this does not solve.** The key-only prepass holds identifiers
+rather than records, but for two files from the same person the intersection is most of a genome, so
+both are retained at it — an independent measurement put the pair near 5.7 GiB. Compare a
+sequencing file against an array, or subset first.
 
 **Identity and concordance compare exactly two files.** Hand it three and neither runs; the script
-says so in a warning rather than printing a report that looks complete. Re-run pairwise.
+parses and reports them all and says in a warning that no comparison was performed, rather than
+printing something that looks complete. *(That path used to be unreachable: the CLI rejected three
+files with a usage error, so the documented behaviour was dead code only the self-test could see.)*
+
+**A coordinate is not an identifier.** When a VCF carries no rsIDs and no position map applies, its
+records are keyed `chrom:pos` — and such a key names the same locus in two files **only if both
+declare the same build**. Those keys are therefore excluded from both the identity gate and the
+concordance rate unless the builds match, and the count excluded is reported. Comparing them across
+builds moved the identity verdict in both directions: it declared one person's two files a probable
+mix-up off 3,000 cross-build pairings, and it let two genuinely different people pass as "consistent
+with one person" by diluting a real disagreement below the threshold with junk.
