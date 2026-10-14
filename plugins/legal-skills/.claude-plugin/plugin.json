@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "legal-skills",
+  "description": "Legal drafting, research, and employment-law issue-spotting with Smart Brevity delivery: mscd-contract-drafting (Ken Adams's A Manual of Style for Contract Drafting applied as a deterministic linter plus a redline protocol — categories of contract language, shall discipline, defined terms, efforts, provisos, ambiguity — with flag-don't-cut rails for risk allocation and prescribed wording), legal-citation-research (research plan, authority hierarchy, no-fabricated-citation rail with offline citation parsing and CourtListener verification that fails to UNVERIFIED, never to a false verified), and employment-law-issues (HR issue-spotting across the employee lifecycle with the live-source verification discipline, because the thresholds move). Every memo, redline cover note, and issue list leads with the point and why it matters.",
+  "version": "0.1.0"
+}

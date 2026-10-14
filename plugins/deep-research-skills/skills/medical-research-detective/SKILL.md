@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.14.1"
+  version: "1.14.2"
 ---
 
 # Medical research detective
@@ -41,7 +41,10 @@ does not give doses. See `references/output-format.md` for the standing safety f
   is the video; this skill's object is the clinical question). Interpreting a personal genome raw
   data file — 23andMe, Nebula, a VCF — against the literature →
   `deep-research-skills:dna-raw-data-audit` (its object is the data file; bring its findings back
-  here when a clinical question follows). This skill owns the clinical side
+  here when a clinical question follows). Verifying *legal* citations — cases, statutes,
+  regulations — or researching a legal question → `legal-skills:legal-citation-research` (same
+  three-check discipline, different corpus: CourtListener rather than Crossref and PubMed; this
+  skill keeps "check this citation" for studies). This skill owns the clinical side
   throughout: symptoms, drug and nutrient interactions, a literature case file. Diagnosis, dosing,
   or "what should I take" → that is a clinician's job; this skill reframes the question into research
   plus questions to ask them. An emergency → stop and use the red-flag list in

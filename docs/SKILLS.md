@@ -1,6 +1,6 @@
 # Skills Library — trigger & capability catalog
 
-Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **74 skills across 13 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
+Auto-generated from every skill's `SKILL.md` frontmatter by `scripts/gen-catalog.py`. **77 skills across 14 plugins.** For the quick when-to-use router, see [INDEX.md](INDEX.md).
 
 ## How to trigger a skill
 
@@ -35,6 +35,7 @@ Install only the plugins you want; each is independent. Skills are namespaced `<
 - [`collaboration-skills`](#collaboration-skills) (2) — Two collaboration instruments that earn their slots: disarming-elicitation (the FBI counter-elicitation stance inverted for willing experts, with the scoped-promise and investigation rails) and meeting-design (decisions extracted as owner-and-date read-backs, not vibes).
 - [`math-foundations-skills`](#math-foundations-skills) (1) — Unit conversion and dimensional analysis — the factor-label method, unit checks as a necessary-not-sufficient guard on every formula, and the unit-driven catch for formula rearrangement errors. The broader basic-math set is archived; this is the one that catches real errors models and humans both make.
 - [`decision-science-skills`](#decision-science-skills) (10) — Decision discipline under uncertainty: pre-mortem (with the counsel rail), tabletop wargaming and no-win drills under full exercise control, weak-signal navigation with cue-graded confidence, Bayesian updating via natural frequencies, reference-class forecasting, competing hypotheses analysis, minority-report dissent capture, the Rashomon-effect protocol for conflicting recollections, and The Challenger.
+- [`legal-skills`](#legal-skills) (3) — Legal drafting, research, and employment-law issue-spotting with Smart Brevity delivery: mscd-contract-drafting (Ken Adams's A Manual of Style for Contract Drafting applied as a deterministic linter plus a redline protocol — categories of contract language, shall discipline, defined terms, efforts, provisos, ambiguity — with flag-don't-cut rails for risk allocation and prescribed wording), legal-citation-research (research plan, authority hierarchy, no-fabricated-citation rail with offline citation parsing and CourtListener verification that fails to UNVERIFIED, never to a false verified), and employment-law-issues (HR issue-spotting across the employee lifecycle with the live-source verification discipline, because the thresholds move). Every memo, redline cover note, and issue list leads with the point and why it matters.
 
 ## `data-analytics-bi-skills`
 
@@ -504,13 +505,13 @@ Install: `/plugin install writing-skills@treasury-analyst-skills`
 
 **What it does:** Writes and edits to Ken Adams clarity principles at a 5th-grade reading level, falling back to 8th grade only when precision demands it — short active sentences, everyday concrete words, one idea per sentence, technical terms explained in place, and a hard rejection of litigated "tested language," archaisms, doublets, and ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by name, or wants plain English, patient or client materials, easy-read text, or writing for low-literacy audiences.
 
-**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `plain language`, `5th grade reading level`, `easy to read`, `easy-read`, `make this easier to read`, `simplify this letter`, `accessible language`, `patient materials`, `low literacy`, `simplest accurate version`
+**Triggers:** `adams plain grade`, `plain grade`, `plain english`, `plain language`, `5th grade reading level`, `easy to read`, `easy-read`, `make this easier to read`, `simplify this letter`, `accessible language`, `patient materials`, `low literacy`, `simplest accurate version. Not for contract clause drafting → legal-skills:mscd-contract-drafting`
 
 ### `writing-skills:adams-smart-brevity`
 
 **Invoke:** `/writing-skills:adams-smart-brevity` — or just describe the task.
 
-**What it does:** Applies Ken Adams clarity principles plus Axios Smart Brevity to technical, legal, professional, clinical, and documentation writing — rejects the "tested language" myth (litigated language is bad language), eliminates archaisms, doublets, ambiguity, and lawyerisms, and structures everything for scanning: the one most important point first, "why it matters" second, short active sentences, bullets and bold, nothing non-essential. Use for drafting, editing, or reviewing documents, contract language, clinical notes, emails, report writing, code comments, or any request for clear, brief, precise, or litigation-resistant language.
+**What it does:** Applies Ken Adams clarity principles plus Axios Smart Brevity to technical, legal, professional, clinical, and documentation writing — rejects the "tested language" myth (litigated language is bad language), eliminates archaisms, doublets, ambiguity, and lawyerisms, and structures everything for scanning: the one most important point first, "why it matters" second, short active sentences, bullets and bold, nothing non-essential. Use for drafting, editing, or reviewing documents, contract language, clinical notes, emails, report writing, code comments, or any request for clear, brief, precise, or litigation-resistant language. Not for drafting or redlining a contract to MSCD → legal-skills:mscd-contract-drafting.
 
 **Triggers:** `smart brevity`, `adams smart brevity`, `writing review`, `language review`, `edit for clarity`, `brevity`, `drafting`, `clear and precise`, `litigation-resistant`, `contract language`, `clinical note language`, `ambiguity check`, `tighten this email`, `report writing`
 
@@ -705,4 +706,34 @@ Install: `/plugin install decision-science-skills@treasury-analyst-skills`
 **What it does:** Estimates a current position or state when the usual instrument — a dashboard, tracker, status report, or data feed — is down, stale, or untrusted, by fusing many weak independent cues (last known-good state, scheduled events that must have fired, historical rhythms, side channels, absence of expected noise) into a continuously re-estimated belief with a stated confidence band; narrates which cue the position leans on hardest, updates as cues arrive, and defines what will confirm or deny the belief when the instruments return (the method of Polynesian/Micronesian wayfinding and etak — Hokule'a, Mau Piailug, Hutchins' distributed-cognition analysis). Use when a decision needs the position anyway and the authoritative number is missing or disbelieved.
 
 **Triggers:** `wayfinding`, `weak signals`, `estimate blind`, `the dashboard is down`, `I don't trust this number`, `navigate without instruments`, `what would we expect to see`, `position without the data`, `dead reckoning`
+
+## `legal-skills`
+
+Legal drafting, research, and employment-law issue-spotting with Smart Brevity delivery: mscd-contract-drafting (Ken Adams's A Manual of Style for Contract Drafting applied as a deterministic linter plus a redline protocol — categories of contract language, shall discipline, defined terms, efforts, provisos, ambiguity — with flag-don't-cut rails for risk allocation and prescribed wording), legal-citation-research (research plan, authority hierarchy, no-fabricated-citation rail with offline citation parsing and CourtListener verification that fails to UNVERIFIED, never to a false verified), and employment-law-issues (HR issue-spotting across the employee lifecycle with the live-source verification discipline, because the thresholds move). Every memo, redline cover note, and issue list leads with the point and why it matters.
+
+Install: `/plugin install legal-skills@treasury-analyst-skills`
+
+### `legal-skills:employment-law-issues`
+
+**Invoke:** `/legal-skills:employment-law-issues` — or just describe the task.
+
+**What it does:** Spots and organizes employment-law and HR issues across the employee lifecycle — hiring and background checks, contractor and exempt classification, wage and hour, leave and accommodation, discrimination and harassment, discipline and investigations, termination and severance, restrictive covenants, handbooks, multi-state and remote work — and turns each into what to verify in the live source, because thresholds and agency positions move. Delivers a Smart Brevity issue list: exposure first, why it matters, do now, what needs counsel. Use for an HR question, reviewing an employment agreement, a release or a handbook, an investigation, or a termination. Not for resumes, interviews or job-search coaching.
+
+**Triggers:** `employment law`, `HR issue`, `employee handbook`, `severance agreement`, `non-compete`, `exempt or non-exempt`, `FMLA`, `ADA accommodation`, `wrongful termination`, `workplace investigation`, `independent contractor`, `overtime`, `harassment complaint`, `performance improvement plan`
+
+### `legal-skills:legal-citation-research`
+
+**Invoke:** `/legal-skills:legal-citation-research` — or just describe the task.
+
+**What it does:** Plans and runs legal research with a verification ledger — frames the question, maps binding versus persuasive authority, searches statute, regulation, caselaw and secondary sources in order, reads holdings not headnotes, checks subsequent history and currency, and verifies every citation before it is cited, because a fabricated citation is sanctionable (Mata v. Avianca). Ships a verifier that parses citations offline and checks CourtListener, reporting UNVERIFIED rather than guessing. Delivers Smart Brevity memos: answer first, confidence, authorities, gaps. Use for a legal question, a research memo, checking the citations in a brief, or finding the current rule. Not for medical or scientific literature → deep-research-skills:medical-research-detective.
+
+**Triggers:** `legal research`, `research memo`, `find case law`, `is this citation real`, `verify these citations`, `check the cites in this brief`, `good law`, `statute lookup`, `what does the law say`, `legal authority`, `CourtListener`
+
+### `legal-skills:mscd-contract-drafting`
+
+**Invoke:** `/legal-skills:mscd-contract-drafting` — or just describe the task.
+
+**What it does:** Drafts, reviews and redlines contract language to Ken Adams's A Manual of Style for Contract Drafting (MSCD) — the categories of contract language (shall only for a party's duty, present tense for policy, may for discretion), defined terms, efforts standards, provisos, "including", numbers and time periods — and delivers every edit as a Smart Brevity redline note: what changed, why it matters, what needs a lawyer's call. Ships a linter that keys findings to sections and never cuts risk-allocation or prescribed wording. Use for drafting a clause, redlining or reviewing an agreement, converting a template to MSCD style, or explaining why a clause is ambiguous. Not for memos or emails → writing-skills:adams-smart-brevity.
+
+**Triggers:** `MSCD`, `Ken Adams`, `contract drafting`, `redline this agreement`, `review this contract`, `draft a clause`, `shall vs must`, `categories of contract language`, `defined terms`, `contract style guide`, `lint this contract`, `plain-language contract`
 

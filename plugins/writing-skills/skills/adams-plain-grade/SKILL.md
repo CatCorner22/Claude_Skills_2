@@ -10,9 +10,9 @@ description: >-
   low-literacy audiences. Triggers: adams plain grade, plain grade, plain english, plain
   language, 5th grade reading level, easy to read, easy-read, make this easier to read,
   simplify this letter, accessible language, patient materials, low literacy, simplest
-  accurate version.
+  accurate version. Not for contract clause drafting → legal-skills:mscd-contract-drafting.
 metadata:
-  version: "1.6.1"
+  version: "1.7.0"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search
@@ -32,8 +32,9 @@ version that still keeps the exact meaning.
 - Rewriting dense prose down to an accessible grade without losing exact meaning.
 - Not for: professional, technical, or internal writing where the audience handles jargon →
   `writing-skills:adams-smart-brevity` (the companion skill; both share the same Adams
-  core). Precision contract drafting or clause review → also
-  `writing-skills:adams-smart-brevity` — the grade targets here don't apply there.
+  core). Precision contract drafting or clause review → `legal-skills:mscd-contract-drafting`
+  (the MSCD system, with `writing-skills:adams-smart-brevity` for the carve-outs) — the grade
+  targets here don't apply there; this skill writes the client's plain paragraph afterwards.
 - Not for: designing *what* an explanation must accomplish (audience model, entry analogy,
   teach-back) → `writing-skills:explanation-design`; that skill decides what the words must
   do, this one brings the words down to grade.

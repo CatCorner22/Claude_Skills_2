@@ -9,8 +9,8 @@ install. A skill is always reachable by its full address (`/deep-research-skills
 once installed, even when the listing budget has trimmed its description away.
 
 This repo is the `treasury-analyst-skills` plugin marketplace (the name is kept for install
-compatibility; the active library is general-use and career-portable — 100+ skills across the
-active plugins, with the finance/Oracle/treasury domain plugins preserved in `archive/`, see
+compatibility; the active library is general-use and career-portable — the current skill and
+plugin counts are in `README.md`; the finance/Oracle/treasury domain plugins are gone, see
 `archive/README.md`). Authoring standard:
 `plugins/coding-agent-skills/skills/writing-agent-skills/SKILL.md` — read it before creating or
 editing any skill. Validate with `bash scripts/validate.sh` and regenerate `docs/SKILLS.md` +

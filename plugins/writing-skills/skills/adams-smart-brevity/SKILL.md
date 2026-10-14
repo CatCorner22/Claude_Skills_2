@@ -8,12 +8,13 @@ description: >-
   "why it matters" second, short active sentences, bullets and bold, nothing non-essential.
   Use for drafting, editing, or reviewing documents, contract language, clinical notes,
   emails, report writing, code comments, or any request for clear, brief, precise, or
-  litigation-resistant language. Triggers: smart brevity, adams smart brevity, writing
+  litigation-resistant language. Not for drafting or redlining a contract to MSCD →
+  legal-skills:mscd-contract-drafting. Triggers: smart brevity, adams smart brevity, writing
   review, language review, edit for clarity, brevity, drafting, clear and precise,
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.5.1"
+  version: "1.6.0"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -37,6 +38,11 @@ governs document-level attention (lead with the point, format for scanning, stop
   (amend, never edit) that apply before any editing begins.
 - Not for: audiences that need the most accessible register (patients, low-literacy, "plain
   English") → `writing-skills:adams-plain-grade` (same Adams core, 5th-grade target).
+- Not for: drafting, reviewing or redlining a contract to *A Manual of Style for Contract
+  Drafting* — the categories of contract language, defined terms, efforts standards, provisos
+  and the section-keyed linter → `legal-skills:mscd-contract-drafting`. This skill's contract
+  table (reference §3) is the short form; that skill is the full system, and it adopts this
+  skill's §3b map of where the bar disagrees and the two carve-outs in step 4 as its rails.
   Building a master prompt end to end → the archived `coding-agent-skills:master-prompt-architect`
   (whose Adams compliance audit this skill reinforces when both apply).
 
