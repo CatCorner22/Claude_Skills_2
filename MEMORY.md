@@ -438,6 +438,13 @@ Never store secrets, credentials, account numbers, or client data here.
   findings roughly twenty minutes after a push, which can be *after* the owner has merged (PR #59
   merged 25 minutes after opening; the bot posted 6 minutes before the merge). Read a merged PR's
   review threads anyway and carry real findings into a follow-up PR; two of its three were real.
+- LESSON (2026-10-14, PR #60 bot review): **a fix that opens a new success path opens a new
+  failure path, and the harness only kills what the fixtures reach.** Making the verifier post
+  to CourtListener on an empty local parse was right; it also created a path where the remote
+  call's failure (429, bad token, dead network) marked nothing UNVERIFIED — `cases` was empty —
+  and exited 0, and a path where an API-only 400 was discarded. Both survived a 27/27 mutation
+  run because no fixture walked the new path. When adding a branch, add its failure fixture in
+  the same commit, and re-ask "what would make this exit clean while blind?"
 - PATTERN (2026-10-14): the "flag, don't cut" carve-outs from `adams-smart-brevity` translate
   cleanly into a linter as **rails** — paragraph-level vocabulary (indemnify, hold harmless,
   warranty, insurance, release; an all-caps run, a § reference) that downgrades every `edit` in
@@ -1536,6 +1543,8 @@ retraction of the previous pass's headline mechanism claim.
   PR #59 merged at 13:46Z. The review bot's three post-push findings (I-9 two deadlines; the
   empty-local-parse skip; digit truncation) went into a follow-up PR from a branch restarted on
   `origin/main` (content diff against main proved the merge before the force-push).
+  PR #60 merged at 14:49Z; its two bot findings (remote-only failure exits clean; API-only 400
+  dropped) fixed in a third PR with the failure fixtures the harness had been missing.
 - Not stored here on purpose: the employment-law moving parts (FTC non-compete rule removed from the
   CFR Feb 2026; FLSA 2024 threshold rule rescinded May 2026; NLRB precedents under GC
   reconsideration Aug 2026). Those are dated entries in the skill's own ledger file, where the
