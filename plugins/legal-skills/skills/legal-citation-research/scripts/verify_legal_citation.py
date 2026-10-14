@@ -37,9 +37,11 @@ WHAT THIS DELIBERATELY DOES NOT DO
   resolves to a real decision; that is all. Those further checks are the skill's steps.
 
 Exit codes:
-  0  every case citation VERIFIED (or nothing to verify)
+  0  every case citation VERIFIED, or no citation found by either parser after CourtListener
+     was consulted
   1  at least one NOT FOUND, AMBIGUOUS or UNRECOGNIZED -- needs attention before filing
-  3  at least one UNVERIFIED -- the check could not be completed
+  3  at least one UNVERIFIED -- the check could not be completed, including a text in which
+     nothing parsed locally and CourtListener was not consulted or did not answer
   2  input unreadable
   5  bad usage
 Stdlib only.
@@ -57,7 +59,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 ENDPOINT = "https://www.courtlistener.com/api/rest/v4/citation-lookup/"
 SITE = "https://www.courtlistener.com"
 USER_AGENT = "legal-citation-research/1.0 (citation verification; stdlib urllib)"
@@ -276,9 +278,10 @@ def apply_results(entries: list[dict], results: list) -> list[dict]:
         clusters = res.get("clusters") or []
         verdict, detail = _verdict(status, clusters, res.get("error_message"))
         if e is None:
-            if verdict == "VERIFIED" or status in (300, 404):
-                extras.append({"kind": "case", "cite": str(res.get("citation") or "?"), "status": verdict,
-                               "detail": detail, "count": 0, "found_by": "courtlistener-only"})
+            # Keep every unmatched result, whatever its status: an UNRECOGNIZED or UNVERIFIED
+            # citation that only CourtListener saw is exactly the one the exit code must carry.
+            extras.append({"kind": "case", "cite": str(res.get("citation") or "?"), "status": verdict,
+                           "detail": detail, "count": 0, "found_by": "courtlistener-only"})
             continue
         if e.get("status") in (None, "UNVERIFIED"):
             e["status"], e["detail"] = verdict, detail
@@ -340,15 +343,25 @@ def verify(text: str, tbl: dict, token: str | None, endpoint: str = ENDPOINT, of
                 break
         if failure is None:
             extras = apply_results(entries, results)
+    remote_scan = None
     if mode != "live" or failure:
         reason = {"offline": "--offline", "no-token": "no COURTLISTENER_API_TOKEN"}.get(mode, failure)
         for e in cases:
             e["status"], e["detail"] = "UNVERIFIED", f"not checked: {reason}"
+        if not cases and text.strip():
+            # Nothing parsed locally and no remote parser ran: that is "could not verify", not
+            # "nothing to verify" -- a brief whose citations all fall outside the local table
+            # looks exactly like this, and it must not exit clean.
+            remote_scan = {"status": "UNVERIFIED",
+                           "detail": f"no citation parsed locally and CourtListener was not consulted: {reason}"}
     counts = {}
     for e in entries + extras:
         counts[e["status"]] = counts.get(e["status"], 0) + 1
+    if remote_scan:
+        counts["UNVERIFIED"] = counts.get("UNVERIFIED", 0) + 1
     return {"version": __version__, "mode": mode, "endpoint": endpoint if mode == "live" else None,
-            "failure": failure, "citations": entries, "courtlistener_only": extras, "counts": counts}
+            "failure": failure, "citations": entries, "courtlistener_only": extras,
+            "remote_scan": remote_scan, "counts": counts}
 
 
 def exit_code(rep: dict) -> int:
@@ -386,6 +399,11 @@ def format_human(rep: dict, source: str) -> str:
         L.append(line)
     for e in rep["courtlistener_only"]:
         L.append(f"  {e['status']:<{width}} {e['cite']}  -- found by CourtListener only (the parser missed it): {e['detail']}")
+        if e["status"] != "VERIFIED":
+            L.append(f"{'':{width + 3}}{FALLBACK}")
+    if rep.get("remote_scan"):
+        L.append(f"  {'UNVERIFIED':<{width}} (the whole text)  -- {rep['remote_scan']['detail']}")
+        L.append(f"{'':{width + 3}}{FALLBACK}")
     c = rep["counts"]
     L.append("summary: " + ", ".join(f"{k.lower()} {v}" for k, v in sorted(c.items())) + f"  (exit {exit_code(rep)})")
     return "\n".join(L)
@@ -471,6 +489,12 @@ def _mock_server():
             if "EXTRA404" in text:
                 out.append({"citation": "6 Haw. 6", "normalized_citations": ["6 Haw. 6"], "status": 404,
                             "error_message": "Citation not found", "clusters": []})
+            if "EXTRA400" in text:
+                out.append({"citation": "7 Zzz. 7", "normalized_citations": [], "status": 400,
+                            "error_message": "Unable to find reporter", "clusters": []})
+            if "EXTRA200" in text:
+                out.append({"citation": "8 Haw. 8", "normalized_citations": ["8 Haw. 8"], "status": 200,
+                            "error_message": "", "clusters": []})
             if "EXTRA" in text:
                 out.append({"citation": "5 Haw. 5", "normalized_citations": ["5 Haw. 5"], "status": 200,
                             "error_message": "", "clusters": [{"id": 4, "case_name": "E v. F", "date_filed": "1850-01-01",
@@ -584,8 +608,22 @@ def self_test() -> int:
         rep12 = verify("More prose, nothing parsed locally. EXTRA404", tbl, "secret-token-abc", url)
         check("an API-only NOT FOUND counts toward the exit code", rep12["counts"].get("NOT FOUND") == 1 and exit_code(rep12) == 1)
         before2 = state["requests"]
-        verify("   ", tbl, "secret-token-abc", url)
-        check("blank text makes no request", state["requests"] == before2)
+        blank = verify("   ", tbl, "secret-token-abc", url)
+        check("blank text makes no request and exits 0", state["requests"] == before2 and exit_code(blank) == 0)
+        rep13 = verify("RATE prose with nothing the local parser knows", tbl, "secret-token-abc", url)
+        check("remote-only scan failure -> UNVERIFIED and exit 3, never a false clean",
+              bool(rep13["remote_scan"]) and rep13["counts"].get("UNVERIFIED") == 1 and exit_code(rep13) == 3)
+        rep14 = verify("prose EXTRA400", tbl, "secret-token-abc", url)
+        check("an API-only UNRECOGNIZED result is kept and drives exit 1",
+              rep14["counts"].get("UNRECOGNIZED") == 1 and exit_code(rep14) == 1)
+        rep15 = verify("prose EXTRA200", tbl, "secret-token-abc", url)
+        check("an API-only 200 with no cluster is kept as UNVERIFIED and drives exit 3",
+              rep15["counts"].get("UNVERIFIED") == 1 and exit_code(rep15) == 3 and "manual check:" in format_human(rep15, "x"))
+        rep16 = verify("prose with no citations and no token", tbl, None, url)
+        check("no token + nothing parsed locally -> UNVERIFIED (not consulted), exit 3, said in the output",
+              exit_code(rep16) == 3 and "not consulted" in format_human(rep16, "x"))
+        rep17 = verify("prose with no citations, consulted", tbl, "secret-token-abc", url)
+        check("nothing found by either parser after CourtListener answered -> exit 0", exit_code(rep17) == 0)
         big = ("x" * 70_000) + " 678 F. Supp. 3d 443 and 999 F.3d 9999"
         rep9 = verify(big, tbl, "secret-token-abc", url)
         check("oversize text is sent as citation strings, and still resolves",
