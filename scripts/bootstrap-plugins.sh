@@ -2,7 +2,7 @@
 # Register this checkout as a plugin marketplace and install its plugins.
 #
 # WHY THIS EXISTS. A fresh session does NOT pick the library up on its own. The committed
-# `.claude/settings.json` declares `extraKnownMarketplaces` and lists all 13 plugins under
+# `.claude/settings.json` declares `extraKnownMarketplaces` and lists all 14 plugins under
 # `enabledPlugins`, and that configuration is **inert until the marketplace is registered**:
 # a clone with those settings in place reports "No plugins installed", so every one of the
 # library's skills is simply absent — not trimmed, not name-only, absent. Registering the
@@ -16,11 +16,11 @@
 # looking at, which is what you want when you are editing skills.
 #
 # Usage, from anywhere:
-#   bash scripts/bootstrap-plugins.sh                 # all 13 plugins
+#   bash scripts/bootstrap-plugins.sh                 # all 14 plugins
 #   bash scripts/bootstrap-plugins.sh deep-research-skills coding-agent-skills
 #
 # Installing FEWER is often the better choice, and is not a compromise. The session's skill
-# listing is a character budget (~8,000 at the defaults), and all 13 plugins overrun it: most
+# listing is a character budget (~8,000 at the defaults), and all 14 plugins overrun it: most
 # skills then reach the session as a bare name, with no description and no trigger phrases, so
 # automatic matching cannot route to them. They stay invocable as `/plugin-name:skill-name`.
 # `python3 scripts/measure-listing-cost.py` prints what a given set costs.

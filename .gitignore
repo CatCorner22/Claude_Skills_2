@@ -70,3 +70,6 @@ genome_*.txt
 *.gz
 genome.txt
 *_Full_*.txt
+
+# claude plugin eval writes its run results beside the cases
+plugins/*/evals/results/

@@ -6,7 +6,7 @@ and communication, working with people, data analytics and BI, machine learning,
 autonomous agents, learning science, math foundations, continuous improvement, and deep
 research**.
 
-**71 active skills across 13 plugins — consolidated 2026-08-23 from 121.** Every skill here
+**77 active skills across 14 plugins — consolidated 2026-08-23 from 121, with deep-research and legal additions since.** Every skill here
 survived a blank-slate review against one test: *does invoking it beat an unaided, competent
 frontier model?* The 50 that did not — competent summaries of canon a strong model reproduces
 unaided — are archived, restorable with one `git mv` (see `archive/README.md`). Every survivor
@@ -25,11 +25,11 @@ fill in.
 **Working inside this repo? Run the bootstrap — nothing happens on its own.**
 
 ```
-bash scripts/bootstrap-plugins.sh                              # all 13
+bash scripts/bootstrap-plugins.sh                              # all 14
 bash scripts/bootstrap-plugins.sh deep-research-skills         # or just what you need
 ```
 
-`.claude/settings.json` declares the marketplace and marks all 13 plugins enabled, and **that
+`.claude/settings.json` declares the marketplace and marks all 14 plugins enabled, and **that
 configuration is inert until the marketplace is registered.** Verified against a clean HOME: a
 fresh clone with those settings in place reports `No plugins installed`, so every skill in the
 library is *absent* from that session — not trimmed to a bare name, absent. Registering the
@@ -44,7 +44,7 @@ what loads is the tree you are editing. The GitHub form below is for installing 
 not cloned.
 
 **Anywhere else**, install globally. Run `python3 scripts/measure-listing-cost.py` for what the
-full set currently costs — and read the subset section below before defaulting to all 13, because
+full set currently costs — and read the subset section below before defaulting to all 14, because
 the listing budget bites well before the context does:
 
 ```
@@ -69,7 +69,7 @@ Installed skills are namespaced, e.g. `decision-science-skills:pre-mortem`. Type
 
 ### Install a subset — and there are named profiles
 
-**Install the plugins you will actually use, not all thirteen.** Every installed skill's `name` and
+**Install the plugins you will actually use, not all fourteen.** Every installed skill's `name` and
 `description` sit in the system prompt for the whole session, whether or not you use it. Run
 `python3 scripts/measure-listing-cost.py` for the current figure rather than trusting one written
 down here — figures quoted in prose go stale silently, and this paragraph used to carry three that
@@ -87,20 +87,21 @@ survive — use it comparatively, not as a promise.
 
 | Plugin | Skills | ~Tokens | % of 200K |
 |---|---|---|---|
+| `coding-agent-skills` | 11 | 2,722 | 1.36% |
 | `decision-science-skills` | 10 | 2,628 | 1.31% |
-| `coding-agent-skills` | 10 | 2,454 | 1.23% |
 | `full-stack-dev-skills` | 10 | 2,149 | 1.07% |
 | `continuous-improvement-skills` | 7 | 1,750 | 0.88% |
 | `safety-and-reliability-skills` | 6 | 1,617 | 0.81% |
 | `data-analytics-bi-skills` | 6 | 1,527 | 0.76% |
 | `machine-learning-skills` | 6 | 1,326 | 0.66% |
+| `writing-skills` | 4 | 1,052 | 0.53% |
 | `data-tools-skills` | 5 | 1,044 | 0.52% |
-| `writing-skills` | 4 | 1,009 | 0.50% |
+| `legal-skills` | 3 | 808 | 0.40% |
 | `metacognition-skills` | 3 | 737 | 0.37% |
+| `deep-research-skills` | 3 | 720 | 0.36% |
 | `collaboration-skills` | 2 | 549 | 0.27% |
-| `deep-research-skills` | 1 | 276 | 0.14% |
 | `math-foundations-skills` | 1 | 267 | 0.13% |
-| **all 13** | **71** | **17,334** | **8.67%** |
+| **all 14** | **77** | **18,898** | **9.45%** |
 
 **Install profiles** — curated bundles matched to a working day, with their measured cost. Usage
 decay rewards a coherent working set: a profile keeps one warm cluster of skills defending its own
@@ -111,7 +112,7 @@ listing slots, where a scattershot install decays everything equally.
 | Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,838 | 1.42% |
 | Developer | `full-stack-dev-skills` + `coding-agent-skills` | 21 | 4,871 | 2.44% |
 | Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,368 | 1.68% |
-| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,186 | 2.09% |
+| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,229 | 2.11% |
 
 
 There is a second, sharper reason to subset, and it is worse than a round "~100 skills" threshold
@@ -211,7 +212,7 @@ why.
 ## How it's built
 
 - One repo that is both a **plugin marketplace** (`.claude-plugin/marketplace.json`) and the home
-  for thirteen **plugins** under `plugins/`, mirroring Anthropic's own
+  for fourteen **plugins** under `plugins/`, mirroring Anthropic's own
   [`anthropics/skills`](https://github.com/anthropics/skills) layout.
 - One plugin ships **subagents**: `coding-agent-skills` carries six read-only specialist reviewers
   in its `agents/` folder (performance, accuracy/correctness, structure/architecture,

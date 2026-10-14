@@ -368,6 +368,16 @@ the task in the words someone actually uses before they have learned the vocabul
 rows against the skill's own trigger list before adding them**; a positive prompt that contains a
 trigger string is not a test.
 
+**F8–F10 are the legal-skills rows, and each is written in the words of someone who has not learned
+the skill's vocabulary.** F8 says "go through it … suggested replacements I can paste into a
+markup" rather than *redline* or *review this contract*; F9 says "make sure every case in it
+actually exists" rather than *verify these citations*; F10 describes a termination after a pay
+question without the words *severance*, *overtime* or *retaliation*. The near-misses are the three
+seams that matter: prose-tightening belongs to `adams-smart-brevity` (whose description now carries
+the reciprocal boundary), a medical citation belongs to `medical-research-detective` (whose
+description has no headroom, so its seam is body-only — if F9's near-miss fails, that is the
+evidence for trimming it), and career coaching belongs to no skill here at all.
+
 **F6 and F7 test the seam in the direction that actually fails.** The risk for this skill is not
 that it fires too widely — it is that a genotype question gets taken by
 `medical-research-detective` (any health question) or `fitness-nutrition-science` (anything about
@@ -384,6 +394,9 @@ produce the evidence before any description is trimmed to make room — the same
 | F5 | `A relative was found to carry a BRCA2 variant — can you check whether my own file shows it?` | `deep-research-skills:dna-raw-data-audit` | `This health channel's video says a study proved the supplement works. Did the study say that?` | dna-raw-data-audit (should be `video-source-audit`) |
 | F6 | `My doctor mentioned a gene result in passing and I want to understand what it means before my next appointment — I have the lab PDF and my own test file.` | `deep-research-skills:dna-raw-data-audit` | `My B12 is low, I'm tired all the time, and I take metformin — what's the mechanism?` | dna-raw-data-audit (should be `medical-research-detective`) |
 | F7 | `Should I be taking a different form of folate? Something about my results came up and the supplement shop says it matters.` | `deep-research-skills:dna-raw-data-audit` | `What's the evidence for creatine timing around training?` | dna-raw-data-audit (should be `fitness-nutrition-science`) |
+| F8 | `Here's the services agreement the other side sent over. Can you go through it and tell me where the wording is ambiguous or could be tightened, and give me suggested replacements I can paste into a markup?` | `legal-skills:mscd-contract-drafting` | `Tighten this email to the client so it reads clearly and gets to the point.` | mscd-contract-drafting (should be `adams-smart-brevity`) |
+| F9 | `An associate drafted this opposition brief with some AI help. Before it goes out, can you make sure every case in it actually exists and still says what we claim?` | `legal-skills:legal-citation-research` | `Can you check whether this journal article citation is real — Smith et al., Lancet 2019, on statins and dementia?` | legal-citation-research (should be `medical-research-detective`) |
+| F10 | `We let a salesperson go last Friday for missing targets. A month earlier she'd asked HR whether she should be getting paid for the extra hours. Her manager wants to send a release — anything we need to worry about?` | `legal-skills:employment-law-issues` | `Can you review my resume for a senior counsel role and suggest how to phrase my experience?` | employment-law-issues (no skill in this library owns career coaching) |
 
 ---
 

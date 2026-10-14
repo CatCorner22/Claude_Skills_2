@@ -157,6 +157,18 @@ Never store secrets, credentials, account numbers, or client data here.
   GL anomaly. Health grade F — which is on-spec: the PDF frames the TCR footprint as the reason
   the app exists. (confidence: high)
 
+- FACT (2026-10-14): **`legal-skills` plugin shipped — 14th plugin, 77 active skills.** Three
+  skills: `mscd-contract-drafting` (MSCD categories of contract language + `mscd_lint.py`, a
+  section-keyed linter with flag-don't-cut rails for risk allocation and prescribed wording),
+  `legal-citation-research` (three-check rail — existence, support, currency — and
+  `verify_legal_citation.py`, offline reporter parsing from a compact reporters-db table plus
+  CourtListener lookup that fails to UNVERIFIED), `employment-law-issues` (lifecycle issue
+  checklist with every figure marked to its instrument, dated moving-parts ledger). Both scripts'
+  self-tests are mutation-tested (34/34 and 25/25 mutants killed). Smart Brevity is the delivery
+  format of all three. MSCD content is [canon attribution] — the owner's MSCD5 PDF in Drive was
+  not read (consent not given at build time); upgrading to ¶ pinpoints needs that read.
+  `claude plugin eval` routing cases live in `plugins/legal-skills/evals/` (six cases).
+
 ## Open Questions / Uncertainties
 - OPEN: Tailoring artifacts not yet supplied — sample OTBI report, reconciliation checklist,
   chart-of-accounts structure, redacted bank statement file. Each unlocks the corresponding
@@ -377,6 +389,47 @@ Never store secrets, credentials, account numbers, or client data here.
   contraindication for one tesamorelin product, then said it could not confirm one, then asserted it
   again, and answered a visceral-adipose-tissue question with a trunk-fat figure. When prose is the
   only channel, quote nothing from it — name the document and route the reader there.
+
+- FACT (2026-10-14): **`claude plugin eval` reads case DIRECTORIES, not the house's flat
+  `evals/<plugin>/<skill>.md` files.** A case is `<plugin>/evals/<case>/prompt.md` (frontmatter:
+  `runs`, `max_turns`, `allowed_tools`, …; body = the prompt) plus `graders/*.md` (frontmatter
+  `type:` one of regex / tool_used / tool_order / file_exists / llm / baseline; an `llm` grader's
+  body is its rubric). "Skill fired" = `tool_used` with `tool: Skill` and
+  `input_match: '"skill"\s*:\s*"(?:[\w-]+:)?<name>"'`; "skill must NOT fire" needs **`min: 0`
+  AND `max: 0` AND `arm: both`** (the default `min` is 1, so `max: 0` alone is an impossible
+  range, and without `arm: both` the grader is excluded from scoring in a two-arm run). Skill
+  graders are indicators under `--ablation with-without`; use `--ablation none` for a routing
+  suite. Results land in `<plugin>/evals/results/` (git-ignored). Source: code.claude.com
+  plugin-evals page, read 2026-10-14.
+- RULE (2026-10-14): **an optional trailing regex group must be fenced against the next token's
+  first character class, digits included.** The citation parser's pinpoint group `(?:,\s*(\d+))?`
+  with lookahead `(?![\s,]*[A-Za-z])` still stole "19" out of ", 193 L.Ed.2d 504" because the
+  engine backtracked the digits until the lookahead held. The fence must be `(?![\d\s,]*[A-Za-z])`.
+  Found by a fixture, not by reading; the eyecite fixture set is the right grounding for any
+  citation regex.
+- RULE (2026-10-14): **`validate.sh` requires the marketplace.json plugin description to equal
+  plugin.json's exactly** ("has drifted"). Copy, never paraphrase, when registering a plugin.
+- LESSON (2026-10-14): mutation testing a self-test pays twice — one mutant survived (the
+  `--known-terms` guard in the linter had no test that distinguished it), and the claimed-span
+  de-duplication changed which rule "owned" a phrase, which turned a passing positive check into
+  a false expectation. A surviving mutant means *add the test*; a newly failing check after a
+  design change means *re-read the expectation*, not the code.
+- LESSON (2026-10-14, legal-skills review): **a ledger entry dated the day it was written can
+  already be stale, and the test that finds it is "check each status against its own check
+  date."** An adversarial reviewer briefed to verify figures found 13 defects; the four that
+  mattered were all *currency* errors in a file whose only job is currency (EEOC harassment
+  guidance rescinded Jan 2026, not "challenged"; NLRB majority seated Aug 2026, not "pending";
+  DOL contractor NPRM published Feb 2026, not "signalled"; PWFA rule partly vacated May 2025),
+  plus two MSCD rows that prescribed the practice Adams criticises (11:59 p.m. for midnight;
+  expire vs terminate). Each was corroborated by a second search before it was applied. Two
+  briefing rules follow: name the "test each dated status" step explicitly, and tell the
+  reviewer up front that when the primary layer is blocked no mark can be upgraded, only
+  contradicted. The author's own blog is the reachable source for MSCD positions.
+- PATTERN (2026-10-14): the "flag, don't cut" carve-outs from `adams-smart-brevity` translate
+  cleanly into a linter as **rails** — paragraph-level vocabulary (indemnify, hold harmless,
+  warranty, insurance, release; an all-caps run, a § reference) that downgrades every `edit` in
+  that paragraph to a `flag` with the rail's reason attached. Deterministic, explainable, and the
+  self-test's differential case (same doublet in a plain paragraph vs an indemnity) pins it.
 
 ## Successful Patterns / Working Methods
 - PATTERN: Parallel subagent authoring works well when each agent first reads the committed
@@ -1454,3 +1507,21 @@ retraction of the previous pass's headline mechanism claim.
       other gate stays green), and every cited `references/*.md` must exist (depth was checked;
       existence never was). Mutation-verified in an isolated copy of the repo — all three failure
       modes caught, live tree untouched.
+
+### Crystallization pass — 2026-10-14 (legal-skills plugin: MSCD drafting, citation research, HR issues)
+- Harvested from the build: the plugin-eval case format (now a FACT above), the regex fence rule,
+  the marketplace-description equality gate, the mutation-testing double lesson, and the rails
+  pattern. Pruned nothing; the DNA-audit entries from 2026-10-13 stand.
+- Validated by execution: linter self-test 113/113 with 34/34 mutants killed; verifier 63/63 with
+  25/25 killed; `validate.sh` 0 errors / 0 warnings; `claude plugin validate` passed; clean-HOME
+  bootstrap installed the plugin and all three skills; `check-trigger-test.py` 24/24 prompts free
+  of their target's triggers. `claude plugin eval` routing run (six cases, `--runs 1
+  --ablation none`): **6/6 passed, overall score 1.0, $0.38, 132 s** — all three skills fired on
+  task-worded prompts and none fired on its near-miss; the three `llm` rail graders passed.
+  Post-review follow-up commit applied 13 reviewer findings (4 ledger-currency, 2 MSCD, 7
+  citation/mark fixes), each re-checked by search first.
+- Not stored here on purpose: the employment-law moving parts (FTC non-compete rule removed from the
+  CFR Feb 2026; FLSA 2024 threshold rule rescinded May 2026; NLRB precedents under GC
+  reconsideration Aug 2026). Those are dated entries in the skill's own ledger file, where the
+  check date travels with the fact; a memory copy would go stale without one.
+
