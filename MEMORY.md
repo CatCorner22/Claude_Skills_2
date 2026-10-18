@@ -1591,7 +1591,13 @@ retraction of the previous pass's headline mechanism claim.
   the baseline ran the comparison on both files and reported the result (1/5), the skill run declined
   on consent grounds and routed to a counsellor (5/5); the match-puzzle case did not discriminate
   (6/6 both — the baseline already knew the Shared cM ranges and the X rule; the skill added the
-  family-structure gate, provenance marks and the six-section shape, which the assertions do not score).
+  family-structure gate, provenance marks and the six-section shape, which the assertions do not score);
+  the family-origin-with-maps case discriminated on the rails (skill 7/7; baseline 4/7 — it explained the
+  method correctly, then turned percentages into 'three-quarters Irish/British' and 'one grandparent-
+  equivalent' and derived '~10:1 for an Irish origin' from a haplogroup frequency without a prior, and two
+  of its four hand-digitised maps carried no source) at 2.2x the skill run's tokens and time. Aggregate:
+  with skill 100% vs 59% without; the skill runs were faster overall because bundled outlines and scripts
+  replaced hand-written cartography. Viewer and benchmark sent to the owner; feedback.json pending.
 - Privacy posture held: research notes, the synthesized report, the tailoring file and the maps live
   under `/root/genome-audit` and `.claude/skills-env/*.private.md`; the public skill carries no
   haplogroup–surname link; subagents received haplogroup labels, surnames and places only.
