@@ -7,10 +7,11 @@ description: >-
   carrier status, supplements, medicines, peptides and lifestyle factors, and says plainly when a
   genotype changes nothing. Use for interpreting a DNA raw data file, checking what a gene variant
   actually means, or preparing a genetics question for a clinician. Research only — never diagnosis
-  or dosing. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
+  or dosing. Ancestry, haplogroups, family trees and lineage maps →
+  deep-research-skills:dna-ancestry-research. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.6.1"
+  version: "1.7.0"
   source: >-
     Built from an eight-stream research pass, then re-audited by a perspective-diverse adversarial
     pass that found defects in the shipped version and is the reason several claims here are
@@ -47,7 +48,9 @@ questions, and collapsing them is how genetic reports become horoscopes.
   `deep-research-skills:medical-research-detective`. Auditing a video's or article's genetics
   claims → `deep-research-skills:video-source-audit`. Training and nutrition protocols for a
   healthy person → `coding-agent-skills:fitness-nutrition-science`. A statistics question with no
-  genome attached → `data-analytics-bi-skills:statistical-inference`.
+  genome attached → `data-analytics-bi-skills:statistical-inference`. Where the family comes from —
+  ancestry, haplogroups, DNA matches, a family tree, lineage maps → `deep-research-skills:dna-ancestry-research`
+  (that skill reads the same file as history; this one reads it as medicine).
 - **Not a diagnostic service, and not a prescriber.** It produces research and questions, never a
   diagnosis, never a dose.
 

@@ -73,3 +73,8 @@ genome.txt
 
 # claude plugin eval writes its run results beside the cases
 plugins/*/evals/results/
+
+# dna-ancestry-research converter outputs are the genome in another shape: PLINK text, yhaplo genos, HaploGrep HSD.
+*.ped
+*.genos.txt
+*.hsd

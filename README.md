@@ -6,7 +6,7 @@ and communication, working with people, data analytics and BI, machine learning,
 autonomous agents, learning science, math foundations, continuous improvement, and deep
 research**.
 
-**77 active skills across 14 plugins — consolidated 2026-08-23 from 121, with deep-research and legal additions since.** Every skill here
+**78 active skills across 14 plugins — consolidated 2026-08-23 from 121, with deep-research and legal additions since.** Every skill here
 survived a blank-slate review against one test: *does invoking it beat an unaided, competent
 frontier model?* The 50 that did not — competent summaries of canon a strong model reproduces
 unaided — are archived, restorable with one `git mv` (see `archive/README.md`). Every survivor
@@ -97,11 +97,12 @@ survive — use it comparatively, not as a promise.
 | `writing-skills` | 4 | 1,052 | 0.53% |
 | `data-tools-skills` | 5 | 1,044 | 0.52% |
 | `legal-skills` | 3 | 808 | 0.40% |
+| `deep-research-skills` | 4 | Deep research with source-provenance control: multi-database literature investigation (medical-research-detective), video claims audited against the sources they cite (video-source-audit), a personal genome audited against the literature (dna-raw-data-audit), and the same genome turned into an evidenced ancestry story with open-tool haplogroup calls, proof-standard genealogy and lineage maps (dna-ancestry-research) |
 | `metacognition-skills` | 3 | 737 | 0.37% |
-| `deep-research-skills` | 3 | 720 | 0.36% |
+| `deep-research-skills` | 4 | 1,014 | 0.51% |
 | `collaboration-skills` | 2 | 549 | 0.27% |
 | `math-foundations-skills` | 1 | 267 | 0.13% |
-| **all 14** | **77** | **18,898** | **9.45%** |
+| **all 14** | **78** | **19,191** | **9.60%** |
 
 **Install profiles** — curated bundles matched to a working day, with their measured cost. Usage
 decay rewards a coherent working set: a profile keeps one warm cluster of skills defending its own
@@ -178,7 +179,6 @@ Practical guidance:
 | `writing-skills` | 4 | Registers and explanation craft: smart-brevity professional/legal writing (risk-allocation carve-outs included), plain-grade accessible writing, explanation design, Diátaxis-routed technical documentation |
 | `metacognition-skills` | 3 | Cumulative improvement across sessions: hierarchical memory management, reflective learning, knowledge crystallization |
 | `collaboration-skills` | 2 | Disarming elicitation (the counter-elicitation stance inverted, with its honesty rails) and meeting design (decisions as owner-and-date read-backs) |
-| `deep-research-skills` | 1 | Multi-database literature investigation with source-provenance control, evidence appraisal, and triple-checked citations (the medical-research-detective) |
 | `math-foundations-skills` | 1 | Units and dimensional analysis — the one basic-math skill that catches real errors; the rest of the set is archived |
 
 ## Finding the right skill
