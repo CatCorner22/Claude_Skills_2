@@ -1550,3 +1550,54 @@ retraction of the previous pass's headline mechanism claim.
   reconsideration Aug 2026). Those are dated entries in the skill's own ledger file, where the
   check date travels with the fact; a memory copy would go stale without one.
 
+
+### Crystallization pass — 2026-10-18 (dna-ancestry-research: genome → haplogroups, genealogy, lineage maps)
+- FACT: `deep-research-skills:dna-ancestry-research` shipped (plugin 0.24.0; library now 78 skills). It
+  invokes the synced anthropic-skills:max-delegation-auditor and anthropic-skills:deep-research when
+  present (named without backticks — `validate.sh` only resolves backticked `*-skills:name` links, and
+  those two live outside this repo) and falls back to an inline audit and its own research fan-out.
+- FACT (verified by execution on a real v5 chip export): HaploGrep 3 `classify --chip` builds the sample's
+  coverage range from the sites present in the VCF, so the converter must write **every genotyped MT
+  site** (reference calls as `ALT .`, `GT 0`); an alt-only VCF leaves the range at the alt sites and the
+  quality score stops meaning what it says. rCRS, not RSRS, for build-37 chip exports. Yleaf's PLINK mode
+  reads no reference genome, but its start-up check demands one: offline, a placeholder FASTA whose only
+  contig is not named chrY (plus a hand-written `.fai`) passes the check in 4.1.5. Both callers reproduced
+  the sequencing placement from the chip (mtDNA quality 0.844; Y QC 1.0 on three trees).
+- FACT: licences — Yleaf GPL-3.0 and HaploGrep 3 MIT are the clean callers; yhaplo's licence is
+  internal non-commercial with restricted redistribution (shell out only, never bundle); eveHap
+  PolyForm-NC; Mitotree non-commercial; Natural Earth public domain (bundled as simplified compact JSON).
+- LESSON: the first renders of the lineage maps had four layout defects a 38/38 self-test did not see —
+  overlapping labels, legend colliding with notes, arrowheads drawn black (`context-stroke` is not
+  rasterised), and `paint-order="stroke"` painted as white blobs by cairosvg. **Rasterise and look at any
+  generated graphic before shipping it; a parse-clean SVG is not a readable one.** Fix shipped as 1.1.0:
+  footer sized to its content, numbered waypoint markers with a key, per-colour markers, halo text
+  (two text elements), six shading bands finer below 25%, value labels on shaded countries.
+- LESSON: a vendor's haplogroup page can already sit at the chip's terminal marker (the 23andMe print
+  named R-A1333, the same marker Yleaf found) — a research note's "2016 ISOGG snapshot" claim must not
+  be turned into "the chip reaches deeper than the vendor shows" without checking the actual report.
+  Corrected in two references before shipping.
+- RULE: a skill rail that says "ask the person first" needs its "when asking is impossible" clause —
+  state the assumption and leave the inference unrun. Found by the sibling-comparison eval run.
+- FACT (skill-creator tooling): `aggregate_benchmark.py` wants `eval-N/<config>/run-1/{outputs/,
+  grading.json, timing.json}`; the viewer discovers any directory holding `outputs/` and reads
+  `grading.json` and `eval_metadata.json` from the run dir or its parent, so copy `eval_metadata.json`
+  into each config dir. `grading.json` needs `expectations[].{text,passed,evidence}` plus a `summary`.
+  Keep the workspace in the scratchpad, never beside the skill in the repo.
+- FACT: parallel research subagents share one per-turn WebSearch budget (200 calls) and the egress
+  proxy blocks most primary hosts (genealogy, vendor, journal and tree sites; only raw.githubusercontent,
+  GitHub release assets, PyPI and git clones work). Five researchers exhausted the budget; plan four or
+  fewer, and expect search-excerpt provenance ([snippet-only]) rather than page reads.
+- Benchmark (iteration 1, three prompts, one run per arm): the sibling-comparison case discriminates —
+  the baseline ran the comparison on both files and reported the result (1/5), the skill run declined
+  on consent grounds and routed to a counsellor (5/5); the match-puzzle case did not discriminate
+  (6/6 both — the baseline already knew the Shared cM ranges and the X rule; the skill added the
+  family-structure gate, provenance marks and the six-section shape, which the assertions do not score);
+  the family-origin-with-maps case discriminated on the rails (skill 7/7; baseline 4/7 — it explained the
+  method correctly, then turned percentages into 'three-quarters Irish/British' and 'one grandparent-
+  equivalent' and derived '~10:1 for an Irish origin' from a haplogroup frequency without a prior, and two
+  of its four hand-digitised maps carried no source) at 2.2x the skill run's tokens and time. Aggregate:
+  with skill 100% vs 59% without; the skill runs were faster overall because bundled outlines and scripts
+  replaced hand-written cartography. Viewer and benchmark sent to the owner; feedback.json pending.
+- Privacy posture held: research notes, the synthesized report, the tailoring file and the maps live
+  under `/root/genome-audit` and `.claude/skills-env/*.private.md`; the public skill carries no
+  haplogroup–surname link; subagents received haplogroup labels, surnames and places only.
