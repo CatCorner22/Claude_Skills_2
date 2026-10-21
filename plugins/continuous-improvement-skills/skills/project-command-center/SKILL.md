@@ -13,7 +13,7 @@ description: >-
   intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
   constructive paranoia, now next later watch.
 metadata:
-  version: "1.2.2"
+  version: "1.3.0"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 
@@ -36,7 +36,10 @@ reality, never to the preferred answer.**
   gauntlet) → the archived `continuous-improvement-skills:lean-six-sigma-for-software`; facilitating
   the improvement workshop → the archived `continuous-improvement-skills:kaizen-and-codesign`;
   multi-advisor code review → `coding-agent-skills:board-review`; a themed
-  adversarial autopsy persona → the chicken-little skills in `coding-agent-skills`.
+  adversarial autopsy persona → the chicken-little skills in `coding-agent-skills`; planning,
+  budgeting and quality-gating an AI agent's OWN multi-step work, token spend included →
+  `coding-agent-skills:project-manager-qc` (this skill commands human projects; that one manages
+  the agent's pipeline and runs an independent subagent check before delivery).
 
 ## Do it
 1. **Scale the controls to the stakes.** Judge uncertainty, reversibility, user impact,

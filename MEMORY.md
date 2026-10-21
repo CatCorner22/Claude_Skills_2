@@ -1625,3 +1625,26 @@ retraction of the previous pass's headline mechanism claim.
 - FACT: the delegation audit lives only in the owner's claude.ai account; the tandem link on that
   side ships as a packaged `.skill` (description sentence + one paragraph in its §3.3) for the owner to
   upload — there is no tool route to edit or upload claude.ai skills from a session.
+- FACT (test results, one run per arm): creative-workaround-genius iteration 1 scored 83% vs 92%
+  without the skill on three blocked-route prompts; two prompts did not discriminate (the baseline
+  already finds permitted routes and refuses to disable TLS) and one went against the skill, which
+  over-applied the control rule (struck a search tool for "weak evidence", called a pattern-built
+  filename a guess instead of confirming it, offered an unverified belief). Revision 1.1.0 (channel vs
+  resource controls; find candidates anywhere, prove them strictly) turned that case into 4/4 vs 3/4,
+  with stronger proof than the baseline (direct request, file header bytes, source at the tag).
+- LESSON: an over-cautious rail is as real a defect as a missing one; test rails against a case where
+  the right move is to keep going, not only against cases where the right move is to stop.
+
+### Crystallization pass — 2026-10-21 (project-manager-qc skill + project-manager subagent)
+- FACT: `coding-agent-skills:project-manager-qc` (skill) and `coding-agent-skills:project-manager`
+  (subagent, `plugins/coding-agent-skills/agents/project-manager.md`; Read/Grep/Glob/Bash, read-only on
+  deliverables) shipped in plugin 0.33.0; library 80 skills, 7 subagents. Modes: PLAN, CHECKPOINT, QC.
+  Skill and agent names must differ: `validate.sh` resolves skills and agents in one namespace.
+- FACT: `context: fork` and `agent:` are Claude-Code-only skill fields here; the house pattern for "a
+  skill that is a subagent" is a main-context skill plus an `agents/*.md` definition it dispatches, so
+  the planning rules and token discipline stay in the main context while the gate runs fresh.
+- FACT (QC test, five planted defects plus one placeholder): both the subagent-role reviewer and a
+  plain reviewer caught all five; the subagent's return was the actionable one (HOLD verdict, the
+  command behind each finding, sized fixes in LOAD/PUNCH/FUTURE bins, a re-inspection list) for ~8%
+  more tokens (66k vs 61k). Detection alone does not justify the subagent; the contract does.
+
