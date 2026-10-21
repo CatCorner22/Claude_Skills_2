@@ -19,7 +19,7 @@ metadata:
     this plugin — Comrade Engineer's state-the-outcome and hidden-cost test, The Foreman's
     evidence-before-done — plus field patterns from real blocked-route sessions, generalised.
     2.0.0 rebuilt it around a fast path after a benchmark showed the 1.x ledger-first process
-    matched an unaided agent's results at roughly twice the time. Provenance marks follow the
+    matched an unaided agent's results at more than twice the time. Provenance marks follow the
     house legend: [canon attribution], [background — verify].
 ---
 
@@ -150,7 +150,7 @@ crew [canon attribution — NASA's Apollo 13 mission accounts; details: backgrou
 Inventory, outcome, test, and hand over only what truly needs the person: that is the loop.
 
 **Why a fast path first.** A benchmark of this skill's 1.x versions against an unaided agent on
-blocked-route tasks found the same outcomes at roughly twice the time:
+blocked-route tasks found the same or worse outcomes at more than twice the time:
 listing five routes and checking each for hidden costs before trying the obvious one was ceremony
 when the second door was open. The breadth is still there — step 4 — but it is paid for only when
 the cheap checks fail. Proportion is part of competence: a forty-minute detour around a

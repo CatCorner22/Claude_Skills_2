@@ -1648,3 +1648,24 @@ retraction of the previous pass's headline mechanism claim.
   command behind each finding, sized fixes in LOAD/PUNCH/FUTURE bins, a re-inspection list) for ~8%
   more tokens (66k vs 61k). Detection alone does not justify the subagent; the contract does.
 
+
+### Crystallization pass — 2026-10-21 (skills redo: creative-workaround-genius 2.0.0, project-manager-qc 2.0.0)
+- FACT: user asked to redo both skills "so that they improve performance vs baseline and vs original
+  versions". Shipped coding-agent-skills 0.34.0 with creative-workaround-genius 2.0.0 (fast path
+  first, identity in the success test, one decisive proof, no optional homework, leave nothing
+  behind) and project-manager-qc 2.0.0 + agent (requirement ledger with amendments superseding,
+  exhaustive eight-category sweep, checks inside the build run, self-contained page).
+- FACT (benchmark, 11 scenarios, 74 task runs, blind judging, held-out cases with 2 runs/arm):
+  workaround — no skill 31/33 (94%) 64k tok 59 s; 1.1.0 30/33 (91%) 94k 151 s; 2.0.0 33/33 (100%)
+  73k 62 s. Project manager — all arms 97/97; no skill 70k 86 s; 1.0.0 83k 120 s; 2.0.0 80k 108 s.
+- LESSON: on a frontier model, process-heavy skills mostly add cost; quality differences appear only
+  on habits the model really has (here: ending with "run this yourself to double-check"). Benchmark
+  against no-skill before claiming a gain, and make the skill's default path as cheap as the
+  unaided agent's.
+- LESSON: pre-register cases and graders, keep held-out cases unseen until the skill is frozen, and
+  disclose every amendment (two this time: a contaminated decoy narrowed; two harder held-out cases
+  added after the pilot hit ceiling). A rule added after seeing a case is not held-out evidence for it.
+- LESSON: eval subagents can wander outside their sandbox (one wrote out.txt/err.txt into the repo
+  root); check `git status` for untracked strays after any eval batch.
+- AVOID: claiming the project-manager skill improves on no-skill at single-session scale — it does
+  not measurably; its case rests on long, multi-session or multi-agent work, which was not measured.

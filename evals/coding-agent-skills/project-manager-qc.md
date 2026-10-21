@@ -74,3 +74,26 @@ modifies nothing, and stays within its output limit.
   raises no flags.
 - **CLI:** exit 0 ok, 2 unreadable ledger, 5 bad usage.
 - The self-test was mutation-tested: 20 deliberate breakages, all caught.
+
+## 8. Benchmark — 2026-10-21 (version 2.0.0 against no skill and 1.0.0)
+Six scenarios: two reviews of finished work with planted defects (a sales summary with seven,
+including an off-by-one date boundary and a de-duplication result that is computed but never
+used; a CLI release with six, including a skipped failing test and a token in an un-ignored `.env`),
+one review with ten defects against a spec whose amendments supersede earlier sections, and three
+builds (contacts clean-up with a buried filename amendment; inventory reconciliation with case units
+and discontinued items; a KPI pack from a long spec with three late amendments). Two held-out
+scenarios were added after a pilot showed the first ones at ceiling. Scripted checks on every
+output, blind graded findings on every review; two runs per arm on held-out cases.
+
+| Arm | Checks passed | Mean tokens | Mean time |
+|---|---|---|---|
+| No skill | 97/97 (100%) | 70k | 86 s |
+| 1.0.0 | 97/97 (100%) | 83k | 120 s |
+| 2.0.0 | 97/97 (100%) | 80k | 108 s |
+
+Every arm found every planted defect and met every requirement, including all three late
+amendments. 2.0.0 is cheaper than 1.0.0 (about 3% fewer tokens, 10% less time) at the same quality,
+but at this task size it costs more than working without it (about 14% more tokens, 26% more time)
+with no measurable gain: the model under test already reads specs to the end and sweeps reviews
+thoroughly. The ledger and sweep are insurance for longer, multi-session or multi-agent work, which
+this benchmark did not measure.
