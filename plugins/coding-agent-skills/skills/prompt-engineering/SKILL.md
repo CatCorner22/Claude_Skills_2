@@ -13,7 +13,7 @@ description: >-
   format, structured output, JSON output, prompt injection, reasoning model, extended thinking,
   prompt caching, flaky prompt, prompt not working, improve a prompt.
 metadata:
-  version: "2.0.2"
+  version: "2.1.0"
 ---
 
 # Prompt engineering
@@ -29,7 +29,9 @@ metadata:
   `coding-agent-skills:writing-agent-skills`; optimizing several prompt factors at once and reading
   their interactions → see `continuous-improvement-skills:design-of-experiments`; qualifying a
   model that grades other outputs before its scores pick your prompt → see
-  `continuous-improvement-skills:measurement-systems-analysis`.
+  `continuous-improvement-skills:measurement-systems-analysis`; cutting what an agent run spends in
+  tokens — turns, reads, subagents, replies — without cutting the result →
+  `coding-agent-skills:puppet-master`.
 
 ## Do it
 

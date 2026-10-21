@@ -35,7 +35,7 @@ Never commit real client, bank, or account data. Sanitize to structural examples
 artifacts in `*.private.md` or `references/*.local.*` (git-ignored).
 
 ## Build status (waves)
-Current state: **80 active skills across 14 plugins** (plus 7 subagents, all in
+Current state: **81 active skills across 14 plugins** (plus 7 subagents, all in
 `coding-agent-skills`). Nine domain plugins / 66 skills were archived in 2026-08, and the Oracle
 and finance/treasury sets among them were then **deleted outright** on owner direction
 (2026-08-18) — `archive/plugins/` no longer exists and they survive only in git history. Two

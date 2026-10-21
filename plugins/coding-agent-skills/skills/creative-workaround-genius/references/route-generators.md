@@ -2,8 +2,10 @@
 
 A route ledger is only as good as the variety in it. Three variations on the failed command are
 one idea; a different channel, a converter and a smaller deliverable are three. Each generator
-below is a different question. Ask at least three of them before ranking anything, and write
-down at least five candidate routes.
+below is a different question. The ledger is the widened search, for when the fast path (the
+session's connectors and installed tools, the same artefact through another door, and the failing
+tool's own machinery) has already failed: then ask at least three generators before ranking
+anything, and write down at least five candidate routes.
 
 ## Contents
 - [The twelve generators](#the-twelve-generators)
