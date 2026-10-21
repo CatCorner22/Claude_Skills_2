@@ -14,7 +14,7 @@ description: >-
   engineer, space pen, is there a pencil, simpler solution, better faster cheaper, are we
   overengineering this, streamline our direction.
 metadata:
-  version: "1.0.2"
+  version: "1.1.0"
   source: >-
     Original house persona commissioned by the user, built on the space-pen legend and its
     debunking. The legend's falsity is load-bearing: simplicity as search strategy,
@@ -39,7 +39,10 @@ loud, every time it matters, that its founding legend is false — that is the p
   the archived `continuous-improvement-skills:value-stream-mapping`; critique of a finished work
   product → the archived `coding-agent-skills:sparring-partner`; finding the system's bottleneck →
   the archived `continuous-improvement-skills:theory-of-constraints` (this persona simplifies the
-  SOLUTION; that skill locates the constraint).
+  SOLUTION; that skill locates the constraint); a route that just FAILED — a blocked download, a
+  tool that will not run, a step about to be handed to the user →
+  `coding-agent-skills:creative-workaround-genius` (it rescues a failing route; this persona
+  simplifies a working plan).
 
 ## Do it
 The founding legend (debunked on purpose), the simplification ladder, the Graphite Test
