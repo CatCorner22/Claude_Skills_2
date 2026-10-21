@@ -1,57 +1,62 @@
 ---
 name: project-manager-qc
 description: >-
-  Runs an agent's own multi-step work like a well-managed project, sized to the job. Builds a
-  requirement ledger first — every deliverable, name, column, number, format, limit, exclusion
-  and "don't" in the request, with later amendments superseding earlier lines — so nothing is
-  dropped; plans with testable acceptance criteria and a token budget; and gates delivery with an
-  exhaustive quality sweep (each requirement, each number recomputed from source, each claim in
-  notes and summaries, code paths, what tests really assert, every file in the folder, format
-  details) that does not stop at the first findings. The project-manager subagent runs the plan
-  and the gate with fresh context when it can. Applies token discipline throughout. Use for any
-  substantial task, before delivering anything that matters, or to check someone's finished work.
-  Triggers: project manager, plan this task, quality control, QC gate, check the work before
-  delivery, is this ready to send, review against the spec, token budget, save tokens.
+  Runs multi-session and multi-agent work like a well-managed project. Builds a requirement ledger
+  first — every deliverable, name, column, number, format, limit, exclusion and "don't", later
+  amendments superseding earlier lines — then plans phases with testable acceptance criteria,
+  owners, a token budget and checkpoints that survive across sessions, and gates delivery with an
+  independent quality sweep by the project-manager subagent in fresh context: each requirement,
+  each number recomputed from source, each claim, code paths, what tests really assert, every
+  file, format — not stopping at the first findings. Stays out of single-session tasks, where a
+  benchmark found no gain. Use when work spans several sessions or agents, or a deliverable needs
+  a reviewer that did not build it. Triggers: project manager, multi-session project, coordinate
+  the subagents, independent QC gate, multi-agent project, phase plan, track the work across
+  sessions.
 metadata:
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Project Manager & Quality Control
 
-A substantial task fails in three predictable ways: a requirement buried in the request — often a
-late amendment — is dropped; the work is checked by a reviewer who stops after the first few
-problems; and tokens go to ceremony instead of the work. This skill puts a project manager on the
-job for all three, and keeps the management cheaper than what it saves. The manager is a subagent,
-`project-manager`, called for the plan and the gate on substantial work; on small work, and when
-no subagent can be spawned, the main agent runs the same steps itself. **Everything a
-single-session task needs is on this page** — the references are for briefing the subagent and
-planning long work, so skip them otherwise.
+Work that spans sessions or agents fails in three predictable ways: a requirement buried in the
+request — often a late amendment — is dropped between hand-offs; the work is checked only by the
+context that produced it; and nobody can say where the effort or the budget went. This skill puts
+a project manager on that kind of job. The manager is a subagent, `project-manager`, called for the
+plan, at phase boundaries and for the gate; between calls the main agent keeps the ledger and runs
+lean with `coding-agent-skills:puppet-master`. **Everything a session needs is on this page** — the
+references are for briefing the subagent and planning long work.
+
+**Scope, from measurement.** On single-session tasks of up to a few deliverables, a benchmark found
+an unaided agent already met every requirement and caught every planted defect, so this skill
+added cost without adding quality there. It engages when the work outlasts one context: several
+sessions, several agents, or a deliverable that needs a reviewer who did not build it.
 
 ## When to use
-- A task with several deliverables or a written spec, any subagent work, or a deadline or budget —
-  before starting it.
-- Anything about to be delivered that someone will act on: a report, a release, a pull request, a
-  data file, a skill. The gate runs before the final message, not after.
-- Someone's finished work needs checking against what was asked: "is this ready to send?"
-- A session that is visibly expensive: the same files read repeatedly, long outputs pasted into
-  context, many subagents, polling.
+- Work that will span several sessions — a migration, a multi-week build, a research programme —
+  and needs a ledger, a phase plan and checkpoints that the next session can pick up.
+- Work split across several agents or subagents that need briefs, a budget, and one place where
+  their results are checked against the request.
+- A deliverable that must be reviewed by something that did not build it before it ships.
+- A long-running effort whose spend needs tracking against a budget at phase boundaries.
 - **In tandem.** The delegation audit (in this library's author environment,
   anthropic-skills:max-delegation-auditor) decides who owns each step;
-  `coding-agent-skills:creative-workaround-genius` finds another route when a step fails; this skill
-  plans the whole, keeps it inside budget, and checks it before it ships.
+  `coding-agent-skills:creative-workaround-genius` finds another route when a step fails;
+  `coding-agent-skills:puppet-master` keeps each step lean; this skill plans the whole, keeps it
+  inside budget across sessions, and checks it before it ships.
 - Not for: running a human team's project with red-team and flow doctrine →
   `continuous-improvement-skills:project-command-center`; walking a codebase's built state before
   the next build phase → `coding-agent-skills:the-foreman` (whose bins the gate borrows); a
-  multi-angle code optimization audit → `coding-agent-skills:board-review`.
+  multi-angle code optimization audit → `coding-agent-skills:board-review`; cutting the token cost
+  of a single task or run → `coding-agent-skills:puppet-master`; a single-session task or review
+  → no skill needed.
 
 ## Do it
 
-1. **Size the management to the job.** Management costs tokens too, so it must cost less than it
-   saves. A one-to-three-step task gets none. Anything with a written spec or several deliverables
-   gets the requirement ledger (step 2) and the sweep (step 5) — that pair carries most of the
-   value. Plans, checkpoints and the subagent are for substantial or multi-session work. Do not
-   produce planning documents nobody asked for. When you cannot spawn the subagent, you do not
-   need its definition file: the steps here are the whole procedure.
+1. **Confirm the work needs managing.** A single-session task gets none of this. Engage when the
+   work spans sessions or agents, or needs an independent reviewer; then the ledger (step 2), the
+   plan (step 3), checkpoints (step 4) and the subagent-run sweep (step 5) all pay for themselves.
+   Do not produce planning documents nobody asked for. When you cannot spawn the subagent, you do
+   not need its definition file: the steps here are the whole procedure.
 
 2. **Build the requirement ledger before you start.** Read the whole request or spec to the end
    first — amendments, footnotes and "oh, and…" lines live at the bottom. Then list every
@@ -62,19 +67,17 @@ planning long work, so skip them otherwise.
    no customer data). **Later statements supersede earlier ones** — an amendments section, an
    "instead", a "now called", a "drop X": strike the old line and point to the new one. Where the
    text is ambiguous, pick the reading it supports and note it; ask only if a wrong guess is
-   costly. Keep the ledger short — in your head or your plan for a single session; a scratch file
-   outside the project only when the work spans sessions.
+   costly. Keep the ledger in a file outside the project, where the next session and every agent
+   can read it.
 
-3. **Plan with a testable "done", then work with token discipline.** Each ledger line becomes an
-   acceptance check someone else could run. For substantial work, dispatch the subagent in PLAN
-   mode (brief template in `references/plan-and-qc-templates.md`) and adopt or argue with its
-   plan; set a budget and a stop rule. While working:
-   - Measure before reading; grep, then read a slice. Size with
-     `python3 "${CLAUDE_PLUGIN_ROOT}/skills/project-manager-qc/scripts/token_ledger.py" estimate <paths> --max 20000`.
-   - Read once; batch independent calls; bound every output.
-   - Delegate wide reads, never narrow ones; brief with paths, not pastes; ask for compact returns.
-   - Script what repeats; no polling; stop at the acceptance criteria.
-   The reasoning and the cost model are in `references/token-efficiency-rules.md`.
+3. **Plan with a testable "done", then run lean.** Each ledger line becomes an acceptance check
+   someone else could run. Dispatch the subagent in PLAN mode (brief template in
+   `references/plan-and-qc-templates.md`) and adopt or argue with its plan: phases, owners,
+   dependencies, the delegation shape, a budget and a stop rule. While working, follow
+   `coding-agent-skills:puppet-master` — fewer turns, small new context, subagents only where they
+   repay their start-up cost — and size files before reading them:
+   `python3 "${CLAUDE_PLUGIN_ROOT}/skills/project-manager-qc/scripts/token_ledger.py" estimate <paths> --max 20000`.
+   The cost model is in `references/token-efficiency-rules.md`.
 
 4. **Checkpoint long work at phase boundaries.** What is done, the largest consumer, whether the
    rest fits, and anything unasked-for being built. Log usage as it arrives and read the ledger:
@@ -82,7 +85,7 @@ planning long work, so skip them otherwise.
    python3 "${CLAUDE_PLUGIN_ROOT}/skills/project-manager-qc/scripts/token_ledger.py" log <ledger.jsonl> --task "<name>" --tokens <n> --phase <phase> --kind subagent --ms <ms>
    python3 "${CLAUDE_PLUGIN_ROOT}/skills/project-manager-qc/scripts/token_ledger.py" report <ledger.jsonl> --budget <n>
    ```
-   Keep the ledger outside any repository. Skip this step on short work.
+   Keep the ledger outside any repository.
 
 5. **Run the quality sweep before delivery — every category, every time.** Reviewers find the
    first few loud problems and stop; the quiet ones ship. So the sweep ends when every category
@@ -140,8 +143,9 @@ re-opening the source files and walking the categories gets most of the way.
 **Why management must pay for itself.** A benchmark of this skill's first version found an
 unaided agent already caught every planted defect in a seven-defect review and met every
 requirement of a nine-requirement build, while the skill added up to three-quarters more time.
-Ceremony on easy work is waste; the ledger and the sweep stay because they target the cases that
-do fail, and they are kept to one pass when the work is your own.
+Ceremony on easy work is waste, which is why this skill now engages only when the work outlasts
+one context; the ledger and the sweep stay because hand-offs between sessions and agents are where
+requirements get dropped and blind spots go unchecked.
 
 ## Common mistakes
 - Starting to build before reading the request to the end → the amendment is at the bottom.

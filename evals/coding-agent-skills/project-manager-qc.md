@@ -1,12 +1,12 @@
 # Evals — coding-agent-skills:project-manager-qc (and the project-manager subagent)
 
 ## 1. Positive trigger (should load the skill)
-> "Build me a small pipeline that pulls last quarter's orders, cleans them, totals them by region
-> and writes a one-page summary with a chart. Plan it properly and keep the token spend sensible —
-> last time this kind of job burned through a lot."
+> "We're moving forty reporting tables to the new warehouse over the next few weeks. It will take
+> several sessions, and I want subagents doing the per-table work. Before anything starts, plan it
+> so any session can pick up where the last one stopped, and keep the token spend under control."
 
-Expected: skill loads. It sizes the management to the job; reads the whole request to the end and
-builds a requirement ledger (every deliverable, name, column, number, format, limit, exclusion and
+Expected: skill loads. It confirms the work spans sessions and agents; reads the whole request to
+the end and builds a requirement ledger, kept in a file the next session and every agent can read (every deliverable, name, column, number, format, limit, exclusion and
 "don't", with later amendments superseding earlier lines); writes a testable "done" for each line
 and a budget with a stop rule; works with the token rules visible in its tool use (sizing before
 reading, sliced reads, batched calls, bounded outputs); and before the final message runs the
@@ -36,13 +36,26 @@ doctrine, not the agent's own pipeline.
 Expected: `coding-agent-skills:the-foreman` loads. Inspecting a codebase's built state before the
 next build phase.
 
+## 4a. Near-miss C (should NOT load this skill)
+> "My analyst says the quarterly numbers are finished and wants to send them to the regional VPs
+> today. Is it ready to go? What I originally asked for is in request.md."
+
+Expected: no skill loads. A single-session check of one finished deliverable is work the model does
+well unaided (see §8); the plugin eval case `ignores-single-review` asserts it.
+
+## 4b. Near-miss D (should NOT load this skill)
+> "Last night's agent run used far more budget than a job that size should. Here's its transcript —
+> where did it all go?"
+
+Expected: `coding-agent-skills:puppet-master` loads. Cutting the token cost of one task or run.
+
 ## 5. Quality rubric
 A good response:
 - **Requirement ledger:** every requirement in the request is listed, and a later amendment
   ("instead", an amendments section, a renamed field) supersedes the earlier line.
 - **Testable done:** every deliverable has a criterion a stranger could check.
-- **Proportion:** no plan or gate on a trivial task; a subagent only where it reads a lot and
-  returns a little.
+- **Proportion:** no ledger, plan or gate on single-session work; a subagent only where it reads a
+  lot and returns a little.
 - **Independent gate:** the QC subagent gets paths, criteria and check commands, never the
   author's summary; it opens files and runs checks; LOAD items are fixed before delivery.
 - **Exhaustive sweep:** requirements, numbers recomputed from source, claims, code paths, what the
@@ -97,3 +110,13 @@ but at this task size it costs more than working without it (about 14% more toke
 with no measurable gain: the model under test already reads specs to the end and sweeps reviews
 thoroughly. The ledger and sweep are insurance for longer, multi-session or multi-agent work, which
 this benchmark did not measure.
+
+## 9. Version 2.1.0 — scope narrowed from measurement (2026-10-21)
+§8 found no quality gain on single-session work and a cost of about 14% more tokens and 26% more
+time. 2.1.0 therefore engages only when work spans several sessions or agents, or needs a reviewer
+that did not build it, and hands single-run token cost to `coding-agent-skills:puppet-master`. The
+procedure is unchanged; the description, the "When to use" list and step 1 now say when to stay
+out. The routing evals moved with it: the single-session review case became `ignores-single-review`,
+and the planning case became a multi-session migration. The multi-session benefit is still
+unmeasured: a fair test needs work that really crosses sessions, which a single-run benchmark
+cannot reproduce.

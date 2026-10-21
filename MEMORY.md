@@ -1669,3 +1669,22 @@ retraction of the previous pass's headline mechanism claim.
   root); check `git status` for untracked strays after any eval batch.
 - AVOID: claiming the project-manager skill improves on no-skill at single-session scale — it does
   not measurably; its case rests on long, multi-session or multi-agent work, which was not measured.
+
+### Crystallization pass — 2026-10-21 (puppet-master 1.0.0; project-manager-qc 2.1.0 narrowed)
+- FACT: user asked for "a Puppet Master skill that finds ways to minimize token use while ensuring
+  no loss of quality or comprehensiveness" and approved narrowing project-manager-qc to multi-session
+  / multi-agent work. Shipped coding-agent-skills 0.35.0: puppet-master 1.0.0 (+ `token_audit.py`,
+  28/28 mutants killed) and project-manager-qc 2.1.0; library 81 skills.
+- FACT (cost model, measured): every turn re-sends the whole context, so turns × context dominates;
+  unaided runs averaged 7.8 turns while tool results were only ~3k of a 66k final context; a
+  subagent starts at ~50k, most of it tool definitions, skill listing and connector instructions.
+- FACT (benchmark, pre-registered, 17 matched runs): weighted tokens 102k → 80k (−21%), processed
+  474k → 297k, turns 7.8 → 4.8, time 75 s → 60 s; scripted 62/62 both arms. Audit task: 330k →
+  159k (−52%), blind 10/10 vs 8/10.
+- LESSON: a "write short" rule can cut evidence. One run dropped its source citation; the fix was
+  "write short, and keep the proof", and two re-runs confirmed it. Pair every brevity rule with an
+  evidence rule.
+- LESSON: the unaided auditors dug deeper and found a lever the skill runs missed (start-up context
+  re-sent every turn). Read the baseline's transcripts for ideas, not just its scores.
+- AVOID: Tier F trigger rows that contain a newly added trigger of their target. Adding "second pair
+  of eyes" to project-manager-qc broke F16; re-run `check-trigger-test.py` after any trigger edit.
