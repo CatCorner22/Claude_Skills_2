@@ -25,6 +25,14 @@ Two refinements make the test usable:
   (that path is restricted), when a proxy sent it (the destination is not permitted for this
   session), or when it is a rate limit (slow down; do not dodge). The probe's verdicts carry that
   distinction: `refused-by-origin`, `refused-at-proxy`, and so on.
+- **Read what it protects: a channel or a resource.** A refusal that names a host or a path
+  ("this destination is not permitted") is a channel control; one that names a thing ("access to
+  this repository is not enabled for this session", "this document is private") is a resource
+  control. The same public information may travel through any other permitted channel; a
+  controlled resource may not, and its route is the environment's sanctioned access request,
+  then the owner. A control never forbids the outcome itself: public information about a
+  controlled resource, published elsewhere by its owner or a third party (a package index entry,
+  a public announcement, a search result), remains a legitimate source.
 - **A permitted channel is not evasion; a disguised one is.** When a network allowlist blocks a
   content-delivery host but permits a package registry or a public code host, fetching the same
   **public** file from the permitted host is using the channel the owner allowed. Changing the
@@ -47,6 +55,8 @@ Two refinements make the test usable:
 | Tool's preflight demands a resource it does not read on this path | obstacle | read the code; satisfy the check with a verified stand-in or a flag; prove equivalence |
 | Documentation describes an option that no longer exists | obstacle | read the tool's help and source for the current mechanism |
 | Permission prompt, or the user denied a tool call | control | do not try the same action another way; ask once, with the reason |
+| An automated permission reviewer denies an action | control | stop that action; do not rephrase or reroute it; continue only with routes different in kind, each stating its purpose plainly |
+| "Access to this <resource> is not enabled for this session" | resource control | use the environment's sanctioned access request (an attach or add tool); if refused, ask the owner; public information published elsewhere stays usable |
 | Login, password, API key, two-factor code | control | the person enters it, or a connector they approved is used |
 | CAPTCHA or bot detection | control | never solve or evade; use an official API or connector, or ask |
 | Terms of service forbid automated access | control | use the official API or export, or ask the person to export |

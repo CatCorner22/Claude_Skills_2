@@ -13,7 +13,7 @@ description: >-
   workaround, find another way, find a way, figure it out yourself, it failed, can't access, won't
   install, download failed, what else could work.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: >-
     Built from the delegation-audit discipline (who does each step) and two sibling skills in
     this plugin — Comrade Engineer's state-the-outcome and hidden-cost test, The Foreman's
@@ -79,6 +79,13 @@ that line, which is exactly why it can be relentless there.
      or licence limit), consent of the user or of a third party, a CAPTCHA or bot check, a rate
      limit, another skill's safety rail, the sandbox's own security settings. Respect it.
    If you cannot tell which it is, treat it as a control until the evidence says otherwise.
+   Then read **what the control protects**, because that sets its reach. A *channel* control
+   ("this host is not permitted") blocks one door: the same public information stays available
+   through the session's other permitted tools and hosts, its own fetch and search tools
+   included. A *resource* control ("access to this repository is not enabled", "this file is
+   private") follows the resource through every door: use the environment's sanctioned way to
+   request access first, and if that is refused, the owner decides. Either way a control blocks
+   a route or a resource, never the outcome itself, so the ledger keeps going.
    The full classification table and the owner's-eyes test are in
    `references/obstacles-and-controls.md`.
 
@@ -120,8 +127,11 @@ that line, which is exactly why it can be relentless there.
        needs directly, skipping the failed step entirely.
    12. *Ask the owner* — only for a control or a genuine decision, always last, bundled into one
        question that offers to do all the work after the yes.
-   Put the pencil on the list too: is the blocked step needed at all? The generators, their
-   typical moves and worked examples are in `references/route-generators.md`.
+   Put the pencil on the list too: is the blocked step needed at all? **Find candidates
+   anywhere, prove them strictly.** A search snippet, a naming pattern, an old download or
+   memory is a fine place to *find* a candidate answer; step 7 decides whether it becomes one.
+   So never strike a route for being weak evidence — strike it only for a hidden cost. The
+   generators, their typical moves and worked examples are in `references/route-generators.md`.
 
 5. **Run the hidden-cost check on every route.** The cheap route is often cheap because it
    skips something. For each candidate ask:
@@ -146,7 +156,9 @@ that line, which is exactly why it can be relentless there.
 7. **Prove it, and name what you did.** Show the success test passing with evidence: the file
    parses, the count matches, the checksum agrees, the output equals a known answer, or a second
    route reproduces the first. A stand-in, a patched config or a converter gets an equivalence
-   check, not an assumption. Then report in this shape:
+   check, not an assumption. A candidate confirmed by a direct check — the server returns the
+   file at that name, the checksum matches, an independent source agrees — is an answer, not a
+   guess; a guess is a candidate nobody checked. Then report in this shape:
 
    | # | Route | Generator | Hidden-cost check | Result |
    |---|---|---|---|---|
@@ -170,7 +182,8 @@ that line, which is exactly why it can be relentless there.
 - **No new home for private data.** A failing local tool is never a reason to upload a person's
   files, genome, records or credentials to an outside service without their explicit yes.
 - **No fabrication to close a gap.** When no route can return a value, the value is reported as
-  unavailable, never estimated into existence.
+  unavailable, never estimated into existence — and no unverified belief is offered as a reason
+  either way ("as far as I know it doesn't ship one"). Mark it as unverified or leave it out.
 - **No hidden kludge.** Every stand-in file, patched setting, pinned version or skipped check is
   named in the report with how to undo it.
 
@@ -216,6 +229,12 @@ extra force to stand-ins and converters, because they can produce a plausible wr
 ## Common mistakes
 - Retrying the same route with small variations → a new route comes from a different generator,
   not from a different flag on the failed command.
+- Treating one refusal as a refusal of the outcome → a control blocks a route or a resource;
+  read which, then keep generating routes that are different in kind.
+- Striking a route because its source is weak → weak sources may supply candidates; only the
+  proof has to be strong.
+- Calling a pattern-built candidate a guess and stopping there → confirm it with a direct check,
+  then it is evidence.
 - Treating a policy denial as a puzzle → read who refused and why; a refused tunnel or a 403 from
   a gatekeeper is a control, and the route goes to its owner.
 - Disabling certificate checks to get past a TLS error → point the tool at the right certificate

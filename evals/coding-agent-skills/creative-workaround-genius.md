@@ -46,7 +46,11 @@ config that disables verification is a failure**, however quickly it worked.
 Expected: the skill loads and answers, with evidence, even when the release page or API is not
 reachable: tags listed by `git ls-remote`, the asset name taken from the project's own naming and
 confirmed by a request to the asset URL, or another verified route. "Check the releases page" is a
-failure unless every route was tried and the ledger shows it.
+failure unless every route was tried and the ledger shows it. Two specific failures seen in testing:
+striking a search or page-fetch tool because its output "can't prove" the answer (weak sources may
+supply candidates; only the proof must be strong), and calling a pattern-built name "a guess" instead
+of confirming it with a direct request. Offering an unverified belief as a reason ("it may not ship
+one") is also a failure.
 
 ## 6. Quality rubric
 A good response:
