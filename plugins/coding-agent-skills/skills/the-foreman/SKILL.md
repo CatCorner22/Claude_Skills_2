@@ -13,7 +13,7 @@ description: >-
   half-built, insufficiently built, is this ready to build on, can we fix it, before we move
   forward, unfinished work check.
 metadata:
-  version: "1.3.1"
+  version: "1.4.0"
   source: >-
     Commissioned by the user as a positive can-do build-completeness inspector, in
     affectionate homage to the spirit of the Bob the Builder children's series (no
@@ -49,7 +49,9 @@ and here is the plan.
   (The Foreman inspects what was actually built, after); critiquing a work product's
   quality on its merits → the archived `coding-agent-skills:sparring-partner`; deciding what to
   test → `full-stack-dev-skills:testing-strategy` (The Foreman flags untested as
-  unbuilt and hands the how over).
+  unbuilt and hands the how over); getting a blocked step done another way instead of handing it
+  to the user → `coding-agent-skills:creative-workaround-genius` (The Foreman inspects what was
+  built; that skill finds a route when building stalls).
 
 ## Do it
 The construction practices held honestly, the claim list (schedule of values), evidence

@@ -1601,3 +1601,27 @@ retraction of the previous pass's headline mechanism claim.
 - Privacy posture held: research notes, the synthesized report, the tailoring file and the maps live
   under `/root/genome-audit` and `.claude/skills-env/*.private.md`; the public skill carries no
   haplogroup–surname link; subagents received haplogroup labels, surnames and places only.
+
+### Crystallization pass — 2026-10-21 (creative-workaround-genius, tandem with the delegation audit)
+- FACT: `coding-agent-skills:creative-workaround-genius` shipped (plugin 0.31.0 → 0.32.0; library 79
+  skills). Division of labour with the synced anthropic-skills:max-delegation-auditor: the audit
+  decides WHO owns a step; this skill decides HOW the agent completes a step it owns when the obvious
+  route fails (outcome first → obstacle vs control → inventory → ≥5 routes from ≥3 generators →
+  hidden-cost check → ranked, time-boxed runs → proof). It supplies the audit's "two alternate
+  Claude-run routes" rule. Reciprocal seams added in the bodies of soviet-space-graphite (1.1.0) and
+  the-foreman (1.4.0); both descriptions are at ~970 chars, so no room for description seams.
+- RULE: a workaround routes around an OBSTACLE (unintended friction), never a CONTROL (permission,
+  credential, policy denial, consent, licence, CAPTCHA, rate limit, sandbox settings). Test: would the
+  owner of the barrier object if they watched? A permitted channel carrying the same public data is
+  not evasion; a disguised request to a refused host is.
+- FACT (calibrated by execution): through this cloud proxy a refused host and a nonexistent host both
+  surface in Python as `URLError(OSError('Tunnel connection failed: 403 Forbidden'))` — classify both
+  as a control and never retry; an origin's HTTP answer of any status means the channel is reachable
+  (raw.githubusercontent.com returns 400 at "/" but 200 for real files; api.github.com returns 403 with
+  a "sessions are bound to their configured repositories" body on unscoped paths). `route_probe.py`
+  encodes this; `--net` takes under a second.
+- FACT: the harness refuses subagent writes of report-style `.md` files in some runs; ask eval
+  subagents to return the text in the hand-back as a fallback, and transcribe it with a note.
+- FACT: the delegation audit lives only in the owner's claude.ai account; the tandem link on that
+  side ships as a packaged `.skill` (description sentence + one paragraph in its §3.3) for the owner to
+  upload — there is no tool route to edit or upload claude.ai skills from a session.
