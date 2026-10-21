@@ -1,11 +1,27 @@
 # Plan and QC templates — briefs, formats and the inline checklist
 
 ## Contents
+- [The requirement ledger](#the-requirement-ledger)
 - [Briefing the project-manager subagent](#briefing-the-project-manager-subagent)
 - [Kickoff plan format (inline)](#kickoff-plan-format-inline)
-- [Inline quality checklist for small tasks](#inline-quality-checklist-for-small-tasks)
+- [The quality sweep as a checklist](#the-quality-sweep-as-a-checklist)
 - [The punch-list bins](#the-punch-list-bins)
 - [Acting on the gate's verdict](#acting-on-the-gates-verdict)
+
+## The requirement ledger
+
+Read the request or spec to the end, then write one line per requirement with its source words.
+Later statements supersede earlier ones; strike the old line and point to the new one.
+```
+R1  outputs/kpis.csv, columns metric,value, no index column        (§4)
+R2  period = September 2026                                         (§2)  → superseded by R9
+R3  exclude internal accounts from signups AND orders               (§2)
+...
+R9  period boundaries in America/New_York, not UTC                 (§6 A1, supersedes R2)
+R10 channel "partner" renamed "affiliate" in every output          (§6 A2)
+Ambiguity: "sorted by the size of the difference" → absolute value, largest first (chosen; noted)
+```
+Each line becomes an acceptance check in the plan and a row in the sweep's first category.
 
 ## Briefing the project-manager subagent
 
@@ -36,7 +52,8 @@ Return the CHECKPOINT format, at most 40 lines.
 **QC**
 ```
 MODE: QC
-Acceptance criteria:
+Request or spec: <path>   (the subagent builds its own requirement ledger from it)
+Acceptance criteria (if any beyond the request):
   1. <checkable criterion>
   2. ...
 Deliverables: <paths>
@@ -56,12 +73,21 @@ Delegate: <none | what and why>
 Budget: <S/M/L>; cut first if short: <item>
 ```
 
-## Inline quality checklist for small tasks
-- Every deliverable named in the request exists, at the path stated.
-- Each "done when" test has been run, and the output was read, not assumed.
-- No claim in the final message lacks evidence in this session.
-- Nothing personal, secret or private went into a file that will be committed or shared.
-- The final message says what was done, what was verified, and what is left — in that order.
+## The quality sweep as a checklist
+
+Walk every category to the end; the sweep is done when the list is, not when the findings feel
+like enough. Re-open the request or spec rather than working from memory.
+- [ ] **Requirements** — each ledger line, pass or fail, evidence from the artefact.
+- [ ] **Numbers** — headline figures recomputed from source, independently of the code under review;
+      totals that should agree across files agree.
+- [ ] **Claims** — every statement in notes, summaries, changelogs, READMEs: true, false, unverifiable.
+- [ ] **Code paths** — cleaned or filtered data actually used; boundaries; filters; joins; units.
+- [ ] **Tests** — run; read what each asserts; does it exercise the shipped path? skipped or vacuous?
+- [ ] **Files** — anything missing; anything that should not be there (debug dumps, personal data,
+      secrets, a `.env` not covered by `.gitignore`).
+- [ ] **Format** — headers and order, index columns, separators, decimals, line and word limits.
+- [ ] **Examples** — documented commands run exactly as written.
+- [ ] **Final message** — says what was done, what was verified, and what is left, in that order.
 
 ## The punch-list bins
 

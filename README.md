@@ -87,7 +87,7 @@ survive — use it comparatively, not as a promise.
 
 | Plugin | Skills | ~Tokens | % of 200K |
 |---|---|---|---|
-| `coding-agent-skills` | 13 | 3,249 | 1.62% |
+| `coding-agent-skills` | 13 | 3,274 | 1.64% |
 | `decision-science-skills` | 10 | 2,628 | 1.31% |
 | `full-stack-dev-skills` | 10 | 2,149 | 1.07% |
 | `continuous-improvement-skills` | 7 | 1,750 | 0.88% |
@@ -102,7 +102,7 @@ survive — use it comparatively, not as a promise.
 | `deep-research-skills` | 4 | 1,014 | 0.51% |
 | `collaboration-skills` | 2 | 549 | 0.27% |
 | `math-foundations-skills` | 1 | 267 | 0.13% |
-| **all 14** | **80** | **19,718** | **9.86%** |
+| **all 14** | **80** | **19,744** | **9.87%** |
 
 **Install profiles** — curated bundles matched to a working day, with their measured cost. Usage
 decay rewards a coherent working set: a profile keeps one warm cluster of skills defending its own
@@ -111,7 +111,7 @@ listing slots, where a scattershot install decays everything equally.
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 |---|---|---|---|---|
 | Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,838 | 1.42% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 23 | 5,398 | 2.70% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 23 | 5,424 | 2.71% |
 | Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,368 | 1.68% |
 | Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,229 | 2.11% |
 
@@ -144,16 +144,16 @@ account of this same mechanism:
 
 Practical guidance:
 
-- **Two to four plugins (~24-31 skills, 3-4% of context)** is the sweet spot: comfortably below the
+- **Two to four plugins (~12-23 skills, under 3% of context)** is the sweet spot: comfortably below the
   point where any of this starts, and small enough that the router discriminates well.
 - **Pick by the work you do**, not by breadth. Each bundle below is measured, not estimated:
 
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 | --- | --- | ---: | ---: | ---: |
-| Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 24 | 5,895 | 2.95% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 31 | 7,213 | 3.61% |
-| Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 26 | 6,624 | 3.31% |
-| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 25 | 6,569 | 3.28% |
+| Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,838 | 1.42% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 23 | 5,424 | 2.71% |
+| Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,368 | 1.68% |
+| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,229 | 2.11% |
 
   Note that a bundle's skills cross-reference skills in plugins you have not installed. Those
   pointers name the plugin (`other-plugin:skill`), so they read as "install that plugin if you want
@@ -169,7 +169,7 @@ Practical guidance:
 | Plugin | Skills | What it covers |
 | --- | --- | --- |
 | `decision-science-skills` | 10 | Structured judgment: pre-mortem (with the counsel rail), tabletop wargaming and no-win drills under full exercise control, weak-signal navigation, Bayesian updating via natural frequencies, reference-class forecasting, competing hypotheses analysis, minority-report dissent capture, the Rashomon protocol, The Challenger |
-| `coding-agent-skills` | 13 | Skill authoring (the house standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors review swarm (+6 subagents), defect epidemiology, rule stress-testing, software archaeology, Comrade Engineer's pencil pass, The Foreman, the Creative Workaround Genius (another route when the obvious one fails), the project manager and QC gate (with its own subagent), fitness and nutrition science, and Chicken Little (Aether) with its deploy-advisor / deploy-compiler autopsy modes |
+| `coding-agent-skills` | 13 | Skill authoring (the house standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors review swarm (+6 subagents), defect epidemiology, rule stress-testing, software archaeology, Comrade Engineer's pencil pass, The Foreman, the Creative Workaround Genius (another route when the obvious one fails), the project manager and QC gate (requirement ledger and exhaustive sweep, with its own subagent), fitness and nutrition science, and Chicken Little (Aether) with its deploy-advisor / deploy-compiler autopsy modes |
 | `full-stack-dev-skills` | 10 | Lean full-stack development: architecture, FastAPI backends (+ the production Python toolchain standard), databases/ORM, dynamic frontends, realtime, ML in production, testing strategy, deploy and operate, evidence-based UI/UX inspection |
 | `continuous-improvement-skills` | 7 | The improvement methods with teeth: DMAIC (worked control-chart project), FMEA (evidence-gated Action Priority), MSA extended to LLM-as-judge gauge studies, DOE, EVOP, root-cause analysis, project command center |
 | `safety-and-reliability-skills` | 6 | Split-tally evidence design (litigation-hold rail), detection-system tuning by disposition audit, reliability math incl. probability-of-failure-on-demand, rebuild rehearsal (irreversibility screen), break-glass playbooks, hash-rank sortition review |
