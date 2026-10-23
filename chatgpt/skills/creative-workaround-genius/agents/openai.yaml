@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Workaround Genius"
+  short_description: "Resolve blocked routes while preserving permission boundaries"
+  default_prompt: "Use $creative-workaround-genius to complete the blocked step through a permitted route and verify the result."

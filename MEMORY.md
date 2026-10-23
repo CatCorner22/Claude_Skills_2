@@ -1688,3 +1688,10 @@ retraction of the previous pass's headline mechanism claim.
   re-sent every turn). Read the baseline's transcripts for ideas, not just its scores.
 - AVOID: Tier F trigger rows that contain a newly added trigger of their target. Adding "second pair
   of eyes" to project-manager-qc broke F16; re-run `check-trigger-test.py` after any trigger edit.
+
+
+### Crystallization pass — 2026-10-23 (ChatGPT and Work adapters)
+- FACT: Added an isolated chatgpt/ subtree adapting PR #65 at 44a01bceb2083f174a07d652a1d078abca19617c: Puppet Master, Project Manager and QC, and Creative Workaround Genius. Claude plugins and catalog counts remain separate.
+- RULE: Maximum-Delegation Auditor retains every feasible authorized step; execution economy cannot remove requested depth, evidence, quality gates, targeted read-back, or consent boundaries. Assistant ownership and worker allocation are separate choices.
+- FACT: Portable audit validation: 20 unit tests, 7 self-checks, and 3 temporary mutation variants detected; four fresh-context functional cases completed, including an independent QC reviewer. These are not matched token-savings or native-routing measurements. Details and limits: chatgpt/docs/validation.md.
+- RULE: Use explicit normalized telemetry and supplied per-model rates; unavailable tokens/worker usage are unknown, not zero. Distinguish conversational adaptation, persisted packages, native discovery/invocation, and account-wide installation.
