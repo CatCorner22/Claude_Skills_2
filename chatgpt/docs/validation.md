@@ -53,15 +53,21 @@ equivalence claim follows from these passes.
 
 ## Honest limits
 
-The native Work workspace save was attempted through its documented git workflow.
-Local commit `b800716b357c44b8ae2a32d51e539a3c6530b4a3` contains the three packages
-and reciprocal Auditor/Cursor edits. Push failed with HTTP 422. Remote read-back
-still showed its prior commit, so durable native Work persistence is **not
-confirmed**; local files and commit were preserved. A full exposed executor skill
-catalog listing did not discover the three new names. Do not describe them as
-natively installed, auto-selected, or account-wide available. The GitHub adapter
-files and this validation record are a separately authorized durable deliverable;
-the tested conversational instructions remain usable when read into a session.
+The initial bulk native Work save returned HTTP 422, and its remote read-back
+showed no change. A subsequent retry saved one new skill per push through the
+same documented workflow. Puppet Master, Project Manager and QC, and Creative
+Workaround Genius were then assigned native skill identities. Fresh remote
+snapshots confirmed that the instruction, license, script, and reference bytes
+match the validated adapters. The host normalized UI YAML and generated icons;
+its parsed interface fields retain the intended names, descriptions, and prompts,
+with ChatGPT included in the native product metadata.
+
+The reciprocal Auditor and Cursor-selector additions were also saved and read
+back. These checks establish native persistence of the three skill packages and
+the existing-skill updates in this user's ChatGPT skills workspace. They do not
+establish automatic routing in every future session or account-wide activation.
+The current conversation's cached skill catalog was not a reliable freshness
+check. No native plugin installation or new token-savings result is claimed.
 
 - Four representative cases are not a comprehensive or statistical validation of
   all future workflows; no randomized/matched baseline arm was run.
