@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Manager and QC"
+  short_description: "Track complex work and verify delivery independently"
+  default_prompt: "Use $project-manager-qc to coordinate this work and verify it against the full requirements."

@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0-chatgpt.1",
+  "source_repository": "CatCorner22/Claude_Skills_2",
+  "source_pull_request": 65,
+  "source_commit": "44a01bceb2083f174a07d652a1d078abca19617c",
+  "adapters": {
+    "puppet-master": "1.0.0",
+    "project-manager-qc": "2.1.0",
+    "creative-workaround-genius": "2.0.0"
+  },
+  "native_account_wide_installation_verified": false,
+  "chatgpt_token_savings_measured": false
+}
