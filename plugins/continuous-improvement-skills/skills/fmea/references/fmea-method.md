@@ -46,10 +46,10 @@ Adapted to office/transactional processes. Calibrate the anchors once to your ow
 materiality, then hold them fixed so ratings compare across rows and across time.
 
 ### Severity (of the effect) — how bad if it happens
-| S | Anchor (transactional/finance processes) |
+| S | Anchor (transactional/office processes) |
 |---|---|
-| 9–10 | Regulatory breach, misstated financial statements, unrecoverable loss of funds, undetected fraud path |
-| 7–8 | Material error reaching a customer, bank, or the GL; costly recovery; audit finding |
+| 9–10 | Regulatory breach, materially inaccurate records, unrecoverable loss of value, undetected fraud path |
+| 7–8 | Material error reaching a customer or an external system of record; costly recovery; audit finding |
 | 5–6 | Error caught downstream but causing rework across teams, missed close/SLA dates |
 | 3–4 | Localized rework; delay absorbed within the team; no external impact |
 | 1–2 | Cosmetic; negligible effect on outcome |

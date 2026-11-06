@@ -46,8 +46,8 @@ metadata:
    average, per-account volatility), ratios (amount ÷ typical amount), and interaction terms can encode real
    structure. Compute aggregates over training rows only, and be wary of stats that peek across the split.
 6. **Treat missingness as information.** Impute with a train-fitted rule (median, or a model), and add a
-   **"was missing" indicator**: in finance a blank field is often meaningful (no prior history, a skipped
-   step), not random noise. Don't drop rows wholesale to avoid imputing.
+   **"was missing" indicator**: a blank field is often meaningful in many domains (no prior history, a
+   skipped step), not random noise. Don't drop rows wholesale to avoid imputing.
 7. **Select a smaller, robust feature set.** Remove near-constant, duplicate, and obviously leaky columns
    first; then use **regularization (lasso)**, **permutation importance**, or correlation pruning to cut the
    rest. Fewer well-chosen features generalize better and are easier to monitor than a wide, noisy matrix.

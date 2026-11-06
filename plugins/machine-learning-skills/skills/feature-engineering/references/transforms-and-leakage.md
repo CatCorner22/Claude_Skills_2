@@ -57,7 +57,7 @@ while you build the encoder (`handle_unknown="infrequent_if_exist"` or `"ignore"
 ## Missing values
 - Impute with a **train-fitted** rule: median (robust) for numerics, a constant/"missing" category for
   categoricals, or a model-based imputer.
-- Add a **binary missingness indicator** per field that is missing-not-at-random: in finance a blank often
+- Add a **binary missingness indicator** per field that is missing-not-at-random: a blank often
   means "no history" or "step skipped," which is signal.
 - Avoid dropping rows with missing values wholesale; it discards data and can bias the sample.
 

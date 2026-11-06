@@ -1756,19 +1756,49 @@ retraction of the previous pass's headline mechanism claim.
 - AVOID: committing a multi-agent edit while agents are still writing. Wait for every report first.
 
 ### Crystallization pass — 2026-11-06 (fitness deletion, archived-pointer sweep, treasury/finance removal)
-- FACT: owner directed four actions in one message: (1) delete `coding-agent-skills:fitness-nutrition-science`
-  outright, not archive; (2) fix every dead `plugin:skill` cross-reference left over from earlier
-  archival/deletion rounds; (3) remove treasury/finance-domain framing from general-purpose skills that
-  still carried it; (4) resolve six flagged accuracy items, with full discretion on how.
+- FACT: owner directed six things in one message: (1) fix every dead `plugin:skill` cross-reference
+  left over from earlier archival/deletion rounds; (2) delete `coding-agent-skills:fitness-nutrition-science`
+  outright, not archive; (3) a disclosure of professional licensing authority for an earlier-flagged
+  legal-review item, acknowledged only, never stored (see the SENSITIVE-DATA-HANDLING entry below);
+  (4) remove treasury/finance-domain framing from general-purpose skills that still carried it (no
+  standalone treasury/finance skill existed anymore to delete, so this was reinterpreted and stated
+  back as framing-removal); (5) resolve six flagged accuracy items, with full discretion on how; (6)
+  after all of the above, audit/optimize the retained skills and report final results — delivered as a
+  confirmation/consistency pass (preservation checker plus a full gate re-run) over everything changed
+  in this round, not a fourth line-by-line read of all 80 skills, and stated to the user as such rather
+  than assumed silently.
 - FACT: the fitness skill was removed with `git rm` (not moved to `archive/skills/`), its cross-references
   in `deep-research-skills` reworded, and the deletion logged in `archive/README.md` under a new
   "Deleted, not archived (2026-11-06, owner-directed)" heading, mirroring the existing Oracle/treasury
   deletion entry's format.
-- FACT: 142 dead `plugin:skill` references across 75 files (pointers into skills archived/deleted in
-  prior rounds) were fixed by 7 parallel subagent batches, each independently confirming deadness via
-  `Glob` before editing. House rule followed: name the domain generically rather than leave a dead
-  pointer; two cases were genuine live-successor retargets (`chicken-little-technical-compiler` ->
-  `chicken-little`), confirmed by that skill's own frontmatter stating the merge, not assumed.
+- FACT: 142 dead `plugin:skill` references across 75 files under `plugins/` (pointers into skills
+  archived/deleted in prior rounds) were fixed by 7 parallel subagent batches, each independently
+  confirming deadness via `Glob` before editing. House rule followed: name the domain generically
+  rather than leave a dead pointer; two cases were genuine live-successor retargets
+  (`chicken-little-technical-compiler` -> `chicken-little`), confirmed by that skill's own
+  frontmatter stating the merge, not assumed.
+- LESSON (advisor caught this, second review of the same round): the 142-reference sweep above only
+  scanned `plugins/`. `evals/**` carries its own "Near-miss (should NOT load this skill) / Expected:"
+  lines that name a skill, and 44 of those named a skill archived/deleted in earlier rounds too —
+  `validate.sh` never scans `evals/`, so these survived every gate clean. When a skill is archived or
+  deleted, grep `evals/` for its name as part of the same sweep, not as an afterthought; consider
+  extending `validate.sh` to cover `evals/` so this class of miss can't recur silently.
+- FACT: the same accuracy-item round also found and fixed leftover explicit finance/accounting framing
+  the earlier treasury/finance-removal pass missed because it read SKILL.md files and not their
+  references/ (the exact scope trap the 2026-11-06 wording-audit entry above already warned about):
+  `root-cause-analysis/references/tools-and-templates.md`, `feature-engineering`'s SKILL.md and
+  `references/transforms-and-leakage.md`, and `fmea/references/fmea-method.md`'s severity-anchor
+  table. Left untouched, correctly: domain-neutral reconciliation/payment scenarios used as ordinary
+  business worked examples (e.g. `duckdb-local-analytics`'s ledger-vs-statement example) — per
+  `archive/README.md`'s own stated rule, those are a deliberate exception, not finance-domain framing.
+- LESSON: `archive/README.md`'s own "what deliberately remains" paragraph (2026-08-18 entry) named
+  three skills — `sql-for-analysts`, `dashboard-design`, `lean-six-sigma-for-software` — as proof that
+  an Oracle-flavored word still lived on in the active library. All three were themselves archived in
+  the 2026-08-23 consolidation two paragraphs below it, making the earlier paragraph's examples false
+  for over two months before this round caught it by cross-checking the claim against a live Glob. A
+  historical dated entry's past-tense facts should stay frozen, but a present-tense claim embedded in
+  one ("what remains") is not historical and goes stale exactly like any other doc — check it the same
+  way.
 - FACT: treasury/finance worked examples were rewritten to domain-neutral equivalents (inventory/supplier
   deliveries instead of cash/receipts) in `reference-class-forecasting` and `competing-hypotheses-analysis`,
   preserving every number exactly while relabeling currency amounts as unit counts.

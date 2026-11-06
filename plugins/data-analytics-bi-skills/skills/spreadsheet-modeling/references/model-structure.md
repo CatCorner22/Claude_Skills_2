@@ -121,7 +121,7 @@ utilization lands anywhere between 55% and 75%.
 | `Hires_New` | 2 | people | proposal under test |
 | `Hire_Month` | 4 | month index | proposal under test (April) |
 | `Salary_Annual` | 90,000 | $/person/yr | HR band midpoint |
-| `Overhead_Rate` | 30% | of salary | finance standard |
+| `Overhead_Rate` | 30% | of salary | cost-accounting standard |
 | `Bill_Rate` | 120 | $/hr | current rate card |
 | `Hours_Per_Month` | 160 | hr/person/mo | org standard workable month |
 | `Util_Base` | 65% | of `Hours_Per_Month` | trailing 6-mo actual |

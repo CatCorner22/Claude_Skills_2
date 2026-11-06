@@ -1,6 +1,6 @@
 # RCA tools and templates (reference)
 
-Worksheets for the three core tools, plus the verification step. Applied to finance/accounting.
+Worksheets for the three core tools, plus the verification step.
 
 ## Contents
 - Problem statement template
@@ -14,8 +14,8 @@ Worksheets for the three core tools, plus the verification step. Applied to fina
 > **What** is wrong: <the defect/deviation> · **Where**: <process/account/entity> · **When**:
 > <started / how often> · **How big**: <magnitude, frequency, $> · **How we know**: <evidence/source>.
 
-No cause, no solution, no blame. Example: "14 supplier invoices were paid twice in Q2 (vs. 2 in Q1),
-totaling $84k, identified in the duplicate-payment report." (The Pareto tally below counts the same
+No cause, no solution, no blame. Example: "14 supplier orders were shipped twice in Q2 (vs. 2 in Q1),
+totaling $84k, identified in the duplicate-fulfillment report." (The Pareto tally below counts the same
 14.)
 
 ## 5 Whys worksheet
