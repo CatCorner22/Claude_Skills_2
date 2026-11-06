@@ -13,7 +13,7 @@ description: >-
   accommodation, wrongful termination, workplace investigation, independent contractor, overtime,
   harassment complaint, performance improvement plan.
 metadata:
-  version: "1.0.3"
+  version: "1.0.4"
   source: >-
     Built from the federal employment statutes named in the references (thresholds marked
     [rule text] with the instrument cited) and a 2026-10-14 search pass on the items that move
@@ -64,8 +64,8 @@ way a decision-maker reads it: exposure first.
    employer's own past practice (consistency is evidence). Write the source next to the issue. A
    number without its instrument is a rumour.
 
-4. **Verify currency before relying on any number or agency position.** Open the live source (   the official code, *ecfr.gov*, the agency's current page, the state statute) and date the
-   check. `references/moving-parts-ledger.md` lists what is known to have moved recently and the
+4. **Verify currency before relying on any number or agency position.** Open the live source (the official code, *ecfr.gov*, the agency's current page, the state statute)
+   and date the check. `references/moving-parts-ledger.md` lists what is known to have moved recently and the
    route to check each; two of its items (the FTC non-compete rule, the 2024 overtime threshold)
    are rules that were vacated and still read as current in older material. Pass anything that
    needs authority to `legal-skills:legal-citation-research`.

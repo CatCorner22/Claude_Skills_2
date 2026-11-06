@@ -11,7 +11,7 @@ description: >-
   deep-research-skills:dna-ancestry-research. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.7.4"
+  version: "1.7.5"
   source: >-
     Citations are verified against retrieved index records, never a search tool's generated prose,
     and a claim attaches only to a record whose title was returned: a bare URL proves an
@@ -167,7 +167,7 @@ Work the stages in order. Several can fail; failing them honestly is the point.
     **When the channel cannot return a number, say so instead of producing one.** Fabrication is most likely at this stage:
     the instruction asks for a figure, and where scholarly resolvers and direct fetches are
     blocked, a search tool's prose will supply a confident invention. The fallback is the three anchored, provenance-graded figures in
-    `references/variant-catalog.md` §0 (quoted as ranges, with their grade and design stated) not
+    `references/variant-catalog.md` §0 (quoted as ranges, with their grade and design stated), not
     a number you cannot source. **An unsourceable figure is reported as unavailable.**
 
 12. **Decide actionability honestly, then report.** An intervention must exist with evidence at
@@ -232,7 +232,7 @@ These are not hedges. Violating any of them causes a specific harm.
   report it (CYP2C19 heterozygous at `*2` and `*17` is the worked case). Where two or more defined
   diplotypes are consistent, enumerate them, say whether the ambiguity is **nomenclatural or
   clinical**, and name the assay that settles it (TPMT `*3B`/`*3C`). Where the call needs copy
-  number or structure, CYP2D6, do not call. **State any cis assumption rather than leaving it
+  number or structure (CYP2D6), do not call. **State any cis assumption rather than leaving it
   silent.** `references/pharmacogenomics.md` §1. *(A blanket ban would forbid every call, since no
   consumer file is phased, and that reference file says in terms that a skill which always reports
   ambiguity is as wrong as one that never does.)*
@@ -260,7 +260,7 @@ These are not hedges. Violating any of them causes a specific harm.
 - **Establish whose genome this is before reading it.** If the data subject is not the person
   asking, say what changes: they have not consented to this analysis, and findings about them are
   not the requester's to receive. **For a minor's file, do not report predictive adult-onset
-  findings**, that decision belongs to the person when they can make it. Route to a clinical
+  findings.** That decision belongs to the person when they can make it. Route to a clinical
   genetics service. *(A relative's export is a realistic input;
   `references/data-formats-and-parsing.md` §5 treats it as one.)*
 - **An exclusion request ("do not tell me about X") is honoured in full for findings with no

@@ -26,7 +26,7 @@ Taiwan.
 Excluded sources may never support a conclusion and never appear in the main reference list.
 
 **Always allowed regardless of country:** multinational bodies and regulators that publish their own
-independently-reviewed output, WHO, Cochrane, EMA, FDA, MHRA, Health Canada, PMDA, and multinational
+independently-reviewed output: WHO, Cochrane, EMA, FDA, MHRA, Health Canada, PMDA, and multinational
 trials coordinated from an allowed country.
 
 **Unlisted countries** are judged on the same underlying criteria (independent peer review, research-
