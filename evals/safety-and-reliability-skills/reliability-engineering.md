@@ -37,12 +37,10 @@ tests.
 > "Our payment-posting service keeps falling over when the third-party eligibility API is slow —
 > add timeouts, retries with backoff, and a circuit breaker so it degrades gracefully."
 
-Expected: qualitative resilience-pattern engineering →
-`continuous-improvement-skills:lean-six-sigma-for-software` (its stability-and-redundancy
-reference). This skill supplies the *math* under those patterns (how much redundancy an SLO
-requires, and the availability/error-budget arithmetic), not the patterns themselves, and that
-skill also owns the error budget as a release-governance mechanism. If it loads on
-pattern-implementation asks with no quantitative frame, tighten the description.
+Expected: qualitative resilience-pattern engineering, a separate discipline this library does
+not carry. This skill supplies the *math* under those patterns (how much redundancy an SLO
+requires, and the availability/error-budget arithmetic), not the patterns themselves. If it
+loads on pattern-implementation asks with no quantitative frame, tighten the description.
 
 ## 2b. Near-miss (generic-token guard)
 > "How reliable is our appointment-recall process? Patients keep slipping through — look

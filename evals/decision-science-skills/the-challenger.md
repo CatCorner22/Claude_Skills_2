@@ -26,8 +26,8 @@ fired; if it loads on a pre-commitment imagination ask, the seam is failing.
 > "I keep saying I'll finish the recon rewrite and I keep stalling — hold up the mirror
 > and get me moving again."
 
-Expected: `coding-agent-skills:stay-hard-accountability` owns effort on the chosen
-plan (the Mirror, the 40% audit). The Challenger governs whether the plan still
+Expected: a separate personal-accountability discipline this library does not carry
+owns effort on the chosen plan (the Mirror, the 40% audit). The Challenger governs whether the plan still
 deserves the effort — quitting the plan is not quitting the work, and neither skill
 substitutes for the other. If the-challenger loads on a personal-drive ask, tighten
 the boundary.
