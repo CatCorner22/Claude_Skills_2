@@ -12,7 +12,7 @@ description: >-
   waste. Triggers: puppet master, save tokens, reduce token usage, token efficiency, cut token
   cost, cheaper run, context is filling up, why was this so expensive, audit token use.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Puppet Master
@@ -80,7 +80,7 @@ fewer subagents, shorter output.
 6. **Write short, and keep the proof.** Lead with the result, then what is left. Every claim the
    user will act on keeps its evidence: the file and function that show it, or the command and
    what it printed. Cut narration, restated requests and echoed output the user can open, never
-   the proof. Output costs several times input and sits in the context of everything after it.
+   the proof. Output also sits in the context of everything after it.
 
 7. **Audit a run, then fix the habit.** For an expensive run, or to review someone's workflow,
    analyse its transcript (Claude Code keeps them under `~/.claude/projects/<project>/`):
@@ -90,8 +90,8 @@ fewer subagents, shorter output.
    It reports turns, final context, processed and price-weighted tokens, the largest tool
    results with the call that made each, and waste signals: a start-up context that dominates
    because it is re-sent every turn, repeated reads, unbounded commands, single-call turns that
-   could have been batched, subagent spawns. Pair every saving you
-   propose with the check that keeps the quality bar intact. Arithmetic, lever table and batching
+   could have been batched, subagent spawns. Pair every saving you propose
+   with the check that keeps the quality bar intact. Arithmetic, lever table and batching
    patterns: `references/token-economics.md`.
 
 ### Quality rails

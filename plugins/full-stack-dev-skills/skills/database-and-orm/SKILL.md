@@ -12,7 +12,7 @@ description: >-
   sqlite foreign keys, sqlite to postgres, transaction handling, connection pool, pool_size,
   too many connections, pgbouncer, database indexes app.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # Database and ORM for applications
@@ -35,7 +35,7 @@ metadata:
    connection** — it is per-connection state, not a property of the file. So orphan rows insert
    clean, the schema looks correct, and the bill arrives when the Postgres load rejects them.
    Wire the `connect`-event pragma from `references/data-layer-recipes.md` and prove it with one
-   deliberate orphan insert; without that proof, an FK on SQLite is a comment.
+   deliberate orphan insert. Without that proof, an FK on SQLite is a comment.
 2. **Model tables 1:1 and resist cleverness:**
 
 ```python
@@ -89,24 +89,24 @@ stmt = (select(Invoice)
    columns from three tables, a plain `select(cols).join(...)` beats loading object graphs.
    Turn on SQL echo in dev occasionally — the query log is the truth.
 5. **Draw the transaction inside the request, not in the dependency's teardown.** One
-   request/use-case = one session = one transaction — but the `commit()` belongs in the request
-   handler or the service call it makes, and `get_db` owns *lifecycle only*: `yield` the
+   request/use-case = one session = one transaction, but the `commit()` belongs in the request
+   handler or the service call it makes. `get_db` owns *lifecycle only*: `yield` the
    session, `close()` it in `finally` (close rolls back anything uncommitted). Committing after
    the `yield` is the trap. A FastAPI yield-dependency's post-`yield` block runs in the
    **request-scoped** exit stack, which current FastAPI closes *after the response has been
    sent* (verified on FastAPI 0.141: raising where the commit would be still returned `201` to
    the client, with the exception surfacing afterwards as a server error nobody's client sees).
    So a deferred-constraint violation, serialization failure, deadlock, or dropped connection
-   rolls the write back *after* you promised success — and there is nowhere to catch
+   rolls the write back *after* you promised success, and there is nowhere to catch
    `IntegrityError` and answer `409`. Which side of the response that block runs on has changed
-   across FastAPI versions, and newer versions let a dependency opt into function scope; that
-   version-dependence is itself the argument for not putting a business-critical step there.
+   across FastAPI versions, and newer versions let a dependency opt into function scope. That
+   version-dependence is itself the argument against putting a business-critical step there.
    Service code still never commits mid-flow — it `flush()`es; the use case commits once.
 6. **Index what you filter and join on** — FKs, columns in frequent `WHERE`/`ORDER BY` — and
    nothing else until a slow query says so (each index taxes every write). `EXPLAIN` the one
    slow query rather than guessing at ten.
 7. **Ride SQLite until it objects — knowing what it silently won't do.** SQLite in WAL mode
-   serves dev and single-node production shockingly far: zero ops, one file. It is not a small
+   serves dev and single-node production a long way: zero ops, one file. It is not a small
    Postgres, and four differences are silent rather than loud — FKs off per connection (step 1),
    no decimal type (step 2), one writer at a time, and savepoints that misbehave under the
    pysqlite driver until you take over `BEGIN` (this one breaks test isolation, not production —
@@ -123,7 +123,7 @@ stmt = (select(Invoice)
 8. **Prove the silent three on your own engine before relying on them.** Ten lines each, once
    per project, ideally as tests: insert a deliberate orphan (is the FK enforced?); round-trip
    `1.005` through the money column (what comes back?); raise where your `get_db` would commit
-   (does the client still see `201`?). All three are in the recipes file. Every one of them has
+   (does the client still see `201`?). All three are in the recipes file. Each has
    shipped as a production surprise in an app whose schema and code looked right.
 
 **Deliverable:** models with constraints, an Alembic revision per change, named access patterns
@@ -137,14 +137,14 @@ the schema: a `NOT NULL` is a rule that holds even when a bug, a manual fix, or 
 second app writes the table. But a constraint is only a guarantee on an engine that enforces it,
 and "the DDL contains it" is not that guarantee: SQLite's foreign keys are the standing example
 of a rule that reads as enforced and isn't. The general form is worth more than the specific
-gotcha — **a data-layer promise you have not watched fail is a promise you have not tested**,
+gotcha: **a data-layer promise you have not watched fail is a promise you have not tested**,
 and the cheapest version of every check in step 8 is one deliberate violation.
-The migration discipline is version control extended to state:
+Migration discipline is version control extended to state:
 code can roll back by deploying the old build, but the schema can't "roll back" data it
-already dropped, so migrations are one-way doors and get the read-the-diff respect one-way
-doors deserve. N+1 is the classic ORM trap because the ORM's core convenience — objects with
+already dropped, so migrations are one-way doors and deserve the read-the-diff respect
+one-way doors get. N+1 is the classic ORM trap because the ORM's core convenience — objects with
 traversable relationships — quietly converts a join into a loop of queries; the fix isn't
-abandoning the ORM but telling it your access pattern (`selectinload`) so it can be the SQL
+abandoning the ORM but telling it your access pattern (`selectinload`) so it can write the SQL
 it was hiding. Transactions-at-the-use-case is the atomicity version of thin routes: a
 use case either happened or didn't, and mid-function commits create the third state nobody
 designs for — with the corollary that the commit has to sit somewhere your error handling can
@@ -174,7 +174,7 @@ that does.
 Record your data-layer decisions in `references/your-environment.md`: engine per environment,
 PK/timestamp/money conventions (minor-unit scale, or the `Numeric` precision), migration
 workflow, pool settings against your server's `max_connections`, and the known hot queries with
-their indexes — so new tables and queries match the house shape.
+their indexes, so new tables and queries match the house shape.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against

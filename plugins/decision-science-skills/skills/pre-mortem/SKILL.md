@@ -12,7 +12,7 @@ description: >-
   is about to lock in. Triggers: premortem, pre-mortem, assume it failed, what could sink
   this, before we go live, prospective hindsight.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
 ---
 
 # Pre-mortem (prospective hindsight)
@@ -25,7 +25,7 @@ metadata:
 - As the BEFORE companion to `continuous-improvement-skills:project-command-center`: that
   doctrine red-teams and logs interventions on plans under way but has no structured
   prospective-hindsight step — run the pre-mortem first, file its output there.
-- Also worth running when a decision feels unanimous suspiciously fast: unanimity under
+- Also run it when a decision turns unanimous suspiciously fast: unanimity under
   planning momentum is often silence, not agreement, and this is the cheapest way to
   find out which.
 - Not for: adversarially attacking a live plan or auditing a benchmark's validity → see
@@ -84,8 +84,7 @@ hindsight* — assuming an outcome has already occurred rather than asking wheth
 improved people's ability to identify reasons for the outcome by roughly 30%. Klein's
 pre-mortem (published in HBR, 2007) turns that lab effect into a meeting: declaring the
 fiasco as fact moves participants from defending a plan to explaining a known failure,
-which is a cognitively easier and more productive task. Just as important is what the
-framing does socially. Planning momentum suppresses dissent — once a team has invested in
+which is a cognitively easier and more productive task. The framing also works socially. Planning momentum suppresses dissent — once a team has invested in
 a plan, voicing doubts reads as disloyalty or obstruction — but in a pre-mortem, finding
 failure reasons *is the assigned job*, so the exercise legitimizes the dissent that was
 already in the room. The silent independent-writing step exists because the first idea
@@ -118,10 +117,10 @@ wish, and because what a team ranks highest reveals what it actually fears.
 
 **Where the event may be litigated, regulated, or claimed against, run this at counsel's
 direction.** A ranked list of ~20 written narratives of how the plan fails, produced *before* commitment is a business record from the moment it exists, and it is discoverable —
-it is contemporaneous proof of what the organisation foresaw and when — which is the element a negligence or foreseeability argument has to establish. It is not privileged because it sits in a private file or carries a confidentiality
-label; in the U.S. the protections that can apply are attorney-client privilege and the
+it is contemporaneous proof of what the organisation foresaw and when — which is the element a negligence or foreseeability argument has to establish. A private file or confidentiality
+label does not make it privileged; in the U.S. the protections that can apply are attorney-client privilege and the
 work-product doctrine, and both generally depend on counsel directing the work and on the
-document being marked and handled accordingly from the start. Retrofitting that afterwards
+document being marked and handled accordingly from the start. Retrofitting afterwards
 rarely works. So: where a dispute, claim, audit or regulatory inquiry is reasonably
 anticipated, involve counsel before the exercise rather than after, and mark the output as
 they direct. This is orientation on how to route the question, not legal advice — and it is

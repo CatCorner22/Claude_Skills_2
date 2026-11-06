@@ -12,7 +12,7 @@ description: >-
   model monitoring, drift detection production, ml pipeline app, score in real time,
   put the model into the app, works in the notebook.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # ML in production
@@ -35,13 +35,13 @@ metadata:
    - **Realtime endpoint** (predict per request): only when the input isn't known until the
      moment of use (fraud check on a new transaction, interactive what-ifs).
    - Skip bespoke model servers until scale forces them; a FastAPI route loading a sklearn
-     pipeline serves a very long way.
+     pipeline serves a long way.
 2. **Package the model as a versioned artifact:** serialized pipeline + a metadata sidecar
    (version, training-data window, metrics at validation, feature list, hash). Save the
    **whole pipeline** (preprocessing + model, e.g. sklearn `Pipeline`), never a bare
    estimator plus "remember to scale."
    - **The hash is not decoration, because loading the artifact runs code.** `joblib.load`
-     and `pickle.load` execute the stream rather than reading it, so whoever can write to
+     and `pickle.load` execute the stream rather than read it, so whoever can write to
      the artifact store — or steer the pointer — can run code inside the serving process.
      Record the artifact's SHA-256 in the sidecar and **verify it before loading**, keep the
      manifest signed or held where the store's writers cannot reach it (a hash beside the
@@ -50,9 +50,9 @@ metadata:
      pickle at all — prefer ONNX or a pure-data format.
    - **The decision threshold ships in the sidecar too**, with the split it was chosen on and
      the FP/FN costs or alert budget that set it (`machine-learning-skills:model-evaluation`
-     fits and freezes it). It is a fitted parameter, not a constant: leaving it in application
-     code means the one number that converts scores into actions is versionless, and a
-     threshold frozen at training prevalence silently changes precision as prevalence moves —
+     fits and freezes it). It is a fitted parameter, not a constant. Leaving it in application
+     code makes the one number that converts scores into actions versionless, and a
+     threshold frozen at training prevalence silently changes precision as prevalence moves,
      so record the prevalence it assumed and monitor that too.
 3. **Serve it thin, validated, and versioned:**
 
@@ -74,8 +74,8 @@ def predict(x: PredictIn):
    Pydantic guards the feature contract (types, ranges, categories); the response always
    carries the model version.
 4. **Kill training/serving skew structurally.** The #1 silent failure: features computed one
-   way in the training notebook and another way in the endpoint. Fix by *sharing code* — the
-   same feature function (or the pipeline itself) runs in both places; no re-implementation
+   way in the training notebook and another way in the endpoint. Fix by *sharing code*: the
+   same feature function (or the pipeline itself) runs in both places, with no re-implementation
    in the route. (Feature craft: `machine-learning-skills:feature-engineering`.)
 5. **Log predictions from day one:** timestamp, model version, inputs (or their hash where
    sensitive), output, and — when it arrives — the actual outcome. That table *is* your
@@ -87,7 +87,7 @@ def predict(x: PredictIn):
    - **Drift is a two-sample question, so name the statistic.** Compare the live window against
      the frozen training window: population stability index (PSI) over fixed bins, or a
      two-sample KS for continuous features and chi-square for categorical ones. The usual PSI
-     reading is < 0.1 stable, 0.1–0.25 worth investigating, > 0.25 a real shift — a convention,
+     reading is < 0.1 stable, 0.1–0.25 worth investigating, > 0.25 a real shift. This is a convention,
      not a test, so calibrate it on your own history before it gates a rollback. Bin edges must
      be frozen with the training window or the index measures your binning, not the data.
    - **A per-feature alarm rate becomes a queue.** Fifty features at a 5% per-feature false rate
@@ -104,18 +104,18 @@ def predict(x: PredictIn):
 
 ## Why / learn
 A model in production is a *dependency on the past*: it encodes the world as of its training
-window, and the world moves — so unlike normal code, an untouched model degrades. Every
+window, and the world moves, so unlike normal code an untouched model degrades. Every
 practice here follows from that one fact. Versioned artifacts and logged predictions exist
 because "which model said what, given what?" is the first question in every ML incident, and
-it's unanswerable retroactively. Monitoring is the model's regression test suite — except
+it's unanswerable retroactively. Monitoring is the model's regression test suite, except
 the regressions come from reality changing, not code changing, so it must run continuously.
-Training/serving skew deserves its structural fix because it's the failure mode evaluation
-can't catch: the model is fine, the features lie, and offline metrics stay green while
-production quietly scores garbage — sharing the literal code path is the only reliable cure.
+Training/serving skew deserves its structural fix because evaluation
+can't catch it: the model is fine, the features lie, and offline metrics stay green while
+production quietly scores garbage. Sharing the literal code path is the only reliable cure.
 The batch-first rule is lean-code economics applied to inference: a nightly job writing a
 predictions table has no latency SLO, no cold starts, no per-request failure modes, and
 turns "ML infrastructure" into "a cron job and a table" — the realtime endpoint is the
-special case, earned by a product requirement, not the default. And staged rollout is the
+special case, earned by a product requirement, not the default. Staged rollout is the
 honest admission that validation metrics are a *proxy*: the only measurement that finally
 matters is the product metric on live traffic, so new models earn promotion there, not in
 the notebook.

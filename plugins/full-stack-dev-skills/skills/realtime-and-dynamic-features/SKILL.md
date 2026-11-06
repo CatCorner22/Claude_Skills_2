@@ -10,7 +10,7 @@ description: >-
   live updates, streaming response, real-time dashboard, background job progress, optimistic
   UI, long running task API, push updates, live refresh, stream LLM tokens.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Realtime and dynamic features
@@ -29,11 +29,11 @@ metadata:
      occasionally. With TanStack Query it's one line (`refetchInterval`), with htmx one
      attribute (`hx-trigger="every 10s"`). Most "realtime" dashboards need exactly this.
    - **SSE (Server-Sent Events)**: server→client push over plain HTTP — live feeds, progress,
-     token streams. Auto-reconnects natively, works through proxies, no protocol upgrade.
+     token streams. Reconnects automatically, works through proxies, needs no protocol upgrade.
    - **WebSockets**: only for genuine *bidirectional* low-latency traffic — chat, collaborative
      editing, games. Everything else is cheaper one level down.
    The lean rule: every step up the ladder buys latency/direction and costs connection state,
-   infra care, and reconnection logic — climb only when the requirement pushes you.
+   infra care, and reconnection logic. Climb only when the requirement pushes you.
 2. **Stream with SSE off a generator** (FastAPI makes it a few lines; LLM token relay is the
    same pattern):
 
@@ -49,13 +49,13 @@ async def job_events(jid: str):
    Client: `new EventSource(url)` + one `onmessage` handler (or `hx-ext="sse"`). Send a
    comment/heartbeat every ~15s so proxies don't kill idle streams. **Check how the stream
    authenticates before you commit to `EventSource`:** its only option is `withCredentials`, so
-   it sends cookies and nothing else — a `headers` option is accepted by the object literal and
+   it sends cookies and nothing else; a `headers` option is accepted by the object literal and
    silently dropped (verified against the spec-conformant implementation in Node 22; the server
    saw no `Authorization` header at all). That is fine for the cookie-session app of
    `full-stack-dev-skills:backend-api-development`, and a dead end for the SPA half of it, which
    holds a JWT in an `Authorization` header. Options there, cheapest first: `fetch` with a
-   `ReadableStream` reader (carries any header, at the cost of writing your own reconnect —
-   which is the one thing `EventSource` was buying you); a short-lived single-use stream ticket
+   `ReadableStream` reader (carries any header, at the cost of writing your own reconnect,
+   the one thing `EventSource` was buying you); a short-lived single-use stream ticket
    in the query string; or moving that surface onto the cookie.
 3. **Run long work as background jobs, never in the request.** Anything beyond a couple of
    seconds: enqueue, return `{job_id}` immediately (202), report progress via the job's
@@ -72,7 +72,7 @@ async def job_events(jid: str):
 5. **Use optimistic UI where the write almost always succeeds** (toggles, small edits):
    update the view immediately, fire the mutation, roll back on error (TanStack Query's
    `onMutate`/`onError` pattern). Skip it for writes that fail meaningfully (payments,
-   validations) — the rollback UX is worse than a spinner.
+   validations): the rollback UX is worse than a spinner.
 6. **Handle the failure modes you signed up for:** SSE reconnects natively (send event IDs
    and resume via `Last-Event-ID` if the stream is a feed); WebSockets need your
    heartbeat + reconnect-with-backoff; both need server timeouts and connection caps.
@@ -93,19 +93,19 @@ async def job_events(jid: str):
 
 ## Why / learn
 "Realtime" is a spectrum of freshness guarantees, and the engineering cost is exponential in
-the guarantee: polling is stateless HTTP (free), SSE is one long-lived response per client
+the guarantee. Polling is stateless HTTP (free), SSE is one long-lived response per client
 (cheap), WebSockets are stateful bidirectional connections the infrastructure must love
 (expensive — sticky sessions, upgrade-aware proxies, fan-out state). The discipline is
 matching the *user's actual freshness need* — "the dashboard shouldn't feel stale" is a
 10-second poll, not a WebSocket mesh. The jobs pattern is the backend half of the same idea:
 HTTP requests are leases, not contracts for unbounded work, so long work moves to a queue
-and the *status becomes data* — which elegantly decouples transport from progress (any
+and the *status becomes data*, which decouples transport from progress: any
 transport can read a status row, so you can start with polling and upgrade to SSE without
-touching the job). Optimistic UI is a bet priced by failure probability: when success is
-~always, paying render-now and rolling back rarely buys perceived speed almost free; when
+touching the job. Optimistic UI is a bet priced by failure probability: when success is
+~always, rendering now and rolling back rarely buys perceived speed almost free; when
 failure is meaningful, the rollback (and the user's mental model of "it was done and then
-undone") costs more than honesty. And the heartbeat/reconnect rituals exist because the
-network's default state is "quietly broken" — long-lived connections don't fail loudly, they
+undone") costs more than honesty. The heartbeat/reconnect rituals exist because the
+network's default state is "quietly broken": long-lived connections don't fail loudly, they
 just stop, so liveness must be manufactured.
 
 ## Common mistakes

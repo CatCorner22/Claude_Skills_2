@@ -12,7 +12,7 @@ description: >-
   simplify this letter, accessible language, patient materials, low literacy, simplest
   accurate version. Not for contract clause drafting → legal-skills:mscd-contract-drafting.
 metadata:
-  version: "1.7.0"
+  version: "1.7.1"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search
@@ -58,7 +58,7 @@ version that still keeps the exact meaning.
 4. **Enforce the Adams rules while you write** (full list in
    `references/grade-targets-and-checks.md`): no litigated formulas, no archaisms, no
    doublets or triplets, no ambiguity; the simplest accurate modern word; a technical term is
-   said once, then explained immediately in plain words; the structure never makes the reader
+   said once, then explained at once in plain words; the structure never makes the reader
    guess.
    - **Carve-out: wording a law or rule requires verbatim is out of scope for every rule
      above.** Statutory or regulatory text prescribed word-for-word, safe-harbour language
@@ -105,7 +105,7 @@ rather than clarity. The simplest accurate modern words carry the same meaning w
 ambiguity that caused the fights. Grade level is a measurement, not a dumbing-down: short
 sentences and concrete words cut the reader's parsing work, and the fallback ladder
 (5th → 8th, never higher) exists so that precision can never become an excuse for needless
-complexity — when accuracy genuinely needs a harder sentence, you take the 8th-grade
+complexity — when accuracy needs a harder sentence, take the 8th-grade
 allowance instead of blurring the idea. Reading level is not intelligence: busy experts also
 read plain text faster and misread it less. The read-aloud test is the real judge because
 readability formulas can be gamed by choppy fragments; a text that *sounds* like a clear
@@ -119,8 +119,8 @@ adult explaining something is doing the work the numbers only approximate.
   often broader duty in many jurisdictions; explain the clause in plain words beside it, do
   not rewrite the operative words. Risk-allocation provisions are a carve-out, like
   rule-prescribed text.
-- Explaining a technical term late, or never → say it once, explain it right away in plain
-  words.
+- Explaining a technical term late, or never → say it once, then explain it in plain words
+  at once.
 - Long glue sentences with stacked clauses → one main idea per sentence; subject, verb,
   object close together.
 - Going above 8th grade because the topic "is complex" → topic complexity never justifies

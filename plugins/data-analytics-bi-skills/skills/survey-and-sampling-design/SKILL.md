@@ -13,7 +13,7 @@ description: >-
   questionnaire, sample size, sampling plan, response rate, nonresponse bias, stratified
   sampling, quota sampling, convenience sample, question wording, Likert, margin of error.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §3), whose anchors were verified
@@ -34,7 +34,7 @@ the before part: the instrument, the sample, and the error budget.
 ## When to use
 - Writing a questionnaire and its sampling plan: a client-satisfaction survey, an internal
   process-pain survey, user research for a product, a pulse check on a team or a customer base.
-- A litigation-adjacent survey whose design will be attacked — the consumer-confusion shape:
+- A litigation-adjacent survey whose design will be attacked (the consumer-confusion shape):
   the wording-effects literature doubles as a cross-examination checklist.
 - Sizing a sample: "how many responses do we need?" — for a proportion, in plain terms.
 - Reviewing someone else's survey before launch, or diagnosing why a feedback channel
@@ -43,10 +43,10 @@ the before part: the instrument, the sample, and the error budget.
   the sampling distribution belong to `data-analytics-bi-skills:statistical-inference`; this
   skill designs what that skill later analyzes, and a good design names its analysis plan
   before launch.
-- Not for: qualitative one-on-one elicitation — the stakeholder interview, the expert
-  walkthrough — → `collaboration-skills:disarming-elicitation`. The seam: that skill surfaces
+- Not for: qualitative one-on-one elicitation (the stakeholder interview, the expert
+  walkthrough) → `collaboration-skills:disarming-elicitation`. The seam: that skill surfaces
   tacit knowledge from one willing person with an adaptive conversation; this skill fields a
-  **standardized instrument** across a sample so answers are comparable and countable. Use it
+  **standardized instrument** across a sample so answers are comparable and countable. Use that skill
   first to discover what to ask; use this skill to ask it at scale.
 - Not for: selection by lot for governance — who reviews, what gets audited, unriggable
   draws → `safety-and-reliability-skills:sortition-review`. That skill draws for fairness and
@@ -60,17 +60,17 @@ Full design mechanics, the worked example, and the question-audit checklist are 
    feed, and about whom is the claim? Write the target population, then the *frame* — the
    actual list you can sample from — and name the gap between them (coverage error). A survey
    without a decision attached collects opinions; a frame nobody inspected collects bias.
-2. **Budget the four error sources before perfecting any one.** Total survey error (Groves)
+2. **Budget the error sources before perfecting any one.** Total survey error (Groves)
    splits the ways a survey misleads into **representation** errors (coverage, sampling,
    nonresponse) and **measurement** errors (wording, order, mode, response style)
    [snippet-only]. Spend design effort where your survey is weakest, not where effort is most
-   visible — a bigger n fixes only sampling error, the one source that usually matters least.
+   visible. A bigger n fixes only sampling error, the one source that usually matters least.
 3. **Choose the sampling design and say what it does to inference.** Simple random: the clean
    default when the frame is one list. Stratified random (Neyman 1934): divide the frame into
    groups that matter, sample within each — guarantees subgroup estimates and usually tightens
    precision [snippet-only]. Cluster: sample groups first (sites, teams), then within — cheaper
    per response, wider error bars for the same n. Convenience (and its cousin quota): whoever
-   is easiest to reach — label it honestly as *unquantifiable* inference; it can generate
+   is easiest to reach — label it *unquantifiable* inference; it can generate
    hypotheses, never population estimates with a defensible margin of error.
 4. **Size the sample in plain terms.** For a proportion at 95% confidence and margin of
    error e: n ≈ 0.96/e² using the worst case p = 0.5 (that is z²·p(1−p)/e² with z = 1.96) —
@@ -78,7 +78,7 @@ Full design mechanics, the worked example, and the question-audit checklist are 
    population is small, then **divide by the expected response rate** to get the invitation
    count. Canonical treatment: Cochran's *Sampling Techniques* [background — verify edition
    before citing formally].
-5. **Plan the nonresponse follow-up before launch — this is the step the Digest skipped.**
+5. **Plan the nonresponse follow-up before launch, the step the Digest skipped.**
    Dillman's tailored-design discipline: multiple contacts (prenotice, invitation, reminders,
    a final different appeal), each written as a social exchange — lower the cost of
    responding, raise the visible reward and trust [snippet-only]. Pre-plan the diagnostics:
@@ -98,9 +98,9 @@ Full design mechanics, the worked example, and the question-audit checklist are 
 ## Why / learn
 Total survey error is the organizing frame because it converts a vague worry ("is this survey
 any good?") into a budget with line items (Groves & Lyberg 2010) [snippet-only]. The deep
-teaching is that the line items trade off: doubling n halves nothing but sampling error, while
-the same money spent on one more follow-up contact attacks nonresponse — usually the bigger
-number.
+lesson is that the line items trade off: doubling n cuts only sampling error, and by only about
+29% (sampling error falls with the square root of n), while the same money spent on one more
+follow-up contact attacks nonresponse — usually the bigger number.
 
 The Literary Digest story earns its place only when told correctly. The folklore says the
 frame was rich (auto and telephone lists), so the sample skewed Republican. Squire (1988)
@@ -108,8 +108,8 @@ showed, using a 1937 Gallup survey that asked people about their Digest particip
 **nonresponse was the decisive killer**: had everyone polled responded, the Digest would have
 called Roosevelt the winner — Landon supporters simply returned their ballots at much higher
 rates [snippet-only]. A 24% response rate whose respondents differ from its non-respondents
-poisons any sample size; 2.4 million responses lost to ~50k interviews. (A modern
-generalization — the "big data paradox" — is often cited here; treat it as background and
+poisons any sample size; 2.4 million responses lost to ~50k interviews. (The "big data paradox,"
+a modern generalization, is often cited here; treat it as background and
 verify before leaning on it.)
 
 Then 1948 broke the winners. Gallup, Roper, and Crossley all called Dewey; Truman won by ~5.
@@ -121,9 +121,9 @@ largely by mid-October), missing the late swing. The SSRC post-mortem (1949, Mos
 the authors) drove the field to probability sampling [snippet-only]. Moral: a measurement plan
 includes *when* you measure.
 
-Dillman deserves his honest reading too: his later editions demote response rate from the goal
+Dillman deserves an honest reading too: his later editions demote response rate from the goal
 to one error source among four (sampling, coverage, measurement, nonresponse) [snippet-only].
-"Dillman says maximize response rate" misstates the mature method — a high response rate from
+"Dillman says maximize response rate" misstates the mature method: a high response rate from
 the wrong frame, answering loaded questions, is a precisely measured wrong answer.
 
 ## Common mistakes

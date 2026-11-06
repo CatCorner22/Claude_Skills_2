@@ -9,7 +9,7 @@ description: >-
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # Anomaly detection
@@ -31,7 +31,7 @@ metadata:
 2. **Start statistical on single features.** For one numeric field, flag points beyond a threshold: the
    classic **z-score**, or better the **robust z-score** using **median and MAD** (resistant to the very
    outliers you're hunting), or the **IQR rule** (below Q1 − 1.5·IQR or above Q3 + 1.5·IQR). Simple, explainable,
-   and often enough — but branch on the degenerate case first, and note the two rules degrade at
+   and often enough, but branch on the degenerate case first: the two rules degrade at
    *different* points and in different ways (measured on a 10,000-row zero-inflated series):
    - **MAD goes to 0 just past 50% ties** — the median absolute deviation from the median is itself
      the median of a mostly-zero vector — and the robust z-score then divides by zero.
@@ -52,8 +52,8 @@ metadata:
    the alert is a cut on it. Tune the cut (contamination rate, score quantile) to your **alert budget** and
    the FP/FN cost. With few labels, estimate precision by having reviewers check a sample of top alerts.
 6. **Rank, and say what drove each flag.** Emit a ranked score and route the **top-N** the team can
-   actually investigate, rather than a raw binary flag — prioritization is what makes detection usable when
-   everything above a hard cutoff would swamp the reviewers. A score alone is not investigable, so attach
+   actually investigate, rather than a raw binary flag — prioritization keeps detection usable when
+   a hard cutoff would swamp the reviewers. A score alone is not investigable, so attach
    the **drivers**: for each alert, report the two or three fields whose robust z (step 2:
    `0.6745·(x − median)/MAD`) is most extreme, and the first check a reviewer should run. That recipe works
    for any scorer, including isolation forest and LOF, which give no native attribution.

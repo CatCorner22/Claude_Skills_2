@@ -13,7 +13,7 @@ description: >-
   project, reduce defects, reduce variation, CTQ, project charter, tollgate, control plan,
   voice of the customer, prove the fix worked.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # DMAIC problem solving
@@ -116,7 +116,7 @@ whose variation you now understand and can keep in control.
   credit. Baseline across enough periods that the trigger is one point among many.
 - Reacting to every point that looks bad → tampering adds variation to a stable process. Act on
   signals, not on values.
-- A control plan owned by a team, a role, or a dashboard → nobody actually looks. Name a person, a
+- A control plan owned by a team, a role, or a dashboard → nobody looks. Name a person, a
   deputy, and a review date.
 - Renegotiating the goal at closure so the project "succeeded" → it devalues every future project's
   numbers. Report met, partially met, or missed, with the arithmetic.

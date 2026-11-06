@@ -14,7 +14,7 @@ description: >-
   accessibility audit, cognitive load, form review, navigation review, simplify a
   workflow, remediation backlog, playwright accessibility tests, heuristic evaluation.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
   source: >-
     Adapted from the user's ui-and-ux-inspection spec (2026-08-04), itself distilled
     from their report 'Eye Tracking, Web-App Usability, and Cognitive Design'; the
@@ -37,7 +37,7 @@ metadata:
   restorable from `archive/skills/`.
 
 ## Do it
-The full step-by-step procedure is preserved verbatim in references/procedure.md — read it
+The full step-by-step procedure is preserved verbatim in references/procedure.md; read it
 before a real inspection. The operational shape:
 
 1. **Preflight and authorization.** Read the repo's docs; confirm report-only vs
@@ -84,7 +84,7 @@ before a real inspection. The operational shape:
    critical path, values survive server validation failure, one mutation per Save despite
    repeated activation, dialog focus trap and restore, filter persistence, undo of
    destructive actions. Where automated evidence is insufficient, pose focused
-   human-validation prompts rather than asserting a conclusion.
+   human-validation prompts instead of asserting a conclusion.
 7. **Produce the two artifacts.**
    - `ui-ux-inspection.md` — executive summary; scope and limitations; critical findings;
      workflow analysis; accessibility, performance, and privacy results; prioritized
@@ -98,7 +98,7 @@ before a real inspection. The operational shape:
    references/remediation-patterns.md. Optional, only when authorized: test files,
    Lighthouse reports, sanitized screenshots, route inventory, code patches, flow diagrams.
 
-**Ground rules — the spec's ethical spine, in force on every run:**
+**Ground rules (the spec's ethical spine, in force on every run):**
 - Distinguish observed evidence from inference; every finding states which it rests on.
 - Never claim that automated inspection proves usability.
 - Prohibited assumptions — never infer: citizenship or nativity; disability; age; gender;
@@ -115,14 +115,14 @@ before a real inspection. The operational shape:
 
 ## Why / learn
 Screen-by-screen review grades surfaces; users experience processes. Tracing backward from
-the successful end state exposes what each step actually contributes — the minimum
-information, authorization, and commitment the outcome requires — so steps that contribute
+the successful end state exposes what each step contributes (the minimum
+information, authorization, and commitment the outcome requires), so steps that contribute
 nothing become visibly deferrable or removable, while genuine risk controls are kept and
 moved to the latest safe point instead of being flattened along with the friction.
 Separating observed evidence from inference, and rating every finding for both severity and
 confidence, is what turns a report into a workable backlog: engineers can rank by impact,
-discount low-confidence items, and re-verify any finding from its reproduction steps — a
-finding without evidence and a verification test is just an opinion. And native semantics
+discount low-confidence items, and re-verify any finding from its reproduction steps. A
+finding without evidence and a verification test is just an opinion. Native semantics
 beat custom controls because the platform ships keyboard behavior, focus management, state
 exposure, and the assistive-technology contract for free; a custom widget must re-earn all
 of that and tends to fail silently for exactly the users least able to report it.

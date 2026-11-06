@@ -13,7 +13,7 @@ description: >-
   class, base-rate anchor, base rate, optimism bias, planning fallacy, how long do projects
   like this actually take, uplift the estimate.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Reference-class forecasting (the outside view)
@@ -80,7 +80,7 @@ Full class-selection heuristics, uplift math, and a worked cash-driver example a
    single-period miss is Deming funnel Rule 2 and roughly doubles variance [snippet-only]. First
    test whether the miss is common-cause (inside the class's normal spread) — if so, leave the
    rule alone; only a special-cause signal (outside the spread, or a run of same-signed misses)
-   justifies a diagnosed, one-time rule change. The distinction that makes this compatible with
+   justifies a diagnosed, one-time rule change. This is compatible with
    "update small and often": **the belief about an open question moves continuously on new
    information about that case; the estimating rule changes rarely, and only on diagnosed error
    from closed cases.** Different objects, different cadences.
@@ -125,8 +125,8 @@ operator is tampering precisely because he is adjusting an aiming rule using not
 error, with no new information about the next drop. Learn something new about next month and you are
 not in his position at all.
 
-The aggregation rule is where a well-run version of this method most often backfires, and the failure
-is instructive because it comes from doing the right thing too many times. A P80 is a promise about
+The aggregation rule is where a well-run version of this method most often backfires, by
+doing the right thing too many times. A P80 is a promise about
 **one** commitment: "there is a 20% chance this is exceeded." Stack that promise on forty line items
 and add them up and you have not made a 20% promise about the total — you have quietly asserted that
 all forty could go wrong together, which is what summing the tails assumes. Independent risks

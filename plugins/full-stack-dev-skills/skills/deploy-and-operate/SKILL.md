@@ -11,7 +11,7 @@ description: >-
   prod, secrets management app, health check endpoint, structured logging, rollback deploy,
   container image size, run migrations on deploy, observability basics, containerize.
 metadata:
-  version: "1.5.1"
+  version: "1.5.2"
 ---
 
 # Deploy and operate
@@ -53,18 +53,18 @@ USER nobody
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-   Slim base, no build tools in the final stage, non-root user, dependencies cached in
-   their own layer (rebuilds are seconds when only code changed). Copy a **virtualenv**, not
+   Use a slim base, no build tools in the final stage, a non-root user, and dependencies cached in
+   their own layer (rebuilds take seconds when only code changed). Copy a **virtualenv**, not
    `site-packages`: the interpreter's install path embeds the minor version, so
    `COPY --from=deps /usr/local/lib/python3.12/site-packages …` repeats `3.12` in four places
    that must agree. Bump only the final `FROM` to 3.13 and the build still succeeds: the packages
-   land in a `python3.12` directory a 3.13 interpreter never looks in, and the first thing anyone
-   learns about it is `ModuleNotFoundError` from a container that pulled and started fine.
+   land in a `python3.12` directory a 3.13 interpreter never looks in, and the first symptom is
+   `ModuleNotFoundError` from a container that pulled and started fine.
    `/opt/venv` leaves the two `FROM` tags as the only strings to keep in step, and drops the
    `/usr/local/bin` copy that was quietly mixing two images' console scripts.
    This is the pip/`requirements.txt` shape. On a project built to the plugin's toolchain
    standard (`full-stack-dev-skills:backend-api-development`'s `references/toolchain-2026.md`)
-   there is no `requirements.txt` —
+   there is no `requirements.txt`:
    swap the deps stage for `COPY pyproject.toml uv.lock ./` plus
    `ENV UV_PROJECT_ENVIRONMENT=/opt/venv` and `uv sync --locked --no-dev` (that variable is what
    puts the environment at `/opt/venv` instead of the project's `.venv`), and the CI
@@ -93,12 +93,12 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
    `data-tools-skills:data-file-hygiene`). If you can't run the prod image locally with a
    different env file, environments have drifted.
 4. **Run migrations as a deploy step, not an app side effect:** `alembic upgrade head`
-   before the new code serves traffic (a CI step or release phase). Combined with
+   before the new code serves traffic (a CI step or release phase). With
    deploy-safe migration patterns (`full-stack-dev-skills:database-and-orm`), old and new
    code both tolerate the schema during the switchover.
 5. **Expose health honestly:** `/healthz` (process up — for restarts) and `/readyz` (DB
    reachable, migrations current — for routing traffic). The platform restarts on the
-   first and gates traffic on the second; deep dependency checks belong in `/readyz` only,
+   first and gates traffic on the second. Deep dependency checks belong in `/readyz` only,
    so a flaky dependency doesn't crash-loop the process.
 6. **Log structured lines to stdout with a request ID.** JSON (or key=value) per event,
    one request-ID middleware so every log line of a request correlates; log at the
@@ -111,19 +111,19 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
    middleware, and the go-live checklist.
 
 ## Why / learn
-Deployment is a *reproducibility* problem wearing an infrastructure costume: every classic
-failure — works-on-my-machine, staging-passed-prod-broke, can't-roll-back — is some
+Deployment is a *reproducibility* problem wearing an infrastructure costume. Every classic
+failure (works-on-my-machine, staging-passed-prod-broke, can't-roll-back) is some
 difference between what you tested and what you ran. The container answers "same code, same
 runtime"; env-only configuration answers "same artifact, different environment"; the
 SHA-tagged image answers "which exact thing is running"; and migrations-as-deploy-step
 answer "code and schema move in lockstep." Once those four invariants hold, deploys stop
-being events and become pointer updates — which is also why rollback becomes trivial: it's
-the same pointer update, backwards. The health-check split exists because "alive" and
+being events and become pointer updates, so rollback becomes trivial: the same pointer
+update, backwards. The health-check split exists because "alive" and
 "ready" are different questions with different consumers (the restarter vs the router), and
 conflating them turns a database blip into a restart storm. Structured logs with request
 IDs are the minimum observability that pays: when something breaks, the question is always
 "what happened to *this* request/job," and grep-able correlated events answer it without a
-tracing platform. All of it is lean-code applied to operations — the fewest moving parts
+tracing platform. All of it is lean-code applied to operations: the fewest moving parts
 that make "is it up, what broke, put it back" answerable in minutes.
 
 ## Common mistakes

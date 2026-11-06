@@ -14,7 +14,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.6.0"
+  version: "1.6.1"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -88,10 +88,10 @@ governs document-level attention (lead with the point, format for scanning, stop
      hold-harmless clauses, warranty disclaimers, and insurance-procurement covenants are not
      ordinary business terms whose litigation history is a failure log. They are the
      provisions courts construe *strictly and against the drafter*, and their enforceability
-     often turns on the presence of particular words. Three consequences that cut directly
+     often turns on the presence of particular words. Three consequences cut
      against this skill's default rules:
      - **The doublet may not be a doublet.** "Indemnify, defend, and hold harmless" looks like
-       exactly the archaic triplet step 2 says to cut — but in many jurisdictions **"defend" is
+       the archaic triplet step 2 says to cut — but in many jurisdictions **"defend" is
        a distinct and broader obligation than "indemnify"**: the duty to defend is triggered by
        what is *alleged* and arises at the outset, while indemnity turns on what is ultimately
        *owed*. Deleting the word as redundancy can silently delete a duty worth more than the
@@ -135,8 +135,7 @@ governs document-level attention (lead with the point, format for scanning, stop
      and rejected and why, the consent discussion, documented non-adherence or refusal, and
      advice given.** They look redundant to an editor and decisive to a reviewer years later.
      Tighten how they are written; do not decide they are surplus.
-   - **Whether the content is complete is a clinician's judgment, not this skill's.** This skill
-     governs the language. Nothing in this library reviews a clinical record for adequacy of
+   - **Whether the content is complete is a clinician's judgment, not this skill's.** Nothing in this library reviews a clinical record for adequacy of
      content, and no other skill is waiting to catch it — say so plainly rather than implying a
      later pass will.
 6. **Stay intellectually honest**: never invent clinical facts, consent language, or legal
@@ -159,8 +158,8 @@ prescribes word-for-word, and risk-allocation provisions whose effect is fixed b
 construction rather than by ordinary reading. In that second category the relationship
 inverts. A clause has been litigated *because* it is the operative allocation of a real risk,
 and the resulting caselaw is not a record of drafting that failed — it is the specification
-telling you which words carry the allocation. Clarity there is still worth pursuing; it is
-simply no longer the thing that decides whether the clause works, so it stops being this
+telling you which words carry the allocation. Clarity there is still worth pursuing; it no
+longer decides whether the clause works, so it stops being this
 skill's call to make alone. Smart Brevity is the same
 respect applied to attention instead of meaning — the reader under time pressure gets the
 point first, the reason second, and a scannable structure for everything else, because a

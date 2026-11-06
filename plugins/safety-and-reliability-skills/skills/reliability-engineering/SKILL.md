@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
 ---
 
 # Reliability engineering
@@ -40,7 +40,7 @@ metadata:
    removed unfailed are **censored/suspended** — they enter the fit as censored, never get
    dropped: dropping survivors biases the estimate toward pessimism, and dropping early
    removals toward optimism. One failure mode per dataset; separate modes before fitting. Data
-   quality is the human gate — confirm the timestamps mean what you think (failure start, not
+   quality is the human gate: confirm the timestamps mean what you think (failure start, not
    ticket-open).
 2. **Classify the data before choosing a model — this decides everything after it.**
    - **Non-repairable population:** many units, each contributing **one** time-to-first-failure
@@ -52,12 +52,12 @@ metadata:
      (**Crow-AMSAA**), step 4.
    Say which case you are in, in writing, before any number is quoted.
 3. **Non-repairable: fit a Weibull, check the fit, bound it, then read β.** (Mechanics and worked
-   numbers in `references/reliability-math.md`.) Check the fit before quoting anything — the
+   numbers in `references/reliability-math.md`.) Check the fit before quoting anything. The
    Weibull plot should be straight; curvature means a threshold or mixed modes, and comparing r²
    against a lognormal plot guards against fitting the wrong family. Then **bootstrap the fit** —
    resample from the fitted parameters, refit, and report percentile intervals on β, η, and any
    B-life. A five-point fit typically leaves β spanning several-fold and a B10 spanning a factor
-   of three, so no interval means no policy. The decision table:
+   of three, so no interval means no policy. Decision table:
    - **β < 1 — infant mortality.** Failures front-loaded (bad installs, fresh patches) →
      burn-in / shake-down before trusting the unit; hunt the defect source; do not schedule
      replacements.
@@ -67,14 +67,14 @@ metadata:
      knee (a B10-style life sets the interval).
    - **β → ∞ — deterministic expiry.** Certificates, passwords, key rotations fail on a known
      date: pure wear-out → calendar-driven renewal, alarmed well ahead.
-   This is the bathtub curve made decidable: β tells you which region you are in and the region
-   dictates the policy — for a **unit's own age**, which is why it applies only to case one.
+   This is the bathtub curve made decidable: β locates your region and the region
+   dictates the policy, for a **unit's own age**; so it applies only to case one.
 4. **Repairable: model the failure intensity, not a lifetime.** Fit the power-law NHPP
    N(t) = λt^β with β̂ = n ÷ Σ ln(T/tᵢ) and λ̂ = n ÷ T^β̂ over an observation window T, and read it
    on its own scale: **β < 1 the system is improving** (fixes are sticking), **β ≈ 1 stable**
    (constant rate — random regime), **β > 1 degrading between repairs** (repair returns it
    bad-as-old; renew the unit or change repair practice — *not* a burn-in and *not* a wear-out
-   claim about units). Run the cheap **Laplace trend test** first: no trend means a renewal
+   claim about units). Run the cheap **Laplace trend test** first: with no trend, a renewal
    process survives and Weibull-on-gaps becomes legitimate. β̂ has SE ≈ β̂/√n, so with a handful
    of failures report the interval and expect it to straddle 1.
 5. **Compute MTBF, MTTR, availability — with bounds and the right definition.** MTBF = total
@@ -113,13 +113,13 @@ metadata:
    the assumed β in every output, and show what a different defensible β would have given; the
    forecast is conditional on it.
 8. **Deliver the decision, not the fit.** Paste the failure log and have the model run and
-   interpret the math; the deliverable is the repairable/non-repairable call, a maintenance policy
+   interpret the math. The deliverable is the repairable/non-repairable call, a maintenance policy
    per failure mode with an interval on every quoted number, the downtime budget versus measured,
    and redundancy sized to the SLO — with the two judgments no fit can make flagged for a human:
    is the data honest, and are the parallel paths truly independent?
 
 ## Why / learn
-The bathtub curve is folklore until it is decidable — everyone sketches it, but the sketch
+The bathtub curve is folklore until it is decidable: everyone sketches it, but the sketch
 doesn't say whether *your* failures are infant mortality or wear-out, and the two demand
 opposite policies (replacing components under β ≈ 1 wastes money on parts whose age was never
 the problem; running β > 1 parts to failure schedules your outages at the worst time). β is the
@@ -135,12 +135,12 @@ bathtub is a statement about *one unit's own age*, estimated across a population
 observed until its first failure. One system that fails and gets repaired nine times is a
 different object: what varies there is the *rate* at which events arrive, and the model for it is
 a recurrent-event one — the power-law NHPP. Both models have a parameter called β and the two
-mean different things, which is exactly why the mistake is so easy and so invisible. Fitted to one
+mean different things, which is why the mistake is so easy and so invisible. Fitted to one
 repaired system's gaps, the Weibull β absorbs reliability growth or decay along with any hazard
 shape, and the resulting number is then read off a table it does not belong to. Asking
 "repairable or not?" first is what keeps the rest of the arithmetic honest.
 
-The second habit worth building is refusing point estimates. β̂ = 3.8 on five failures sounds
+The second habit to build is refusing point estimates. β̂ = 3.8 on five failures sounds
 decisive and is not: bootstrap the fit and the interval routinely spans several-fold, which can
 leave the *qualitative* claim (wear-out is real) standing while destroying the *quantitative* one
 (replace at 51 days). Those two deserve different confidence and usually get the same, and that
@@ -157,7 +157,7 @@ Availability arithmetic converts "how reliable is enough?" from taste into a bud
 and audit, whether you count minutes or events; counting events is the fairer measure wherever
 failure is partial rather than total. The barrier to all of this was never the concepts — it was
 the statistics: MLE fits, censoring, plotting positions, trend tests were a reliability
-engineer's trade. With the math runnable on a pasted log, what remains genuinely human are the
+engineer's trade. With the math runnable on a pasted log, what remains human is the
 judgments no fit can make: whether the data is honest, and whether the redundant paths share a
 common cause.
 

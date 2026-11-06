@@ -13,7 +13,7 @@ description: >-
   matches, exception queue drowning, tune the alerts, memory cell, everything is an
   exception, nobody looks at the alerts anymore.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
   source: >-
     Built from the library's biological-systems research dossier
     (docs/research/epic-wave-held-research.md, Lane 3 top pick). The mechanism is the
@@ -33,7 +33,7 @@ real threats. The desensitized operator, not the missed detector, is the documen
 the Joint Commission's Sentinel Event Alert 50 (April 2013) counted **98 alarm-related adverse
 events from January 2009 to June 2012, 80 of them deaths**, against a background in which
 **85–99% of alarm signals required no clinical intervention** [snippet-only]. This is not
-metaphor borrowed from biology: artificial immune systems (AIS) is an established engineering
+borrowed metaphor: artificial immune systems (AIS) is an established engineering
 literature — negative selection (Forrest's self/non-self work, 1990s), clonal selection,
 immune networks, and danger theory — with documented intrusion- and anomaly-detection
 deployments, and it documents exactly this failure trade [snippet-only].
@@ -72,19 +72,19 @@ are in `references/immune-tuning-method.md`.
    the **ceiling** adds the firings that aged out unread. Report both, because **`unread` is
    unknown, not benign**: counting it as a false alarm asserts the alert was harmless on the
    evidence that nobody looked, and that error is biggest in the most flooded queue — the one
-   whose alerts age out. Since a high rate is this skill's argument for widening a threshold,
+   whose alerts age out. A high rate is this skill's argument for widening a threshold, so
    a point estimate hands the worst-drowned queue the strongest case for switching detection
    off. **A rule may only be loosened or retired on floor evidence.** A wide band is itself
    the finding: sample 30–50 unread firings, adjudicate them properly, and place the true
    rate before any threshold moves. No dispositions recorded? Start recording them today; a
-   one-line disposition per firing is the cheapest instrumentation this skill ever asks for.
+   one-line disposition per firing is the cheapest instrumentation this skill asks for.
 2. **Rank rules by alarm-flood contribution.** Confirmed non-actionable firings × volume —
    rank on the floor, so a rule cannot climb the work list on firings nobody read. Three
-   rules usually produce most of the flood; those three are the work. What a large unread
-   count *does* justify right away is routing (batch, digest, demote, give it an owner):
+   rules usually produce most of the flood; those three are the work. A large unread
+   count *does* justify routing right away (batch, digest, demote, give it an owner):
    load comes down, coverage does not.
 3. **Recalibrate defaults before adding smarts.** The highest-leverage move on record is not
-   a better detector — it is fixing default thresholds that were never set for this
+   a better detector but fixing default thresholds that were never set for this
    population. Boston Medical Center recalibrated *default* alarm limits and cut audible
    alarms **89% in the pilot (12,546 → 1,424/day)** and 60% hospital-wide across 310
    telemetry beds, with no missed events reported [snippet-only]. Ask of every flooding
@@ -140,8 +140,8 @@ and risk is accepted by people, not by tooling.
 The axis is the whole model. Push any detection system toward catching everything and it
 attacks self: the false-match flood rises until operators stop looking, at which point the
 system has quietly crossed to the other end of the axis — functional immunodeficiency with
-perfect paperwork. That is why the flood is the killer and not just a nuisance: the Joint
-Commission's 80 deaths were not caused by missing alarms but by alarms so abundant
+perfect paperwork. The flood is the killer, not just a nuisance: the Joint
+Commission's 80 deaths came not from missing alarms but from alarms so abundant
 (85–99% needing no action) that the true ones died in the noise [snippet-only]. The same
 economics show up wherever detection is operated: enterprise SOC studies report
 false-positive rates above 50–80%, 67% of analysts unable to clear their daily alerts, and
@@ -150,7 +150,7 @@ false-positive rates above 50–80%, 67% of analysts unable to clear their daily
 transaction-monitoring alerts as false positives** at $25–50 of manual cost per alert
 [snippet-only]. Different domains, one disease.
 
-The immune system's answer is architectural, not heroic. It does not make one perfect
+The immune system's answer is architectural, not heroic. It builds no single perfect
 detector; it layers a cheap, fast, unspecific innate response in front of an expensive,
 slow, specific adaptive one, so cost scales with evidence. Negative selection alone — flag
 everything that isn't self — provably floods (Stibor et al. showed the false-positive and

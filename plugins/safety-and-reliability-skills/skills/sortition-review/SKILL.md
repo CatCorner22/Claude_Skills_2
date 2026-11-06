@@ -4,9 +4,9 @@ description: >-
   Designs selection-by-lot oversight channeling Athenian euthynai (scheduled end-of-term
   review by allotted reviewers, generals included, universal, never suspicion-triggered) and
   the 1268 Venetian doge protocol (ten alternating rounds of lot and vote, blind draws, 529
-  years): define the reviewable population, set a universal floor with no exemptions, draw
+  years): define the reviewable population, set a universal floor, no exemptions, draw
   items by verifiable lot (pre-committed seed,
-  dice in the open), rotate reviewer pairs by lot too, make end-of-role handover review
+  dice in the open), rotate reviewer pairs by lot, make end-of-role handover review
   the default so departure carries no stigma, size the draw to real attention (the
   assistant first-passes every drawn item, the human adjudicates), and publish the rule,
   never the draw. Use when selection must be unriggable, review must carry no accusation,
@@ -14,7 +14,7 @@ description: >-
   spot-check by lot, they know which ones get looked at, same person always reviews,
   rotate reviewers, end-of-term handover, draw at random, unriggable selection.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
 ---
 
 # Sortition review (euthynai and the ballotino)
@@ -29,7 +29,7 @@ alternating rounds of lot and vote (30→9→40→12→25→9→45→11→41), w
 performed by the ballotino — a boy picked at random off the street — and it ran
 essentially unchanged for 529 years, until the Republic fell in 1797 [snippet-only].
 
-Two distinct controls hide in those stories, and this skill installs both:
+Those stories hide two distinct controls, and this skill installs both:
 (a) **universality** — review happens to everything by schedule, so selection carries no
 accusation and evasion cannot target the trigger; (b) **verifiable randomness,
 interleaved** — who reviews, and what gets reviewed, is drawn by a lot nobody can steer,
@@ -100,13 +100,13 @@ are in `references/sortition-method.md`.
    stigma; the person who leaves cleanly is *served* by the record it produces.
 6. **Size the draw to real attention — let the assistant carry the volume.** Random
    selection historically died of workload: nobody genuinely examines thirty drawn
-   items a month, so the draw shrank until it was theater. The assistant does the
+   items a month, so the draw shrank to theater. The assistant does the
    first pass on *every* drawn item — pulls the record, checks it against the stated
    policy, drafts findings with the evidence attached — and the human adjudicates.
    Discipline: the assistant drafts findings; the human owns every judgment. A finding
    no human has adjudicated is not a finding.
 7. **Publish the rule, never the draw.** Everyone should know the population, the
-   floor, the odds, and the mechanics — that knowledge is the deterrent, because it
+   floor, the odds, and the mechanics. That knowledge is the deterrent, because it
    makes every item potentially examined. Nobody learns which items came up, or when
    the next draw lands, before it happens. Announce the system loudly; keep the
    selections quiet until done.
@@ -125,8 +125,7 @@ implied nothing [snippet-only].
 Randomness solves a different problem: capture. A known reviewer or a predictable
 selection is a single point of purchase — one relationship, one bribe, one friendship,
 and the control is hollow while its paperwork continues. A verifiable lot has no one to
-befriend. Venice interleaved lot and vote ten times not from mysticism but from
-arithmetic: each random stage multiplies the number of people a fixer would have to own,
+befriend. Venice interleaved lot and vote ten times from arithmetic, not mysticism: each random stage multiplies the number of people a fixer would have to own,
 until owning them all is harder than just being electable [snippet-only]. The lot's
 verifiability matters as much as its randomness — a draw performed in the dark is just a
 gatekeeper with dice-themed stationery, which is why the ballotino drew blind and in
@@ -138,8 +137,8 @@ the vendor whose invoices keep coming up clean. That is the quiet reason end-of-
 accounting survived in Athens for generations: it manufactured legitimacy, not just
 deterrence.
 
-The economics changed recently and the design should notice. Universality was always
-correct and always unaffordable — the reason real programs quietly shrank to theater.
+The economics changed recently, and the design should use that. Universality was always
+correct and always unaffordable, which is why real programs quietly shrank to theater.
 An assistant that first-passes every drawn item makes the honest version affordable for
 a two-person office: the draw can be sized to what deters, not to what exhausts, so
 long as the human adjudication gate stays absolute.

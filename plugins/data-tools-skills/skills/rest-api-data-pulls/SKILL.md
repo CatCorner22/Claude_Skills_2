@@ -8,7 +8,7 @@ description: >-
   call api python, paginate an api, saas api export, pagination, api rate limit, 429 retry,
   requests python, extract data from api, api to csv, json to dataframe, oauth token api.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # REST API data pulls
@@ -25,7 +25,7 @@ metadata:
 ## Do it
 1. **Read the API's contract before writing code:** base URL, auth method, pagination style,
    rate limits, and the resource's field list. Most SaaS platforms publish a versioned resource
-   path and a per-resource field list; find both before writing a line of code, because they
+   path and a per-resource field list; find both, because they
    determine your pagination style and how much you can ask for per call.
 2. **Authenticate the simplest way the API allows, and keep secrets out of code.** Enterprise
    platforms commonly take Basic auth (a dedicated integration user) or OAuth2/JWT; most other

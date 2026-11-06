@@ -13,7 +13,7 @@ description: >-
   format, structured output, JSON output, prompt injection, reasoning model, extended thinking,
   prompt caching, flaky prompt, prompt not working, improve a prompt.
 metadata:
-  version: "2.1.0"
+  version: "2.1.1"
 ---
 
 # Prompt engineering
@@ -189,7 +189,7 @@ skill is that reference for Anthropic models; every mechanism named below was ch
 - the eval cases used or recommended, the currently-failing ones first, with the repeat count;
 - when iterating: what changed from the previous version and which failure it targets.
 
-The assistant drafts the prompt, examples, and eval cases; the human owns the success criteria and
+You draft the prompt, examples, and eval cases; the human owns the success criteria and
 validates against real inputs before relying on it.
 
 ## Why / learn
@@ -222,7 +222,7 @@ real: LLM output is nondeterministic, so a one-run-per-case comparison confuses 
 with the spread you'd see from running the same prompt twice. Once you accept repeats, the natural
 next step is a designed experiment across factors rather than a long series of single edits.
 
-One consequence worth internalizing: **a prompt is a per-model artifact.** Instructions that were
+One consequence: **a prompt is a per-model artifact.** Instructions that were
 load-bearing on one generation become dead weight or active harm on the next — pressure language,
 elicited chain-of-thought, self-check scaffolding, word caps, prefill tricks. Re-audit prompts when
 you change models, and read this skill the same way: the method (criteria, context, contract,

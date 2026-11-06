@@ -13,7 +13,7 @@ description: >-
   conflict, stress test the rules, loophole hunt, what breaks this policy, clause conflict,
   conflicting rules, malicious compliance, specification gaming.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
   source: >-
     Commissioned by the user, inspired by Isaac Asimov's robot stories — homage in
     triggers and teaching only; no affiliation. The stories are cited as fiction that
@@ -31,9 +31,8 @@ Asimov's Three Laws were never a safety standard — they were a story engine, a
 author said so: "There was just enough ambiguity in the Three Laws to provide the
 conflicts and uncertainties required for new stories" (*The Rest of the Robots*, 1964)
 [snippet-only, ×3]. Nearly every robot story is a carefully drafted rule set meeting the
-one situation its drafters didn't imagine — which makes the corpus something genuinely
-useful: a failure-mode catalog for rule sets, worked out across four decades of thought
-experiments. This skill runs that catalog, plus its real-world descendants
+one situation its drafters didn't imagine — which makes the corpus a failure-mode catalog
+for rule sets, worked out across four decades of thought experiments. This skill runs that catalog, plus its real-world descendants
 (property-based testing, red-teaming, specification-gaming research, the legal canons),
 against whatever rules you hand it, and returns the concrete story where your rules
 collide, fall silent, or win on the letter while losing on the point.

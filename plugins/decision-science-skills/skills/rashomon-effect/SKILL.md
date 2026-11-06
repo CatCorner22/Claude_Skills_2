@@ -15,7 +15,7 @@ description: >-
   remembers it differently, whose story is right, reconcile the statements, contradictory
   testimony.
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
   source: >-
     Commissioned by the user, named for the Rashomon effect — the scholarly term (Karl G.
     Heider, American Anthropologist, 1988) that honors Kurosawa's film Rashomon (1950),
@@ -32,7 +32,7 @@ Four people watched the same event; four accounts contradict each other; nobody 
 "The Rashomon effect" is established scholarship for exactly this: Karl G. Heider coined it
 for ethnographers who studied the same culture and disagreed in good faith — divergence
 traced to observer circumstances, not deceit (American Anthropologist, 1988)
-[snippet-only, ×4]. The attribution behind the name is commonly garbled, so this skill
+[snippet-only, ×4]. The attribution behind the name is commonly garbled; this skill
 corrects it up front: Kurosawa's film takes its plot from Akutagawa's "In a Grove" (1922,
 seven accounts of a samurai's death, compressed to four) and only its title and framing
 from Akutagawa's "Rashōmon" (1915), which contains no testimony plot at all
@@ -61,8 +61,8 @@ memory, and stakes before it is evidence of anyone lying.
   witness is defensive; this skill owns what happens to the accounts afterward.
 
 ## Do it
-The full protocol — intake moves, the worked outage example, the divergence table, the
-adjudication rules, and the reconciled-account template — is in
+The full protocol (intake moves, the worked outage example, the divergence table, the
+adjudication rules, and the reconciled-account template) is in
 `references/reconciliation-method.md`.
 
 1. **Collect each account whole, separately, before any comparison.** No interruptions,
@@ -132,7 +132,7 @@ as important-vs-trivial and innocent-vs-intentional, with vantage, stress, and t
 of perception all recognized [snippet-only, ×4] — the divergence classification in step 5
 is that instruction turned into a procedure.
 
-The film contributes a warning about misreading, not a license for nihilism. Rashomon does
+The film warns against misreading; it is no license for nihilism. Rashomon does
 not say "there is no truth": Kurosawa's own framing of the film is about people unable to
 be honest with themselves, embellishing self-servingly (direction well-supported at claim
 level [snippet-only, ×3]; exact wording not verified here). Each account in the film is

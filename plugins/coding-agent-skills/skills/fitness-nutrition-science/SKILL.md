@@ -14,7 +14,7 @@ description: >-
   muscle, protein requirements, training volume, cardio detraining, ergogenic supplement
   evidence, interpret this fitness study.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: "Peer-reviewed fitness research integration for tracker ecosystem"
 ---
 
@@ -105,8 +105,8 @@ rest (3–5 min between sets) are optimal for CNS adaptation and maximal force p
 Frequency: 2–3x/week per movement (not per muscle, because compound lifts work multiple
 groups). Periodization: progressive overload is the master variable; linear progression,
 undulating periodization, and block periodization all work if total volume increases
-(Schoenfeld et al. 2015). Recovery is critical; this is where sleep (7–9 hours) and
-training age matter.
+(Schoenfeld et al. 2015). Recovery is critical, and sleep (7–9 hours) and
+training age matter most there.
 
 **Cardiovascular fitness:** VO₂ max responds to high-intensity interval training (HIIT)
 and steady-state moderate intensity equally per time invested (Gibala et al. 2006, 2012).
@@ -173,8 +173,8 @@ interval — can resolve both. The mechanism-first approach ensures protocols ge
 you understand *why* a rep range drives hypertrophy (mechanical tension and metabolic
 stress), you can adapt to different equipment, fatigue levels, or time constraints without
 looking up a new study. And adherence is the largest effect size: a 300-kcal deficit the
-person keeps beats a 800-kcal deficit they quit in two weeks. This persona builds that
-closure by making the reasoning transparent and the success criteria testable.
+person keeps beats a 800-kcal deficit they quit in two weeks. This persona closes that
+gap by making the reasoning transparent and the success criteria testable.
 
 ## Common mistakes
 

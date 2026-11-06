@@ -13,7 +13,7 @@ description: >-
   another way, find a way, figure it out yourself, it failed, can't access, won't install,
   download failed, blocked, what else could work.
 metadata:
-  version: "2.0.0"
+  version: "2.0.1"
   source: >-
     Built from the delegation-audit discipline (who does each step) and two sibling skills in
     this plugin — Comrade Engineer's state-the-outcome and hidden-cost test, The Foreman's
@@ -73,8 +73,8 @@ through one is its owner. That line is what lets the skill be quick and bold eve
    *resource* control ("this repository is not enabled for you") follows the thing through every
    door; only its owner opens it. Full table: `references/obstacles-and-controls.md`.
 
-3. **Fast path: try the likeliest second doors first, in parallel.** These three checks find the
-   route most of the time, and they are cheap enough to run together in one turn:
+3. **Fast path: try the likeliest second doors first, in parallel.** These three checks usually find the
+   route and are cheap enough to run together in one turn:
    - **What is already on board.** Installed programs and libraries (`command -v`, the package
      manager's list), browsers or runtimes bundled with other tools, files already in hand, and the
      session's connectors — search the tool list for the blocked service's name; a connector is
@@ -152,7 +152,7 @@ Inventory, outcome, test, and hand over only what truly needs the person: that i
 **Why a fast path first.** A benchmark of this skill's 1.x versions against an unaided agent on
 blocked-route tasks found the same or worse outcomes at more than twice the time:
 listing five routes and checking each for hidden costs before trying the obvious one was ceremony
-when the second door was open. The breadth is still there — step 4 — but it is paid for only when
+when the second door was open. Step 4 keeps the breadth, but you pay for it only when
 the cheap checks fail. Proportion is part of competence: a forty-minute detour around a
 ten-second check is a bad trade.
 

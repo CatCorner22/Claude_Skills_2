@@ -14,13 +14,13 @@ description: >-
   meeting agenda, run this meeting, too many meetings, this should be an email, action
   items, decision protocol, pre-read, standing meeting audit, fix the agenda.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # Meeting design (decisions, not topics)
 
 ## When to use
-- Planning a meeting and wanting it to end with things decided, not topics visited.
+- Planning a meeting to end with things decided, not topics visited.
 - Questioning whether a meeting should exist at all — yours or one you keep getting
   invited to.
 - Red-checking an existing agenda: "which of these items are actually decisions?"
@@ -57,7 +57,7 @@ mechanics, the decision-log format, and the recurring-meeting audit — are in
    principled objection) / consult-then-decide (the owner hears the room, then calls
    it) / vote. Name who holds the rule, out loud and on the agenda.
 3. **Send the pre-read ahead; open with silent reading.** The author writes prose, not
-   slides. The room reads silently for the first minutes — this is documented Amazon
+   slides. The room reads silently for the first minutes, as in documented Amazon
    practice: narrative memos read at the start of the meeting in place of a
    presentation. Nobody presents what everyone can read faster themselves; the author
    answers questions once reading ends.
@@ -98,7 +98,7 @@ opens changes what the discussion is *for* — informing a named judgment rather
 winning a hidden vote — and makes calling the decision at the timebox a formality
 instead of a confrontation.
 
-Silent reading beats presenting for two reasons. First, everyone actually reads:
+Silent reading beats presenting for two reasons. First, everyone reads:
 pre-reads sent "to review beforehand" reliably go unread, and the meeting quietly
 re-derives the document out loud for the people who skipped it — so the reading time
 moves inside the meeting, where it is short, shared, and honest. Second, written prose
@@ -108,8 +108,8 @@ prose is the argument; the meeting starts where the document ends.
 
 A recurring meeting is a standing cost that renews by default. Multiply its length by
 its headcount by its frequency and it is real capacity — yet unlike almost any other
-recurring commitment, no one has to re-approve it, so it persists on the momentum of
-its own existence long after the need that created it has gone. The audit exists
+recurring commitment, no one has to re-approve it, so it persists on its own momentum
+long after the need that created it has gone. The audit exists
 because the default is silence, and silence is a yes.
 
 ## Common mistakes

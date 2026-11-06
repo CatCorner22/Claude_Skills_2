@@ -11,7 +11,7 @@ description: >-
   sampling distribution, type I error, type II error, statistical power, A/B test, significance level,
   null hypothesis, bootstrap confidence interval, permutation test, Mann-Whitney, nonparametric test.
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
 ---
 
 # Statistical inference
@@ -41,14 +41,14 @@ metadata:
 ## Do it
 1. **State the population claim and hypotheses first — before seeing results.** Write the null `H₀`
    (no effect / no difference) and the alternative `H₁`, and decide one- vs. two-sided. Fixing this in
-   advance is what keeps the test honest.
+   advance keeps the test honest.
 2. **Set α, the effect that matters, and power up front.** Choose the significance level `α` (commonly
    0.05 — the tolerated Type I error rate), the smallest effect size worth detecting, and a target
    power (commonly 0.80). Use these to size the sample *before* you collect data — here for a
    non-randomized comparison; for a randomized experiment the sizing worksheet (n per arm, duration,
    variance reduction) is `data-analytics-bi-skills:ab-test-design` step 3, and for a survey estimate
    it is `data-analytics-bi-skills:survey-and-sampling-design`. The machinery is the same; the owner
-   depends on what you're sizing.
+   depends on what you size.
 3. **Choose the test from the data type, the design, AND the estimand** — the quantity the decision is
    about: one/two/paired means → t-test (Welch's by default); 3+ means → one-way ANOVA; counts /
    association in a contingency table → chi-square. If the decision is about **means** and the data is
@@ -60,12 +60,12 @@ metadata:
 4. **Check the assumptions.** Independence of observations; approximate normality *of the sampling
    distribution* (large `n` buys this via the Central Limit Theorem even when the raw data is
    non-normal); equal variances (or use Welch's t-test, a safe default); expected count ≥ 5 per cell
-   for chi-square (else Fisher's exact). If violated, move to a method that **keeps your estimand** —
-   Welch, a bootstrap CI, a permutation test — rather than pushing on; switching to a rank-based test
+   for chi-square (else Fisher's exact). If violated, move to a method that **keeps your estimand**
+   (Welch, a bootstrap CI, a permutation test) rather than pushing on. Switching to a rank-based test
    is also fine, but it changes the claim you are entitled to make (step 10).
 5. **Gate the experiment's validity before you interpret anything.** If the data came from a live
-   randomized test, four checks run *before* the p-value means anything, and any one of them failing
-   means the readout is void rather than negative. `data-analytics-bi-skills:ab-test-design` owns how
+   randomized test, run four checks *before* the p-value means anything; failing any one
+   voids the readout rather than making it negative. `data-analytics-bi-skills:ab-test-design` owns how
    to design and diagnose each; this skill refuses to interpret until they pass.
    - **Sample ratio mismatch (SRM).** Compare observed assignment counts with the designed split via a
      1-df chi-square. Designed 50/50, observed 10,200 / 9,800 of 20,000: `χ² = 200²/10,000 × 2 = 8`,
@@ -74,7 +74,7 @@ metadata:
    - **The stopping rule.** Was it pre-committed? A fixed-horizon test stopped the moment the dashboard
      crossed p < 0.05 has an actual Type I error rate several times α (roughly 5× nominal per Johari et
      al., KDD 2017, as cited in ab-test-design), so the nominal p-value is not a p-value. Report the
-     stopping rule with the result; if it was broken, say the test is inconclusive and re-run — no
+     stopping rule with the result; if it was broken, call the test inconclusive and re-run, since no
      adjustment recovers an unplanned stop after the fact.
    - **The exposure window.** Whole weeks/cycles covered, and is the effect still moving with exposure
      (novelty decaying, primacy building)? A week-one estimate of a still-moving curve is precise about
@@ -133,12 +133,12 @@ family contains; (7) a conclusion sentence phrased in the estimand the method su
 runs the analysis; the human owns α, the effect that matters, and the decision.
 
 ## Why / learn
-Inference exists because you almost never measure the whole population — you measure a *sample* and
-have to reason back to the whole under uncertainty. The engine is the **sampling distribution**: if
+Inference exists because you almost never measure the whole population. You measure a *sample* and
+must reason back to the whole under uncertainty. The engine is the **sampling distribution**: if
 you repeated the study, your statistic would land somewhere different each time, and that variation is
 what a standard error, a confidence interval, and a p-value all quantify. A hypothesis test is a
 structured bet against a straw man: assume H₀ (nothing is going on), ask how surprising your data
-would be in that world, and if it would be very surprising (`p < α`) you reject the straw man. The
+would be in that world, and if it would be very surprising (`p < α`), reject the straw man. The
 **p-value is one narrow, easily-misread slice of this** — it measures surprise *given H₀*, so it can
 never by itself tell you the probability that H₀ is true, or how big or important the effect is. That
 is why a mature analysis carries three things together: the p-value (is it distinguishable from
@@ -158,7 +158,7 @@ users and 20 for 10%, versus group B = 1 for everyone: A's **mean is 2** against
 `P(A > B) = 0.10` — Mann–Whitney will declare B the dominant group with enough data while A generates
 twice the revenue. Or make the means exactly equal (A ≡ 1; B = 0 with probability 0.6 and 2.5 with
 probability 0.4, so E[B] = 1.0) and `P(A > B) = 0.6`: a test with nothing to find, finding something.
-That zero-inflated, long-tailed shape is not exotic — it is what revenue and usage per user look like.
+That zero-inflated, long-tailed shape is not exotic: it is what revenue and usage per user look like.
 **Kruskal–Wallis** extends the same logic to k groups: its null is that the groups' distributions are the
 same, so it can reject on a difference in spread or shape while all k means match. **Wilcoxon signed-rank**
 adds a requirement of its own — the differences must be **symmetric** about their centre, or it can reject
@@ -182,7 +182,7 @@ Neither is magic: a plain permutation test's null is "the labels are irrelevant,
 "the means are equal," so pair it with a studentized statistic when variances differ; and the bootstrap
 leans on the sample resembling the population, which is exactly what tiny samples cannot promise.
 
-**Finally, an analysis of an invalid experiment is not a conservative analysis — it is a confident wrong
+**Finally, an analysis of an invalid experiment is not conservative; it is a confident wrong
 answer.** Sample-ratio mismatch, a broken stopping rule, and a mismatch between the randomization and
 analysis units all corrupt the inputs to every formula downstream, and none of them shows up as a large
 p-value. That is why the validity gate sits *before* the test rather than in the caveats paragraph: a
@@ -220,7 +220,7 @@ each metric, whether your data meets the independence/normality assumptions, whi
 is really about (a mean that rolls up to a total, a median, a rate), your validity-gate expectations for
 experimental readouts, and the tool you run tests in (Python `scipy`/`statsmodels`, R, Excel, a BI stats
 add-in). Keep the experiment-side conventions consistent with
-`data-analytics-bi-skills:ab-test-design`'s `references/your-environment.md`. The skill then targets its
+`data-analytics-bi-skills:ab-test-design`'s `references/your-environment.md`. The skill then aims its
 workflow at your real decisions.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside

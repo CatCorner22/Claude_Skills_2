@@ -15,7 +15,7 @@ description: >-
   hits, emergency access, runbook, kill switch, tripwire, covenant trip, we'd be
   scrambling, sealed instructions.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
   source: >-
     Homage to Asimov's Foundation — pre-recorded guidance that unseals when predicted
     crises arrive — an homage only, no affiliation with the estate or rights holders.
@@ -36,7 +36,7 @@ documented and *tested*, not merely declared (Yale's HIPAA break-glass procedure
 [gov/compliance], with testing requirements mapped to NIST SP 800-53 and CIS controls
 [framework]. Banking supervision mandates contingency funding plans built from
 early-warning indicators, graduated stress triggers, and pre-approved action menus
-[regulatory]. The anatomy is the same in both and is domain-neutral — indicator →
+[regulatory]. The anatomy is the same in both and domain-neutral — indicator →
 graduated trigger → pre-authored actions → logged, expiring authority → scheduled
 testing — so it transfers to any operation that can foresee its crises.
 
@@ -54,7 +54,7 @@ The design question throughout: **what must already exist when the alarm sounds?
   trip) needs a pre-agreed response instead of an improvised one.
 - Natural downstream of `decision-science-skills:pre-mortem`: that skill finds and
   ranks the failure modes; this one converts each surviving failure mode into a
-  tripwire-plus-playbook pair. Run them as a pair — a pre-mortem without this stage
+  tripwire-plus-playbook pair. Run them together — a pre-mortem without this stage
   produces a list; this stage without a pre-mortem produces playbooks for the wrong
   crises.
 - Sibling the archived `safety-and-reliability-skills:bowtie-barrier-analysis` places these
@@ -86,15 +86,15 @@ and the failure-mode table are in `references/break-glass-method.md`.
    the ones that are foreseeable, consequential, and fast-moving enough that improvised
    response would be too slow. Each surviving mode becomes one tripwire-plus-playbook
    pair. The per-scenario tripwires that close a
-   `decision-science-skills:minority-report` exercise are prime candidates too — a
-   crisis a dissenting future already predicted deserves an armed playbook standing
-   behind its tripwire.
+   `decision-science-skills:minority-report` exercise are prime candidates too: a
+   crisis a dissenting future already predicted deserves an armed playbook behind its
+   tripwire.
 2. **Define the tripwire as a number someone actually watches.** Not vibes — a metric
    with a threshold, a named watcher (role, not hero), a stated cadence, and a stated
    place the number lives. Red-check every candidate: who watches this number? how
-   often? where? would two people agree it tripped? Add graduation where useful — an
-   early-warning level that alerts and a firing level that unseals — the
-   graduated-trigger pattern from contingency-plan practice [regulatory].
+   often? where? would two people agree it tripped? Add graduation where useful, as
+   contingency-plan practice does: an early-warning level that alerts and a firing level
+   that unseals [regulatory].
 3. **Pre-author the first ten moves at calm-headed quality.** These are the sealed
    instructions: the first ten concrete moves, written now, while heads are cool, in
    read-do form (the archived `safety-and-reliability-skills:checklist-design` supplies the form).
@@ -137,9 +137,9 @@ and the failure-mode table are in `references/break-glass-method.md`.
 ## Why / learn
 Pre-authoring works because judgment quality is a perishable resource: the same person
 writes better instructions on a quiet Tuesday than mid-alarm, so the playbook banks
-calm-headed quality and spends it during the crisis. That is the entire trade — effort
-now for quality then — and it is why the skill insists the moves be written at
-*drafting* quality, not bullet-point intentions. Ten specific moves that a cold reader
+calm-headed quality and spends it during the crisis. That is the whole trade: effort
+now for quality then. So write the moves at *drafting* quality, not as
+bullet-point intentions. Ten specific moves that a cold reader
 can execute beat a page of "assess the situation and communicate appropriately."
 
 The tripwire exists because the hardest question during an emerging crisis is not "what
@@ -150,7 +150,7 @@ is exactly why supervisory contingency plans pair early-warning indicators with
 graduated triggers rather than a single alarm [regulatory]. The named watcher matters
 as much as the number: an unwatched metric is a tripwire in a forest.
 
-The authority grant resolves a real tension rather than pretending it away. Standing
+The authority grant resolves a real tension. Standing
 emergency power erodes control — that is how privileged access sprawls — but requesting
 power during the emergency is the slowest step in the response. Break-glass practice
 threads it: generous in the moment, sealed until needed, fully logged, and re-locking

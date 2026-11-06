@@ -14,7 +14,7 @@ description: >-
   down, I don't trust this number, navigate without instruments, what would we expect
   to see, position without the data, dead reckoning.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
   source: >-
     Built from the library's operational-wisdom research lane
     (docs/research/epic-wave-held-research.md, Lane 1 entry 1). The mechanism is
@@ -43,7 +43,7 @@ many weak, independent cues, and keep re-estimating it as cues arrive.
   reason to distrust, and a decision needs the position anyway.
 - Typical shapes, in any role: a project's true status when the tracker has not been
   updated in weeks; a matter's posture when the other side has gone quiet; when money
-  in flight will actually land while the payment system is down; whether last night's
+  in flight will land while the payment system is down; whether last night's
   deploy succeeded while monitoring is out.
 - Early warning: you suspect something has drifted but no instrument has said so yet,
   and you want to ask "what would we expect to see if things were fine?"
@@ -95,7 +95,7 @@ commentary format are in `references/wayfinding-method.md`.
    or lost trust. This calibration step is what makes the next blind stretch safer.
 
 **Division of labor.** Humans under stress fuse two or three signals, badly, and
-anchor on the loudest one. The assistant's job is the full enumeration (all five cue
+anchor on the loudest. The assistant's job is the full enumeration (all five cue
 classes, nothing forgotten), the explicit weighting, the fusion into a banded
 position, and the running commentary. The human supplies cues the assistant cannot
 see, challenges the independence claims, and owns the decision taken on the position.

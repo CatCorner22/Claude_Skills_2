@@ -1,7 +1,7 @@
 ---
 name: technical-documentation
 description: >-
-  Structures technical documentation as typed artifacts, not prose: routes docs through
+  Structures technical documentation as typed artifacts: routes docs through
   Procida's Diátaxis framework (tutorial, how-to, reference, explanation — forms that
   fail when blended), shapes the README around a newcomer's first screen, records decisions as
   Nygard-style ADRs (context/decision/consequences, superseded rather than
@@ -14,7 +14,7 @@ description: >-
   ADR, architecture decision record, changelog, Diátaxis, how-to guide, tutorial vs reference,
   API docs, docs as code, semantic versioning, our docs are out of date.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §5 technical-documentation).
@@ -162,7 +162,7 @@ the more expensive failure, because a misfiled page merely wastes a reader's tim
 wrong one costs a decision. Wrongness has a different cause and needs a different mechanism.
 "Docs as code" is the standard answer and it is a **change-triggered** control: a behaviour change and
 its doc change ride the same review, which works precisely to the extent that the doc sits next to
-something a commit touches. Notice what that leaves uncovered — and notice that it is exactly the
+something a commit touches. That leaves uncovered exactly the
 list people complain about. A data dictionary goes wrong when an upstream team renames a column: no
 commit in your repo, so no review fires. A method note goes wrong when the assumption underneath a
 definition quietly stops holding: nothing textual changed at all, so no diff could see it. A run
@@ -170,7 +170,7 @@ sheet goes wrong when the tool it drives ships a new menu. Link-checkers, spell-
 same-PR review are all blind to every one of these, and they are the mechanisms most teams believe
 they have covered themselves with.
 
-The complement is **time-triggered**, and it is unglamorous: a named owner, a cadence, and a
+The complement is **time-triggered** and unglamorous: a named owner, a cadence, and a
 last-verified stamp. Each of the three fixes a distinct failure. Ownership fixes diffusion of
 responsibility — a page owned by "the team" is owned by nobody, and the useful accountability is not
 for writing the page but for answering whether it is still true. Cadence fixes the fact that rot

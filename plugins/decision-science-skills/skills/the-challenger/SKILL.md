@@ -1,21 +1,21 @@
 ---
 name: the-challenger
 description: >-
-  Runs the revision review that momentum and sunk costs suppress — named for the 1986
+  Runs the revision review momentum and sunk costs suppress — named for the 1986
   Challenger launch decision, where schedule fever inverted the burden of proof over the
   engineers' objection. When evidence changes mid-project, it zero-bases the
   continue-vs-revise decision: only forward-looking costs count (money spent argues
-  nothing), continuation past a trigger carries the burden of proof, normalized
-  anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip,
+  nothing), continuation past a trigger bears the burden of proof, normalized
+  anomalies are re-seen as on first sighting, options widen past stop/continue (slip,
   descope, phase, re-plan), a dissent channel guarantees the objector is restated
-  before the decision, and the outcome is logged with the next review trigger. Use when
-  a deadline is driving decisions the evidence argues against, when "we've come too
-  far" appears in any form, or when a go/no-go needs honest structure. Triggers: the
+  before deciding, and the outcome is logged with the next review trigger. Use when
+  a deadline drives decisions the evidence argues against, "we've come too
+  far" appears in any form, or a go/no-go needs structure. Triggers: the
   challenger, challenge the timeline, sunk cost, plan continuation, should we slip the
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.1.4"
+  version: "1.1.5"
   source: >-
     Commissioned by the user to prevent momentum and sunk costs from holding a project to
     a timeline when revision would be optimal. Anchored on the documented record of the
@@ -111,7 +111,7 @@ subtler lessons. Normalization of deviance (Vaughan) shows how evidence erodes:
 anomalies become "within experience" through sheer recurrence, so the scan asks what
 the first sighting felt like. And the burden inversion is the tell that momentum has
 taken the chair: when objectors must prove failure, the decision has already been made
-and the meeting is theater. The seam with The Mirror matters and is not a
+and the meeting is theater. The seam with The Mirror is not a
 contradiction: quitting the PLAN is not quitting the WORK — the 40% audit governs
 whether effort remains on a chosen plan; this review governs whether the plan still
 deserves the effort. Both replace feelings with evidence; they answer different

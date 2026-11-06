@@ -10,7 +10,7 @@ description: >-
   sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and effect, Pareto, RCA, why did
   this happen, recurring problem, keeps happening, corrective action, containment, verify the cause.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # Root-cause analysis
@@ -55,7 +55,7 @@ countermeasure decision.
    plausible answer — see `references/tools-and-templates.md`.
 5. **Use Pareto to prioritize the vital few.** When there are many defect types, tally by category and
    sort descending — typically a small number of causes drive most of the occurrences. Fix the tallest
-   bars first; don't spread effort evenly across trivial many. If the problem statement already spans
+   bars first; don't spread effort evenly across the trivial many. If the problem statement already spans
    several defect types, run this tally *before* step 3, so the why-chain follows the tallest bar
    rather than whichever type surfaced first.
 6. **Verify the cause before you build a countermeasure.** Confirm with data or a controlled test: if
@@ -70,7 +70,7 @@ Symptoms recur until the *cause* is removed — which is the entire reason to re
 answer. Under time pressure the brain offers a quick, blameable explanation ("someone was careless"),
 you fix that, and the problem returns because the real driver — a process that *lets* the error happen —
 is still there. The disciplines here are all devices for that resistance. **5 Whys** forces you past the
-first layer down the causal chain to a condition you can actually change. The **fishbone's 6M grid**
+first layer down the causal chain to a condition you can change. The **fishbone's 6M grid**
 counteracts anchoring by making you consider categories you'd otherwise skip — most stubborn problems are
 in Method, Measurement, or Machine, not the "Man" box people reach for first. **Pareto** counters the urge
 to treat every defect equally by showing that a vital few causes dominate. And **verifying before

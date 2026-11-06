@@ -15,7 +15,7 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
@@ -29,7 +29,7 @@ metadata:
 
 The knowledge that matters most in an interview is usually tacit: the process owner who
 quietly reroutes work every week but never wrote it down, the user who "just knows" which
-requests will bounce. Direct questioning often fails not because people withhold, but
+requests will bounce. Direct questioning often fails not because people withhold but
 because questions that sound like evaluation put experts on defense — and defended answers
 are rehearsed answers. The counter-stance is independently documented in several
 professions: motivational interviewing trains a detective-named version of it as a
@@ -55,11 +55,11 @@ elicitation used against them — evidence, not license. The rail is expanded in
   knowledge, the undocumented exceptions that make the real process differ from the SOP.
 - The expert won't open up: earlier sessions produced short, guarded, or rehearsed
   answers, or the users can't articulate what they do when asked directly.
-- Rehearsing an important interview before it happens — the assistant plays the defensive
+- Rehearsing an important interview — the assistant plays the defensive
   expert so the stance is practiced, not improvised.
 - Auditing a finished transcript: which questions triggered defensiveness, where a
   doorknob moment was offered and missed.
-- When the conversation happens inside a designed forum, sibling
+- When the conversation happens inside a designed forum,
   `collaboration-skills:meeting-design` builds the container (purpose, timebox, roles);
   this skill runs the conversation inside it.
 - Not for: choosing WHAT to ask in voice-of-customer work → see
@@ -110,7 +110,7 @@ the expanded ethics rail are in `references/elicitation-method.md`.
    re-source the fact rather than banking it.
 5. **Hold contradictions as your own confusion.** When two statements clash, the framing
    is "what I can't figure out is how both of these fit" — never "you said two different
-   things." The discrepancy gets examined either way; only one framing keeps the expert
+   things." Either framing gets the discrepancy examined; only this one keeps the expert
    on your side of the table.
 6. **Let silence work.** After an answer, wait. The first answer is the rehearsed one;
    the elaboration that follows an unhurried pause is where the tacit material lives.

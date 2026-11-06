@@ -13,7 +13,7 @@ description: >-
   case law, is this citation real, verify these citations, check the cites in this brief, good
   law, statute lookup, what does the law say, legal authority, CourtListener.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   source: >-
     Method built from standard legal-research practice and the post-2023 sanctions record for
     fabricated citations; the one case cited in the body is Mata v. Avianca, Inc., 678 F. Supp. 3d
@@ -31,7 +31,7 @@ ledger of what was checked and how, and delivers the answer the way a partner re
 line first, confidence stated, authorities pinpointed, gaps named.
 
 ## When to use
-- A legal question that needs an answer with authority behind it, for a memo, a brief, advice, or
+- A legal question that needs an answer with authority behind it, for a memo, a brief, advice or
   a drafting decision.
 - Checking the citations in a brief, a memo, or anything a generative tool helped write.
 - Finding the current rule when a statute, regulation or agency position may have moved.
@@ -50,8 +50,8 @@ line first, confidence stated, authorities pinpointed, gaps named.
 
 2. **Map the authority before reading any of it.** Binding first: constitution, statute,
    regulation, then the highest court of the jurisdiction and its intermediate courts. Then
-   persuasive: other jurisdictions, trial courts, agency guidance. Secondary sources — treatises,
-   Restatements, law reviews, practice guides — are finding aids and orientation, cited only when
+   persuasive: other jurisdictions, trial courts, agency guidance. Secondary sources (treatises,
+   Restatements, law reviews, practice guides) are finding aids for orientation, cited only when
    nothing primary exists. Note where federal and state law interact and whether an agency
    interpretation still gets deference. `references/research-method.md` §2.
 
@@ -69,10 +69,10 @@ line first, confidence stated, authorities pinpointed, gaps named.
 5. **Check currency and subsequent history.** A licensed citator if available; otherwise
    CourtListener's cited-by listing plus a search of the case name with *overruled*, *abrogated*,
    *superseded* and *reversed*; for statutes, the amendment history and pending bills; for
-   regulations, whether the rule was vacated or withdrawn — two recent federal rules were, and both
-   still look current in cached copies. `references/research-method.md` §5.
+   regulations, whether the rule was vacated or withdrawn (two recent federal rules were, and both
+   still look current in cached copies). `references/research-method.md` §5.
 
-6. **Verify every citation before it leaves, with the script and then with your eyes.**
+6. **Verify every citation before it leaves: run the script, then read the authority yourself.**
    ```
    python3 "${CLAUDE_PLUGIN_ROOT}/skills/legal-citation-research/scripts/verify_legal_citation.py" brief.docx
    python3 "${CLAUDE_PLUGIN_ROOT}/skills/legal-citation-research/scripts/verify_legal_citation.py" --cite "678 F. Supp. 3d 443"
@@ -80,7 +80,7 @@ line first, confidence stated, authorities pinpointed, gaps named.
    With `COURTLISTENER_API_TOKEN` set it checks each citation against CourtListener and reports
    VERIFIED, NOT FOUND, AMBIGUOUS, UNRECOGNIZED or UNVERIFIED; without a token or a network it
    still parses everything and reports UNVERIFIED with the manual route. VERIFIED means the
-   citation resolves to a real decision — you still read it (step 4). NOT FOUND is treated as
+   citation resolves to a real decision — you still read it (step 4). Treat NOT FOUND as
    fabricated until found in another source. UNVERIFIED does not go in the document. **Never ask a
    generative tool to confirm its own citation**; that is the step that produced the sanctions in
    *Mata*. `references/citation-verification.md` §1–§5.
@@ -102,7 +102,7 @@ A citation can exist and not support the proposition (the most common error in c
 can support it and no longer be good law; and it can fail to exist at all. The last is new at
 scale: a generative tool produces citations by pattern, so its output is fluent, well-formed and
 sometimes fictional, and it will confirm its own invention when asked. The protection is
-procedural, not perceptual — nobody can tell a fabricated citation from a real one by looking,
+procedural, not perceptual: nobody can tell a fabricated citation from a real one by looking,
 which is why the verifier checks a corpus and reports what it could not check rather than
 guessing.
 
@@ -117,8 +117,8 @@ when they read it, for the jurisdictions they chose. It is the fastest way to le
 an area and the slowest way to be wrong about a specific rule in a specific state this year.
 
 **Why the ledger.** A memo that says *verified* without saying how is a claim; the ledger makes it
-an audit trail — which database, which query, which status, which date — so the next reader (or
-the same lawyer a year later) can see what was checked and repeat it.
+an audit trail (which database, which query, which status, which date), so the next reader, or
+the same lawyer a year later, can see what was checked and repeat it.
 
 **Why Smart Brevity.** The reader of a research memo decides in the first two lines whether to
 read the rest, and the reader of a brief is a judge with forty others. Bottom line first,

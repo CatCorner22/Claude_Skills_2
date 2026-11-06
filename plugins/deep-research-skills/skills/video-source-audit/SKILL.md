@@ -12,7 +12,7 @@ description: >-
   audit this video, check this video's sources, is this video accurate, grade this video, does
   this video misrepresent the study, debunk this video.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Built from a seven-stream research pass with adversarial verification. Statistical
     arithmetic independently recomputed; citations verified against retrieved index data
@@ -25,17 +25,17 @@ Takes a video and the sources it claims to rest on, reads both, and reports wher
 The output is an audit: a claim-by-claim ledger, three independent letter grades, and an evidence
 trail a reader can check without rewatching anything.
 
-**The discipline this skill exists to enforce:** it is easy to watch a video and form an opinion
-about it. This produces a *finding* about the video, which means every judgment traces to a named
-source, a timecode, and a stated rule — and the skill refuses to grade when it cannot reach the
-evidence, rather than producing a confident letter out of vibes.
+**The discipline this skill enforces:** watching a video and forming an opinion is easy. This
+skill produces a *finding* about the video, so every judgment traces to a named source, a
+timecode and a stated rule. It refuses to grade when it cannot reach the evidence, rather than
+producing a confident letter out of vibes.
 
 ## When to use
 - A video makes empirical claims and you want to know whether its sources say what it says they
-  say — a health or nutrition explainer, a science-communication channel, a documentary segment,
+  say: a health or nutrition explainer, a science-communication channel, a documentary segment,
   a conference talk, a podcast episode with citations on screen.
 - A video's numbers look too good: "cuts your risk in half", "doubles your chances", "studies show".
-- You are deciding whether to trust a creator, and want the reasoning rather than the verdict.
+- You are deciding whether to trust a creator, and want the reasoning, not just the verdict.
 - You already have the paper and want to know whether the video represented it faithfully.
 - Not for: a clinical symptom cluster, drug interaction, or "what could link these" literature
   case file → `deep-research-skills:medical-research-detective`. Training, nutrition, or
@@ -45,33 +45,32 @@ evidence, rather than producing a confident letter out of vibes.
   Auditing your own project's metrics and benchmark claims →
   `continuous-improvement-skills:project-command-center`.
 - **Not a summarizer.** Summarizing is one early stage of the audit, not the deliverable. If someone wants a
-  plain recap with no source-checking, give them that and do not run the audit machinery.
+  plain recap with no source-checking, give them that and do not run the audit.
 
 ## Do it
 
-Work the stages in order. Preflight and source-tracing can fail, and failing them honestly is the point —
-a grade issued without reaching the sources is the exact output this skill exists to prevent.
+Work the stages in order. Preflight and source-tracing can fail, and failing them honestly is the point:
+a grade issued without reaching the sources is the output this skill exists to prevent.
 
 1. **Preflight, and be willing to stop here.** Probe reachability *before* promising an audit.
-   Run the recipes in `references/acquisition-and-sources.md` §1. Three outcomes, and they must
-   never be conflated:
+   Run the recipes in `references/acquisition-and-sources.md` §1. Never conflate the three
+   outcomes:
    - **Reachable with captions** → continue.
    - **Reachable, no captions** → say so; offer to audit from a transcript the user pastes.
    - **Not reachable** (network policy, region block, private/removed video) → **stop and say so.**
      Do not reconstruct the video from its title, from memory, or from what similar videos say.
-     A blocked fetch and a nonexistent source produce identical-looking failures, so the skill
-     must distinguish them by *mechanism*, not by result.
+     A blocked fetch and a nonexistent source produce identical-looking failures, so distinguish them by *mechanism*, not by result.
 
-2. **Summarize in logical form.** Not a recap — a structure: the thesis, the claims offered in
+2. **Summarize in logical form.** Build a structure, not a recap: the thesis, the claims offered in
    support of it, the evidence offered for each claim, and the action the video wants the viewer
-   to take. Note explicitly what the video asserts without support. This structure is what the
-   rest of the audit is run against, so build it before looking at any source.
+   to take. Note explicitly what the video asserts without support. The rest of the audit runs
+   against this structure, so build it before looking at any source.
 
 3. **Build the claim ledger.** Decompose the transcript into atomic, checkable claims with
    timecodes, and assign each a **weight class** — *load-bearing* (the thesis depends on it;
    pre-register 3–5 of these before auditing), *supporting*, or *aside*. Method, claim typology,
    and what does not count as a claim: `references/claim-audit-method.md` §1–2.
-   Weight classes are not decoration — the grading instrument uses them to stop a video from
+   The grading instrument uses weight classes to stop a video from
    diluting one fabricated core claim with thirty accurate asides.
 
 4. **Trace every source.** Description links, pinned comment, spoken references ("a 2019 Lancet
@@ -81,14 +80,14 @@ a grade issued without reaching the sources is the exact output this skill exist
    are invisible to a transcript-based audit. If a video cites on screen, say that the source list
    is incomplete and that the comprehensiveness grade is affected.
 
-5. **Read the sources, and record how deeply.** An audit built on abstracts is not the same
-   artifact as one built on methods and results, and the report must say which it is. Abstracts
+5. **Read the sources, and record how deeply.** An audit built on abstracts differs from one built on methods and results, and the report
+   must say which it is. Abstracts
    systematically overstate. Where full text is unreachable, mark the claim
    `SOURCE-NOT-READ` and exclude it from the graded denominator rather than guessing.
 
 6. **Lock the comparison target.** Before classifying anything, fix *what in the source* the claim
    is being compared against — the source's own **prespecified primary analysis**. This is the
-   single highest-leverage rule in the method: the same video claim classifies as faithful or as
+   highest-leverage rule in the method: the same video claim classifies as faithful or as
    overstated depending only on which slice of the source you hold it against, so the slice is
    chosen once, in advance, and recorded. `references/claim-audit-method.md` §3.
 
@@ -110,11 +109,11 @@ a grade issued without reaching the sources is the exact output this skill exist
    every individual number is correct.
 
 9. **Run the independent literature pass.** Auditing only what the video cited answers "did they
-   quote it right", which is half the job. Now go find what the video did **not** cite: is its
+   quote it right", which is half the job. Now find what the video did **not** cite: is its
    evidence representative of the body, is there a systematic review or meta-analysis that
    supersedes its primary studies, is there contradicting work, has anything it relied on been
-   retracted or failed to replicate, and what does the weight of evidence actually say? This is
-   what turns the report from a fact-check into an audit, and it is the only way to score
+   retracted or failed to replicate, and what does the weight of evidence say? This
+   turns the report from a fact-check into an audit, and it is the only way to score
    comprehensiveness item 8 (representativeness) honestly. Method, search strategy, and the
    stopping rule: `references/acquisition-and-sources.md` §7.
 
@@ -147,16 +146,16 @@ Full template, what belongs in each section, and a worked skeleton: `references/
 
 **This structure holds even when the audit fails.** A `NOT-GRADED` or `INCOMPLETE` report keeps all
 six headings and says under each what could not be determined and why. Collapsing to a one-line
-apology is how a reader loses track of what was actually established.
+apology is how a reader loses track of what was established.
 
 ## Why / learn
 
-**The audit's whole value is the comparison, not the opinion.** A viewer can tell that a video
-*feels* overconfident. What they cannot do cheaply is open the cited paper, find the primary
+**The audit's value is the comparison, not the opinion.** A viewer can tell that a video
+*feels* overconfident. They cannot cheaply open the cited paper, find the primary
 endpoint, and discover that the video quoted a secondary outcome in a subgroup. That gap — between
 what a source says and what a video says it says — is where nearly all science-communication
 distortion lives, and it is invisible without doing the retrieval. This is also why the skill
-refuses to grade unreachable sources: an audit that skips the comparison is just an opinion wearing
+refuses to grade unreachable sources: an audit that skips the comparison is an opinion wearing
 an audit's formatting.
 
 **Distortion mostly enters upstream of the video.** Sumner et al.'s BMJ study of health-science
@@ -184,7 +183,7 @@ objectively codeable failures.** Whether a cited source exists is a fact; whethe
 "overstated" is a judgment. Let the facts cap and let the judgments average.
 
 **Absolute versus relative is the centerpiece because it is where honest numbers mislead.** A
-relative risk reduction is not false — it is incomplete, and it is often the more transferable
+relative risk reduction is not false but incomplete, and it is often the more transferable
 number across populations. The failure is presenting it *alone*, because the same "50% reduction"
 is life-changing at a 20% baseline and irrelevant at a 0.002% one. The corrective is never to
 replace relative with absolute; it is to require the baseline alongside, so the viewer can compute.
@@ -193,7 +192,7 @@ positive actually have it") rather than percentages of percentages is that this 
 comprehension effect, not a stylistic preference.
 
 ## Common mistakes
-- Grading a video you could not actually fetch → the two failures look identical in the output and
+- Grading a video you could not fetch → the two failures look identical in the output and
   must be distinguished by mechanism. Stop and say which one happened.
 - Reading a search tool's generated summary as evidence → the retrieved link list is data; the
   prose beneath it is generated and will state a confident publisher, year, and DOI for a source

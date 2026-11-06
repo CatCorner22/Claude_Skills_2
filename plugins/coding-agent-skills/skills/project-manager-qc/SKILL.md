@@ -13,7 +13,7 @@ description: >-
   the subagents, independent QC gate, multi-agent project, phase plan, track the work across
   sessions.
 metadata:
-  version: "2.1.0"
+  version: "2.1.1"
 ---
 
 # Project Manager & Quality Control
@@ -32,11 +32,11 @@ added cost without adding quality there. It engages when the work outlasts one c
 sessions, several agents, or a deliverable that needs a reviewer who did not build it.
 
 ## When to use
-- Work that will span several sessions — a migration, a multi-week build, a research programme —
-  and needs a ledger, a phase plan and checkpoints that the next session can pick up.
-- Work split across several agents or subagents that need briefs, a budget, and one place where
+- Work spanning several sessions — a migration, a multi-week build, a research programme —
+  that needs a ledger, a phase plan and checkpoints the next session can pick up.
+- Work split across several agents or subagents, needing briefs, a budget, and one place where
   their results are checked against the request.
-- A deliverable that must be reviewed by something that did not build it before it ships.
+- A deliverable that needs review by something that did not build it before it ships.
 - A long-running effort whose spend needs tracking against a budget at phase boundaries.
 - **In tandem.** The delegation audit (in this library's author environment,
   anthropic-skills:max-delegation-auditor) decides who owns each step;

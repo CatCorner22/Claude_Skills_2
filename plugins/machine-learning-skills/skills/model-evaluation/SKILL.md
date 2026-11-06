@@ -12,7 +12,7 @@ description: >-
   RMSE, R2, data leakage, train test split, confusion matrix, threshold, calibration, subgroup
   performance, slice evaluation, label quality.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # Model evaluation
@@ -20,7 +20,7 @@ metadata:
 ## When to use
 - Deciding how to validate a model (holdout vs k-fold vs time-series CV) and which metric to report.
 - Diagnosing overfitting/underfitting, choosing a decision threshold, or reading a confusion matrix.
-- Running the leakage checklist on any evaluation (routinely, not only when results look "too good"), putting an interval on the reported metric, breaking performance down by slice, or comparing a model to its baseline.
+- Running the leakage checklist on any evaluation, putting an interval on the reported metric, breaking performance down by slice, or comparing a model to its baseline.
 - Not for: framing the target and picking the decision metric conceptually up front → see `machine-learning-skills:ml-project-framing`. For time-series-specific backtesting mechanics → see `machine-learning-skills:time-series-forecasting`. For qualifying the label/judgment process the metric is scored against — inter-rater agreement, attribute-agreement studies, Gage R&R → see `continuous-improvement-skills:measurement-systems-analysis`.
 - Not for: what happens after the model ships — serving it, versioning responses, and
   detecting training/serving skew or drift in production → see
@@ -28,7 +28,7 @@ metadata:
   it *was* good; that skill says whether it still is.
 
 ## Do it
-1. **Split before you look at anything.** Carve out a **test set** and don't touch it until the very end;
+1. **Split before you look at anything.** Carve out a **test set** and don't touch it until the end;
    tune on **train + validation** (or cross-validation). For temporal data, **split by time**, never
    randomly — a random split lets the future leak into training.
 2. **Choose the validation scheme for your data.** Large, IID data → a single **holdout** is fine. Small
@@ -84,8 +84,7 @@ metadata:
 scheme and why it fits the data (IID / temporal / grouped); (2) the metric and the decision it
 proxies; (3) baseline vs model scores side by side, with the lift; (4) the chosen threshold, the
 split it was chosen on, and the FP/FN costs behind it (classification); (5) the overfit/underfit
-diagnosis from the train-vs-validation gap; (6) the leakage checklist with what each check found
-(run every time, not only on suspicious results); (7) a confidence interval on the headline
+diagnosis from the train-vs-validation gap; (6) the leakage checklist with what each check found; (7) a confidence interval on the headline
 metric plus the effective sample size behind it (positives, not rows); (8) the metric by slice
 with per-slice n, and any slice below the aggregate called out; (9) where the labels came from
 and what is known about their error rate. The assistant drafts the report; the human owns the
@@ -98,7 +97,7 @@ will optimize hard in the wrong direction — a 99%-accurate fraud model that ne
 canonical example, because accuracy is the wrong proxy when positives are 1% of the data (there, precision,
 recall, and PR AUC are what track the decision).
 
-**ROC AUC is prevalence-invariant, and that is exactly the problem.** It is worth getting the mechanism
+**ROC AUC is prevalence-invariant, and that is exactly the problem.** Get the mechanism
 right, because the wrong story leads to wrong predictions about your own experiments. TPR = TP/(TP+FN) is
 computed entirely within the positives; FPR = FP/(FP+TN) entirely within the negatives; TNR = 1 − FPR
 likewise. Class balance moves none of them, so AUC — the probability the model ranks a random positive
@@ -124,7 +123,7 @@ a best case. Leakage is insidious precisely because it makes everything look won
 the answer through a feature or a split that won't exist in production, so offline metrics soar and live
 performance collapses. The habit that protects you is mechanical — split first, fit every transform on
 train only, anchor every feature to the prediction time, and never let the test set influence a single
-decision until the end. And always, always compare to a baseline, because a number without a reference
+decision until the end. Always compare to a baseline, because a number without a reference
 point is not evidence of anything.
 
 Three things finish an honest report. **Uncertainty:** every metric is a statistic computed on a finite

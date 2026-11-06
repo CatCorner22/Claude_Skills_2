@@ -11,7 +11,7 @@ description: >-
   Triggers: software archaeology, excavate, dig into this legacy, harris matrix,
   stratigraphy, which of these are dead, scream test, who wrote this and why, safe to delete.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Software archaeology (excavate before you demolish)
@@ -118,9 +118,8 @@ which fences hold nothing at all.
 The scream test exists because *usage is the only authority on use*. Documentation lies
 (it describes intent, not behavior), owners lie (they moved on years ago), and labels lie
 (the worked example in the reference is a "deprecated" folder a nightly job still reads).
-Disabling-and-listening asks the system itself, and the Microsoft figure — ~15% of
-confidently-declared-dead servers turned out alive `[snippet-only]` — quantifies why the
-question must be asked even when everyone agrees the thing is dead. Reversibility is what
+Disabling-and-listening asks the system itself, and the Microsoft figure from step 6
+shows why the question must be asked even when everyone agrees the thing is dead. Reversibility is what
 makes the test cheap: a scream costs minutes of rollback, while a wrong deletion costs a
 reconstruction. And the site report closes the loop Hunt and Thomas cared about: code is
 produced by cultural forces, and your removals are the next stratum — recorded, they are

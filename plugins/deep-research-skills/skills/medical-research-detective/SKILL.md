@@ -7,14 +7,14 @@ description: >-
   country of origin, and triple-checking every citation so nothing is fabricated. Produces a
   graded case file: ranked hypotheses, evidence for and against, questions and tests for a
   clinician, red flags, and gaps. Research only — never diagnosis, dosing, or treatment
-  advice. Use for a puzzling symptom cluster, a suspected drug or nutrient interaction, a
-  condition that resists explanation, a second-opinion literature review, or verifying a
+  advice. Use for a puzzling symptom cluster, a suspected drug or nutrient interaction, an
+  unexplained condition, a second-opinion literature review, or verifying a
   medical claim or citation. Triggers: medical research,
   research my symptoms, connect these symptoms, what could link, overlooked cause, deep dive on
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.14.2"
+  version: "1.14.3"
 ---
 
 # Medical research detective
@@ -24,7 +24,7 @@ rival hypotheses, hunt the connections nobody made because the findings live in 
 specialties, then verify every citation before it reaches you.
 
 **This is research, not medical care.** It produces literature and questions to take to a licensed
-clinician. It does not diagnose, does not recommend starting/stopping/changing any treatment, and
+clinician. It does not diagnose, does not recommend starting, stopping or changing any treatment, and
 does not give doses. See `references/output-format.md` for the standing safety framing.
 
 ## When to use
@@ -32,7 +32,7 @@ does not give doses. See `references/output-format.md` for the standing safety f
   resists explanation — "what could link all of these?"
 - Hunting an overlooked common cause: a drug or nutrient interaction, a side effect that mimics a
   new disease, an exposure, a deficiency, a "great imitator" condition.
-- A deep literature review on a condition, drug, or test — far past first-page search results.
+- A deep literature review on a condition, drug, or test, far past first-page search results.
 - Verifying a medical claim, study, or citation someone handed you (including one produced by an AI).
 - Not for: general non-medical research → use the built-in `deep-research` skill. Training,
   nutrition, or ergogenic-supplement protocols for a healthy person →
@@ -46,30 +46,30 @@ does not give doses. See `references/output-format.md` for the standing safety f
   three-check discipline, different corpus: CourtListener rather than Crossref and PubMed; this
   skill keeps "check this citation" for studies). This skill owns the clinical side
   throughout: symptoms, drug and nutrient interactions, a literature case file. Diagnosis, dosing,
-  or "what should I take" → that is a clinician's job; this skill reframes the question into research
+  or "what should I take" is a clinician's job; this skill reframes the question into research
   plus questions to ask them. An emergency → stop and use the red-flag list in
   `references/output-format.md`, which routes to urgent care.
 
 ## Do it
-Screen for urgency (stage 0), then work the case in seven stages. Depth is the point: a shallow pass is the failure mode. Do not stop at
-the first plausible answer — the whole value is in stage 2 and the disconfirmation pass in stage 5.
+Screen for urgency (stage 0), then work the case in seven stages. A shallow pass is the failure mode. Do not stop at
+the first plausible answer: the value is in stage 2 and the disconfirmation pass in stage 5.
 
 0. **Screen for urgency before anything else.** Read the presented findings against the red-flag
    list in `references/output-format.md` *first* — before framing, before hypotheses, before a
    single search. If any red flag is present, **say so as the first thing in the reply, name
    which one, and tell the user to seek care now**; do not lead with a differential, and do not
    make the urgent-care note the eleventh item of a stage-7 report the user may never scroll to.
-   Research and urgency are not alternatives — offer to continue the research afterwards, and
+   Research and urgency are not alternatives: offer to continue the research afterwards, and
    continue it if they want, but the routing comes first. This skill is slow by design and its
-   users bring real presentations; a seven-stage investigation is the wrong shape of answer to a
+   users bring real presentations; a seven-stage investigation is the wrong answer to a
    time-critical one, and being right three thousand words later is not being right.
 
-1. **Frame the case.** Collect what is actually known before searching: the findings (symptoms, labs,
+1. **Frame the case.** Collect what is known before searching: the findings (symptoms, labs,
    imaging, diagnoses) with **onset dates and sequence**; every drug, supplement, and dose change
    with *when it started*; relevant history, exposures, diet, family history; what has already been
    ruled out and *how*. Restate it back as a case summary and name the specific question(s) the
-   research must answer. Ask the user for missing anchors rather than assuming them — especially
-   timing, which is where most dot-connections hide.
+   research must answer. Ask the user for missing anchors instead of assuming them, especially
+   timing, where most dot-connections hide.
 
 2. **Generate rival hypotheses before searching.** Write a differential *first*, so the search tests
    ideas instead of confirming one. Run **all eight** generators in
@@ -106,12 +106,12 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
    quality using `references/evidence-appraisal.md`; check for retraction and predatory venues.
    Then invert: for each surviving hypothesis, actively search for the evidence that would
    **disconfirm** it and report what you find. A hypothesis that survives a real attempt to kill it
-   is worth far more than one that merely accumulated supporting hits.
+   is worth far more than one that accumulated supporting hits.
 
 6. **Triple-check every citation.** Before any citation reaches the output it must pass all three
    checks in `references/citation-verification.md`: (a) it **exists** (DOI/PMID resolves),
-   (b) its **metadata matches** (title, authors, journal, year), and (c) the source **actually
-   states the claim** you attached to it — quote the supporting sentence. Run
+   (b) its **metadata matches** (title, authors, journal, year), and (c) the source **states the
+   claim** you attached to it — quote the supporting sentence. Run
    `${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_citation.py` on each DOI/PMID. A citation that fails any check is removed, not
    softened. If verification is impossible (no network, paywalled full text), label the claim
    **unverified** and say exactly what could not be checked.
@@ -122,8 +122,8 @@ the first plausible answer — the whole value is in stage 2 and the disconfirma
      you resolve it from the paper. `RETRACTION STATUS UNVERIFIED` means the Retraction Watch
      feed never answered for that record and the only evidence was publication-type metadata,
      which lags a notice by weeks; check the publisher page before relying on the source. The
-     tool is built to fail toward "look at this," so treating an unknown as a pass converts its
-     one designed safety margin into the failure it was margin against.
+     tool is built to fail toward "look at this," so treating an unknown as a pass turns its
+     one designed safety margin into the failure it guards against.
 
 7. **Assemble the case file.** Produce the structure in `references/output-format.md` using
    `assets/case-file-template.md`: plain-language summary first, then hypotheses ranked with
@@ -138,7 +138,7 @@ The reason ordinary search fails on hard cases is **specialty siloing**: the car
 describes finding A, the gastroenterology literature describes finding B, and no paper contains both
 because no author was looking at both. A search engine matches your words against single documents,
 so it can only return what someone already wrote down together. Dot-connection is therefore not a
-better query — it is a different *move*: you hypothesize the bridge (a shared mechanism, a drug, a
+better query but a different *move*: you hypothesize the bridge (a shared mechanism, a drug, a
 deficiency, a single upstream cause), then search for the bridge itself, then search the two findings
 in the same query to see whether anyone ever noticed. That is why stage 2 comes before stage 3.
 
@@ -155,7 +155,7 @@ weigh them. Reporting a case-report-grade link with trial-grade confidence is th
 damaging thing this kind of research does, because it sends someone to their doctor certain about
 something that was never established. Hence grading every link and saying plainly which are leads.
 
-**Citation verification is the anti-hallucination guarantee**, and it matters most precisely here.
+**Citation verification is the anti-hallucination guarantee**, and it matters most here.
 A fabricated or misattributed citation in a medical context can drive a real decision about a real
 body. Language models are fluent at producing citation-shaped text — plausible authors, plausible
 journal, plausible year — that resolves to nothing. The only defense is mechanical: resolve the
@@ -177,7 +177,7 @@ scientists.
 - Ignoring timing → onset sequence is often the decisive clue; a symptom that began three weeks after
   a new prescription is a different case than one that predates it.
 - Citing an abstract you did not read past → the abstract frequently overstates the finding. Verify
-  the claim against the actual text and quote it.
+  the claim against the full text and quote it.
 - Presenting relative risk without absolute risk ("doubles your risk") → meaningless without the base
   rate. Give both.
 - Letting an unverifiable citation through with a hedge → remove it or label it unverified; never let

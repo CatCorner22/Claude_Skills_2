@@ -8,13 +8,13 @@ description: >-
   from accounts of Feynman's practice, not a protocol he wrote) to find the author's own gaps,
   strips curse-of-knowledge tells (Pinker's framing: undefined abbreviations, "simply," skipped
   steps), and verifies with teach-back. The assistant plays the smart newcomer, flags jargon and
-  hand-waves, drafts analogies with breaks marked, and simulates the teach-back. Use when a
+  hand-waves, drafts analogies, and simulates the teach-back. Use when a
   concept must land with someone who doesn't already know it — onboarding, newcomer docs, or
   "why does nobody get this?". Triggers: explain it well, Feynman
   technique, analogy for, teach this concept, curse of knowledge, make this intuitive,
   teach-back, explain to a newcomer.
 metadata:
-  version: "1.1.4"
+  version: "1.1.5"
 ---
 
 # Explanation design
@@ -68,7 +68,7 @@ the curse-of-knowledge tell list with rewrites, and the teach-back script are in
    Never definition-first: a definition is a summary for people who already understand.
 4. **Run the Feynman loop.** Explain the concept in plain words as if to a smart newcomer →
    notice every place you reach for jargon or wave a hand ("...and then it just sorts itself
-   out") → treat each such place as *your* gap, not the reader's → go re-learn that piece → 
+   out") → treat each such place as *your* gap, not the reader's → go re-learn that piece →
    simplify again. Repeat until the plain-words version runs end to end. Label it honestly when
    you name it: a method distilled from accounts of Feynman's practice.
 5. **Strip the curse-of-knowledge tells.** Sweep for: abbreviations never expanded; "simply,"
@@ -80,7 +80,7 @@ the curse-of-knowledge tell list with rewrites, and the teach-back script are in
    is data about the explanation, not a verdict on the learner. Fix the explanation at the
    distorted spot and re-verify.
 
-**Division of labor.** The assistant plays the smart newcomer (it can genuinely not-know on
+**Division of labor.** The assistant plays the smart newcomer (it can not-know on
 request, which the expert author cannot), flags jargon and hand-waves, generates candidate
 analogies with their break-points already marked, and simulates the teach-back before any human
 learner's time is spent. The human owns the audience model and the final call on which analogy

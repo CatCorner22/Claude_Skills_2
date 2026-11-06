@@ -13,7 +13,7 @@ description: >-
   compact the context, working memory, episodic memory, semantic memory, MEMORY.md, memory
   layers, save for later, what do you remember, pick up where we left off.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
 ---
 
 # Hierarchical memory manager
@@ -52,13 +52,13 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
      load ritual surfaces them first.
 2. **At session start / on retrieval:** load only the most relevant slices from native
    memory, project knowledge, MEMORY.md, or artifacts. Briefly restate the anchors that
-   affect the current task — the standing directives, the avoidance rules that bite here,
-   the preferences that shape the deliverable — and don't dump the whole store into context.
+   affect the current task (the standing directives, the avoidance rules that bite here,
+   the preferences that shape the deliverable); do not dump the whole store into context.
 3. **During work:** proactively extract important new information and place it in the
    correct layer, phrased in the entry grammar (`FACT:` / `PREFERENCE:` / `RULE:` /
    `LESSON:` / `PATTERN:` / `METHOD:` / `DIRECTIVE:`, each with its evidence and
    confidence). Prefer durable external storage (a project file, MEMORY.md, an artifact) over pure context
-   whenever the information should outlive the session. When the user corrects something,
+   when the information should outlive the session. When the user corrects something,
    run the correction protocol in `metacognition-skills:reflective-learner` — its triage step
    logs the rule back through this skill; when a deep analysis via
    the archived `metacognition-skills:dynamic-analysis-engine` produces durable findings, they land here
@@ -85,11 +85,11 @@ The hierarchy mirrors how durable knowledge actually forms: everything starts as
 state, a little of it matters enough to record as *what happened* (episodic), and only the
 distilled residue — facts, preferences, rules — deserves permanent storage (semantic). The
 layer names borrow the vocabulary of human memory research as an organizing analogy, not a
-neuroscience claim: what earns the borrowing is the promotion pipeline, because skipping the
-middle step is exactly why unstructured note-keeping rots — raw transcripts pile up, nothing
+neuroscience claim: the borrowing is earned by the promotion pipeline, because skipping the
+middle step is why unstructured note-keeping rots — raw transcripts pile up, nothing
 is promoted or pruned, and retrieval degrades until the notes are noise. Compaction is the
 active ingredient: memory is curated, not accumulated. Progressive disclosure is the other
-half — stored knowledge costs nothing until it's loaded, so the discipline of loading only
+half — stored knowledge costs nothing until loaded, so loading only
 relevant anchors keeps a large store cheap; a session that begins by restating three
 applicable rules gets their full value at a fraction of the cost of replaying the archive.
 Evidence-and-confidence annotations are what make entries *arguable*: a fact that knows
@@ -108,7 +108,7 @@ auditable and the user stays in control of what "true" means.
 - Keeping memory only in context → it dies with the session. Write durable items to files.
 - Entries without evidence or dates → unarguable assertions that can never be safely
   retired. Every entry says where it came from.
-- Letting memory maintenance displace the task at hand → memory serves the work, never the
+- Letting memory maintenance displace the task at hand → memory serves the work, not the
   reverse.
 - Storing secrets, credentials, or raw sensitive data → reference their location instead;
   sensitive tailoring detail belongs in git-ignored `*.private.md` files.

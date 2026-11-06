@@ -14,7 +14,7 @@ description: >-
   adaptive adversary. Triggers: tabletop exercise, wargame the plan, run a drill,
   incident simulation, inject, BCP exercise, commander's intent.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
 ---
 
 # Tabletop wargaming (with commander's intent)
@@ -34,7 +34,7 @@ metadata:
   `continuous-improvement-skills:project-command-center` lacks: that doctrine carries the
   Millennium Challenge validity lesson and adversarial plan review; this skill supplies
   the roles, turns, injects, and adjudication to actually run an exercise.
-- A neighboring seam, in prose: auditing whether an exercise *can genuinely fail* — fixed
+- A neighboring seam: auditing whether an exercise *can genuinely fail* — fixed
   criteria, intervention logging, demonstration-vs-experiment honesty — is a
   validation-design discipline (a user-level skill covers it); this skill *runs* the
   exercise, and borrows that discipline rather than owning it.
@@ -82,7 +82,7 @@ metadata:
 
 5. **Play turns: action → reaction → counteraction.** Blue acts on the critical event;
    red reacts as an intelligent adversary would; blue counters. Adjudicate each exchange
-   before the next. Turns stop the exercise collapsing into a discussion of the plan.
+   before the next. Turns keep the exercise from collapsing into a discussion of the plan.
 6. **Escalate with injects.** Deliver pre-scripted injects at planned times, plus adaptive
    injects responding to what players actually chose — each carrying its EXERCISE marking.
    Templates in `references/exercise-design.md`.
@@ -111,7 +111,7 @@ are the provenance here — practitioner doctrine, not controlled trials] made t
 portable: scenario, injects, facilitator, debrief. Commander's intent is load-bearing
 for any operating team because real incidents break the plan first —
 purpose, key tasks, and end state are what let the person at the desk act correctly at
-2 a.m. without calling anyone. The safety discipline earns its prominence from documented
+2 a.m. without calling anyone. The safety discipline's prominence comes from documented
 LLM behavior: models given adversary or adjudicator seats have shown abrupt escalation in
 wargame studies [snippet-only], and a model's agreeableness quietly hands blue easy wins,
 which manufactures false confidence — the most expensive possible output of an exercise.

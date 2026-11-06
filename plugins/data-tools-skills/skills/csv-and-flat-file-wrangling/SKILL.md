@@ -13,7 +13,7 @@ description: >-
   delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
   zeros lost, csv broken columns, mojibake, flat file feed.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
 ---
 
 # CSV and flat-file wrangling
@@ -38,9 +38,9 @@ metadata:
    with vim, so on a box without it use `head -c 500 file.csv | od -An -tx1z | head`; `od` is
    POSIX and always present, though the trailing `z` (the ASCII gutter beside the hex) is a GNU
    extension, so drop it to plain `-tx1` if a BSD/macOS `od` rejects the type string (or open
-   the file in a text editor showing invisibles). You're checking:
+   the file in a text editor showing invisibles). Check:
    encoding clues (a `EF BB BF` UTF-8 BOM; high bytes suggesting Latin-1/Windows-1252), the
-   actual delimiter (comma, semicolon, pipe, tab), quoting style, line endings, and whether
+   delimiter (comma, semicolon, pipe, tab), quoting style, line endings, and whether
    there are title/footer rows around the data.
 2. **Parse explicitly — never rely on defaults for a recurring feed:**
 
@@ -94,7 +94,7 @@ like `0006789599` round-tripped through numeric inference comes back as the inte
 add one null to that column and it becomes the float `6789599.0`; and a 19-digit ID in that same
 float column is written back out as `6.78959912345679e+18`. Every join against the original keys
 goes quiet, and nothing errors — a known hazard class this library documents from hard
-experience. The whole discipline is therefore to make interpretation
+experience. The discipline is therefore to make interpretation
 explicit (encoding, delimiter, dtypes, date formats are *declared*, not guessed) and then to
 *prove* the parse with counts and control totals, exactly like reconciling a statement. The
 reason IDs are always strings is that identity data has no arithmetic meaning — the moment it

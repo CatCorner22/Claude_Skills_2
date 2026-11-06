@@ -14,7 +14,7 @@ description: >-
   probability, prior probability, superforecasting, superforecaster, perpetual beta, how
   much should this evidence move me.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §4), whose anchors were verified
@@ -30,8 +30,7 @@ it, never wrote its modern form, and never named it — Richard Price found the 
 Bayes's papers, substantially edited it, and read it to the Royal Society in 1763; Laplace
 independently rediscovered and generalized the result (1774; 1812), and Laplace's form is
 the one everyone uses [snippet-only]. A practice built on revising beliefs when evidence
-arrives should model that honesty in its own foundations. The practice itself is simple to
-state: hold an explicit prior, ask of every new fact "how surprising is this under each
+arrives should model that honesty in its own foundations. The practice is simple: hold an explicit prior, ask of every new fact "how surprising is this under each
 story?", move the belief by that much and no more, and keep the log.
 
 ## When to use
@@ -44,7 +43,7 @@ story?", move the belief by that much and no more, and keep the log.
   small, frequent, logged updates instead of one dramatic reversal.
 - Not for: the probability *mechanics* — conditional probability, Bayes' theorem itself,
   and natural-frequency teaching belong to the archived `math-foundations-skills:probability-fundamentals`.
-  The seam, named plainly: that skill teaches the math of a single computation; this skill
+  That skill teaches the math of a single computation; this skill
   is the decision practice layered above it — priors owned in advance, evidence graded as
   it arrives, updates logged and scored over the life of a real question.
 - Not for: establishing the prior from comparable past cases — the outside view and
@@ -134,7 +133,7 @@ The arithmetic is deliberately demoted to counts because that is where the empir
 evidence points: Gigerenzer & Hoffrage showed correct Bayesian answers roughly *tripled* —
 from about 16% to about 46% — when problems were recast from probabilities to natural
 frequencies ("out of 10,000 people…"), a gain replicated with experienced physicians
-[snippet-only]. Hold the honest limit: a majority still failed. Natural frequencies help;
+[snippet-only]. A majority still failed. Natural frequencies help;
 they do not fix. (The teaching of that format itself belongs to
 the archived `math-foundations-skills:probability-fundamentals`; this skill just refuses to let a
 formula stand where a count table would be checkable.)
@@ -148,13 +147,13 @@ superforecasters "beat intelligence analysts with classified access by ~30%" is
 comparison. Teach it, if at all, with that provenance chain visible; a skill about
 weighing evidence must weigh its own.
 
-Two limits are worth understanding as *properties of the method*, not as footnotes. The first is
+Two limits are *properties of the method*, not footnotes. The first is
 that **Bayes' theorem divides the probability you have among the hypotheses you supplied.** The
 denominator is the sum over your hypothesis list, so the posteriors always add to 100% of that
 list — whether or not the list covers the world. Compare two stories and the arithmetic will hand
 you back "78% H1" even when the truth is a third thing neither of you named, and it will do so most
 confidently exactly when the evidence is strange, because strange evidence discriminates hard
-between the two things on offer. The tell is available and cheap: compute how likely the evidence
+between the two things on offer. The tell is cheap: compute how likely the evidence
 was *overall* — sum P(evidence | Hᵢ) × P(Hᵢ) across your list. If that number is tiny, your
 evidence is surprising under everything you have thought of, and the correct move is to widen the
 list rather than to trust the winner of a two-horse race. (Enumerating the full hypothesis set is

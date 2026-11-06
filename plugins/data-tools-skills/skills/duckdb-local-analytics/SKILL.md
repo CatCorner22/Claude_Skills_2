@@ -12,7 +12,7 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
 ---
 
 # DuckDB local analytics
@@ -103,8 +103,8 @@ SELECT count(*) FILTER (WHERE stmt_only)   AS stmt_only,
    Re-running the whole analysis on next month's export becomes one command.
    `references/duckdb-recipes.md` covers window-function recipes, larger-than-memory settings,
    and pandas interop.
-7. **Sanity-check like always:** row counts per source, control totals, and the unmatched counts
-   from any join — SQL makes wrong answers fast, too. The assistant writes the SQL and the script;
+7. **Sanity-check:** row counts per source, control totals, and the unmatched counts
+   from any join — SQL makes wrong answers fast too. The assistant writes the SQL and the script;
    the human supplies the control totals and adjudicates any reconciliation breaks.
 
 ## Why / learn

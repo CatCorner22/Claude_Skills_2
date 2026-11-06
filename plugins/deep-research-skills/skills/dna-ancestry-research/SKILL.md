@@ -13,7 +13,7 @@ description: >-
   tree, genealogy, DNA matches, shared cM, GEDmatch, lineage map, migration map, ethnicity
   estimate, genetic genealogy.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   source: >-
     Built from a five-stream research pass (genetic-genealogy standards and ethics; what the vendor
     reports measure; haplogroup origins, ages and migration; open callers and map data with their
@@ -24,24 +24,24 @@ metadata:
 
 # DNA ancestry research — genome to lineage, with maps
 
-Takes what a person has — a chip export, a whole-genome result, a vendor's ancestry report, a
-match list, a half-built tree, family stories — and turns it into three layers of ancestry, each
-graded by what the evidence actually supports: **deep ancestry** (the Y-DNA and mtDNA lines, on a
+Turns what a person has — a chip export, a whole-genome result, a vendor's ancestry report, a
+match list, a half-built tree, family stories — into three layers of ancestry, each graded by what
+the evidence supports: **deep ancestry** (the Y-DNA and mtDNA lines, on a
 scale of thousands of years), **population composition** (what the vendor's percentages mean, on a
 scale of centuries), and **genealogy** (named people in records, within the last two hundred years
-or so). Then it draws the maps that make the story legible and says, on each one, what is known,
-what is inferred, and what is not known at all.
+or so). Then it draws maps that make the story legible and says, on each one, what is known,
+what is inferred, and what is not known.
 
-**The discipline this skill exists to enforce.** Ancestry reporting is where confident storytelling
+**The discipline this skill enforces.** Ancestry reporting is where confident storytelling
 outruns evidence fastest: a percentage becomes a nationality, a haplogroup becomes a tribe, a shared
-segment becomes a named ancestor. Every claim here therefore carries its layer, its source, its
-version, and its uncertainty — and the maps carry them too, in their footers, because a map
-without its sources is the most persuasive wrong thing a person can be handed.
+segment becomes a named ancestor. Every claim here therefore carries its layer, source, version and uncertainty. Maps carry them
+too, in their footers, because a map without its sources is the most persuasive wrong thing a
+person can be handed.
 
 ## When to use
 - Someone has consumer DNA results (23andMe, AncestryDNA, MyHeritage, Nebula Genomics, FamilyTreeDNA
   or a YFull report) and wants to know where their family comes from, what their haplogroups mean,
-  or how far the data can really take them.
+  or how far the data can take them.
 - Someone wants their Y-DNA or mtDNA haplogroup called or checked from a chip file, or wants a
   vendor's call reconciled with another vendor's or with a sequencing result.
 - Someone has DNA matches, shared-centimorgan figures or a GEDmatch kit and wants help working out
@@ -51,25 +51,25 @@ without its sources is the most persuasive wrong thing a person can be handed.
   applied, and the lineage drawn on a map or a pedigree chart.
 - Not for: health, carrier, pharmacogenomic or risk questions about the same file →
   `deep-research-skills:dna-raw-data-audit` (that skill reads the genome as medicine; this one
-  reads it as history, and the two must not blur). A clinical question with no genome in it →
+  reads it as history; do not blur the two). A clinical question with no genome in it →
   `deep-research-skills:medical-research-detective`. Checking whether a video's ancestry or
   genetics claims match its cited sources → `deep-research-skills:video-source-audit`. A statistics
   question with no genome attached → `data-analytics-bi-skills:statistical-inference`.
 
 ## Do it
 
-Work the stages in order. Stage 1 is the only one that may not be skipped under any time pressure,
-and several later stages can legitimately end with "the data cannot establish this".
+Work the stages in order. Never skip stage 1, whatever the time pressure. Several later stages can
+legitimately end with "the data cannot establish this".
 
 1. **Set up privately, establish whose genome this is, and agree what will not be surfaced.** A
    genome identifies a person and every biological relative they have, none of whom consented to
-   this analysis. Keep the raw file, and every file derived from it (the VCF, PLINK and genos
-   outputs this skill writes, the caller reports, the maps with real names), outside any repository
+   this analysis. Keep the raw file and every file derived from it (the VCF, PLINK and genos
+   outputs this skill writes, the caller reports, the maps with real names) outside any repository
    and any shared drive, and never paste genotypes into a third-party service. Before any file goes
-   near version control run `git check-ignore -v <file>` and get a hit — the common genomic
+   near version control run `git check-ignore -v <file>` and get a hit. The common genomic
    extensions are ignored in the repository this skill ships from, but that protection does not
-   travel with the installed plugin, and the `.ped`, `.map` and `.genos.txt` outputs are not
-   covered by most ignore files at all. Then ask three things before reading anything: **whose
+   travel with the installed plugin, and most ignore files do not cover the `.ped`, `.map` and
+   `.genos.txt` outputs at all. Then ask three things before reading anything: **whose
    file is this** (if not the asker's, say what changes — the subject has not consented, findings
    about them are not the asker's to receive, and a minor's file gets no deep-ancestry surprises);
    **what should not be surfaced** (unexpected parentage, a specific branch, living relatives'
@@ -79,13 +79,13 @@ and several later stages can legitimately end with "the data cannot establish th
 
 2. **Audit the plan for delegation before executing it.** List every step from inventory to
    delivery and mark who does it. The person's only jobs are consent, decisions and anything in the
-   limits that stay with them (passwords, accounts, uploads to a matching site, purchases); every
-   other step — file conversion, running the callers, the research, the records look-ups, the
-   maps, the writing — is this skill's. If a delegation-audit skill is installed (in this
+   limits that stay with them (passwords, accounts, uploads to a matching site, purchases). This
+   skill does every other step: file conversion, running the callers, the research, the records
+   look-ups, the maps, the writing. If a delegation-audit skill is installed (in this
    library's author environment it is anthropic-skills:max-delegation-auditor), invoke it on the
    plan and adopt what it finds; otherwise run that audit inline: for each step the plan hands to
    the person, name the tool that could do it instead or the limit that forbids it. Bundle every
-   consent the plan needs into one question rather than a drip of them.
+   consent the plan needs into one question.
 
 3. **Inventory the inputs and run the summary before any call.** Collect what exists: the chip
    export (23andMe, AncestryDNA or MyHeritage layouts all parse), the whole-genome deliverables
@@ -102,8 +102,8 @@ and several later stages can legitimately end with "the data cannot establish th
    file declares, and the converters refuse rather than guess (`references/haplogroups-and-deep-ancestry.md` §1).
 
 4. **Call the deep-ancestry haplogroups with open tools, then review the calls.** Two licence-clean
-   callers cover both lines; the exact recipes, install notes, tree versions and what each output
-   column means are in `references/haplogroups-and-deep-ancestry.md` §2–4.
+   callers cover both lines; the recipes, install notes, tree versions and output-column meanings
+   are in `references/haplogroups-and-deep-ancestry.md` §2–4.
    - *mtDNA:* convert, then classify with HaploGrep 3 in chip mode, against PhyloTree 17.3 as
      distributed by HaploGrep, with the extended report and QC file on:
      ```
@@ -112,7 +112,7 @@ and several later stages can legitimately end with "the data cannot establish th
      ```
      The converter writes **every genotyped site**, reference calls included, because chip mode
      builds its coverage range from the sites present; an alt-only VCF makes the tool treat the
-     rest of the molecule as unobserved and the quality score stops meaning what it says.
+     rest of the molecule as unobserved, and the quality score loses its meaning.
    - *Y-DNA (only when the summary says a Y chromosome is present):* convert to PLINK text and run
      Yleaf against more than one tree, so the names can be reconciled rather than trusted singly:
      ```
@@ -128,7 +128,7 @@ and several later stages can legitimately end with "the data cannot establish th
      flips** (the chip called the complement base — a probe artefact, not a private mutation),
      sites not genotyped, and real discrepancies; it counts chip-only private mutations, which stay
      unconfirmed until a sequence agrees; and for Yleaf it says whether the trees agree on the
-     terminal marker. Report each call with the tool, the tree and its version, the quality score,
+     terminal marker. Report each call with the tool, the tree and its version, the quality score
      and the **depth limit**: a chip resolves a lineage only as far as its probes reach, so the
      honest form is "R-L21 — subclade unresolved by chip", never a deeper name borrowed from
      someone else's sequencing. Where a sequencing result exists (Nebula via YFull, Big Y, a full
@@ -138,8 +138,8 @@ and several later stages can legitimately end with "the data cannot establish th
 5. **Read the vendor's ancestry report for what it measures, and restate every number in those
    terms.** A composition percentage is the share of the person's DNA segments assigned, by a
    classifier, to the reference population they most resemble, at a stated confidence, on a stated
-   version of the panel — and the vendors re-draw the panels, so the same person's numbers move
-   between versions without their ancestry changing. Genetic groups or recent-ancestor locations
+   version of the panel. Vendors re-draw the panels, so the same person's numbers move between
+   versions without their ancestry changing. Genetic groups or recent-ancestor locations
    are a different layer (identity-by-descent matching to customers who report four grandparents
    from one place), framed by the vendors in the last two centuries; the timeline feature assumes a
    single ancestor per population; the relatives list has segment-length and SNP-count floors
@@ -149,14 +149,13 @@ and several later stages can legitimately end with "the data cannot establish th
    anything about deep ancestry from the composition back to the haplogroup layer where it belongs.
    `references/vendor-reports.md` carries what each product does and the limits that bind it.
 
-6. **Run the research pass, with a privacy brief.** The haplogroups, the places, the surnames and
-   the record classes each need current literature and current record availability, and those
-   move. If a deep-research coordinator skill is installed (in this library's author environment it
+6. **Run the research pass, with a privacy brief.** The haplogroups, places, surnames and
+   record classes each need current literature and current record availability, which change. If a deep-research coordinator skill is installed (in this library's author environment it
    is anthropic-skills:deep-research), invoke it with the question decomposed into: the origin,
    age, distribution and migration of each haplogroup, with dated nodes from the published clocks
    and ancient-DNA papers; the surname and regional history; the record classes that exist for the
    places and periods in play; and anything the vendor has changed since the report was issued.
-   Otherwise spawn that fan-out yourself, three to five researchers in one turn. Either way the
+   Otherwise spawn that fan-out yourself: three to five researchers in one turn. Either way the
    brief to every researcher carries **only haplogroup labels, surnames and places — never the
    file, never a genotype, never a match's name** — and every claim that comes back must resolve
    to a retrieved record and carry a provenance mark; a search tool's generated prose is not a
@@ -175,7 +174,7 @@ and several later stages can legitimately end with "the data cannot establish th
    Method: `references/method-and-standards.md` §1–5; sources: `references/records-and-documentary-research.md`.
 
 8. **Draw the maps, each with its sources in the footer.** Use the bundled renderer, which draws
-   exactly what the spec says and nothing it was not told:
+   exactly what the spec says and nothing else:
    ```
    python3 "${CLAUDE_PLUGIN_ROOT}/skills/dna-ancestry-research/scripts/lineage_maps.py" map <spec.json> -o <private-dir>/<name>.svg
    python3 "${CLAUDE_PLUGIN_ROOT}/skills/dna-ancestry-research/scripts/lineage_maps.py" pedigree <persons.json> -o <private-dir>/pedigree.svg --redact
@@ -188,7 +187,7 @@ and several later stages can legitimately end with "the data cannot establish th
    `references/lineage-maps.md` has the spec recipes, the honesty rules for routes, and the data
    licence.
 
-9. **Deliver in the fixed shape, and end on what would resolve the open questions.** Six sections,
+9. **Deliver in the fixed shape, and end on what would resolve the open questions.** Use six sections,
    every time (the contract is below). The final section names the specific test or record that
    would answer each open question — a Y-sequencing test for the subclade, a full mitochondrial
    sequence for the private mutations, a parish register for an unproven link — and states, for
@@ -211,7 +210,7 @@ and several later stages can legitimately end with "the data cannot establish th
 
 ### Hard rails
 - **No relatedness test on a third party, and no volunteered family-structure inference.** The
-  arithmetic for comparing two files is simple; the result can tell someone who is not in the
+  arithmetic for comparing two files is simple, but the result can tell someone outside the
   conversation something irreversible. Decline the comparison, say why, and route to a genetic
   counsellor or a genealogist who handles unexpected results. If the data implies non-paternity,
   consanguinity or an unexpected parent, say such inferences are possible and ask whether the
@@ -271,9 +270,9 @@ one of them is not evidence of it. The Genealogical Proof Standard asks for a re
 search, complete citations, analysis and correlation, resolution of conflicts, and a written
 conclusion; the DNA-specific standards add that the test-takers, the data and the reasoning are
 reported so another researcher can check them. Working that way is slower and produces fewer
-named ancestors — and the ones it produces stay produced.
+named ancestors, and the ones it produces hold.
 
-**Why relatives are the first consideration, not a footnote.** Every result here is also a result
+**Why relatives come first, not last.** Every result here is also a result
 about parents, siblings, children and cousins who did not ask. A Y-haplogroup is shared by a whole
 paternal line; an unexpected-parentage finding changes someone else's life; a match's name is a
 person's. The rails are the minimum that keeps a research tool from becoming a disclosure engine.

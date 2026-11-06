@@ -14,7 +14,7 @@ description: >-
   confounder, confounding, collider bias, difference-in-differences, staggered rollout,
   instrumental variable, regression discontinuity, natural experiment.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
   source: >-
     Built from docs/research/general-use-expansion-research.md §1 (general-use expansion wave
     dossier). Provenance marks carried from the dossier: [snippet-only, cross-checked] =
@@ -25,7 +25,7 @@ metadata:
 # Causal inference (correlation-vs-causation, made procedural)
 
 ## When to use
-- Someone claims a policy, process change, price move, or exposure *caused* an outcome — and the
+- Someone claims a policy, process change, price move, or exposure *caused* an outcome and the
   evidence is observational (no one randomized anything): "resolution time fell after the new
   intake form," "the discipline rate differs by group," "revenue rose after the notification change."
 - Before "controlling for" variables in any regression: deciding *which* covariates to adjust for
@@ -48,7 +48,7 @@ The full drill — DAG roles, the identification ladder, worked DiD/IV/RD exampl
 viewpoints, and sensitivity phrasing — is in `references/causal-identification.md`.
 1. **Write the causal question as a counterfactual contrast.** "What would Y have been for these
    units *without* X?" Name the treatment, the outcome, the units, and the comparison you wish
-   you had. If you can't state the counterfactual, you don't yet have a causal question.
+   you had. If you can't state the counterfactual, you have no causal question yet.
 2. **Draw the DAG before you argue.** Nodes = variables; arrows = claimed direct causes. Classify
    every covariate by its *structural role*, not by whether it correlates: **confounder** (arrows
    into both X and Y — a common cause), **mediator** (on the path X→M→Y — part of the effect),
@@ -58,7 +58,7 @@ viewpoints, and sensitivity phrasing — is in `references/causal-identification
    path — every path that reaches X through an arrow pointing *into* it — by adjusting for
    confounders on it. Never adjust for a collider (that *opens* a path and manufactures
    correlation) or a mediator (that throws away the effect you're estimating), and never adjust
-   for anything downstream of the treatment. And draw the *unmeasured* causes too: "pre-treatment"
+   for anything downstream of the treatment. Draw the *unmeasured* causes too: "pre-treatment"
    is not a safety certificate, because a pre-treatment variable that is a common effect of one
    cause of X and one cause of Y opens a path the moment you adjust for it (M-bias, §1–§2).
 4. **Name what would identify the effect — climb the ladder.** (a) **Randomization** if still
@@ -74,7 +74,7 @@ viewpoints, and sensitivity phrasing — is in `references/causal-identification
    effect on **compliers**, not the population (§6). (d) **Regression discontinuity**: a
    score/date/size cutoff assigns treatment; units just above and just below are comparable; check
    that no one manipulated their position around the cutoff; the effect is the one **at the
-   cutoff**. (e) If none apply: adjustment-only, labeled as the weakest rung — and run with its
+   cutoff**. (e) If none apply, use adjustment-only, labeled as the weakest rung, and run it with its
    actual toolkit (propensity matching/weighting or doubly-robust estimation, judged on covariate
    balance) plus an explicit **positivity/overlap** check (§4a).
 5. **Stress the design's key assumption — that *is* the analysis.** Pre-trend plots and placebo
@@ -103,7 +103,7 @@ contemporaneous with correlation itself, and logician Alexander Bain warned of t
 1870; it is not a quotable line from Pearson or Fisher. The teaching irony: Pearson (1911)
 dismissed *causation* as "another fetish amidst the inscrutable arcana of even modern science" —
 the correlation pioneer thought causation was the confused idea [snippet-only, cross-checked].
-The aphorism is also only half a lesson: it tells you what correlation isn't, not what would make
+The aphorism is only half a lesson: it says what correlation isn't, not what would make
 a causal claim *earned*. The DAG supplies that. Pearl's graphical framework (causal diagrams,
 *Biometrika* 1995; the back-door criterion; lay canon *The Book of Why*, 2018 [snippet-only,
 cross-checked]) turns "control for everything" — the kitchen-sink reflex — into a structural
@@ -133,13 +133,13 @@ Three ideas hold the toolkit together once you have used it a few times. **First
 answers a narrower question than the one you asked.** RD gives you the effect at the cutoff, IV
 gives you the effect on the units the instrument actually moved, adjustment-only gives you the
 effect over the region where the treated and untreated populations overlap. None of these is a
-defect — they are what "as if randomized" costs — and the discipline is to say which population
+defect; they are what "as if randomized" costs. Say which population
 the number describes in the same sentence as the number. The scope statement *is* part of the
 estimate. **Second: identification and inference are separate problems, and a design can solve the
 first while leaving the second untouched.** Denver-vs-Phoenix can be a defensible identification
 story and still support no standard error at all, because the unit that could have gone differently
-is the office-quarter and there is exactly one of them. Software will happily print an interval
-computed from thousands of tickets; the interval answers a question nobody asked. **Third: the
+is the office-quarter and there is exactly one of them. Software will print an interval
+computed from thousands of tickets, but the interval answers a question nobody asked. **Third: the
 methods themselves get revised, so cite the design and not just the acronym.** "We ran a DiD"
 described a settled procedure in 2015 and describes an ambiguity now: staggered adoption turned out
 to break the standard two-way fixed-effects implementation badly enough that a whole family of

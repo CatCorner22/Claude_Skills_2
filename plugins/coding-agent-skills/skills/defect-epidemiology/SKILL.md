@@ -3,18 +3,18 @@ name: defect-epidemiology
 description: >-
   Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread:
   fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in
-  three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history
+  three passes (literal grep, LLM semantic sweep for mutated variants, version-history
   transmission tree), dispositions every contact as patched, not-applicable, or
-  accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared
-  snippet) so reinfection stops at the source, ranks sources by copies spawned, and quarantines
-  the top ones with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY
+  accepted-with-reason, finds patient zero (origin commit, template, tutorial, or shared
+  snippet) so reinfection stops there, ranks sources by copies spawned, and quarantines
+  the top ones with a template fix and lint rule. Grounded in ReDeBug and VUDDY
   (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009
   (inconsistent clone edits cause real faults). Use when a found bug's pattern may live
   elsewhere, or the same bug keeps coming back. Triggers: contact tracing, patient zero, code
   clone, copy-paste bug, everywhere else this appears, outbreak, this bug again, trace the
   clones, quarantine the template.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Defect epidemiology (contact-trace the bug you just found)
@@ -64,7 +64,7 @@ a worked example, quarantine patterns, and the outbreak-report template are in
 2. **Trace in three passes, cheap to deep:**
    - *Pass 1 — literal:* grep for the pattern's distinctive tokens and their obvious
      variants. Catches exact and renamed copies (Type 1–2 clones).
-   - *Pass 2 — semantic:* the assistant sweeps candidate regions — same subsystem, same
+   - *Pass 2 — semantic:* sweep candidate regions — same subsystem, same
      author clusters, files with similar structure or shared imports — reading for the
      *signature*, not the text. This is the amplification step: restructured and
      semantic-twin clones (Type 3–4) are invisible to grep and prohibitively slow for a
@@ -100,7 +100,7 @@ a worked example, quarantine patterns, and the outbreak-report template are in
    it everywhere, I think" into a checkable claim.
 
 ## Why / learn
-The core finding behind this skill is that **patches do not propagate on their own**.
+The core finding: **patches do not propagate on their own**.
 ReDeBug's result generalizes: the fix lands where the bug was *reported*, while the copies
 — in other files, other repos, other people's projects scaffolded from the same template —
 keep the defect alive `[snippet-only]`. Juergens et al. explain why clones are worse than
@@ -125,7 +125,7 @@ taxonomy in the reference maps each mutation level to the pass that can still ca
 Grep catches Types 1–2; only meaning-level reading catches Types 3–4, which is exactly
 where an LLM changes the economics of the sweep (VUDDY industrialized fingerprint matching
 for whole ecosystems; a semantic sweep does for your codebase what grep cannot)
-`[snippet-only]`. Finally, quarantine prefers *mechanism over memo*: a lint rule that
+`[snippet-only]`. Quarantine prefers *mechanism over memo*: a lint rule that
 blocks the pattern at commit time keeps working after everyone has forgotten the outbreak;
 an announcement is forgotten by the next hire's first copy-paste.
 

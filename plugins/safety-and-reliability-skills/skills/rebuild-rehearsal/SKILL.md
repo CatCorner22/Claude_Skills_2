@@ -8,13 +8,12 @@ description: >-
   pick a real rebuild unit (restore from backup, recreate the deliverable from raw inputs,
   rebuild the environment from docs alone), rotate learn-lead-teach so last time's
   apprentice leads, harvest every exposed gap into the docs, and name who funds the cycle.
-  The assistant simulates the rebuild, interrogates the docs for gaps, and plays the
-  newcomer with only the written record. Use when knowledge lives in one head or docs have
+  The assistant simulates the rebuild, finds doc gaps, and plays the newcomer. Use when knowledge lives in one head or docs have
   never been proven by use. Triggers: rebuild drill, restore drill, if she left tomorrow,
   are the docs enough to recreate this, it only lives in his head, bus factor, knowledge
   refresh, could a newcomer run this, disaster recovery rehearsal.
 metadata:
-  version: "1.5.1"
+  version: "1.5.2"
 ---
 
 # Rebuild rehearsal (the Shikinen Sengu pattern)
@@ -31,8 +30,8 @@ And the cycle *broke*. After the Ōnin War, the Inner Shrine went roughly 120 ye
 without rebuilding (1462–1585); the practice was revived only when the fundraising nuns
 of Keikō-in raised money across the country for decades, with warlord endowment behind
 them — Oda Nobunaga began funding the shrine again in 1569 and died in 1582, so the 1585
-rebuild was carried through by his successors [snippet-only]. That lapse is not a
-blemish on the story — it is half the lesson: a renewal cycle without a funding owner
+rebuild was carried through by his successors [snippet-only]. That lapse is no
+blemish on the story; it is half the lesson: a renewal cycle without a funding owner
 silently lapses, no matter how sacred everyone agrees it is. (The shinise
 footnote makes the same point from commerce: Kongō Gumi, temple builders founded 578,
 operated independently until liquidation in 2006, longevity built on single-craft focus
@@ -91,8 +90,8 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    depart having never taught.
 4. **Rotate learn → lead → teach.** Each rehearsal, last time's apprentice leads and a
    genuine newcomer apprentices; the veteran attends only to correct, not to drive.
-   Three rehearsals turn a newcomer into a teacher — that rotation, not the docs, is
-   what actually moves the capability between generations.
+   Three rehearsals turn a newcomer into a teacher; that rotation, not the docs,
+   moves the capability between generations.
 5. **Run it for real, newcomer driving.** The person with the least knowledge executes
    from the written record alone; the veteran stays silent until something goes wrong,
    then corrects out loud — **except at a step whose effect leaves the building**, where the
@@ -105,7 +104,7 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    found its limit, not a failed one. (The screen is in `references/rebuild-method.md`; every
    other rebuild pattern here is safe by construction, this one is not.)
    Every question the driver has to ask a human is a gap in
-   the docs — log each one verbatim as it happens.
+   the docs; log each one verbatim as it happens.
 6. **Harvest every gap into the record.** The rehearsal is the documentation's test:
    each logged question, missing step, stale credential, or dead link becomes a doc fix
    before the rehearsal is closed. A rehearsal whose gaps stay in a notebook bought
@@ -114,7 +113,7 @@ gap-harvest protocol, and a worked example are in `references/rebuild-method.md`
    role, with time or budget authority — owns keeping the rehearsals scheduled and
    resourced. Renewal is the first thing cut when quarters get busy, and it fails
    silently: nothing breaks on the day you skip it. If no one can say who funds the
-   next rehearsal, the cycle has already lapsed; it just hasn't been noticed yet.
+   next rehearsal, the cycle has already lapsed unnoticed.
 8. **Use the assistant to make rehearsal affordable.** Historically, rehearsing a
    rebuild cost nearly as much as the rebuild — the barrier Ise paid thirteen centuries
    of treasure to clear. The assistant collapses that cost: it simulates the rebuild
@@ -142,7 +141,7 @@ beaten by one move: rebuild the real thing on a fixed schedule, timed so the peo
 did it last are still present to correct the people doing it next. Why exactly 20 years is
 not settled — thatch and timber durability and ritual renewal are all offered — but the
 property that makes it work as a pattern is generational overlap: 20 years is short enough
-that a working life spans two or three cycles. That is the property to scale, not the
+that a working life spans two or three cycles. Scale that property, not the
 number: if analysts stay three years, a three-year cadence guarantees nothing.
 
 The inversion worth internalizing: **the artifact is disposable; the capability is the
@@ -155,9 +154,9 @@ a departure. Protecting the artifact while the capability decays is embalming.
 The rehearsal doubles as the only honest test of documentation. Docs are written by
 people who already know the material, so they systematically omit what the author cannot
 see they know — the curse of knowledge. No amount of review by knowledgeable colleagues
-finds those holes; only execution by someone without the knowledge does. That is why the
-newcomer drives and the veteran only corrects: the configuration maximizes gap discovery
-while the correction is still available.
+finds those holes; only execution by someone without the knowledge does. So the
+newcomer drives and the veteran only corrects: that setup maximizes gap discovery
+while correction is still available.
 
 Finally, the honest half of the Ise story: the cycle ran on treasure, and when war
 destroyed the funding, the cycle stopped for four generations — revived not by

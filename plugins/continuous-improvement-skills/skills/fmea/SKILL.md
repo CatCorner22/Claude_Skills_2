@@ -10,7 +10,7 @@ description: >-
   to test hardest. Triggers: FMEA, failure modes, failure mode and effects analysis, severity
   occurrence detection, action priority, RPN, risk priority number, rank what could go wrong.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # FMEA (failure mode and effects analysis)
@@ -85,7 +85,7 @@ multi-dimensional risk into one score, check whether arithmetic can silence the 
 least afford to ignore. The second lesson is economic: FMEA's value was never the worksheet, it was
 the disciplined anticipation — and the worksheet's cost is what made offices skip it. An LLM
 inverts that economics by drafting the full rated inventory from a process description in minutes.
-But copying the artifact while dropping the mechanism nulls the result: the mechanism here is human
+But copying the artifact and dropping the mechanism nullifies the result: the mechanism here is human
 adjudication of every rating and an owner who acts on the register. Keep the gate; skip the grind.
 
 ## Common mistakes

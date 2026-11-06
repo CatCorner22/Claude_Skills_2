@@ -2,19 +2,18 @@
 name: split-tally-evidence
 description: >-
   Designs tamper-evident records on the split tally-stick principle (English Exchequer,
-  ~650 years): notched stick split lengthwise into stock and foil, wood grain self-
-  authenticating. Halves each record between adverse parties so verification is rejoining
+  ~650 years): notched stick split lengthwise into stock and foil, self-authenticating wood grain. Halves each record between adverse parties, so verification means rejoining
   two halves neither can alter alone. Inventories records one party could rewrite,
-  designs the split for each (counterpart-held confirmations, hash-anchored exports,
+  designs each split (counterpart-held confirmations, hash-anchored exports,
   signed receipts, append-only logs with external anchors), schedules verification as
-  rejoining ritual, proves by attempted alteration, adds second keeper who independently
-  re-derives critical numbers, and suspends disposal schedules under legal hold. Use when
-  records must survive disputes or when evidence needs designing rather than hoping.
+  rejoining ritual, proves by attempted alteration, adds second keeper to
+  re-derive critical numbers independently, and suspends disposal under legal hold. Use when
+  records must survive disputes or evidence needs designing, not hoping.
   Triggers: tally stick, split tally, tamper-evident, who holds the other copy, could
   someone alter this after the fact, does our half fit their half, hash anchor, dual
   custody, evidence design, litigation hold, legal hold, spoliation, duty to preserve.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
   source: >-
     Built from the library's operational-wisdom research dossier
     (docs/research/epic-wave-held-research.md, Lane 1 entry 2: split tally sticks, English
@@ -33,7 +32,7 @@ comparing two ledgers; it was physically rejoining two artifacts neither party c
 alone [snippet-only: Science Museum Group, Wikipedia, Christie's]. The system's afterlife is
 history's best records-management cautionary tale: in 1834 the retired sticks were
 carelessly incinerated in the Palace of Westminster's furnaces, and the fire burned down
-Parliament (16 October 1834) [snippet-only]. Both lessons hold — the control worked for six
+Parliament (16 October 1834) [snippet-only]. Both lessons hold: the control worked for six
 centuries because the medium itself was the control, and even a retired record deserves a
 designed disposal.
 
@@ -110,7 +109,7 @@ ritual, alteration test, and the second-keeper section are in
      weight as the alteration test in step 5.** Every schedule is suspended the moment
      litigation, a claim, an audit, or a regulatory inquiry becomes *reasonably
      anticipated* — not when it is filed, served, or docketed. That earlier trigger is the
-     whole point: by the time a complaint arrives, the routine deletion that ran last month
+     point: by the time a complaint arrives, the routine deletion that ran last month
      has already happened.
    - **Why this skill in particular needs the rail.** Everything above is built to make
      records survive a dispute, so step 7 is the one step that destroys evidence on a
@@ -120,7 +119,7 @@ ritual, alteration test, and the second-keeper section are in
      jointly-logged protocol is the best exhibit an opponent could ask for on the question
      of whether it was deliberate. The artifacts this skill produces to prove good faith
      become the record of the disposal.
-   - **The stakes, stated plainly.** Under U.S. Federal Rule of Civil Procedure 37(e),
+   - **The stakes.** Under U.S. Federal Rule of Civil Procedure 37(e),
      where electronically stored information that should have been preserved in the
      anticipation or conduct of litigation is lost because a party failed to take
      reasonable steps to preserve it and it cannot be restored or replaced, a court may
@@ -171,7 +170,7 @@ why a hash stored beside the record protects nothing.
 The deeper move is choosing your verifier by interest, not by office. The debtor holds the
 foil precisely because the debtor *wants* to catch an inflated stock — each side polices
 the half it would be harmed by. Adverse interest is the cheapest, most attentive control
-ever designed: it needs no salary, no sampling plan, and no reminder. That is also why the
+ever designed: it needs no salary, no sampling plan, and no reminder. So the
 split must run between genuinely adverse parties — two halves inside one team is redundancy
 against loss, not evidence against tampering.
 
@@ -182,7 +181,7 @@ result, so the record's integrity has its own documented history. The khipu patt
 answers the remaining gap: a split protects a record of *what was exchanged*, but a
 computed number can be wrong identically in both halves — only independent re-derivation
 from raw source catches that, which is why the Inka paid four keepers instead of one
-[snippet-only]. And the Parliament fire teaches the last lesson with unmatched economy:
+[snippet-only]. And the Parliament fire teaches the last lesson economically:
 records outlive their designers, so a flow without a designed retirement ends in an
 improvised one.
 

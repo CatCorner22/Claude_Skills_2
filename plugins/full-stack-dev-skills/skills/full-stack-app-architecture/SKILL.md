@@ -10,7 +10,7 @@ description: >-
   folder layout, where should this code live, new web app setup, scaffold project, module
   boundaries, config management app.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Full-stack application architecture
@@ -31,10 +31,10 @@ metadata:
    well; the lean rule is fewer moving pieces.
 2. **Start as a monolith — one deployable, one database.** A modular monolith serves almost
    every app until well past product-market fit. Split a service out only when a boundary has
-   *proven* different scaling, different release cadence, or a different team owning it — and
-   split along that proven seam, not a guessed one. Four signals actually count (measured resource
+   *proven* different scaling, different release cadence, or a different team owning it, and
+   split along that proven seam, not a guessed one. Four signals count (measured resource
    divergence, a counted cadence conflict, ownership that already matches the code, a stateable
-   containment requirement); five common ones only look like they do — "too big to understand",
+   containment requirement). Five common ones only look like they do: "too big to understand",
    slow tests, scary deploys, a team wanting autonomy, and "we might need to scale". Each imposter
    has a cheaper fix; the reference names it.
 3. **Lay out the project by feature, not by layer:**
@@ -53,27 +53,27 @@ migrations/            # one Alembic history — the DB is shared even when the 
 tests/                 # only tests that cross features
 ```
 
-   A feature folder holds its routes, models, logic, and tests together — the code that
+   A feature folder holds its routes, models, logic, and tests together: the code that
    changes together lives together, and deleting a feature is deleting a folder. Two boundaries
-   inside it earn their keep: `platform/` holds what would still make sense if every feature were
+   earn their keep: `platform/` holds what would still make sense if every feature were
    deleted, and `rules.py` holds pure domain functions (no DB, no clock) so the arithmetic is
    testable without a database. The reference gives the full tree with the test for each boundary.
 4. **Keep module boundaries honest.** Features talk to each other through small, explicit
    functions (a `users.get_user(id)` call), never by reaching into each other's tables or
    internals. State it as one rule — *a feature may import another feature's public surface and
    nothing else* — and enforce it with a test, because a boundary rule nobody checks is a
-   preference; the reference carries a 20-line pytest that walks the imports. That discipline is
-   what keeps the "split it out later" option real — a service boundary is just a module boundary
+   preference; the reference carries a 20-line pytest that walks the imports. That discipline
+   keeps the "split it out later" option real: a service boundary is just a module boundary
    that grew up.
 5. **Handle config the twelve-factor way.** All environment differences (DB URL, secrets,
    feature toggles) come from **environment variables**, read once at startup into a single
    typed settings object (`pydantic-settings`). No `if ENV == "prod"` scattered through code;
    no secrets in git (`.env` is git-ignored — same rule as this repo's own hygiene, see
    `data-tools-skills:data-file-hygiene`). Two rules make it real rather than nominal: secrets get
-   **no default**, so an empty environment fails at boot instead of running on the dev key; and
+   **no default**, so an empty environment fails at boot instead of running on the dev key, and
    config is only what varies *between deploys of the same code* — anything that varies per
    customer or tenant is data and belongs in the database. `grep -rn "os.environ" app/` should
-   return nothing outside `config.py` — and once `pydantic-settings` is doing the reading, usually
+   return nothing outside `config.py`, and once `pydantic-settings` does the reading, usually
    nothing at all.
 6. **Decide the rendering split deliberately.** JSON API + React when the frontend is a real
    application (heavy interactivity, offline-ish state); server-rendered + htmx when it's
@@ -81,27 +81,27 @@ tests/                 # only tests that cross features
    fine: htmx pages with one React island where interactivity concentrates.
 7. **Write the architecture down in one page** — stack, layout, boundaries, config, and the
    split criteria you'll honor later — using `references/architecture-decisions.md` as the
-   template. One page is a constraint, not a target: a longer doc is not read, and an unread
+   template. One page is a constraint, not a target: nobody reads a longer doc, and an unread
    architecture doc is worse than none because it gets cited as authority. Each split criterion
    must name a measurement, a threshold, and where the number comes from; "when we need to scale"
    is not a criterion. The reference's deliverable contract gives the "done when" test per item.
 
 ## Why / learn
-Architecture is deciding *what changes together* — and most early architectural failure comes
+Architecture is deciding *what changes together*, and most early architectural failure comes
 from optimizing for imagined scale instead of for change. The monolith-first rule is
 empirical: successful systems that started as microservices are rare, because service
 boundaries drawn before the domain is understood are guesses, and a wrong service boundary
-costs network calls, distributed debugging, and deployment orchestration *forever* — while a
+costs network calls, distributed debugging, and deployment orchestration *forever*, while a
 wrong module boundary costs a refactor. Feature-folder layout follows the same logic at file
 scale: layer-first layout (`routes/`, `models/`, `services/`) scatters every feature across
 the tree, so every change touches four directories; feature-first layout makes the common
-operation (change one feature) local and the rare operation (change all routes) global —
+operation (change one feature) local and the rare operation (change all routes) global,
 which matches reality. The twelve-factor config rule is about making the same artifact run
 everywhere: the moment behavior depends on scattered environment checks, you have multiple
-programs pretending to be one, and staging stops predicting production. And the honest-
+programs pretending to be one, and staging stops predicting production. The honest-
 boundaries rule is the option premium you pay to keep futures open: modules that communicate
-through narrow interfaces can be split, scaled, or rewritten independently later — you're not
-building microservices, you're preserving the *right* to.
+through narrow interfaces can be split, scaled, or rewritten independently later. You're not
+building microservices; you're preserving the *right* to.
 
 ## Common mistakes
 - Choosing the stack by hype benchmark → fewer moving pieces you know beats novel pieces you don't.
@@ -120,7 +120,7 @@ building microservices, you're preserving the *right* to.
 ## Tailor to your environment
 Capture your app's decisions in `references/your-environment.md`: chosen stack and why, the
 layout, module boundaries and their interfaces, config/secrets handling, and your recorded
-split criteria — so future changes (and agents) follow the same shape.
+split criteria, so future changes (and agents) follow the same shape.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against

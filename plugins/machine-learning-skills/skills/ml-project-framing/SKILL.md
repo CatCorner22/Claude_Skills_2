@@ -13,7 +13,7 @@ description: >-
   prediction task, unit of prediction, baseline model, is this an ML problem, does ML fit,
   feasibility, well-posed, can we predict, framing spec, scope an ML project.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
   source: >-
     The framing discipline descends from CRISP-DM's Business Understanding phase (the
     late-1990s NCR/DaimlerChrysler/SPSS/OHRA consortium process model), verified via
@@ -80,8 +80,8 @@ disconnected from the decision** (you celebrated 0.92 AUC while the business kep
 the cost of the errors you were making was never in the objective). Framing forces those choices into
 the open *before* modeling, when they are cheap to fix — the same insight the CRISP-DM process model
 institutionalized by putting a Business Understanding phase before any data work [snippet-only]. The
-discipline of naming the **prediction time** is what makes leakage visible: leakage is simply using
-information that would not exist yet when the prediction is really made, and you can only see it once
+discipline of naming the **prediction time** is what makes leakage visible: leakage is using
+information that would not exist yet when the prediction is made, and you can only see it once
 you have fixed the moment of prediction. The **baseline** exists because "good" is meaningless in
 isolation — a forecast is only worth deploying if it beats the free naive rule, and models
 routinely don't. Think of framing as writing the problem down so precisely that the modeling becomes

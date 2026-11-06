@@ -13,7 +13,7 @@ description: >-
   must, categories of contract language, defined terms, contract style guide, lint this contract,
   plain-language contract.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   source: >-
     Built on the approach of Kenneth A. Adams, A Manual of Style for Contract Drafting (5th ed.,
     ABA 2023), paraphrased and attributed, never quoted at length — own the book. MSCD positions are
@@ -26,11 +26,11 @@ metadata:
 
 Contract language is a stylized dialect with one job: to state the deal so precisely that nobody
 has to interpret it. Ken Adams's *A Manual of Style for Contract Drafting* is the most rigorous
-account of how to do that, and this skill applies its system — **decide what each sentence is doing,
+account of how, and this skill applies its system — **decide what each sentence is doing,
 then use the verb form that does exactly that** — to drafting, reviewing and redlining. A bundled
 linter does the mechanical half; the judgment calls stay with the drafter, with the test to apply
 written next to each one. Every deliverable leaves in Smart Brevity form, because the reader is a
-partner or a client who will read the first two lines and decide.
+partner or client who reads the first two lines and decides.
 
 ## When to use
 - Drafting a clause, a schedule or a whole agreement, from a term sheet or from scratch.
@@ -57,13 +57,13 @@ partner or a client who will read the first two lines and decide.
    python3 "${CLAUDE_PLUGIN_ROOT}/skills/mscd-contract-drafting/scripts/mscd_lint.py" contract.docx --review
    ```
    The header counts every `shall` and sorts them into obligation-looking, policy, discretion and
-   passive — that ratio is the state of the document in one line. Findings are keyed to the section
+   passive; that ratio is the state of the document in one line. Findings are keyed to the section
    they sit in, so work section by section. Three severities: `edit` is a replacement you can apply
    as written; `flag` is a lawyer's decision (contested, or inside a rail); `info` is a heuristic
-   worth a look. Nothing the linter says is a verdict on substance.
+   worth a look. No linter finding is a verdict on substance.
 
 3. **Put every sentence in its category of contract language.** This is the core of MSCD and of
-   this skill: the verb form signals what the sentence does. The working set —
+   this skill: the verb form signals what the sentence does. The working set:
    | Category | What it does | Verb form |
    |---|---|---|
    | Obligation (on the subject) | imposes a duty on the party that is the subject | *Acme shall pay* |
@@ -74,7 +74,7 @@ partner or a client who will read the first two lines and decide.
    | Declaration | a fact a party asserts | *Acme states that …*, *Zenith acknowledges that …* |
    | Performance | an act done by the signing itself | *Acme hereby grants* |
    | Agreement / intention / belief / recommendation | the rarer four | *agrees*, *intends*, *believes*, *recommends* |
-   The one test that resolves most disputes: **swap `shall` for `has a duty to`; if the sentence
+   The test that resolves most disputes: **swap `shall` for `has a duty to`; if the sentence
    still makes sense, `shall` is right, otherwise it is not.** "This Agreement *has a duty to*
    terminate" fails, so it is policy: *terminates*. Full taxonomy, the `will`/`must`/`may not`
    decisions and a worked rewrite: `references/categories-of-contract-language.md`.
@@ -119,13 +119,13 @@ partner or a client who will read the first two lines and decide.
 
 10. **Verify, then stop.** Re-run the linter on the revised text: the `shall` ratio should have
     moved toward obligation-only and the edit count toward zero, and every remaining `flag` should
-    have a named owner in the note. Then stop; a clean draft does not need a second pass of polish.
+    have a named owner in the note. Then stop; a clean draft needs no second polish.
 
 ## Why / learn
 
 MSCD's premise is that contract prose is not expository writing: it does not persuade, narrate or
-explain, it *regulates conduct and states facts*, and the English for that is small and can be
-systematised. Most contract ambiguity comes from category leakage — one `shall` doing every job in
+explain, it *regulates conduct and states facts*, and the English for that is small enough to
+systematise. Most contract ambiguity comes from category leakage — one `shall` doing every job in
 the table — and most archaism survives because nobody asked what a sentence was for. Once each
 sentence has a category, the verb form follows mechanically, the archaisms have nowhere to hide,
 and a reader (or a court) is never asked to guess whether *shall survive* imposed a duty on
@@ -134,9 +134,9 @@ the classification has a test.
 
 **The "tested language" myth, and where it stops.** Litigation over a formula is evidence that the
 formula left room to fight, not a warranty that it works; the modern precise version is the safer
-one. That axiom holds for everything whose only job is to convey meaning — which is nearly
-everything — and it stops at the two rails in step 8, where the caselaw is the specification rather
-than a failure log. Several of MSCD's positions are also genuinely contested among transactional
+one. That axiom holds for everything whose only job is to convey meaning, which is nearly
+everything, and it stops at the two rails in step 8, where the caselaw is the specification rather
+than a failure log. Several of MSCD's positions are also contested among transactional
 lawyers (*represents and warrants* → *states*; whether *hold harmless* adds anything; whether
 *best efforts* outranks *reasonable efforts*). This skill follows MSCD in fresh drafting and
 **says when a position is Adams's rather than settled**, because a drafter who takes a contested
@@ -144,7 +144,7 @@ rule to a partner as if it were settled loses trust in the whole method.
 
 **Why Smart Brevity for the deliverable.** The redline is read by someone with less time than you
 had. If the first two lines do not say what changed and why it matters, the review is reopened
-from scratch, and the most important flag — the one that needs a decision — is found last or not at
+from scratch, and the most important flag, the one that needs a decision, is found last or not at
 all. The cover note is not a summary of the redline; it is the redline's decision list.
 
 **Copyright posture.** This skill teaches MSCD's approach in its own words and names the book as the

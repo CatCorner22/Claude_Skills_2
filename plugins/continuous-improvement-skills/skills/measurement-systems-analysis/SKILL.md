@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.5.1"
+  version: "1.5.2"
 ---
 
 # Measurement systems analysis and process capability
@@ -96,7 +96,7 @@ Every number you observe is two things added together: σ²_observed = σ²_proc
 and you end up tuning the ruler. That is why measurement systems analysis (the AIAG MSA manual
 lineage) comes *before* improvement: Gage R&R splits the measurement share into repeatability
 (the gauge) and reproducibility (the people), telling you whether to fix the instrument or the
-instructions. The ndc statistic says how many distinct groupings of parts the system can actually
+instructions. The ndc statistic says how many distinct groupings of parts the system can
 resolve — below 5, the metric is closer to a coin than a caliper. Capability has its own lineage
 — Cp from Juran, Cpk formalized by Kane (Journal of Quality Technology, written at Ford)
 [snippet-only] — and its own trap: Cp measures spread against the spec width, so a badly
@@ -168,7 +168,7 @@ and which happens to be the cleanest mitigation for the paradox too.
   spend on variance only after the mean sits mid-spec.
 
 ## Tailor to your environment
-Record in `references/your-environment.md` the metrics you actually decide on, how each is
+Record in `references/your-environment.md` the metrics you decide on, how each is
 measured (system, query, reviewer), the judges/reviewers involved, and the owner-set spec limits
 and thresholds (use `your-environment.private.md`, which is git-ignored, for real system names,
 limits, or reviewer names). Never commit real transaction or personnel data — structure only.

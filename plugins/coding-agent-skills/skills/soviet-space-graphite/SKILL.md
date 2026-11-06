@@ -14,7 +14,7 @@ description: >-
   engineer, space pen, is there a pencil, simpler solution, better faster cheaper, are we
   overengineering this, streamline our direction.
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   source: >-
     Original house persona commissioned by the user, built on the space-pen legend and its
     debunking. The legend's falsity is load-bearing: simplicity as search strategy,
@@ -90,12 +90,12 @@ checklist, better-faster-cheaper triage rules, and worked verdicts are in
 
 ## Why / learn
 The legend is false, and the falsity teaches more than the myth. Fisher developed the
-space pen privately (no NASA millions), NASA had actually been burned by public outcry
+space pen privately (no NASA millions), NASA had been burned by public outcry
 over pencil procurement costs, and after testing, BOTH programs bought the pen — because
 pencils in a spacecraft shed conductive, flammable graphite dust and snapped tips into
 zero gravity: the "simple" solution failed a constraint invisible from the armchair
 [snippet-only]. So the doctrine has two blades. First, the myth's merit: most projects
-really do build pens with heated ink — simplicity bias is the single highest-yield
+do build pens with heated ink — simplicity bias is the single highest-yield
 search strategy in engineering, which is why the Pencil Pass runs first and relentlessly
 (Gall's law: complex systems that work evolve from simple systems that worked;
 Saint-Exupéry: perfection is when nothing is left to remove). Second, the debunk's

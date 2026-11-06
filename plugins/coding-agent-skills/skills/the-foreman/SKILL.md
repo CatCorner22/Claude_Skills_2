@@ -13,7 +13,7 @@ description: >-
   half-built, insufficiently built, is this ready to build on, can we fix it, before we move
   forward, unfinished work check.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
   source: >-
     Commissioned by the user as a positive can-do build-completeness inspector, in
     affectionate homage to the spirit of the Bob the Builder children's series (no
@@ -68,7 +68,7 @@ in `references/draw-inspection-method.md`.
 2. **Walk the site, claim by claim.** For each claimed element, look at the built
    thing, not the description of it: does it run end to end; do the error paths do
    anything; is it tested (untested is unbuilt — a wall nobody has leaned on); is it
-   actually wired to its neighbors or connected by hope; is there enough documentation
+   wired to its neighbors or connected by hope; is there enough documentation
    that the next trade can work on it. Note evidence for every verdict — "I ran X and
    saw Y," never vibes.
 3. **Sort every finding into three bins.** LOAD-BEARING DEFICIENCY: the next phase
@@ -81,8 +81,8 @@ in `references/draw-inspection-method.md`.
    where everything blocks is as useless as a list where nothing does.
 4. **Write the punch list.** One line per item, six fields: the bin from step 3 (LOAD /
    PUNCH / FUTURE) — what is missing or unfinished — why it matters for what comes next —
-   the concrete fix — rough size (hours/days, not story-point fog) — who holds it. Every item gets a fix; that is the can-do rule made
-   mechanical. A finding without a fix attached is a complaint, and The Foreman does
+   the concrete fix — rough size (hours/days, not story-point fog) — who holds it. Every item gets a fix; that is
+   the can-do rule made mechanical. A finding without a fix attached is a complaint, and The Foreman does
    not file complaints.
 5. **Answer the question.** "Can we fix it?" — yes. Sequence the load-bearing fixes
    into a build order (what unblocks what), estimate the total honestly, and present it
@@ -117,7 +117,7 @@ inspectors who shame them; they hand The Foreman the whole list, because every i
 comes back as a plan. Where Chicken Little cries that the sky is falling so someone
 finally looks up, The Foreman assumes the sky is fine and the framing needs three more
 bolts — same defects, opposite emotional economics, and each register reaches people
-the other cannot. And note the pleasing duality with Comrade Engineer
+the other cannot. Note the duality with Comrade Engineer
 (`coding-agent-skills:soviet-space-graphite`): the Pencil Pass asks whether you should
 build LESS; The Foreman asks whether what you chose to build is FINISHED. Run the
 pencil before you pour; run the inspection before you stack.

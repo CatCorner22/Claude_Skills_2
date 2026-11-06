@@ -13,7 +13,7 @@ description: >-
   accommodation, wrongful termination, workplace investigation, independent contractor, overtime,
   harassment complaint, performance improvement plan.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   source: >-
     Built from the federal employment statutes named in the references (thresholds marked
     [rule text] with the instrument cited) and a 2026-10-14 search pass on the items that move
@@ -26,10 +26,10 @@ metadata:
 Employment law is the field where "I read the rule once" fails fastest: the thresholds are
 statutory but the agency positions, the state overlays and the salary figures move, sometimes
 mid-year, sometimes by a court vacating a rule that still reads as current in every cached copy.
-So this skill does not try to be the rulebook. It is an issue-spotting method with a verification
+So this skill is not the rulebook. It is an issue-spotting method with a verification
 discipline: place the situation on the lifecycle map, name every issue and the source that governs
 it, verify the live text before relying on a number, assess exposure, and deliver the result the
-way a decision-maker reads it — exposure first.
+way a decision-maker reads it: exposure first.
 
 ## When to use
 - An HR or employment question from an employer, a manager, or an employee: pay, leave, a
@@ -71,23 +71,23 @@ way a decision-maker reads it — exposure first.
    are rules that were vacated and still read as current in older material. Pass anything that
    needs authority to `legal-skills:legal-citation-research`.
 
-5. **Assess exposure, including the one that is usually missed.** For each issue: likelihood,
-   severity, and whether it can still be fixed. Then check the **timing against protected
+5. **Assess exposure, including the one usually missed.** For each issue, rate likelihood and
+   severity and say whether it can still be fixed. Then check the **timing against protected
    activity** — a complaint, a leave request, an accommodation request, a wage inquiry, a report
-   to an agency — because retaliation is the claim most often made and the one a clean underlying
-   decision does not cure. Record deadlines that are already running (agency charge windows,
+   to an agency — because retaliation is the claim most often made, and a clean underlying
+   decision does not cure it. Record deadlines that are already running (agency charge windows,
    notice periods, final-pay timing, revocation periods). `references/lifecycle-issue-checklist.md` §6.
 
 6. **Build the action plan in three horizons.** *Now*: preserve documents (and a litigation hold
-   if a claim is foreseeable), interim measures, stop the clock where you can. *Next*: the
-   investigation or the interactive process, run to protocol. *Decide*: the termination or policy
+   if a claim is foreseeable), take interim measures, stop the clock where you can. *Next*: run the
+   investigation or the interactive process to protocol. *Decide*: make the termination or policy
    decision, with the checklist worked and the consistency check done. Name the counsel triggers:
    any threat of a charge or suit, protected-activity timing, a group or pattern, immigration,
    union activity, an executive or a multi-state covenant.
    `references/investigation-and-termination-playbook.md`.
 
-7. **Deliver the Smart Brevity issue list.** Exposure first — the single biggest issue in one
-   sentence — then why it matters, do now, decisions needed, verify list (every number with its
+7. **Deliver the Smart Brevity issue list.** Exposure first (the single biggest issue in one
+   sentence), then why it matters, do now, decisions needed, verify list (every number with its
    source and check date), counsel triggers, and the ledger. For a document review, add the
    provision-by-provision table. `references/issue-list-template.md`.
 
@@ -105,7 +105,7 @@ does not have. A method that names the issue and the source, and then verifies, 
 three. A method that remembers the number does not.
 
 **Why retaliation sits in its own step.** The underlying complaint may be weak and the employer
-may be right about the performance problem, and none of that matters if the termination follows
+may be right about the performance problem, yet none of that matters if the termination follows
 the complaint closely enough for a factfinder to infer cause. Protected activity turns ordinary
 management decisions into claims; the defence is documentation that predates the activity,
 consistency with how others were treated, and process that is visibly the same.

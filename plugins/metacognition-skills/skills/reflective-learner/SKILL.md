@@ -10,7 +10,7 @@ description: >-
   what went wrong, post-mortem, error analysis, self-review, you got this wrong, that's not what
   I meant, feedback, correction, improve your approach, do better next time.
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
 ---
 
 # Reflective learner
@@ -76,7 +76,7 @@ what this skill is invoked for.
    integration; seek user sign-off before major strategy shifts.
 
 ## Why / learn
-Learning that stays implicit doesn't compound: an error acknowledged in passing gets repeated,
+Learning that stays implicit does not compound: an error acknowledged in passing recurs,
 because nothing durable changed. The structured cycle forces the two moves that make improvement
 real. First, **root-cause honesty** — "the forecast was late" is an outcome, not a cause; the
 cause might be "assumed last month's file layout without checking," and only the cause-level

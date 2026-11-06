@@ -11,7 +11,7 @@ description: >-
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # Assertion-evidence deck
@@ -34,7 +34,7 @@ one claim in a full sentence and proves it with a picture; every number carries 
   the slide deck.
 
 ## Do it
-Run seven stages in order. Each names what it produces, so you can stop, hand off, or resume at any
+Run seven stages in order. Each produces a named output, so you can stop, hand off, or resume at any
 boundary. **Skipping stage 2 is the failure mode that matters** — a deck that reaches a
 decision-maker with an unsourced number costs more credibility than one that openly reports a gap.
 
@@ -49,7 +49,7 @@ decision-maker with an unsourced number costs more credibility than one that ope
 | 7 | Deliver | File, source ledger, gap list |
 
 **Stage 1 — Scope the talk.** Settle four things before writing a headline; ask the user rather
-than guess at audience or duration. (1) **Audience** — who decides something because of this deck?
+than guess the audience or duration. (1) **Audience** — who decides something because of this deck?
 (2) **Duration** — budget ~1 minute per body slide (a 15-min slot ≈ 10–12 body slides + title +
 summary). (3) **Main claim** — one sentence everything supports; if the user can't state it, draft
 2–3 and let them pick. (4) **Depth** — the slide stays at *snorkel* depth (the surface statement a
@@ -63,7 +63,7 @@ summary — slide only with confirmation and an "as reported" tag), **Inferred**
 remembered — never a bare number on a slide; verify it or convert it to a stated gap).
 
 **Stage 3 — Choose the spine.** Write the headlines first, as a plain numbered list, and show them
-to the user before building anything — the headline list *is* the talk. Each headline states a
+to the user before building anything; the headline list *is* the talk. Each headline is a
 complete sentence (subject + verb), asserts something falsifiable, and runs ≤ 2 lines (~105 chars
 at 28 pt across 11.52 in — verify by rendering, not counting).
 
@@ -89,8 +89,8 @@ claim — distribution → chart, sequence → flow diagram, magnitude → 2–4
 labeled diagram. Over ~40 body words means the claim is too big — split the slide.
 
 **Stage 5 — Build the file.** Both bundled scripts require **python-pptx** (`pip install
-python-pptx`) and exit with that message if it is missing — install it before you start building
-rather than discovering it halfway through, because nothing earlier in the pipeline needs it.
+python-pptx`) and exit with that message if it is missing. Install it before you start building,
+because nothing earlier in the pipeline needs it and a halfway failure wastes work.
 Prefer **Path A**, the bundled builder: write a deck spec as JSON and
 run `python3 "${CLAUDE_PLUGIN_ROOT}/skills/assertion-evidence-deck/scripts/build_deck.py" deck_spec.json -o output.pptx` (neutral palette by default;
 `--brand warm-accent` to match that brand instead). It encodes the geometry, typography, and
@@ -118,13 +118,13 @@ speaker's own preparation — the speaker needs to know more than the slides sho
 
 ## Why / learn
 A bullet-list slide makes the audience hold fragments in working memory and assemble the argument
-themselves while the speaker talks over them — reading and listening compete for one channel, so
+themselves while the speaker talks over them. Reading and listening compete for one channel, so
 they do neither well. An assertion-evidence slide removes that work: the headline hands over the
 conclusion in one sentence, the visual supplies the proof, and the audience reads one sentence,
-looks at one picture, and listens. The method also disciplines the *speaker* — a headline that
-cannot be written as a falsifiable sentence signals a slide with no point, which is worth
-discovering while drafting rather than mid-talk. The **snorkel/scuba** split keeps the screen at the
-"so what?" level while the mechanism waits in the notes for questions. And the governing evidence
+looks at one picture, and listens. The method also disciplines the *speaker*: a headline that
+cannot be written as a falsifiable sentence signals a slide with no point, better discovered while
+drafting than mid-talk. The **snorkel/scuba** split keeps the screen at the
+"so what?" level while the mechanism waits in the notes for questions. The governing evidence
 rule is an asymmetry: **a wrong number costs more than a missing
 number.** A missing figure invites a question you can answer with command of the problem; a wrong
 figure, once found, retroactively taints every correct figure beside it, because the audience can no

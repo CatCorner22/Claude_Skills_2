@@ -14,7 +14,7 @@ description: >-
   methods, clean up the knowledge base, merge duplicate notes, retire stale facts,
   capability map, crystallization pass.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
 ---
 
 # Knowledge crystallizer
@@ -71,7 +71,7 @@ crystallization pass are in `references/crystallization-protocol.md`.
 6. **Append one line to the Crystallization log** — what was added, merged, retired, and
    flagged, with evidence pointers. One line per pass keeps the audit trail cheap enough to
    maintain and rich enough to make every change traceable and reversible. A pass without
-   its log line didn't happen, as far as the store's history is concerned.
+   its log line did not happen, as far as the store's history is concerned.
 
 ## Why / learn
 Insights are perishable: an observation that lives only in one session's context is gone by
@@ -87,8 +87,8 @@ outcome-level phrasing ("we lost work once") never does. The prune step is what 
 efficient: semantic memory competes for attention, and every stale entry costs a little
 retrieval quality forever. And the one-line audit log is what makes permanent memory *safe*
 to build — it turns the store from a black box into a system the user can inspect,
-question, and roll back. The economy of the log matters as much as its existence: a pass
-cheap enough to run at every milestone actually gets run, which is why the cadence survives
+question, and roll back. The log must stay cheap: a pass
+cheap enough to run at every milestone gets run, which is why the cadence survives
 in practice — and this library's own store carries a month of log entries whose drift from
 one line to twenty is itself the failure mode the rule guards against.
 

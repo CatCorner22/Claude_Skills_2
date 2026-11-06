@@ -11,7 +11,7 @@ description: >-
   seasonality, backtesting, rolling forecast, rolling origin, predict future values, trend and
   seasonality, prediction interval, forecast uncertainty.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # Time-series forecasting
@@ -83,8 +83,8 @@ metadata:
    Count how often the backtest actual fell inside the
    interval at each horizon and compare with the nominal level: 48 of 60 h-step actuals inside a nominal
    95% interval is **80% coverage**, and the interval is too narrow — widen it or report the measured
-   coverage instead of the label. Report interval width too: an interval can only be honest *and* useful if
-   it is both calibrated and tight enough to act on.
+   coverage instead of the label. Report interval width too: an interval is honest *and* useful only if
+   it is calibrated and tight enough to act on.
 
 **Deliverable — the forecast package.** The finished output contains: (1) the decomposition read —
 trend, seasonal periods, additive vs multiplicative, level shifts and one-offs noted; (2) naive and
@@ -124,7 +124,7 @@ swing inflates the denominator instead: a plain seasonal-naive forecast scores a
 "passing" a bar it has earned nothing against, while the seasonal-lag denominator puts the same forecast
 near 1.0 — the honest reading. Same metric, same threshold, opposite verdict.
 Read for what it is — a **scale-free** error, safe on zeros, comparable across series of wildly different
-magnitudes — it is genuinely useful, and the ratio of two models' MASE on the same series is exactly the
+magnitudes — it is useful, and the ratio of two models' MASE on the same series is exactly the
 skill ratio because the shared denominator cancels. So: MASE to compare, skill ratio at horizon *h* to
 decide.
 

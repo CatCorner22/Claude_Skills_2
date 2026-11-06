@@ -13,7 +13,7 @@ description: >-
   dimensional analysis, units don't match, per unit, annualize, factor-label, cancel the units,
   unit check, thousands vs millions.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Units and dimensional analysis
@@ -45,8 +45,8 @@ Worked chains, the full check protocol, and the trap catalog are in
    number without a unit cannot be checked, converted, or safely combined.
 2. **Write each conversion factor as a fraction equal to 1,** oriented so the unit you
    want to remove sits on the opposite side of the bar: `5280 ft / 1 mi` kills miles in
-   a numerator; `1 mi / 5280 ft` kills feet. Orientation comes from cancellation, not
-   memory — there is nothing to memorize.
+   a numerator; `1 mi / 5280 ft` kills feet. Orient by cancellation, not memory;
+   there is nothing to memorize.
 3. **Chain the factors and cancel units before touching the numbers.**
    ```
    45 mi     5280 ft     1 hr        45 × 5280
@@ -68,7 +68,7 @@ Worked chains, the full check protocol, and the trap catalog are in
 7. **Annualize flows by ×12; hand rates that compound to the growth sibling.** A
    *flow* adds across months: $2,350/month × 12 months/year = $28,200/year, and
    $46,800/year ÷ 12 = $3,900/month. A *rate of return* does not add — 1% per month is
-   (1.01)¹² − 1 ≈ 12.68% per year, not 12%. This skill's job is the distinction and the
+   (1.01)¹² − 1 ≈ 12.68% per year, not 12%. This skill covers the distinction and the
    ×12 case; the (1+r)ⁿ math belongs to the archived `math-foundations-skills:exponential-growth-and-logs`.
 8. **Dimension-check any formula before trusting it.** Write the units of every symbol;
    work out the units of every term; every pair of added or subtracted terms shares a
@@ -80,7 +80,7 @@ Worked chains, the full check protocol, and the trap catalog are in
    of questions: the draft's units came out as years, and writing them down was what
    exposed that nothing in it said how the quantity actually moved with time (the
    worked catch is in the reference file). Numbers can look right by luck; writing the
-   units out is what makes the structure you actually wrote visible.
+   units out makes the structure you wrote visible.
 9. **Scan for the standing traps:** per-month and per-year figures added in one sum;
    "$ thousands" columns read as raw dollars (a 1,000× error — write k$ and M$ as real
    units: 2,340 k$ = $2,340,000 = 2.34 M$); percent used as if it were a count
@@ -93,19 +93,19 @@ Worked chains, the full check protocol, and the trap catalog are in
 a unit *is* a symbol — "45 mi/hr" is the product 45 × mi × hr⁻¹. That is why the
 factor-label method works: each conversion factor equals 1 (5280 ft and 1 mi are the
 same length), so multiplying by it changes the representation and never the quantity.
-Carrying units through a calculation is therefore a check that travels with the work —
+Carrying units through a calculation is therefore a check that travels with the work,
 but be precise about what it proves. **Units resolving does not make the structure
 correct.** It is a one-way test: wrong units prove the formula wrong, while right units
 leave a formula that can still carry a wrong constant, a wrong sign, a missing factor of
 two, or the right dimensions assembled the wrong way round. Treat a clean dimensional
-check as "not yet refuted", never as "verified". Dropping units doesn't simplify the
-work — it deletes the half of the answer that can catch the other half.
+check as "not yet refuted", never as "verified". Dropping units does not simplify the
+work; it deletes the half of the answer that can catch the other half.
 
 **A dimensional check is the cheapest formula review that exists.** It needs no data,
-no test cases, and no domain expertise beyond knowing what each symbol measures — yet it
-refutes a wrong formula outright. It is asymmetric in the useful direction: passing
+no test cases, and no domain expertise beyond knowing what each symbol measures, yet it
+refutes a wrong formula outright. The asymmetry favors you: passing
 doesn't prove a formula right (a constant can still be wrong), but failing proves it
-wrong with certainty. That asymmetry is why it runs *before* trusting any formula, not
+wrong with certainty. That is why the check runs *before* you trust any formula, not
 after the numbers disappoint — plausible-looking output is precisely what a
 dimensionally broken formula produces, since nothing else constrains it. It works on
 authors, too: the weight-of-the-books catch above (from a sizing skill since archived, the

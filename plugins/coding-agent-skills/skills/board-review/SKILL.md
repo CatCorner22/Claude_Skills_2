@@ -12,7 +12,7 @@ description: >-
   optimization review, performance and accuracy audit, deep code audit, multi-agent review,
   suboptimal code audit, optimize this code thoroughly.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # Board of Advisors review
@@ -31,7 +31,7 @@ metadata:
    the exact code under review (selection, files, directory, or diff) and restate the
    original goals, intended behavior, and accuracy requirements in a few sentences. If goals
    are ambiguous, ask the user before launching anything; if you must proceed, state your
-   assumptions explicitly. Do not expand scope beyond what was given without asking.
+   assumptions. Do not expand scope beyond what was given without asking.
 2. **Launch the five specialists in parallel** — each is a read-only subagent shipped with
    this plugin (namespaced `coding-agent-skills:<name>`):
    - `performance-advisor` — speed, complexity, allocations, hot paths
@@ -48,7 +48,7 @@ metadata:
    unedited findings from all five specialists. The chair deduplicates, prioritizes
    (accuracy-critical first, then goal-preserving speed wins, then structure, robustness,
    clarity), enforces a written Goal Preservation Check on every proposal, and produces the
-   ranked Optimization Review report. Do not synthesize yourself — the chair's strict
+   ranked Optimization Review report. Do not synthesize yourself: the chair's strict
    priority order and preservation checks are the control.
 4. **Present the chair's report in full**, then offer the concrete next action: "Implement
    any of the prioritized revisions? Which ones?" The board is read-only by construction —
@@ -63,7 +63,7 @@ metadata:
    failure to try hard enough.
 
 ## Why / learn
-The board works because of three deliberate design choices. **Parallel isolated
+The board rests on three design choices. **Parallel isolated
 specialists** beat one big review for the same reason five focused proofreaders beat one
 tired one: each subagent runs in its own context window with a single mission, so the
 performance reviewer never gets distracted by naming and the correctness reviewer reads
@@ -77,8 +77,8 @@ keeps the pipeline auditable: every final revision traces to a specialist's evid
 proposal must state *why the original deliverable survives it*, which forces the burden of
 proof onto the change, where it belongs. The read-only-until-approved rule is the same
 principle at the workflow level — analysis and mutation are separated so a review can be
-trusted not to have quietly "fixed" things, and the human stays the approval gate. The caps,
-finally, are respect for attention: an audit that returns 200 findings returns none.
+trusted not to have quietly "fixed" things, and the human stays the approval gate. The caps
+respect attention: an audit that returns 200 findings returns none.
 
 ## Common mistakes
 - Launching advisors without restated goals → findings drift into taste; goals first, always.

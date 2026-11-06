@@ -11,7 +11,7 @@ description: >-
   deep-research-skills:dna-ancestry-research. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.7.0"
+  version: "1.7.1"
   source: >-
     Built from an eight-stream research pass, then re-audited by a perspective-diverse adversarial
     pass that found defects in the shipped version and is the reason several claims here are
@@ -24,11 +24,11 @@ metadata:
 
 # Digital DNA Agent — DNA raw-data audit
 
-Takes a personal genome file, works out what it can and cannot actually establish, cross-references
+Takes a personal genome file, works out what it can and cannot establish, cross-references
 the alleles that matter against the literature, and reports each finding with its evidence strength,
-its absolute effect size, and what — if anything — a person should do differently.
+its absolute effect size, and what, if anything, a person should do differently.
 
-**The discipline this skill exists to enforce.** Consumer genomics is dense with confident
+**The discipline this skill enforces.** Consumer genomics is dense with confident
 interpretation that the underlying data does not support. The most common correct answer to "what
 does this variant mean for me?" is *nothing you should act on*, and a skill that cannot say that
 clearly is worse than no skill. So every finding here carries three separate things: what the data
@@ -36,9 +36,9 @@ supports, how strong the evidence is, and whether any action follows. Those are 
 questions, and collapsing them is how genetic reports become horoscopes.
 
 ## When to use
-- You have a 23andMe and/or Nebula raw data file and want to know what is genuinely in it.
+- You have a 23andMe and/or Nebula raw data file and want to know what is in it.
 - You have been told you carry some variant — APOE4, MTHFR, Factor V Leiden, a BRCA variant — and
-  want the real effect size rather than a headline.
+  want the real effect size, not the headline.
 - You are preparing a genetics question for a clinician and want the findings organised so the
   appointment is useful.
 - You want to know whether a medication, supplement, or lifestyle change is indicated by your
@@ -56,7 +56,7 @@ questions, and collapsing them is how genetic reports become horoscopes.
 
 ## Do it
 
-Work the stages in order. Several can fail, and failing them honestly is the point.
+Work the stages in order. Several can fail; failing them honestly is the point.
 
 1. **Set up privately, before reading anything.** A genome is the most identifying data a person
    has, it implicates biological relatives who did not consent, and it cannot be rotated like a
@@ -70,22 +70,22 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
 
    **And take a stance on where the report goes, because the deliverable's whole point — "take this
    to a clinician" — is the act that creates a medical record.** `your-environment.md` collects the
-   insurance and employment concern and nothing consumed it. State plainly: a conversation with a
+   insurance and employment concern, but nothing consumed it. State plainly: a conversation with a
    clinician about a genetic finding can enter a medical record, the rules on what follows from that
    vary by jurisdiction and by insurance line, and **that is a reason to decide deliberately rather
    than a reason not to go** — the alternative is acting on unconfirmed consumer data alone. Where
    the person is unsure, a genetic counsellor is the right first conversation precisely because it
    can be had before anything is confirmed.
 
-   **Also ask what has already been done.** The pipeline starts from the file and so assumes nobody
+   **Also ask what has already been done.** The pipeline starts from the file and assumes nobody
    has acted yet, which is often false: a methylfolate stack already being taken, a food group
    already avoided, a drug already stopped. Each changes the job from interpretation to
-   **correction**, and a correction delivered without acknowledging what the person already did
+   **correction**, and a correction that ignores what the person already did
    lands as a rebuke. `references/interventions-evidence.md` §4 works the methylfolate case.
 
-2. **Identify what you actually have, and detect the build.** 23andMe exports and Nebula outputs are
+2. **Identify what you have, and detect the build.** 23andMe exports and Nebula outputs are
    different data with different limits, and a position lookup against the wrong genome build
-   silently returns the wrong variant. Detect rather than assume. Formats, build detection, and the
+   silently returns the wrong variant. Detect; do not assume. Formats, build detection and the
    array-versus-sequencing distinction: `references/data-formats-and-parsing.md` §1–2.
 
 3. **Run the quality pass, and report it before any interpretation — starting with a blocking
@@ -99,11 +99,11 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    this gate and refuses to judge it on too few overlapping sites.
 
    Then the rest of the pass: no-call rate, total sites, and concordance. Two platforms genotyping
-   the same person is a genuine quality signal, and a discordant call at a site you were about to
+   the same person is a quality signal, and a discordant call at a site you were about to
    interpret is a finding in itself — the script reports such a site as discordant and takes **no**
    genotype from it. See **Scripts**. `references/data-formats-and-parsing.md` §5.
 
-4. **Internalise what the file cannot answer, and say it up front.** An array probes a chosen subset
+4. **Say up front what the file cannot answer.** An array probes a chosen subset
    of sites: a variant's absence from the file is *not* evidence of its absence from the person, and
    a negative consumer result is weak reassurance. Imputed genotypes are statistical inferences, not
    measurements, and imputation degrades precisely for the rare variants people most want checked.
@@ -136,10 +136,10 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
    structural variants and pseudogene-confounded loci. **And a low-pass-plus-imputation product is
    not high-depth sequencing** — its rare-variant calls inherit the array argument in full. Either way: **no clinically significant
    finding from consumer data supports action until a clinical-grade laboratory confirms it.** Say
-   it every time — not as a disclaimer, as the finding. `references/variant-triage.md` §4.
+   it every time, as the finding rather than a disclaimer. `references/variant-triage.md` §4.
 
-8. **Do pharmacogenomics properly, which means refusing most of it.** This is where consumer data
-   comes closest to being decision-relevant and also where it fails in ways users do not expect.
+8. **Do pharmacogenomics properly, which means refusing most of it.** Consumer data comes closest
+   to being decision-relevant here, and it also fails here in ways users do not expect.
    Star alleles are diplotypes: calling them generally needs *phase* — which variants sit on the
    same chromosome copy — and for some genes *copy number*. An unphased genotype list supplies
    neither. CYP2D6 is the canonical refusal: deletions, duplications and CYP2D6/CYP2D7 hybrids put
@@ -157,19 +157,18 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
 
 10. **Establish ancestry before quoting any population estimate.** Polygenic scores and many risk
     estimates were derived in predominantly European-ancestry cohorts and lose accuracy applied
-    elsewhere. This is not a footnote — it determines whether a number means anything for this
+    elsewhere. It is not a footnote: it determines whether a number means anything for this
     person. `references/risk-communication.md` §4.
 
-11. **Search the current literature for every finding that survives.** The catalogue gives you the
-    established baseline; the literature search tells you what has changed, what failed to
+11. **Search the current literature for every finding that survives.** The catalogue gives the
+    established baseline; the literature search shows what has changed, what failed to
     replicate, and whether a newer and larger estimate supersedes the one you were about to quote.
     Resolve every citation against a retrieved record — a search tool's generated prose will state
     confident identifiers for papers that returned no result.
 
-    **When the channel cannot return a number, say so instead of producing one.** This is the stage
-    where fabrication is most likely: the instruction asks for a figure, and in environments where
-    scholarly resolvers and direct fetches are blocked, a search tool's prose will supply a
-    confident invention. The fallback is the three anchored, provenance-graded figures in
+    **When the channel cannot return a number, say so instead of producing one.** Fabrication is most likely at this stage:
+    the instruction asks for a figure, and where scholarly resolvers and direct fetches are
+    blocked, a search tool's prose will supply a confident invention. The fallback is the three anchored, provenance-graded figures in
     `references/variant-catalog.md` §0 — quoted as ranges, with their grade and design stated — not
     a number you cannot source. **An unsourceable figure is reported as unavailable.**
 
@@ -198,10 +197,10 @@ Work the stages in order. Several can fail, and failing them honestly is the poi
 
 ## Hard rails
 
-These are not hedges. Each exists because violating it causes a specific harm.
+These are not hedges. Violating any of them causes a specific harm.
 
 - **No doses. Ever.** Not for a drug, not for a supplement, not for a peptide. Dosing is a
-  prescriber's act informed by the whole person.
+  prescriber's act, informed by the whole person.
 - **No genotype-based recommendation of a drug, supplement, or peptide.** The rail rests on
   **non-actionability, not on absence of evidence** — "no peptide has gene-interaction evidence"
   is false, and a rail resting on a false premise breaks on one counterexample. The accurate form:
@@ -277,13 +276,13 @@ These are not hedges. Each exists because violating it causes a specific harm.
 
 **The data is weaker than the output format implies.** A genotyping array is a set of probes for
 chosen sites, not a reading of a genome. It reports what it was built to ask about, which is
-overwhelmingly common variation, and its performance on a rare variant is poor for a reason worth
-understanding: cluster separation in a genotyping assay depends on having many samples of each
-genotype class, and a rare variant supplies almost none. That is why a clinical laboratory
+overwhelmingly common variation. It performs poorly on a rare variant because cluster separation
+in a genotyping assay depends on having many samples of each genotype class, and a rare variant
+supplies almost none. That is why a clinical laboratory
 re-tests before anyone acts, and why the honest reading of an alarming raw-data hit is "this needs
 confirming", not "I have this".
 
-**Relative risk is where genetic reporting goes wrong, and it goes wrong in a specific way.**
+**Relative risk is where genetic reporting goes wrong.**
 Genotype effects are usually published against a population baseline the reader does not know,
 often as odds ratios from case-control designs rather than risks, and frequently without
 age-conditioning. So "three times the risk" arrives with three separate pieces of missing context.
@@ -312,8 +311,8 @@ with actionability, which is how a real association becomes a supplement recomme
 study supports. Where the general recommendation does not change based on genotype — which is the
 common case — saying so is the correct, useful answer.
 
-**The most over-interpreted variant in consumer genetics is MTHFR**, and getting it right is a good
-test of whether a genetics tool is trustworthy. A professional society advised
+**The most over-interpreted variant in consumer genetics is MTHFR**, and getting it right tests
+whether a genetics tool is trustworthy. A professional society advised
 against routine MTHFR polymorphism testing on the grounds of minimal clinical utility, and the
 recommendation stood through a later addendum — which also reclassified the document from an
 evidence-based practice guideline to a clinical practice resource, so quote it as that. The position is echoed elsewhere in the literature —

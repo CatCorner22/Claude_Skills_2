@@ -13,7 +13,7 @@ description: >-
   review, rebase, version control, commit message, force push, git blame, revert, review this
   diff.
 metadata:
-  version: "1.4.2"
+  version: "1.4.3"
   source: >-
     Review-size and review-rate figures come from the SmartBear/Cisco peer-review study
     (2,500 reviews, 3.2M LOC), verified via web search snippets — claims carrying those
@@ -84,7 +84,7 @@ example review — is in `references/review-checklist.md`; task-oriented command
    looks like success. Verified: with `origin/main` two commits ahead, `git merge main` reported
    up-to-date and left the new file absent from the tree; `git fetch origin && git merge
    origin/main` brought it in. Fetch first, every time.
-5. **Resolve conflicts calmly.** A conflict just means two branches changed the same lines;
+5. **Resolve conflicts calmly.** A conflict means two branches changed the same lines;
    git marks them with `<<<<<<<`, `=======`, `>>>>>>>`. For each: open the file, decide the
    *correct combined* result (not blindly "keep mine"), delete the markers, then `git add`
    the file. Finish with `git merge --continue` (or `git rebase --continue`); re-run the

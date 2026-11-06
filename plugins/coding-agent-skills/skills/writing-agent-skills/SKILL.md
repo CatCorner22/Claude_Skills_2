@@ -8,7 +8,7 @@ description: >-
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
 ---
 
 # Writing Agent Skills (house standard)
@@ -41,8 +41,8 @@ mkdir -p plugins/<plugin>/skills/<name>
 cp "${CLAUDE_PLUGIN_ROOT}/skills/writing-agent-skills/assets/SKILL.template.md" \
    plugins/<plugin>/skills/<name>/SKILL.md
 ```
-(`cp` into a directory that does not exist yet fails with "No such file or directory", so the
-`mkdir` is part of the step rather than an assumption about it.)
+(`cp` into a directory that does not exist fails with "No such file or directory", so the
+`mkdir` is part of the step.)
 
 ### 2. Write compliant frontmatter
 ```yaml
@@ -153,7 +153,7 @@ the trigger phrases and be third-person (it is injected into the system prompt).
 body persists in context across the turn, so every line is a recurring cost: concise,
 well-ordered instructions beat exhaustive ones.
 
-**Know what the listing actually costs, because it decides whether your skill is findable at
+**Know what the listing costs, because it decides whether your skill is findable at
 all.** Run `python3 scripts/measure-listing-cost.py` and read ITS number. **Do not write the figure
 down here** — an earlier version of this paragraph did, and the numbers it quoted (121 skills,
 ≈110,000 characters, 14.9% of a 200K context, 14 plugins) outlived the library they described by

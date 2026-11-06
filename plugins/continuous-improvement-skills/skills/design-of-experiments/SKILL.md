@@ -13,7 +13,7 @@ description: >-
   which factors actually matter, orthogonal array, screening design, split-plot, Taguchi, robust
   design, one-factor-at-a-time is too slow.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # Design of experiments
@@ -116,7 +116,7 @@ experiments for the price of one. Fractional designs push the same logic further
 run only a fraction of the combinations and pay with **aliasing** — some effects become
 indistinguishable — betting that high-order interactions are negligible (they usually are). That
 bet is stated up front as the design's *resolution*, which is what makes a fraction honest: you
-know exactly which blind spots you bought — which is also why the bet must be priced honestly: a
+know exactly which blind spots you bought. The bet must also be priced honestly: a
 design's resolution follows from its generators and its run count, so a promise of "resolution IV"
 that the arithmetic doesn't support is not a rule of thumb, it is a wrong answer that reads as a
 clean one. **Randomization** is the insurance policy against the factor you didn't list — anything

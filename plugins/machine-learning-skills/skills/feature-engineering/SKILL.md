@@ -9,7 +9,7 @@ description: >-
   encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
   datetime features, lag features, rolling features, feature selection, interactions, impute features.
 metadata:
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # Feature engineering
@@ -22,7 +22,7 @@ metadata:
 
 ## Do it
 1. **Fit every transform on training data only.** Put encoders, scalers, imputers, and selectors in a
-   **pipeline** that is `fit` on the training fold and merely `transform`s validation/test. This one habit
+   **pipeline** that is `fit` on the training fold and only `transform`s validation/test. This one habit
    prevents most leakage — the statistics a transform learns (means, categories, target rates) must come
    only from data the model is allowed to see.
 2. **Encode categoricals to match cardinality.** **One-hot** for low-cardinality fields; **ordinal** for
@@ -50,7 +50,7 @@ metadata:
    step), not random noise. Don't drop rows wholesale just to avoid imputing.
 7. **Select a smaller, robust feature set.** Remove near-constant, duplicate, and obviously leaky columns
    first; then use **regularization (lasso)**, **permutation importance**, or correlation pruning to cut the
-   rest. Fewer well-chosen features generalize better and are far easier to monitor than a wide, noisy matrix.
+   rest. Fewer well-chosen features generalize better and are easier to monitor than a wide, noisy matrix.
 8. **Write the leakage audit last, one line per surviving feature.** For each kept feature record: what the
    value would have been at the prediction timestamp, which rows the transform was fit on, and the window it
    reads (strictly prior, or not). A feature you cannot write that line for does not ship.

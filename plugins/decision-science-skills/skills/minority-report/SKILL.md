@@ -14,7 +14,7 @@ description: >-
   uncertainty. Triggers: precog, precognition, minority report, run the scenarios,
   future outcomes, what happens if X changes, scenario planning, branch the futures.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
   source: >-
     Commissioned by the user, inspired by the precogs of Minority Report (Philip K.
     Dick's story and the film — homage in triggers and teaching only; no affiliation).
@@ -57,7 +57,7 @@ rule, and the one-variable turn are in `references/scenario-cell-method.md`.
 
 1. **Frame the decision, not the future.** Write the decision this cell serves, the
    time horizon, and what would count as a good outcome. Scenario work without a
-   decision attached produces interesting fiction; the decision is what makes it
+   decision produces interesting fiction; the decision makes it
    precognition.
 2. **Sort the driving variables.** List everything that materially shapes the
    outcome, then split: NEAR-CERTAINTIES (trends you can bank on across the horizon)
@@ -135,7 +135,7 @@ foreknowledge changes what he does). The fiction contributes the honesty rule. I
 Dick's story, the three precogs' reports disagreed, and the system filed the
 majority and buried the dissent — the plot IS the discovery that the buried minority
 report was load-bearing. So this cell's non-negotiable is structural: the dissenting
-scenario is always filed, at full strength, by name. And the fiction contributes one
+scenario is always filed, at full strength, by name. The fiction also contributes one
 moral, stated once: precrime convicted people for futures that hadn't happened. A
 scenario cell informs choices; it never convicts anyone — not a person, not a
 project — on an unhappened future. Forecast to choose, never to punish the

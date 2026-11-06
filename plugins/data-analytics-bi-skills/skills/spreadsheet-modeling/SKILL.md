@@ -14,7 +14,7 @@ description: >-
   analysis, what-if, data table, hardcoded formula, model review, scenario toggle,
   spreadsheet error, one formula per row.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
   source: >-
     Grounded in the documented spreadsheet-error research collected by EuSpRIG (Panko's
     field-audit synthesis) and FAST-style structured-modeling conventions. Claims marked
@@ -27,10 +27,10 @@ metadata:
 - Building a financial or operational model in Excel or Google Sheets (budget, forecast, pricing, ROI).
 - Reviewing or auditing an inherited model for structure, hardcoding, and formula errors.
 - Adding sensitivity/what-if analysis or scenario toggles to an existing model.
-- Not for: the forecasting *methodology* behind the numbers. Statistical method — seasonality, model
-  choice, backtesting → see `machine-learning-skills:time-series-forecasting`; the treasury
-  direct-vs-indirect framing is a cash-forecasting method question, which belongs to whatever
-  finance source you work from — this library no longer carries one. This skill is the modeling
+- Not for: the forecasting *methodology* behind the numbers. Statistical method (seasonality, model
+  choice, backtesting) → see `machine-learning-skills:time-series-forecasting`; the treasury
+  direct-vs-indirect framing is a cash-forecasting method question for whatever
+  finance source you work from, since this library no longer carries one. This skill is the modeling
   craft, not the method.
 
 ## Do it
@@ -41,13 +41,13 @@ metadata:
    the archived `data-analytics-bi-skills:data-cleaning` — and paste values into a marked data zone, not into
    formulas.
 2. **One formula per row, consistent across all columns.** Write a formula once in the first period
-   and fill it right unchanged. If a row needs an exception in one column, restructure it — a row you
-   can't copy across is a row that hides a bug.
+   and fill it right unchanged. If a row needs an exception in one column, restructure it: a row you
+   can't copy across hides a bug.
 3. **Never hardcode a constant inside a formula.** `=Revenue*0.21` should be `=Revenue*TaxRate`, with
    `TaxRate` living in an input cell. Every number a user might change must be a findable, single-source
-   input — magic numbers buried in formulas are unauditable and get out of sync.
+   input. Magic numbers buried in formulas are unauditable and get out of sync.
 4. **Name the key inputs and structured references.** Use `=Price*Units` (named ranges) rather than
-   `=$B$4*$C$4`. Names make formulas read like the logic they represent and make auditing far faster.
+   `=$B$4*$C$4`. Names make formulas read like the logic they represent and speed auditing.
    Keep names for genuine inputs and important intermediates, not every cell.
 5. **Build check cells and control totals.** Add explicit reconciliations — cross-foot rows and
    columns, balance identities (assets = liabilities + equity; sum of parts = total), and a single
@@ -57,10 +57,10 @@ metadata:
    input zone, never by editing formulas. See `references/model-structure.md`.
 7. **Document assumptions and sources.** Note the source, units, and as-of date beside each input, and
    keep a cover/README sheet stating purpose, owner, version, and key assumptions. Future-you and the
-   reviewer both need this.
+   reviewer both need it.
 8. **Audit before you trust it.** Trace precedents/dependents on the outputs, scan for inconsistent
    formulas across a row (Excel error-checking / `FORMULATEXT`), confirm no unintended circular
-   references, and stress the inputs to extremes — then gut-check the outputs (sign, magnitude,
+   references, and stress the inputs to extremes, then gut-check the outputs (sign, magnitude,
    units, a rough independent re-derivation) per
    the archived `math-foundations-skills:number-sense-and-estimation` before anyone relies on the number.
 9. **Know when to leave the spreadsheet.** A workbook rebuilt by hand every period becomes a script —
@@ -70,14 +70,14 @@ metadata:
    the archived `data-analytics-bi-skills:dashboard-design`.
 
 ## Why / learn
-A model is only as good as it is **auditable** — the value isn't the answer it prints today, it's that
+A model is only as good as it is **auditable**. The value is not the answer it prints today but that
 someone can follow, trust, and safely change it tomorrow. Spreadsheets fail silently: a single
 overwritten formula or a `0.21` typed where `0.12` belonged produces a clean-looking number that's
-simply wrong, and the field-audit record says this is the norm, not the exception — Panko's synthesis
+wrong, and the field-audit record says this is the norm, not the exception. Panko's synthesis
 of the research EuSpRIG collects found at least one error in 94% of 88 spreadsheets audited, with an
 average cell error rate around 5% across the underlying studies [snippet-only]. Structure is the
 defense, and the published structured-modeling conventions (the FAST standard's "flexible,
-appropriate, structured, transparent" discipline among them) all converge on the same few moves.
+appropriate, structured, transparent" discipline among them) converge on the same few moves.
 **Separating inputs from calculations** means there is exactly one place to change an assumption and
 one place a wrong assumption can hide. **One consistent formula per row** turns a correctness question
 into a visual one — a broken row *looks* different from its neighbors, so errors become visible

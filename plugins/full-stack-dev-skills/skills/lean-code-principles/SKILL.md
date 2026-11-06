@@ -10,7 +10,7 @@ description: >-
   simplify this code, too much boilerplate, do we need this abstraction, code review
   simplicity, delete code, small diff, keep it simple.
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
 ---
 
 # Lean-code principles
@@ -29,20 +29,20 @@ metadata:
    the framework you already depend on → a well-maintained library → your own code. Every
    hand-rolled retry loop, date parser, or auth scheme is code you now own forever; FastAPI,
    React, SQLAlchemy, and the stdlib have already written most of what an app needs. Name the
-   framework-native replacement, don't gesture at one: a hand-rolled `for attempt in range(3)`
+   framework-native replacement; don't gesture at one: a hand-rolled `for attempt in range(3)`
    retry with `time.sleep(2 ** attempt)` becomes `httpx.Client(transport=HTTPTransport(retries=3))`
    for connect failures, or `@retry(stop=stop_after_attempt(3), wait=wait_exponential())`
    (tenacity) when you also need to retry on a status or an exception type — both already have
-   the backoff, the attempt cap, and the final-failure semantics your loop got approximately.
+   the backoff, the attempt cap, and the final-failure semantics your loop approximated.
 2. **Apply YAGNI at every decision point.** Build for the requirement in front of you, not the
    one you can imagine. No plugin systems for one implementation, no config options nobody
    asked to configure, no "for future flexibility" parameters. The future requirement, when it
-   arrives, will be different from your guess — and cheaper to add then.
+   arrives, will differ from your guess, and it will be cheaper to add then.
 3. **Keep the public surface small.** Fewer exported functions, fewer parameters, fewer
    options. A module that exposes 3 functions is testable and learnable; one that exposes 30
    is a liability. Default arguments over configuration objects; one obvious way over three
    flexible ones.
-4. **Earn every abstraction** against four gates, all of which must pass — the full test,
+4. **Earn every abstraction** against four gates, all of which must pass. The full test,
    with the thresholds and a worked three-version example, is in
    `references/earning-abstractions.md`:
    (1) **shared axis of change** — the copies have a history of being edited in the same
@@ -92,29 +92,29 @@ def register(payload: SignupIn) -> User:
    backfill, identifier and wire-format shape, and a request-scoped correlation id are on
    that list. The full table, and the tells that "lean" has become an excuse for
    under-engineering, are in `references/earning-abstractions.md`.
-8. **Review against the checklist** in `references/lean-review-checklist.md` — it's the
+8. **Review against the checklist** in `references/lean-review-checklist.md`, the
    codified version of steps 1–7 for PR review, with the "signs of over-engineering" table
    and the eight-part contract for what a finished lean review actually contains.
 
 ## Why / learn
 Every line of code is a liability with a maintenance coupon attached: it must be read,
 tested, secured, upgraded, and understood by every future reader. "Minimize lines of code"
-isn't code golf — cryptic one-liners *increase* the real cost — it's minimizing the amount of
+isn't code golf (cryptic one-liners *increase* the real cost); it's minimizing the amount of
 *owned* behavior by delegating to platforms that amortize their maintenance across thousands
 of users. That's why the resolution order in step 1 matters: stdlib and framework code is
-effectively free (someone else patches it), while your code is expensive (you patch it).
+effectively free (someone else patches it); your code is expensive (you patch it).
 YAGNI works because of an asymmetry: adding a capability later costs roughly the same as
-adding it now, but carrying an unused capability costs continuously — and speculative designs
-are usually wrong anyway, so you pay twice: once to carry it, once to fight it. Notice the
-condition that asymmetry rests on — *later costs about the same as now* — because that is
-exactly what step 7 is checking. Where deferring converts a future code change into a data
+adding it now, but carrying an unused capability costs continuously. Speculative designs
+are usually wrong anyway, so you pay twice: once to carry it, once to fight it. The
+asymmetry rests on one condition, *later costs about the same as now*, and that is
+exactly what step 7 checks. Where deferring converts a future code change into a data
 repair or a disclosure, the asymmetry inverts and YAGNI is the wrong tool, which is why
 "lean" and "under-engineered" are distinguishable at all. The
 abstraction rule is the same economics: duplication is a visible, local cost, while a wrong
-abstraction is an invisible, global one. And small surface area is what makes all of it
-compound — code that exposes little can change much, which is the property that keeps a
+abstraction is an invisible, global one. Small surface area makes all of it
+compound: code that exposes little can change much, which keeps a
 codebase fast to work in after year one. Lean code is also the best practice for AI-assisted
-development specifically: smaller, more boring codebases fit in context windows, generate
+development: smaller, more boring codebases fit in context windows, generate
 fewer hallucinated APIs, and make agent-written diffs reviewable.
 
 ## Common mistakes

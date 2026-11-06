@@ -13,7 +13,7 @@ description: >-
   tune the matching rules, can't take it offline to test, keep improving in production, which
   tolerance is best, improve without stopping the process.
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
 ---
 
 # Evolutionary operation (EVOP)
@@ -35,7 +35,7 @@ metadata:
    safe, and names the guard responses with hard limits. On a recon engine, false-match rate is a
    hard bound: a false match posts wrong cash. Write the limits down. Any drift outside spec stops
    the experiment immediately and returns the process to the last known-good center.
-2. **Pick 2–3 process factors** you can actually set: an amount tolerance, a date window, a
+2. **Pick 2–3 process factors** you can set: an amount tolerance, a date window, a
    dunning wait. More than three makes the pattern too large to run unobtrusively in production.
 3. **Define a tiny factorial pattern around the current operating point.** A 2×2 (low/high per
    factor) plus the current center — five settings, all inside the safe limits, steps small enough
@@ -47,7 +47,7 @@ metadata:
    throughout.
 5. **After each phase (several cycles), test factor effects against experimental error.** Compute
    each effect and its standard error from cycle-to-cycle scatter; act only on effects clearing
-   about two standard errors — and at the small cycle counts EVOP actually runs on, quote the
+   about two standard errors — and at the small cycle counts EVOP runs on, quote the
    small-sample bar beside it (t ≈ 4.3 at n = 3), because 2×SE and the honest bar can
    disagree. This ledger-and-significance work was historically a resident
    statistician's job — have the LLM maintain the EVOP log, run the small-sample tests, and state

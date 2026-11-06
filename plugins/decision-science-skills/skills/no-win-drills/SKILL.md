@@ -14,7 +14,7 @@ description: >-
   choosing least-worst. Triggers: kobayashi maru, no-win, every option is bad,
   least-worst, damage control drill, degraded mode, can't win this one, loss triage.
 metadata:
-  version: "1.5.0"
+  version: "1.5.1"
   source: >-
     Homage to Star Trek's Kobayashi Maru, the Starfleet Academy simulation that cannot
     be won (the name lives in triggers only; no affiliation with or endorsement by the
@@ -51,7 +51,7 @@ with no winning move, and the honest audit of when refusing the frame is legitim
 - Auditing a constraint set before accepting it — the Kirk blade: which of these
   constraints are physics and which are policy wearing a physics costume?
 - Whenever success is being quietly redefined mid-effort and nobody has said so out loud.
-- A neighboring seam, in prose: auditing whether a test or pilot *can genuinely fail* —
+- A neighboring seam: auditing whether a test or pilot *can genuinely fail* —
   fixed criteria, demonstration-vs-experiment honesty — is a validation-design
   discipline (a session-level skill covers it). That skill guards against exercises that
   cannot be failed; this one builds exercises that cannot be won. Mirror images.
@@ -137,7 +137,7 @@ in `decision-science-skills:tabletop-wargaming`'s `references/exercise-design.md
 discipline, shared by every exercise in this library.
 
 ## Why / learn
-The reason to remove the winning move is that its presence contaminates the lesson.
+Remove the winning move because its presence contaminates the lesson.
 While a path to success exists, trainees optimize toward it, and the skills that only
 matter when there is no such path — bounding losses, ordering what to save,
 communicating honestly while things fail — never get load-bearing practice. The
@@ -150,7 +150,7 @@ with a structured debrief, is a teacher; encountered raw in production, it is a 
 Grading process instead of outcome is what makes the drill fair and repeatable. In a
 no-win drill the outcome is fixed by construction, so it carries zero information about
 the player; only the decision path differentiates. This is the general decision-science
-point — outcome quality and decision quality are different variables, loosely coupled
+point: outcome quality and decision quality are different variables, loosely coupled
 anywhere luck operates — enforced here by design: the drill makes outcome-grading not
 just unwise but meaningless.
 

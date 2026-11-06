@@ -9,7 +9,7 @@ description: >-
   logistic regression, linear regression, random forest, gradient boosting, XGBoost, LightGBM, predict
   a category, predict a number, classifier, feature importance, coefficients.
 metadata:
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Supervised modeling
@@ -41,7 +41,7 @@ envelopes, and how to read coefficients and importances without over-claiming ar
 5. **Move to trees/ensembles when linear underfits — one rung at a time, with a stop rule you wrote
    first.** Use a **random forest** for a robust, low-tuning nonlinear model, or **gradient boosting
    (XGBoost/LightGBM)** for top accuracy on tabular data. They capture interactions and nonlinearity linear
-   models miss, and need little scaling or encoding fuss. Climb the ladder (baseline → linear → forest →
+   models miss, and need little scaling or encoding. Climb the ladder (baseline → linear → forest →
    boosting → tuned boosting → stack) and **keep a rung only when its validation gain over the best kept
    model exceeds the across-fold standard deviation** — a gain inside the fold noise is not a finding, and
    a rung you keep is a rung you maintain forever. Before judging a family, check its train-vs-validation
@@ -82,8 +82,8 @@ its keep.** A linear or logistic model is not a throwaway — it is a real model
 its coefficients are a defensible explanation, which matters wherever a prediction has to be defended to
 someone who did not build it — an adverse-action notice, a triage rule a clinician overrides, a screening
 model an auditor will ask about. You reach for trees and boosting when the linear model demonstrably
-underfits (it can't capture the curve or the interaction), and the price you pay is interpretability and a real risk of overfitting that only regularization and honest validation keep
-in check. Understanding *why* the families differ helps you choose: linear models assume an additive,
+underfits (it can't capture the curve or the interaction), and the price is interpretability and a real risk of overfitting that only regularization and honest validation keep
+in check. Knowing *why* the families differ helps you choose: linear models assume an additive,
 monotone relationship and extrapolate; trees carve the feature space into boxes, capture interactions for
 free, but never extrapolate beyond the training range. Interpretation is where people most often fool
 themselves — impurity-based feature importance is biased toward high-cardinality and continuous features,
