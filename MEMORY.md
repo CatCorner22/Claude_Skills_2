@@ -175,6 +175,13 @@ Never store secrets, credentials, account numbers, or client data here.
   `your-environment.md`. (as of 2026-07-18)
 - OPEN: The CAMT.053 version supported in the employer's ERP release needs confirmation before any
   skill hard-codes one. (flagged in OTBI research)
+- OPEN: "Route fast deterministic forks (tool choice, path selection, retries) through JEV" —
+  integration target unknown. Nothing in this tree references JEV; public material describes a
+  TypeSafe decision model reached via a `jev-router` proxy (`jev-claude`) or a `jev-route` plugin,
+  but only via a competitor's comparison page and an anecdotal post, so it is unverified. The
+  user's "in-turn forks" framing also conflicts with the per-turn model routing that material
+  describes, and a per-turn router would override the `model` pin in `.claude/settings.json`.
+  Needs the user's integration target before any config. (as of 2026-11-06)
 
 ## Lessons Learned & Avoidance Rules
 - RULE (2026-08-18, surfaces pass): **the repository is not the product.** Every gate here —
@@ -1695,3 +1702,36 @@ retraction of the previous pass's headline mechanism claim.
 - RULE: Maximum-Delegation Auditor retains every feasible authorized step; execution economy cannot remove requested depth, evidence, quality gates, targeted read-back, or consent boundaries. Assistant ownership and worker allocation are separate choices.
 - FACT: Portable audit validation: 20 unit tests, 7 self-checks, and 3 temporary mutation variants detected; four fresh-context functional cases completed, including an independent QC reviewer. These are not matched token-savings or native-routing measurements. Details and limits: chatgpt/docs/validation.md.
 - RULE: Use explicit normalized telemetry and supplied per-model rates; unavailable tokens/worker usage are unknown, not zero. Distinguish conversational adaptation, persisted packages, native discovery/invocation, and account-wide installation.
+
+### Crystallization pass — 2026-11-06 (Haiku-main / Opus-advisor harness, PR #67)
+- FACT: Shipped a project-level harness in `.claude/`: session model pinned to `claude-haiku-5-5`,
+  plus four subagents in `.claude/agents/` — `advisor` (`claude-opus-5-5`) and read-only
+  `search` / `grep` / `docs` on Haiku. `CLAUDE.md` gained one rule requiring an advisor
+  consultation before a plan locks, after the same error twice, and before a task is marked done.
+  Merged as PR #67 (`29ecc95`), 169 insertions across 6 files, no CI in this repo.
+- FACT: Claude Code accepts a **full pinned model name** wherever it takes a model — the `model`
+  key in `settings.json`, `--model`, and `agents/*.md` frontmatter — not only the
+  `sonnet|opus|haiku|inherit` aliases. Verified on CLI 2.1.318 with a negative control: an invented
+  name returns `[claude-code:unrecognized_model]`, so acceptance of the real names discriminates.
+  Pin the full name when a generation matters; an alias silently follows the family's latest.
+- FACT: the `model` key in a committed `.claude/settings.json` governs **local CLI sessions only** —
+  a cloud session takes its model from the platform and ignores the key. Unlike `enabledPlugins`,
+  which needs `scripts/bootstrap-plugins.sh`, this key is NOT inert in a fresh clone, so it reaches
+  everyone who clones this public repo.
+- FACT: `.gitignore`'s `*.local` pattern does **not** match `.claude/settings.local.json`. The
+  usual "keep personal tweaks local and git-ignored" route needs its own explicit ignore line here.
+- LESSON: read-only means the `tools` whitelist omits `Edit`, `Write` and `Bash` — an instruction
+  asking an agent not to write is not enforcement. Omitting `Bash` also costs the agent `--help`,
+  so a docs-style agent needs an explicit authority ladder (tree → vendored artifact → official
+  upstream → labeled-unverified) instead.
+- LESSON: `scripts/validate.sh` validates **skills**, not subagents, so it passes clean on an
+  `.claude/agents/` change while covering none of it. Check subagent frontmatter separately
+  (parses, `name` matches filename, no write tools) and say which gate actually covered the work.
+- AVOID: repeating that "PRs are squash-merged" in this repo — `CLAUDE.md` says so, but #63 through
+  #67 all landed as merge commits. The companion rule (prove already-merged content by content
+  diff, never by commit ancestry) stays correct and is the safe method either way; its stated
+  rationale is wrong. `CLAUDE.md` is uncorrected, pending the user's call.
+- AVOID: treating a Stop-hook "unpushed commit(s)" warning as lost work after a merge. Restarting
+  the branch from `origin/main` leaves the local branch ahead of its stale remote tracking ref by
+  GitHub's own merge commit; `origin/main..HEAD` empty plus an empty content diff proves nothing
+  is unpushed, and pushing to satisfy the hook accomplishes nothing.
