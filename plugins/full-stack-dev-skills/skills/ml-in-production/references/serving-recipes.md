@@ -51,7 +51,7 @@ def score_batch(model: Model, db: Session) -> int:
     return len(rows)
 ```
 Run it as a background job on a schedule (see realtime-and-dynamic-features for the job
-pattern). The product reads the predictions table like any other data — no serving infra.
+pattern). The product reads the predictions table like any other data: no serving infra.
 
 ## Prediction-log schema
 ```python
@@ -68,7 +68,7 @@ class PredictionLog(Base):
 ```
 `DateTime(timezone=True)` on both timestamps, not the bare `Mapped[datetime]`: a bare
 annotation compiles to `TIMESTAMP WITHOUT TIME ZONE` on Postgres (verified on SQLAlchemy
-2.0.52), and the two timestamps here are the ones you subtract — a label backfilled by a job
+2.0.52), and the two timestamps here are the ones you subtract: a label backfilled by a job
 running in a different zone, or the hour a DST change lands, silently shifts every
 score-to-outcome delay by an hour. Same rule as
 `full-stack-dev-skills:database-and-orm`, whose SQLite→Postgres checklist lists portable
@@ -85,10 +85,10 @@ training set. Retention per your data policy; hash inputs where they're sensitiv
 | Canary | New model serves a small slice (user %, segment) | Product metric needs live traffic |
 | A/B | Formal split + significance on the product metric | The decision is close or high-stakes |
 Promotion/rollback = config change (the pointer), no rebuild of the image. Compare on the
-*product* metric (conversion, loss rate), not just AUC — the validation metric is a proxy.
+*product* metric (conversion, loss rate), not just AUC: the validation metric is a proxy.
 
 **But it is still a code change, so treat the artifact store as a production-code path.**
-`joblib.load()` and `pickle.load()` do not read data — they *execute* the stream, calling
+`joblib.load()` and `pickle.load()` do not read data: they *execute* the stream, calling
 whatever constructors and `__reduce__` hooks it names. Anyone who can write to the artifact
 store, or influence the pointer, can run arbitrary code inside the serving process. That
 makes "promotion is only a config change" true about your build pipeline and false about
@@ -97,26 +97,26 @@ of a deploy's review.
 
 So: restrict write access to the artifact store to the same set that can ship code; record
 the artifact's SHA-256 in `meta.json` at training time and **verify it before loading**
-(above), with the manifest signed or held somewhere the store's writers cannot reach —
+(above), with the manifest signed or held somewhere the store's writers cannot reach:
 a hash sitting beside the file it describes protects nothing, exactly as with the split
 tally's anchor; and never load an artifact from a path a request can influence. If models
-arrive from outside your own training pipeline, pickle is the wrong format entirely —
+arrive from outside your own training pipeline, pickle is the wrong format entirely:
 prefer ONNX or a pure-data format for those.
 
 ## Pre-launch checklist
 - [ ] Whole pipeline serialized (no external preprocessing steps to "remember")
 - [ ] **Decision threshold in the sidecar**, with the split it was chosen on, the FP/FN costs
-      or alert budget that set it, and the prevalence it assumed — it is a fitted parameter,
+      or alert budget that set it, and the prevalence it assumed: it is a fitted parameter,
       and left in application code the one number that turns scores into actions is versionless
 - [ ] Feature code shared between training and serving (one function, imported twice)
 - [ ] Input schema validated at the endpoint (types, ranges, categories)
 - [ ] Model loads at startup; version in every response
-- [ ] Model artifact integrity verified at load (SHA-256 vs the signed manifest) — loading a
+- [ ] Model artifact integrity verified at load (SHA-256 vs the signed manifest): loading a
       pickle executes code, so this is the same control as verifying a deployed binary
 - [ ] Artifact-store write access limited to whoever may ship code
 - [ ] Prediction logging on, day one
 - [ ] Drift checks defined: which features, what statistic (PSI / KS / chi-square) at what
-      threshold, and who's alerted — plus prevalence, since a threshold frozen at training
+      threshold, and who's alerted, plus prevalence, since a threshold frozen at training
       prevalence silently changes precision as prevalence moves
 - [ ] Retrain trigger and rollback trigger written down and agreed
 - [ ] Shadow/canary plan for the *next* version already sketched

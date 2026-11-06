@@ -9,15 +9,15 @@ Write these down before the first search; the ledger starts here.
 
 | Item | Why it matters |
 |---|---|
-| **Question presented** — *Under [jurisdiction] law, does [rule] apply when [facts]?* | A question without a jurisdiction cannot be answered; one without the operative facts is answered for someone else's case |
-| **Posture** — transactional advice, litigation (which stage, which court), compliance | Decides which authority binds and how much certainty is needed |
-| **Currency date** — "as of" when the answer must hold | A rule in flux (an agency position, a threshold) needs a date on the answer |
-| **Facts that matter** — employer size, dates, state of work, contract terms, who did what when | Thresholds and elements turn on them; list what you do not yet know |
-| **What would change the answer** — the fact or authority that flips it | Tells you when you can stop and what to flag as open |
+| **Question presented**: *Under [jurisdiction] law, does [rule] apply when [facts]?* | A question without a jurisdiction cannot be answered; one without the operative facts is answered for someone else's case |
+| **Posture**: transactional advice, litigation (which stage, which court), compliance | Decides which authority binds and how much certainty is needed |
+| **Currency date**: "as of" when the answer must hold | A rule in flux (an agency position, a threshold) needs a date on the answer |
+| **Facts that matter**: employer size, dates, state of work, contract terms, who did what when | Thresholds and elements turn on them; list what you do not yet know |
+| **What would change the answer**: the fact or authority that flips it | Tells you when you can stop and what to flag as open |
 
 ## §2 The authority hierarchy
 
-**Binding (mandatory) authority** — what the deciding court must follow — comes first, and the
+**Binding (mandatory) authority** (what the deciding court must follow) comes first, and the
 memo says which authorities are binding and which are persuasive.
 
 1. **Constitutions**: federal, then the state's.
@@ -31,7 +31,7 @@ memo says which authorities are binding and which are persuasive.
 4. **Caselaw**: the highest court of the jurisdiction, then its intermediate appellate courts, then
    trial courts (not binding on other trial courts). Federal courts applying state law apply the
    state's substantive law (*Erie*), following its highest court and predicting its answer where it
-   has not spoken — the prediction duty comes from later cases, not *Erie* itself [canon attribution].
+   has not spoken; the prediction duty comes from later cases, not *Erie* itself [canon attribution].
    Federal questions: the Supreme Court, then the circuit. Check the local rule on citing
    unpublished opinions.
 5. **Persuasive authority**: other jurisdictions (weight by similarity of statute and reasoning),
@@ -54,7 +54,7 @@ audit trail and the next researcher's starting point.
 2. **Statute and regulation** from the official source. Read the whole section, the definitions,
    the effective date, and the notes on amendments. Search the Federal Register for the rule's
    docket to see proposed changes, stays, vacaturs.
-3. **Caselaw — one good case.** Find one on-point decision from a binding court (from the
+3. **Caselaw: one good case.** Find one on-point decision from a binding court (from the
    treatise, the annotated code, or a search), then follow everything that cites it: CourtListener
    (*cited by* list), Google Scholar (*How cited*), Westlaw/Lexis if licensed. Then the most recent
    applications, with a date restriction.

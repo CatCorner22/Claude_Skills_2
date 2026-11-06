@@ -16,33 +16,33 @@ answer, and the failure envelope where "lean" turns into under-engineering.
 ## The four gates
 
 An extraction is earned when it passes **all four**. One failure means leave the
-duplication and revisit later — duplication is a cost you can see and localize, and the
+duplication and revisit later: duplication is a cost you can see and localize, and the
 line usually quoted here is right: it is far cheaper than the wrong abstraction.
 
-**Gate 1 — shared axis of change.** The copies must have a history, or a stated
+**Gate 1: shared axis of change.** The copies must have a history, or a stated
 requirement, of changing *together for the same reason*. Coincidental similarity is the
 weakest possible evidence and it is the evidence most extractions are built on. Measured
 below.
 
-**Gate 2 — the name and the one-sentence docstring.** Write the docstring before the code.
+**Gate 2: the name and the one-sentence docstring.** Write the docstring before the code.
 If it needs "or", "depending on", or "and optionally", you are describing more than one
 concept and the extraction will carry a flag for each. Treat `generic`, `base`, `common`,
 `util`, `helper`, `manager`, `process`, and `handle` as a signal rather than a rule: each
 is a placeholder for a noun you have not found yet, and a concept you cannot name is a
 concept you have not isolated.
 
-**Gate 3 — signature projection.** Add the *next* caller on paper, before writing
+**Gate 3: signature projection.** Add the *next* caller on paper, before writing
 anything. If it needs a new parameter, a new branch inside the body, or a boolean, you are
 building a switchboard: a behaviour-selecting parameter is an `if` you moved to the call
-site, so the reader now needs both files instead of one. The arithmetic is the argument —
+site, so the reader now needs both files instead of one. The arithmetic is the argument:
 with k booleans the function has 2^k reachable behaviours; at k = 3 that is 2^3 = 8 paths
 while the test suite typically exercises only the 3 combinations the current callers use,
 leaving 8 − 3 = 5 paths that compile, are reachable, and have never once run. Those five
 are where the next bug lives, and nothing in review will surface them.
 
-**Gate 4 — read-through.** Cover the body of the extracted function, read the call site
+**Gate 4: read-through.** Cover the body of the extracted function, read the call site
 aloud, and state what it produces. If you cannot, the parameters are doing the explaining
-and you have relocated complexity rather than removed it — at the cost of one jump per
+and you have relocated complexity rather than removed it, at the cost of one jump per
 read, paid by every future reader.
 
 ### The rule of three, amended
@@ -51,7 +51,7 @@ Extract on the third occurrence **and** gate 1, not on the third occurrence alon
 Why three and not two: with two copies, every difference between them is equally plausibly
 "the parameter", so you are *inventing* the shape of the parameterization from one
 observation. The third copy makes the varying part an intersection of two differences,
-which is a much smaller and usually correct set — three is the smallest n where the
+which is a much smaller and usually correct set: three is the smallest n where the
 abstraction is inferred rather than guessed. Gate 1 is what stops you extracting three
 things that merely rhyme.
 
@@ -69,14 +69,14 @@ done
 echo "$both / $total commits touched both"
 ```
 
-Read the ratio. The bands below are a reading heuristic — the reasoning for the floor is
-given underneath, but the cut points are not a measured result and should be moved if your
-repo's commit granularity differs:
+Read the ratio. The bands below are a reading heuristic. The reasoning for the floor is
+given underneath, but the cut points are not a measured result: move them if your repo's
+commit granularity differs.
 
 | Shared-edit ratio | Reading | Do |
 |---|---|---|
 | ≥ ~1/3 | The copies live on one axis of change | Extract the part that moved together |
-| ~1/10 to 1/3 | Partial overlap | Extract only the sub-block the shared commits actually touched — usually much smaller than the whole function |
+| ~1/10 to 1/3 | Partial overlap | Extract only the sub-block the shared commits touched — usually much smaller than the whole function |
 | 0 over ≥ 10 commits | They have never once needed to agree | Do not extract |
 
 Ten is the floor because below it you cannot distinguish "never changes together" from
@@ -88,14 +88,14 @@ repository, a squash-merge history that collapses a month of separate edits into
 commit, or a file that was renamed (add `--follow`, and even then a split or a merge loses
 the trail) all return a ratio near zero for reasons that have nothing to do with coupling.
 The tell is a `total` that is implausibly small for the file's age. Fall back to the
-**requirement test**: is there a document outside the code — a wire format, a regulator's
-field list, an API contract, a shared vendor spec — that *forces* these to change together?
+**requirement test**: is there a document outside the code (a wire format, a regulator's
+field list, an API contract, a shared vendor spec) that *forces* these to change together?
 If yes, gate 1 passes on the document. If the only reason they must agree is that they
 currently look alike, gate 1 fails.
 
 ## Worked example: three CSV exports, three ways
 
-A service has three export endpoints — invoices, payments, customers — each a handler that
+A service has three export endpoints (invoices, payments, customers), each a handler that
 queries, writes CSV, and returns it. They are visibly similar. Line counts below are of the
 code exactly as shown; count them yourself.
 
@@ -175,13 +175,13 @@ def export_invoices(since: date, db: Session = Depends(get_db)):
 nothing. It fails gate 2 (the docstring is "export any model as CSV, depending on which
 fields are money or enums or relations"), gate 3 (5 of its 9 parameters select behaviour),
 and gate 4 (nobody can predict the output of `money_fields={"total"}` without reading the
-dispatch). Three of those five — `money_fields`, `enum_fields`, `relation_fields` — shape
+dispatch). Three of those five (`money_fields`, `enum_fields`, `relation_fields`) shape
 each row independently of the others, so the row loop already has 2^3 = 8 reachable
 behaviours. It is the version that gets merged, because it *looks* like consolidation.
 
 ### Version C — the earned extraction
 
-The part that is genuinely identical **and changes for one reason** is the envelope:
+The part that is identical **and changes for one reason** is the envelope:
 buffer, writer, header row, streaming response, disposition header. The row shaping is
 per-endpoint and changes for per-endpoint reasons.
 
@@ -213,7 +213,7 @@ def export_invoices(since: date, db: Session = Depends(get_db)):
     )
 ```
 
-8 lines each: 11 + 24 = 35 total, or 42 − 35 = 7 lines removed — and 57 − 35 = 22 fewer
+8 lines each: 11 + 24 = 35 total, or 42 − 35 = 7 lines removed, and 57 − 35 = 22 fewer
 than the DRY version.
 
 ### The accounting
@@ -226,16 +226,16 @@ than the DRY version.
 
 **The 7 lines are not the point.** Run two real changes through the three versions:
 
-*Change 1 — Excel mangles accented customer names; the CSV needs a UTF-8 BOM.* This is an
+*Change 1: Excel mangles accented customer names; the CSV needs a UTF-8 BOM.* This is an
 envelope change. Version A: three edits, and the third one gets forgotten until a customer
 reports it. Version B: one edit, then re-verify 8 flag paths. Version C: one edit, one
-place, nothing else can be affected — which is exactly what gate 1 predicted, because the
+place, nothing else can be affected, which is exactly what gate 1 predicted, because the
 envelope is where the shared history lives.
 
-*Change 2 — the customers export needs a computed lifetime-value column.* This is a
+*Change 2: the customers export needs a computed lifetime-value column.* This is a
 row-shaping change. Version C: one line inside one handler's generator expression, and the
 other two exports cannot break. Version B: a new `computed=` callable parameter, so
-parameters go from 9 to 10 and the row loop's independent shapers go from three to four —
+parameters go from 9 to 10 and the row loop's independent shapers go from three to four:
 2^3 = 8 reachable behaviours become 2^4 = 16, adding 16 − 8 = 8 combinations that have
 never run, and every existing caller now flows through a new branch. Version A: one line
 in one file.
@@ -261,21 +261,21 @@ These earn a factory, protocol, or interface with one visible implementation, be
 1 is satisfied by something other than repetition:
 
 - **Two implementations exist today, in production, selected at runtime.** Evidence: both
-  are deployed. Not "we might swap vendors" — that migration is a rewrite either way, and
+  are deployed. Not "we might swap vendors": that migration is a rewrite either way, and
   the wrapper you wrote for it will fit the old vendor's model, not the new one's.
-- **The seam sits on a boundary you do not own** — the clock, the filesystem, the network,
+- **The seam sits on a boundary you do not own**: the clock, the filesystem, the network,
   a payment or mail provider. The second implementation is the test environment and it
   exists today. Build *one* fake at the process edge rather than an interface per class:
   a single injectable clock beats patching `datetime.now` in forty tests, and the forty
-  patches are the cost you are actually avoiding.
-- **Dispatch is driven by data** — a config value, a tenant, a file extension, an event
+  patches are the cost you are avoiding.
+- **Dispatch is driven by data**: a config value, a tenant, a file extension, an event
   name. A registry replaces an `if/elif` chain. Threshold: warranted once the dispatch
   appears in **two or more places**, or once adding a new type requires editing code
-  outside that type's own module — both mean the chain will be edited incompletely.
+  outside that type's own module: both mean the chain will be edited incompletely.
 - **Expensive or order-dependent construction reached from more than one entry point**
   (web process, worker, CLI, test bootstrap). The factory deduplicates a startup sequence
   that demonstrably changes together, which is gate 1 satisfied by construction.
-- **A boundary someone else has already copied** — a public API, a wire format, a plugin
+- **A boundary someone else has already copied**: a public API, a wire format, a plugin
   point with an external implementer. The indirection is a contract, and you cannot
   unilaterally change a contract later, so the option YAGNI trades on is not open.
 
@@ -289,7 +289,7 @@ YAGNI is an argument about *option value*. It holds exactly where deferring keep
 option open, and it reverses where deferring closes it or converts a future code change
 into a data repair. One question decides which side you are on:
 
-> **If we skip this and turn out to be wrong, is the fix a code change — or a data repair,
+> **If we skip this and turn out to be wrong, is the fix a code change, or a data repair,
 > a security disclosure, or a customer-visible incident?**
 
 A code change means YAGNI applies: skip it, add it when the requirement is real, and it
@@ -300,7 +300,7 @@ Operationally: **reversible in a single migration you would be willing to run at
 defer. Requires touching rows already written, or a third party already depends on it →
 decide now.**
 
-| Class | What the later fix actually is | The cheap version to build now |
+| Class | What the later fix is | The cheap version to build now |
 |---|---|---|
 | Trust-boundary validation and authorization | A disclosure, plus an audit of everything that got through since launch | One schema validated at the edge; deny by default |
 | Idempotency wherever a retry exists (queue, client, LB, or a human clicking twice) | Reconciling duplicate writes already committed | An idempotency key column and a unique index, at write time |
@@ -310,18 +310,18 @@ decide now.**
 | Request-scoped correlation id and structured errors | Debugging by redeploy, on production, at the worst time | One id, logged at every external call, carried in the error |
 | Retention and deletion path for personal data | A legal request you cannot service | Know which tables hold it before you store it |
 
-**The tells that "lean" has become an excuse.** Each is what the practitioner actually
+**The tells that "lean" has become an excuse.** Each is what the practitioner
 observes, not a principle:
 
 - Every test needs a live database or real network, defended as "we'll add the seam when we
-  need it". You are already paying for the seam — in test runtime and in the tests nobody
+  need it". You are already paying for the seam: in test runtime and in the tests nobody
   writes because they are slow.
 - Boring, readable code that hides an unbounded `.all()`, a missing row lock, or a call
   with no timeout. Simple to read is not the same as simple under load.
 - A 900-line module with no internal seams, defended as simple. Simplicity is measured by
   how much a reader must hold at once. The counter-test: how many lines must you read to
   answer "where does the money amount get rounded?" If the answer is more than a screen,
-  the module is not simple, it is undifferentiated — and undifferentiated code is where
+  the module is not simple, it is undifferentiated, and undifferentiated code is where
   people stop making changes.
 - Net-negative diffs pursued as a goal. Deleting the retry that was absorbing a real flake
   is a negative diff and a worse system. Net lines is a diagnostic you read, never a target

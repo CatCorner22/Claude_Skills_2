@@ -12,7 +12,7 @@ Anything naming real contracts, clients, vendors, or personnel stays in
   finding #1 every time):
 
 ## Measures your rules reference
-- Metrics, counts, thresholds, and approval tallies that appear inside rules — the
+- Metrics, counts, thresholds, and approval tallies that appear inside rules: the
   standing Goodhart-pass targets:
 
 ## Re-test cadence

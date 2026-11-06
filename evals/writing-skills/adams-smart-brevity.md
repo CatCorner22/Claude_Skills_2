@@ -37,9 +37,9 @@ Adams skills is failing.
 > "Build me a master prompt for a reconciliation agent — full persona, constraints,
 > output format."
 
-Expected: `coding-agent-skills:master-prompt-architect` owns end-to-end master-prompt
-construction (its own Adams compliance audit applies there). This skill should not load as
-the primary; its rules reinforce that skill's audit rather than replace it.
+Expected: building a master prompt end to end is a separate task this library does not cover as
+a single skill. This skill should not load as the primary for that build task; an Adams-style
+compliance audit of the finished prompt text is a natural extension of this skill's rules.
 
 ## 3. Quality rubric
 - **Does**: leads with the one most important point + "why it matters"; every sentence

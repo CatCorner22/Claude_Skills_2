@@ -26,7 +26,7 @@ the-foreman loads on a should-we-continue ask, the seam is failing.
 > "This codebase feels rotten everywhere. Deploy the compiler and give me the full
 > alarmist autopsy — worst case, everything that could be failing."
 
-Expected: `coding-agent-skills:chicken-little-technical-compiler` owns the
+Expected: `coding-agent-skills:chicken-little` (deploy-compiler mode) owns the
 blocker-hunting autopsy in the alarmist register. The Foreman is a phase-gate
 inspection against a claim list, in the opposite emotional register. If the user
 asks for the sky-is-falling treatment, hand them Chicken Little.

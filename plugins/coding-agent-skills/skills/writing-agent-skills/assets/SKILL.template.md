@@ -18,14 +18,14 @@ metadata:
 - Not for: <adjacent case> → see `<plugin>:<other-skill>`.
 
 ## Do it
-1. <First concrete step — state inputs and the goal.>
+1. <First concrete step: state inputs and the goal.>
 2. <Next step. Use prose for judgment calls.>
 3. <For fragile/consistency-critical steps, give exact commands, a column map, or a bundled script.>
 4. <Produce the deliverable and state how to check it is correct.>
 
 ## Why / learn
 <The mental model and the reasoning behind the steps, in plain language. Explain *why* the
-approach works so the reader can generalize. Never bark "MUST/NEVER" — teach instead.>
+approach works so the reader can generalize. Never bark "MUST/NEVER"; teach instead.>
 
 ## Common mistakes
 - <Pitfall> → <fix>.
@@ -33,19 +33,19 @@ approach works so the reader can generalize. Never bark "MUST/NEVER" — teach i
 
 ## Tailor to your environment
 <How the user points this skill at their real setup. Instruct them to drop specifics into
-`references/your-environment.md`. Never commit raw real data — sanitize; raw files use the
+`references/your-environment.md`. Never commit raw real data; sanitize. Raw files use the
 `.private`/`.local` suffix so `.gitignore` keeps them out of git.>
 
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/<skill-name>.md` works well — fill
+a dirty tree. Copy it into your own project (`.claude/skills-env/<skill-name>.private.md` works well), fill
 it in there, and point this skill at that copy. Your specifics then survive updates and stay somewhere
 you own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/<topic>.md — <what it contains>
+- references/<topic>.md: <what it contains>
 
 ## Scripts
 <!-- Optional. One line per bundled script: how to run it and what it outputs. Delete if none. -->
-- `scripts/<name>.py` — <what it does and its output>.
+- `scripts/<name>.py`: <what it does and its output>.

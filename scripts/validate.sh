@@ -252,6 +252,12 @@ fi
 #   `continuous-improvement-skills:curve-hero-design-language`, restorable from ...)
 # An archived target referenced *without* that mark still errors, because the
 # reader is then sent to a skill they cannot install.
+#
+# Scans `evals/**/*.md` too, not just `plugins/`. An eval's "Near-miss / Expected:"
+# line names a `plugin:skill` just as live prose does, and a skill archived or
+# deleted after its evals were written leaves exactly the same broken promise —
+# found the hard way in 2026-11-06, when a 44-reference gap in evals/ survived
+# several rounds of this gate passing clean because it only looked at plugins/.
 # ---------------------------------------------------------------------------
 if command -v python3 >/dev/null 2>&1; then
   xlink_out=$(python3 - <<'PY'
@@ -271,7 +277,7 @@ for pat, idx in (("archive/skills/*/*", (2, 3)), ("archive/*/skills/*", (1, 3)))
 REF = re.compile(r"`([a-z0-9-]+-skills):([a-z0-9-]+)`")
 WINDOW = 160          # chars of preceding prose that may carry the "archived" mark
 bad = []
-for md in glob.glob("plugins/**/*.md", recursive=True):
+for md in glob.glob("plugins/**/*.md", recursive=True) + glob.glob("evals/**/*.md", recursive=True):
     # errors="replace" keeps one stray byte from raising, which used to kill this whole
     # check silently: the traceback went to stderr, `|| true` swallowed the exit code, and
     # an empty $xlink_out read as "no broken links".

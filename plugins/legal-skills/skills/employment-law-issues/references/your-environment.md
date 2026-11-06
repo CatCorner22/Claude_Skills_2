@@ -1,7 +1,7 @@
 # Your environment — employment-law-issues (template)
 
 Fill this in for your current role, and keep the filled copy outside the plugin at
-`.claude/skills-env/employment-law-issues.private.md` (git-ignored by the `*.private.*` pattern —
+`.claude/skills-env/employment-law-issues.private.md` (git-ignored by the `*.private.*` pattern;
 confirm your own repository ignores it too). Nothing identifying a person, a complaint or a matter
 belongs in the shipped file.
 
@@ -11,7 +11,7 @@ belongs in the shipped file.
 
 ## Policies and templates in force
 - Handbook (last reviewed), offer letter, employment agreement, separation agreement, restrictive
-  covenant, investigation template — each with its owner and the states it was drafted for.
+  covenant, investigation template, each with its owner and the states it was drafted for.
 
 ## State overlays that apply
 - For each state: minimum wage and exempt salary level (figure, source, date checked); paid leave;

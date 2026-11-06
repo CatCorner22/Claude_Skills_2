@@ -24,12 +24,12 @@ happened.
 4. **Plan.** Who to interview and in what order (complainant, witnesses, accused last, follow-ups);
    which documents to collect; the timeline; the standard (preponderance).
 5. **Interviews.** Two people present; open questions; no promises of confidentiality beyond "as
-   confidential as the process allows" — a blanket confidentiality instruction to non-supervisory
+   confidential as the process allows"; a blanket confidentiality instruction to non-supervisory
    employees can collide with their rights to discuss working conditions, and the Board's standard
    on confidentiality during an open investigation has moved more than once (ledger §2, the
    *Apogee Retail* row) [background — verify]. Record each interview the same day. Ask each witness about
    retaliation and how to reach them.
-6. **Findings.** For each allegation: substantiated, not substantiated, inconclusive — with the
+6. **Findings.** For each allegation: substantiated, not substantiated, inconclusive, with the
    evidence relied on and credibility reasoning (consistency, corroboration, motive, demeanour
    used cautiously). Policy violation and legal conclusion are different findings; the report
    makes the first and leaves the second to counsel.
@@ -47,12 +47,12 @@ Work every line before the meeting, and keep the worked checklist in the file.
 - [ ] **Consistency**: comparable conduct by others, and what happened to them. A difference needs
       a documented reason.
 - [ ] **Timing against protected activity**: complaints, leave or accommodation requests, wage
-      inquiries, safety reports, agency contact, union activity, whistleblowing — anything in the
+      inquiries, safety reports, agency contact, union activity, whistleblowing: anything in the
       past year. If there is any, counsel before the decision.
 - [ ] **Contract and policy**: an employment agreement with cause, notice or severance terms; a
       handbook promise of progressive discipline; a collective agreement with just-cause and
       grievance steps.
-- [ ] **Protected status check** (not a reason to act or not act — a reason to document the
+- [ ] **Protected status check** (not a reason to act or not act; a reason to document the
       legitimate reason carefully): age 40 and over, disability or recent medical leave, pregnancy,
       recent return from military service, any class under state law.
 - [ ] **Group reductions**: WARN and mini-WARN headcounts and notice; selection criteria written

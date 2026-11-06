@@ -9,10 +9,10 @@
 ## Sanitization scrub by file type
 
 ### Excel (.xlsx)
-- [ ] Replace identifiers in *all* sheets — including hidden ones. Excel's right-click →
+- [ ] Replace identifiers in *all* sheets, including hidden ones. Excel's right-click →
       Unhide dialog does **not** list `veryHidden` sheets; enumerate them in code instead:
       `[(ws.title, ws.sheet_state) for ws in openpyxl.load_workbook(p).worksheets]`
-- [ ] Delete or refresh pivot caches (a pivot remembers source rows even after deletion) —
+- [ ] Delete or refresh pivot caches (a pivot remembers source rows even after deletion);
       safest: paste sanitized values into a fresh workbook
 - [ ] Check defined names, header/footer, and comments/notes for names and account numbers
 - [ ] File → Info → Inspect Document (Document Inspector) for metadata, hidden rows/columns,
@@ -22,7 +22,7 @@
 
 ### CSV / flat files
 - [ ] Scrub identifier columns with consistent, shape-preserving fakes
-- [ ] Check free-text columns (descriptions, memos) — names and account numbers hide there
+- [ ] Check free-text columns (descriptions, memos): names and account numbers hide there
 - [ ] Confirm no real values survive in the header row or a trailing footer
 - [ ] Regenerate rather than hand-edit when the file came from a script
 
@@ -39,7 +39,7 @@
 ## Sensitive-data classes (default; align to your policy)
 | Class | Examples | Handling |
 |---|---|---|
-| Credentials | passwords, tokens, keys | Never in files at all — secrets manager/env vars |
+| Credentials | passwords, tokens, keys | Never in files at all; use a secrets manager or env vars |
 | Direct identifiers | account numbers, IBANs, tax IDs, names + contact | Sanitize before any sharing |
 | Quasi-identifiers | customer + amount + date combinations | Sanitize or aggregate; combinations re-identify |
 | Business-confidential | balances, margins, forecasts | Share on need-to-know channels only |

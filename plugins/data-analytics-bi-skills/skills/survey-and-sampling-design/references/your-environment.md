@@ -4,7 +4,7 @@ Sensitive specifics stay in `your-environment.private.md` (git-ignored).
 
 ## Populations and frames
 - The groups you survey repeatedly (clients, staff, users, panel) and the list/frame that
-  reaches each — note known coverage gaps:
+  reaches each; note known coverage gaps:
 
 ## Response-rate history
 - Typical response rates by audience and mode (they drive the invitation math in §3):

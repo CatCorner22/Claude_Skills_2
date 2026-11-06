@@ -1,12 +1,12 @@
 # Your environment — mscd-contract-drafting (template)
 
 Fill this in for your current role, and keep the filled copy outside the plugin at
-`.claude/skills-env/mscd-contract-drafting.private.md` (git-ignored by the `*.private.*` pattern —
+`.claude/skills-env/mscd-contract-drafting.private.md` (git-ignored by the `*.private.*` pattern;
 confirm your own repository ignores it too). Nothing identifying a client, a deal or a counterparty
 belongs in the shipped file.
 
 ## House style decisions
-- Verb of obligation: `shall` (MSCD default) or `must` — one choice, held for the whole instrument.
+- Verb of obligation: `shall` (MSCD default) or `must`: one choice, held for the whole instrument.
   Pass it to the linter as `--house-style`.
 - Defined terms: quotation marks and bold where defined; plain capitals thereafter. Definitions
   section at the front / at the back / integrated (say which, and when).
@@ -34,5 +34,5 @@ defining. One per line in a file passed to the linter as `--known-terms`.
 Which forms are live (edits there are flags), who owns each, and the governing law each assumes.
 
 ## Deliverable preferences
-Tracked changes or the three-column table; whether the cover note goes in the email body or as a
+Tracked changes or the redline table; whether the cover note goes in the email body or as a
 first page; who signs off on flags.

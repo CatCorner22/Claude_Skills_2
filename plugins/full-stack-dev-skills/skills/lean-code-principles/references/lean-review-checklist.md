@@ -30,7 +30,7 @@
 | Comments explaining clever code | Cleverness tax | Rewrite boring; delete the comment |
 
 ## Deletion opportunities (hunt monthly)
-- Unused dependencies — `deptry` or `pipreqs` for Python, `depcheck` for Node. Not `pip-audit`
+- Unused dependencies: `deptry` or `pipreqs` for Python, `depcheck` for Node. Not `pip-audit`
   (CVEs) and not `npm ls` (prints the installed tree): neither answers "which declared
   dependency is never imported", so both report clean on a project full of unused deps.
 - Dead endpoints/routes (access logs say nobody calls them)
@@ -40,7 +40,7 @@
 
 ## Net-lines discipline
 Track per PR: `+added / −deleted / net`. Healthy mature codebases trend near zero net while
-shipping features. Celebrate the negative-net feature PR in review — it's the strongest
+shipping features. Celebrate the negative-net feature PR in review: it's the strongest
 signal the discipline is working. Celebrate it as an outcome, never set it as a target:
 see the last tell in `earning-abstractions.md`, where the deleted retry that was absorbing
 a real flake is a negative diff and a worse system.
@@ -51,15 +51,15 @@ A lean review is not a set of opinions in a PR thread. It is an artifact with ei
 and a reviewer who leaves out parts 6–8 has produced the failure mode this skill exists to
 prevent: a smaller codebase that is worse.
 
-1. **Net-lines line per file group** — added, deleted, net. Per group, not one repo-wide
+1. **Net-lines line per file group**: added, deleted, net. Per group, not one repo-wide
    number, so a large deletion cannot hide a large addition somewhere else.
-2. **Each proposed deletion with its evidence.** Not "this looks unused" — the actual
+2. **Each proposed deletion with its evidence.** Not "this looks unused": the actual
    proof: a callers grep that returns nothing, an access-log window with the number of days
    and zero hits, the date a feature flag reached 100%. A deletion without evidence is a
    guess with a merge button.
-3. **Each proposed inline, with before/after and the count** — including the test lines the
+3. **Each proposed inline, with before/after and the count**: including the test lines the
    inline removes, which are usually where most of the saving is.
-4. **Each abstraction kept, with the gate it passes** — name the gate and the evidence
+4. **Each abstraction kept, with the gate it passes**: name the gate and the evidence
    (the four gates are in the sibling reference `earning-abstractions.md`). "Seems fine"
    is not a gate.
 5. **Each abstraction removed, with the gate it fails.** Naming the failed gate is what
@@ -70,7 +70,7 @@ prevent: a smaller codebase that is worse.
    section, everything the review left alone reads as something the reviewer missed.
 7. **Behaviour-preservation evidence.** Which tests cover the changed lines, run before and
    after, with the result. If no test covers them, writing one is the first item of work,
-   not the last — a simplification with no test is a rewrite with no test.
+   not the last: a simplification with no test is a rewrite with no test.
 8. **What was not done, and why.** Scope you found and deliberately did not take, so it is
    a filed item rather than a thing everyone assumed the other person saw.
 
@@ -131,9 +131,9 @@ trust. The `app/exports/` deletions are 42 (the three Version A handlers the rew
 replaces) + 183 (`legacy_xlsx.py`) + 11 (the flag and its dead branch) + 4 (`_fmt_money`)
 = 240, against 35 added, so 35 − 240 = −205. Tests are 14 − 33 = −19. Total:
 −205 + −19 = −224. A net-lines line that does not survive this re-addition means the
-deletion inventory and the diff have drifted apart — which is the most common way a lean
+deletion inventory and the diff have drifted apart, which is the most common way a lean
 review overstates what it did.
 
 Read what the artifact makes arguable. Every claim in it can be checked by someone who
-disagrees — the log window, the commit ratio, the parameter count, the golden files. That
+disagrees: the log window, the commit ratio, the parameter count, the golden files. That
 is the difference between a lean review and a preference.

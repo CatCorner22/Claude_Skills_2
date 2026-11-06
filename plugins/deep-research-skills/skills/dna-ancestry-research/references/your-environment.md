@@ -1,7 +1,7 @@
 # Your environment — tailoring template for dna-ancestry-research
 
 This file ships as a template. **Copy it to `.claude/skills-env/dna-ancestry-research.private.md`
-in your own project and fill in the copy** — the `.private.md` suffix is what keeps it out of git,
+in your own project and fill in the copy**: the `.private.md` suffix is what keeps it out of git,
 and a `/plugin marketplace update` can overwrite this shipped copy. Confirm with
 `git check-ignore -v .claude/skills-env/dna-ancestry-research.private.md` before writing anything
 into it. Never put a genotype, a match's name or a raw-file path that reveals a third party here.
@@ -43,7 +43,7 @@ into it. Never put a genotype, a match's name or a raw-file path that reveals a 
 
 ## 6. Preferences
 - Delegation: which steps you want to be asked about before they run (uploads, purchases,
-  contacting a match, anything irreversible) — everything else runs without asking.
+  contacting a match, anything irreversible); everything else runs without asking.
 - Research depth: quick orientation / full proof-standard work-up.
 - Maps wanted (deep-ancestry routes, composition shading, ancestor places, pedigree) and extents.
 - Output format and where the private copies go.

@@ -25,9 +25,8 @@ the ORM makes it portable."
 ## 2. Near-miss (should NOT load this skill)
 > "Write a SQL query joining these two CSV exports to find unmatched payments."
 
-Expected: analytical SQL over files — `data-tools-skills:duckdb-local-analytics` /
-`data-analytics-bi-skills:sql-for-analysts`. If this skill loads, sharpen the app-data-layer
-framing.
+Expected: analytical SQL over files — `data-tools-skills:duckdb-local-analytics`. If this
+skill loads, sharpen the app-data-layer framing.
 
 ## 3. Quality rubric
 A good response:

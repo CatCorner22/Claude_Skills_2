@@ -1,6 +1,6 @@
 # Your flat-file feeds (sanitized template)
 
-Wire in your current role here — this file is what makes the skill yours, and it repoints when
+Wire in your current role here: this file is what makes the skill yours, and it repoints when
 you change jobs. Fill in each recurring feed; real export files live in `references/*.local.*`
 (git-ignored), never in this committed file.
 

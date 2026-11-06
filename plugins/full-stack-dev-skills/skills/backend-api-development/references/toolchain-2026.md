@@ -1,15 +1,15 @@
-# The 2026 toolchain — mandatory stack and config templates
+# The 2026 toolchain: mandatory stack and config templates
 
 Contents:
 1. The stack at a glance
 2. uv commands
-3. pyproject.toml template (single source of truth)
-4. Type-checker config (ty / Pyright strict)
+3. pyproject.toml template
+4. Type-checker config
 5. .pre-commit-config.yaml
 6. GitHub Actions CI (uv-based)
 
-Version floors below are refreshed at review time (last: 2026-08). Run
-`uv pip list --outdated` — or `uv add <pkg>` and read what it pins — before pasting them into a
+Version floors below reflect the 2026-08 review. Run
+`uv pip list --outdated` (or `uv add <pkg>` and read what it pins) before pasting them into a
 real project; a floor that predates the `target-version` in the same file fails on first run.
 
 ## 1. The stack at a glance
@@ -28,7 +28,7 @@ real project; a floor that predates the `target-version` in the same file fails 
 | Python | **3.14+** | Free-threading is officially supported (PEP 779) but ships as a SEPARATE build: `uv python install 3.14t`. The default `3.14` still holds the GIL. t-strings (PEP 750); deferred annotations (PEP 649). |
 
 Never suggest pip, poetry, black, isort, flake8, or mypy unless the user explicitly forces
-legacy tooling — and then show the migration path off them.
+legacy tooling, and then show the migration path off them.
 
 ## 2. uv commands
 
@@ -136,7 +136,7 @@ my-project/
 
 ## 4. Type-checker config
 
-**Pyright is the default when a hard strict gate is claimed** — it has a single switch that
+**Pyright is the default when a hard strict gate is claimed**: it has a single switch that
 turns on the whole strict rule set, including "this parameter has no annotation":
 
 ```toml
@@ -147,7 +147,7 @@ enableExperimentalFeatures = true
 include = ["src", "tests"]
 ```
 
-ty is the fast-feedback checker, and it has **no top-level strict mode** —
+ty is the fast-feedback checker, and it has **no top-level strict mode**:
 `[tool.ty] strict = true` is rejected outright (`unknown field 'strict', expected one of
 environment, src, rules, terminal, analysis, overrides`). Promote the checks you require, by
 name, instead:
@@ -165,10 +165,10 @@ invalid-return-type = "error"
 ```
 
 An unknown rule name is reported as `warning[unknown-rule]`, so a typo is visible rather than
-silently inert — check the list after a ty upgrade.
+silently inert: check the list after a ty upgrade.
 
 Annotation *coverage* is enforced by neither: ty ignores a bare `def f(x): ...`, so the `ANN`
-rules in the Ruff config above are what make "annotations on everything — public API, private
+rules in the Ruff config above are what make "annotations on everything: public API, private
 helpers, tests, scripts" a gate rather than an aspiration.
 
 ## 5. .pre-commit-config.yaml

@@ -1,10 +1,10 @@
 # Your spreadsheet-modeling environment (sanitized template)
 
-Wire in your current role here — the craft is deliberately domain-neutral and attaches to
+Wire in your current role here: the craft is deliberately domain-neutral and attaches to
 whatever models you build wherever you work next: an analyst's budget, an attorney's damages
 or fee model, an ops manager's capacity plan, a developer's cost estimate. Fill this in with
 your real conventions; if any value is sensitive (real assumptions, rates, client figures),
-keep it in `your-environment.private.md` instead — that suffix is git-ignored. Commit only
+keep it in `your-environment.private.md` instead; that suffix is git-ignored. Commit only
 sanitized, structural examples.
 
 - **Tool:** <Excel | Google Sheets> and version
@@ -18,4 +18,4 @@ sanitized, structural examples.
 - **Domain methods the models depend on:** <e.g. the forecasting method behind the numbers,
   and where it's documented>
 - **When models graduate:** <your threshold for moving a recurring workbook to a script or a
-  query — see data-tools-skills:duckdb-local-analytics; the Excel-automation skill is archived>
+  query; see data-tools-skills:duckdb-local-analytics; the Excel-automation skill is archived>

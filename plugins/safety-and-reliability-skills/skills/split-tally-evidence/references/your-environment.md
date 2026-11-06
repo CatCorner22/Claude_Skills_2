@@ -1,10 +1,10 @@
 # Your environment (sanitized template)
 
-Wire in your current role here. This skill is domain-neutral by design — the split pattern
+Wire in your current role here. This skill is domain-neutral by design: the split pattern
 attaches to whatever high-stakes record flows exist in the job you hold now, and moves with
 you to the next one. Keep this committed file **structural**: flow types, roles, media, and
 schedules. Real counterpart names, agreement contents, live hash values, storage paths, and
-anything client- or employer-identifying belong in `your-environment.private.md` — that
+anything client- or employer-identifying belong in `your-environment.private.md`; that
 suffix is git-ignored and never committed.
 
 ## Record flows and their splits
@@ -44,11 +44,11 @@ suffix is git-ignored and never committed.
   our own decision to claim>
 - Notice recipients: <every holder of every half, **including the counterpart**>
 - Automation to switch off and verify per hold: <retention policies, log rotation, mailbox
-  purges, expiring links, storage lifecycle rules — list them structurally, by system role>
+  purges, expiring links, storage lifecycle rules; list them structurally, by system role>
 - Scope checklist: <primary halves, anchors, third-party lodgements, append-only logs and
   their rotation, ritual result log, second-keeper working papers>
 - Release authority: <role who can lift a hold in writing>
 - Hold log location: <where trigger / notice / automation-confirmation / release dates are
-  recorded — the ritual log works>
+  recorded; the ritual log works>
 - Counsel contact for live preservation questions: <role; real names go in the
   `.private.md` twin>

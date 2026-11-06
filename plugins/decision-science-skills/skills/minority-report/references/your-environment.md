@@ -7,11 +7,11 @@ Sensitive specifics stay in `your-environment.private.md` (git-ignored).
   build-vs-buy):
 
 ## Reference classes
-- Where your base rates live (past slips, past outcomes, comparable cases) — feed §7:
+- Where your base rates live (past slips, past outcomes, comparable cases); feeds §7:
 
 ## Watchers
 - Who watches which tripwires, on what cadence:
 
 ## Filing
 - Where scenario decks and decision logs live; who may read them (see the
-  reflexivity note on leaked decks — §6):
+  reflexivity note on leaked decks, §6):

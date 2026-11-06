@@ -9,7 +9,7 @@ description: >-
   encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
   datetime features, lag features, rolling features, feature selection, interactions, impute features.
 metadata:
-  version: "1.4.0"
+  version: "1.4.4"
 ---
 
 # Feature engineering
@@ -22,43 +22,43 @@ metadata:
 
 ## Do it
 1. **Fit every transform on training data only.** Put encoders, scalers, imputers, and selectors in a
-   **pipeline** that is `fit` on the training fold and merely `transform`s validation/test. This one habit
-   prevents most leakage — the statistics a transform learns (means, categories, target rates) must come
+   **pipeline** that is `fit` on the training fold and only `transform`s validation/test. This one habit
+   prevents most leakage: the statistics a transform learns (means, categories, target rates) must come
    only from data the model is allowed to see.
 2. **Encode categoricals to match cardinality.** **One-hot** for low-cardinality fields; **ordinal** for
-   genuinely ordered categories; **frequency/count** or **target (mean) encoding** for high-cardinality
-   fields (merchant, GL account, vendor). Target encoding must be computed **out-of-fold** — each row
-   encoded from rows other than its own — or it leaks the label straight into the feature. Smoothing toward
+   ordered categories; **frequency/count** or **target (mean) encoding** for high-cardinality
+   fields (merchant, category code, vendor). Target encoding must be computed **out-of-fold** (each row
+   encoded from rows other than its own) or it leaks the label straight into the feature. Smoothing toward
    the global mean shrinks that leak but does not remove it: the row's own label is still inside its
    category's mean, and on a pure-noise 800-level column, heavily smoothed full-training-set encoding still
    manufactures a train AUC of 0.79 that is 0.52 on test. See `references/transforms-and-leakage.md`.
 3. **Scale numerics when the model needs it.** **Standardize** (z-score) or **min-max** for linear, distance,
    and regularized models and anything trained by gradient descent on the raw inputs (neural nets,
-   SGD-fitted linear); tree ensembles split on order alone and are scale-invariant — gradient boosting
+   SGD-fitted linear); tree ensembles split on order alone and are scale-invariant, gradient boosting
    included, despite the name.
    Fit the scaler on train only. Consider a **log/Box-Cox** transform for heavily skewed monetary values.
-4. **Build datetime and lag/rolling features — carefully.** From a timestamp derive day-of-week, month,
+4. **Build datetime and lag/rolling features carefully.** From a timestamp derive day-of-week, month,
    quarter-end, business-day, holiday, and payroll-cycle flags. For time series add **lags** (`y_{t-1}`,
-   `y_{t-7}`) and **rolling** stats (trailing mean/std) — but each window may use **only past data relative
+   `y_{t-7}`) and **rolling** stats (trailing mean/std), but each window may use **only past data relative
    to the row's timestamp**, or you leak the future. Temporal leakage is the leak that most often survives
    review, because a rolling window computed on a fully sorted frame looks identical to a correct one.
 5. **Add aggregations and interactions where the domain suggests them.** Group statistics (per-customer
    average, per-account volatility), ratios (amount ÷ typical amount), and interaction terms can encode real
    structure. Compute aggregates over training rows only, and be wary of stats that peek across the split.
 6. **Treat missingness as information.** Impute with a train-fitted rule (median, or a model), and add a
-   **"was missing" indicator** — in finance a blank field is often meaningful (no prior history, a skipped
-   step), not random noise. Don't drop rows wholesale just to avoid imputing.
+   **"was missing" indicator**: a blank field is often meaningful in many domains (no prior history, a
+   skipped step), not random noise. Don't drop rows wholesale to avoid imputing.
 7. **Select a smaller, robust feature set.** Remove near-constant, duplicate, and obviously leaky columns
    first; then use **regularization (lasso)**, **permutation importance**, or correlation pruning to cut the
-   rest. Fewer well-chosen features generalize better and are far easier to monitor than a wide, noisy matrix.
+   rest. Fewer well-chosen features generalize better and are easier to monitor than a wide, noisy matrix.
 8. **Write the leakage audit last, one line per surviving feature.** For each kept feature record: what the
    value would have been at the prediction timestamp, which rows the transform was fit on, and the window it
    reads (strictly prior, or not). A feature you cannot write that line for does not ship.
 
-**Deliverable — the feature spec + pipeline.** The finished output contains: (1) a feature
-dictionary — each feature's name, source column(s), transform, and what the transform is fit on;
+**Deliverable: the feature spec + pipeline.** The finished output contains: (1) a feature
+dictionary: each feature's name, source column(s), transform, and what the transform is fit on;
 (2) one fit-on-train-only pipeline (code, or the exact ordered steps) that produces the model
-matrix; (3) a leakage audit — one line per feature confirming it is knowable at prediction time
+matrix; (3) a leakage audit: one line per feature confirming it is knowable at prediction time
 from past, in-sample data; (4) the selection result: features kept, features cut, and why. The
 assistant drafts the features and pipeline; the human owns the domain meaning of each field and
 confirms what is truly knowable at prediction time.
@@ -68,13 +68,13 @@ Two truths sit under all of this. First, **good features often beat fancier algo
 well-constructed features (the right lags, a sensible encoding, a meaningful ratio) routinely outperforms a
 heavily tuned boosting model fed raw columns, because you are injecting domain knowledge the algorithm would
 otherwise have to discover from limited data. Feature engineering is where your understanding of the business
-does its work. Second — the cardinal rule — **never let information from the future or from the test set leak
+does its work. Second, the cardinal rule: **never let information from the future or from the test set leak
 into a feature.** Leakage is subtle because it usually improves offline scores, which is exactly why it feels
 like progress; it is only unmasked when the model meets reality and collapses. The mechanism that keeps you
 honest is fitting transforms on the training data alone: a scaler's mean, a target encoder's category rates,
-an imputer's fill value, a selector's chosen columns — every one of these is a *statistic learned from data*,
+an imputer's fill value, a selector's chosen columns. Every one of these is a *statistic learned from data*,
 and if it learns from validation/test rows or from future timestamps, the model has effectively seen the
-answer. Think of a feature as a question you could genuinely answer at prediction time with only past,
+answer. Think of a feature as a question you could answer at prediction time with only past,
 in-sample information; if you couldn't, it isn't a feature, it's a leak.
 
 ## Common mistakes
@@ -95,10 +95,10 @@ its generic transforms onto your columns, and hands the model choice to `machine
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/feature-engineering.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/feature-engineering.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/transforms-and-leakage.md — encoding/scaling/datetime/selection recipes and the leakage-safe pipeline pattern
-- references/your-environment.md — your columns, cardinalities, calendar effects, and missingness meaning (add when supplied)
+- references/transforms-and-leakage.md: encoding/scaling/datetime/selection recipes and the leakage-safe pipeline pattern
+- references/your-environment.md: your columns, cardinalities, calendar effects, and missingness meaning (add when supplied)

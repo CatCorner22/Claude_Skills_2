@@ -1,7 +1,7 @@
 # DMAIC phase toolkit (reference)
 
 Per-phase deliverable contracts, the tools each phase uses, and the tollgate questions that stop a
-bad project — written as the questions plus **the answer that means "do not advance."** A tollgate
+bad project: written as the questions plus **the answer that means "do not advance."** A tollgate
 that only ever passes is a ceremony. For one project carried through all five phases with numbers,
 see `references/worked-project.md`.
 
@@ -27,11 +27,11 @@ tree (need → measurable characteristic → spec/limit), stakeholder map.
 
 **Tollgate questions, with the failing answer:**
 - *"Which solution are we going to implement?"* — **Failing answer: anyone can name one.** The
-  project is a decision already made, looking for justification. Either kill it and just implement
+  project is a decision already made, looking for justification. Either kill it and implement
   the thing, or restart Define with the solution explicitly out of scope.
 - *"What is today's number, and where does it come from?"* — **Failing answer: a range, or "about,"
   or a recollection.** There is no problem statement yet, only a complaint.
-- *"Who is the customer of this process, and what did they actually say?"* — **Failing answer: a
+- *"Who is the customer of this process, and what did they say?"* — **Failing answer: a
   manager's summary of what customers presumably want.** The CTQs are then guesses with specs
   attached, and specs derived from guesses will be met without anyone being happier.
 - *"Can the sponsor authorize every change inside this scope?"* — **Failing answer: no, but we'll
@@ -59,7 +59,7 @@ design and the acceptance bars); run chart / control chart of the baseline
 - **20–25 subgroups** before control limits are treated as established. Fewer, and the sampling
   error in the limits themselves makes the chart signal on its own noise; call them provisional
   and recompute.
-- The baseline window must span **at least one full cycle of every known systematic driver** —
+- The baseline window must span **at least one full cycle of every known systematic driver**:
   month-end, seasonality, shift rotation, academic year. Otherwise the "improvement" you measure
   later may be the calendar.
 - Attribute agreement bar in common use: **≥ 90% agreement**, with κ quoted alongside its base
@@ -81,26 +81,25 @@ design and the acceptance bars); run chart / control chart of the baseline
 
 **Phase failure envelope.** Measure is where projects stall indefinitely, because data collection
 has no natural end. Timebox it at Define. The opposite failure is baselining fast on data whose
-definition nobody tested — cheaper to fix here than anywhere downstream, and unfixable after
+definition nobody tested: cheaper to fix here than anywhere downstream, and unfixable after
 Improve.
 
 ## Analyze
 
 **Deliverable contract.** Stratification tables **with denominators**; the hypothesis that was
 tested and the prediction it made in advance; the data that confirmed it and what would have
-refuted it; the gap arithmetic — what fraction of the charter gap this cause can explain.
+refuted it; the gap arithmetic: what fraction of the charter gap this cause can explain.
 
 **Tools:** fishbone/6M and 5 Whys to *generate* hypotheses
 (`continuous-improvement-skills:root-cause-analysis`); Pareto to prioritize; stratified comparison,
 correlation, and hypothesis tests to *test* them (`data-analytics-bi-skills:statistical-inference`);
-value-stream mapping when the problem is delay rather than defect
-(the archived `continuous-improvement-skills:value-stream-mapping`); constraint analysis when the problem is
-throughput (the archived `continuous-improvement-skills:theory-of-constraints`).
+value-stream mapping when the problem is delay rather than defect; constraint
+analysis when the problem is throughput.
 
 **Two rules that do most of the work:**
 - **Pareto on counts, but always with denominators beside them.** Counts tell you where the volume
   is; rates tell you where the mechanism is. A stratum with the worst rate on a small base cannot
-  move the top-line number; a stratum with the biggest count may simply be the biggest stratum.
+  move the top-line number; a stratum with the biggest count may be only the biggest stratum.
 - **A location is not a cause.** "Team B," "the night shift," "product area B" are where to look
   next, not answers. Analyze ends when you can state a mechanism.
 
@@ -120,7 +119,7 @@ throughput (the archived `continuous-improvement-skills:theory-of-constraints`).
 
 **Phase failure envelope.** Analyze fails in two opposite directions: stopping at the first
 plausible cause (usually the one someone suspected before the project started), and never
-stopping — a search for the complete causal picture when the top cause plus a piloted fix would
+stopping: a search for the complete causal picture when the top cause plus a piloted fix would
 have done. Set the exit condition at the tollgate: one verified cause explaining enough of the gap
 to justify the Improve work.
 
@@ -132,9 +131,9 @@ counterweight metrics); the pilot result compared to baseline with an effect siz
 novelty check; a new-risk review of the change itself; the projected effect on the top-line metric,
 stated as a projection.
 
-**Tools:** solution generation against the *verified* cause
-(the archived `continuous-improvement-skills:structured-ideation`); error-proofing (poka-yoke) preferred over
-added inspection; impact/effort or PICK selection; a reversible pilot;
+**Tools:** solution generation against the *verified* cause; error-proofing
+(poka-yoke) preferred over added inspection; impact/effort or PICK selection;
+a reversible pilot;
 `continuous-improvement-skills:fmea` on the change to catch risks it introduces; a designed
 experiment when several candidate changes interact and one-at-a-time piloting would take too long
 (`continuous-improvement-skills:design-of-experiments`); small-step tuning of live settings after
@@ -156,21 +155,21 @@ go-live (`continuous-improvement-skills:evolutionary-operation`).
   rollout is what allows an honest closure statement afterwards.
 
 **Phase failure envelope.** Improve fails when the pilot's success came from the attention rather
-than the change — guard by running long enough that novelty passes and comparing the pilot's last
+than the change: guard by running long enough that novelty passes and comparing the pilot's last
 weeks against its first. It also fails when the "solution" is a reporting change: the test is
 whether a customer of the process would notice any difference.
 
 ## Control
 
 **Deliverable contract.** Control plan with all eleven fields per row
-(`references/control-charts-and-control-plans.md` §7); revised standard work with a revision number
-(the archived `continuous-improvement-skills:standard-work`); a named individual owner and deputy; post-rollout
-chart with sustain evidence and recomputed, provenance-stamped limits; a closure statement saying
+(`references/control-charts-and-control-plans.md` §7); revised standard work with a
+revision number; a named individual owner and deputy; post-rollout chart with sustain
+evidence and recomputed, provenance-stamped limits; a closure statement saying
 whether the goal was met, partially met, or missed, and what happened to the residual.
 
 **Tools:** control chart / SPC with an explicitly chosen rule set; poka-yoke and automated checks
-in preference to added review steps; a formal handoff working session
-(the archived `safety-and-reliability-skills:sbar-structured-communication` for the format); 30/60/90 audits.
+in preference to added review steps; a formal handoff working session using a
+structured handoff format; 30/60/90 audits.
 
 **Tollgate questions, with the failing answer:**
 - *"Name the person — not the team — who looks at this chart, and on what day."* — **Failing
@@ -203,10 +202,10 @@ Three things make a tollgate real rather than ceremonial:
 
 1. **It can end the project.** Killing at Define costs a week; killing at Control costs the whole
    project plus the credibility of the next one. Track how many of your tollgates have ever stopped
-   anything — if the answer is none, they are status meetings.
+   anything, if the answer is none, they are status meetings.
 2. **The reviewer is not the project team.** Someone with no stake in advancing asks the questions
    above and is allowed to be unsatisfied.
-3. **The failing answers are written down in advance** — as above — so the gate is a comparison
+3. **The failing answers are written down in advance** (as above), so the gate is a comparison
    rather than a negotiation conducted by people who want to proceed.
 
 ## How DMAIC projects actually fail
@@ -251,21 +250,19 @@ DMAIC is expensive machinery and it has an operating envelope. Route elsewhere w
   unavailable; be explicit that you are doing a before/after comparison with its confounds, and
   do not draw control limits from five points.
 - **The cause is already known and the fix is obvious.** Just do it. The rigor exists to prevent
-  changing the wrong thing, and when the right thing is not in doubt the rigor is pure cost →
-  the archived `continuous-improvement-skills:kaizen-and-codesign`.
+  changing the wrong thing, and when the right thing is not in doubt the rigor is pure cost; a
+  lighter kaizen-style action suffices.
 - **Nothing exists yet.** DMAIC improves a process that runs; designing a new one is DMADV/DFSS
-  territory, where the customer requirement is decomposed into a design rather than a baseline
-  (the archived `continuous-improvement-skills:qfd-house-of-quality` for the requirement decomposition,
-  the archived `continuous-improvement-skills:lean-six-sigma-for-software` for the software case).
+  territory, where the customer requirement is decomposed into a design rather than a baseline,
+  through requirement-decomposition methods such as QFD / house of quality, or their
+  software-engineering equivalents for a new build.
 - **The process is wildly unstable.** With large special-cause variation there is no single
-  baseline to improve against. Remove the special causes first — usually faster and more valuable
+  baseline to improve against. Remove the special causes first, usually faster and more valuable
   than the project you were planning.
 - **"Good" is contested.** DMAIC cannot arbitrate what the customer wants; it optimizes against a
   spec someone else has to set. Settle the requirement first.
 - **The problem is flow, not defects.** Long queues and waiting are usually a constraint or a
-  batching problem, and the constraint analysis gets there faster
-  (the archived `continuous-improvement-skills:theory-of-constraints`,
-  the archived `continuous-improvement-skills:value-stream-mapping`).
-- **The organization needs the story on one page.** The rigor still applies; the artifact is an A3
-  (the archived `continuous-improvement-skills:a3-thinking`), which can summarize a DMAIC project without
-  replacing it.
+  batching problem, and theory-of-constraints or value-stream-mapping analysis gets there faster
+  than DMAIC does.
+- **The organization needs the story on one page.** The rigor still applies; the artifact is an
+  A3 report, which can summarize a DMAIC project without replacing it.

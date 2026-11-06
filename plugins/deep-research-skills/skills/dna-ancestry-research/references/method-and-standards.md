@@ -1,7 +1,7 @@
 # Method and standards — DNA as one witness among several
 
 How the genealogical layer is worked so that its conclusions survive a second researcher. The
-figures here were compiled from secondary sources and search excerpts of the named pages; each
+figures here come from secondary sources and search excerpts of the named pages; each
 carries a provenance mark, and anything a conclusion will rest on should be re-read from the
 primary page at the time of use.
 
@@ -30,15 +30,15 @@ this skill's output directly, paraphrased rather than quoted because the standar
 copyrighted:
 
 - A genetic relationship is rarely proven by comparing just two samples (Standard 53).
-- The write-up carries enough verifiable detail — testers, data, reasoning — for another
+- The write-up carries enough verifiable detail (testers, data, reasoning) for another
   researcher to check or dispute it (Standard 54).
 - DNA conclusions are paired with documentary evidence, and every link in a line of descent from
   the common ancestor to a tester is itself a genealogical conclusion needing documentation
   (Standard 56) [snippet-only].
 
 **What this means in practice.** The deliverable is a proof argument with a research log, not a
-chart. Each ancestor link in the ahnentafel gets a grade — *proven by records*, *supported by
-DNA plus records*, *hypothesised*, *unknown* — and a hypothesised link names the record class
+chart. Each ancestor link in the ahnentafel gets a grade (*proven by records*, *supported by
+DNA plus records*, *hypothesised*, *unknown*), and a hypothesised link names the record class
 that would prove it. A match analysis ends in ranked hypotheses, each with the record or test that
 would settle it, never in a name presented as a result.
 
@@ -72,8 +72,8 @@ tie-breakers are ages, X-sharing, and which other relatives match.
 **The probabilities are a different thing.** The percentages the DNA Painter tool and *What Are
 The Odds* (WATO) attach to a cM value were not computed from the crowd-sourced ranges; they were
 digitised from a figure in AncestryDNA's matching white paper and describe Ancestry's simulations
-[snippet-only]. So keep two columns in any write-up — "observed range (crowd-sourced v4.0)" and
-"probability (Ancestry simulation via DNA Painter)" — because they answer different questions and
+[snippet-only]. So keep two columns in any write-up ("observed range (crowd-sourced v4.0)" and
+"probability (Ancestry simulation via DNA Painter)") because they answer different questions and
 fail differently. WATO scores every hypothesis relative to the least likely one, which is always
 1, so scores mean something only within one chart; later versions offer alternative probability
 sets, and the tool has limited application to double cousins, three-quarter siblings and
@@ -88,19 +88,19 @@ A triangulated group is three or more testers who all match each other on the sa
 segment. Overlapping segments in a chromosome browser are not triangulation until every pair has
 been checked at that location, and a shared-match list proves nothing about segments at all
 [snippet-only, cross-checked]. Even a confirmed group shows only that the segment descends from
-one ancestral couple — not which ancestor, and not how far back.
+one ancestral couple, not which ancestor, and not how far back.
 
 Small segments are mostly false. A trio-based study of roughly 25,000 genotyped Europeans found a
 false-positive rate above 67% for segments of 2–4 cM, nearly all from phasing switch errors
 [snippet-only — Durand et al. 2014]; AncestryDNA raised its floor from 6 to 8 cM in 2020 after
 its own concordance test found about a fifth of 6 cM segments false [snippet-only]. Those two
 figures come from different companies, chips and pipelines, so they describe a steep curve rather
-than interchangeable constants. Vendor floors as documented (mostly older than 2024 — read the
+than interchangeable constants. Vendor floors as documented (mostly older than 2024; read the
 live help page at the time of use): about 8 cM after Timber at Ancestry; 7 cM and 700 SNPs at
 23andMe; one 8 cM segment at MyHeritage; 7 cM and 700 SNPs at GEDmatch, lowerable by the user;
 and at FamilyTreeDNA at least one segment of 9 cM when the total is under 20 cM [snippet-only].
 
-Pile-up regions — stretches with excess identity-by-descent across the population — produce
+Pile-up regions (stretches with excess identity-by-descent across the population) produce
 false relationships; one study reported a ten-fold increase in false positives among controls,
 and a worked example on chromosome 22 spans roughly 16–25 Mb on build 37 [snippet-only]. Segments
 of 7–15 cM are the band most exposed to imputation and pile-up effects [snippet-only].
@@ -119,7 +119,7 @@ documentary one. The warning sign is heavy overlap among match groups. The pract
 are to rank matches by **longest segment** rather than total, prioritising 20 cM or more (a 23 cM
 segment is the suggested floor for a traceable link in Ashkenazi lines), to ignore segments under
 about 10 cM when totalling, and to recompute totals at a higher threshold before consulting the
-ranges — excluding segments under 7 cM can halve a total [snippet-only, cross-checked]. Say in the
+ranges (excluding segments under 7 cM can halve a total) [snippet-only, cross-checked]. Say in the
 report which adjustment was applied and why.
 
 ## §5 What X, Y and mtDNA can each establish
@@ -139,8 +139,8 @@ report which adjustment was applied and why.
   optimistic [snippet-only].
 - **X-DNA** has an inheritance pattern that excludes whole branches (a man's X comes only from his
   mother), so a sizeable X match constrains which lines are possible; the absence of an X match
-  proves nothing. Vendors treat it differently — one includes X in totals, one counts an X match
-  only when the pair also match elsewhere, one reports it separately — so name the vendor beside
+  proves nothing. Vendors treat it differently: one includes X in totals, one counts an X match
+  only when the pair also match elsewhere, one reports it separately, so name the vendor beside
   any X figure [snippet-only].
 
 Use the uniparental markers as **exclusion tests first**: a Y or mtDNA mismatch kills a hypothesis
@@ -158,7 +158,7 @@ location [snippet-only — QuickLesson 19]. Keep the "citing" layer whenever the
 register number is the only way back to the original. Because match data are visible only to the
 tester, a DNA citation must carry enough detail for a reader who cannot see the match list to
 judge the conclusion. Auto-generated citations from record sites sometimes name the wrong person
-on a page or drop the URL — check them, never paste them [snippet-only].
+on a page or drop the URL: check them, never paste them [snippet-only].
 
 **Minimum research-log fields** (synthesised from the standards above): objective and hypothesis;
 privatised tester and match identifiers; company or upload site and the date viewed; total cM,
@@ -175,11 +175,11 @@ living test-takers only with their informed consent, and the code of ethics adds
 is not shared privately without the list owner's consent [snippet-only, cross-checked]. The
 community's Genetic Genealogy Standards hold that testers own their results and raw data even when
 someone else paid, and that presenters privatise or redact living matches' names [snippet-only].
-This skill's rule — living people redacted on anything that leaves the machine, matches never
-named to a subagent or third party — is the operational form of those standards.
+This skill's rule (living people redacted on anything that leaves the machine, matches never
+named to a subagent or third party) is the operational form of those standards.
 
 **Unexpected parentage** is a planning item, not an edge case: cited per-generation rates range
-from 1–2% to 2–12% depending on population and method [snippet-only — both figures from secondary
+from 1–2% to 2–12% depending on population and method [snippet-only: both figures from secondary
 sources, neither verified against a primary study], and with autosomal matching alone such events
 often go undetected a few generations back. The convergent procedure: verify first on multiple
 matches from both sides; pause before any contact; let the affected person choose the terminology

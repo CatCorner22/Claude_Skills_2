@@ -20,12 +20,12 @@ and non-negotiable.
 
 **No citation reaches the output until it passes all three checks:**
 
-1. **It exists** — the DOI or PMID resolves to a real record.
-2. **Its metadata matches** — title, authors, journal, and year agree with the canonical record.
-3. **It supports the claim** — the source actually states what you attached to it, and you can quote
+1. **It exists**: the DOI or PMID resolves to a real record.
+2. **Its metadata matches**: title, authors, journal, and year agree with the canonical record.
+3. **It supports the claim**: the source actually states what you attached to it, and you can quote
    the sentence.
 
-A citation failing any check is **removed or explicitly labeled unverified** — never quietly softened
+A citation failing any check is **removed or explicitly labeled unverified**, never quietly softened
 with a hedge and left sitting beside verified ones.
 
 Never write a citation from memory. Every reference in the case file must have been resolved during
@@ -34,13 +34,13 @@ this session, or be marked unverified.
 ## Why this is necessary
 
 Language models produce citation-shaped text fluently: plausible author names, a real journal, a
-year that fits, a DOI with the right format — for a paper that does not exist. The failure is
+year that fits, a DOI with the right format, for a paper that does not exist. The failure is
 invisible precisely because the output looks correct. Three distinct failure modes:
 
-- **Fabrication** — the paper does not exist at all.
-- **Misattribution** — the paper exists, but not with those authors, that year, or that title; or the
+- **Fabrication**: the paper does not exist at all.
+- **Misattribution**: the paper exists, but not with those authors, that year, or that title; or the
   DOI belongs to a different paper.
-- **Claim drift** — the paper exists and is cited correctly, but does not say what it is cited for.
+- **Claim drift**: the paper exists and is cited correctly, but does not say what it is cited for.
   This is the most common and the hardest to catch, because everything except the substance checks
   out.
 
@@ -57,7 +57,7 @@ Resolve the identifier against an authoritative registry:
 - **No identifier at all** → search the exact title in PubMed/Europe PMC/Scholar. If a paper with
   that title cannot be found in any database, treat it as **non-existent** until proven otherwise.
 
-A DOI that is merely well-formed proves nothing — it must actually resolve.
+A DOI that is merely well-formed proves nothing: it must actually resolve.
 
 ## Check 2: metadata accuracy
 
@@ -71,7 +71,7 @@ Compare the claimed citation against the canonical record field by field:
 | Year | Matches, or differs only by online-vs-print | Year drifted to fit a narrative |
 | Volume/pages | Match when present | Fabricated detail |
 
-Mismatch handling: a **title or first-author mismatch is disqualifying** — the citation is wrong,
+Mismatch handling: a **title or first-author mismatch is disqualifying**: the citation is wrong,
 even if a real paper exists at that DOI. Cite the canonical record or drop it. Minor journal-
 abbreviation or online-first year differences are acceptable; note them.
 
@@ -88,7 +88,7 @@ The check that requires actually reading:
    - Does the study design support the verb used? ("caused" needs more than a cross-sectional study.)
    - Are the effect size and direction represented accurately?
    - Are stated limitations reflected, rather than dropped?
-4. If only the abstract was available, mark the claim **abstract-only** — a real and disclosable
+4. If only the abstract was available, mark the claim **abstract-only**: a real and disclosable
    limitation.
 
 If no passage in the source states the claim, the citation does not support it. Find a source that
@@ -97,7 +97,7 @@ does, or reduce the claim to what the source actually says.
 ## Running the verifier
 
 `scripts/verify_citation.py` automates checks 1 and 2 against free, key-less APIs (Crossref, NCBI
-E-utilities, Europe PMC). **Check 3 always requires a human/agent reading the text** — no script can
+E-utilities, Europe PMC). **Check 3 always requires a human/agent reading the text**: no script can
 do it.
 
 ```bash
@@ -120,12 +120,12 @@ python3 "${CLAUDE_PLUGIN_ROOT}/skills/medical-research-detective/scripts/verify_
 ```
 
 It reports: existence, canonical metadata, field-by-field comparison against any claimed values,
-inferred country of origin (see `source-provenance.md`), retraction indicators — including the
-Retraction Watch annotations Crossref carries on the work record — and, separately, any
+inferred country of origin (see `source-provenance.md`), retraction indicators, including the
+Retraction Watch annotations Crossref carries on the work record, and, separately, any
 correction/erratum on file, which is a note rather than a failure. It exits non-zero when a check
 fails, so it can gate a batch.
 
-**When the network is unavailable** the script says so plainly rather than guessing — never interpret
+**When the network is unavailable** the script says so plainly rather than guessing. Never interpret
 a network failure as verification. Fall back to the manual process below and mark the citations
 unverified.
 
@@ -133,7 +133,7 @@ unverified.
 
 Without the script, verify by hand:
 
-1. Open `https://doi.org/{DOI}` — it should land on the paper's page.
+1. Open `https://doi.org/{DOI}`: it should land on the paper's page.
 2. Search the exact title in PubMed and Europe PMC.
 3. Compare first author, journal, year against what you plan to write.
 4. Check the record for a retraction notice or erratum.
@@ -154,7 +154,7 @@ Slower, equally valid. What is not valid is skipping it.
 | Network unavailable | Mark all affected citations **unverified**; list exactly what was not checked |
 
 Removing a citation often means weakening or dropping the claim it supported. That is the correct
-outcome — the alternative is a confident statement resting on nothing.
+outcome: the alternative is a confident statement resting on nothing.
 
 ## Labeling in the output
 
@@ -168,16 +168,16 @@ Every reference in the case file's list carries its verification status:
 [X] Excluded-source — country of origin outside the allowed set; quarantine appendix only
 ```
 
-Include a one-line verification summary — e.g. "27 sources cited: 24 verified, 2 abstract-only, 1
-unverified (paywalled); 3 excluded-source leads listed separately" — so the reader can see the
+Include a one-line verification summary, e.g. "27 sources cited: 24 verified, 2 abstract-only, 1
+unverified (paywalled); 3 excluded-source leads listed separately", so the reader can see the
 integrity of the evidence base at a glance.
 
 ## Verifying someone else's citations
 
-A standalone use of this skill: someone hands you a reference list — from a paper, a supplement
-marketing page, a forum post, or an AI-generated answer — and wants to know whether it is real.
+A standalone use of this skill: someone hands you a reference list (from a paper, a supplement
+marketing page, a forum post, or an AI-generated answer) and wants to know whether it is real.
 
 Run the same three checks on each entry and return a table: identifier, resolves?, metadata match?,
 supports the stated claim?, retracted?, venue quality. Report totals plainly. AI-generated medical
 reference lists in particular frequently contain fabricated or misattributed entries, so check every
-one rather than spot-checking — and say which specific entries failed and how.
+one rather than spot-checking, and say which specific entries failed and how.

@@ -32,17 +32,29 @@ the Oracle-era `fusioncash-architect` tool.
 | `sponsored-projects-ar-skills` | 9 | Sponsored projects/grants receivables, federal compliance (Uniform Guidance) — after its 2 Fusion skills went with the Oracle deletion |
 | `treasury-accounting-skills` | 6 | Debt facilities and covenants, hedging/derivatives, investment policy compliance, accruals, intercompany, audit readiness |
 
-What deliberately remains in the active library is the *word*, not the domain: Oracle as one SQL
-dialect among several in `sql-for-analysts`, Oracle OTBI as one of five named BI products in
-`dashboard-design`, the unrelated *test oracle* concept in `lean-six-sigma-for-software`, and
-reconciliation or payment scenarios used as ordinary business worked examples. Every cross-link
-that used to point into a treasury skill was rewritten to name the domain instead of promising a
-restorable archive — a pointer to something that no longer exists is worse than no pointer.
+What deliberately remains in the active library is the *word*, not the domain: reconciliation or
+payment scenarios used as ordinary business worked examples (not labeled as finance/treasury
+content, and not built on any Oracle/Fusion specifics). *(This paragraph originally also named
+`sql-for-analysts`, `dashboard-design`, and `lean-six-sigma-for-software` as the three skills
+keeping an Oracle-flavored mention — all three were themselves archived in the 2026-08-23
+blank-slate consolidation below, so those examples no longer apply; nothing replaced them.)* Every
+cross-link that used to point into a treasury skill was rewritten to name the domain instead of
+promising a restorable archive — a pointer to something that no longer exists is worse than no
+pointer.
 
 **Git history still contains everything deleted; nothing else does.** `git log --diff-filter=D`
 finds the removal commits, and any deleted file can be recovered from the commit before them.
 Locally installed copies of these plugins keep working — installs are version-pinned snapshots —
 but they will never update and no longer appear in the marketplace listing.
+
+## Deleted, not archived (2026-11-06, owner-directed)
+
+**`coding-agent-skills:fitness-nutrition-science`** (1 skill, its references and house eval) was
+deleted outright on the owner's explicit instruction. Every cross-link that used to point into it
+was rewritten to say the training, nutrition, or supplement topic is outside that skill's scope,
+rather than naming a replacement that does not exist. Plugin descriptions, the README skill-count
+table and the routing-eval rows that referenced it (Tier F, rows F3 and F7's near-miss) were
+updated in the same pass.
 
 ## The blank-slate consolidation (2026-08-23) — 50 skills archived
 

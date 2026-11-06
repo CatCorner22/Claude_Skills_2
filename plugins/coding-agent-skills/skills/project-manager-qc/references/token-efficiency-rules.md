@@ -1,4 +1,4 @@
-# Token efficiency — the cost model and the rules
+# Token efficiency: the cost model and the rules
 
 Tokens are spent where text enters a context and stays there. That single fact explains almost
 every rule below: reading less, returning less and re-deriving less save far more than writing
@@ -13,8 +13,8 @@ your own with the ledger.
 
 ## The cost model
 
-- **Input dominates.** Everything in the context — the system prompt, every earlier turn, every
-  tool result — is input again on the next model call. A 10,000-token file read early is paid for on
+- **Input dominates.** Everything in the context (the system prompt, every earlier turn, every
+  tool result) is input again on the next model call. A 10,000-token file read early is paid for on
   every later turn of that context, not once. Prompt caching softens the price of a stable prefix
   but not the attention and room it takes [background — verify against current pricing docs].
 - **Tool results are the biggest lever.** A full file, a full log, a full directory listing or a
@@ -45,7 +45,7 @@ your own with the ledger.
 | 12 | Don't poll | Each check re-reads state | notifications; one scheduled check-in for what cannot notify |
 | 13 | Stop at the acceptance criteria | Gold-plating is spend with no buyer | an unasked-for feature goes to the FUTURE bin |
 | 14 | Match effort to the stage | Mechanical stages need little reasoning | low effort for format conversions; high for judgement and verification |
-| 15 | Keep the final message short | It is the one thing the user must read | the outcome, the evidence, what is left — no recap of every step |
+| 15 | Keep the final message short | It is the one thing the user must read | the outcome, the evidence, what is left; no recap of every step |
 
 ## Anti-patterns
 

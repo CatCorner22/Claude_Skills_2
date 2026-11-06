@@ -1,6 +1,6 @@
 # RCA tools and templates (reference)
 
-Worksheets for the three core tools, plus the verification step. Applied to finance/accounting.
+Worksheets for the three core tools, plus the verification step.
 
 ## Contents
 - Problem statement template
@@ -14,8 +14,8 @@ Worksheets for the three core tools, plus the verification step. Applied to fina
 > **What** is wrong: <the defect/deviation> · **Where**: <process/account/entity> · **When**:
 > <started / how often> · **How big**: <magnitude, frequency, $> · **How we know**: <evidence/source>.
 
-No cause, no solution, no blame. Example: "14 supplier invoices were paid twice in Q2 (vs. 2 in Q1),
-totaling $84k, identified in the duplicate-payment report." (The Pareto tally below counts the same
+No cause, no solution, no blame. Example: "14 supplier orders were shipped twice in Q2 (vs. 2 in Q1),
+totaling $84k, identified in the duplicate-fulfillment report." (The Pareto tally below counts the same
 14.)
 
 ## 5 Whys worksheet
@@ -28,19 +28,19 @@ Why 3? ________________________  →
 Why 4? ________________________  →
 Why 5? ________________________  → Root cause (a process/system condition you can change)
 ```
-Stop when the answer is (a) actionable and (b) whose removal prevents recurrence — 5 is a guide, not a
+Stop when the answer is (a) actionable and (b) whose removal prevents recurrence: 5 is a guide, not a
 quota. Branch into a fishbone if a "why" has several parallel causes.
 
 ## Fishbone (Ishikawa) 6M prompts
 Spine = the effect (your problem statement). Brainstorm causes into six bones:
-- **Man / People** — skills, training, staffing, handoffs, unclear ownership.
-- **Method / Process** — steps, sequence, approvals, missing/ambiguous procedure.
-- **Machine / Systems** — ERP config, interfaces, tooling, automation gaps.
-- **Material / Inputs** — source data quality, master data, upstream document accuracy.
-- **Measurement** — metric definitions, thresholds, how/when data is captured, wrong report.
-- **Environment / Mother-nature** — deadlines, policy, period-end crunch, org changes.
+- **Man / People**: skills, training, staffing, handoffs, unclear ownership.
+- **Method / Process**: steps, sequence, approvals, missing/ambiguous procedure.
+- **Machine / Systems**: ERP config, interfaces, tooling, automation gaps.
+- **Material / Inputs**: source data quality, master data, upstream document accuracy.
+- **Measurement**: metric definitions, thresholds, how/when data is captured, wrong report.
+- **Environment / Mother-nature**: deadlines, policy, period-end crunch, org changes.
 
-Most durable causes live in Method, Measurement, or Machine — not "Man". Note the "Man" box invites
+Most durable causes live in Method, Measurement, or Machine, not "Man". Note the "Man" box invites
 blame; convert it to *what let the person err*.
 
 ## Pareto tally
@@ -62,4 +62,4 @@ An unverified cause is a hypothesis, not a finding.
 ## Countermeasure record
 | Root cause (verified) | Countermeasure (prefer error-proofing) | Owner | Date | Recurrence check |
 |-----------------------|----------------------------------------|-------|------|------------------|
-Only close the problem after the recurrence check confirms it held — then remove temporary containment.
+Only close the problem after the recurrence check confirms it held, then remove temporary containment.

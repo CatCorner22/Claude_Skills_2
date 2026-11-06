@@ -1,9 +1,9 @@
 # Usages and ambiguity — the words that carry the disputes
 
-The first half is a table of the usages MSCD singles out, each with its position, the form to
-write, whether the position is contested, and the linter rule that catches it. The second half is
-an ambiguity taxonomy with a before-and-after pair for each kind, so a reviewer can name what is
-wrong with a clause rather than sense it. [canon attribution: the positions are Adams's,
+§1 is a table of the usages MSCD singles out, each with its position, the form to write, whether
+the position is contested, and the linter rule that catches it. §2 lists archaisms and doublets.
+§3 is an ambiguity taxonomy with a before-and-after pair for each kind, so a reviewer can name what
+is wrong with a clause rather than sense it. §4 is the audit procedure. [canon attribution: the positions are Adams's,
 paraphrased. Items marked *contested* are live arguments among drafters; items marked
 *snippet-only* were confirmed only from published excerpts of the manual.]
 
@@ -13,8 +13,8 @@ Contents: §1 Usages · §2 Archaisms and doublets · §3 Ambiguity taxonomy · 
 
 | Usage | MSCD position | Write | Contested? | Linter |
 |---|---|---|---|---|
-| *best efforts*, *commercially reasonable efforts*, *reasonable best efforts*, *good-faith efforts* | one standard — *reasonable efforts* — and define it; the gradations do not reliably mean different things, and courts have gone both ways on whether *best* is more demanding | *shall use reasonable efforts to …*, with a definition that states what the efforts standard requires and does not require (for example, that it does not require a party to act against its own commercial interests) | **yes** — a flag | `EFFORTS` |
-| *including, but not limited to* / *including without limitation* | the tail is redundant, and it is also not a cure: courts have read *including* restrictively with and without it, and an interpretation provision is no more reliable. Where a restrictive reading would hurt, restructure — state the general class so it stands on its own and give the examples separately — rather than lean on the tail [snippet-only] | *including* alone where examples are meant; restructure where the general words must carry the weight | no | `INCLUDING` |
+| *best efforts*, *commercially reasonable efforts*, *reasonable best efforts*, *good-faith efforts* | one standard (*reasonable efforts*) and define it; the gradations do not reliably mean different things, and courts have gone both ways on whether *best* is more demanding | *shall use reasonable efforts to …*, with a definition that states what the efforts standard requires and does not require (for example, that it does not require a party to act against its own commercial interests) | **yes**: a flag | `EFFORTS` |
+| *including, but not limited to* / *including without limitation* | the tail is redundant, and it is also not a cure: courts have read *including* restrictively with and without it, and an interpretation provision is no more reliable. Where a restrictive reading would hurt, restructure: state the general class so it stands on its own and give the examples separately, rather than lean on the tail [snippet-only] | *including* alone where examples are meant; restructure where the general words must carry the weight | no | `INCLUDING` |
 | *provided that* / *provided, however, that* | do not use: a proviso can introduce a condition, an exception or a separate rule, and the word does not say which | restate as *if* / *only if*, *except that* / *but*, or a new sentence | no | `PROVISO` |
 | *notwithstanding anything to the contrary* | a precedence puzzle; two provisions each claim to win | state the exception where it applies (*except as provided in Section 4.2*) or subordinate with *subject to Section 4.2* | no | `NOTWITHSTANDING` |
 | *subject to* | acceptable to subordinate one provision to another; overused as a blanket | *subject to Section X* with a specific section | no | — |
@@ -58,7 +58,7 @@ and binding* (say which), *free and clear* (→ *free of*), *made and entered in
 *in effect*), *power and authority* (→ *authority*), *unless and until* (pick one), *if and when*
 (pick one).
 
-**Doublets that are not doublets** — rail territory: *indemnify, defend and hold harmless*. In
+**Doublets that are not doublets** (rail territory): *indemnify, defend and hold harmless*. In
 many jurisdictions *defend* is a distinct and often broader obligation (triggered by what is
 alleged, arising at the outset, often worth more than the indemnity), and whether *hold harmless*
 adds anything to *indemnify* is contested. Never cut these as redundancy; propose the clearer
@@ -70,24 +70,24 @@ and conspicuousness rules can make the extra words the element that makes the cl
 ## §3 Ambiguity taxonomy
 
 Ambiguity is a word or structure with two or more specific meanings. It is different from
-**vagueness** (a single meaning with fuzzy edges — *reasonable*, *promptly*), which can be
+**vagueness** (a single meaning with fuzzy edges: *reasonable*, *promptly*), which can be
 deliberate, and from **uncertainty** (the parties did not address the case at all), which no
 wording fixes. A reviewer who can name the kind can name the fix.
 
-**Lexical** — one word, two meanings.
+**Lexical**: one word, two meanings.
 - *Before:* *Zenith shall report biweekly.*
 - *After:* *Zenith shall report every two weeks.*
 
-**Syntactic: modifier scope** — a modifier that could attach to one item or several.
+**Syntactic: modifier scope**: a modifier that could attach to one item or several.
 - *Before:* *charitable institutions or societies* (is *charitable* attached to *societies*?)
 - *After:* *charitable institutions and charitable societies*, or tabulate.
 
-**Syntactic: closing modifier** — a trailing phrase after a list.
+**Syntactic: closing modifier**: a trailing phrase after a list.
 - *Before:* *employees and contractors of Acme* (contractors of Acme, or all employees too?)
-- *After:* *Acme's employees and Acme's contractors* — or tabulate with the modifier in the stem.
+- *After:* *Acme's employees and Acme's contractors*, or tabulate with the modifier in the stem.
 
 **Syntactic: `and` / `or` with negation.**
-- *Before:* *Zenith shall not sell or lease the Equipment* — fine (both prohibited); but *Zenith
+- *Before:* *Zenith shall not sell or lease the Equipment*: fine (both prohibited); but *Zenith
   shall not sell and lease the Equipment* prohibits only doing both.
 - *After:* state each prohibition: *Zenith shall not sell the Equipment, and Zenith shall not lease
   the Equipment.*
@@ -96,34 +96,34 @@ wording fixes. A reviewer who can name the kind can name the fix.
 - *Before:* *Acme may terminate for breach or insolvency* (both at once?)
 - *After:* *Acme may terminate if either of the following occurs: (a) …; (b) ….*
 
-**Contextual** — two provisions that each claim to govern.
+**Contextual**: two provisions that each claim to govern.
 - *Before:* Section 3 says payment is due in 30 days; Section 9 says *notwithstanding anything to the
   contrary* payment is due on delivery.
 - *After:* put the exception in Section 3: *… except that payment for an Expedited Order is due on
   delivery.*
 
-**Antecedent** — *it*, *such*, *the same*, *the foregoing* with two candidates.
+**Antecedent**: *it*, *such*, *the same*, *the foregoing* with two candidates.
 - *Before:* *Acme shall deliver the Report and the Invoice, and Zenith shall approve it.*
 - *After:* *… and Zenith shall approve the Report.*
 
-**Number** — singular/plural subjects with distributive duties.
+**Number**: singular/plural subjects with distributive duties.
 - *Before:* *The Guarantors shall pay $1,000,000* (each, or together?)
 - *After:* *Each Guarantor shall pay $1,000,000* or *The Guarantors are jointly and severally liable
   to pay $1,000,000.*
 
-**Enumeration** — a trailing qualifier after a list.
+**Enumeration**: a trailing qualifier after a list.
 - *Before:* *(a) reports, (b) invoices and (c) notices sent by email* (only notices by email?)
 - *After:* tabulate with *sent by email* in the stem, or in its own sentence.
 
-**Time** — endpoints and direction.
+**Time**: endpoints and direction.
 - *Before:* *between June 1 and June 10*; *within 10 days of delivery*.
 - *After:* *from June 1 through June 10, inclusive*; *no later than 10 days after delivery*.
 
-**Undefined capital** — a label with no definition.
+**Undefined capital**: a label with no definition.
 - *Before:* *the Services* (never defined).
 - *After:* define it once, or use lowercase if ordinary meaning is intended.
 
-**Category leakage** — the verb form claims the wrong job (the subject of
+**Category leakage**: the verb form claims the wrong job (the subject of
 `references/categories-of-contract-language.md`).
 - *Before:* *The Term shall survive termination.*
 - *After:* *Sections 5, 6 and 9 survive termination.*

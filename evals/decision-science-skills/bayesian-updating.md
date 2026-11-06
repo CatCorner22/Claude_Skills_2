@@ -42,8 +42,9 @@ is 81-to-1?"); and grades in bands rather than decimals.
 > "A screening test is 95% accurate and the condition affects 1 in 500 people. If someone
 > tests positive, what's the actual probability they have it? Walk me through the math."
 
-Expected: `math-foundations-skills:probability-fundamentals` owns Bayes-theorem mechanics
-and natural-frequency teaching for a one-shot chance-of-X computation. No live decision,
+Expected: plain Bayes-theorem mechanics and natural-frequency teaching for a one-shot
+chance-of-X computation, a separate discipline this library does not carry as its own skill.
+No live decision,
 no standing belief, no update stream — this is the math lesson, not the decision
 practice. If bayesian-updating loads on a pure compute-this-posterior ask, the seam is
 failing.
@@ -89,5 +90,5 @@ pure establish-the-base-rate ask, tighten the boundary.
   false precision (grades, not decimals, where judgment is the source); conditionals never
   inverted (prosecutor's-fallacy guard shown when relevant); correlated evidence counted
   once; provenance marks ([snippet-only] / [background — verify]) carried on external
-  claims; the seams respected — mechanics credited to probability-fundamentals, priors to
-  reference-class-forecasting, re-decisions to the-challenger.
+  claims; the seams respected — bare Bayes-theorem mechanics left to general math teaching,
+  priors to reference-class-forecasting, re-decisions to the-challenger.

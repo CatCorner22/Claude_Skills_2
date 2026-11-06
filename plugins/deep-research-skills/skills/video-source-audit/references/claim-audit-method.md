@@ -27,14 +27,14 @@ nobody's tested this"). Auditing these produces noise and inflates the denominat
 **Procedure.** Walk the transcript in order. For each claim record: timecode, verbatim quote,
 paraphrase, and weight class.
 
-**Weight classes** — assign before auditing, so the audit cannot be motivated:
-- **Load-bearing** — the video's thesis fails without it. **Pre-register 3–5.** If you cannot name
+**Weight classes**: assign before auditing, so the audit cannot be motivated:
+- **Load-bearing**: the video's thesis fails without it. **Pre-register 3–5.** If you cannot name
   them before checking sources, you do not yet understand the video's argument.
-- **Supporting** — buttresses a load-bearing claim but is not itself decisive.
-- **Aside** — background, colour, framing.
+- **Supporting**: buttresses a load-bearing claim but is not itself decisive.
+- **Aside**: background, colour, framing.
 
 Claims built across several minutes are recorded once, at the timecode where the assertion
-completes, with the span noted. Do not split a single argument into six claims to inflate a count —
+completes, with the span noted. Do not split a single argument into six claims to inflate a count,
 and note that the grading instrument is rate-based partly so that this kind of splitting cannot
 change the grade much.
 
@@ -67,14 +67,14 @@ reproducible instead of arbitrary.
 The same video claim can be faithful or overstated depending purely on *which part of the source*
 you compare it against. A claim of "cuts risk in half" is overstated against a trial's primary
 result and faithful against one of its subgroups. If the auditor picks the comparison after seeing
-the claim, the classification is chosen, not found — and two auditors will never agree.
+the claim, the classification is chosen, not found, and two auditors will never agree.
 
-**The rule:** compare against the source's **prespecified primary analysis** — the primary endpoint,
+**The rule:** compare against the source's **prespecified primary analysis**: the primary endpoint,
 in the whole randomized population, as the protocol defined it. Record what that is, in the ledger,
 before classifying.
 
-**Then, separately**, if the video's number matches a *secondary* result — a subgroup, a secondary
-endpoint, a per-protocol analysis, a post-hoc slice — that is not a rescue. It is a distinct
+**Then, separately**, if the video's number matches a *secondary* result (a subgroup, a secondary
+endpoint, a per-protocol analysis, a post-hoc slice) that is not a rescue. It is a distinct
 finding, coded `SELECTIVE-ANALYSIS`, and it belongs in the ledger as such. The number being real is
 exactly what makes the move effective; a viewer cannot catch it by checking whether the figure
 appears in the paper, because it does.
@@ -83,7 +83,7 @@ appears in the paper, because it does.
 
 ## §4 The fidelity precedence ladder
 
-Mutually exclusive categories are impossible here — a mouse finding stated as a human causal fact
+Mutually exclusive categories are impossible here: a mouse finding stated as a human causal fact
 with an inflated number is simultaneously scope-inflated, strength-inflated, and overstated. Forcing
 one choice makes the code arbitrary. So: **run the ladder top-down, take the first code that fires
 as the primary, and record the rest as secondary tags.**
@@ -103,7 +103,7 @@ as the primary, and record the rest as secondary tags.**
 
 Secondary tags that ride alongside the primary code: `SELECTIVE-ANALYSIS`, `QUOTE-MINED`,
 `CHERRY-PICKED` (true, but the source's own contradicting result is omitted), `OUT-OF-CONTEXT`,
-`STALE` (source retracted or superseded — note this grades on *comprehensiveness*, not accuracy).
+`STALE` (source retracted or superseded; note this grades on *comprehensiveness*, not accuracy).
 
 ### The conclusion-change test — the F2/F1 boundary
 
@@ -115,7 +115,7 @@ aesthetic judgment. Replace it with one binary question:
 
 **No → F1. Yes → F2.**
 
-- "8,432 people" rendered as "about 10,000 people" — changes no conclusion → **F1**.
+- "8,432 people" rendered as "about 10,000 people": changes no conclusion → **F1**.
 - "A randomized trial found sleep extension dropped blood pressure 4 points", where the source is
   n=40, −4.1 mmHg, 95% CI −9.2 to +1.0, p=0.11, and a *secondary* endpoint. Every word is
   defensible. But the video's viewer concludes "sleep extension lowers blood pressure" and the
@@ -137,21 +137,21 @@ an act of invention, and the report should name which one it found.
 
 ## §5 The comprehensiveness checklist
 
-"Did the video omit anything important?" is unbounded — an auditor can always name one more missing
+"Did the video omit anything important?" is unbounded: an auditor can always name one more missing
 paper, so two auditors never converge. **Bound it.** Score these items per load-bearing claim,
 yes/no, answerable from the transcript alone:
 
-1. **Source identified** — named or shown specifically enough to find.
-2. **Design stated** — RCT, cohort, case report, animal, in vitro, modelling.
-3. **Population/scope stated** — who it was studied in, and who it therefore applies to.
-4. **Absolute terms given** — the effect in absolute terms, or the baseline alongside the relative.
-5. **Uncertainty conveyed** — an interval, a sample size, or at minimum "one small trial".
-6. **A limitation noted** — any real limitation of the evidence, including the source's own.
-7. **Contrary evidence acknowledged** — the main contradicting finding named, or a correct
+1. **Source identified**: named or shown specifically enough to find.
+2. **Design stated**: RCT, cohort, case report, animal, in vitro, modelling.
+3. **Population/scope stated**: who it was studied in, and who it therefore applies to.
+4. **Absolute terms given**: the effect in absolute terms, or the baseline alongside the relative.
+5. **Uncertainty conveyed**: an interval, a sample size, or at minimum "one small trial".
+6. **A limitation noted**: any real limitation of the evidence, including the source's own.
+7. **Contrary evidence acknowledged**: the main contradicting finding named, or a correct
    statement that none exists.
-8. **Representativeness** — whether the cited source is typical of the body of evidence, or an
+8. **Representativeness**: whether the cited source is typical of the body of evidence, or an
    outlier selected from it. This is the item that catches cherry-picking.
-9. **Conflicts disclosed** — funding or COI where material. Score `N/A` and drop from the
+9. **Conflicts disclosed**: funding or COI where material. Score `N/A` and drop from the
    denominator when none exists.
 
 Plus two video-level items: a **scope statement** (what the video is not claiming), and whether
@@ -162,7 +162,7 @@ O3 uncertainty omitted · O4 population narrowed in the source but not the video
 literature omitted · O6 harms or side effects omitted while benefits are given · O7 relies on a
 retracted, superseded, or failed-to-replicate source without noting it · O8 funding/COI omitted.
 
-Score `C_raw` = items satisfied ÷ items applicable. Expect genuine, well-intentioned explainers to
+Score `C_raw` = items satisfied ÷ items applicable. Expect well-intentioned explainers to
 land at roughly 25–45%: the checklist is demanding by construction, which is why comprehensiveness
 gets its **own** band table in the grading rubric rather than sharing accuracy's.
 
@@ -170,7 +170,7 @@ gets its **own** band table in the grading rubric rather than sharing accuracy's
 
 ## §6 Worked example
 
-Illustrative and invented — not an audit of any real creator. Every number below is recomputed
+Illustrative and invented, not an audit of any real creator. Every number below is recomputed
 from the setup.
 
 **The source (fictional trial):** 2,000 randomized, 1,000 per arm. Primary endpoint, whole
@@ -196,7 +196,7 @@ design stated ✓ ("a trial"); population ✗ (the subgroup restriction is never
 absolute terms ✗; uncertainty ✗; limitation ✗; contrary evidence ✗; representativeness ✗.
 C_raw for this claim = 2/8 = **0.250**.
 
-**What the audit says.** The video's headline number exists in the paper — that is precisely why it
+**What the audit says.** The video's headline number exists in the paper; that is precisely why it
 works. The finding is not "they made it up"; it is "they quoted a subgroup result as the headline
 without saying it was a subgroup, in a trial that examined eight subgroups, where the chance of at
 least one spuriously large subgroup effect was about one in three." That sentence is the audit.

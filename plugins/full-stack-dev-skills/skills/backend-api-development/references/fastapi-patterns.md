@@ -52,7 +52,7 @@ def current_user(creds: HTTPAuthorizationCredentials = Depends(HTTPBearer()),
 ```
 Refresh: long-lived refresh token in an HttpOnly cookie or a DB table (revocable), exchanged
 for short access tokens at `/refresh`. Password hashing: Argon2id via `pwdlib`
-(`PasswordHash.recommended()`) — never custom, never passlib (unmaintained since 2020).
+(`PasswordHash.recommended()`): never custom, never passlib (unmaintained since 2020).
 
 ## One-shape error handling
 ```python
@@ -69,12 +69,12 @@ def unhandled(_, exc: Exception):
     return JSONResponse({"detail": "Internal error"}, status_code=500)
 ```
 Pass `exc_info=exc` explicitly: an exception handler is not running inside an `except` block, so
-a bare `log.exception("unhandled")` records `NoneType: None` where the traceback should be — the
+a bare `log.exception("unhandled")` records `NoneType: None` where the traceback should be: the
 one thing the generic 500 handler exists to capture. Verified on FastAPI 0.141.
 
 This keeps the `{"detail": ...}` **key** that FastAPI already uses for validation failures, raised
-`HTTPException`s, and unrouted URLs — but be precise about what that does and does not buy you.
-Only the key is consistent; the value type is not. Measured on FastAPI:
+`HTTPException`s, and unrouted URLs. Only the key is consistent; the value type is not.
+Measured on FastAPI:
 
 | Source | `detail` type | Value |
 |---|---|---|
@@ -84,13 +84,13 @@ Only the key is consistent; the value type is not. Measured on FastAPI:
 
 That matters because this plugin's own client (`frontend-recipes.md`) does
 `detail = JSON.parse(body).detail ?? detail` and then `throw new ApiError(r.status, detail)`. On a
-422 the thrown `detail` is an array. What the user actually sees is **`[object Object]`** — or,
-in React, an "Objects are not valid as a React child" throw that takes the view down — not the
-pydantic repr you would see in Python; JavaScript never produces that form. Either normalise in
-the client (`Array.isArray(detail) ? detail.map(e => e.msg).join("; ") : detail`, which
-`frontend-recipes.md`'s client now does) or override `RequestValidationError` so the server emits
+422 the thrown `detail` is an array. What the user sees is **`[object Object]`**, or,
+in React, an "Objects are not valid as a React child" throw that takes the view down (not the
+pydantic repr you would see in Python); JavaScript never produces that form. Either normalise in
+the client (`Array.isArray(detail) ? detail.map(e => e.msg).join("; ") : detail`, as
+`frontend-recipes.md`'s client does) or override `RequestValidationError` so the server emits
 one shape. If you prefer a coded envelope
-(the archived `full-stack-dev-skills:elite-python-engineer` shows `{"error": {"code", "message"}}`), those
+(one convention uses `{"error": {"code", "message"}}`), those
 three built-in paths keep emitting `{"detail": ...}` until you override
 `RequestValidationError` and Starlette's `HTTPException` as well; that reference has both
 handlers written out.
@@ -117,4 +117,4 @@ offset paging or tables get large.
 - [ ] Errors raised, not returned; correct status codes
 - [ ] List endpoints paginated with a cap
 - [ ] Names: plural nouns (`/invoices/{id}`), verbs only for true actions (`/invoices/{id}/send`)
-- [ ] Shows correctly in `/docs` — the contract is accurate
+- [ ] Shows correctly in `/docs`: the contract is accurate

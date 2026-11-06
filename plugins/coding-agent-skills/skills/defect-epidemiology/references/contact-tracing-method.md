@@ -1,12 +1,12 @@
 # The contact-tracing method
 
 Research anchors, all `[snippet-only]` provenance (cross-checked across independent
-search results): ReDeBug, IEEE S&P 2012 — unpatched code clones of known-vulnerable code
+search results): ReDeBug, IEEE S&P 2012: unpatched code clones of known-vulnerable code
 found across entire OS distributions; patches routinely fail to propagate to clones.
-VUDDY, IEEE S&P 2017 — vulnerable-clone discovery scaled with function-level fingerprints.
-Juergens et al., "Do Code Clones Matter?", ICSE 2009 — inconsistent changes to clones are
+VUDDY, IEEE S&P 2017: vulnerable-clone discovery scaled with function-level fingerprints.
+Juergens et al., "Do Code Clones Matter?", ICSE 2009: inconsistent changes to clones are
 frequent and yielded ~107 confirmed faults across the commercial and open-source systems
-studied. Kim et al.'s clone-genealogy work — clone lineages tracked through version
+studied. Kim et al.'s clone-genealogy work: clone lineages tracked through version
 history.
 
 ## Contents
@@ -20,7 +20,7 @@ history.
 
 ## Fingerprinting the defective pattern (Type 1–4)
 
-The clone taxonomy, at practice level — each type is a mutation distance from the index
+The clone taxonomy, at practice level: each type is a mutation distance from the index
 case, and each has a cheapest pass that can still catch it:
 
 | Type | What changed in the copy | Caught by |
@@ -32,11 +32,11 @@ case, and each has a cheapest pass that can still catch it:
 
 A usable fingerprint has two parts:
 
-1. **The semantic signature** — one or two sentences naming the *mistake and its trigger
+1. **The semantic signature**: one or two sentences naming the *mistake and its trigger
    condition*, not the code: "computes the total before filtering exclusions, so excluded
    rows are counted whenever both features are enabled." This survives every mutation
    level, because it describes meaning.
-2. **The minimal wrong shape** — the smallest fragment that still contains the mistake
+2. **The minimal wrong shape**: the smallest fragment that still contains the mistake
    (often 2–5 lines: the misordered pair of calls, the boundary condition, the missing
    guard). This drives passes 1–2 and gives reviewers something concrete to recognize.
 
@@ -48,36 +48,36 @@ the defect.
 
 Run cheap-to-deep; record per pass what was searched, so coverage is a checkable claim.
 
-**Pass 1 — literal (Types 1–2).** Grep the codebase for the minimal wrong shape's
+**Pass 1: literal (Types 1–2).** Grep the codebase for the minimal wrong shape's
 distinctive tokens: the unusual identifier, the characteristic constant, the odd call
 order. Loosen progressively (drop renamed identifiers, keep structure words). Cheap,
 fast, and it also seeds pass 3 with the tokens worth tracing through history.
 
-**Pass 2 — semantic (Types 3–4).** The assistant reads *candidate regions* for the
-semantic signature — not the whole codebase line by line, but the places transmission
+**Pass 2: semantic (Types 3–4).** The assistant reads *candidate regions* for the
+semantic signature, not the whole codebase line by line, but the places transmission
 plausibly reached:
 - the same subsystem and its siblings (copy-paste is local before it is global);
 - files by the same author cluster around the same period;
 - files with similar structure or shared imports (scaffolded from the same origin);
 - other repos instantiated from the same template or generator.
 For each candidate region, the question is "does this code make the same mistake under
-some condition?" — a meaning-level question grep cannot ask. Record hits *and* the regions
+some condition?" Grep cannot ask a meaning-level question. Record hits *and* the regions
 cleared, with the same weight: the cleared list is what makes "we checked everywhere
 plausible" honest.
 
-**Pass 3 — genealogy (the transmission tree).** Walk version history to date and connect
+**Pass 3: genealogy (the transmission tree).** Walk version history to date and connect
 the instances: when did each contact first appear, and what did its introducing change
 copy from? History search on the distinctive tokens (your VCS's pickaxe-style search),
 plus commit metadata (author, date, files touched together), usually reveals the copying
-events directly — instance C arrived in a commit that visibly duplicated instance A.
+events directly: instance C arrived in a commit that visibly duplicated instance A.
 Draw the tree: nodes are instances (plus any external source), edges are "copied from."
 This is clone genealogy in the Kim et al. sense `[snippet-only]`, done at outbreak scale
 rather than corpus scale. The tree's root is your patient-zero lead, and its branching
-factors — each node's out-degree — are your spread data.
+factors (each node's out-degree) are your spread data.
 
 ## The contact-disposition table
 
-One row per instance found by any pass. No blank dispositions — an undispositioned
+One row per instance found by any pass. No blank dispositions: an undispositioned
 contact is an open transmission chain, and the sweep does not close until the column is
 full.
 
@@ -88,10 +88,10 @@ full.
 | `vendor/sync.py:aggregate` | 2 | pass 1 | yes, low traffic | accepted-with-reason | scheduled for next release; risk noted | named owner | revisit date |
 
 Disposition rules:
-- **patched** — the fix is applied and verified in that context (not merely copied in).
-- **not-applicable** — a *written reason* why the defect cannot trigger there. An
+- **patched**: the fix is applied and verified in that context (not merely copied in).
+- **not-applicable**: a *written reason* why the defect cannot trigger there. An
   unreasoned N/A is not a disposition; it is a shrug wearing one's clothes.
-- **accepted-with-reason** — a named owner, a written rationale, and a revisit date.
+- **accepted-with-reason**: a named owner, a written rationale, and a revisit date.
   Acceptance without an owner and date is deferral, and deferrals reopen outbreaks.
 
 ## Patient-zero analysis and the infectious-source checklist
@@ -106,13 +106,13 @@ Follow the transmission tree to the earliest instance, then take one more step: 
 - one prolific person's habit (the same hands, the same mistake, many sites);
 - a code generator or snippet library emitting the pattern.
 
-Then the question that decides whether the outbreak is over — **is the source still
+Then the question that decides whether the outbreak is over: **is the source still
 infectious?** The infectious-source checklist:
 
 - [ ] Is the origin snippet/template/page still reachable and still wrong?
 - [ ] Is it inside scaffolding that new projects instantiate automatically?
 - [ ] Does internal documentation still recommend it?
-- [ ] Do code assistants reproduce it — does the codebase's own most-copied example of
+- [ ] Do code assistants reproduce it: does the codebase's own most-copied example of
       this task still contain the pattern (the examples an assistant or a new hire will
       imitate)?
 - [ ] Is the habit-carrier still writing the pattern (a review-time check, kindly)?
@@ -121,12 +121,12 @@ Any box ticked means quarantine work remains even if every current contact is pa
 
 ## Source out-degree, worked on a small example
 
-The number that drives the quarantine decision: **each source's out-degree — how many direct
-copies it spawned** — read straight off the transmission tree. Rank by it and act on the
+The number that drives the quarantine decision: **each source's out-degree: how many direct
+copies it spawned**, read straight off the transmission tree. Rank by it and act on the
 maximum. (Note what this deliberately is *not*: a single tree-wide ratio. See the caution
 below the example for why such a ratio cannot work.)
 
-Worked example — the sweep found 8 instances (patient-zero template T, its descendants
+Worked example: the sweep found 8 instances (patient-zero template T, its descendants
 A–F, and one independent twin G); pass 3's tree shows:
 
 ```
@@ -139,23 +139,23 @@ G (independent Type-4 twin, no edge from T)
 
 - Out-degrees: T→4, A→1, C→1, B/D/E/F/G→0.
 - **Max out-degree = 4 (T); mean out-degree across the 7 tree members = 6/7.**
-- Read the max, not the mean. **T alone spawned 4** — the super-spreader. Fixing A–F
+- Read the max, not the mean. **T alone spawned 4**: the super-spreader. Fixing A–F
   without fixing T leaves expected reinfection on every new project scaffolded from it.
 - G is a reminder that the tree isn't everything: independent twins (Type 4) arise
   without transmission, which is why the semantic pass runs even when the tree looks
   complete.
 
-> **Why there is no tree-level "R0" here — and why you should distrust one if you see it.**
+> **Why there is no tree-level "R0" here, and why you should distrust one if you see it.**
 > It is tempting to divide total transmissions by tree members and call the result R0. Don't:
 > that ratio is an identity, not a measurement. Every member of a transmission tree except
 > patient zero has exactly one parent, so edges always equal members − 1, and the ratio is
-> always (N−1)/N — just under 1 for every tree that has ever existed or could exist. It rises
+> always (N−1)/N, just under 1 for every tree that has ever existed or could exist. It rises
 > with tree *size* and tells you nothing about spread, and a threshold like "R0 ≥ 1" built on
 > it can never fire. Epidemiology's R0 is an expected secondary-case count for an *ongoing*
 > process in a susceptible population; a completed clone tree is a finished artifact, and the
 > two are not the same quantity. What the tree can honestly tell you is **which sources are
-> still live and how many copies each spawned** — which is the number the quarantine decision
-> actually needs.
+> still live and how many copies each spawned**, which is the number the quarantine decision
+> needs.
 
 Decision rule: quarantine effort goes to sources in descending out-degree; **any still-live
 source with out-degree ≥ 2 gets the full quarantine set below**, and the single highest
@@ -166,15 +166,15 @@ out-degree source gets it first even if that is the only one.
 Quarantine acts on **sources and pathways**, not on cases (the table already handled the
 cases). In descending durability:
 
-1. **Fix the source itself** — the template, scaffold, generator, wiki page, or example
+1. **Fix the source itself**: the template, scaffold, generator, wiki page, or example
    repo. This is the only action that stops *new* infections.
-2. **Lint/CI rule that blocks the pattern** — a mechanical gate at commit or build time,
+2. **Lint/CI rule that blocks the pattern**: a mechanical gate at commit or build time,
    with the outbreak-report ID in its failure message so the rule stays explicable years
    later. Mechanism outlives memory.
-3. **In-situ warning comment** — placed where the next copy-paster will actually look:
+3. **In-situ warning comment**: placed where the next copy-paster will look:
    at the patched sites, in the template, on the wiki page. One or two lines: what the
    trap is, where the fix is, the outbreak-report ID.
-4. **Documentation correction** — update the recommending doc; leave a tombstone note at
+4. **Documentation correction**: update the recommending doc; leave a tombstone note at
    the old location if people link to it.
 
 An announcement or team memo is the *least* durable measure and never sufficient alone:
@@ -206,5 +206,5 @@ QUARANTINE: <source fix | lint/CI rule id | in-situ warnings placed | doc correc
 CLOSURE: all contacts dispositioned <yes/no>; revisit dates: <accepted rows>
 ```
 
-File it where the next person who meets this pattern will find it — the report's ID in
+File it where the next person who meets this pattern will find it; the report's ID in
 the lint rule's message is usually how they arrive.

@@ -1,7 +1,7 @@
 # Adams rules, forbidden patterns, contract-language categories, and the dual self-audit
 
 §1–§4 are preserved from the source spec (adams-smart-brevity v1.0.0, 2026-08-03), organized for
-use, with house additions marked where they appear. **§3b is entirely house content** — it is the
+use, with house additions marked where they appear. **§3b is entirely house content**: it is the
 counter-case to the source, not part of it.
 
 Contents: §1 Core Adams principles · §2 Forbidden patterns · §3 Categories of contract
@@ -13,7 +13,7 @@ checklist · §5 Interaction notes
 **Primary rule: if language has been litigated, it is bad language.**
 
 - Litigation over meaning is evidence that the wording left room to fight over. (Parties
-  also litigate clear language opportunistically — but you cannot tell which case you are
+  also litigate clear language opportunistically, but you cannot tell which case you are
   in from the outside, and the drafting fix is the same either way.)
 - The claim that language is "tested" or "settled" by courts is a myth. A court's
   construction resolves one dispute on one record; it does not certify the words for your
@@ -30,12 +30,12 @@ checklist · §5 Interaction notes
 
 ## §2 Forbidden patterns (flag and rewrite on sight)
 
-- "indemnify and hold harmless against any and all claims arising out of or relating to…"
-  — **flag, but do not cut on this skill's authority.** This is a risk-allocation provision
+- "indemnify and hold harmless against any and all claims arising out of or relating to…":
+  **flag, but do not cut on this skill's authority.** This is a risk-allocation provision
   (SKILL.md step 4, second carve-out): "any and all" and "arising out of or relating to" are
   fair game as ambiguity, but the verbs are not interchangeable filler. **"Defend" is a
-  distinct and often broader obligation than "indemnify"** in many jurisdictions — triggered by
-  what is alleged, not by what is finally owed — so a triplet trimmed to "indemnify" can delete
+  distinct and often broader obligation than "indemnify"** in many jurisdictions, triggered by
+  what is alleged, not by what is finally owed, so a triplet trimmed to "indemnify" can delete
   a duty worth more than the indemnity. Whether "hold harmless" adds anything is contested
   (Adams says no; some courts read it as broader), which is itself the reason to propose rather
   than excise. Draft the clearer version alongside the original, price each cut, and route it
@@ -47,10 +47,10 @@ checklist · §5 Interaction notes
 - Long introductory clauses that bury the main point.
 - Passive constructions that hide the actor when the actor matters.
 - Ambiguous "and/or", misplaced modifiers, unclear pronoun references.
-- Template clone language — identical soft/hard-tissue descriptions across clinical visits.
+- Template clone language: identical soft/hard-tissue descriptions across clinical visits.
 
 For each: prefer the direct modern equivalent that states the intended meaning without the
-historical baggage — except where the pattern sits inside a risk-allocation provision or text a
+historical baggage, except where the pattern sits inside a risk-allocation provision or text a
 rule prescribes verbatim, where the two carve-outs in SKILL.md step 4 apply and the move is to
 propose alongside, never to excise.
 
@@ -66,18 +66,18 @@ Adams's full taxonomy also covers agreement, belief, intention, and recommendati
 | Language of discretion | Grants permission or choice | "may" |
 | Language of prohibition | Forbids | "shall not" / "must not" |
 | Language of policy | States rules governing the contract itself | present tense, no "shall" |
-| Language of declaration | States a fact a party asserts (a representation) | present tense — "states that", "acknowledges that" — never "shall" |
+| Language of declaration | States a fact a party asserts (a representation) | present tense ("states that", "acknowledges that"), never "shall" |
 
-Most drafting ambiguity comes from category leakage — one "shall" doing every job in the
+Most drafting ambiguity comes from category leakage: one "shall" doing every job in the
 table. One category per sentence; the verb form signals which. On declarations Adams's own
 preference is "states that" over "represents and warrants": the doublet adds remedies
 argument, not meaning.
 
 ## §3b Where practising drafters disagree with Adams
 
-This skill renders Ken Adams's positions faithfully, and it should — they are the most rigorous
+This skill renders Ken Adams's positions faithfully, and it should: they are the most rigorous
 account of contract language available, and the house default is to follow them. But several are
-**genuinely contested among transactional lawyers**, not settled. Presenting a contested position
+**contested among transactional lawyers**, not settled. Presenting a contested position
 as settled is the failure mode this section exists to prevent: a drafter who takes an Adams rule
 to a partner and discovers it is a live argument loses confidence in the whole method, and a
 drafter who applies one silently to a client's paper may lose something worse.
@@ -88,14 +88,14 @@ cautious for its own sake.
 
 | Adams's position | The standard counter-case | House rule |
 |---|---|---|
-| **"Hold harmless" adds nothing to "indemnify"** — they are synonyms and the doublet is clutter | Some courts and many drafters read "hold harmless" as broader, covering claims that never ripen into a loss, and some jurisdictions have distinguished them | **Flag, propose alongside, do not cut.** The disagreement itself is the reason |
+| **"Hold harmless" adds nothing to "indemnify"**: they are synonyms and the doublet is clutter | Some courts and many drafters read "hold harmless" as broader, covering claims that never ripen into a loss, and some jurisdictions have distinguished them | **Flag, propose alongside, do not cut.** The disagreement itself is the reason |
 | **"Defend" is often folded into the same critique of the triplet** | Widely treated as a **distinct and broader** obligation: triggered by what is alleged, arising at the outset, and frequently worth more than the indemnity | **Never cut.** This is the sharpest case in the whole section |
-| **"Represents and warrants" → "states that"** — the doublet adds a remedies argument, not meaning | A common belief that the two verbs preserve distinct remedies (misrepresentation sounding in tort/rescission, breach of warranty in contract damages). Adams argues remedies do not turn on the verb; many drafters are unwilling to test that on a client's deal | Follow Adams in new drafting; **flag rather than change** in an instrument already in force or under negotiation |
-| **Reserve "shall" strictly for a duty of the sentence's subject** | The plain-language movement (and several government drafting manuals) goes further and eliminates "shall" entirely in favour of "must" | Either is defensible. **Consistency within one instrument matters more than which you pick** — state the choice and hold it |
-| **Cut doublets and triplets on sight** | In risk allocation, belt-and-suspenders phrasing is sometimes the element that makes a clause enforceable — express-negligence and conspicuousness requirements are the clearest instances | The step-4 carve-out: reformat freely, excise never |
+| **"Represents and warrants" → "states that"**: the doublet adds a remedies argument, not meaning | A common belief that the two verbs preserve distinct remedies (misrepresentation sounding in tort/rescission, breach of warranty in contract damages). Adams argues remedies do not turn on the verb; many drafters are unwilling to test that on a client's deal | Follow Adams in new drafting; **flag rather than change** in an instrument already in force or under negotiation |
+| **Reserve "shall" strictly for a duty of the sentence's subject** | The plain-language movement (and several government drafting manuals) goes further and eliminates "shall" entirely in favour of "must" | Either is defensible. **Consistency within one instrument matters more than which you pick**: state the choice and hold it |
+| **Cut doublets and triplets on sight** | In risk allocation, belt-and-suspenders phrasing is sometimes the element that makes a clause enforceable; express-negligence and conspicuousness requirements are the clearest instances | The step-4 carve-out: reformat freely, excise never |
 
-[canon attribution throughout — these are the standard positions on both sides, stated for
-orientation and not independently re-verified; all of it is jurisdiction-dependent. Nothing here
+[canon attribution throughout: these are the standard positions on both sides, stated for
+orientation and not independently verified; all of it is jurisdiction-dependent. Nothing here
 is legal advice, and a live instrument goes to a lawyer in the governing jurisdiction.]
 
 **What this does *not* license.** Every row above is confined to risk allocation, remedies, and
@@ -124,12 +124,13 @@ contested defence, and the axiom applies to them with full force.
 ## §5 Interaction notes
 
 - **With `writing-skills:adams-plain-grade`**: same Adams core (clarity first, no tested
-  language, no ambiguity), different register — plain-grade targets a 5th-grade reading
+  language, no ambiguity), different register: plain-grade targets a 5th-grade reading
   level for accessible audiences; this skill targets professional readers under time
   pressure. Choose by audience.
 - **With a clinical litigation-avoidance pass** (a content reviewer; not in this library): the
   pass flags sparse, ambiguous, or incomplete *content*; this skill ensures the suggested or
   generated *language* is free of litigated constructions and maximally clear.
-- **With the archived `coding-agent-skills:master-prompt-architect`**: its Kenneth A. Adams Compliance
-  Audit is reinforced and extended by this skill.
+- **With master-prompt architecture work** (building a full prompt end to end, not in this
+  library): an Adams-style compliance audit of the finished prompt text is a natural extension
+  of this skill's rules.
 - **Self-application**: the language of this skill itself follows these rules.

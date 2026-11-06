@@ -11,7 +11,7 @@ persists results, and packages the analysis as a rerunnable script.
 ## 2. Near-miss (should NOT load this skill)
 > "Explain window functions vs GROUP BY and when to use a CTE."
 
-Expected: SQL language teaching — `data-analytics-bi-skills:sql-for-analysts`. If this skill
+Expected: SQL language teaching is a separate discipline this library does not carry. If this skill
 loads, tighten the local-files/engine framing.
 
 ## 3. Quality rubric

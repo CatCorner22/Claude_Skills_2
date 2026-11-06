@@ -1,32 +1,32 @@
 ---
 name: the-challenger
 description: >-
-  Runs the revision review that momentum and sunk costs suppress — named for the 1986
+  Runs the revision review momentum and sunk costs suppress, named for the 1986
   Challenger launch decision, where schedule fever inverted the burden of proof over the
   engineers' objection. When evidence changes mid-project, it zero-bases the
   continue-vs-revise decision: only forward-looking costs count (money spent argues
-  nothing), continuation past a trigger carries the burden of proof, normalized
-  anomalies are re-seen as on first sighting, options widen beyond stop/continue (slip,
+  nothing), continuation past a trigger bears the burden of proof, normalized
+  anomalies are re-seen as on first sighting, options widen past stop/continue (slip,
   descope, phase, re-plan), a dissent channel guarantees the objector is restated
-  before the decision, and the outcome is logged with the next review trigger. Use when
-  a deadline is driving decisions the evidence argues against, when "we've come too
-  far" appears in any form, or when a go/no-go needs honest structure. Triggers: the
+  before deciding, and the outcome is logged with the next review trigger. Use when
+  a deadline drives decisions the evidence argues against, "we've come too
+  far" appears in any form, or a go/no-go needs structure. Triggers: the
   challenger, challenge the timeline, sunk cost, plan continuation, should we slip the
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.1.4"
+  version: "1.1.8"
   source: >-
-    Commissioned by the user to prevent momentum and sunk costs from holding a project to
-    a timeline when revision would be optimal. Anchored on the documented record of the
-    Challenger launch decision (Rogers Commission; Vaughan's normalization of deviance) —
-    held soberly: seven people died; this skill borrows the lessons, not drama.
+    Prevents momentum and sunk costs from holding a project to a timeline when revision
+    would be optimal. Anchored on the documented record of the Challenger launch decision
+    (Rogers Commission; Vaughan's normalization of deviance), held soberly: seven people
+    died; this skill borrows the lessons, not drama.
 ---
 
 # The Challenger (revision review)
 
 The night before launch, the question changed from "prove it is safe to fly" to "prove
-it is NOT safe" — and the schedule flew the vehicle. This skill exists for the moment a
+it is NOT safe", and the schedule flew the vehicle. This skill exists for the moment a
 project reaches that inversion: evidence has changed, the date has not, and everyone can
 feel which way the room is leaning. Its voice is grave and precise, because its
 namesake earned that.
@@ -42,10 +42,10 @@ namesake earned that.
   (this skill runs mid-flight, when momentum exists); the epistemics of tests and
   intervention logs → `continuous-improvement-skills:project-command-center` (any
   criteria change this review produces is logged there, openly, never silently);
-  driving effort on the chosen plan → the archived `coding-agent-skills:stay-hard-accountability`
+  driving effort on the chosen plan is a separate discipline this library does not carry
   (see Why / learn for the seam: The Mirror governs effort, The Challenger governs
-  whether the plan still deserves it); the blocker-hunting autopsy persona →
-  the archived `coding-agent-skills:chicken-little-executive-advisor`.
+  whether the plan still deserves it); the blocker-hunting autopsy persona is also
+  outside this library's current scope.
 
 ## Do it
 The facilitation script, the Challenger record held soberly, the bias literature, a worked
@@ -53,42 +53,40 @@ go-live-that-should-slip example, and the decision-log template are in
 `references/revision-review-method.md`.
 
 1. **Install triggers at plan time** (the step that makes every later step possible):
-   name, in the plan itself, the conditions that OBLIGATE a revision review — slipped
+   name, in the plan itself, the conditions that OBLIGATE a revision review: slipped
    milestones, anomaly counts, changed load numbers, dependency failures. A review held
    only when someone feels brave is a review momentum already won. Reviews fire on
    triggers, not on courage.
 2. **Zero-base the decision.** Ask it exactly: "Starting today, knowing what we now
-   know, with the money already spent belonging to someone else — would we choose this
+   know, with the money already spent belonging to someone else, would we choose this
    plan and this date?" Sunk costs are excluded by construction: everything spent is
    gone on every branch, so it cannot differentiate the branches. Andy Grove's form of
    the question works too: if the board replaced us tomorrow, what would our successors
-   do? — then walk out the door and back in as them.
+   do? Then walk out the door and back in as them.
 3. **Set the burden of proof where it belongs.** Past a fired trigger, CONTINUATION
    must prove the plan still holds; the challengers do not have to prove it fails. Say
-   out loud who currently bears the burden — if the room is asking the objectors for
+   out loud who currently bears the burden: if the room is asking the objectors for
    certainty, the Challenger inversion has already happened.
 4. **Run the normalization-of-deviance scan.** List every anomaly the project has
    reclassified from alarming to routine merely because it recurred without
    catastrophe (the O-ring blow-by had become "within experience"). For each: what did
    we say the FIRST time we saw it? Recurrence without consequence is exposure, not
    evidence of safety.
-5. **Cost both branches honestly, forward-looking only.** Revision has real costs —
-   contracts, dependencies, credibility, morale — and continuation-while-wrong has the
-   retrofit clock (the archived `safety-and-reliability-skills:weight-of-the-books`). Discipline the
+5. **Cost both branches honestly, forward-looking only.** Revision has real costs (contracts, dependencies, credibility, morale), and continuation-while-wrong has the
+   retrofit clock, a separate discipline this library does not carry. Discipline the
    optimism on both sides with the base rates: what actually happened the last several
    times this team "made up the schedule later"
    (`decision-science-skills:reference-class-forecasting`)?
 6. **Widen the options beyond stop/continue.** Slip the date; descope to the pencil
    (`coding-agent-skills:soviet-space-graphite`); phase the launch (partial go-live);
    attack the constraint instead of the calendar
-   (the archived `continuous-improvement-skills:theory-of-constraints`); or change acceptance
-   criteria OPENLY, as a logged intervention — never silently. Binary framing is
+   (a separate discipline this library does not carry); or change acceptance
+   criteria OPENLY, as a logged intervention, never silently. Binary framing is
    momentum's favorite trick: it makes revision look like surrender.
 7. **Guarantee the dissent channel.** The objecting engineer gets a named path
-   (PACE graded assertiveness —
-   the archived `safety-and-reliability-skills:sbar-structured-communication`), a written objection,
+   (PACE graded assertiveness, a separate discipline this library does not carry), a written objection,
    and this rule: the decision-maker must restate the dissent to the dissenter's
-   satisfaction BEFORE deciding. An objection that was never restated was never heard —
+   satisfaction BEFORE deciding. An objection that was never restated was never heard:
    it was survived.
 8. **Decide, log, and date the next look.** Record: the decision, the evidence it
    rests on, the expected outcome, what evidence would have changed it, and the next
@@ -98,25 +96,25 @@ go-live-that-should-slip example, and the decision-log template are in
 ## Why / learn
 Three biases interlock to keep doomed timelines alive, and the steps are aimed one
 each. **Sunk cost** (Arkes & Blumer; the Concorde fallacy is named for a project that
-flew on it) makes spent money feel like an argument — zero-basing removes it by
+flew on it) makes spent money feel like an argument; zero-basing removes it by
 construction, because sunk cost is identical on every branch and therefore can justify
 none of them. **Escalation of commitment** (Staw's "knee-deep in the Big Muddy") makes
-each increment easier to approve than the decision would be fresh — the Grove
+each increment easier to approve than the decision would be fresh: the Grove
 walk-out-the-door question defeats it by deleting the self whose consistency is being
-protected. **Plan-continuation bias** — aviation's "get-there-itis," overrepresented in
-approach-phase accidents — strengthens as the destination nears, which is why triggers
+protected. **Plan-continuation bias** (aviation's "get-there-itis," overrepresented in
+approach-phase accidents) strengthens as the destination nears, which is why triggers
 are installed at plan time: the review must not depend on anyone's courage at the
 moment courage is most expensive [snippet-only]. The Challenger record supplies the two
 subtler lessons. Normalization of deviance (Vaughan) shows how evidence erodes:
 anomalies become "within experience" through sheer recurrence, so the scan asks what
 the first sighting felt like. And the burden inversion is the tell that momentum has
 taken the chair: when objectors must prove failure, the decision has already been made
-and the meeting is theater. The seam with The Mirror matters and is not a
-contradiction: quitting the PLAN is not quitting the WORK — the 40% audit governs
+and the meeting is theater. The seam with The Mirror is not a
+contradiction: quitting the PLAN is not quitting the WORK: the 40% audit governs
 whether effort remains on a chosen plan; this review governs whether the plan still
 deserves the effort. Both replace feelings with evidence; they answer different
-questions. Feynman's line — adapted here from technology and public relations to
-projects and schedules; his exact words are in the reference — closes the loop and the
+questions. Feynman's line, adapted here from technology and public relations to
+projects and schedules (his exact words are in the reference), closes the loop and the
 teach: for a successful project, reality must take precedence over the schedule, for
 nature cannot be fooled.
 
@@ -132,8 +130,8 @@ nature cannot be fooled.
 - Changing acceptance criteria quietly to keep the date → that is the intervention-log
   violation; do it openly or not at all.
 - A continue decision with no next trigger → deciding has ended; momentum is steering.
-- Using this review to dodge hard work the plan legitimately needs → route effort
-  questions to the archived `coding-agent-skills:stay-hard-accountability`; the two are partners,
+- Using this review to dodge hard work the plan legitimately needs → that effort
+  discipline is a separate practice this library does not carry; the two are partners,
   not exits from each other.
 
 ## Tailor to your environment
@@ -144,12 +142,12 @@ revision-review logs live.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/the-challenger.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/the-challenger.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/revision-review-method.md — the full review protocol with facilitation
+- references/revision-review-method.md: the full review protocol with facilitation
   script, the Challenger record held soberly, the bias literature, a worked go-live
   example, and the decision-log template
-- references/your-environment.md — your triggers, chairs, base rates (fill in)
+- references/your-environment.md: your triggers, chairs, base rates (fill in)

@@ -5,13 +5,13 @@ source specification (shown as a fully populated example).
 
 - `severity` rates the magnitude of user impact (how badly the defect hurts task success,
   time-on-task, error rate, or access); `confidence` rates the strength of the evidence
-  behind the finding — observed and reproduced scores high, inferred scores low — so a
+  behind the finding (observed and reproduced scores high, inferred scores low), so a
   backlog can be ranked by impact and discounted by evidence independently.
 - `status` tracks the finding's lifecycle in the remediation backlog (`open` when filed;
   update it as findings are fixed and re-verified across re-inspections).
 
-**Allowed values** (added here so two runs of this skill produce comparable JSON — the example
-below is the verbatim source spec, this vocabulary is the house convention for filling it):
+**Allowed values** (the example below is the verbatim source spec; this vocabulary is the house
+convention that keeps two runs of this skill comparable):
 
 | Field | Values |
 |---|---|

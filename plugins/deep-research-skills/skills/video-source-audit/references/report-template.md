@@ -1,6 +1,6 @@
 # The report template
 
-Every audit this skill produces carries these six sections, in this order, under these headings —
+Every audit this skill produces carries these six sections, in this order, under these headings,
 including the audits that fail. What follows is what belongs in each, why, and a worked skeleton.
 
 **Contents**
@@ -22,12 +22,12 @@ including the audits that fail. What follows is what belongs in each, why, and a
 here.
 
 Must contain:
-- What the video claims, in one short paragraph — stated fairly, as the creator would recognise it.
+- What the video claims, in one short paragraph, stated fairly, as the creator would recognise it.
 - What the audit found, in one short paragraph.
 - The three grades, named in words as well as letters ("accuracy: C-, meaning several load-bearing
   claims went further than their sources").
 - **The bottom line**: should a reasonable person act on this video? Answer it directly.
-- The honest uncertainty. If the audit rests on three claims, or on abstracts only, say so *here* —
+- The honest uncertainty. If the audit rests on three claims, or on abstracts only, say so *here*,
   not buried in section 2 where a skimming reader will miss it.
 
 Do not soften the finding for the summary and sharpen it below, and do not do the reverse. A reader
@@ -45,7 +45,7 @@ exhaustive by design and length is not a defect here.
   the reasoning in one sentence.
 - **The comprehensiveness checklist**, scored per load-bearing claim, with `N/A` items shown as
   dropped from the denominator rather than silently removed.
-- **What could not be checked, and why** — unreachable sources, on-screen-only citations, paywalled
+- **What could not be checked, and why**: unreachable sources, on-screen-only citations, paywalled
   full text, ambiguous references. Each with its mechanism, per `acquisition-and-sources.md` §1.
 
 ## §3 Section 3 — The grade and reasoning
@@ -55,9 +55,9 @@ exhaustive by design and length is not a defect here.
 - **Boundary disclosure** where a score sits within 0.02 of a band edge.
 - **Interlock flags**, printed above the grades with a sentence saying what each means.
 - **The explicit no-composite statement.** Say in words that the three axes are not averaged and
-  why — otherwise a reader or a downstream summariser will do it.
+  why, since otherwise a reader or a downstream summariser will do it.
 - **The highest-leverage fix, computed** by re-scoring with each unit set to clean, not guessed at.
-  Report the band gain. If the intuitively obvious fix gains nothing, say that too — it is often
+  Report the band gain. If the intuitively obvious fix gains nothing, say that too: it is often
   the most useful line in the report.
 
 Full instrument: `grading-rubric.md`.
@@ -73,9 +73,9 @@ Every statistical statement in the video gets a row. For each:
 Then, mandatory:
 - **The absolute-vs-relative reconstruction, with its arithmetic shown.** State CER, RRR, and
   compute `ARR = CER × RRR` and `NNT = 1/ARR` in the open so a reader can follow. Where the
-  control-arm rate is unavailable, say the absolute effect cannot be determined — do not invent a
+  control-arm rate is unavailable, say the absolute effect cannot be determined: do not invent a
   baseline.
-- **A natural-frequency translation of every headline number** — the four-part template in
+- **A natural-frequency translation of every headline number**: the four-part template in
   `statistics-taxonomy.md` §0. Counts of people, not percentages of percentages.
 - **The asymmetric-framing table**: every benefit claim and every harm claim with the *scale* each
   was given on, and whether the scales match. Include it even when it comes back clean, because a
@@ -91,12 +91,12 @@ Structure it as the five questions in `acquisition-and-sources.md` §7:
 
 1. **Is the cited evidence representative?** What the wider search returned, and how the video's
    selection compares to it.
-2. **Higher-tier evidence the video ignored** — systematic reviews, meta-analyses, guidelines that
+2. **Higher-tier evidence the video ignored**: systematic reviews, meta-analyses, guidelines that
    supersede its primary studies.
 3. **Contradicting work**, found by searching against the thesis deliberately.
 4. **Retractions, corrections, failed replications** affecting anything load-bearing.
-5. **What the weight of evidence actually says** — plainly, with its own confidence, including
-   "genuinely unsettled" where that is the truth.
+5. **What the weight of evidence actually says**: plainly, with its own confidence, including
+   "unsettled" where that is the truth.
 
 Then, non-negotiably:
 - **Every finding carries a resolvable identifier and how it was verified.** These are citations the
@@ -113,12 +113,12 @@ Then, non-negotiably:
 - **The verdict in three to five sentences**, consistent with section 1 and adding the nuance that
   section 1 deliberately left out.
 - **The linked reference list, in two clearly separated groups:**
-  - *The video's sources* — every one, with its identifier, the depth tier it was read at, and its
+  - *The video's sources*: every one, with its identifier, the depth tier it was read at, and its
     fidelity outcome.
-  - *The independent research* — everything from section 5, with identifiers.
+  - *The independent research*, everything from section 5, with identifiers.
 - **A verification line** stating how identifiers were checked (resolver API, or retrieved search
   records) and naming anything that could not be verified.
-- **Further reading** for a reader who wants to get better at this themselves — draw from
+- **Further reading** for a reader who wants to get better at this themselves; draw from
   `further-reading.md` and pick the two or three that fit this particular video's failure mode
   rather than pasting the list.
 
@@ -135,7 +135,7 @@ was attempted at all.
 - **Section 1** states plainly that the video could not be audited, and why, in the first sentence.
 - **Section 2** carries whatever ledger was built before the failure, even if partial.
 - **Section 3** prints `NOT-GRADED` or `INCOMPLETE` with the precondition that failed, in place of
-  letters — and still applies the precedence rule, since a cap that fired on verified evidence
+  letters, and still applies the precedence rule, since a cap that fired on verified evidence
   survives a thin sample.
 - **Section 4** carries any statistical statements that could be checked, and names those that
   could not.

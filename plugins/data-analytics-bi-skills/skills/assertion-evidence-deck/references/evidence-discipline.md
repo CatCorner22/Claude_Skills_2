@@ -1,6 +1,6 @@
 # Evidence discipline
 
-Read at stage 2. A slide is a durable artifact — it gets forwarded, screenshotted, pasted into a
+Read at stage 2. A slide is a durable artifact: it gets forwarded, screenshotted, pasted into a
 board packet, and quoted back months later by someone who never heard the talk. Whatever appears on
 it must survive that trip. This file defines how a claim earns a place on a slide.
 
@@ -17,8 +17,8 @@ it must survive that trip. This file defines how a claim earns a place on a slid
 
 A wrong number on a slide costs more than a missing number on a slide.
 
-A missing number invites a question, and the answer — "we have not been able to extract that yet;
-here is what it would take" — demonstrates command of the problem. A wrong number, once discovered,
+A missing number invites a question, and the answer ("we have not been able to extract that yet;
+here is what it would take") demonstrates command of the problem. A wrong number, once discovered,
 retroactively taints every other figure in the deck, including the correct ones. The audience cannot
 tell which claims were checked, so it discounts all of them.
 
@@ -31,7 +31,7 @@ follows the same rule. Prefer the honest gap.
 Sort every factual claim into one of three tiers before it reaches a slide.
 
 ### Verified
-Read out of a named artifact during this session — a file on disk, a query result, a configuration
+Read out of a named artifact during this session: a file on disk, a query result, a configuration
 export, a report retrieved from its source. A verified claim goes on a slide. Record the artifact
 name and its date.
 
@@ -40,16 +40,16 @@ Supplied by the user, carried forward from a previous conversation, or taken fro
 that itself cites something you have not opened. A reported claim goes on a slide only after the user
 confirms it, and it carries an "as reported" qualifier in the source tag. Summaries drift: a figure
 that was right in March may describe a configuration that changed in May. Take particular care with
-figures that arrive through a chain of summaries — each retelling can round, re-scope, or lose a
+figures that arrive through a chain of summaries: each retelling can round, re-scope, or lose a
 qualifier, and none of that is visible in the final sentence.
 
 ### Inferred
 Derived by calculation, estimated, recalled, or reconstructed from context. An inferred claim never
 appears on a slide as a bare figure. Three ways out:
-1. **Verify it** — open the artifact and promote it to verified.
-2. **Label it** — present it as an estimate with its basis and its bound: "on the order of 800,
+1. **Verify it**: open the artifact and promote it to verified.
+2. **Label it**: present it as an estimate with its basis and its bound: "on the order of 800,
    pending the full export."
-3. **Convert it to a gap** — state what is unknown and what would resolve it.
+3. **Convert it to a gap**: state what is unknown and what would resolve it.
 
 The third option is usually the strongest for a leadership audience, because it converts a soft
 number into a concrete request.
@@ -60,8 +60,8 @@ Maintain one table for the whole deck. Build it as you gather, not afterward.
 
 | Slide | Claim | Value | Source artifact | Source date | Tier |
 |---|---|---|---|---|---|
-| 3 | Bank accounts in scope | 31 | `bank_accounts_export.csv` | 2026-07-14 | Verified |
-| 5 | Rules on two merchant codes | 76.3% | `04_CONFIG_FORENSICS_VERIFIED.md` | 2026-07-21 | Verified |
+| 3 | Locations in scope | 31 | `locations_export.csv` | 2026-07-14 | Verified |
+| 5 | Rules on two categories | 76.3% | `04_CONFIG_FORENSICS_VERIFIED.md` | 2026-07-21 | Verified |
 | 6 | Tolerance window | ±15 days | Tolerance rule set export | 2026-07-21 | Verified |
 | 8 | Review volume driver | departmental backlog | user interview | 2026-07-18 | Reported |
 | 9 | Auto-reconciliation rate | — | not extracted | — | Gap |
@@ -110,13 +110,13 @@ apology; it is a statement about the state of the evidence and a request.
 > **Headline:** Three figures remain unavailable until the reconciliation results export includes
 > rule attribution.
 >
-> **Evidence:** a three-row table — the figure needed, the blocker, the action that unblocks it.
+> **Evidence:** a three-row table: the figure needed, the blocker, the action that unblocks it.
 >
 > **Source tag:** Source: open items list, 2026-07-21.
 
-Avoid hedge words that soften without informing — "roughly," "approximately," "various,"
-"significant" — unless you attach a bound. "Approximately 800" says less than "between 780 and 870,
-pending the export." When you truly cannot bound it, say the figure is not yet established and stop.
+Avoid hedge words that soften without informing ("roughly," "approximately," "various,"
+"significant") unless you attach a bound. "Approximately 800" says less than "between 780 and 870,
+pending the export." When you cannot bound it, say the figure is not yet established and stop.
 
 ## Numbers that need extra care
 
@@ -138,11 +138,11 @@ Some figures mislead even when they are individually correct.
 
 Run this before handing over any deck.
 1. Read every slide and list every number on it.
-2. Match each number to a ledger row. An unmatched number is a defect — remove it or source it.
+2. Match each number to a ledger row. An unmatched number is a defect: remove it or source it.
 3. Confirm every *reported* claim carries its qualifier.
 4. Confirm no *inferred* figure appears as a bare number.
 5. Confirm every rate has a denominator and every count has a window.
 6. Confirm the gap list in the deck matches the gap rows in the ledger.
 
-The check takes a few minutes and catches the one class of error the linter cannot see — a
+The check takes a few minutes and catches the one class of error the linter cannot see: a
 well-formatted, well-designed, confidently wrong figure.

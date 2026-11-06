@@ -19,8 +19,8 @@ ethics rail without being asked (willing expert, declared identity and purpose).
 > "We're planning a co-design session where the clinic staff redesign their own
 > scheduling workflow — what should we ask them about their needs and pain points?"
 
-Expected: `continuous-improvement-skills:kaizen-and-codesign` owns voice-of-customer
-content and workshop facilitation — WHAT to ask. disarming-elicitation owns the
+Expected: voice-of-customer content and workshop facilitation — WHAT to ask — is a separate
+discipline this library does not carry. disarming-elicitation owns the
 one-on-one STANCE that gets questions answered, not the content plan for a
 participatory workshop. If it loads here, the seam is failing.
 
@@ -28,8 +28,8 @@ participatory workshop. If it loads here, the seam is failing.
 > "Our vendor won't budge on the renewal price. How do I get them to open up about
 > what they'd really accept?"
 
-Expected: `decision-science-skills:principled-negotiation` owns interest-based
-bargaining — BATNA, interest maps, calibrated questions toward agreement.
+Expected: interest-based bargaining — BATNA, interest maps, calibrated questions toward
+agreement — is a separate discipline this library does not carry.
 disarming-elicitation surfaces knowledge from willing experts; using its moves to
 draw out a counterparty's reservation price is bargaining (and skirts the ethics
 rail). If it loads here, tighten the boundary.

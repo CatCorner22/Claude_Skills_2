@@ -34,9 +34,9 @@ What to look for:
 |---|---|---|
 | `UnicodeDecodeError` on load | File isn't UTF-8 (often Windows-1252 from Excel/ERP) | `encoding="cp1252"` (or `latin-1`); verify accented names look right after |
 | `Ã©`, `â€™` in text | Latin-1/Win-1252 bytes decoded as UTF-8 (or double-encoded) | Reload with correct encoding; if double-encoded, `s.encode("cp1252").decode("utf-8")` |
-| First column named `ï»¿Account` (or `\ufeffAccount` from a reader that decodes UTF-8 without stripping the mark — pandas strips it, the stdlib `csv` module does not) | UTF-8 BOM | `encoding="utf-8-sig"` |
+| First column named `ï»¿Account` (or `\ufeffAccount` from a reader that decodes UTF-8 without stripping the mark: pandas strips it, the stdlib `csv` module does not) | UTF-8 BOM | `encoding="utf-8-sig"` |
 | Every row is one giant column | Wrong delimiter assumed | Inspect a raw line; set `sep=";"` / `"\|"` / `"\t"` |
-| `latin-1` "works" on everything | It maps every byte to *something* — it can't fail | That silence is the trap: verify text visually; prefer declaring `cp1252` when the source is Windows |
+| `latin-1` "works" on everything | It maps every byte to *something*, so it can't fail | That silence is the trap: verify text visually; prefer declaring `cp1252` when the source is Windows |
 
 `latin-1` deserves its own warning: because it accepts any byte, it converts an encoding
 error you would have seen into mojibake you won't. Use it as a diagnosis tool, not a fix.
@@ -51,8 +51,8 @@ error you would have seen into mojibake you won't. Use it as a diagnosis tool, n
 
 RFC 4180 is the closest thing CSV has to a spec: comma-separated, CRLF line endings, fields
 containing commas/quotes/newlines wrapped in double quotes, embedded quotes doubled (`""`).
-Real exporters deviate from it constantly — which is exactly why the parse must be declared
-and validated rather than assumed. When you control the export, RFC 4180-style quoting is
+Real exporters deviate from it constantly, so the parse must be declared and validated rather
+than assumed. When you control the export, RFC 4180-style quoting is
 the ask that fixes shifted columns at the source.
 
 ## Numbers (including the join-key destruction hazard)
@@ -88,7 +88,7 @@ guessing the width). Prevention is the only fix: declare identifier dtypes at th
 
 ## Fixed-width files
 
-No delimiter at all — columns are positional. Get the layout from the file spec (never guess
+No delimiter at all: columns are positional. Get the layout from the file spec (never guess
 from one sample; a wide value in row 5,000 breaks eyeballed positions):
 
 ```python
@@ -99,14 +99,14 @@ df = pd.read_fwf("positions.txt",
 ```
 
 Watch for: space-padded IDs (`.str.strip()` after read, then re-check uniqueness), implied
-decimal points ("120050" meaning 1200.50 — the spec will say), and sign columns stored
+decimal points ("120050" meaning 1200.50; the spec will say), and sign columns stored
 separately from the amount.
 
 ## Keys and joins
 - Normalize before joining: `df[k] = df[k].str.strip().str.upper().str.zfill(width)` as applicable.
 - First join is always `how="outer", indicator=True`; review `_merge` value counts; only then
   choose the join the analysis needs, and document how many rows each side lost and why.
-- Duplicated keys multiply rows in a merge — check `df[k].is_unique` on the "one" side first.
+- Duplicated keys multiply rows in a merge; check `df[k].is_unique` on the "one" side first.
 
 ## The hardened loader pattern
 
@@ -137,12 +137,12 @@ door with a named reason instead of poisoning everything downstream.
 
 ## Worked example: merging two systems' rosters
 
-Domain-neutral by design — the same shape appears as an analyst reconciling two exports, an
-attorney combining two matter lists, an ops manager merging vendor rosters, or a developer
-joining a user dump to a license file. Two systems export "the same" people list:
+The same shape appears when an analyst reconciles two exports, an attorney combines two matter
+lists, an ops manager merges vendor rosters, or a developer joins a user dump to a license file.
+Two systems export "the same" people list:
 
-- `hr_export.csv` — UTF-8 with BOM, comma-delimited, `emp_id` zero-padded to 6 (`004217`).
-- `badge_export.csv` — Windows-1252, semicolon-delimited, `EMPLOYEE` as a bare number (`4217`).
+- `hr_export.csv`: UTF-8 with BOM, comma-delimited, `emp_id` zero-padded to 6 (`004217`).
+- `badge_export.csv`: Windows-1252, semicolon-delimited, `EMPLOYEE` as a bare number (`4217`).
 
 ```python
 import pandas as pd
@@ -166,9 +166,9 @@ print(m["_merge"].value_counts())
 # right_only       3   ← badges with no HR record (contractors? stale badges?)
 ```
 
-The 24 unmatched rows are the *deliverable* of the merge audit — each one is a question for
+The 24 unmatched rows are the *deliverable* of the merge audit. Each one is a question for
 the system owners, not noise to drop. Only after they're explained do you choose the final
-join type and record why. Note what made this work: bytes inspected first (BOM, cp1252,
+join type and record why. What made this work: bytes inspected first (BOM, cp1252,
 semicolons), IDs read as strings on both sides (read numerically, both sides collapse to
 `4217` and the documented 6-wide convention is gone; a string/numeric mix then refuses to
 merge at all), keys normalized to one convention, uniqueness proven, and the

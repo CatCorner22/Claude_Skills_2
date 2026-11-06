@@ -1,4 +1,4 @@
-# Workaround field notes — patterns that keep recurring
+# Workaround field notes: patterns that keep recurring
 
 Each note is a pattern seen in real blocked routes, written generically: the symptom, what it
 usually means, the routes worth listing, the one that tends to win, how to prove it, and the
@@ -49,7 +49,7 @@ refused one.
 network check, on a code path that does not use it. **Routes.** Its own flag or environment
 variable for an existing copy; an offline or no-update option; reading the source to see exactly
 what the check verifies; a stand-in that satisfies the check, used only when the source shows the
-resource is not read on this path. **Proof.** The output equals a known answer — a run with the
+resource is not read on this path. **Proof.** The output equals a known answer: a run with the
 real resource elsewhere, a published result, or an independent tool. **Hidden cost.** If the check
 protects correctness on any path you might use later, the stand-in becomes a silent error; name it
 in the report and delete it when done.

@@ -5,8 +5,8 @@ discrepancy non-judgmentally, a clinical-training staple [clinical-pedagogy]; th
 counterintelligence elicitation brochure's "feigned ignorance" technique, published as a
 warning to potential targets [gov]; internal-investigations interview training
 [industry]; technical writers' knowledge elicitation [practitioner]; and the AAFP
-"doorknob phenomenon" — the most important disclosure comes when the interview seems
-over [AAFP — a *Curbside Consultation* piece in *American Family Physician*, a department
+"doorknob phenomenon": the most important disclosure comes when the interview seems
+over [AAFP: a *Curbside Consultation* piece in *American Family Physician*, a department
 the journal describes as peer reviewed; it is a ~1,000-word clinical commentary that
 names the phenomenon and advises on handling it, not a study that measures it]. Source
 links at the end of this file.
@@ -27,7 +27,7 @@ Broad, jargon-free, genuinely curious; hands the expert the teacher's chair.
 - Shape: "Help me understand how ___ actually happens, start to finish."
 - Shape: "I've read the procedure, and I still don't get what a normal Tuesday looks
   like. Would you walk me through one?"
-- What it buys: the expert chooses the frame, so their frame — not the org chart's —
+- What it buys: the expert chooses the frame, so their frame, not the org chart's,
   becomes visible. The gap between their telling and the SOP is your map of the tacit.
 - Anti-pattern: opening with the official vocabulary ("walk me through the approval
   matrix"), which invites recitation of the document you already have.
@@ -42,14 +42,14 @@ correction teach.
   the detail you most need resolved; never on a fact you would look careless for
   missing.
 - What it buys: correction is effortless for the expert and arrives loaded with the
-  differentiating detail ("no, no — it has to go *before*, otherwise the batch locks
+  differentiating detail ("no, no, it has to go *before*, otherwise the batch locks
   the record, that's why we all do it by 9:40").
-- Where it fails: someone who defers — junior to you, unsure what the interview is for,
-  or simply agreeable — may accept the wrong detail rather than correct it, and their
+- Where it fails: someone who defers (junior to you, unsure what the interview is for,
+  or simply agreeable) may accept the wrong detail rather than correct it, and their
   agreement reads exactly like confirmation. Treat a bare "yes, that's right" to a
   planted detail as unconfirmed: re-source it from a document, a second person, or an
   open question that makes them state the fact in their own words. Where the status gap
-  is wide enough that correcting you would feel costly, use a naive open instead — you
+  is wide enough that correcting you would feel costly, use a naive open instead; you
   lose the shortcut, not the answer.
 - Hygiene: every deliberately wrong detail gets read back correctly in the verbatim
   replay at the close, so the technique never leaves a planted error standing in notes.
@@ -58,9 +58,9 @@ correction teach.
 
 ### 3. Discrepancy held as your own confusion
 Two of the expert's statements conflict, or their account conflicts with the data. The
-discrepancy is raised — always — but owned as the interviewer's puzzle.
+discrepancy is raised, always, but owned as the interviewer's puzzle.
 
-- Shape: "What I can't figure out is how X and Y both fit — I'm clearly missing a
+- Shape: "What I can't figure out is how X and Y both fit; I'm clearly missing a
   piece."
 - Shape: "The log shows N and you're describing M; help me see what the log isn't
   telling me."
@@ -70,15 +70,15 @@ discrepancy is raised — always — but owned as the interviewer's puzzle.
   usually the undocumented exception you came for.
 
 ### 4. The doorknob
-After the formal close — thanks given, notebook shut, the interview visibly over — one
+After the formal close (thanks given, notebook shut, the interview visibly over), one
 casual question.
 
-- Shape: "Oh — one thing I meant to ask…" followed by the question you most care about.
+- Shape: "Oh, one thing I meant to ask…" followed by the question you most care about.
 - Shape (adapted from the clinical solicitation): "Is there something else I should have
   asked about?" The word is not decoration: in a randomized primary-care trial, physicians
   who solicited further concerns with "is there *something* else you want to address in
   the visit today?" left about 78% fewer concerns unmet, while the "*anything* else"
-  version could not be distinguished from asking nothing — "any" is a negative-polarity
+  version could not be distinguished from asking nothing: "any" is a negative-polarity
   word, and the question it builds carries its own invitation to answer no
   [Heritage et al. 2007, peer-reviewed]. Two gaps between that trial and this shape:
   it tested a mid-visit solicitation with patients rather than a post-close question with
@@ -86,7 +86,7 @@ casual question.
   questions. Borrow the wording; the effect size does not transfer.
 - Why post-closure: impression management ends when the interview does; post-closure
   answers are the least rehearsed of the session.
-- Logistics: budget the minute for it — schedule the room five minutes past the formal
+- Logistics: budget the minute for it: schedule the room five minutes past the formal
   end; the doorknob dies when both parties bolt for the door.
 
 ## Designing the sequence for a named interview
@@ -99,12 +99,12 @@ decision the knowledge feeds. The assistant drafts; the human edits and conducts
 3. For each remaining target, choose the cheapest pattern: restatement-with-error where
    you can guess wrong plausibly; discrepancy-as-confusion where data and account
    conflict; another naive open where you know nothing yet.
-4. Choose the doorknob in advance — usually the highest-stakes target, or the standing
-   "what should I have asked?" — and script the casual delivery.
+4. Choose the doorknob in advance (usually the highest-stakes target, or the standing
+   "what should I have asked?") and script the casual delivery.
 5. Mark the planned silences: after the open, and after any answer that ends sooner
    than expected.
 6. Prepend the stakes-lowering opener: why you're here, what the notes are for, who
-   sees them — declared honestly (see the rail).
+   sees them, declared honestly (see the rail).
 
 ## The rehearsal script: role-playing the defensive expert
 
@@ -116,7 +116,7 @@ themselves.
   tacit targets.
 - The assistant answers in character: short answers to evaluative-sounding questions,
   recitation to official vocabulary, elaboration only when the interviewer's move earns
-  it — and it volunteers a doorknob-shaped disclosure only if the interviewer leaves
+  it, and it volunteers a doorknob-shaped disclosure only if the interviewer leaves
   room for one.
 - Run the full sequence, then debrief against the audit protocol below: which questions
   would have triggered defense, which pattern each question used, whether the doorknob
@@ -128,16 +128,16 @@ themselves.
 
 For a finished interview (transcript or detailed notes), the assistant marks:
 
-1. **Defensiveness triggers** — each question followed by a shorter, more guarded, or
+1. **Defensiveness triggers**: each question followed by a shorter, more guarded, or
    more official answer than the ones before it; classify the trigger (evaluative
    phrasing, prosecution of a discrepancy, stacked questions, status reclaimed).
-2. **Missed doorknob moments** — trailing offers ("…anyway, that's a whole other
+2. **Missed doorknob moments**: trailing offers ("…anyway, that's a whole other
    story"), hedges at the close, topics the expert raised twice without being asked.
    Each is a follow-up question for next contact.
-3. **Unplayed patterns** — contradictions in the transcript that were never raised
+3. **Unplayed patterns**: contradictions in the transcript that were never raised
    (candidates for discrepancy-as-confusion next time), and answers accepted at the
    rehearsed first layer with no silence after.
-4. **Capture hygiene** — key claims not recorded verbatim; any deliberate-error
+4. **Capture hygiene**: key claims not recorded verbatim; any deliberate-error
    restatement not corrected on the record; and any the expert simply agreed with, which
    is a fact to re-source rather than a fact confirmed.
 
@@ -154,20 +154,20 @@ share. That is the mechanical basis of the rail, and it draws a bright line:
   sequence past a "no" is manipulation, not elicitation.
 - **No deception about identity or purpose.** Who you are, why you are asking, and
   where the answers go are declared. The deliberate-error restatement is a phrasing
-  technique inside a declared purpose — the expert knows they are being interviewed and
+  technique inside a declared purpose: the expert knows they are being interviewed and
   why; nothing about the *situation* is faked.
 - **Surfacing tacit knowledge, not extracting secrets.** The target is knowledge whose
-  owner benefits from its surfacing — their process documented, their expertise
+  owner benefits from its surfacing: their process documented, their expertise
   credited. If the value of the answer depends on the answerer not realizing they gave
   it, you are on the wrong side of the line.
 - **Why the FBI citation is here.** The brochure documents these exact techniques so
   targets can *recognize* covert elicitation and defend against it [gov]. It is cited
-  as evidence the stance is real and effective — proof of mechanism, not a license.
+  as evidence the stance is real and effective, proof of mechanism, not a license.
   The difference between this skill and what the brochure warns about is consent, and
   consent is the one component the techniques cannot fake for you.
 
 ## Sources
-From the library's research dossier (Lane 2); provenance marks as recorded there:
+Sources, with their provenance marks:
 
 - Motivational interviewing's detective-named approach: [social-work MI
   training](https://www.socialworkshorts.co.uk/2022/01/28/motivational-interviewing-be-like-columbo/),
@@ -182,7 +182,7 @@ From the library's research dossier (Lane 2); provenance marks as recorded there
   [Ferri Benedetti](https://passo.uno/the-columbo-technique-for-technical-writers/)
   [practitioner]
 - Doorknob phenomenon: Faden & Gorton, "The Doorknob Phenomenon in Clinical Practice,"
-  *American Family Physician* 98(1), 2018, 52 — a *Curbside Consultation* commentary
+  *American Family Physician* 98(1), 2018, 52, a *Curbside Consultation* commentary
   ([AAFP](https://www.aafp.org/pubs/afp/issues/2018/0701/p52.html)) [AAFP; a department the
   journal describes as peer reviewed, but commentary describing the phenomenon rather
   than evidence measuring it]

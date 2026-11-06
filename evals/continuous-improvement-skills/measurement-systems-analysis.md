@@ -54,8 +54,7 @@ contract sense of the token.
 > noise before reacting?"
 
 Expected: building and reading the control chart is the SPC coverage in
-`continuous-improvement-skills:dmaic-problem-solving` (Control phase) /
-`continuous-improvement-skills:lean-six-sigma-for-software` — stability is their question;
+`continuous-improvement-skills:dmaic-problem-solving` (Control phase) — stability is its question;
 whether a *stable* process meets spec (Cp/Cpk) is this skill's. Likewise, a broad "which metric
 for my classifier, ROC AUC or PR AUC?" ask belongs to `machine-learning-skills:model-evaluation`.
 If measurement-systems-analysis loads on chart-selection or generic model-metric asks, tighten

@@ -43,7 +43,7 @@ For an agreement, a handbook or a policy:
 
 | § | Provision | Issue | Fix | Source | Status |
 |---|---|---|---|---|---|
-| 7 | confidentiality and non-disparagement | broad, no carve-outs; non-supervisory signer | add agency-charge, whistleblower and § 7 carve-outs; narrow to trade secrets and defamation | NLRA § 7; SEC Rule 21F-17; *McLaren Macomb* (under reconsideration — ledger §2) | **flag — counsel** |
+| 7 | confidentiality and non-disparagement | broad, no carve-outs; non-supervisory signer | add agency-charge, whistleblower and § 7 carve-outs; narrow to trade secrets and defamation | NLRA § 7; SEC Rule 21F-17; *McLaren Macomb* (under reconsideration; ledger §2) | **flag — counsel** |
 | 9 | release | no § 1542 language; employee works in California | add the statutory waiver | Cal. Civ. Code § 1542 [rule text] | edit |
 | 12 | consideration period | 14 days; employee is 52 | 21 days, 7-day revocation, advice-of-counsel sentence, ADEA named | 29 U.S.C. § 626(f) [rule text] | edit |
 
@@ -69,7 +69,7 @@ non-disparagement clause was offered.
 > **Do now:**
 > - Preserve the sales records, the target communications and the September 2 email thread.
 > - Withdraw the 14-day agreement before it is signed; reissue under §3 of the playbook.
-> - Confirm final pay was made within the state's timing rule — verify the rule, not assumed.
+> - Confirm final pay was made within the state's timing rule. Verify the rule; do not assume it.
 >
 > **Decisions needed:**
 > - Whether to offer severance at all, and how much — owner, by Friday.
@@ -89,7 +89,7 @@ non-disparagement clause was offered.
 >
 > **Counsel triggers present:** protected-activity timing; a release with age-claim defects.
 >
-> **Not an issue, and why:** WARN — a single termination; COBRA — the company is above 20, notice
+> **Not an issue, and why:** WARN: a single termination; COBRA: the company is above 20, notice
 > timing to be confirmed by the administrator.
 
 ## §4 Rules of the form

@@ -2,9 +2,9 @@
 
 The documentary layer is where names come from. This file lists the record classes, where each
 lives, what is free, and the known gaps, so a research plan can be drawn up before the first
-search. Availability moves — cut-off years roll forward, indexes launch, sites close uploads — so
+search. Availability moves (cut-off years roll forward, indexes launch, sites close uploads), so
 the dated items sit in a ledger with the date they were read, and the rule is to **re-read the
-live page at the time of use** and update the ledger. Everything here was compiled from secondary
+live page at the time of use** and update the ledger. Everything here comes from secondary
 guides and search excerpts of the named sites unless marked otherwise.
 
 ## Contents
@@ -27,7 +27,7 @@ Register Office, with a free index that returns only counts [snippet-only].
 **Church registers.** The National Library of Ireland's digitised Catholic registers cover roughly
 1,086 parishes for baptisms and marriages to 1880, with many western-seaboard registers starting
 only in the 1850s–60s; the images are browsable by parish only, and the name indexes belong to the
-commercial sites (one launched its index as free-to-search with registration in 2016 — confirm the
+commercial sites (one launched its index as free-to-search with registration in 2016; confirm the
 current terms) [snippet-only, cross-checked]. The state site's own church records are limited to a
 few dioceses; Church of Ireland registers are catalogued by the Representative Church Body
 Library; Presbyterian records route through the Public Record Office of Northern Ireland and a
@@ -65,7 +65,7 @@ passenger lists and loan-fund records.
 ## §2 United States
 
 **Federal census.** 1790–1950, released under the 72-year rule; the 1950 census opened in April
-2022, so the 1960 census is due in April 2032 by the same arithmetic [snippet-only — the rule is
+2022, so the 1960 census is due in April 2032 by the same arithmetic [snippet-only: the rule is
 the Census Bureau's; the 2032 date is the inference]. **The 1890 census is effectively lost**: a
 1921 fire destroyed about a quarter of the schedules and the remainder was later destroyed; only
 a few thousand names survive [snippet-only]. Bridge the gap with state censuses (many states took
@@ -74,7 +74,7 @@ collections of the later censuses are free with registration [snippet-only].
 
 **Vital records** have no federal index. The method is the CDC's "Where to Write for Vital
 Records" guide (state office, fees, start years) plus the FamilySearch Wiki page for the state plus
-the state archive — never one database. Statewide registration began at different dates, and
+the state archive, never one database. Statewide registration began at different dates, and
 published charts disagree on some states [snippet-only].
 
 **Immigration and naturalisation.** Two free New York portals cover 1820–1957 between them (the
@@ -84,7 +84,7 @@ Naturalisation turns on the date of the record: before 27 September 1906 any cou
 naturalise with no standard forms, and the National Archives' holdings are usually the declaration
 and petition only; afterwards the immigration agency holds duplicate certificate files for
 1906–1956, obtained by an index search and then a record request, with fees that have been quoted
-at several levels — read the live fee page [snippet-only].
+at several levels; read the live fee page [snippet-only].
 
 **Military, land, probate, newspapers, directories, deaths.** Civil War pension index and
 First World War draft cards (about 24 million men) are free on FamilySearch; the 1942 "old man's"
@@ -124,8 +124,8 @@ For an Irish surname, the 1890 birth-registration count by province and principa
 (Matheson's report, free online) gives the first geographic filter; Griffith's Valuation household
 counts by parish give the second; and the published sept histories tell you whether the name was
 borne by more than one unrelated family [snippet-only]. Where the septs are geographically
-distinct, **a county of origin from a US record — a naturalisation, an obituary, a headstone, a
-passenger list — is the single most valuable documentary fact**, and it is the fact the Y-DNA
+distinct, **a county of origin from a US record (a naturalisation, an obituary, a headstone, a
+passenger list) is the single most valuable documentary fact**, and it is the fact the Y-DNA
 evidence can then test: a terminal SNP that surname projects place with one sept excludes the
 others, a discrimination surname distribution alone cannot make. Anglicised spellings vary by
 family and decade; search every variant.

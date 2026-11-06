@@ -23,7 +23,7 @@ by three navigators using different methods. David Lewis documented the techniqu
 *We, the Navigators*; Edwin Hutchins analyzed it as distributed cognition.
 
 Etak itself is a moving-reference-island technique. The navigator pictures a real
-island lying off to one side of the course — not the origin, not the destination — and
+island lying off to one side of the course, not the origin, not the destination, and
 divides the voyage into segments by which star bearing that island currently sits
 under. The canoe is imagined stationary; the reference island "moves" backward through
 star positions as the voyage proceeds. Position is therefore never a coordinate; it is
@@ -32,14 +32,14 @@ the third etak of the voyage"), re-derived continuously from whatever the enviro
 offers:
 
 - **Star bearings** at rising and setting (precise, but clouds kill them).
-- **Swell trains** — long-period ocean swells hold direction for days and are read
+- **Swell trains**: long-period ocean swells hold direction for days and are read
   through the hull even in fog or at night.
-- **Birds** — species that sleep ashore and fish at sea point toward land at dusk.
-- **Clouds and light** — cloud stacks and lagoon glare over unseen islands.
+- **Birds**: species that sleep ashore and fish at sea point toward land at dusk.
+- **Clouds and light**: cloud stacks and lagoon glare over unseen islands.
 
 No single cue is trusted; the fix is the agreement of many weak ones, and when a cue
 class dies (overcast → no stars) the others still carry a usable position. That is
-graceful degradation as a design property — the exact opposite of a single
+graceful degradation as a design property: the exact opposite of a single
 authoritative instrument whose outage is total blindness.
 
 Transfer rule: keep the mechanism, drop the romance. You are not "sailing"; you are
@@ -48,7 +48,7 @@ independent observations, updated as each arrives, stated with its uncertainty.
 
 ## 2. Cue inventory taxonomy (five classes)
 
-Work all five classes every time. The classes exist so the inventory is exhaustive —
+Work all five classes every time. The classes exist so the inventory is exhaustive:
 under stress people grab the two loudest cues and stop.
 
 | # | Cue class | What it is | Everyday examples (any role) |
@@ -77,14 +77,14 @@ raises confidence, agreement within a group raises nothing.
 **Reliability — how often has this cue been wrong before?** Grade coarsely; three
 levels are enough:
 
-- **Strong** — direct, hard to fake by accident (a build artifact exists; money
+- **Strong**: direct, hard to fake by accident (a build artifact exists; money
   visibly left the account; a signed document arrived).
-- **Moderate** — usually right, with known failure modes (calendar says the meeting
-  happened — but it may have been held and useless).
-- **Weak** — suggestive only (channel chatter volume; tone of the last message).
+- **Moderate**: usually right, with known failure modes (calendar says the meeting
+  happened, but it may have been held and useless).
+- **Weak**: suggestive only (channel chatter volume; tone of the last message).
 
 Weighting rule of thumb: a position may LEAN on strong cues, must be CHECKED against
-moderate ones, and uses weak ones only in aggregate — many weak cues agreeing across
+moderate ones, and uses weak ones only in aggregate: many weak cues agreeing across
 independent sources is a real signal; one weak cue alone is noise.
 
 ## 4. The fusion protocol
@@ -102,15 +102,15 @@ independent sources is a real signal; one weak cue alone is noise.
    independent groups agree and at least one is strong; *moderate* when groups agree
    but none is strong; *low* when groups conflict or the set is thin. Say which.
    - **Grade the cue that sizes the quantity, not the cue set as a whole.** Broad agreement
-     across groups tells you the *direction* — the thing is progressing, the risk is not
+     across groups tells you the *direction*: the thing is progressing, the risk is not
      materialising. It does not tell you the *number*. Where a single cue supplies the
      magnitude, the confidence word tracks that cue, and drops a band when it is **aged**,
-     **weak or moderate**, or **from the same source family as your anchor** — three ways for
+     **weak or moderate**, or **from the same source family as your anchor**: three ways for
      an estimate to inherit one source's error twice while looking corroborated. The worked
      example in §5 is exactly this shape: five groups agree and one is Strong, which reads as
      *high* on the rule above, but the only cue sizing the increment is a moderate, aged,
      same-family-as-the-floor cue, so it publishes **moderate**. Say which cue you graded.
-6. Write the navigator's commentary (section 6) — the leaned-on cue and its failure
+6. Write the navigator's commentary (section 6): the leaned-on cue and its failure
    story.
 7. Write the confirm/deny line: the instrument reading that would confirm the band,
    and the reading that would refute it.
@@ -119,10 +119,10 @@ independent sources is a real signal; one weak cue alone is noise.
 
 ## 5. Worked example — project status, tracker stale two weeks
 
-Situation (deliberately generic — swap in your own role): you have inherited a
+Situation (deliberately generic, so swap in your own role): you have inherited a
 project mid-flight. The tracker was last updated two weeks ago, when it showed 30 of
 50 work items complete. The owner is unreachable. A steering meeting tomorrow will
-decide whether to add people to the project, and needs a position on where it really
+decide whether to add people to the project, and needs a position on where it
 stands. All figures below are illustrative, not benchmarks.
 
 **Blind spot:** true completion state; decision = staff up or hold, tomorrow.
@@ -146,15 +146,15 @@ likely around 35 — moderate confidence."** Why *moderate* and not *high*, when
 independent groups agree and one of them is Strong: the agreeing groups establish the
 direction (work flowed, nothing stalled) and none of them sizes the increment. Rhythm is the
 only cue that does, and it is moderate-grade, aged the same way the floor is, and from the
-same source family as the floor — so the floor and the increment share one source's error.
-That is the rule-5 clause, and it sets both the band width and the confidence word.
+same source family as the floor, so the floor and the increment share one source's error.
+That is the step-5 clause in §4, and it sets both the band width and the confidence word.
 
 **Confirm/deny:** when the owner returns or the tracker is updated, a count of 33–37
-confirms the method; below 33 means a stall the side channels missed — investigate
+confirms the method; below 33 means a stall the side channels missed, so investigate
 which silence lied.
 
 **The decision:** the meeting can proceed on "on pace, no stall detected, position
-moderate-confidence" — a materially better footing than either "the tracker says 30"
+moderate-confidence": a materially better footing than either "the tracker says 30"
 (stale) or "we don't know" (false blindness).
 
 ## 6. The navigator's-commentary format
@@ -191,10 +191,10 @@ When the instrument returns:
 4. Adjust the standing cue inventory in `your-environment.md`: promote, demote, or
    merge cues based on what the check showed.
 5. Keep the log append-only. A handful of scored outages teaches more about your
-   environment's cue reliability than any amount of theory — and it is the only
+   environment's cue reliability than any amount of theory, and it is the only
    defense against the drift toward overconfidence that unchecked estimators suffer.
 
 If the same instrument keeps going dark, the calibration log doubles as the
-requirements document for fixing or replacing it — at which point the job becomes
+requirements document for fixing or replacing it, at which point the job becomes
 building an instrument, and that belongs to `machine-learning-skills:anomaly-detection`
 or plain engineering, not to this skill.

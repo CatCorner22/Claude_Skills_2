@@ -40,9 +40,9 @@ but no concept is being taught.
 > "I finally understand how hearsay exceptions work, but I keep forgetting them after a few
 > weeks. Set me up with a retention schedule so it sticks."
 
-Expected: `learning-skills:spaced-retrieval-learning` owns making understood material stick over
-time. Explanation-design gets a concept in; retention scheduling keeps it there. (If that skill
-is not yet installed, the response should still not load explanation-design for this ask.)
+Expected: spaced-retrieval practice is a separate discipline this library does not carry.
+Explanation-design gets a concept in; retention scheduling keeps it there. Either way, the
+response should not load explanation-design for this ask.
 
 ## 3. Quality rubric
 A good response:

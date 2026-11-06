@@ -1,11 +1,11 @@
 # Haplogroups and deep ancestry — calling from chip data, reading the calls, dating the ladder
 
-The uniparental lines are the one place a consumer file supports a precise, reproducible claim —
+The uniparental lines are the one place a consumer file supports a precise, reproducible claim,
 provided the claim is made at the depth the data reaches and named on a stated tree. This file
 gives the recipes, what every output column means, and how to build a dated migration ladder
-from published sources. The recipes were run end to end while building this skill (HaploGrep 3
-version 3.3.2; Yleaf 4.1.5) on a real chip export; the ages and distributions in §5 come from
-secondary sources and search excerpts and carry provenance marks.
+from published sources. The recipes target HaploGrep 3
+version 3.3.2 and Yleaf 4.1.5. The ages and distributions in §5 come from secondary sources and
+search excerpts and carry provenance marks.
 
 ## Contents
 - [§1 Build safety and the reference question](#1-build-safety-and-the-reference-question)
@@ -36,9 +36,9 @@ MIT-licensed tree repository) and checks its length and checksum before use.
 
 **Install.** HaploGrep 3 is MIT-licensed and needs Java 11 or later [snippet-only]. Download the
 release archive (`haplogrep3-<version>-linux.tar.gz`) from the project's GitHub releases page,
-unpack it, and run `./haplogrep3 trees` to see which trees are present; the archive tested here
-carried `phylotree-rcrs@17.3`, and `./haplogrep3 install-tree phylotree-rcrs@17.3` adds it when it is missing. Say
-"PhyloTree 17.3 as distributed by HaploGrep" in the report — the 17.x point releases are the
+unpack it, and run `./haplogrep3 trees` to see which trees are present; the 3.3.2 archive
+carries `phylotree-rcrs@17.3`, and `./haplogrep3 install-tree phylotree-rcrs@17.3` adds it when it is missing. Say
+"PhyloTree 17.3 as distributed by HaploGrep" in the report: the 17.x point releases are the
 distributor's maintained corrections to the 2016 Build 17, not new upstream builds [snippet-only].
 
 **Convert and classify.**
@@ -47,12 +47,12 @@ python3 "${CLAUDE_PLUGIN_ROOT}/skills/dna-ancestry-research/scripts/haplogroup_i
 haplogrep3 classify --in <private-dir>/chip_mt.vcf --tree phylotree-rcrs@17.3 --chip --extend-report --write-qc --out <private-dir>/mt_report.txt
 python3 "${CLAUDE_PLUGIN_ROOT}/skills/dna-ancestry-research/scripts/haplogroup_inputs.py" review <private-dir>/mt_report.txt
 ```
-The converter writes **every genotyped site** — reference calls as `GT 0` with an empty ALT,
-differences as `GT 1` — because in `--chip` mode the classifier builds the sample's coverage range
-from the sites present. Tested on the same export both ways: with every genotyped site listed the
-range was the genotyped positions and the quality score rose, because expected mutations at
-unprobed positions no longer counted against the sample; without `--chip` the range became the
-whole molecule and every unprobed expected mutation was scored as missing. Duplicate probes at one
+The converter writes **every genotyped site** (reference calls as `GT 0` with an empty ALT,
+differences as `GT 1`) because in `--chip` mode the classifier builds the sample's coverage range
+from the sites present. Listing every genotyped site makes the
+range the genotyped positions and raises the quality score, because expected mutations at
+unprobed positions no longer count against the sample; without `--chip` the range becomes the
+whole molecule and every unprobed expected mutation is scored as missing. Duplicate probes at one
 position collapse to one row when they agree and are dropped when they conflict; indel codes and
 heterozygous-looking calls are dropped and counted.
 
@@ -92,10 +92,10 @@ Y sites are essentially all no-calls, which is what a person without a Y chromos
 installers and a portable package on its releases page; from source, clone the repository, install
 `numpy`, `pandas`, `networkx` and `graphviz` (the Python package), and run it as
 `python3 -m yleaf.Yleaf` from the clone's root directory. Its PLINK mode reads the bundled marker
-tables and needs neither `bcftools`, `samtools` nor a reference genome — but the program's
+tables and needs neither `bcftools`, `samtools` nor a reference genome, but the program's
 start-up check still asks for one and offers to download hg19 (about 3 GB). On a machine that is
 online, let it, once. Offline, pass `--ref-fasta` pointing at a small placeholder FASTA whose only
-contig is **not** named `chrY` or `Y`, with a pre-built `.fai` beside it; the version tested skips
+contig is **not** named `chrY` or `Y`, with a pre-built `.fai` beside it; that version skips
 build validation for such a file and never reads sequence in PLINK mode. Add `--no-update-check`
 so a run on a private machine makes no network call [snippet-only, confirmed in the help text].
 
@@ -114,12 +114,12 @@ number of valid markers and a QC score (0–1, from three sub-scores); the per-t
 repeat this; the per-sample `<id>.<tree>.out` table lists every marker the chip touched with its
 ancestral and derived bases, the called base and a state (`A` ancestral, `D` derived, `NC` no
 call); `haplogroup_path_<tree>.json` is the path from the root to the terminal node with each
-node's state — the direct source for a migration ladder, because it shows which nodes the chip
+node's state: the direct source for a migration ladder, because it shows which nodes the chip
 actually observed; `report.<tree>.json` is the machine-readable summary; `.info` gives the marker
 accounting. An example run on a current 23andMe export observed about two thousand markers with
-haplogroup information and landed on the same terminal marker the vendor's own report named —
-which is the point of the exercise: an independent, reproducible call on three current trees,
-with the marker evidence on disk, rather than a label taken on trust.
+haplogroup information and landed on the same terminal marker the vendor's own report named.
+That is the aim: an independent, reproducible call on three current trees, with the marker
+evidence on disk, rather than a label taken on trust.
 
 **Depth.** A chip resolves to the last probed derived node. Report "<label on each tree>
 (terminal marker <M>) — subclade unresolved by chip", and name the sequencing test that would
@@ -138,9 +138,9 @@ citable artefact).
   Y-SNP ages [snippet-only]. Report the estimate, the source, its date and the interval where one
   is published; never one bare number.
 - **mtDNA has two clocks that disagree on scale.** Phylogenetic (maximum-likelihood) ages date a
-  haplogroup's *formation* — for haplogroup T's branches, tens of thousands of years [canon
+  haplogroup's *formation*, for haplogroup T's branches tens of thousands of years [canon
   attribution — Pala et al. 2012]; genealogical clocks (FamilyTreeDNA, YFull) date the
-  *coalescence of sampled living lineages* — thousands of years for the same branches
+  *coalescence of sampled living lineages*, thousands of years for the same branches
   [snippet-only]. The difference is methodological, not a contradiction; report both and say
   which is which.
 - **Tree versions are part of the result.** PhyloTree 17 is dated 2016 with maintained point
@@ -185,7 +185,7 @@ presence in Starčevo-Criş Romania and the LBK at Karsdorf, Germany; Bronze Age
 Samara steppe [snippet-only — ancient-DNA supplements]; and a diffuse modern presence of
 haplogroup T around a tenth of Europeans, rising to a quarter in some eastern populations
 [snippet-only]. The honest map for a T lineage therefore shows a Near-Eastern origin and a
-**diffuse** European presence with at least two entry routes, not a single line — and marks any
+**diffuse** European presence with at least two entry routes, not a single line, and marks any
 small subclade's position as "unknown — no published population study" when that is the state of
 the literature.
 
