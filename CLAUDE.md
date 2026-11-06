@@ -34,6 +34,14 @@ The `metacognition-skills` suite is always engaged in this repo, not on-request:
 5. **Never store** secrets, credentials, account numbers, or client data in `MEMORY.md` or any
    committed file. Sensitive tailoring detail goes in `*.private.md` (git-ignored).
 
+## Advisor consultation (mandatory)
+
+Consult the `advisor` subagent at three points, every time: **before a plan locks**, **after the
+same error occurs twice**, and **before a task is marked done**. Each consultation states the goal,
+the options already ruled out, and the files that bear on the decision. The advisor returns a
+verdict; record that verdict and act on it before proceeding. Where you reject the verdict, say so
+and give the reason.
+
 ## Git rules for this repo (hard-learned — see MEMORY.md lessons)
 
 - The working branch is a **shared integration branch**: other agents (e.g. Cursor) also push

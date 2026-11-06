@@ -1,0 +1,14 @@
+{
+  "releases": [
+    {
+      "version": "1.2",
+      "path": "mirror/release-1.2.txt",
+      "sha256": "83fe037273d14a69d23d0c3669e4b332fbb85245a8744f32e94b37763cd95ce4"
+    },
+    {
+      "version": "2.0",
+      "path": "mirror/release-2.0.txt",
+      "sha256": "9bd216b51123c7dcbea252a73b9840ce6cf0f19d6d038b6f5b2410681bd592c3"
+    }
+  ]
+}

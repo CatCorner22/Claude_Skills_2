@@ -1,0 +1,3 @@
+- R1 reports 8 calls without the workflow and 5 with it: **3 fewer calls, a 37.5% reduction** in that comparison. Token savings, cost savings, worker usage, and quality equivalence cannot be established from the supplied evidence. (Supplied run note R1.)
+- I can follow the workflow conversationally here. Account-wide installation is unavailable because no native installation or registry tool is provided; nothing has been installed account-wide.
+- I cannot use another agent to bypass the resource permission denial. Retrieval requires authorized access.

@@ -22,6 +22,11 @@ fill in.
 
 ## Install
 
+For the portable Puppet Master, Project Manager and QC, and Creative Workaround
+Genius adaptations, see [ChatGPT and Work adapters](chatgpt/README.md). They preserve
+assistant ownership and quality gates, have separate validation, and do not claim
+account-wide installation or measured ChatGPT token savings.
+
 **Working inside this repo? Run the bootstrap — nothing happens on its own.**
 
 ```

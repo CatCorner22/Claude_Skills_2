@@ -1,0 +1,3 @@
+release=1.2
+status=stable
+identity=fixture-release-1.2

@@ -1,0 +1,12 @@
+diff --git a/maximum-delegation-auditor/SKILL.md b/maximum-delegation-auditor/SKILL.md
+index 55093fe..801e67f 100644
+--- a/maximum-delegation-auditor/SKILL.md
++++ b/maximum-delegation-auditor/SKILL.md
+@@ -121,3 +121,7 @@ Use actual tool or product names; do not list tools merely discovered. On a long
+ - Confirm result labels reflect evidence and separate remote completion from local-device execution.
+ - Confirm the final takeover report names actual tools and an honest verification scope.
+ - Confirm no claim of universal loading or access exceeds the environment's evidence.
++
++## 9. Work with Puppet Master
++
++When `puppet-master` is available and relevant, let it optimize the execution path while this audit retains ownership, consent boundaries, verification, and delivery. Read its full current instructions through the host's skill provider; do not infer them from a catalog entry. Assistant ownership does not require a separate subagent: use useful independent workers and keep tiny dependent work inline, following current user/platform delegation requirements. Token savings never justify handing feasible work to Blake, dropping evidence or quality checks, skipping required read-back, or claiming unobserved installation. Use `creative-workaround-genius` for failed permitted routes and `project-manager-qc` for cross-session/agent coordination or an independent delivery gate when needed; avoid recursive reloads and unnecessary ceremony.

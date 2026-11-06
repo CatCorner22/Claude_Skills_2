@@ -1,0 +1,51 @@
+{
+  "scope": "Local input.csv and result.csv only; all five source records checked. No bank/provider contact or external validation.",
+  "utc_window": {
+    "inclusive_start": "2026-10-22T00:00:00+00:00",
+    "exclusive_end": "2026-10-23T00:00:00+00:00"
+  },
+  "deduplication": "Retain first source record per id before filtering; preserve source order.",
+  "source_rows": 5,
+  "output_rows": 2,
+  "sum_usd": "31.00",
+  "decisions": [
+    {
+      "source_line": 2,
+      "id": "A",
+      "decision": "included"
+    },
+    {
+      "source_line": 3,
+      "id": "B",
+      "decision": "included"
+    },
+    {
+      "source_line": 4,
+      "id": "B",
+      "decision": "duplicate id; first source record retained"
+    },
+    {
+      "source_line": 5,
+      "id": "C",
+      "decision": "outside UTC date window"
+    },
+    {
+      "source_line": 6,
+      "id": "D",
+      "decision": "status is not Settled"
+    }
+  ],
+  "sha256": {
+    "input.csv": "98fa2ded11e6e6175105d43c21b854267847fa0e348e8d4ca65aa6c8dff7fa8c",
+    "request.md": "4c634b7f0ef47e3a56b5ce77679739c5f6ba0558fa4dcf945da8785de9bb3e10",
+    "result.csv": "1a1a10a755e7ff01b17a0e366cb74cd9830db19ca378bea6dc9262bcfb6fde23"
+  },
+  "checks": {
+    "exact_csv_bytes": true,
+    "amended_schema_order": true,
+    "unique_ids": true,
+    "decimal_total": true,
+    "input_unchanged": true,
+    "request_unchanged": true
+  }
+}

@@ -1,0 +1,3 @@
+release=2.0
+status=preview
+identity=fixture-release-2.0

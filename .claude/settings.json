@@ -1,4 +1,5 @@
 {
+  "model": "claude-haiku-5-5",
   "extraKnownMarketplaces": {
     "treasury-analyst-skills": {
       "source": {

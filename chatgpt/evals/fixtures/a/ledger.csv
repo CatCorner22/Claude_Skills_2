@@ -1,0 +1,4 @@
+id,status,amount_usd
+1,Settled,100.00
+2,Pending,200.00
+3,Settled,75.00

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Puppet Master"
+  short_description: "Complete work efficiently and preserve every quality gate"
+  default_prompt: "Use $puppet-master to complete this task efficiently while retaining evidence, checks, and assistant ownership."
