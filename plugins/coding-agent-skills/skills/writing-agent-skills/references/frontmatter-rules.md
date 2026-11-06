@@ -19,7 +19,8 @@
 - Leads with the primary use case; ends with a short `Triggers:` list of literal phrases.
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
-- **Budget reality, measured 2026-08-18.** 121 skills' names + descriptions = **≈110,000 chars ≈
+- **Historical snapshot, measured 2026-08-18** (a 121-skill library, before consolidation; not current).
+  121 skills' names + descriptions = **≈110,000 chars ≈
   29,700 tokens ≈ 14.9% of a 200K window**, mean ~890 chars per description. Token figures are an
   estimate at ~3.7 chars/token, a divisor stated because an undisclosed divisor produces
   conflicting percentages. That character estimate is also ~30% light against the harness's real tokenizer, which puts the true listing cost at

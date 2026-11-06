@@ -53,7 +53,7 @@ is missing from the ledger.
 >   Fed. R. Civ. P. 11(b)(2) (binding).
 > - Citing non-existent decisions and maintaining them after inquiry supports sanctions under
 >   Rule 11 and the court's inherent power — *Mata v. Avianca, Inc.*, 678 F. Supp. 3d 443
->   (S.D.N.Y. 2023) (binding in this district as persuasive district authority; pinpoint to be
+>   (S.D.N.Y. 2023) (persuasive district authority; pinpoint to be
 >   added on reading).
 > - Contrary authority: none found (searched CourtListener and Google Scholar, "Rule 11"
 >   "fabricated citation", 2026-10-14).

@@ -13,7 +13,7 @@ description: >-
   case law, is this citation real, verify these citations, check the cites in this brief, good
   law, statute lookup, what does the law say, legal authority, CourtListener.
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
   source: >-
     Method built from standard legal-research practice and the post-2023 sanctions record for
     fabricated citations; the one case cited in the body is Mata v. Avianca, Inc., 678 F. Supp. 3d
