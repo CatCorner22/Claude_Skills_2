@@ -111,7 +111,7 @@ WGS is **"run a purpose-built caller on the alignment, or order a clinical panel
 whole-genome data, so CYP2D6 is covered"*. And even a purpose-built caller is imperfect: the
 published comparisons report high but not complete concordance against truth sets.
 
-**One open question, recorded rather than resolved.** A verification pass argued that a *homozygous*
+**One open question.** It can be argued that a *homozygous*
 no-function call at the `*4` tag leaves no functional allele, so "your data cannot determine your
 CYP2D6 status" understates it and suppresses a poor-metabolizer flag. The pharmacology is right.
 **What is not settled is whether the call can be trusted:** array allele dropout and
@@ -216,8 +216,7 @@ guideline set as versioned — pairs are added and recommendations revised, so c
 publication rather than quoting a remembered state.
 
 **PharmGKB** curates variant–drug annotations on **clinical-annotation levels of evidence — 1A, 1B,
-2A, 2B, 3 and 4** — a separate system again from either CPIC scale. The shape, which an earlier
-version of this file got wrong in two places:
+2A, 2B, 3 and 4** — a separate system again from either CPIC scale. The shape:
 
 | Level | What it means |
 | :--- | :--- |
@@ -232,9 +231,9 @@ version of this file got wrong in two places:
 research lead, not a prescribing input, and the distance between 1A and 4 is the distance between
 medicine and speculation.
 
-**Read the current definitions at source rather than quoting this table.** It could not be verified
-against a retrieved record in this environment, and a paraphrase of someone else's grading system is
-exactly the kind of claim that drifts — which is how the earlier version's swap survived review.
+**Read the current definitions at source rather than quoting this table.** It is not verified
+against a retrieved record, and a paraphrase of someone else's grading system is exactly the kind of
+claim that drifts.
 
 **Report the framework level alongside the finding.** "CPIC level A" and "PharmGKB level 3" demand
 entirely different language, and a report that omits the level implies more than the evidence
@@ -249,10 +248,9 @@ prescriber — **as a flag for proper testing**, never as a dosing instruction.
 
 **No identifiers in this section or the next, deliberately and with a cost.** The framework
 documentation and the per-pair guidelines are maintained as living web resources, and none resolved
-to a retrieved record in this environment (`variant-catalog.md` §0). So §3 and §4 carry *mechanisms*,
+to a retrieved record (`variant-catalog.md` §0). So §3 and §4 carry *mechanisms*,
 which are stable, and no citations — and the live pass must attach the specific guideline record for
-any pair actually being reported. **That gap is why the PharmGKB level definitions above were wrong
-until a verification pass caught them:** an unsourced claim about someone else's framework has
+any pair actually being reported. **That gap is a risk:** an unsourced claim about someone else's framework has
 nothing holding it in place.
 
 **Check the guideline status live; do not quote it from this file.** Which pairs carry a guideline,
@@ -274,7 +272,7 @@ reaches a prescriber.
 | **CYP2C9 + VKORC1** | Warfarin | Both feed published dosing algorithms; the classic multi-gene case. **Not the whole set:** CYP4F2 (rs2108622) also feeds them, and rs12777823 matters specifically in African-ancestry patients — so a two-gene warfarin answer is ancestry-incomplete |
 | **G6PD** | **Named triggers, because "oxidative drugs" is not actionable:** rasburicase (contraindicated in deficiency), primaquine and tafenoquine, dapsone, nitrofurantoin, methylene blue, **high-dose or intravenous vitamin C** (a supplement, and the one most likely to be
 self-administered — see `interventions-evidence.md` §4), and — classically, outside medicine — fava
-beans | Deficiency causes haemolysis on oxidative challenge. **X-linked, which has a consequence this file previously left implicit:** a heterozygous female is a mosaic, her enzyme activity can fall anywhere from near-normal to deficient, and **a genotype cannot resolve where** — so a heterozygous female call is a prompt for an enzyme assay, never reassurance. **Quantitative enzyme activity is the better test in hemizygous males and homozygous females, but it is NOT definitive** — a heterozygous female is frequently reported *normal* despite a clinically relevant deficient red-cell population, and reticulocytosis (in newborns, or after any haemolytic episode) and recent transfusion can all falsely normalise the result. **So in a heterozygous female the genotype adds information the assay does not, and a normal enzyme activity is never clearance.** Draw it away from an acute episode |
+beans | Deficiency causes haemolysis on oxidative challenge. **X-linked, which has a consequence:** a heterozygous female is a mosaic, her enzyme activity can fall anywhere from near-normal to deficient, and **a genotype cannot resolve where** — so a heterozygous female call is a prompt for an enzyme assay, never reassurance. **Quantitative enzyme activity is the better test in hemizygous males and homozygous females, but it is NOT definitive** — a heterozygous female is frequently reported *normal* despite a clinically relevant deficient red-cell population, and reticulocytosis (in newborns, or after any haemolytic episode) and recent transfusion can all falsely normalise the result. **So in a heterozygous female the genotype adds information the assay does not, and a normal enzyme activity is never clearance.** Draw it away from an acute episode |
 | **CYP2D6** | Codeine, tamoxifen, many antidepressants and antipsychotics | Clinically major — **and not callable from this data** (§2). The finding is the limitation |
 | **HLA-B\*58:01** | Allopurinol | Associated with severe cutaneous adverse reactions, with strongly ancestry-dependent carriage. **Requires proper HLA typing** — and it is the third HLA pair, alongside abacavir and carbamazepine, that belongs on any list of this kind |
 | **CYP3A5** | Tacrolimus | A transplant-immunosuppression dosing gene, and the one genuinely array-callable pair here (§2): expressers clear tacrolimus faster and reach lower trough concentrations on a standard dose |

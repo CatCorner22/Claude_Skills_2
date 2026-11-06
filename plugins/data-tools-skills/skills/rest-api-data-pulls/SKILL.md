@@ -8,7 +8,7 @@ description: >-
   call api python, paginate an api, saas api export, pagination, api rate limit, 429 retry,
   requests python, extract data from api, api to csv, json to dataframe, oauth token api.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
 ---
 
 # REST API data pulls

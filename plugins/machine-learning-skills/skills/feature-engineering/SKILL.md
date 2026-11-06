@@ -9,7 +9,7 @@ description: >-
   encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
   datetime features, lag features, rolling features, feature selection, interactions, impute features.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
 ---
 
 # Feature engineering

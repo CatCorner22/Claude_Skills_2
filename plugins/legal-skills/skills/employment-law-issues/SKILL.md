@@ -13,7 +13,7 @@ description: >-
   accommodation, wrongful termination, workplace investigation, independent contractor, overtime,
   harassment complaint, performance improvement plan.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   source: >-
     Built from the federal employment statutes named in the references (thresholds marked
     [rule text] with the instrument cited) and a 2026-10-14 search pass on the items that move

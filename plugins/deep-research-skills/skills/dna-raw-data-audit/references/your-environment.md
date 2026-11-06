@@ -42,7 +42,7 @@ request, without naming it.
 | Where the files live | _____ (keep them **outside** any repository or shared drive) |
 
 **Test, do not assume, that the file is ignored.** `git check-ignore -v <file>` must print a
-matching rule. Two traps proven by execution while this skill was being reviewed: the tailoring file
+matching rule. Two traps: the tailoring file
 must carry the **`.private.md`** suffix to be ignored (the plain `.md` form is not), and **the file
 your provider hands you is a `.zip`** — so an archive pattern is needed as well as the
 extension patterns. Neither protection exists in your repository unless you put it there.
@@ -124,9 +124,9 @@ Test rather than assume, then record:
 - Can you reach a literature index directly (PubMed / PMC / Europe PMC / Crossref)? _____
 - Can a page be fetched, or only searched? _____ — search results give *identifiers* inside returned
   URLs; the *numbers* usually live only in generated prose, and those are not the same evidence
-- Regulatory sources — a medicines regulator's site, an anti-doping list? _____ *(in the environment
-  this skill was built in, both were blocked, which is why `interventions-evidence.md` names
-  mechanisms and sends you to the live list instead of quoting it)*
+- Regulatory sources — a medicines regulator's site, an anti-doping list? _____ *(where both are
+  blocked, `interventions-evidence.md` names mechanisms and sends you to the live list instead of
+  quoting it)*
 - Your provider's own account pages, for establishing which product tier produced your file? _____
 
 **If the indexes are unreachable:** report it in the report's own research section, take numbers only

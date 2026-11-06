@@ -32,7 +32,7 @@ So for a run of *T* turns whose context grows from *C₀* to *C*, processed toke
 
 1. **Turns multiply everything.** Each extra turn re-reads the whole context.
 2. **New content is paid twice:** once to write it, then on every later read.
-3. **Start-up context is a floor.** *Measured:* a subagent here began at about 50k tokens before
+3. **Start-up context is a floor.** *Measured:* a subagent began at about 50k tokens before
    its first action; an unaided run's final context averaged 66k, of which tool results were
    about 3k.
 
@@ -92,7 +92,7 @@ evidence.
 
 ## Delegation break-even
 
-A subagent pays its start-up context (*measured* about 50k here) on its first call and re-reads
+A subagent pays its start-up context (*measured* about 50k) on its first call and re-reads
 its growing context on each of its turns; you then read its return. Inline the work when what it
 would add to *your* context, times your remaining turns, is less than that. In practice:
 

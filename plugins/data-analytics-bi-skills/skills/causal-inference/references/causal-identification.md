@@ -2,8 +2,8 @@
 
 Depth for `data-analytics-bi-skills:causal-inference`. Provenance marks carried from the
 research dossier (`docs/research/general-use-expansion-research.md` §1):
-**[snippet-only, cross-checked]** = verified via convergent web-search snippets, direct source
-fetches egress-blocked at research time; **[background — verify]** = commonly reported, not
+**[snippet-only, cross-checked]** = verified via convergent web-search snippets, without fetching
+the primary source; **[background — verify]** = commonly reported, not
 independently confirmed — do not repeat as fact without checking.
 
 ## Contents
@@ -175,7 +175,7 @@ Checks that earn the "if":
 
 ### The number this table cannot give you: a standard error
 
-**−2.0 days is a point estimate with no inference attached, and that is not an oversight — it is
+**−2.0 days is a point estimate with no inference attached. That is not an oversight; it is
 the design.** There is **one treated cluster** (Denver) and **one control cluster** (Phoenix).
 Two traps follow, and both get sprung routinely:
 

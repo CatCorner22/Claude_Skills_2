@@ -38,11 +38,11 @@ generators are given so you can re-derive them yourself before you run.
 | 8–15 | 12, 16, 20 | **Plackett–Burman** | **III** | Mains only, cheaply; each main is *partially* correlated (±1/3 in the 12-run array) with the 2FIs not containing it — a pure screen |
 | any, runs nearly free | as many as useful | Full factorial anyway | (full) | When runs are cheap (prompts, configs, simulations), buy the clean answer |
 
-> **Check that count yourself — the table said "nine aliased pairs" until 2026-08-18, which is
-> arithmetically impossible.** Six factors have C(6,2) = 15 two-factor interactions, so nine
-> *pairs* would need 18. With I = ABCE = BCDF = ADEF, multiplying each 2FI by every defining
+> **Check that count yourself.** Six factors have C(6,2) = 15 two-factor interactions, so nine
+> aliased *pairs* is arithmetically impossible: nine pairs would need 18. With
+> I = ABCE = BCDF = ADEF, multiplying each 2FI by every defining
 > word gives: AB=CE, AC=BE, AD=EF, AF=DE, BD=CF, BF=CD, and AE=BC=DF — 7 groups, 15 members,
-> all accounted for. The triple is the one worth remembering: it is why "pairs" was the wrong
+> all accounted for. The triple is the one worth remembering: it is why "pairs" is the wrong
 > word as well as the wrong number.
 
 **The ceiling rule, so you can sanity-check any claim including this table's.** In N runs a regular
@@ -232,8 +232,8 @@ pooled-error margin would have been t₀.₉₇₅,₁₆ × 0.53 = **1.12 pp** 
 1.82 pp (t₍γ,₁₆₎ = 3.433 × 0.53). That is what the extra 16 runs would have bought, priced
 before the fact rather than regretted after.
 
-**Which skill owns which prompt question.** `coding-agent-skills:prompt-engineering` states the seam
-in its own iteration step, and this file holds the same line from the other side:
+**Which skill owns which prompt question.** `coding-agent-skills:prompt-engineering` states the same seam
+in its iteration step:
 **one-factor-at-a-time is for attributing a fix; a factorial is for finding the best combination.**
 Neither rule is a concession to the other — they answer different questions. So: a prompt is
 producing wrong output and you need to know which edit caused what → one edit per run against a
@@ -311,7 +311,7 @@ depends on, and say why in the run sheet.
 - **Steepest ascent**: from the fitted effects, step the significant factors together in the
   improving direction, run, repeat until the response turns over; then a small design around the
   peak if the region is curved.
-- **Hand the winner to production carefully**: an offline-designed optimum becomes an
+- **Hand the winner to production carefully**: an offline-designed optimum becomes a
   `continuous-improvement-skills:evolutionary-operation` starting point — small, monitored,
   reversible steps in the live system, not a big-bang cutover.
 

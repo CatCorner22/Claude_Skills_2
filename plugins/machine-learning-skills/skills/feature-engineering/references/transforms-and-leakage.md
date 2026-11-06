@@ -27,7 +27,7 @@ categories, ~5 rows each, a coin-flip target — a heavily smoothed encoding fit
 produced **train AUC 0.79** against **test AUC 0.52**; the same encoding computed out-of-fold produced
 0.52/0.52. The fabricated 0.79 is what a reviewer would have read as "the merchant feature is strong."
 
-**Library gotcha worth knowing:** scikit-learn's `TargetEncoder` cross-fits inside `fit_transform` but not
+**Library gotcha:** scikit-learn's `TargetEncoder` cross-fits inside `fit_transform` but not
 in `fit(...).transform(...)`. Calling `fit` and then `transform` on the *same* training rows returns the
 full-data encoding and reproduces exactly the leak above (0.74 in-sample AUC on the noise column vs 0.51
 from `fit_transform`). Use `fit_transform`, or put the encoder in a `Pipeline`, which calls it for you.

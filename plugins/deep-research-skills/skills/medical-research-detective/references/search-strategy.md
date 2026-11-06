@@ -60,7 +60,7 @@ Practical rules:
   work you are usually searching for. The trap is what a zero-hit result then looks like: a
   clean gap. It is not one. Run the unfiltered query before recording any gap, and prefer
   putting the species restriction in free text (or dropping it) when currency matters. The
-  script now labels a zero-hit run under `--humans` rather than offering it as a finding.
+  script labels a zero-hit run under `--humans` rather than offering it as a finding.
 - Record queries verbatim so the search is reproducible (see [Logging](#logging-the-search)).
 
 ## MeSH and synonym expansion

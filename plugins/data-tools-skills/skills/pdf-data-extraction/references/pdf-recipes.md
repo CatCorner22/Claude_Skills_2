@@ -146,9 +146,9 @@ assert abs(OPENING + df["amount"].sum() - CLOSING) < 0.005, \
 On a two-page statement whose rows are +2,500.00, +110.50, −750.25, −25.00, this yields four
 typed rows carrying their section, and `1,000.00 + 1,835.25 = 2,835.25` passes. Every failure
 of that assertion is a dropped, doubled, or mis-signed row — find it before shipping the table.
-Note the reach of the check, though: only amounts enter the arithmetic, so a wrong `section`
-label or a heading absorbed into a description passes it untouched. That is what the stitch log
-is for — it is the only signal that the `SECTIONS` list doesn't match the document.
+The check reaches only amounts, though: a wrong `section` label or a heading absorbed into a
+description passes it untouched. The stitch log is the only signal that the `SECTIONS` list
+doesn't match the document.
 
 ## Invoice pattern
 1. Header fields by regex on text: invoice number, dates, PO number, supplier

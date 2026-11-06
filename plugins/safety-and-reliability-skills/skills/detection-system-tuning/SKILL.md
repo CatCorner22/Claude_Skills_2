@@ -13,7 +13,7 @@ description: >-
   matches, exception queue drowning, tune the alerts, memory cell, everything is an
   exception, nobody looks at the alerts anymore.
 metadata:
-  version: "1.4.2"
+  version: "1.4.3"
   source: >-
     Built from the library's biological-systems research dossier
     (docs/research/epic-wave-held-research.md, Lane 3 top pick). The mechanism is the

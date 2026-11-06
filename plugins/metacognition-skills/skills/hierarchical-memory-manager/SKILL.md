@@ -13,7 +13,7 @@ description: >-
   compact the context, working memory, episodic memory, semantic memory, MEMORY.md, memory
   layers, save for later, what do you remember, pick up where we left off.
 metadata:
-  version: "1.4.2"
+  version: "1.4.3"
 ---
 
 # Hierarchical memory manager

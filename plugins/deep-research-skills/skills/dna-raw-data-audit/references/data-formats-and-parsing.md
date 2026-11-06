@@ -53,9 +53,8 @@ returns a different variant, silently.**
 
 - **Detect, never assume.** The bundled script reads the declared build from the header and, when
   none is declared, **warns, proceeds on rsID-keyed lookups only, and signals exit 3** — in text
-  mode and under `--json` alike. **It does not refuse**, which an earlier version of this sentence
-  claimed; what it refuses is any *positional* interpretation, and no positional lookup may be
-  attempted on such a file.
+  mode and under `--json` alike. **It does not refuse the file**; it refuses any
+  *positional* interpretation, and no positional lookup may be attempted on such a file.
 - **Prefer rsIDs over positions** when cross-referencing. An rsID is build-independent; a position is
   not. This single habit eliminates most build errors.
 - **Never compare positions across files declaring different builds** without liftover. rsID-based
@@ -111,8 +110,7 @@ a C/T site reported on the opposite strand appears as G/A, and C/T versus G/A is
 the pair `{A,T}` returns `{A,T}`, so **allele identity alone cannot tell you the orientation**, and a
 flipped call inverts which allele is the risk allele.
 
-**Two things get conflated here, and this file conflated them in both directions before getting it
-right.** Separate them:
+**Two things get conflated here.** Separate them:
 
 - **Unorientability is a property of the SITE.** An A/T or C/G site is its own reverse complement,
   so allele identity alone cannot tell you which strand the file reports.
@@ -134,11 +132,10 @@ call is 2 copies on one orientation and 0 on the other, and that is the genuinel
 
 **So the only unresolvable class is a homozygote at a palindromic site** — and it is invisible to any
 check that looks at the genotype without knowing the site's pair, because `CC` could sit at a C/G
-site or a C/T one. The bundled script's first implementation returned "not ambiguous" for a
-homozygote and passed it silently; its second returned AMBIGUOUS for *every* call at a palindromic
-site once the pair was known, which told the reader not to count a heterozygote that was never in
-doubt. **Both directions are errors, and only the first is loud** — the second quietly suppresses
-real findings.
+site or a C/T one. Returning "not ambiguous" for a homozygote passes it silently; returning
+AMBIGUOUS for *every* call at a palindromic site tells the reader not to count a heterozygote that
+was never in doubt. **Both directions are errors, and only the first is loud** — the second quietly
+suppresses real findings.
 
 Practical consequence: **to resolve a homozygote you need the site's allele pair from an external
 reference.** Without it, the honest output is that ambiguity could not be ruled out. A heterozygote
@@ -181,9 +178,8 @@ genotypes.** On an array every probed site has a row, so absence means "never pr
 **The case that makes this concrete, and it is the worst one in the skill:** an APOE **e3/e3** person
 is reference at *both* defining sites. Their APOE is therefore **entirely invisible in a
 variants-only VCF** — and a parser that reads absence as reference reports a confident e3/e3 for
-someone whose APOE region was never sequenced. The bundled script's first version did exactly this
-from a zero-coverage gVCF block; its self-test now asserts the refusal, and the negative control
-confirms the old logic produced `e3/e3`.
+someone whose APOE region was never sequenced. A zero-coverage gVCF block produces exactly
+this error; the script's self-test asserts the refusal.
 
 Three VCF-specific traps, each of which turns absence into a confident call:
 
@@ -281,13 +277,12 @@ catalogued sites with absent ones labelled, a three-state strand assessment per 
 (`AMBIGUOUS` / `CLEAR` / `UNDETERMINED`), and the APOE diplotype including the one ambiguous
 combination.
 
-**The refusals are the valuable part.** Each of these was a defect first and is now an assertion in
-the self-test:
+**The refusals are the valuable part.** Each of these is an assertion in the self-test:
 
 - **Ploidy is validated before anything is called.** Comparing `set(genotype)` makes
   `set("C") == set("CC")`, so a half-call, a truncated field or a haploid `GT` was read as a
   homozygote — and at APOE that produced a confident **e4/e4 from a single observed allele**. Any
-  genotype that is not a two-allele diploid call is now refused with the reason.
+  genotype that is not a two-allele diploid call is refused with the reason.
 - **Concordance excludes non-diploid comparisons instead of scoring them.** The same `set()` collapse
   made `CC` and `C` agree, inflating the audit's own quality gate. Allele order still agrees
   (`AG` == `GA`), which is the property worth keeping.
@@ -326,15 +321,15 @@ and a caller reading only the exit status would otherwise conclude the opposite:
    catalogue rows say *unexamined*, not *negative*.
 4. **No genotypes extracted** — every record was a reference block, a `DP=0` line, a no-call, or
    unkeyable. "Nothing was examined" is not only an unannotated ID column, and each of the other
-   routes to it used to exit 0 with a clean-looking empty report.
+   routes to it exits 3, not 0 with a clean-looking empty report.
 5. **More than one sample in the file** — a trio or family VCF. Only the first sample column is
    read, so an unflagged multi-sample file is a confident report about one person attributed to
    another, and nothing in the output would look wrong.
 
-**These are decided where they occur, never by searching the warning text.** An earlier version
-derived them by substring-matching the warnings list — and every per-file warning begins with the
-file's path, so a file whose *name* contained "NO dbSNP rsIDs" forged a blocking condition that had
-not happened, including "sample identity failure" on a single file where the gate never ran.
+**These are decided where they occur, never by searching the warning text.** Deriving them by
+substring-matching the warnings list is wrong: every per-file warning begins with the file's path,
+so a file whose *name* contained "NO dbSNP rsIDs" would forge a blocking condition that had not
+happened, including "sample identity failure" on a single file where the gate never ran.
 
 **It will run on a whole-genome file, and that took work.** A retained VCF record costs **537 bytes**,
 measured, and the cost is linear in record count: 500k records → 256 MiB, 1M → 512 MiB. A 30x
@@ -345,10 +340,9 @@ file genotypes are the whole demand), so the parse retains only that union and c
 file-level counts (sites, no-calls, reference blocks, chromosomes) are still taken over every
 record, the restriction is disclosed in the warnings, and no reported figure changes.
 
-**The headline figure, re-measured, and the correction matters more than the number.** A 5M-record
-VCF alongside a 640k-site array export peaks at **~740 MiB in ~50 s** here. An earlier version of
-this paragraph said 574 MiB; an independent re-measurement got 877 MiB on the same code, and the
-figure moved again when the code changed. **It depends on how much of the array the VCF actually
+**Headline figure.** A 5M-record
+VCF alongside a 640k-site array export peaks at **~740 MiB in ~50 s** as measured. Other
+measurements gave 574 MiB and 877 MiB, and the figure moves when the code changes. **It depends on how much of the array the VCF actually
 matches**, which varies by file, so treat it as an order of magnitude rather than a constant — and
 re-measure rather than quoting this sentence.
 
@@ -363,8 +357,7 @@ sequencing file against an array, or subset first.
 
 **Identity and concordance compare exactly two files.** Hand it three and neither runs; the script
 parses and reports them all and says in a warning that no comparison was performed, rather than
-printing something that looks complete. *(That path used to be unreachable: the CLI rejected three
-files with a usage error, so the documented behaviour was dead code only the self-test could see.)*
+printing something that looks complete.
 
 **A coordinate is not an identifier.** When a VCF carries no rsIDs and no position map applies, its
 records are keyed `chrom:pos` — and such a key names the same locus in two files **only if both

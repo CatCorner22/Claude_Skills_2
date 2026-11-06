@@ -8,7 +8,7 @@ description: >-
   new plugin in this repo. Triggers: write a skill, new skill, SKILL.md, authoring
   standard, skill description, add a skill, review a skill, do and teach.
 metadata:
-  version: "1.5.1"
+  version: "1.5.2"
 ---
 
 # Writing Agent Skills (house standard)
@@ -154,12 +154,8 @@ body persists in context across the turn, so every line is a recurring cost: con
 well-ordered instructions beat exhaustive ones.
 
 **Know what the listing costs, because it decides whether your skill is findable at
-all.** Run `python3 scripts/measure-listing-cost.py` and read ITS number. **Do not write the figure
-down here** — an earlier version of this paragraph did, and the numbers it quoted (121 skills,
-≈110,000 characters, 14.9% of a 200K context, 14 plugins) outlived the library they described by
-enough that a reader planning an install would have over-estimated the cost by two thirds. No gate
-caught it, because a stale cluster of figures is internally consistent; `check-arithmetic.py` only
-checks that a chain adds up, not that its inputs are still true. The mean is what generalises:
+all.** Run `python3 scripts/measure-listing-cost.py` and read ITS number. **Do not write the figure down here.** A stale cluster of figures stays internally consistent,
+and `check-arithmetic.py` only checks that a chain adds up, not that its inputs are still true. The mean is what generalises:
 ~900 characters (~240 tokens) per description, so the total tracks the skill count almost linearly,
 and the `Triggers:` lists are roughly a fifth of the spend.
 

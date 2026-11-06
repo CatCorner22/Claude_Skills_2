@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.5.2"
+  version: "1.5.3"
 ---
 
 # Measurement systems analysis and process capability

@@ -12,7 +12,7 @@ description: >-
   waste. Triggers: puppet master, save tokens, reduce token usage, token efficiency, cut token
   cost, cheaper run, context is filling up, why was this so expensive, audit token use.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # Puppet Master

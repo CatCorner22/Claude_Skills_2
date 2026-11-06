@@ -22,8 +22,8 @@ Record the legend so marks stay consistent across authors:
 - `[snippet-only]` — <verified via convergent search snippets from a research dossier.>
 - `[snippet-only, cross-checked]` — <as above, corroborated across independent results.>
 - `[canon attribution]` — <author/year named but not independently re-verified; check before quoting.>
-- `[background — verify before citing]` — <recalled context, not verified in this environment.>
-- `[unverified here]` — <could not be checked in this environment; stated as a claim, not a fact.>
+- `[background — verify before citing]` — <recalled context, not verified.>
+- `[unverified here]` — <could not be checked; stated as a claim, not a fact.>
 
 ## Versioning
 - `metadata.version`: <minor bump on content revision, patch on typo-grade fixes.>

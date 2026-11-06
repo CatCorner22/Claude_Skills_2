@@ -6,7 +6,7 @@ question that detects it in a transcript. Every number here has been recomputed 
 **Contents**
 - §0 The plain-language method (this is technique, not tone)
 - §1 The centerpiece: absolute vs relative
-- §2 Odds ratios, hazard ratios, and other ratios that are not risk
+- §2 Ratios that are not risk
 - §3 Significance, p-values, and intervals
 - §4 Base rates and the 2×2
 - §5 Endpoints: surrogate, composite, selective

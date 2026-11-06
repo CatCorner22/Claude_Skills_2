@@ -69,7 +69,7 @@ non-disparagement clause was offered.
 > **Do now:**
 > - Preserve the sales records, the target communications and the September 2 email thread.
 > - Withdraw the 14-day agreement before it is signed; reissue under §3 of the playbook.
-> - Confirm final pay was made within the state's timing rule — verify the rule, not assumed.
+> - Confirm final pay was made within the state's timing rule — verify the rule; do not assume it.
 >
 > **Decisions needed:**
 > - Whether to offer severance at all, and how much — owner, by Friday.

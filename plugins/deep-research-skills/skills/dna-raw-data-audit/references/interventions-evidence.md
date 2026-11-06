@@ -51,9 +51,9 @@ it does not tell you to do anything different, and the published work suggests i
 response to lifestyle change either — so the advice is unchanged.
 
 **Never state a regulatory status as a fixed fact.** Name the mechanism and the source, and say it
-must be re-checked. This is not pedantry: while building this file, one peptide's regulatory posture
-demonstrably shifted across a span of a few years, and a nomination status changed again later.
-Anything frozen here would be wrong by the time someone read it.
+must be re-checked. This is not pedantry: one peptide's regulatory posture
+shifted across a span of a few years, and a nomination status changed again later. A frozen status
+goes stale.
 
 ---
 
@@ -83,8 +83,8 @@ Nearly nothing clears both. The honest consequence:
   genotype association with weight
   ([PMC9335902](https://pmc.ncbi.nlm.nih.gov/articles/PMC9335902/)). On the endpoint that matters,
   then, the two are a surrogate hit and a borderline null: **G3 to weak G2, not replication** — and
-  the disagreement is on the *same* endpoint, not across different ones. An earlier version of this
-  file called it "reported and replicated", which those citations do not support.
+  the disagreement is on the *same* endpoint, not across different ones. It is not
+  "reported and replicated": those citations do not support that.
 
   **The decisive counterexample is a different drug, and naming it makes the rail stronger rather
   than weaker.** **Setmelanotide** is a peptide whose approved indication is *gated on genotype*:
@@ -93,12 +93,11 @@ Nearly nothing clears both. The honest consequence:
   checking against the label, because if it holds it is the single real exception to this skill's
   VUS rail:** a secondary drug-profile source describes the gate as admitting variants interpreted
   as pathogenic, likely pathogenic **or of uncertain significance** — a weaker and more interesting
-  gate than "pathogenic only". *Prose-sourced and not confirmed against the label here; read the
+  gate than "pathogenic only". *Prose-sourced and not confirmed against the label; read the
   label before relying on it*
   ([approval announcement](https://www.biospace.com/rhythm-pharmaceuticals-announces-fda-approval-of-imcivree-setmelanotide-as-first-ever-therapy-for-chronic-weight-management-in-patients-with-obesity-due-to-pomc-pcsk1-or-lepr-deficiency)).
   That is a label-level gene–intervention pair — **G1 by this file's own definition, for a peptide** —
-  and it carries the point alone. (**Metreleptin is not a second example**, though an earlier version
-  of this file said it was: its approved indication is the complications of leptin deficiency in
+  and it carries the point alone. (**Metreleptin is not a second example**: its approved indication is the complications of leptin deficiency in
   *generalised lipodystrophy* — gated on a **phenotype**, with no gene named, and that condition is
   itself genetically heterogeneous.) A rail resting on "no peptide has gene-interaction evidence"
   would still be false on setmelanotide alone.
@@ -184,13 +183,12 @@ and the document's evidentiary standing was downgraded; describe it accordingly 
 "a practice guideline" indefinitely. The addendum is listed by title on the society's own
 practice-resources page and is **not** the same record as
 [PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) — **that is a correction notice *about* the
-addendum.** An earlier version of this file cited the erratum as its evidence for what the addendum
-said, inside the paragraph it calls the field's emblematic case.
+addendum.**
 
 The position is echoed in the thrombosis literature by a call to action arguing MTHFR should not form
 part of inherited-thrombophilia testing
 ([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)) — **a single-author commentary, so
-"multiple professional bodies concur" overstated what that citation carries.** The clinical-utility
+it does not show that multiple professional bodies concur.** The clinical-utility
 question has also been revisited
 ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
 
@@ -206,8 +204,8 @@ genotype's effect size.
 that did not close:** a modest reduction in **stroke** does survive pooling in that literature, and
 stroke is also the one endpoint where the homocysteine Mendelian-randomisation work has shown
 anything. A blanket "no cardiovascular benefit" erases it. *(No identifier ships with this paragraph:
-the review previously cited here did not re-resolve on re-check, and the Cochrane review of
-homocysteine-lowering interventions is the record to retrieve when a resolver is reachable. The
+the Cochrane review of homocysteine-lowering interventions is the record to retrieve when a
+resolver is reachable. The
 pooled figures are prose-sourced either way.)*
 
 The methylfolate-protocol industry built on MTHFR is **G3 at best and largely G4**. If a person
@@ -215,7 +213,7 @@ arrives already taking a stack because of an MTHFR result, the useful service is
 delivered without contempt, because they were sold this by people who sounded authoritative.
 
 **Three boundaries the correction must carry, because without them it can be heard as advice to stop
-folate.** All three were missing from this file until a safety review named them:
+folate.**
 
 1. **Ring-fence periconceptional folic acid.** It is recommended for anyone who could become
    pregnant **regardless of MTHFR genotype**, and nothing in this correction touches it. "The
@@ -234,10 +232,10 @@ folate.** All three were missing from this file until a safety review named them
 | :--- | :--- | :--- |
 | **HFE** C282Y homozygous (confirmed) | Changes iron advice in the *opposite* direction to the default — avoid iron supplementation, and get iron studies. One of the few places a genotype genuinely redirects a supplement decision | G2 / **T3** — the downgrade is honest rather than pedantic: there is no randomised trial of iron-supplement avoidance with hard outcomes in C282Y homozygotes, and the evidence is cohort, registry and mechanistic |
 | **G6PD** deficiency (confirmed) | **An avoidance list is only useful if it names things, and this is the supplements table, so name the supplement first: high-dose or intravenous vitamin C.** Published haemolysis cases on high-dose vitamin C are concentrated in G6PD deficiency, including a fatal one and cases of methaemoglobinaemia with haemolytic anaemia, and authors have proposed G6PD deficiency as a contraindication to high-dose vitamin C therapy — a mass-market supplement and an IV-clinic staple, which makes this the one row here where naming the item could prevent a crisis. Then the drugs (`pharmacogenomics.md` §4 carries them): rasburicase, contraindicated; primaquine and tafenoquine, dapsone, nitrofurantoin, methylene blue. And fava beans. **Avoidance, not supplementation** | G1 / **T3** — case series and pharmacovigilance, because a randomised trial of oxidant-trigger avoidance in deficient people would be unethical. **Say why the tier is unachievable rather than borrowing a higher one** |
-| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it. **Name the genotype that carries the risk, because it is not the obvious one: heterozygotes.** One inactive allele clears acetaldehyde poorly but leaves alcohol tolerable enough to keep drinking; homozygotes usually self-limit. In meta-analysis the heterozygote-plus-heavy-drinking combination carried a large elevated risk while heterozygotes who drink little or not at all showed no significant elevation — effect modification, not a bare association *(figures prose-sourced; ship the direction)* | **G2** / **T3** for the behaviour — **regraded on both axes.** T1 was wrong because the evidence for alcohol reduction with hard outcomes is observational plus Mendelian randomisation, not randomised. And G3 was wrong because: this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which contradicted both the action in the cell beside it and `variant-catalog.md`'s own entry |
+| **ALDH2** rs671 | Strengthens the case for reducing alcohol. No supplement addresses it. **Name the genotype that carries the risk, because it is not the obvious one: heterozygotes.** One inactive allele clears acetaldehyde poorly but leaves alcohol tolerable enough to keep drinking; homozygotes usually self-limit. In meta-analysis the heterozygote-plus-heavy-drinking combination carried a large elevated risk while heterozygotes who drink little or not at all showed no significant elevation — effect modification, not a bare association *(figures prose-sourced; ship the direction)* | **G2** / **T3** for the behaviour — not T1, because the evidence for alcohol reduction with hard outcomes is observational plus Mendelian randomisation, not randomised; and not G3, because this is the textbook replicated gene–*environment* interaction, where genotype modifies the effect of an exposure. G3 means "associated with the outcome, modifies no response", which would contradict both the action in the cell beside it and `variant-catalog.md`'s own entry |
 | **MCM6/LCT** rs4988235 | Explains lactose intolerance — **in European ancestry only.** This variant tags the European lactase-persistence haplotype; independent persistence alleles exist elsewhere, so a "non-persistent" call outside that ancestry is frequently a **false negative**. Dietary choice follows symptoms, which the person already knows | G2 / T2 |
-| **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions, and the second is the reverse of what an earlier version of this file said: sensitivity is high but **not** 100%, so do not promise a perfect rule-out — and **diet does not affect this test.** Serology and biopsy go falsely negative once gluten has been withdrawn; a genotype does not change with diet, **which is exactly why HLA typing is the usable rule-out in someone already eating gluten-free, and why it can spare them a gluten challenge.** Telling such a reader the test is uninterpretable removes their one usable option and pushes them toward a challenge that has real symptomatic cost | G2 / T2, as a rule-out |
-| **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. **The reported direction is *higher* measured serum B12 in non-secretors — which would make a normal B12 weaker reassurance in one — but that direction could not be confirmed against a retrieved record here, so treat it as unverified rather than as the finding.** "Different" alone is unactionable; an unverified direction, labelled, is at least a question someone can take to a clinician. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
+| **Celiac HLA-DQ2/DQ8** | **A rule-out and nothing else, and the asymmetry is arithmetic.** At 1% prevalence with 30–40% population carriage, NPV stays above 99.9% while PPV never exceeds about 3.5% — so a negative makes coeliac disease very unlikely and a positive says almost nothing, because up to 40% of everyone carries it. Two cautions: sensitivity is high but **not** 100%, so do not promise a perfect rule-out — and **diet does not affect this test.** Serology and biopsy go falsely negative once gluten has been withdrawn; a genotype does not change with diet, **which is exactly why HLA typing is the usable rule-out in someone already eating gluten-free, and why it can spare them a gluten challenge.** Telling such a reader the test is uninterpretable removes their one usable option and pushes them toward a challenge that has real symptomatic cost | G2 / T2, as a rule-out |
+| **FUT2** secretor status | **Flips the usual story: it changes the MEASUREMENT, not the requirement.** Non-secretors run different serum B12 levels for the same intake, so the variant is a reason to interpret a *lab value* differently rather than to supplement. **The reported direction is *higher* measured serum B12 in non-secretors — which would make a normal B12 weaker reassurance in one — but that direction could not be confirmed against a retrieved record, so treat it as unverified rather than as the finding.** "Different" alone is unactionable; an unverified direction, labelled, is at least a question someone can take to a clinician. That makes it one of the few panel variants with a genuine use — and the use is on the test, not the person | G2 / T2 for interpretation |
 | **Confirmed deficiency on a blood test** | The actual basis for supplementing — and it is a *measurement*, not a genotype | — / T1–T2 |
 
 **The pattern worth stating plainly: measure, don't infer.** Serum 25-OH-D beats any vitamin D
@@ -264,16 +262,15 @@ assessment is structural: **grade the class, name what is actually established, 
 **and the dual GIP/GLP-1 agonist tirzepatide** are approved medicines with large randomised trials — **T1, approved**. That is what real evidence
 for a peptide looks like, and every class below should be read against it; the gap is large.
 
-**But do not lump them, because their outcome evidence is not the same *shape*** — which is the
-honest statement, and not the one an earlier version of this file made: that tirzepatide had no
-equivalent outcome trial. It does. Semaglutide has a placebo-controlled cardiovascular-outcome trial
+**But do not lump them, because their outcome evidence is not the same *shape*.**
+Tirzepatide does have outcome trials. Semaglutide has a placebo-controlled cardiovascular-outcome trial
 reporting superiority on major adverse cardiovascular events in a broad at-risk population.
 Tirzepatide's placebo-controlled hard-outcome evidence sits in a **specific** population —
 obesity-related heart failure with preserved ejection fraction, where the SUMMIT trial (n = 731)
 reported a reduction in the composite of cardiovascular death or worsening heart failure, driven by
 the heart-failure component
 ([society trial summary](https://www.acc.org/Latest-in-Cardiology/Articles/2024/11/13/21/17/sat-959am-summit-aha-2024);
-*the primary publication's identifier did not resolve here, so the trial is named rather than cited
+*the primary publication's identifier did not resolve, so the trial is named rather than cited
 with a reconstructed PMID*).
 
 Its **general-population** cardiovascular-outcome trial is a different animal again: run against an
@@ -284,8 +281,7 @@ between the two drugs.
 
 **So both support a cardiovascular-benefit claim, and what differs is the population and the
 comparator.** Check each drug's own outcome evidence rather than inheriting it from the class — the
-same error as inheriting a guideline across a gene–drug pair, and one this paragraph committed while
-teaching against it.
+same error as inheriting a guideline across a gene–drug pair.
 
 Their genetic evidence is **G2 at best and not usable** (§2): a genotype does not select them.
 
@@ -302,7 +298,7 @@ sustained IGF-1 elevation. **G4.**
 
 **Label provenance for tesamorelin — and a provenance distinction worth keeping.** A search channel
 can establish a document's **identity** without returning a word of its **content**, and those are
-two different grades. Both were tested here, and the result is mostly the second:
+two different grades. The result for tesamorelin is mostly the second:
 
 - **Verified with title (a secondary host of the label, not the label):** `Egrifta SV Prescribing
   Information` ([drugs.com/pro/egrifta-sv.html](https://drugs.com/pro/egrifta-sv.html)) and
@@ -320,9 +316,9 @@ two different grades. Both were tested here, and the result is mostly the second
   the 1 mg-per-vial and 2 mg-per-vial products differ in dosage, number of vials per dose,
   reconstitution and storage, and therefore carry **separate labels**. So "the tesamorelin label" is
   not a thing that exists: any quotation has to name the product. (A third, later-marketed name
-  appears in secondary sources; it did not return here and is not asserted.)
-- **UNAVAILABLE here:** the label of record itself. `accessdata.fda.gov` and `dailymed.nlm.nih.gov`
-  fail at **DNS** in this environment — not TLS, not 403 — so no primary label text is fetchable, and
+  appears in secondary sources; it did not return and is not asserted.)
+- **Label of record unavailable.** Where `accessdata.fda.gov` and `dailymed.nlm.nih.gov` fail at
+  **DNS** from your environment (not TLS, not 403), no primary label text is fetchable, and
   no DailyMed SPL set ID is quoted here, because an identifier this channel never returned is not
   one to write down. Read the current label by product name at DailyMed or FDA, and take the exact
   indication sentence, the contraindications, the malignancy warning and anything about the effect
@@ -331,15 +327,14 @@ two different grades. Both were tested here, and the result is mostly the second
   resolve — [20101189](https://pubmed.ncbi.nlm.nih.gov/20101189/) (a PubMed URL returned) and
   20554713 (only a mirror returned, titled merely "Journal Article") — but **neither record's title
   came back in a result link**, only in generated prose. Under §0 of `variant-catalog.md` that is
-  `url-only`: the identifiers exist, what the papers *are* is unestablished here, and the trial
+  `url-only`: the identifiers exist, what the papers *are* is unestablished, and the trial
   design read out of that prose is therefore not reported. Resolve them before citing either.
 
-*Two live observations, recorded because they are this file's own hazards happening rather than
-being described.* The generated prose **contradicted itself inside one session** — asserting a
-pregnancy contraindication, then saying it could not confirm one, then asserting it again, and
-answering a question about visceral adipose tissue with a trunk-fat figure. And the searches
-surfaced **peptide-vendor wikis and supplier "research" pages** among the results for a prescription
-drug, which is the vendor-dominated-search hazard §5 warns about, arriving unprompted. Both are
+*Two hazards seen in practice.* Generated search prose can **contradict itself inside one
+session** — asserting a pregnancy contraindication, then saying it could not confirm one, then
+asserting it again, and answering a question about visceral adipose tissue with a trunk-fat figure.
+Searches can also surface **peptide-vendor wikis and supplier "research" pages** among the results
+for a prescription drug, which is the vendor-dominated-search hazard §5 warns about. Both are
 reasons the grades above are stated flatly instead of hedged.
 
 **This class spans three different regulatory categories, and collapsing them is a real error:** a
@@ -354,8 +349,8 @@ of this market on evidence *availability*. What it found is the point: fat-free 
 functional outcomes were not demonstrated, and glucose handling worsened.** So the best-studied
 member of the class moved a surrogate (T2) while raising a metabolic concern, and the honest reading
 is a negative one. *The specific effect sizes are not quoted here: they appeared only in secondary
-summaries that disagreed with each other, and the primary record was not retrievable in this
-environment — read them from the paper.*
+summaries that disagreed with each other, and the primary record could not be retrieved —
+read them from the paper.*
 
 **BPC-157.** Marketed heavily; evidence overwhelmingly preclinical (**T4–T5**) — one systematic
 review of the literature included 36 studies of which **35 were preclinical and 1 clinical**, a ratio
@@ -368,12 +363,11 @@ significant safety risks** in compounding
 reviews at [PMC12313605](https://pmc.ncbi.nlm.nih.gov/articles/PMC12313605/) and
 [PMC12446177](https://pmc.ncbi.nlm.nih.gov/articles/PMC12446177/)).
 
-**State this substance's OWN documented concerns, which an earlier version of this file got wrong by
-importing another peptide's.** The concerns recorded for BPC-157 are about **identity and
+**State this substance's OWN documented concerns, not another peptide's.** The concerns recorded for BPC-157 are about **identity and
 characterisation**: it has no standardised pharmacopoeial name, and the review found missing
 characterisation data — impurities, aggregates, bioburden, bacterial endotoxins. *Immunogenicity by
 route of administration* is the stated rationale for a different nominated peptide, and attaching it
-here was a misattribution. **The category, the nomination status and the stated rationale have all
+here would be a misattribution. **The category, the nomination status and the stated rationale have all
 moved over time, and they are per-substance — re-check the live source rather than quoting this
 paragraph, and never carry one substance's rationale across to another.** **G4.**
 
@@ -387,8 +381,7 @@ warns about twice** ("peptide is not a regulatory category"). Taken separately:
 **Melanotan I is afamelanotide, an APPROVED product with a narrow indication** — reducing
 phototoxicity in erythropoietic protoporphyria, authorised on randomised placebo-controlled
 evidence. Its regulatory status is "approved, narrow indication" and its tier for the approved use is
-**T1/T2**, not unapproved and not T6; an earlier version of this file graded it as grey-market
-alongside melanotan II. **Material sold online as "melanotan I" is not that product.** The approved
+**T1/T2**, not unapproved and not T6. **Material sold online as "melanotan I" is not that product.** The approved
 product's own labelling calls for periodic full-body skin examination — which is the monitoring the
 naevus signal below actually implies.
 
@@ -396,7 +389,7 @@ naevus signal below actually implies.
 signal attaches to: the case report cited below is titled for melanotan II specifically. It carries
 a specific, concrete concern about naevi that distinguishes it from the
 "unproven but probably inert" category: published case reports describe **eruptive naevi and
-darkening of pre-existing naevi after use**, now with three records each carrying its returned
+darkening of pre-existing naevi after use**, three records, each with its returned
 title:
 
 - *"Eruptive naevi and darkening of preexisting naevi 24 h after a single mono-dose injection of
@@ -418,10 +411,8 @@ documented naevus change and no established causal link to melanoma. **The actio
 review, not reassurance** — and for the *approved* melanotan I product, periodic full-body skin
 examination is what its own labelling calls for.
 
-*Citation history, kept because the corrections went both ways.* Two identifiers were withdrawn from
-this sentence when a pass could not resolve them; a later re-source returned `PMC3663356` **with its
-title**, so it is restored — and it is a different journal from the one that pass named. The other
-withdrawal stands and was sharpened: `10.2340/00015555-1130` is a letter about *nomenclature* —
+`PMC3663356` is cited with its returned title. `10.2340/00015555-1130` is not cited: it is a
+letter about *nomenclature* —
 which molecule the street name denotes — while **`10.2340/00015555-0928`** is the naevus letter. Two
 adjacent DOIs at one journal, one on point and one not (`variant-catalog.md` §0). **State
 what this evidence is and is not:** case reports establish temporal association, not causation — a
@@ -437,9 +428,8 @@ randomised placebo-controlled trials behind it
 [PMID 27181790](https://pubmed.ncbi.nlm.nih.gov/27181790/) dose-finding RCT;
 [PMID 31599847](https://pubmed.ncbi.nlm.nih.gov/31599847/) long-term extension;
 [PMC6819021](https://pmc.ncbi.nlm.nih.gov/articles/PMC6819021/), which reports **both** phase 3
-trials in one paper — so the adjacent ID an earlier version cited beside it was withdrawn). So it is **T1/T2 for its
-licensed indication, approved** — not a grey-market unknown, and an earlier version of this file
-misclassified it. **Two things follow, and the second is the one that matters:** the licensed
+trials in one paper). So it is **T1/T2 for its
+licensed indication, approved** — not a grey-market unknown. **Two things follow, and the second is the one that matters:** the licensed
 indication is narrow and the published effect sizes are modest, and **material sold online as
 "PT-141" is not the approved product** — it is the same molecule name attached to an unregulated
 supply chain, which is the product-integrity problem below (item 1) rather than an efficacy question. **G4.**
@@ -455,9 +445,7 @@ addresses — followed by a fourth item that is a *method* rail rather than a ri
    authority for human therapeutic use** — which is what a research-only peptide is, whatever its
    pharmacology. **Read that class as residual, not as an overlap:** it covers what no other
    section addresses, so a growth-hormone secretagogue is caught by the peptide-hormone section
-   rather than by the catch-all, and the two are mutually exclusive by construction. (An earlier
-   version of this item said the catch-all "sweeps in most of this market", which the list's own
-   structure makes doubtful.) Either way the conclusion stands: **"it isn't on the named-substance
+   rather than by the catch-all, and the two are mutually exclusive by construction. Either way the conclusion stands: **"it isn't on the named-substance
    list" is not a defence.** Check the edition in force. **Name both
    mechanisms and send an athlete to the current published list** — the list is versioned and the
    edition in force changes.
@@ -466,7 +454,7 @@ addresses — followed by a fourth item that is a *method* rail rather than a ri
 4. **A hazard in the research step itself, which is this skill's own exposure.** For grey-market
    peptides the searchable literature is **outnumbered by vendor content** — clinic pages, supplement
    wikis and seller "research" write-ups that imitate the form of evidence and are what a search
-   returns first. Three consequences, all of which bit while this file was being verified: a search
+   returns first. Three consequences, all of which can occur: a search
    summary can be built almost entirely from commercial sources; the same figure appears in several
    vendor pages with different values, creating false corroboration; and the primary regulatory
    sources that would settle it are often unreachable. **So for this class, restrict the search to
@@ -495,8 +483,7 @@ genome will suggest.
 **T1 for hard outcomes** — long-term mortality, events, and major mobility disability as a function
 endpoint. **Sleep duration and regularity, and alcohol reduction, sit at T3**: large and consistent
 observational evidence, with randomised work limited to surrogate endpoints such as blood pressure.
-An earlier version of this paragraph graded all five T1, inflating the tier in the file's own
-favoured direction — the error it polices everywhere else. All five apply **regardless of
+All five apply **regardless of
 genotype**, which is the actual point, and none becomes better supported by being
 genotype-tailored. `coding-agent-skills:fitness-nutrition-science` owns the training and nutrition detail;
 this skill's job is to avoid implying that a genotype-tailored variation on them is better supported

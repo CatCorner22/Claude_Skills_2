@@ -10,7 +10,7 @@ Books and articles that make you better at this work, grouped by what you are tr
 - §4 How communication distorts findings
 - §5 Appraisal and reporting instruments — two different families
 - §6 Contested works: cite the dispute, not just the work
-- §7 What was dropped, and why
+- §7 What is not cited, and why
 
 ---
 
@@ -158,17 +158,16 @@ Presenting a disputed source as settled is exactly the failure this skill grades
   "Darrell Huff and Fifty Years of How to Lie with Statistics", DOI 10.1214/088342305000000205.
   Cite the symposium beside the book.
 
-## §7 What was dropped, and why
+## §7 What is not cited, and why
 
-The drops are as informative as the keeps, because they show the standard being enforced.
+The omissions show the standard being enforced.
 
 - **Nuovo, Melnikow & Chang, on reporting NNT and absolute risk reduction in RCTs (JAMA 2002)** —
-  dropped. A domain-restricted PubMed search returned ten unrelated records and no matching PMID,
+  not cited. A domain-restricted PubMed search returned ten unrelated records and no matching PMID,
   while the generated summary confidently supplied a volume and page range. That is precisely the
-  fabrication pattern §0 describes: perfectly formed, entirely unsupported. It would have been the
-  easiest entry in this file to include and nobody would have questioned it.
+  fabrication pattern §0 describes: perfectly formed, entirely unsupported.
 - Two further well-known candidate books failed to resolve to a catalogue record matching both
-  author and title, and were dropped rather than cited from memory.
+  author and title, and are not cited from memory.
 
 If you extend this list, extend the standard with it: **an entry that cannot be resolved to a
 retrieved record does not go in, however confident you are that it exists.**

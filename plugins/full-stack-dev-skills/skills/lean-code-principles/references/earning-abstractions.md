@@ -69,9 +69,9 @@ done
 echo "$both / $total commits touched both"
 ```
 
-Read the ratio. The bands below are a reading heuristic — the reasoning for the floor is
-given underneath, but the cut points are not a measured result and should be moved if your
-repo's commit granularity differs:
+Read the ratio. The bands below are a reading heuristic. The reasoning for the floor is
+given underneath, but the cut points are not a measured result: move them if your repo's
+commit granularity differs.
 
 | Shared-edit ratio | Reading | Do |
 |---|---|---|

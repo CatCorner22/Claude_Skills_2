@@ -73,9 +73,8 @@ trials, before condemning or clearing a measurement system on a boundary reading
 reason, %GRR moving from 12% to 9% after a change is not by itself evidence the change worked. The
 thresholds sort; they do not adjudicate a close call.
 
-One arithmetic consequence worth knowing before you quote both numbers as independent evidence:
-when %GRR is taken against **study** variation, ndc = 1.41·√(1 − %GRR²)/%GRR, so the two criteria
-are the same fact twice — ndc ≥ 5 holds exactly while %GRR ≤ ~27%, and a 30% %GRR necessarily
+Before quoting both numbers as independent evidence: when %GRR is taken against **study**
+variation, ndc = 1.41·√(1 − %GRR²)/%GRR, so the two criteria are the same fact twice — ndc ≥ 5 holds exactly while %GRR ≤ ~27%, and a 30% %GRR necessarily
 returns ndc = 4. The last row therefore only bites independently when %GRR is quoted against
 **tolerance** (where spec width, not part spread, is the denominator). Say which convention you
 used; otherwise "%GRR 28% but ndc 6" is arithmetically impossible and signals a mixed calculation.
@@ -233,17 +232,17 @@ show two engine runs and two human reviewers agree on what counts as "a match" �
 ## 5a. What counts as a repeat trial for an LLM judge
 
 Repeatability means **the same operator measuring the same part again under the same conditions**.
-Everything in a gage study depends on that "same conditions," and for an LLM judge it is easy to
-break in either direction. Two opposite traps, both of which produce a number that looks like
-repeatability and is not:
+Everything in a gage study depends on those "same conditions," and an LLM judge breaks them
+easily in either direction. Two opposite traps produce a number that looks like repeatability and
+is not:
 
-**A note on all three traps below: check which knobs your model actually has.** Several current
+**A note on both traps below: check which knobs your model actually has.** Several current
 generations reject `temperature`/`top_p`/`top_k` outright — the API errors rather than honouring
 them (`coding-agent-skills:prompt-engineering` carries the detail). On those models the gauge's
 settable parameters are the prompt and rubric version, the effort/thinking configuration, the
-context policy, and the model version. Every trap below holds with those substituted for
-"temperature": trap 1 is *any* configuration change between trials, trap 2 is any setting that
-manufactures determinism, and trap 3 is any mismatch with production. Where the knob does exist,
+context policy, and the model version. Both traps below hold with those substituted for
+"temperature": trap 1 is *any* configuration change between trials, and trap 2 is any setting that
+manufactures determinism. Where the knob does exist,
 read the traps literally.
 
 **Trap 1 — varying temperature between trials measures a different system, not the same one twice.**
@@ -286,9 +285,8 @@ which is precisely what §1's randomization rule already prescribes for parts:
 
 ## 5b. Operator-specific biases of an LLM judge, and their MSA controls
 
-If an LLM judge is an operator, then it has operator pathologies — and the useful thing about the MSA
-frame is that it already contains the controls; they just have to be pointed at the right failure.
-Three are well documented in the LLM-as-judge literature (Zheng et al., "Judging LLM-as-a-Judge with
+An LLM judge is an operator, so it has operator pathologies, and the MSA frame already holds the
+controls; point them at the right failure. Three are well documented in the LLM-as-judge literature (Zheng et al., "Judging LLM-as-a-Judge with
 MT-Bench and Chatbot Arena," which names position, verbosity and self-enhancement bias plus limited
 reasoning as the method's core limitations) [snippet-only, cross-checked]:
 

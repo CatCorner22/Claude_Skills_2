@@ -10,7 +10,7 @@ description: >-
   to test hardest. Triggers: FMEA, failure modes, failure mode and effects analysis, severity
   occurrence detection, action priority, RPN, risk priority number, rank what could go wrong.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # FMEA (failure mode and effects analysis)

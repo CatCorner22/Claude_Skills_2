@@ -111,7 +111,7 @@ Nebula sells whole-genome sequencing with full Y-chromosome and mitochondrial co
 delegates the deep-ancestry analysis to YFull: customers transfer Y and mtDNA data, receive the
 terminal Y haplogroup and tree position free, and pay to unlock the full report with SNPs, STRs
 and matches; YFull's servers are stated to be in Russia [snippet-only — vendor blog]. No
-reachable page documents the reference panel, algorithm, population count or confidence behind
+page located documents the reference panel, algorithm, population count or confidence behind
 Nebula's autosomal "ancestry breakdown", and a community source reports a change of laboratory
 process after 2024 that may have reduced coverage [snippet-only — single unverified source].
 

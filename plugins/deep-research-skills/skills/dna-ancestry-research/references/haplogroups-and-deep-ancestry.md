@@ -3,9 +3,9 @@
 The uniparental lines are the one place a consumer file supports a precise, reproducible claim —
 provided the claim is made at the depth the data reaches and named on a stated tree. This file
 gives the recipes, what every output column means, and how to build a dated migration ladder
-from published sources. The recipes were run end to end while building this skill (HaploGrep 3
-version 3.3.2; Yleaf 4.1.5) on a real chip export; the ages and distributions in §5 come from
-secondary sources and search excerpts and carry provenance marks.
+from published sources. The recipes were tested end to end on a real chip export with HaploGrep 3
+version 3.3.2 and Yleaf 4.1.5. The ages and distributions in §5 come from secondary sources and
+search excerpts and carry provenance marks.
 
 ## Contents
 - [§1 Build safety and the reference question](#1-build-safety-and-the-reference-question)
@@ -36,7 +36,7 @@ MIT-licensed tree repository) and checks its length and checksum before use.
 
 **Install.** HaploGrep 3 is MIT-licensed and needs Java 11 or later [snippet-only]. Download the
 release archive (`haplogrep3-<version>-linux.tar.gz`) from the project's GitHub releases page,
-unpack it, and run `./haplogrep3 trees` to see which trees are present; the archive tested here
+unpack it, and run `./haplogrep3 trees` to see which trees are present; the archive tested
 carried `phylotree-rcrs@17.3`, and `./haplogrep3 install-tree phylotree-rcrs@17.3` adds it when it is missing. Say
 "PhyloTree 17.3 as distributed by HaploGrep" in the report — the 17.x point releases are the
 distributor's maintained corrections to the 2016 Build 17, not new upstream builds [snippet-only].
@@ -117,9 +117,9 @@ call); `haplogroup_path_<tree>.json` is the path from the root to the terminal n
 node's state — the direct source for a migration ladder, because it shows which nodes the chip
 actually observed; `report.<tree>.json` is the machine-readable summary; `.info` gives the marker
 accounting. An example run on a current 23andMe export observed about two thousand markers with
-haplogroup information and landed on the same terminal marker the vendor's own report named —
-which is the point of the exercise: an independent, reproducible call on three current trees,
-with the marker evidence on disk, rather than a label taken on trust.
+haplogroup information and landed on the same terminal marker the vendor's own report named.
+That is the aim: an independent, reproducible call on three current trees, with the marker
+evidence on disk, rather than a label taken on trust.
 
 **Depth.** A chip resolves to the last probed derived node. Report "<label on each tree>
 (terminal marker <M>) — subclade unresolved by chip", and name the sequencing test that would

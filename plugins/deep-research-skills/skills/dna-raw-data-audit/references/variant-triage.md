@@ -56,8 +56,8 @@ panels have since published specifications and refinements for particular criter
 [PMC6709533](https://pmc.ncbi.nlm.nih.gov/articles/PMC6709533) on reputable-source criteria;
 [PMC6225902](https://pmc.ncbi.nlm.nih.gov/articles/PMC6225902/) on expert-panel processes).
 
-*Citation note: the originating framework paper did not resolve to a retrieved record in this
-environment, so it is referenced by name with the resolvable specification literature above rather
+*Citation note: the originating framework paper did not resolve to a retrieved record, so it is
+referenced by name with the resolvable specification literature above rather
 than with an identifier reconstructed from memory. See `variant-catalog.md` §0 for the standard.*
 
 **"Has a ClinVar entry" is not "is pathogenic".** ClinVar aggregates submitted interpretations, and
@@ -115,12 +115,10 @@ pathogenic variants: retrospective, population based diagnostic evaluation"*
 [PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/) /
 [BMJ 2021;372:n214](https://www.bmj.com/content/372/bmj.n214)). Its shape is the finding:
 
-*Two corrections recorded here rather than silently applied. **The PMID was wrong**: this file cited
-`33753354`, which resolves to nothing matching; a re-check returned `33589468` carrying the exact
-title, in two independent searches. **And the participant count was a self-inconsistency** — the
-paragraph below declines to quote percentages because they reached us only through search-tool prose,
-while the precise figure `49,908` reached us the same way. It is now stated as an approximation.
-Either both ship or neither does, and the rule has to bind the numbers an author likes too.*
+*`33753354` resolves to nothing matching and is not cited; `33589468` carries the exact title, in two
+independent searches. The participant count is approximate: percentages are not quoted because they
+reached the author only through search-tool prose, and the precise figure `49,908` reached it the
+same way. Either both ship or neither does.*
 
 - For **common** variants, chip genotyping performed **well** — sensitivity, specificity, PPV and NPV
   all above 99% across >100,000 common variants. Arrays are not broken.
@@ -135,8 +133,7 @@ exchange worth presenting as an exchange: a commentary
 ([PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/)) and a correspondence reply
 ([PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/)) — **that reply is authored from inside
 the company whose data was criticised, so it is a party's response rather than independent
-commentary, and an earlier version of this file listed both as "companion commentaries" without
-saying so.** A later analysis addresses the public-health consequence
+commentary.** A later analysis addresses the public-health consequence
 ([PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/)). Third-party interpretation
 adds its own error burden ([PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/)), and a
 professional-society committee opinion addresses consumer disease-risk testing directly

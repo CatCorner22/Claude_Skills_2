@@ -13,7 +13,7 @@ description: >-
   another way, find a way, figure it out yourself, it failed, can't access, won't install,
   download failed, blocked, what else could work.
 metadata:
-  version: "2.0.1"
+  version: "2.0.2"
   source: >-
     Built from the delegation-audit discipline (who does each step) and two sibling skills in
     this plugin — Comrade Engineer's state-the-outcome and hidden-cost test, The Foreman's
@@ -149,7 +149,7 @@ route (fit the canister), and built and tested the adapter before reading the pr
 crew [canon attribution — NASA's Apollo 13 mission accounts; details: background — verify].
 Inventory, outcome, test, and hand over only what truly needs the person: that is the loop.
 
-**Why a fast path first.** A benchmark of this skill's 1.x versions against an unaided agent on
+**Why a fast path first.** A benchmark of a ledger-first process against an unaided agent on
 blocked-route tasks found the same or worse outcomes at more than twice the time:
 listing five routes and checking each for hidden costs before trying the obvious one was ceremony
 when the second door was open. Step 4 keeps the breadth, but you pay for it only when

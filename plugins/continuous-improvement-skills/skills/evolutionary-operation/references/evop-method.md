@@ -90,7 +90,7 @@ Each cycle yields one estimate of each effect, so after n cycles you have n repl
 - rule of thumb: act only when |effect| > **2 × SE** — the shop-floor bar. The familiar "≈ 95%
   two-sided" attached to 2×SE is the *large-sample* figure and does not survive small n: at
   n = 3 (df = 2) a ±2×SE interval covers about **82%**, not 95%, and the 95% t-critical is 4.30.
-  Quote the honest bar alongside it and say which one you used. Note also that a 2×2 phase tests
+  Quote the honest bar alongside it and say which one you used. A 2×2 phase also tests
   three effects (two mains plus the interaction), so at ~82% per-effect coverage the chance of at
   least one spurious signal in a phase is ~46% — which is why the bounded step size and the
   owner's ratification, not the bar alone, are what keep EVOP from tampering.

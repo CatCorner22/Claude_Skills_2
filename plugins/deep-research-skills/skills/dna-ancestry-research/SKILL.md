@@ -13,7 +13,7 @@ description: >-
   tree, genealogy, DNA matches, shared cM, GEDmatch, lineage map, migration map, ethnicity
   estimate, genetic genealogy.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   source: >-
     Built from a five-stream research pass (genetic-genealogy standards and ethics; what the vendor
     reports measure; haplogroup origins, ages and migration; open callers and map data with their

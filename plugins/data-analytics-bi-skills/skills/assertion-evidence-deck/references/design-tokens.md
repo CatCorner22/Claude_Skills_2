@@ -160,12 +160,12 @@ re-run the contrast arithmetic on whatever you find — a sanctioned color is no
 
 `scripts/build_deck.py` encodes the tokens for the slide kinds it builds. The neutral palette is
 the default; pass `--brand warm-accent` only when you must match that brand, and `--font` to
-override the typeface. The builder computes contrast on three pairs — ink-on-background, muted-on-background, and
-the accent used as text — and warns on stderr when one falls below its threshold.
-`--brand warm-accent` warns every run, because the accent as a magnitude number is 2.49:1; that
-warning is the tokens rule above speaking, and the fix is to label the value directly rather than to ignore it. Text placed on
-a filled shape is picked automatically as whichever of ink/background contrasts better with the
-fill.
+override the typeface. The builder computes contrast on three pairs (ink-on-background,
+muted-on-background, and the accent used as text) and warns on stderr when one falls below its
+threshold. `--brand warm-accent` warns every run, because the accent as a magnitude number is
+2.49:1. That warning is the tokens rule above speaking: label the value directly rather than
+ignore it. Text placed on a filled shape is picked automatically as whichever of ink/background
+contrasts better with the fill.
 
 When you build outside the script — editing a template, using the `pptx` skill directly — copy the
 geometry table above rather than eyeballing positions. Consistent placement across slides is most of

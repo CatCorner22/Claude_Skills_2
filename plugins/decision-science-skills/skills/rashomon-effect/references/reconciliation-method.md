@@ -167,7 +167,7 @@ of scope here: rival causal explanations go to
   important-vs-trivial and innocent-vs-intentional; vantage, stress, and perception
   limits recognized [snippet-only, ×4].
 
-## 9. Attribution corrected (film and story)
+## 9. Attribution (film and story)
 - Kurosawa's *Rashomon* (1950) takes its PLOT from Akutagawa's "In a Grove" (1922) —
   seven accounts of a samurai's death, compressed to four in the film — and only its
   TITLE and frame from Akutagawa's "Rashōmon" (1915), which has no testimony plot. The
@@ -179,7 +179,7 @@ of scope here: rival causal explanations go to
   (Anderson 2016; the Routledge volume *Rashomon Effects*, 2015) [snippet-only, ×3].
 - The film does not claim "there is no truth." Kurosawa's autobiography frames it as
   being about people unable to be honest with themselves, embellishing self-servingly
-  (direction well-supported [snippet-only, ×3]; exact wording unverifiable here — quote
+  (direction well-supported [snippet-only, ×3]; exact wording not verified — quote
   at claim level only). Each account is self-flattering; even the woodcutter's
   "objective" version is compromised (the dagger he evidently took); the ending is moral
   restoration. The effect names good-faith divergence, not deliberate lying

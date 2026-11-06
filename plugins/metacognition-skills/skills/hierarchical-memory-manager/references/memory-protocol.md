@@ -80,9 +80,8 @@ Every semantic entry is one idea, typed, with its provenance attached:
 - METHOD: current working method for <task> is <approach>. (updated <date>)
 - DIRECTIVE: <standing user instruction>. (user-stated <date>, standing)
 ```
-The parenthetical is not decoration. An entry that knows where it came from can be
-re-checked, weighed against a contradicting claim, and retired cleanly; a bare assertion
-can only be believed or ignored. This grammar is shared with the crystallizer's validation
+The parenthetical is required. An entry with a source can be re-checked, weighed against
+a contradicting claim, and retired cleanly; a bare assertion can only be believed or ignored. This grammar is shared with the crystallizer's validation
 gates — capture in this shape and the permanence pass gets cheaper.
 
 ## Session-start load ritual
@@ -122,13 +121,12 @@ original text stays for provenance:
 - FACT: <original statement>. (evidence: <source>; confidence: high)
   (UPDATE <date>: <what changed> — contradiction flagged, original kept for provenance.)
 ```
-Silent overwriting is the one unforgivable move: it destroys the audit trail that makes
-the store trustworthy. If the user resolves the conflict, update Semantic and log the
+Never overwrite silently: it destroys the audit trail that makes the store trustworthy. If the user resolves the conflict, update Semantic and log the
 resolution in Episodic so the change is traceable.
 
 ## Worked lifecycle example (one store, three stages)
-Genericized from this repository's real MEMORY.md — the store that maintains this library;
-the three stages below played out there across about three weeks, not three years.
+Genericized from this repository's real MEMORY.md, the store that maintains this library;
+the three stages below played out there across about three weeks.
 Swap the nouns for any role: matters for an attorney, vendors for an ops manager, clients
 for an analyst, services for a developer.
 

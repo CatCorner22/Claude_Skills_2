@@ -13,7 +13,7 @@ description: >-
   someone alter this after the fact, does our half fit their half, hash anchor, dual
   custody, evidence design, litigation hold, legal hold, spoliation, duty to preserve.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
   source: >-
     Built from the library's operational-wisdom research dossier
     (docs/research/epic-wave-held-research.md, Lane 1 entry 2: split tally sticks, English

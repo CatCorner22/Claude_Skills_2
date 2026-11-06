@@ -2,8 +2,8 @@
 
 Reusable structures and the fixes for the failures you'll actually hit. The *shapes* here are
 provider-agnostic; the *mechanisms* are not. Every mechanism named below was checked against the
-Claude API reference available in this environment (in Claude Code, the bundled `claude-api` skill),
-and each one differs by provider and by model generation — confirm yours before relying on it:
+Claude API reference (in Claude Code, the bundled `claude-api` skill). Each one differs by provider
+and by model generation, so confirm yours before relying on it:
 schema-constrained output, thinking/effort configuration, prompt caching, whether sampling
 parameters are accepted at all, and whether assistant-turn prefill is still permitted.
 
@@ -47,9 +47,9 @@ dropped — is a long-input failure, and placing the instruction after the mater
 answer. And this ordering is what prompt caching requires anyway (see *Where static content goes*):
 static material ahead of the varying question, or nothing is ever reused.
 
-One honesty note on the first reason: "it ignores the instruction because the input is long" is a
-hypothesis, not a law. Provider documentation for at least one model family states that instruction
-following, tool calling, and reasoning stay strong across a full million-token window — so if the
+The first reason is a hypothesis, not a law: "it ignores the instruction because the input is
+long". Provider documentation for at least one model family states that instruction following, tool
+calling, and reasoning stay strong across a full million-token window — so if the
 long-input reordering doesn't fix it, the cause is elsewhere (a buried instruction competing with a
 wall of same-priority bullets, a contradiction, or a missing criterion). Measure with repeat runs
 before and after the move; the caching payoff is the reason the layout is worth keeping either way.
@@ -102,7 +102,7 @@ structure. Budget them deliberately.
   is static, so it goes in the cached prefix and is read at a fraction of input price on every
   subsequent request. The in-context-learning literature reports blocks of dozens to hundreds
   outperforming a handful `[unverified here — the provider reference documents no number, and no
-  citation was checked in this environment]`. Treat block size as a factor to measure on your eval
+  citation was checked]`. Treat block size as a factor to measure on your eval
   set, not a setting to copy.
 - **Order and label balance** are reported to move classification-style outputs `[same hedge]`.
   Cheap to test: shuffle the example order, balance the counts per label, re-run with repeats. If
@@ -256,10 +256,9 @@ Caching changes prompt *layout*, so it belongs in prompt design rather than in a
 
 ## Patterns that aged out
 
-Kept as a list of *old patterns* rather than dated commentary, so it stays readable as the ground
-shifts. Each of these was correct advice for some model generation; each is now either superseded by
-a mechanism or actively harmful. Re-audit against your provider's reference — the boundary at which
-each changed is model-specific.
+Each of these was correct advice for some model generation; each is now either superseded by a
+mechanism or actively harmful. Re-audit against your provider's reference, because the boundary at
+which each changed is model-specific.
 
 | Old pattern | What replaced it |
 |---|---|

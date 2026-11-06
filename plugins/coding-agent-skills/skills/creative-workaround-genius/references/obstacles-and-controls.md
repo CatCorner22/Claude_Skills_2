@@ -20,7 +20,7 @@ each.
 Ask: **if the person or system that owns this barrier watched this route happen, would they
 object?** If yes, or if you cannot tell, it is a control, and the route goes to the owner.
 
-Two refinements make the test usable:
+Three refinements make the test usable:
 - **Read who refused.** The same "403" means different things when the origin server sent it
   (that path is restricted), when a proxy sent it (the destination is not permitted for this
   session), or when it is a rate limit (slow down; do not dodge). The probe's verdicts carry that
@@ -114,9 +114,9 @@ result. I tried A and B first; both hit the same control."
 
 ## §6 Hand-off protocol with a delegation audit
 
-A delegation audit (in this library's author environment, anthropic-skills:max-delegation-auditor)
-marks each step as the agent's, the agent's with consent, or the person's only. The two skills
-interlock at three points:
+A delegation audit (where available, anthropic-skills:max-delegation-auditor) marks each step
+as the agent's, the agent's with consent, or the person's only. The two skills interlock at
+three points:
 1. **Before execution.** For every step the audit leaves with the person, this skill asks whether
    the step is a control or merely an unfamiliar obstacle. Obstacles come back to the agent with a
    route ledger.

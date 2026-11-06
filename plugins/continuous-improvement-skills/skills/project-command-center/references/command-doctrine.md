@@ -1,7 +1,5 @@
 # Command doctrine — adaptive command, OODA, Toyota flow, co-design, writing
 
-Preserved near-verbatim from the source spec (project-command-center v1.0.0).
-
 Contents: §1 Adaptive command · §2 OODA, three nested loops · §3 Toyota-inspired flow ·
 §4 Co-design · §5 Writing discipline and the ambiguity audit · §6 Smart Brevity frame
 

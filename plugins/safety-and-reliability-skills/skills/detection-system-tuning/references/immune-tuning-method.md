@@ -148,8 +148,8 @@ A team's queue received 1,240 firings last quarter across 11 rules. Dispositions
 | R9 "no response in 48h" | 90 | 31 | 0 | 34% | 4% |
 
 Read the bands before the ranking. R4, R2, R9 and the tail are narrow — their floors are
-real numbers to tune on. **R7 is the trap.** On the old single-number method it tied R4 at
-96% and looked like the second-biggest noise source in the queue; in fact 141 of its 240
+real numbers to tune on. **R7 is the trap.** A single-number rate would put it at 96%, tied
+with R4, and make it look like the second-biggest noise source in the queue; in fact 141 of its 240
 firings were never opened by anyone, so all that is actually known is that its true rate lies
 somewhere between 38% and 96%. Ranked on *confirmed* noise it is not the second-biggest
 source — R2 is — and R7's real finding is that more than half its firings outran the humans.
@@ -176,8 +176,8 @@ Projected queue after the changes: roughly 500 live-queue firings/quarter (1,240
 removed at R4's source − 240 demoted to R7's digest), with the page tier gated
 on danger signals. The team then sets tolerance-list expiries for R4's newly-approved
 senders, books the R7 sample, and schedules the next audit — the numbers above are the
-baseline it will be measured against. Note what the band bought: on the old method R7 would
-have been retired as a 96%-autoimmune rule, and nobody would have learned whether those 141
+baseline it will be measured against. Note what the band bought: a single-number rate would
+have retired R7 as a 96%-autoimmune rule, and nobody would have learned whether those 141
 firings mattered.
 
 ## The tolerance-list template
@@ -271,7 +271,7 @@ infection: the system meets the change on historical data before it meets produc
 
 ## The fuel load
 
-Fire ecology's suppression bias, folded in per the research verdict: suppressing all small
+Fire ecology's suppression bias applies here: suppressing all small
 fires removes mild burning, accumulates fuel, and concentrates burning into extreme
 conditions — the suppressed fires are not prevented, they are banked (Nature
 Communications, 2024) [snippet-only].
@@ -295,8 +295,8 @@ the archived `continuous-improvement-skills:lean-six-sigma-for-software`.)
 
 ## Sources
 
-All marks [snippet-only]: claims cross-checked across independent WebSearch results; direct
-fetches were egress-blocked in the research sandbox. Per the library's research dossier
+All marks [snippet-only]: claims cross-checked across independent WebSearch results, not
+verified by direct fetch. Per the library's research dossier
 (docs/research/epic-wave-held-research.md, Lane 3, entry 1):
 
 - Joint Commission Sentinel Event Alert 50 (April 2013) — alarm-related adverse events and

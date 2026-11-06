@@ -151,8 +151,7 @@ process — a reviewer, a rule, a downstream system, a judge model — and every
 - **Do the study properly:** `continuous-improvement-skills:measurement-systems-analysis` runs the
   attribute-agreement study for pass/fail judgments (including LLM-as-judge scoring) and the crossed Gage
   R&R that splits repeatability (the same rater re-judging) from reproducibility (rater-to-rater), judged on
-  %GRR and distinct categories. That skill already describes itself as adding the inter-rater rigor on top
-  of this one; this is the return link — send label-quality questions there and bring the agreement numbers
+  %GRR and distinct categories. Send label-quality questions there and bring the agreement numbers
   back into the evaluation report.
 
 ## Leakage checklist

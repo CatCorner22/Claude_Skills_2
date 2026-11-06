@@ -13,7 +13,7 @@ description: >-
   which factors actually matter, orthogonal array, screening design, split-plot, Taguchi, robust
   design, one-factor-at-a-time is too slow.
 metadata:
-  version: "1.2.3"
+  version: "1.2.4"
 ---
 
 # Design of experiments

@@ -1,9 +1,9 @@
 # Grade targets, Adams rules, and the self-check
 
 §1 and §2 are preserved from the source spec (adams-plain-grade v1.0.0, 2026-08-04),
-organized for use. §5–§8 are house additions, and **§3 and §4 now carry house content too**
+organized for use. §5–§8 are house additions, and **§3 and §4 carry house content too**
 (the measurement mechanics and the discretion/obligation check in the self-check are not from
-the source) — so do not read this file as a verbatim record of the spec beyond §1–§2.
+the source). Do not read this file as a verbatim record of the spec beyond §1–§2.
 
 Contents: §1 Grade targets · §2 The Adams rules · §3 Measuring the grade · §4 Self-check ·
 §5 Where the targets come from · §6 Worked example (before/after) · §7 The plain-word
@@ -169,12 +169,12 @@ What the rewrite did, move by move:
 - **Meaning preserved, including the *category* of each statement:** the date, the requirement,
   the delivery channel, the safety rationale, and the fallback path all survive, and each stays
   the same *kind* of statement it was.
-- **The category check is the one this example nearly failed — run it explicitly.** The source
-  says alternative arrangements "**may be made**": that is discretion, and the company is not
-  bound. An earlier version of this rewrite read "Call us at 555-0100. **We will set up another
-  way for you**" — which is an *obligation*, and it hands the reader a commitment the source
-  never made. It reads better, it scores better, and it is a different document. The current
-  wording ("we **can** set up another way") keeps the discretion. Plain-language rewriting pulls
+- **Run the category check explicitly.** The source says alternative arrangements
+  "**may be made**": that is discretion, and the company is not bound. Writing "Call us at
+  555-0100. **We will set up another way for you**" would be an *obligation*, and it hands the
+  reader a commitment the source never made. It reads better, it scores better, and it is a
+  different document. The wording used ("we **can** set up another way") keeps the
+  discretion. Plain-language rewriting pulls
   toward the confident, concrete, active form, and the confident form of a discretion is an
   obligation — so on anything with legal or contractual weight, test every sentence for the
   category it belongs to before you certify that nothing changed. The categories, and which verb

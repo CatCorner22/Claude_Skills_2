@@ -118,16 +118,14 @@ The rule is positional, not a list of forbidden filenames. The version most peop
 denylist of the insides (`{"models", "routes", "rules"}`), and it quietly permits whatever filename
 someone adds next — including `service.py`, which is exactly where the public function's body lives.
 
-**Checking the dotted path alone is not enough, and the earlier version of this test was wrong to
-imply it was.** It claimed `from app.features.customers import <x>` "addresses the package —
-therefore `__init__.py`". That holds only when `<x>` is an attribute defined in `__init__.py`. When
-`<x>` is a *submodule*, Python's import system binds the submodule instead, so
-`from app.features.customers import models` reaches straight into the private module while
-`node.module` stays three parts long and a `len(parts) > 3` guard never fires. Verified on a real
-tree: with `invoices/service.py` importing `customers.models` and reading `models.Customer.email`,
-the original test reported **zero violations** while the private access genuinely worked. The
-`_submodule_names` lookup above closes it, and still passes the legitimate
-`from app.features.customers import contact_email`.
+**Checking the dotted path alone is not enough.** `from app.features.customers import <x>`
+addresses `__init__.py` only when `<x>` is an attribute defined there. When `<x>` is a *submodule*,
+Python's import system binds the submodule instead, so `from app.features.customers import models`
+reaches straight into the private module while `node.module` stays three parts long and a
+`len(parts) > 3` guard never fires. Verified on a real tree: with `invoices/service.py` importing
+`customers.models` and reading `models.Customer.email`, a dotted-path-only test reported **zero
+violations** while the private access genuinely worked. The `_submodule_names` lookup above closes
+the gap, and still passes the legitimate `from app.features.customers import contact_email`.
 
 Three things this does not catch, and the fix for each:
 
@@ -440,8 +438,8 @@ module still reads `os.environ` lazily on first use, so the app boots clean and 
 on the first request that touches that path. Pydantic reports all missing fields at once precisely
 so that a fresh deploy tells you everything wrong in one attempt.
 
-**Check 2 had a second way of quietly passing, and it is the reason the check is a script
-rather than a one-liner.** Written as `if env -i python -c "…"; then fail; fi`, the branch that
+**Check 2 can pass silently on a broken setup, which is why it is a script rather than a
+one-liner.** Written as `if env -i python -c "…"; then fail; fi`, the branch that
 means "passed" is simply *any non-zero exit* — and a typo'd import path, an uninstalled
 dependency, and a missing interpreter (rc=127) all exit non-zero, indistinguishable from the
 `ValidationError` the check exists to assert. With `2>/dev/null` on the end, nobody could see

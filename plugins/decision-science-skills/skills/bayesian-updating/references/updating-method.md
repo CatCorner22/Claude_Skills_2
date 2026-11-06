@@ -15,8 +15,8 @@ Belief revision is a loop, not an event:
 
 Every stage leaves a written trace. The prior is written *before* the evidence is read;
 the likelihood judgment is written *before* the posterior is computed; the posterior is
-logged with its triggering evidence. The writing is not bureaucracy — it is what prevents
-the silent prior-swap that vivid evidence performs on unrecorded beliefs (§8).
+logged with its triggering evidence. The writing is not bureaucracy; it prevents the silent prior-swap
+that vivid evidence performs on unrecorded beliefs (§8).
 
 ## 2. Setting the prior (reference-class handoff)
 
@@ -169,7 +169,7 @@ in doubt, name the band, not the number.
 Use the grades as *vocabulary*, not as a computation mandate: the point is to be able to
 say "this witness/result/metric is maybe a 3, not a 100" in a meeting, out loud, before
 anyone treats it as decisive. Two practical corollaries:
-- Most evidence people argue loudest about grades out around 2–3 — real, mentionable,
+- Most evidence people argue loudest about grades around 2–3: real, mentionable,
   nowhere near settling.
 - A "highly reliable" single source rarely justifies an LR above ~20 once its own error
   modes are priced in; LRs of 100+ usually come from *convergent independent* lines, not
@@ -305,8 +305,8 @@ large enough that historians debate near-co-authorship [snippet-only, incl. Roya
 and the Diniz *Significance* piece "Bayes and Price: when did it start?"].
 
 Why the history sits in a methods file: "Bayes' theorem" is a textbook case of Stigler's
-law (discoveries named for someone other than their discoverer), and a skill whose whole
-content is *revising beliefs to fit evidence* should not open on an attribution it knows
+law (discoveries named for someone other than their discoverer), and a skill about
+*revising beliefs to fit evidence* should not open on an attribution it knows
 to be folklore. The history is also a working example of the method: the folk prior
 ("Bayes wrote Bayes' theorem") meets documentary evidence (posthumous publication, Price's
 editing, Laplace's generalization) and yields a revised posterior. Updating applies to
@@ -333,7 +333,7 @@ one's own citations first.
 - The catch-all problem is a standard point about Bayes' theorem's normalizing denominator rather
   than a single-source claim; the hypothesis-enumeration discipline is credited in-library to
   `decision-science-skills:competing-hypotheses-analysis` (Heuer lineage).
-- All worked arithmetic in §4, §5, and §8 recomputed at authoring time and re-verified on revision:
+- Worked arithmetic in §4, §5, and §8, recomputed:
   180/1,160 = 9/58 ≈ 15.5%; 12/29 ≈ 41.4%; 36/(36+49) ≈ 42.4%; the §5 compounding table —
   3⁴ = 81, 81/130 ≈ 62.3%; 1.5⁴ = 5.0625, 5.0625/54.0625 ≈ 9.4%; odds-ratio error 81/5.0625 =
   16 = 2⁴.

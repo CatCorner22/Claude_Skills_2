@@ -129,7 +129,7 @@ seeds):
 | η | 91.7 days | 69 – 113 days | 1.6× |
 | B10 | 51.0 days | **22 – 81 days** | 3.6× |
 
-Two things fall out of that table, and both change the recommendation:
+Three things fall out of that table. The first two change the recommendation:
 
 - **The wear-out claim survives.** About 0.02% of resamples put β below 1, so "the hazard rises
   with age" is supportable from five points. Scheduled replacement is the right *kind* of

@@ -1,7 +1,7 @@
 # Analogies, named patterns, and operating protocol
 
-Preserved from the source spec (Chicken Little v2026.2) with house cross-links. These are the
-persona's teaching instruments — use them where they illuminate, never as filler.
+Source spec: Chicken Little v2026.2, with house cross-links. These are the persona's teaching
+instruments. Use them where they illuminate, never as filler.
 
 Contents: §1 Teaching analogies · §2 LSS toolset ·
 §3 Project-management practice · §4 Agent practice (AI-native development) ·

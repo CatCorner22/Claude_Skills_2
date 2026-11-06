@@ -55,8 +55,7 @@ your risk" without the baseline makes those two indistinguishable**, which is wh
 the omission as a defect rather than a simplification.
 
 **NNH is ⌈1 / ARR⌉** — here 1 / 0.010 = 100 exactly in the rare column, and ⌈1 / 0.24⌉ = 5 in the
-common one. **One computation trap, because it put a wrong 101 in that cell until a verification
-pass recomputed it:** in floating point `0.015 - 0.005` is `0.009999999999999998`, so `1/arr` is
+common one. **One computation trap, because it can put a wrong 101 in that cell:** in floating point `0.015 - 0.005` is `0.009999999999999998`, so `1/arr` is
 `100.00000000000001` and `ceil()` returns 101. Measured over integer NNH targets from 2 to 1,000,
 formed as `baseline + 1/n` minus `baseline`, the bare `ceil()` is off by one for **30% of them at a
 0.5% baseline, 37% at 1% and 47% at 10%** — and `ceil(round(1/arr, 9))` gets all of them right.
@@ -153,22 +152,19 @@ population-ascertained carriers comparable to family-ascertained ones
 cumulative risks at the lower end of the published range with wide intervals
 ([PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695)) — which is an argument for rule 4 below.
 
-**Two disciplines on this comparison, both learned by getting it wrong here:**
+**Two disciplines on this comparison:**
 
 - **The gap is a BRCA1 result in the records cited, not a both-genes result.** Scope the claim to the
   gene you can support it for, and do not let "for the same gene" stand in for "for either gene".
 - **The two records are not comparable on age horizon** — one reports penetrance to 70, the other to
-  80. Comparing across horizons is precisely the error the next subsection forbids, and it was
-  committed inside the paragraph that establishes this file's safety argument. **Read the horizon off
+  80. Comparing across horizons is precisely the error the next subsection forbids. **Read the horizon off
   each record and state it beside each figure.** The figures are not reproduced here because they did
-  not resolve to a retrieved record in this environment (`variant-catalog.md` §0); get them from the
+  not resolve to a retrieved record (`variant-catalog.md` §0); get them from the
   records, with their intervals and their carrier counts, which are small.
 
-*Withdrawn on re-check: an earlier version of this paragraph claimed, citing PMID 16484695, that
-variation between families carrying the same variant exceeds variation between positions within a
-gene. A verification pass could not find that result in the cited paper, which is a
-penetrance-estimation study rather than a variance partition. The claim is withdrawn rather than
-rehedged, and the record is kept for what it does establish.*
+*Not claimed: that variation between families carrying the same variant exceeds variation between
+positions within a gene. PMID 16484695 does not support it, being a penetrance-estimation study
+rather than a variance partition. The record is cited for what it does establish.*
 
 So the rule is **not** "family-based estimates are inflated, discount them". It is:
 
@@ -218,7 +214,7 @@ and quiet error. The gap widens sharply with age and with conditions whose incid
 **Summed decade *incidence* is not summed *hazard*.** If a source gives hazards, cumulative incidence
 is `1 − exp(−Σh)`, which for Σh = 0.12 is 11.3%, not 12.0%.
 
-### The direction is not fixed, and assuming it is was an error in this file
+### The direction is not fixed
 
 The block above has no **competing mortality** in it, and that omission is what makes the answer look
 one-directional. In reality two forces oppose each other: the person has **passed through some
@@ -299,7 +295,7 @@ means anything for this person, and it is not a caveat to append at the end.
 AUC is the figure that gets published, and the one that sounds impressive. It is the wrong headline
 for a person, and the precise reason matters: **AUC does not depend on how many cases are in the
 study sample, so it cannot be read as this person's risk.** (It is *not* independent of prevalence
-under a fixed model — that is a common misstatement, and this file made it. Moving the liability
+under a fixed model, a common misstatement: moving the liability
 threshold changes the score distributions themselves.) The same score, two prevalences:
 
 ```
@@ -343,8 +339,7 @@ of liability variance (AUC ≈ 0.73), stronger than every row of the table above
 
 So a big multiple at a *wide* cutpoint means a genuinely strong score, and a big multiple at a very
 narrow one is a tail statement. **Neither is the person's risk**, which is the absolute number — but
-dismissing the first as a cutpoint artefact would be wrong, and an earlier version of this file
-invited exactly that.
+dismissing the first as a cutpoint artefact would be wrong.
 
 ### Portability, and what it does to the number
 
@@ -507,8 +502,7 @@ stronger one. A consumer array probes selected variants rather than sequencing t
 detection rate for most recessive conditions is unknown-to-low. **A reproductive decision needs
 clinical-grade carrier screening.** The professional instrument is a **tiered carrier-screening
 framework** that sets which conditions should be offered by carrier frequency — but no record for it
-resolved in this environment, and an earlier version of this paragraph promised a name in place of an
-identifier and then supplied neither. **So the followable instruction is the one to give: ask a
+resolved. **So the followable instruction is the one to give: ask a
 genetic counsellor or the ordering clinician which tier of carrier screening applies, and what the
 panel's detection rate is for this person's ancestry.** That question is answerable; a framework
 name quoted from memory is not.
@@ -543,7 +537,7 @@ Use this for every quantitative genetic finding. All five elements, in this orde
 **Four rules the template enforces:**
 - **The confirmation status travels with the number.** A template that can emit a genotype, an
   absolute risk and an action without stating that the call is an unconfirmed array probe defeats the
-  skill's own hard rail, and this one could until a review caught it.
+  skill's own hard rail.
 - **Natural frequencies before percentages.** Counts of people, never percentages of percentages.
 - **No composite "genetic risk score" across findings.** Conditions have independent baselines and
   independent evidence quality; a single number summarising them is uninterpretable, and averaging

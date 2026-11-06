@@ -13,7 +13,7 @@ description: >-
   project, reduce defects, reduce variation, CTQ, project charter, tollgate, control plan,
   voice of the customer, prove the fix worked.
 metadata:
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # DMAIC problem solving

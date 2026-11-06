@@ -101,11 +101,11 @@ first that fires:
 3. **Medium** — everything else. Action should be taken; justify in the register if it isn't.
 
 **The rule-1 carve-out needs evidence, or it becomes the loophole this table exists to close.**
-Two paragraphs above, the file diagnoses teams that "learned to argue Detection down a point to
-duck a threshold". The `S 9–10 unless O and D are both ≤ 3` exception is that same lever with the
-sign flipped, and it is worse, because it rides on the two least defensible numbers on the sheet:
+Teams "learned to argue Detection down a point to duck a threshold" (see above). The
+`S 9–10 unless O and D are both ≤ 3` exception is that same lever with the sign flipped, and it is
+worse, because it rides on the two least defensible numbers on the sheet:
 
-- **Occurrence for a catastrophic mode is 1–3 almost by construction.** The shipped anchor for
+- **Occurrence for a catastrophic mode is 1–3 almost by construction.** The anchor for
   O 1–2 is "never seen here; barely conceivable given current controls" — which is the honest
   description of most catastrophes right up until the first one.
 - **Detection is rated against the control as *claimed*.** Nothing else in this method requires
@@ -120,13 +120,13 @@ teams write. So condition the carve-out:
 > argument), and the detection control **assurance-tested or sampled, not merely named**. Where
 > either is an assertion, the mode is High and the action is required.
 
-the archived `safety-and-reliability-skills:bowtie-barrier-analysis` carries the assurance test this leans on:
+The archived `safety-and-reliability-skills:bowtie-barrier-analysis` carries the assurance test this leans on:
 a barrier nobody has exercised is a claimed barrier, and
 `safety-and-reliability-skills:reliability-engineering` §4b prices exactly this — a protective
 control that is never exercised fails hidden, so a confident Detection score on an untested
 control is the number least connected to reality on the whole sheet.
 
-Note what rule 1 encodes: severity earns High on its own, but a *moderate* severity still reaches
+Rule 1 encodes this: severity earns High on its own, but a *moderate* severity still reaches
 High when the cause is common **and** the control is blind — silent, frequent failure is the case
 raw RPN buries. Run the worked example below through these three rules before trusting them on
 your own register; all five of its AP values should come back unchanged.

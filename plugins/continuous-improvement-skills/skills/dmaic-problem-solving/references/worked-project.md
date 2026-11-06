@@ -26,8 +26,8 @@ visible to everyone who files one.
 
 **Problem statement (quantified, blame-free).** "Over the last 12 weeks, 12.0% of closed tickets
 were reopened by the requester. In this desk's own handling-time data a reopened ticket costs about
-twice a first-time resolution, and reopens are the most frequent theme in requester feedback." No cause named, no team
-named, no solution named.
+twice a first-time resolution, and reopens are the most frequent theme in requester feedback."
+No cause named, no team named, no solution named.
 
 **Goal.** Reduce the reopen rate to **≤ 6.0%** within two quarters, without increasing median
 time-to-close.
@@ -120,18 +120,18 @@ level as a convention for comparing across processes, not as a measurement.
 it requires a genuine level shift, not a good week; and conversely, one week at 6.2% would be
 ordinary noise and must not be reported as success.
 
-**Tollgate outcome:** passed. Definition frozen and version-stamped, 12 subgroups of data (thin —
-the desk's rule is 20–25 subgroups before limits are trusted, so the limits were flagged
-provisional and stayed provisional: the rollout landed before another eight to thirteen
+**Tollgate outcome:** passed. Definition frozen and version-stamped; 12 subgroups of data, which is
+thin. The desk's rule is 20–25 subgroups before limits are trusted, so the limits were flagged
+provisional and stayed provisional. The rollout landed before another eight to thirteen
 *pre-change* weeks could accumulate, and adding post-rollout weeks to a baseline would fold the
-improvement into the very limits it is being measured against. And the post-change limits computed
-in Control are **also provisional** — that window is eight weeks, which is thinner still than these
-twelve. Saying otherwise would be the same error one phase later. This project never owns firm
-limits inside its own lifetime: they become firm when the post-change chart reaches 20–25 subgroups
-under the new process, roughly three months past rollout, which is the process owner's job under
-the control plan and is written into it as a dated recompute. Until then every limit on this
-project's charts carries the word *provisional*, and every verdict drawn from one is read as
-sorting rather than as a gate.)
+improvement into the very limits it is measured against. The post-change limits computed in
+Control are **also provisional**: that window is eight weeks, thinner still than these twelve.
+Calling them firm would repeat the error one phase later. This project never owns firm limits
+inside its own lifetime. They become firm when the post-change chart reaches 20–25 subgroups
+under the new process, roughly three months past rollout. That is the process owner's job under
+the control plan, written into it as a dated recompute. Until then every limit on this project's
+charts carries the word *provisional*, and every verdict drawn from one is read as sorting, not
+as a gate.
 
 ---
 

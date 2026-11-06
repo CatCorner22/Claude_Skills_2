@@ -22,8 +22,8 @@ action — if any — follows.
 `pubmed.ncbi.nlm.nih.gov` URL, a PMC ID inside a PMC URL, or an identifier inside a publisher URL.
 A search tool returns two things: retrieved records, and a model-written prose summary beneath them.
 **Only the records are evidence.** The prose states confident publishers, years, volumes and DOIs
-for items that returned no supporting record; that failure mode was reproduced repeatedly while
-building this file, and several plausible-looking citations were dropped because of it.
+for items that returned no supporting record; that failure mode recurs, and plausible-looking
+citations without a returned record are dropped.
 
 **This catalogue deliberately does not freeze effect-size numbers.** That is a design decision, not
 an omission, for three reasons:
@@ -42,9 +42,8 @@ it, and whether any action attaches — and the skill's Do-it stage 11 requires 
 for the numbers, resolved at analysis time. **If you find yourself wanting to quote an effect size
 from this file, that is the signal to go and get it from the literature instead.**
 
-**A returned URL proves an identifier EXISTS. It does not prove what the paper IS.** This
-distinction cost two citations in this skill, both withdrawn above and in
-`interventions-evidence.md`: a PMC ID returned as a bare `pmc.ncbi.nlm.nih.gov/articles/PMCxxxxxxx`
+**A returned URL proves an identifier EXISTS. It does not prove what the paper IS.** Two
+failure patterns: a PMC ID returned as a bare `pmc.ncbi.nlm.nih.gov/articles/PMCxxxxxxx`
 link with **no title beside it**, which a later pass could not re-resolve; and an ID adjacent to a
 real one, cited for a paper that turns out to be reported entirely within its neighbour. So:
 
@@ -52,10 +51,9 @@ real one, cited for a paper that turns out to be reported entirely within its ne
 > identifier resolves"; a returned title supports "this identifier is *that* paper". Adjacent
 > identifiers (…21 / …23) deserve particular suspicion, because that is what a guessed ID looks like.
 
-**The rule cuts both ways, and one identifier has already come back.** `PMC3663356` was withdrawn
-when a pass could not re-resolve it; a later search returned it **with its title**, so it is
-restored in `interventions-evidence.md` — attached to what the title actually says, which is not
-what the pass that named it claimed. **A withdrawal is provisional in the same way an identifier
+**The rule cuts both ways.** `PMC3663356` failed one re-resolution and returned on a later search
+**with its title**, so it is cited in `interventions-evidence.md`, attached to what the title
+actually says. **A withdrawal is provisional in the same way an identifier
 is**, and the same search also showed that two *adjacent* DOIs at one journal
 (`10.2340/00015555-0928` and `-1130`) are a naevus case letter and a nomenclature letter
 respectively. **Adjacency is a reason to check, not a verdict either way.**
@@ -68,9 +66,9 @@ prose alone does not ship, however real the paper is.
 ### The one carve-out: three variants where a number is unavoidable
 
 **The no-frozen-numbers rule has a failure mode, and it has to be named.** It defers every figure to
-a live literature pass — and in this environment that pass cannot return a figure. Scholarly
-resolvers and direct page fetches are blocked by the egress proxy (see `your-environment.md`); the
-only working channel is a search tool whose *records* yield identifiers but whose *numbers* live in
+a live literature pass — and where scholarly resolvers and direct page fetches are blocked by an
+egress proxy (see `your-environment.md`), that pass cannot return a figure: the only working
+channel is a search tool whose *records* yield identifiers but whose *numbers* live in
 model-written prose. So "go and get the number at analysis time" resolves, in practice, to either
 nothing or a confidently-stated invention — and it fails hardest at APOE, where the news is least
 welcome and a wrong figure is least likely to be challenged.
@@ -91,10 +89,10 @@ is strictly safer than an instruction that cannot be executed, and the grading i
 | Variant | Anchored figures | Grade |
 | :--- | :--- | :--- |
 | **HFE C282Y homozygosity** (rs1800562) | Documented iron-overload-related disease in **28.4% of male homozygotes (95% CI 18.8–40.2)** and **1.2% of females (95% CI 0.03–6.5)**, in 31,192 people of northern European descent aged 40–69 — Allen et al. 2008, *NEJM* 358(3):221–230 ([PMID 18199861](https://pubmed.ncbi.nlm.nih.gov/18199861/)). The sex asymmetry is the headline, and the female interval is very wide on few events | **[R/p]** |
-| **F5 Factor V Leiden heterozygosity** (rs6025) | Two papers, two designs, and they must not be merged. **Retrospective family study** (Middeldorp et al., *Ann Intern Med* 1998;128:15–20, *"The incidence of venous thromboembolism in family members of patients with factor V Leiden mutation and venous thrombosis"*): first-event incidence **0.45%/year (95% CI 0.28–0.61)** in carrier relatives against **0.10%/year (0.02–0.19)** in non-carriers, **RR 4.2 (1.8–9.9)**, rising with age from about 0.25%/yr under 30 to about 1.1%/yr over 60. **Prospective cohort of asymptomatic carriers** (Middeldorp et al., *Ann Intern Med* 2001;135:322–327): **9 events in 1,564 observation-years = 0.58%/year**, and **0.26%/year for spontaneous events** — the authors concluded the absolute risk does not justify routine family screening. Cited by title against returned repository records; **no PubMed record was returned for either in this environment, so no PMID ships.** Systematic review: [PMID 19531787](https://pubmed.ncbi.nlm.nih.gov/19531787/) | **[R/p]** |
-| ↳ *two withdrawn attributions, recorded so neither returns* | This row once cited `PMID 11583312`, which resolves to a **pooled case-control analysis reporting odds ratios** — a different study and a different estimand, incapable of supporting an annual-incidence claim. A verification pass then proposed attributing the 0.58%/1,564-observation-year figure to **Simioni 2002** (*Blood* 99:1938–42); **that is also wrong** — a re-source shows those are Middeldorp 2001's own numbers. Simioni 2002 exists and is a separate prospective cohort whose figures were not retrieved. **A proposed correction is a claim like any other and gets checked too** | — |
+| **F5 Factor V Leiden heterozygosity** (rs6025) | Two papers, two designs, and they must not be merged. **Retrospective family study** (Middeldorp et al., *Ann Intern Med* 1998;128:15–20, *"The incidence of venous thromboembolism in family members of patients with factor V Leiden mutation and venous thrombosis"*): first-event incidence **0.45%/year (95% CI 0.28–0.61)** in carrier relatives against **0.10%/year (0.02–0.19)** in non-carriers, **RR 4.2 (1.8–9.9)**, rising with age from about 0.25%/yr under 30 to about 1.1%/yr over 60. **Prospective cohort of asymptomatic carriers** (Middeldorp et al., *Ann Intern Med* 2001;135:322–327): **9 events in 1,564 observation-years = 0.58%/year**, and **0.26%/year for spontaneous events** — the authors concluded the absolute risk does not justify routine family screening. Cited by title against returned repository records; **no PubMed record was returned for either, so no PMID ships.** Systematic review: [PMID 19531787](https://pubmed.ncbi.nlm.nih.gov/19531787/) | **[R/p]** |
+| ↳ *two attributions not to use* | `PMID 11583312` is not cited: it resolves to a **pooled case-control analysis reporting odds ratios** — a different study and a different estimand, incapable of supporting an annual-incidence claim. The 0.58%/1,564-observation-year figure is not **Simioni 2002**'s (*Blood* 99:1938–42): those are Middeldorp 2001's own numbers. Simioni 2002 exists and is a separate prospective cohort whose figures were not retrieved. **A proposed correction is a claim like any other and gets checked too** | — |
 | ↳ *what that means over a horizon* | **These derive from figures that currently carry no identifier (row above), so they are shape, not magnitude — do not quote "96 of 100" to a person until the inputs are re-sourced, and note that the conclusion about anticoagulation rests on clinical guidance rather than on these two rates.** The arithmetic itself reproduces exactly and stands as a worked illustration. At 0.45%/yr vs 0.10%/yr: **10 years** 4.41% vs 1.00% (ARR 3.41 pp, 34 extra per 1,000, NNH ⌈1/0.0341⌉ = 30); **20 years** 8.63% vs 1.98% (ARR 6.64 pp, 66 extra per 1,000, NNH ⌈1/0.0664⌉ = 16). So **96 of 100 carriers are event-free at 10 years and 91 of 100 at 20** — which is why heterozygosity alone does not warrant anticoagulation. Note the relative risk *shrinks* with horizon (4.5 per-year → 4.43 at 10 years → 4.35 at 20) as both risks compound toward 1, so **state the horizon with the multiple** | **[calc from [p]]** — correct arithmetic on unsourced inputs. A `[calc]` grade asserts only that the computation is right; **it cannot launder the provenance of what went into it** |
-| **APOE** (rs429358 + rs7412) | Lifetime Alzheimer's risk to age 85, from a semi-dominant model: **all-genotype population baseline 11% male / 14% female** (this is *not* the ε3/ε3 risk); **e3/e4 23% / 30%**; **e4/e4 51% / 60%** — Genin et al. 2011, *Molecular Psychiatry* ([PMC3162068](https://pmc.ncbi.nlm.nih.gov/articles/PMC3162068/), [10.1038/mp.2011.52](https://doi.org/10.1038/mp.2011.52)). **Quote these as the high end of a range, with the design named:** this analysis combined relative risks from case-control data with absolute risks from cohort studies, and cohort-based cumulative-incidence estimates over a fixed follow-up are generally **lower**, because they measure a different quantity than lifetime risk to 85. *(A specific percentage for that comparison was removed: it carried no identifier at all, and an unsourced number that revises a risk estimate **downward** is the most consequential kind in this file — it is the one a reader quotes as reassurance.)* Get the cohort figure from the literature at analysis time | **[R/p]** |
+| **APOE** (rs429358 + rs7412) | Lifetime Alzheimer's risk to age 85, from a semi-dominant model: **all-genotype population baseline 11% male / 14% female** (this is *not* the ε3/ε3 risk); **e3/e4 23% / 30%**; **e4/e4 51% / 60%** — Genin et al. 2011, *Molecular Psychiatry* ([PMC3162068](https://pmc.ncbi.nlm.nih.gov/articles/PMC3162068/), [10.1038/mp.2011.52](https://doi.org/10.1038/mp.2011.52)). **Quote these as the high end of a range, with the design named:** this analysis combined relative risks from case-control data with absolute risks from cohort studies, and cohort-based cumulative-incidence estimates over a fixed follow-up are generally **lower**, because they measure a different quantity than lifetime risk to 85. *(No specific percentage is given for that comparison: it carries no identifier at all, and an unsourced number that revises a risk estimate **downward** is the most consequential kind in this file — it is the one a reader quotes as reassurance.)* Get the cohort figure from the literature at analysis time | **[R/p]** |
 | ↳ *the dose effect, its complement, and the comparator trap* | e3/e4 is **+12 pp male / +16 pp female** over baseline (2.1×); e4/e4 is **+40 pp / +46 pp** (4.6× / 4.3×). Going from one e4 to two roughly **doubles** the heterozygote's absolute risk (2.2× male, 2.0× female). And on the same figures, **49 per 100 male and 40 per 100 female e4/e4 homozygotes reach 85 unaffected** — report that in the same breath, every time. **Critically: the 11%/14% baseline is the ALL-GENOTYPE population figure, so every multiple here is genotype-versus-population.** Published APOE relative risks are almost always computed against **ε3/ε3**, which is lower than the population mean because the population contains the ε4 carriers — so those multiples are larger and **are not comparable to these.** State the referent, or a reader will conclude one of the two sources is wrong | **[calc]** |
 
 **Everything else in this file stays unfrozen.** The carve-out is three variants, not a precedent for
@@ -105,7 +103,7 @@ range with stated provenance beats both silence and invention.
 
 | Claim | Record |
 | :--- | :--- |
-| Direct-to-consumer raw data carries a materially elevated false-positive rate for rare variants, and clinical confirmation is required before action | **Population-scale, the strongest anchor:** [PMID 33589468](https://pubmed.ncbi.nlm.nih.gov/33589468/) / [PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/) / [BMJ 2021;372:n214](https://www.bmj.com/content/372/bmj.n214) — roughly fifty thousand people with both chip and sequencing data; chips perform well on common variants and collapse in PPV on very rare ones. *(This row previously carried `PMID 33753354`, which resolves to nothing matching; the corrected ID was returned with the exact title in two independent searches. And the participant count is now approximate, because the precise figure is prose-sourced like the percentages this file declines to quote.)* **Clinical-laboratory series:** [PMID 29565420](https://pubmed.ncbi.nlm.nih.gov/29565420/) / [PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/), with the published exchange around it — [PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/) and [PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/), **the latter authored from inside the company whose data was criticised, so cite it as a party's response and not as independent commentary** — and the public-health consequence [PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/) |
+| Direct-to-consumer raw data carries a materially elevated false-positive rate for rare variants, and clinical confirmation is required before action | **Population-scale, the strongest anchor:** [PMID 33589468](https://pubmed.ncbi.nlm.nih.gov/33589468/) / [PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/) / [BMJ 2021;372:n214](https://www.bmj.com/content/372/bmj.n214) — roughly fifty thousand people with both chip and sequencing data; chips perform well on common variants and collapse in PPV on very rare ones. *(`PMID 33753354` resolves to nothing matching and is not cited; the ID above was returned with the exact title in two independent searches. The participant count is approximate, because the precise figure is prose-sourced like the percentages this file declines to quote.)* **Clinical-laboratory series:** [PMID 29565420](https://pubmed.ncbi.nlm.nih.gov/29565420/) / [PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/), with the published exchange around it — [PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/) and [PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/), **the latter authored from inside the company whose data was criticised, so cite it as a party's response and not as independent commentary** — and the public-health consequence [PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/) |
 | A professional society has addressed consumer disease-risk testing directly | [PMID 33399428](https://pubmed.ncbi.nlm.nih.gov/33399428/) |
 | Third-party interpretation of DTC raw data carries its own burden of error | [PMID 29997392](https://pubmed.ncbi.nlm.nih.gov/29997392/) |
 | DTC screening is limited for hereditary breast/ovarian cancer specifically | [PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/) |
@@ -118,15 +116,14 @@ range with stated provenance beats both silence and invention.
 **Dropped for failing the standard**, recorded because the drops are as informative as the keeps:
 the ACMG/AMP sequence-variant interpretation guideline (Richards et al.) and the published
 *Nature Genetics* version of the polygenic-score portability paper never appeared in a returned
-record in this environment, though both are clearly real and are referenced by many records that
+record, though both are clearly real and are referenced by many records that
 did resolve. They are cited here **by framework name with resolvable secondary literature**, never
 with an identifier reconstructed from memory.
 
-**Withdrawn on re-check:** an earlier version of this file cited `PMID 39218908` as the
-portability anchor and a 2025 medRxiv preprint as the counterweight. A later verification pass
-could not re-resolve that PMID to any record, and anchoring one side of a live dispute on a single
-non-peer-reviewed preprint is weak on its own terms. Both were replaced by the five records above,
-each of which resolved in two independent searches. **An identifier that no longer resolves is
+**Not used as anchors:** `PMID 39218908` as the portability anchor, because it does not
+re-resolve to any record, and a 2025 medRxiv preprint as the counterweight, because anchoring one
+side of a live dispute on a single non-peer-reviewed preprint is weak on its own terms. The five
+records above stand in their place, each of which resolved in two independent searches. **An identifier that no longer resolves is
 withdrawn, not downgraded to a hedge** — and recording the withdrawal is what stops it reappearing.
 
 ---
@@ -170,7 +167,7 @@ it is not. `risk-communication.md` §4 carries the portability arithmetic.
   carries each known site's allele pair and grades the **call**: `CLEAR` for any heterozygote,
   `AMBIGUOUS` for a homozygote at a palindromic site, `UNDETERMINED` where the pair is not
   verified — see `data-formats-and-parsing.md` §2 for the worked table and for the two opposite
-  errors the script had to shed.
+  errors to avoid.
 - **R3** Rare variant on an array — elevated false-positive rate. Treat as a prompt for a
   confirmatory test, never as a result.
 - **R4** Requires phase, copy number, or specialised typing the platform cannot provide. **Do not
@@ -205,7 +202,7 @@ These can change medical management. **All of them require clinical-grade confir
 | :--- | :--- | :--- | :--- |
 | **HFE** C282Y (rs1800562) — **homozygous** | The genotype of interest in hereditary haemochromatosis. Penetrance is incomplete and lower than early estimates implied, and sex-asymmetric by more than an order of magnitude (§0 carries the anchored figures) | E1 / R1 | Iron studies (ferritin, transferrin saturation) — a cheap phenotype test that settles the question far better than the genotype does. **This is the model case: the genotype's value is prompting a *measurement*** |
 | **HFE** H63D (rs1799945) | **Graded down deliberately, and it matters because this allele is common** (roughly one in ten European-ancestry chromosomes), so it fires on a large fraction of real files. **H63D homozygosity is not an established cause of clinically significant iron overload**, and C282Y/H63D compound heterozygotes develop iron-overload disease at low frequency; variant databases carry H63D as a risk factor rather than a penetrant allele. Presenting it in the same cell and at the same evidence grade as C282Y homozygosity is exactly the error §1's effect-size ladder warns about. **Also c.187C>G — a palindromic site**, so a *homozygous* call cannot be oriented from the genotype alone (a heterozygous one can; §1, R2) | **E3** / R2 | The same cheap action, which is the saving grace: iron studies. They cost little and settle either allele. **Do not report H63D as haemochromatosis** |
-| **Familial hypercholesterolaemia** — LDLR and APOB founder variants | A monogenic cause of severe lifelong LDL elevation and premature cardiovascular disease, with an effective treatment. **Consumer platforms probe a handful of founder variants at most**, so a negative is close to meaningless and a positive is a rare-variant call (§0 anchor 1) | E1 / R3 | **A lipid panel, which is the measurement that matters and does not need the genotype at all** — then clinical confirmation and cascade testing of relatives if the lipids support it. This is the file's model pattern stated in §2 ("a lipid panel for a lipid variant"), and the catalogue previously carried no lipid variant to attach it to |
+| **Familial hypercholesterolaemia** — LDLR and APOB founder variants | A monogenic cause of severe lifelong LDL elevation and premature cardiovascular disease, with an effective treatment. **Consumer platforms probe a handful of founder variants at most**, so a negative is close to meaningless and a positive is a rare-variant call (§0 anchor 1) | E1 / R3 | **A lipid panel, which is the measurement that matters and does not need the genotype at all** — then clinical confirmation and cascade testing of relatives if the lipids support it. This is the file's model pattern stated in §2 ("a lipid panel for a lipid variant") |
 | **F5** Factor V Leiden (rs6025) | Commonest inherited thrombophilia allele | E2 / R1 | Context for a clinician around thrombosis risk, surgery, oestrogen exposure. Does **not** by itself warrant anticoagulation |
 | **BRCA1 / BRCA2** founder variants | Some platforms probe a small number of founder variants only | E1 / R3 | Confirmation, then genetics referral. **Critically:** a negative consumer result is near-meaningless here, because only a handful of thousands of possible variants were probed ([PMC10581610](https://pmc.ncbi.nlm.nih.gov/articles/PMC10581610/)) |
 | **G6PD** deficiency variants (the commonest probed are the two defining the A− haplotype, rs1050828 and rs1050829; many causal variants exist and most are not probed) | X-linked; causes haemolysis on oxidative triggers. **X-linkage is the whole interpretation, not a caveat:** a heterozygous female is an X-inactivation mosaic whose enzyme activity can land anywhere, and a genotype cannot say where | E1 / R2–R3 | A real contraindication list for specific drugs and foods (`pharmacogenomics.md` §4 names them). Confirm by quantitative enzyme activity — **better than genotype in hemizygous males and homozygous females, but NOT definitive:** heterozygous females often read normal despite a deficient red-cell population, and reticulocytosis or recent transfusion can falsely normalise anyone's result. A normal assay is not clearance |
@@ -259,7 +256,7 @@ consumer data — and it is also where findings most clearly implicate relatives
   probed by consumer platforms — but over a thousand pathogenic CFTR variants are known, so a
   negative at F508del alone leaves most of the carrier probability untouched, and the residual
   depends on ancestry (`risk-communication.md` §5 computes it). *Named rather than cited: no rsID
-  ships here because none was verified against a retrieved record in this environment.*
+  ships here because none was verified against a retrieved record.*
 - Carrier status is decision-relevant mainly in a **reproductive** context, and the relevant test
   there is a clinical expanded carrier screen, not raw data.
 - **This tier triggers the relatives rail.** A carrier finding is information about parents and
@@ -293,10 +290,9 @@ polymorphism testing on the grounds of minimal clinical utility
 addendum **which simultaneously reclassified the document from an evidence-based practice guideline
 to a clinical practice resource** — the direction survived, its evidentiary standing was downgraded —
 and **[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) is the correction notice
-about that addendum rather than the addendum itself** — an earlier version of this file cited the
-erratum as the amendment. The position is echoed by a call to action in the thrombosis literature
+about that addendum rather than the addendum itself**. The position is echoed by a call to action in the thrombosis literature
 ([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)), **a single-author commentary, so
-"other professional bodies reached the same position" claimed more than that citation supports.** The
+it does not show that other professional bodies reached the same position.** The
 clinical-utility question has been revisited since
 ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
 Grade **E5 / R1** — the genotype is called reliably; the interpretation industry built on it is the
@@ -313,9 +309,9 @@ did not reduce myocardial infarction or mortality.)*
 Collections of variants with mechanistic stories and no carrier-specific intervention evidence.
 Grade E4 at best. The honest output is that no action follows.
 
-**One exception, and it is not optional.** An earlier version of this item said "mitochondrial SNP
-panels" without qualification, which would file the single highest-consequence mitochondrial finding
-in the domain under "no action follows". **MT-RNR1 m.1555A>G is a genuine, guideline-level
+**One exception, and it is not optional.** Filing all mitochondrial SNP
+panels under "no action follows" would misfile the single highest-consequence mitochondrial finding
+in the domain. **MT-RNR1 m.1555A>G is a genuine, guideline-level
 aminoglycoside contraindication causing irreversible hearing loss, and some consumer platforms do
 genotype mitochondrial sites** (`pharmacogenomics.md` §4); m.3243A>G is a second real variant. **A
 mitochondrial panel is Tier E by default, not by rule — check for MT-RNR1 before dismissing it.**
@@ -381,7 +377,7 @@ may want to make — planning, insurance, research participation, whether they w
 and *not* a supplement or peptide protocol. Any tool that answers an ε4 result with a stack
 recommendation is selling something.
 
-**But the flat claim "no intervention attaches to APOE" is now false, and the exception is the single
+**But the flat claim "no intervention attaches to APOE" is false, and the exception is the single
 most actionable APOE fact available to someone who finds ε4/ε4 in raw data.** ε4 dose is the
 principal risk stratifier for **amyloid-related imaging abnormalities (ARIA)** with the anti-amyloid
 monoclonal antibodies: ARIA rates rise steeply with ε4 copy number, and the product labelling for
@@ -397,7 +393,7 @@ pharmacogenomic axis as well as a risk axis:
 
 **No identifier ships with this axis**, and the disclosure matters in a file whose first sentence is
 that every citation was verified against a retrieved record: the labelling is a living regulatory
-document and none resolved to a retrieved record here. **Name the drug class and the labelling
+document and none resolved to a retrieved record. **Name the drug class and the labelling
 section, and read the version in force at analysis time** rather than quoting figures from this file
 (`pharmacogenomics.md` §4's rule).
 
@@ -406,8 +402,8 @@ section, and read the version in force at analysis time** rather than quoting fi
 
 ### ε2 exists, and a section headed "in full" has to say so
 
-ε2 appeared nowhere in this section except inside the haplotype algebra, which leaves an ε2 carrier
-to infer their own result from a discussion of ε4. Two things to report:
+ε2 appears above only inside the haplotype algebra, and an ε2 carrier should not have to infer their
+own result from a discussion of ε4. Two things to report:
 
 - **ε2 carriage is associated with *lower* Alzheimer's risk** than ε3/ε3. For someone who came
   looking for an ε4 answer, that is the finding, and omitting it is its own kind of mis-report.
@@ -421,8 +417,8 @@ So APOE carries a **third axis**:
 
 - **Lipid axis — ε2/ε2 only: E2–E3 / R1.** The resolving action is a **fasting lipid panel**, which
   is §2's "the genotype's value is prompting a *measurement*" pattern exactly — the same shape as
-  iron studies for HFE. §2 even names "a lipid panel for a lipid variant" without previously
-  connecting it to the one APOE genotype that fits.
+  iron studies for HFE. §2 names "a lipid panel for a lipid variant"; ε2/ε2 is the one APOE
+  genotype that fits.
 
 ### When only one of the two sites is called
 

@@ -2,11 +2,11 @@
 
 Depth for `data-analytics-bi-skills:ab-test-design`. Provenance marks carried from the
 research dossier (`docs/research/general-use-expansion-research.md` §2):
-**[snippet-only, cross-checked]** = verified via convergent web-search snippets, direct source
-fetches egress-blocked at research time. Platform success-rate figures are **self-reported** by
+**[snippet-only, cross-checked]** = verified via convergent web-search snippets, without fetching
+the primary source. Platform success-rate figures are **self-reported** by
 their owners — cite them as reported experience, never as measured industry constants.
-**[canon attribution]** = author/year named from the experimentation canon at authoring time and
-**not** independently re-verified (no dossier entry, direct fetches unavailable) — treat the
+**[canon attribution]** = author/year named from the experimentation canon and
+**not** independently re-verified (no dossier entry). Treat the
 attribution as a pointer to check before quoting it. No figure in this file is taken from a
 [canon attribution] source: every number in §5, §6 and §11 is computed here from its own stated
 inputs, so the arithmetic stands even if an attribution needs correcting.

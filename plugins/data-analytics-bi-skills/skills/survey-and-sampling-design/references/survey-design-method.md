@@ -51,7 +51,7 @@ Representative Method," *JRSS* 1934), the paper that also discredited purposive 
   where answers vary more. Needs variance estimates (from a pilot or a prior wave).
 
 Honesty rule for convenience samples: report them as "of those who responded to X," never
-as population estimates. The in-app feedback widget is a self-selection machine — it
+as population estimates. The in-app feedback widget is a self-selection machine that
 oversamples the delighted, the furious, and the heavy user. The fix is not to discard it
 but to *calibrate* it: run a small probability-sample pulse check on the same questions and
 compare; the widget then becomes a cheap change-detector between calibrations.
@@ -230,4 +230,4 @@ deliverable.
 - Sample-size formula family attributed to Cochran, *Sampling Techniques* —
   [background — verify edition/page before formal citation].
 - The "big data paradox" coda — [background — verify before citing].
-- All worked arithmetic in §3 and §6 recomputed at authoring time.
+- Worked arithmetic in §3 and §6 is recomputed from the stated inputs.

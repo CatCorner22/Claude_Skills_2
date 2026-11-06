@@ -84,10 +84,9 @@ semantic store:
 ```
 Every permanent entry should be traceable to a log line; every log line should make the
 change reversible (what was there before). One line is the deliberate size: cheap enough
-that the pass actually runs at every milestone, rich enough to audit. This repository's own
-MEMORY.md carries a month of these entries, and their drift from one line to twenty is
-itself the failure mode the rule guards against — when a pass needs a paragraph, the pass
-was too big, not the log too small.
+that the pass actually runs at every milestone, rich enough to audit. Log entries that
+drift from one line to twenty are the failure mode this rule guards against: when a pass
+needs a paragraph, the pass was too big, not the log too small.
 
 ## Pruning rules
 - **Merge** entries that say the same thing differently — keep the clearer phrasing, note

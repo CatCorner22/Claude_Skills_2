@@ -14,7 +14,7 @@ description: >-
   methods, clean up the knowledge base, merge duplicate notes, retire stale facts,
   capability map, crystallization pass.
 metadata:
-  version: "1.3.2"
+  version: "1.3.3"
 ---
 
 # Knowledge crystallizer

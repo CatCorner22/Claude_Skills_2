@@ -73,8 +73,8 @@ a bare `log.exception("unhandled")` records `NoneType: None` where the traceback
 one thing the generic 500 handler exists to capture. Verified on FastAPI 0.141.
 
 This keeps the `{"detail": ...}` **key** that FastAPI already uses for validation failures, raised
-`HTTPException`s, and unrouted URLs — but be precise about what that does and does not buy you.
-Only the key is consistent; the value type is not. Measured on FastAPI:
+`HTTPException`s, and unrouted URLs. Only the key is consistent; the value type is not.
+Measured on FastAPI:
 
 | Source | `detail` type | Value |
 |---|---|---|
@@ -88,7 +88,7 @@ That matters because this plugin's own client (`frontend-recipes.md`) does
 in React, an "Objects are not valid as a React child" throw that takes the view down — not the
 pydantic repr you would see in Python; JavaScript never produces that form. Either normalise in
 the client (`Array.isArray(detail) ? detail.map(e => e.msg).join("; ") : detail`, which
-`frontend-recipes.md`'s client now does) or override `RequestValidationError` so the server emits
+as `frontend-recipes.md`'s client does) or override `RequestValidationError` so the server emits
 one shape. If you prefer a coded envelope
 (the archived `full-stack-dev-skills:elite-python-engineer` shows `{"error": {"code", "message"}}`), those
 three built-in paths keep emitting `{"detail": ...}` until you override

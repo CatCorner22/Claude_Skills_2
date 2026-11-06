@@ -49,7 +49,7 @@ The third row is the one that requires discipline. In a restricted network, a bl
 genuinely dead link return *indistinguishable* failures. The audit must therefore report the
 **mechanism** it observed, not the conclusion it would like to draw:
 
-- `CONNECT tunnel failed, response 403` / an explicit egress-blocked error → *this environment*
+- `CONNECT tunnel failed, response 403` / an explicit egress-blocked error → your environment
   cannot reach the host. Says nothing about whether the video or source exists.
 - HTTP 404 from a host you did reach → the resource is absent.
 - `Video unavailable` / `Private video` from yt-dlp → reached the platform, the video is gone.

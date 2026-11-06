@@ -1,7 +1,5 @@
 # Statistical discipline, AI assurance, and the Chicken Little pass
 
-Preserved near-verbatim from the source spec (project-command-center v1.0.0).
-
 Contents: §1 Statistical discipline · §2 Engineering and AI assurance · §3 Chicken
 Little — the constructive adversary · §4 Opportunity scan and output rules
 

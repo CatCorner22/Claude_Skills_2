@@ -12,7 +12,7 @@ description: >-
   simplify this letter, accessible language, patient materials, low literacy, simplest
   accurate version. Not for contract clause drafting → legal-skills:mscd-contract-drafting.
 metadata:
-  version: "1.7.1"
+  version: "1.7.2"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search

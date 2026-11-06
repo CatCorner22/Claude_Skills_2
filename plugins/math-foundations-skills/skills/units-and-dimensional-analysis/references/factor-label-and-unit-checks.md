@@ -109,17 +109,17 @@ your own, a formula from a document you cannot interrogate.
    Passing does not prove it right (a dimensionless constant can still be wrong) — it
    promotes the formula to "worth testing numerically."
 
-**Worked catch — from this library's own history.** The
+**Worked catch.** The
 the archived `safety-and-reliability-skills:weight-of-the-books` skill dates each safety margin: how
 long until a growing load erodes the factor F = capacity/load down to its written floor.
-A draft formula said:
+A faulty formula:
 
 > time to exhaustion = F ÷ g   (g = load growth per year)
 
 Check it. F is capacity/load — the units cancel; it is a pure number. g is fractional
-growth per year, so "per year" is its only dimension. F ÷ g then carries "years" only
-in the way a coin toss carries destiny — divide any pure number by any per-year figure
-and "years" pops out, regardless of whether the quantity means anything. The check
+growth per year, so "per year" is its only dimension. F ÷ g yields "years" only
+by accident: dividing any pure number by any per-year figure gives "years", whether or
+not the quantity means anything. The check
 forces the real question: *what is the law relating F to time?* Load grows as
 L(t) = L₀(1+g)ᵗ, so F(t) = F₀/(1+g)ᵗ — exponential, not linear. Solving
 F(t) = F_floor gives:
@@ -127,12 +127,11 @@ F(t) = F_floor gives:
 > t = ln(F₀/F_floor) ÷ ln(1+g)
 
 Both logarithm arguments are dimensionless, as the third law requires. The numbers show
-how far off the draft was: F₀ = 3.0, floor = 1.5, g = 25%/yr. Correct:
+how far off the faulty formula is: F₀ = 3.0, floor = 1.5, g = 25%/yr. Correct:
 t = ln(2) ÷ ln(1.25) = 0.6931 ÷ 0.2231 ≈ 3.1 years. (Check: 1.25³ = 1.953 ≈ 2, so just
-over 3 years — consistent.) The draft: 3.0 ÷ 0.25 = 12 years — plausible-looking and
+over 3 years — consistent.) The faulty formula gives 3.0 ÷ 0.25 = 12 years — plausible-looking and
 nearly four times too long, the exact failure mode where a margin evaporates years
-before its owner expects. Adversarial review caught it because a reviewer wrote the
-units of every term; the author's plausible numbers had sailed past everyone. The check
+before its owner expects. Writing the units of every term catches it, while plausible numbers pass unchecked. The check
 works on authors too.
 
 ## §5 The trap catalog, with verified numbers

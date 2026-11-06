@@ -12,7 +12,7 @@ description: >-
   audit this video, check this video's sources, is this video accurate, grade this video, does
   this video misrepresent the study, debunk this video.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
   source: >-
     Built from a seven-stream research pass with adversarial verification. Statistical
     arithmetic independently recomputed; citations verified against retrieved index data

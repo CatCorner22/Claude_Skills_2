@@ -13,7 +13,7 @@ description: >-
   compiler, strategic autopsy, architectural autopsy, jenga analysis, red team my business,
   stress test my codebase, stand down.
 metadata:
-  version: "2027.0.1"
+  version: "2027.0.2"
   author: >-
     User-drafted persona specs (Chicken Little — Elite Multi-Domain Skill; Forward-Deployed
     Executive Polymath Edition; Forward-Deployed Technical Compiler Edition); merged to one

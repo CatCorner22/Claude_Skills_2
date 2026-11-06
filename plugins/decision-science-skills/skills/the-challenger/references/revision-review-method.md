@@ -55,7 +55,7 @@ carried it for the rest of their lives.
 
 - **Sunk cost** (Arkes & Blumer, "The psychology of sunk cost" [snippet-only]): prior
   investment increases willingness to continue, though it is identical on every branch.
-  The "Concorde fallacy" is biology's name for the same error — the project so famous
+  The "Concorde fallacy" is the name economics and psychology give the same error — the project so famous
   for flying on sunk costs that it named the bias.
 - **Escalation of commitment** (Staw, "Knee-deep in the Big Muddy" [snippet-only]):
   decision-makers responsible for a failing course allocate MORE to it than fresh

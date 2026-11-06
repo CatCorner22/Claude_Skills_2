@@ -51,8 +51,8 @@ error you would have seen into mojibake you won't. Use it as a diagnosis tool, n
 
 RFC 4180 is the closest thing CSV has to a spec: comma-separated, CRLF line endings, fields
 containing commas/quotes/newlines wrapped in double quotes, embedded quotes doubled (`""`).
-Real exporters deviate from it constantly — which is exactly why the parse must be declared
-and validated rather than assumed. When you control the export, RFC 4180-style quoting is
+Real exporters deviate from it constantly, so the parse must be declared and validated rather
+than assumed. When you control the export, RFC 4180-style quoting is
 the ask that fixes shifted columns at the source.
 
 ## Numbers (including the join-key destruction hazard)
@@ -137,9 +137,9 @@ door with a named reason instead of poisoning everything downstream.
 
 ## Worked example: merging two systems' rosters
 
-Domain-neutral by design — the same shape appears as an analyst reconciling two exports, an
-attorney combining two matter lists, an ops manager merging vendor rosters, or a developer
-joining a user dump to a license file. Two systems export "the same" people list:
+The same shape appears when an analyst reconciles two exports, an attorney combines two matter
+lists, an ops manager merges vendor rosters, or a developer joins a user dump to a license file.
+Two systems export "the same" people list:
 
 - `hr_export.csv` — UTF-8 with BOM, comma-delimited, `emp_id` zero-padded to 6 (`004217`).
 - `badge_export.csv` — Windows-1252, semicolon-delimited, `EMPLOYEE` as a bare number (`4217`).
@@ -166,9 +166,9 @@ print(m["_merge"].value_counts())
 # right_only       3   ← badges with no HR record (contractors? stale badges?)
 ```
 
-The 24 unmatched rows are the *deliverable* of the merge audit — each one is a question for
+The 24 unmatched rows are the *deliverable* of the merge audit. Each one is a question for
 the system owners, not noise to drop. Only after they're explained do you choose the final
-join type and record why. Note what made this work: bytes inspected first (BOM, cp1252,
+join type and record why. What made this work: bytes inspected first (BOM, cp1252,
 semicolons), IDs read as strings on both sides (read numerically, both sides collapse to
 `4217` and the documented 6-wide convention is gone; a string/numeric mix then refuses to
 merge at all), keys normalized to one convention, uniqueness proven, and the

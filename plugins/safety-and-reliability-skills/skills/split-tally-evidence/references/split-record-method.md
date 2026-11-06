@@ -259,8 +259,8 @@ keeper for the handful of numbers that would fund a dispute.
 
 ## Sources
 
-All marks [snippet-only]: claims cross-checked across independent WebSearch results; direct
-fetches were egress-blocked in the research sandbox. Per the library's research dossier
+All marks [snippet-only]: claims cross-checked across independent WebSearch results, not
+verified by direct fetch. Per the library's research dossier
 (docs/research/epic-wave-held-research.md, Lane 1, entries 2 and 8):
 
 - Split tally sticks — Science Museum Group (medieval Exchequer tally sticks); Wikipedia;

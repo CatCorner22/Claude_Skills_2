@@ -19,17 +19,15 @@
 - Leads with the primary use case; ends with a short `Triggers:` list of literal phrases.
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
-- **Budget reality, re-measured 2026-08-18 (this replaces an earlier ~1%-of-context claim that the
-  library's own numbers contradict).** 121 skills' names + descriptions = **≈110,000 chars ≈
+- **Budget reality, measured 2026-08-18.** 121 skills' names + descriptions = **≈110,000 chars ≈
   29,700 tokens ≈ 14.9% of a 200K window**, mean ~890 chars per description. Token figures are an
-  estimate at ~3.7 chars/token — stated, because an undisclosed divisor is exactly how this
-  paragraph and `README.md` came to publish two different percentages. That character estimate
-  is also ~30% light against the harness's real tokenizer, which puts the true listing cost at
+  estimate at ~3.7 chars/token, a divisor stated because an undisclosed divisor produces
+  conflicting percentages. That character estimate is also ~30% light against the harness's real tokenizer, which puts the true listing cost at
   **≈38,800 tokens ≈ 19.4% of a 200K window** (`claude plugin details <plugin>` summed across all
   14 plugins; see `docs/live-routing-and-degradation-2026-08-18.md`) — quote that one when the
   size of an install is the point. Both character figures come from
   `python3 scripts/measure-listing-cost.py`; re-run it rather than editing the figure by hand,
-  because a hand-kept number in two places is a number that will disagree with itself again. A literal
+  because a hand-kept number in two places will disagree with itself. A literal
   1%-of-context listing budget is 8,000 characters, and `scripts/simulate-listing-budget.py` reports
   that it keeps **three** full descriptions here once the 121 bare names are paid for, so ~1% cannot
   describe a full-description listing; it is consistent instead with a listing that has degraded to mostly
@@ -63,8 +61,7 @@ metadata:
 
 Do not mass-retrofit untouched skills — the convention rides along with real edits so
 diffs stay reviewable. `metadata:` is a bare key on its own line; both `scripts/validate.sh`
-and `scripts/gen-catalog.py` handle it (the catalog parser bug that leaked bare keys into
-descriptions was fixed 2026-08-11 — keep the key bare, no inline value).
+and `scripts/gen-catalog.py` handle it (keep the key bare, no inline value).
 
 ## Claude-Code-only fields (use only for skills that will never run outside Claude Code)
 `argument-hint`, `arguments`, `disable-model-invocation`, `user-invocable`, `allowed-tools`,

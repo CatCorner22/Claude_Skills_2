@@ -1,9 +1,9 @@
 # Document types — the full method
 
 Provenance legend: **[snippet-only]** = verified via cross-checked WebSearch result
-blocks (per the general-use expansion dossier, §5); direct fetches of diataxis.fr and
-keepachangelog.com were egress-blocked, so every Diátaxis and Keep-a-Changelog claim
-below carries that mark. Re-verify against the primary sites before quoting externally.
+blocks (per the general-use expansion dossier, §5), not by direct fetch of diataxis.fr or
+keepachangelog.com. Every Diátaxis and Keep-a-Changelog claim below carries that mark.
+Re-verify against the primary sites before quoting externally.
 
 ## Contents
 1. [The Diátaxis router](#1-the-diátaxis-router)

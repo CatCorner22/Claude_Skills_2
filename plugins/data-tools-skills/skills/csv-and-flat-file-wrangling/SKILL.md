@@ -13,7 +13,7 @@ description: >-
   delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
   zeros lost, csv broken columns, mojibake, flat file feed.
 metadata:
-  version: "1.4.2"
+  version: "1.4.3"
 ---
 
 # CSV and flat-file wrangling
