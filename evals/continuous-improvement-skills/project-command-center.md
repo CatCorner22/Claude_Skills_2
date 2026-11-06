@@ -17,9 +17,10 @@ the intervention log, the decision/blocker, and Now / Next / Later / Watch.
 > "Build our new scheduling feature end to end with lean six sigma rigor — charter,
 > co-design, accessible UI, adversarial testing."
 
-Expected: `continuous-improvement-skills:lean-six-sigma-for-software` owns the full
-software-build discipline. project-command-center is the command/validity doctrine, not
-the build methodology; loading here means the two skills' boundary is failing.
+Expected: the full software-build discipline (co-design, accessible UI, adversarial testing
+end to end) is a separate discipline this library does not carry. project-command-center is
+the command/validity doctrine, not the build methodology; loading here means the boundary
+is failing.
 
 ## 2b. Near-miss (statistics-only guard)
 > "What's the difference between sensitivity and specificity?"

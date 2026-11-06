@@ -29,6 +29,6 @@ A good response:
   sensitivity reveals which assumptions actually drive the answer.
 - **Safe:** warns against overtyping formulas with values, hardcoding, and unintended circular
   references; recommends documentation and an audit pass with a final gut-check of the
-  headline number (sign, magnitude, units — `math-foundations-skills:number-sense-and-estimation`);
+  headline number (sign, magnitude, units — a basic number-sense check);
   points recurring hand-rebuilt workbooks toward
-  `data-tools-skills:excel-automation-python` rather than more manual tabs.
+  scripted automation rather than more manual tabs.

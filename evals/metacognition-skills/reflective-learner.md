@@ -10,9 +10,9 @@ reflection (categorized as context loss / assumption error, with a root cause); 
 avoidance rule to semantic memory; applies the separation immediately going forward.
 
 ## 2. Near-miss (should NOT load this skill)
-> "Analyze this bank fee export and tell me what's driving the increase."
+> "Analyze this expense export and tell me what's driving the increase."
 
-Expected: that is external data analysis → `metacognition-skills:dynamic-analysis-engine`.
+Expected: that is external data analysis, a separate discipline this library does not carry.
 If this skill loads, tighten the description.
 
 ## 3. Quality rubric

@@ -44,8 +44,7 @@ family's design-vs-register seam is failing.
 ## 3. Quality rubric
 - **Does**: main point first; short active sentences; everyday concrete words; one idea per
   sentence; technical terms glossed in place; grade verified 5th (or justified 8th, never
-  higher); action steps, if any, given checklist form per
-  `safety-and-reliability-skills:checklist-design` while the prose stays at grade.
+  higher); action steps, if any, given plain checklist form while the prose stays at grade.
 - **Teaches**: why litigated language is bad language; why meaning always beats grade (the
   8th-grade fallback exists so precision never excuses complexity); why the read-aloud test
   outranks the readability score (the formulas measure only sentence and word length).

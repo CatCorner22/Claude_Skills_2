@@ -12,7 +12,7 @@ metadata).
 ## 2. Near-miss (should NOT load this skill)
 > "This dataset has duplicates and missing values — clean it up before I run the analysis."
 
-Expected: content cleaning — `data-analytics-bi-skills:data-cleaning`. If this skill loads,
+Expected: content cleaning is a separate discipline this library does not carry. If this skill loads,
 sharpen the files/organization/sharing framing.
 
 ## 3. Quality rubric

@@ -18,9 +18,9 @@ involved.
 > "Here's last quarter's order-value column. Give me the mean, median, spread, and a sense of how
 > skewed it is."
 
-Expected: this is describing one sample, not inferring to a population —
-`data-analytics-bi-skills:descriptive-statistics` should handle it. If statistical-inference loads as
-the primary skill, tighten the description / cross-links.
+Expected: this is describing one sample, not inferring to a population — plain descriptive
+statistics should handle it, a separate discipline this library does not carry as its own skill.
+If statistical-inference loads as the primary skill, tighten the description / cross-links.
 
 ## 3. Near-miss (should NOT load this skill — design seam)
 > "We're about to launch a new checkout page against the current one. How many users per arm do we

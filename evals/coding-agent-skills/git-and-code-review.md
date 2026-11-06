@@ -14,9 +14,9 @@ why-bearing messages.
 > "Set up Claude Code so that every time it makes a commit in this repo, it automatically runs the
 > test suite first."
 
-Expected: this is harness automation (a hook that runs on an event), handled by
-`coding-agent-skills:agent-harness-config`, not git usage itself. If this skill loads instead,
-tighten the description / cross-links.
+Expected: this is harness automation (a hook that runs on an event) — a separate discipline this
+library does not carry, not git usage itself. If this skill loads instead, tighten the
+description / cross-links.
 
 ## 2b. Near-miss (deep-audit guard)
 > "Run the board on the pricing module — I want a full multi-angle optimization audit:
@@ -38,7 +38,7 @@ A good response:
   trade-off (truthful record vs linear story) and why the golden rule exists.
 - **Routes the seams:** a real bug confirmed in review → contact-trace copies via
   `coding-agent-skills:defect-epidemiology` before closing; comment tone that indicts the
-  author → `collaboration-skills:feedback-that-lands`; correct-but-overbuilt code →
+  author → naming behavior, impact, and a request directly; correct-but-overbuilt code →
   `full-stack-dev-skills:lean-code-principles` (an overbuilt *whole solution* → the Pencil
   Pass in `coding-agent-skills:soviet-space-graphite`); "phase is done, build on it" claims →
   `coding-agent-skills:the-foreman`; deleting long-standing code → scream test /

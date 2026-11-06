@@ -12,7 +12,7 @@ validates the parse with row counts and a control total.
 > "The file loads fine — now dedupe these customer records and handle the missing values and
 > outliers."
 
-Expected: post-parse cleaning — `data-analytics-bi-skills:data-cleaning`. If this skill loads,
+Expected: post-parse cleaning is a separate discipline this library does not carry. If this skill loads,
 sharpen the parse/ingest framing.
 
 ## 2b. Near-miss (scale guard)
@@ -30,9 +30,9 @@ A good response:
 - **Teaches:** that a flat file has no schema so every load is declared interpretation; why IDs
   are strings (the numeric-coercion/leading-zero hazard destroys join keys silently); the
   outer-join-with-indicator audit before any merge decision.
-- **Routes:** hands post-parse cleaning to `data-analytics-bi-skills:data-cleaning`, oversized
-  or join-heavy work to `data-tools-skills:duckdb-local-analytics`, script hardening to
-  `coding-agent-skills:python-for-analysts`, and raw/processed file discipline to
+- **Routes:** hands post-parse cleaning to a separate discipline this library does not carry,
+  oversized or join-heavy work to `data-tools-skills:duckdb-local-analytics`, general Python
+  script hygiene to good practice, and raw/processed file discipline to
   `data-tools-skills:data-file-hygiene` where those seams appear.
 - **Safe:** never "fixes" encoding by trial-and-error until errors vanish; hardens recurring
-  feeds to fail loudly on layout changes; no real bank/customer exports in examples.
+  feeds to fail loudly on layout changes; no real customer/account exports in examples.

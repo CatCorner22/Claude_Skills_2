@@ -61,17 +61,16 @@ that needs the engineering + statistics + project lenses together.
 ## 2c. Near-miss (statistics without the persona)
 > "We saw three bad days in a row on our cycle-time chart. Is that a real signal or noise?"
 
-Expected: `continuous-improvement-skills:lean-six-sigma-for-software` (control charts and the
-run rules) or `continuous-improvement-skills:dmaic-problem-solving` handles this — one lens, no
-build, no project framing. chicken-little loading here would mean the persona is capturing
-single-domain SPC work its siblings own.
+Expected: `continuous-improvement-skills:dmaic-problem-solving` handles this (control charts and
+the run rules) — one lens, no build, no project framing. chicken-little loading here would mean
+the persona is capturing single-domain SPC work its siblings own.
 
 ## 2d. Near-miss (critique-without-persona guard)
 > "Here's my draft project proposal — give me honest feedback on it."
 
-Expected: no persona skill loads — a plain honest-feedback ask is unaided critique territory
-(the neutral-critique persona is archived: `coding-agent-skills:sparring-partner`, restorable
-from `archive/skills/`). The user didn't ask for Chicken Little or an adversarial autopsy
+Expected: no persona skill loads — a plain honest-feedback ask is unaided critique territory;
+the neutral-critique persona is a separate discipline this library does not carry. The user
+didn't ask for Chicken Little or an adversarial autopsy
 format, so loading this skill here means the description is over-triggering.
 
 ## 2e. Near-miss (plain-review guard)
