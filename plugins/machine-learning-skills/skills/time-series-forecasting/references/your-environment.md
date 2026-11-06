@@ -16,9 +16,9 @@ Commit only sanitized, structural examples.
   **skill ratio** (model MAE(h) ÷ baseline MAE(h) < 1 on the same backtest origins) and/or MAE < X
   currency at horizon h. Do **not** set "MASE < 1" as the target: MASE scales h-step out-of-sample error by
   an in-sample naive error at a fixed lag, so the number floats with the horizon and with the lag your
-  library used: above 1 for a good long-horizon model on a trending series, well below 1 for a bare
-  seasonal-naive forecast scored against the lag-1 default. Report MASE as the scale-free number for
-  comparing series, not as the bar.>
+  library used: above 1 for a good long-horizon model on a hard-to-beat series (e.g. a random walk),
+  well below 1 for a bare seasonal-naive forecast scored against the lag-1 default. Report MASE as
+  the scale-free number for comparing series, not as the bar.>
 - **Interval requirement:** <level you need (80% / 95%), and the **measured coverage** you accept from the
   backtest, e.g. "80% nominal, coverage within ±5 points">
 - **Model-selection protocol:** <nested: re-select order/hyperparameters inside each backtest origin | frozen:

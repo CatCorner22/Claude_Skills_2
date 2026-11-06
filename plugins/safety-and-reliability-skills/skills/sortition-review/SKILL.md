@@ -14,7 +14,7 @@ description: >-
   spot-check by lot, they know which ones get looked at, same person always reviews,
   rotate reviewers, end-of-term handover, draw at random, unriggable selection.
 metadata:
-  version: "1.3.4"
+  version: "1.3.5"
 ---
 
 # Sortition review (euthynai and the ballotino)
@@ -25,8 +25,9 @@ logistai, then a general conduct examination before allotted euthynoi, within a 
 leaving office (Oxford Classical Dictionary; Aristotle, *Ath. Pol.*) [snippet-only]. No
 exceptions, no suspicion required: being examined implied nothing, because everyone was.
 Venice attacked the other half of the problem. Its 1268 doge-election protocol ran ten
-alternating rounds of lot and vote (30→9→40→12→25→9→45→11→41), with the blind draws
-performed by the ballotino (a boy picked at random off the street), and it ran
+alternating rounds of lot and vote — nine stages of lot-reduced committees
+(30→9→40→12→25→9→45→11→41), then a final vote by the Forty-One choosing the doge — with
+the blind draws performed by the ballotino (a boy picked at random off the street), and it ran
 largely unchanged for 529 years, until the Republic fell in 1797 [snippet-only].
 
 Those stories hide two distinct controls, and this skill installs both:

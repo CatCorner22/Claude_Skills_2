@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.3.6"
+  version: "1.3.7"
 ---
 
 # Reliability engineering
@@ -167,7 +167,7 @@ common cause.
 - Reading an NHPP β through the bathtub table → β > 1 there means the system degrades between
   repairs, not that units wear out. Name which model produced the β you are quoting.
 - Quoting β, η, or a B-life as a bare number → bootstrap it. A five-point fit can support
-  "wear-out is real" while refusing to support "replace at 50 days."
+  "wear-out is real" while refusing to support "replace at 51 days."
 - Skipping the fit check → a curved Weibull plot means a threshold or two mixed modes, and no β
   read off it means anything. Look at the plot; compare against a lognormal.
 - Dropping censored/suspended units → biased fit; enter survivors and removals as censored.

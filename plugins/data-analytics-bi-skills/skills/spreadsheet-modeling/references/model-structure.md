@@ -77,7 +77,9 @@ Build tripwires that make silent errors loud:
 
 A check cell asserts an identity that holds *whatever the inputs are*. If a check only holds
 for today's inputs, it is not a check: it is a snapshot that will cry wolf on the first
-what-if run.
+what-if run. That same algebraic truth is also identity's limit: holding for every input set
+only guarantees the check won't false-fire — not that it will catch every bug, as the worked
+example below shows.
 
 ## Sensitivity: data tables and scenarios
 - **One-way data table:** vary a single input down a column, read one output across, which shows the

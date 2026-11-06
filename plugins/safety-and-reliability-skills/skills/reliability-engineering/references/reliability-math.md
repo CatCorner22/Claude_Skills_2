@@ -134,11 +134,11 @@ Three things fall out of that table. The first two change the recommendation:
 - **The wear-out claim survives.** About 0.02% of resamples put β below 1, so "the hazard rises
   with age" is supportable from five points. Scheduled replacement is the right *kind* of
   policy here.
-- **The 50-day interval does not survive.** B10 is somewhere between about three weeks and
+- **The 51-day interval does not survive.** B10 is somewhere between about three weeks and
   three months. So the honest prescription is *"wear-out is real; a scheduled replacement is
-  justified; the interval is provisional at ~50 days with a plausible range of 22–81 days:
+  justified; the interval is provisional at ~51 days with a plausible range of 22–81 days:
   set it from the cost asymmetry (nearer 22 if an in-service failure is expensive, nearer 81 if
-  early replacement is) and re-fit as failures accumulate."* Not "replace at 50 days."
+  early replacement is) and re-fit as failures accumulate."* Not "replace at 51 days."
 - The estimator is also **biased upward at small n**: the mean bootstrap β is 4.48 against a
   point estimate of 3.84, about +17%, so the fit leans steeper than the truth. (B10 came out
   roughly median-unbiased here: bootstrap median 50.7 vs point 51.0, because the β and η

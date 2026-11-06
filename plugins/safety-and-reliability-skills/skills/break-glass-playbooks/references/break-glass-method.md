@@ -2,8 +2,8 @@
 
 Method lineage: break-glass emergency-access procedures in healthcare compliance
 (documented, pre-staged, logged, and tested emergency accounts; Yale's HIPAA break-glass
-procedure) [gov/compliance], with testing requirements mapped to NIST SP 800-53 and CIS
-controls [framework]; and regulator-mandated contingency funding plans built from
+procedure) [gov/compliance], with testing requirements mapped to NIST SP 800-53
+[framework]; and regulator-mandated contingency funding plans built from
 early-warning indicators, graduated stress triggers, and pre-approved action menus
 [regulatory]. The anatomy (indicator → graduated trigger → pre-authored actions →
 logged, expiring authority → scheduled testing) is domain-neutral. Source links at the

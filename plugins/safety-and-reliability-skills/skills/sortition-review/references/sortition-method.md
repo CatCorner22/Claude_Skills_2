@@ -3,8 +3,9 @@
 Method lineage: Athenian euthynai, under which every magistrate, including the strategoi
 (generals), underwent an end-of-term accounting: a financial logos before ten allotted
 logistai, then a general conduct review before ten allotted euthynoi, within a month of
-leaving office (Oxford Classical Dictionary; Aristotle, *Ath. Pol.*) [snippet-only]; and the Venetian doge-election protocol of 1268: ten alternating rounds of lot and vote
-(30→9→40→12→25→9→45→11→41), blind draws performed by the ballotino, family quotas, no
+leaving office (Oxford Classical Dictionary; Aristotle, *Ath. Pol.*) [snippet-only]; and the Venetian doge-election protocol of 1268: ten alternating rounds of lot and vote —
+nine stages of lot-reduced committees (30→9→40→12→25→9→45→11→41), then a final vote by
+the Forty-One choosing the doge — blind draws performed by the ballotino, family quotas, no
 campaigning, used largely unchanged until 1797 [snippet-only]. Both are selection
 design, domain-neutral by construction.
 
@@ -258,5 +259,6 @@ notes.
   magistrates including strategoi
 - Aristotle, *Ath. Pol.*: the institutional description of the boards and procedure
 - Molinari's protocol analysis of the 1268 Venetian doge election: the ten
-  alternating rounds (30→9→40→12→25→9→45→11→41), the ballotino's blind draws, family
-  quotas, and the protocol's 529-year run
+  alternating rounds — nine lot-reduced committees (30→9→40→12→25→9→45→11→41) then the
+  Forty-One's final vote — the ballotino's blind draws, family quotas, and the
+  protocol's 529-year run

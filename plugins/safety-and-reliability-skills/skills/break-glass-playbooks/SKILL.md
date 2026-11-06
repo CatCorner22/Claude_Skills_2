@@ -2,7 +2,7 @@
 name: break-glass-playbooks
 description: >-
   Arms each foreseeable crisis with a break-glass playbook, channeling documented
-  emergency-access procedures (HIPAA; NIST/CIS-mapped testing) and
+  emergency-access procedures (HIPAA; NIST SP 800-53-mapped testing) and
   regulator-mandated contingency plans with graduated escalation: define the tripwire
   as a number a named person watches on a stated
   cadence, pre-author the first ten moves at calm-headed quality, pre-grant emergency
@@ -15,12 +15,12 @@ description: >-
   hits, emergency access, runbook, kill switch, tripwire, covenant trip, we'd be
   scrambling, sealed instructions.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
   source: >-
     Homage to Asimov's Foundation — pre-recorded guidance that unseals when predicted
     crises arrive — an homage only, no affiliation with the estate or rights holders.
     The skill channels the documented practices: break-glass emergency-access
-    procedures (Yale's HIPAA procedure; NIST SP 800-53 / CIS-mapped testing
+    procedures (Yale's HIPAA procedure; NIST SP 800-53-mapped testing
     requirements) and regulator-mandated contingency plans built on early-warning
     indicators, graduated triggers, and pre-approved action menus.
 ---
@@ -33,7 +33,7 @@ was watching) because nothing written during the alarm will match calm-headed qu
 Two documented practice families supply the pattern. Healthcare compliance requires
 break-glass emergency-access procedures: pre-staged, logged emergency accounts that are
 documented and *tested*, not merely declared (Yale's HIPAA break-glass procedure)
-[gov/compliance], with testing requirements mapped to NIST SP 800-53 and CIS controls
+[gov/compliance], with testing requirements mapped to NIST SP 800-53
 [framework]. Banking supervision mandates contingency funding plans built from
 early-warning indicators, graduated stress triggers, and pre-approved action menus
 [regulatory]. The anatomy is the same in both and domain-neutral: indicator →
@@ -159,7 +159,7 @@ generosity affordable.
 Drills exist because sealed things decay silently: people leave, systems move,
 credentials rotate, storage links die. A playbook fails in exactly one of two visible
 ways, at the drill (cheaply) or at the crisis (expensively), and the drill is how you
-choose which. The compliance framing (testing mapped to NIST SP 800-53 / CIS controls)
+choose which. The compliance framing (testing mapped to NIST SP 800-53)
 is useful precisely because it converts "we should test it sometime" into a scheduled
 obligation [framework]. The feedback loop closes the design: each drill and each real
 firing is the only ground truth the playbook ever receives, and a playbook that does
