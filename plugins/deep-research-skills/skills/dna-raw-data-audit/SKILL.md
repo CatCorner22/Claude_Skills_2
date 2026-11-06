@@ -11,7 +11,7 @@ description: >-
   deep-research-skills:dna-ancestry-research. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.7.1"
+  version: "1.7.2"
   source: >-
     Built from an eight-stream research pass, then re-audited by a perspective-diverse adversarial
     pass that found defects in the shipped version and is the reason several claims here are
@@ -228,8 +228,7 @@ These are not hedges. Violating any of them causes a specific harm.
   probed set, give the post-negative carrier probability using **ancestry-specific clinical
   sensitivity**, report the **negative likelihood ratio** rather than NPV for anything rare, and
   never let a negative stand as clearance for a condition the person has a family history of.
-  `references/risk-communication.md` §5. *(The earlier wording — "never offer reassurance without
-  saying what was probed" — licensed the harm: list the probed set, then reassure.)*
+  `references/risk-communication.md` §5.
 - **No star-allele call the data cannot support — which is not the same as "no phase, no call".**
   Where no defined haplotype carries both observed variants in cis, the diplotype *is* determined:
   report it (CYP2C19 heterozygous at `*2` and `*17` is the worked case). Where two or more defined
@@ -299,9 +298,9 @@ population-based ones, with newer and larger estimates overlapping more than the
 suggested. **Two disciplines follow:** quote the **age horizon** with every penetrance figure, because
 comparing a to-70 estimate against a to-80 one manufactures a gap; and quote a **range**, because
 large series have put absolute cumulative risks at the lower end of the published spread with wide
-intervals. *(An earlier version of this section also claimed that variation between families carrying
-the same variant exceeds variation between positions within a gene. The record cited for it does not
-visibly support it, so the claim is withdrawn rather than rehedged — see `risk-communication.md` §3.)*
+intervals. The claim that variation between families carrying the same variant exceeds variation
+between positions within a gene is not made: the record cited for it does not visibly support it
+(see `risk-communication.md` §3).
 
 **Actionability is a higher bar than association, and almost nothing clears it.** A variant can be
 genuinely associated with an outcome and still be useless, because the question is not "does this
@@ -416,7 +415,7 @@ ignored**, so confirm with `git check-ignore -v` before writing anything into it
   build, because comparing them across builds has both manufactured a false mix-up and let two
   different people pass as one.
 - **Test reachability before relying on the citation verifier.** Where the scholarly resolvers are
-  blocked — the normal case in this environment — it returns `ERROR: network unavailable` and
+  blocked (common in sandboxed and proxied setups), it returns `ERROR: network unavailable` and
   verifies nothing. The operative standard is then `references/variant-catalog.md` §0: an
   identifier counts as verified only when it appears inside a returned URL **and** the record's
   title was returned beside it. Report unverifiable identifiers as unverified, and say in report

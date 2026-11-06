@@ -78,7 +78,7 @@ Two collaboration instruments that earn their slots: disarming-elicitation (the 
 
 | Skill | Optimized for | When to use | Say (or `/invoke`) |
 |---|---|---|---|
-| **disarming-elicitation** | Runs knowledge-elicitation interviews in the disarming, low-stakes stance documented in motivational interviewing, the FBI elicitation brochure… | Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction. | `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, … |
+| **disarming-elicitation** | Runs knowledge-elicitation interviews in the disarming, low-stakes stance of motivational interviewing, the FBI elicitation brochure… | Use with experts, process owners, and users who know more than they can say — willing people only, never covert extraction. | `columbo`, `elicitation`, `stakeholder interview`, `requirements gathering`, … |
 | **meeting-design** | Designs meetings that produce decisions instead of discussion | Use when planning, tightening, or questioning any meeting. | `meeting agenda`, `run this meeting`, `too many meetings`, `this should be an email`, … |
 
 ## Development & coding agents

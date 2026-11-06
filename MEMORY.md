@@ -1735,3 +1735,22 @@ retraction of the previous pass's headline mechanism claim.
   the branch from `origin/main` leaves the local branch ahead of its stale remote tracking ref by
   GitHub's own merge commit; `origin/main..HEAD` empty plus an empty content diff proves nothing
   is unpushed, and pushing to satisfy the hook accomplishes nothing.
+
+### Crystallization pass — 2026-11-06 (wording audit of all 81 skills)
+- FACT: user asked to double-check every skill and edit for optimized language. Twelve parallel
+  editors tightened 79 of 81 SKILL.md files (project-command-center and pdf-data-extraction needed
+  nothing). Each changed skill and plugin got a patch bump; PR #68 is a draft against main.
+- FACT (verification that held): a script comparing each changed file with its HEAD version
+  (numbers, code spans, URLs, file paths, plugin:skill references, H2 headings, frontmatter name,
+  Triggers list) found no lost fact across 79 files. Cross-skill dead targets stayed at 50, same as
+  before the audit.
+- LESSON: the fact-preservation script does not track negation or modal words. A rail can soften
+  and still pass it. Pair every wording audit with a count of never/not/must/only/do-not per file,
+  and read every file where a count drops. That check found no softened rail here, but only because
+  someone read the removed sentences.
+- LESSON: a wording pass removed the author's review history from skill text ("an earlier version
+  of this section also claimed...", "the normal case in this environment"). Those phrases shipped
+  unnoticed, and the validator does not look for them. Audit prose for narration of the repo's own history or the
+  author's environment; keep the rule, drop the story.
+- AVOID: reporting "every skill audited" when references/*.md were not touched. Say the scope.
+- AVOID: committing a multi-agent edit while agents are still writing. Wait for every report first.

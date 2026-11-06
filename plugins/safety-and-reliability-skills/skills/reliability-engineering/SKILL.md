@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.3.2"
+  version: "1.3.3"
 ---
 
 # Reliability engineering
@@ -177,12 +177,12 @@ common cause.
 - Scheduled replacement under β ≈ 1 → pure waste; random failure calls for redundancy and fast
   repair, not calendars.
 - Time-based availability on a request-serving service → partial failure logs as zero downtime.
+  Count events (good ÷ valid) and spend an error budget.
 - Applying MTBF/MTTR/availability to a dormant protective function → its failures are hidden, so
   MTTR is meaningless; price it as probability of failure on demand (~λT/2) and manage the
   proof-test interval T.
 - Adding a redundant channel to a protective function nobody tests → two things that can be
   silently dead, sharing whatever common cause killed the first.
-  Count events (good ÷ valid) and spend an error budget.
 - Multiplying a series chain without naming the independence assumption → the product is the
   no-overlap end of the range; still audit shared causes, which are what widen the blast radius.
 - Parallel credit for an unexercised standby → treat it as absent until switchover is
