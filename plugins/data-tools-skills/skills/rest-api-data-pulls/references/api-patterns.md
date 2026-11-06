@@ -111,11 +111,11 @@ lines = pd.json_normalize(
                                                                # empty collections routinely
 ```
 - One table per level; join on the parent key at analysis time. Parents with no children are
-  absent from the child table by construction — use a left join, not an inner one, if the
+  absent from the child table by construction, so use a left join, not an inner one, if the
   parent count has to survive.
-- After flattening: IDs to `string`, dates parsed, amounts numeric — the flat-file rules apply.
+- After flattening: IDs to `string`, dates parsed, amounts numeric; the flat-file rules apply.
 
 ## Run logging
 Log one line per run: `timestamp, resource, filter_window, rows_fetched, server_total,
 duration_s, output_file`. The first question about any recurring extract is "did it pull
-everything?" — the log answers it without re-running.
+everything?" The log answers it without re-running.

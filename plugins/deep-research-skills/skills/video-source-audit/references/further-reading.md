@@ -26,8 +26,8 @@ year, volume, page range, and DOI **for items that returned no supporting record
 generated text, not retrieval. Reading it as evidence is how a citation list acquires perfectly
 formed entries that resolve to nothing.
 
-**The rule: an identifier is verified only if it appears in a returned record** — a PMID in a
-pubmed.ncbi.nlm.nih.gov URL, a DOI inside a publisher URL, an OpenLibrary OL-id. If the identifier
+**The rule: an identifier is verified only if it appears in a returned record** (a PMID in a
+pubmed.ncbi.nlm.nih.gov URL, a DOI inside a publisher URL, an OpenLibrary OL-id). If the identifier
 appears only in the prose, it is unverified, and unverified means it does not ship.
 
 Two further traps this file guards against:
@@ -35,7 +35,7 @@ Two further traps this file guards against:
 - **Edition vs work.** Catalogue lookups usually land on an *edition* record, so a 1993 reissue of a
   1954 book resolves with a 1993 date. Where the original year matters it is given as the work's
   year, with the edition noted separately.
-- **Fuzzy title matching.** Catalogue search returns confident near-misses — a different book, by a
+- **Fuzzy title matching.** Catalogue search returns confident near-misses: a different book, by a
   different author, with a similar title. Match author *and* title before accepting a record.
 
 Where full text is freely available, that is noted, because a source a reader can actually open is
@@ -70,13 +70,13 @@ This is the evidence base behind the skill's insistence on absolute-beside-relat
 | Akl et al., "Framing of health information messages" (Cochrane) | **PMID 22161408** | Gain vs loss framing. |
 | Spiegelhalter, "Risk and Uncertainty Communication" | DOI 10.1146/annurev-statistics-010814-020148 | The statistician's overview. |
 
-**Books:** *Calculated Risks* — Gigerenzer — OpenLibrary **OL7947684M** (published in the UK as
-*Reckoning with Risk*, OL work **OL28353266W** — **the same book**; do not list both) ·
-*Risk Savvy* — Gigerenzer — **OL26179594M** · *The Art of Statistics* — Spiegelhalter —
-**OL27934405M** · *The Norm Chronicles* — Blastland & Spiegelhalter — **OL27167950M** (the MicroMort:
-personal risk on one comparable scale) · *Innumeracy* — Paulos — work **OL1960756W** ·
-*Naked Statistics* — Wheelan — work **OL19167522W** ·
-*Calling Bullshit* — Bergstrom & West — 2020 — ISBN **9780525509189**.
+**Books:** *Calculated Risks*, Gigerenzer, OpenLibrary **OL7947684M** (published in the UK as
+*Reckoning with Risk*, OL work **OL28353266W**, **the same book**; do not list both) ·
+*Risk Savvy*, Gigerenzer, **OL26179594M** · *The Art of Statistics*, Spiegelhalter,
+**OL27934405M** · *The Norm Chronicles*, Blastland & Spiegelhalter, **OL27167950M** (the MicroMort:
+personal risk on one comparable scale) · *Innumeracy*, Paulos, work **OL1960756W** ·
+*Naked Statistics*, Wheelan, work **OL19167522W** ·
+*Calling Bullshit*, Bergstrom & West, 2020, ISBN **9780525509189**.
 
 ## §3 How good science goes wrong
 
@@ -114,16 +114,16 @@ and calls it validity.**
 **Reporting guidelines** ask whether the *write-up* is complete. A well-conducted trial reported
 badly scores poorly; a poor trial reported meticulously scores well.
 
-- CONSORT 2010 (parallel-group RCTs) — **PMID 20334633**, DOI 10.1136/bmj.c332
-- PRISMA 2020 (systematic reviews) — **PMID 33782057** (BMJ 2021;372:n71)
-- STROBE (observational studies) — **PMID 18064739**; PLoS Med version DOI 10.1371/journal.pmed.0040296
+- CONSORT 2010 (parallel-group RCTs): **PMID 20334633**, DOI 10.1136/bmj.c332
+- PRISMA 2020 (systematic reviews): **PMID 33782057** (BMJ 2021;372:n71)
+- STROBE (observational studies): **PMID 18064739**; PLoS Med version DOI 10.1371/journal.pmed.0040296
 
 **Appraisal and certainty instruments** ask whether the *result* can be believed.
 
-- RoB 2 (risk of bias in RCTs) — **PMID 31462531**
-- ROBINS-I (non-randomised intervention studies) — **PMID 27733354**
-- AMSTAR 2 (systematic-review conduct) — **PMID 28935701**
-- GRADE (certainty in a body of evidence) — **PMID 18436948**
+- RoB 2 (risk of bias in RCTs): **PMID 31462531**
+- ROBINS-I (non-randomised intervention studies): **PMID 27733354**
+- AMSTAR 2 (systematic-review conduct): **PMID 28935701**
+- GRADE (certainty in a body of evidence): **PMID 18436948**
 
 **Caveat when citing any of these:** CONSORT, PRISMA and STROBE were each co-published across
 several journals simultaneously, so more than one PMID legitimately is "the" paper. Cite the PMID
@@ -131,7 +131,7 @@ several journals simultaneously, so more than one PMID legitimately is "the" pap
 did not see.
 
 **AMSTAR 2 is also the design precedent for this skill's rubric.** Its output is a confidence rating
-— high / moderate / low / critically low — driven by which *critical domains* fail, deliberately not
+(high / moderate / low / critically low) driven by which *critical domains* fail, deliberately not
 a summed score, precisely because one critical flaw can invalidate a review that scores well
 elsewhere. That is the same reasoning behind this skill's cap ladder and its refusal to average the
 three axes.
@@ -140,20 +140,20 @@ three axes.
 
 Presenting a disputed source as settled is exactly the failure this skill grades other people for.
 
-- **Ioannidis, "Why most published research findings are false"** (PLoS Med 2005) — **PMID 16060722**.
+- **Ioannidis, "Why most published research findings are false"** (PLoS Med 2005): **PMID 16060722**.
   The field's most-cited manifesto *and* formally disputed: Goodman & Greenland's critique
   (**PMID 17456002**), Ioannidis's reply (**PMID 17593900**), and a published correction to the
   original noting an error in a table equation (**PMID 36007233**). Cite it with its dispute.
 - **Open Science Collaboration, "Estimating the reproducibility of psychological science"**
-  (Science 2015) — **PMID 26315443**. The headline "36% replicated" is an estimate under dispute:
+  (Science 2015): **PMID 26315443**. The headline "36% replicated" is an estimate under dispute:
   Gilbert et al.'s comment (**PMID 26941311**) and a Bayesian reanalysis (**PMID 26919473**).
-- **Ziliak & McCloskey, *The Cult of Statistical Significance*** — rebutted at length by Hoover &
+- **Ziliak & McCloskey, *The Cult of Statistical Significance***, rebutted at length by Hoover &
   Siegler, DOI 10.1080/13501780801913298, with the authors' reply DOI 10.1080/13501780801913413.
-- **Kahneman, *Thinking, Fast and Slow*** — excellent for the System 1 / System 2 framing, **not**
+- **Kahneman, *Thinking, Fast and Slow***: excellent for the System 1 / System 2 framing, **not**
   as an evidence base: several popularised results failed to replicate, the load-bearing receipt
   being the multi-lab preregistered replication of ego depletion (**PMID 27474142**), which found a
   trivial effect not distinguishable from zero across 23 labs.
-- **Huff, *How to Lie with Statistics*** (1954) — not discredited, but historically complicated.
+- **Huff, *How to Lie with Statistics*** (1954): not discredited, but historically complicated.
   *Statistical Science* 20(3) (2005) ran a fiftieth-anniversary symposium including Steele,
   "Darrell Huff and Fifty Years of How to Lie with Statistics", DOI 10.1214/088342305000000205.
   Cite the symposium beside the book.
@@ -162,7 +162,7 @@ Presenting a disputed source as settled is exactly the failure this skill grades
 
 The omissions show the standard being enforced.
 
-- **Nuovo, Melnikow & Chang, on reporting NNT and absolute risk reduction in RCTs (JAMA 2002)** —
+- **Nuovo, Melnikow & Chang, on reporting NNT and absolute risk reduction in RCTs (JAMA 2002)**:
   not cited. A domain-restricted PubMed search returned ten unrelated records and no matching PMID,
   while the generated summary confidently supplied a volume and page range. That is precisely the
   fabrication pattern §0 describes: perfectly formed, entirely unsupported.

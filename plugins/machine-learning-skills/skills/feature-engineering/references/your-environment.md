@@ -1,7 +1,7 @@
 # Your feature setup (sanitized template)
 
 Fill this in with your real setup. If any value is sensitive (real column names, category lists, sample
-rows, business identifiers), keep it in `your-environment.private.md` instead — that suffix is git-ignored.
+rows, business identifiers), keep it in `your-environment.private.md` instead. That suffix is git-ignored.
 Commit only sanitized, structural examples.
 
 - **Categorical fields (name → cardinality → encoding):**

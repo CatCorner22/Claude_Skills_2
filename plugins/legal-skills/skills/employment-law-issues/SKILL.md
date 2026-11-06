@@ -13,7 +13,7 @@ description: >-
   accommodation, wrongful termination, workplace investigation, independent contractor, overtime,
   harassment complaint, performance improvement plan.
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
   source: >-
     Built from the federal employment statutes named in the references (thresholds marked
     [rule text] with the instrument cited) and a 2026-10-14 search pass on the items that move
@@ -64,8 +64,7 @@ way a decision-maker reads it: exposure first.
    employer's own past practice (consistency is evidence). Write the source next to the issue. A
    number without its instrument is a rumour.
 
-4. **Verify currency before relying on any number or agency position.** Open the live source —
-   the official code, *ecfr.gov*, the agency's current page, the state statute — and date the
+4. **Verify currency before relying on any number or agency position.** Open the live source (   the official code, *ecfr.gov*, the agency's current page, the state statute) and date the
    check. `references/moving-parts-ledger.md` lists what is known to have moved recently and the
    route to check each; two of its items (the FTC non-compete rule, the 2024 overtime threshold)
    are rules that were vacated and still read as current in older material. Pass anything that
@@ -73,8 +72,8 @@ way a decision-maker reads it: exposure first.
 
 5. **Assess exposure, including the one usually missed.** For each issue, rate likelihood and
    severity and say whether it can still be fixed. Then check the **timing against protected
-   activity** — a complaint, a leave request, an accommodation request, a wage inquiry, a report
-   to an agency — because retaliation is the claim most often made, and a clean underlying
+   activity** (a complaint, a leave request, an accommodation request, a wage inquiry, a report
+   to an agency), because retaliation is the claim most often made, and a clean underlying
    decision does not cure it. Record deadlines that are already running (agency charge windows,
    notice periods, final-pay timing, revocation periods). `references/lifecycle-issue-checklist.md` §6.
 
@@ -116,9 +115,10 @@ are not formalities; they are the evidence that the decision was made for the st
 Courts and agencies ask what the employer did, in what order, and whether it did the same for
 everyone.
 
-**Why the thresholds are marked and dated.** Every number in this skill's references is either
-[rule text] with its instrument named or [snippet-only] with a check date, because the one thing a
-reader will do with a threshold is rely on it. The marks are the instruction: open the source.
+**Why the thresholds are marked and dated.** Every number in this skill's references carries a
+mark: [rule text] with its instrument named, [snippet-only] with a check date, or a background
+mark ([background — verify], [canon attribution]). The one thing a reader will do with a threshold
+is rely on it, so the marks are the instruction: open the source.
 
 **Why Smart Brevity.** The reader is an owner, a general counsel or an HR director deciding
 whether to call outside counsel today. The exposure comes first, in one sentence; the law comes
@@ -154,13 +154,13 @@ identifying a person, a complaint or a matter in the `.private.md` twin.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/employment-law-issues.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/employment-law-issues.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- `references/lifecycle-issue-checklist.md` — the stage-by-stage tables: issues, governing sources, what to verify live, what to pull, counsel triggers; deadlines that run
-- `references/moving-parts-ledger.md` — the items known to have moved recently, each with its status as last checked, the date, and the route to re-check
-- `references/investigation-and-termination-playbook.md` — the investigation protocol, the termination checklist, and the separation-agreement checklist with its required carve-outs
-- `references/issue-list-template.md` — the Smart Brevity issue list and the document-review table, with a worked example
-- `references/your-environment.md` — employer profile, policies in force, escalation path, deadlines, state overlays (fill in; the `.private.md` twin is git-ignored)
+- `references/lifecycle-issue-checklist.md`: the stage-by-stage tables: issues, governing sources, what to verify live, what to pull, counsel triggers; deadlines that run
+- `references/moving-parts-ledger.md`: the items known to have moved recently, each with its status as last checked, the date, and the route to re-check
+- `references/investigation-and-termination-playbook.md`: the investigation protocol, the termination checklist, and the separation-agreement checklist with its required carve-outs
+- `references/issue-list-template.md`: the Smart Brevity issue list and the document-review table, with a worked example
+- `references/your-environment.md`: employer profile, policies in force, escalation path, deadlines, state overlays (fill in; the `.private.md` twin is git-ignored)

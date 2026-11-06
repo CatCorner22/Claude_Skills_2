@@ -71,10 +71,10 @@ as invalid YAML.
 
 **The login step is not optional and its absence does not look like an auth problem.** A fresh
 runner holds no credentials for any registry, so `docker push` fails with `denied` /
-`unauthorized` *after* the build has already run — minutes of green pipeline followed by a
+`unauthorized` *after* the build has already run: minutes of green pipeline followed by a
 message that reads like a permissions bug in the registry. For GHCR the built-in `GITHUB_TOKEN`
 suffices once the job declares `packages: write` (job-level `permissions:` replaces the
-repository default wholesale, which is why `contents: read` is listed alongside it — omit it and
+repository default wholesale, which is why `contents: read` is listed alongside it: omit it and
 `actions/checkout` loses its read right). For Docker Hub, ECR, or a private registry, swap in
 that registry's host and a pair of repository secrets.
 
@@ -82,10 +82,10 @@ The two `env:` names are deliberate and must match the code that reads them: `AP
 is the `env_prefix = "APP_"` settings object from
 `full-stack-dev-skills:full-stack-app-architecture`, and `TEST_DATABASE_URL` is what the conftest
 spine in `full-stack-dev-skills:testing-strategy` reads. A name nothing reads is the worst
-outcome here — the step passes while silently exercising the default database, so the
+outcome here: the step passes while silently exercising the default database, so the
 migration check proves nothing.
 
-Fail-fast order: lint (seconds), then the scratch-DB migration check, then tests — all before
+Fail-fast order: lint (seconds), then the scratch-DB migration check, then tests: all before
 anything is built. The image is built once and the SHA is the release name; `./deploy.sh` runs
 `alembic upgrade head` against the target database before pointing traffic at the new SHA.
 
@@ -125,14 +125,14 @@ async def request_context(request: Request, call_next):
 ```
 **The `try/finally` is the whole point of the middleware.** Written as a bare
 `response = await call_next(request)` followed by the log line, an unhandled exception skips
-both the log call and the header — so the one request class you most need correlated, the 500,
+both the log call and the header, so the one request class you most need correlated, the 500,
 is the one that leaves no trace. Verified on FastAPI 0.141: a route raising `ValueError`
 produced a 500 response with **no** log line and **no** `x-request-id` header, while a 200 on the
 same app logged normally.
 
 The 500 response itself still cannot carry the header: Starlette's `ServerErrorMiddleware` sits
 *outside* your `@app.middleware("http")` stack, so it builds that response where you can no
-longer touch it. Correlate through the logged line instead — which is exactly why the log must
+longer touch it. Correlate through the logged line instead, which is exactly why the log must
 run in `finally`, and why the generic 500 handler should log `rid` (read it back off
 `request.state.request_id`) next to the traceback.
 

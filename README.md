@@ -92,21 +92,21 @@ survive — use it comparatively, not as a promise.
 
 | Plugin | Skills | ~Tokens | % of 200K |
 |---|---|---|---|
-| `coding-agent-skills` | 14 | 3,493 | 1.75% |
-| `decision-science-skills` | 10 | 2,619 | 1.31% |
-| `full-stack-dev-skills` | 10 | 2,149 | 1.07% |
-| `continuous-improvement-skills` | 7 | 1,750 | 0.88% |
-| `safety-and-reliability-skills` | 6 | 1,595 | 0.80% |
+| `coding-agent-skills` | 14 | 3,485 | 1.74% |
+| `decision-science-skills` | 10 | 2,614 | 1.31% |
+| `full-stack-dev-skills` | 10 | 2,147 | 1.07% |
+| `continuous-improvement-skills` | 7 | 1,746 | 0.87% |
+| `safety-and-reliability-skills` | 6 | 1,594 | 0.80% |
 | `data-analytics-bi-skills` | 6 | 1,527 | 0.76% |
-| `machine-learning-skills` | 6 | 1,326 | 0.66% |
-| `data-tools-skills` | 5 | 1,044 | 0.52% |
-| `writing-skills` | 4 | 1,044 | 0.52% |
-| `deep-research-skills` | 4 | 1,011 | 0.51% |
+| `machine-learning-skills` | 6 | 1,325 | 0.66% |
+| `data-tools-skills` | 5 | 1,043 | 0.52% |
+| `writing-skills` | 4 | 1,043 | 0.52% |
+| `deep-research-skills` | 4 | 1,009 | 0.50% |
 | `legal-skills` | 3 | 808 | 0.40% |
 | `metacognition-skills` | 3 | 737 | 0.37% |
 | `collaboration-skills` | 2 | 539 | 0.27% |
 | `math-foundations-skills` | 1 | 267 | 0.13% |
-| **all 14** | **81** | **19,911** | **9.96%** |
+| **all 14** | **81** | **19,886** | **9.94%** |
 
 **Install profiles** — curated bundles matched to a working day, with their measured cost. Usage
 decay rewards a coherent working set: a profile keeps one warm cluster of skills defending its own
@@ -114,10 +114,10 @@ listing slots, where a scattershot install decays everything equally.
 
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 |---|---|---|---|---|
-| Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,838 | 1.42% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 24 | 5,643 | 2.82% |
-| Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,345 | 1.67% |
-| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,202 | 2.10% |
+| Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,837 | 1.42% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 24 | 5,632 | 2.82% |
+| Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,341 | 1.67% |
+| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,196 | 2.10% |
 
 
 There is a second, sharper reason to subset, and it is worse than a round "~100 skills" threshold
@@ -154,10 +154,10 @@ Practical guidance:
 
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 | --- | --- | ---: | ---: | ---: |
-| Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,838 | 1.42% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 24 | 5,643 | 2.82% |
-| Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,345 | 1.67% |
-| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,202 | 2.10% |
+| Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,837 | 1.42% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 24 | 5,632 | 2.82% |
+| Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,341 | 1.67% |
+| Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,196 | 2.10% |
 
   Note that a bundle's skills cross-reference skills in plugins you have not installed. Those
   pointers name the plugin (`other-plugin:skill`), so they read as "install that plugin if you want

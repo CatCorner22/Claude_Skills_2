@@ -1,7 +1,7 @@
 # Variant catalogue
 
 The sites worth looking at, what each is, whether consumer platforms call it dependably, and what
-action — if any — follows.
+action, if any, follows.
 
 **Contents**
 - §0 The verification standard, and why this file carries no frozen effect sizes
@@ -18,7 +18,7 @@ action — if any — follows.
 
 ## §0 The verification standard, and why this file carries no frozen effect sizes
 
-**Every citation here was verified against a retrieved index record** — a PMID inside a
+**Every citation here was verified against a retrieved index record**: a PMID inside a
 `pubmed.ncbi.nlm.nih.gov` URL, a PMC ID inside a PMC URL, or an identifier inside a publisher URL.
 A search tool returns two things: retrieved records, and a model-written prose summary beneath them.
 **Only the records are evidence.** The prose states confident publishers, years, volumes and DOIs
@@ -37,8 +37,8 @@ an omission, for three reasons:
    external number carries a provenance mark or an honest hedge. A catalogue of bare effect sizes
    would violate it on every line.
 
-So this file gives what is *stable* — what the variant is, the mechanism, whether the platform calls
-it, and whether any action attaches — and the skill's Do-it stage 11 requires a live literature pass
+So this file gives what is *stable*: what the variant is, the mechanism, whether the platform calls
+it, and whether any action attaches. The skill's Do-it stage 11 requires a live literature pass
 for the numbers, resolved at analysis time. **If you find yourself wanting to quote an effect size
 from this file, that is the signal to go and get it from the literature instead.**
 
@@ -51,10 +51,10 @@ real one, cited for a paper that turns out to be reported entirely within its ne
 > identifier resolves"; a returned title supports "this identifier is *that* paper". Adjacent
 > identifiers (…21 / …23) deserve particular suspicion, because that is what a guessed ID looks like.
 
-**The rule cuts both ways.** `PMC3663356` failed one re-resolution and returned on a later search
-**with its title**, so it is cited in `interventions-evidence.md`, attached to what the title
-actually says. **A withdrawal is provisional in the same way an identifier
-is**, and the same search also showed that two *adjacent* DOIs at one journal
+**The rule cuts both ways.** `PMC3663356` is cited in `interventions-evidence.md` because it
+returns **with its title**, attached to what the title actually says; an identifier that fails one
+re-resolution can resolve on a later search, so **a withdrawal is provisional in the same way an
+identifier is**. Two *adjacent* DOIs at one journal
 (`10.2340/00015555-0928` and `-1130`) are a naevus case letter and a nomenclature letter
 respectively. **Adjacency is a reason to check, not a verdict either way.**
 
@@ -66,11 +66,11 @@ prose alone does not ship, however real the paper is.
 ### The one carve-out: three variants where a number is unavoidable
 
 **The no-frozen-numbers rule has a failure mode, and it has to be named.** It defers every figure to
-a live literature pass — and where scholarly resolvers and direct page fetches are blocked by an
+a live literature pass, and where scholarly resolvers and direct page fetches are blocked by an
 egress proxy (see `your-environment.md`), that pass cannot return a figure: the only working
 channel is a search tool whose *records* yield identifiers but whose *numbers* live in
 model-written prose. So "go and get the number at analysis time" resolves, in practice, to either
-nothing or a confidently-stated invention — and it fails hardest at APOE, where the news is least
+nothing or a confidently-stated invention, and it fails hardest at APOE, where the news is least
 welcome and a wrong figure is least likely to be challenged.
 
 **So three variants carry anchored figures here**, each with its provenance graded explicitly. This
@@ -78,10 +78,10 @@ is strictly safer than an instruction that cannot be executed, and the grading i
 
 > **Provenance grades used below.** **[R]** the identifier resolved to a retrieved record *and* the
 > figure came from that record. **[R/p]** the identifier resolved to a retrieved record, but the
-> **figure itself was read from search-result prose** and not from the record — treat it as an
+> **figure itself was read from search-result prose** and not from the record: treat it as an
 > order-of-magnitude anchor, quote it as a range, and re-verify before it reaches a person.
 > **[calc]** computed here from the figures beside it; the derivation is shown so it can be checked.
-> **[p]** the figure came from search-result prose and **no identifier resolved for it at all** —
+> **[p]** the figure came from search-result prose and **no identifier resolved for it at all**:
 > the weakest grade here. A `[p]` figure is a placeholder for a number someone must still go and
 > get, and **it does not reach a person.** **[calc from [p]]** correct arithmetic on unsourced
 > inputs: the computation is checkable, the magnitude is not.
@@ -113,7 +113,7 @@ range with stated provenance beats both silence and invention.
 | Family-ascertained penetrance exceeds population-based penetrance, with the gap narrowing in larger studies | [PMC2447846](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2447846/) (family-based; its title states the point), [PMID 11044354](https://pubmed.ncbi.nlm.nih.gov/11044354/) / [PMC2408797](https://pmc.ncbi.nlm.nih.gov/articles/PMC2408797/) (population-based), [PMID 25192939](https://pubmed.ncbi.nlm.nih.gov/25192939) (population screening — **counter-evidence in this row: it found population-ascertained risks comparable to family-ascertained ones**, in founder-variant carriers ascertained through healthy relatives), [PMID 16484695](https://pubmed.ncbi.nlm.nih.gov/16484695) (a large US series putting absolute cumulative risks at the lower end of the published range, with wide intervals) |
 | Injectable peptides sold outside regulation carry risks independent of efficacy | [PMC13585006](https://pmc.ncbi.nlm.nih.gov/articles/PMC13585006) |
 
-**Dropped for failing the standard**, recorded because the drops are as informative as the keeps:
+**Not shipped, because they fail the standard**, recorded because the exclusions are as informative as the inclusions:
 the ACMG/AMP sequence-variant interpretation guideline (Richards et al.) and the published
 *Nature Genetics* version of the polygenic-score portability paper never appeared in a returned
 record, though both are clearly real and are referenced by many records that
@@ -123,8 +123,8 @@ with an identifier reconstructed from memory.
 **Not used as anchors:** `PMID 39218908` as the portability anchor, because it does not
 re-resolve to any record, and a 2025 medRxiv preprint as the counterweight, because anchoring one
 side of a live dispute on a single non-peer-reviewed preprint is weak on its own terms. The five
-records above stand in their place, each of which resolved in two independent searches. **An identifier that no longer resolves is
-withdrawn, not downgraded to a hedge** — and recording the withdrawal is what stops it reappearing.
+records above stand in their place, each of which resolved in two independent searches. **An identifier that stops resolving is
+withdrawn, not downgraded to a hedge**, and recording the withdrawal is what stops it reappearing.
 
 ---
 
@@ -148,14 +148,14 @@ risk numbers, and it is easy to miss:
 So read every R grade as "R-grade in a population where this allele is common", and downgrade it when
 it is not. `risk-communication.md` §4 carries the portability arithmetic.
 
-**Evidence strength** — what the literature establishes:
+**Evidence strength**: what the literature establishes:
 - **E1** Established, with an intervention tested in carriers.
 - **E2** Established association, no carrier-specific intervention evidence.
 - **E3** Replicated but small effect, or effect size still moving.
 - **E4** Single study, or preclinical/mechanistic only.
 - **E5** Contested, or a professional body advises against testing.
 
-**Array reliability** — whether a consumer platform calls *this site* dependably:
+**Array reliability**: whether a consumer platform calls *this site* dependably:
 - **R1** Common variant, directly probed, well-clustered. Trust the call; still confirm before
   clinical action.
 - **R2** Probed but orientation- or context-sensitive (an A/T or C/G site, or near an indel).
@@ -163,12 +163,12 @@ it is not. `risk-communication.md` §4 carries the portability arithmetic.
   heterozygote at a palindromic site carries one copy of each allele under either orientation, so
   its **dosage is unambiguous and the call is usable**; only a **homozygote** there is
   unresolvable. The sites in this catalogue verified as palindromic are **rs1799945** (HFE H63D,
-  C/G — and it sits in the actionable tier) and **rs9939609** (FTO, A/T). The bundled script
+  C/G, and it sits in the actionable tier) and **rs9939609** (FTO, A/T). The bundled script
   carries each known site's allele pair and grades the **call**: `CLEAR` for any heterozygote,
   `AMBIGUOUS` for a homozygote at a palindromic site, `UNDETERMINED` where the pair is not
-  verified — see `data-formats-and-parsing.md` §2 for the worked table and for the two opposite
+  verified; see `data-formats-and-parsing.md` §2 for the worked table and for the two opposite
   errors to avoid.
-- **R3** Rare variant on an array — elevated false-positive rate. Treat as a prompt for a
+- **R3** Rare variant on an array, with an elevated false-positive rate. Treat as a prompt for a
   confirmatory test, never as a result.
 - **R4** Requires phase, copy number, or specialised typing the platform cannot provide. **Do not
   call.**
@@ -188,7 +188,7 @@ anchored APOE figures in §0 for the last):
 ```
 
 That is a **22-fold span** from the typical GWAS hit to APOE (40 / 1.77). **A report that presents both in the
-same visual register — same row height, same colour, same confident sentence shape — is actively
+same visual register (same row height, same colour, same confident sentence shape) is actively
 misinforming**, and that ratio is the whole reason this catalogue is tiered rather than listed.
 
 ---
@@ -210,8 +210,8 @@ These can change medical management. **All of them require clinical-grade confir
 
 **The HFE pattern generalises and is worth internalising:** the most useful genetic findings are
 the ones that point at a cheap, decisive *phenotype* measurement. Iron studies for HFE, an enzyme
-assay for G6PD — with the caveat above, which makes it the partial exception rather than the clean
-case — a lipid panel for a lipid variant. The genotype earns its keep by prompting the
+assay for G6PD (with the caveat above, which makes it the partial exception rather than the clean
+case), a lipid panel for a lipid variant. The genotype earns its keep by prompting the
 test, not by substituting for it.
 
 ---
@@ -245,15 +245,15 @@ Full treatment, including the callable-versus-not split and what to hand a presc
 
 ## §4 Tier C — carrier status and reproductive relevance
 
-Heterozygous carrier status for recessive conditions is often the most genuinely useful output of
-consumer data — and it is also where findings most clearly implicate relatives.
+Heterozygous carrier status for recessive conditions is often the most useful output of
+consumer data, and it is also where findings most clearly implicate relatives.
 
 - Consumer platforms probe a **small, specific subset** of variants per condition. "Carrier status
   not detected" means only "none of the probed variants was seen", and for most recessive conditions
   that is a long way from clearance. Say so explicitly every time.
 - **One worked example, because a tier with no named variant cannot be checked.** Cystic fibrosis:
   **CFTR F508del** is the commonest pathogenic variant in European-ancestry populations and is
-  probed by consumer platforms — but over a thousand pathogenic CFTR variants are known, so a
+  probed by consumer platforms, but over a thousand pathogenic CFTR variants are known, so a
   negative at F508del alone leaves most of the carrier probability untouched, and the residual
   depends on ancestry (`risk-communication.md` §5 computes it). *Named rather than cited: no rsID
   ships here because none was verified against a retrieved record.*
@@ -288,19 +288,19 @@ consumer genetics. A professional society advised against routine MTHFR
 polymorphism testing on the grounds of minimal clinical utility
 ([PMID 23288205](https://pubmed.ncbi.nlm.nih.gov/23288205)); the recommendation stood through a later
 addendum **which simultaneously reclassified the document from an evidence-based practice guideline
-to a clinical practice resource** — the direction survived, its evidentiary standing was downgraded —
+to a clinical practice resource** (the direction survived, its evidentiary standing was downgraded),
 and **[PMID 32587351](https://pubmed.ncbi.nlm.nih.gov/32587351) is the correction notice
 about that addendum rather than the addendum itself**. The position is echoed by a call to action in the thrombosis literature
 ([PMC9175241](https://pmc.ncbi.nlm.nih.gov/articles/PMC9175241/)), **a single-author commentary, so
 it does not show that other professional bodies reached the same position.** The
 clinical-utility question has been revisited since
 ([PMC11288266](https://pmc.ncbi.nlm.nih.gov/articles/PMC11288266/)).
-Grade **E5 / R1** — the genotype is called reliably; the interpretation industry built on it is the
+Grade **E5 / R1**: the genotype is called reliably; the interpretation industry built on it is the
 problem. Report the guideline, not a methylfolate protocol.
 
 **And name the measurement, because this file's own pattern offers one where the MTHFR section
 otherwise stops at a refusal:** a **plasma homocysteine level** is the cheap, decisive test, and the
-guidance cited above makes exactly that substitution — measure the phenotype rather than genotyping
+guidance cited above makes exactly that substitution: measure the phenotype rather than genotyping
 the pathway. That is the same move as iron studies for HFE and an enzyme assay for G6PD. *(And see
 `interventions-evidence.md` §4 for what follows if it is raised: the homocysteine-lowering trials
 did not reduce myocardial infarction or mortality.)*
@@ -311,14 +311,14 @@ Grade E4 at best. The honest output is that no action follows.
 
 **One exception, and it is not optional.** Filing all mitochondrial SNP
 panels under "no action follows" would misfile the single highest-consequence mitochondrial finding
-in the domain. **MT-RNR1 m.1555A>G is a genuine, guideline-level
+in the domain. **MT-RNR1 m.1555A>G is a guideline-level
 aminoglycoside contraindication causing irreversible hearing loss, and some consumer platforms do
 genotype mitochondrial sites** (`pharmacogenomics.md` §4); m.3243A>G is a second real variant. **A
-mitochondrial panel is Tier E by default, not by rule — check for MT-RNR1 before dismissing it.**
+mitochondrial panel is Tier E by default, not by rule: check for MT-RNR1 before dismissing it.**
 
 **Vitamin D pathway variants.** Associations exist; the intervention question is whether genotype
 changes what to do, and the answer has not been established. A serum 25-OH-D measurement is cheap,
-decisive, and makes the genotype moot — the §2 phenotype pattern again.
+decisive, and makes the genotype moot: the §2 phenotype pattern again.
 
 ---
 
@@ -338,42 +338,42 @@ and it is also the easiest to get technically wrong.
 | ε1 (rare) | C | T |
 
 **Among the three common haplotypes, all six diplotypes are uniquely determined from the two
-unphased genotypes — APOE needs no phasing.** That is a real and useful contrast with star alleles,
+unphased genotypes, so APOE needs no phasing.** That is a real and useful contrast with star alleles,
 and it was verified by enumerating every haplotype pair (the bundled script implements and tests it).
 
 **Exactly one combination is formally ambiguous.** `rs429358 = C/T` with `rs7412 = C/T` is consistent
-with both **ε2/ε4** and **ε1/ε3**. ε1 is rare, so ε2/ε4 is overwhelmingly the right read — but it
+with both **ε2/ε4** and **ε1/ε3**. ε1 is rare, so ε2/ε4 is overwhelmingly the right read, but it
 cannot be *excluded* without phasing, and the honest report says so. The script flags this case
 rather than silently resolving it.
 
 **Three further observations resolve "uniquely" only because ε1 was admitted**, and they deserve a
 caution rather than a confident answer: `(C/C, C/T) → ε1/ε4`, `(C/C, T/T) → ε1/ε1`, and
 `(C/T, T/T) → ε1/ε2`. Since ε1 is rare, **a genotyping error at one of the two sites is the likelier
-explanation than a true ε1 haplotype** — so re-check both calls before reporting one of these. The
+explanation than a true ε1 haplotype**, so re-check both calls before reporting one of these. The
 script resolves them and attaches that caution.
 
 **Two technical facts worth carrying, because both are free checks:**
 
 - **A strand flip at either APOE site is DETECTABLE.** Both sites are T/C, and the complement set
-  A/G is disjoint from it — so an A or a G at either position is a parsing, mapping or
+  A/G is disjoint from it, so an A or a G at either position is a parsing, mapping or
   strand-handling error, not a genotype, and must be refused rather than complemented into something
   plausible. This is the opposite of FTO rs9939609 (A/T), where the allele set equals its own
   complement and a flip cannot be detected at all (§1, R2).
-- **The two sites are 138 bp apart in every build** — c.526 − c.388, both in exon 4 with no intron
+- **The two sites are 138 bp apart in every build**: c.526 − c.388, both in exon 4 with no intron
   between them. The *spacing* is therefore build-independent and makes a free consistency check on a
   file's own coordinates; the *absolute* positions are build-specific and must be read from the
   file's header, never assumed. A different spacing means a row is mis-mapped.
 
 **On actionability, be careful and be honest.** ε4 carries an established association with
 Alzheimer's risk, dose-dependent between heterozygotes and homozygotes, and the absolute lifetime
-figures are what matter — a relative multiple quoted alone is close to meaningless here. **This is
-the one variant where this file carries anchored figures** (§0, carve-out): quote them as a range,
+figures are what matter: a relative multiple quoted alone is close to meaningless here. **This is
+one of the three variants where this file carries anchored figures** (§0, carve-out): quote them as a range,
 with the design named and the provenance grade attached, alongside the share of homozygotes who
-reach 85 unaffected — and add whatever the live pass can actually resolve for this person's ancestry
-and age (`risk-communication.md`). What makes APOE genuinely hard is that **no intervention has been shown
+reach 85 unaffected, and add whatever the live pass can actually resolve for this person's ancestry
+and age (`risk-communication.md`). What makes APOE hard is that **no intervention has been shown
 to reduce the ε4-attributable increment in Alzheimer's *incidence*.** That makes it the clearest case
 in the whole catalogue where the correct output is information and support for decisions the person
-may want to make — planning, insurance, research participation, whether they wanted to know at all —
+may want to make (planning, insurance, research participation, whether they wanted to know at all),
 and *not* a supplement or peptide protocol. Any tool that answers an ε4 result with a stack
 recommendation is selling something.
 
@@ -382,12 +382,12 @@ most actionable APOE fact available to someone who finds ε4/ε4 in raw data.** 
 principal risk stratifier for **amyloid-related imaging abnormalities (ARIA)** with the anti-amyloid
 monoclonal antibodies: ARIA rates rise steeply with ε4 copy number, and the product labelling for
 that class directs that ApoE ε4 status be established before treatment specifically to inform that
-risk. That is a **carrier-specific, prescribing-relevant consequence** — so APOE has a
+risk. That is a **carrier-specific, prescribing-relevant consequence**, so APOE has a
 pharmacogenomic axis as well as a risk axis:
 
-- **Alzheimer's incidence axis: E2 / R1** — established, called reliably, no intervention shown to
+- **Alzheimer's incidence axis: E2 / R1**: established, called reliably, no intervention shown to
   change the outcome in carriers.
-- **Pharmacogenomic axis (anti-amyloid mAb ARIA risk): E1 / R1** — an intervention decision that
+- **Pharmacogenomic axis (anti-amyloid mAb ARIA risk): E1 / R1**: an intervention decision that
   turns on carrier status. It is **only relevant if the person is ever considering that drug class**,
   which most are not, and the raw-data call still needs clinical confirmation first.
 
@@ -410,40 +410,40 @@ own result from a discussion of ε4. Two things to report:
 - **ε2/ε2 has a lipid axis of its own.** It is the genotype underlying **familial
   dysbetalipoproteinaemia** (type III hyperlipoproteinaemia): a severe mixed hyperlipidaemia with
   premature atherosclerosis that responds well to lipid-lowering therapy. **Most ε2/ε2 people never
-  express it** — penetrance is low and generally needs a second metabolic hit — so this is a
+  express it** (penetrance is low and generally needs a second metabolic hit), so this is a
   *prompt*, not a diagnosis. Both defining SNPs are R1 and the script resolves ε2/ε2 directly.
 
 So APOE carries a **third axis**:
 
 - **Lipid axis — ε2/ε2 only: E2–E3 / R1.** The resolving action is a **fasting lipid panel**, which
-  is §2's "the genotype's value is prompting a *measurement*" pattern exactly — the same shape as
+  is §2's "the genotype's value is prompting a *measurement*" pattern exactly: the same shape as
   iron studies for HFE. §2 names "a lipid panel for a lipid variant"; ε2/ε2 is the one APOE
   genotype that fits.
 
 ### When only one of the two sites is called
 
 **A single-site APOE call is not a partial answer; it is no answer.** rs7412 alone cannot distinguish
-ε4 from ε3, and rs429358 alone cannot distinguish ε2 from ε3 — which is why the haplotypes are
+ε4 from ε3, and rs429358 alone cannot distinguish ε2 from ε3, which is why the haplotypes are
 defined jointly. If one site is a no-call, or absent from a variants-only VCF, **report the
 limitation rather than the likely diplotype.** The bundled script refuses here and says which site
 failed; the honest sentence is "your APOE could not be determined from this file, and here is why",
 not a hedged guess.
 
-This is also the variant most likely to be genuinely unwelcome news, which is why the
+This is also the variant most likely to be unwelcome news, which is why the
 `your-environment.md` question about what the person does *not* want surfaced is not a formality.
 
 ---
 
 ## §8 What is not in this catalogue, and why
 
-- **Frozen effect sizes** — §0.
-- **Polygenic risk scores** — a score is not a site. `risk-communication.md` §4 covers what they can
+- **Frozen effect sizes**: §0.
+- **Polygenic risk scores**: a score is not a site. `risk-communication.md` §4 covers what they can
   honestly be used for; the short version is that ancestry decides whether the number transfers.
-- **Anything requiring phase, copy number, or specialised typing** — R4. Named as a limitation
+- **Anything requiring phase, copy number, or specialised typing**: R4. Named as a limitation
   rather than estimated.
-- **Variants of uncertain significance** — reported as uncertain, never ranked or acted on.
-- **Peptide and supplement "genotype matches"** — there is essentially no established
+- **Variants of uncertain significance**: reported as uncertain, never ranked or acted on.
+- **Peptide and supplement "genotype matches"**: there is essentially no established
   gene-interaction evidence for peptides, so no genotype supports recommending one.
   `interventions-evidence.md` carries that rail and the reasoning.
-- **Ancestry, traits and relatedness** — a different product. Relatedness inference in particular can
+- **Ancestry, traits and relatedness**: a different product. Relatedness inference in particular can
   surface family structure nobody asked about; see the relatives rail in `SKILL.md`.

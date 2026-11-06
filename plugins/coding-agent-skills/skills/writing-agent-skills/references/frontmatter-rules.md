@@ -19,13 +19,13 @@
 - Leads with the primary use case; ends with a short `Triggers:` list of literal phrases.
 - Slightly "pushy" to avoid under-triggering, but specific enough not to over-trigger.
 - Must not contain XML tags.
-- **Historical snapshot, measured 2026-08-18** (a 121-skill library, before consolidation; not current).
+- **Historical snapshot, measured 2026-08-18** (a 121-skill library; not current).
   121 skills' names + descriptions = **≈110,000 chars ≈
   29,700 tokens ≈ 14.9% of a 200K window**, mean ~890 chars per description. Token figures are an
   estimate at ~3.7 chars/token, a divisor stated because an undisclosed divisor produces
   conflicting percentages. That character estimate is also ~30% light against the harness's real tokenizer, which puts the true listing cost at
   **≈38,800 tokens ≈ 19.4% of a 200K window** (`claude plugin details <plugin>` summed across all
-  14 plugins; see `docs/live-routing-and-degradation-2026-08-18.md`) — quote that one when the
+  14 plugins; see `docs/live-routing-and-degradation-2026-08-18.md`): quote that one when the
   size of an install is the point. Both character figures come from
   `python3 scripts/measure-listing-cost.py`; re-run it rather than editing the figure by hand,
   because a hand-kept number in two places will disagree with itself. A literal
@@ -33,7 +33,7 @@
   that it keeps **three** full descriptions here once the 121 bare names are paid for, so ~1% cannot
   describe a full-description listing; it is consistent instead with a listing that has degraded to mostly
   **name-only**, which is the documented failure mode (see below). Keep descriptions tight
-  because a tight description routes better — not because trimming fixes the budget. The lever
+  because a tight description routes better, not because trimming fixes the budget. The lever
   that moves real tokens is how many plugins a user installs.
 - **The listing degrades silently at scale.** Observed at ~100 installed skills: least-used
   skills' descriptions are trimmed to name-only. There is no error; `/plugin:skill` direct
@@ -60,14 +60,14 @@ metadata:
     from, plus the provenance-mark legend if claims carry marks ([snippet-only] etc.).
 ```
 
-Do not mass-retrofit untouched skills — the convention rides along with real edits so
+Do not mass-retrofit untouched skills; the convention rides along with real edits so
 diffs stay reviewable. `metadata:` is a bare key on its own line; both `scripts/validate.sh`
 and `scripts/gen-catalog.py` handle it (keep the key bare, no inline value).
 
 ## Claude-Code-only fields (use only for skills that will never run outside Claude Code)
 `argument-hint`, `arguments`, `disable-model-invocation`, `user-invocable`, `allowed-tools`,
 `disallowed-tools`, `model`, `effort`, `context: fork`, `agent`, `paths`, `hooks`, `shell`.
-Other agents ignore or may choke on these — keep them out of portable skills.
+Other agents ignore or may choke on these; keep them out of portable skills.
 
 ## YAML tips
 - Use a block scalar (`>-`) for multi-line descriptions so they fold to a single line.

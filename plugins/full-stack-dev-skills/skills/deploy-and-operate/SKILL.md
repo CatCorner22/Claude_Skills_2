@@ -1,17 +1,17 @@
 ---
 name: deploy-and-operate
 description: >-
-  Ships and runs full-stack apps the lean way — small multi-stage Docker images, a CI
+  Ships and runs full-stack apps the lean way: small multi-stage Docker images, a CI
   pipeline shaped lint → test → build → migrate → deploy, twelve-factor environment and
   secrets discipline, health endpoints, structured logging with request IDs, and the minimal
-  observability that answers "is it up and what broke" — plus rollback as a first-class
+  observability that answers "is it up and what broke", plus rollback as a first-class
   path. Use when containerizing an app, setting up CI/CD, wiring environments and secrets,
   adding health checks or logging, or designing the deploy/rollback flow. Triggers:
   dockerfile, deploy the app, CI/CD pipeline, github actions deploy, environment variables
   prod, secrets management app, health check endpoint, structured logging, rollback deploy,
   container image size, run migrations on deploy, observability basics, containerize.
 metadata:
-  version: "1.5.2"
+  version: "1.5.3"
 ---
 
 # Deploy and operate
@@ -20,7 +20,7 @@ metadata:
 - Containerizing an app, standing up CI/CD, or wiring environments, secrets, health checks,
   logging, and rollback for a full-stack service.
 - Reviewing a deploy setup that is slow, flaky, or opaque when things break.
-- Not for: which cloud/platform to buy — this skill's patterns are platform-agnostic
+- Not for: which cloud/platform to buy: this skill's patterns are platform-agnostic
   (containers + env vars run anywhere). App architecture and config *design* →
   `full-stack-dev-skills:full-stack-app-architecture`. Long-lived connection infra concerns →
   `full-stack-dev-skills:realtime-and-dynamic-features`.
@@ -60,8 +60,8 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
    that must agree. Bump only the final `FROM` to 3.13 and the build still succeeds: the packages
    land in a `python3.12` directory a 3.13 interpreter never looks in, and the first symptom is
    `ModuleNotFoundError` from a container that pulled and started fine.
-   `/opt/venv` leaves the two `FROM` tags as the only strings to keep in step, and drops the
-   `/usr/local/bin` copy that was quietly mixing two images' console scripts.
+   `/opt/venv` leaves the two `FROM` tags as the only strings to keep in step, and avoids copying
+   `/usr/local/bin`, which quietly mixes two images' console scripts.
    This is the pip/`requirements.txt` shape. On a project built to the plugin's toolchain
    standard (`full-stack-dev-skills:backend-api-development`'s `references/toolchain-2026.md`)
    there is no `requirements.txt`:
@@ -69,12 +69,12 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
    `ENV UV_PROJECT_ENVIRONMENT=/opt/venv` and `uv sync --locked --no-dev` (that variable is what
    puts the environment at `/opt/venv` instead of the project's `.venv`), and the CI
    `pip install` step for `uv sync --locked`. **`uv` is not in the `python:3.12-slim` base
-   image** — the deps stage fails with `uv: not found` unless you put it there first, so add
+   image**: the deps stage fails with `uv: not found` unless you put it there first, so add
    `COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv` (pin the tag in real use) to
    that stage, and install it in CI too. **And move both `FROM` tags off 3.12**: that toolchain
    pins `requires-python = ">=3.14"` and its CI installs 3.14, so `uv sync --locked` on a
    `python:3.12-slim` base has no interpreter that satisfies the constraint. It does not fail
-   cleanly — uv downloads a 3.14 interpreter and builds `/opt/venv` against it, the deps stage
+   cleanly: uv downloads a 3.14 interpreter and builds `/opt/venv` against it, the deps stage
    goes green, and the runtime stage's 3.12 image then has a venv whose `pyvenv.cfg` names a
    home that image does not contain. Use `python:3.14-slim` for both stages, or build on
    `ghcr.io/astral-sh/uv:python3.14-bookworm-slim` and skip the separate uv copy. The
@@ -89,23 +89,23 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 3. **Keep environments twelve-factor: same image, different env.** All differences arrive as
    environment variables into the one settings object
    (`full-stack-dev-skills:full-stack-app-architecture`); secrets come from the platform's
-   secret store or CI secrets — never baked into images, never in git (the same rule as
+   secret store or CI secrets: never baked into images, never in git (the same rule as
    `data-tools-skills:data-file-hygiene`). If you can't run the prod image locally with a
    different env file, environments have drifted.
 4. **Run migrations as a deploy step, not an app side effect:** `alembic upgrade head`
    before the new code serves traffic (a CI step or release phase). With
    deploy-safe migration patterns (`full-stack-dev-skills:database-and-orm`), old and new
    code both tolerate the schema during the switchover.
-5. **Expose health honestly:** `/healthz` (process up — for restarts) and `/readyz` (DB
-   reachable, migrations current — for routing traffic). The platform restarts on the
+5. **Expose health honestly:** `/healthz` (process up, for restarts) and `/readyz` (DB
+   reachable, migrations current, for routing traffic). The platform restarts on the
    first and gates traffic on the second. Deep dependency checks belong in `/readyz` only,
    so a flaky dependency doesn't crash-loop the process.
 6. **Log structured lines to stdout with a request ID.** JSON (or key=value) per event,
    one request-ID middleware so every log line of a request correlates; log at the
    boundaries (request in/out, job start/end, external calls) with duration and status.
-   The platform collects stdout — no log files, no rotation code.
+   The platform collects stdout: no log files, no rotation code.
 7. **Make rollback boring and rehearsed:** deploy = point at image SHA, rollback = point at
-   the previous SHA (plus `alembic downgrade` only if the migration wasn't additive —
+   the previous SHA (plus `alembic downgrade` only if the migration wasn't additive:
    prefer additive so rollback is code-only). Keep the last-known-good SHA one command
    away. `references/deploy-recipes.md` has the CI workflow, compose file, logging
    middleware, and the go-live checklist.
@@ -145,10 +145,10 @@ you consider sensitive, or tokens.**
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/deploy-and-operate.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/deploy-and-operate.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/deploy-recipes.md — CI workflow, compose file, logging middleware, go-live checklist
-- references/your-environment.md — your platform, registry, secrets, runbook (fill in)
+- references/deploy-recipes.md: CI workflow, compose file, logging middleware, go-live checklist
+- references/your-environment.md: your platform, registry, secrets, runbook (fill in)

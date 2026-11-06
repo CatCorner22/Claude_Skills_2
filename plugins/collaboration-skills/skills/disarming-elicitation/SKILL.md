@@ -15,7 +15,7 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.4.3"
+  version: "1.4.4"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
@@ -30,7 +30,7 @@ metadata:
 The knowledge that matters most in an interview is usually tacit: the process owner who
 quietly reroutes work every week but never wrote it down, the user who "just knows" which
 requests will bounce. Direct questioning often fails not because people withhold but
-because questions that sound like evaluation put experts on defense — and defended answers
+because questions that sound like evaluation put experts on defense. Defended answers
 are rehearsed answers. The counter-stance is independently documented in several
 professions: motivational interviewing trains a detective-named version of it as a
 clinical staple [clinical-pedagogy], the FBI's counterintelligence elicitation brochure
@@ -41,21 +41,21 @@ elicitation [practitioner]. Its exit move has a named clinical twin, the AAFP
 [AAFP clinical commentary].
 
 **The ethics rail, named plainly:** this is a stance for making it *easy* for willing
-people to share what they know — surfacing tacit knowledge they would gladly give if
+people to share what they know, surfacing tacit knowledge they would gladly give if
 asking were less costly. It is not for extracting secrets, and it never involves deception
-about who you are or why you are asking — including implied deception, which is what a
+about who you are or why you are asking, including implied deception, which is what a
 confidentiality assurance becomes when the speaker cannot keep it (step 2). The FBI brochure is cited because it proves the
-stance is real and effective — it is a *warning* document, teaching readers to recognize
-elicitation used against them — evidence, not license. The rail is expanded in
+stance is real and effective. It is a *warning* document, teaching readers to recognize
+elicitation used against them: evidence, not license. The rail is expanded in
 `references/elicitation-method.md`.
 
 ## When to use
 - A stakeholder interview, requirements-gathering session, or walkthrough with a process
-  owner where the expert knows more than they can articulate — tacit workflow, tribal
+  owner where the expert knows more than they can articulate: tacit workflow, tribal
   knowledge, the undocumented exceptions that make the real process differ from the SOP.
 - The expert won't open up: earlier sessions produced short, guarded, or rehearsed
   answers, or the users can't articulate what they do when asked directly.
-- Rehearsing an important interview — the assistant plays the defensive
+- Rehearsing an important interview: the assistant plays the defensive
   expert so the stance is practiced, not improvised.
 - Auditing a finished transcript: which questions triggered defensiveness, where a
   doorknob moment was offered and missed.
@@ -67,7 +67,7 @@ elicitation used against them — evidence, not license. The rail is expanded in
   workshop facilitation; this skill owns the stance that gets any question answered.
 - Not for: interest-based bargaining → see
   the archived `decision-science-skills:principled-negotiation`; bargaining trades on interests and
-  positions, elicitation surfaces knowledge — mixing them poisons both.
+  positions, elicitation surfaces knowledge; mixing them poisons both.
 - Not for: delivering a hard message about someone's behavior → see
   the archived `collaboration-skills:feedback-that-lands`.
 - Not for: escalating a problem or transferring work under time pressure → see
@@ -78,58 +78,58 @@ Full question-sequence patterns, the rehearsal script, the transcript-audit prot
 the expanded ethics rail are in `references/elicitation-method.md`.
 
 1. **Name the interview and what only this person knows.** One expert, one goal, a short
-   list of what the documents *cannot* tell you — that list is what the questions must
+   list of what the documents *cannot* tell you; that list is what the questions must
    surface. Check the rail here: the person is willing, and they know who you are and why
    you are asking. If either is false, stop; this skill has nothing for you.
-2. **Lower the stakes before the first question — with a promise you can actually keep.**
+2. **Lower the stakes before the first question, with a promise you can keep.**
    Open by signaling harmlessness: you are there to learn, not to grade; you are confused
-   and they are the expert. Status runs downhill in an interview — hand it to them and keep
+   and they are the expert. Status runs downhill in an interview: hand it to them and keep
    it there.
    - **Say what you will do with the notes, not that nothing can happen.** "This is for my
-     own understanding — I'm not writing your name against anything" is a promise you
+     own understanding; I'm not writing your name against anything" is a promise you
      control. "Their answers won't be quoted against them" usually is not: you rarely own who
      reads your notes, and you cannot bind a manager, a lawyer, or a court. A confidentiality
      assurance you cannot honour is worse than none, because it is the assurance that made
      them talk.
    - **A second rail, alongside the willing/known-purpose one: if this is an investigation,
-     an HR, audit, compliance, or regulatory matter — or anything where what you learn may be
-     reported — say so, in those words, before the first question.** The disarming stance
+     an HR, audit, compliance, or regulatory matter (or anything where what you learn may be
+     reported), say so, in those words, before the first question.** The disarming stance
      works *because* the stakes are genuinely low; using it where they are not is the misuse
      the FBI document cited below exists to warn people about. In those settings the honest
      move is often not to run this skill at all, but to name the process, tell the person what
-     protections and obligations apply, and let them decide what to say — and if they may need
+     protections and obligations apply, and let them decide what to say, and if they may need
      their own representation, to say that too.
 3. **Open naive.** "Help me understand how a request actually moves from X to Y" beats
-   "walk me through the approval matrix." Broad, genuinely curious, jargon-free questions
+   "walk me through the approval matrix." Broad, curious, jargon-free questions
    invite the expert to educate; precise official-sounding ones invite them to recite.
-4. **Restate their words slightly wrong — on purpose.** "So the reroute happens *after*
+4. **Restate their words slightly wrong, on purpose.** "So the reroute happens *after*
    the batch posts?" when you suspect it is before. Correction is effortless teaching:
    people fix an error instantly and add detail they would never volunteer to an
    open-ended "tell me more." If they agree with your wrong version instead of correcting
-   it, that is not confirmation — deference produces the same "yes" as knowledge does, so
+   it, that is not confirmation: deference produces the same "yes" as knowledge does, so
    re-source the fact rather than banking it.
 5. **Hold contradictions as your own confusion.** When two statements clash, the framing
-   is "what I can't figure out is how both of these fit" — never "you said two different
+   is "what I can't figure out is how both of these fit", never "you said two different
    things." Either framing gets the discrepancy examined; only this one keeps the expert
    on your side of the table.
 6. **Let silence work.** After an answer, wait. The first answer is the rehearsed one;
    the elaboration that follows an unhurried pause is where the tacit material lives.
-7. **Close formally — then the doorknob.** Thank them, shut the notebook, let the
-   interview visibly end. Then, casually, one more question — the one you actually came
-   for, or simply "is there something else I should have asked about?" — "something," not
+7. **Close formally, then the doorknob.** Thank them, shut the notebook, let the
+   interview visibly end. Then, casually, one more question (the one you came
+   for, or "is there something else I should have asked about?"). Use "something," not
    "anything," because "any" is the word that invites a no and tested no better than not
    asking at all [peer-reviewed]. Post-closure answers are the least rehearsed of the
    whole session; family medicine has a name for exactly this moment because that is when
    the real disclosure comes [AAFP clinical commentary].
-8. **Capture verbatim and replay for confirmation.** Record the expert's exact words —
-   especially anything surfaced by a deliberate-error restatement — and read the key
+8. **Capture verbatim and replay for confirmation.** Record the expert's exact words,
+   especially anything surfaced by a deliberate-error restatement, and read the key
    claims back before you rely on them, so the technique never leaves a wrong number
    standing.
 
 Division of labor: the assistant drafts the question sequence for the named interview
 (naive open → restatement-with-error → discrepancy-held-as-confusion → doorknob),
 role-plays the defensive expert for rehearsal, and audits transcripts for missed
-doorknob moments and defensiveness-triggering questions — the audit's deliverable is a
+doorknob moments and defensiveness-triggering questions. The audit's deliverable is a
 list of next-contact questions, each tagged with its pattern, plus one sentence on the
 biggest stance improvement. The human conducts the interview and owns the relationship;
 the stance cannot be delegated.
@@ -141,29 +141,29 @@ curious questioner is spending effort on the subject. Every move in the sequence
 the conversation from the first mode to the second: naive openers remove the sense of a
 test, the handed-over status removes the audience to perform for, and "help me
 understand" makes sharing the path of least resistance. This is why the stance works on
-*willing* people and adds nothing with unwilling ones — it lowers the cost of sharing; it
+*willing* people and adds nothing with unwilling ones: it lowers the cost of sharing; it
 does not manufacture the will to share. That asymmetry is the ethics rail in mechanical
 form.
 
 The deliberate-error restatement works because correcting is cognitively cheaper than
 composing. Asked to "explain the exception process," an expert must decide where to
-start, what matters, what you already know. Shown a slightly wrong version, they just fix
-it — and the fix arrives with exactly the detail that distinguishes the real process from
-the documented one. Motivational interviewing's version — deploying discrepancy
-non-judgmentally, holding the contradiction as the interviewer's own puzzle — is a
+start, what matters, what you already know. Shown a slightly wrong version, they fix
+it, and the fix arrives with exactly the detail that distinguishes the real process from
+the documented one. Motivational interviewing's version (deploying discrepancy
+non-judgmentally, holding the contradiction as the interviewer's own puzzle) is a
 clinical training staple for the same reason [clinical-pedagogy]: examined discrepancies
 produce movement; prosecuted ones produce defense.
 
 The doorknob close works because rehearsal ends when the interview does. While the
 session is officially on, the expert manages an impression; the moment it visibly ends,
 the performance stops, and what surfaces next is unguarded. The AAFP commentary names
-this the doorknob phenomenon — the most consequential disclosure arriving as the visit
-closes — and its advice is to treat that disclosure as material to pursue rather than an
+this the doorknob phenomenon (the most consequential disclosure arriving as the visit
+closes), and its advice is to treat that disclosure as material to pursue rather than an
 interruption to deflect [AAFP clinical commentary]. Inviting it on purpose is the
 adjacent move, and the invitation's wording carries much of the effect: a randomized
 trial of a mid-visit solicitation found "is there *something* else you want to address in
 the visit today?" left roughly 78% fewer concerns unmet, while the "*anything* else" form
-was indistinguishable from no prompt at all — a question built on "any" is shaped for the
+was indistinguishable from no prompt at all; a question built on "any" is shaped for the
 answer no [peer-reviewed]. Borrow the wording rather than the effect size: that trial solicited
 further concerns mid-visit from patients, not coverage of your questions from a colleague
 after the close. The same mechanism is why the skill's last question is casual and why it
@@ -173,7 +173,7 @@ The stance is symmetric, which is the final reason the rail matters: the identic
 appear in a counterintelligence warning brochure precisely because they work on people
 who do not realize knowledge is being drawn out of them [gov]. Consent is the entire
 difference between an interviewer and an operator. Keep the purpose declared, the
-identity honest, and the expert willing, and the same mechanics are simply good manners
+identity honest, and the expert willing, and the same mechanics are good manners
 with a memory.
 
 ## Common mistakes
@@ -208,19 +208,19 @@ with a memory.
 Record your standing interview landscape in `references/your-environment.md`: the experts
 and process owners you return to, what each uniquely knows, your consent and
 recording/note conventions, and where transcripts and verbatim captures live. Keep the
-committed file structural — names of roles, not people. Anything sensitive (real names,
+committed file structural: names of roles, not people. Anything sensitive (real names,
 quoted material, internal politics) belongs in `your-environment.private.md`, which is
 git-ignored and never committed.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/disarming-elicitation.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/disarming-elicitation.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/elicitation-method.md — the four question-sequence patterns with examples,
+- references/elicitation-method.md: the four question-sequence patterns with examples,
   sequence design for a named interview, the defensive-expert rehearsal script, the
   transcript-audit protocol, and the expanded ethics rail with sources
-- references/your-environment.md — your experts, consent conventions, and capture
+- references/your-environment.md: your experts, consent conventions, and capture
   locations (sanitized stub; real detail goes in the `.private.md` twin)

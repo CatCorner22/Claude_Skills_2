@@ -30,7 +30,7 @@ table_settings = {
 page.crop((x0, top, x1, bottom)).extract_table(table_settings)  # crop to the table's bbox
 ```
 - Debug visually: `page.to_image().debug_tablefinder(table_settings).save("dbg.png")` shows the
-  detected grid — the fastest way to see *why* columns merged.
+  detected grid, the fastest way to see *why* columns merged.
 - Explicit column boundaries when detection fails:
   `"vertical_strategy": "explicit", "explicit_vertical_lines": [x0, x1, x2, ...]`.
 
@@ -47,21 +47,21 @@ tables[0].parsing_report   # accuracy/whitespace/confidence — low accuracy = w
 ```bash
 ocrmypdf --deskew --rotate-pages input.pdf ocr.pdf   # adds a text layer via Tesseract
 ```
-Then extract as native. Expect: 0/O, 1/l/I, 5/S confusions in amounts — the balance check is
+Then extract as native. Expect: 0/O, 1/l/I, 5/S confusions in amounts. The balance check is
 mandatory, and a human review threshold for low-confidence pages is reasonable policy.
 
 ## Bank-statement pattern
 1. Crop to the transaction table region per page (headers/footers/marketing out).
 2. Extract rows; keep section headings (Deposits / Withdrawals / Fees) as a `section` column,
    listing them exactly as this document prints them.
-3. Stitch continuation lines: a row with empty date and amount is description overflow —
+3. Stitch continuation lines: a row with empty date and amount is description overflow;
    append to previous row's description, skipping blank spacer rows and refusing (loudly) to
    stitch one that arrives before the first transaction.
 4. Normalize amounts (strip currency symbols/commas; parens or trailing minus → negative;
    debit/credit columns → one signed column with the sign convention documented).
 5. Assert: opening + sum(credits) − sum(debits) = closing (per the statement's own figures).
 
-All five steps in one pass — repeated headers dropped, section headings captured, continuation
+All five steps in one pass: repeated headers dropped, section headings captured, continuation
 lines stitched, parens/trailing-minus negatives signed, and the statement's own arithmetic used
 as the assertion:
 
@@ -145,15 +145,15 @@ assert abs(OPENING + df["amount"].sum() - CLOSING) < 0.005, \
 
 On a two-page statement whose rows are +2,500.00, +110.50, −750.25, −25.00, this yields four
 typed rows carrying their section, and `1,000.00 + 1,835.25 = 2,835.25` passes. Every failure
-of that assertion is a dropped, doubled, or mis-signed row — find it before shipping the table.
+of that assertion is a dropped, doubled, or mis-signed row; find it before shipping the table.
 The check reaches only amounts, though: a wrong `section` label or a heading absorbed into a
 description passes it untouched. The stitch log is the only signal that the `SECTIONS` list
 doesn't match the document.
 
 ## Invoice pattern
 1. Header fields by regex on text: invoice number, dates, PO number, supplier
-   (`re.search(r"Invoice\s*(?:No|#)\s*[:.]?\s*(\S+)", text, re.I)` — the `re.I` is not
+   (`re.search(r"Invoice\s*(?:No|#)\s*[:.]?\s*(\S+)", text, re.I)`; the `re.I` is not
    optional: `INVOICE NO:` in all caps is the common case and the pattern misses it without).
 2. Line-item table by the table tools above.
 3. Assert: sum(line totals) = subtotal; subtotal + tax = total. Route failures to a human.
-4. Per-supplier recipes: invoices are template-stable per sender — key the recipe on supplier.
+4. Per-supplier recipes: invoices are template-stable per sender, so key the recipe on supplier.

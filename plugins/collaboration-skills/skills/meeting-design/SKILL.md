@@ -14,20 +14,20 @@ description: >-
   meeting agenda, run this meeting, too many meetings, this should be an email, action
   items, decision protocol, pre-read, standing meeting audit, fix the agenda.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
 ---
 
 # Meeting design (decisions, not topics)
 
 ## When to use
 - Planning a meeting to end with things decided, not topics visited.
-- Questioning whether a meeting should exist at all — yours or one you keep getting
+- Questioning whether a meeting should exist at all, yours or one you keep getting
   invited to.
 - Red-checking an existing agenda: "which of these items are actually decisions?"
 - Converting a transcript or messy notes into a decision log with owners and dates.
 - Auditing a recurring meeting that nobody has re-justified since it was created.
 - When `decision-science-skills:the-challenger` fires a revision trigger, the resulting
-  go/no-go deserves a designed decision meeting — this skill builds that room.
+  go/no-go deserves a designed decision meeting; this skill builds that room.
 - Not for: kaizen events and co-design workshops → see
   the archived `continuous-improvement-skills:kaizen-and-codesign`, which owns workshop facilitation;
   this skill covers the ordinary working meeting.
@@ -36,19 +36,19 @@ metadata:
 - Not for: negotiating the substance once you are in the room → see
   the archived `decision-science-skills:principled-negotiation`; this skill designs the container,
   not the bargaining.
-- Not for: working out who must be in the room at all — power, interest, engagement
-  moves → see the archived `collaboration-skills:stakeholder-mapping`; this skill designs the
+- Not for: working out who must be in the room at all (power, interest, engagement
+  moves) → see the archived `collaboration-skills:stakeholder-mapping`; this skill designs the
   meeting for the people the map surfaces.
 
 ## Do it
-Full templates — the decision-list agenda, the four decision rules, silent-start
-mechanics, the decision-log format, and the recurring-meeting audit — are in
+Full templates (the decision-list agenda, the four decision rules, silent-start
+mechanics, the decision-log format, and the recurring-meeting audit) are in
 `references/meeting-method.md`.
 
 1. **Test whether the meeting should exist.** One question: will this gathering produce
    a decision or a commitment that would not happen async? Status, updates, and FYIs
    flow as written posts; a meeting is for the moments where synchronous judgment
-   changes the outcome. If the answer is no, draft the async post instead — that is a
+   changes the outcome. If the answer is no, draft the async post instead; that is a
    success of the method, not a failure of nerve.
 2. **Write the agenda as a list of decisions, not topics.** Each item is a decision
    question ("Do we ship with the current importer or slip two weeks?"), never a noun
@@ -61,16 +61,16 @@ mechanics, the decision-log format, and the recurring-meeting audit — are in
    practice: narrative memos read at the start of the meeting in place of a
    presentation. Nobody presents what everyone can read faster themselves; the author
    answers questions once reading ends.
-4. **Run the room to the rule.** Park tangents visibly (a named lot, on screen — not in
+4. **Run the room to the rule.** Park tangents visibly (a named lot, on screen, not in
    someone's private notes), and call the decision when the timebox ends. With the rule
    named in advance, the call is mechanical rather than awkward. If the decision
-   genuinely cannot be made, the output is a named blocker with an owner and a date —
+   cannot be made, the output is a named blocker with an owner and a date,
    not a longer discussion.
 5. **Every action leaves with an owner and a date.** "Someone should look into that" is
    a tangent wearing an action's clothes; assign it to a person with a date, or drop it.
 6. **Close by reading back**: decisions made (with their rules), actions with owners
    and dates, and every parked item with its disposition. Publish the read-back as the
-   decision log — the log, not the conversation, is the meeting's product.
+   decision log; the log, not the conversation, is the meeting's product.
 7. **Audit recurring meetings on a cadence.** Re-run the step-1 test on every standing
    meeting you own: what decisions did its last few occurrences actually produce?
    Shrink it, merge it, demote it to an async post, or end it.
@@ -94,20 +94,20 @@ nobody says who decides, the group defaults to an unspoken everyone-must-agree r
 never chose: discussion runs until fatigue produces the appearance of agreement, the
 loudest or most senior voice fills the vacuum, and people leave believing different
 things were decided. Saying "Ana decides after hearing the room" before discussion
-opens changes what the discussion is *for* — informing a named judgment rather than
-winning a hidden vote — and makes calling the decision at the timebox a formality
+opens changes what the discussion is *for*: informing a named judgment rather than
+winning a hidden vote, and makes calling the decision at the timebox a formality
 instead of a confrontation.
 
 Silent reading beats presenting for two reasons. First, everyone reads:
 pre-reads sent "to review beforehand" reliably go unread, and the meeting quietly
-re-derives the document out loud for the people who skipped it — so the reading time
+re-derives the document out loud for the people who skipped it, so the reading time
 moves inside the meeting, where it is short, shared, and honest. Second, written prose
 is a stricter argument than a slide deck: it has to hold together without a performer,
 so weak reasoning shows on the page before it costs the room an hour. The author's
 prose is the argument; the meeting starts where the document ends.
 
 A recurring meeting is a standing cost that renews by default. Multiply its length by
-its headcount by its frequency and it is real capacity — yet unlike almost any other
+its headcount by its frequency and it is real capacity. Unlike almost any other
 recurring commitment, no one has to re-approve it, so it persists on its own momentum
 long after the need that created it has gone. The audit exists
 because the default is silence, and silence is a yes.
@@ -133,17 +133,17 @@ because the default is silence, and silence is a yes.
 Record house specifics in `references/your-environment.md`: where decision logs are
 published, the default decision rule per forum, your standing-meeting inventory and
 audit cadence, pre-read length norms, and the async channel of record. Anything
-sensitive — named attendees, org dynamics, who actually holds which decision — belongs
+sensitive (named attendees, org dynamics, who actually holds which decision) belongs
 in `your-environment.private.md` (git-ignored), never in a committed file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/meeting-design.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/meeting-design.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/meeting-method.md — the decision-list agenda template with the four
+- references/meeting-method.md: the decision-list agenda template with the four
   decision rules, the should-this-meeting-exist test, silent-start mechanics, the
   decision-log format, and the recurring-meeting audit protocol
-- references/your-environment.md — your forums, logs, default rules, and audit cadence
+- references/your-environment.md: your forums, logs, default rules, and audit cadence

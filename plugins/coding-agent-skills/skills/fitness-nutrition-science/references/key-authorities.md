@@ -1,4 +1,4 @@
-# Key Authorities — Evidence-Based Fitness & Neuroscience
+# Key Authorities: Evidence-Based Fitness & Neuroscience
 
 Reference authorities cited in this skill, with their signature findings, institutional
 affiliations, and boundary conditions for their claims.

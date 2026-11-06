@@ -14,14 +14,14 @@ inside the installed plugin, where a `/plugin marketplace update` can overwrite 
 ## Before anything else: what do you not want to know?
 
 **Decide this first.** Some findings cannot be unlearned, some implicate relatives, and some have no
-action attached at all — the combination of "serious", "unactionable" and "irreversible" is real and
+action attached at all: the combination of "serious", "unactionable" and "irreversible" is real and
 APOE is the common example.
 
 - Findings you want **excluded** from any report: _____
 - Do you want **carrier status** reported? (It is information about your parents and siblings too.) _____
 - Do you want findings with **no available action** reported? _____
-- Do you want **relatedness inferences** — consanguinity, unexpected family structure, non-paternity
-  — addressed at all? Default is **no**, and the skill will not volunteer them. _____
+- Do you want **relatedness inferences** (consanguinity, unexpected family structure, non-paternity)
+  addressed at all? Default is **no**, and the skill will not volunteer them. _____
 - Is there anyone else who should be part of the conversation before a heritable finding is
   disclosed? _____
 
@@ -44,7 +44,7 @@ request, without naming it.
 **Test, do not assume, that the file is ignored.** `git check-ignore -v <file>` must print a
 matching rule. Two traps: the tailoring file
 must carry the **`.private.md`** suffix to be ignored (the plain `.md` form is not), and **the file
-your provider hands you is a `.zip`** — so an archive pattern is needed as well as the
+your provider hands you is a `.zip`**, so an archive pattern is needed as well as the
 extension patterns. Neither protection exists in your repository unless you put it there.
 
 **Confirm before proceeding:** the files are not in a git repository, not in a synced cloud folder
@@ -54,7 +54,7 @@ shared with anyone, and have not been uploaded to a third-party interpretation s
 
 ## Ancestry
 
-This is not demographic box-ticking — it decides whether published estimates transfer to you
+This is not demographic box-ticking: it decides whether published estimates transfer to you
 (`risk-communication.md` §4).
 
 - Genetic ancestry as far as you know it: _____
@@ -62,7 +62,7 @@ This is not demographic box-ticking — it decides whether published estimates t
 - Any founder population in your background? _____ (changes which variants are worth probing and
   which frequency references apply)
 
-If this is unknown, say so — the audit will report estimates with the portability caveat unresolved
+If this is unknown, say so: the audit will report estimates with the portability caveat unresolved
 rather than silently assuming the cohorts the literature used.
 
 ---
@@ -103,8 +103,8 @@ Determines how much of the audit can reach an actionable conclusion rather than 
 
 - Do you have a clinician who will order confirmatory genetic testing? _____
 - Access to a clinical genetics service or genetic counsellor? _____
-- Can you get routine phenotype bloodwork (ferritin, lipids, 25-OH-D, B12, HbA1c)? _____
-  — often **more decisive than the genotype**; see the measure-don't-infer pattern in
+- Can you get routine phenotype bloodwork (ferritin, lipids, 25-OH-D, B12, HbA1c)? _____,
+  often **more decisive than the genotype**; see the measure-don't-infer pattern in
   `interventions-evidence.md` §4
 - Insurance or employment considerations that make you cautious about having findings in a medical
   record? _____ (a real consideration, and it affects sequencing, not just disclosure)
@@ -116,15 +116,15 @@ Determines how much of the audit can reach an actionable conclusion rather than 
 **Fill this in before the literature pass, because it decides whether the pass is possible.** The
 skill's design defers effect sizes to a live literature search (`variant-catalog.md` §0), and that
 instruction is unexecutable where the network blocks the sources. Where it is unexecutable, **a
-search tool's prose will happily supply a confident invented number** — so the reachability answer
+search tool's prose will happily supply a confident invented number**, so the reachability answer
 is a safety control, not an infrastructure note.
 
 Test rather than assume, then record:
 
 - Can you reach a literature index directly (PubMed / PMC / Europe PMC / Crossref)? _____
-- Can a page be fetched, or only searched? _____ — search results give *identifiers* inside returned
+- Can a page be fetched, or only searched? _____ Search results give *identifiers* inside returned
   URLs; the *numbers* usually live only in generated prose, and those are not the same evidence
-- Regulatory sources — a medicines regulator's site, an anti-doping list? _____ *(where both are
+- Regulatory sources: a medicines regulator's site, an anti-doping list? _____ *(where both are
   blocked, `interventions-evidence.md` names mechanisms and sends you to the live list instead of
   quoting it)*
 - Your provider's own account pages, for establishing which product tier produced your file? _____
@@ -147,7 +147,7 @@ that look as though it had.
 
 ## Standing notes
 
-Anything the audit should assume without re-asking — a condition you already know you have, a
+Anything the audit should assume without re-asking: a condition you already know you have, a
 finding you have already had confirmed clinically, an interpretation you have already been given and
 want checked rather than repeated.
 
@@ -162,9 +162,9 @@ cannot be rotated like a password, and it is partly information about people who
 
 - **Never commit a genome file.** The marketplace repository this skill ships from ignores the common
   genomic extensions (VCF, gVCF, BCF, BAM/CRAM, FASTQ, PLINK), the provider download archives, and a
-  `genomes/` directory — **and none of that travels with the installed plugin.** In *your*
+  `genomes/` directory, **and none of that travels with the installed plugin.** In *your*
   repository, assume nothing is ignored until `git check-ignore -v <file>` prints a rule.
-- **Health and genetic detail belongs in the `.private.md` file**, which is git-ignored — never in
+- **Health and genetic detail belongs in the `.private.md` file**, which is git-ignored, never in
   this committed template, and never in the plain `.md`, **which is not ignored.** Prove it with
   `git check-ignore -v <file>` rather than trusting the suffix convention.
 - **Do not paste raw data into third-party interpretation services.** Their error rates are

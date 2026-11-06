@@ -11,20 +11,20 @@ ladder · §8 Routing within the register family
 
 ## §1 Grade targets
 
-**Preferred — 5th grade**
+**Preferred: 5th grade**
 - Average sentence length: 10–14 words.
 - Everyday concrete words; prefer 1–2 syllables.
 - Active voice.
 - One main idea per sentence.
 - Concrete examples.
-- Target: Flesch Reading Ease 90 or higher, **or** Flesch-Kincaid grade at or below 5.0 —
+- Target: Flesch Reading Ease 90 or higher, **or** Flesch-Kincaid grade at or below 5.0:
   two separate scales, not two readings of the same number (§3). Either one is a pass, and
-  **neither is a window — but they run in opposite directions.** Reading Ease is a *floor*
+  **neither is a window, but they run in opposite directions.** Reading Ease is a *floor*
   (higher is easier: 105 is not "too easy", it is easy) and Flesch-Kincaid grade is a
   *ceiling* (lower is easier: 2.0 is fine, 6.0 is not). Overshooting in the easy direction is
   never the failure; only the read-aloud test can fail a text for being too simple.
 
-**Fallback — 8th grade (only when precision requires it)**
+**Fallback: 8th grade (only when precision requires it)**
 - Sentences may reach 15–18 words.
 - Words stay common and concrete.
 - Any technical term is explained right away in plain words.
@@ -32,7 +32,7 @@ ladder · §8 Routing within the register family
 **Hard limits**
 - Never go above 8th grade.
 - Never sacrifice Adams clarity to hit a lower grade.
-- Never make the meaning fuzzy just to hit a grade — meaning always wins; that is what the
+- Never make the meaning fuzzy to hit a grade: meaning always wins; that is what the
   8th-grade fallback is for.
 
 ## §2 The Adams rules (never drop these)
@@ -60,10 +60,10 @@ endeavor, remuneration*.
   other. Pick the scale you are reporting, say which, and never lengthen sentences to raise
   a Flesch-Kincaid number.
 - Estimate honestly when you can't compute: count words per sentence (the dominant lever)
-  and watch for 3+ syllable words — swapping those two things moves the grade more than
+  and watch for 3+ syllable words; swapping those two things moves the grade more than
   anything else.
 - **The sentence count is the fragile input, and this register attacks it.** The skill asks
-  for bullets, and most scorers find sentence boundaries by splitting on `.` `!` `?` only —
+  for bullets, and most scorers find sentence boundaries by splitting on `.` `!` `?` only,
   so a bulleted list whose items end without punctuation is read as one enormous sentence.
   The same six lines scored Reading Ease 106.6 with terminal periods and 77.0 as
   unpunctuated bullets (Flesch-Kincaid −0.2 against 11.2), on identical words. Punctuate the
@@ -82,13 +82,13 @@ endeavor, remuneration*.
 - [ ] No ambiguity.
 - [ ] Grade is 5th if possible, never higher than 8th.
 - [ ] A 5th-grader in your audience's own community could understand it without help.
-- [ ] The meaning is exactly what the source meant — nothing softened, nothing dropped.
+- [ ] The meaning is exactly what the source meant: nothing softened, nothing dropped.
 - [ ] Nothing added that the source doesn't support; every concrete detail the rewrite
       supplies (a number, a step, a name) was confirmed against something real.
 
 ## §5 Where the targets come from
 
-The register this skill enforces is not a private taste — it sits on a documented public
+The register this skill enforces is not a private taste; it sits on a documented public
 lineage. Provenance: claims marked [snippet-only] were verified against web-search snippets,
 not full primary texts.
 
@@ -99,19 +99,19 @@ not full primary texts.
 - **The Federal Plain Language Guidelines** operationalize the Act, leading with the same
   moves this skill drills: define your audience and write for their needs, put the main
   point first, keep sentences short, prefer active voice and everyday words [snippet-only].
-  Where to find them moved: GSA redirected plainlanguage.gov in September 2025 to a shorter
+  The Guidelines no longer sit at plainlanguage.gov: GSA redirected that site in September 2025 to a shorter
   guide series on Digital.gov, and the Guidelines came down with the old site. The originals
   live in the plainlanguage.gov GitHub archive, and the Center for Plain Language reposted
   them (checked 2026-08-19). A citation that still reads "maintained at plainlanguage.gov"
   is a small live demonstration of why the sibling `writing-skills:technical-documentation`
   stamps "last verified" separately from "last edited."
 - **Flesch Reading Ease** was published by Rudolf Flesch in 1948 and scores text 0–100 from
-  two surface features — average sentence length and average syllables per word — with
+  two surface features (average sentence length and average syllables per word), with
   higher scores meaning easier reading [snippet-only].
 - **Flesch-Kincaid Grade Level** was derived in 1975 by J. Peter Kincaid and colleagues under
   contract to the US Navy, recalibrating readability formulas against reading tests of
   enlisted personnel so the output reads as a US school grade [snippet-only]. The formulas
-  were built to make *technical manuals usable by their real readers* — the same job this
+  were built to make *technical manuals usable by their real readers*, the same job this
   skill does for patient letters and public notices.
 - **The honest boundary of the formulas:** both measure only sentence length and word
   length. They cannot detect ambiguity, a dropped qualifier, or a softened meaning. That is
@@ -124,12 +124,12 @@ not full primary texts.
 
 ## §6 Worked example (before/after)
 
-Domain-neutral by design — the same notice could go out from an analyst's team, a law
+Domain-neutral by design: the same notice could go out from an analyst's team, a law
 office, an operations department, or a software product. The organization is adding a
 sign-in code.
 
-**Before** (typical first draft — 2 sentences, 67 words, ~34 words per sentence, ~1.8–2.0
-syllables per word — **FRE ≈ 7–19, FKGL ≈ 19–21** — passive voice, archaic connectors,
+**Before** (typical first draft: 2 sentences, 67 words, ~34 words per sentence, ~1.8–2.0
+syllables per word, **FRE ≈ 7–19, FKGL ≈ 19–21**, passive voice, archaic connectors,
 unexplained jargon):
 
 > Pursuant to our updated security protocols, effective May 1, multi-factor authentication
@@ -139,10 +139,10 @@ unexplained jargon):
 > SMS transmissions, alternative verification arrangements may be made by contacting
 > customer support.
 
-**After** (plain grade — 9 sentences, 71 words, ~8 words per sentence, ~1.15–1.23 syllables
+**After** (plain grade: 9 sentences, 71 words, ~8 words per sentence, ~1.15–1.23 syllables
 per word; by the §3 formulas that is **FRE ≈ 95–101**, clearing the 90 floor. Note the
 divergence §3 warns about: the same text scores **FKGL ≈ 1–2**, far under 5.0, and it is the
-right text anyway. The ranges are not sloppiness — two syllable counters run over this exact
+right text anyway. The ranges are not sloppiness: two syllable counters run over this exact
 paragraph disagreed by six Reading Ease points, which is why §3 calls the score a check and
 the read-aloud test the judge):
 
@@ -163,7 +163,7 @@ What the rewrite did, move by move:
   get…?"; *shall be transmitted* → "We will text it."
 - **Technical term said once, explained immediately:** "one-time code" gets one plain
   sentence of explanation right where it first appears. "Multi-factor authentication" does
-  not survive at all — the reader needs the behavior, not the term.
+  not survive at all; the reader needs the behavior, not the term.
 - **Actor named, active voice:** "We will text it to your phone" instead of "which shall be
   transmitted via SMS."
 - **Meaning preserved, including the *category* of each statement:** the date, the requirement,
@@ -176,22 +176,22 @@ What the rewrite did, move by move:
   different document. The wording used ("we **can** set up another way") keeps the
   discretion. Plain-language rewriting pulls
   toward the confident, concrete, active form, and the confident form of a discretion is an
-  obligation — so on anything with legal or contractual weight, test every sentence for the
+  obligation, so on anything with legal or contractual weight, test every sentence for the
   category it belongs to before you certify that nothing changed. The categories, and which verb
   forms signal which, are in `writing-skills:adams-smart-brevity`'s
   `references/adams-and-brevity-checks.md` §3.
 - **Two details were added, and they are the part to check:** the phone number and "type it
   on the sign-in page after your password" are not in the source. Concrete beats abstract, so
-  a plain rewrite pulls toward specifics — which is exactly the moment a rewrite invents one.
+  a plain rewrite pulls toward specifics, which is exactly the moment a rewrite invents one.
   Every specific the rewrite supplies has to be confirmed before it ships; 555-0100 stands in
-  here for the number you would actually look up (it is a reserved fictional exchange).
-- **Not gamed:** the sentences are short because each carries one idea — not chopped
+  here for the number you would look up (it is a reserved fictional exchange).
+- **Not gamed:** the sentences are short because each carries one idea, not chopped
   fragments planted to fool the formula. Read it aloud: it sounds like a person.
 
 ## §7 The plain-word ladder
 
 Swap on sight; the left column adds syllables and legal fog, never meaning. Two entries
-carry a condition in the right column — read it, because those words have more than one
+carry a condition in the right column; read it, because those words have more than one
 sense and only one sense swaps cleanly.
 
 | Instead of | Say |
@@ -207,7 +207,7 @@ sense and only one sense swaps cleanly.
 | in order to | to |
 | notwithstanding | despite (before a noun); even though (before a clause) |
 | obtain | get |
-| provide | give — but "the contract provides that…" becomes "says" |
+| provide | give, but "the contract provides that…" becomes "says" |
 | request | ask for |
 | regarding | about |
 | approximately | about |
@@ -217,20 +217,20 @@ sense and only one sense swaps cleanly.
 | immediately | right away |
 | terminate | end |
 
-If a swap would change the meaning even slightly, the swap loses — keep the precise word and
+If a swap would change the meaning even slightly, the swap loses: keep the precise word and
 explain it in plain words right after (that is the 8th-grade fallback working as designed).
 
 ## §8 Routing within the register family
 
-Four registers, one library — the audience picks the skill:
+Four registers, one library; the audience picks the skill:
 
-- **This skill** — the most accessible accurate version: patients, clients, the public,
+- **This skill**: the most accessible accurate version: patients, clients, the public,
   low-literacy readers. Grade-measured, meaning-exact.
-- **`writing-skills:adams-smart-brevity`** — the same Adams core for jargon-fluent
+- **`writing-skills:adams-smart-brevity`**: the same Adams core for jargon-fluent
   professional readers: point first, scannable, precise; no grade ceiling.
-- **`writing-skills:explanation-design`** — when the job is building *understanding* of a
+- **`writing-skills:explanation-design`**: when the job is building *understanding* of a
   concept, not delivering a notice: audience model, entry analogy, teach-back. Design the
   explanation there; bring its words down to grade here.
-- **the archived `writing-skills:gonzo`** — the deliberately wild register, engaged by name only, for
+- **the archived `writing-skills:gonzo`**: the deliberately wild register, engaged by name only, for
   commentary that polite registers can't reach. Never for anything a patient or client must
   rely on.

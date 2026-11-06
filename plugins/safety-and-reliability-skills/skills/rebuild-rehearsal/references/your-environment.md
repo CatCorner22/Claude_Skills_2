@@ -1,10 +1,10 @@
 # Your environment (sanitized template)
 
-Wire in your current role here. This skill is domain-neutral by design — an analyst, an
+Wire in your current role here. This skill is domain-neutral by design: an analyst, an
 attorney, an operations manager, or a developer can each fill this file with their own
 capabilities and rebuild units. Keep the committed file **structural**: roles and
 capability types, not names, system identifiers, or access details. Real names, system
-paths, credentials, and anything sensitive go in `your-environment.private.md` — that
+paths, credentials, and anything sensitive go in `your-environment.private.md`; that
 suffix is git-ignored and never committed.
 
 ## Bus-factor census
@@ -29,7 +29,7 @@ suffix is git-ignored and never committed.
 - Compression rule if the team is small: <who drives, who corrects, how "lead" rotates>
 
 ## Rehearsal log (one line per rehearsal)
-- <date> — <capability> — driver <role> — time to complete — gaps found/fixed
+- <date>, <capability>, driver <role>, time to complete, gaps found/fixed
 - Log location: <where this lives>
 
 ## Funding owner

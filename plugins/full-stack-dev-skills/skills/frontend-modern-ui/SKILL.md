@@ -1,7 +1,7 @@
 ---
 name: frontend-modern-ui
 description: >-
-  Builds lean, dynamic frontends — React + Vite when the UI is a real application (components
+  Builds lean, dynamic frontends: React + Vite when the UI is a real application (components
   by feature, server state via TanStack Query vs local UI state, forms, accessibility
   basics), htmx + server templates when it's mostly forms and tables, and the judgment call
   between them. Use when building or restructuring a web UI, untangling React state, wiring
@@ -10,7 +10,7 @@ description: >-
   htmx, vite setup, form handling react, UI architecture, frontend too complex, SPA vs server
   rendered, component design.
 metadata:
-  version: "1.3.2"
+  version: "1.3.3"
 ---
 
 # Frontend: modern, dynamic, lean
@@ -22,23 +22,23 @@ metadata:
   `full-stack-dev-skills:full-stack-app-architecture` (this skill executes it). Realtime
   updates (WebSockets/SSE) → `full-stack-dev-skills:realtime-and-dynamic-features`.
   Dashboard/visualization design → the archived `data-analytics-bi-skills:dashboard-design`.
-- Not for: auditing an interface you have already built — usability, accessibility and
+- Not for: auditing an interface you have already built: usability, accessibility and
   cognitive-load defects with severity- and confidence-rated findings → see
   `full-stack-dev-skills:ui-and-ux-inspection`. This skill builds to the floor; that one
   measures against it.
 
 ## Do it
 1. **Honor the split decision, and default down.** Forms-and-tables UIs → **htmx**: the
-   server renders HTML, htmx swaps fragments on interaction — no build step, no client
+   server renders HTML, htmx swaps fragments on interaction: no build step, no client
    state, routinely ~5x less code. App-like UIs (editors, live dashboards, rich
    interactions) → **React + Vite**. A hybrid (server pages + one React island) covers the
    common middle case.
 2. **In React, separate the two kinds of state; this is most of frontend sanity:**
-   - **Server state** (data that lives in the API): owned by **TanStack Query** —
+   - **Server state** (data that lives in the API): owned by **TanStack Query**;
      `useQuery({ queryKey: ['invoices'], queryFn: fetchInvoices })` gives caching, refetching,
      loading/error states; after a mutation, `invalidateQueries({ queryKey: ['invoices'] })`
      re-syncs. (v5 accepts only the object form; the old positional call throws.) Never copy
-     server data into `useState` — that copy is a cache you now maintain by hand.
+     server data into `useState`: that copy is a cache you now maintain by hand.
    - **UI state** (which tab is open, form drafts): plain `useState`/`useReducer`, kept in
      the component that owns it. Reach for context only for genuine cross-cutting state
      (theme, session); reach for a store library rarely.
@@ -47,20 +47,20 @@ metadata:
    component when it has two reasons to change, not at a line count. Extract a custom hook
    when *stateful logic* (not JSX) repeats.
 4. **Fetch through one thin API layer.** A single `api.ts` wrapping `fetch` (base URL, auth
-   header, error → thrown exception, JSON parsing) — components call named functions
+   header, error → thrown exception, JSON parsing): components call named functions
    (`getInvoices()`), never raw fetch. Types come from the backend's OpenAPI schema
    (generate or mirror them) so the contract is checked, not assumed.
 5. **Forms: use the platform first.** Uncontrolled inputs + `FormData` on submit covers most
    forms in a few lines; controlled inputs only where the UI reacts per keystroke; a form
-   library (react-hook-form) only when validation complexity actually arrives. Server-side
+   library (react-hook-form) only when validation complexity arrives. Server-side
    validation is the real gate either way (`full-stack-dev-skills:backend-api-development`);
    client validation is UX, not security.
-6. **Bake in the accessibility floor:** semantic elements (`button`, `label`, `nav` — not
+6. **Bake in the accessibility floor:** semantic elements (`button`, `label`, `nav`, not
    div-with-onClick), labels tied to inputs, keyboard reachability, visible focus. It takes
    less code than div soup and is the difference between working and
    working for everyone.
-7. **Keep the toolchain stock.** Vite defaults, one CSS approach (Tailwind *or* CSS modules
-   — pick once), no bespoke webpack surgery, dependencies added the lean way
+7. **Keep the toolchain stock.** Vite defaults, one CSS approach (Tailwind *or* CSS modules,
+   pick once), no bespoke webpack surgery, dependencies added the lean way
    (`full-stack-dev-skills:lean-code-principles`). `references/frontend-recipes.md` has the
    htmx patterns, TanStack Query setup, API-layer template, and the component checklist.
 
@@ -69,7 +69,7 @@ Frontend complexity is almost always *state* complexity, and the deepest simplif
 recognizing that most "state" isn't yours: it's the server's data, briefly visiting the
 browser. Treat it as a cache managed by a library built for caching, and the classic bug
 family (stale copies, manual refetches, loading flags drifting out of sync)
-that `useState`+`useEffect` fetching breeds dissolves. What remains is genuinely local UI state, which
+that `useState`+`useEffect` fetching breeds dissolves. What remains is local UI state, which
 is small and easy. The React-vs-htmx call is the same insight at page scale: if the browser
 holds no meaningful state between interactions, shipping a client-side application framework
 to manage no state is pure overhead. htmx keeps the state where it already lives (the
@@ -98,10 +98,10 @@ and your accessibility bar, so new UI (human- or agent-written) matches the hous
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/frontend-modern-ui.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/frontend-modern-ui.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/frontend-recipes.md — htmx fragment patterns, TanStack Query setup, API layer template, component checklist
-- references/your-environment.md — your surfaces, conventions, and bars (fill in)
+- references/frontend-recipes.md: htmx fragment patterns, TanStack Query setup, API layer template, component checklist
+- references/your-environment.md: your surfaces, conventions, and bars (fill in)

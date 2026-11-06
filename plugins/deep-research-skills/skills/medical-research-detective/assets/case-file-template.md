@@ -56,7 +56,7 @@ deliberate search for contrary evidence found}
 {same structure}
 
 ### Considered and set aside
-- **{Hypothesis}** — {why it was ruled out, and by what evidence}
+- **{Hypothesis}**: {why it was ruled out, and by what evidence}
 
 ---
 
@@ -68,7 +68,7 @@ The links between findings that are not obvious from any single specialty's view
 
 - **Proposed bridge:** {shared mechanism / drug / nutrient / upstream condition}
 - **Strength:** **{Established / Supported / Emerging / Lead / Speculative}**
-- **Does any published source connect these directly?** {Yes — cite it. / No — this is a bridge
+- **Does any published source connect these directly?** {Yes: cite it. / No: this is a bridge
   across separate literatures, built from: {source for X-link} + {source for Y-link}}
 - **What would confirm it:** {the study or test that would settle it}
 - **Sources:** {[V] …}
@@ -79,8 +79,8 @@ The links between findings that are not obvious from any single specialty's view
 
 Written to be read aloud.
 
-1. **"{Question}"** — *why it matters:* {one line}
-2. **"{Question}"** — *why it matters:* {one line}
+1. **"{Question}"**: *why it matters:* {one line}
+2. **"{Question}"**: *why it matters:* {one line}
 
 ---
 
@@ -104,7 +104,7 @@ If any of these are present, contact emergency services or go to an emergency de
 
 ## What we could not establish
 
-- **{Gap}** — {why: no studies, conflicting evidence, paywalled, search not run}. {What would
+- **{Gap}**: {why: no studies, conflicting evidence, paywalled, search not run}. {What would
   close it.}
 - **Searches not run:** {any, and why}
 
@@ -125,7 +125,7 @@ If any of these are present, contact emergency services or go to an emergency de
 Verification tags: `[V]` verified · `[A]` abstract-only · `[U]` unverified · `[R]` retracted ·
 `[X]` excluded-source
 
-1. **[V]** {Author(s)}. {Title}. *{Journal}*. {Year}. {DOI/PMID}. — *{country}* — {study type;
+1. **[V]** {Author(s)}. {Title}. *{Journal}*. {Year}. {DOI/PMID}. *{country}*. {study type;
    one line on what it showed}
 
 **Verification summary:** {N} sources cited: {n} verified, {n} abstract-only, {n} unverified
@@ -139,7 +139,7 @@ leads in Appendix A). Country filter: {allowed set}; Russia and China excluded.
 *Only included when a lead appears nowhere in the allowed literature. These do not support any
 conclusion and are not part of the evidence base above.*
 
-- **[X] {Claimed finding}** — {source, country}. **Set aside because:** country-of-origin policy.
+- **[X] {Claimed finding}**: {source, country}. **Set aside because:** country-of-origin policy.
   **What would confirm it legitimately:** {the allowed-source evidence that would be needed}.
 
 *{Omit this appendix entirely when empty.}*

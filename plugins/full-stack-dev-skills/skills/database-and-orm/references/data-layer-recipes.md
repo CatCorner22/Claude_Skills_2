@@ -10,8 +10,8 @@
 - SQLite → Postgres checklist
 - Three probes (run these once per project)
 
-Every snippet here was exercised against SQLAlchemy 2.0 + FastAPI (0.141) before being written
-down. The numbers in "Connection pooling" are the library defaults at that version — re-read
+Every snippet here is exercised against SQLAlchemy 2.0 + FastAPI (0.141). The numbers in
+"Connection pooling" are the library defaults at that version; re-read
 them from your own install (`print(engine.pool.status())`) rather than trusting this page.
 
 ## Engine + session setup (with the SQLite pragmas)
@@ -42,13 +42,13 @@ SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 Why the listener rather than one `PRAGMA` at startup: `foreign_keys` is per-connection state, and
 a pooled engine opens connections lazily, on new threads, and again after `dispose()` or a
 `pool_recycle`. Anything short of the `connect` event leaves some connections unguarded, and the
-unguarded ones fail silently — they accept orphan rows. `journal_mode` *is* persistent in the
+unguarded ones fail silently: they accept orphan rows. `journal_mode` *is* persistent in the
 file, so re-issuing it is a cheap no-op (and harmless on `:memory:`, where it stays `memory`).
 
 `check_same_thread`: on SQLAlchemy 2.0 the pysqlite dialect already defaults it to `False` for
 **file** databases (they use `QueuePool`), so passing it is belt-and-braces there. It is load
 bearing for **in-memory** databases, which default to `check_same_thread=True` on a
-`SingletonThreadPool` — one connection *per thread*, so a second thread silently gets a
+`SingletonThreadPool`: one connection *per thread*, so a second thread silently gets a
 different, empty database (`no such table: invoices`). An in-memory DB shared across threads
 needs both:
 ```python
@@ -82,20 +82,20 @@ in the *request-scoped* exit stack, which closes after the response has been sen
 FastAPI 0.141 with a dependency that raises exactly where the commit would be: the client got
 `201` and the success body; the exception surfaced afterwards, as a server-side error the client
 never sees. A deferred-constraint violation, serialization failure, deadlock, or dropped
-connection there therefore rolls back a request you already reported as successful — and no
+connection there therefore rolls back a request you already reported as successful, and no
 `except IntegrityError` in your code can reach it, so `409`/retry handling is impossible.
 Newer FastAPI exposes a per-dependency scope for teardown-before-response; treat that as a
 second belt, not the boundary. The version-dependence is the point: keep the commit somewhere
 your own code controls.
 
-`with db.begin():` inside the handler is the other correct form, with one sharp edge — it raises
+`with db.begin():` inside the handler is the other correct form, with one sharp edge: it raises
 `InvalidRequestError: A transaction is already begun on this Session.` if anything already used
 the session, which an auth or tenant-lookup dependency sharing `get_db` usually has
 (`Session.autobegin` is `True` by default). Verified both ways: fresh session → fine; after one
 `SELECT` → raises. An explicit `db.commit()` at the end of the use case has no such
 precondition, which is why it is the default recommendation here.
 
-Retries (serialization failures, deadlocks) wrap the **whole** use case — re-run the service
+Retries (serialization failures, deadlocks) wrap the **whole** use case: re-run the service
 call from the top after a `rollback()`, never retry a half-applied transaction.
 
 ## Money that survives both engines
@@ -114,14 +114,14 @@ def from_minor(units: int, scale: int = 2) -> Decimal:
 Pick the scale once (2 for most currencies, 3 for fils, 4 if unit prices need mills) and put it
 in the column name. `BigInteger`, not the bare `Mapped[int]`: 4-byte `INTEGER` caps a cents
 column at $21,474,836.47. Integers are exact on both engines and exact under `SUM`; a `Decimal` column
-on SQLite is not — pysqlite has no decimal type, so SQLAlchemy binds a double and rebuilds the
+on SQLite is not: pysqlite has no decimal type, so SQLAlchemy binds a double and rebuilds the
 `Decimal` from it. Measured on SQLite through `Numeric(12, 2)`: `1.005 → 1.00`, `8.475 → 8.47`,
 `99999999999999.99 → 99999999999999.98`. Current SQLAlchemy does this without a warning.
-A bare `Mapped[Decimal]` also emits plain `NUMERIC` on Postgres — unconstrained precision and
-scale — so write `Numeric(p, s)` explicitly even on the Postgres-only path.
+A bare `Mapped[Decimal]` also emits plain `NUMERIC` on Postgres: unconstrained precision and
+scale, so write `Numeric(p, s)` explicitly even on the Postgres-only path.
 
 ## Connection pooling
-This and the two engine differences above are what actually break on switch day.
+This and the two engine differences above are what break on switch day.
 ```python
 create_engine(
     settings.db_url,
@@ -153,7 +153,7 @@ Symptom map:
   `pool_recycle` under the server's or proxy's idle timeout.
 
 Use `NullPool` (no app-side pooling) when:
-- an **external pooler** owns it — PgBouncer/pgpool in transaction mode. Don't stack two pools.
+- an **external pooler** owns it: PgBouncer/pgpool in transaction mode. Don't stack two pools.
   (With asyncpg behind transaction-mode pooling, prepared-statement caching must also be off.)
 - **serverless / short-lived processes**, where a pool is created and thrown away per invocation.
 - Forking: never let a child process inherit live connections. `NullPool`, or call
@@ -163,15 +163,15 @@ Use `NullPool` (no app-side pooling) when:
 1. Change models → `alembic revision --autogenerate -m "add invoices.due_date"`
 2. **Read the generated migration.** Autogenerate cannot see renames (drop+add = data loss);
    fix by hand with `op.alter_column`.
-3. One migration per PR; merged migrations are immutable — fix forward with a new one.
+3. One migration per PR; merged migrations are immutable: fix forward with a new one.
 4. Deploy-safe pattern for tightening: add nullable → backfill (data migration or script) →
    add NOT NULL in a later migration once code writes it always.
-5. `alembic upgrade head` runs in CI against a scratch DB — a migration that can't apply
+5. `alembic upgrade head` runs in CI against a scratch DB: a migration that can't apply
    cleanly fails the build, not the deploy.
 6. SQLite caveat: it cannot `ALTER` a column's type or constraints, so Alembic emulates those
    changes by rebuilding the table (`with op.batch_alter_table(...)`). A rebuild is where an
    unenforced FK finally matters, and a batch migration written for SQLite may not be what you
-   want on Postgres — run migrations in CI against the engine you deploy.
+   want on Postgres: run migrations in CI against the engine you deploy.
 
 ## N+1 diagnosis
 Symptom: page slow, DB fine; log shows the same query with different IDs, dozens of times.
@@ -188,7 +188,7 @@ many-to-one (single JOIN); raw column selects for list screens.
 
 ## SQLite → Postgres checklist
 - [ ] All schema changes already via Alembic (no drifted dev DB)
-- [ ] `PRAGMA foreign_keys=ON` was on in dev — otherwise assume orphan rows exist and go find
+- [ ] `PRAGMA foreign_keys=ON` was on in dev: otherwise assume orphan rows exist and go find
       them *before* the load: one `LEFT JOIN ... WHERE parent.id IS NULL` per FK
 - [ ] Money columns are integer minor units, or `Numeric(p, s)` with precision and scale written
       out; a bare `Mapped[Decimal]` gets a `NUMERIC` with neither
@@ -200,7 +200,7 @@ many-to-one (single JOIN); raw column selects for list screens.
 - [ ] `db_url` is config; the test suite runs against Postgres in CI **before** the switch
 - [ ] Data move: dump/load script or `pgloader`; verify row counts + spot checksums
 - [ ] Concurrency assumptions revisited: Postgres gives real concurrent writers, but also
-      real lock behavior — retest the hot write paths
+      real lock behavior: retest the hot write paths
 - [ ] Case sensitivity and collation checked: SQLite's `LIKE` is ASCII-case-insensitive by
       default, Postgres's is not; any uniqueness that relied on that changes meaning
 - [ ] Backups configured on day one of Postgres (the ops cost you deferred, now due)
@@ -229,6 +229,6 @@ status = TestClient(app, raise_server_exceptions=False).post("/probe").status_co
 #        (This is what FastAPI 0.141 does by default.)
 # 500 -> the teardown runs before the response on your version.
 ```
-Either answer leaves the commit belonging in the handler — `201` because the teardown can't
+Either answer leaves the commit belonging in the handler: `201` because the teardown can't
 report failure, `500` because it can only report a generic one. Re-run probe 3 after a framework
 upgrade: this answer has changed across FastAPI versions, and silently.

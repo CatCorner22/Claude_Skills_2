@@ -1,4 +1,4 @@
-# Your Environment — Fitness & Nutrition Science Skill
+# Your Environment: Fitness & Nutrition Science Skill
 
 Fill in this template to tailor the skill to your tracker's cohort, measurement resolution,
 and success criteria. Keep this file outside the plugin in `.claude/skills-env/` so your

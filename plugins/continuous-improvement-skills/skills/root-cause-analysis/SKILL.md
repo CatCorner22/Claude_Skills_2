@@ -3,14 +3,14 @@ name: root-cause-analysis
 description: >-
   Finds the true cause of a recurring problem with 5 Whys, a fishbone/Ishikawa diagram across the 6M
   categories, and Pareto analysis, separating immediate containment from the root cause and verifying
-  the cause before any countermeasure — driving from a quantified, blame-free problem statement
+  the cause before any countermeasure: driving from a quantified, blame-free problem statement
   through a toggle-the-cause verification test to an error-proofed countermeasure with an owner,
   with Reason's slip/lapse/mistake/violation taxonomy so human error gets the right fix instead of
   blame. Use when diagnosing a recurring problem, chasing a defect's cause, or a fix that never
   sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and effect, Pareto, RCA, why did
   this happen, recurring problem, keeps happening, corrective action, containment, verify the cause.
 metadata:
-  version: "1.2.3"
+  version: "1.2.4"
 ---
 
 # Root-cause analysis
@@ -31,7 +31,7 @@ containment. The assistant drafts the statement, why-chains, fishbone
 candidates, and Pareto tally; the human owns containment, the verification test, and the
 countermeasure decision.
 1. **Write a sharp problem statement.** State *what* is wrong, *where*, *when it started*, *how big*
-   (magnitude/frequency), and *how you know* — with evidence, no cause and no blame. "AP posted 14
+   (magnitude/frequency), and *how you know*, with evidence, no cause and no blame. "AP posted 14
    duplicate payments in Q2, up from 2 in Q1" beats "AP is careless." A vague problem yields a vague
    cause.
 2. **Contain first, then investigate.** Put in an immediate action that protects the customer *now*
@@ -40,21 +40,21 @@ countermeasure decision.
    for the fix.
 3. **Run a 5 Whys chain on the confirmed problem.** Ask "why?" of each answer, following the causal
    thread, until you reach a cause that (a) is a process/system condition you can act on and (b) whose
-   removal would prevent recurrence. Five is a guide, not a quota — stop at the actionable cause. Test
+   removal would prevent recurrence. Five is a guide, not a quota: stop at the actionable cause. Test
    the logic backwards with "therefore": each *why* should read forward as a valid cause→effect.
-   When a *why* lands on a human action, classify it before continuing — slip, lapse, rule-based
-   mistake, knowledge-based mistake, or violation — because the type decides the countermeasure in
+   When a *why* lands on a human action, classify it before continuing (slip, lapse, rule-based
+   mistake, knowledge-based mistake, or violation) because the type decides the countermeasure in
    step 7: forcing function for a slip, checklist for a lapse, rule repair for a rule-based
    mistake, training for a knowledge-based one, incentives for a violation. Then keep asking why:
    the taxonomy names the human failure mode, the chain continues to the process condition that let
    it through (`references/human-error-taxonomy.md`).
 4. **Widen with a fishbone (Ishikawa) when the cause isn't single-threaded.** Brainstorm candidate
-   causes into the **6M** categories — **Man** (people/skill), **Method** (process), **Machine**
+   causes into the **6M** categories: **Man** (people/skill), **Method** (process), **Machine**
    (systems/tools), **Material** (inputs/data), **Measurement** (metrics/definitions), **Environment/
    Mother-nature** (surroundings, policy, timing). The 6M grid keeps you from anchoring on the first
-   plausible answer — see `references/tools-and-templates.md`.
+   plausible answer: see `references/tools-and-templates.md`.
 5. **Use Pareto to prioritize the vital few.** When there are many defect types, tally by category and
-   sort descending — typically a small number of causes drive most of the occurrences. Fix the tallest
+   sort descending, typically a small number of causes drive most of the occurrences. Fix the tallest
    bars first; don't spread effort evenly across the trivial many. If the problem statement already spans
    several defect types, run this tally *before* step 3, so the why-chain follows the tallest bar
    rather than whichever type surfaced first.
@@ -66,19 +66,19 @@ countermeasure decision.
    remove the temporary containment.
 
 ## Why / learn
-Symptoms recur until the *cause* is removed — which is the entire reason to resist the first plausible
+Symptoms recur until the *cause* is removed, which is the entire reason to resist the first plausible
 answer. Under time pressure the brain offers a quick, blameable explanation ("someone was careless"),
-you fix that, and the problem returns because the real driver — a process that *lets* the error happen —
+you fix that, and the problem returns because the real driver, a process that *lets* the error happen,
 is still there. The disciplines here are all devices for that resistance. **5 Whys** forces you past the
 first layer down the causal chain to a condition you can change. The **fishbone's 6M grid**
-counteracts anchoring by making you consider categories you'd otherwise skip — most stubborn problems are
+counteracts anchoring by making you consider categories you'd otherwise skip: most stubborn problems are
 in Method, Measurement, or Machine, not the "Man" box people reach for first. **Pareto** counters the urge
 to treat every defect equally by showing that a vital few causes dominate. And **verifying before
 countermeasure** is what separates analysis from storytelling: a cause you can toggle and watch the effect
 follow is proven; one that merely sounds right is not. Keep containment and root cause in separate boxes,
 because the great trap is shipping the temporary patch as if it were the cure and closing the problem while
 the cause lives on. The aim is a countermeasure that makes the error hard or impossible to repeat, not a
-reminder to "be more careful" — reminders decay, error-proofing doesn't.
+reminder to "be more careful": reminders decay, error-proofing doesn't.
 
 ## Common mistakes
 - Vague problem statement → vague cause. Quantify what/where/when/how-big with evidence, no blame.
@@ -87,24 +87,24 @@ reminder to "be more careful" — reminders decay, error-proofing doesn't.
 - Anchoring on the first cause → use the 6M fishbone to force breadth before you converge.
 - Skipping verification → you countermeasure a guess. Confirm the cause changes the effect first.
 - Spreading effort across every defect → use Pareto; fix the vital few first.
-- Blaming a person → almost always a process/system let the error through. Fix the system — and
+- Blaming a person → almost always a process/system let the error through. Fix the system, and
   classify the error type (step 3) so the countermeasure matches the failure mode.
 
 ## Tailor to your environment
 Record your real recurring problems and data sources in `references/your-environment.md` (use
 `your-environment.private.md`, git-ignored, if it names real people, vendors, or incidents). Capture your
 defect categories, where you pull occurrence counts for Pareto, your containment vs. root-cause
-conventions, and who signs off that a cause is verified. Never commit real incident or client data —
+conventions, and who signs off that a cause is verified. Never commit real incident or client data:
 sanitize to structure only.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/root-cause-analysis.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/root-cause-analysis.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/tools-and-templates.md — 5 Whys worksheet, 6M fishbone prompts, Pareto tally, verification test
-- references/human-error-taxonomy.md — Reason's slip/lapse/mistake/violation taxonomy on Rasmussen's
+- references/tools-and-templates.md: 5 Whys worksheet, 6M fishbone prompts, Pareto tally, verification test
+- references/human-error-taxonomy.md: Reason's slip/lapse/mistake/violation taxonomy on Rasmussen's
   skill–rule–knowledge levels, the countermeasure mapping, and a classification worked example
-- references/your-environment.md — your defect categories, data sources, and sign-offs (add when supplied)
+- references/your-environment.md: your defect categories, data sources, and sign-offs (add when supplied)

@@ -69,4 +69,4 @@ speed/accuracy under real conditions → (e) clarity that reduces future accurac
   preferred response when true.
 - Chair: roughly ≤15–20 ranked revisions; merge duplicates; drop low-value items into
   "Intentionally Deferred" with one line of why.
-- Nobody invents findings during synthesis — merge, reframe, or drop only.
+- Nobody invents findings during synthesis; merge, reframe, or drop only.

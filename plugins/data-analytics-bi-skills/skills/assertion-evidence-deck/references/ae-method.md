@@ -34,7 +34,7 @@ signals that the slide has no point. That is worth discovering while drafting ra
 
 ### Style
 1. Begin each body slide with a sentence-assertion headline, left-justified, no more than two lines.
-2. Support the headline with visual evidence — photographs, drawings, graphs, films, or words and
+2. Support the headline with visual evidence: photographs, drawings, graphs, films, or words and
    equations arranged visually. Avoid bullet lists.
 3. In the body of the slide, use words only when necessary. Design so the audience reads no more than
    20 words per minute.
@@ -43,7 +43,7 @@ signals that the slide has no point. That is worth discovering while drafting ra
 1. Use a bold sans-serif typeface such as Calibri.
 2. Use 28-point type for the headline, 18–24 point for **prose** body text, and 12–14 point (not
    bold) for reference listings. Dense layouts are the documented exception: table cells and
-   flow-step labels at 14 point, two-column and three-row items at 16 point — they are scanned as
+   flow-step labels at 14 point, two-column and three-row items at 16 point; they are scanned as
    tokens, not read as sentences (`references/design-tokens.md`). Prose is never shrunk to fit; a
    statement slide that needs 14-point body has too much on it, and the finding is to split it.
 3. Avoid all capital letters, italics, and underline.
@@ -51,7 +51,7 @@ signals that the slide has no point. That is worth discovering while drafting ra
 ### Layout
 1. Keep blocks of text, especially headlines, to no more than two lines.
 2. Keep lists to two, three, or four items.
-3. Use small side margins so you can insert sufficient white space between elements — for instance,
+3. Use small side margins so you can insert sufficient white space between elements, for instance,
    at least a half-inch of white space below the headline.
 
 Note the tension between Style rule 2 and Layout rule 2: the method avoids bullet lists yet permits
@@ -64,10 +64,10 @@ with bullet glyphs does not.
 The headline carries the slide's entire argument, so write it first and revise it hardest.
 
 **Test it three ways.**
-1. *Sentence test* — does it have a subject and a verb?
-2. *Falsifiability test* — could evidence contradict it? "Reconciliation challenges" cannot be
+1. *Sentence test*: does it have a subject and a verb?
+2. *Falsifiability test*: could evidence contradict it? "Reconciliation challenges" cannot be
    contradicted; "Two merchant codes absorb three-quarters of all transaction creation rules" can.
-3. *Standalone test* — read only the headlines in order. Do they form the argument? If a reader gets
+3. *Standalone test*: read only the headlines in order. Do they form the argument? If a reader gets
    the talk from the headlines alone, the spine is sound.
 
 **Keep it to two lines.** At 28 point across an 11.52-inch box, two lines run roughly 105
@@ -105,7 +105,7 @@ editable and legible when projected. Reserve images for chart types PowerPoint c
 
 ## Snorkel and scuba
 
-For any technical explanation, write the *scuba* version — full mechanism, full precision — then
+For any technical explanation, write the *scuba* version (full mechanism, full precision), then
 write the *snorkel* version that answers "so what?" for someone who does not share your specialty.
 
 The slide shows snorkel. The speaker notes hold scuba. The speaker knows scuba and can descend on
@@ -127,7 +127,7 @@ The snorkel version becomes the headline. The scuba version becomes the note.
 Structure a talk as one main message supported by three key details. Use this to decide what
 survives the cut.
 1. Write the main message of the talk in one sentence.
-2. Name three key details that support it — no more.
+2. Name three key details that support it, no more.
 3. For each key detail, ask: does the audience act differently knowing it? If not, it goes in the
    notes, an appendix, or the leave-behind.
 
@@ -153,7 +153,7 @@ the source tag. Never present a result without its window.
 the date. Bold nothing except the column the headline names.
 
 **The summary.** Restate the main claim as the headline. Below it, the two or three supporting claims
-in the same words used earlier. Repetition of exact wording is a feature — it is how the audience
+in the same words used earlier. Repetition of exact wording is a feature: it is how the audience
 retains the argument.
 
 ## Failure modes and their fixes

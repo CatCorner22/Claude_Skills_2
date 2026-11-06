@@ -11,7 +11,7 @@ description: >-
   Triggers: software archaeology, excavate, dig into this legacy, harris matrix,
   stratigraphy, which of these are dead, scream test, who wrote this and why, safe to delete.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # Software archaeology (excavate before you demolish)
@@ -19,22 +19,22 @@ metadata:
 Archaeologists never bulldoze a site to find out what is in it. Edward Harris gave the
 discipline its recording instrument (the Harris matrix, devised 1973 and formalized in
 *Principles of Archaeological Stratigraphy*): a directed graph of before/after/contemporary
-relationships between excavation contexts, governed by the law of superposition — what lies
+relationships between excavation contexts, governed by the law of superposition: what lies
 above was deposited after what lies below `[snippet-only]`. Reinhard carried the method
 across to software in "Adapting the Harris Matrix for Software Stratigraphy" (*Advances in
-Archaeological Practice*, Cambridge) — a program's accreted versions treated as a digital
+Archaeological Practice*, Cambridge): a program's accreted versions treated as a digital
 site obeying Harris's laws `[snippet-only]`. Hunt and Thomas named the wider practice
 "software archaeology" (*IEEE Software*, 2002): preserve the artifacts, record as you dig,
 and respect the cultural forces that produced the code `[snippet-only]`. This skill turns
 all three into one discipline: **record before you remove**.
 
 ## When to use
-- An accreted system — codebase, configuration store, rule set, feature flags, scheduled
-  jobs, a shared-drive document corpus — must be refactored, migrated, pruned, or retired,
+- An accreted system (codebase, configuration store, rule set, feature flags, scheduled
+  jobs, a shared-drive document corpus) must be refactored, migrated, pruned, or retired,
   and nobody can say with evidence which parts are still alive.
 - "Is this safe to delete?" asked about anything old: a directory nobody owns, a rule that
   fires before yours, a folder literally named `deprecated` that people still fear.
-- Reconstructing why a system is shaped the way it is — who wrote this and why — before
+- Reconstructing why a system is shaped the way it is (who wrote this and why) before
   changing it (inherited codebase, departed authors, contractor eras).
 - Not for: diagnosing one failure's cause → `continuous-improvement-skills:root-cause-analysis`
   (RCA explains an incident's causal chain; excavation reconstructs the whole deposit's
@@ -52,64 +52,64 @@ and the site-report template are in `references/excavation-method.md`.
 
 1. **Bound the site.** Name the system under excavation and the strata question being
    asked ("which of these 300 config files are dead?", "can the v1 module go?"). List what
-   counts as an artifact at this dig's grain — file, rule, table, flag, job, document. An
+   counts as an artifact at this dig's grain: file, rule, table, flag, job, document. An
    unbounded dig never finishes; a bounded one produces a deliverable.
 2. **Harvest dating evidence** for every artifact, from strongest to weakest: version-control
    history (first commit, last meaningful change, author clusters); naming-convention eras
    (`ALLCAPS.INI` vs `snake_case.yaml` vs `per-service-kebab` are different decades of the
    site); style and toolchain fingerprints (framework idioms, API generations); dependency
    direction (who references whom); runtime evidence (logs, access records); filesystem
-   timestamps last (migrations and copies reset them — they lie). Date by convergence of
+   timestamps last (migrations and copies reset them, so they lie). Date by convergence of
    independent lines, never by one line alone.
-3. **Build the relationship graph** — the Harris matrix. Record, per artifact: what it sits
+3. **Build the relationship graph**, the Harris matrix. Record, per artifact: what it sits
    *above* (overrides, wraps, consumes, supersedes), what it is *contemporary* with (same
    era, same deposition event), and what *cuts* it (later changes that truncated or replaced
-   part of it). This is the step the assistant amplifies: it reads the full inventory —
-   hundreds or thousands of artifacts, their references, dates, and naming patterns — and
+   part of it). This is the step the assistant amplifies: it reads the full inventory
+   (hundreds or thousands of artifacts, their references, dates, and naming patterns) and
    emits a draft matrix in minutes, where a human dig would take weeks. Render it as a
    Mermaid diagram (newest strata at top; conventions in the reference). The human then
-   corrects edges they know are wrong — the draft is a hypothesis, not a verdict.
+   corrects edges they know are wrong; the draft is a hypothesis, not a verdict.
 4. **Cluster into named eras.** Group contemporaneous artifacts into strata and give each a
    memorable name from its evidence signature: "the Bootstrap era," "the contractor summer,"
    "the compliance push." An era boundary needs at least two independent evidence lines
    (e.g., a naming shift *and* an author-cluster change). Named eras turn a pile of files
    into a history people can reason and argue about.
 5. **Classify every layer, with evidence:**
-   - **LIVING FLOOR** — in active use now: runtime or reference evidence within the
+   - **LIVING FLOOR**: in active use now: runtime or reference evidence within the
      artifact's own usage rhythm.
-   - **FILL** — inert itself but load-bearing: something living sits on it (references it,
+   - **FILL**: inert itself but load-bearing: something living sits on it (references it,
      imports it, fires after it). Removing fill collapses what is above.
-   - **RUBBLE** — nothing above it, no runtime evidence across a full usage cycle, its era
+   - **RUBBLE**: nothing above it, no runtime evidence across a full usage cycle, its era
      closed. Only rubble is a removal candidate.
-   When evidence is insufficient, classify FILL, never RUBBLE — the default must be the
+   When evidence is insufficient, classify FILL, never RUBBLE; the default must be the
    conservative one. A folder's *label* ("deprecated", "old", "backup") is not evidence.
-6. **Remove rubble via the scream test** — the removal step, not a separate project.
-   Disable the suspect artifact *reversibly* (flag off, rename, revoke access — never
+6. **Remove rubble via the scream test**, the removal step, not a separate project.
+   Disable the suspect artifact *reversibly* (flag off, rename, revoke access; never
    delete first); announce or stay silent per your policy (a silent test also catches
    consumers nobody documented); wait a window sized to the artifact's usage rhythm (a
    daily job needs weeks; anything touched by a monthly or quarterly cycle needs that full
    cycle); keep rollback ready and restore within minutes if someone screams. Microsoft's
    documented decommissioning practice found roughly 15% of "unused" servers screamed when
-   disabled `[snippet-only]` — that is the measured error rate of confident "nobody uses
+   disabled `[snippet-only]`. That is the measured error rate of confident "nobody uses
    this" claims, and the reason the test exists. Only after a silent window: archive, then
    delete.
 7. **File the site report.** What was excavated, the matrix, the eras and their evidence,
    the classification table, what was removed and what screamed, what survived and why,
-   and the open questions. Future maintainers inherit your dig — the report is what keeps
+   and the open questions. Future maintainers inherit your dig; the report is what keeps
    them from excavating the same ground again.
 
 ## Why / learn
 The law of superposition is the whole trick: in an undisturbed deposit, position *is*
-chronology. Software accretes the same way — an override is later than the rule it
+chronology. Software accretes the same way: an override is later than the rule it
 overrides, a wrapper is later than what it wraps, a migration is later than the schema it
-alters — so the reference-and-override structure of a system encodes its history even when
-every document and every author is gone. The Harris matrix just makes that encoding
+alters. So the reference-and-override structure of a system encodes its history even when
+every document and every author is gone. The Harris matrix makes that encoding
 explicit and checkable: once the relationships are drawn as a DAG, "what happens if I
 remove this?" becomes a graph query instead of a guess.
 
 Record-before-remove is Chesterton's fence made procedural. The fence parable says: don't
 clear the fence until you know why it was put up. On a one-fence decision, asking "why?" is
-enough — that is `soviet-space-graphite`'s Graphite Test. On an accreted site there are
+enough; that is `soviet-space-graphite`'s Graphite Test. On an accreted site there are
 hundreds of fences, and asking "why?" one at a time either stalls forever or degenerates
 into vibes. Excavation replaces the question with evidence: superposition tells you what
 each fence holds up, dating tells you which era planted it, and classification tells you
@@ -122,7 +122,7 @@ Disabling-and-listening asks the system itself, and the Microsoft figure from st
 shows why the question must be asked even when everyone agrees the thing is dead. Reversibility is what
 makes the test cheap: a scream costs minutes of rollback, while a wrong deletion costs a
 reconstruction. And the site report closes the loop Hunt and Thomas cared about: code is
-produced by cultural forces, and your removals are the next stratum — recorded, they are
+produced by cultural forces, and your removals are the next stratum: recorded, they are
 history; unrecorded, they are the next generation's mystery.
 
 ## Common mistakes
@@ -146,19 +146,19 @@ Wire in your current systems in `references/your-environment.md`: the accreted s
 are likely to dig (repositories, config stores, job schedulers, document shares), where
 each one's dating evidence lives (history, logs, access records), your naming-convention
 eras as you discover them, your announce-or-silent scream-test policy and standard window
-sizes, and where site reports are filed. Keep committed content structural — real system
+sizes, and where site reports are filed. Keep committed content structural: real system
 names, owners, or anything sensitive goes in `your-environment.private.md` (git-ignored),
 never in a committed file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/software-archaeology.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/software-archaeology.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/excavation-method.md — dating-evidence taxonomy, Harris-matrix drafting
+- references/excavation-method.md: dating-evidence taxonomy, Harris-matrix drafting
   protocol with Mermaid conventions, a worked config-directory example, era clustering,
   layer classification with evidence bars, the scream-test protocol with window sizing,
   and the site-report template
-- references/your-environment.md — your dig sites, evidence sources, and removal policy (fill in)
+- references/your-environment.md: your dig sites, evidence sources, and removal policy (fill in)

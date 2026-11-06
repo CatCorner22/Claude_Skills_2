@@ -17,9 +17,9 @@
 <tr hx-get="/invoices/42/edit" hx-target="this" hx-swap="outerHTML">...</tr>
 ```
 Server side: the same route renders the full page (normal request) or just the fragment
-(`HX-Request` header) — one template, included both ways. Pattern covers search, pagination,
+(`HX-Request` header): one template, included both ways. Pattern covers search, pagination,
 inline edit, modals, infinite scroll; when a page needs client-held state across many
-interactions, that page has outgrown htmx — make it the React island.
+interactions, that page has outgrown htmx: make it the React island.
 
 ## TanStack Query setup
 ```tsx
@@ -100,13 +100,13 @@ export const getInvoices = () => req<Page<Invoice>>("/invoices");
 export const postInvoice = (d: InvoiceIn) => req<Invoice>("/invoices", { method: "POST", body: JSON.stringify(d) });
 ```
 Types: generate from the backend OpenAPI schema (`openapi-typescript`) or mirror by hand for
-small APIs — either way the contract lives in one checked place.
+small APIs: either way the contract lives in one checked place.
 
 ## Component checklist
 - [ ] Lives in its feature folder; imports flow feature → shared, never feature → feature internals
 - [ ] Server data via useQuery; no server data in useState
 - [ ] UI state in the lowest component that owns it
 - [ ] Semantic elements; inputs labeled; keyboard reachable; focus visible
-- [ ] Loading and error states rendered (the query gives them — use them)
+- [ ] Loading and error states rendered (the query gives them: use them)
 - [ ] No raw fetch; API layer functions only
-- [ ] Would this be less code as a server-rendered fragment? (If yes — why is it React?)
+- [ ] Would this be less code as a server-rendered fragment? (If yes: why is it React?)

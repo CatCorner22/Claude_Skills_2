@@ -1,7 +1,7 @@
 # Acquisition and source tracing
 
-How to get the transcript, how to find what the video cited, how to resolve it, and — the part
-that matters most — how each of these fails and what to do instead of guessing.
+How to get the transcript, how to find what the video cited, how to resolve it, and (the part
+that matters most) how each of these fails and what to do instead of guessing.
 
 **Contents**
 - §1 Reachability preflight and the three outcomes
@@ -46,7 +46,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/skills/video-source-audit/scripts/fetch_transcrip
 | Not reachable | fetch errors — network policy, geo-block, private, removed, age-gated | **stop.** Report which error. Emit `NOT-GRADED`. |
 
 The third row is the one that requires discipline. In a restricted network, a blocked fetch and a
-genuinely dead link return *indistinguishable* failures. The audit must therefore report the
+dead link return *indistinguishable* failures. The audit must therefore report the
 **mechanism** it observed, not the conclusion it would like to draw:
 
 - `CONNECT tunnel failed, response 403` / an explicit egress-blocked error → your environment
@@ -62,8 +62,8 @@ worst error this skill can make, because it converts a tooling limitation into a
 YouTube's auto-caption VTT uses a **rolling two-line window**: each cue repeats the tail of the
 previous cue so the on-screen text scrolls. Fed to a model raw, the same sentence appears three or
 four times. Measured across real auto-caption files, the rolling format runs on the order of **15-20x** the
-token cost of the same content de-duplicated — the exact multiple depends on whether the
-comparison is against plain or timecoded text, so treat the order of magnitude as the finding. Collapse it before doing anything else — the bundled
+token cost of the same content de-duplicated: the exact multiple depends on whether the
+comparison is against plain or timecoded text, so treat the order of magnitude as the finding. Collapse it before doing anything else: the bundled
 script does this, and `--convert-subs srt` alone does **not**.
 
 De-duplicated, transcript size is a non-problem: a 60-minute talk is on the order of 15,000 tokens
@@ -77,20 +77,20 @@ and long, not from the transcript, which is one document.
 
 Check all seven. Most audits that miss a source missed it in one of the last four.
 
-1. **Description links** — the primary location. Present in full in the metadata JSON's description
+1. **Description links**: the primary location. Present in full in the metadata JSON's description
    field; it is not truncated there the way it is in a collapsed web view.
-2. **Pinned comment** — creators routinely post corrections and source lists here, and a correction
+2. **Pinned comment**: creators routinely post corrections and source lists here, and a correction
    the creator issued themselves is directly relevant to the comprehensiveness grade.
-3. **Spoken references** — "a 2019 Lancet paper by Smith", "the Framingham data". These have no
+3. **Spoken references**: "a 2019 Lancet paper by Smith", "the Framingham data". These have no
    link and must be resolved from the words alone (§3).
-4. **Chapter titles** — often name the study or concept.
-5. **Linked companion article** — a newsletter, blog post, or Substack carrying the real citation
+4. **Chapter titles**: often name the study or concept.
+5. **Linked companion article**: a newsletter, blog post, or Substack carrying the real citation
    list. Follow it; it frequently contains everything the description omitted.
-6. **On-screen citations** — text or a screenshot of a paper shown in frame. **These are invisible
+6. **On-screen citations**: text or a screenshot of a paper shown in frame. **These are invisible
    to a transcript-based audit.** This is a hard limit of the method, not an oversight, and it must
    be disclosed: say that on-screen sources may exist and were not captured, and note the effect on
    the comprehensiveness grade. If the user can screenshot them, ask.
-7. **Shortened links** — expand before resolving, and report the destination, since a shortener
+7. **Shortened links**: expand before resolving, and report the destination, since a shortener
    hides where a "source" actually points (sometimes at a store page, not a study).
 
 ---
@@ -112,10 +112,10 @@ Work top to bottom; stop when you have a durable identifier plus canonical metad
 
 **Operational notes that save real time:**
 
-- **Identify yourself, but check how each service wants it — they differ, and one changed.**
+- **Identify yourself, but check how each service wants it: they differ.**
   Crossref runs a "polite pool" keyed on an email in the query (`?mailto=`) or User-Agent, and
-  service is more consistent inside it. Unpaywall *requires* an email parameter. **OpenAlex now
-  authenticates with an API key** (`?api_key=`) — the mailto polite pool it previously operated is
+  service is more consistent inside it. Unpaywall *requires* an email parameter. **OpenAlex
+  authenticates with an API key** (`?api_key=`): the mailto polite pool is
   deprecated, so mailto-only code silently gets the unauthenticated budget. Verify each service's
   current requirement rather than assuming they are alike; this is exactly the kind of detail that
   moves.
@@ -154,7 +154,7 @@ support the same conclusions.
 | **T1 Abstract only** | abstract | existence and rough direction only |
 | **T0 Not read** | metadata only, or unreachable | **nothing.** Mark `SOURCE-NOT-READ`, exclude from the denominator |
 
-Abstracts systematically overstate their own papers — spin is a documented and measured feature of
+Abstracts systematically overstate their own papers: spin is a documented and measured feature of
 abstract writing. An audit conducted at T1 that reports a confident fidelity verdict has inherited
 the abstract's spin and laundered it into a grade. Never let T1 evidence produce a reversal finding.
 
@@ -164,11 +164,11 @@ the abstract's spin and laundered it into a grade. Never let T1 evidence produce
 
 Three distinct states hide behind "I could not find it", and they grade differently:
 
-1. **Fabricated** — the identifier resolves to nothing *from a host you successfully reached*, or
+1. **Fabricated**: the identifier resolves to nothing *from a host you successfully reached*, or
    resolves to a real paper whose metadata does not match the claim at all. This is the only one
    that may trigger the fabrication cap.
-2. **Unreachable** — the resolver could not be contacted. Not evidence of anything. `SOURCE-NOT-READ`.
-3. **Ambiguous** — the reference is too vague to identify uniquely (§3). A citation-quality finding.
+2. **Unreachable**: the resolver could not be contacted. Not evidence of anything. `SOURCE-NOT-READ`.
+3. **Ambiguous**: the reference is too vague to identify uniquely (§3). A citation-quality finding.
 
 Before recording a fabrication, confirm you reached the resolver at all: fetch a known-good
 identifier through the same path in the same session. If that also fails, you are in state 2 and
@@ -197,14 +197,14 @@ Stages 1–8 answer *"did the video quote its sources correctly?"* This stage an
 reader actually cares about: **"is the video's picture of the evidence the right one?"** A video can
 quote three real papers with perfect fidelity and still be badly wrong about the state of the
 question, because it picked three papers out of forty. Nothing in the fidelity ladder can detect
-that — only going and looking can.
+that; only going and looking can.
 
 This pass is what feeds report section 5, and it is the only honest way to score comprehensiveness
 checklist item 8 (representativeness).
 
 ### The five questions, in order
 
-1. **Is the cited evidence representative?** Search the video's own claim — not its citations — and
+1. **Is the cited evidence representative?** Search the video's own claim, not its citations, and
    see what comes back. If the video cites three small trials and the search surfaces a Cochrane
    review pooling thirty, the video did not report the evidence; it reported a selection from it.
 2. **Is there a higher tier of evidence the video ignored?** A systematic review or meta-analysis
@@ -218,9 +218,9 @@ checklist item 8 (representativeness).
 4. **Has anything the video relied on been retracted, corrected, or failed to replicate?** Check
    each load-bearing source for a retraction notice, an expression of concern, a published
    correction, and a replication attempt. A retraction routes to comprehensiveness O7 and the
-   `FAITHFUL-TO-BAD-SOURCE` flag — never to accuracy.
+   `FAITHFUL-TO-BAD-SOURCE` flag, never to accuracy.
 5. **What does the weight of evidence actually say?** State it plainly, with its own confidence,
-   *including* "this is genuinely unsettled" where that is the truth. Manufacturing a clean answer
+   *including* "this is unsettled" where that is the truth. Manufacturing a clean answer
    the literature does not support repeats the video's own sin in the auditor's voice.
 
 ### Search strategy
@@ -229,19 +229,19 @@ Search the **claim**, not the citation. The video's reference list is precisely 
 under examination, so starting from it inherits the bias. Build queries from the claim's substance
 plus the population and the outcome, then:
 
-- Look for the review tier first (systematic review, meta-analysis, Cochrane, practice guideline) —
+- Look for the review tier first (systematic review, meta-analysis, Cochrane, practice guideline):
   it is the cheapest way to learn what the body of evidence looks like.
 - Chain backward through the best paper's reference list, and forward through "cited by" to find
   what superseded it.
 - Search the negation explicitly: the claim plus "no association", "null", "failed to replicate",
   "does not".
 - Resolve everything through the §3 ladder, and record how each item was verified. **The §3 rule
-  about retrieved records versus generated prose applies with full force here** — this pass produces
+  about retrieved records versus generated prose applies with full force here**: this pass produces
   citations the video never made, so every one of them is the auditor's own responsibility.
 
 ### The stopping rule, and the honesty rule
 
-**Stop at saturation, not at sufficiency** — when new queries stop returning new work, not when you
+**Stop at saturation, not at sufficiency**: when new queries stop returning new work, not when you
 have enough to make a point. Then **say where you stopped**: how many queries, which databases,
 what date range, and what you could not reach. An independent pass with an undisclosed stopping
 point is an opinion with a bibliography.

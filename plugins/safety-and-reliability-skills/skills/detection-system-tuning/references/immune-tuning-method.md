@@ -1,9 +1,9 @@
 # The immune-tuning method: axis, layers, dispositions, tolerance, memory, fuel
 
-Method lineage: the artificial-immune-systems (AIS) engineering literature — negative
+Method lineage: the artificial-immune-systems (AIS) engineering literature: negative
 selection (Forrest, self/non-self), clonal selection, immune networks, and danger
 theory/dendritic-cell algorithm (Greensmith, Aickelin & Cayzer, ICARIS 2005, from
-Matzinger's danger model) — with documented intrusion- and anomaly-detection deployments
+Matzinger's danger model), with documented intrusion- and anomaly-detection deployments
 and surveys [snippet-only]. The alarm-fatigue
 evidence and its numbers are quoted with their provenance marks; nothing here is rounded
 into new claims. Source list at the end of this file.
@@ -22,12 +22,12 @@ into new claims. Source list at the end of this file.
 
 ## The axis, with the documented numbers
 
-**Autoimmunity** — the system attacks self. False matches, junk exceptions, alarm floods.
+**Autoimmunity**: the system attacks self. False matches, junk exceptions, alarm floods.
 Its terminal stage is operator desensitization, and that stage is documented soberly:
 
 - The Joint Commission's Sentinel Event Alert 50 (April 2013) reported **98 alarm-related
   adverse events between January 2009 and June 2012: 80 deaths, 13 permanent losses of
-  function** — in hospitals full of working alarms. The same alert reports that **85–99% of
+  function**, in hospitals full of working alarms. The same alert reports that **85–99% of
   alarm signals require no clinical intervention** [snippet-only]. The alarms did not fail
   to sound; they sounded so often that trained professionals, rationally, stopped treating
   each one as information. Eighty deaths is why default thresholds are worth an audit.
@@ -40,15 +40,15 @@ Its terminal stage is operator desensitization, and that stage is documented sob
   at a manual cost of **$25–50 per alert** [snippet-only]. (Quoted as industry-attributed;
   treat it as an order-of-magnitude anchor, not a measurement of your queue.)
 
-**Immunodeficiency** — the system misses real threats. It gets the headlines, so teams
-over-correct toward it, widening rules and lowering thresholds — which feeds autoimmunity,
+**Immunodeficiency**: the system misses real threats. It gets the headlines, so teams
+over-correct toward it, widening rules and lowering thresholds. That feeds autoimmunity,
 which desensitizes operators, which produces the very misses the widening was meant to
 prevent. A flooded queue is functionally immunodeficient with perfect audit paperwork.
 
 The AIS literature formalizes the trade rather than moralizing it: pure negative selection
 ("flag whatever isn't self") suffers documented false-positive and detector-scaling
 problems (Stibor et al., GECCO 2005) [snippet-only]; danger theory was proposed
-specifically to cut false positives by requiring context — damage signals — and not mere
+specifically to cut false positives by requiring context (damage signals) and not mere
 non-self [snippet-only]. Tuning is choosing a position on the axis deliberately, per rule,
 with the queue's own disposition history as the evidence.
 
@@ -72,7 +72,7 @@ Two routing principles:
 
 ## The disposition-audit protocol
 
-The disposition history is the queue's immune record: what fired, and what a human actually
+The disposition history is the queue's immune record: what fired, and what a human
 did about it. The audit turns it into per-rule autoimmunity rates.
 
 1. **Choose the period.** Long enough for each significant rule to fire meaningfully
@@ -80,7 +80,7 @@ did about it. The audit turns it into per-rule autoimmunity rates.
 2. **Pull every firing with its disposition.** Normalize dispositions into a small closed
    set, e.g.: `acted` (something real was done), `benign-known` (recognized recurring
    non-issue), `benign-new` (investigated, nothing there), `duplicate`, `unread` (aged out
-   with no human touch). `unread` is a disposition — the most alarming one.
+   with no human touch). `unread` is a disposition, and the most alarming one.
 3. **Compute per rule:** firings; autoimmunity rate; flood contribution = that rule's
    non-actionable firings as a share of the queue's total non-actionable firings.
 
@@ -92,7 +92,7 @@ did about it. The audit turns it into per-rule autoimmunity rates.
    ```
 
    Report both. Folding `unread` into a single point estimate asserts that an alert nobody
-   opened was a false alarm — on the evidence that nobody looked. That bias is not random: it
+   opened was a false alarm, on the evidence that nobody looked. That bias is not random: it
    is largest exactly where alerts age out unopened, which is the most flooded queue in the
    system. Since a high rate is this skill's signal to widen a threshold or retire a rule, a
    point estimate hands the worst-drowned queue the strongest argument for switching detection
@@ -101,17 +101,17 @@ did about it. The audit turns it into per-rule autoimmunity rates.
    **The band's width is itself the finding.** Narrow (`unread` a few percent) → tune on the
    floor and move on. Wide (`unread` is a large share) → **you do not yet have a tuning
    dataset, you have a staffing and triage finding.** Take a random sample of the unread
-   firings — 30–50 is usually enough to tell a 10% actionable rate from a 60% one — adjudicate
+   firings (30–50 is usually enough to tell a 10% actionable rate from a 60% one), adjudicate
    them properly, and use the sampled rate to place the true value inside the band before any
    threshold moves. If nobody can be found to adjudicate the sample, that answer is the audit's
    headline result, not a reason to fall back on the ceiling.
 
    **Never widen a rule, raise its threshold, or retire it on the strength of `unread`
-   firings.** A rule may only be loosened on *confirmed* non-actionable evidence — the floor.
+   firings.** A rule may only be loosened on *confirmed* non-actionable evidence: the floor.
    `unread` justifies routing changes (batching, summarizing, lowering the rule's rank in the
    queue, giving it an owner), which reduce load without reducing coverage. Both ratios are undefined when
    their denominator is zero, and the zero cases carry the information: a rule with **no
-   firings this period** has no measurable rate — leave the cell blank rather than
+   firings this period** has no measurable rate: leave the cell blank rather than
    recording 0%, and put the rule on the silent list, because a detector that broke looks
    exactly like a detector whose risk went away, and only checking the rule still fires on
    a known-positive tells them apart. A queue with **no non-actionable firings at all**
@@ -120,19 +120,19 @@ did about it. The audit turns it into per-rule autoimmunity rates.
 4. **Rank by flood contribution** and take the top three rules as the working set.
 5. **For each, ask the default question:** who set this threshold or scope, for what
    population, and would anyone set it there today? Prefer recalibrating the default over
-   adding intelligence — the Boston Medical Center result (below) is the benchmark for how
+   adding intelligence; the Boston Medical Center result (below) is the benchmark for how
    much that one move can carry.
 6. **Record the audit** (date, period, rates, actions taken) so the next audit measures the
    change instead of re-arguing it.
 
 No disposition history exists in many teams. Then the audit's step 0 is instrumentation:
-one line per firing — rule, timestamp, disposition, initials. A week of honest lines beats
+one line per firing: rule, timestamp, disposition, initials. A week of honest lines beats
 a year of recollection.
 
 ## Worked example — a monitored operations inbox
 
-Domain-neutral on purpose: this is any shared inbox or monitoring queue — a firm's intake
-mailbox, an analyst's exception feed, a service's alert channel. **All numbers below are
+Domain-neutral on purpose: this is any shared inbox or monitoring queue, such as a firm's intake
+mailbox, an analyst's exception feed, or a service's alert channel. **All numbers below are
 illustrative**, not research findings.
 
 A team's queue received 1,240 firings last quarter across 11 rules. Dispositions split into
@@ -147,35 +147,35 @@ A team's queue received 1,240 firings last quarter across 11 rules. Dispositions
 | …7 more rules | 120 | 88 | 7 | 73–79% | 10% |
 | R9 "no response in 48h" | 90 | 31 | 0 | 34% | 4% |
 
-Read the bands before the ranking. R4, R2, R9 and the tail are narrow — their floors are
+Read the bands before the ranking. R4, R2, R9 and the tail are narrow, so their floors are
 real numbers to tune on. **R7 is the trap.** A single-number rate would put it at 96%, tied
 with R4, and make it look like the second-biggest noise source in the queue; in fact 141 of its 240
-firings were never opened by anyone, so all that is actually known is that its true rate lies
+firings were never opened by anyone, so all that is known is that its true rate lies
 somewhere between 38% and 96%. Ranked on *confirmed* noise it is not the second-biggest
-source — R2 is — and R7's real finding is that more than half its firings outran the humans.
+source (R2 is), and R7's real finding is that more than half its firings outran the humans.
 
 Actions, in method order:
-- **R4 — recalibrate the default.** The "approved list" was seeded once at go-live and
-  never maintained; 40 recurring legitimate senders were simply never added. Fixing the
+- **R4: recalibrate the default.** The "approved list" was seeded once at go-live and
+  never maintained; 40 recurring legitimate senders were never added. Fixing the
   list (the default) removes ~500 firings/quarter at the source. No new detector.
-- **R2 — split the rule and gate the page.** "Urgent" as a bare keyword is anomaly, not
+- **R2: split the rule and gate the page.** "Urgent" as a bare keyword is anomaly, not
   danger. The rule splits: keyword alone → queue; keyword + a named deadline or a named
   consequence in the message (a danger signal) → immediate attention.
-- **R7 — sample before you touch the threshold.** The tempting move is retirement; the band
+- **R7: sample before you touch the threshold.** The tempting move is retirement; the band
   forbids it, because retiring a rule on the strength of firings nobody read is exactly how
   a coverage gap gets created deliberately. Adjudicate a random 40 of the 141 unread, place
   the true rate inside the band, and *then* decide. What the unread count does justify
   immediately is a routing change that cuts load without cutting coverage: oversized
   attachments never needed action within a day, so demote them to a weekly digest (layer 1)
-  out of the live queue (layer 2) — reversible, and it costs no detection.
-- **R9 — leave it alone.** 34% autoimmunity at low volume with real catches is a healthy
+  out of the live queue (layer 2). It is reversible and costs no detection.
+- **R9: leave it alone.** 34% autoimmunity at low volume with real catches is a healthy
   adaptive-layer rule, and its band has zero width because every firing was dispositioned.
   Not every rule needs surgery; the audit also certifies health.
 
 Projected queue after the changes: roughly 500 live-queue firings/quarter (1,240 − ~500
 removed at R4's source − 240 demoted to R7's digest), with the page tier gated
 on danger signals. The team then sets tolerance-list expiries for R4's newly-approved
-senders, books the R7 sample, and schedules the next audit — the numbers above are the
+senders, books the R7 sample, and schedules the next audit; the numbers above are the
 baseline it will be measured against. Note what the band bought: a single-number rate would
 have retired R7 as a 96%-autoimmune rule, and nobody would have learned whether those 141
 firings mattered.
@@ -200,8 +200,8 @@ Renewal check:  <what re-validation looks at — has the pattern's population ch
 
 Suppress at the source. A muted notification still burns queue attention downstream and
 still trains operators that firings are ignorable; a retuned rule stops the cost where it
-starts. Boston Medical Center's move was exactly this — changing default alarm *limits*,
-not silencing speakers — and it cut audible alarms **89% in the pilot (12,546 → 1,424 per
+starts. Boston Medical Center's move was exactly this: changing default alarm *limits*,
+not silencing speakers. It cut audible alarms **89% in the pilot (12,546 → 1,424 per
 day)** and 60% hospital-wide across 310 telemetry beds, **with no missed events reported**
 [snippet-only].
 
@@ -215,12 +215,12 @@ Designing the gate for a given system:
 1. **Enumerate the damage evidence available in context.** Examples across domains: a
    transaction that also breaches a hard limit; an anomaly plus an affected party's
    complaint; a failed check plus a production error rate moving; unusual access plus data
-   actually leaving; a missed deadline plus a contractual consequence attached.
+   leaving; a missed deadline plus a contractual consequence attached.
 2. **Write the gate as anomaly AND danger.** The page condition is a conjunction. Anomaly
    alone routes to the queue with a deadline, not to a human's attention now.
 3. **Name the fallback.** Some real threats present no early damage signal; that is the
    immunodeficiency risk of the gate. Cover it with the queue's service level (everything
-   gets dispositioned within N days) rather than by weakening the gate — the gate protects
+   gets dispositioned within N days) rather than by weakening the gate: the gate protects
    the page tier, the service level protects coverage.
 4. **Audit the gate with the same disposition data:** pages that needed no action (gate
    too loose) and incidents that sat in the queue while damage accrued (gate too tight, or
@@ -229,7 +229,7 @@ Designing the gate for a given system:
 ## Memory-cell harvesting from postmortems
 
 A memory cell is a permanent, cheap, specific detector minted from a true incident, so
-second exposure is detected fast and precisely — the postmortem → detection-rule lifecycle
+second exposure is detected fast and precisely: the postmortem → detection-rule lifecycle
 documented in SOC practice as detection-as-code [snippet-only].
 
 Add one step to whatever postmortem or after-action form the team already uses:
@@ -246,20 +246,20 @@ Owner + review: <role; memory cells enter the same disposition audit as every ru
 ```
 
 Two disciplines keep the memory pool healthy. **Specificity:** a memory cell is narrow by
-design — generalizing it into a broad heuristic converts memory into autoimmunity; if the
+design: generalizing it into a broad heuristic converts memory into autoimmunity; if the
 incident suggests a broad detector, that is a new layer-1/2 rule proposal with its own
 replay, not a memory cell. **Same audit as everything else:** memory cells rot as systems
 change; the disposition audit retires the dead ones.
 
 ## Threshold-change simulation
 
-Never change a live threshold on argument alone — replay it. Vaccination, not first
+Never change a live threshold on argument alone; replay it. Vaccination, not first
 infection: the system meets the change on historical data before it meets production.
 
 1. **Fix the replay set:** the last audit period's raw events, plus every known-true
    incident in reach (however old) as the must-catch list.
 2. **Run old and new rule over the same set.** Produce the delta: firings gained, firings
-   lost, and — decisive — must-catch incidents still caught.
+   lost, and, decisively, must-catch incidents still caught.
 3. **Read the delta against the axis.** Firings lost are almost all non-actionable (their
    dispositions are on record) → autoimmunity reduced at near-zero coverage cost. Any
    must-catch incident lost → the change buys quiet with immunodeficiency; redesign (often:
@@ -267,19 +267,19 @@ infection: the system meets the change on historical data before it meets produc
 4. **Stage the rollout** where volume allows: shadow-fire the new threshold (log, don't
    notify) alongside the old for one cycle, then switch.
 5. **Log the change** with its replay results, so the next audit can score the prediction
-   against what actually happened.
+   against what happened.
 
 ## The fuel load
 
 Fire ecology's suppression bias applies here: suppressing all small
 fires removes mild burning, accumulates fuel, and concentrates burning into extreme
-conditions — the suppressed fires are not prevented, they are banked (Nature
+conditions: the suppressed fires are not prevented, they are banked (Nature
 Communications, 2024) [snippet-only].
 
 A tuned detection system runs the same budget. Every auto-suppressed exception, every
 tolerance entry, every demoted rule is fuel: risk deliberately accepted and stored rather
-than burned off. That is not an argument against tolerance — an untuned queue kills
-attention today — it is the reason tolerance carries evidence counts and expiry dates.
+than burned off. That is not an argument against tolerance (an untuned queue kills
+attention today); it is the reason tolerance carries evidence counts and expiry dates.
 Tolerance induction **without periodic re-validation** is how small fires convert into the
 big one: the pattern's population drifts, the entry stays, and years later the "known
 benign" channel is exactly where the real thing walks in.
@@ -287,7 +287,7 @@ benign" channel is exactly where the real thing walks in.
 The prescribed burns, named in the method: expiry dates that force re-validation (tolerance
 template), the recurring disposition audit that re-reads what suppression is hiding, and
 replay logs that keep every acceptance visible instead of ambient. SRE error budgets are
-the same discipline at practice level — a stated allowance of failure deliberately spent so
+the same discipline at practice level: a stated allowance of failure deliberately spent so
 risk surfaces continuously instead of accumulating [snippet-only]; a tolerance list with
 expiries is a detection system's error budget, written down. (For error budgets in software
 delivery itself, the library's home is
@@ -299,16 +299,16 @@ All marks [snippet-only]: claims cross-checked across independent WebSearch resu
 verified by direct fetch. Per the library's research dossier
 (docs/research/epic-wave-held-research.md, Lane 3, entry 1):
 
-- Joint Commission Sentinel Event Alert 50 (April 2013) — alarm-related adverse events and
+- Joint Commission Sentinel Event Alert 50 (April 2013): alarm-related adverse events and
   the 85–99% non-actionable figure (via KFF Health News; HCPLive) [snippet-only]
-- Boston Medical Center default-recalibration results — 89% pilot reduction, 60%
+- Boston Medical Center default-recalibration results: 89% pilot reduction, 60%
   hospital-wide, 310 telemetry beds, no missed events reported (via ECRI) [snippet-only]
-- SOC alert-fatigue figures — ACM Computing Surveys (2025); CyberDefenders [snippet-only]
-- AML false-positive benchmark, PwC-attributed — via Facctum; Unit21 [snippet-only]
-- AIS literature — AIS survey (arXiv 1006.4949); negative-selection survey (Science
+- SOC alert-fatigue figures: ACM Computing Surveys (2025); CyberDefenders [snippet-only]
+- AML false-positive benchmark, PwC-attributed: via Facctum; Unit21 [snippet-only]
+- AIS literature: AIS survey (arXiv 1006.4949); negative-selection survey (Science
   Direct); Stibor et al., GECCO 2005 (ACM) [snippet-only]
-- Danger theory — Matzinger's danger model; the dendritic-cell algorithm introduced by
+- Danger theory: Matzinger's danger model; the dendritic-cell algorithm introduced by
   Greensmith, Aickelin & Cayzer at ICARIS 2005 [snippet-only]
-- Detection-as-code / postmortem-to-rule lifecycle — Splunk [snippet-only]
-- Suppression bias — Nature Communications (2024) [snippet-only]
-- Error budgets — Google SRE book, "Embracing Risk" [snippet-only]
+- Detection-as-code / postmortem-to-rule lifecycle: Splunk [snippet-only]
+- Suppression bias: Nature Communications (2024) [snippet-only]
+- Error budgets: Google SRE book, "Embracing Risk" [snippet-only]

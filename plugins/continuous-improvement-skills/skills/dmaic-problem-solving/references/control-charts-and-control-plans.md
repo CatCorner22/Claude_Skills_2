@@ -3,7 +3,7 @@
 The Control phase's machinery: which chart, what its limits are, when the chart stops being able
 to tell you anything, which signal rules to arm and what they cost, and what a control plan
 contains such that the gain survives the project team's departure. The charts are also what the
-Measure phase uses to establish stability and what Improve uses to prove a shift is real — so read
+Measure phase uses to establish stability and what Improve uses to prove a shift is real, so read
 this before the baseline, not after the rollout.
 
 ## Contents
@@ -22,12 +22,12 @@ Every measurement varies. A control chart exists to answer one question: **is th
 process being itself, or is something new acting on it?** Deming named the two ways of getting
 that wrong, and both are expensive:
 
-- **Mistake 1 — reacting to noise as if it were signal (tampering).** Adjusting a stable process
+- **Mistake 1: reacting to noise as if it were signal (tampering).** Adjusting a stable process
   in response to an ordinary point makes its variation *worse*, not better, because the adjustment
   is uncorrelated with the deviation and adds its own. In the worked project, week 19's 9.0%
   reopen rate sat well inside a 4.89–10.55% band; a "root-cause review" of week 19 would have
   produced a plausible story, a process change, and more variation.
-- **Mistake 2 — dismissing a signal as noise.** The complement, and the one that turns an
+- **Mistake 2: dismissing a signal as noise.** The complement, and the one that turns an
   early-warning system into an ornament: a genuine new failure mode explained away as a blip
   because someone can always name a reason a week was unusual.
 
@@ -59,7 +59,7 @@ chart that signals constantly.
 **Rational subgrouping is the decision that matters more than the formula.** Group so that within
 a subgroup only common-cause variation can act, and the thing you want to detect acts *between*
 subgroups. Weekly subgroups on a desk with a strong day-of-week pattern bury that pattern inside
-the subgroup — which is correct if you want to detect week-to-week shifts, and wrong if the
+the subgroup, which is correct if you want to detect week-to-week shifts, and wrong if the
 day-of-week pattern is the problem. Pick the subgroup to match the shift you need to catch.
 
 ## §3 The limit formulas you will actually use
@@ -67,7 +67,7 @@ day-of-week pattern is the problem. Pick the subgroup to match the shift you nee
 All are centerline ± 3 standard deviations of the *plotted statistic*.
 
 - **p-chart:** centerline p̄ = (total defectives) / (total units).
-  σ_i = √(p̄(1 − p̄) / n_i); limits = p̄ ± 3σ_i. **Limits vary with n_i** — a week with half the
+  σ_i = √(p̄(1 − p̄) / n_i); limits = p̄ ± 3σ_i. **Limits vary with n_i**: a week with half the
   volume gets wider limits, and drawing one flat pair of limits over a varying denominator is the
   most common p-chart error.
 - **np-chart** (constant n): centerline n·p̄; limits = n·p̄ ± 3√(n·p̄(1 − p̄)).
@@ -88,8 +88,8 @@ All are centerline ± 3 standard deviations of the *plotted statistic*.
 
 Note what the constants encode: **σ is estimated from *within*-subgroup spread** (R̄/d₂), never
 from the standard deviation of all the data pooled together. Pooling folds any between-subgroup
-shift into σ, which widens the limits by exactly the amount of the thing you are trying to detect
-— the chart then declares a drifting process to be in control. If your limits look suspiciously
+shift into σ, which widens the limits by exactly the amount of the thing you are trying to detect:
+the chart then declares a drifting process to be in control. If your limits look suspiciously
 generous, check whether someone computed σ with a spreadsheet's STDEV over the whole column.
 
 ## §4 When the chart cannot work (failure envelope)
@@ -98,30 +98,30 @@ Four conditions under which a control chart returns confident nonsense. Check al
 trusting limits.
 
 **1. The lower limit collapses to zero (rare events).** LCL = p̄ − 3√(p̄(1−p̄)/n) falls below zero
-exactly when n·p̄ < 9(1 − p̄) — for small p̄, roughly **when the expected defects per subgroup is
+exactly when n·p̄ < 9(1 − p̄), for small p̄, roughly **when the expected defects per subgroup is
 under 9**. The chart then has no lower limit at all: it can detect deterioration and can *never*
 confirm an improvement from a single point. What you see: a chart with a floor at zero, occasional
 spikes, and no way to answer "did it get better?" Fixes, in order of preference: enlarge the
 subgroup until n·p̄ ≥ 9 (aggregate to months rather than weeks); chart **time between events** on
-an I-MR chart instead of a rate, which is the right tool for genuinely rare defects; or accept
+an I-MR chart instead of a rate, which is the right tool for rare defects; or accept
 that you will need run rules and many periods. In the worked project n·p̄ = 800 × 0.095 = 76,
 comfortably clear.
 
 **2. Overdispersion (the limits are too tight).** p/np/c/u limits assume binomial or Poisson
-variation and nothing else. Real periods differ in ways the model does not know about — mix,
-staffing, seasonality — and the true period-to-period variation exceeds the theoretical. What you
+variation and nothing else. Real periods differ in ways the model does not know about (mix,
+staffing, seasonality) and the true period-to-period variation exceeds the theoretical. What you
 see: a chart where a third of the points are outside the limits and every investigation ends in
 "nothing special happened." Diagnostic: standardize each point, z_i = (p_i − p̄)/σ_i, take the mean
 moving range of the z series, and compute σ_z = MR̄_z / 1.128. If σ_z ≈ 1 the binomial model holds.
-Materially above 1 and the limits are too tight by that factor — multiply them by σ_z (this is the
+Materially above 1 and the limits are too tight by that factor: multiply them by σ_z (this is the
 p′ chart, due to Laney) or chart the rate on an I-MR chart, which estimates variation empirically
 and sidesteps the assumption entirely. Around 1.2 is the usual "borderline, proceed with a note";
-by 1.4 switch. **Both thresholds assume the subgroup count item 3 asks for**, because σ_z is
-itself an estimate — built from k − 1 moving ranges — and at small k its own spread swallows
+by 1.4 switch. **Both thresholds assume the subgroup count condition 3 below asks for**, because σ_z is
+itself an estimate, built from k − 1 moving ranges, and at small k its own spread swallows
 them. Simulate a perfectly binomial p-chart (n = 800, p̄ = 0.095) and σ_z lands at or above 1.2
 on **22%** of runs at 12 subgroups, 14% at 25, and 7% at 50; at or above 1.4 on 8% of runs at 12
 subgroups and 2% at 25. So a single σ_z past 1.2 off a dozen periods is not evidence of
-overdispersion — it is what this statistic returns on clean data about one time in five. Below
+overdispersion: it is what this statistic returns on clean data about one time in five. Below
 20–25 subgroups, record it and re-check; act on it only once the count supports it. The worked
 project's baseline returns σ_z ≈ 1.20 on 12 subgroups, which is squarely inside that noise: it
 is a flag to re-check as data accumulates, not a finding.
@@ -133,13 +133,13 @@ data, call the limits provisional, and recompute when you reach 25. What you see
 this: limits that move noticeably every time you add data, and early "signals" that vanish on
 recomputation.
 
-**4. Autocorrelation and slow processes.** If each point depends on the previous one — a backlog,
-a queue, an inventory level, anything with memory — successive points are not independent draws,
+**4. Autocorrelation and slow processes.** If each point depends on the previous one (a backlog,
+a queue, an inventory level, anything with memory) successive points are not independent draws,
 run rules fire constantly, and the 3σ limits are wrong. What you see: long smooth excursions that
 trip the 8-points rule with no assignable cause. Chart the *differences*, or model the
 autocorrelation, or chart a different statistic. Separately, if the process produces one number
-per quarter, 25 subgroups is six years: SPC is simply unavailable on that timescale and you are
-back to a before/after comparison with all of its confounding — say so rather than drawing limits
+per quarter, 25 subgroups is six years: SPC is unavailable on that timescale and you are
+back to a before/after comparison with all of its confounding: say so rather than drawing limits
 from five points.
 
 ## §5 Signal rules and what each one costs
@@ -156,31 +156,31 @@ is not intuitive.
 
 **The two columns are reciprocals only in the first row.** A 3σ signal is an independent event
 point to point, so 1/0.0027 = 370 is both the firing probability's inverse and the average run
-length. The run rules re-fire while the run continues — once eight points sit on one side, the
-ninth on that side signals again — so their per-point firing probability counts alarm *states*,
-not investigations, and inverting it overstates how often you are actually sent to look
+length. The run rules re-fire while the run continues (once eight points sit on one side, the
+ninth on that side signals again) so their per-point firing probability counts alarm *states*,
+not investigations, and inverting it overstates how often you are sent to look
 (1/0.0078 = 128 against a true ARL₀ of 255; 1/0.0031 = 327 against 511). Budget against the ARL₀
 column, which comes from the run-length distribution.
 
-**The number nobody computes — and do not compute it by adding the probability column.** Summing
+**The number nobody computes, and do not compute it by adding the probability column.** Summing
 the four rates (0.0027 + 0.0078 + 0.0031 + 0.0055 ≈ 0.019, "one alarm every 52 points") is
 wrong, because the rules overlap heavily: a point beyond 3σ is also beyond 2σ and beyond 1σ and
 sits on one side of the centerline, so it can satisfy several rules at once, and the run rules
 share the same points as they slide. Union ≠ sum. The correct figure comes from the run-length distribution:
-**ARL₀ ≈ 92 points with all four armed** — a false-alarm rate of about **0.011 per point**, not
+**ARL₀ ≈ 92 points with all four armed**: a false-alarm rate of about **0.011 per point**, not
 0.019. (Verified two independent ways: a Markov chain over the rule state space, and a 40,000-run
-Monte Carlo giving 91.6 ± 0.4. The same machinery reproduces the two known closed forms — 370.4
-for the 3σ rule alone and 255 for the 8-in-a-row rule alone — so it is calibrated.)
+Monte Carlo giving 91.6 ± 0.4. The same machinery reproduces the two known closed forms (370.4
+for the 3σ rule alone and 255 for the 8-in-a-row rule alone) so it is calibrated.)
 
 Read that as: on a weekly chart, a spurious investigation roughly every other year. On a daily
-chart, one every three months. On an hourly chart, about two a week — which is still how a
+chart, one every three months. On an hourly chart, about two a week, which is still how a
 control chart trains its owner to ignore it. Match the rule set to the plotting frequency and to
 how expensive an investigation is: high-frequency charts with cheap consequences get the 3σ rule
 only. The general lesson outlives these four rules: **whenever you arm several detectors on one
 stream, the combined false-alarm rate must be derived from the run-length distribution, never by
-adding the individual rates** — adding overstates it whenever the detectors can fire together.
+adding the individual rates**: adding overstates it whenever the detectors can fire together.
 
-The 3σ limit rule alone detects large shifts immediately and moderate shifts almost never — the
+The 3σ limit rule alone detects large shifts immediately and moderate shifts almost never: the
 worked project's 1.7σ improvement produced eight consecutive weeks below the old centerline and
 **not one point outside the old limits**. If the shift you care about is smaller than about 2σ of
 the plotted statistic, the run rules are not optional decoration; they are the detection.
@@ -205,24 +205,24 @@ rather than letting them absorb the pilot's own effect.
 A control plan is not a paragraph promising to keep an eye on things. One row per controlled
 characteristic, each row carrying all eleven fields:
 
-1. **Characteristic** — what is controlled, in CTQ terms.
-2. **Operational definition** — version-stamped, with inclusions and exclusions, identical to the
+1. **Characteristic**: what is controlled, in CTQ terms.
+2. **Operational definition**: version-stamped, with inclusions and exclusions, identical to the
    one frozen at the Measure tollgate.
-3. **Data source and extraction** — the system, the query or report, and who runs it. A metric
+3. **Data source and extraction**: the system, the query or report, and who runs it. A metric
    whose extraction lives in one person's saved filter is already broken.
-4. **Chart type and subgroup rule** — including how varying subgroup size is handled.
-5. **Centerline and limits, with their provenance** — the value, the date computed, and the data
+4. **Chart type and subgroup rule**: including how varying subgroup size is handled.
+5. **Centerline and limits, with their provenance**: the value, the date computed, and the data
    range they came from.
-6. **Signal rules in force** — named explicitly, from §5, chosen for this plotting frequency.
-7. **Reaction plan** — written as if-then, with the *authority* attached: "if two consecutive
+6. **Signal rules in force**: named explicitly, from §5, chosen for this plotting frequency.
+7. **Reaction plan**: written as if-then, with the *authority* attached: "if two consecutive
    points exceed the UCL, the desk lead pauses cache-clear closures in the affected area and
-   raises a P2 to engineering — no further approval required." A reaction plan whose first step is
+   raises a P2 to engineering: no further approval required." A reaction plan whose first step is
    "escalate for a decision" is a delay, not a plan.
-8. **Escalation** — what happens, and who is told, if the reaction plan does not restore control
+8. **Escalation**: what happens, and who is told, if the reaction plan does not restore control
    within a stated period.
-9. **Owner** — one named individual, plus a named deputy. Not a team, not a role, not a dashboard.
-10. **Review cadence and evidence** — when they look, and where the record that they looked lives.
-11. **Recompute rule** — the §6 conditions and who approves a recompute.
+9. **Owner**: one named individual, plus a named deputy. Not a team, not a role, not a dashboard.
+10. **Review cadence and evidence**: when they look, and where the record that they looked lives.
+11. **Recompute rule**: the §6 conditions and who approves a recompute.
 
 Fields 5, 7 and 9 are the ones that decay first. A plan whose limits carry no provenance cannot be
 audited; a reaction plan without pre-granted authority converts a signal into a meeting; and an
@@ -242,24 +242,24 @@ which must carry a revision number so a later drift can be dated.)
 
 - *The dashboard owner.* The metric is on a dashboard nobody has an appointment with. Symptom: at
   the 90-day audit the chart is current and no one can say what it did last month. Fix: the review
-  is a calendar entry with a person's name, and it produces a written line each time — even "in
+  is a calendar entry with a person's name, and it produces a written line each time: even "in
   control, no action."
 - *The owner who cannot act.* The named owner watches a metric driven by a process they do not
   control. Symptom: signals are logged and escalated, and nothing changes. This is a Define-phase
-  failure surfacing late — the scope was drawn wider than the sponsor's authority. Fix: move
+  failure surfacing late: the scope was drawn wider than the sponsor's authority. Fix: move
   ownership to the authority, or narrow what is controlled.
 - *The departed owner.* The owner changes role and the plan does not. Symptom: an unopened chart
   and a metric that has drifted back to baseline. Fix: name a deputy in field 9 from the start, and
   make control-plan handover an explicit item in the role's transition.
 
 **The audit schedule.** Check at **30 days** that the chart is being produced and the reaction plan
-has been exercised at least once (deliberately, if no real signal has occurred — an untested
-reaction plan is scenery). At **60 days**, that the standard work matches what people actually do,
+has been exercised at least once (deliberately, if no real signal has occurred: an untested
+reaction plan is scenery). At **60 days**, that the standard work matches what people do,
 by watching rather than asking. At **90 days**, that the level has held and the limits still fit
 the data; this is the point where the project team formally stops owning it.
 
 **The revert signature.** Gains almost never collapse; they erode. What you see is a slow return
 toward the old centerline over one to two quarters, usually beginning with an exception granted
 for a busy period that is never withdrawn. Watch for the 8-points-on-one-side rule firing on the
-*wrong* side — that is the erosion announcing itself, and it is the single most useful thing a
+*wrong* side: that is the erosion announcing itself, and it is the single most useful thing a
 control chart does after the project ends.

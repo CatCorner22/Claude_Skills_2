@@ -19,17 +19,17 @@ evidence.
 Strongest to weakest, for questions about whether something *causes* or *treats* something:
 
 1. **Systematic review / meta-analysis** of well-conducted randomized trials
-2. **Randomized controlled trial (RCT)** — large, well-designed, pre-registered
-3. **Prospective cohort study** — follows people forward over time
-4. **Case-control study** — works backward from outcome to exposure
-5. **Cross-sectional study** — a snapshot; shows association, cannot establish sequence
-6. **Case series / case report** — documents that something happened, in a few people
-7. **Mechanistic, in-vitro, or animal study** — shows a pathway is possible in a model
-8. **Expert opinion, narrative review, editorial** — useful orientation, not evidence of effect
+2. **Randomized controlled trial (RCT)**: large, well-designed, pre-registered
+3. **Prospective cohort study**: follows people forward over time
+4. **Case-control study**: works backward from outcome to exposure
+5. **Cross-sectional study**: a snapshot; shows association, cannot establish sequence
+6. **Case series / case report**: documents that something happened, in a few people
+7. **Mechanistic, in-vitro, or animal study**: shows a pathway is possible in a model
+8. **Expert opinion, narrative review, editorial**: useful orientation, not evidence of effect
 
 The hierarchy is a default, not a law. A large, consistent cohort can outweigh a small, flawed RCT,
 and for questions about *harms* (rare adverse effects), observational data and case reports are often
-the only ethical evidence that exists — a well-documented case series of a drug reaction is
+the only ethical evidence that exists: a well-documented case series of a drug reaction is
 meaningful even though it sits low in the table.
 
 **The rule that matters most here:** a dot-connection resting on levels 6–7 is a **Lead**. It says
@@ -46,7 +46,7 @@ meaningful even though it sits low in the table.
 | Case report/series | That a phenomenon occurs | How often, or that it generalizes | Publication favors the dramatic |
 | Mechanistic/animal | Biological plausibility | That it happens in humans at real doses | Doses far above human exposure; species differences |
 
-**Association is not causation** — the standing caution. Strength, consistency across studies,
+**Association is not causation**: the standing caution. Strength, consistency across studies,
 dose–response, correct temporality, and biological plausibility all raise confidence; none alone
 establishes cause.
 
@@ -66,7 +66,7 @@ Downgrade for: inconsistency between studies, small samples/wide confidence inte
 observational evidence for: a very large effect, a clear dose–response relationship, or when
 plausible confounding would have *reduced* the observed effect.
 
-Report the grade next to the claim, not in a footnote — the reader needs to see the strength at the
+Report the grade next to the claim, not in a footnote: the reader needs to see the strength at the
 moment they read the assertion.
 
 ## Reading the statistics
@@ -82,7 +82,7 @@ Enough numeracy to avoid the standard traps:
 - **p-values.** p < 0.05 means "unlikely under the null," not "important" or "true." It says nothing
   about effect size, and it is heavily gamed.
 - **Effect size and NNT.** Statistically significant ≠ clinically meaningful. Number needed to treat
-  translates an effect into human terms — but **an NNT is meaningless as a bare number**, and a
+  translates an effect into human terms, but **an NNT is meaningless as a bare number**, and a
   bright line like "8 is strong, 400 is not" is the wrong instrument. Three things have to travel
   with it before it means anything:
   - **Which outcome.** NNT 400 to prevent a stroke or a death is not the same claim as NNT 400 to
@@ -90,7 +90,7 @@ Enough numeracy to avoid the standard traps:
   - **Over what horizon.** NNT is a rate over a period. NNT 300 over five years is roughly NNT 60
     per year of treatment; quoting the five-year figure against a one-year comparator makes a good
     treatment look useless.
-  - **Against which harms** — the number needed to *harm* for the same population and horizon, and
+  - **Against which harms**: the number needed to *harm* for the same population and horizon, and
     the cost and burden of treating. NNT 300 over five years against death can be an excellent
     trade; NNT 8 for a transient symptom, with a serious adverse-effect profile, can be a poor one.
 
@@ -123,7 +123,7 @@ Predatory journals publish for a fee with little or no peer review, and they are
 search tools. Signals to check before trusting a source found only in a general web search:
 
 - Is the journal **selected for MEDLINE**, or listed in the **DOAJ**? Absence is a caution flag.
-  MEDLINE selection is a real quality screen — a committee reviews the journal against
+  MEDLINE selection is a real quality screen: a committee reviews the journal against
   published criteria. Being *in PubMed* is not the same thing: PubMed also carries whatever a
   PMC-depositing journal sends, which is how predatory content reaches it. Check the journal in
   the NLM Catalog and look for "Currently indexed for MEDLINE", rather than reading a PubMed
@@ -134,7 +134,7 @@ search tools. Signals to check before trusting a source found only in a general 
 - Does the journal name closely mimic a well-known title?
 
 A finding published only in a questionable venue is not evidence; treat it as an unverified lead and
-say so. Preprints are a different category: legitimate but **not yet peer-reviewed** — label them as
+say so. Preprints are a different category: legitimate but **not yet peer-reviewed**; label them as
 preprints explicitly and check whether a peer-reviewed version has since appeared.
 
 ## Retraction and correction checking
@@ -148,10 +148,10 @@ databases for the DOI/PMID. `scripts/verify_citation.py` does the machine-checka
 every lookup: it reads PubMed's publication types, the Crossref `updated-by` annotations (Crossref
 carries the Retraction Watch database, refreshed on working days, so a DOI check sees a retraction
 even though the retracted record keeps its original title), and any retraction marker anchored at the
-start of the title. A clean result is still only as current as those records — a notice issued this
+start of the title. A clean result is still only as current as those records: a notice issued this
 week may not have propagated, so check the publisher page for anything load-bearing.
 
-Also check for **corrections/errata** — a paper can stand while a key number in it does not; the
+Also check for **corrections/errata**: a paper can stand while a key number in it does not; the
 script reports these separately, as a note rather than a failure. If a retracted paper is nonetheless
 historically important to the story, you may mention it *labeled as retracted*, never as support for
 a claim.
@@ -159,7 +159,7 @@ a claim.
 ## Conflicts of interest and funding
 
 Look at who funded the study and what the authors disclose. Industry funding does not invalidate a
-study — much good research is industry-funded — but it is associated with more favorable results, so
+study (much good research is industry-funded), but it is associated with more favorable results, so
 it is context the reader deserves. Note it when the funder has a direct stake in the outcome, and
 give more weight to independently funded replications. The same goes for author conflicts on
 guideline documents and reviews.
@@ -168,14 +168,14 @@ guideline documents and reviews.
 
 Individual studies matter less than the pattern across them:
 
-1. **Consistency** — do independent groups, in different populations, find the same thing?
-2. **Totality** — is the claim supported by the whole literature, or by the two studies that agree
+1. **Consistency**: do independent groups, in different populations, find the same thing?
+2. **Totality**: is the claim supported by the whole literature, or by the two studies that agree
    with it? Actively look for the studies that disagree.
-3. **Recency and supersession** — has a later, larger study overturned an older one? Forward citation
+3. **Recency and supersession**: has a later, larger study overturned an older one? Forward citation
    chaining is how you find out.
-4. **Directness** — was the studied population, dose, and outcome actually the one in question?
-5. **Coherence** — does the claim fit with what else is known physiologically?
+4. **Directness**: was the studied population, dose, and outcome actually the one in question?
+5. **Coherence**: does the claim fit with what else is known physiologically?
 
-When the evidence genuinely conflicts, say so and characterize the disagreement, rather than picking
+When the evidence conflicts, say so and characterize the disagreement, rather than picking
 the side that fits the hypothesis. "Two large cohorts found X; a 2019 RCT did not replicate it" is a
 more useful sentence than a confident conclusion in either direction.

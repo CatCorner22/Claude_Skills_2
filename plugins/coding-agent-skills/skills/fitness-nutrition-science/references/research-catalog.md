@@ -1,7 +1,7 @@
-# Research Catalog — Fitness & Nutrition Science
+# Research Catalog: Fitness & Nutrition Science
 
 Organized by topic with study citations, sample sizes, effect sizes, and real-world
-generalizability notes. Every finding referenced in the skill has an entry here.
+generalizability notes. The principal findings referenced in the skill have entries here.
 
 ## Fat Loss Protocols
 
@@ -221,7 +221,7 @@ Medicine*, 50(5), 899–915.
 
 ## Cross-References
 
-All core findings referenced in `SKILL.md` have entries above. For intervention comparisons
+The principal findings referenced in `SKILL.md` have entries above. For intervention comparisons
 (e.g., "Is HIIT better than steady-state?"), see the mechanism-first framing in
-`SKILL.md` §Cardiovascular fitness — both work; time cost and individual preference
+`SKILL.md` §Cardiovascular fitness: both work; time cost and individual preference
 are the deciding factors.

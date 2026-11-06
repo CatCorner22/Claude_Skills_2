@@ -1,7 +1,7 @@
 # Your tabletop environment (sanitized template)
 
 Fill this in with your real setup. Anything naming real accounts, counterparties, people,
-or live controls belongs in `your-environment.private.md` — that suffix is git-ignored.
+or live controls belongs in `your-environment.private.md`, that suffix is git-ignored.
 An exercise file that leaks real controls is itself an incident; commit structure only.
 
 - **Scenario priorities:** <which of the three starters (impersonated urgent instruction,

@@ -7,7 +7,7 @@ Tailoring hook. Fill this in so the skill fits how you actually research. Everyt
 
 **No personal health information in this file.** It is committed to git.
 
-- Personal health details — yours or anyone else's — go in `your-environment.private.md`, which is
+- Personal health details (yours or anyone else's) go in `your-environment.private.md`, which is
   git-ignored (matches the repo's `*.private.md` pattern). That file never gets committed, and its
   contents never appear in a shareable artifact.
 - When researching a real person's case, work from **de-identified** facts: ages as ranges ("50s"),
@@ -30,13 +30,13 @@ Record any changes here:
 ## Databases and access
 
 - Preferred databases: _(default: PubMed, Europe PMC, Cochrane, Google Scholar, ClinicalTrials.gov)_
-- Institutional or library full-text access: _(e.g. university library, public library card — this
+- Institutional or library full-text access: _(e.g. university library, public library card: this
   determines how much of the claim-support check can be done against full text rather than abstracts)_
 - Any database you want excluded: _(none by default)_
 
 ## Output preferences
 
-- Reading level: _(default: plain language on top, technical grading beneath — the two-layer format)_
+- Reading level: _(default: plain language on top, technical grading beneath: the two-layer format)_
 - Typical length: _(default: match the case; Bottom line always short)_
 - Always include the search log? _(default: yes)_
 - Preferred citation style: _(default: author, title, journal, year, DOI/PMID, with verification tag)_

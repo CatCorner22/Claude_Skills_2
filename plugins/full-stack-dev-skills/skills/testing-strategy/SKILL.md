@@ -12,7 +12,7 @@ description: >-
   not, brittle tests, flaky test, test isolation, slow test suite, playwright e2e, test coverage
   target, regression test, test pyramid, integration vs unit, testcontainers.
 metadata:
-  version: "1.3.1"
+  version: "1.3.2"
 ---
 
 # Testing strategy: minimal and effective
@@ -35,8 +35,8 @@ metadata:
 ## Do it
 1. **Aim the suite at one question: "does the app still do what users need?"** Rank test
    value = (probability the code breaks) × (cost when it does) ÷ (cost of the test). Most of
-   that value concentrates in a mid-sized band of **API-boundary tests** — real HTTP against
-   your FastAPI app with a real test database — because they exercise routing, validation,
+   that value concentrates in a mid-sized band of **API-boundary tests**: real HTTP against
+   your FastAPI app with a real test database, because they exercise routing, validation,
    auth, logic, and SQL in one shot and survive refactors.
 
 ```python
@@ -53,11 +53,11 @@ def test_rejects_negative_amount(client):
 
 2. **Build the fixture spine once, then prove it.** In `conftest.py`: an app client
    (`TestClient`), a fresh-schema test DB per session, per-test transaction rollback for
-   isolation, and small factory helpers for common rows. Real database, not mocked sessions —
+   isolation, and small factory helpers for common rows. Real database, not mocked sessions.
    the SQL is exactly what you need tested. **The isolation fixture is the one fixture that
    fails silently.** Whether the outer transaction survives the endpoint's own `commit()` (and
    any POST commits) depends on your SQLAlchemy version, the `join_transaction_mode` you probably
-   didn't pass, and whether your driver's savepoints actually work — and when it goes wrong the
+   didn't pass, and whether your driver's savepoints work, and when it goes wrong the
    symptom is not an error. It is a suite that passes in order and fails when someone reorders,
    parallelises, or runs one test alone. Make the promise falsifiable with a two-test canary,
    which is cheaper than the afternoon it replaces:
@@ -75,22 +75,22 @@ def test_canary_2_sees_a_clean_db(db):          # must be 0, not 1
 3. **Choose the test engine deliberately, per test.** SQLite is a fine stand-in for tests that
    only touch your own logic, and the wrong tool for anything the *database* decides. It ignores
    foreign keys unless `PRAGMA foreign_keys=ON` is set on every connection, has no decimal type,
-   doesn't enforce `NUMERIC` scale or `VARCHAR` length, and differs on `LIKE` case sensitivity —
+   doesn't enforce `NUMERIC` scale or `VARCHAR` length, and differs on `LIKE` case sensitivity,
    so an FK/constraint test on default SQLite can pass by never testing anything, or fail on a
    dialect difference that production doesn't have. Constraint, migration, and SQL-dialect tests
    belong on the engine you deploy: a Postgres service container in CI, or testcontainers
    locally. Keep it one flag (`TEST_DATABASE_URL`) so the same suite runs both ways, and run the
    full suite against the production engine at least in CI (see
    `full-stack-dev-skills:database-and-orm` for what SQLite silently changes).
-4. **Unit-test the genuinely tricky pure logic** — pricing math, date arithmetic, parsers:
+4. **Unit-test the tricky pure logic** (pricing math, date arithmetic, parsers):
    plain functions, plain asserts, no mocks. If a "unit" test needs three mocks to run,
    the logic is welded to I/O. Extract the pure part
    (`full-stack-dev-skills:lean-code-principles`) instead of mocking around it.
 5. **Keep end-to-end tests few and critical.** A handful of Playwright flows for the paths
-   that must never break (log in, create the core object, complete the core action —
+   that must never break (log in, create the core object, complete the core action,
    the "money paths"). E2E tests are slow and flaky-prone, so each must earn its place by
    guarding a flow whose breakage is an incident.
-6. **Mock only at true external boundaries** — third-party APIs, clocks, randomness, email.
+6. **Mock only at true external boundaries**: third-party APIs, clocks, randomness, email.
    Use `respx`/`responses` for HTTP, inject the clock. Never mock your own database, your
    own services, or the framework: every internal mock is a place the test agrees with the
    code instead of checking it.
@@ -113,12 +113,12 @@ suite-runtime budget.
 A test suite is a tripwire system, and tripwires have two failure modes: not firing when a
 burglar walks through (missed regressions) and firing every time the wind blows (brittle
 tests that fail on refactors). The API boundary is the sweet spot because it's the
-*contract* — tests written against it fire when behavior changes (what users experience)
+*contract*: tests written against it fire when behavior changes (what users experience)
 and stay silent when implementation changes (what refactoring touches). Mock-heavy unit
 suites invert this: they pin implementation details, so they fail on every refactor and
 pass even when the integrated behavior is broken. They are negative
 signal that trains people to ignore red. The mock-at-external-boundaries rule follows from
-asking "what am I actually asserting?": mocking *your own* code asserts that the code calls
+asking "what am I asserting?": mocking *your own* code asserts that the code calls
 itself the way it calls itself; mocking the *outside world* removes nondeterminism you
 don't control. The bug-becomes-test rule is empirical Bayesianism (past breakage is the
 best predictor of future breakage), and the what-not-to-test list is the lean-code
@@ -127,7 +127,7 @@ regressions, and a test that can't fail meaningfully is pure carrying cost.
 
 The tripwire metaphor hides a third failure mode, which lives in the fixtures rather
 than the tests: **the harness that quietly isn't doing its job**. A rollback that doesn't roll
-back, or a test engine that drops the constraint under test, produces green — the one colour
+back, or a test engine that drops the constraint under test, produces green, the one colour
 nobody investigates. Test code gets no tests of its own, so the only defence is to make each
 harness promise falsifiable by something cheap: a canary test for isolation, one deliberate
 constraint violation for the engine. Prove the instrument, then trust the measurements.
@@ -153,10 +153,10 @@ enforce.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/testing-strategy.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/testing-strategy.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/testing-recipes.md — conftest spine (with the isolation canary), engine choice, factories, Playwright skeleton, level-decision table
-- references/your-environment.md — your fixtures, money paths, budgets (fill in)
+- references/testing-recipes.md: conftest spine (with the isolation canary), engine choice, factories, Playwright skeleton, level-decision table
+- references/your-environment.md: your fixtures, money paths, budgets (fill in)

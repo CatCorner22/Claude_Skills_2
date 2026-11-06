@@ -1,6 +1,6 @@
 # Your memory environment (sanitized template)
 
-Wire in your current role here — the memory method is role-portable (analyst, attorney,
+Wire in your current role here. The memory method is role-portable (analyst, attorney,
 ops manager, developer); this file is what re-points it when you change jobs. Keep anything
 sensitive in `your-environment.private.md` (git-ignored).
 

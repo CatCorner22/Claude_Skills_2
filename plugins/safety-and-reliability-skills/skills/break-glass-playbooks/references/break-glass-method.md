@@ -1,12 +1,12 @@
 # The break-glass method: tripwires, sealed instructions, drills, re-arm
 
-Method lineage: break-glass emergency-access procedures in healthcare compliance —
-documented, pre-staged, logged, and tested emergency accounts (Yale's HIPAA break-glass
+Method lineage: break-glass emergency-access procedures in healthcare compliance
+(documented, pre-staged, logged, and tested emergency accounts; Yale's HIPAA break-glass
 procedure) [gov/compliance], with testing requirements mapped to NIST SP 800-53 and CIS
 controls [framework]; and regulator-mandated contingency funding plans built from
 early-warning indicators, graduated stress triggers, and pre-approved action menus
-[regulatory]. The anatomy — indicator → graduated trigger → pre-authored actions →
-logged, expiring authority → scheduled testing — is domain-neutral. Source links at the
+[regulatory]. The anatomy (indicator → graduated trigger → pre-authored actions →
+logged, expiring authority → scheduled testing) is domain-neutral. Source links at the
 end of this file.
 
 ## Contents
@@ -22,19 +22,19 @@ end of this file.
 
 A tripwire passes only if all five hold:
 
-1. **Measurable** — a number or an unambiguous binary event, never a mood. "Queue age
+1. **Measurable**: a number or an unambiguous binary event, never a mood. "Queue age
    over 48 hours" passes; "the queue feels out of control" fails.
-2. **Watched** — a named watcher, by role, whose routine actually includes looking.
+2. **Watched**: a named watcher, by role, whose routine actually includes looking.
    If watching is nobody's job, the tripwire does not exist.
-3. **Cadenced** — the watch frequency is stated and is faster than the crisis develops.
+3. **Cadenced**: the watch frequency is stated and is faster than the crisis develops.
    A weekly glance cannot catch a four-hour failure.
-4. **Thresholded** — the firing value is written down in advance, so two people would
+4. **Thresholded**: the firing value is written down in advance, so two people would
    agree it tripped without a meeting.
-5. **Located** — the number lives in a stated place the watcher can reach; a metric
+5. **Located**: the number lives in a stated place the watcher can reach; a metric
    that requires an engineer to compute is not watched, it is commissioned.
 
 **Graduation** (from contingency-plan practice [regulatory]): where the crisis develops
-in stages, set two levels — an *early-warning* level that alerts the watcher and the
+in stages, set two levels: an *early-warning* level that alerts the watcher and the
 chair, and a *firing* level that unseals the playbook. The alert level buys preparation
 time; the firing level removes the "is this really it?" debate.
 
@@ -67,12 +67,12 @@ FIRST TEN MOVES (read-do; a cold reader under stress is the audience)
 
 Rules for the moves:
 
-- **Read-do form** — each step read aloud, done, confirmed, in order; the form and its
+- **Read-do form**: each step read aloud, done, confirmed, in order; the form and its
   killer-item discipline come from checklist canon (the checklist-design skill, since archived).
 - **Ten moves buys the first hour.** The playbook is not a script for the whole
   crisis; it is the bridge from alarm to functioning command.
 - **Each move names its actor** (role) and its "done" condition.
-- **No move may depend on calm-time resources** — the authoring system, the author's
+- **No move may depend on calm-time resources**: the authoring system, the author's
   memory, a login nobody else holds.
 - **Write at drafting quality.** Full sentences, exact names of things, no "assess" or
   "communicate appropriately." The value banked is precisely the quality that will be
@@ -83,15 +83,15 @@ Rules for the moves:
 What the first ten moves need is granted in advance, break-glass style
 [gov/compliance]:
 
-- **Scope**: the minimum that moves 1–10 require — access, spend limit, the power to
-  halt a process or invoke a rollback path. Enumerate it; "whatever it takes" is not
+- **Scope**: the minimum that moves 1–10 require (access, spend limit, the power to
+  halt a process or invoke a rollback path). Enumerate it; "whatever it takes" is not
   a grant, it is an abdication.
 - **Sealed until fired**: usable only on a declared trip; the declaration itself is
   logged (who, when, which tripwire value).
-- **Fully logged in use**: every action under the grant leaves a record — that audit
+- **Fully logged in use**: every action under the grant leaves a record; that audit
   trail is what makes the pre-grant defensible.
 - **Automatic expiry**: the grant re-locks on a timer (hours to days, stated in the
-  header). Extending it is a chair decision, made on the record — never a default.
+  header). Extending it is a chair decision, made on the record, never a default.
 - **Re-verified at every drill**: expired credentials and moved systems are the most
   common drill findings.
 
@@ -105,7 +105,7 @@ Protocol, timed end to end:
 
 1. Inject a simulated tripwire reading to the watcher through the normal channel.
 2. Watcher recognizes the trip, declares it, and names the playbook's location cold.
-3. Reader — someone who did not write the playbook — retrieves it and walks the first
+3. Reader (someone who did not write the playbook) retrieves it and walks the first
    moves (execute harmless ones; state-changing ones are walked to the brink and
    confirmed executable).
 4. Authority is exercised far enough to prove it works: the access opens, the log
@@ -114,7 +114,7 @@ Protocol, timed end to end:
 6. Debrief in one page: what stalled, what was stale, what the cold reader could not
    parse.
 
-Drill log, one line per drill — kept with the playbook:
+Drill log, one line per drill, kept with the playbook:
 
 ```
 DATE | playbook | time-to-unseal | authority worked? (Y/N) | stale items found |
@@ -125,14 +125,14 @@ A playbook with an empty drill log is unarmed regardless of how good its prose i
 
 ## The re-arm / feedback loop
 
-After every real firing — and every drill that found anything:
+After every real firing, and every drill that found anything:
 
-1. Run the after-action ritual (four questions — intended, actual, why, change; the
-   after-action-review skill that owned the format is archived, restorable): what
+1. Run the after-action ritual (four questions: intended, actual, why, change; the
+   after-action-review skill that carries the format is archived): what
    was supposed to happen, what actually happened, why the difference.
 2. Update the moves where reality diverged; retire moves nobody used; add the move
    everyone improvised.
-3. Re-check the tripwire against how the crisis actually announced itself — thresholds
+3. Re-check the tripwire against how the crisis announced itself; thresholds
    are usually set too high the first time, cadences too slow.
 4. Reset the authority (close the grant, confirm re-lock, re-verify credentials).
 5. Bump the version, re-seal, and set the next drill date.
@@ -154,22 +154,22 @@ and now defends against the previous crisis.
 | Never re-armed | Fired once, never updated | Re-arm loop after every firing; version bump + new drill date |
 
 ## Sources
-From the library's research dossier (Lane 2); provenance marks as recorded there:
+Provenance marks follow each source:
 
 - Yale HIPAA break-glass procedure:
   [hipaa.yale.edu](https://hipaa.yale.edu/security/break-glass-procedure-granting-emergency-access-critical-ephi-systems)
   [gov/compliance]
-- Break-glass access under a control framework — pre-approval, documentation, logging,
-  and automatic expiry:
+- Break-glass access under a control framework (pre-approval, documentation, logging,
+  and automatic expiry):
   [hoop.dev overview](https://hoop.dev/blog/break-glass-access-under-the-nist-cybersecurity-framework/)
   [framework]. That overview is written against the NIST *Cybersecurity Framework*; the
   underlying catalog controls are NIST SP 800-53 Rev 5 **AC-2(2)** (automatically remove or
-  disable temporary and emergency accounts after an organization-defined period — the expiry
-  rule above) and **CP-4 / IR-3** (contingency-plan and incident-response testing — the drill
+  disable temporary and emergency accounts after an organization-defined period; the expiry
+  rule above) and **CP-4 / IR-3** (contingency-plan and incident-response testing; the drill
   cadence). Cite those, not a CIS control number: emergency-account handling sits under CIS
   account- and access-management, not the incident-response control.
 - Regulator-mandated contingency funding plans (early-warning indicators, graduated
   triggers, pre-approved action menus):
   [Fed SR 10-6](https://www.federalreserve.gov/boarddocs/srletters/2010/sr1006.htm),
   [interagency update](https://www.federalreserve.gov/newsevents/pressreleases/files/bcreg20230728a1.pdf)
-  [regulatory] — cited at practice level; the mechanism is domain-neutral.
+  [regulatory], cited at practice level; the mechanism is domain-neutral.

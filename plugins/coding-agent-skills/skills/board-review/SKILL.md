@@ -1,7 +1,7 @@
 ---
 name: board-review
 description: >-
-  Runs the full Board of Advisors multi-agent swarm — five read-only specialist subagents
+  Runs the full Board of Advisors multi-agent swarm: five read-only specialist subagents
   (performance, accuracy/correctness, structure/architecture, clarity/maintainability,
   robustness/edge-cases) launched in parallel over the code under review, then the board-chair
   subagent synthesizing their findings into one deduplicated, ranked revision report that
@@ -12,14 +12,14 @@ description: >-
   optimization review, performance and accuracy audit, deep code audit, multi-agent review,
   suboptimal code audit, optimize this code thoroughly.
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
 ---
 
 # Board of Advisors review
 
 ## When to use
-- The user asks for a thorough, multi-angle audit of code — "run the board," "full
-  optimization review," "find everything suboptimal" — where the goal is speed and accuracy
+- The user asks for a thorough, multi-angle audit of code ("run the board," "full
+  optimization review," "find everything suboptimal") where the goal is speed and accuracy
   improvements that strictly preserve intended behavior.
 - A significant module is about to be optimized, hardened, or refactored and the owner wants
   the complete picture before touching it.
@@ -27,21 +27,21 @@ metadata:
   multi-agent systems in general → see the archived `coding-agent-skills:agentic-workflow-design`.
 
 ## Do it
-1. **Extract goals and scope first — the board reviews against goals, not taste.** Identify
+1. **Extract goals and scope first: the board reviews against goals, not taste.** Identify
    the exact code under review (selection, files, directory, or diff) and restate the
    original goals, intended behavior, and accuracy requirements in a few sentences. If goals
    are ambiguous, ask the user before launching anything; if you must proceed, state your
    assumptions. Do not expand scope beyond what was given without asking.
-2. **Launch the five specialists in parallel** — each is a read-only subagent shipped with
+2. **Launch the five specialists in parallel.** Each is a read-only subagent shipped with
    this plugin (namespaced `coding-agent-skills:<name>`):
-   - `performance-advisor` — speed, complexity, allocations, hot paths
-   - `accuracy-correctness-advisor` — logic, precision, invariants, wrong results
-   - `structure-architecture-advisor` — modularity, boundaries, ordering
-   - `clarity-maintainability-advisor` — naming, density, dead code, cognitive load
-   - `robustness-edgecase-advisor` — validation, failure modes, leaks, races
+   - `performance-advisor`: speed, complexity, allocations, hot paths
+   - `accuracy-correctness-advisor`: logic, precision, invariants, wrong results
+   - `structure-architecture-advisor`: modularity, boundaries, ordering
+   - `clarity-maintainability-advisor`: naming, density, dead code, cognitive load
+   - `robustness-edgecase-advisor`: validation, failure modes, leaks, races
    Give every specialist the same package: the exact code/files, the restated goals, and the
    instruction to stay read-only and use the canonical Finding schema
-   (`references/finding-schema.md`). Launch them in one parallel batch — they are
+   (`references/finding-schema.md`). Launch them in one parallel batch; they are
    independent by design.
 3. **Wait for all five, then hand everything to the chair.** Invoke
    `coding-agent-skills:board-chair` with the restated goals plus the complete,
@@ -51,7 +51,7 @@ metadata:
    ranked Optimization Review report. Do not synthesize yourself: the chair's strict
    priority order and preservation checks are the control.
 4. **Present the chair's report in full**, then offer the concrete next action: "Implement
-   any of the prioritized revisions? Which ones?" The board is read-only by construction —
+   any of the prioritized revisions? Which ones?" The board is read-only by construction:
    no advisor edits code, and neither do you at this stage.
 5. **Apply only what the user approves.** Implement approved revisions carefully (one at a
    time or as an approved batch), run the chair's Recommended Verification for each (tests,
@@ -59,24 +59,24 @@ metadata:
    a focused re-run of the relevant specialist as the confirmation pass.
 6. **Keep the noise contract.** Specialists cap at their top 8–12 findings; the chair
    delivers roughly ≤15–20 revisions. If the board finds nothing material, the correct
-   output is "nothing material" — a clean report is a valid, preferred result, not a
+   output is "nothing material". A clean report is a valid, preferred result, not a
    failure to try hard enough.
 
 ## Why / learn
 The board rests on three design choices. **Parallel isolated
 specialists** beat one big review for the same reason five focused proofreaders beat one
-tired one: each subagent runs in its own context window with a single mission, so the
+tired one. Each subagent runs in its own context window with a single mission, so the
 performance reviewer never gets distracted by naming and the correctness reviewer reads
-every boundary condition instead of skimming — and isolation means one advisor's framing
+every boundary condition instead of skimming, and isolation means one advisor's framing
 can't anchor another's. **Synthesis as a separate role** exists because merging is a
-different cognitive job from finding: the chair holds the strict priority order (accuracy
-outranks speed, always — a fast wrong answer is worthless), deduplicates overlapping
-findings into root causes, and — critically — is forbidden from inventing findings, which
+different cognitive job from finding. The chair holds the strict priority order (accuracy
+outranks speed, always; a fast wrong answer is worthless), deduplicates overlapping
+findings into root causes, and is forbidden from inventing findings, which
 keeps the pipeline auditable: every final revision traces to a specialist's evidence.
 **Goal preservation as the invariant** is what separates optimization from vandalism: every
 proposal must state *why the original deliverable survives it*, which forces the burden of
 proof onto the change, where it belongs. The read-only-until-approved rule is the same
-principle at the workflow level — analysis and mutation are separated so a review can be
+principle at the workflow level: analysis and mutation are separated so a review can be
 trusted not to have quietly "fixed" things, and the human stays the approval gate. The caps
 respect attention: an audit that returns 200 findings returns none.
 
@@ -98,10 +98,10 @@ to the swarm.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/board-review.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/board-review.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/finding-schema.md — the canonical Finding schema, severity/category definitions, and the chair's report structure
-- references/your-environment.md — your goal statements, calibration, verification commands (fill in)
+- references/finding-schema.md: the canonical Finding schema, severity/category definitions, and the chair's report structure
+- references/your-environment.md: your goal statements, calibration, verification commands (fill in)

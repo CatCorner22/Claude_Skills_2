@@ -1,14 +1,14 @@
 # Your environment (sanitized template)
 
 Wire in your current systems here so a contact-trace starts from your real terrain.
-Keep this file **structural** — patterns and locations, not secrets. Anything sensitive
+Keep this file **structural**: patterns and locations, not secrets. Anything sensitive
 (real repo names tied to an employer, live vulnerability details, client specifics) goes
-in `your-environment.private.md` — that suffix is git-ignored and never committed.
+in `your-environment.private.md`; that suffix is git-ignored and never committed.
 
 ## Sweep scope (what "everywhere" means here)
 - Repositories a sweep must cover: <main repo(s), sibling services, shared libraries>
 - Cross-repo copies: <other codebases scaffolded from the same origins>
-- Excluded from sweeps and why: <vendored code, generated artifacts — state the reason>
+- Excluded from sweeps and why: <vendored code, generated artifacts: state the reason>
 
 ## Patient-zero habitats (where origins usually live)
 - Templates / scaffolds / generators: <locations>

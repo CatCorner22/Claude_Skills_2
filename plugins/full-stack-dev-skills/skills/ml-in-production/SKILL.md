@@ -1,7 +1,7 @@
 ---
 name: ml-in-production
 description: >-
-  Puts machine-learning models into applications the lean way — packaging a trained model as
+  Puts machine-learning models into applications the lean way: packaging a trained model as
   a versioned artifact, serving it behind a FastAPI endpoint with Pydantic-validated inputs,
   choosing batch vs realtime inference by the product's actual latency need, keeping the
   feature pipeline identical between training and serving, and monitoring predictions and
@@ -12,7 +12,7 @@ description: >-
   model monitoring, drift detection production, ml pipeline app, score in real time,
   put the model into the app, works in the notebook.
 metadata:
-  version: "1.4.1"
+  version: "1.4.2"
 ---
 
 # ML in production
@@ -29,9 +29,9 @@ metadata:
 ## Do it
 1. **Choose the serving pattern by the product's latency need, cheapest first:**
    - **Batch scoring** (nightly/hourly job writes predictions to a table): the product reads
-     predictions like any other data. Right whenever decisions aren't per-request —
+     predictions like any other data. Right whenever decisions aren't per-request:
      dashboards, rankings, risk flags. This covers *most* business ML and needs no serving
-     infra at all (it's a background job — `full-stack-dev-skills:realtime-and-dynamic-features`).
+     infra at all (it's a background job: `full-stack-dev-skills:realtime-and-dynamic-features`).
    - **Realtime endpoint** (predict per request): only when the input isn't known until the
      moment of use (fraud check on a new transaction, interactive what-ifs).
    - Skip bespoke model servers until scale forces them; a FastAPI route loading a sklearn
@@ -42,12 +42,12 @@ metadata:
    estimator plus "remember to scale."
    - **The hash is not decoration, because loading the artifact runs code.** `joblib.load`
      and `pickle.load` execute the stream rather than read it, so whoever can write to
-     the artifact store — or steer the pointer — can run code inside the serving process.
+     the artifact store (or steer the pointer) can run code inside the serving process.
      Record the artifact's SHA-256 in the sidecar and **verify it before loading**, keep the
      manifest signed or held where the store's writers cannot reach it (a hash beside the
      file it describes proves nothing), and restrict write access to the artifact store to
      whoever may ship code. Models from outside your own training pipeline should not be
-     pickle at all — prefer ONNX or a pure-data format.
+     pickle at all: prefer ONNX or a pure-data format.
    - **The decision threshold ships in the sidecar too**, with the split it was chosen on and
      the FP/FN costs or alert budget that set it (`machine-learning-skills:model-evaluation`
      fits and freezes it). It is a fitted parameter, not a constant. Leaving it in application
@@ -78,7 +78,7 @@ def predict(x: PredictIn):
    same feature function (or the pipeline itself) runs in both places, with no re-implementation
    in the route. (Feature craft: `machine-learning-skills:feature-engineering`.)
 5. **Log predictions from day one:** timestamp, model version, inputs (or their hash where
-   sensitive), output, and — when it arrives — the actual outcome. That table *is* your
+   sensitive), output, and (when it arrives) the actual outcome. That table *is* your
    monitoring, your debugging, and your retraining set.
 6. **Monitor like the model is drifting, because it is:** input distributions vs the
    training window (drift on key features), score distribution over time, and true
@@ -114,7 +114,7 @@ can't catch it: the model is fine, the features lie, and offline metrics stay gr
 production quietly scores garbage. Sharing the literal code path is the only reliable cure.
 The batch-first rule is lean-code economics applied to inference: a nightly job writing a
 predictions table has no latency SLO, no cold starts, no per-request failure modes, and
-turns "ML infrastructure" into "a cron job and a table" — the realtime endpoint is the
+turns "ML infrastructure" into "a cron job and a table": the realtime endpoint is the
 special case, earned by a product requirement, not the default. Staged rollout is the
 honest admission that validation metrics are a *proxy*: the only measurement that finally
 matters is the product metric on live traffic, so new models earn promotion there, not in
@@ -140,10 +140,10 @@ artifacts trained on sensitive data.**
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/ml-in-production.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/ml-in-production.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/serving-recipes.md — artifact layout, batch scoring job, prediction-log schema, rollout and pre-launch checklists
-- references/your-environment.md — your models, patterns, thresholds, triggers (fill in)
+- references/serving-recipes.md: artifact layout, batch scoring job, prediction-log schema, rollout and pre-launch checklists
+- references/your-environment.md: your models, patterns, thresholds, triggers (fill in)

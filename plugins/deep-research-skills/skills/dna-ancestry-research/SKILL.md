@@ -1,31 +1,31 @@
 ---
 name: dna-ancestry-research
 description: >-
-  Turns a genome into an evidenced ancestry story — reads 23andMe, AncestryDNA and Nebula Genomics
+  Turns a genome into an evidenced ancestry story: reads 23andMe, AncestryDNA and Nebula Genomics
   results, calls Y-DNA and mtDNA haplogroups from chip data with open tools (HaploGrep 3, Yleaf),
   explains what vendor ancestry percentages actually measure, works DNA matches and records under
   the Genealogical Proof Standard (Shared cM, triangulation, WATO, endogamy), and draws lineage
   maps as SVG: dated haplogroup migration routes, composition shading, ancestor places and a
-  pedigree chart. Researches and delegates on its own. Research only — a medical reading of the
+  pedigree chart. Researches and delegates on its own. Research only: a medical reading of the
   file is dna-raw-data-audit, and it never tests relatedness on people who did not consent. Use
   for where a family comes from, haplogroup questions, DNA-match puzzles, or mapping a lineage.
   Triggers: ancestry, heritage, haplogroup, Y-DNA, mtDNA, maternal line, paternal line, family
   tree, genealogy, DNA matches, shared cM, GEDmatch, lineage map, migration map, ethnicity
   estimate, genetic genealogy.
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
   source: >-
-    Built from a five-stream research pass (genetic-genealogy standards and ethics; what the vendor
+    Covers five research streams (genetic-genealogy standards and ethics; what the vendor
     reports measure; haplogroup origins, ages and migration; open callers and map data with their
-    licences; Irish and US record sources), then validated by running both bundled scripts against
-    a real chip export and two open callers. Provenance marks in the references follow the house
+    licences; Irish and US record sources). Both bundled scripts run against a real chip export
+    and two open callers. Provenance marks in the references follow the house
     legend: [snippet-only], [canon attribution], [background — verify], [unverified], [rule text].
 ---
 
 # DNA ancestry research — genome to lineage, with maps
 
-Turns what a person has — a chip export, a whole-genome result, a vendor's ancestry report, a
-match list, a half-built tree, family stories — into three layers of ancestry, each graded by what
+Turns what a person has: a chip export, a whole-genome result, a vendor's ancestry report, a
+match list, a half-built tree, family stories, into three layers of ancestry, each graded by what
 the evidence supports: **deep ancestry** (the Y-DNA and mtDNA lines, on a
 scale of thousands of years), **population composition** (what the vendor's percentages mean, on a
 scale of centuries), and **genealogy** (named people in records, within the last two hundred years
@@ -67,10 +67,10 @@ legitimately end with "the data cannot establish this".
    outputs this skill writes, the caller reports, the maps with real names) outside any repository
    and any shared drive, and never paste genotypes into a third-party service. Before any file goes
    near version control run `git check-ignore -v <file>` and get a hit. The common genomic
-   extensions are ignored in the repository this skill ships from, but that protection does not
+   extensions are ignored in this skill's source repository, but that protection does not
    travel with the installed plugin, and most ignore files do not cover the `.ped`, `.map` and
    `.genos.txt` outputs at all. Then ask three things before reading anything: **whose
-   file is this** (if not the asker's, say what changes — the subject has not consented, findings
+   file is this** (if not the asker's, say what changes: the subject has not consented, findings
    about them are not the asker's to receive, and a minor's file gets no deep-ancestry surprises);
    **what should not be surfaced** (unexpected parentage, a specific branch, living relatives'
    details, a donor-conception question); and **what may leave the machine** (which maps and
@@ -81,8 +81,8 @@ legitimately end with "the data cannot establish this".
    delivery and mark who does it. The person's only jobs are consent, decisions and anything in the
    limits that stay with them (passwords, accounts, uploads to a matching site, purchases). This
    skill does every other step: file conversion, running the callers, the research, the records
-   look-ups, the maps, the writing. If a delegation-audit skill is installed (in this
-   library's author environment it is anthropic-skills:max-delegation-auditor), invoke it on the
+   look-ups, the maps, the writing. If a delegation-audit skill is installed (for example
+   anthropic-skills:max-delegation-auditor), invoke it on the
    plan and adopt what it finds; otherwise run that audit inline: for each step the plan hands to
    the person, name the tool that could do it instead or the limit that forbids it. Bundle every
    consent the plan needs into one question.
@@ -125,7 +125,7 @@ legitimately end with "the data cannot establish this".
      python3 "${CLAUDE_PLUGIN_ROOT}/skills/dna-ancestry-research/scripts/haplogroup_inputs.py" review <private-dir>/yleaf/hg_prediction_combined.hg
      ```
      The review names the expected mutations the chip did not show and sorts them into **strand
-     flips** (the chip called the complement base — a probe artefact, not a private mutation),
+     flips** (the chip called the complement base: a probe artefact, not a private mutation),
      sites not genotyped, and real discrepancies; it counts chip-only private mutations, which stay
      unconfirmed until a sequence agrees; and for Yleaf it says whether the trees agree on the
      terminal marker. Report each call with the tool, the tree and its version, the quality score
@@ -150,21 +150,21 @@ legitimately end with "the data cannot establish this".
    `references/vendor-reports.md` carries what each product does and the limits that bind it.
 
 6. **Run the research pass, with a privacy brief.** The haplogroups, places, surnames and
-   record classes each need current literature and current record availability, which change. If a deep-research coordinator skill is installed (in this library's author environment it
-   is anthropic-skills:deep-research), invoke it with the question decomposed into: the origin,
+   record classes each need current literature and current record availability, which change. If a deep-research coordinator skill is installed (for example
+   anthropic-skills:deep-research), invoke it with the question decomposed into: the origin,
    age, distribution and migration of each haplogroup, with dated nodes from the published clocks
    and ancient-DNA papers; the surname and regional history; the record classes that exist for the
    places and periods in play; and anything the vendor has changed since the report was issued.
    Otherwise spawn that fan-out yourself: three to five researchers in one turn. Either way the
-   brief to every researcher carries **only haplogroup labels, surnames and places — never the
-   file, never a genotype, never a match's name** — and every claim that comes back must resolve
+   brief to every researcher carries **only haplogroup labels, surnames and places, never the
+   file, never a genotype, never a match's name**, and every claim that comes back must resolve
    to a retrieved record and carry a provenance mark; a search tool's generated prose is not a
    source. `references/method-and-standards.md` §6 has the citation forms.
 
 7. **Work the genealogical layer under the proof standard.** Seed an ahnentafel from what the
    person knows (a person n has father 2n and mother 2n+1), then for every link ask what record
-   class would prove it and whether it has been seen — a civil or church register, a census, a
-   land or probate record, a passenger or naturalisation file — and grade the link: proven by
+   class would prove it and whether it has been seen: a civil or church register, a census, a
+   land or probate record, a passenger or naturalisation file, and grade the link: proven by
    records, supported by DNA, hypothesised, unknown. For matches, use the Shared cM ranges to
    bound a relationship rather than name it, triangulate (three or more testers all matching each
    other on the same overlapping segment) before calling a segment ancestral, run the hypotheses
@@ -189,23 +189,23 @@ legitimately end with "the data cannot establish this".
 
 9. **Deliver in the fixed shape, and end on what would resolve the open questions.** Use six sections,
    every time (the contract is below). The final section names the specific test or record that
-   would answer each open question — a Y-sequencing test for the subclade, a full mitochondrial
-   sequence for the private mutations, a parish register for an unproven link — and states, for
+   would answer each open question: a Y-sequencing test for the subclade, a full mitochondrial
+   sequence for the private mutations, a parish register for an unproven link, and states, for
    any upload the person is weighing, what the receiving site does with the data and which
    matching settings they would be choosing. The person decides; this skill informs.
 
 ### Deliverable contract — six sections, every time
-1. **Executive summary** — plain language; the three layers, what each established, and what none
+1. **Executive summary**: plain language; the three layers, what each established, and what none
    of them can tell this person.
-2. **Deep ancestry** — each haplogroup call with tool, tree, version, quality and depth limit; the
+2. **Deep ancestry**: each haplogroup call with tool, tree, version, quality and depth limit; the
    dated migration ladder with its sources; the deep-ancestry map.
-3. **Population composition** — the vendor's figures restated with version, panel and confidence;
+3. **Population composition**: the vendor's figures restated with version, panel and confidence;
    genetic groups as a separate layer; the composition map; what moved between versions and why.
-4. **Genealogy** — the ahnentafel with an evidence grade per link; match and segment analysis as
+4. **Genealogy**: the ahnentafel with an evidence grade per link; match and segment analysis as
    ranked hypotheses; the pedigree chart and ancestor-places map.
-5. **Research log** — every source retrieved, every claim's provenance mark, and every item that
+5. **Research log**: every source retrieved, every claim's provenance mark, and every item that
    could not be verified, stated as unverified rather than smoothed over.
-6. **Next steps and privacy** — the test or record that would resolve each open question; what was
+6. **Next steps and privacy**: the test or record that would resolve each open question; what was
    redacted or withheld and why; what in this report is safe to share and what names relatives.
 
 ### Hard rails
@@ -214,7 +214,7 @@ legitimately end with "the data cannot establish this".
   conversation something irreversible. Decline the comparison, say why, and route to a genetic
   counsellor or a genealogist who handles unexpected results. If the data implies non-paternity,
   consanguinity or an unexpected parent, say such inferences are possible and ask whether the
-  person wants them addressed at all — before, not after; and when asking is impossible, state
+  person wants them addressed at all, before and not after the analysis; and when asking is impossible, state
   the assumption and leave the inference unrun.
 - **The exclusion list is honoured in full.** Ancestry findings have no clinical urgency, so there
   is no override: an excluded topic is noted as "a finding in an excluded category exists" and left
@@ -236,20 +236,20 @@ legitimately end with "the data cannot establish this".
 ## Why / learn
 
 **Three layers, three clocks.** The Y chromosome and the mitochondrion pass down a single line
-each, unmixed, so their mutations can be arranged on a tree with dated nodes — but the tree reaches
+each, unmixed, so their mutations can be arranged on a tree with dated nodes, but the tree reaches
 back thousands of years and says nothing about the other thousands of ancestors a person has at any
 depth. Autosomal composition averages the whole genome against reference panels of living people
 and so answers "whom do my segments resemble", at a resolution of roughly the last few centuries,
 with no fixed boundaries: redraw the panel and the answer redraws. Identity-by-descent matching
 finds specific shared segments and so reaches named people, but only inside the window where
-segments survive recombination — a handful of generations. Each layer is honest at its own depth
+segments survive recombination: a handful of generations. Each layer is honest at its own depth
 and misleading when quoted at another's, which is why the report keeps them apart.
 
 **Why a chip stops short.** A genotyping array interrogates a chosen few thousand Y and
 mitochondrial sites. Any branch of the tree that no probe touches is invisible, so a chip-based
 call lands at the last *probed* node on the person's path and the caller cannot see beyond it. The
-same lineage sequenced lands deeper and acquires a different name on each tree — YFull, FamilyTreeDNA
-and ISOGG each label nodes differently and sometimes split them differently — so reconciliation is
+same lineage sequenced lands deeper and acquires a different name on each tree (YFull, FamilyTreeDNA
+and ISOGG each label nodes differently and sometimes split them differently), so reconciliation is
 by terminal marker, not by label, and the tree and version are part of the result.
 
 **Why rCRS, and why reference calls go in the VCF.** Consumer chips report mitochondrial positions
@@ -315,34 +315,34 @@ relatives; decide before the analysis what you want to know.
 
 **Keep your filled-in copy outside the plugin, and keep the genome outside it entirely.** This file
 ships as a *template* inside the installed plugin, where a `/plugin marketplace update` can
-overwrite it. Copy it to `.claude/skills-env/dna-ancestry-research.private.md` in your own project — and note
-that **the `.private.md` suffix is what keeps it out of git — the plain `.md` form is NOT
+overwrite it. Copy it to `.claude/skills-env/dna-ancestry-research.private.md` in your own project, and note
+that **the `.private.md` suffix is what keeps it out of git: the plain `.md` form is NOT
 ignored**, so confirm with `git check-ignore -v` before writing anything into it.
 
 ## References
-- references/method-and-standards.md — the Genealogical Proof Standard and the DNA standards,
+- references/method-and-standards.md: the Genealogical Proof Standard and the DNA standards,
   Shared cM ranges and how to use them, triangulation, WATO, endogamy and pedigree collapse, what
   X, Y and mtDNA can each establish, ethics and law-enforcement matching, citation forms.
-- references/vendor-reports.md — what 23andMe, AncestryDNA, Nebula Genomics (via YFull) and
+- references/vendor-reports.md: what 23andMe, AncestryDNA, Nebula Genomics (via YFull) and
   third-party calculators actually compute, their reference panels, versions, confidence levels
   and match thresholds, and how to restate each figure honestly.
-- references/haplogroups-and-deep-ancestry.md — build safety, the HaploGrep 3 and Yleaf recipes
+- references/haplogroups-and-deep-ancestry.md: build safety, the HaploGrep 3 and Yleaf recipes
   with install notes, reading their outputs, tree naming and clocks, and how to build a dated
   migration ladder from published sources.
-- references/records-and-documentary-research.md — Irish and United States record classes with
+- references/records-and-documentary-research.md: Irish and United States record classes with
   where each lives and its known gaps, the platforms' current upload rules, and citation templates.
-- references/lineage-maps.md — the map and pedigree spec recipes, which four maps to draw, the
+- references/lineage-maps.md: the map and pedigree spec recipes, which four maps to draw, the
   honesty rules for routes and shading, redaction, and the map-data licence.
-- references/your-environment.md — the tailoring template (copy to the `.private.md` twin).
+- references/your-environment.md: the tailoring template (copy to the `.private.md` twin).
 
 ## Scripts
-- `scripts/haplogroup_inputs.py` — `summary` (build, site counts, whether Y is present),
+- `scripts/haplogroup_inputs.py`: `summary` (build, site counts, whether Y is present),
   `mt-vcf` (chip MT calls → rCRS VCF with every genotyped site, for HaploGrep 3 `--chip`),
   `y-plink` (chip Y calls → PLINK text for Yleaf `-plink`; refuses a file with no Y signal),
   `y-genos` (yhaplo layout, for anyone holding that tool under its own licence), `review` (screens a
   HaploGrep 3 extended report or a Yleaf combined table for strand flips, unobserved sites, private
   mutations and tree agreement). `--self-test` runs the offline checks; exit 2 unreadable input,
   3 unsafe (build or no-Y), 5 usage.
-- `scripts/lineage_maps.py` — `map spec.json -o out.svg` (routes, points, shaded countries on
+- `scripts/lineage_maps.py`: `map spec.json -o out.svg` (routes, points, shaded countries on
   bundled public-domain outlines), `pedigree persons.json -o out.svg [--redact]` (ahnentafel chart),
   `demo -o <dir>` (synthetic examples), `--self-test`.

@@ -80,7 +80,7 @@ memo says so in the body rather than implying a finished check.
 
 ## §3 Variants
 
-- **Brief or motion**: the same order inside the court's required structure — the argument heading
+- **Brief or motion**: the same order inside the court's required structure: the argument heading
   is the bottom line, the first sentence under it is why it matters, authorities follow with
   pinpoints. The ledger stays in the file, not the filing.
 - **Client update**: bottom line, why it matters, what the client should do, what happens next;

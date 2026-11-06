@@ -24,7 +24,7 @@ A skill is done when every box is checked.
 - [ ] **Trigger phrases are collision-checked**: grep every phrase in the `Triggers:` list
       against the frontmatter of every other active skill. A phrase claimed by two skills
       mis-routes users, and the validator does not catch it. Qualify or yield the loser.
-- [ ] Description leaves editing headroom (aim ≤ 984 chars). The validator NOTEs above 973 —
+- [ ] Description leaves editing headroom (aim ≤ 984 chars). The validator NOTEs above 973:
       a description at the cap cannot absorb a future seam sentence.
 
 ## Content (do + teach)
@@ -40,7 +40,7 @@ A skill is done when every box is checked.
       only for what it cannot parse: conclusions drawn *from* the numbers, figures carried
       across prose sentences, and any claim that an example's stated finding follows from its
       own setup. The script proves the sums; you still have to prove the story.
-- [ ] **If you changed a skill's internal structure — its steps, phases, gates, or fields —
+- [ ] **If you changed a skill's internal structure (its steps, phases, gates, or fields),
       re-check what other skills SAY about it.** `validate.sh` proves a `plugin:skill` reference
       resolves; nothing proves the sentence around it is still true. A reference can resolve
       perfectly and still describe a structure that no longer exists, such as a link calling a
@@ -52,7 +52,7 @@ A skill is done when every box is checked.
       from an existing skill will ever learn it exists. Add the `Not for:` line to the
       established skill, not just the new one.
 - [ ] **When you fix a defect, grep the library for the same defect and fix every sibling in the
-      same pass — including elsewhere in the skill you just fixed.** A fix applied to one skill
+      same pass, including elsewhere in the skill you just fixed.** A fix applied to one skill
       does not propagate on its own. Example: `fmea` was repaired for multiplicative risk scoring (a
       severity ceiling so a rare catastrophic failure cannot be averaged away), but `pre-mortem`
       kept ranking by likelihood × damage × detection-lateness, and the error propagated downstream
@@ -66,7 +66,7 @@ A skill is done when every box is checked.
       thing users copy.
 - [ ] Every cited `plugin:skill` resolves to a live skill directory; archived targets use the
       explicit `(archived: plugin:skill, restorable from archive/)` form.
-      **`scripts/validate.sh` enforces this** — it resolves every `plugin:skill` reference
+      **`scripts/validate.sh` enforces this**: it resolves every `plugin:skill` reference
       against active skills, active subagents (`plugins/*/agents/*.md` share the namespace), and
       `archive/`, and errors on any that resolves to none of them or that points at an archived
       target without saying so. So the manual check is a courtesy; the one
@@ -74,15 +74,15 @@ A skill is done when every box is checked.
       accurately, which no script can tell you.
 - [ ] Any external number or attribution carries a provenance mark or an honest hedge; no
       invented statistics. **Use the house vocabulary, which means these and only these:**
-      - `[snippet-only]` — taken from search snippets, primary source not opened. Add
+      - `[snippet-only]`: taken from search snippets, primary source not opened. Add
         `, cross-checked` when independent snippets agreed, or `, ×N` for the number that did.
-      - `[canon attribution]` — named to the standard source everyone cites, not
+      - `[canon attribution]`: named to the standard source everyone cites, not
         independently re-verified. Use for "Klein's pre-mortem", "Rubin's taxonomy".
-      - `[background — verify]` — general knowledge stated for orientation; the reader should
+      - `[background — verify]`: general knowledge stated for orientation; the reader should
         confirm before relying on it.
-      - `[unverified]` — a specific value that could not be confirmed. **Never quote a number
+      - `[unverified]`: a specific value that could not be confirmed. **Never quote a number
         beside this mark.** Say what is unknown, not what you half-remember.
-      - `[rule text]` — quoted or closely paraphrased from a statute, rule, or standard, with
+      - `[rule text]`: quoted or closely paraphrased from a statute, rule, or standard, with
         the instrument named and its jurisdiction stated.
 - [ ] **Epistemic hedging sits in the right section, and the Do-it step keeps its verb.** A
       `## Do it` step is an instruction: it carries the action plus at most a bracketed mark.
@@ -92,7 +92,7 @@ A skill is done when every box is checked.
       uncertainty about an effect size take the main verb.
 - [ ] **Never ship the repo's own review history as skill content.** "An earlier version of
       this file said…" is legitimate when it teaches a trap the reader could fall into; "a
-      reviewer showed…" and "this environment could not reach the sources" are not — the second
+      reviewer showed…" and "this environment could not reach the sources" are not; the second
       reads to an installed user as a claim about *their* environment. State what is known and
       what is not; the audit trail belongs in git.
 - [ ] **Every runnable path is written for the installed shape**, i.e. addressed from
@@ -102,34 +102,34 @@ A skill is done when every box is checked.
 
 ## Evals & validation
 - [ ] `evals/<plugin>/<skill>.md` has a positive trigger, a near-miss, and a quality rubric.
-- [ ] The eval's positive prompt actually contains a phrase the description advertises. An eval
+- [ ] The eval's positive prompt contains a phrase the description advertises. An eval
       written in vocabulary the skill does not claim tests a route that does not exist.
 - [ ] `bash scripts/validate.sh` passes with no warnings for this skill.
 - [ ] `python3 scripts/gen-catalog.py` re-run, and the skill's row in `docs/INDEX.md` reads
-      correctly — the generator derives that row by parsing the description, so a row that reads
+      correctly; the generator derives that row by parsing the description, so a row that reads
       as a fragment means the description's shape defeated the parser.
 - [ ] `claude plugin validate plugins/<plugin>` passes.
-- [ ] Plugin `version` bumped in `plugins/<plugin>/.claude-plugin/plugin.json` — installed
+- [ ] Plugin `version` bumped in `plugins/<plugin>/.claude-plugin/plugin.json`: installed
       copies are version-pinned snapshots and pick up nothing without a bump.
 - [ ] Skill `metadata.version` bumped for any content change (three-part semver;
       `validate.sh` errors on a missing or malformed one and NOTEs an unbumped change).
 
 ## Executable content — the bar prose does not need
 
-Prose survives a careless reader; code does not. The library's critical
-findings sat in executable content (two bundled scripts and about a dozen copy-paste
+Prose survives a careless reader; code does not. Critical
+findings sit in executable content (two bundled scripts and about a dozen copy-paste
 recipes), never in the prose. Reading
 code is not reviewing it: each of these read fine.
 
 - [ ] **Every bundled script has a `--self-test`, and it covers the failure the script exists
-      to prevent** — not just its happy path. A citation verifier's self-test must include a
+      to prevent**, not just its happy path. A citation verifier's self-test must include a
       fabricated identifier; a linter's must include a deck that violates each rule.
 - [ ] **The self-test is mutation-tested at least once.** Break each guard deliberately and
       confirm the suite fails. A suite that passes with the check deleted is not a suite. Two
       real cases: a linter whose five checks could each be removed with `--self-test`
       still exiting 0, and a script whose test asserted the buggy behaviour, so the bug was
       pinned rather than caught.
-- [ ] **Every copy-paste recipe has been RUN once, against the failure case it describes** —
+- [ ] **Every copy-paste recipe has been RUN once, against the failure case it describes**,
       in the actual language and library, not read. Found only by running: a `KeyError` on a
       spec the validator deliberately allows, a shell loop silently dropping the last line of
       a file with no trailing newline, a CI check whose "pass" branch was every kind of
@@ -146,7 +146,7 @@ code is not reviewing it: each of these read fine.
 ## Trigger test (in a fresh session) — the only check that validates routing
 Everything above can pass on a skill that never loads. This is the one item that proves the
 description works, and it cannot be automated from inside a session that already knows the
-answer. The full protocol — setup, scoring, and the ranked rows — is `docs/trigger-test.md`;
+answer. The full protocol (setup, scoring, and the ranked rows) is `docs/trigger-test.md`;
 add a row there for the skill you are shipping and log the result.
 - [ ] The positive-trigger prompt loads the skill.
 - [ ] The near-miss prompt does NOT load it.
@@ -158,9 +158,9 @@ Four rules that decide whether the result means anything:
   type. A test that quotes the trigger string passes by construction and measures nothing.
 - **Record the install set.** The listing trims descriptions to name-only somewhere around 100
   installed skills, silently. A pass with four plugins installed is not evidence of a pass with
-  fourteen — they are different experiments.
+  fourteen; they are different experiments.
 - **Distinguish the two failures.** Nothing loaded (**MISS**) means the description lacks the
-  user's vocabulary — add it. A different plausible skill loaded (**WRONG**) means two descriptions
-  are competing and neither names the boundary — write reciprocal `Not for:` lines in *both*, in
+  user's vocabulary, so add it. A different plausible skill loaded (**WRONG**) means two descriptions
+  are competing and neither names the boundary, so write reciprocal `Not for:` lines in *both*, in
   matching words. Never fix a WRONG by deleting the loser's trigger phrase: doing that to a word
   three skills shared is what left `standardize` with no owner at all.

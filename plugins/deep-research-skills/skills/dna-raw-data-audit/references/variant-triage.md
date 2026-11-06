@@ -39,7 +39,7 @@ only knows how to narrate findings will invent them to fill the shape. The commo
 one or two flags worth raising with a clinician and a clear statement that nothing else changes.
 
 **Where a broader scan is legitimate:** a specific question the person brings ("a relative was found
-to carry X — am I at risk?"), in which case look up that variant directly and apply the same grading.
+to carry X: am I at risk?"), in which case look up that variant directly and apply the same grading.
 That is a targeted lookup, not a scan.
 
 ---
@@ -47,8 +47,8 @@ That is a targeted lookup, not a scan.
 ## §2 ACMG/AMP classification and ClinVar review status
 
 **The classification framework.** The professional joint-consensus framework for interpreting sequence
-variants assigns each to one of **five tiers** — pathogenic, likely pathogenic, uncertain
-significance, likely benign, benign — by combining weighted evidence criteria, each carrying a
+variants assigns each to one of **five tiers** (pathogenic, likely pathogenic, uncertain
+significance, likely benign, benign) by combining weighted evidence criteria, each carrying a
 direction and a strength. The framework anticipated gene- and disease-specific refinement, and expert
 panels have since published specifications and refinements for particular criteria and genes
 ([PMC6885382](https://pmc.ncbi.nlm.nih.gov/articles/PMC6885382/) on specifications generally;
@@ -63,10 +63,10 @@ than with an identifier reconstructed from memory. See `variant-catalog.md` §0 
 **"Has a ClinVar entry" is not "is pathogenic".** ClinVar aggregates submitted interpretations, and
 submitters disagree. Read the **review status** before the assertion:
 
-- **Multiple submitters, no conflicts** or an **expert panel / practice guideline** review status —
+- **Multiple submitters, no conflicts** or an **expert panel / practice guideline** review status:
   substantial weight.
-- **Single submitter**, or **criteria not provided** — weak; one laboratory's opinion.
-- **Conflicting interpretations** — the field has not settled it. **Report the conflict, do not pick
+- **Single submitter**, or **criteria not provided**: weak; one laboratory's opinion.
+- **Conflicting interpretations**: the field has not settled it. **Report the conflict, do not pick
   a side.** A variant classified pathogenic by one submitter and benign by three is not a finding;
   it is an open question.
 - A variant can be **reclassified**, and reclassification runs predominantly from uncertain toward
@@ -75,7 +75,7 @@ submitters disagree. Read the **review status** before the assertion:
 
 **The frequency sanity check.** A variant asserted pathogenic for a rare dominant condition cannot be
 common in population databases. If a flagged variant is present at appreciable frequency in large
-reference cohorts, that is strong evidence against the pathogenic assertion — and this is precisely
+reference cohorts, that is strong evidence against the pathogenic assertion, and this is precisely
 the failure mode documented in direct-to-consumer interpretation, where variants labelled
 "increased risk" turned out benign and common (§4).
 
@@ -109,7 +109,7 @@ that decides what to do.
 
 The strongest study is a **population-scale** one: a retrospective diagnostic evaluation of roughly
 **fifty thousand UK Biobank participants who had both SNP-chip and next-generation-sequencing data**,
-plus a small set of people who shared consumer test data — *"Use of SNP chips to detect rare
+plus a small set of people who shared consumer test data, titled *"Use of SNP chips to detect rare
 pathogenic variants: retrospective, population based diagnostic evaluation"*
 ([PMID 33589468](https://pubmed.ncbi.nlm.nih.gov/33589468/) /
 [PMC7879796](https://pmc.ncbi.nlm.nih.gov/articles/PMC7879796/) /
@@ -117,10 +117,10 @@ pathogenic variants: retrospective, population based diagnostic evaluation"*
 
 *`33753354` resolves to nothing matching and is not cited; `33589468` carries the exact title, in two
 independent searches. The participant count is approximate: percentages are not quoted because they
-reached the author only through search-tool prose, and the precise figure `49,908` reached it the
+appeared only in search-tool prose, and the precise figure `49,908` appeared the
 same way. Either both ship or neither does.*
 
-- For **common** variants, chip genotyping performed **well** — sensitivity, specificity, PPV and NPV
+- For **common** variants, chip genotyping performed **well**: sensitivity, specificity, PPV and NPV
   all above 99% across >100,000 common variants. Arrays are not broken.
 - For **very rare** variants the positive predictive value collapsed, and only a small minority of
   heterozygous chip genotypes were confirmed by sequencing.
@@ -131,7 +131,7 @@ A smaller, earlier clinical-laboratory series reached the same conclusion from t
 [PMC6301953](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6301953/)), and it drew a published
 exchange worth presenting as an exchange: a commentary
 ([PMID 29950595](https://pubmed.ncbi.nlm.nih.gov/29950595/)) and a correspondence reply
-([PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/)) — **that reply is authored from inside
+([PMID 29955106](https://pubmed.ncbi.nlm.nih.gov/29955106/)): **that reply is authored from inside
 the company whose data was criticised, so it is a party's response rather than independent
 commentary.** A later analysis addresses the public-health consequence
 ([PMID 33113957](https://pubmed.ncbi.nlm.nih.gov/33113957/)). Third-party interpretation
@@ -144,15 +144,15 @@ prose rather than in a retrieved record during verification, and `variant-catalo
 that disqualifies a number from shipping. The direction, the common-versus-rare split, and the
 clinical consequence are firmly established and are what the rule rests on.*
 
-**Correct the famous figure rather than repeating it.** The number people arrive with — that a large
-fraction of consumer raw-data variants are false positives — traces to the small clinical-laboratory
+**Correct the famous figure rather than repeating it.** The number people arrive with (that a large
+fraction of consumer raw-data variants are false positives) traces to the small clinical-laboratory
 series above. That study is real and its direction is right, but its sample was a few dozen
 specimens from one laboratory, **selected because someone had already sought confirmation of a
 flagged variant**. A rate measured on samples chosen that way does not estimate the rate in anyone's
 file, and it does **not** transfer to common pharmacogenomic SNPs, which the population-scale study
 found are called well. So the honest reply to "isn't 40% of this data wrong?" is: *the false-positive
 problem is real and concentrated in rare variants; that particular percentage describes a selected
-referral series, not your file* — and then the PPV arithmetic below, which does apply.
+referral series, not your file*, and then the PPV arithmetic below, which does apply.
 
 ### The mechanism — and the primary cause is not the one people name
 
@@ -160,8 +160,8 @@ Probe design and genotype-cluster separation are real contributors: arrays are o
 variants, and cluster assignment degrades when almost no samples carry the rare allele.
 
 **But the dominant mechanism is Bayesian and cannot be engineered away.** Positive predictive value
-depends on prevalence, not just on assay quality. Take an excellent assay — 99% sensitivity, 99.9%
-specificity — applied to a variant carried by 1 in 50,000 people:
+depends on prevalence, not just on assay quality. Take an excellent assay (99% sensitivity, 99.9%
+specificity) applied to a variant carried by 1 in 50,000 people:
 
 ```
  per 1,000,000 people tested:
@@ -186,7 +186,7 @@ The confirmation rule still applies to sequencing, for **different** reasons:
 - Consumer sequencing is not performed or reported under clinical-laboratory conditions, and the
   provider's own documentation typically says the data is not for clinical use.
 - Short-read sequencing remains weak or blind for **repeat expansions, large structural variants,
-  segmental duplications and pseudogene-confounded loci** — so "whole genome" does not mean
+  segmental duplications and pseudogene-confounded loci**, so "whole genome" does not mean
   "everything was seen".
 - A variant call still needs orthogonal confirmation before it drives a clinical decision, which is
   a statement about the reporting context rather than about the assay's accuracy.
@@ -196,7 +196,7 @@ against a sequencing call or vice versa.
 
 ### The rule, stated without softening
 
-> **No clinically significant finding from consumer raw data — array or sequencing — supports action
+> **No clinically significant finding from consumer raw data, array or sequencing, supports action
 > until a clinical-grade laboratory confirms it.**
 
 **Say it every time, as the finding rather than as a disclaimer.** The sentence that works is "this
@@ -204,7 +204,7 @@ needs confirming", not "I have this". Before recording any variant as present:
 
 1. Check it was **called, not no-called** (`data-formats-and-parsing.md` §3).
 2. Check **concordance and sample identity** if a second file exists (§5 there).
-3. Check the **strand** if the site is or may be palindromic — and note that a homozygous call cannot
+3. Check the **strand** if the site is or may be palindromic, and note that a homozygous call cannot
    establish this on its own.
 4. Check the **population frequency** against the claimed pathogenicity (§2), and compute the PPV
    implied by that frequency.
@@ -220,7 +220,7 @@ supported.
 ## §5 Variants of uncertain significance
 
 A VUS means the evidence does not currently support classifying the variant either way. It is
-**common** — and it is not a weak pathogenic call.
+**common**, and it is not a weak pathogenic call.
 
 - **Report as uncertain and leave it there.** Do not rank VUSs by suspicion, do not describe one as
   "probably significant", and do not let one drive a test, a screening decision, or a behaviour
@@ -252,5 +252,5 @@ should be able to conclude:
 > else is either not reliably called by this platform, or established but without any intervention
 > that has been shown to change the outcome in carriers.
 
-**A report that always finds something is not more thorough — it is less reliable.** If the funnel
+**A report that always finds something is not more thorough: it is less reliable.** If the funnel
 empties, report the empty funnel and the reasoning that emptied it.

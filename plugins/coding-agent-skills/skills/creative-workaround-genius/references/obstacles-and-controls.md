@@ -1,4 +1,4 @@
-# Obstacles and controls — where the workaround stops
+# Obstacles and controls: where the workaround stops
 
 Every blocker is one of two things. An **obstacle** is friction nobody intended: a missing
 library, a format mismatch, an unreachable host with no stated policy, a tool that demands
@@ -36,8 +36,8 @@ Three refinements make the test usable:
 - **A permitted channel is not evasion; a disguised one is.** When a network allowlist blocks a
   content-delivery host but permits a package registry or a public code host, fetching the same
   **public** file from the permitted host is using the channel the owner allowed. Changing the
-  request so a refused host stops recognising it — another user agent, a tunnel, a proxy hop, a
-  borrowed credential — is evasion. The difference is whether the route works *within* the rules
+  request so a refused host stops recognising it (another user agent, a tunnel, a proxy hop, a
+  borrowed credential) is evasion. The difference is whether the route works *within* the rules
   or works by hiding from them.
 
 ## §2 Classification table
@@ -102,7 +102,7 @@ substitute result as the original; fabricate a value no route could return.
 
 ## §5 How to ask a control's owner
 
-Ask once, late, and bundled — the delegation audit's rule. The question carries:
+Ask once, late, and bundled: the delegation audit's rule. The question carries:
 1. the outcome and what is already done;
 2. the single control in the way, and who owns it;
 3. what the agent will do immediately after the yes, so the person's part is one action;

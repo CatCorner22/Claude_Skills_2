@@ -13,7 +13,7 @@ description: >-
   case law, is this citation real, verify these citations, check the cites in this brief, good
   law, statute lookup, what does the law say, legal authority, CourtListener.
 metadata:
-  version: "1.0.3"
+  version: "1.0.4"
   source: >-
     Method built from standard legal-research practice and the post-2023 sanctions record for
     fabricated citations; the one case cited in the body is Mata v. Avianca, Inc., 678 F. Supp. 3d
@@ -80,7 +80,7 @@ line first, confidence stated, authorities pinpointed, gaps named.
    With `COURTLISTENER_API_TOKEN` set it checks each citation against CourtListener and reports
    VERIFIED, NOT FOUND, AMBIGUOUS, UNRECOGNIZED or UNVERIFIED; without a token or a network it
    still parses everything and reports UNVERIFIED with the manual route. VERIFIED means the
-   citation resolves to a real decision — you still read it (step 4). Treat NOT FOUND as
+   citation resolves to a real decision; you still read it (step 4). Treat NOT FOUND as
    fabricated until found in another source. UNVERIFIED does not go in the document. **Never ask a
    generative tool to confirm its own citation**; that is the step that produced the sanctions in
    *Mata*. `references/citation-verification.md` §1–§5.
@@ -150,32 +150,32 @@ never in this file or any committed one.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/legal-citation-research.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/legal-citation-research.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- `references/research-method.md` — framing, the authority hierarchy, the search protocol, reading the authority, currency and subsequent history, and when to stop
-- `references/citation-verification.md` — the no-fabricated-citation rail, how fabrication happens, the sanctions record, the verifier's statuses and what each requires, manual verification routes, citation anatomy, the ledger format
-- `references/memo-template.md` — the Smart Brevity research memo, brief and client-update variants, with a worked example and the ledger footer
-- `references/your-environment.md` — jurisdictions, databases, citator, memo conventions, court standing orders (fill in; the `.private.md` twin is git-ignored)
+- `references/research-method.md`: framing, the authority hierarchy, the search protocol, reading the authority, currency and subsequent history, and when to stop
+- `references/citation-verification.md`: the no-fabricated-citation rail, how fabrication happens, the sanctions record, the verifier's statuses and what each requires, manual verification routes, citation anatomy, the ledger format
+- `references/memo-template.md`: the Smart Brevity research memo, brief and client-update variants, with a worked example and the ledger footer
+- `references/your-environment.md`: jurisdictions, databases, citator, memo conventions, court standing orders (fill in; the `.private.md` twin is git-ignored)
 
 ## Scripts
 > Paths use `${CLAUDE_PLUGIN_ROOT}` so they resolve from **any** working directory once the plugin
 > is installed. A bare `scripts/…` path only works inside a clone of the marketplace repo.
 - `python3 "${CLAUDE_PLUGIN_ROOT}/skills/legal-citation-research/scripts/verify_legal_citation.py" <brief.docx|memo.md|text.txt> [--json] [--offline] [--token-file PATH]`,
-  or `--cite "<citation>"` (repeatable) — parses case citations offline with a compact reporter
+  or `--cite "<citation>"` (repeatable): parses case citations offline with a compact reporter
   table derived from the Free Law Project's reporters-db (BSD-2-Clause, license text shipped beside the table; spacing and period variants
   and the known variant spellings all resolve), classifies statutes, regulations, rules and
   Westlaw/Lexis database cites with the place to verify each, and with `COURTLISTENER_API_TOKEN`
   set POSTs the text to CourtListener's citation-lookup endpoint. Statuses: VERIFIED (a decision
-  came back, with case name, date and URL), NOT FOUND (well-formed, absent from the corpus — the
+  came back, with case name, date and URL), NOT FOUND (well-formed, absent from the corpus, the
   fabrication signal), AMBIGUOUS (several decisions; listed), UNRECOGNIZED (reporter not known to
   CourtListener), UNVERIFIED (no token, no network, rate-limited, malformed reply, or a 200 with no
-  decision attached — never a false VERIFIED). Every non-verified case citation prints the manual
+  decision attached; never a false VERIFIED). Every non-verified case citation prints the manual
   route. Exit 0 all verified (or nothing found by either parser after CourtListener answered), 1
-  any NOT FOUND / AMBIGUOUS / UNRECOGNIZED, 3 any UNVERIFIED — including a document scan in which
-  no case citation parsed locally and CourtListener was not consulted or did not answer — 2
+  any NOT FOUND / AMBIGUOUS / UNRECOGNIZED, 3 any UNVERIFIED (including a document scan in which
+  no case citation parsed locally and CourtListener was not consulted or did not answer), 2
   unreadable input. The token is read from the environment or a file, is sent only as
   the `Authorization` header, and is never printed. `--self-test` runs the parser fixtures and a
   local mock of the endpoint, including a fabricated citation that must come back NOT FOUND, a

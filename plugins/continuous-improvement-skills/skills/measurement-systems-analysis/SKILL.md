@@ -3,9 +3,9 @@ name: measurement-systems-analysis
 description: >-
   Answers two questions no metric-driven decision should skip: can this measurement be trusted,
   and is the process capable?
-  Part A runs Gage R&R — a crossed study (10 parts × 3 operators × 3 trials, blind and
+  Part A runs Gage R&R (a crossed study (10 parts × 3 operators × 3 trials, blind and
   randomized) decomposed by ANOVA into repeatability, reproducibility, and part-to-part
-  variation, judged on %GRR and ndc — plus attribute agreement studies for
+  variation, judged on %GRR and ndc) plus attribute agreement studies for
   pass/fail judgments, including LLM-as-judge scoring, where agreement across judges and
   repeated runs is measured before any eval score is trusted. Part B computes capability,
   Cp and Cpk against spec limits, only after stability is confirmed on a control chart.
@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.5.3"
+  version: "1.5.4"
 ---
 
 # Measurement systems analysis and process capability
@@ -26,68 +26,68 @@ metadata:
   (reproducibility) versus the real thing (part-to-part).
 - Pass/fail judgment calls that must be consistent: two reviewers scoring whether a
   reconciliation exception is "a match", audit sampling decisions, and **LLM-as-judge** eval
-  scores — including this library's own `evals/` rubrics.
+  scores: including a skill library's own `evals/` rubrics.
 - Judging a *stable* process against spec limits with Cp/Cpk, and deciding whether to center it
   or reduce its variance.
 - Not for: building the control chart that establishes stability → the SPC coverage in
   `continuous-improvement-skills:dmaic-problem-solving` (Control phase) and
-  the archived `continuous-improvement-skills:lean-six-sigma-for-software` owns the charts — stability is
+  the archived `continuous-improvement-skills:lean-six-sigma-for-software` owns the charts: stability is
   their gate; whether the stable process meets spec is this skill's question. Broad ML model
   evaluation (metric choice, cross-validation, leakage) →
   `machine-learning-skills:model-evaluation`; this skill adds the inter-rater rigor on top.
-  An "MSA" that is a *master service agreement* is a contract, not a measurement — this skill
+  An "MSA" that is a *master service agreement* is a contract, not a measurement: this skill
   never triggers on the bare acronym.
 
 ## Do it
-**Part A — can the measurement be trusted?**
+**Part A: can the measurement be trusted?**
 1. **Design the study.** Classic variable gage R&R: **10 parts × 3 operators × 3 trials**, parts
    spanning the real range of the process, presented **blind and in randomized order** so nobody
    (human or model) can remember or anchor. For pass/fail judgments run the attribute variant:
    ~30–50 items of known reference answer, each judged repeatedly by each judge
    (`references/msa-and-capability.md` §1, §4).
 2. **Decompose the variance by ANOVA** into repeatability (same operator re-measuring the same
-   part — the equipment), reproducibility (operator-to-operator), and part-to-part. The LLM runs
-   this on a pasted table — no stats package needed (§2).
+   part: the equipment), reproducibility (operator-to-operator), and part-to-part. The LLM runs
+   this on a pasted table: no stats package needed (§2).
 3. **Judge against the acceptance table:** %GRR **< 10%** and number of distinct categories
    (ndc) **≥ 5** → acceptable; 10–30% → conditional, only with a documented reason and an
    improvement plan; **> 30%** → the metric cannot support decisions; fix the measurement system
-   before touching the process (§3) — reading %GRR near a boundary settles nothing, because a
+   before touching the process (§3): reading %GRR near a boundary settles nothing, because a
    10×3×3 study estimates it loosely enough to straddle one (§3). For the pass/fail (attribute) variant the bars are κ > 0.75
-   and effectiveness ≥ 90% — but **kappa is prevalence-sensitive**, so quote it only with its base
+   and effectiveness ≥ 90% (but **kappa is prevalence-sensitive**, so quote it only with its base
    rate and its 2×2 table beside it, and never compare kappas across item sets with different base
    rates (§4a). κ is also an *estimate*, and at the low end of the 30–50 items step 1 asks for its
-   own standard error runs about **0.14–0.17** — wide enough to cross those bars. It shrinks with
+   own standard error runs about **0.14–0.17**) wide enough to cross those bars. It shrinks with
    the item count (SE scales as 1/√n, so ~0.12 by 50 items), which is the argument for the top of
    that range whenever a verdict rides on the number. Quote the interval alongside the point
    estimate either way, and treat the bars as coarse sorting rather than gates at that size (§4a).
-4. **For LLM-as-judge scoring, measure agreement before trusting scores — and define a repeat
-   trial correctly.** First, identify what the gauge's settable parameters actually *are* on your
+4. **For LLM-as-judge scoring, measure agreement before trusting scores, and define a repeat
+   trial correctly.** First, identify what the gauge's settable parameters *are* on your
    model: several current generations **reject `temperature`/`top_p`/`top_k` outright**
    (`coding-agent-skills:prompt-engineering`), so on those the gauge settings are the prompt and
-   rubric version, the effort/thinking configuration, the context policy, and the model version —
+   rubric version, the effort/thinking configuration, the context policy, and the model version,
    not decoding parameters. Where the knobs do not exist, the traps below still apply, with those
    settings substituted for "temperature". Hold the configuration fixed (model version, prompt,
-   decoding parameters where they exist —
+   decoding parameters where they exist:
    *the one you will ship*) and get your repeat signal by re-randomizing **presentation**: swap the
    A/B order and require the verdict to hold, re-shuffle item order, score each item in a fresh
-   context. Do **not** vary temperature between trials — that changes the gauge rather than
-   re-measuring the part — and do not report the ~100% self-agreement a greedy/temperature-0 judge
+   context. Do **not** vary temperature between trials (that changes the gauge rather than
+   re-measuring the part) and do not report the ~100% self-agreement a greedy/temperature-0 judge
    produces as repeatability; determinism is an operator with perfect memory, which is exactly what
    the blinding rule in step 1 exists to defeat (§5a). Then run a second judge **from a different
    model family** and a human-adjudicated reference, and test the three operator-specific biases:
-   **position/order**, **verbosity**, and **self-preference** — never let the model that produced
+   **position/order**, **verbosity**, and **self-preference**, never let the model that produced
    the candidates be their only judge (§5b). Compute agreement as an attribute study (kappa,
    effectiveness), reporting each 2×2 table and base rate (§4a). If the judge can't agree with
    itself under a fixed configuration, its scores can't rank anything.
-**Part B — is the process capable?**
+**Part B: is the process capable?**
 5. **Confirm stability first.** Capability math assumes one process with one σ; an out-of-control
    process isn't one process. Point to the control chart (SPC coverage above) showing in-control
    before computing anything.
 6. **Compute Cp = (USL − LSL) / 6σ** (potential, spread only) and **Cpk = min(USL − μ, μ − LSL) /
-   3σ** (actual — penalizes running off-center). Worked example in §6–§7.
+   3σ** (actual: penalizes running off-center). Worked example in §6–§7.
 7. **Judge against the owner's threshold and improve in order:** 1.33 is the customary automotive
-   floor. **Center first** (usually a free adjustment — Cpk rises toward Cp), **then reduce
-   variance** (expensive — raises both). The human gate: spec limits and acceptance thresholds
+   floor. **Center first** (usually a free adjustment: Cpk rises toward Cp), **then reduce
+   variance** (expensive: raises both). The human gate: spec limits and acceptance thresholds
    are business decisions the process owner sets, never numbers the analyst back-solves from data.
 
 ## Why / learn
@@ -97,38 +97,38 @@ and you end up tuning the ruler. That is why measurement systems analysis (the A
 lineage) comes *before* improvement: Gage R&R splits the measurement share into repeatability
 (the gauge) and reproducibility (the people), telling you whether to fix the instrument or the
 instructions. The ndc statistic says how many distinct groupings of parts the system can
-resolve — below 5, the metric is closer to a coin than a caliper. Capability has its own lineage
-— Cp from Juran, Cpk formalized by Kane (Journal of Quality Technology, written at Ford)
-[snippet-only] — and its own trap: Cp measures spread against the spec width, so a badly
+resolve: below 5, the metric is closer to a coin than a caliper. Capability has its own lineage
+(Cp from Juran, Cpk formalized by Kane (Journal of Quality Technology, written at Ford)
+[snippet-only]) and its own trap: Cp measures spread against the spec width, so a badly
 off-center process can carry a flattering Cp while shipping scrap; Cpk is the honest one because
 it measures the *nearer* spec edge. Both are meaningless without stability, since an unstable
 process has no single σ to plug in. The attribute-agreement variant is an old AIAG procedure that
 is arguably the missing rigor for LLM evaluation: an LLM judge is just an operator, so before its
-scores drive decisions, it owes the same evidence a human inspector owes — agreement with itself
+scores drive decisions, it owes the same evidence a human inspector owes: agreement with itself
 on repeat, agreement with its peers, agreement with a reference. Concretely: before claiming new
 matching rules "raised the match rate", show two runs and two reviewers score the same exceptions
 the same way, or the gain may be reader noise. What once needed Minitab literacy the LLM now does
-from a pasted table — the thresholds and spec limits stay human.
+from a pasted table: the thresholds and spec limits stay human.
 
 Take that "just an operator" claim seriously and it pays twice, because the frame does not only
-transfer the *procedure* — it predicts the *failure modes* and already contains their controls. A
+transfer the *procedure*: it predicts the *failure modes* and already contains their controls. A
 judge that prefers whichever answer sits first is a gauge whose reading depends on how the part was
 presented, which is why the answer is to swap the order and demand consistency: that swap is a
 same-part re-measurement, i.e. a repeat trial in the strict Gage R&R sense, and it happens to test
 the best-documented weakness LLM judges have. A judge that rewards length is a gauge biased by a
 nuisance characteristic of the part, caught by stratifying effectiveness against a reference rather
 than by inspecting agreement. A model grading its own output is an operator with a stake in the
-part — the reason inspection is kept independent of production in every quality system ever built,
+part: the reason inspection is kept independent of production in every quality system ever built,
 long before anyone had a language model to worry about.
 
 The chance-correction statistic deserves the same scepticism the skill applies to everything else.
-Raw percent agreement flatters, so kappa is the right instinct — but kappa's correction is built
+Raw percent agreement flatters, so kappa is the right instinct, but kappa's correction is built
 from the raters' marginal rates, and **skewed marginals depress it**, the "high agreement but low
 kappa" paradox (Feinstein & Cicchetti, 1990) [snippet-only, cross-checked]. The same six
 disagreements out of thirty items score κ ≈ 0.52 on a 70%-pass set and κ = 0.60 on a balanced one,
 with nothing about the raters changed. So a hard verdict drawn off a bare kappa repeats, one level
 up, the error of drawing one off a bare percentage: report p_o, the base rate, and the 2×2 table
-together — the table is four numbers and every statistic is a lossy summary of it. And balance the
+together: the table is four numbers and every statistic is a lossy summary of it. And balance the
 item set with borderline cases, which the study design already asks for on diagnosticity grounds
 and which happens to be the cleanest mitigation for the paradox too.
 
@@ -171,18 +171,18 @@ and which happens to be the cleanest mitigation for the paradox too.
 Record in `references/your-environment.md` the metrics you decide on, how each is
 measured (system, query, reviewer), the judges/reviewers involved, and the owner-set spec limits
 and thresholds (use `your-environment.private.md`, which is git-ignored, for real system names,
-limits, or reviewer names). Never commit real transaction or personnel data — structure only.
+limits, or reviewer names). Never commit real transaction or personnel data: structure only.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/measurement-systems-analysis.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/measurement-systems-analysis.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/msa-and-capability.md — study designs, the ANOVA decomposition explained, the
+- references/msa-and-capability.md: study designs, the ANOVA decomposition explained, the
   %GRR/ndc acceptance table, kappa's prevalence sensitivity read off the 2×2 table, the
   LLM-as-judge agreement protocol as a worked example with what counts as a repeat trial and the
   position/verbosity/self-preference biases mapped to their MSA controls, and Cp/Cpk
   math with the stability precondition and an off-center worked example
-- references/your-environment.md — your metrics, measurement systems, judges, and spec limits
+- references/your-environment.md: your metrics, measurement systems, judges, and spec limits

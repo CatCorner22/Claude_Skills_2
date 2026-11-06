@@ -12,13 +12,13 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.4.2"
+  version: "1.4.3"
 ---
 
 # DuckDB local analytics
 
 ## When to use
-- Joining, filtering, or aggregating CSV/Parquet/Excel files with SQL on your own machine —
+- Joining, filtering, or aggregating CSV/Parquet/Excel files with SQL on your own machine:
   reconciliations across exports, million-row aggregations, repeatable analysis queries.
 - Datasets that make Excel crawl or pandas run out of memory.
 - Not for: SQL *language* skills (joins, windows, CTEs) → see
@@ -29,7 +29,7 @@ metadata:
 1. **Install and open.** `pip install duckdb` (Python) or the standalone CLI. In-memory for
    ad-hoc work (`duckdb.connect()`); a file (`duckdb.connect("analysis.duckdb")`) when you want
    tables to persist between sessions.
-2. **Query files directly — they behave as tables:**
+2. **Query files directly; they behave as tables:**
 
 ```sql
 SELECT bank, count(*) AS n, sum(amount) AS total
@@ -44,7 +44,7 @@ SELECT * FROM read_parquet('data/tx_2026-*.parquet');
 SELECT * FROM read_xlsx('report.xlsx', sheet='Detail');
 ```
 
-3. **Fix auto-detection where it guesses wrong** — the same landmines as any CSV load: force ID
+3. **Fix auto-detection where it guesses wrong.** The same landmines as any CSV load apply: force ID
    columns to text and declare formats instead of accepting the sniffers' guess:
 
 ```sql
@@ -52,7 +52,7 @@ SELECT * FROM read_csv('export.csv', header=true, delim=';',
     types={'account_id':'VARCHAR'}, dateformat='%d/%m/%Y');
 ```
 
-4. **Join across files like tables** — this replaces the VLOOKUP chain:
+4. **Join across files like tables.** This replaces the VLOOKUP chain:
 
 ```sql
 -- Guard FIRST: a NULL or blank join key can never match anything, so it lands in the break
@@ -84,18 +84,18 @@ SELECT count(*) FILTER (WHERE stmt_only)   AS stmt_only,
 ```
 
    **Why the marker and not the key.** `USING (ref_no)` coalesces the key column, which reads
-   as "so it can never be NULL in the result" — and that is false. A NULL key never *matches*,
+   as "so it can never be NULL in the result". That is false. A NULL key never *matches*,
    so the row still comes through the FULL OUTER JOIN with the coalesced `ref_no` NULL, and
-   `l.ref_no IS NULL` and `s.ref_no IS NULL` are then **both true**. Verified in DuckDB 1.5.5:
+   `l.ref_no IS NULL` and `s.ref_no IS NULL` are then **both true**. In DuckDB 1.5.5,
    one statement row with a blank `ref_no` is counted once as `stmt_only` and again as
-   `ledger_only` — the same row inflating both sides of the break report, while claiming to
+   `ledger_only`: the same row inflates both sides of the break report, claiming to
    exist only in the statement *and* only in the ledger. Deriving each flag from a marker that
    exists solely on its own side (`in_stmt` / `in_ledger`, or any column guaranteed non-null
    there) cannot produce that contradiction. The guard above stops the unkeyed rows from
    reaching the join at all, so they are reported as what they are.
 
 5. **Persist results where the next step needs them.** `COPY recon TO 'recon.parquet'` (compact,
-   typed — the best interchange format), `COPY ... TO 'out.csv' (HEADER)` for spreadsheet users,
+   typed, the best interchange format), `COPY ... TO 'out.csv' (HEADER)` for spreadsheet users,
    or keep tables in the .duckdb file. In Python, `con.sql(q).df()` hands the result to pandas
    for plotting; `duckdb.sql("... FROM df")` queries an existing DataFrame with zero copying.
 6. **Make the analysis a script, not a session.** Save the queries in a .sql file (CLI:
@@ -104,16 +104,16 @@ SELECT count(*) FILTER (WHERE stmt_only)   AS stmt_only,
    `references/duckdb-recipes.md` covers window-function recipes, larger-than-memory settings,
    and pandas interop.
 7. **Sanity-check:** row counts per source, control totals, and the unmatched counts
-   from any join — SQL makes wrong answers fast too. The assistant writes the SQL and the script;
+   from any join; SQL makes wrong answers fast too. The assistant writes the SQL and the script;
    the human supplies the control totals and adjudicates any reconciliation breaks.
 
 ## Why / learn
 DuckDB fills the gap between "too big for a spreadsheet" and "not worth a database server": an
 in-process, columnar SQL engine, so the *files are the database* and the query is the analysis.
-That inversion is the point — instead of importing data into a tool, you point the engine at the
+That inversion is the point: instead of importing data into a tool, you point the engine at the
 data where it lies, which makes the workflow reproducible (paths + SQL text = the whole analysis)
 and reviewable (a colleague reads one query instead of tracing formula chains across tabs). It's
-fast for analytics because columnar execution reads only the columns a query touches — which is
+fast for analytics because columnar execution reads only the columns a query touches, which is
 also why Parquet (columnar on disk) is its natural partner and why converting a big CSV to
 Parquet once pays back every subsequent query. And because it's still SQL over inferred schemas,
 the flat-file disciplines carry over unchanged: declare types where inference can lie (IDs!),
@@ -135,10 +135,10 @@ and the recurring analysis scripts. **Never commit the data files themselves.**
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/duckdb-local-analytics.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/duckdb-local-analytics.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/duckdb-recipes.md — window functions, pivots, larger-than-memory settings, pandas/Parquet interop
-- references/your-environment.md — your datasets, conversions, and saved analyses (fill in)
+- references/duckdb-recipes.md: window functions, pivots, larger-than-memory settings, pandas/Parquet interop
+- references/your-environment.md: your datasets, conversions, and saved analyses (fill in)

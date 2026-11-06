@@ -10,7 +10,7 @@ for that, and the instrument publishes its own workings so a disputed grade can 
 - §3 The band tables (one per axis, and why they differ)
 - §4 The cap ladder
 - §5 INCOMPLETE, NOT-GRADED, and precedence
-- §6 Interlock flags — and the ban on a composite grade
+- §6 Interlock flags, and the ban on a composite grade
 - §7 What forces an F; what earns an A+
 - §8 The highest-leverage fix, computed
 - §9 The output contract
@@ -31,7 +31,7 @@ Two obvious designs both fail:
 **The resolution:** a compensatory weighted *rate* over the whole ledger, capped by a
 non-compensatory ladder that fires only on the small, pre-registered set of **load-bearing** claims.
 
-**The second-order rule that makes it reproducible — cap severity tracks coding objectivity.**
+**The second-order rule that makes it reproducible: cap severity tracks coding objectivity.**
 The harshest caps sit on the most objectively codeable failures (does the source exist? does its
 conclusion invert?), and the gentlest on the most judgment-laden. Let facts cap; let judgments
 average.
@@ -44,7 +44,7 @@ On the padded video above: allowed = 0.25 × 30 / 0.75 = 10, aside points 195 �
 10/40 = **0.2500 → F**. On an honest aside-heavy video (4 load-bearing + 5 supporting + 30 asides,
 all faithful) the rescale fires and the score stays **1.0000 → A+**, because rescaling a class whose
 fidelity matches the core changes nothing. The cap bites only when aside fidelity diverges from core
-fidelity — exactly the case it exists for.
+fidelity, exactly the case it exists for.
 
 ---
 
@@ -55,19 +55,19 @@ claims purely from granularity choices; a count threshold ("3+ reversals → C")
 auditor. Counts are used *only* inside the cap ladder, where the denominator is the small,
 pre-registered load-bearing set.
 
-**Accuracy** — fidelity of representation.
+**Accuracy**: fidelity of representation.
 `A_raw = Σ(wᵢ · pᵢ) / Σ(wᵢ)` over all **checkable** claims, where `w` is the weight and `p` the
 fidelity score from the ladder (F0 = 1.00, F1 = 0.85, F2/F2u = 0.50, F3/F3s = 0.25, F4 = 0.10,
 F5/F6 = 0.00). Claims coded `NC` (not checkable) are **excluded from the denominator**, never scored
-zero — an unreachable source is not the video's failure.
+zero: an unreachable source is not the video's failure.
 
-**Comprehensiveness** — `C_raw = items satisfied / items applicable` over the bounded checklist in
+**Comprehensiveness**: `C_raw = items satisfied / items applicable` over the bounded checklist in
 `claim-audit-method.md` §5, scored per load-bearing claim, `N/A` items dropped from the denominator.
 
-**Statistics** — its own pass, not a derivative of the fidelity codes. Enumerate every statistical
+**Statistics**: its own pass, not a derivative of the fidelity codes. Enumerate every statistical
 statement in the transcript; score each against the taxonomy: 1.00 clean, 0.50 incomplete
-(technically true, materially misleading — e.g. relative with no baseline), 0.00 wrong (a number or
-interpretation that is simply incorrect). `S_raw = Σ points / count`. A claim can be F0 on accuracy
+(technically true, materially misleading, e.g. relative with no baseline), 0.00 wrong (a number or
+interpretation that is incorrect). `S_raw = Σ points / count`. A claim can be F0 on accuracy
 and 0.00 here; that independence is the reason the axis exists.
 
 ---
@@ -75,7 +75,7 @@ and 0.00 here; that independence is the reason the axis exists.
 ## §3 The band tables
 
 Each axis needs its **own** table. Sharing one is a hidden calibration error: the comprehensiveness
-checklist is demanding by construction, so genuine well-made explainers land around 25–45%, and
+checklist is demanding by construction, so well-made explainers land around 25–45%, and
 under the accuracy table essentially the whole population would score F. A scale with no
 discrimination is not a scale.
 
@@ -96,7 +96,7 @@ discrimination is not a scale.
 | F | < .40 | < .20 | < .25 |
 
 Worked check: `C_raw = 7/28 = 0.2500` scores **F** on the accuracy table and **D-** on the
-comprehensiveness table. D- is the informative answer — it leaves room below it for a video that
+comprehensiveness table. D- is the informative answer: it leaves room below it for a video that
 discloses nothing at all.
 
 **Know the scale's asymmetry.** A through D- are 0.03–0.08 wide; F absorbs the whole bottom 0.40.
@@ -126,14 +126,14 @@ Caps apply to the **load-bearing** set. Take the worst that fires; the final let
 
 ## §5 INCOMPLETE, NOT-GRADED, and precedence
 
-**NOT-GRADED** — the audit could not run: video unreachable, no transcript obtainable, or the video
+**NOT-GRADED**: the audit could not run: video unreachable, no transcript obtainable, or the video
 makes no checkable claims (a vlog, an opinion piece, entertainment). This is not a bad grade; it is
 the wrong instrument or a missing input, and the report says which.
 
-**INCOMPLETE** — the audit ran but the evidence is too thin for a rate: fewer than 5 checkable
+**INCOMPLETE**: the audit ran but the evidence is too thin for a rate: fewer than 5 checkable
 claims, or more than 50% of load-bearing sources at tier T0/T1 (see acquisition §4).
 
-**Precedence, applied in this order — caps override INCOMPLETE downward; INCOMPLETE overrides
+**Precedence, applied in this order: caps override INCOMPLETE downward; INCOMPLETE overrides
 scores upward:**
 
 1. If a hard cap fires on **verified** evidence, emit that letter regardless of the sample floor,
@@ -143,7 +143,7 @@ scores upward:**
 
 The asymmetry is deliberate: **proven failure is knowledge; thin evidence is not.** A 90-second
 short with three claims, one citing a paper that does not exist, gets an F on accuracy with the
-thin-sample annotation — reporting INCOMPLETE there would hide a proven fabrication. But a thin
+thin-sample annotation, reporting INCOMPLETE there would hide a proven fabrication. But a thin
 sample may **never** manufacture a *high* grade.
 
 ---
@@ -158,13 +158,13 @@ because a downstream reader or summariser will otherwise compute one.
 
 Cross-axis information is carried by **named flags**, printed above the grades:
 
-- **SELECTION-DISTORTED** — accuracy ≥ A- while comprehensiveness ≤ C+. Faithful representation of
+- **SELECTION-DISTORTED**: accuracy ≥ A- while comprehensiveness ≤ C+. Faithful representation of
   an unrepresentative source set. This is the cherry-picker.
-- **FAITHFUL-TO-BAD-SOURCE** — accuracy ≥ B+ while a load-bearing source is retracted or has a
+- **FAITHFUL-TO-BAD-SOURCE**: accuracy ≥ B+ while a load-bearing source is retracted or has a
   documented failed replication. The video reported honestly; the evidence base did not hold.
-- **TRIVIALLY-ACCURATE** — accuracy in the A range on fewer than 10 checkable claims. Accurate about
+- **TRIVIALLY-ACCURATE**: accuracy in the A range on fewer than 10 checkable claims. Accurate about
   very little.
-- **UPSTREAM-DISTORTION** — the exaggeration is present in the source's own press release and the
+- **UPSTREAM-DISTORTION**: the exaggeration is present in the source's own press release and the
   video repeated it. A failure to check, not an act of invention.
 
 ---
@@ -174,14 +174,14 @@ Cross-axis information is carried by **named flags**, printed above the grades:
 **Forces an F:** any fabricated load-bearing claim; reversal on ≥50% of load-bearing claims; or a
 score below the axis floor (accuracy < .40, comprehensiveness < .20, statistics < .25).
 
-**Earns an A+ — all four, so it is achieved rather than defaulted:**
+**Earns an A+ (all four, so it is achieved rather than defaulted):**
 1. Score at or above the A+ threshold for that axis.
 2. Zero F2-or-worse codes in **any** weight class.
 3. At least 10 checkable claims audited.
 4. The video must **affirmatively do the good thing**, not merely avoid the bad one:
-   - *Accuracy* — volunteers at least one limitation of its own source.
-   - *Comprehensiveness* — steelmans the opposing view at least once.
-   - *Statistics* — translates its own headline statistic to an absolute scale in its own words
+   - *Accuracy*: volunteers at least one limitation of its own source.
+   - *Comprehensiveness*: steelmans the opposing view at least once.
+   - *Statistics*: translates its own headline statistic to an absolute scale in its own words
      (baseline plus absolute change, or an NNT, or natural frequencies).
 
 Both ends must be reachable, or the scale is decoration.
@@ -194,7 +194,7 @@ Do not guess what the creator should fix. **Compute it:** for each claim and eac
 statement, re-run the score with that unit set to clean, re-apply the cap ladder, and report the
 unit whose repair produces the largest band gain.
 
-This is not busywork — it routinely overturns the intuitive answer. In testing, repairing the
+This is not busywork: it routinely overturns the intuitive answer. In a worked case, repairing the
 *obvious* defect (adding the baseline risk alongside the relative figure) gained **zero bands**,
 because a separate wrong-number cap survived the repair; a different, less obvious repair moved the
 grade four bands. An auditor eyeballing "what should they fix" would have given the wrong advice
@@ -222,9 +222,9 @@ NO COMPOSITE GRADE — see §6.
 two auditors who differ by a single claim look like they disagree about the grade when they
 actually agree about the video.
 
-This block is **section 3** of the six-section report. The full deliverable — executive summary,
+This block is **section 3** of the six-section report. The full deliverable (executive summary,
 hyper-thorough analysis, this grade block, the statistics breakdown, the independent research
-findings, and a linked conclusion — is specified in `report-template.md`, including the rule that
+findings, and a linked conclusion) is specified in `report-template.md`, including the rule that
 all six headings survive a `NOT-GRADED` or `INCOMPLETE` outcome rather than collapsing to a
 one-line apology.
 
@@ -234,12 +234,12 @@ one-line apology.
 
 **Stated plainly so it is not inherited as a stronger claim than it is: this rubric's inter-rater
 reproducibility has not been validated.** It was designed for reproducibility and its arithmetic,
-cap interactions, and band behaviour were verified by execution — but no two independent auditors
+cap interactions, and band behaviour were verified by execution, but no two independent auditors
 have run it on a real video. Treat the agreement targets below as design goals, not measurements,
 and say so if you report a grade to someone who might treat it as calibrated.
 
-**Do not gate this instrument on kappa alone.** Grade distributions are skewed — most audited videos
-land B through C — and weighted kappa collapses on skewed marginals. A rater pair agreeing exactly
+**Do not gate this instrument on kappa alone.** Grade distributions are skewed (most audited videos
+land B through C), and weighted kappa collapses on skewed marginals. A rater pair agreeing exactly
 85% of the time and within one band 100% of the time can produce κ_w = 0.000, while the *same* rater
 behaviour on a spread corpus gives κ_w ≈ 0.98. This is the high-agreement/low-kappa paradox that
 `continuous-improvement-skills:measurement-systems-analysis` documents for measurement systems

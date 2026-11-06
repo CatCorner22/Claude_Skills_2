@@ -2,7 +2,7 @@
 
 Fill this in with your real conventions so meeting design starts from your actual
 forums. Keep it **structural**: no named attendees, no org politics, no client data.
-Anything sensitive goes in `your-environment.private.md` — that suffix is git-ignored
+Anything sensitive goes in `your-environment.private.md`; that suffix is git-ignored
 and never committed.
 
 ## Forums and their defaults
@@ -19,7 +19,7 @@ and never committed.
 - House length bound: <e.g., 2 pages / 6 pages>
 - Silent reading budget: <e.g., 10 min>
 - Where pre-reads live: <folder / channel>
-- Sent how far ahead: <e.g., 24h — reading still happens in the room>
+- Sent how far ahead: <e.g., 24h; reading still happens in the room>
 
 ## Async channel of record
 - Status and FYIs flow to: <channel / doc>

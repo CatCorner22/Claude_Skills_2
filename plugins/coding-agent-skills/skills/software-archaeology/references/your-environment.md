@@ -3,16 +3,16 @@
 Wire in your current systems here so a dig starts from your real terrain instead of
 generic advice. Keep this file **structural** — patterns and locations, not secrets.
 Anything sensitive (real hostnames, owners, access details, client or employer specifics)
-goes in `your-environment.private.md` — that suffix is git-ignored and never committed.
+goes in `your-environment.private.md`; that suffix is git-ignored and never committed.
 
 ## Likely dig sites
-- <accreted system 1 — e.g., the main application repo's config tree>
-- <accreted system 2 — e.g., the scheduled-job definitions>
-- <accreted system 3 — e.g., the shared-drive document corpus / wiki>
+- <accreted system 1, e.g., the main application repo's config tree>
+- <accreted system 2, e.g., the scheduled-job definitions>
+- <accreted system 3, e.g., the shared-drive document corpus / wiki>
 
 ## Where the dating evidence lives
 - Version-control history: <repo host; any known history breaks (migrations, squashes)>
-- Runtime evidence: <log system, access records, job-run history — and their retention windows>
+- Runtime evidence: <log system, access records, job-run history, and their retention windows>
 - Reference/dependency extraction: <how to list who-references-whom in each site>
 
 ## Known eras (grow this as digs discover them)

@@ -8,12 +8,12 @@ Contents:
 4. [The physics-vs-policy constraint audit](#4-the-physics-vs-policy-constraint-audit)
 5. [Worked example — deadline vs quality vs scope](#5-worked-example--deadline-vs-quality-vs-scope)
 
-Provenance: the method operationalizes documented practice — no-win patient-death
+Provenance: the method operationalizes documented practice: no-win patient-death
 simulation in emergency-medicine education (a randomized pilot at the University of
 Maryland MASTRI Center, reported as a research-forum abstract in *Annals of Emergency
 Medicine*, 2014: residents in the death arm reported feeling more prepared one month
 later, with no evident harm; small n, self-reported outcome, and the wider simulated-death
-literature is mixed — treat it as suggestive), EMS Kobayashi-Maru stress-training
+literature is mixed; treat it as suggestive), EMS Kobayashi-Maru stress-training
 [practitioner], and sanctioned adversarial reframing in cyber education [peer-reviewed,
 Conti & Caroland, "Embracing the Kobayashi Maru," IEEE Security & Privacy, 2011]. The
 drill mechanics below are the house implementation of those sources' mechanisms, not
@@ -22,11 +22,11 @@ claims from the sources themselves.
 ## 1. Design rules — closing every exit honestly
 
 A no-win drill fails at design time in exactly one way: a door is left open. Humans
-designing their own drills leave doors open unconsciously — the designer's mind
+designing their own drills leave doors open unconsciously: the designer's mind
 protects itself with an imagined escape. So design is the LLM's job, and the rules are
 mechanical:
 
-**Rule 1 — inventory the doors.** Before writing the drill, list every generic exit a
+**Rule 1: inventory the doors.** Before writing the drill, list every generic exit a
 player might reach for:
 - more resources (budget, people, compute, a favor)
 - more time (deadline slip, extension, stalling)
@@ -36,30 +36,30 @@ player might reach for:
 - quiet scope redefinition (deliver less and call it done)
 - refusing to play (resign the situation to someone else)
 
-**Rule 2 — close each door diegetically.** Every closure needs a believable in-world
-mechanism, not fiat. "The vendor cannot help" is fiat; "the vendor's own region is down
-— that is why yours is" is diegetic. Fiat closures make players argue with the drill
+**Rule 2: close each door diegetically.** Every closure needs a believable in-world
+mechanism, not fiat. "The vendor cannot help" is fiat; "the vendor's own region is down;
+that is why yours is" is diegetic. Fiat closures make players argue with the drill
 instead of deciding inside it.
 
-**Rule 3 — conservation of loss.** Write the drill so that every strategy loses
+**Rule 3: conservation of loss.** Write the drill so that every strategy loses
 something irreplaceable, and the losses differ in *kind*, not just size. If all paths
 lose the same thing, there is no ordering decision to train. State privately (designer's
 note, revealed at debrief) what each candidate strategy costs.
 
-**Rule 4 — the clean-exit test.** Before play, the LLM switches sides and attempts to
+**Rule 4: the clean-exit test.** Before play, the LLM switches sides and attempts to
 win its own drill three different ways, in writing. Any strategy that escapes without a
 loss of kind is a door: close it or re-scope the drill. Only after the drill survives
 its own designer's attack is it ready to run.
 
-**Rule 5 — real but bounded stakes.** The drill draws from the player's actual domain
+**Rule 5: real but bounded stakes.** The drill draws from the player's actual domain
 (that is what makes the emotional debrief worth having) but stays fictional in its
 particulars: no real client names, no real colleague cast as the failure. Time-box the
-whole exercise; futility without an end time is just misery.
+whole exercise; futility without an end time is misery.
 
 ## 2. The escalation script
 
 The environment is played by the LLM as a sequence of beats. Escalation is scripted;
-player consequences are adjudicated. No punishing randomness — the drill is unwinnable
+player consequences are adjudicated. No punishing randomness: the drill is unwinnable
 by structure, not by dice.
 
 | Beat | Environment move | What it trains |
@@ -72,7 +72,7 @@ by structure, not by dice.
 | 6. Terminal decision | The final least-worst choice, executed | Owning a costed loss out loud |
 
 Running notes for the LLM:
-- Every player decision gets a consequence inside the next beat — silence from the
+- Every player decision gets a consequence inside the next beat; silence from the
   environment reads as safety and re-opens doors.
 - Beat 4's tempting door is load-bearing: players who take it should discover the cost
   in-drill, not at debrief. Testing doors is good process; assuming a door works because
@@ -80,7 +80,7 @@ Running notes for the LLM:
 - At beat 5 the environment *announces* futility rather than letting players infer it.
   The training target is what they do after they know, not how long denial lasts.
 - Communication is part of play: if there are stakeholders in the fiction (a customer, a
-  boss, a patient's family), the players must actually compose what they tell them.
+  boss, a patient's family), the players must compose what they tell them.
 
 ## 2b. The participation contract (agree it before the first inject)
 
@@ -91,11 +91,11 @@ is a real cost, and it is only defensible when the person chose it knowing what 
 Five terms, stated at the briefing, not buried in a document:
 
 1. **Participation is voluntary, and anyone may withdraw at any point without explaining
-   why.** Say it in those words. A right to withdraw that costs a justification is not one —
+   why.** Say it in those words. A right to withdraw that costs a justification is not one,
    and in a drill about futility, "I need to stop" is exactly the signal you must not make
    expensive.
 2. **Screen for recent lived experience of the scenario.** Someone who has just been through
-   the real version — the layoff, the loss, the failed close, the death — is not getting a
+   the real version (the layoff, the loss, the failed close, the death) is not getting a
    rehearsal, they are getting a re-run. Ask privately before the drill, offer the observer
    seat, and take "not this one" at face value without a reason. This is the screen most
    likely to be skipped and most likely to cause harm.
@@ -103,15 +103,15 @@ Five terms, stated at the briefing, not buried in a document:
    up is not performance data, does not reach a manager or a file, and is not referred to
    afterwards outside the debrief. Say what will be written down and what will not.
 4. **Separate the debriefer from the assessor where you can.** If the drill is being scored
-   at all, the person running the emotional debrief should not be the person grading — the
+   at all, the person running the emotional debrief should not be the person grading. The
    two roles ask for opposite things from the participant, and combining them quietly turns
    candour into evidence.
 5. **Name the stop and the escalation before you start.** One person can halt the drill
-   instantly; anyone may call it (the shared abort phrase — **"REAL WORLD, REAL WORLD"** —
+   instantly; anyone may call it (the shared abort phrase **"REAL WORLD, REAL WORLD"**
    from `decision-science-skills:tabletop-wargaming`'s exercise-control section applies here
    too). And if someone is genuinely distressed rather than usefully uncomfortable, the drill
    stops, the debrief becomes a conversation, and the facilitator points to whatever real
-   support exists — occupational health, EAP, a manager, a clinician. A facilitator who
+   support exists: occupational health, EAP, a manager, a clinician. A facilitator who
    cannot tell those apart should not run this drill.
 
 The distinction the whole contract rests on: this drill is meant to be *uncomfortable*, and
@@ -119,44 +119,44 @@ is not meant to be *harmful*. Discomfort is the mechanism; harm is a design fail
 
 ## 3. The debrief protocol — process, not outcome
 
-The debrief is where the educational benefit of a death scenario is realized — the
+The debrief is where the educational benefit of a death scenario is realized; the
 medical-simulation literature centers debriefing, not the scenario itself
 [industry, healthcare-simulation practice]. Run it in three passes, in order:
 
-**Pass 1 — facts.** Reconstruct the timeline without evaluation: what was known at each
+**Pass 1: facts.** Reconstruct the timeline without evaluation: what was known at each
 beat, what was decided, what it cost. No adjectives.
 
-**Pass 2 — process grades.** Four dimensions, each graded on the record from pass 1:
+**Pass 2: process grades.** Four dimensions, each graded on the record from pass 1:
 
 | Dimension | Anchor question |
 |---|---|
 | Loss-minimization | Was total loss bounded and were losses compared across paths before choosing? |
-| Save order | Was an explicit ordering of what to save declared *before* acting — or reverse-engineered after? |
+| Save order | Was an explicit ordering of what to save declared *before* acting, or reverse-engineered after? |
 | Communication under futility | Were stakeholders told the truth at beat 5, or managed with false comfort? |
 | Frame honesty | Were any success redefinitions declared aloud (legitimate) or slipped in silently (concealment)? |
 
 Say the calibration sentence out loud every time: *a high process grade with a
 total-loss outcome is this drill working as designed.* Outcome grading in a no-win
-drill is not merely unfair — it is meaningless, because the outcome was fixed before
+drill is not merely unfair; it is meaningless, because the outcome was fixed before
 the player entered.
 
-**Pass 3 — emotional debrief.** What did futility feel like, when did each player
+**Pass 3: emotional debrief.** What did futility feel like, when did each player
 privately conclude there was no exit, and what did that feeling tempt them toward
 (freezing, thrashing, goalpost-moving, gallows detachment)? This pass is why the drill
 exists: the first encounter with those temptations should happen where they are
-discussable. **It runs under the participation contract in §2b** — offered, never required;
+discussable. **It runs under the participation contract in §2b**: offered, never required;
 never graded; and it does not leave the room. A player who would rather not answer says so
 and the debrief moves on, because a compulsory account of your own moment of despair, given
 to colleagues, is not a debrief.
 
 ## 4. The physics-vs-policy constraint audit
 
-The Kirk blade, held honestly. Before accepting a constraint set — in a drill or in the
-real decision the drill rehearses — classify every constraint:
+The Kirk blade, held honestly. Before accepting a constraint set (in a drill or in the
+real decision the drill rehearses), classify every constraint:
 
 | Question | Physics answer | Policy answer |
 |---|---|---|
-| Who set this? | Nobody — it is how the world works | A person or institution, findable by name |
+| Who set this? | Nobody; it is how the world works | A person or institution, findable by name |
 | What breaks if it changes? | Reality does not permit the change | Somebody's expectations, budget, or precedent |
 | Who can change it? | No one | The owner, if asked or persuaded |
 
@@ -165,19 +165,19 @@ and occasionally physics mistaken for policy (a statutory date, a thermodynamic 
 a signed contract's penalty clause). The audit's product is a two-column list and, for
 each policy constraint, the name of its owner.
 
-**The transparency test.** Reframing — changing a constraint instead of optimizing
-inside it — is legitimate exactly when all three hold:
+**The transparency test.** Reframing (changing a constraint instead of optimizing
+inside it) is legitimate exactly when all three hold:
 1. **Declared before acting**: the change is announced to the people relying on the
    result, not discovered by them afterward.
-2. **Policy, not physics**: the constraint changed is genuinely somebody's decision.
+2. **Policy, not physics**: the constraint changed is somebody's decision.
    "Reframing" physics is called faking the outcome.
 3. **Owned consequences**: a named person accepts what the change costs (precedent,
-   trust, money) — the reframer, or an owner who agreed.
+   trust, money): the reframer, or an owner who agreed.
 
 Fail any one and the move is cheating: hidden changes defraud the graders; faked
 physics defrauds everyone; unowned consequences are billed to whoever trusted the
-result. This is the difference between the classroom exercise at West Point — where
-cheating was *assigned*, declared, and graded [peer-reviewed] — and actual exam fraud.
+result. This is the difference between the classroom exercise at West Point, where
+cheating was *assigned*, declared, and graded [peer-reviewed], and actual exam fraud.
 
 **The quiet Kirk move.** The commonest reframe is not hacking the simulator; it is
 silently redefining success mid-effort. The forced-declaration script, verbatim:
@@ -192,8 +192,8 @@ concealment regardless of how well it would have worked.
 ## 5. Worked example — deadline vs quality vs scope
 
 **Setup.** A team owes a compliance filing system in 6 weeks. The audit: the filing
-date is set by regulation — *physics* for this drill's purposes (the team cannot move
-it; the regulator will not). Team capacity is bounded — physics on this horizon (the
+date is set by regulation, *physics* for this drill's purposes (the team cannot move
+it; the regulator will not). Team capacity is bounded, physics on this horizon (the
 door "hire someone" is closed diegetically: onboarding exceeds the window). The
 internal quality bar (full test coverage of every module) is *policy*, owned by the
 engineering lead. The scope list (all four filing types) is *policy*, owned by the
@@ -207,15 +207,15 @@ records what each path loses in kind.
 before choosing. Example declaration: *1. correctness of anything filed (a wrong filing
 is worse than a missing one), 2. the regulator relationship, 3. team survival past the
 deadline, 4. scope breadth.* The grade attaches to declaring an order and choosing
-consistently with it — a different order, consistently applied, grades equally well.
+consistently with it; a different order, consistently applied, grades equally well.
 
 **Three least-worst paths, costed:**
 
 | Path | The move | What it saves | What it loses (in kind) | Frame honesty requirement |
 |---|---|---|---|---|
-| A. Full scope, quality debt | Ship all four filing types; cut test coverage on the two low-volume types | Scope breadth, the date | Latent-defect risk in filed output — the save order's #1 is exposed; remediation debt lands next quarter | Declaring the coverage cut to the engineering lead who owns the bar — silently skipping tests is the hidden-Kirk version |
-| B. Cut scope transparently | Ship two filing types complete; file the other two late with a declared plan | Correctness, quality bar, team | Scope breadth now; a known regulator conversation about the late pair | Declaring the descope to the product owner and the regulator *before* the date — discovered-later descope fails the test |
-| C. Reframe the deliverable | Ask the regulator whether a phased submission satisfies the requirement — changing what "the filing" means | Potentially everything material | The ask itself spends regulator goodwill; if refused, a week of the window is gone — this path has a price even when it works | The reframe targets a policy constraint (the regulator's format expectations, owner known) and is declared in the open — the legitimate Kirk move, with the fallback cost owned |
+| A. Full scope, quality debt | Ship all four filing types; cut test coverage on the two low-volume types | Scope breadth, the date | Latent-defect risk in filed output (the save order's #1 is exposed); remediation debt lands next quarter | Declaring the coverage cut to the engineering lead who owns the bar; silently skipping tests is the hidden-Kirk version |
+| B. Cut scope transparently | Ship two filing types complete; file the other two late with a declared plan | Correctness, quality bar, team | Scope breadth now; a known regulator conversation about the late pair | Declaring the descope to the product owner and the regulator *before* the date; discovered-later descope fails the test |
+| C. Reframe the deliverable | Ask the regulator whether a phased submission satisfies the requirement, changing what "the filing" means | Potentially everything material | The ask itself spends regulator goodwill; if refused, a week of the window is gone; this path has a price even when it works | The reframe targets a policy constraint (the regulator's format expectations, owner known) and is declared in the open: the legitimate Kirk move, with the fallback cost owned |
 
 **Debrief highlights for this example.** Path A chosen without informing the quality
 bar's owner grades as concealment even if nothing breaks. Path C attempted *without

@@ -1,7 +1,7 @@
 ---
 name: lean-code-principles
 description: >-
-  Applies the lean-code discipline that anchors this plugin — minimizing lines of code by
+  Applies the lean-code discipline that anchors this plugin: minimizing lines of code by
   leaning on frameworks and the standard library, YAGNI, small public surface area, deleting
   code as a feature, and judging when an abstraction pays for itself versus when it's
   speculative cost. Use when writing or reviewing application code, deciding whether to add a
@@ -10,7 +10,7 @@ description: >-
   simplify this code, too much boilerplate, do we need this abstraction, code review
   simplicity, delete code, small diff, keep it simple.
 metadata:
-  version: "1.1.4"
+  version: "1.1.5"
 ---
 
 # Lean-code principles
@@ -32,7 +32,7 @@ metadata:
    framework-native replacement; don't gesture at one: a hand-rolled `for attempt in range(3)`
    retry with `time.sleep(2 ** attempt)` becomes `httpx.Client(transport=HTTPTransport(retries=3))`
    for connect failures, or `@retry(stop=stop_after_attempt(3), wait=wait_exponential())`
-   (tenacity) when you also need to retry on a status or an exception type — both already have
+   (tenacity) when you also need to retry on a status or an exception type: both already have
    the backoff, the attempt cap, and the final-failure semantics your loop approximated.
 2. **Apply YAGNI at every decision point.** Build for the requirement in front of you, not the
    one you can imagine. No plugin systems for one implementation, no config options nobody
@@ -45,12 +45,12 @@ metadata:
 4. **Earn every abstraction** against four gates, all of which must pass. The full test,
    with the thresholds and a worked three-version example, is in
    `references/earning-abstractions.md`:
-   (1) **shared axis of change** — the copies have a history of being edited in the same
+   (1) **shared axis of change**: the copies have a history of being edited in the same
    commit for the same reason, or a document outside the code forces them to agree;
-   (2) **name and one-sentence docstring** — if the docstring needs "or" / "depending on",
-   it is more than one concept; (3) **signature projection** — add the next caller on paper,
+   (2) **name and one-sentence docstring**: if the docstring needs "or" / "depending on",
+   it is more than one concept; (3) **signature projection**: add the next caller on paper,
    and if it needs a new parameter or a boolean you are building a switchboard, not an
-   abstraction; (4) **read-through** — cover the body, read the call site, state the output.
+   abstraction; (4) **read-through**: cover the body, read the call site, state the output.
    The rule of three still applies but is not sufficient on its own: extract on the third
    occurrence **and** gate 1. A wrong abstraction is worse than duplication, because
    duplication is a visible local cost and a wrong abstraction is an invisible global one
@@ -75,7 +75,7 @@ def register(payload: SignupIn) -> User:
    −7 net, −1 exported name. Report the accounting that way in review; "simplified" without a
    number is an opinion.
 5. **Make deletion a first-class activity.** Dead code, commented-out blocks, unused deps,
-   feature flags that shipped — delete them in their own commits (git remembers). Measure PRs
+   feature flags that shipped: delete them in their own commits (git remembers). Measure PRs
    by *net* lines: a feature that adds 200 and deletes 150 is better engineering than one that
    only adds 80.
 6. **Write the obvious version first.** The straightforward loop, the plain function, the
@@ -84,7 +84,7 @@ def register(payload: SignupIn) -> User:
    every read.
 7. **Before you call it lean, check the irreversible list.** YAGNI is an argument about
    option value, so it holds only where deferring keeps the option open. One question
-   decides it: *if we skip this and turn out to be wrong, is the fix a code change — or a
+   decides it: *if we skip this and turn out to be wrong, is the fix a code change, or a
    data repair, a security disclosure, or a customer-visible incident?* A code change means
    skip it; anything else means the cost of deferral grows with every hour of traffic and
    building it now is not over-engineering. Trust-boundary validation, idempotency wherever
@@ -94,7 +94,7 @@ def register(payload: SignupIn) -> User:
    under-engineering, are in `references/earning-abstractions.md`.
 8. **Review against the checklist** in `references/lean-review-checklist.md`, the
    codified version of steps 1–7 for PR review, with the "signs of over-engineering" table
-   and the eight-part contract for what a finished lean review actually contains.
+   and the eight-part contract for what a finished lean review contains.
 
 ## Why / learn
 Every line of code is a liability with a maintenance coupon attached: it must be read,
@@ -121,7 +121,7 @@ fewer hallucinated APIs, and make agent-written diffs reviewable.
 - Code golf mistaken for lean code → fewer *owned concepts*, not fewer characters; clarity wins.
 - Hand-rolling what the framework provides → auth, validation, serialization, retries: use the platform.
 - Abstracting on the second occurrence "while I'm here" → wait for the third, and for proof they change together.
-- Config options as politeness → every option doubles the test matrix; add them when someone actually needs them.
+- Config options as politeness → every option doubles the test matrix; add them when someone needs them.
 - Keeping dead code "just in case" → git is the just-in-case; delete it.
 - Measuring productivity in lines added → net negative diffs that ship the feature are the win.
 - Clever comprehensions/metaprogramming to save lines → you saved lines and spent readability; the reader pays more.
@@ -136,14 +136,14 @@ team uses, banned patterns, and where you deliberately deviate (and why).
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/lean-code-principles.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/lean-code-principles.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/earning-abstractions.md — the four gates with thresholds, a worked example carried
+- references/earning-abstractions.md: the four gates with thresholds, a worked example carried
   through three versions with line counts, when duplication beats DRY, when an indirection is
   warranted before the third occurrence, and the under-engineering failure envelope
-- references/lean-review-checklist.md — the PR review checklist, over-engineering signs table,
+- references/lean-review-checklist.md: the PR review checklist, over-engineering signs table,
   and the deliverable contract for a finished lean review
-- references/your-environment.md — your conventions, approved deps, deviations (fill in)
+- references/your-environment.md: your conventions, approved deps, deviations (fill in)

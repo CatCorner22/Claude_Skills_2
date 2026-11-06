@@ -2,7 +2,7 @@
 
 A single improvement project worked through all five phases with real numbers, so the method is
 visible producing artifacts rather than described. Every figure recomputes; substitute your own
-and the shape holds. The domain is deliberately ordinary — an internal support desk — because the
+and the shape holds. The domain is deliberately ordinary (an internal support desk) because the
 mechanics transfer and the arithmetic is checkable.
 
 ## Contents
@@ -33,7 +33,7 @@ No cause named, no team named, no solution named.
 time-to-close.
 
 The second clause is not decoration. A reopen-rate target with no counterweight is trivially met
-by never closing anything — the goal statement has to name the metric the fix is most likely to
+by never closing anything: the goal statement has to name the metric the fix is most likely to
 push in the wrong direction, or you will improve one number by exporting the problem into
 another. That counterweight metric gets baselined and charted alongside the primary one.
 
@@ -42,7 +42,7 @@ In scope: closure decision, closure notes, requester notification. Out of scope:
 triage, routing, and the engineering backlog that produces underlying defects. The scope test
 that mattered: *can the sponsor authorize every change inside this boundary?* The desk manager
 could change closure practice; she could not change the engineering backlog. That is why the
-backlog is out of scope — and it is why the project later had to escalate rather than act.
+backlog is out of scope, and it is why the project later had to escalate rather than act.
 
 **VOC → CTQ.** Requester interviews (11 of them, not a survey) said the same thing three ways:
 "it came back," "I had to re-explain everything," "nobody told me it was a workaround." Two CTQs:
@@ -53,11 +53,11 @@ backlog is out of scope — and it is why the project later had to escalate rath
 | "Tell me if it's temporary" | Closure note states permanent fix or workaround | 100% of closures classified |
 
 The second CTQ looks like a documentation nicety. It became the stratifying variable that found
-the cause — which is the usual fate of a well-written CTQ: it makes a distinction the data did
+the cause, which is the usual fate of a well-written CTQ: it makes a distinction the data did
 not previously carry.
 
 **Tollgate outcome:** passed, with one condition. The sponsor could not answer "what fraction of
-reopens do we expect to be genuinely unavoidable?", so the 6.0% target was recorded as an
+reopens do we expect to be unavoidable?", so the 6.0% target was recorded as an
 *aspiration pending Analyze*, not a commitment. Recording the softness at Define is what let the
 project end honestly instead of arguing about the goalpost at Control.
 
@@ -67,7 +67,7 @@ project end honestly instead of arguing about the goalpost at Control.
 
 **Operational definition, v1.** "A ticket is *reopened* if its status returns to open after being
 set to resolved." Two reviewers independently classified the same 60 resolved-then-reopened
-tickets under v1 and agreed on **51 / 60 = 85%** — below the 90% bar this desk uses for attribute
+tickets under v1 and agreed on **51 / 60 = 85%**: below the 90% bar this desk uses for attribute
 agreement (`continuous-improvement-skills:measurement-systems-analysis` owns the study design and
 the κ arithmetic).
 
@@ -81,7 +81,7 @@ Re-run on a fresh 60: **57 / 60 = 95%**. Passed.
 
 **This is where the most common DMAIC lie gets told, and where it gets prevented.** Reclassifying
 the same 12 weeks under v2 moved the number from **1,152 reopens (12.0%)** to **912 reopens
-(9.5%)** — a 2.5-point "improvement" produced entirely by a definition change, before anyone
+(9.5%)**: a 2.5-point "improvement" produced entirely by a definition change, before anyone
 touched the process. Because it happened *before* the baseline was frozen, it is a correction.
 Had the same change landed during Improve, it would have manufactured most of the project's
 claimed gain. Hence the rule: **the operational definition freezes at the Measure tollgate. If it
@@ -101,22 +101,22 @@ Baseline rate = 912 / 9600 = 0.095 → **9.5%**.
 σ = √(0.095 × 0.905 / 800) = √0.000107469 ≈ **0.010367**;
 UCL = 0.095 + 3 × 0.010367 = **0.126** (12.6%); LCL = 0.095 − 3 × 0.010367 = **0.0639** (6.39%).
 
-All twelve points fall between 7.875% and 11.375% — inside the limits, no runs, no trend. The
+All twelve points fall between 7.875% and 11.375%: inside the limits, no runs, no trend. The
 process is **stable at a bad level**, which is the only condition under which a later shift can be
 attributed to the change rather than to the process's own wandering. (Chart selection, limit
 formulas, and the overdispersion check that qualifies these limits are in
 `references/control-charts-and-control-plans.md`; that check returns σ_z ≈ 1.20 here, which on only
-12 subgroups is inside what a perfectly binomial process produces about one time in five — recorded
+12 subgroups is inside what a perfectly binomial process produces about one time in five: recorded
 and re-checked as data accumulates, not treated as evidence the limits are too tight.)
 
-**Capability read.** Reopen/not-reopen is attribute data, so Cp/Cpk do not apply — those need
+**Capability read.** Reopen/not-reopen is attribute data, so Cp/Cpk do not apply: those need
 continuous measurements against two-sided specs (`continuous-improvement-skills:measurement-systems-analysis`
 §6–7). The attribute equivalents: 0.095 × 1,000,000 = **95,000 DPMO**, which under the
 conventional 1.5σ long-term shift is about a **2.8 sigma level**. Quote the DPMO; treat the sigma
 level as a convention for comparing across processes, not as a measurement.
 
 **The number that reframed the goal.** The charter target of 6.0% sits *below* the baseline LCL of
-6.39%. Two consequences the team wrote down at the tollgate: the goal cannot be reached by luck —
+6.39%. Two consequences the team wrote down at the tollgate: the goal cannot be reached by luck:
 it requires a genuine level shift, not a good week; and conversely, one week at 6.2% would be
 ordinary noise and must not be reported as success.
 
@@ -148,8 +148,8 @@ as a gate.
 | **Total** | **9,600** | **912** | 912 / 9600 = 9.5% |
 
 Read it twice, because the two readings answer different questions. **By count**, workaround and
-no-response together are 411 + 274 = 685 = 75.1% of all reopens — that is where the *volume* is,
-and volume is what a Pareto ranks. **By rate**, "Other" is worst at 18.0% — that is where the
+no-response together are 411 + 274 = 685 = 75.1% of all reopens: that is where the *volume* is,
+and volume is what a Pareto ranks. **By rate**, "Other" is worst at 18.0%: that is where the
 *mechanism* is most concentrated, but on 400 closures it can contribute at most 72 reopens. A team
 that ranks only by rate chases a stratum too small to move the top-line metric; a team that ranks
 only by count misses that "Other" is an uncategorized bucket hiding something. Both readings go in
@@ -173,7 +173,7 @@ Area B holds 268 / 411 = 65.2% of workaround reopens at 4.6× the rate of A and 
 - SE = √(0.17125 × 0.82875 × (1/700 + 1/1700)) ≈ √0.000286232 ≈ 0.016918
 - z = (0.382857 − 0.084118) / 0.016918 ≈ **17.7**
 
-The honest reading is not "p < 0.001." It is that at these sample sizes the test is a formality —
+The honest reading is not "p < 0.001." It is that at these sample sizes the test is a formality:
 a 30-point difference on 2,400 observations was never going to be noise, and the test's job here
 is to document that someone checked, not to discover anything. Run the test when the difference is
 small enough that you could be fooled; say so plainly when it isn't
@@ -186,7 +186,7 @@ mechanism: the standard Area B workaround is "clear the local cache," which reso
 the underlying configuration-sync defect recurs on the next scheduled sync, roughly every 10 days.
 
 **Step 5: verify the mechanism with a prediction that could have failed.** If the mechanism is
-right, Area B workaround reopens should not be spread evenly across the 14-day window — they
+right, Area B workaround reopens should not be spread evenly across the 14-day window: they
 should cluster at the sync interval. Observed: **231 of 268 = 86.2%** of them reopened between
 day 8 and day 12. Under an even spread across 14 days, a 5-day window would hold about 36%.
 
@@ -197,13 +197,13 @@ big in Area B" is not confirmation; "reopens will pile up on days 8–12 and the
 
 **Tollgate outcome:** passed, with the gap arithmetic on the record. The charter gap is 9.5% →
 6.0% = 3.5 points = 336 reopens. Area B carries 290 reopens in total, so even driving them to
-zero — an upper bound no fix reaches — leaves 622 / 9600 = **6.48%**, still above the 6.0% target.
+zero, an upper bound no fix reaches, leaves 622 / 9600 = **6.48%**, still above the 6.0% target.
 The charter goal is therefore unreachable from this cause alone, whatever the fix achieves. Saying
 that at the Analyze tollgate is what turned the missed target at Control from a failure into a
 planned outcome.
 
 Note which denominator that arithmetic used. 290 is about a third of the 912 *reopens*, but 86% of
-the 336-reopen *gap to target* — two very different statements, and quoting the first while
+the 336-reopen *gap to target*: two different statements, and quoting the first while
 meaning the second is the same denominator error this project spends the Improve phase avoiding.
 
 ---
@@ -224,7 +224,7 @@ a better disguise. The test that kills it: *would a requester notice the differe
 a reporting change wearing a solution's clothes.
 
 **The sync fix is out of scope** (engineering backlog). The sponsor escalated rather than
-descoping the project — an SBAR handoff to the engineering lead
+descoping the project: an SBAR handoff to the engineering lead
 (the archived `safety-and-reliability-skills:sbar-structured-communication` supplies the format). The
 escalation carried the day-8-to-12 fingerprint, which is why it was prioritized: it named a
 specific defect with evidence, not a complaint about reopens.
@@ -232,13 +232,13 @@ specific defect with evidence, not a complaint about reopens.
 **Pilot design.** Area B tenants only, 6 weeks, reversible by feature flag. Before running it, an
 FMEA on the change (`continuous-improvement-skills:fmea`) surfaced one new failure mode worth a
 guard: a sync fix that resolves conflicts by discarding the local copy would silently lose
-requester-side configuration — silent success at D 9, so a reconciliation log was added.
+requester-side configuration: silent success at D 9, so a reconciliation log was added.
 
 **The denominator trap, avoided deliberately.** The pilot metric is reopen rate among **all Area B
 closures**, not among Area B *workaround* closures. Fixing the defect removes workaround closures
 as well as reopens; measured per workaround closure, numerator and denominator would both shrink
-and the reported gain would understate — or, with a different change, wildly overstate — what the
-process actually delivered. Whenever a change alters who enters the denominator, move the metric
+and the reported gain would understate (or, with a different change, wildly overstate) what the
+process delivered. Whenever a change alters who enters the denominator, move the metric
 up to a population the change cannot redefine.
 
 Area B baseline on that population: 1,000 closures, 290 reopens = 29.0% (700 workaround closures
@@ -254,7 +254,7 @@ baseline.
 **Two checks before believing it.** First, novelty: the last two weeks of the pilot were compared
 against the first two separately, because a pilot everyone is watching improves for reasons that
 do not survive the attention going away. No drift. Second, the counterweight metric: median
-time-to-close was unchanged — the reopen gain was not bought by holding tickets open longer.
+time-to-close was unchanged: the reopen gain was not bought by holding tickets open longer.
 
 **Projection to the top-line metric, stated as a projection.** Holding every other stratum at
 baseline, Area B's 12-week reopens fall from 290 to 1,000 × 0.116 = 116, so total reopens fall
@@ -279,16 +279,16 @@ Full rollout, then 8 weeks of monitoring at 800 closures/week (n = 6,400):
 | Rate % | 7.75 | 7.375 | 8.375 | 7.0 | 8.0 | 7.5 | 9.0 | 6.75 |
 
 Observed rate = 494 / 6400 = 0.0771875 → **7.72%**, against the 7.69% projection. The projection
-landing within 0.03 points is itself weak evidence that nothing else moved at the same time — a
+landing within 0.03 points is itself weak evidence that nothing else moved at the same time: a
 large gap between projected and observed is a signal to go looking for a second change, in either
 direction.
 
 **How the shift was proved, and why the limit rule alone would have missed it.** Against the
 *baseline* chart (centerline 9.5%, LCL 6.39%), **not one of the eight points is below the lower
-control limit** — the lowest is 6.75%. A team watching only for out-of-limit points would have
+control limit**: the lowest is 6.75%. A team watching only for out-of-limit points would have
 seen eight ordinary weeks and concluded nothing had happened. What fires is the run rule: all
 eight points fall below the old centerline. Under an unchanged process each point is a coin flip,
-so eight on one side has probability 0.5^8 = 0.00390625, and two-sided 2 × 0.5^8 = 0.0078125 —
+so eight on one side has probability 0.5^8 = 0.00390625, and two-sided 2 × 0.5^8 = 0.0078125:
 about 1 in 128. That is the formal evidence the level shifted.
 
 This is the general lesson and it is why the run rules exist: **the 3σ limit rule detects large
@@ -298,7 +298,7 @@ weekly noise, comfortably invisible to the limit rule and obvious to the run rul
 **Then, and only then, recompute limits at the new level.** p̄ = 0.0771875, n = 800:
 σ = √(0.0771875 × 0.9228125 / 800) ≈ **0.009436**;
 UCL = 0.0771875 + 3 × 0.009436 = **0.1055** (10.55%); LCL = 0.0771875 − 3 × 0.009436 = **0.0489**
-(4.89%). Limits are recomputed because a deliberate, documented process change occurred — never
+(4.89%). Limits are recomputed because a deliberate, documented process change occurred, never
 because points were signalling. (See `references/control-charts-and-control-plans.md` §6.)
 
 **The operating rule the desk now runs on:** a week between 4.89% and 10.55% is noise. Do nothing.
@@ -317,29 +317,29 @@ costs more than the missing 1.7 points.
 
 A DMAIC project is done when a stranger can audit it from these artifacts alone. Item by item:
 
-1. **Signed charter** — quantified problem, measurable goal, named counterweight metric, scope
+1. **Signed charter**: quantified problem, measurable goal, named counterweight metric, scope
    boundary with the authority that matches it, sponsor, team, timebox.
 2. **SIPOC** naming the process start and end points the metric is measured across.
-3. **VOC record** — who was asked, how many, what they said, and the CTQ table that translates it
+3. **VOC record**: who was asked, how many, what they said, and the CTQ table that translates it
    into characteristics with specs.
 4. **Operational definition, version-stamped and dated**, with its inclusion *and* exclusion rules
    written out, plus a note of any restatement and the number under both versions.
-5. **Measurement-system evidence** — the agreement study, its result against the stated bar, and
+5. **Measurement-system evidence**: the agreement study, its result against the stated bar, and
    what was changed if it failed.
-6. **Baseline** — the raw subgroup data (not just the mean), the run/control chart with limits,
+6. **Baseline**: the raw subgroup data (not just the mean), the run/control chart with limits,
    the stability verdict, and the subgroup count.
 7. **Stratification tables with denominators**, not count-only Paretos.
-8. **The verification of cause** — the prediction that was made in advance and the data that
+8. **The verification of cause**: the prediction that was made in advance and the data that
    confirmed it, plus what would have refuted it.
-9. **Gap arithmetic** — what fraction of the charter gap the verified cause can explain.
+9. **Gap arithmetic**: what fraction of the charter gap the verified cause can explain.
 10. **Solution selection table** including the rejected candidates and why.
-11. **Pilot design and result** — population, duration, reversibility mechanism, primary and
+11. **Pilot design and result**: population, duration, reversibility mechanism, primary and
     counterweight metrics, the early-vs-late novelty check, and the comparison against baseline.
 12. **New-risk review** (FMEA) of the change itself, with any guard added.
-13. **Control plan** — the full contract in `references/control-charts-and-control-plans.md` §7.
+13. **Control plan**: the full contract in `references/control-charts-and-control-plans.md` §7.
 14. **Standard work revision number** encoding the change
     (the archived `continuous-improvement-skills:standard-work`).
-15. **Named owner** — an individual, a review cadence, and a written if-then response rule.
+15. **Named owner**: an individual, a review cadence, and a written if-then response rule.
 16. **Post-rollout chart with the sustain evidence** and the recomputed limits, dated.
 17. **Closure statement** saying plainly whether the goal was met, partially met, or missed, and
     what happened to the residual.

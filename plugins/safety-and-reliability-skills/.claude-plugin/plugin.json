@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "safety-and-reliability-skills",
   "description": "Safety engineering for records, alarms, and dormant protections: split-tally evidence design with the litigation-hold rail, detection-system tuning by empirical disposition audit (floor-ceiling autoimmunity band), reliability math including probability-of-failure-on-demand for dormant protective functions, rebuild rehearsal with an irreversibility screen, break-glass playbooks, and hash-rank sortition review.",
-  "version": "0.16.3"
+  "version": "0.16.4"
 }

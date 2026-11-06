@@ -2,8 +2,8 @@
 
 Every number a vendor shows is the output of a method with a panel, a version and a threshold.
 This file gives the method behind each product so the report can restate the figure in those
-terms. Compiled from the vendors' own help pages, blogs and patents as reached through search
-excerpts, plus the published method papers; marked accordingly, and re-read the live page for
+terms. Sources are the vendors' own help pages, blogs and patents as reached through search
+excerpts, plus the published method papers; each is marked accordingly, and the live page should be re-read for
 anything the person will act on.
 
 ## Contents
@@ -53,7 +53,7 @@ matches [snippet-only].
 and American populations, replaced the phasing pipeline, and removed the "Broadly" and
 "Unassigned" categories from the default view; it reaches only customers on the current chip, and
 updates for older chips stopped in 2020 [snippet-only]. Post-2025 percentages therefore look more
-specific than earlier ones without the underlying data having changed — say so when comparing a
+specific than earlier ones without the underlying data having changed; say so when comparing a
 person's old and new reports. The only per-population accuracy figures located are old and the
 quoting source warns they are out of sync with the current model [snippet-only].
 
@@ -88,9 +88,9 @@ grandparental pairs overlap so heavily that it relies on self-reported ages to d
 one to three hundred years and found average sharing differs by orders of magnitude between
 founder-effect and continental populations [canon attribution — Henn et al. 2012].
 
-**Custody.** The company's recent history — a large credential-stuffing breach, a settlement with
+**Custody.** The company's recent history (a large credential-stuffing breach, a settlement with
 mandatory two-factor authentication, bankruptcy and sale to a nonprofit, and multi-state
-settlements preserving deletion and sample-destruction rights [snippet-only, cross-checked] — is
+settlements preserving deletion and sample-destruction rights) [snippet-only, cross-checked] is
 part of what a person weighing continued participation should hear. Relay the live privacy
 statement, not a remembered one.
 
@@ -99,10 +99,10 @@ statement, not a remembered one.
 AncestryDNA's composition splits some regions that other vendors merge (France and Germany, for
 example), weights match totals with its Timber algorithm, and raised its match floor to 8 cM in
 2020 [snippet-only]. Its tree-based match features and most shared-match views sit behind a
-subscription tier [snippet-only — check the live product page]. MyHeritage reports one segment
+subscription tier [snippet-only: check the live product page]. MyHeritage reports one segment
 floor for a match and shows further segments to a lower floor [snippet-only]. Neither vendor's
-raw file parses differently for this skill's scripts — the AncestryDNA two-allele layout and the
-MyHeritage quoted CSV are both accepted — but each vendor's **upload** rules are time-sensitive
+raw file parses differently for this skill's scripts (the AncestryDNA two-allele layout and the
+MyHeritage quoted CSV are both accepted), but each vendor's **upload** rules are time-sensitive
 and belong in the platform ledger of `records-and-documentary-research.md` §3.
 
 ## §4 Nebula Genomics and YFull
@@ -149,9 +149,9 @@ from the model's assumptions, and identical bar plots arise from different demog
 [canon attribution — Lawson et al. 2018]. Full siblings legitimately differ because each inherits
 a different recombined draw, so one can carry a distant ancestor's segment the other lacks.
 
-Genuine fine structure exists in north-west Europe — haplotype-based studies resolve regional
+Fine structure exists in north-west Europe: haplotype-based studies resolve regional
 clusters in Britain and divide Ireland into about ten clusters with a barrier in the north
-[canon attribution — Leslie et al. 2015; Gilbert et al. 2017] — but it is subtle enough that an
+[canon attribution — Leslie et al. 2015; Gilbert et al. 2017], but it is subtle enough that an
 allele-frequency classifier keeps "British & Irish" as one population and pushes finer claims
 onto the identity-by-descent layer. Tribal and community membership rests on documented descent
 and the community's own rules, never on a percentage [snippet-only — NHGRI].

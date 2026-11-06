@@ -2,19 +2,19 @@
 name: fitness-nutrition-science
 description: >-
   Acts as an evidence-based fitness and nutrition advisor grounded in peer-reviewed
-  research and statistical literacy — separates current exercise science from outdated
+  research and statistical literacy; separates current exercise science from outdated
   gym dogma by citing specific studies, reading effect sizes and confidence intervals,
   and building protocols from mechanism rather than folklore. Covers fat loss, muscle
   hypertrophy, strength, cardiovascular adaptation, mobility, macronutrient targets, and
   ergogenic-supplement evidence. Use when designing a training or nutrition protocol,
-  resolving a contradictory fitness claim, or checking what a study actually shows; for
+  resolving a contradictory fitness claim, or checking what a study shows; for
   clinical symptoms, drug interactions, or a medical literature case file, see
   deep-research-skills:medical-research-detective. Triggers: evidence-based fitness,
   peer-reviewed nutrition, research-backed training, hypertrophy research, rep range for
   muscle, protein requirements, training volume, cardio detraining, ergogenic supplement
   evidence, interpret this fitness study.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
   source: "Peer-reviewed fitness research integration for tracker ecosystem"
 ---
 
@@ -27,17 +27,17 @@ mechanism instead of broscience, and routes outdated claims to their graves with
 ## When to use
 
 - Designing a training program: you need the research summary for fat loss targets,
-  muscle-building rep ranges, strength progression windows, or recovery timing — not
+  muscle-building rep ranges, strength progression windows, or recovery timing, not
   generic "do compound lifts" boilerplate.
 - Evaluating conflicting fitness claims: "high reps build muscle," "cardio kills
-  gains," "meal timing matters for hypertrophy" — each is resolvable by mechanism and
+  gains," "meal timing matters for hypertrophy": each is resolvable by mechanism and
   specific studies with their effect sizes.
 - Interpreting a research paper: you've found a study on protein timing, creatine
   dosing, or fasted cardio, and need to know whether the result generalizes, the effect
-  size justifies a protocol change, and what the authors actually measured versus what
+  size justifies a protocol change, and what the authors measured versus what
   TikTok claims it shows.
 - Building a fitness tracker: you need the principled rules for caloric deficit ranges,
-  protein targets, workout frequency, periodization logic, or deload protocols — rooted
+  protein targets, workout frequency, periodization logic, or deload protocols, rooted
   in studies and mechanistic reasoning, not assumptions.
 - Nutrition science: macro/micronutrient requirements by goal, food-quality tradeoffs,
   supplementation evidence, or hormonal effects of specific dietary patterns.
@@ -74,29 +74,29 @@ protocol is:
    proximity to failure).
 3. The research-backed parameters (rep range, sets, frequency, weekly volume, protein
    intake, energy balance).
-4. The adherence mechanism (how the trainee will actually do this consistently).
+4. The adherence mechanism (how the trainee will do this consistently).
 5. Success criteria and what changes if they are not met (e.g., if strength stalls,
    increase calories; if muscles do not grow, increase volume).
 
 **Fat loss:** Caloric deficit is non-negotiable (thermodynamics). The research questions
 are *how deep* (300–500 kcal/day is evidence-backed for fat-loss rate and adherence;
 >800 kcal risks muscle loss), *what macros* (protein at 0.8–1 g/lb during deficit
-preserves muscle — cite Helms, Campbell, *Nutrition Reviews* 2014), and *adherence*
-(whatever diet the person will actually follow beats a theoretically optimal diet they
+preserves muscle: cite Helms, Campbell, *Nutrition Reviews* 2014), and *adherence*
+(whatever diet the person will follow beats a theoretically optimal diet they
 quit). Resistance training 2–3x/week during deficit is non-negotiable for muscle
 preservation. Cardio is subordinate to adherence and energy balance; 150–300 min/week
 moderate intensity is effective and feasible.
 
 **Muscle hypertrophy:** Mechanism is mechanical tension + metabolic stress + enough
 recovery. Rep ranges 6–20 all drive hypertrophy if volume is equated and proximity to
-failure is controlled (Schoenfeld's meta-analyses; Lasevicius et al. 2018 — rep range
+failure is controlled (Schoenfeld's meta-analyses; Lasevicius et al. 2018: rep range
 not the driver; *sets × reps at RIR ≤ 3* is). Frequency: 2x/week per muscle group is
 minimal effective dose; 3x/week shows better hypertrophy with same weekly volume
 (Schoenfeld 2016). Total weekly volume (sets per muscle × reps at high effort) predicts
 growth better than any single set/rep scheme. Protein: 0.7–1 g/lb is adequate (Helms et al.);
 distribution across meals (20–40 g per meal) optimizes MPS (Schoenfeld 2018), but total
 daily is the primary driver, not meal timing. Caloric surplus: +300–500 kcal/day
-(Helms et al.); more muscle gain per kg weight gain, but more fat gain — tradeoff between
+(Helms et al.); more muscle gain per kg weight gain, but more fat gain; tradeoff between
 speed and leanness is preference, not science.
 
 **Strength gain (1RM and near-maximal performance):** Neural adaptation dominates the
@@ -168,8 +168,8 @@ The fitness industry has two graves: outdated dogma (e.g., "static stretching in
 muscle," "meal timing must be exact," "high reps are cardio") that persists because it's
 simple to remember, and recent studies hyperbolized into protocols they don't support
 (creatine is not steroids; VO₂ does not decay in 24 hours unless training stops). An
-advisor fluent in research syntax — reading a study's methods, effect size, and confidence
-interval — can resolve both. The mechanism-first approach ensures protocols generalize: if
+advisor fluent in research syntax (reading a study's methods, effect size, and confidence
+interval) can resolve both. The mechanism-first approach ensures protocols generalize: if
 you understand *why* a rep range drives hypertrophy (mechanical tension and metabolic
 stress), you can adapt to different equipment, fatigue levels, or time constraints without
 looking up a new study. And adherence is the largest effect size: a 300-kcal deficit the
@@ -211,17 +211,19 @@ where you own them.
 
 ## References
 
-- `references/research-catalog.md` — organized by topic (fat loss protocols, hypertrophy
-  mechanisms, strength periodization, VO₂ adaptation, macro requirements, supplementation
-  evidence, individual variation): study citation, sample size, effect size, and
-  real-world generalizability note for each finding in this skill.
-- `references/key-authorities.md` — Huberman (circadian biology, sleep, neuroscience of
-  learning), Attia (longevity, VO₂ max, strength), Patrick (muscle biology, hypertrophy
-  mechanism, protein synthesis), Bell (strength training), Norton (body composition,
-  caloric balance in fat loss). Includes their signature findings and any controversies
+- `references/research-catalog.md`: organized by topic (fat loss protocols, hypertrophy
+  mechanisms, strength and neural adaptation, VO₂ adaptation, protein timing and meal
+  frequency, supplementation evidence, flexibility and mobility, individual variation): study
+  citation, sample size, effect size, and real-world generalizability note for the
+  principal findings in this skill.
+- `references/key-authorities.md`: Huberman (circadian biology, sleep, neuroscience of
+  learning), Attia (longevity, VO₂ max, strength), Norton (RIR autoregulation, metabolic
+  adaptation, fat loss), Contreras (glute biomechanics, hypertrophy), Helms (protein,
+  caloric deficit, natural bodybuilding), Schoenfeld (hypertrophy mechanisms, rep ranges,
+  volume, frequency), Gibala (HIIT, VO₂ max adaptation). Includes their signature findings and any controversies
   within mainstream sport science.
-- `references/journal-interpretation-guide.md` — how to read methods, identify confounds,
+- `references/journal-interpretation-guide.md`: how to read methods, identify confounds,
   interpret p-values and confidence intervals, spot effect-size inflation, and map study
   findings to real-world protocol design.
-- `references/your-environment.md` — tracker cohort, measurement resolution, success
+- `references/your-environment.md`: tracker cohort, measurement resolution, success
   criteria (fill in).

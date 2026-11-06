@@ -1,7 +1,7 @@
 ---
 name: realtime-and-dynamic-features
 description: >-
-  Adds the highly dynamic layer to full-stack apps the lean way — choosing polling vs
+  Adds the highly dynamic layer to full-stack apps the lean way: choosing polling vs
   Server-Sent Events vs WebSockets by actual need, streaming responses (including LLM token
   streams), live-updating dashboards, optimistic UI, and background jobs with progress
   reporting, using FastAPI primitives and minimal client code. Use when a page must update
@@ -10,7 +10,7 @@ description: >-
   live updates, streaming response, real-time dashboard, background job progress, optimistic
   UI, long running task API, push updates, live refresh, stream LLM tokens.
 metadata:
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Realtime and dynamic features
@@ -24,14 +24,14 @@ metadata:
   Deployment concerns of long-lived connections → `full-stack-dev-skills:deploy-and-operate`.
 
 ## Do it
-1. **Choose the transport by the actual requirement — in this order:**
+1. **Choose the transport by the actual requirement, in this order:**
    - **Polling** (client refetches every N seconds): updates can lag a bit and arrive
      occasionally. With TanStack Query it's one line (`refetchInterval`), with htmx one
      attribute (`hx-trigger="every 10s"`). Most "realtime" dashboards need exactly this.
-   - **SSE (Server-Sent Events)**: server→client push over plain HTTP — live feeds, progress,
-     token streams. Reconnects automatically, works through proxies, needs no protocol upgrade.
-   - **WebSockets**: only for genuine *bidirectional* low-latency traffic — chat, collaborative
-     editing, games. Everything else is cheaper one level down.
+   - **SSE (Server-Sent Events)**: server→client push over plain HTTP (live feeds, progress,
+     token streams). Reconnects automatically, works through proxies, needs no protocol upgrade.
+   - **WebSockets**: only for genuine *bidirectional* low-latency traffic (chat, collaborative
+     editing, games). Everything else is cheaper one level down.
    The lean rule: every step up the ladder buys latency/direction and costs connection state,
    infra care, and reconnection logic. Climb only when the requirement pushes you.
 2. **Stream with SSE off a generator** (FastAPI makes it a few lines; LLM token relay is the
@@ -60,10 +60,10 @@ async def job_events(jid: str):
 3. **Run long work as background jobs, never in the request.** Anything beyond a couple of
    seconds: enqueue, return `{job_id}` immediately (202), report progress via the job's
    status. In-process `BackgroundTasks`/asyncio for fire-and-forget on one node; a queue +
-   worker (arq/Celery + Redis) once jobs must survive restarts or need retries — the
+   worker (arq/Celery + Redis) once jobs must survive restarts or need retries; the
    escalation criteria live in `full-stack-dev-skills:full-stack-app-architecture`'s stack
    table. Persist job status in the DB (`queued/running/done/failed` + progress + result
-   ref) so *any* transport — polling or SSE — can serve it.
+   ref) so *any* transport (polling or SSE) can serve it.
 4. **Make dashboards live at the right cost:** metrics that move each minute → polling;
    an activity feed → SSE from an in-process pub/sub (or Redis pub/sub when multi-node);
    htmx dashboards → fragments re-rendered on `hx-trigger="every 30s"` or SSE swap. Design
@@ -78,13 +78,13 @@ async def job_events(jid: str):
    heartbeat + reconnect-with-backoff; both need server timeouts and connection caps.
    `references/realtime-recipes.md` has the WebSocket endpoint, job-status table, optimistic
    mutation, and the transport decision table.
-7. **Authorize the long-lived connection before you open it — and remember CORS does not
+7. **Authorize the long-lived connection before you open it, and remember CORS does not
    apply here.** A stream endpoint carries the same authorization burden as any other route,
    but two things make it easier to get wrong. First, `await ws.accept()` is the point of no
    return: authenticate the caller *and* authorize them for the specific resource in the path
    (`/ws/room/{room}` needs a `may_join(user, room)` check, or any authenticated user reaches
    every room by editing the URL) before that line, not after. Second, **the same-origin policy
-   and CORS do not govern WebSocket handshakes** — any page anywhere may open a socket to your
+   and CORS do not govern WebSocket handshakes**: any page anywhere may open a socket to your
    server, with cookies attached subject only to `SameSite`, so a cookie-authenticated socket
    without an explicit `Origin` allowlist is hijackable cross-site. Prefer a short-lived
    single-use ticket minted over authenticated HTTP (the same pattern the SSE section uses),
@@ -95,8 +95,8 @@ async def job_events(jid: str):
 "Realtime" is a spectrum of freshness guarantees, and the engineering cost is exponential in
 the guarantee. Polling is stateless HTTP (free), SSE is one long-lived response per client
 (cheap), WebSockets are stateful bidirectional connections the infrastructure must love
-(expensive — sticky sessions, upgrade-aware proxies, fan-out state). The discipline is
-matching the *user's actual freshness need* — "the dashboard shouldn't feel stale" is a
+(expensive: sticky sessions, upgrade-aware proxies, fan-out state). The discipline is
+matching the *user's actual freshness need*: "the dashboard shouldn't feel stale" is a
 10-second poll, not a WebSocket mesh. The jobs pattern is the backend half of the same idea:
 HTTP requests are leases, not contracts for unbounded work, so long work moves to a queue
 and the *status becomes data*, which decouples transport from progress: any
@@ -129,10 +129,10 @@ settings, and the multi-node fan-out mechanism if any.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/realtime-and-dynamic-features.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/realtime-and-dynamic-features.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/realtime-recipes.md — transport decision table, WebSocket endpoint, job-status pattern, optimistic mutation
-- references/your-environment.md — your transports, queue, settings (fill in)
+- references/realtime-recipes.md: transport decision table, WebSocket endpoint, job-status pattern, optimistic mutation
+- references/your-environment.md: your transports, queue, settings (fill in)

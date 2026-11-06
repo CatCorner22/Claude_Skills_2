@@ -1,8 +1,8 @@
 # Design tokens
 
 Read at stage 5. Every value below carries its provenance. Two sources supply them: the official
-Microsoft assertion-evidence template (geometry and typography), and — for the optional
-`warm-accent` brand pack only — a published institutional brand standard, kept because it is a
+Microsoft assertion-evidence template (geometry and typography), and, for the optional
+`warm-accent` brand pack only, a published institutional brand standard, kept because it is a
 useful worked case rather than because you should use it. The builder ships a **neutral palette as
 its default**. `scripts/build_deck.py` encodes the geometry, typography, and colors for the slide
 kinds it builds; copy the geometry table when building outside the script.
@@ -16,7 +16,7 @@ kinds it builds; copy the geometry table when building outside the script.
 
 ## Slide geometry
 
-Extracted directly from `Assertion_evidence_presentation.pptx` — the official template Microsoft
+Extracted directly from `Assertion_evidence_presentation.pptx`, the official template Microsoft
 published in cooperation with Melissa Marshall. Values in inches, converted from the template's EMU.
 
 | Element | x | y | width | height | Size |
@@ -41,7 +41,7 @@ Derived values:
   rendering, not by counting.
 
 The template's slide master sets titles bold, left-aligned, with bullets suppressed. Its body style
-also suppresses bullets at the first level — the template ships with bullets off, which is the method
+also suppresses bullets at the first level: the template ships with bullets off, which is the method
 expressed as a default.
 
 ## Typography
@@ -58,18 +58,18 @@ That brand page states that its office licenses Gotham and Goudy Old Style, and 
 alternatives are encouraged for non-designers producing presentations and letters, naming
 Montserrat as the preferred substitute for Gotham. The pattern generalizes: a licensed brand face
 you do not have a seat for is a font-substitution problem waiting to happen, and most brand
-standards name their own fallback — find it before you pick one yourself.
+standards name their own fallback; find it before you pick one yourself.
 
 Point sizes come from the handout and hold regardless of typeface: 28 point headline, 18–24 point
 body, 12–14 point references and source tags, and never bold on the reference line.
 
 **The documented exception, for dense layouts.** The 18–24 point body floor is for *prose* body
-text — a statement slide, a summary's points. Layouts that pack many short strings into a fixed
+text: a statement slide, a summary's points. Layouts that pack many short strings into a fixed
 frame cannot hold it and are not expected to: **table cells and flow-step labels sit at 14 point,
 two-column and three-row items at 16 point.** That is what the geometry table above specifies and
 what `build_deck.py` emits. The distinction that matters is *reading mode*: prose is read in
 sentences and needs the larger size, while a table cell and a step label are scanned as tokens
-beside their neighbours. What the exception does not license is shrinking prose to fit — if a
+beside their neighbours. What the exception does not license is shrinking prose to fit: if a
 statement slide needs 14 point body text, the slide has too much on it, which is the split-the-slide
 finding, not a type-size decision.
 
@@ -80,8 +80,8 @@ which pushes a two-line headline onto three lines and can overflow a text box. A
 correctly on the author's machine and breaks on the recipient's has failed.
 
 Apply this rule:
-1. **The recipient's machine governs.** For a deck that leaves your machine — emailed, presented from
-   someone else's laptop, posted to a shared drive — use **Calibri**. It ships with Microsoft Office
+1. **The recipient's machine governs.** For a deck that leaves your machine (emailed, presented from
+   someone else's laptop, posted to a shared drive), use **Calibri**. It ships with Microsoft Office
    everywhere and satisfies the handout's requirement directly.
 2. **Use Arial** when the deck must match the official template's own theme, or when the audience
    mixes Windows and macOS and Calibri coverage is uncertain.
@@ -98,15 +98,15 @@ recipient from "fixing" it.
 
 The default is the **neutral palette** (`--brand neutral`, the builder's default): ink `333333`
 for body text, primary `4B4B4B`, muted `767676` for source tags and slide numbers, secondary
-`A6A6A6`, on white. Every *text* pair clears WCAG AA on white — `333333` at 12.63:1, `767676` at
+`A6A6A6`, on white. Every *text* pair clears WCAG AA on white: `333333` at 12.63:1, `767676` at
 4.54:1. The one value that does not is `A6A6A6`, the second chart series, at 2.43:1 against white:
-below the 3:1 non-text threshold, so it is subject to the same rule as the warm accent below —
+below the 3:1 non-text threshold, so it is subject to the same rule as the warm accent below:
 never the sole carrier of meaning. The builder keeps data labels on for exactly that reason. Use
 this palette unless the deck must match an existing brand.
 
-Everything below documents the **warm-accent palette** (`--brand warm-accent`; the older name
-`ut` still resolves, so existing deck specs keep working). The values are verified from a
-published institutional brand standard. It is here as a **worked case, not a recommendation** —
+Everything below documents the **warm-accent palette** (`--brand warm-accent`; `ut` is accepted as an alias for
+that name, so existing deck specs keep working). The values are verified from a
+published institutional brand standard. It is here as a **worked case, not a recommendation**:
 this is what happens when a real brand's signature color meets WCAG, and the same arithmetic
 applies to whatever brand you are handed.
 
@@ -119,7 +119,7 @@ applies to whatever brand you are handed.
 Two constraints from the same source:
 - **Black is not in the palette.** It is reserved for cases where black-and-white printing is the
   only option. Set body text in Slate Gray, not black.
-- **The standard targets WCAG 2.2 Level AA.** Check contrast before shipping — which is exactly
+- **The standard targets WCAG 2.2 Level AA.** Check contrast before shipping, which is exactly
   where it runs into trouble.
 
 Contrast ratios computed from the published RGB values using the WCAG 2.x relative-luminance formula.
@@ -154,7 +154,7 @@ A working allocation:
 
 These values cover one institution-level palette. Sub-brands within a large organization typically
 publish their own accent sets; check the relevant brand site before borrowing an accent color, and
-re-run the contrast arithmetic on whatever you find — a sanctioned color is not an accessible one.
+re-run the contrast arithmetic on whatever you find: a sanctioned color is not an accessible one.
 
 ## Applying the tokens
 
@@ -167,6 +167,6 @@ threshold. `--brand warm-accent` warns every run, because the accent as a magnit
 ignore it. Text placed on a filled shape is picked automatically as whichever of ink/background
 contrasts better with the fill.
 
-When you build outside the script — editing a template, using the `pptx` skill directly — copy the
+When you build outside the script — editing a template, using the `pptx` skill directly, copy the
 geometry table above rather than eyeballing positions. Consistent placement across slides is most of
 what makes a deck look professional, and it costs nothing once the numbers are written down.

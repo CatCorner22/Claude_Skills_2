@@ -34,9 +34,9 @@ What to look for:
 |---|---|---|
 | `UnicodeDecodeError` on load | File isn't UTF-8 (often Windows-1252 from Excel/ERP) | `encoding="cp1252"` (or `latin-1`); verify accented names look right after |
 | `Ã©`, `â€™` in text | Latin-1/Win-1252 bytes decoded as UTF-8 (or double-encoded) | Reload with correct encoding; if double-encoded, `s.encode("cp1252").decode("utf-8")` |
-| First column named `ï»¿Account` (or `\ufeffAccount` from a reader that decodes UTF-8 without stripping the mark — pandas strips it, the stdlib `csv` module does not) | UTF-8 BOM | `encoding="utf-8-sig"` |
+| First column named `ï»¿Account` (or `\ufeffAccount` from a reader that decodes UTF-8 without stripping the mark: pandas strips it, the stdlib `csv` module does not) | UTF-8 BOM | `encoding="utf-8-sig"` |
 | Every row is one giant column | Wrong delimiter assumed | Inspect a raw line; set `sep=";"` / `"\|"` / `"\t"` |
-| `latin-1` "works" on everything | It maps every byte to *something* — it can't fail | That silence is the trap: verify text visually; prefer declaring `cp1252` when the source is Windows |
+| `latin-1` "works" on everything | It maps every byte to *something*, so it can't fail | That silence is the trap: verify text visually; prefer declaring `cp1252` when the source is Windows |
 
 `latin-1` deserves its own warning: because it accepts any byte, it converts an encoding
 error you would have seen into mojibake you won't. Use it as a diagnosis tool, not a fix.
@@ -88,7 +88,7 @@ guessing the width). Prevention is the only fix: declare identifier dtypes at th
 
 ## Fixed-width files
 
-No delimiter at all — columns are positional. Get the layout from the file spec (never guess
+No delimiter at all: columns are positional. Get the layout from the file spec (never guess
 from one sample; a wide value in row 5,000 breaks eyeballed positions):
 
 ```python
@@ -99,14 +99,14 @@ df = pd.read_fwf("positions.txt",
 ```
 
 Watch for: space-padded IDs (`.str.strip()` after read, then re-check uniqueness), implied
-decimal points ("120050" meaning 1200.50 — the spec will say), and sign columns stored
+decimal points ("120050" meaning 1200.50; the spec will say), and sign columns stored
 separately from the amount.
 
 ## Keys and joins
 - Normalize before joining: `df[k] = df[k].str.strip().str.upper().str.zfill(width)` as applicable.
 - First join is always `how="outer", indicator=True`; review `_merge` value counts; only then
   choose the join the analysis needs, and document how many rows each side lost and why.
-- Duplicated keys multiply rows in a merge — check `df[k].is_unique` on the "one" side first.
+- Duplicated keys multiply rows in a merge; check `df[k].is_unique` on the "one" side first.
 
 ## The hardened loader pattern
 
@@ -141,8 +141,8 @@ The same shape appears when an analyst reconciles two exports, an attorney combi
 lists, an ops manager merges vendor rosters, or a developer joins a user dump to a license file.
 Two systems export "the same" people list:
 
-- `hr_export.csv` — UTF-8 with BOM, comma-delimited, `emp_id` zero-padded to 6 (`004217`).
-- `badge_export.csv` — Windows-1252, semicolon-delimited, `EMPLOYEE` as a bare number (`4217`).
+- `hr_export.csv`: UTF-8 with BOM, comma-delimited, `emp_id` zero-padded to 6 (`004217`).
+- `badge_export.csv`: Windows-1252, semicolon-delimited, `EMPLOYEE` as a bare number (`4217`).
 
 ```python
 import pandas as pd
