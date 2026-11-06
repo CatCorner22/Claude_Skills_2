@@ -14,7 +14,7 @@ description: >-
   probability, prior probability, superforecasting, superforecaster, perpetual beta, how
   much should this evidence move me.
 metadata:
-  version: "1.2.5"
+  version: "1.2.6"
   source: >-
     Built from the general-use expansion research dossier
     (docs/research/general-use-expansion-research.md, §4). Provenance legend:
@@ -42,8 +42,8 @@ story?", move the belief by that much and no more, and keep the log.
 - Keeping a live question honestly under review ("will the vendor deliver by Q3?") with
   small, frequent, logged updates instead of one dramatic reversal.
 - Not for: the probability *mechanics* (conditional probability, Bayes' theorem itself,
-  and natural-frequency teaching) belong to the archived `math-foundations-skills:probability-fundamentals`.
-  That skill teaches the math of a single computation; this skill
+  and natural-frequency teaching) are a separate discipline this library does not carry.
+  That math teaches a single computation; this skill
   is the decision practice layered above it: priors owned in advance, evidence graded as
   it arrives, updates logged and scored over the life of a real question.
 - Not for: establishing the prior from comparable past cases: the outside view and
@@ -134,8 +134,8 @@ evidence points: Gigerenzer & Hoffrage showed correct Bayesian answers roughly *
 from about 16% to about 46%, when problems were recast from probabilities to natural
 frequencies ("out of 10,000 people…"), a gain replicated with experienced physicians
 [snippet-only]. A majority still failed. Natural frequencies help;
-they do not fix. (The teaching of that format itself belongs to
-the archived `math-foundations-skills:probability-fundamentals`; this skill refuses to let a
+they do not fix. (The teaching of that format itself is a separate discipline this
+library does not carry; this skill refuses to let a
 formula stand where a count table would be checkable.)
 
 The discipline half comes from the forecasting-tournament record: what separated

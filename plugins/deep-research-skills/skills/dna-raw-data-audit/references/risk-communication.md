@@ -21,7 +21,6 @@ Duplication is a defect here. The general machinery already exists and is verifi
 | :--- | :--- |
 | ARR/RRR/NNT, the three identities, odds-ratio-vs-risk-ratio divergence, natural frequencies, base rates and PPV, truncated axes, the full misrepresentation taxonomy | `deep-research-skills:video-source-audit` → `references/statistics-taxonomy.md` |
 | Evidence hierarchy, GRADE-lite grading, retraction and predatory-venue checks | `deep-research-skills:medical-research-detective` → `references/evidence-appraisal.md` |
-| Effect size vs significance, confidence intervals, publication bias, heterogeneity | `coding-agent-skills:fitness-nutrition-science` → `references/journal-interpretation-guide.md` |
 | Hypothesis testing, interval interpretation | `data-analytics-bi-skills:statistical-inference` |
 | Confounding, colliders, why filtering is conditioning | `data-analytics-bi-skills:causal-inference` |
 | Making a technical finding land for a non-specialist | `writing-skills:explanation-design` |

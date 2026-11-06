@@ -13,7 +13,7 @@ description: >-
   project, reduce defects, reduce variation, CTQ, project charter, tollgate, control plan,
   voice of the customer, prove the fix worked.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
 ---
 
 # DMAIC problem solving
@@ -24,10 +24,10 @@ metadata:
 - Translating voice-of-the-customer into measurable **CTQs** and a project charter.
 - Any problem important enough to justify a baseline, a verified cause, and a control plan.
 - Not for: a quick one-off cause hunt with no measurement system → see
-  `continuous-improvement-skills:root-cause-analysis`. To document the improved method afterward as the
-  new standard → see the archived `continuous-improvement-skills:standard-work`. Improving a *software delivery*
-  process (releases, defects, pipelines) or building software to engineering standards → see
-  the archived `continuous-improvement-skills:lean-six-sigma-for-software`. Nor for problems outside DMAIC's
+  `continuous-improvement-skills:root-cause-analysis`. Documenting the improved method afterward
+  as the new standard, and improving a *software delivery* process (releases, defects,
+  pipelines) to engineering standards, are both separate disciplines this library does not
+  carry. Nor for problems outside DMAIC's
   operating envelope: a defect that occurs a handful of times a year (no baseline is possible),
   a process so unstable it has no single level to improve against (remove the special causes
   first), a one-off with no repeating cycle, or a process whose fix is already known and obvious.

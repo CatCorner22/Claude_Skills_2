@@ -13,7 +13,7 @@ description: >-
   competing hypotheses, hypothesis matrix, which explanation fits the evidence, diagnostic
   evidence, rule out causes, weigh rival explanations, why is this break really happening.
 metadata:
-  version: "1.1.5"
+  version: "1.1.6"
 ---
 
 # Competing-hypotheses analysis (the hypothesis matrix)
@@ -25,17 +25,16 @@ disconfirmation: the answer is the hypothesis that best survives attack, not the
 felt right.
 
 **Naming rule for this library:** never shorten this method to its usual three-letter initialism.
-In this library that letter sequence means Automated Clearing House (the banking and NACHA skills
-own it). Write "competing hypotheses" or "the hypothesis matrix" in prose, headings, and output.
+That letter sequence commonly means Automated Clearing House in payments. Write "competing
+hypotheses" or "the hypothesis matrix" in prose, headings, and output.
 
 ## When to use
 - An unexplained result with a natural set of rival causes. Canonical examples: a
-  reconciliation break that resists the standard pass (timing difference vs. duplicate statement
-  line vs. matching-rule gap vs. bank error vs. keying error), or a works-in-test-fails-in-prod
+  reconciliation break that resists the standard pass (timing difference vs. duplicate record
+  vs. matching-rule gap vs. supplier error vs. keying error), or a works-in-test-fails-in-prod
   production mystery.
 - Any analysis at risk of confirmation bias: an incident with multiple suspects, rival readings of
-  a prompt during a master-prompt audit (the archived `coding-agent-skills:master-prompt-architect`
-  ran these), or generalizing the
+  a prompt during a master-prompt audit, or generalizing the
   disconfirmation pass of `deep-research-skills:medical-research-detective` beyond medicine.
 - Deciding what evidence to gather next: the matrix shows which observation would
   discriminate between the surviving rivals.
@@ -118,8 +117,8 @@ discipline was always sound, the tedium killed it, and the tedium is now free.
 
 ## Tailor to your environment
 Record your recurring rival sets and evidence sources in `references/your-environment.md`: the
-standing hypothesis set for each problem you diagnose repeatedly (e.g., break causes per bank
-account or statement feed), where the evidence lives (statement exports, match logs, subledger
+standing hypothesis set for each problem you diagnose repeatedly (e.g., break causes per record
+source or import feed), where the evidence lives (record exports, match logs, detail
 reports, access logs), your source-credibility conventions, and your escalation rule for deception
 hypotheses. Keep it structural: real account numbers, amounts, or names belong in
 `your-environment.private.md` (git-ignored), never in a committed file.

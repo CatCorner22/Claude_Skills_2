@@ -15,7 +15,7 @@ description: >-
   date, launch fever, are we still go, normalization of deviance, escalation of
   commitment, revision review.
 metadata:
-  version: "1.1.7"
+  version: "1.1.8"
   source: >-
     Prevents momentum and sunk costs from holding a project to a timeline when revision
     would be optimal. Anchored on the documented record of the Challenger launch decision
@@ -42,10 +42,10 @@ namesake earned that.
   (this skill runs mid-flight, when momentum exists); the epistemics of tests and
   intervention logs → `continuous-improvement-skills:project-command-center` (any
   criteria change this review produces is logged there, openly, never silently);
-  driving effort on the chosen plan → the archived `coding-agent-skills:stay-hard-accountability`
+  driving effort on the chosen plan is a separate discipline this library does not carry
   (see Why / learn for the seam: The Mirror governs effort, The Challenger governs
-  whether the plan still deserves it); the blocker-hunting autopsy persona →
-  the archived `coding-agent-skills:chicken-little-executive-advisor`.
+  whether the plan still deserves it); the blocker-hunting autopsy persona is also
+  outside this library's current scope.
 
 ## Do it
 The facilitation script, the Challenger record held soberly, the bias literature, a worked
@@ -73,19 +73,18 @@ go-live-that-should-slip example, and the decision-log template are in
    we say the FIRST time we saw it? Recurrence without consequence is exposure, not
    evidence of safety.
 5. **Cost both branches honestly, forward-looking only.** Revision has real costs (contracts, dependencies, credibility, morale), and continuation-while-wrong has the
-   retrofit clock (the archived `safety-and-reliability-skills:weight-of-the-books`). Discipline the
+   retrofit clock, a separate discipline this library does not carry. Discipline the
    optimism on both sides with the base rates: what actually happened the last several
    times this team "made up the schedule later"
    (`decision-science-skills:reference-class-forecasting`)?
 6. **Widen the options beyond stop/continue.** Slip the date; descope to the pencil
    (`coding-agent-skills:soviet-space-graphite`); phase the launch (partial go-live);
    attack the constraint instead of the calendar
-   (the archived `continuous-improvement-skills:theory-of-constraints`); or change acceptance
+   (a separate discipline this library does not carry); or change acceptance
    criteria OPENLY, as a logged intervention, never silently. Binary framing is
    momentum's favorite trick: it makes revision look like surrender.
 7. **Guarantee the dissent channel.** The objecting engineer gets a named path
-   (PACE graded assertiveness:
-   the archived `safety-and-reliability-skills:sbar-structured-communication`), a written objection,
+   (PACE graded assertiveness, a separate discipline this library does not carry), a written objection,
    and this rule: the decision-maker must restate the dissent to the dissenter's
    satisfaction BEFORE deciding. An objection that was never restated was never heard:
    it was survived.
@@ -131,8 +130,8 @@ nature cannot be fooled.
 - Changing acceptance criteria quietly to keep the date → that is the intervention-log
   violation; do it openly or not at all.
 - A continue decision with no next trigger → deciding has ended; momentum is steering.
-- Using this review to dodge hard work the plan legitimately needs → route effort
-  questions to the archived `coding-agent-skills:stay-hard-accountability`; the two are partners,
+- Using this review to dodge hard work the plan legitimately needs → that effort
+  discipline is a separate practice this library does not carry; the two are partners,
   not exits from each other.
 
 ## Tailor to your environment

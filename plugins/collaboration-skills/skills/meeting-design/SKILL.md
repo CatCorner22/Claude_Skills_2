@@ -14,7 +14,7 @@ description: >-
   meeting agenda, run this meeting, too many meetings, this should be an email, action
   items, decision protocol, pre-read, standing meeting audit, fix the agenda.
 metadata:
-  version: "1.2.5"
+  version: "1.2.6"
 ---
 
 # Meeting design (decisions, not topics)
@@ -28,17 +28,16 @@ metadata:
 - Auditing a recurring meeting that nobody has re-justified since it was created.
 - When `decision-science-skills:the-challenger` fires a revision trigger, the resulting
   go/no-go deserves a designed decision meeting; this skill builds that room.
-- Not for: kaizen events and co-design workshops → see
-  the archived `continuous-improvement-skills:kaizen-and-codesign`, which owns workshop facilitation;
-  this skill covers the ordinary working meeting.
-- Not for: escalating a problem or transferring work under time pressure → see
-  the archived `safety-and-reliability-skills:sbar-structured-communication`.
-- Not for: negotiating the substance once you are in the room → see
-  the archived `decision-science-skills:principled-negotiation`; this skill designs the container,
-  not the bargaining.
+- Not for: kaizen events and co-design workshops → that is workshop facilitation,
+  a separate discipline; this skill covers the ordinary working meeting.
+- Not for: escalating a problem or transferring work under time pressure →
+  structured handoff communication is a separate discipline this library does not
+  carry.
+- Not for: negotiating the substance once you are in the room → that is a separate
+  discipline; this skill designs the container, not the bargaining.
 - Not for: working out who must be in the room at all (power, interest, engagement
-  moves) → see the archived `collaboration-skills:stakeholder-mapping`; this skill designs the
-  meeting for the people the map surfaces.
+  moves) → that is stakeholder mapping, a separate discipline; this skill designs
+  the meeting for the people that mapping surfaces.
 
 ## Do it
 Full templates (the decision-list agenda, the four decision rules, silent-start
@@ -77,9 +76,8 @@ mechanics, the decision-log format, and the recurring-meeting audit) are in
 
 Division of labor: the assistant drafts the decision-list agenda from a stated purpose,
 red-checks an existing agenda item by item, and converts a transcript or notes into the
-decision log. The human owns the invite list (map it with
-the archived `collaboration-skills:stakeholder-mapping`), ratifies each decision rule, and makes
-the calls in the room.
+decision log. The human owns the invite list (map it with a separate stakeholder-mapping
+process), ratifies each decision rule, and makes the calls in the room.
 
 ## Why / learn
 A topic is a place to visit; a decision is a finish line. "Discuss Q3 roadmap" is

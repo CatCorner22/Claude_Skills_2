@@ -91,8 +91,8 @@ $/month, and multiplying by 12 months/yr cancels cleanly; a periodic return is
 dimensionless-per-period and lives in an exponent, where no unit may appear. The ×12
 figure is the "nominal annual" convention, fine as a label, wrong as a prediction of
 what a balance does. The (1+r)ⁿ machinery, CAGR, and doubling times belong to
-the archived `math-foundations-skills:exponential-growth-and-logs`; this skill's job is routing you
-to the right one of the two moves.
+a separate exponential-growth discipline this library does not carry as a skill; this
+skill's job is routing you to the right one of the two moves.
 
 ## §4 The formula dimensional-check protocol
 Run this on any formula before trusting it: inherited spreadsheet logic, a draft of
@@ -109,7 +109,7 @@ your own, a formula from a document you cannot interrogate.
    Passing does not prove it right (a dimensionless constant can still be wrong); it
    promotes the formula to "worth testing numerically."
 
-**Worked catch.** The archived `safety-and-reliability-skills:weight-of-the-books` skill dates each safety margin: how
+**Worked catch.** A sizing method this library no longer carries as a skill dates each safety margin: how
 long until a growing load erodes the factor F = capacity/load down to its written floor.
 A faulty formula:
 

@@ -139,7 +139,7 @@ judgment), and writing it down is the first deliverable of the project.
   before committing the roadmap.
 
 ## Handoffs once the frame is set
-- Signal exploration and data-quality profiling → the archived `data-analytics-bi-skills:exploratory-data-analysis`
+- Signal exploration and data-quality profiling → a separate step this library does not provide a dedicated skill for
 - Feature encoding/scaling with fit-on-train discipline → `machine-learning-skills:feature-engineering`
 - Regression/classification build → `machine-learning-skills:supervised-modeling`
 - Series forecasting with temporal backtesting → `machine-learning-skills:time-series-forecasting`

@@ -485,7 +485,7 @@ endpoint. **Sleep duration and regularity, and alcohol reduction, sit at T3**: l
 observational evidence, with randomised work limited to surrogate endpoints such as blood pressure.
 All five apply **regardless of
 genotype**, which is the actual point, and none becomes better supported by being
-genotype-tailored. `coding-agent-skills:fitness-nutrition-science` owns the training and nutrition detail;
+genotype-tailored. Training and nutrition detail for these five habits is outside this skill's scope;
 this skill's job is to avoid implying that a genotype-tailored variation on them is better supported
 than the baseline, because it is not.
 

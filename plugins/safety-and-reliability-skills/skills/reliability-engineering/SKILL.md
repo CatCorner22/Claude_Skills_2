@@ -13,7 +13,7 @@ description: >-
   availability math, downtime budget, series parallel reliability, burn-in, failure rate fit, how
   much downtime does our SLO allow.
 metadata:
-  version: "1.3.5"
+  version: "1.3.6"
 ---
 
 # Reliability engineering
@@ -30,9 +30,9 @@ metadata:
   replacement, including deterministic expiries (certificates, passwords, key rotations).
 - Forecasting failures from tiny samples (two or three events) with Weibayes.
 - Not for: qualitative resilience patterns (timeouts, retries, circuit breakers, bulkheads) →
-  see the archived `continuous-improvement-skills:lean-six-sigma-for-software` (its stability-and-redundancy
-  reference; this skill installs the math underneath it). Hunting unusual patterns in a metric
-  stream → see `machine-learning-skills:anomaly-detection`.
+  that is a separate discipline this library does not carry; this skill installs the math
+  underneath it. Hunting unusual patterns in a metric stream → see
+  `machine-learning-skills:anomaly-detection`.
 
 ## Do it
 1. **Collect failure data honestly.** Times to failure on one consistent clock (operating hours

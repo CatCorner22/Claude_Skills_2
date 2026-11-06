@@ -9,16 +9,16 @@ description: >-
   possible fraud. Triggers: anomaly detection, anomaly, outlier, outlier detection, unusual transaction,
   fraud detection, isolation forest, local outlier factor, LOF, z-score, novelty detection, unusual activity.
 metadata:
-  version: "1.4.2"
+  version: "1.4.3"
 ---
 
 # Anomaly detection
 
 ## When to use
 - Flagging unusual transactions or values: reconciliation breaks, fee/interest spikes, duplicate or out-of-pattern payments, suspicious activity.
-- Finding outliers in a time series (a day's cash movement far from its seasonal norm) or in multivariate transaction data.
+- Finding outliers in a time series (a day's metric reading far from its seasonal norm) or in multivariate transaction data.
 - Setting a detection threshold when you have few or no labels, and managing the resulting alert volume.
-- Not for: mechanically matching a statement to the ledger and classifying breaks. That is reconciliation, a finance-domain procedure this library does not carry; use this skill to *rank* which breaks are unusual. Designing the control framework alerts feed into is controls work, also outside this library.
+- Not for: mechanically matching two records and classifying their differences. That is reconciliation, a domain-specific matching procedure this library does not carry; use this skill to *rank* which differences are unusual. Designing the control framework alerts feed into is controls work, also outside this library.
 - Not for: operating a whole *queue* of detectors: disposition audits, tolerance lists with
   expiry, paging gates, and the economics of alert volume → see
   `safety-and-reliability-skills:detection-system-tuning`. This skill builds and tunes one
@@ -26,8 +26,8 @@ metadata:
 
 ## Do it
 1. **Define "anomalous" for this context, and the cost of each error.** Decide what unusual means here
-   (a value, a pattern, a rate) and weigh a **missed anomaly** against a **false alarm**. In treasury a
-   missed fraudulent payment is costly; a wall of false alerts destroys trust. Both costs set the threshold.
+   (a value, a pattern, a rate) and weigh a **missed anomaly** against a **false alarm**. A
+   missed fraudulent transaction is costly; a wall of false alerts destroys trust. Both costs set the threshold.
 2. **Start statistical on single features.** For one numeric field, flag points beyond a threshold: the
    classic **z-score**, or better the **robust z-score** using **median and MAD** (resistant to the
    outliers you're hunting), or the **IQR rule** (below Q1 − 1.5·IQR or above Q3 + 1.5·IQR). Simple, explainable,
@@ -82,7 +82,7 @@ and the ranked alerts; the human owns the investigation and the verdict on every
 ## Why / learn
 The mental shift is that **an anomaly is "unusual," not automatically "wrong."** These methods find points
 that don't fit the historical pattern; whether a given point is an error, fraud, or a perfectly legitimate
-one-off (a genuine large acquisition payment) is a question only investigation answers. So detection is a
+one-off (a genuine one-time bulk order) is a question only investigation answers. So detection is a
 *triage* step that decides where humans look, and it must be paired with investigation, never treated as a
 verdict. The second hard truth is **labels are scarce**, which is why this is mostly unsupervised: you rarely
 have a clean history of "these were the frauds," so you can't train a straightforward classifier and you can't

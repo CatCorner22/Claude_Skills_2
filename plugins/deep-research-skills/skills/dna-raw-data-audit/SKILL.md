@@ -11,7 +11,7 @@ description: >-
   deep-research-skills:dna-ancestry-research. Triggers: 23andme, nebula, my dna, raw genetic data, digital dna agent, my genome,
   genetic risk, apoe, mthfr, pharmacogenomic, carrier status, polygenic risk score.
 metadata:
-  version: "1.7.5"
+  version: "1.7.6"
   source: >-
     Citations are verified against retrieved index records, never a search tool's generated prose,
     and a claim attaches only to a record whose title was returned: a bare URL proves an
@@ -45,7 +45,7 @@ questions, and collapsing them is how genetic reports become horoscopes.
 - Not for: a clinical symptom cluster or suspected drug interaction with no genome involved →
   `deep-research-skills:medical-research-detective`. Auditing a video's or article's genetics
   claims → `deep-research-skills:video-source-audit`. Training and nutrition protocols for a
-  healthy person → `coding-agent-skills:fitness-nutrition-science`. A statistics question with no
+  healthy person with no genome attached are outside this skill. A statistics question with no
   genome attached → `data-analytics-bi-skills:statistical-inference`. Where the family comes from:
   ancestry, haplogroups, DNA matches, a family tree, lineage maps → `deep-research-skills:dna-ancestry-research`
   (that skill reads the same file as history; this one reads it as medicine).

@@ -13,7 +13,7 @@ description: >-
   dimensional analysis, units don't match, per unit, annualize, factor-label, cancel the units,
   unit check, thousands vs millions.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
 ---
 
 # Units and dimensional analysis
@@ -28,14 +28,14 @@ metadata:
 - Checking a formula's dimensional consistency *before* trusting it: yours, a
   colleague's, or one inherited inside a spreadsheet.
 - Not for: sizing a system against its payload and growth curve (the Load Manifest
-  method) → see the archived `safety-and-reliability-skills:weight-of-the-books`. This skill checks
-  that the sizing formulas are dimensionally sound; that one runs the design review.
+  method), which is a separate discipline this library does not carry; this skill only
+  checks that such sizing formulas are dimensionally sound.
 - Not for: measurement instrument error (repeatability, reproducibility, Gage R&R) →
   see `continuous-improvement-skills:measurement-systems-analysis`. Wrong units are a
   translation defect; noisy gauges are a measurement defect.
-- Siblings: the archived `math-foundations-skills:algebra-and-formulas` (unit-check every formula it
-  rearranges) and the archived `math-foundations-skills:number-sense-and-estimation` (units confirm
-  the kind of thing; that skill confirms the size of it).
+- Siblings: algebraic formula rearrangement (unit-check every formula it rearranges)
+  and number-sense estimation (units confirm the kind of thing; estimation confirms
+  the size of it) are both separate disciplines this library does not carry as skills.
 
 ## Do it
 Worked chains, the full check protocol, and the trap catalog are in
@@ -69,14 +69,15 @@ Worked chains, the full check protocol, and the trap catalog are in
    *flow* adds across months: $2,350/month × 12 months/year = $28,200/year, and
    $46,800/year ÷ 12 = $3,900/month. A *rate of return* does not add: 1% per month is
    (1.01)¹² − 1 ≈ 12.68% per year, not 12%. This skill covers the distinction and the
-   ×12 case; the (1+r)ⁿ math belongs to the archived `math-foundations-skills:exponential-growth-and-logs`.
+   ×12 case; the (1+r)ⁿ math belongs to a separate exponential-growth discipline this
+   library does not carry as a skill.
 8. **Dimension-check any formula before trusting it.** Write the units of every symbol;
    work out the units of every term; every pair of added or subtracted terms shares a
    unit, both sides match, and anything inside exp, ln, or an exponent is dimensionless.
    A formula that fails is wrong no matter how plausible its output looks, and one
    whose units merely *resolve* still owes you the question of which law joins the
-   terms. The margin-exhaustion formula in the archived
-   `safety-and-reliability-skills:weight-of-the-books` shows that pair of questions at
+   terms. A margin-exhaustion formula from a sizing discipline this library no longer
+   carries as a skill shows that pair of questions at
    work: its units came out as years, and writing them down exposed that nothing in it
    said how the quantity moved with time (the worked catch is in the reference file). Numbers can look right by luck; writing the
    units out makes the structure you wrote visible.
@@ -127,8 +128,8 @@ exponent, where only dimensionless things belong.
   unchecked chain just launders the error.
 - Dividing rates on different time bases ($/day ÷ items/hour) → convert both to one
   base, then divide.
-- Annualizing a growth rate with ×12 → ×12 is for flows; rates compound; route to
-  the archived `math-foundations-skills:exponential-growth-and-logs`.
+- Annualizing a growth rate with ×12 → ×12 is for flows; rates compound instead, via
+  exponential-growth math this library does not carry as a skill.
 - Adding per-month and per-year figures in one total ($1,800/mo rent + $2,400/yr
   insurance ≠ $4,200 of anything; it is $21,600 + $2,400 = $24,000/yr) → convert to a
   common period before any sum.

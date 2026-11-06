@@ -93,8 +93,8 @@ Tone rules that keep the review a collaboration:
 - Ask where you might be missing context; the author knows things the diff doesn't show.
 - Praise specifically: name the behavior that's good and why it works, with the same
   precision as criticism.
-- If a drafted comment reads as a verdict on the author, rewrite it with
-  the archived `collaboration-skills:feedback-that-lands` before posting.
+- If a drafted comment reads as a verdict on the author, rewrite it around behavior,
+  impact, and request before posting.
 
 ## Severity labels
 Label every comment so the author can triage:

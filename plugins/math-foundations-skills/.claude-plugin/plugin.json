@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "math-foundations-skills",
   "description": "Unit conversion and dimensional analysis — the factor-label method, unit checks as a necessary-not-sufficient guard on every formula, and the unit-driven catch for formula rearrangement errors. The broader basic-math set is archived; this is the one that catches real errors models and humans both make.",
-  "version": "0.6.3"
+  "version": "0.6.4"
 }

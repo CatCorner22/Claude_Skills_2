@@ -31,5 +31,5 @@ and never committed.
 ## Hand-offs
 - Register/grade-level rewrites of finished explanations: <who owns plain-language output;
   route via `writing-skills:adams-plain-grade`>
-- Long-term retention follow-up (schedules, prompts): route via
-  the archived `learning-skills:spaced-retrieval-learning`.
+- Long-term retention follow-up (schedules, prompts): <who owns this, if anyone>; spaced-retrieval
+  practice is a separate discipline this library does not carry.

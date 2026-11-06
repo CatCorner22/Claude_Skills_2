@@ -14,7 +14,7 @@ description: >-
   technique, analogy for, teach this concept, curse of knowledge, make this intuitive,
   teach-back, explain to a newcomer.
 metadata:
-  version: "1.1.6"
+  version: "1.1.7"
 ---
 
 # Explanation design
@@ -40,9 +40,9 @@ is the main reason competent people write incomprehensible explanations.
 - Not for: attention-first professional structure (the point first, scannable, for a busy
   reader who already has the background) → see `writing-skills:adams-smart-brevity`. Brevity
   serves a reader deciding what to act on; explanation serves a reader building understanding.
-- Not for: making understood material stick over time → see
-  the archived `learning-skills:spaced-retrieval-learning`. This skill gets the concept *in*; that one keeps
-  it there.
+- Not for: making understood material stick over time: spaced-retrieval practice is a
+  separate discipline this library does not carry. This skill gets the concept *in*; keeping
+  it there over time is a different job.
 - Not for: authoring Agent Skills → see `coding-agent-skills:writing-agent-skills`.
 
 ## Do it

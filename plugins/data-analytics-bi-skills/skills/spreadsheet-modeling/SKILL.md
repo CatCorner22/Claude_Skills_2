@@ -14,7 +14,7 @@ description: >-
   analysis, what-if, data table, hardcoded formula, model review, scenario toggle,
   spreadsheet error, one formula per row.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
   source: >-
     Grounded in the documented spreadsheet-error research collected by EuSpRIG (Panko's
     field-audit synthesis) and FAST-style structured-modeling conventions. Claims marked
@@ -28,17 +28,16 @@ metadata:
 - Reviewing or auditing an inherited model for structure, hardcoding, and formula errors.
 - Adding sensitivity/what-if analysis or scenario toggles to an existing model.
 - Not for: the forecasting *methodology* behind the numbers. Statistical method (seasonality, model
-  choice, backtesting) → see `machine-learning-skills:time-series-forecasting`; the treasury
-  direct-vs-indirect framing is a cash-forecasting method question for whatever
-  finance source you work from, since this library no longer carries one. This skill is the modeling
-  craft, not the method.
+  choice, backtesting) → see `machine-learning-skills:time-series-forecasting`; a domain-specific
+  forecasting framework (choosing how to compose raw inputs into a forecast) is a question for
+  whatever domain source you work from. This skill is the modeling craft, not the method.
 
 ## Do it
 1. **Separate inputs, calculations, and outputs.** Put assumptions in one clearly marked zone (or
    sheet), calculations in another, results in a third; flow runs one direction, inputs → calcs →
    outputs. Color inputs distinctly (e.g. blue font) and never bury an assumption inside a
-   calculation. If raw data feeds the model, land it analysis-ready first
-   (the archived `data-analytics-bi-skills:data-cleaning`) and paste values into a marked data zone, not into
+   calculation. If raw data feeds the model, clean it and land it analysis-ready first
+   and paste values into a marked data zone, not into
    formulas.
 2. **One formula per row, consistent across all columns.** Write a formula once in the first period
    and fill it right unchanged. If a row needs an exception in one column, restructure it: a row you
@@ -61,13 +60,12 @@ metadata:
 8. **Audit before you trust it.** Trace precedents/dependents on the outputs, scan for inconsistent
    formulas across a row (Excel error-checking / `FORMULATEXT`), confirm no unintended circular
    references, and stress the inputs to extremes, then gut-check the outputs (sign, magnitude,
-   units, a rough independent re-derivation) per
-   the archived `math-foundations-skills:number-sense-and-estimation` before anyone relies on the number.
-9. **Know when to leave the spreadsheet.** A workbook rebuilt by hand every period becomes a script
-   (the archived `data-tools-skills:excel-automation-python`); data that chokes the sheet or a fragile chain of
-   lookups becomes one query (`data-tools-skills:duckdb-local-analytics`); outputs that feed a
-   standing report get designed as a view, not more tabs
-   (the archived `data-analytics-bi-skills:dashboard-design`).
+   units, a rough independent re-derivation) as a basic number-sense check before anyone relies on
+   the number.
+9. **Know when to leave the spreadsheet.** A workbook rebuilt by hand every period becomes a
+   script; data that chokes the sheet or a fragile chain of lookups becomes one query
+   (`data-tools-skills:duckdb-local-analytics`); outputs that feed a standing report get designed
+   as a view, not more tabs.
 
 ## Why / learn
 A model is only as good as it is **auditable**. The value is not the answer it prints today but that

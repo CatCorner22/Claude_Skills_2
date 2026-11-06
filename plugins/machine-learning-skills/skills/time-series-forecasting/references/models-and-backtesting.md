@@ -117,7 +117,7 @@ Reporting a full-series `auto_arima` search followed by a rolling backtest as "o
 - **The decision rule: an explicit skill ratio.** `skill = model MAE(h) ÷ baseline MAE(h)`, both measured on
   the **same backtest origins** at the **same horizon** *h* you decide on. Below 1 you beat the baseline.
   Report it per horizon step if the decision spans several (h = 1 may win while h = 13 loses).
-- For treasury cash series (small, zero, or negative values), prefer **MAE/RMSE in currency** plus the skill
+- For series with small, zero, or negative values (net flows, returns, inventory deltas), prefer **MAE/RMSE in the series' own units** plus the skill
   ratio, with **MASE** as the cross-series companion; avoid MAPE/sMAPE. Always report the baseline's score
   next to the model's.
 

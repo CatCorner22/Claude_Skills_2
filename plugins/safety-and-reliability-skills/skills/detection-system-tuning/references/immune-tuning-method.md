@@ -289,9 +289,8 @@ template), the recurring disposition audit that re-reads what suppression is hid
 replay logs that keep every acceptance visible instead of ambient. SRE error budgets are
 the same discipline at practice level: a stated allowance of failure deliberately spent so
 risk surfaces continuously instead of accumulating [snippet-only]; a tolerance list with
-expiries is a detection system's error budget, written down. (For error budgets in software
-delivery itself, the library's home is
-the archived `continuous-improvement-skills:lean-six-sigma-for-software`.)
+expiries is a detection system's error budget, written down. (Error budgets in software
+delivery itself are a related but separate discipline this library does not carry.)
 
 ## Sources
 

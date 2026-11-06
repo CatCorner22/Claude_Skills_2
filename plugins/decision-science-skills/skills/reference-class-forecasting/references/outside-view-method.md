@@ -10,7 +10,7 @@ appraisal guidance (HM Treasury Green Book; Department for Transport tables) [sn
 - [Anchoring and placement](#anchoring-and-placement)
 - [Adjustment rules and uplift math](#adjustment-rules-and-uplift-math)
 - [Aggregation: never sum the P80s](#aggregation-never-sum-the-p80s)
-- [Worked example: a cash-driver anchor from MAPE/bias history](#worked-example-a-cash-driver-anchor-from-mapebias-history)
+- [Worked example: a volume-driver anchor from MAPE/bias history](#worked-example-a-volume-driver-anchor-from-mapebias-history)
 - [Correct once, not twice: uplift or curve, never both](#correct-once-not-twice-uplift-or-curve-never-both)
 - [The inside-vs-outside reconciliation memo](#the-inside-vs-outside-reconciliation-memo)
 - [When the class is thin](#when-the-class-is-thin)
@@ -19,8 +19,8 @@ appraisal guidance (HM Treasury Green Book; Department for Transport tables) [sn
 
 The class must be **broad enough for statistics, narrow enough to be comparable**. Heuristics:
 
-- **Match on the mechanism that drives the outcome**, not on surface labels. For a cash driver,
-  the mechanism is the payer population and calendar (tuition cycles behave like tuition cycles);
+- **Match on the mechanism that drives the outcome**, not on surface labels. For a volume driver,
+  the mechanism is the supplier base and calendar (delivery cycles behave like delivery cycles);
   for a software feature, it is team + codebase + feature size, not the feature's subject matter.
 - **Prefer your own history when it exists.** Twenty-four cycles of your own forecast-vs-actual
   errors beat an industry benchmark of someone else's projects: same process, same people, same
@@ -68,10 +68,10 @@ Two disciplines; pick one per estimate:
   `uplift% = r_P80 − 1`, `estimate_P80 = estimate × r_P80`.
   No case-by-case argument; the policy does the adjusting.
 
-**Direction matters.** Uplift the numbers where being over hurts (costs, disbursements, schedule);
-haircut the numbers where being under hurts (receipts feeding a liquidity floor): for receipts use
-a low percentile, e.g. `estimate_P20 = estimate × r_P20`, so that in 80% of comparable cycles at
-least that much arrived. Certainty level is a risk-appetite decision the human owns; record it.
+**Direction matters.** Uplift the numbers where being over hurts (costs, outbound demand, schedule);
+haircut the numbers where being under hurts (an inflow feeding a minimum-stock floor): for an
+inflow use a low percentile, e.g. `estimate_P20 = estimate × r_P20`, so that in 80% of comparable
+cycles at least that much arrived. Certainty level is a risk-appetite decision the human owns; record it.
 
 **And the certainty level attaches to ONE commitment.** A P80 per line item, added up across a
 portfolio, is not a P80 portfolio: it is a much more expensive number wearing a P80 label. That is
@@ -84,7 +84,7 @@ P80. Never item-by-item P80s added together.**
 
 Everything above is correct for a *single* commitment: one project, one covenant, one deliverable
 you must individually meet. The moment you own the **sum**: a program budget, a department's annual
-plan, a 13-week cash total across a dozen drivers, applying the house percentile to each line and
+plan, a 13-week operating total across a dozen drivers, applying the house percentile to each line and
 adding is a double count, because **independent overruns partially cancel**. Variances add;
 standard deviations do not. For independent items, `σ_sum = √(Σσᵢ²)`, while summing the item
 uplifts charges you `Σσᵢ`.
@@ -145,33 +145,33 @@ many or lumpy), and take one contingency off that.*
   *merge bias* runs the opposite direction from cost pooling: parallelism makes the joint milestone
   worse, not better. Size schedule contingency by simulating the network, never by a sum rule.
 
-## Worked example: a cash-driver anchor from MAPE/bias history
+## Worked example: a volume-driver anchor from MAPE/bias history
 
-Setting: the tuition-receipts driver in a rolling 13-week direct-method cash process. The
+Setting: the incoming-supplier-delivery driver feeding a rolling 13-week operations plan. The
 accuracy loop already tracks per-cycle variance (MAPE and signed bias), so the reference
 class is sitting in the variance file.
 
 1. **Class:** the driver's own last 24 cycles of `(actual − forecast) / forecast`, same
-   definition as the accuracy reference. Ratified: same payer population, same calendar; two
-   cycles during a fee-definition change excluded for a stated, outcome-independent reason.
+   definition as the accuracy reference. Ratified: same supplier base, same calendar; two
+   cycles during a SKU-definition change excluded for a stated, outcome-independent reason.
 2. **Distribution (illustrative):** MAPE 6.2%; signed bias **+3.5%** (actuals persistently above
    the projection: systematic under-projection). Ratios `r = actual/forecast`, sorted:
    P20 = 1.01, P50 = 1.03, P80 = 1.07. (Note the mean bias +3.5% and the median ratio +3.0% are
    *different statistics*, as they will be on any right-skewed error distribution. Which one you
    correct by matters; see the next section.)
-3. **Anchor:** next cycle's inside number is $18.40M. Naive anchor = 18.40 × 1.03 = **$18.95M**.
-   The +3.5% bias is not noise (18 of 22 cycles were same-signed), so anchoring at the raw
-   $18.40M would repeat a known, measured error.
+3. **Anchor:** next cycle's inside number is 18.40k units. Naive anchor = 18.40 × 1.03 =
+   **18.95k units**. The +3.5% bias is not noise (18 of 22 cycles were same-signed), so anchoring
+   at the raw 18.40k units would repeat a known, measured error.
 4. **Uplift/haircut by use:**
-   - Feeding the *expected* cash position: use the anchor, $18.95M.
-   - Feeding a *liquidity floor* check (can we cover the payroll run if receipts disappoint?):
-     use P20 → 18.40 × 1.01 = **$18.58M**. Note where that lands: the floor is *above* the
+   - Feeding the *expected* operating plan: use the anchor, 18.95k units.
+   - Feeding a *minimum-stock floor* check (can we keep the line running if deliveries disappoint?):
+     use P20 → 18.40 × 1.01 = **18.58k units**. Note where that lands: the floor is *above* the
      raw inside number, because this driver's whole ratio distribution sits above 1.00:
-     the haircut is taken off the anchor ($18.95M), not off the raw estimate. A P20 below
+     the haircut is taken off the anchor (18.95k units), not off the raw estimate. A P20 below
      1.00 would be arithmetically impossible here anyway: with 18 of 22 cycles positive,
      only 4 ratios are at or under 1.00, and P20 reads the 5th of 22 sorted values.
-   - If this driver were a disbursement, the P80 figure would be the prudent number:
-     18.40 × 1.07 = **$19.69M**.
+   - If this driver were outbound customer orders instead of inbound deliveries, the P80 figure
+     would be the prudent number: 18.40 × 1.07 = **19.69k units**.
    - **If several drivers are being anchored for one total**, do not add up each driver's P80:
      see [Aggregation](#aggregation-never-sum-the-p80s). The total takes one contingency at the
      total's own P80.
@@ -183,8 +183,8 @@ class is sitting in the variance file.
    estimate. See the next section before doing anything with it.
 
 This is the loop-closing move: the forecast process already measures MAPE and bias; this method turns that
-measurement into next-cycle anchors and uplifts per driver (tuition receipts, payroll, grant
-drawdowns), instead of letting the accuracy history sit unread.
+measurement into next-cycle anchors and uplifts per driver (deliveries, outbound orders, staffing
+hours), instead of letting the accuracy history sit unread.
 
 ## Correct once, not twice: uplift or curve, never both
 
@@ -242,7 +242,7 @@ Half a page, drafted by the assistant, signed by the human:
 ## When the class is thin
 
 - Fewer than ~10 cases: report the thinness explicitly; give the range rather than fine
-  percentiles; widen the class one notch (all receipt drivers, not just tuition; all features,
+  percentiles; widen the class one notch (all inflow drivers, not just deliveries; all features,
   not just this module) and show both views.
 - No internal history at all: use published external classes (e.g., cost-overrun distributions by
   project type from the Flyvbjerg literature [snippet-only]) as the starting anchor, state the

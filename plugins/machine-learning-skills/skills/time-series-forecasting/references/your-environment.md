@@ -1,10 +1,10 @@
 # Your time series (sanitized template)
 
-Fill this in with your real series. If any value is sensitive (actual balances, cash amounts, account
+Fill this in with your real series. If any value is sensitive (actual values, account or customer
 names, sample rows), keep it in `your-environment.private.md` instead; that suffix is git-ignored.
 Commit only sanitized, structural examples.
 
-- **Series & business meaning:** <e.g. daily net operating cash movement for the main USD account>
+- **Series & business meaning:** <e.g. daily sessions for the main product's signup page>
 - **Frequency:** <daily | weekly | monthly>; **business days only?** <yes/no>
 - **Forecast horizon:** <how many steps ahead you need, e.g. next 5 business days / 13 weeks>
 - **Seasonal periods present:** <day-of-week, month-end, quarter-end, holidays, payroll cycle>

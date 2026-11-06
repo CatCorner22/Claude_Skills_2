@@ -94,8 +94,8 @@ Readings that matter for the decision:
   a missed issue costs much, 15.5% may warrant action; if investigation is expensive,
   maybe only a second, independent signal does. Write the threshold next to the question.
 
-(The count-table format itself, natural frequencies, is taught in
-the archived `math-foundations-skills:probability-fundamentals`; this skill applies it to live
+(The count-table format itself, natural frequencies, is a separate discipline this
+library does not carry; this skill applies it to live
 decisions.)
 
 ## 5. The odds shortcut and chaining

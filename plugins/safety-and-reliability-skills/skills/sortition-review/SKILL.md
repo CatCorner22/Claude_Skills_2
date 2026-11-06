@@ -14,7 +14,7 @@ description: >-
   spot-check by lot, they know which ones get looked at, same person always reviews,
   rotate reviewers, end-of-term handover, draw at random, unriggable selection.
 metadata:
-  version: "1.3.3"
+  version: "1.3.4"
 ---
 
 # Sortition review (euthynai and the ballotino)
@@ -59,9 +59,9 @@ gatekeeper.
 - Not for: rehearsing against an adaptive adversary → see
   `decision-science-skills:tabletop-wargaming`; sortition is selection design, not
   adversarial testing.
-- Not for: designing the control architecture around a hazard → see
-  the archived `safety-and-reliability-skills:bowtie-barrier-analysis`; a sortition draw is one
-  barrier that skill might place, not the map.
+- Not for: designing the control architecture around a hazard → that is a separate
+  discipline this library does not carry; a sortition draw is one barrier such a map
+  might place, not the map itself.
 
 ## Do it
 Verifiable-lot mechanics, the universality-floor design, reviewer-rotation patterns,

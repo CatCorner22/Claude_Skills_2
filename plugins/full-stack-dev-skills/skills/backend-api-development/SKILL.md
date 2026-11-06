@@ -11,7 +11,7 @@ description: >-
   session, API error handling, HTTP status codes, pagination endpoint, OpenAPI schema,
   dependency injection fastapi, CRUD API.
 metadata:
-  version: "1.6.3"
+  version: "1.6.4"
 ---
 
 # Backend API development (FastAPI)
@@ -64,7 +64,7 @@ def create_invoice(data: InvoiceIn, db: Session = Depends(get_db)):
    422 validation (automatic), 401 unauthenticated, 403 forbidden, 404 absent, 409 conflict.
    `{"detail": ...}` is the default here because FastAPI's own validation, routing,
    and `HTTPException` paths already emit it, so nothing has to be re-wrapped.
-   A custom envelope (the archived `full-stack-dev-skills:elite-python-engineer` prefers
+   A custom envelope (one convention prefers
    `{"error": {"code", "message"}}` for its stable machine-readable code) is equally valid but
    only becomes "one shape" once the validation and `HTTPException` handlers are overridden too;
    pick one per service, not one per route. Never return 200-with-error-body; never leak

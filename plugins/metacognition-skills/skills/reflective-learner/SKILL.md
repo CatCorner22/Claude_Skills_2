@@ -10,7 +10,7 @@ description: >-
   what went wrong, post-mortem, error analysis, self-review, you got this wrong, that's not what
   I meant, feedback, correction, improve your approach, do better next time.
 metadata:
-  version: "1.1.5"
+  version: "1.1.6"
 ---
 
 # Reflective learner
@@ -20,8 +20,8 @@ metadata:
 - Immediately after explicit or implicit user feedback or corrections.
 - When high uncertainty, a suboptimal outcome, or a detected error warrants examination.
 - Briefly at session start (recall recent lessons) and fully at session end or on request.
-- Not for: analyzing external data or documents → see
-  the archived `metacognition-skills:dynamic-analysis-engine`; this skill analyzes *the work itself*.
+- Not for: analyzing external data or documents → that is a separate discipline this
+  library does not carry; this skill analyzes *the work itself*.
 
 ## Do it
 The full reflection template, the weakness categories, and a worked example are in

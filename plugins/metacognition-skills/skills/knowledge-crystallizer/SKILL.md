@@ -14,15 +14,14 @@ description: >-
   methods, clean up the knowledge base, merge duplicate notes, retire stale facts,
   capability map, crystallization pass.
 metadata:
-  version: "1.3.4"
+  version: "1.3.5"
 ---
 
 # Knowledge crystallizer
 
 ## When to use
-- After a significant analysis (the archived `metacognition-skills:dynamic-analysis-engine`) or
-  reflection (`metacognition-skills:reflective-learner`) cycle has produced insights worth
-  keeping.
+- After a significant analysis or reflection (`metacognition-skills:reflective-learner`)
+  cycle has produced insights worth keeping.
 - When the same pattern, preference, or fix has recurred across 2+ interactions.
 - At milestones and session end, the standing cadence a memory practice mandates (this
   repo's CLAUDE.md schedules exactly this pass: harvest → validate → distill → integrate →
@@ -31,12 +30,12 @@ metadata:
 - Not for: the moment-to-moment capture and layering of notes → see
   `metacognition-skills:hierarchical-memory-manager`; this skill is the *refinery* that
   turns its raw material into permanent, validated knowledge.
-- Not for: running the team debrief that surfaces the lessons → see
-  the archived `decision-science-skills:after-action-review` (its sustain/improve items are prime
-  harvest input for this pass).
-- Not for: getting a crystallized rule into the *user's* unaided recall → see
-  the archived `learning-skills:spaced-retrieval-learning` (permanence in the store is this skill;
-  permanence in a human head is retrieval practice).
+- Not for: running the team debrief that surfaces the lessons → that is a separate
+  discipline this library does not carry; its sustain/improve items are prime harvest
+  input for this pass.
+- Not for: getting a crystallized rule into the *user's* unaided recall → permanence in
+  the store is this skill; permanence in a human head is retrieval practice, a separate
+  discipline this library does not carry.
 
 ## Do it
 Validation criteria, entry formats, the audit-trail record, pruning rules, and a worked
@@ -44,8 +43,8 @@ crystallization pass are in `references/crystallization-protocol.md`.
 
 1. **Harvest.** Collect candidate insights from recent Working/Episodic memory, reflection
    outputs from `metacognition-skills:reflective-learner`, analysis findings from
-   the archived `metacognition-skills:dynamic-analysis-engine`, and any after-action review's
-   sustain/improve list. A candidate is anything that might matter beyond today.
+   deep-dive analysis work, and any team debrief's sustain/improve list. A candidate is
+   anything that might matter beyond today.
 2. **Validate each candidate against the four gates** before it becomes permanent:
    - **Consistency**: does it contradict existing semantic memory? If so, flag the
      contradiction with provenance; don't overwrite.

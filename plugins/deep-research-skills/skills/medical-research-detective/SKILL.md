@@ -14,7 +14,7 @@ description: >-
   this condition, PubMed, Google Scholar, medical literature, drug interaction research, verify
   this study, check this citation.
 metadata:
-  version: "1.14.6"
+  version: "1.14.7"
 ---
 
 # Medical research detective
@@ -35,8 +35,8 @@ does not give doses. See `references/output-format.md` for the standing safety f
 - A deep literature review on a condition, drug, or test, far past first-page search results.
 - Verifying a medical claim, study, or citation someone handed you (including one produced by an AI).
 - Not for: general non-medical research → use the built-in `deep-research` skill. Training,
-  nutrition, or ergogenic-supplement protocols for a healthy person →
-  `coding-agent-skills:fitness-nutrition-science`. Checking whether a *video* represented its
+  nutrition, or ergogenic-supplement protocols for a healthy person with no clinical question
+  attached is outside this skill. Checking whether a *video* represented its
   cited sources faithfully, and grading it → `deep-research-skills:video-source-audit` (its object
   is the video; this skill's object is the clinical question). Interpreting a personal genome raw
   data file (23andMe, Nebula, a VCF) against the literature →
@@ -83,7 +83,7 @@ the first plausible answer: the value is in stage 2 and the disconfirmation pass
    typically) and aim for at least 5–8 candidates, the boring ones included. This is the medical
    edition of a domain-general discipline: `decision-science-skills:competing-hypotheses-analysis`
    owns the full hypothesis-matrix method (judge by disconfirmation, never by accumulation), and the
-   base-rate check is the archived `math-foundations-skills:probability-fundamentals` applied to disease
+   base-rate check applies general probability fundamentals to disease
    frequency.
 
 3. **Build an explicit search strategy.** For each hypothesis, write the PICO-style question, then

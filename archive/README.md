@@ -44,6 +44,15 @@ finds the removal commits, and any deleted file can be recovered from the commit
 Locally installed copies of these plugins keep working — installs are version-pinned snapshots —
 but they will never update and no longer appear in the marketplace listing.
 
+## Deleted, not archived (2026-11-06, owner-directed)
+
+**`coding-agent-skills:fitness-nutrition-science`** (1 skill, its references and house eval) was
+deleted outright on the owner's explicit instruction. Every cross-link that used to point into it
+was rewritten to say the training, nutrition, or supplement topic is outside that skill's scope,
+rather than naming a replacement that does not exist. Plugin descriptions, the README skill-count
+table and the routing-eval rows that referenced it (Tier F, rows F3 and F7's near-miss) were
+updated in the same pass.
+
 ## The blank-slate consolidation (2026-08-23) — 50 skills archived
 
 The owner ran a blank-slate review of all 121 active skills against one test: *does invoking

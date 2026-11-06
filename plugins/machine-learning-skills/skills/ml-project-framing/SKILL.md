@@ -13,7 +13,7 @@ description: >-
   prediction task, unit of prediction, baseline model, is this an ML problem, does ML fit,
   feasibility, well-posed, can we predict, framing spec, scope an ML project.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
   source: >-
     The framing discipline descends from CRISP-DM's Business Understanding phase (the
     late-1990s NCR/DaimlerChrysler/SPSS/OHRA consortium process model), verified via
@@ -28,11 +28,11 @@ metadata:
 - Sanity-checking a stakeholder's "can we predict X?" request: deciding whether ML is the right tool at all.
 - Reviewing an existing model that underperforms in production to find a framing flaw.
 - Not for: choosing metrics and validation once the task is framed → see
-  `machine-learning-skills:model-evaluation`. For profiling the data to test feasibility → see
-  the archived `data-analytics-bi-skills:exploratory-data-analysis`.
+  `machine-learning-skills:model-evaluation`. Profiling the data to test feasibility is a
+  separate step this skill does not perform.
 - Not for: architecting a bespoke or fine-tuned language model once framing says a generic one
-  will not do: the prompting/RAG/PEFT/full-tune ladder, data budget, and eval harness → see
-  the archived `machine-learning-skills:bespoke-llm-architect`.
+  will not do: the prompting/RAG/PEFT/full-tune ladder, data budget, and eval harness is a
+  separate discipline this library does not cover.
 
 ## Do it
 1. **State the decision first, not the model.** Write one sentence: *who* acts, *what* action changes
@@ -67,7 +67,7 @@ metadata:
    how efforts like this perform rather than on the demo's optimism.
 7. **Run feasibility and leakage checks.** Confirm there is enough labeled history, plausible signal in
    the features, a relationship stable enough to persist, and that the target is available for
-   past periods. Use the archived `data-analytics-bi-skills:exploratory-data-analysis` to test signal before committing.
+   past periods. Profile the data directly, with exploratory analysis, to test signal before committing.
 8. **Write a one-page framing spec.** Capture decision, target, grain, prediction time, feature list,
    metric + baseline, data availability, and known risks. This page is the contract the project is
    built against; see `references/framing-spec.md` for the template and worked examples across

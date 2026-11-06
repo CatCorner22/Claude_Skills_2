@@ -10,7 +10,7 @@ description: >-
   sticks. Triggers: root cause, 5 whys, fishbone, Ishikawa, cause and effect, Pareto, RCA, why did
   this happen, recurring problem, keeps happening, corrective action, containment, verify the cause.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
 ---
 
 # Root-cause analysis
@@ -20,8 +20,8 @@ metadata:
 - A fix that keeps failing because you've been treating a symptom, not the cause.
 - Prioritizing which of many problem types to attack first (Pareto).
 - Not for: running a full data-driven improvement project with baseline and controls → see
-  `continuous-improvement-skills:dmaic-problem-solving`. To tell the whole problem-solving story on one
-  page for alignment → see the archived `continuous-improvement-skills:a3-thinking`.
+  `continuous-improvement-skills:dmaic-problem-solving`. Telling the whole problem-solving
+  story on one page for alignment is a separate discipline this library does not carry.
 
 ## Do it
 A finished RCA is five artifacts: a quantified problem statement, a containment action labeled as

@@ -12,7 +12,7 @@ description: >-
   optimization review, performance and accuracy audit, deep code audit, multi-agent review,
   suboptimal code audit, optimize this code thoroughly.
 metadata:
-  version: "1.0.3"
+  version: "1.0.4"
 ---
 
 # Board of Advisors review
@@ -24,7 +24,7 @@ metadata:
 - A significant module is about to be optimized, hardened, or refactored and the owner wants
   the complete picture before touching it.
 - Not for: routine PR review → see `coding-agent-skills:git-and-code-review`. Designing
-  multi-agent systems in general → see the archived `coding-agent-skills:agentic-workflow-design`.
+  multi-agent systems in general is a separate discipline this library does not cover.
 
 ## Do it
 1. **Extract goals and scope first: the board reviews against goals, not taste.** Identify

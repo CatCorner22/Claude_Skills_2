@@ -13,7 +13,7 @@ description: >-
   format, structured output, JSON output, prompt injection, reasoning model, extended thinking,
   prompt caching, flaky prompt, prompt not working, improve a prompt.
 metadata:
-  version: "2.1.3"
+  version: "2.1.4"
 ---
 
 # Prompt engineering
@@ -24,8 +24,8 @@ metadata:
 - Debugging a flaky prompt: inconsistent between runs, wrong format, ignores an instruction.
 - Turning a vague ask into a specific, testable instruction.
 - Not for: orchestrating a multi-step or autonomous workflow, tool contracts, and the guardrails
-  that gate consequential actions → see the archived `coding-agent-skills:agentic-workflow-design`; packaging
-  instructions as a reusable skill with frontmatter → see
+  that gate consequential actions, which is a separate harness-design discipline this skill does
+  not cover; packaging instructions as a reusable skill with frontmatter → see
   `coding-agent-skills:writing-agent-skills`; optimizing several prompt factors at once and reading
   their interactions → see `continuous-improvement-skills:design-of-experiments`; qualifying a
   model that grades other outputs before its scores pick your prompt → see
@@ -130,9 +130,9 @@ skill is that reference for Anthropic models, and every mechanism named below is
      exposed tool set, treat model-emitted commands and paths as untrusted on the way *out*
      (allowlist, not blocklist), keep credentials out of reach of the model's execution context, and
      put a human in front of hard-to-reverse actions: sending, paying, deleting, publishing.
-     Reversibility is the criterion. Those harness controls are
-     the archived `coding-agent-skills:agentic-workflow-design`'s subject; the prompt-side job is to state the
-     trust boundary and not to overclaim.
+     Reversibility is the criterion. Those harness controls belong to a separate discipline
+     (harness and workflow design); the prompt-side job is to state the trust boundary and not
+     to overclaim.
    - **Prompt-level mitigations, ranked as mitigation:** label the block untrusted, say that content
      inside it is data to analyze and never instructions to follow, and ask the model to report
      attempted redirection instead of complying. Useful; not sufficient.

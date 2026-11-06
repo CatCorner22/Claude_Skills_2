@@ -13,7 +13,7 @@ description: >-
   class, base-rate anchor, base rate, optimism bias, planning fallacy, how long do projects
   like this actually take, uplift the estimate.
 metadata:
-  version: "1.2.3"
+  version: "1.2.4"
 ---
 
 # Reference-class forecasting (the outside view)
@@ -27,9 +27,9 @@ Green Book; Department for Transport uplift tables) [snippet-only].
 
 ## When to use
 - A material estimate that so far rests only on its own story: project cost or duration, a
-  feature-delivery date, a next-cycle number for a cash driver.
+  feature-delivery date, a next-cycle number for a volume driver.
 - Turning a variance history you already keep into next-cycle anchors. Any rolling operational
-  forecast (cash, pipeline, capacity) that measures per-driver MAPE and signed bias has a
+  forecast (inventory, pipeline, capacity) that measures per-driver MAPE and signed bias has a
   ready-made reference class sitting in its accuracy file: this skill turns that history into
   per-driver base-rate anchors and uplifts.
 - Software/project estimation from a delivery history (e.g., a feature-delivery reference class
@@ -37,12 +37,12 @@ Green Book; Department for Transport uplift tables) [snippet-only].
 - Sanity-checking someone else's optimistic plan or business case.
 - Not for: building the estimate's underlying model itself. Statistical/ML series models belong
   to `machine-learning-skills:time-series-forecasting`, spreadsheet model craft to
-  `data-analytics-bi-skills:spreadsheet-modeling`, and direct-method cash projections are a
-  finance workflow outside this skill. This skill FEEDS those loops with base rates and
+  `data-analytics-bi-skills:spreadsheet-modeling`, and domain-specific forecast-composition
+  workflows are outside this skill. This skill FEEDS those loops with base rates and
   uplifts; it never replaces them.
 
 ## Do it
-Full class-selection heuristics, uplift math, and a worked cash-driver example are in
+Full class-selection heuristics, uplift math, and a worked volume-driver example are in
 `references/outside-view-method.md`; calibration and the tampering guard are in
 `references/calibration-and-tampering.md`.
 
@@ -61,7 +61,7 @@ Full class-selection heuristics, uplift math, and a worked cash-driver example a
    signs; or (b) skip case-by-case adjustment and apply a **required uplift at a chosen certainty
    level**, e.g., a P80 uplift in the style of the Department for Transport tables: the uplift
    that 80% of past cases would not have exceeded. Pick the certainty level in the direction the
-   risk hurts (uplift disbursements and costs; haircut receipts).
+   risk hurts (uplift costs and outbound demand; haircut inflows).
 5. **Ask whether you own one commitment or a portfolio: the certainty level attaches to one.**
    P80 per item is right for a single commitment. Add up P80s across many items and you double-count
    risk, because independent overruns partially cancel: variances add, standard deviations don't, so
@@ -148,7 +148,7 @@ of which correlations you assumed to size it.
 - Anchoring on the mean of a skewed distribution → overruns are fat-tailed; use percentiles at a
   stated certainty level.
 - Free-hand adjustments to the anchor → every adjustment written and signed, or none (fixed uplift).
-- Uplifting in the comfortable direction → uplift costs/disbursements, haircut receipts; pick the
+- Uplifting in the comfortable direction → uplift costs/outbound demand, haircut inflows; pick the
   percentile on the side where the miss hurts.
 - Adding up line-item P80s to budget a portfolio → double-counts risk; the summed number is nearer a
   P99.6 than a P80. P50 per item plus one contingency at the portfolio's P80, with the correlation
@@ -172,7 +172,7 @@ of which correlations you assumed to size it.
 ## Tailor to your environment
 Record your setup in `references/your-environment.md`: where each variance history lives, the
 drivers or project types you estimate repeatedly, your house certainty level (e.g., P80 for
-disbursements, P20 for receipts) **and the level it applies at (per item or per portfolio, plus
+outbound demand, P20 for inflows) **and the level it applies at (per item or per portfolio, plus
 who holds the portfolio contingency)**, where the decision journal is kept, and your review cadence.
 Keep committed content structural: real figures, counterparty names, or client data belong in
 `your-environment.private.md` (git-ignored), never in a committed file.
@@ -186,7 +186,7 @@ own rather than in a cache you may not realise is disposable.
 ## References
 - references/outside-view-method.md: class-selection heuristics, distribution and uplift math, the
   aggregation rule (why summing P80s over-budgets, with worked numbers and the correlation dial), a
-  worked cash-driver example from a MAPE/bias history, and the correct-once rule for a measured bias
+  worked volume-driver example from a MAPE/bias history, and the correct-once rule for a measured bias
 - references/calibration-and-tampering.md: the belief-vs-rule distinction that reconciles the two
   disciplines, Tetlock calibration practices, the decision-journal template, and Deming's funnel
   rules as the tampering guard

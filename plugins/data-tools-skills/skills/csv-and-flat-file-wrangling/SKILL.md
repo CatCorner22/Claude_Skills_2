@@ -13,7 +13,7 @@ description: >-
   delimited, fixed width file, load csv pandas, merge csv files, bank export csv, leading
   zeros lost, csv broken columns, mojibake, flat file feed.
 metadata:
-  version: "1.4.4"
+  version: "1.4.5"
 ---
 
 # CSV and flat-file wrangling
@@ -23,13 +23,12 @@ metadata:
   or ticket system, a vendor portal, a bank), especially when the parse comes out wrong
   (shifted columns, mojibake, lost zeros).
 - Merging or appending multiple flat files into one dataset for analysis.
-- Not for: deep cleaning after a correct parse (dedupe, outliers, imputation) → see
-  the archived `data-analytics-bi-skills:data-cleaning`. Statement-specific formats (BAI2, camt.053, MT940) are
+- Not for: deep cleaning after a correct parse (dedupe, outliers, imputation) — that's a separate
+  data-cleaning discipline this library does not carry. Statement-specific formats (BAI2, camt.053, MT940) are
   format-specific knowledge (a banking-domain topic this library does not carry; see
   `archive/`), not general flat-file wrangling.
-- Not for: sources that aren't flat files: a workbook (.xlsx) → openpyxl/pandas directly (the
-  archived `data-tools-skills:excel-automation-python` carries the full recipes, restorable
-  from `archive/`); a PDF report or statement → see
+- Not for: sources that aren't flat files: a workbook (.xlsx) → openpyxl/pandas directly (full
+  recipes restorable from `archive/`); a PDF report or statement → see
   `data-tools-skills:pdf-data-extraction`. Both hand their output back to this skill's typing
   discipline.
 
@@ -80,8 +79,8 @@ df = pd.read_csv(
    declare-the-types discipline applies there (`types={'id':'VARCHAR'}`), because DuckDB's
    sniffer can mistype IDs exactly like pandas.
 7. **Harden the recurring feed.** Wrap the load in a function that runs the step-3 checks and
-   raises on violation; log filename, row count, and totals per run, and structure the script per
-   the archived `coding-agent-skills:python-for-analysts`. Keep the raw export pristine and separate from
+   raises on violation; log filename, row count, and totals per run, and structure the script with
+   good general Python script hygiene. Keep the raw export pristine and separate from
    processed outputs per `data-tools-skills:data-file-hygiene`; when the vendor changes the
    layout (they will), the load fails at the door instead of poisoning the analysis.
 

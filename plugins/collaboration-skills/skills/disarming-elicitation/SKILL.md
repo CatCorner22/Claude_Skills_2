@@ -15,7 +15,7 @@ description: >-
   won't open up, walkthrough with the process owner, doorknob question, one more
   thing.
 metadata:
-  version: "1.4.4"
+  version: "1.4.5"
   source: >-
     Homage to the rumpled TV detective of "just one more thing" fame (Lt. Columbo,
     NBC) — an homage only, no affiliation with the series or its rights holders. The
@@ -62,16 +62,17 @@ elicitation used against them: evidence, not license. The rail is expanded in
 - When the conversation happens inside a designed forum,
   `collaboration-skills:meeting-design` builds the container (purpose, timebox, roles);
   this skill runs the conversation inside it.
-- Not for: choosing WHAT to ask in voice-of-customer work → see
-  the archived `continuous-improvement-skills:kaizen-and-codesign`, which owns VOC content and
-  workshop facilitation; this skill owns the stance that gets any question answered.
-- Not for: interest-based bargaining → see
-  the archived `decision-science-skills:principled-negotiation`; bargaining trades on interests and
-  positions, elicitation surfaces knowledge; mixing them poisons both.
-- Not for: delivering a hard message about someone's behavior → see
-  the archived `collaboration-skills:feedback-that-lands`.
-- Not for: escalating a problem or transferring work under time pressure → see
-  the archived `safety-and-reliability-skills:sbar-structured-communication`.
+- Not for: choosing WHAT to ask in voice-of-customer work → that is workshop
+  facilitation and VOC content design, a separate discipline this skill does not
+  own; this skill owns the stance that gets any question answered.
+- Not for: interest-based bargaining → that is a separate discipline trading on
+  interests and positions, while elicitation surfaces knowledge; mixing them
+  poisons both.
+- Not for: delivering a hard message about someone's behavior → that is a separate
+  discipline this library does not carry.
+- Not for: escalating a problem or transferring work under time pressure →
+  structured handoff communication is a separate discipline this library does not
+  carry.
 
 ## Do it
 Full question-sequence patterns, the rehearsal script, the transcript-audit protocol, and
@@ -201,8 +202,7 @@ with a memory.
 - Using the sequence on someone who has declined to share → that is manipulation, not
   elicitation; the rail says stop.
 - Interviewing for VOC content with no content plan → this skill carries the stance;
-  bring the question substance from
-  the archived `continuous-improvement-skills:kaizen-and-codesign`.
+  bring the question substance from a separate voice-of-customer workshop process.
 
 ## Tailor to your environment
 Record your standing interview landscape in `references/your-environment.md`: the experts

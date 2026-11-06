@@ -12,7 +12,7 @@ description: >-
   audit this video, check this video's sources, is this video accurate, grade this video, does
   this video misrepresent the study, debunk this video.
 metadata:
-  version: "1.2.3"
+  version: "1.2.4"
   source: >-
     Statistical arithmetic independently recomputed; citations verified against retrieved
     index data only (see references/further-reading.md on why the distinction matters).
@@ -38,7 +38,7 @@ producing a confident letter out of vibes.
 - You already have the paper and want to know whether the video represented it faithfully.
 - Not for: a clinical symptom cluster, drug interaction, or "what could link these" literature
   case file → `deep-research-skills:medical-research-detective`. Training, nutrition, or
-  supplement protocols for a healthy person → `coding-agent-skills:fitness-nutrition-science`.
+  supplement protocols for a healthy person with no video attached are outside this skill.
   Turning a meeting recording into decisions and owners → `collaboration-skills:meeting-design`.
   A statistics question with no video attached → `data-analytics-bi-skills:statistical-inference`.
   Auditing your own project's metrics and benchmark claims →

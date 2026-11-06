@@ -13,7 +13,7 @@ description: >-
   compact the context, working memory, episodic memory, semantic memory, MEMORY.md, memory
   layers, save for later, what do you remember, pick up where we left off.
 metadata:
-  version: "1.4.4"
+  version: "1.4.5"
 ---
 
 # Hierarchical memory manager
@@ -31,9 +31,9 @@ metadata:
 - Not for: the validation-and-pruning pass that makes entries permanent → see
   `metacognition-skills:knowledge-crystallizer` (this skill is the warehouse and its
   librarian; that one is the refinery and quality gate).
-- Not for: making material stick in the *user's* head → see
-  the archived `learning-skills:spaced-retrieval-learning` (that is memory for the human, built on
-  retrieval practice; this is memory for the assistant, built on curation).
+- Not for: making material stick in the *user's* head → that is memory for the human, built
+  on retrieval practice, a separate discipline this library does not carry; this is memory
+  for the assistant, built on curation.
 
 ## Do it
 Layer templates, the exact semantic headings, the entry grammar, the compaction checklist,
@@ -60,10 +60,8 @@ and a worked lifecycle example are in `references/memory-protocol.md`.
    confidence). Prefer durable external storage (a project file, MEMORY.md, an artifact) over pure context
    when the information should outlive the session. When the user corrects something,
    run the correction protocol in `metacognition-skills:reflective-learner`; its triage step
-   logs the rule back through this skill; when a deep analysis via
-   the archived `metacognition-skills:dynamic-analysis-engine` produces durable findings, they land here
-   the same way, as do the sustain/improve items a team debrief surfaces via
-   the archived `decision-science-skills:after-action-review`.
+   logs the rule back through this skill; durable findings from a deep analysis land here
+   the same way, as do the sustain/improve items a structured team debrief surfaces.
 4. **Compact periodically**: after major milestones or roughly every 15–30 significant
    turns: distill Working → Episodic → Semantic. Promote what proved durable; drop what
    didn't. Anything recurring and validated is a candidate for permanence: hand it to

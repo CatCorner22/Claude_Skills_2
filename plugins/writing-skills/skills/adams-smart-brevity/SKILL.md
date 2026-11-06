@@ -14,7 +14,7 @@ description: >-
   litigation-resistant, contract language, clinical note language, ambiguity check, tighten
   this email, report writing.
 metadata:
-  version: "1.6.2"
+  version: "1.6.3"
   source: "Adapted from the user's adams-smart-brevity v1.0.0 spec (2026-08-03)"
 ---
 
@@ -43,8 +43,8 @@ governs document-level attention (lead with the point, format for scanning, stop
   and the section-keyed linter) → `legal-skills:mscd-contract-drafting`. This skill's contract
   table (reference §3) is the short form; that skill is the full system, and it adopts this
   skill's §3b map of where the bar disagrees and the two carve-outs in step 4 as its rails.
-  Building a master prompt end to end → the archived `coding-agent-skills:master-prompt-architect`
-  (whose Adams compliance audit this skill reinforces when both apply).
+  Building a master prompt end to end is a separate task this library does not cover as a
+  single skill.
 
 ## Do it
 1. **Lead with the one most important point** (the piece's "what's new") in one sentence.

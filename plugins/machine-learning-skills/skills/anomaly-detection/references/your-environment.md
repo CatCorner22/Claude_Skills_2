@@ -4,7 +4,7 @@ Fill this in with your real setup. If any value is sensitive (real transactions,
 account identifiers, sample rows), keep it in `your-environment.private.md` instead. That suffix is
 git-ignored. Commit only sanitized, structural examples.
 
-- **What "anomalous" means here:** <e.g. a fee far above the rate card; a payment out of pattern; a recon break>
+- **What "anomalous" means here:** <e.g. a value far above the rate card; a record out of pattern; a match-up break>
 - **Fields monitored:** <amount, counterparty, GL account, channel, hour, currency, …>
 - **Single-feature or multivariate:** <one quantity vs a combination of fields>
 - **Time series involved?** <yes: series, frequency, seasonality; or no>

@@ -425,7 +425,6 @@ Cross-link these rather than restating them. Duplication is a real defect here.
 | Confounding, colliders, backdoor criterion, the identification ladder, why filtering is conditioning | `data-analytics-bi-skills:causal-inference` |
 | Type-M/winner's curse in experiments, peeking, SRM, MDE, variance reduction | `data-analytics-bi-skills:ab-test-design` |
 | Evidence hierarchy, GRADE-lite grading, retraction and predatory-venue checks, NNT/NNH in clinical context | `deep-research-skills:medical-research-detective` (`references/evidence-appraisal.md`) |
-| Effect size vs significance, Cohen's d bands, funnel plots, I², abstract red-flag language | `coding-agent-skills:fitness-nutrition-science` (`references/journal-interpretation-guide.md`) |
 | Absolute-vs-relative and diagnostic-accuracy statistics applied to your own project's metrics | `continuous-improvement-skills:project-command-center` |
 | Making a technical finding land for a non-specialist audience | `writing-skills:explanation-design` |
 

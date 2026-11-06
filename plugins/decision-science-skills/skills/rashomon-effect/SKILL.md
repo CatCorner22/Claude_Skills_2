@@ -15,7 +15,7 @@ description: >-
   remembers it differently, whose story is right, reconcile the statements, contradictory
   testimony.
 metadata:
-  version: "1.1.5"
+  version: "1.1.6"
   source: >-
     Named for the Rashomon effect, the scholarly term (Karl G.
     Heider, American Anthropologist, 1988) that honors Kurosawa's film Rashomon (1950),
@@ -51,9 +51,9 @@ memory, and stakes before it is evidence of anyone lying.
   `decision-science-skills:competing-hypotheses-analysis`. This skill reconciles
   testimonies into one account of what happened; that one weighs rival explanations of
   why. A reconciled account is often its best input.
-- Not for: the structured team debrief after an event →
-  the archived `decision-science-skills:after-action-review` (four questions, sustain and improve; it
-  can call this skill when its what-actually-happened step hits contradictions).
+- Not for: the structured team debrief after an event, a separate discipline this
+  library does not carry, though its what-actually-happened step can hit contradictions
+  this skill would then reconcile.
 - Not for: tracing a failure's causal chain →
   `continuous-improvement-skills:root-cause-analysis`.
 - Not for: the interviewing stance that gets a guarded person talking →

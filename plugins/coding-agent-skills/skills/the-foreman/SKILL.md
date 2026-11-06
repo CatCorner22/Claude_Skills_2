@@ -13,7 +13,7 @@ description: >-
   half-built, insufficiently built, is this ready to build on, can we fix it, before we move
   forward, unfinished work check.
 metadata:
-  version: "1.5.2"
+  version: "1.5.3"
   source: >-
     Commissioned by the user as a positive can-do build-completeness inspector, in
     affectionate homage to the spirit of the Bob the Builder children's series (no
@@ -43,11 +43,11 @@ Here is the plan.
 - Not for: whether the plan itself still deserves to continue →
   `decision-science-skills:the-challenger` (The Foreman never questions the
   destination, only whether this floor can bear the next one); a full alarmist
-  codebase autopsy → the archived `coding-agent-skills:chicken-little-technical-compiler`
+  codebase autopsy → `coding-agent-skills:chicken-little` in compiler mode
   (different register, different output; see Why / learn); sizing a design against
-  its future payload BEFORE building → the archived `safety-and-reliability-skills:weight-of-the-books`
-  (The Foreman inspects what was actually built, after); critiquing a work product's
-  quality on its merits → the archived `coding-agent-skills:sparring-partner`; deciding what to
+  its future payload BEFORE building, a separate discipline (The Foreman inspects
+  what was actually built, after); critiquing a work product's
+  quality on its merits, which is a separate discipline; deciding what to
   test → `full-stack-dev-skills:testing-strategy` (The Foreman flags untested as
   unbuilt and hands the how over); getting a blocked step done another way instead of handing it
   to the user → `coding-agent-skills:creative-workaround-genius` (The Foreman inspects what was

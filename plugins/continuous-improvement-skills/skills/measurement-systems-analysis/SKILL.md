@@ -15,7 +15,7 @@ description: >-
   reproducibility, inter-rater agreement, attribute agreement, LLM judge agreement, process
   capability, Cp, Cpk, capability study.
 metadata:
-  version: "1.5.4"
+  version: "1.5.5"
 ---
 
 # Measurement systems analysis and process capability
@@ -30,10 +30,9 @@ metadata:
 - Judging a *stable* process against spec limits with Cp/Cpk, and deciding whether to center it
   or reduce its variance.
 - Not for: building the control chart that establishes stability → the SPC coverage in
-  `continuous-improvement-skills:dmaic-problem-solving` (Control phase) and
-  the archived `continuous-improvement-skills:lean-six-sigma-for-software` owns the charts: stability is
-  their gate; whether the stable process meets spec is this skill's question. Broad ML model
-  evaluation (metric choice, cross-validation, leakage) →
+  `continuous-improvement-skills:dmaic-problem-solving` (Control phase) owns the charts:
+  stability is its gate; whether the stable process meets spec is this skill's question.
+  Broad ML model evaluation (metric choice, cross-validation, leakage) →
   `machine-learning-skills:model-evaluation`; this skill adds the inter-rater rigor on top.
   An "MSA" that is a *master service agreement* is a contract, not a measurement: this skill
   never triggers on the bare acronym.

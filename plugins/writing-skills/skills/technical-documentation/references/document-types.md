@@ -247,10 +247,10 @@ Route away what only looks like a procedure doc:
 - Crisis-shaped: a tripwire someone watches, pre-granted authority, sealed first
   moves → `safety-and-reliability-skills:break-glass-playbooks` (that skill owns the
   word "runbook").
-- A full method with sequence, timing, key points and reasons, trained and reviewed →
-  the archived `continuous-improvement-skills:standard-work`.
-- A 5–9-item card at a pause point guarding killer items →
-  the archived `safety-and-reliability-skills:checklist-design`.
+- A full method with sequence, timing, key points and reasons, trained and reviewed is a
+  separate discipline this library does not carry.
+- A 5–9-item card at a pause point guarding killer items is also outside this library's
+  scope.
 
 ## 7. API and reference-doc discipline
 

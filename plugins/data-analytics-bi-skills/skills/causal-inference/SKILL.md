@@ -14,7 +14,7 @@ description: >-
   confounder, confounding, collider bias, difference-in-differences, staggered rollout,
   instrumental variable, regression discontinuity, natural experiment.
 metadata:
-  version: "1.2.5"
+  version: "1.2.6"
   source: >-
     Built from docs/research/general-use-expansion-research.md §1 (general-use expansion wave
     dossier). Provenance marks used in the text: [snippet-only, cross-checked] =
@@ -36,7 +36,8 @@ metadata:
   studies: `continuous-improvement-skills:design-of-experiments`; online/field variant tests:
   `data-analytics-bi-skills:ab-test-design`. Testing whether an association is distinguishable
   from noise (hypothesis tests, p-values, A/B analysis) → `data-analytics-bi-skills:statistical-inference`.
-  A recurring mess driven by feedback structure → the archived `decision-science-skills:systems-thinking`.
+  A recurring mess driven by feedback structure is a systems-thinking question, a separate
+  discipline this library does not carry.
   Note the seam by name: a causal-*loop* diagram maps feedback structure (which loops exist,
   which way they push); it is **not** causal identification and never licenses an effect estimate.
   One incident's cause chain → `continuous-improvement-skills:root-cause-analysis`. Predicting an

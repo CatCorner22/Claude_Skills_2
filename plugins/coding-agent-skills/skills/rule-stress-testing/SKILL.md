@@ -13,7 +13,7 @@ description: >-
   conflict, stress test the rules, loophole hunt, what breaks this policy, clause conflict,
   conflicting rules, malicious compliance, specification gaming.
 metadata:
-  version: "1.2.4"
+  version: "1.2.5"
   source: >-
     Commissioned by the user, inspired by Isaac Asimov's robot stories — homage in
     triggers and teaching only; no affiliation. The stories are cited as fiction that
@@ -43,18 +43,16 @@ collide, fall silent, or win on the letter while losing on the point.
   collisions found on paper first.
 - Someone already found a loophole, or two rules just gave contradictory instructions,
   and you want the rest of the family found before they fire in production.
-- A natural pair: stress-testing the guardrails that
-  the archived `coding-agent-skills:agentic-workflow-design` produces, before an agent lives inside
-  them.
-- Not for: commissioning or adversarially auditing a prompt or system prompt →
-  the archived `coding-agent-skills:master-prompt-architect` (it owns the adversarial interrogation
-  of a prompt under construction; this skill owns rule-conflict and loophole discovery
-  inside an existing rule set).
+- A natural pair: stress-testing the guardrails that harness and workflow design produces,
+  before an agent lives inside them.
+- Not for: commissioning or adversarially auditing a prompt or system prompt under
+  construction, which is a separate discipline; this skill owns rule-conflict and
+  loophole discovery inside an existing rule set.
 - Not for: failure-mode analysis of a process or design →
   `continuous-improvement-skills:fmea` (it ranks how a process fails; this skill finds
   where rules fight each other).
-- Not for: designing agent guardrails from scratch →
-  the archived `coding-agent-skills:agentic-workflow-design`.
+- Not for: designing agent guardrails from scratch, which is a separate discipline this
+  library does not cover.
 - Not for: deciding whether to remove a rule →
   `coding-agent-skills:soviet-space-graphite` (Chesterton's fence: understand a rule
   before deleting it; this skill helps by showing what a rule is FOR, meaning what breaks
@@ -165,8 +163,8 @@ CLAUDE.md, git rules, code-freeze and on-call policies, agent guardrails), where
 precedence decisions are recorded once made, the measures your rules reference (ripe for
 the Goodhart pass), and your re-test cadence after amendments. Where a fix must bind your
 own future self (a definition you know you'll be tempted to re-widen under deadline
-pressure), write it as a pre-commitment with the unbinding condition stated in advance
-(the archived `decision-science-skills:ulysses-pact`). Anything naming real contracts, clients, or
+pressure), write it as a pre-commitment (a Ulysses pact) with the unbinding condition
+stated in advance. Anything naming real contracts, clients, or
 personnel goes in `your-environment.private.md` (git-ignored), never in a committed file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside

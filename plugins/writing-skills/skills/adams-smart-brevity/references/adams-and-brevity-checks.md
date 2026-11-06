@@ -130,6 +130,7 @@ contested defence, and the axiom applies to them with full force.
 - **With a clinical litigation-avoidance pass** (a content reviewer; not in this library): the
   pass flags sparse, ambiguous, or incomplete *content*; this skill ensures the suggested or
   generated *language* is free of litigated constructions and maximally clear.
-- **With the archived `coding-agent-skills:master-prompt-architect`**: its Kenneth A. Adams Compliance
-  Audit is reinforced and extended by this skill.
+- **With master-prompt architecture work** (building a full prompt end to end, not in this
+  library): an Adams-style compliance audit of the finished prompt text is a natural extension
+  of this skill's rules.
 - **Self-application**: the language of this skill itself follows these rules.

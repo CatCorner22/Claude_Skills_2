@@ -13,7 +13,7 @@ description: >-
   intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
   constructive paranoia, now next later watch.
 metadata:
-  version: "1.3.2"
+  version: "1.3.3"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 
@@ -33,9 +33,9 @@ reality, never to the preferred answer.**
 - Evaluating risk claims, diagnostic/classifier metrics, or statistical assertions.
 - Preparing releases, reviewing AI systems, or running incident response.
 - Not for: the full software-build discipline (charters, control charts, WCAG, adversarial
-  gauntlet) → the archived `continuous-improvement-skills:lean-six-sigma-for-software`; facilitating
-  the improvement workshop → the archived `continuous-improvement-skills:kaizen-and-codesign`;
-  multi-advisor code review → `coding-agent-skills:board-review`; a themed
+  gauntlet), a separate discipline this library does not carry; facilitating the
+  improvement workshop, likewise a separate discipline; multi-advisor code review →
+  `coding-agent-skills:board-review`; a themed
   adversarial autopsy persona → the chicken-little skills in `coding-agent-skills`; planning,
   budgeting and quality-gating an AI agent's OWN multi-step work, token spend included →
   `coding-agent-skills:project-manager-qc` (this skill commands human projects; that one manages

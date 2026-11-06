@@ -119,7 +119,7 @@ section at the top of this file: the belief updates continuously on new informat
 guarded here). A single-period miss inside the class's normal spread is the marble's scatter,
 adjusting the rule to it *adds* the adjustment's variance to the process's own. The guard:
 **classify the miss before touching anything** (next section). Rules change once, with
-a diagnosis and a reason: the same discipline the cash-forecasting accuracy loop states as
+a diagnosis and a reason: the same discipline a forecast-accuracy tracking loop states as
 "diagnose the miss to a driver and correct the rule, do not just overwrite the number".
 
 ## Common-cause vs. special-cause test
@@ -129,7 +129,7 @@ Before any rule change, test the miss against the reference class itself:
 1. **Spread test:** is this cycle's error inside the class's usual range (roughly P10–P90 of the
    error distribution)? Inside → common cause. Leave the rule alone; log and move on.
 2. **Run test:** are the last several errors same-signed (e.g., 6+ in a row, or 18 of 22 as in the
-   worked tuition example)? A run signals a systematic bias, a special cause of the fixable kind.
+   worked deliveries example)? A run signals a systematic bias, a special cause of the fixable kind.
 3. **Magnitude test:** is the error far outside the historical range? Special cause: find the
    event (calendar shift, definition change, one-off) before generalizing from it.
 4. **Only special-cause findings change the rule**, and the change is made once, at the driver

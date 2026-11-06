@@ -5,12 +5,12 @@ Keep it **structural**: no real dollar figures, counterparty names, or client da
 sensitive goes in `your-environment.private.md`, that suffix is git-ignored and never committed.
 
 ## Variance histories (candidate reference classes you already own)
-- **Cash drivers:** <where the per-driver forecast-vs-actual history lives — e.g., the accuracy
+- **Volume drivers:** <where the per-driver forecast-vs-actual history lives — e.g., the accuracy
   tab of the rolling forecast model, a BI export, a variance workbook> — grain <weekly/monthly>,
-  depth <n cycles>, per driver: <tuition receipts, payroll, grant drawdowns, AP runs, ...>
+  depth <n cycles>, per driver: <incoming deliveries, outbound orders, staffing hours, ...>
 - **Projects/features:** <where estimated-vs-actual delivery history lives — tracker export,
   sprint reports> — unit <days/points>, depth <n items>
-- **Other:** <bank-fee true-ups, investment-income projections, headcount plans, ...>
+- **Other:** <quality-defect rates, demand projections, headcount plans, ...>
 
 ## Class conventions
 - Default class definitions per estimate type: <e.g., "same driver, trailing 24 cycles,
@@ -18,8 +18,8 @@ sensitive goes in `your-environment.private.md`, that suffix is git-ignored and 
 - Exclusion log: <cases excluded from any class, each with its outcome-independent reason>
 
 ## Certainty levels (house policy)
-- Disbursements / costs / schedules: <e.g., P80>
-- Receipts feeding a liquidity floor: <e.g., P20>
+- Outbound demand / costs / schedules: <e.g., P80>
+- Inflows feeding a minimum-stock floor: <e.g., P20>
 - Who owns changes to these levels: <role>
 - **The level this policy applies AT**: per item, or per portfolio? <e.g., "P50 per line, one
   contingency at the total's P80"> Summing item P80s across a portfolio over-budgets; state the rule
@@ -43,4 +43,4 @@ sensitive goes in `your-environment.private.md`, that suffix is git-ignored and 
 
 ## Hand-offs
 - Model corrections found via run tests go to: <the owner of the projection model —
-  e.g., the cash-forecasting process owner> with the written diagnosis.
+  e.g., the forecast process owner> with the written diagnosis.

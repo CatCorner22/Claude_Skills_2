@@ -13,7 +13,7 @@ description: >-
   matches, exception queue drowning, tune the alerts, memory cell, everything is an
   exception, nobody looks at the alerts anymore.
 metadata:
-  version: "1.4.4"
+  version: "1.4.5"
   source: >-
     Built from the biological-systems research dossier
     (docs/research/epic-wave-held-research.md, Lane 3 top pick). The mechanism is the
@@ -53,9 +53,8 @@ deployments, and it documents exactly this failure trade [snippet-only].
   skill operates the whole layered system around detectors from any source: queue economics,
   disposition audits, tolerance induction, memory formation.
 - Not for: watching a process metric for stability → SPC/control charts live in
-  `continuous-improvement-skills:dmaic-problem-solving` (Control phase) and
-  the archived `continuous-improvement-skills:lean-six-sigma-for-software`; whether a measurement can be
-  trusted at all → `continuous-improvement-skills:measurement-systems-analysis`.
+  `continuous-improvement-skills:dmaic-problem-solving` (Control phase); whether a
+  measurement can be trusted at all → `continuous-improvement-skills:measurement-systems-analysis`.
 - Not for: diagnosing why one alarm fired or why one incident happened →
   `continuous-improvement-skills:root-cause-analysis`.
 - Not for: what happens after a legitimate page lands: sealed emergency response and

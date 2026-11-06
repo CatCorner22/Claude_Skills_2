@@ -12,7 +12,7 @@ description: >-
   analyze large csv, sql without a database, parquet analytics, out of memory pandas,
   too big for Excel.
 metadata:
-  version: "1.4.3"
+  version: "1.4.4"
 ---
 
 # DuckDB local analytics
@@ -21,8 +21,8 @@ metadata:
 - Joining, filtering, or aggregating CSV/Parquet/Excel files with SQL on your own machine:
   reconciliations across exports, million-row aggregations, repeatable analysis queries.
 - Datasets that make Excel crawl or pandas run out of memory.
-- Not for: SQL *language* skills (joins, windows, CTEs) → see
-  the archived `data-analytics-bi-skills:sql-for-analysts`. For getting messy files parseable in the first
+- Not for: SQL *language* skills (joins, windows, CTEs) — that's a separate SQL-skills discipline
+  this library does not carry. For getting messy files parseable in the first
   place → see `data-tools-skills:csv-and-flat-file-wrangling`.
 
 ## Do it

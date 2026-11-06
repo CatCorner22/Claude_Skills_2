@@ -6,21 +6,21 @@ description: >-
   ARIMA/SARIMA), and ML approaches with lagged and exogenous features, using time-ordered splits,
   rolling-origin backtesting with model selection re-run inside each origin, a skill-vs-baseline ratio at
   the decision horizon, and empirical prediction intervals with a coverage check. Use when forecasting a
-  series over time such as cash flow, account balances, transaction volumes, or collections. Triggers:
+  series over time such as web traffic, inventory levels, order volumes, or sensor readings. Triggers:
   time series, forecast, forecasting, ARIMA, SARIMA, ETS, Holt-Winters, exponential smoothing,
   seasonality, backtesting, rolling forecast, rolling origin, predict future values, trend and
   seasonality, prediction interval, forecast uncertainty.
 metadata:
-  version: "1.4.2"
+  version: "1.4.3"
 ---
 
 # Time-series forecasting
 
 ## When to use
-- Forecasting a value that unfolds over time: daily/weekly cash flow, account balances, payment or transaction volumes, a collections series.
+- Forecasting a value that unfolds over time: daily/weekly web traffic, inventory levels, order or ticket volumes, a support-queue series.
 - Choosing between classical (ETS, ARIMA) and ML forecasting approaches, or adding exogenous drivers.
 - Validating a forecast honestly with time-based splits and backtesting instead of a shuffled hold-out.
-- Not for: the finance framing of a liquidity forecast built from operational drivers (receivables aging, payment runs): that is direct-method cash forecasting, a domain method this library does not carry; hand the statistical driver-series here. For general metric/validation choice → see `machine-learning-skills:model-evaluation`.
+- Not for: building the business logic that turns raw operational inputs into the series to forecast — that composition step belongs to the domain it comes from; hand this skill the resulting statistical driver-series. For general metric/validation choice → see `machine-learning-skills:model-evaluation`.
 
 ## Do it
 1. **Plot it and decompose.** Chart the raw series first. Separate **trend**, **seasonality**, and
@@ -107,8 +107,8 @@ and repeat their season. If ARIMA or a boosted model can't beat seasonal-naive o
 complexity is buying nothing but risk. Decomposition is the lens that tells you which tool to reach for:
 a series that is mostly trend + seasonality is ETS's home turf; strong autocorrelation in the residual is
 ARIMA's; genuine dependence on known external drivers is where ML/exogenous models start to pay off.
-MAPE's traps matter in treasury specifically, where volumes can be small, zero, or negative. A metric
-that divides by the actual value quietly lies exactly where cash series are hardest.
+MAPE's traps matter especially for series whose volumes can be small, zero, or negative (net flows, returns, inventory deltas). A metric
+that divides by the actual value quietly lies exactly where series with values near zero are hardest.
 
 **"Beat the baseline" has to be measured at the horizon you decide on, which is why MASE is not the
 decision rule.** MASE divides your *out-of-sample* errors by the mean *in-sample* naive error at a fixed
@@ -166,10 +166,10 @@ Record your series in `references/your-environment.md` (keep real values, accoun
 in `your-environment.private.md`, which is git-ignored): the series and its business meaning, frequency
 and horizon, its seasonal periods (weekly/monthly/holiday/quarter-end), known exogenous drivers and when
 they're knowable, how you treat gaps and outliers, and your accuracy target expressed as a **skill ratio at
-your decision horizon** (plus the interval level and the coverage you need) next to your baseline. If you're
-building a liquidity forecast, frame it with a direct-method cash-forecast structure first (from
-whatever finance source you use, since this library does not carry one) and feed the statistical
-forecast of a driver series (e.g. collections) back as an input there.
+your decision horizon** (plus the interval level and the coverage you need) next to your baseline. If a downstream
+business process composes several raw inputs into the series you're forecasting (e.g. a
+multi-step operational calculation), build that composition first, outside this skill, and feed
+the statistical forecast of the resulting driver series back as an input there.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against

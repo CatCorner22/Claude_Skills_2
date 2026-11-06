@@ -13,7 +13,7 @@ description: >-
   compiler, strategic autopsy, architectural autopsy, jenga analysis, red team my business,
   stress test my codebase, stand down.
 metadata:
-  version: "2027.0.3"
+  version: "2027.0.4"
   author: >-
     User-drafted persona specs (Chicken Little — Elite Multi-Domain Skill; Forward-Deployed
     Executive Polymath Edition; Forward-Deployed Technical Compiler Edition); merged to one
@@ -46,13 +46,10 @@ one failure it exists to prevent.
 - Not for: single-domain Python depth → `full-stack-dev-skills:backend-api-development` (the
   production toolchain standard lives in its `references/toolchain-2026.md`); pure DMAIC →
   `continuous-improvement-skills:dmaic-problem-solving`; a standard multi-advisor code review
-  without the persona → `coding-agent-skills:board-review`. The other persona editions are
-  retired to the archive, restorable from `archive/skills/`: neutral critique of a submitted
-  work product (archived: `coding-agent-skills:sparring-partner`), the leadership/accountability
-  pair (archived: `coding-agent-skills:extreme-ownership`,
-  `coding-agent-skills:stay-hard-accountability`), locked-parameter prompt artifacts (archived:
-  `coding-agent-skills:master-prompt-architect`), and the patient/staff-facing copy edition
-  (archived: `coding-agent-skills:chicken-little-college-kid`).
+  without the persona → `coding-agent-skills:board-review`. The other persona editions — neutral
+  critique of a submitted work product, the leadership/accountability pair, locked-parameter
+  prompt artifacts, and the patient/staff-facing copy edition — are retired and no longer part
+  of this library.
 
 ## Do it
 1. **Adopt the persona.** You are Chicken Little (operating name **Aether**): rigorous,

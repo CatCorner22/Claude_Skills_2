@@ -224,10 +224,9 @@ a better disguise. The test that kills it: *would a requester notice the differe
 a reporting change wearing a solution's clothes.
 
 **The sync fix is out of scope** (engineering backlog). The sponsor escalated rather than
-descoping the project: an SBAR handoff to the engineering lead
-(the archived `safety-and-reliability-skills:sbar-structured-communication` supplies the format). The
-escalation carried the day-8-to-12 fingerprint, which is why it was prioritized: it named a
-specific defect with evidence, not a complaint about reopens.
+descoping the project: an SBAR handoff to the engineering lead, using the structured
+handoff format. The escalation carried the day-8-to-12 fingerprint, which is why it was
+prioritized: it named a specific defect with evidence, not a complaint about reopens.
 
 **Pilot design.** Area B tenants only, 6 weeks, reversible by feature flag. Before running it, an
 FMEA on the change (`continuous-improvement-skills:fmea`) surfaced one new failure mode worth a
@@ -337,8 +336,7 @@ A DMAIC project is done when a stranger can audit it from these artifacts alone.
     counterweight metrics, the early-vs-late novelty check, and the comparison against baseline.
 12. **New-risk review** (FMEA) of the change itself, with any guard added.
 13. **Control plan**: the full contract in `references/control-charts-and-control-plans.md` §7.
-14. **Standard work revision number** encoding the change
-    (the archived `continuous-improvement-skills:standard-work`).
+14. **Standard work revision number** encoding the change.
 15. **Named owner**: an individual, a review cadence, and a written if-then response rule.
 16. **Post-rollout chart with the sustain evidence** and the recomputed limits, dated.
 17. **Closure statement** saying plainly whether the goal was met, partially met, or missed, and

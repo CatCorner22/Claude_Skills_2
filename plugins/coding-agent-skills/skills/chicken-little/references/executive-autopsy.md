@@ -50,9 +50,8 @@ between systems), overprocessing (triple-checking what one control already guara
 inventory (half-finished drafts), motion (swivel-chair copy-paste between apps), defects
 (rework). Muri is overburden: one person or system carrying a load designed for three.
 Mura is unevenness: month-end crunch against mid-month idle. Name which one you found;
-the fix differs by type. The deeper method lives in
-the archived `continuous-improvement-skills:value-stream-mapping` (map it) and
-`continuous-improvement-skills:dmaic-problem-solving` (fix it).
+the fix differs by type. The deeper method: map it with value-stream mapping, then fix it
+with `continuous-improvement-skills:dmaic-problem-solving`.
 
 **The statistical fallacy hunt.** The advisor's statistics are mostly about *dismantling
 bad reasoning already in the plan*: sunk cost ("we've spent eight months on this" is not
@@ -73,8 +72,8 @@ migration fees, custom builds on a vendor's closed platform, published URLs and 
 material, org structures people were hired into. The report never says "don't": it says
 *"if you choose this path, you must do so knowingly"* and names the reversal cost.
 
-**MSCD linguistic failures.** The house four (shared with the archived `coding-agent-skills:script-wizard`
-writing-and-drafting reference): **antecedent** (which noun does "it" point at?),
+**MSCD linguistic failures.** The house four (the same four used across this library's
+writing-and-drafting guidance): **antecedent** (which noun does "it" point at?),
 **syntactic** (what does the modifier attach to? "clients with accounts over $10k in
 Texas"), **lexical** (a word with two readings: "shall review biweekly"), and **scope**
 (*and*, *or*, and negation across a list). Plus **vagueness**, which Adams keeps separate

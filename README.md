@@ -6,7 +6,7 @@ and communication, working with people, data analytics and BI, machine learning,
 autonomous agents, learning science, math foundations, continuous improvement, and deep
 research**.
 
-**81 active skills across 14 plugins — consolidated 2026-08-23 from 121, with deep-research and legal additions since.** Every skill here
+**80 active skills across 14 plugins — consolidated 2026-08-23 from 121, with deep-research and legal additions since.** Every skill here
 survived a blank-slate review against one test: *does invoking it beat an unaided, competent
 frontier model?* The 50 that did not — competent summaries of canon a strong model reproduces
 unaided — are archived, restorable with one `git mv` (see `archive/README.md`). Every survivor
@@ -62,6 +62,7 @@ the listing budget bites well before the context does:
 /plugin install decision-science-skills@treasury-analyst-skills
 /plugin install deep-research-skills@treasury-analyst-skills
 /plugin install full-stack-dev-skills@treasury-analyst-skills
+/plugin install legal-skills@treasury-analyst-skills
 /plugin install machine-learning-skills@treasury-analyst-skills
 /plugin install math-foundations-skills@treasury-analyst-skills
 /plugin install metacognition-skills@treasury-analyst-skills
@@ -92,7 +93,7 @@ survive — use it comparatively, not as a promise.
 
 | Plugin | Skills | ~Tokens | % of 200K |
 |---|---|---|---|
-| `coding-agent-skills` | 14 | 3,485 | 1.74% |
+| `coding-agent-skills` | 13 | 3,220 | 1.61% |
 | `decision-science-skills` | 10 | 2,614 | 1.31% |
 | `full-stack-dev-skills` | 10 | 2,147 | 1.07% |
 | `continuous-improvement-skills` | 7 | 1,746 | 0.87% |
@@ -106,7 +107,7 @@ survive — use it comparatively, not as a promise.
 | `metacognition-skills` | 3 | 737 | 0.37% |
 | `collaboration-skills` | 2 | 539 | 0.27% |
 | `math-foundations-skills` | 1 | 267 | 0.13% |
-| **all 14** | **81** | **19,886** | **9.94%** |
+| **all 14** | **80** | **19,621** | **9.81%** |
 
 **Install profiles** — curated bundles matched to a working day, with their measured cost. Usage
 decay rewards a coherent working set: a profile keeps one warm cluster of skills defending its own
@@ -115,7 +116,7 @@ listing slots, where a scattershot install decays everything equally.
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 |---|---|---|---|---|
 | Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,837 | 1.42% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 24 | 5,632 | 2.82% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 23 | 5,367 | 2.68% |
 | Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,341 | 1.67% |
 | Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,196 | 2.10% |
 
@@ -155,7 +156,7 @@ Practical guidance:
 | Bundle | Plugins | Skills | ~Tokens | % of 200K |
 | --- | --- | ---: | ---: | ---: |
 | Analyst | `data-analytics-bi-skills` + `data-tools-skills` + `math-foundations-skills` | 12 | 2,837 | 1.42% |
-| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 24 | 5,632 | 2.82% |
+| Developer | `full-stack-dev-skills` + `coding-agent-skills` | 23 | 5,367 | 2.68% |
 | Operations / process | `continuous-improvement-skills` + `safety-and-reliability-skills` | 13 | 3,341 | 1.67% |
 | Management / communication | `collaboration-skills` + `writing-skills` + `decision-science-skills` | 16 | 4,196 | 2.10% |
 
@@ -173,7 +174,7 @@ Practical guidance:
 | Plugin | Skills | What it covers |
 | --- | --- | --- |
 | `decision-science-skills` | 10 | Structured judgment: pre-mortem (with the counsel rail), tabletop wargaming and no-win drills under full exercise control, weak-signal navigation, Bayesian updating via natural frequencies, reference-class forecasting, competing hypotheses analysis, minority-report dissent capture, the Rashomon protocol, The Challenger |
-| `coding-agent-skills` | 14 | Skill authoring (the house standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors review swarm (+6 subagents), defect epidemiology, rule stress-testing, software archaeology, Comrade Engineer's pencil pass, The Foreman, the Creative Workaround Genius (another route when the obvious one fails), the project manager and QC gate for multi-session and multi-agent work (requirement ledger and exhaustive sweep, with its own subagent), Puppet Master (the whole job on the fewest tokens, with a transcript audit), fitness and nutrition science, and Chicken Little (Aether) with its deploy-advisor / deploy-compiler autopsy modes |
+| `coding-agent-skills` | 13 | Skill authoring (the house standard), prompt engineering with the injection-defense doctrine, git/code review with run-verified agent traps, the Board of Advisors review swarm (+6 subagents), defect epidemiology, rule stress-testing, software archaeology, Comrade Engineer's pencil pass, The Foreman, the Creative Workaround Genius (another route when the obvious one fails), the project manager and QC gate for multi-session and multi-agent work (requirement ledger and exhaustive sweep, with its own subagent), Puppet Master (the whole job on the fewest tokens, with a transcript audit), and Chicken Little (Aether) with its deploy-advisor / deploy-compiler autopsy modes |
 | `full-stack-dev-skills` | 10 | Lean full-stack development: architecture, FastAPI backends (+ the production Python toolchain standard), databases/ORM, dynamic frontends, realtime, ML in production, testing strategy, deploy and operate, evidence-based UI/UX inspection |
 | `continuous-improvement-skills` | 7 | The improvement methods with teeth: DMAIC (worked control-chart project), FMEA (evidence-gated Action Priority), MSA extended to LLM-as-judge gauge studies, DOE, EVOP, root-cause analysis, project command center |
 | `safety-and-reliability-skills` | 6 | Split-tally evidence design (litigation-hold rail), detection-system tuning by disposition audit, reliability math incl. probability-of-failure-on-demand, rebuild rehearsal (irreversibility screen), break-glass playbooks, hash-rank sortition review |
@@ -181,6 +182,8 @@ Practical guidance:
 | `machine-learning-skills` | 6 | Practical ML: project framing, feature engineering, supervised modeling, evaluation, horizon-aware time-series forecasting, anomaly detection |
 | `data-tools-skills` | 5 | Data plumbing that survives real files: DuckDB local analytics, PDF extraction, REST API pulls, CSV/flat-file wrangling, file hygiene |
 | `writing-skills` | 4 | Registers and explanation craft: smart-brevity professional/legal writing (risk-allocation carve-outs included), plain-grade accessible writing, explanation design, Diátaxis-routed technical documentation |
+| `deep-research-skills` | 4 | Multi-source literature investigation (medical research detective), genome raw-data audit, DNA ancestry/genealogy research, video source audit |
+| `legal-skills` | 3 | Legal drafting and research with Smart Brevity delivery: MSCD-based contract drafting with a deterministic linter, legal citation research with a no-fabricated-citation rail (offline parsing plus CourtListener verification, fails to UNVERIFIED rather than a false positive), employment-law issue-spotting across the employee lifecycle |
 | `metacognition-skills` | 3 | Cumulative improvement across sessions: hierarchical memory management, reflective learning, knowledge crystallization |
 | `collaboration-skills` | 2 | Disarming elicitation (the counter-elicitation stance inverted, with its honesty rails) and meeting design (decisions as owner-and-date read-backs) |
 | `math-foundations-skills` | 1 | Units and dimensional analysis — the one basic-math skill that catches real errors; the rest of the set is archived |
