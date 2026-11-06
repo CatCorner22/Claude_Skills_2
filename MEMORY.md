@@ -1868,3 +1868,5 @@ retraction of the previous pass's headline mechanism claim.
   finance skills" instruction is meant to override that standing exception too, these need the same
   domain-neutral rewrite the fixed files got; if not, they stand as-is under the existing house rule.
   Ask before touching them rather than picking a side silently — this is the one item that stayed open.
+  **RESOLVED (user decision, 2026-11-06): keep the exception.** The standing archive/README.md rule
+  stands; the listed examples were confirmed correct as-is and were not rewritten.
