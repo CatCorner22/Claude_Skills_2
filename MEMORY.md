@@ -1776,12 +1776,19 @@ retraction of the previous pass's headline mechanism claim.
   confirming deadness via `Glob` before editing. House rule followed: name the domain generically
   rather than leave a dead pointer; two cases were genuine live-successor retargets
   (`chicken-little-technical-compiler` -> `chicken-little`), confirmed by that skill's own
-  frontmatter stating the merge, not assumed.
+  frontmatter stating the merge, not assumed. (This 142 is not the same quantity as the "50" in the
+  2026-11-06 wording-audit entry above: that 50 counted *distinct dead target names* seen at that
+  earlier point in time, before this round's fitness-nutrition-science deletion added one more name
+  to the dead set; this 142 counts total reference *occurrences* across `plugins/` found and fixed
+  in this later round. Different unit, different moment — not a discrepancy.)
 - LESSON (advisor caught this, second review of the same round): the 142-reference sweep above only
   scanned `plugins/`. `evals/**` carries its own "Near-miss (should NOT load this skill) / Expected:"
-  lines that name a skill, and 44 of those named a skill archived/deleted in earlier rounds too —
-  `validate.sh` never scans `evals/`, so these survived every gate clean. When a skill is archived or
-  deleted, grep `evals/` for its name as part of the same sweep, not as an afterthought; consider
+  lines that name a skill, and 44 of those across 35 files named a skill archived/deleted in earlier
+  rounds too (counted by an automated script cross-checking every `evals/` reference against the
+  live skill list, run both before dispatching the fix and again after, independently of the fixing
+  subagents' own self-reported counts) — `validate.sh` never scans `evals/`, so these survived every
+  gate clean. When a skill is archived or deleted, grep `evals/` for its name as part of the same
+  sweep, not as an afterthought; consider
   extending `validate.sh` to cover `evals/` so this class of miss can't recur silently.
 - FACT: the same accuracy-item round also found and fixed leftover explicit finance/accounting framing
   the earlier treasury/finance-removal pass missed because it read SKILL.md files and not their
@@ -1835,3 +1842,29 @@ retraction of the previous pass's headline mechanism claim.
   an earlier round, so the live instruction had to be reinterpreted as "remove the domain's framing from
   surviving general-purpose skills," and that reinterpretation should be stated back to the user rather
   than assumed silently.
+- FACT (advisor's second review caught this): `assertion-evidence-deck`'s worked-example files
+  (`assets/deck_spec_example.json`, `references/evidence-discipline.md`,
+  `references/ae-method.md`) still used Oracle Fusion Cash Management-specific vocabulary (TCR/ECT,
+  AutoMatch/Lockbox, BAI2/CAMT/MT940, "bank accounts", "merchant codes", "subledger") disguised as a
+  generic "illustrative" reconciliation deck — this directly contradicted `archive/README.md`'s own
+  claim that the skill had been de-mounted from Oracle (it lost `oracle-cm-domain.md` in 2026-08-18
+  but kept this). Rewritten to a domain-neutral location/category/exception-record scenario,
+  preserving every number (31, 4, 12k, 42/34/9/6/5, 76.3%, the day-count tolerances) exactly. Also
+  genericized `feature-engineering`'s "GL account" examples and `reflective-learner`'s "13-week cash
+  forecast / AR/AP aging" worked reflection entry.
+- LESSON: a worked example labeled "illustrative" or built from placeholder values is not automatically
+  domain-neutral — check its *vocabulary*, not just whether its numbers are fake. Oracle Cash
+  Management module terms (TCR, ECT, AutoMatch, Lockbox) survived three files specifically because they
+  read as generic jargon on a skim; they are not generic, they are one vendor's product nouns.
+- OPEN QUESTION FOR THE USER (not decided unilaterally): `archive/README.md` states as a deliberate,
+  standing exception that "reconciliation or payment scenarios used as ordinary business worked
+  examples" may stay in the library, distinct from treasury/finance-domain framing. Several surviving
+  worked examples rely on that exception and were left untouched this round because they don't
+  explicitly label themselves as finance/treasury content: `fmea/references/fmea-method.md`'s
+  bank-reconciliation FMEA example ("Cash overstated"), `evolutionary-operation/references/evop-method.md`,
+  `competing-hypotheses-analysis/references/your-environment.md` (BAI2/camt, subledger vocabulary in
+  the fill-in template), `pdf-data-extraction`'s bank-statement parsing pattern, and a couple of eval
+  files (`anomaly-detection.md`, `split-tally-evidence.md`). If the user's "delete the treasury and
+  finance skills" instruction is meant to override that standing exception too, these need the same
+  domain-neutral rewrite the fixed files got; if not, they stand as-is under the existing house rule.
+  Ask before touching them rather than picking a side silently — this is the one item that stayed open.

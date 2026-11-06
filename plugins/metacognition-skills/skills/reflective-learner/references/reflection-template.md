@@ -33,8 +33,8 @@ Categorizing makes patterns visible across reflections:
 
 ## Worked example
 ```markdown
-## Reflection — 13-week cash forecast build (2026-07-17)
-**Situation:** Built a rolling forecast from AR/AP aging exports on request.
+## Reflection — 13-week demand forecast build (2026-07-17)
+**Situation:** Built a rolling forecast from order-aging exports on request.
 **Outcome:** Numbers correct, but user had to ask twice for weekly (not monthly) buckets.
 **Strengths:** Variance columns anticipated the follow-up; tie-out totals matched.
 **Weaknesses / Errors:** Assumption error — defaulted to monthly granularity when

@@ -66,7 +66,7 @@ The headline carries the slide's entire argument, so write it first and revise i
 **Test it three ways.**
 1. *Sentence test*: does it have a subject and a verb?
 2. *Falsifiability test*: could evidence contradict it? "Reconciliation challenges" cannot be
-   contradicted; "Two merchant codes absorb three-quarters of all transaction creation rules" can.
+   contradicted; "Two categories absorb three-quarters of all exception creation rules" can.
 3. *Standalone test*: read only the headlines in order. Do they form the argument? If a reader gets
    the talk from the headlines alone, the spine is sound.
 
@@ -77,8 +77,8 @@ characters. Long headlines usually contain two claims; split the slide instead o
 fall outside seven days" beats "Same-amount candidates falling outside seven days were rejected by
 the engine."
 
-**Put the number in the headline when the number is the point.** "Two merchant codes absorb 76
-percent of transaction creation rules" outperforms "Transaction creation rules concentrate heavily,"
+**Put the number in the headline when the number is the point.** "Two categories absorb 76
+percent of exception creation rules" outperforms "Exception creation rules concentrate heavily,"
 because the audience gets the magnitude without decoding a chart first.
 
 ## Choosing the evidence
@@ -167,7 +167,7 @@ retains the argument.
 | Body text over 40 words | The claim is too large | Split the slide; move detail to notes |
 | Unsourced number | Pulled from memory or an old summary | Verify it or convert it to a stated gap |
 | Fifty-slide deck for a 20-minute slot | No duration budget in stage 1 | One minute per body slide; cut to fit |
-| Jargon in the headline | Writing for peers, presenting to leadership | Keep the term, add the consequence: "…, which strands real subledger activity" |
+| Jargon in the headline | Writing for peers, presenting to leadership | Keep the term, add the consequence: "…, which strands real detail-record activity" |
 | Screenshot of a spreadsheet | Skipping the design step | Extract the three numbers that matter |
 
 ## Before and after

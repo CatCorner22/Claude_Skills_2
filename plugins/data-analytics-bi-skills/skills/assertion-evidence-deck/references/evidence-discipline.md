@@ -60,8 +60,8 @@ Maintain one table for the whole deck. Build it as you gather, not afterward.
 
 | Slide | Claim | Value | Source artifact | Source date | Tier |
 |---|---|---|---|---|---|
-| 3 | Bank accounts in scope | 31 | `bank_accounts_export.csv` | 2026-07-14 | Verified |
-| 5 | Rules on two merchant codes | 76.3% | `04_CONFIG_FORENSICS_VERIFIED.md` | 2026-07-21 | Verified |
+| 3 | Locations in scope | 31 | `locations_export.csv` | 2026-07-14 | Verified |
+| 5 | Rules on two categories | 76.3% | `04_CONFIG_FORENSICS_VERIFIED.md` | 2026-07-21 | Verified |
 | 6 | Tolerance window | ±15 days | Tolerance rule set export | 2026-07-21 | Verified |
 | 8 | Review volume driver | departmental backlog | user interview | 2026-07-18 | Reported |
 | 9 | Auto-reconciliation rate | — | not extracted | — | Gap |

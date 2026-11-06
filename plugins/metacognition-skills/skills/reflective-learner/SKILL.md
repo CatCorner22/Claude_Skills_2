@@ -10,7 +10,7 @@ description: >-
   what went wrong, post-mortem, error analysis, self-review, you got this wrong, that's not what
   I meant, feedback, correction, improve your approach, do better next time.
 metadata:
-  version: "1.1.6"
+  version: "1.1.7"
 ---
 
 # Reflective learner

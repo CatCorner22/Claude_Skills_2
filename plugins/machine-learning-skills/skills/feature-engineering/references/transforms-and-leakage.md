@@ -14,7 +14,7 @@
 | **One-hot** | Low cardinality (≤ ~15 levels) | Column explosion at high cardinality |
 | **Ordinal** | Ordered categories (ratings, tiers) | Don't impose order on nominal fields |
 | **Frequency / count** | High cardinality | Ties value to how common a level is; usually leak-safe |
-| **Target (mean) encoding** | High cardinality with signal (merchant, GL account) | **Leaks the label unless done out-of-fold**: smoothing shrinks the leak, it does not remove it |
+| **Target (mean) encoding** | High cardinality with signal (merchant, category code) | **Leaks the label unless done out-of-fold**: smoothing shrinks the leak, it does not remove it |
 
 Target encoding done right: compute the category's target mean **out-of-fold**, so a row is never encoded
 using its own label. Fit the encoding map on training folds only and apply it to validation/test; unseen
@@ -33,7 +33,7 @@ full-data encoding and reproduces exactly the leak above (0.74 in-sample AUC on 
 from `fit_transform`). Use `fit_transform`, or put the encoder in a `Pipeline`, which calls it for you.
 
 **Unseen categories break the other encoders too.** `OneHotEncoder` and `OrdinalEncoder` default to
-`handle_unknown="error"`, so the first vendor or GL account that appears after the training cut raises a
+`handle_unknown="error"`, so the first vendor or category code that appears after the training cut raises a
 `ValueError` at predict time. The pipeline that validated cleanly fails on live data. Decide the policy
 while you build the encoder (`handle_unknown="infrequent_if_exist"` or `"ignore"` for one-hot,
 `"use_encoded_value"` with an explicit `unknown_value` for ordinal), and note it in the feature dictionary.

@@ -9,7 +9,7 @@ description: >-
   encoding, one-hot, target encoding, frequency encoding, scaling, normalization, standardize features,
   datetime features, lag features, rolling features, feature selection, interactions, impute features.
 metadata:
-  version: "1.4.3"
+  version: "1.4.4"
 ---
 
 # Feature engineering
@@ -27,7 +27,7 @@ metadata:
    only from data the model is allowed to see.
 2. **Encode categoricals to match cardinality.** **One-hot** for low-cardinality fields; **ordinal** for
    ordered categories; **frequency/count** or **target (mean) encoding** for high-cardinality
-   fields (merchant, GL account, vendor). Target encoding must be computed **out-of-fold** (each row
+   fields (merchant, category code, vendor). Target encoding must be computed **out-of-fold** (each row
    encoded from rows other than its own) or it leaks the label straight into the feature. Smoothing toward
    the global mean shrinks that leak but does not remove it: the row's own label is still inside its
    category's mean, and on a pure-noise 800-level column, heavily smoothed full-training-set encoding still

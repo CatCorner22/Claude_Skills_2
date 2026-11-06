@@ -11,7 +11,7 @@ description: >-
   technical talk, sentence-headline slides, snorkel vs scuba, turn this report into slides, audit
   my deck.
 metadata:
-  version: "1.4.4"
+  version: "1.4.5"
 ---
 
 # Assertion-evidence deck
