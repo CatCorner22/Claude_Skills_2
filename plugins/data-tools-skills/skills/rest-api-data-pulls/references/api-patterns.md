@@ -45,9 +45,8 @@ def same_origin(candidate: str, base: str) -> bool:
     return c.scheme == "https" and (c.scheme, c.netloc) == (b.scheme, b.netloc)
 ```
 - The first retry fires immediately: `Retry.get_backoff_time()` returns 0 until two
-  consecutive failures are in its history. If you need a delay on the first retry,
-  urllib3's `Retry` cannot supply it — wrap the call yourself, or rely on `Retry-After`
-  (`respect_retry_after_header` is already on).
+  consecutive failures are in its history. urllib3's `Retry` cannot delay the first retry;
+  wrap the call yourself, or rely on `Retry-After` (`respect_retry_after_header` is already on).
 - The cap comes free: urllib3 clamps each sleep to `backoff_max`, 120 s by default.
 - Timeouts always (`timeout=60`); a hung request is worse than a failed one.
 - 4xx (except 429): read `r.json()` / `r.text` for the API's diagnostic and fix the request.
@@ -59,13 +58,13 @@ def same_origin(candidate: str, base: str) -> bool:
 | Page number | `?page=3&per_page=100` | until short/empty page |
 | Cursor | body returns `next_cursor` | until cursor null |
 | Link header | `Link: <url>; rel="next"` | until no `next` link |
-Cursor pagination is safest under concurrent writes (no skipped/duplicated rows when data
-shifts between pages); with offset pagination, keep the pull window short and sort stable —
-and note that a row-count reconciliation does not detect this failure, because one insert and
-one delete during the pull duplicate one row and skip another while the total still matches.
+Cursor pagination is safest under concurrent writes (no skipped or duplicated rows when data
+shifts between pages). With offset pagination, keep the pull window short and the sort stable.
+A row-count reconciliation does not detect this failure: one insert and one delete during the
+pull duplicate one row and skip another while the total still matches.
 The offset/`hasMore` loop is in the skill body; the other two styles:
 
-Both loops below are bounded by `max_pages`, like the offset loop in the skill body — a
+Both loops below are bounded by `max_pages`, like the offset loop in the skill body. A
 server that keeps handing back a cursor, or a `next` link that cycles, must not be able to
 spin the pull forever.
 
@@ -112,11 +111,11 @@ lines = pd.json_normalize(
                                                                # empty collections routinely
 ```
 - One table per level; join on the parent key at analysis time. Parents with no children are
-  absent from the child table by construction — use a left join, not an inner one, if the
+  absent from the child table by construction, so use a left join, not an inner one, if the
   parent count has to survive.
-- After flattening: IDs to `string`, dates parsed, amounts numeric — the flat-file rules apply.
+- After flattening: IDs to `string`, dates parsed, amounts numeric; the flat-file rules apply.
 
 ## Run logging
 Log one line per run: `timestamp, resource, filter_window, rows_fetched, server_total,
 duration_s, output_file`. The first question about any recurring extract is "did it pull
-everything?" — the log answers it without re-running.
+everything?" The log answers it without re-running.

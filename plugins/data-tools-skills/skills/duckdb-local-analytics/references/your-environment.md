@@ -1,6 +1,6 @@
 # Your DuckDB environment (sanitized template)
 
-Fill in your setup. Data files never go in git — reference their locations only.
+Fill in your setup. Data files never go in git; reference their locations only.
 
 - **Standard datasets:** <dataset → path/glob → format (csv/parquet) → refresh cadence>
 - **Parquet conversions you maintain:** <which big CSVs you keep converted>

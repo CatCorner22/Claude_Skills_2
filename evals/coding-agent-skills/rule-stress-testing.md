@@ -21,9 +21,9 @@ repair); then re-tests the fixed set and logs residual open items.
 > parameters first, then red-team it and deliver the blueprint and final prompt in one
 > code block."
 
-Expected: `coding-agent-skills:master-prompt-architect` owns commissioning and
-adversarially auditing a prompt under construction, including its clarify-first gate
-and triple audit. rule-stress-testing owns collision discovery inside an EXISTING rule
+Expected: commissioning and adversarially auditing a prompt under construction end to end
+(including a clarify-first gate and a triple audit) is a separate task this library does not
+cover as a single skill. rule-stress-testing owns collision discovery inside an EXISTING rule
 set; if it loads on a build-me-a-prompt ask, the seam is failing.
 
 ## 2b. Near-miss (process-failure guard)

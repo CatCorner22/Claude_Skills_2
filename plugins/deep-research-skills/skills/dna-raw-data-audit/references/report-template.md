@@ -1,6 +1,6 @@
 # The report template
 
-Every audit carries these six sections, in this order, under these headings — including the audits
+Every audit carries these six sections, in this order, under these headings, including the audits
 that cannot proceed.
 
 **Contents**
@@ -21,12 +21,12 @@ that cannot proceed.
 notation. If a sentence needs the rest of the report to parse, it does not belong here.
 
 Must contain:
-- **What the files are** and what kind of data they hold — one sentence, in plain terms, including
+- **What the files are** and what kind of data they hold: one sentence, in plain terms, including
   whether this is array or sequencing data, because it governs everything else.
-- **What was found** — in plain terms, and if the answer is "nothing that changes what you should
+- **What was found**: in plain terms, and if the answer is "nothing that changes what you should
   do", say exactly that, here, first.
 - **What to do**, as a short list. If the list is empty, say so.
-- **What this cannot tell you** — the most under-reported and most important part of a genetic
+- **What this cannot tell you**: the most under-reported and most important part of a genetic
   report. State it here rather than in a footnote.
 
 Do not soften here and sharpen below, or the reverse. A reader who stops after this section should
@@ -42,16 +42,16 @@ The complete evidentiary record. Exhaustive by design; length is not a defect he
 - **The finding ledger**, one row per catalogued site that was called: variant · gene · genotype ·
   source file · imputed or measured · array-reliability grade · evidence grade · effect size in
   absolute terms · action or none.
-- **The funnel, stated with its numbers** — how many sites, how many catalogue hits, how many
+- **The funnel, stated with its numbers**: how many sites, how many catalogue hits, how many
   reliably called, how many actionable. Showing the funnel emptying is informative.
-- **What could not be checked, and why** — never probed, no-called, discordant, strand-unresolved,
+- **What could not be checked, and why**: never probed, no-called, discordant, strand-unresolved,
   requires phasing, requires copy number, requires HLA typing. Each with its mechanism.
 
 ## §3 Assessment and reasoning
 
 Per finding, the reasoning a reader can argue with:
 
-- **Both grades** — evidence strength and array reliability — never collapsed into one.
+- **Both grades**: evidence strength and array reliability, never collapsed into one.
 - **The confirmation requirement**, stated explicitly for anything clinically significant.
 - **The reasoning**, in a sentence: why this grade, why this action or why none.
 - **No composite "genetic risk score".** Conditions have independent baselines and independent
@@ -65,11 +65,11 @@ Every quantitative claim, with its arithmetic visible:
 
 - **Absolute beside relative**, with the baseline, for every risk figure. Use the template in
   `risk-communication.md` §6.
-- **Natural frequencies** — counts of people per 1,000, not percentages of percentages.
+- **Natural frequencies**: counts of people per 1,000, not percentages of percentages.
 - **The measure named**: odds ratio or risk ratio, and the design it came from. Convert where the
   baseline is known, and show the conversion.
 - **Age-conditioned** where the literature supports it; stated as unconditioned where it does not.
-- **The ancestry caveat applied**, not appended — if the person's ancestry differs from the cohorts
+- **The ancestry caveat applied**, not appended: if the person's ancestry differs from the cohorts
   the estimate came from, that belongs beside the number.
 - **Intervals**, not just point estimates.
 
@@ -78,7 +78,7 @@ Every quantitative claim, with its arithmetic visible:
 The current-literature pass. Sections 2–4 report what the catalogue and the files establish; this
 section reports what the **literature now says**, which is a different question.
 
-- **What supersedes the catalogue** — newer or larger estimates for any finding reported above.
+- **What supersedes the catalogue**: newer or larger estimates for any finding reported above.
 - **What failed to replicate**, and anything reclassified since.
 - **Contradicting work**, found by searching against the finding deliberately.
 - **Whether the evidence base is representative**, or whether the quoted estimate comes from a
@@ -92,7 +92,7 @@ section reports what the **literature now says**, which is a different question.
 ## §6 Conclusion
 
 - **The verdict in a few sentences**, consistent with §1 and adding the nuance §1 omitted.
-- **The clinician-ready question list** — the most actionable artifact the skill produces. Format in
+- **The clinician-ready question list**: the most actionable artifact the skill produces. Format in
   `interventions-evidence.md` §7 and `pharmacogenomics.md` §5.
 - **Linked references, in two groups**: the catalogue entries relied on, and the independent research
   from §5, each with a working identifier.
@@ -115,12 +115,12 @@ reader unable to tell whether the audit was attempted.
 | Only one of two files supplied | Proceed, and state that no concordance check was possible — a named reduction in confidence |
 | Data is low-pass/imputed | Proceed, and grade every finding accordingly; no clinical finding rests on an imputed call |
 | Ancestry unknown | Proceed, but §4 reports every estimate with the portability caveat unresolved rather than silently assuming European-ancestry applicability |
-| **The literature pass cannot run** — scholarly resolvers unreachable, which is the normal case in some environments | **This is a reportable failure, not a silent one.** §5 then says: which identifiers were checked and against what, that no live pass was possible, and that any number quoted comes from the anchored provenance-graded figures in `variant-catalog.md` §0 with its grade attached. **It must not contain figures that look as though a live pass produced them** — that is where fabrication enters |
+| **The literature pass cannot run** — scholarly resolvers unreachable from the environment | **This is a reportable failure, not a silent one.** §5 then says: which identifiers were checked and against what, that no live pass was possible, and that any number quoted comes from the anchored provenance-graded figures in `variant-catalog.md` §0 with its grade attached. **It must not contain figures that look as though a live pass produced them** — that is where fabrication enters |
 | **Sample identity fails, or cannot be tested** | **Stop.** §1 says so in the first sentence and no findings appear anywhere. If identity could not be tested for lack of overlapping sites, say that the cross-platform comparison cannot be treated as coming from one person |
 | Funnel empties | **Report the empty funnel.** §1 says nothing changes; §2 shows the numbers that emptied it. This is a complete report, not a failed one |
 
 **The serious-finding path, which needs stating because improvisation here does harm.** If something
-genuinely urgent surfaces — a reliably-called, high-penetrance, actionable variant, or a
+urgent surfaces: a reliably-called, high-penetrance, actionable variant, or a
 pharmacogenomic flag against a drug the person is **currently taking, or is scheduled to start**
 (a first chemotherapy dose and a booked operation are the cases where deferral is the harm):
 
@@ -128,7 +128,7 @@ pharmacogenomic flag against a drug the person is **currently taking, or is sche
 2. **Name the confirmation step and the clinician to take it to.** The action is a conversation and a
    test, not a decision.
 3. **Do not advise stopping or changing a medication**, even one the data flags. Especially then.
-4. **State the uncertainty honestly in the same breath** — unconfirmed consumer data, with a
+4. **State the uncertainty honestly in the same breath**: unconfirmed consumer data, with a
    materially elevated false-positive rate for exactly this class of variant. Both facts are true
    and the person needs both.
 5. **Flag the relatives implication** before going further, if the finding is heritable and

@@ -1,4 +1,4 @@
-# Your environment — no-win drills
+# Your environment: no-win drills
 
 Fill this in to point the skill at your real terrain. Keep committed content
 structural and sanitized; anything naming real incidents, clients, or colleagues goes
@@ -20,7 +20,7 @@ in `your-environment.private.md` (git-ignored), never in a committed file.
 
 ## House save order
 <!-- Your default ordering of what gets protected first when something must be lost.
-     Drills grade consistency with a declared order — having a house default makes
+     Drills grade consistency with a declared order; having a house default makes
      declaring fast. -->
 
 ## Debrief record

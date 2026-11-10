@@ -17,9 +17,7 @@ axe, not page-load-only).
 > "Build a beautiful accessible design system for our new app — tokens, components, the
 > works."
 
-Expected: construction, not inspection —
-`continuous-improvement-skills:lean-six-sigma-for-software` (its
-accessible-ui-design-system reference) and `full-stack-dev-skills:frontend-modern-ui`
+Expected: construction, not inspection — `full-stack-dev-skills:frontend-modern-ui`
 territory. This skill audits what exists; it does not design new systems. If it loads,
 sharpen the inspect/audit framing in the description.
 

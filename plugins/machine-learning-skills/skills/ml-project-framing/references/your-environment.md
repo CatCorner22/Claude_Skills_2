@@ -1,9 +1,9 @@
 # Your ML problem (sanitized template)
 
-Wire in your current role here — the framing method is domain-neutral, and this file is what
+Wire in your current role here. The framing method is domain-neutral, and this file is what
 points it at the predictions that matter wherever you work now. If any value is sensitive
 (actual figures, account identifiers, sample rows, internal system names), keep it in
-`your-environment.private.md` instead — that suffix is git-ignored. Commit only sanitized,
+`your-environment.private.md` instead. That suffix is git-ignored. Commit only sanitized,
 structural examples.
 
 - **Decision & owner:** <who acts on the prediction, and what action changes>

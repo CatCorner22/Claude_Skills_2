@@ -33,16 +33,16 @@ Named extents: `world`, `atlantic`, `europe`, `ireland-britain`, or a box
 and Ireland–Britain extents, and any custom box inside the Europe extent, use the finer 1:50m file.
 A box such as `[-16, 28, 62, 62]` (Ireland to the steppe and the Near East) suits most European
 deep-ancestry routes better than the Atlantic extent. `width` and `height` size the map panel; the
-footer — legend, the numbered waypoint key, wrapped notes and the attribution — is laid out below it
+footer (legend, the numbered waypoint key, wrapped notes and the attribution) is laid out below it
 and the canvas grows to fit, so long notes never overlap the legend. Waypoints are drawn as numbered
 markers with their names and dates in the key, which keeps a crowded coastline legible; a waypoint
 with no label and no `when` only bends the line. Country names are Natural Earth `ADMIN` names or
 ISO-A3 codes, case-insensitive; a name the data does not contain is reported in the footer rather
 than silently dropped. Shaded countries carry their value at the polygon's centre, and the six-band
-legend (0–1, 1–5, 5–10, 10–25, 25–50, 50–100 %) is added automatically — the bands are finer below
+legend (0–1, 1–5, 5–10, 10–25, 25–50, 50–100 %) is added automatically: the bands are finer below
 25% because that is where composition sub-labels live.
 
-**Deep-ancestry routes** (dates and places illustrative — fill from the ladder):
+**Deep-ancestry routes** (dates and places illustrative; fill from the ladder):
 ```json
 {
   "title": "Deep ancestry — paternal and maternal lines",
@@ -136,15 +136,15 @@ number empty rather than filling it with a guess.
 last hundred years with "living". It is the default for any copy leaving the machine. On the
 ancestor-places map, label points by ahnentafel number and keep the named version private.
 Because every file this skill produces describes relatives who did not consent, the private
-directory — not a repository, not a shared drive — is where the un-redacted versions live.
+directory (not a repository, not a shared drive) is where the un-redacted versions live.
 
 ## §6 Data, licence and interchange
 
 - **Outlines:** Natural Earth Admin 0 country polygons, 1:110m and 1:50m, simplified and stored
   as compact JSON in `assets/`. Natural Earth is public domain; no permission or credit is
   required, and the suggested credit "Made with Natural Earth" is in every footer [licence file
-  read]. Natural Earth's own carve-outs — a newspaper's world base map, a European agency's
-  rivers and lakes, a vendor's North American roads — are not in these files; adding European
+  read]. Natural Earth's own carve-outs (a newspaper's world base map, a European agency's
+  rivers and lakes, a vendor's North American roads) are not in these files; adding European
   rivers to a map would bring one in [snippet-only — licence file].
 - **Projection:** equirectangular with the standard parallel at the extent's mid-latitude. Fine
   for these extents; a world map at the poles is distorted, and the routes are schematic anyway.

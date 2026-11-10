@@ -1,7 +1,7 @@
 # EVOP method — phases, cycles, significance, and safe bounds
 
 Working mechanics for `evolutionary-operation`. Everything here assumes the process owner has
-already set safe operating limits (§6 — read it first if that hasn't happened).
+already set safe operating limits (§6: read it first if that hasn't happened).
 
 ## Contents
 1. The pattern
@@ -24,18 +24,18 @@ factor B (low)  |  (1)          (2)
 ```
 
 - Five settings total; every one sits **inside the owner's safe limits**.
-- Steps are deliberately small — small enough that output at every point stays in spec, and small
+- Steps are deliberately small: small enough that output at every point stays in spec, and small
   enough that operations barely notices the pattern is running. If a step would need sign-off as a
   "change", it is too big for EVOP.
 - For three factors, use a 2³ (8 corners) or a half-fraction (4 corners) plus center. The
-  half-fraction — 2^(3−1), C = AB, so I = ABC — is **resolution III**: each main effect is aliased
+  half-fraction (2^(3−1), C = AB, so I = ABC) is **resolution III**: each main effect is aliased
   with the two-factor interaction of the other two (A≡BC, B≡AC, C≡AB), and no interaction is
   estimable from those four runs. That is an acceptable trade in EVOP, where you only need a
-  direction to move the center and the next phase re-measures at the new center — an effect that
-  was really an interaction fails to reproduce there. It is not acceptable as a statement about
+  direction to move the center and the next phase re-measures at the new center: an effect that
+  was an interaction fails to reproduce there. It is not acceptable as a statement about
   which factor matters: quote such an effect as a direction, never as a clean main effect. If you
   need the interactions, run all 8 corners. Beyond three factors, the pattern stops being
-  unobtrusive — that's designed-experiment territory
+  unobtrusive: that's designed-experiment territory
   (`continuous-improvement-skills:design-of-experiments`).
 
 ## 2. Cycles and phases
@@ -49,7 +49,7 @@ factor B (low)  |  (1)          (2)
 - **The EVOP log (information board)** carries, per response: the running mean at each pattern
   point, each factor's effect estimate, its standard error, and the cycle count. Historically a
   wall chart maintained by a statistician; here, a table the LLM updates every cycle. No log, no
-  error estimate, no conclusions — keep it from cycle one.
+  error estimate, no conclusions: keep it from cycle one.
 
 ## 3. Worked example — recon matching tolerances, 2×2 plus center
 
@@ -77,8 +77,8 @@ Effect of **T** per cycle = mean(points 2, 4) − mean(points 1, 3): 0.70, 0.75,
 Effect of **W** per cycle = mean(points 3, 4) − mean(points 1, 2): 0.60, 0.35, 0.65 → mean **+0.53**.
 Interaction per cycle = mean(points 1, 4) − mean(points 2, 3): 0.00, +0.05, −0.15 → mean −0.03.
 
-Guard readings stayed inside the bound at every point (worst: 0.031% at point 4, vs 0.05% limit)
-— but note the *trend*: false-match rate rises with T. The guard is closest to its cliff exactly
+Guard readings stayed inside the bound at every point (worst: 0.031% at point 4, vs 0.05% limit),
+but note the *trend*: false-match rate rises with T. The guard is closest to its cliff exactly
 where the improvement response is best. That trend goes to the owner alongside the effects.
 
 ## 4. Significance from small samples
@@ -87,29 +87,29 @@ Each cycle yields one estimate of each effect, so after n cycles you have n repl
 
 - effect = mean of the n per-cycle effects
 - s = standard deviation of the per-cycle effects; **SE = s / √n**
-- rule of thumb: act only when |effect| > **2 × SE** — the shop-floor bar. The familiar "≈ 95%
+- rule of thumb: act only when |effect| > **2 × SE**: the shop-floor bar. The familiar "≈ 95%
   two-sided" attached to 2×SE is the *large-sample* figure and does not survive small n: at
   n = 3 (df = 2) a ±2×SE interval covers about **82%**, not 95%, and the 95% t-critical is 4.30.
-  Quote the honest bar alongside it and say which one you used. Note also that a 2×2 phase tests
+  Quote the honest bar alongside it and say which one you used. A 2×2 phase also tests
   three effects (two mains plus the interaction), so at ~82% per-effect coverage the chance of at
-  least one spurious signal in a phase is ~46% — which is why the bounded step size and the
+  least one spurious signal in a phase is ~46%, which is why the bounded step size and the
   owner's ratification, not the bar alone, are what keep EVOP from tampering.
 
 For the example: T effect 0.80, s ≈ 0.13, SE ≈ 0.076 → 0.80 ≫ 2×0.076: **signal**. W effect
 0.53, s ≈ 0.16, SE ≈ 0.093 → clears 2×SE and barely clears the small-n t bar (4.3 × 0.093 ≈
-0.40) — real, but run more cycles before leaning on W. Interaction −0.03: noise.
+0.40): real, but run more cycles before leaning on W. Interaction −0.03: noise.
 
 Historical note: classic EVOP worksheets estimated s from *ranges* (range × a d₂-style constant)
 so plant crews could run it without computing variances. With an LLM keeping the ledger, compute
-the t-statistics directly — but keep publishing the effect ± 2·SE form on the log, because that is
+the t-statistics directly, but keep publishing the effect ± 2·SE form on the log, because that is
 what the owner reads. Two disciplines the arithmetic doesn't excuse: randomize run order within
-each cycle (defeats day-of-week and month-end confounds — or block on them explicitly), and never
+each cycle (defeats day-of-week and month-end confounds, or block on them explicitly), and never
 stop a phase the moment an effect first crosses the line (that's optional stopping; fix the phase
 length in advance).
 
 ## 5. Shifting the center and rotating factors (stopping rules)
 
-- **A direction wins** (effect clears the bar, guard trend acceptable): propose the new center —
+- **A direction wins** (effect clears the bar, guard trend acceptable): propose the new center:
   here (T 1.25, W 4) pending more W cycles, or conservatively (T 1.25, W 3) on T alone. The
   **owner ratifies** the shift and re-states limits around the new center. Begin the next phase
   there: EVOP climbs in small ratified steps, indefinitely.
@@ -129,7 +129,7 @@ The non-negotiables that make in-production experimentation defensible:
 - **Limits precede perturbation.** The process owner sets factor bounds and guard limits before
   the first cycle, in writing, in the EVOP log header. The analyst proposes; the owner disposes.
 - **Guards are hard, not advisory.** A guard limit (false-match rate, forecast bias, SLA breach)
-  is a stop condition, not a note. Measure the guard independently of the mechanism being tuned —
+  is a stop condition, not a note. Measure the guard independently of the mechanism being tuned:
   on a recon engine, by the audit pass, never by the engine's own claim.
 - **Every setting must be individually safe**, not just safe on average across the pattern.
 - **Reversibility**: every pattern point and center shift must be revertible in one step; record

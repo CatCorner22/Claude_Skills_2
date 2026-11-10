@@ -21,8 +21,8 @@ description is over-triggering; if it loads only to say "run the diagnosis first
 deck," that is acceptable.
 
 Second near-miss:
-> "Design a KPI dashboard for our cash position."
-Expected: `data-analytics-bi-skills:dashboard-design`, not this skill — a live dashboard is not an
+> "Design a KPI dashboard for our inventory position."
+Expected: a live, interactive dashboard, not this skill — a live dashboard is not an
 assertion-evidence talk.
 
 ## 3. Quality rubric

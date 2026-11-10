@@ -3,25 +3,25 @@ name: defect-epidemiology
 description: >-
   Treats a confirmed bug as an index case, not a singleton, and contact-traces its spread:
   fingerprints the defective pattern semantically (Type 1–4 code-clone taxonomy), sweeps in
-  three passes (literal grep, LLM semantic sweep that catches mutated variants, version-history
+  three passes (literal grep, LLM semantic sweep for mutated variants, version-history
   transmission tree), dispositions every contact as patched, not-applicable, or
-  accepted-with-reason, finds patient zero (the origin commit, template, tutorial, or shared
-  snippet) so reinfection stops at the source, ranks sources by copies spawned, and quarantines
-  the top ones with a template fix plus a lint rule. Grounded in ReDeBug and VUDDY
+  accepted-with-reason, finds patient zero (origin commit, template, tutorial, or shared
+  snippet) so reinfection stops there, ranks sources by copies spawned, and quarantines
+  the top ones with a template fix and lint rule. Grounded in ReDeBug and VUDDY
   (unpatched code clones persist across whole OS distributions) and Juergens et al. ICSE 2009
   (inconsistent clone edits cause real faults). Use when a found bug's pattern may live
   elsewhere, or the same bug keeps coming back. Triggers: contact tracing, patient zero, code
   clone, copy-paste bug, everywhere else this appears, outbreak, this bug again, trace the
   clones, quarantine the template.
 metadata:
-  version: "1.2.1"
+  version: "1.2.3"
 ---
 
 # Defect epidemiology (contact-trace the bug you just found)
 
 A confirmed bug is evidence about a *population*, not just a line of code. The research is
 blunt about it: ReDeBug found unpatched code clones of known-vulnerable code persisting
-across entire OS distributions — the patch shipped, and its copies never heard about it
+across entire OS distributions; the patch shipped, and its copies never heard about it
 (IEEE S&P 2012) `[snippet-only]`; VUDDY scaled the same hunt with function fingerprints
 (IEEE S&P 2017) `[snippet-only]`; and Juergens et al., "Do Code Clones Matter?" (ICSE
 2009), found that inconsistent changes to cloned code are frequent and yielded roughly
@@ -32,16 +32,16 @@ response: index case → fingerprint → contact trace → disposition → patie
 ## When to use
 - A bug is confirmed and there is any chance its pattern was copied, templated, generated,
   or independently repeated elsewhere in the codebase (or across repos you own).
-- The same class of bug keeps reappearing after being "fixed" — this bug again.
+- The same class of bug keeps reappearing after being "fixed": this bug again.
 - A vulnerable or defective snippet is known to have circulated: a starter template, a
   wiki example, a tutorial, one prolific person's habit.
 - The found-bug step of a change workflow: before closing the fix, trace the contacts.
-- Not for: diagnosing and fixing the single bug in front of you — that is ordinary
+- Not for: diagnosing and fixing the single bug in front of you, that is ordinary
   debugging, and it happens *before* this skill starts (this skill begins once the
   defective pattern is confirmed and fixed at least once).
 - Not for: explaining one incident's causal chain →
   `continuous-improvement-skills:root-cause-analysis` (RCA's unit is the failure and its
-  causes; this skill's unit is the *pattern* and its population — retrospective spread
+  causes; this skill's unit is the *pattern* and its population, retrospective spread
   control, not causal diagnosis).
 - Not for: prospective what-could-fail analysis of a design or process →
   `continuous-improvement-skills:fmea` (that anticipates modes before failure; this
@@ -56,76 +56,75 @@ a worked example, quarantine patterns, and the outbreak-report template are in
 `references/contact-tracing-method.md`.
 
 1. **Confirm the index case and fingerprint the pattern.** Write the defect's *semantic
-   signature* — what makes the code wrong and under which conditions it bites — in one or
+   signature* (what makes the code wrong and under which conditions it bites) in one or
    two sentences, plus the minimal wrong shape (the smallest code fragment that still
    contains the mistake). The fingerprint must survive renaming and restructuring: "reads
    the length before the null-check, so empty input crashes" traces; the literal text of
    one instance does not.
 2. **Trace in three passes, cheap to deep:**
-   - *Pass 1 — literal:* grep for the pattern's distinctive tokens and their obvious
+   - *Pass 1, literal:* grep for the pattern's distinctive tokens and their obvious
      variants. Catches exact and renamed copies (Type 1–2 clones).
-   - *Pass 2 — semantic:* the assistant sweeps candidate regions — same subsystem, same
-     author clusters, files with similar structure or shared imports — reading for the
+   - *Pass 2, semantic:* sweep candidate regions: same subsystem, same
+     author clusters, files with similar structure or shared imports, reading for the
      *signature*, not the text. This is the amplification step: restructured and
      semantic-twin clones (Type 3–4) are invisible to grep and prohibitively slow for a
      human to hunt; an LLM reads for meaning at scale.
-   - *Pass 3 — genealogy:* walk the version history. When did the pattern first appear,
+   - *Pass 3, genealogy:* walk the version history. When did the pattern first appear,
      and which later commits copied it where? History search on the pattern's distinctive
      tokens plus commit metadata yields the transmission tree (clone-genealogy analysis,
      after Kim et al. `[snippet-only]`).
 3. **Disposition every contact in a table.** Each found instance gets a row: location,
-   clone type, which pass found it, whether the defect actually triggers there, and
-   exactly one disposition — **patched**, **not-applicable** (with the reason the defect
+   clone type, which pass found it, whether the defect triggers there, and
+   exactly one disposition: **patched**, **not-applicable** (with the reason the defect
    cannot bite in that context), or **accepted-with-reason** (named owner, written
    rationale, revisit date). No row may be left blank: an undispositioned contact is an
    open transmission chain.
 4. **Find patient zero.** Follow the transmission tree to the earliest instance, then ask
    where *it* came from: a tutorial, a public Q&A snippet, an internal wiki page, a
    scaffold or starter template, a code generator, one person's muscle memory. Then the
-   critical question — **is the source still infectious?** A patched codebase with an
+   critical question: **is the source still infectious?** A patched codebase with an
    unpatched template reinfects on the next project.
 5. **Rank the sources by out-degree and quarantine the top of that list.** Read each node's
-   **out-degree** — how many direct copies it spawned — off the transmission tree, and act on
+   **out-degree** (how many direct copies it spawned) off the transmission tree, and act on
    the **maximum**, not an average. Resist computing a tree-wide "R0" by dividing transmissions
    by members: in any transmission tree every member but patient zero has exactly one parent, so
-   that ratio is always (N−1)/N — just under 1 for every tree, rising with size and measuring
+   that ratio is always (N−1)/N, just under 1 for every tree, rising with size and measuring
    nothing (`references/contact-tracing-method.md` shows why, and why a "R0 ≥ 1" threshold built
    on it can never fire). The actionable trigger is **any still-live source with out-degree ≥ 2**.
    Quarantine acts on sources, not cases: fix the template or wiki page itself, add the lint/CI
    rule that blocks the pattern from re-entering, and leave an in-situ warning where the next
-   copy-paster will actually look (the old location, the template file, the wiki page).
+   copy-paster will look (the old location, the template file, the wiki page).
 6. **Close only when every contact is dispositioned, and file the outbreak report:** index
    case, fingerprint, passes run and their coverage, the disposition table, patient zero,
    the spread numbers, quarantine actions, and the closure statement. The report is what turns "we fixed
    it everywhere, I think" into a checkable claim.
 
 ## Why / learn
-The core finding behind this skill is that **patches do not propagate on their own**.
-ReDeBug's result generalizes: the fix lands where the bug was *reported*, while the copies
-— in other files, other repos, other people's projects scaffolded from the same template —
+The core finding: **patches do not propagate on their own**.
+ReDeBug's result generalizes: the fix lands where the bug was *reported*, while the copies (in other files, other repos, other people's projects scaffolded from the same template)
 keep the defect alive `[snippet-only]`. Juergens et al. explain why clones are worse than
-mere duplication: the danger is *inconsistent evolution* — one copy gets the fix or the
+mere duplication: the danger is *inconsistent evolution*: one copy gets the fix or the
 new requirement and its siblings do not, which is precisely how a fixed bug reappears
 `[snippet-only]`. So the closing question after any real fix is never "is this instance
-fixed?" but "is this *pattern* extinct or controlled?" — the unit of work is the pattern.
+fixed?" but "is this *pattern* extinct or controlled?" The unit of work is the pattern.
 
 The epidemiological framing earns its keep because each borrowed concept forces a step
 people skip. *Index case* forces the reframe from singleton to population. *Contact
-tracing* forces exhaustiveness — a sweep is not done when you found "a few more," it is
+tracing* forces exhaustiveness: a sweep is not done when you found "a few more," it is
 done when every contact has a disposition, because one undispositioned clone is a live
-transmission chain. *Patient zero* forces the origin question, which is what actually
+transmission chain. *Patient zero* forces the origin question, which is what
 stops recurrence: fixing all current copies while the scaffold that spawns them stays
 infectious just schedules the next outbreak. And *source out-degree* forces prioritization by
 reproductive power rather than by instance count: a template that spawns four copies per
 project matters more than six inert copies in code nobody extends.
 
 The fingerprint must be semantic because transmission mutates. Copy-pasted code gets
-renamed, reformatted, and restructured on the way in — the practice-level Type 1–4 clone
+renamed, reformatted, and restructured on the way in. The practice-level Type 1–4 clone
 taxonomy in the reference maps each mutation level to the pass that can still catch it.
 Grep catches Types 1–2; only meaning-level reading catches Types 3–4, which is exactly
 where an LLM changes the economics of the sweep (VUDDY industrialized fingerprint matching
 for whole ecosystems; a semantic sweep does for your codebase what grep cannot)
-`[snippet-only]`. Finally, quarantine prefers *mechanism over memo*: a lint rule that
+`[snippet-only]`. Quarantine prefers *mechanism over memo*: a lint rule that
 blocks the pattern at commit time keeps working after everyone has forgotten the outbreak;
 an announcement is forgotten by the next hire's first copy-paste.
 
@@ -141,7 +140,7 @@ an announcement is forgotten by the next hire's first copy-paste.
 - Patching all copies but not patient zero → the template, wiki page, or scaffold
   reinfects the next project; check whether the source is still infectious.
 - Quarantine by announcement → memos decay; add the lint/CI rule and the in-situ warning
-  where copy-pasters actually look.
+  where copy-pasters look.
 - Treating "not-applicable" as a shrug → it is a claim with a reason (why the defect
   cannot trigger there); an unreasoned N/A is an undispositioned contact.
 - Using this skill for a one-off incident diagnosis → that is
@@ -151,20 +150,20 @@ an announcement is forgotten by the next hire's first copy-paste.
 Wire in your current systems in `references/your-environment.md`: the repositories and
 shared code locations a sweep must cover, where your templates/scaffolds/generators and
 snippet wikis live (the usual patient-zero habitats), how lint/CI rules are added in your
-stack, and where outbreak reports are filed. Keep committed content structural — real
+stack, and where outbreak reports are filed. Keep committed content structural: real
 repo names, vulnerability details, or anything sensitive belongs in
 `your-environment.private.md` (git-ignored), never in a committed file.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/defect-epidemiology.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/defect-epidemiology.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/contact-tracing-method.md — the Type 1–4 fingerprinting taxonomy, the
+- references/contact-tracing-method.md: the Type 1–4 fingerprinting taxonomy, the
   three-pass sweep, the contact-disposition table, patient-zero analysis with the
   infectious-source checklist, source out-degree worked on a small example, quarantine patterns, the
   outbreak-report template, and the research anchors
-- references/your-environment.md — your sweep scope, template locations, and lint
+- references/your-environment.md: your sweep scope, template locations, and lint
   infrastructure (fill in)

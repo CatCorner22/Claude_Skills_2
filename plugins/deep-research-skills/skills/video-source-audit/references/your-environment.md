@@ -2,7 +2,7 @@
 
 Fill this in so the audit matches what you actually audit and what you can actually reach.
 Keep the filled-in copy at `.claude/skills-env/video-source-audit.private.md` in your own project, not
-here — this file lives in the plugin cache and a marketplace update can overwrite it.
+here: this file lives in the plugin cache and a marketplace update can overwrite it.
 
 ## What you audit
 
@@ -13,7 +13,7 @@ here — this file lives in the plugin cache and a marketplace update can overwr
 - **Typical format:** _____ (short-form explainer, long-form essay, interview podcast, lecture,
   documentary segment)
 - **Channels or creators you check often:** _____
-- **Do you audit the same creator repeatedly?** If so, note prior audits — a creator who issued a
+- **Do you audit the same creator repeatedly?** If so, note prior audits: a creator who issued a
   correction after a previous audit deserves that recorded on the comprehensiveness axis.
 
 ## What you can reach
@@ -47,7 +47,7 @@ here — this file lives in the plugin cache and a marketplace update can overwr
 - **Report length:** _____ (one-page verdict / full ledger / both)
 - **Audience:** _____ (yourself, a team, a public write-up)
 - **Do you want the plain-language translations inline or as an appendix?** _____
-- **Any axis you do not care about?** _____ (say so — an unrequested axis still costs work; but
+- **Any axis you do not care about?** _____ (say so: an unrequested axis still costs work; but
   never let dropping an axis turn into a composite grade over the remaining two)
 
 ## Standing notes

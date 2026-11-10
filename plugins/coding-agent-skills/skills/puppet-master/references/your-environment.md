@@ -1,7 +1,7 @@
 # Your environment — tailoring template for puppet-master
 
 This file ships as a template. **Copy it to `.claude/skills-env/puppet-master.private.md` in your
-own project and fill in the copy** — the `.private.md` suffix is what keeps it out of git, and a
+own project and fill in the copy**. The `.private.md` suffix is what keeps it out of git, and a
 `/plugin marketplace update` can overwrite this shipped copy. Confirm with `git check-ignore -v`
 before writing anything into it.
 

@@ -20,18 +20,18 @@ person-hours cost (no invented dollar statistics).
 > "We're planning a two-day improvement workshop where the intake team redesigns
 > their own process at the gemba — help me facilitate it."
 
-Expected: `continuous-improvement-skills:kaizen-and-codesign` owns kaizen events and
-co-design workshop facilitation. meeting-design covers the ordinary working meeting —
+Expected: kaizen events and co-design workshop facilitation are a separate discipline this
+library does not carry. meeting-design covers the ordinary working meeting —
 decision agendas, pre-reads, decision logs. If meeting-design loads on a kaizen/
 workshop ask, the boundary is failing.
 
 ## 2b. Near-miss (time-pressure escalation guard)
-> "A payment looks wrong and my manager approved it — I need to escalate this to the
-> treasurer in the next ten minutes. How do I structure what I say?"
+> "An order looks wrong and my manager approved it — I need to escalate this to the
+> operations lead in the next ten minutes. How do I structure what I say?"
 
-Expected: `safety-and-reliability-skills:sbar-structured-communication` owns
-escalation and transfer-of-work communication under time pressure (SBAR, read-back,
-graded assertiveness). meeting-design designs deliberate decision forums, not urgent
+Expected: escalation and transfer-of-work communication under time pressure (structured
+handoff format, read-back, graded assertiveness) is a separate discipline this library does
+not carry. meeting-design designs deliberate decision forums, not urgent
 upward communication. If it loads here, tighten the seam.
 
 ## 3. Quality rubric

@@ -1,9 +1,9 @@
 # Your environment (sanitized template)
 
-Fill this in with your real arsenal so the playbooks start from your actual crises and
+Fill this in with your real arsenal so the playbooks start from your crises and
 systems. Keep it **structural**: roles and mechanisms, not live values. Real trigger
 thresholds, system names, account identifiers, and access paths go in
-`your-environment.private.md` — that suffix is git-ignored and never committed.
+`your-environment.private.md`; that suffix is git-ignored and never committed.
 
 ## Crisis list
 - **<Crisis name>**: source <which pre-mortem / incident produced it>, speed <how fast

@@ -1,12 +1,12 @@
 # Your environment (fill in)
 
-Wire in your current role here — the register is domain-neutral, and this file points it at
+Wire in your current role here. The register is domain-neutral, and this file points it at
 your real audience wherever you work now. Keep anything identifying real patients or clients
-in `your-environment.private.md` (git-ignored) — never in this file.
+in `your-environment.private.md` (git-ignored), never in this file.
 
 ## Your audience
 - Region/dialect (the skill defaults to plain American English with no regionalisms; set
-  yours here — e.g. *US Southeast* — with local terms and idioms to use or avoid):
+  yours here, e.g. *US Southeast*, with local terms and idioms to use or avoid):
 - Typical reading context (letter, portal message, waiting-room handout, text message):
 
 ## House glosses (term → approved plain wording)

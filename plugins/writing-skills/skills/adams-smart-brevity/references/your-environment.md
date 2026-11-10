@@ -1,7 +1,7 @@
 # Your environment (fill in)
 
 Point this skill at your real writing surface. Keep anything identifying real patients or
-clients in `your-environment.private.md` (git-ignored) — never in this file.
+clients in `your-environment.private.md` (git-ignored), never in this file.
 
 ## House style decisions
 - Terminology choices already standardized (term → the one house form):

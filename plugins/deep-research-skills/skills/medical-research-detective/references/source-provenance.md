@@ -14,19 +14,19 @@ is determined, and how excluded-country findings are handled without losing the 
 
 ## The policy
 
-**Allowed** — sources whose research originates in a modern, high-income country with an established
+**Allowed**: sources whose research originates in a modern, high-income country with an established
 independent-research and regulatory tradition. Explicitly including the user's named set: the
 **United States, Canada, England** (and the rest of the United Kingdom), **Germany, South Africa,
-Japan** — plus peer countries: Australia, New Zealand, Ireland, France, Italy, Spain, Portugal,
+Japan**, plus peer countries: Australia, New Zealand, Ireland, France, Italy, Spain, Portugal,
 Netherlands, Belgium, Austria, Switzerland, the Nordic countries (Denmark, Sweden, Norway, Finland,
 Iceland), Poland, Czechia, and other EU/EEA member states, Israel, South Korea, Singapore, and
 Taiwan.
 
-**Excluded** — research originating in **Russia** and **China**, per the user's standing instruction.
+**Excluded**: research originating in **Russia** and **China**, per the user's standing instruction.
 Excluded sources may never support a conclusion and never appear in the main reference list.
 
 **Always allowed regardless of country:** multinational bodies and regulators that publish their own
-independently-reviewed output — WHO, Cochrane, EMA, FDA, MHRA, Health Canada, PMDA — and multinational
+independently-reviewed output: WHO, Cochrane, EMA, FDA, MHRA, Health Canada, PMDA, and multinational
 trials coordinated from an allowed country.
 
 **Unlisted countries** are judged on the same underlying criteria (independent peer review, research-
@@ -36,7 +36,7 @@ it and why, so the user can overrule.
 
 ## What this is and is not
 
-This is a **source-integrity control**, applied at the level of research systems and institutions —
+This is a **source-integrity control**, applied at the level of research systems and institutions:
 the same kind of judgment as preferring peer-reviewed journals over preprints, or excluding predatory
 venues. The relevant considerations are structural: independence of peer review, enforcement against
 data fabrication, transparency of trial registration, and the ability of outside parties to verify or
@@ -49,7 +49,7 @@ exchange for a uniformly verifiable evidence base.
 
 Because it is a filter the user chose rather than a scientific universal, it is: **stated openly**
 (never applied silently), **auditable** (the excluded appendix shows exactly what was set aside), and
-**overridable** (the user can change the country list at any time — record it in
+**overridable** (the user can change the country list at any time; record it in
 `your-environment.md`).
 
 ## Determining country of origin
@@ -57,19 +57,19 @@ Because it is a filter the user chose rather than a scientific universal, it is:
 Provenance follows the **research**, not the publisher or the journal's home country. In priority
 order:
 
-1. **Corresponding author's primary affiliation** — the strongest single signal.
+1. **Corresponding author's primary affiliation**: the strongest single signal.
 2. **Lead/first author's affiliation** and the affiliation of the majority of authors.
-3. **The site(s) where data were collected** — for a clinical trial, where patients were enrolled.
+3. **The site(s) where data were collected**: for a clinical trial, where patients were enrolled.
 4. **The data-coordinating center / sponsor** running the analysis.
 5. **Funding source**, as a secondary signal when the above are ambiguous.
 
 A journal published in an allowed country does **not** make a study from an excluded country
-allowed — journals publish work from everywhere. Conversely, an allowed-country study published in an
+allowed: journals publish work from everywhere. Conversely, an allowed-country study published in an
 excluded-country journal is judged on the research, though the venue itself still gets the usual
 quality check from `evidence-appraisal.md`.
 
 `scripts/verify_citation.py` reports the affiliation countries it can infer from the metadata and
-flags excluded ones. **Treat its output as a first pass, not a verdict** — confirm against the paper
+flags excluded ones. **Treat its output as a first pass, not a verdict**: confirm against the paper
 itself when a source is load-bearing. Read its provenance line as one of four distinct states:
 
 | State | Means | What you must do |
@@ -80,34 +80,34 @@ itself when a source is load-bearing. Read its provenance line as one of four di
 | `PROVENANCE UNKNOWN` | No affiliation metadata at all (common for Crossref-only records) | Resolve from the paper itself |
 
 Two limits are structural. The script's country table covers common research countries and their
-larger cities only, so anything outside it reads as *unrecognized* — which is a prompt to resolve it
+larger cities only, so anything outside it reads as *unrecognized*, which is a prompt to resolve it
 yourself, never a finding of "excluded" and never a clean pass. And a city is only ever a fallback
 signal: a country name in the same institution beats it, and a city sitting in a *complete* US
 postal address ("Moscow, ID 83844, USA") is read as American, because that one is the University of
 Idaho and not Russia. Note the exact behaviour, which is deliberately conservative: the state code
 must sit immediately after the city AND be followed immediately by a ZIP or the country name. On a
 bare "Moscow, ID 83844" with no country, the script reports **UNRECOGNIZED** rather than either
-country — it will not guess, and the ambiguity comes to you.
+country: it will not guess, and the ambiguity comes to you.
 A city that resolves without either of those checks firing is still the weakest signal the script
-has — confirm it before letting it decide anything.
+has: confirm it before letting it decide anything.
 
 ## Hard cases
 
 **Multinational collaborations.** A trial with sites in many countries, coordinated from an allowed
-country, with a corresponding author in an allowed country, is **allowed** — this is the normal shape
+country, with a corresponding author in an allowed country, is **allowed**; this is the normal shape
 of large modern trials. Note the multinational enrollment when it matters to interpretation.
 
 **One co-author from an excluded country.** Not disqualifying. International co-authorship is routine;
 the policy looks at where the research was led and conducted, not at individual passports.
 
 **Systematic reviews and meta-analyses.** Judge the review by *its* authors' provenance. If an
-allowed-country review pools some excluded-country primary studies, the review may be cited — but say
+allowed-country review pools some excluded-country primary studies, the review may be cited, but say
 so, since the pooled effect partly rests on data the policy would otherwise set aside. If excluded-
 country studies dominate the pooled estimate, downgrade confidence and note it explicitly.
 
   **Label that downgrade for what it is.** It is a **source-integrity policy adjustment**, not a
   methodological assessment of the review. Say so in those words, because clinicians read a
-  confidence label as a judgement about *study quality* — and GRADE, the framework that vocabulary
+  confidence label as a judgement about *study quality*, and GRADE, the framework that vocabulary
   comes from, has a risk-of-bias domain and no country domain. Writing a provenance penalty into a
   GRADE-shaped label makes a policy decision look like a finding about the evidence, and the reader
   cannot tell them apart. Report the methodological grade and the policy adjustment as two lines:
@@ -132,13 +132,13 @@ user should know exists. They go to a clearly-marked appendix under these rules:
 
 - They **never** support a conclusion, never appear in the main reference list, and never contribute
   to a confidence grade.
-- They are listed **only** when they contain a lead found nowhere in the allowed literature — not to
-  pad the output. If allowed sources already cover the point, the excluded one is simply dropped.
+- They are listed **only** when they contain a lead found nowhere in the allowed literature, not to
+  pad the output. If allowed sources already cover the point, the excluded one is dropped.
 - **Exception, and it is the important one: contrary evidence is never silently dropped.** An
-  excluded-country source that *contradicts* a live hypothesis — a null result, a failed
-  replication, a systematic review finding no association — is always quarantined and listed, even
+  excluded-country source that *contradicts* a live hypothesis (a null result, a failed
+  replication, a systematic review finding no association) is always quarantined and listed, even
   though "it refutes the story" is not a *lead* under the rule above. Without this exception the two
-  rules compose into a bias engine: disconfirmation (dot-connection-method §4) tells you to hunt for
+  rules compose into a bias engine: disconfirmation (`dot-connection-method.md`, "Disconfirmation: try to kill it") tells you to hunt for
   contrary evidence, the drop rule deletes the contrary evidence that happens to sit in the filtered
   portion, and the hypothesis is then *upgraded* for surviving a kill attempt that was run on a
   corpus with its refutations removed. Confirmation is filtered out harmlessly; refutation filtered
@@ -146,8 +146,8 @@ user should know exists. They go to a clearly-marked appendix under these rules:
 - **And such a source blocks the confidence upgrade.** Where quarantined evidence contradicts a
   surviving hypothesis, say so on the hypothesis and hold its grade where it was: the disconfirmation
   pass did not clear it, it was not fully run. That is a statement about what was searched, not an
-  endorsement of the excluded source — it still supports no conclusion in either direction.
-- Each entry states what the lead claims, why it was set aside, and — the actionable part — **what
+  endorsement of the excluded source: it still supports no conclusion in either direction.
+- Each entry states what the lead claims, why it was set aside, and, the actionable part, **what
   allowed-source evidence would be needed to confirm it**, so the thread can be picked up legitimately.
 - They are labeled `[X] Excluded-source — not verified, not supporting any conclusion`.
 
@@ -167,11 +167,11 @@ Apply the filter **during** stage 4, as sources are collected, not at the end:
    - Either → quarantine appendix, with the confirm-path note. Mark which of the two it is;
      a contradicting entry also blocks that hypothesis's disconfirmation upgrade (above).
 4. **Unclear** → try to resolve from the paper itself. A country you *can* identify but the policy
-   does not list is not unclear — judge it on the criteria in [The policy](#the-policy). Only a
-   provenance you genuinely cannot determine falls back to excluded, and say so when it does.
+   does not list is not unclear: judge it on the criteria in [The policy](#the-policy). Only a
+   provenance you cannot determine falls back to excluded, and say so when it does.
 
 Then run one check at the end: **is any conclusion resting on a thin allowed-source base because the
-main literature on this topic is excluded-country?** If so, say it plainly — "the majority of
+main literature on this topic is excluded-country?** If so, say it plainly: "the majority of
 published work on this specific question originates outside the allowed source set, so confidence is
 limited." An honest thin base beats a padded one.
 
@@ -184,5 +184,5 @@ filter's effect, e.g.:
 > allowed sources and dropped; 2 unique leads listed in Appendix A). Country filter: allowed set per
 > your-environment.md; Russia and China excluded.
 
-Two lines, and the reader knows exactly how the filter shaped the evidence base — including how much
+Two lines, and the reader knows exactly how the filter shaped the evidence base, including how much
 was set aside.

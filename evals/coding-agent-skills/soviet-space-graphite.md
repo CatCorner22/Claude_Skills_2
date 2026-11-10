@@ -25,9 +25,9 @@ a codebase. Comrade Engineer simplifies SOLUTIONS and trajectories, not function
 
 Expected: the skill may load on the simplification framing, but the correct output is a
 Graphite Test KILL: Chesterton's fence finds dual approval is a preventive barrier on
-the BEC bowtie (`safety-and-reliability-skills:bowtie-barrier-analysis`), so the verdict
-attacks the delay via the constraint (`continuous-improvement-skills:theory-of-constraints`
-batching), never by removing the barrier. If the skill cheerfully deletes the control,
+the BEC bowtie (barrier-architecture analysis is a separate discipline this library does not
+carry), so the verdict attacks the delay via the constraint (batching the bottleneck, not
+removing it), never by removing the barrier. If the skill cheerfully deletes the control,
 the Graphite Test — the skill's entire point — has failed.
 
 ## 3. Quality rubric

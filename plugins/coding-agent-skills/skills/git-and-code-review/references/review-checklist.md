@@ -18,13 +18,13 @@ that is beautifully formatted is still wrong; a nit is the cheapest thing to fix
 
 ## Why the fixed order
 Attention spent early is not available late. If a reviewer opens a diff and starts with
-naming and formatting, the style pass consumes the fresh attention that correctness needed —
+naming and formatting, the style pass consumes the fresh attention that correctness needed,
 and correctness defects are the ones that cost real money, data, or trust after merge.
 Running the same order every time also makes reviews predictable for authors: they learn
 that a blocking comment means "wrong result possible," not "not how I'd write it."
 
 ## Correctness (blocking)
-- Does it actually do what the PR says it does? Re-read the description, then the diff.
+- Does it do what the PR says it does? Re-read the description, then the diff.
 - Edge cases: empty input, nulls/NaN, zero, negatives, duplicates, very large inputs,
   timezones, encodings.
 - Error handling: are failures caught specifically and reported, not silently swallowed?
@@ -34,7 +34,7 @@ that a blocking comment means "wrong result possible," not "not how I'd write it
 - Concurrency and ordering: can two runs interleave? Is anything read-modify-write?
 - Security/data: no secrets committed, no injection via unescaped input, least-privilege
   access, no sensitive data in logs.
-- If review confirms a real bug: the fix is step one, not the whole job — contact-trace the
+- If review confirms a real bug: the fix is step one, not the whole job: contact-trace the
   pattern's other copies with `coding-agent-skills:defect-epidemiology` before closing.
 
 ## Readability and design
@@ -42,7 +42,7 @@ that a blocking comment means "wrong result possible," not "not how I'd write it
 - Names say what things are; functions do one thing; nesting is shallow.
 - No copy-paste duplication that should be a shared helper; no dead code.
 - Comments explain *why*, not *what the code already says*.
-- Is the mechanism proportionate to the job? Correct-but-overbuilt is a real finding — raise
+- Is the mechanism proportionate to the job? Correct-but-overbuilt is a real finding: raise
   it as a question, and review the code against
   `full-stack-dev-skills:lean-code-principles`; if the *whole solution*, not the code, is
   what's overbuilt, run the Pencil Pass in `coding-agent-skills:soviet-space-graphite`.
@@ -61,7 +61,7 @@ that a blocking comment means "wrong result possible," not "not how I'd write it
 ## Size and pacing — the evidence
 The SmartBear study of Cisco Systems' peer-review data (2,500 reviews covering 3.2M lines
 of code, roughly 50 developers) is the most-cited empirical anchor for review economics.
-Its findings, verified via search snippets and marked accordingly:
+Its findings, known from search snippets only and marked accordingly:
 - Reviewers should take on **no more than about 200–400 changed lines at a time**; the
   ability to find defects diminishes beyond ~400 LOC [snippet-only].
 - Defect density drops significantly at inspection rates **faster than ~500 LOC per
@@ -72,7 +72,7 @@ Its findings, verified via search snippets and marked accordingly:
 Practical consequences:
 - A large feature ships as a stack of small PRs, each independently reviewable, rather
   than one unreviewable diff.
-- "Approved" on a 2,000-line PR reviewed in ten minutes is a signature, not a review —
+- "Approved" on a 2,000-line PR reviewed in ten minutes is a signature, not a review;
   treat it as unreviewed risk, not cleared risk.
 - Purely mechanical bulk changes (a rename, a formatter run) are the exception: verify the
   mechanism (the script/command used), spot-check, and keep them in their own commit so
@@ -80,35 +80,35 @@ Practical consequences:
 
 ## The feedback grammar
 Every substantive comment carries three parts: **the line, the concern, the fix.**
-- Point at the line (or range) — never "somewhere in here."
+- Point at the line (or range), never "somewhere in here."
 - State the concern as an observable consequence: what goes wrong, for whom, when.
-- Suggest a fix or a direction — even a question ("dedup on `txn_id` first?") counts.
+- Suggest a fix or a direction, even a question ("dedup on `txn_id` first?") counts.
 
 "This sums before dedup, so duplicate fee rows double-count month-end totals — dedup on
 `txn_id` before the groupby?" beats "this looks wrong."
 
 Tone rules that keep the review a collaboration:
-- Critique the code, not the person: "this loop re-reads the file each pass" — never "you
+- Critique the code, not the person: "this loop re-reads the file each pass", never "you
   always do this."
 - Ask where you might be missing context; the author knows things the diff doesn't show.
 - Praise specifically: name the behavior that's good and why it works, with the same
   precision as criticism.
-- If a drafted comment reads as a verdict on the author, rewrite it with
-  the archived `collaboration-skills:feedback-that-lands` before posting.
+- If a drafted comment reads as a verdict on the author, rewrite it around behavior,
+  impact, and request before posting.
 
 ## Severity labels
 Label every comment so the author can triage:
-- **blocking:** — wrong result, data loss, security, broken contract. Must change before merge.
-- **should:** — real improvement, author's call whether now or follow-up; say which you'd accept.
-- **nit:** — style/preference; never blocks, batch-fixable, ideally automated away.
-- **question:** — genuine uncertainty; the answer may dissolve the comment.
-- **praise:** — worth labeling too; it calibrates future work.
+- **blocking:** wrong result, data loss, security, broken contract. Must change before merge.
+- **should:** real improvement, author's call whether now or follow-up; say which you'd accept.
+- **nit:** style/preference; never blocks, batch-fixable, ideally automated away.
+- **question:** genuine uncertainty; the answer may dissolve the comment.
+- **praise:** worth labeling too; it calibrates future work.
 
 Approve when the change is correct and clear, not when it is perfect. Perfection blocks
 shipping; leave polish as named follow-ups.
 
 ## Worked example: reviewing a small diff
-The change (any role's automation script — a report generator, an intake filter, a data
+The change (any role's automation script: a report generator, an intake filter, a data
 clean-up; the method is identical):
 
 ```diff
@@ -125,9 +125,9 @@ PR description: "Fix month-end totals being wrong when the export contains dupli
 
 A correct review, in order:
 
-1. **Correctness first — and the diff fails it.** The description says duplicates were the
+1. **Correctness first, and the diff fails it.** The description says duplicates were the
    bug, but nothing here deduplicates; the rewrite only changes summing mechanics.
-   > blocking: The PR says duplicates caused the wrong totals, but this diff never dedups —
+   > blocking: The PR says duplicates caused the wrong totals, but this diff never dedups;
    > rows with the same `txn_id` still double-count. Dedup before summing
    > (e.g. `{r["txn_id"]: r for r in rows}.values()`), and add a test with a duplicated row
    > that fails on the old code?
@@ -143,21 +143,21 @@ A correct review, in order:
    > question: how was this verified? A before/after total on the month that surfaced the
    > bug in the PR description would make this easy to approve.
 5. **Praise where earned.**
-   > praise: returning a dict keeps the interface stable for the report layer — good call
+   > praise: returning a dict keeps the interface stable for the report layer; good call
    > not to change the shape while fixing the value.
 
 Outcome: the author adds dedup + a failing-then-passing test, switches to `Decimal`, keeps
 the comprehension, posts the before/after totals. Second pass: correctness clean, tests
-encode the bug, approve — and because review confirmed a real defect pattern
+encode the bug, approve, and because review confirmed a real defect pattern
 (sum-before-dedup), the reviewer asks whether other reports share the pattern before the
 ticket closes (that hunt is `coding-agent-skills:defect-epidemiology`).
 
 ## Reviewing as the author (making your PR reviewable)
-- Self-review the diff in the PR view before requesting review — you will catch the
+- Self-review the diff in the PR view before requesting review: you will catch the
   leftover debug line and the accidental file.
 - Write the description as: what changed / why / how verified. State the risk you're most
   unsure about; that's where you want the reviewer's attention.
-- Keep mechanical changes (renames, formatting) in separate commits — or separate PRs — so
+- Keep mechanical changes (renames, formatting) in separate commits (or separate PRs) so
   the reviewable core stays small.
 - Answer every comment: fix it, or say why not. Silence reads as "missed it."
 - A claim that a phase is "done" is not reviewable in a diff; completion claims get
@@ -166,10 +166,10 @@ ticket closes (that hunt is `coding-agent-skills:defect-epidemiology`).
 ## Special cases
 - **Generated or vendored code:** review the generator/config and the decision to vendor,
   not the output line-by-line; pin versions and checksums.
-- **Config and data changes:** the diff looks trivial and the blast radius isn't — review
+- **Config and data changes:** the diff looks trivial and the blast radius isn't; review
   against the consumer of the config, and ask what happens on the first bad value.
 - **Long-standing code being deleted:** absence of callers in the repo is not absence of
   users. Prefer a reversible disable-and-wait (a scream test) over immediate deletion;
   the whole-site version of that discipline is `coding-agent-skills:software-archaeology`.
-- **Emergency fixes:** review still happens — after merge if it must, on the calendar, with
+- **Emergency fixes:** review still happens: after merge if it must, on the calendar, with
   the same checklist; "reviewed later" only works when later is scheduled.

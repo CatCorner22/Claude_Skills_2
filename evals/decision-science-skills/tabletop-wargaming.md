@@ -12,8 +12,8 @@ violate-the-plan test; assigns blue / red cell / white cell; plays action → re
 counteraction turns with pre-scripted and adaptive injects inside scripted red bounds;
 states the safety discipline IN the run — the LLM generates red moves and adjudication
 options with anti-agreement prompting, humans rule every consequential outcome (fraud
-succeeded or not); logs turns, decisions, authorities, gaps; hands off to
-`decision-science-skills:after-action-review`.
+succeeded or not); logs turns, decisions, authorities, gaps; hands off to a structured
+after-action debrief afterward, a separate discipline this library does not carry.
 
 ## 2. Near-miss (should NOT load this skill — solo prospective-imagination seam)
 > "We're about to commit to the new positive-pay rollout plan. Assume it's a year from

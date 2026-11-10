@@ -2,7 +2,7 @@
 
 Two disciplines that keep the outside view honest over time: **calibration** (log, score, and
 update predictions so judgment improves against a record) and the **tampering guard** (Deming's
-funnel rules — don't let single-period misses rewrite the rule).
+funnel rules: don't let single-period misses rewrite the rule).
 
 ## Contents
 - [Read this first: the belief moves, the rule does not](#read-this-first-the-belief-moves-the-rule-does-not)
@@ -37,10 +37,10 @@ error of a case already closed?**
 Why the funnel experiment does not license belief-freezing: Deming's operator is adjusting the
 *aiming rule* using nothing but *output error*, with no new information about the next drop. That is
 the definition of tampering. A forecaster who learns something new about next month is not in that
-situation at all — they are not adjusting a rule, they are reading evidence.
+situation at all: they are not adjusting a rule, they are reading evidence.
 
 **Where the two legitimately meet: the run test.** A single realized error is only an error. A *run*
-of same-signed errors is information about the process — which is exactly why the run test (below) is
+of same-signed errors is information about the process, which is exactly why the run test (below) is
 the one route by which outcome data is allowed to change the rule. So the boundary is not a wall; it
 is a gate with a stated key.
 
@@ -52,25 +52,25 @@ side: that skill's "update small and often" applies to the belief, and it hands 
 From the superforecasting research on what separates consistently accurate forecasters
 [snippet-only]:
 
-- **Granular probabilities.** Say 63%, not "likely" — vague words hide miscalibration and make
+- **Granular probabilities.** Say 63%, not "likely": vague words hide miscalibration and make
   scoring impossible. If 63% vs. 70% feels absurdly precise, that feeling is the point: forcing
   the number exposes how much you actually know.
-- **Frequent small updates — of the *belief*, not the rule.** Move the estimate for the open
+- **Frequent small updates, of the *belief*, not the rule.** Move the estimate for the open
   question a few points as evidence about that case arrives; large jumps usually mean the prior was
   never real. Update on evidence, not on mood or on who asked. This is the practice the section
   above scopes: it never licenses re-tuning the driver curve, the uplift percentage, or the class
-  definition after a single miss — that is the funnel, and it is guarded below.
+  definition after a single miss; that is the funnel, and it is guarded below.
 - **Decompose the question.** Break "will receipts hit the number?" into parts you can estimate
-  (enrollment locked? calendar shift? payer-mix change?) — Fermi-style decomposition beats
+  (enrollment locked? calendar shift? payer-mix change?). Fermi-style decomposition beats
   gestalt guessing.
-- **Start from the base rate, then adjust** — the outside view is itself the first calibration
+- **Start from the base rate, then adjust**: the outside view is itself the first calibration
   practice; the inside view supplies increments, not the starting point.
 - **Score everything and post-mortem both directions.** Misses show overconfidence; windfall hits
   show underconfidence. Both are calibration errors.
 
 ## The decision journal
 
-One entry per material estimate or decision (Klein/Kahneman practice — the journal is a
+One entry per material estimate or decision (Klein/Kahneman practice: the journal is a
 pre-mortem's paper trail and hindsight-bias vaccine). Template:
 
 ```
@@ -114,13 +114,13 @@ the funnel's position [snippet-only]:
 - **Rule 4 — aim at wherever the last marble landed:** a random walk; drifts without bound
   (estimate-by-last-actual is this rule).
 
-The estimating rule is the funnel — **not** your belief about the open question (see the framing
+The estimating rule is the funnel, **not** your belief about the open question (see the framing
 section at the top of this file: the belief updates continuously on new information; only the rule is
-guarded here). A single-period miss inside the class's normal spread is the marble's scatter —
+guarded here). A single-period miss inside the class's normal spread is the marble's scatter,
 adjusting the rule to it *adds* the adjustment's variance to the process's own. The guard:
 **classify the miss before touching anything** (next section). Rules change once, with
-a diagnosis and a reason — the same discipline the cash-forecasting accuracy loop states as
-"diagnose the miss to a driver and correct the rule — do not just overwrite the number".
+a diagnosis and a reason: the same discipline a forecast-accuracy tracking loop states as
+"diagnose the miss to a driver and correct the rule, do not just overwrite the number".
 
 ## Common-cause vs. special-cause test
 
@@ -129,18 +129,18 @@ Before any rule change, test the miss against the reference class itself:
 1. **Spread test:** is this cycle's error inside the class's usual range (roughly P10–P90 of the
    error distribution)? Inside → common cause. Leave the rule alone; log and move on.
 2. **Run test:** are the last several errors same-signed (e.g., 6+ in a row, or 18 of 22 as in the
-   worked tuition example)? A run signals a systematic bias — special cause of the fixable kind.
-3. **Magnitude test:** is the error far outside the historical range? Special cause — find the
+   worked deliveries example)? A run signals a systematic bias, a special cause of the fixable kind.
+3. **Magnitude test:** is the error far outside the historical range? Special cause: find the
    event (calendar shift, definition change, one-off) before generalizing from it.
 4. **Only special-cause findings change the rule**, and the change is made once, at the driver
    (curve, lag, calendar), with the diagnosis written in the journal. Then the class keeps
    accumulating and the next review checks whether the change worked.
 5. **A rule change is also a class break.** When a structural correction is accepted, mark the break
-   date and start a new class from the first post-correction cycle — the old cycles describe
+   date and start a new class from the first post-correction cycle: the old cycles describe
    forecasts the old rule produced, so they can no longer supply the bias ratio (they usually still
    describe *spread*). And drop the outside-view bias uplift to ×1.00 for whatever the curve now
    handles, or the estimate carries the correction twice. The full procedure is
    "Correct once, not twice" in `outside-view-method.md`.
 
-The quiet payoff: this test is also what protects the *reference class* — a class polluted by
+The quiet payoff: this test is also what protects the *reference class*; a class polluted by
 rule changes made after every miss no longer measures the process, only the tampering.

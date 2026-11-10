@@ -30,9 +30,9 @@ loading it here means the before/during boundary is failing.
 > through what was supposed to happen, what actually happened, and what we do differently
 > next time."
 
-Expected: `decision-science-skills:after-action-review` — the event already happened;
-this is the four-question team debrief, not prospective hindsight. A pre-mortem load here
-means the before/after boundary is failing. (Likewise, the assistant reflecting on its own
+Expected: a structured after-action debrief, a separate discipline this library does not
+carry — the event already happened; this is the four-question team debrief, not prospective
+hindsight. A pre-mortem load here means the before/after boundary is failing. (Likewise, the assistant reflecting on its own
 correction routes to `metacognition-skills:reflective-learner`, never here.)
 
 ## 3. Quality rubric

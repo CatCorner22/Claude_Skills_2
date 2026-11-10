@@ -33,8 +33,8 @@ A good response:
 - **Routes:** hands the framed task onward by type — `machine-learning-skills:supervised-modeling`,
   `machine-learning-skills:time-series-forecasting`, or `machine-learning-skills:anomaly-detection` —
   with features to `machine-learning-skills:feature-engineering`, metrics to
-  `machine-learning-skills:model-evaluation`, signal checks to
-  `data-analytics-bi-skills:exploratory-data-analysis`, human-judged label agreement to
+  `machine-learning-skills:model-evaluation`, signal exploration and data-quality profiling to
+  a separate step this library does not provide a dedicated skill for, human-judged label agreement to
   `continuous-improvement-skills:measurement-systems-analysis`, and realistic-lift expectations to
   `decision-science-skills:reference-class-forecasting`.
 - **Safe:** is willing to conclude "this isn't an ML problem" or "ship the baseline" when the decision,

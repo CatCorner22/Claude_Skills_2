@@ -6,7 +6,7 @@ Fill in your real specifics. Keep proprietary prompt content and real customer d
 Mechanism support changes by model generation, so record **when you last checked** each line against
 the provider's own reference rather than treating it as settled.
 
-- **Models / runtimes:** <which model(s), which SDK or platform — and the date each was verified>
+- **Models / runtimes:** <which model(s), which SDK or platform, and the date each was verified>
 - **Output contract mechanism:** <schema-constrained output available? forced-tool-call schema?
   neither, so prompt-level shaping is the fallback? name the exact parameter you use>
 - **Reasoning configuration:** <does this model have a thinking mode? is it on by default? which
@@ -24,8 +24,8 @@ the provider's own reference rather than treating it as settled.
   retrieved docs, tool results, other users), which tools are exposed alongside them, and which
   actions require human confirmation>
 - **Where eval cases live:** <folder/table of real inputs + known-good outputs, including known
-  failures — and the repeat count you run per case>
+  failures, and the repeat count you run per case>
 - **Judging:** <who or what scores the outputs? if a model judges, has its agreement been qualified
   (repeat runs, second judge, human reference, agreement statistic)?>
-- **Guardrails:** <length limits, banned outputs, PII handling — describe structurally, no real PII here>
+- **Guardrails:** <length limits, banned outputs, PII handling: describe structurally, no real PII here>
 - **Sign-off:** <who approves a prompt that touches customers, money, or a system of record>

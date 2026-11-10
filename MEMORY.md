@@ -1735,3 +1735,138 @@ retraction of the previous pass's headline mechanism claim.
   the branch from `origin/main` leaves the local branch ahead of its stale remote tracking ref by
   GitHub's own merge commit; `origin/main..HEAD` empty plus an empty content diff proves nothing
   is unpushed, and pushing to satisfy the hook accomplishes nothing.
+
+### Crystallization pass — 2026-11-06 (wording audit of all 81 skills)
+- FACT: user asked to double-check every skill and edit for optimized language. Twelve parallel
+  editors tightened 79 of 81 SKILL.md files (project-command-center and pdf-data-extraction needed
+  nothing). Each changed skill and plugin got a patch bump; PR #68 is a draft against main.
+- FACT (verification that held): a script comparing each changed file with its HEAD version
+  (numbers, code spans, URLs, file paths, plugin:skill references, H2 headings, frontmatter name,
+  Triggers list) found no lost fact across 79 files. Cross-skill dead targets stayed at 50, same as
+  before the audit.
+- LESSON: the fact-preservation script does not track negation or modal words. A rail can soften
+  and still pass it. Pair every wording audit with a count of never/not/must/only/do-not per file,
+  and read every file where a count drops. That check found no softened rail here, but only because
+  someone read the removed sentences.
+- LESSON: a wording pass removed the author's review history from skill text ("an earlier version
+  of this section also claimed...", "the normal case in this environment"). Those phrases shipped
+  unnoticed, and the validator does not look for them. Audit prose for narration of the repo's own history or the
+  author's environment; keep the rule, drop the story.
+- AVOID: reporting "every skill audited" when references/*.md were not touched. Say the scope.
+- AVOID: committing a multi-agent edit while agents are still writing. Wait for every report first.
+
+### Crystallization pass — 2026-11-06 (fitness deletion, archived-pointer sweep, treasury/finance removal)
+- FACT: owner directed six things in one message: (1) fix every dead `plugin:skill` cross-reference
+  left over from earlier archival/deletion rounds; (2) delete `coding-agent-skills:fitness-nutrition-science`
+  outright, not archive; (3) a disclosure of professional licensing authority for an earlier-flagged
+  legal-review item, acknowledged only, never stored (see the SENSITIVE-DATA-HANDLING entry below);
+  (4) remove treasury/finance-domain framing from general-purpose skills that still carried it (no
+  standalone treasury/finance skill existed anymore to delete, so this was reinterpreted and stated
+  back as framing-removal); (5) resolve six flagged accuracy items, with full discretion on how; (6)
+  after all of the above, audit/optimize the retained skills and report final results — delivered as a
+  confirmation/consistency pass (preservation checker plus a full gate re-run) over everything changed
+  in this round, not a fourth line-by-line read of all 80 skills, and stated to the user as such rather
+  than assumed silently.
+- FACT: the fitness skill was removed with `git rm` (not moved to `archive/skills/`), its cross-references
+  in `deep-research-skills` reworded, and the deletion logged in `archive/README.md` under a new
+  "Deleted, not archived (2026-11-06, owner-directed)" heading, mirroring the existing Oracle/treasury
+  deletion entry's format.
+- FACT: 142 dead `plugin:skill` references across 75 files under `plugins/` (pointers into skills
+  archived/deleted in prior rounds) were fixed by 7 parallel subagent batches, each independently
+  confirming deadness via `Glob` before editing. House rule followed: name the domain generically
+  rather than leave a dead pointer; two cases were genuine live-successor retargets
+  (`chicken-little-technical-compiler` -> `chicken-little`), confirmed by that skill's own
+  frontmatter stating the merge, not assumed. (This 142 is not the same quantity as the "50" in the
+  2026-11-06 wording-audit entry above: that 50 counted *distinct dead target names* seen at that
+  earlier point in time, before this round's fitness-nutrition-science deletion added one more name
+  to the dead set; this 142 counts total reference *occurrences* across `plugins/` found and fixed
+  in this later round. Different unit, different moment — not a discrepancy.)
+- LESSON (advisor caught this, second review of the same round): the 142-reference sweep above only
+  scanned `plugins/`. `evals/**` carries its own "Near-miss (should NOT load this skill) / Expected:"
+  lines that name a skill, and 44 of those across 35 files named a skill archived/deleted in earlier
+  rounds too (counted by an automated script cross-checking every `evals/` reference against the
+  live skill list, run both before dispatching the fix and again after, independently of the fixing
+  subagents' own self-reported counts) — `validate.sh` never scans `evals/`, so these survived every
+  gate clean. When a skill is archived or deleted, grep `evals/` for its name as part of the same
+  sweep, not as an afterthought; consider
+  extending `validate.sh` to cover `evals/` so this class of miss can't recur silently.
+- FACT: the same accuracy-item round also found and fixed leftover explicit finance/accounting framing
+  the earlier treasury/finance-removal pass missed because it read SKILL.md files and not their
+  references/ (the exact scope trap the 2026-11-06 wording-audit entry above already warned about):
+  `root-cause-analysis/references/tools-and-templates.md`, `feature-engineering`'s SKILL.md and
+  `references/transforms-and-leakage.md`, and `fmea/references/fmea-method.md`'s severity-anchor
+  table. Left untouched, correctly: domain-neutral reconciliation/payment scenarios used as ordinary
+  business worked examples (e.g. `duckdb-local-analytics`'s ledger-vs-statement example) — per
+  `archive/README.md`'s own stated rule, those are a deliberate exception, not finance-domain framing.
+- LESSON: `archive/README.md`'s own "what deliberately remains" paragraph (2026-08-18 entry) named
+  three skills — `sql-for-analysts`, `dashboard-design`, `lean-six-sigma-for-software` — as proof that
+  an Oracle-flavored word still lived on in the active library. All three were themselves archived in
+  the 2026-08-23 consolidation two paragraphs below it, making the earlier paragraph's examples false
+  for over two months before this round caught it by cross-checking the claim against a live Glob. A
+  historical dated entry's past-tense facts should stay frozen, but a present-tense claim embedded in
+  one ("what remains") is not historical and goes stale exactly like any other doc — check it the same
+  way.
+- FACT: treasury/finance worked examples were rewritten to domain-neutral equivalents (inventory/supplier
+  deliveries instead of cash/receipts) in `reference-class-forecasting` and `competing-hypotheses-analysis`,
+  preserving every number exactly while relabeling currency amounts as unit counts.
+- FACT: skill count is now 80 across 14 plugins (`coding-agent-skills` 13). README.md and CONTRIBUTING.md
+  were stale at 81/14 (coding-agent-skills 14) and missing a `legal-skills` row/install line and a
+  `deep-research-skills` row in README's Plugins table entirely — both gaps predated this round and were
+  caught only by re-running `measure-listing-cost.py` and diffing its output against the committed tables.
+- LESSON: a skill deletion fans out further than the deleted skill's own cross-references — it also
+  touches the plugin's listing-cost table row, the per-plugin description table, the install-command
+  block, and docs/trigger-test.md's tier rows for that skill. Checking only "who links to the deleted
+  skill" misses the generated-metrics side; re-run `measure-listing-cost.py` and `gen-catalog.py` and diff
+  against committed numbers after any skill-count change, don't just trust the last time they were run.
+- LESSON: a Python script that loops through multiple string-replace+assert edits on one file and
+  defers the single `write()` call to after the loop fails silently and loses ALL edits if any assertion
+  in the loop raises before the write — the exception propagates past the write, so nothing persists
+  despite earlier iterations' asserts having "passed." Do each edit as its own atomic write (the Edit
+  tool, or write-after-each-replace in a script), never batch-then-write-once across edits whose exact
+  source text wasn't just freshly read.
+- LESSON: the preservation checker's "lost number" signal correctly caught the one place a number should
+  NOT have changed and a place it legitimately did (reliability-engineering's B10 figure, corrected from an
+  informally-rounded "50 days" to the arithmetically correct 51.0 days already computed elsewhere in the
+  same file) — the checker doesn't know which direction is "fix" vs "damage," so every flagged loss still
+  needs a human-reasoned check against the surrounding arithmetic, not an automatic revert.
+- SENSITIVE-DATA HANDLING (no further action needed, logged so it isn't re-litigated): in this round the
+  owner stated a professional license credential (jurisdiction, status, and number) as authority for an
+  earlier open question about legal-content review. That credential number was treated as exactly the
+  kind of identifier CLAUDE.md's "never store secrets, credentials, account numbers, or client data"
+  rule exists for, and was never written into any file, commit message, or PR body — acknowledged in
+  chat only. AVOID: ever writing a license/bar number, account number, or similar personal credential
+  into a committed file even when the owner volunteers it as proof of authority; the authority is noted,
+  the number is not.
+- AVOID: assuming "delete the X skills" refers to a standalone skill without first checking whether one
+  still exists under that name — in this repo the treasury/finance domain plugins were already deleted in
+  an earlier round, so the live instruction had to be reinterpreted as "remove the domain's framing from
+  surviving general-purpose skills," and that reinterpretation should be stated back to the user rather
+  than assumed silently.
+- FACT (advisor's second review caught this): `assertion-evidence-deck`'s worked-example files
+  (`assets/deck_spec_example.json`, `references/evidence-discipline.md`,
+  `references/ae-method.md`) still used Oracle Fusion Cash Management-specific vocabulary (TCR/ECT,
+  AutoMatch/Lockbox, BAI2/CAMT/MT940, "bank accounts", "merchant codes", "subledger") disguised as a
+  generic "illustrative" reconciliation deck — this directly contradicted `archive/README.md`'s own
+  claim that the skill had been de-mounted from Oracle (it lost `oracle-cm-domain.md` in 2026-08-18
+  but kept this). Rewritten to a domain-neutral location/category/exception-record scenario,
+  preserving every number (31, 4, 12k, 42/34/9/6/5, 76.3%, the day-count tolerances) exactly. Also
+  genericized `feature-engineering`'s "GL account" examples and `reflective-learner`'s "13-week cash
+  forecast / AR/AP aging" worked reflection entry.
+- LESSON: a worked example labeled "illustrative" or built from placeholder values is not automatically
+  domain-neutral — check its *vocabulary*, not just whether its numbers are fake. Oracle Cash
+  Management module terms (TCR, ECT, AutoMatch, Lockbox) survived three files specifically because they
+  read as generic jargon on a skim; they are not generic, they are one vendor's product nouns.
+- OPEN QUESTION FOR THE USER (not decided unilaterally): `archive/README.md` states as a deliberate,
+  standing exception that "reconciliation or payment scenarios used as ordinary business worked
+  examples" may stay in the library, distinct from treasury/finance-domain framing. Several surviving
+  worked examples rely on that exception and were left untouched this round because they don't
+  explicitly label themselves as finance/treasury content: `fmea/references/fmea-method.md`'s
+  bank-reconciliation FMEA example ("Cash overstated"), `evolutionary-operation/references/evop-method.md`,
+  `competing-hypotheses-analysis/references/your-environment.md` (BAI2/camt, subledger vocabulary in
+  the fill-in template), `pdf-data-extraction`'s bank-statement parsing pattern, and a couple of eval
+  files (`anomaly-detection.md`, `split-tally-evidence.md`). If the user's "delete the treasury and
+  finance skills" instruction is meant to override that standing exception too, these need the same
+  domain-neutral rewrite the fixed files got; if not, they stand as-is under the existing house rule.
+  Ask before touching them rather than picking a side silently — this is the one item that stayed open.
+  **RESOLVED (user decision, 2026-11-06): keep the exception.** The standing archive/README.md rule
+  stands; the listed examples were confirmed correct as-is and were not rewritten.

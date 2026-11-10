@@ -1,6 +1,6 @@
 # Token economics — the cost model, the levers, and the audit
 
-Figures marked *measured* come from this library's 2026-10-21 benchmark: 74 subagent runs on
+Figures marked *measured* come from the 2026-10-21 benchmark: 74 subagent runs on
 eleven sandboxed tasks, audited with `scripts/token_audit.py`. Price ratios are typical published
 ratios at the time of writing [background — verify against your provider's current pricing].
 Replace both with your own numbers in `your-environment.md`.
@@ -32,7 +32,7 @@ So for a run of *T* turns whose context grows from *C₀* to *C*, processed toke
 
 1. **Turns multiply everything.** Each extra turn re-reads the whole context.
 2. **New content is paid twice:** once to write it, then on every later read.
-3. **Start-up context is a floor.** *Measured:* a subagent here began at about 50k tokens before
+3. **Start-up context is a floor.** *Measured:* a subagent began at about 50k tokens before
    its first action; an unaided run's final context averaged 66k, of which tool results were
    about 3k.
 
@@ -66,11 +66,11 @@ reading was never the cost; the turn count was.
 
 ## What can share a turn
 
-**Yes — independent:** reading several known files; several searches; probing several hosts once
+**Yes (independent):** reading several known files; several searches; probing several hosts once
 each; running the test suite and the linter; `git status` with `git log`; checking a file's size
 and its first lines in one command.
 
-**No — dependent:** reading a file to learn a path you then open; a search whose result picks the
+**No (dependent):** reading a file to learn a path you then open; a search whose result picks the
 next file; running a fix before the test that checks it; anything whose input you would have to
 guess. Guessing to save a turn is a quality defect; do the extra turn.
 
@@ -92,7 +92,7 @@ evidence.
 
 ## Delegation break-even
 
-A subagent pays its start-up context (*measured* about 50k here) on its first call and re-reads
+A subagent pays its start-up context (*measured* about 50k) on its first call and re-reads
 its growing context on each of its turns; you then read its return. Inline the work when what it
 would add to *your* context, times your remaining turns, is less than that. In practice:
 

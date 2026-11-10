@@ -9,8 +9,8 @@
 Expected: skill loads and does both with visible unit cancellation. The cost chain:
 41,500 kWh/month × $0.032/kWh = $1,328/month (kWh cancels), then × 12 months/year =
 $15,936/year — and it notes this ×12 is valid because a cost is a *flow*, distinguishing
-it from a rate of return, which compounds and belongs to
-`math-foundations-skills:exponential-growth-and-logs`.
+it from a rate of return, which compounds and belongs to a separate compound-growth
+discipline this library does not carry.
 The formula check writes the units of every term: balance ($) × monthly outflow
 ($/month) / 30 gives $²/month — not days, so the formula is refuted before any number
 is computed. It then supplies the dimensionally sound form — days = balance ÷ (monthly
@@ -23,12 +23,12 @@ dimension check refutes a formula regardless of how plausible its output looks.
 > daily volume and the document store grows every year — run the design review so we
 > know it will hold at real volumes."
 
-Expected: `safety-and-reliability-skills:weight-of-the-books` loads instead — sizing a
-system against its payload, peak, growth curve, and outlier lot is the Load Manifest
-method. Volumes and growth rates sound unit-flavored, but the ask is the design review,
+Expected: a capacity-sizing design review loads instead — sizing a system against its
+payload, peak, growth curve, and outlier lot is a separate discipline this library does
+not carry. Volumes and growth rates sound unit-flavored, but the ask is the design review,
 not a conversion or a dimension check. If units-and-dimensional-analysis loads here,
-its description is over-triggering. (The right division of labor: that skill runs the
-review; this one checks that the sizing formulas inside it are dimensionally sound.)
+its description is over-triggering. (The right division of labor: that review runs the
+sizing; this skill checks that the formulas inside it are dimensionally sound.)
 
 ## 2b. Near-miss (closer — should NOT load this skill)
 > "Two reviewers keep disagreeing on the same exception queue — one calls a line a
@@ -56,13 +56,12 @@ A good response:
   formula, right units only fail to refute it; why a conversion factor equals 1 and
   therefore preserves value; why a dimensional check is the cheapest formula review
   (fails with certainty, passes only provisionally); why flows add but growth
-  compounds; and cites the library's own weight-of-the-books formula catch as evidence
-  the check works on authors too.
+  compounds; and that a dimension-check catch on one of this library's own formulas is
+  evidence the check works on authors too.
 - **Stays honest:** treats a *passed* dimension check as "worth testing numerically,"
   never as proof of correctness (a dimensionless constant can still be wrong); refutes
   a broken formula outright instead of patching its output to look plausible; keeps
-  compound-growth math with `math-foundations-skills:exponential-growth-and-logs`
-  rather than improvising it; routes system
-  sizing to `safety-and-reliability-skills:weight-of-the-books` and gauge reliability
+  compound-growth math separate rather than improvising it; routes system
+  sizing to a capacity-sizing design review and gauge reliability
   to `continuous-improvement-skills:measurement-systems-analysis`; and flags any
   quantity it cannot assign a unit to as a finding rather than guessing one.

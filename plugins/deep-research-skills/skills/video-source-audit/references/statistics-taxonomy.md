@@ -6,7 +6,7 @@ question that detects it in a transcript. Every number here has been recomputed 
 **Contents**
 - §0 The plain-language method (this is technique, not tone)
 - §1 The centerpiece: absolute vs relative
-- §2 Odds ratios, hazard ratios, and other ratios that are not risk
+- §2 Ratios that are not risk
 - §3 Significance, p-values, and intervals
 - §4 Base rates and the 2×2
 - §5 Endpoints: surrogate, composite, selective
@@ -24,7 +24,7 @@ question that detects it in a transcript. Every number here has been recomputed 
 following reliably works, and it works because people reason far more accurately about natural
 frequencies (counts of people) than about conditional probabilities or percentages of percentages.
 
-**The four-part template — apply to every statistic in the report:**
+**The four-part template, applied to every statistic in the report:**
 
 1. **Fix a reference class of real people**, sized so the smallest cell is a whole number ≥ 1.
    "Out of 10,000 people like you", not "0.75%". Use 100 / 1,000 / 10,000 / 100,000.
@@ -32,7 +32,7 @@ frequencies (counts of people) than about conditional probabilities or percentag
    drug, 2 in 1,000 do."
 3. **Name the difference in the same units.** "So 2 people out of every 1,000 are spared."
 4. **Then, and only then, give the headline number and reconcile it.** "That is the '50% reduction'
-   you heard — it is 50% *of a small number*."
+   you heard; it is 50% *of a small number*."
 
 Never present a percentage of a percentage. Never give a relative figure without its baseline in
 the same breath.
@@ -78,7 +78,7 @@ Identical headline. In one case you treat 10 people to help one; in the other, 5
 number is the same in both columns, which is exactly why quoting it alone is the move.
 
 **Plain language:** "Out of 1,000 people, 4 would have had the event. With treatment, 2 do. So 2
-people in every 1,000 are spared — that is what 'cuts the risk in half' means here."
+people in every 1,000 are spared; that is what 'cuts the risk in half' means here."
 
 **The corrective is not to discard the relative number.** RRR is often more stable across
 populations than ARR, which is why trials report it and why it transfers. The honest presentation
@@ -87,10 +87,10 @@ is *both, with the baseline*: "a 50% relative reduction, from 0.4% to 0.2%, so 2
 
 **Reconstructing absolute risk when only relative is reported.** You need exactly one extra number:
 the control-arm event rate over the study's follow-up. Find it, in descending reliability: (1) the
-primary results table, events/N per arm — compute everything yourself; (2) event counts in the
+primary results table, events/N per arm, compute everything yourself; (2) event counts in the
 abstract; (3) a Kaplan–Meier curve read at the endpoint, CER ≈ 1 − S_control(t); (4) the registry
 record or supplementary appendix; (5) a population reference rate, clearly labelled as an
-approximation. If none is available, say the absolute effect **cannot be determined** — do not
+approximation. If none is available, say the absolute effect **cannot be determined**: do not
 invent a baseline to make the arithmetic work.
 
 **Detection question:** *Does every relative figure in the transcript appear with its baseline?*
@@ -153,7 +153,7 @@ computed *assuming* the null, so it cannot be a probability *about* the null.
 - "p = 0.03 means it'll replicate 97% of the time" → false; replication probability tracks power.
 - "p was 0.06 so there's no effect" → false; absence of evidence is not evidence of absence.
 
-**The difference-of-significance fallacy** — "A worked, B didn't" derived from two p-values on
+**The difference-of-significance fallacy**: "A worked, B didn't" derived from two p-values on
 opposite sides of 0.05. A difference between "significant" and "non-significant" is not itself
 significant; that requires a test of the *interaction*. Highly detectable in transcripts.
 
@@ -178,7 +178,7 @@ For 10% vs 8%: 7.8489 × (0.0900 + 0.0736) / 0.0004 = **3,211 per arm**. A video
 trial that "found" a 2-point difference is describing a study with almost no power to find it.
 
 **Type-M (magnitude) error.** With α = 0.05 two-sided and a true effect of 1.0 SE, power = **17.0%**,
-and the expected published estimate *among the studies that reach significance* is **2.49 SE** —
+and the expected published estimate *among the studies that reach significance* is **2.49 SE**,
 roughly 2.5x the truth. Underpowered significant results are systematically inflated. This is why
 "a study found" plus a small sample is a red flag rather than a reassurance.
 
@@ -216,7 +216,7 @@ cannot compute what a positive result means, and the omission is the finding.
 ### Surrogate vs hard endpoints
 
 A surrogate stands in for an outcome people care about. It is valid only if the treatment's effect
-on the surrogate reliably transmits to the hard outcome — an empirical claim about that treatment,
+on the surrogate reliably transmits to the hard outcome: an empirical claim about that treatment,
 not a property of the marker.
 
 **The canonical real case — CAST** (Cardiac Arrhythmia Suppression Trial, preliminary report, NEJM
@@ -266,7 +266,7 @@ component?*
 **The canonical real case — ISIS-2.** Asked by reviewers to break the aspirin result down by
 subgroup, the investigators subdivided roughly 17,000 patients by astrological birth sign. Aspirin
 appeared not to work for those born under Gemini or Libra, and to work exceptionally well for
-Capricorn — published deliberately, and placed first, to show readers what subgroup analyses are
+Capricorn, published deliberately, and placed first, to show readers what subgroup analyses are
 worth. The point is not that the astrology was silly; it is that *statistically it is no different*
 from the clinically-plausible subgroup analyses that routinely change practice.
 
@@ -280,7 +280,7 @@ slice? And how many slices were examined?*
 ### Intention-to-treat vs per-protocol
 
 ITT analyses everyone as randomized, regardless of what they did. Per-protocol keeps only those who
-completed the protocol — which conditions on post-randomization behaviour, a collider, and
+completed the protocol, which conditions on post-randomization behaviour, a collider, and
 reintroduces confounding. Adherers differ from non-adherers in many ways besides adherence.
 
 Worked (constructed; 1,000 per arm). Treatment arm: 800 adherent with 40 events (5.0%), 200
@@ -296,12 +296,12 @@ The per-protocol analysis doubles the apparent effect without the drug doing any
 ### Regression to the mean
 
 Select cases for being extreme on a first measurement and they will, on average, be less extreme on
-a second — with no intervention at all. With equal SDs and test–retest correlation r:
+a second, with no intervention at all. With equal SDs and test–retest correlation r:
 E[post | pre] = μ + r·(pre − μ).
 
 Worked: μ = 100, SD = 15, r = 0.60, select everyone scoring 130 (2 SD high), apply an inert
-intervention. E[retest] = 100 + 0.60 × 30 = **118**. Apparent improvement = 12 points = **0.80 SD**
-— a large effect size, from nothing. **Detection:** *were participants selected for being extreme,
+intervention. E[retest] = 100 + 0.60 × 30 = **118**. Apparent improvement = 12 points = **0.80 SD**:
+a large effect size, from nothing. **Detection:** *were participants selected for being extreme,
 and is there a control group?* Without a control arm, this alone can produce the whole result.
 
 ### Survivorship bias
@@ -323,7 +323,7 @@ share-weighted blend and the shares differ.
  Programme B: easy 170/200 = 85.0% · hard 5/20 = 25.0% · total 175/220 = 79.5%
 ```
 
-A beats B on easy cases **and** on hard cases, and loses overall — because A's caseload is 50.0%
+A beats B on easy cases **and** on hard cases, and loses overall, because A's caseload is 50.0%
 hard and B's is 9.1%. It is not a paradox; it is a weighting fact.
 
 ### Ecological fallacy
@@ -347,8 +347,8 @@ literacy is *lower* (70.0% vs 98.6% and 81.1%). Both facts are true; only one is
 visible literature is a biased sample of the conducted literature and a meta-analysis inherits the
 bias exactly. **Funnel plot:** effect against precision; absent bias, small studies scatter
 symmetrically at the bottom. A *missing corner* where small null results should be is the signal.
-Honest caveat most treatments omit: funnel asymmetry is **not** synonymous with publication bias —
-genuine small-study effects and heterogeneity produce it too.
+Honest caveat most treatments omit: funnel asymmetry is **not** synonymous with publication bias:
+real small-study effects and heterogeneity produce it too.
 
 **Heterogeneity.** I² is the share of variability due to real differences between studies rather
 than chance. Above roughly 75%, a pooled point estimate can be close to meaningless: the studies
@@ -369,7 +369,7 @@ and cannot be compared by the listener.
 
 **Detection:** build a two-column table of every benefit claim and every harm claim with the
 **scale** of each, and check whether the scales match. A mismatch is a first-class finding *even
-when every individual number is accurate* — which is why this check must be run explicitly rather
+when every individual number is accurate*, which is why this check must be run explicitly rather
 than emerging from claim-by-claim fidelity coding, which would pass all of them.
 
 ### Percentage points vs percent change
@@ -385,7 +385,7 @@ divides by the base and gives a different, also-true number.
 
 The trap runs both ways: "rates rose 2%" understates a 4%→6% move; "conversions jumped 50%" oversells
 a 2%→3% move. The honest sentence carries both. This is the same arithmetic as §1 in different
-clothing — ARR is in points, RRR is in percent.
+clothing: ARR is in points, RRR is in percent.
 
 ### Per-capita vs raw counts, and denominator choice
 
@@ -409,7 +409,7 @@ Two bars, 47% and 52%. From zero: 52/47 = 1.106. From 45: (52−45)/(47−45) = 
 Exaggeration = 3.500 / 1.106 = **3.16x**.
 
 Report it as a number: "the chart at 04:09 truncates the y-axis at 45%, inflating a 5-point gap by
-a factor of 3.2." (Line charts showing change over time are the legitimate exception — they encode
+a factor of 3.2." (Line charts showing change over time are the legitimate exception: they encode
 by position, not length.) Note this is a **visual** finding: it needs the frame, not the transcript,
 so it can only be audited when the user supplies the chart or describes it.
 
@@ -425,10 +425,9 @@ Cross-link these rather than restating them. Duplication is a real defect here.
 | Confounding, colliders, backdoor criterion, the identification ladder, why filtering is conditioning | `data-analytics-bi-skills:causal-inference` |
 | Type-M/winner's curse in experiments, peeking, SRM, MDE, variance reduction | `data-analytics-bi-skills:ab-test-design` |
 | Evidence hierarchy, GRADE-lite grading, retraction and predatory-venue checks, NNT/NNH in clinical context | `deep-research-skills:medical-research-detective` (`references/evidence-appraisal.md`) |
-| Effect size vs significance, Cohen's d bands, funnel plots, I², abstract red-flag language | `coding-agent-skills:fitness-nutrition-science` (`references/journal-interpretation-guide.md`) |
 | Absolute-vs-relative and diagnostic-accuracy statistics applied to your own project's metrics | `continuous-improvement-skills:project-command-center` |
 | Making a technical finding land for a non-specialist audience | `writing-skills:explanation-design` |
 
 **This skill's own contribution** is the layer those do not have: the arithmetic, the
-plain-language translation, and the **transcript-detection question** for each move — the operational
+plain-language translation, and the **transcript-detection question** for each move: the operational
 bridge from a statistical concept to a sentence someone actually said on camera.

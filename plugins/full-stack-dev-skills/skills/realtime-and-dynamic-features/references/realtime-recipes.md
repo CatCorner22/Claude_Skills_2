@@ -3,7 +3,7 @@
 ## Contents
 - Transport decision table
 - Job-status pattern
-- WebSocket endpoint (when truly needed) — authorize before `accept()`
+- WebSocket endpoint (when truly needed)
 - Optimistic mutation
 - Authenticating a stream
 - Liveness settings
@@ -42,7 +42,7 @@ def job_status(jid: str, db=Depends(get_db)):
         raise HTTPException(404)
     return job
 ```
-Worker updates the row as it goes; polling and SSE both just read it. Escalate from
+Worker updates the row as it goes; polling and SSE both read it. Escalate from
 BackgroundTasks to arq/Celery when: jobs must survive restarts, need retries, or saturate
 the web process.
 
@@ -50,7 +50,7 @@ the web process.
 
 **Authorize before you accept.** `accept()` is the point of no return: after it, the socket is
 a live bidirectional channel. Everything that decides *whether this person may be here* runs
-before that line — and `{room}` is a path parameter, so a route that authenticates the user but
+before that line, and `{room}` is a path parameter, so a route that authenticates the user but
 never checks the room lets any authenticated user read and post to every room by editing the URL.
 
 ```python
@@ -89,15 +89,15 @@ async def ws_room(ws: WebSocket, room: str, ticket: str = Query(...)):
 ```
 
 **Why the origin check is not optional.** The same-origin policy and CORS do not govern
-WebSocket handshakes — a page on any origin may open a `ws://`/`wss://` connection to your
+WebSocket handshakes: a page on any origin may open a `ws://`/`wss://` connection to your
 server, and the browser attaches cookies subject only to `SameSite`. A cookie-authenticated
 socket with no `Origin` check is therefore hijackable cross-site (CSWSH): the attacker's page
 opens the socket as your logged-in user and reads the stream. `SameSite=Lax`/`Strict` blunts it
 for cookie auth, but the explicit allowlist is the control that does not depend on cookie
-policy — and it is one line. A ticket in the query string sidesteps the ambient-credential
+policy, and it is one line. A ticket in the query string sidesteps the ambient-credential
 problem entirely, which is why it is the pattern shown here.
 
-**The rest of the input contract.** `receive_json()` raises on malformed JSON — let it close the
+**The rest of the input contract.** `receive_json()` raises on malformed JSON: let it close the
 socket rather than catching broadly and continuing. Cap message size (server config, plus the
 `max_length` above) and rate-limit per connection: an authenticated socket is an unmetered write
 path to every other member of the room until you meter it. Broadcast a server-built envelope, so
@@ -129,7 +129,7 @@ const toggle = useMutation({
 Use for near-always-successful writes; skip for meaningful-failure writes.
 
 **Type the updater `T | undefined`, and never dereference `old` bare.** TanStack Query v5 invokes
-the functional updater with `undefined` whenever the query key holds no cached data — a first
+the functional updater with `undefined` whenever the query key holds no cached data: a first
 render, after `queryClient.clear()`, or once the entry is garbage-collected. Verified against
 `@tanstack/query-core@5.101.4`: `setQueryData(['todos'], (old) => old.map(...))` on an empty
 cache calls the updater with `undefined` and throws
@@ -138,7 +138,7 @@ cache calls the updater with `undefined` and throws
 That throw is the dangerous part, because it happens *inside* `onMutate`: the mutation is
 rejected before `mutationFn` ever runs, so **the server write silently never happens** while the
 UI shows the user's click as accepted. Annotating the parameter `(old: Todo[])` does not prevent
-this — TypeScript types are erased at runtime, and the annotation is simply wrong for v5, whose
+this: TypeScript types are erased at runtime, and the annotation is wrong for v5, whose
 updater signature is `(oldData: T | undefined) => T | undefined`. For the same reason `ctx!.prev`
 in `onError` is a lie the compiler believes: if `onMutate` threw, `ctx` is `undefined` and the
 non-null assertion throws a second error inside the error handler.
@@ -146,15 +146,15 @@ non-null assertion throws a second error inside the error handler.
 ## Authenticating a stream
 `EventSourceInit` has exactly one member, `withCredentials`. Passing
 `new EventSource(url, {headers: {Authorization: "Bearer …"}})` throws no error, logs no warning,
-and sends no header — the stream connects unauthenticated and the server answers 401 on a
+and sends no header: the stream connects unauthenticated and the server answers 401 on a
 transport that reconnects forever. Verified against Node 22's spec-conformant EventSource: the
 request arrived with `authorization: null`. So:
 
-- **Cookie session** (`SameSite=Lax`, `withCredentials: true` for a cross-origin stream) —
+- **Cookie session** (`SameSite=Lax`, `withCredentials: true` for a cross-origin stream):
   `EventSource` works unchanged, and this is why SSE and server-rendered apps pair so well.
-- **Bearer token** — use `fetch` with a `ReadableStream` reader, and accept that you now own
+- **Bearer token**: use `fetch` with a `ReadableStream` reader, and accept that you now own
   reconnect and `Last-Event-ID` resume, since that is precisely what `EventSource` was providing.
-- **Short-lived stream ticket** — a single-use, few-minute token minted by an authenticated
+- **Short-lived stream ticket**: a single-use, few-minute token minted by an authenticated
   endpoint and passed in the query string, exchanged for the stream. Keeps `EventSource`, and
   keeps the long-lived credential out of URLs, referrers, and access logs.
 

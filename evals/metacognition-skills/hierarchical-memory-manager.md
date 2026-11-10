@@ -21,8 +21,8 @@ tighten the description/cross-links.
 > "I keep forgetting the difference between the three retention-schedule rules — quiz me on
 > them until they stick."
 
-Expected: making material stick in the *user's* head is retrieval practice →
-`learning-skills:spaced-retrieval-learning`. This skill curates the assistant's store, it
+Expected: making material stick in the *user's* head is retrieval practice, a separate
+discipline this library does not carry. This skill curates the assistant's store, it
 does not drill the human. If it loads here, the memory-for-whom seam is failing.
 
 ## 3. Quality rubric
@@ -36,8 +36,8 @@ A good response:
   routed to the user — never a silent overwrite.
 - **Routes the suite:** corrections → `metacognition-skills:reflective-learner` correction
   protocol (logging back through this skill); recurring validated candidates →
-  `metacognition-skills:knowledge-crystallizer` for the permanence gates; durable analysis
-  findings arrive from `metacognition-skills:dynamic-analysis-engine`.
+  `metacognition-skills:knowledge-crystallizer` for the permanence gates; durable findings
+  from a deep analysis land here the same way.
 - **Teaches:** explains why compaction and selective promotion beat hoarding, and presents
   the working/episodic/semantic naming as an organizing analogy borrowed from human-memory
   vocabulary — not as a neuroscience claim.

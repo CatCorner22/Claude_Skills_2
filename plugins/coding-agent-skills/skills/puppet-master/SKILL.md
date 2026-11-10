@@ -12,7 +12,7 @@ description: >-
   waste. Triggers: puppet master, save tokens, reduce token usage, token efficiency, cut token
   cost, cheaper run, context is filling up, why was this so expensive, audit token use.
 metadata:
-  version: "1.0.0"
+  version: "1.0.3"
 ---
 
 # Puppet Master
@@ -24,7 +24,7 @@ nothing dropped. This skill holds the result to its full bar and makes every tok
 *turns × context*. Cached context is cheap per token (about a tenth of plain input) but it is
 re-read on every turn; new content is written once at a premium and then re-read on every later
 turn; output costs several times input. A subagent starts by loading its own full system context
-before it does anything. In this library's benchmark, unaided runs averaged 7.8 turns and about
+before it does anything. In the benchmark behind this skill, unaided runs averaged 7.8 turns and about
 470k tokens processed, while the tool results they read came to about 3k. Re-sending the context
 was the cost, not the reading. The levers, by yield: fewer turns, less new content per turn,
 fewer subagents, shorter output.
@@ -58,7 +58,7 @@ fewer subagents, shorter output.
 3. **Take the cheapest decisive look.** Ask what small observation settles the next decision:
    `wc -c` before reading, `grep -n` then a slice, `head`, a count, a hash, one probe instead of a
    sweep, a one-line filter that pulls only the JSON fields you need. Read a file whole when you
-   need all of it — a spec, a short script — because one full read is cheaper than three slices.
+   need all of it (a spec, a short script), because one full read is cheaper than three slices.
    Never `cat` a large file, list a tree recursively, or dump a whole log.
 
 4. **Keep new context small and unrepeated.**
@@ -70,7 +70,7 @@ fewer subagents, shorter output.
 
 5. **Delegate only when it pays.** A subagent costs its start-up context plus its own turns, so
    inline any work that would add less than that to your context. Delegate a wide read whose
-   conclusion is small, genuinely parallel independent streams, or work that needs a fresh view.
+   conclusion is small, parallel independent streams, or work that needs a fresh view.
    Brief with paths and the exact question, never pasted contents; ask for a compact, structured
    return (a table, JSON, a line limit); give mechanical work the smallest capable model when you
    can choose one. Most of a subagent's start-up context is tool definitions, skill listings and
@@ -80,7 +80,7 @@ fewer subagents, shorter output.
 6. **Write short, and keep the proof.** Lead with the result, then what is left. Every claim the
    user will act on keeps its evidence: the file and function that show it, or the command and
    what it printed. Cut narration, restated requests and echoed output the user can open, never
-   the proof. Output costs several times input and sits in the context of everything after it.
+   the proof. Output also sits in the context of everything after it.
 
 7. **Audit a run, then fix the habit.** For an expensive run, or to review someone's workflow,
    analyse its transcript (Claude Code keeps them under `~/.claude/projects/<project>/`):
@@ -90,8 +90,8 @@ fewer subagents, shorter output.
    It reports turns, final context, processed and price-weighted tokens, the largest tool
    results with the call that made each, and waste signals: a start-up context that dominates
    because it is re-sent every turn, repeated reads, unbounded commands, single-call turns that
-   could have been batched, subagent spawns. Pair every saving you
-   propose with the check that keeps the quality bar intact. Arithmetic, lever table and batching
+   could have been batched, subagent spawns. Pair every saving you propose
+   with the check that keeps the quality bar intact. Arithmetic, lever table and batching
    patterns: `references/token-economics.md`.
 
 ### Quality rails
@@ -114,7 +114,7 @@ the turn count, not in the reading.
 
 **Why the bar comes first.** Cutting tokens is easy if quality may fall: read less, check less,
 write less. The discipline is to cut only the path. The written bar is also what tells you a
-slice was enough — without it, "efficient" quietly turns into "incomplete".
+slice was enough; without it, "efficient" quietly turns into "incomplete".
 
 **Why delegation is a cost decision.** A subagent buys a clean context and parallel time, and it
 pays for them with its own start-up context and turns. That trade is excellent for a fifty-file
@@ -137,19 +137,19 @@ live, and the audit findings that keep recurring.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/puppet-master.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/puppet-master.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/token-economics.md — the cost model with worked arithmetic, the lever table with
+- references/token-economics.md: the cost model with worked arithmetic, the lever table with
   what each saves and what keeps quality safe, what can share a turn, output-bounding idioms,
   the delegation break-even, and the audit procedure with a worked example.
-- references/your-environment.md — your start-up costs, price ratios, idioms and recurring
+- references/your-environment.md: your start-up costs, price ratios, idioms and recurring
   findings (fill in; the `.private.md` twin is git-ignored).
 
 ## Scripts
-- `scripts/token_audit.py` — reads a Claude Code transcript (JSON lines) and reports turns, start-up
+- `scripts/token_audit.py`: reads a Claude Code transcript (JSON lines) and reports turns, start-up
   and final context, processed tokens, price-weighted tokens, the largest tool results with their
   calls, and waste signals; never prints tool-result contents. `--top N`, `--json`, `--self-test` for the
   offline checks; exit 2 on an unreadable or empty transcript, 5 on bad usage.

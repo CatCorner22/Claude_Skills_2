@@ -3,7 +3,7 @@ name: project-command-center
 description: >-
   Adaptive project command doctrine for planning, requirements, architecture, implementation,
   debugging, release preparation, incident response, statistical interpretation, and AI-system
-  review — Van Riper red-teaming (preserve the possibility of failure, log interventions,
+  review: Van Riper red-teaming (preserve the possibility of failure, log interventions,
   separate continuation from validation), nested OODA loops, Toyota-style flow, co-design with
   feedback closure, Smart Brevity updates, contract-drafting writing discipline,
   absolute-vs-relative risk and diagnostic-accuracy statistics, constrained-agency AI assurance,
@@ -13,7 +13,7 @@ description: >-
   intervention log, OODA, audit this benchmark, relative risk claim, release readiness,
   constructive paranoia, now next later watch.
 metadata:
-  version: "1.3.0"
+  version: "1.3.3"
   source: "Adapted from the user's project-command-center spec (2026-08-05)"
 ---
 
@@ -26,16 +26,16 @@ constructive-paranoia pass named Chicken Little. **Loyalty runs to the user and 
 reality, never to the preferred answer.**
 
 ## When to use
-- Planning, running, or reviewing a project of any size — the doctrine scales its controls
+- Planning, running, or reviewing a project of any size: the doctrine scales its controls
   to uncertainty, reversibility, user impact, and blast radius; small tasks are never
   forced into heavyweight methodology.
 - Auditing an experiment, benchmark, pilot, or validation exercise for epistemic validity.
 - Evaluating risk claims, diagnostic/classifier metrics, or statistical assertions.
 - Preparing releases, reviewing AI systems, or running incident response.
 - Not for: the full software-build discipline (charters, control charts, WCAG, adversarial
-  gauntlet) → the archived `continuous-improvement-skills:lean-six-sigma-for-software`; facilitating
-  the improvement workshop → the archived `continuous-improvement-skills:kaizen-and-codesign`;
-  multi-advisor code review → `coding-agent-skills:board-review`; a themed
+  gauntlet), a separate discipline this library does not carry; facilitating the
+  improvement workshop, likewise a separate discipline; multi-advisor code review →
+  `coding-agent-skills:board-review`; a themed
   adversarial autopsy persona → the chicken-little skills in `coding-agent-skills`; planning,
   budgeting and quality-gating an AI agent's OWN multi-step work, token spend included →
   `coding-agent-skills:project-manager-qc` (this skill commands human projects; that one manages
@@ -47,29 +47,29 @@ reality, never to the preferred answer.**
 2. **Preserve the possibility of failure** (the prime directive, for any test, benchmark,
    pilot, or validation): fix rules and acceptance criteria BEFORE results are known;
    record every intervention as first-class data (what, why, who authorized, what evidence
-   it invalidated, what remains supportable); separate continuation from validation —
+   it invalidated, what remains supportable); separate continuation from validation:
    restoring a failed system to continue an exercise is legitimate, but later results no
    longer validate the original end-to-end hypothesis; never represent a demonstration,
    rehearsal, or training event as a falsifiable experiment; if your red-team challenge
    cannot reject the architecture, say plainly the review was theater.
-3. **Command adaptively.** Expect an intelligent environment — users, attackers,
+3. **Command adaptively.** Expect an intelligent environment: users, attackers,
    dependencies, regulators, and production systems do not follow the plan because the
    plan requires it; test plans under adaptation, denial, delay, and partial information.
    Decentralize with clear intent (shared purpose, bounded autonomy, observable outcomes,
    rapid feedback). Never confuse instrumentation with understanding.
-4. **Run three nested OODA loops** — FAST (minutes–a day), DELIVERY (PR–release),
-   STRATEGIC (milestone+) — and keep a learning log per consequential loop: observation,
+4. **Run three nested OODA loops**: FAST (minutes–a day), DELIVERY (PR–release),
+   STRATEGIC (milestone+), and keep a learning log per consequential loop: observation,
    interpretation, confidence, decision, expected outcome, actual outcome, next trigger.
    Tempo comes from better orientation and smaller reversible actions, not hurried
    decisions. Details in `references/command-doctrine.md` §2.
-5. **Manage flow the Toyota way, translated honestly to software** — jidoka, andon,
-   pull/JIT, inventory-is-waste, genchi genbutsu, kaizen, respect for people — while
+5. **Manage flow the Toyota way, translated honestly to software**: jidoka, andon,
+   pull/JIT, inventory-is-waste, genchi genbutsu, kaizen, respect for people, while
    optimizing time from identified need to validated outcome, not utilization
    (`references/command-doctrine.md` §3).
 6. **Co-design with feedback closure.** Map stakeholders and decision rights; every
    material contribution gets a visible disposition (what changed, what didn't and why,
    who owns follow-through, when validated). Consultation after decisions are fixed is
-   ceremony — call it that.
+   ceremony: call it that.
 7. **Communicate in the Smart Brevity frame** without loss of substance: *What changed →
    Why it matters → Evidence → Decision or blocker → Next action, owner, trigger →
    Chicken Little watch.* Brevity never conceals uncertainty, conditions, dissent, or
@@ -87,24 +87,24 @@ reality, never to the preferred answer.**
     (`references/statistics-and-ai-assurance.md` §2).
 11. **Run the Chicken Little pass**: a deliberately anxious, evidence-bound adversarial
     sweep of the hunt list (silent failures, mocked-away risk, unrehearsed rollbacks,
-    concentration risks, data-loss paths, excessive agent authority…) — theatrical alarm
+    concentration risks, data-loss paths, excessive agent authority…): theatrical alarm
     allowed, but every material finding carries severity, evidence, unknowns, causal
     chain, mitigation, owner, validation test, revisit trigger. Then the opportunity scan
     (remove rather than automate? simpler design? reversible experiment?). Present only
     the highest-value items under **Now / Next / Later / Watch**
-    (`references/statistics-and-ai-assurance.md` §3).
+    (`references/statistics-and-ai-assurance.md` §3–§4).
 12. **Close with the output rules**: lead with the answer; attribute every claim to
-    evidence actually examined; say where you did not verify; end consequential reviews
+    evidence examined; say where you did not verify; end consequential reviews
     with the intervention log, the decision or blocker, and Now / Next / Later / Watch.
 
 ## Why / learn
 The doctrine's spine is the Millennium Challenge lesson: an exercise whose organizers
-protect the preferred answer from adaptive challenge loses its epistemic value — when the
+protect the preferred answer from adaptive challenge loses its epistemic value, when the
 fleet Van Riper's red team had sunk was refloated and the rules were rewritten mid-game, the
 exercise stopped being evidence: the organizers had restored the side whose success the
 exercise was meant to test. Everything else follows from taking that seriously in software:
 criteria fixed before results, interventions logged, continuation never dressed up as
-validation. OODA earns its place because orientation — not speed — is the decisive
+validation. OODA earns its place because orientation, not speed, is the decisive
 element: it determines what you can even notice, which is why dashboards without
 challenged assumptions reinforce wrong orientation. The Toyota translation works only when
 you respect the disanalogy (variation and discovery ARE the work in software), the
@@ -133,13 +133,13 @@ severity levels, and the statistical reporting template your org requires.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/project-command-center.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/project-command-center.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/command-doctrine.md — adaptive command, the three OODA loops, the Toyota
+- references/command-doctrine.md: adaptive command, the three OODA loops, the Toyota
   translation, co-design and feedback closure, writing discipline and the ambiguity audit
-- references/statistics-and-ai-assurance.md — statistical discipline, engineering/AI
+- references/statistics-and-ai-assurance.md: statistical discipline, engineering/AI
   assurance and constrained agency, the Chicken Little hunt list and opportunity scan
-- references/your-environment.md — your gates, authorities, and templates (fill in)
+- references/your-environment.md: your gates, authorities, and templates (fill in)

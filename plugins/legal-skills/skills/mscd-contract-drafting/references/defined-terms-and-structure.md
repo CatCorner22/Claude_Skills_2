@@ -1,8 +1,8 @@
 # Defined terms and the structure of a contract
 
-How MSCD organises a contract — the words that get capitals, the front and back matter that frame
-the body, the numbering that makes a clause citable, and the layout that makes it readable. Each
-section ends with what the linter checks and what it cannot. [canon attribution throughout: the
+How MSCD organises a contract: the words that get capitals, the front and back matter that frame
+the body, the numbering that makes a clause citable, and the layout that makes it readable. Sections
+1 to 5 end with the linter rules that apply (§1 also says what the linter cannot judge). [canon attribution throughout: the
 positions are Adams's, paraphrased; the manual carries the detail.]
 
 Contents: §1 Defined terms · §2 The front of the contract · §3 The body · §4 The back ·
@@ -64,7 +64,7 @@ other than the signing date, and say so in the concluding clause.
 
 **Background (recitals).** Plain narrative sentences under a heading such as *Background* or
 *Recitals*: who the parties are, what they want, what happened before. Nothing operative goes
-here — no duties, no definitions that the body depends on — and no *WHEREAS*. The recital of
+here: no duties, no definitions that the body depends on, and no *WHEREAS*. The recital of
 consideration (*for good and valuable consideration, the receipt and sufficiency of which are
 hereby acknowledged*) does nothing: consideration is a fact about the exchange, and reciting it
 does not create it.
@@ -93,10 +93,10 @@ with a stem, so the scope of every modifier is visible:
 
 The stem must read grammatically into every element; *and* or *or* goes at the end of the
 penultimate element only; each element ends with a semicolon; the last with a period. A trailing
-phrase that is meant to modify all the elements goes back in the stem or into its own sentence —
+phrase that is meant to modify all the elements goes back in the stem or into its own sentence;
 tabulation exists to settle the question *does this modify the last item or all of them?*
 
-**Cross-references.** *Section 4.2*, *Article 7*, *Schedule 1* — never *above*, *below*, *the
+**Cross-references.** *Section 4.2*, *Article 7*, *Schedule 1*. Never *above*, *below*, *the
 foregoing*, *hereof*, or *as set forth herein*. A cross-reference to a section that does not exist
 is a drafting error a court cannot repair; the linter checks every *Section n.n* against the
 headings it found.
@@ -131,8 +131,8 @@ Linter: `BOILERPLATE`, `XREF-VAGUE` (*the date first written above*).
 
 - No all-capitals for emphasis. Capitals are hard to read; where a rule requires conspicuous text
   (warranty disclaimers under UCC § 2-316; the definition of *conspicuous* in § 1-201(b)(10)
-  [canon attribution]), keep it conspicuous — bold or contrasting type can satisfy that and reads
-  better — but do not change an existing block on this skill's authority (rail).
+  [canon attribution]), keep it conspicuous (bold or contrasting type can satisfy that and reads
+  better), but do not change an existing block on this skill's authority (rail).
 - Bold for a defined term where it is defined; nothing else bold except headings.
 - Hanging indents for enumerated clauses so the stem and the elements are visually distinct.
 - One typeface, left-aligned, numbered pages, and a table of contents for anything over about ten

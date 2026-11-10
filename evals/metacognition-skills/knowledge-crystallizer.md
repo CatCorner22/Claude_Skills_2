@@ -22,9 +22,9 @@ tighten the description.
 > "The go-live had three surprises and the team is meeting Friday to walk through what was
 > supposed to happen versus what did — facilitate that debrief."
 
-Expected: running the team/event debrief is
-`decision-science-skills:after-action-review`; its sustain/improve output later arrives
-here as harvest input. If crystallizer loads as the facilitator, the seam is failing.
+Expected: running the team/event debrief is a structured after-action review, a separate
+discipline this library does not carry; its sustain/improve output later arrives here as
+harvest input. If crystallizer loads as the facilitator, the seam is failing.
 
 ## 3. Quality rubric
 A good response:

@@ -17,27 +17,27 @@ Read at stage 7. How to present deep research so it is comprehensive *and* under
 
 Use `assets/case-file-template.md`. Sections in this order:
 
-1. **Bottom line** — 3–6 sentences of plain language. What the research suggests, the single most
+1. **Bottom line**: 3–6 sentences of plain language. What the research suggests, the single most
    promising lead, and the most important next step. A reader who stops here gets real value.
-2. **The case** — the findings, timeline, medications, and what has been ruled out, as understood.
+2. **The case**: the findings, timeline, medications, and what has been ruled out, as understood.
    Lets the user correct a wrong premise before reading conclusions built on it.
-3. **Hypotheses considered** — ranked. Each with: what it is, how well it fits, **evidence for**,
+3. **Hypotheses considered**: ranked. Each with: what it is, how well it fits, **evidence for**,
    **evidence against**, what it fails to explain, confidence grade, and how it could be checked.
-   Include the ones that were ruled out and why — that is how the reader knows the search was wide.
-4. **The dot-connections** — the heart of the report. Each connection: the finding(s) linked, the
-   proposed mechanism or bridge, its strength grade, the supporting citations, and — explicitly —
+   Include the ones that were ruled out and why; that is how the reader knows the search was wide.
+4. **The dot-connections**: the heart of the report. Each connection: the finding(s) linked, the
+   proposed mechanism or bridge, its strength grade, the supporting citations, and, explicitly,
    whether any published source connects them directly or whether this is a bridge across separate
    literatures.
-5. **Questions for your clinician** — specific, answerable questions, phrased so the user can read
+5. **Questions for your clinician**: specific, answerable questions, phrased so the user can read
    them aloud, each with a one-line note on why it matters.
-6. **Tests or evaluations the literature suggests** — what could distinguish among the hypotheses,
-   with what each would show. Framed as "the literature uses X to distinguish Y" — a discussion item
+6. **Tests or evaluations the literature suggests**: what could distinguish among the hypotheses,
+   with what each would show. Framed as "the literature uses X to distinguish Y": a discussion item
    for the clinician, never an instruction.
-7. **Red flags** — symptoms warranting urgent evaluation (see below). Always present.
-8. **What we could not establish** — gaps, unrun searches, paywalled sources, contested evidence.
-9. **Search log** — queries, databases, hit counts, what was kept (from `search-strategy.md`).
-10. **References** — every source with verification status label and country.
-11. **Appendix A — excluded-source leads** — the quarantine tier (`source-provenance.md`), only if
+7. **Red flags**: symptoms warranting urgent evaluation (see below). Always present.
+8. **What we could not establish**: gaps, unrun searches, paywalled sources, contested evidence.
+9. **Search log**: queries, databases, hit counts, what was kept (from `search-strategy.md`).
+10. **References**: every source with verification status label and country.
+11. **Appendix A — excluded-source leads**: the quarantine tier (`source-provenance.md`), only if
     non-empty.
 
 ## The two-layer principle
@@ -63,7 +63,7 @@ technical grading beneath.
   grammar.
 - **Never use certainty language for a lead.** "May," "one possible explanation," and "no study has
   tested this directly" are load-bearing.
-- Use tables for parallel comparisons (hypotheses, tests, evidence for/against) — they make the
+- Use tables for parallel comparisons (hypotheses, tests, evidence for/against): they make the
   weighing visible.
 
 ## Confidence labels
@@ -95,9 +95,9 @@ enormous value without ever receiving medical advice.
 ## Red flags: the urgent-care list
 
 **This list is a triage gate, not a report section.** Run it against the presented findings as
-stage 0 — before framing, hypotheses, or searching (SKILL.md). When one is present it leads the
+stage 0, before framing, hypotheses, or searching (SKILL.md). When one is present it leads the
 reply; it does not wait at the bottom of a long report. Always include the section in the written
-output as well. Tailor it to the case, and always cover the general categories — symptoms that
+output as well. Tailor it to the case, and always cover the general categories: symptoms that
 warrant prompt evaluation rather than more research:
 
 - Chest pain or pressure; sudden shortness of breath
@@ -115,12 +115,12 @@ Time-critical presentations that are easy to research past because each looks li
 complaint until it is asked about specifically:
 
 - **New back pain with saddle numbness, new urinary retention or incontinence, or bowel
-  incontinence** — cauda equina syndrome; the window for surgery is measured in hours
+  incontinence**: cauda equina syndrome; the window for surgery is measured in hours
 - **New headache in an adult over ~50 with scalp tenderness, jaw pain on chewing, or any visual
-  change** — giant cell arteritis; untreated, vision loss can be sudden and permanent
-- **Rapid-onset hives, lip or tongue swelling, wheeze, or faintness after an exposure** — anaphylaxis
+  change**: giant cell arteritis; untreated, vision loss can be sudden and permanent
+- **Rapid-onset hives, lip or tongue swelling, wheeze, or faintness after an exposure**: anaphylaxis
 - **A first seizure at any age**
-- **Sudden severe testicular pain or scrotal swelling** — testicular torsion; also hours, not days
+- **Sudden severe testicular pain or scrotal swelling**: testicular torsion; also hours, not days
 - **Bleeding, severe abdominal pain, severe headache, or visual change in pregnancy or within six
   weeks of delivery**
 
@@ -139,20 +139,20 @@ State once at the top, clearly and without hedging, and reinforce where it matte
 Then keep the substantive commitments throughout:
 - **No diagnosis.** Hypotheses are named as hypotheses.
 - **No dosing**, and no "try this."
-- **Never contradict the user's clinician** — the clinician has the examination and the records. Where
+- **Never contradict the user's clinician**: the clinician has the examination and the records. Where
   the literature seems to point elsewhere, frame it as a question to raise, not as an error to correct.
 - **Do not alarm.** Include base rates when naming a serious possibility; "this is rare, and the
   common explanations should be excluded first" is part of accurate reporting.
 - **Do not minimize either.** If the literature genuinely supports concern about a pattern, say so
   plainly and route to the red-flag list.
 - **Respect the boundary on request type.** If asked to diagnose or to recommend a treatment, decline
-  that specific framing, then deliver the research and the questions instead — which is usually what
+  that specific framing, then deliver the research and the questions instead, which is usually what
   the person actually needed.
 
 ## Length
 
 Match the case. A single verification question needs a paragraph and a table; a multi-symptom
-investigation earns several pages. Long is fine when every section carries weight — but the **Bottom
+investigation earns several pages. Long is fine when every section carries weight, but the **Bottom
 line** must stay short regardless, and nothing should be padded to look thorough. If a section has
 nothing in it (no excluded-source leads, no red flags applicable), say so in a line or omit it rather
 than filling it.

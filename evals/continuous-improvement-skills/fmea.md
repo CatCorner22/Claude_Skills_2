@@ -26,10 +26,9 @@ register — but that is a follow-on, not this ask.)
 > "Map out our payment-fraud hazard: the preventive barriers on the left, the mitigating barriers
 > on the right, escalation factors, and who owns each barrier."
 
-Expected: hazard-and-barrier architecture is
-`safety-and-reliability-skills:bowtie-barrier-analysis` territory — a bowtie diagram around a top
-event, not a rated failure-mode register. If fmea loads on barrier/bowtie vocabulary, its trigger
-surface has grown too greedy.
+Expected: hazard-and-barrier architecture (a bowtie diagram around a top event) is a separate
+discipline this library does not carry, not a rated failure-mode register. If fmea loads on
+barrier/bowtie vocabulary, its trigger surface has grown too greedy.
 
 ## 3. Quality rubric
 A good response:

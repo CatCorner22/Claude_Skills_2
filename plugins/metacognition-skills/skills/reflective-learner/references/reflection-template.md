@@ -24,17 +24,17 @@
 
 ## Weakness categories
 Categorizing makes patterns visible across reflections:
-- **Reasoning gap** — a step was skipped or an inference unjustified.
-- **Tool misuse** — wrong tool, wrong parameters, or missed verification.
-- **Context loss** — earlier information was forgotten or contradicted.
-- **Assumption error** — acted on an unverified assumption.
-- **Style mismatch** — output didn't fit the user's format/tone/depth preference.
-- **Scope error** — did more or less than asked.
+- **Reasoning gap**: a step was skipped or an inference unjustified.
+- **Tool misuse**: wrong tool, wrong parameters, or missed verification.
+- **Context loss**: earlier information was forgotten or contradicted.
+- **Assumption error**: acted on an unverified assumption.
+- **Style mismatch**: output didn't fit the user's format/tone/depth preference.
+- **Scope error**: did more or less than asked.
 
 ## Worked example
 ```markdown
-## Reflection — 13-week cash forecast build (2026-07-17)
-**Situation:** Built a rolling forecast from AR/AP aging exports on request.
+## Reflection — 13-week demand forecast build (2026-07-17)
+**Situation:** Built a rolling forecast from order-aging exports on request.
 **Outcome:** Numbers correct, but user had to ask twice for weekly (not monthly) buckets.
 **Strengths:** Variance columns anticipated the follow-up; tie-out totals matched.
 **Weaknesses / Errors:** Assumption error — defaulted to monthly granularity when
@@ -45,8 +45,8 @@ the horizon the user actually named.
 **Actionable updates:**
 - Memory update: `RULE:` read the granularity off the horizon the request names — the bucket
   size was derivable, so the durable item is a rule, not a preference about the user's
-  forecasts. (The field takes the fact/preference/rule being stored; "none" would be wrong
-  here, because a rule *is* being stored — it is just not a `PREFERENCE:`.)
+  forecasts. (The field takes the fact, preference or rule being stored. "none" is wrong
+  here: a rule *is* being stored, just not a `PREFERENCE:`.)
 - Avoidance rule: never default granularity when the request names a horizon.
 ```
 
@@ -54,12 +54,12 @@ the horizon the user actually named.
 At each new reflection, scan the last few for their Actionable updates and mark each:
 - **Applied** (behavior visibly changed) · **Partially applied** · **Not applied** (why?)
 
-Marking honestly requires the counterfactual — what you would have done without the update. Without
+Marking honestly requires the counterfactual: what you would have done without the update. Without
 it, "applied" cannot be distinguished from "never came up", and every audit comes back clean. That
 is why the correction record carries the field (see `correction-protocol.md`).
 
-### What the tally actually tells you
-A worked audit over five cycles: **14** actionable updates recorded — **9** applied, **3** partially
+### What the tally tells you
+A worked audit over five cycles: **14** actionable updates recorded, **9** applied, **3** partially
 applied, **2** not applied. The three states account for the whole cycle: 9 + 3 + 2 = 14. The
 applied count is the least informative number in the set; read the other two first.
 
@@ -67,7 +67,7 @@ applied count is the least informative number in the set; read the other two fir
   re-audit; the half that keeps failing is the real one.
 - **Not applied** is diagnostic only when you distinguish *never fired* from *fired and lost*. An
   update whose trigger situation never arose is not a failure and should not be counted as one, and
-  it is not evidence against the update either — a rule guarding a rare, costly move earns its place
+  it is not evidence against the update either: a rule guarding a rare, costly move earns its place
   unfired. The question is whether the trigger could realistically arise at all: an update written
   so narrowly that nothing will ever match it is the one paying scan cost for nothing.
 - **Repeats** are the number that matters: updates in this cycle restating something already
@@ -78,10 +78,10 @@ applied count is the least informative number in the set; read the other two fir
 A working trigger: when repeats exceed roughly one in five of a cycle's updates, stop adding entries
 and spend the cycle relocating the ones you already have, because past that ratio the store is
 growing faster than the behavior. For this cycle the line sits just under three updates: 14 / 5 = 2.8.
-Two repeats is below it — each still gets a site fix, but the cycle is not yet dominated by them.
+Two repeats is below it; each still gets a site fix, but the cycle is not yet dominated by them.
 The exact fraction has no measured basis; pick one, write it down, and hold it, so the trigger is
 a threshold rather than a mood.
 
-A lesson repeatedly "not applied" after relocation is a candidate for a stronger mechanism — a
-standing rule in project instructions, an automated check, or a skill update — via
+A lesson repeatedly "not applied" after relocation is a candidate for a stronger mechanism (a
+standing rule in project instructions, an automated check, or a skill update) via
 `metacognition-skills:knowledge-crystallizer`.

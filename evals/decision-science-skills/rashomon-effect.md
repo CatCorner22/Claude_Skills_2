@@ -30,10 +30,10 @@ which-cause-fits ask with no contradictory accounts in play, the seam is failing
 > "The release is done — run us through the after-action: what was supposed to happen,
 > what actually happened, what do we sustain and improve next time?"
 
-Expected: `decision-science-skills:after-action-review` owns the four-question team
-debrief. rashomon-effect is the tool the AAR reaches for only when its
-what-actually-happened step hits hardened contradictions; it should not load on a
-routine debrief ask.
+Expected: a structured after-action debrief, a separate discipline this library does not
+carry, owns the four-question team format. rashomon-effect is the tool such a debrief
+reaches for only when its what-actually-happened step hits hardened contradictions; it
+should not load on a routine debrief ask.
 
 ## 3. Quality rubric
 - **Does**: separate whole-account intake with cognitive-interview moves (report

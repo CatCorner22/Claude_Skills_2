@@ -14,8 +14,8 @@ candidates per the architecture split.
 > "What makes a good KPI dashboard — layout, chart choice, color for a monthly finance
 > deck?"
 
-Expected: dashboard craft — `data-analytics-bi-skills:dashboard-design`. If this skill
-loads, sharpen the build-the-UI framing.
+Expected: dashboard visualization craft, a separate discipline this library does not carry.
+If this skill loads, sharpen the build-the-UI framing.
 
 ## 3. Quality rubric
 A good response:

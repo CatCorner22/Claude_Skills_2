@@ -2,7 +2,7 @@
 
 Grouped by what you're trying to do, not alphabetically. Commands are stable across recent git
 versions; `git switch`/`git restore` are the modern verbs (older muscle memory uses `git checkout`
-for both) — confirm your version with `git --version` if `switch` isn't available.
+for both); confirm your version with `git --version` if `switch` isn't available.
 
 ## Contents
 - Start work
@@ -48,7 +48,7 @@ git rebase origin/main                  # linear history; rewrites YOUR commits 
 ```
 Merge `origin/main`, never a bare `main`. Local `main` only advances when you fetch or pull it,
 so `git merge main` on a branch cut days ago merges a stale ref and prints "Already up to date."
-with exit 0 — a silent no-op indistinguishable from success. If you prefer to keep local `main`
+with exit 0, a silent no-op indistinguishable from success. If you prefer to keep local `main`
 current instead, `git switch main && git pull && git switch - && git merge main` is equivalent;
 what is never safe is merging `main` without updating it first.
 
@@ -61,7 +61,7 @@ git reset --soft HEAD~1                 # undo last commit, keep changes staged 
 git stash                               # shelve work-in-progress
 git stash pop                           # bring it back
 ```
-Prefer `revert` over `reset --hard` on anything you've pushed — `revert` is additive and doesn't
+Prefer `revert` over `reset --hard` on anything you've pushed; `revert` is additive and doesn't
 rewrite shared history. Reach for `git reflog` to recover a commit you think you lost.
 
 ## Resolve a conflict
@@ -73,7 +73,7 @@ git add path/to/resolved-file
 git merge --continue                    # or: git rebase --continue
 git merge --abort                       # or: git rebase --abort   (start over cleanly)
 ```
-Then re-run the tests — a conflict-free resolution can still be logically wrong.
+Then re-run the tests: a conflict-free resolution can still be logically wrong.
 
 ## Share and open a PR
 ```bash
@@ -82,4 +82,4 @@ gh pr create --fill                     # GitHub CLI: open a PR (or use the web 
 gh pr view --web
 ```
 Never `git push --force` a shared branch. If you must overwrite your *own* unshared branch after a
-rebase, use `git push --force-with-lease` — it refuses if someone else pushed in the meantime.
+rebase, use `git push --force-with-lease`: it refuses if someone else pushed in the meantime.

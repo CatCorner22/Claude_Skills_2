@@ -2,7 +2,7 @@
 
 Never commit real secrets or tokens.
 
-- **Platform / deploy mechanism:** <where it runs; what deploy.sh actually does>
+- **Platform / deploy mechanism:** <where it runs; what deploy.sh does>
 - **Registry and tagging:** <registry; SHA tags; retention>
 - **Secret store:** <platform secrets / vault; who can read prod>
 - **Environments:** <dev / staging / prod; env-var sources per env>

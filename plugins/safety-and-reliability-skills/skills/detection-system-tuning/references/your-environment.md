@@ -1,10 +1,10 @@
 # Your environment (sanitized template)
 
-Wire in your current role here. This skill is domain-neutral by design — the method
+Wire in your current role here. This skill is domain-neutral by design: the method
 attaches to whatever detection systems you operate in the job you hold now, and moves with
 you to the next one. Keep this committed file **structural**: system kinds, roles, and
 mechanisms. Real rule names, live thresholds, incident details, client or employer
-identifiers, and sample firings belong in `your-environment.private.md` — that suffix is
+identifiers, and sample firings belong in `your-environment.private.md`; that suffix is
 git-ignored and never committed.
 
 ## Detection systems you operate
@@ -24,7 +24,7 @@ git-ignored and never committed.
 
 ## Paging path and danger signals
 - What counts as a page here: <channel, who is interrupted>
-- Danger signals available in context: <damage evidence your systems can actually see>
+- Danger signals available in context: <damage evidence your systems can see>
 - Queue service level backing the gate: <everything dispositioned within N days>
 
 ## Tolerance list

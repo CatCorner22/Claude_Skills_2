@@ -20,12 +20,12 @@ Total time: 35–45 minutes. Works with 3–12 people who know the plan.
    Do not say "might fail," "could fail," or "what are the risks." Failure is a fact in
    this room; participants are explaining it, not predicting it.
 3. **Silent writing (2–3 min).** No talking, no shared screens, no peeking. Everyone
-   writes their own list — including the facilitator and the most senior person present.
+   writes their own list, including the facilitator and the most senior person present.
 4. **Round-robin (10–15 min).** Go around the room; each person reads ONE reason per
    pass. Record each verbatim on a shared list. No rebuttals, no "that can't happen,"
    no solutioning yet. Continue passes until everyone says "pass."
-5. **Consolidate and rank (10 min).** Merge duplicates. Rank the list on three dimensions —
-   damage, likelihood, and how late you would detect it — ordered by **dominance rather than
+5. **Consolidate and rank (10 min).** Merge duplicates. Rank the list on three dimensions
+   (damage, likelihood, and how late you would detect it), ordered by **dominance rather than
    multiplied into a single score**. Take damage first and break ties within a band by the
    other two. Do not compute damage × likelihood × lateness: a severity-9 item that is rare
    (2) and detectable (3) scores 54, while a severity-3 nuisance that is common (6) and
@@ -37,25 +37,25 @@ Total time: 35–45 minutes. Works with 3–12 people who know the plan.
 7. **Close.** File the output with the plan; schedule the after-action review now.
 
 Facilitation notes: keep the tone matter-of-fact, not gleeful or gloomy; thank
-contributors for damaging reasons — the exercise exists to make those speakable; if a
-senior person starts evaluating reasons mid-round, restate rule 4.
+contributors for damaging reasons, since the exercise exists to make those speakable; if a
+senior person starts evaluating reasons mid-round, restate step 4.
 
 ## Solo-analyst variant (LLM-amplified)
 
-When you are a team of one, the LLM substitutes for the missing room — for breadth, not
+When you are a team of one, the LLM substitutes for the missing room, for breadth, not
 for judgment.
 
 1. Paste the actual plan (sanitized) and the real process documents it touches.
 2. Declare the fiasco exactly as in the team script.
-3. Ask the LLM for ~20 failure narratives, **forced across the categories below** — a
+3. Ask the LLM for ~20 failure narratives, **forced across the categories below**, a
    specific story each ("the bulk load finished clean but every row landed in the prior
    period, so the first anyone noticed was the month-end variance report"), not
    risk-register abstractions.
 4. Then run the stakeholder round: "Each of the following people writes their reason the
-   plan failed, in their own voice" — name your real roster (e.g. the operations lead,
+   plan failed, in their own voice"; name your real roster (e.g. the operations lead,
    the approver, the vendor contact, the DBA, the internal auditor).
-5. Have the LLM bucket and deduplicate. **You rank.** You assign owners — even if every
-   owner is you, the date and tripwire still matter.
+5. Have the LLM bucket and deduplicate. **You rank.** You assign owners, even if every
+   owner is you; the date and tripwire still matter.
 6. Anti-agreement discipline: instruct the LLM not to soften ("but this is unlikely...")
    and not to converge on your favorite risk; ask it to argue for the reason you find
    least plausible before you discard it.
@@ -71,7 +71,7 @@ Force at least two narratives per category; the tired mind writes only the first
   or missing rows; period/date semantics wrong; test data passed but production data has
   the ugly 2%; a mapping nobody owned.
 - **People / political:** the one person who understood it left or was out; approver
-  bottleneck; a stakeholder never actually agreed and resists after go-live; training
+  bottleneck; a stakeholder never agreed and resists after go-live; training
   assumed, not done; incentives reward the old process.
 - **Timing / external:** go-live collides with month-end, payroll, or an audit; bank or
   vendor changes something on their side; holiday calendars; a regulator or policy
@@ -90,8 +90,8 @@ A row is closed only when the decision column is filled and the owner has confir
 ## Evidence base (and its honest limits)
 
 - Mitchell, D. J., Russo, J. E., & Pennington, N. (1989), "Back to the future: Temporal
-  perspective in the explanation of events": prospective hindsight — treating the
-  outcome as already having happened — improved reason identification by roughly 30% in
+  perspective in the explanation of events": prospective hindsight (treating the
+  outcome as already having happened) improved reason identification by roughly 30% in
   controlled studies. This is the lab mechanism the exercise borrows.
 - Klein, G. (2007), "Performing a Project Premortem," *Harvard Business Review*: the
   meeting format above; Klein's supporting evidence is field experience with teams, not

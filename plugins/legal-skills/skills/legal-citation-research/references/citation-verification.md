@@ -8,10 +8,10 @@ statuses and what each requires of you · §5 Manual verification routes · §6 
 
 **No citation goes into a document until it has passed three separate checks:**
 
-1. **Existence** — the decision, statute or rule exists at that citation. The bundled verifier
+1. **Existence**: the decision, statute or rule exists at that citation. The bundled verifier
    checks this against CourtListener for cases and says where to check everything else.
-2. **Support** — the pinpointed page says what the sentence says it says. Only reading does this.
-3. **Currency** — it is still the law on the date the document is used. A citator, or the manual
+2. **Support**: the pinpointed page says what the sentence says it says. Only reading does this.
+3. **Currency**: it is still the law on the date the document is used. A citator, or the manual
    routes in `research-method.md` §5.
 
 A citation that fails any check is removed or marked, never left in on the chance that it is
@@ -20,8 +20,8 @@ far as anyone reading it can tell.
 
 ## §2 How fabrication happens
 
-A generative tool produces text by pattern. A legal citation has a strong pattern — a volume, a
-reporter, a page, a court, a year — and the tool will produce one that fits it whether or not a
+A generative tool produces text by pattern. A legal citation has a strong pattern (a volume, a
+reporter, a page, a court, a year) and the tool will produce one that fits it whether or not a
 decision sits there. The output is fluent, well-formed and sometimes fictional, and the tool
 cannot tell the difference from the inside, which is why asking it to *confirm* a citation
 produces a confident confirmation of the invention. The lawyers sanctioned in *Mata* did exactly
@@ -31,7 +31,7 @@ Nobody detects a fabricated citation by looking at it.
 ## §3 The sanctions record
 
 **The anchor case.** *Mata v. Avianca, Inc.*, 678 F. Supp. 3d 443 (S.D.N.Y. 2023) [snippet-only,
-cross-checked ×2 — the reporter citation was confirmed by two independent sources]: counsel filed an
+cross-checked ×2; the reporter citation was confirmed by two independent sources]: counsel filed an
 opposition citing six decisions that did not exist, with fabricated quotations and internal
 citations, produced by a generative tool; the court imposed sanctions under Rule 11, found
 subjective bad faith in the continued assertion of the cases after they were questioned, and
@@ -39,8 +39,8 @@ ordered a $5,000 penalty along with other measures [snippet-only]. The decision 
 duty to verify authorities rests with the lawyer who signs the filing, however the authorities
 were produced.
 
-**What has followed** [snippet-only — every item below must be verified before it is cited; the
-titles and figures came from secondary trackers, not from the opinions]: trial and appellate
+**What has followed** [snippet-only: every item below must be verified before it is cited; the
+titles and figures are from secondary trackers, not from the opinions]: trial and appellate
 courts in multiple jurisdictions have sanctioned, fined, referred and in some cases suspended
 lawyers for filings containing fabricated or unsupported citations; sanctions increasingly count
 per citation; appellate courts have said expressly that the sanction is for the failure to verify,
@@ -92,7 +92,7 @@ reporter. Short forms (*Id.*, *supra*, *Mata*, 678 F. Supp. 3d at 450) cannot be
 the verifier ignores them and checks the full citation they point to. Statutes: title, code,
 section (*42 U.S.C. § 1983*); regulations: title, C.F.R., section (*29 C.F.R. § 541.600*).
 Citation form follows the Bluebook, the ALWD Guide, or a state style manual, and local rules can
-override all of them — record which applies in `your-environment.md`.
+override all of them. Record which applies in `your-environment.md`.
 
 ## §7 The ledger
 

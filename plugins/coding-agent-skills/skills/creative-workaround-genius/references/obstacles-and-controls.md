@@ -1,4 +1,4 @@
-# Obstacles and controls — where the workaround stops
+# Obstacles and controls: where the workaround stops
 
 Every blocker is one of two things. An **obstacle** is friction nobody intended: a missing
 library, a format mismatch, an unreachable host with no stated policy, a tool that demands
@@ -20,7 +20,7 @@ each.
 Ask: **if the person or system that owns this barrier watched this route happen, would they
 object?** If yes, or if you cannot tell, it is a control, and the route goes to the owner.
 
-Two refinements make the test usable:
+Three refinements make the test usable:
 - **Read who refused.** The same "403" means different things when the origin server sent it
   (that path is restricted), when a proxy sent it (the destination is not permitted for this
   session), or when it is a rate limit (slow down; do not dodge). The probe's verdicts carry that
@@ -36,8 +36,8 @@ Two refinements make the test usable:
 - **A permitted channel is not evasion; a disguised one is.** When a network allowlist blocks a
   content-delivery host but permits a package registry or a public code host, fetching the same
   **public** file from the permitted host is using the channel the owner allowed. Changing the
-  request so a refused host stops recognising it — another user agent, a tunnel, a proxy hop, a
-  borrowed credential — is evasion. The difference is whether the route works *within* the rules
+  request so a refused host stops recognising it (another user agent, a tunnel, a proxy hop, a
+  borrowed credential) is evasion. The difference is whether the route works *within* the rules
   or works by hiding from them.
 
 ## §2 Classification table
@@ -102,7 +102,7 @@ substitute result as the original; fabricate a value no route could return.
 
 ## §5 How to ask a control's owner
 
-Ask once, late, and bundled — the delegation audit's rule. The question carries:
+Ask once, late, and bundled: the delegation audit's rule. The question carries:
 1. the outcome and what is already done;
 2. the single control in the way, and who owns it;
 3. what the agent will do immediately after the yes, so the person's part is one action;
@@ -114,9 +114,9 @@ result. I tried A and B first; both hit the same control."
 
 ## §6 Hand-off protocol with a delegation audit
 
-A delegation audit (in this library's author environment, anthropic-skills:max-delegation-auditor)
-marks each step as the agent's, the agent's with consent, or the person's only. The two skills
-interlock at three points:
+A delegation audit (where available, anthropic-skills:max-delegation-auditor) marks each step
+as the agent's, the agent's with consent, or the person's only. The two skills interlock at
+three points:
 1. **Before execution.** For every step the audit leaves with the person, this skill asks whether
    the step is a control or merely an unfamiliar obstacle. Obstacles come back to the agent with a
    route ledger.

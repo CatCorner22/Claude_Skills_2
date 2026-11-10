@@ -1,7 +1,7 @@
 # Choosing a test (reference)
 
 Pick from the *question*, the *data type*, the *design* (independent vs. paired groups), and the
-**estimand** — the quantity the decision is about — not from habit. Then confirm the assumptions before you
+**estimand** (the quantity the decision is about), not from habit. Then confirm the assumptions before you
 trust the p-value.
 
 ## Contents
@@ -29,11 +29,11 @@ section). Choose it when its question is yours, not merely because the data is n
 | Means, unequal variances, and you want the dominance question anyway | — | Brunner–Munzel (`P(X > Y) = ½` without assuming identical distributions) |
 
 ## What each rank-based test's null actually is
-Rank tests are good tests. They are just not tests of means, and the gap matters whenever the decision is
+Rank tests are good tests. They are not tests of means, and the gap matters whenever the decision is
 about a total.
 
 - **Mann–Whitney U / Wilcoxon rank-sum.** The statistic estimates `P(X > Y) + ½P(X = Y)`; the null is
-  `P(X > Y) = P(Y > X)` — no tendency for one group's draws to exceed the other's (*stochastic dominance*).
+  `P(X > Y) = P(Y > X)`: no tendency for one group's draws to exceed the other's (*stochastic dominance*).
   It becomes a test of medians or means **only** under the location-shift model: identical distributions
   differing by a constant, which also implies equal variances and equal shapes.
 - **Kruskal–Wallis.** The k-group extension; the null is that all groups' distributions are identical. It
@@ -55,8 +55,8 @@ about a total.
    dominant group. Both statements are true; only one of them is about revenue.
 2. *The test fires when the means are identical.* Group A ≡ 1 → mean 1.0. Group B: 0 with probability 0.6,
    2.5 with probability 0.4 → mean `0.6×0 + 0.4×2.5 = 1.0`. The means are exactly equal, yet
-   `P(A > B) = 0.6` vs `P(B > A) = 0.4`, so the dominance null is false and Mann–Whitney is right to reject
-   — while "the groups differ in average value" is false.
+   `P(A > B) = 0.6` vs `P(B > A) = 0.4`, so the dominance null is false and Mann–Whitney is right to reject,
+   while "the groups differ in average value" is false.
 
 Zero-inflated, long-tailed shapes like these are the norm for revenue, usage, claim size, and cycle time.
 
@@ -74,19 +74,19 @@ interval on your estimand; the **permutation test** gives a p-value.
    asymmetric-in-the-wrong-direction. For paired data resample *pairs*; for clustered data resample
    *clusters* (a block bootstrap), never individual rows inside a cluster.
 6. Honest limits: the bootstrap assumes your sample resembles the population. At `n` in the single digits,
-   or for extreme quantiles (a 99th percentile), it is not trustworthy — no method conjures information
+   or for extreme quantiles (a 99th percentile), it is not trustworthy; no method conjures information
    the sample doesn't contain.
 
 **Permutation test for a difference between groups:**
 1. Compute the observed statistic (difference in means, or better a **Welch/studentized** difference).
-2. Pool the observations, reshuffle the group labels, recompute — many times (10,000 is standard; enumerate
+2. Pool the observations, reshuffle the group labels, recompute, many times (10,000 is standard; enumerate
    exhaustively when the design is tiny).
 3. The two-sided p is the share of shuffles whose |statistic| ≥ |observed| (add-one style:
    `(1 + #{≥ observed}) / (1 + #shuffles)` so p is never reported as 0).
-4. Exact under **exchangeability** — under H₀ the labels carry no information — with no normality
+4. Exact under **exchangeability** (under H₀ the labels carry no information), with no normality
    assumption anywhere. For paired data permute the *sign* within each pair; for stratified/clustered data
    permute within blocks or permute whole clusters.
-5. Two honest limits. The sharp null is "no effect at all," not "equal means" — which is why the
+5. Two honest limits. The sharp null is "no effect at all," not "equal means," which is why the
    studentized version is the one to permute when variances differ. And granularity is a design property:
    with 5 vs 5 observations there are only `C(10,5) = 252` distinct label splits, so the smallest attainable
    two-sided p is `2/252 ≈ 0.008`; at 10 vs 10 there are `C(20,10) = 184,756` and granularity stops
@@ -102,17 +102,17 @@ interval on your estimand; the **permutation test** gives a p-value.
 | Paired categorical (before/after on the same units)? | McNemar's test |
 
 ## Relationships between two numerics
-- **Pearson correlation** — strength of a *linear* relationship (assumes roughly bivariate normal).
-- **Spearman correlation** — strength of a *monotonic* relationship; robust to outliers/nonlinearity.
-- **Simple linear regression** — direction, slope, and a CI/test on the slope.
+- **Pearson correlation**: strength of a *linear* relationship (assumes roughly bivariate normal).
+- **Spearman correlation**: strength of a *monotonic* relationship; robust to outliers/nonlinearity.
+- **Simple linear regression**: direction, slope, and a CI/test on the slope.
 
 ## Assumptions to check
 - **All tests:** observations are **independent** (no repeated units, no clustering) and the sample is
   representative of the population you want to conclude about. No test rescues a biased sample.
-- **t-test / ANOVA:** the *sampling distribution of the mean* is approximately normal — satisfied for
+- **t-test / ANOVA:** the *sampling distribution of the mean* is approximately normal: satisfied for
   large `n` by the Central Limit Theorem even when raw values are skewed; for small `n` the raw data
   should be roughly normal. ANOVA and the pooled t-test also assume **equal variances** (Welch's
-  t-test and Welch's ANOVA drop that assumption — good defaults).
+  t-test and Welch's ANOVA drop that assumption and are good defaults).
 - **Chi-square:** expected count ≥ 5 in (almost) every cell; put counts, not percentages, in the table.
 - **Correlation / regression:** linearity (Pearson), no extreme leverage points, roughly constant spread.
 
@@ -127,7 +127,7 @@ Route by **what the decision is about**, not by "the data isn't normal":
 | Clustered / repeated measures | Aggregate to the cluster, cluster-robust SE, or a mixed model | Permute whole clusters |
 | Chi-square cells too thin | Fisher's exact | — |
 
-**A transformation is not an assumption fix — it is an estimand change.** A t-test on `log x` tests the
+**A transformation is not an assumption fix; it is an estimand change.** A t-test on `log x` tests the
 difference in mean *logs*; exponentiating gives a ratio of **geometric** means. Because the geometric mean
 is never above the arithmetic one and the gap grows with spread, the two can rank groups oppositely:
 
@@ -135,10 +135,10 @@ is never above the arithmetic one and the gap grows with spread, the two can ran
 - Group B = {12, 12}: arithmetic mean 12; geometric mean 12; total 24.
 - The log-scale test prefers **B** (12 > 10). The revenue line prefers **A** by more than 4× (101 vs 24).
 
-So when the decision is about a **total** — revenue, cost, hours, headcount — keep the arithmetic mean:
+So when the decision is about a **total** (revenue, cost, hours, headcount), keep the arithmetic mean:
 bootstrap the raw difference, or model `E[Y]` directly with a log-link GLM (Gamma/quasi-Poisson) rather than
 taking logs and back-transforming. If you do report a log-scale result, label it as a ratio of geometric
-means. Never "fix" a violated assumption by ignoring it — the reported p-value stops meaning what it claims.
+means. Never "fix" a violated assumption by ignoring it: the reported p-value stops meaning what it claims.
 
 ## Effect sizes to report with the test
 Report the effect size that belongs to the null you tested.
@@ -146,7 +146,7 @@ Report the effect size that belongs to the null you tested.
 - Bootstrap/permutation on means → the raw difference with its **bootstrap CI**.
 - ANOVA → **eta-squared / omega-squared** (share of variance explained).
 - Mann–Whitney / Brunner–Munzel → the **probability of superiority** `P(X > Y)` (equivalently
-  Cliff's delta or the rank-biserial correlation) — that is what the test estimated. Do not pair a
+  Cliff's delta or the rank-biserial correlation); that is what the test estimated. Do not pair a
   Mann–Whitney p-value with Cohen's d and a sentence about means.
 - Wilcoxon signed-rank → the **Hodges–Lehmann** estimate (pseudo-median of differences) and its CI.
 - Chi-square → **Cramér's V** (or the odds ratio for a 2×2 table).

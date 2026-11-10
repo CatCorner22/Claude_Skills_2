@@ -41,7 +41,7 @@ SET memory_limit = '8GB';
 SET temp_directory = '/path/with/space';   -- spill location for big sorts/joins
 ```
 - Convert big CSVs once: `COPY (FROM read_csv_auto('big.csv')) TO 'big.parquet';`
-- Filter early and select only needed columns â€” columnar reads reward it.
+- Filter early and select only needed columns; columnar reads reward it.
 - `EXPLAIN` shows the plan if a query is unexpectedly slow.
 
 ## Parquet and pandas interop
@@ -53,7 +53,7 @@ con.sql("CREATE TABLE t AS FROM df")                              # pandas df â†
 con.sql("COPY t TO 'out.parquet'")
 ```
 Parquet preserves types (no re-inference next read), compresses well, and is the right handoff
-format between scripts. CSV is for humans and spreadsheets at the very end.
+format between scripts. CSV is for humans and spreadsheets at the end.
 
 ## CLI niceties
 - `duckdb analysis.duckdb` opens a persistent database; `.tables`, `.schema t` inspect it.

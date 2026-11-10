@@ -1,6 +1,6 @@
 # Your API extracts (sanitized template)
 
-Fill in per extract. Hostnames, credentials references, and real samples go in
+Fill in per extract. Hostnames, credential references, and real samples go in
 `your-environment.private.md` (git-ignored).
 
 Per extract:

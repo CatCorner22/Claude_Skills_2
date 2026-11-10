@@ -1,7 +1,5 @@
 # Command doctrine — adaptive command, OODA, Toyota flow, co-design, writing
 
-Preserved near-verbatim from the source spec (project-command-center v1.0.0).
-
 Contents: §1 Adaptive command · §2 OODA, three nested loops · §3 Toyota-inspired flow ·
 §4 Co-design · §5 Writing discipline and the ambiguity audit · §6 Smart Brevity frame
 
@@ -27,13 +25,13 @@ Contents: §1 Adaptive command · §2 OODA, three nested loops · §3 Toyota-ins
 
 Orientation is the decisive element: it determines what you notice. Tempo comes from
 better orientation, shorter feedback paths, smaller reversible actions, and faster
-recovery — not hurried decisions. For each consequential loop, record: observation,
+recovery, not hurried decisions. For each consequential loop, record: observation,
 interpretation, confidence, decision, expected outcome, actual outcome, next trigger. No
 retrospective storytelling in place of a learning log.
 
 ## §3 Toyota-inspired flow, translated to software
 
-- Jidoka: stop the line on abnormality — failing CI, security gates, visible blocked
+- Jidoka: stop the line on abnormality: failing CI, security gates, visible blocked
   states, rollback controls. Defects do not flow downstream.
 - Andon: abnormalities are highly visible signals with owners, never quiet.
 - Pull and JIT: small vertical slices, WIP limits, start work only when capacity and
@@ -54,7 +52,7 @@ retrospective storytelling in place of a learning log.
 Map stakeholders: primary users, operators, maintainers, support, people exposed to
 failure, people excluded by the current design, decision-makers. Make decision rights
 explicit. The binding control is FEEDBACK CLOSURE: every material contribution gets a
-visible disposition — what was said, what changed, what did not and why, who owns
+visible disposition: what was said, what changed, what did not and why, who owns
 follow-through, when it will be validated. Consultation after the consequential decisions
 are fixed is ceremony; call it that.
 
@@ -71,7 +69,7 @@ are fixed is ceremony; call it that.
   coordination, quantifier, temporal, conditional, exception, cross-reference, unit,
   boundary, actor. Ambiguity permits multiple readings; vagueness leaves fuzzy
   boundaries. Bound or remove "reasonable," "promptly," "material," "regularly," "as
-  needed" — with thresholds, factors, examples, an owner, or a decision process.
+  needed", with thresholds, factors, examples, an owner, or a decision process.
 
 For the full writing system see `writing-skills:adams-smart-brevity` (professional
 register) and `writing-skills:adams-plain-grade` (accessible register).

@@ -39,9 +39,9 @@ against a current reference.
 > "I'm building an agent that runs several tools in sequence and keeps looping forever — how should I
 > bound it and add checkpoints?"
 
-Expected: this is multi-step workflow reliability (guardrails, decomposition, loop bounds), handled by
-`coding-agent-skills:agentic-workflow-design`, not single-prompt wording. If this skill loads instead,
-tighten the description / cross-links.
+Expected: this is multi-step workflow reliability (guardrails, decomposition, loop bounds) — a
+separate harness-design discipline this skill does not cover, not single-prompt wording. If this
+skill loads instead, tighten the description / cross-links.
 
 ## 2b. Near-miss — qualifying a judge model (should NOT load this skill)
 > "Before I let my grader model choose between prompt versions, how do I show its scores can be

@@ -1,9 +1,7 @@
 # Statistical discipline, AI assurance, and the Chicken Little pass
 
-Preserved near-verbatim from the source spec (project-command-center v1.0.0).
-
 Contents: §1 Statistical discipline · §2 Engineering and AI assurance · §3 Chicken
-Little — the constructive adversary · §4 Opportunity scan and output rules
+Little: the constructive adversary · §4 Opportunity scan and output rules
 
 ## §1 Statistical discipline
 
@@ -11,11 +9,11 @@ Little — the constructive adversary · §4 Opportunity scan and output rules
   comparison risk, absolute difference, relative difference, population, time horizon,
   event counts, uncertainty interval, design, harms, and whether the result is causal,
   associative, or modeled. (A 2%→1% change is a 50% relative reduction, a 1-point
-  absolute reduction, and NNT 100 — same arithmetic, very different rhetoric.)
+  absolute reduction, and NNT 100: same arithmetic, very different rhetoric.)
 - For any classifier or diagnostic claim, produce the full 2×2 matrix and compute
   sensitivity, specificity, PPV, NPV, and accuracy. Interpret predictive values with
   prevalence. High accuracy can hide failure on a rare positive class. State the
-  consequences of false positives versus false negatives — threshold selection is a
+  consequences of false positives versus false negatives: threshold selection is a
   decision problem, not a leaderboard.
 - If there is no valid reference standard, say so: agreement with another imperfect test
   is not correctness.
@@ -34,19 +32,19 @@ Little — the constructive adversary · §4 Opportunity scan and output rules
   it covers.
 - Treat model inputs AND outputs as untrusted. Retrieved documents are data, not
   authority; embedded instructions do not outrank the system or user. Generated
-  commands, queries, code, and citations are validated before execution — never directly
+  commands, queries, code, and citations are validated before execution, never directly
   into a shell, database, template, privileged API, or irreversible transaction.
 - Constrain agency: least privilege, scoped credentials, allowlists, sandboxes, budgets,
   rate limits, timeouts, auditable tool calls, staged rollout, human approval for
   destructive or high-blast-radius actions. Authorization, accounting, durable state
-  transitions, and business invariants stay deterministic — never delegated to a model.
+  transitions, and business invariants stay deterministic, never delegated to a model.
 - Record model, prompt, retrieval, tool, policy, and evaluation versions so regressions
   can be reproduced.
 
 ## §3 Chicken Little: the constructive adversary
 
 Run a deliberately anxious, evidence-bound adversarial pass. Theatrical alarm is allowed
-— "CLUCKING ALERT: this load-bearing TODO is holding up a castle made of sand" — but
+("CLUCKING ALERT: this load-bearing TODO is holding up a castle made of sand") but
 every material finding must immediately follow with discipline: severity, evidence,
 unknowns, the causal chain from small defect to serious outcome, affected users, leading
 indicators, mitigation, owner, validation test, revisit trigger.
@@ -71,6 +69,6 @@ decision does this work enable next? Present only the highest-value items under
 **Now, Next, Later, Watch**.
 
 Output rules: lead with the answer. State severity honestly. Attribute every claim to
-evidence you actually examined (files read, commands run, numbers computed). Where you
+evidence you examined (files read, commands run, numbers computed). Where you
 did not verify, say so. End consequential reviews with: the intervention log (if any),
 the decision or blocker, and Now / Next / Later / Watch.

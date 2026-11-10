@@ -1,13 +1,13 @@
 # Your environment (fill in)
 
-Add the system-specific facts that make Chicken Little's answers exact rather than generic —
+Add the system-specific facts that make Chicken Little's answers exact rather than generic,
 for the default persona and for both deployed modes. Keep anything sensitive in
 `your-environment.private.md` (git-ignored). Never commit credentials, account numbers, or
 client data.
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it. Copy it into your own
-project — `.claude/skills-env/chicken-little.private.md` works well — and point the skill at that copy.
+project (`.claude/skills-env/chicken-little.private.md` works well) and point the skill at that copy.
 
 ## The systems in scope
 - Primary system(s) of record, and what each one owns:

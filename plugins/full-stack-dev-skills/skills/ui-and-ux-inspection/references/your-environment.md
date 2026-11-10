@@ -1,7 +1,7 @@
 # Your environment (fill in)
 
-Sanitized, structural entries only. Anything sensitive — real URLs, tenant names, test
-credentials or how to obtain them, client identifiers, regulatory specifics — goes in
+Sanitized, structural entries only. Anything sensitive (real URLs, tenant names, test
+credentials or how to obtain them, client identifiers, regulatory specifics) goes in
 `references/your-environment.private.md`, which `.gitignore` keeps out of git.
 
 ## Application under inspection
@@ -10,7 +10,7 @@ credentials or how to obtain them, client identifiers, regulatory specifics — 
 - Framework / router / design system: <e.g. React + Vite, TanStack Router, in-house tokens>
 
 ## Target routes
-- <route or route group> — <public | authenticated | role>
+- <route or route group>: <public | authenticated | role>
 - <…>
 
 ## Critical processes (written as observable outcomes, not activities)
@@ -19,7 +19,7 @@ credentials or how to obtain them, client identifiers, regulatory specifics — 
 
 ## Test accounts policy
 - <least-privilege fixture accounts only; how they are provisioned; what is forbidden>
-- Production access: <default: never — inspection runs against test/staging only>
+- Production access: <default: never; inspection runs against test/staging only>
 
 ## Browser matrix and input modes
 - <browsers + versions; viewports beyond the standard 320/375/768/1024/1440;

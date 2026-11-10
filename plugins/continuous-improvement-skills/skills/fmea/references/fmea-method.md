@@ -21,11 +21,11 @@ the Action-Priority-vs-RPN story, and a worked bank-reconciliation FMEA.
    reference from every 88-record continuation." A function stated fuzzily produces failure
    modes you cannot rate.
 3. **Failure analysis.** For each function, enumerate:
-   - **Failure mode** — the way the function is not performed (no match, wrong match, partial
+   - **Failure mode**: the way the function is not performed (no match, wrong match, partial
      parse, duplicate load). A mode is observable at the element itself.
-   - **Effect** — the consequence experienced upstream/at the system level (misstated cash
+   - **Effect**: the consequence experienced upstream/at the system level (misstated cash
      position, silent wrong posting, wasted investigation time). Effects carry the Severity.
-   - **Cause** — the downstream mechanism that produces the mode (file re-transmission, parse
+   - **Cause**: the downstream mechanism that produces the mode (file re-transmission, parse
      rule truncation, tolerance set too wide). Causes carry the Occurrence.
    Chain them explicitly: cause → mode → effect. One mode can have several causes and several
    effects; give each cause its own row so actions stay targeted.
@@ -33,7 +33,7 @@ the Action-Priority-vs-RPN story, and a worked bank-reconciliation FMEA.
    for Occurrence, and the *current controls* for Detection. Rate current state, not hoped-for
    state. Drafted ratings (including LLM-drafted ones) are adjudicated by the process owner
    before entering the register.
-5. **Prioritize by Action Priority** (High/Medium/Low) using the logic below — not by S×O×D.
+5. **Prioritize by Action Priority** (High/Medium/Low) using the logic below, not by S×O×D.
 6. **Take action and re-rate.** Prevention actions reduce Occurrence; detection controls reduce
    the Detection score (better = lower). Severity only moves if the process is redesigned so the
    effect itself is smaller. Record action, owner, date; re-rate the row once the action is real.
@@ -46,10 +46,10 @@ Adapted to office/transactional processes. Calibrate the anchors once to your ow
 materiality, then hold them fixed so ratings compare across rows and across time.
 
 ### Severity (of the effect) — how bad if it happens
-| S | Anchor (transactional/finance processes) |
+| S | Anchor (transactional/office processes) |
 |---|---|
-| 9–10 | Regulatory breach, misstated financial statements, unrecoverable loss of funds, undetected fraud path |
-| 7–8 | Material error reaching a customer, bank, or the GL; costly recovery; audit finding |
+| 9–10 | Regulatory breach, materially inaccurate records, unrecoverable loss of value, undetected fraud path |
+| 7–8 | Material error reaching a customer or an external system of record; costly recovery; audit finding |
 | 5–6 | Error caught downstream but causing rework across teams, missed close/SLA dates |
 | 3–4 | Localized rework; delay absorbed within the team; no external impact |
 | 1–2 | Cosmetic; negligible effect on outcome |
@@ -73,7 +73,7 @@ materiality, then hold them fixed so ratings compare across rows and across time
 | 9–10 | No current control would surface it — it silently succeeds *looking* correct |
 
 The Detection question for auto-matching rule sets is exactly this scale: a failed match that
-lands in the unreconciled report is a D 3–4; a *wrong* match that auto-posts cleanly is a D 9–10 —
+lands in the unreconciled report is a D 3–4; a *wrong* match that auto-posts cleanly is a D 9–10,
 which is why wrong-match modes usually dominate the Action Priority even at lower Occurrence.
 
 ## Action Priority vs RPN
@@ -81,53 +81,53 @@ which is why wrong-match modes usually dominate the Action Priority even at lowe
 The classical ranking multiplied the three ratings into a **Risk Priority Number** (RPN = S×O×D,
 range 1–1000) and worked the biggest numbers first. The arithmetic has a flaw: multiplication
 treats the three dimensions as interchangeable, so S=9, O=2, D=3 gives RPN 54 while S=3, O=6, D=6
-gives 108 — the trivial-but-common annoyance outranks the near-catastrophe. Teams gaming a single
+gives 108: the trivial-but-common annoyance outranks the near-catastrophe. Teams gaming a single
 number also learned to argue Detection down a point to duck a threshold. The harmonized AIAG-VDA
-handbook replaced RPN with an **Action Priority table** — a lookup over the (S, O, D) combination
+handbook replaced RPN with an **Action Priority table**: a lookup over the (S, O, D) combination
 in which Severity dominates, then Occurrence, then Detection `[snippet-only]`.
 
-Working logic — a **Severity-dominant simplification**, not the published lookup; if you hold the
+Working logic: a **Severity-dominant simplification**, not the published lookup; if you hold the
 AIAG-VDA table, calibrate against it and use that. Apply the three rules in order and stop at the
 first that fires:
 
-1. **High** — S 9–10 (unless O and D are both ≤ 3 **and both scores are evidenced** — see the
-   note under rule 3); **or** S 7–8 with O ≥ 4 **or** D ≥ 4;
+1. **High**: S 9–10 (unless O and D are both ≤ 3 **and both scores are evidenced**: see the
+   note after rule 3); **or** S 7–8 with O ≥ 4 **or** D ≥ 4;
    **or** S 4–6 with O ≥ 4 **and** D ≥ 7 (a frequent cause with no working control).
    Action is required, or the current risk is explicitly accepted by the owner in writing.
-2. **Low** — S 1–3; **or** S ≤ 6 with O ≤ 3 **and** D ≤ 3 (moderate at worst, rare, and caught
+2. **Low**: S 1–3; **or** S ≤ 6 with O ≤ 3 **and** D ≤ 3 (moderate at worst, rare, and caught
    before it hurts). Action discretionary. The severity ceiling is load-bearing: without it a
    catastrophic-but-rare-and-detectable mode (S 9, O 2, D 3) would fall to Low, which is exactly
-   the averaging-away this table exists to prevent — severity 7+ never rates Low here.
-3. **Medium** — everything else. Action should be taken; justify in the register if it isn't.
+   the averaging-away this table exists to prevent: severity 7+ never rates Low here.
+3. **Medium**: everything else. Action should be taken; justify in the register if it isn't.
 
 **The rule-1 carve-out needs evidence, or it becomes the loophole this table exists to close.**
-Two paragraphs above, the file diagnoses teams that "learned to argue Detection down a point to
-duck a threshold". The `S 9–10 unless O and D are both ≤ 3` exception is that same lever with the
-sign flipped, and it is worse, because it rides on the two least defensible numbers on the sheet:
+Teams "learned to argue Detection down a point to duck a threshold" (see above). The
+`S 9–10 unless O and D are both ≤ 3` exception is that same lever with the sign flipped, and it is
+worse, because it rides on the two least defensible numbers on the sheet:
 
-- **Occurrence for a catastrophic mode is 1–3 almost by construction.** The shipped anchor for
-  O 1–2 is "never seen here; barely conceivable given current controls" — which is the honest
+- **Occurrence for a catastrophic mode is 1–3 almost by construction.** The anchor for
+  O 1–2 is "never seen here; barely conceivable given current controls", which is the honest
   description of most catastrophes right up until the first one.
 - **Detection is rated against the control as *claimed*.** Nothing else in this method requires
   that the control was ever tested.
 
 Two low numbers, neither of which anyone has to prove, drop a catastrophic mode from High to
-Medium — and Medium says "justify in the register if it isn't [actioned]", which is a sentence
+Medium, and Medium says "justify in the register if it isn't [actioned]", which is a sentence
 teams write. So condition the carve-out:
 
-> **A mode with S 9–10 stays High unless *both* the O ≤ 3 and the D ≤ 3 are evidenced** — the
+> **A mode with S 9–10 stays High unless *both* the O ≤ 3 and the D ≤ 3 are evidenced**: the
 > occurrence rating backed by data (an incident history, a population base rate, a physical
 > argument), and the detection control **assurance-tested or sampled, not merely named**. Where
 > either is an assertion, the mode is High and the action is required.
 
-the archived `safety-and-reliability-skills:bowtie-barrier-analysis` carries the assurance test this leans on:
+Barrier-architecture analysis carries the assurance test this leans on:
 a barrier nobody has exercised is a claimed barrier, and
-`safety-and-reliability-skills:reliability-engineering` §4b prices exactly this — a protective
+`safety-and-reliability-skills:reliability-engineering` §4b prices exactly this: a protective
 control that is never exercised fails hidden, so a confident Detection score on an untested
 control is the number least connected to reality on the whole sheet.
 
-Note what rule 1 encodes: severity earns High on its own, but a *moderate* severity still reaches
-High when the cause is common **and** the control is blind — silent, frequent failure is the case
+Rule 1 encodes this: severity earns High on its own, but a *moderate* severity still reaches
+High when the cause is common **and** the control is blind: silent, frequent failure is the case
 raw RPN buries. Run the worked example below through these three rules before trusting them on
 your own register; all five of its AP values should come back unchanged.
 
@@ -138,7 +138,7 @@ dominance instead.
 ## Worked example: bank-reconciliation FMEA
 
 Process: daily bank reconciliation (statement load → auto-match → manual match → investigate →
-adjust). Break types are failure modes. Ratings shown as adjudicated examples — yours will differ.
+adjust). Break types are failure modes. Ratings shown as adjudicated examples: yours will differ.
 
 | Step | Failure mode | Effect (S) | Cause (O) | Current control (D) | S | O | D | AP | Action |
 |---|---|---|---|---|---|---|---|---|---|
@@ -149,7 +149,7 @@ adjust). Break types are failure modes. Ratings shown as adjudicated examples �
 | Adjust | In-tolerance difference dropped, not posted | Book balance drifts | Writer nets difference silently | Month-end tie-out | 6 | 3 | 5 | Medium | Auto-post difference as external transaction |
 
 Read the table the way the method intends: the D=9 wrong-match row outranks the noisy-but-visible
-failed-match row despite lower Occurrence — silent success is the enemy, visible failure is cheap.
+failed-match row despite lower Occurrence: silent success is the enemy, visible failure is cheap.
 
 ## Living-register cadence
 

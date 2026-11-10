@@ -24,8 +24,9 @@ monitoring returns, with the calibration check logged.
 > a 200-customer product generate in a month? Just ballpark it with optimistic and
 > pessimistic bounds."
 
-Expected: `math-foundations-skills:number-sense-and-estimation` owns this — a solo
-Fermi bounding of a static quantity (decompose → bound → triangulate). There is no
+Expected: a basic number-sense check, a solo Fermi bounding of a static quantity
+(decompose → bound → triangulate), a separate discipline this library does not carry.
+There is no
 downed instrument, no streaming cues, no continuously re-estimated belief. If this
 skill loads on a static-quantity ballpark, its description is over-triggering.
 

@@ -2,7 +2,7 @@
 name: adams-plain-grade
 description: >-
   Writes and edits to Ken Adams clarity principles at a 5th-grade reading level, falling
-  back to 8th grade only when precision demands it — short active
+  back to 8th grade only when precision demands it: short active
   sentences, everyday concrete words, one idea per sentence, technical terms explained in
   place, and a hard rejection of litigated "tested language," archaisms, doublets, and
   ambiguity, while keeping meaning exact. Use when the user asks for adams-plain-grade by
@@ -12,7 +12,7 @@ description: >-
   simplify this letter, accessible language, patient materials, low literacy, simplest
   accurate version. Not for contract clause drafting → legal-skills:mscd-contract-drafting.
 metadata:
-  version: "1.7.0"
+  version: "1.7.4"
   source: >-
     Adapted from the user's adams-plain-grade v1.0.0 spec (2026-08-04). The readability
     lineage in references/grade-targets-and-checks.md §5 is verified via web-search
@@ -33,32 +33,32 @@ version that still keeps the exact meaning.
 - Not for: professional, technical, or internal writing where the audience handles jargon →
   `writing-skills:adams-smart-brevity` (the companion skill; both share the same Adams
   core). Precision contract drafting or clause review → `legal-skills:mscd-contract-drafting`
-  (the MSCD system, with `writing-skills:adams-smart-brevity` for the carve-outs) — the grade
+  (the MSCD system, with `writing-skills:adams-smart-brevity` for the carve-outs); the grade
   targets here don't apply there; this skill writes the client's plain paragraph afterwards.
 - Not for: designing *what* an explanation must accomplish (audience model, entry analogy,
   teach-back) → `writing-skills:explanation-design`; that skill decides what the words must
   do, this one brings the words down to grade.
-- Not for: the other ask-for-it-by-name register in this family — participatory, savage
-  commentary → the archived `writing-skills:gonzo`.
+- Not for: the other ask-for-it-by-name register in this family: participatory, savage
+  commentary. That wild register is a separate discipline this library does not carry.
 - Not for: escalations, handoffs, and instructions between professionals, where the fix is
-  structure (SBAR, read-back), not reading level →
-  the archived `safety-and-reliability-skills:sbar-structured-communication`.
+  structure (SBAR, read-back), not reading level. Structured handoff communication is
+  outside this skill.
 
 ## Do it
 1. **Find the one most important point.** Say it first, in the simplest true sentence. (If
    the text's real job is to make the reader *understand* a concept, design the explanation
-   first — audience model, entry analogy, concrete-first ordering — with
+   first (audience model, entry analogy, concrete-first ordering) with
    `writing-skills:explanation-design`, then apply this register to its words.)
 2. **Tell why it matters** in one short sentence.
-3. **Add the rest** in short bullets or very short paragraphs — one main idea per sentence,
+3. **Add the rest** in short bullets or brief paragraphs: one main idea per sentence,
    subject–verb–object kept close, active voice, concrete examples. If part of the text is
-   steps the reader must *perform* (not prose to understand), give that part checklist form —
-   the archived `safety-and-reliability-skills:checklist-design` owns the format for action items; this
+   steps the reader must *perform* (not prose to understand), give that part checklist form;
+   formatting action-item checklists is a separate discipline this library does not carry; this
    skill keeps the surrounding prose at grade.
 4. **Enforce the Adams rules while you write** (full list in
    `references/grade-targets-and-checks.md`): no litigated formulas, no archaisms, no
    doublets or triplets, no ambiguity; the simplest accurate modern word; a technical term is
-   said once, then explained immediately in plain words; the structure never makes the reader
+   said once, then explained at once in plain words; the structure never makes the reader
    guess.
    - **Carve-out: wording a law or rule requires verbatim is out of scope for every rule
      above.** Statutory or regulatory text prescribed word-for-word, safe-harbour language
@@ -76,36 +76,36 @@ version that still keeps the exact meaning.
      drafter, and some allocations require express, conspicuous wording to be enforceable at
      all. Notably, **"defend" is a distinct and often broader obligation than "indemnify"** in
      many jurisdictions, so trimming "indemnify, defend, and hold harmless" as a doublet can
-     delete a real duty. Plain-language *explanation* of such a clause is valuable — write it
-     next to the clause, never over it — and the reformatting this skill does best (structure,
+     delete a real duty. Plain-language *explanation* of such a clause is valuable (write it
+     next to the clause, never over it), and the reformatting this skill does best (structure,
      white space, one idea per sentence, bolding a cap) is safe. Rewriting the operative words
      is a lawyer's call in the governing jurisdiction. Same carve-out as
      `writing-skills:adams-smart-brevity` step 4. [canon attribution, jurisdiction-dependent.]
 5. **Check the grade.** 5th grade preferred: sentences average 10–14 words, everyday 1–2
    syllable words, and Flesch Reading Ease 90 or better **or** Flesch-Kincaid grade 5.0 or
-   below — either one passes (reference §1). Neither is a window, but they run in opposite
+   below; either one passes (reference §1). Neither is a window, but they run in opposite
    directions: Reading Ease is a **floor** (higher is easier, so 105 is fine and there is no
    upper bound to fear), while Flesch-Kincaid grade is a **ceiling** (lower is easier, so 2.0
    is fine and 6.0 is not). They are two scales, not one number read twice: at 10–14 words
    per sentence, FRE 90–100 computes to FKGL ≈ 1.8–4.2 while FKGL 5.0 sits at FRE ≈ 77–84,
    so never lengthen a sentence to chase an FKGL of 5.0. Punctuate your bullet items before
-   scoring anything — most tools split sentences on `.!?` and read an unpunctuated list as
+   scoring anything: most tools split sentences on `.!?` and read an unpunctuated list as
    one huge sentence (reference §3). Fall back to 8th grade (sentences up to 15–18 words)
    only where a precise idea cannot stay accurate at 5th. Never above 8th. Never fuzz the
-   meaning to hit a lower grade — meaning always wins.
+   meaning to hit a lower grade; meaning always wins.
 6. **Read it aloud.** It should sound like a clear adult talking to a smart 11-year-old:
    plain American English, second person, no regionalisms and no institutional voice. If
    your readers share a specific dialect, set it in `references/your-environment.md`.
 7. **Run the self-check** (bundled in the reference) before delivering.
 
 ## Why / learn
-Courts fight over words exactly because those words failed to say one thing clearly — so
+Courts fight over words exactly because those words failed to say one thing clearly, so
 "tested language" is language with a documented failure history, kept alive by precedent
 rather than clarity. The simplest accurate modern words carry the same meaning without the
 ambiguity that caused the fights. Grade level is a measurement, not a dumbing-down: short
 sentences and concrete words cut the reader's parsing work, and the fallback ladder
 (5th → 8th, never higher) exists so that precision can never become an excuse for needless
-complexity — when accuracy genuinely needs a harder sentence, you take the 8th-grade
+complexity: when accuracy needs a harder sentence, take the 8th-grade
 allowance instead of blurring the idea. Reading level is not intelligence: busy experts also
 read plain text faster and misread it less. The read-aloud test is the real judge because
 readability formulas can be gamed by choppy fragments; a text that *sounds* like a clear
@@ -119,8 +119,8 @@ adult explaining something is doing the work the numbers only approximate.
   often broader duty in many jurisdictions; explain the clause in plain words beside it, do
   not rewrite the operative words. Risk-allocation provisions are a carve-out, like
   rule-prescribed text.
-- Explaining a technical term late, or never → say it once, explain it right away in plain
-  words.
+- Explaining a technical term late, or never → say it once, then explain it in plain words
+  at once.
 - Long glue sentences with stacked clauses → one main idea per sentence; subject, verb,
   object close together.
 - Going above 8th grade because the topic "is complex" → topic complexity never justifies
@@ -131,23 +131,23 @@ adult explaining something is doing the work the numbers only approximate.
   they can handle; route to `writing-skills:adams-smart-brevity`.
 
 ## Tailor to your environment
-Wire in your current role here — the register is domain-neutral and serves whoever your
+Wire in your current role here. The register is domain-neutral and serves whoever your
 accessible-audience readers are wherever you work next: an analyst's public summary, an
 attorney's client letters, an ops manager's staff notices, a developer's user-facing
 messages. Record in `references/your-environment.md`: your audience's region and dialect
 (plain American English is the default), house terms with their approved plain glosses, and any regulatory phrases that must
 appear verbatim (quote them, then explain them in plain words right after). Keep anything
-identifying real patients or clients out of git — raw detail goes in
+identifying real patients or clients out of git; raw detail goes in
 `your-environment.private.md` (git-ignored).
 
 **Keep your filled-in copy outside the plugin.** This file ships as a *template* and lives inside
 the installed plugin, where a `/plugin marketplace update` can overwrite it or refuse to run against
-a dirty tree. Copy it into your own project — `.claude/skills-env/adams-plain-grade.private.md` works well — fill it in
+a dirty tree. Copy it into your own project (`.claude/skills-env/adams-plain-grade.private.md` works well), fill it in
 there, and point this skill at that copy. Your specifics then survive updates and stay somewhere you
 own rather than in a cache you may not realise is disposable.
 
 ## References
-- references/grade-targets-and-checks.md — grade targets, readability measures, the Adams
+- references/grade-targets-and-checks.md: grade targets, readability measures, the Adams
   rules, the pre-delivery self-check, where the targets come from, a worked before/after
   example, and the plain-word ladder
-- references/your-environment.md — your audience, house glosses, must-keep phrases (fill in)
+- references/your-environment.md: your audience, house glosses, must-keep phrases (fill in)

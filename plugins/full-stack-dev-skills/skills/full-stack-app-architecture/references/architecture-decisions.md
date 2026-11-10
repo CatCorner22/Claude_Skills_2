@@ -59,7 +59,7 @@ is real or decorative:
 | `db.py` (no models) | Models import the session base; if `db.py` imported models you get an import cycle the first time a feature is added | `db.py` imports nothing from `app.features` |
 | `platform/` | Holds what survives deleting every feature | Ask it of each file: email *transport* survives; the reminder email *template* does not |
 | `features/<x>/__init__.py` | The published surface; everything else in the folder is private | The boundary test below passes |
-| `rules.py` vs `service.py` | Pure rules are testable without a database, which is where date and money arithmetic actually gets checked | `rules.py` has no import of the session, no `datetime.now()` — the clock arrives as a parameter |
+| `rules.py` vs `service.py` | Pure rules are testable without a database, which is where date and money arithmetic gets checked | `rules.py` has no import of the session, no `datetime.now()` — the clock arrives as a parameter |
 | feature `tests/` vs top-level `tests/` | Deleting a feature must delete its tests | After `rm -rf app/features/x`, the remaining suite still collects |
 | `migrations/` at the root | The database is one shared resource, so its history is global even when the code is not. Per-feature migration folders give you multiple Alembic heads and a merge conflict on every branch | `alembic heads` prints one line |
 | `frontend/` as a sibling | Different toolchain and lockfile; the built artifact is copied into `app/static/` at image build (`full-stack-dev-skills:deploy-and-operate`) | The backend test suite runs with `node` uninstalled |
@@ -116,39 +116,37 @@ def test_features_touch_each_other_only_through_their_public_surface():
 
 The rule is positional, not a list of forbidden filenames. The version most people write first is a
 denylist of the insides (`{"models", "routes", "rules"}`), and it quietly permits whatever filename
-someone adds next — including `service.py`, which is exactly where the public function's body lives.
+someone adds next, including `service.py`, which is exactly where the public function's body lives.
 
-**Checking the dotted path alone is not enough, and the earlier version of this test was wrong to
-imply it was.** It claimed `from app.features.customers import <x>` "addresses the package —
-therefore `__init__.py`". That holds only when `<x>` is an attribute defined in `__init__.py`. When
-`<x>` is a *submodule*, Python's import system binds the submodule instead, so
-`from app.features.customers import models` reaches straight into the private module while
-`node.module` stays three parts long and a `len(parts) > 3` guard never fires. Verified on a real
-tree: with `invoices/service.py` importing `customers.models` and reading `models.Customer.email`,
-the original test reported **zero violations** while the private access genuinely worked. The
-`_submodule_names` lookup above closes it, and still passes the legitimate
-`from app.features.customers import contact_email`.
+**Checking the dotted path alone is not enough.** `from app.features.customers import <x>`
+addresses `__init__.py` only when `<x>` is an attribute defined there. When `<x>` is a *submodule*,
+Python's import system binds the submodule instead, so `from app.features.customers import models`
+reaches straight into the private module while `node.module` stays three parts long and a
+`len(parts) > 3` guard never fires. Verified on a real tree: with `invoices/service.py` importing
+`customers.models` and reading `models.Customer.email`, a dotted-path-only test reported **zero
+violations** while the private access worked. The `_submodule_names` lookup above closes
+the gap, and still passes the legitimate `from app.features.customers import contact_email`.
 
 Three things this does not catch, and the fix for each:
 
 - **Relative imports.** `from ..customers.models import Customer` has `node.module == "customers.models"`
   and `level == 2`, so it slips past. Ban relative imports repo-wide instead of complicating the
-  test — Ruff's `TID252` does it in one config line.
+  test; Ruff's `TID252` does it in one config line.
 - **Plain `import` statements.** `import app.features.customers.models as m` is an `ast.Import`,
   not an `ast.ImportFrom`, so the walk skips it; `TID252` does not cover it either. One extra
   branch closes it (`elif isinstance(node, ast.Import): modules = [a.name for a in node.names]`),
-  and is worth adding only if your codebase actually uses that style.
+  and is worth adding only if your codebase uses that style.
 - **Reaching through the ORM.** `db.query(Invoice).join(Customer)` imports nothing illegal and still
   couples the two schemas. Nothing static will catch it; code review is the control, and the tell in
   review is a query in feature A that names feature B's table.
 
 If you already run `import-linter`, its layered contracts express this better and also catch cycles.
-The pytest version exists so that a project with no extra dependency still has the rule enforced —
+The pytest version exists so that a project with no extra dependency still has the rule enforced:
 the point is that *something* fails, not which tool does it.
 
 ## Worked example: where does the overdue-reminder feature go?
 
-**The request:** "When an invoice is 30 days past due, email the customer a reminder — once — and
+**The request:** "When an invoice is 30 days past due, email the customer a reminder (once) and
 show a Reminders tab on the invoice page."
 
 This is the case that breaks naive layouts, because it touches domain logic, persistence, a
@@ -157,11 +155,11 @@ kinds of code, one feature.
 
 **The decision procedure.** Ask three questions in order, stop at the first that answers:
 
-1. **Deletion test** — if this feature were cancelled tomorrow, would this code be deleted with it?
+1. **Deletion test**: if this feature were cancelled tomorrow, would this code be deleted with it?
    Yes → `features/<this feature>/`.
-2. **Second-noun test** — does the code need a fact owned by another feature? Then it does not move
+2. **Second-noun test**: does the code need a fact owned by another feature? Then it does not move
    there; you call that feature's public function and keep the code where question 1 put it.
-3. **Runtime test** — does this exist because of the framework or the deployment rather than the
+3. **Runtime test**: does this exist because of the framework or the deployment rather than the
    domain? → `app/` root or `app/platform/`.
 
 Applied, piece by piece:
@@ -180,7 +178,7 @@ Applied, piece by piece:
 
 Row 6 is the one people get wrong, and it is worth being explicit about the cost. The join version
 is one line shorter today. It also means that the day customers grows a `contacts` table with a
-billing-contact role, invoices breaks — and nothing in the invoices feature said it depended on the
+billing-contact role, invoices breaks, and nothing in the invoices feature said it depended on the
 shape of `customers.email`. The function call makes the dependency a signature that a type checker
 and a grep can both see.
 
@@ -202,12 +200,12 @@ and a grep can both see.
 | `migrations/versions/xxxx_invoice_reminders.py` | 18 |
 
 Inside `features/invoices/`: 9 + 7 + 22 + 6 + 8 + 5 + 34 = 91 lines. Outside it: 11 + 4 + 3 + 1 + 18 = 37 lines,
-for 91 + 37 = 128 lines across the twelve entries above — and 91 / 128 ≈ 71% of the change sits in
+for 91 + 37 = 128 lines across the twelve entries above, and 91 / 128 ≈ 71% of the change sits in
 one folder.
 
 **Read the shape, not the total.** The 37 outside lines are the signature of a boundary that held:
-one new platform capability, three one-line additions, and a migration. The failure signature looks
-different and is easy to recognise — a layer-first version of this same feature puts 30 lines into a
+one new platform capability, three small additions, and a migration. The failure signature looks
+different and is easy to recognise: a layer-first version of this same feature puts 30 lines into a
 shared `services/notification_service.py` with a branch on document type, so the *next* notification
 feature edits that same file, and the two features are now coupled through a file neither of them
 owns. When you review a diff, count the lines that landed in files the feature does not own. Trending
@@ -215,7 +213,7 @@ up, feature after feature, is the earliest visible sign that the layout is disso
 
 Sanity check on piece 1 while you are there, because it is the only real arithmetic in the feature:
 an invoice due on day 0 with `grace_days = 30` is first eligible on day 30, so a run on day 29 must
-send nothing and a run on day 30 must send exactly one — and a second run on day 31 must also send
+send nothing and a run on day 30 must send exactly one, and a second run on day 31 must also send
 nothing. Three assertions, no database, no SMTP. That test is why `rules.py` is a separate file.
 
 ## Split signals that count — and the five imposters
@@ -225,17 +223,17 @@ nothing. Three assertions, no database, no SMTP. That test is why `rules.py` is 
 **1. Resource shape divergence, measured.** One deployable means every replica is sized for the
 fattest module. If a rendering or inference path peaks at 3.5 GB while every other path holds under
 0.4 GB, then five replicas cost 5 × 3.5 = 17.5 GB, where a split fleet of four web replicas plus one
-fat worker costs 4 × 0.4 + 3.5 = 5.1 GB — a difference of 17.5 − 5.1 = 12.4 GB bought to serve a path
+fat worker costs 4 × 0.4 + 3.5 = 5.1 GB: a difference of 17.5 − 5.1 = 12.4 GB bought to serve a path
 that is a small share of traffic. Two conditions make this real rather than theoretical: the ratio
 has to be large (a 20% difference is noise; roughly 5× or more is where the fleet-wide rounding
 dominates) and you have to already be running enough replicas that the multiplier bites. At two
 replicas the whole saving is about one machine, which does not pay for a second pipeline. Redo this
-with your own numbers — the numbers above are an illustration of the calculation, not a benchmark.
+with your own numbers: the numbers above are an illustration of the calculation, not a benchmark.
 
 **2. Release cadence conflict, counted from the deploy log.** Count, for one quarter: deploys of A
 delayed a day or more by unrelated work in B, and the median hours lost. Say that is 9 events at 6
 hours: 9 × 6 = 54 hours in the quarter, so 54 × 4 = 216 hours a year. Now price the split's carrying
-cost in the same unit — the five items in the next paragraph — and note the asymmetry that decides
+cost in the same unit (the five items in the next paragraph) and note the asymmetry that decides
 it: the blocked-deploy cost is recoverable by cheaper means (deploy trains, feature flags, faster
 tests, trunk-based development), while the split's cost is permanent and compounds. So the rule is
 not "216 beats the estimate"; it is "216 survived a quarter of the cheap fixes and still beats the
@@ -244,7 +242,7 @@ exactly like a cadence conflict.
 
 The five carrying costs, none of which is zero: a second build/deploy pipeline; a second set of
 dashboards, alerts and on-call surface; a versioned contract between the two, which now needs
-backward-compatible changes; a new failure mode that did not previously exist (partial availability —
+backward-compatible changes; a new failure mode that did not previously exist (partial availability:
 A up, B down, and a decision about what A does then); and a local dev setup that requires both
 services running. That fifth one is the one teams forget and the one that slows every new joiner.
 The cost also grows superlinearly: n services have up to n × (n − 1) ÷ 2 pairwise contracts, so at
@@ -266,7 +264,7 @@ outcome in one sentence, this is not your signal.
 
 ### The five imposters
 
-| Sounds like a split | What it actually indicates | The cheaper fix |
+| Sounds like a split | What it indicates | The cheaper fix |
 |---|---|---|
 | "The codebase is too big to understand" | Missing *module* boundaries, not missing *network* boundaries. Splitting makes the same tangle need two checkouts and a running dependency | Feature folders and the import test above |
 | "The test suite takes 22 minutes" | Slow tests — usually per-test schema setup. Splitting shrinks each suite while the sum grows, and adds contract tests you did not have | `full-stack-dev-skills:testing-strategy`: transaction-rollback fixtures, parallelism |
@@ -274,7 +272,7 @@ outcome in one sentence, this is not your signal.
 | "This team wants autonomy" | A process problem whose code boundary may be nowhere near the team boundary | Module ownership in CODEOWNERS plus review rights — most of the autonomy, none of the distributed tax |
 | "We might need to scale later" | Nothing measurable. It is a prediction, and the boundary it suggests is a guess made at the moment you know least | Write the criterion down (see the deliverable contract) and revisit with data |
 
-One genuine case hides among the imposters: **a different runtime is genuinely required** — a GPU,
+One genuine case hides among the imposters: **a different runtime is required**: a GPU,
 a native library that pins an incompatible interpreter or CUDA version, a component that must be
 written in another language for a hard reason. That is a proven boundary, not a guessed one; it is
 signal 1 in a harder form, because no amount of module discipline makes one process host two
@@ -282,7 +280,7 @@ incompatible runtimes. Split exactly that module and nothing adjacent to it.
 
 ## Failure envelope: where monolith-first stops working
 
-What the practitioner actually sees when the modular monolith has stopped being the right shape:
+What the practitioner sees when the modular monolith has stopped being the right shape:
 
 - **Memory-limit restarts traced to one endpoint.** The fleet is being sized for the p99 of a single
   path. Observable as OOM kills whose stack traces all name the same module.
@@ -292,7 +290,7 @@ What the practitioner actually sees when the modular monolith has stopped being 
 - **A dependency resolution that cannot be solved.** Two modules need mutually incompatible versions
   of the same native dependency. This one is binary: you see a resolver failure, and no refactor
   fixes it.
-- **A freeze.** A recurring deploy freeze is the terminal symptom — the organisation has concluded
+- **A freeze.** A recurring deploy freeze is the terminal symptom: the organisation has concluded
   that deploying is dangerous and has stopped, which converts every subsequent release into a bigger
   release, which makes it more dangerous.
 
@@ -314,13 +312,13 @@ echo "platform/features = $plat / $feat"
 Read the *trend*, not the level. 2,400 ÷ 9,600 = 0.25 one quarter and 3,300 ÷ 10,100 ≈ 0.33 the next
 means the shared layer added 3,300 − 2,400 = 900 lines while the domain added 10,100 − 9,600 = 500,
 so the undeletable part of the codebase grew 900 ÷ 500 = 1.8 times faster than the part it exists to
-serve — the layout is quietly reverting to layer-first with nicer folder names. The usual cause is a "shared" module that started
+serve: the layout is quietly reverting to layer-first with nicer folder names. The usual cause is a "shared" module that started
 as one helper and became a place to put anything two features touched. The fix is not a ratio target;
 it is to name what each platform module *is* and move anything that fails the survives-deleting-every-
 feature test back into the feature that uses it.
 
-A legitimately high ratio exists: an app that is mostly infrastructure with a thin domain — a
-gateway, a proxy, a sync daemon — will have thin features by nature. The question the ratio asks is
+A legitimately high ratio exists: an app that is mostly infrastructure with a thin domain (a
+gateway, a proxy, a sync daemon) will have thin features by nature. The question the ratio asks is
 whether the number matches the kind of app you believe you are building.
 
 **Other places the layout is the wrong tool:**
@@ -332,7 +330,7 @@ whether the number matches the kind of app you believe you are building.
 - **One feature.** Below roughly two or three features the folder level is pure ceremony; start flat
   in `app/` and introduce `features/` at the moment the second domain noun appears.
 - **A coordinator that spans features.** A checkout flow that touches carts, payments and inventory
-  is not a fourth feature — a "feature" whose only content is importing three others is a use case,
+  is not a fourth feature: a "feature" whose only content is importing three others is a use case,
   and it belongs in the feature that owns the *outcome* (the order), calling the others' public
   surfaces. Creating `features/checkout/` produces a hub every feature depends on, which is the
   shared-kernel failure in a different costume.
@@ -375,15 +373,15 @@ Five decisions in twenty lines, each of which is the point:
 3. **Validation on the value, not just the type.** `ge=1, le=365` turns `APP_REMINDER_GRACE_DAYS=0`
    into a boot failure rather than a Monday morning where every invoice is overdue.
 4. **`extra="forbid"`.** A key in `.env` that matches no field becomes an error instead of a silent
-   no-op — `DATBASE_URL=...` fails at boot rather than leaving the default quietly in place. Caveat
+   no-op: `DATBASE_URL=...` fails at boot rather than leaving the default quietly in place. Caveat
    worth knowing: if several tools share one `.env`, this bites; give each its own prefix or file.
 5. **`lru_cache`, not a module-level global.** One instance per process, constructible with an
    override in tests, and injectable as `Depends(get_settings)` (`full-stack-dev-skills:backend-api-development`).
 
-**Three checks that prove the config is actually twelve-factor**, run them in CI:
+**Three checks that prove the config is twelve-factor**, run them in CI:
 
 These are literal CI steps, so each must exit **non-zero only when the config is wrong**. Two of
-the three invert if you write them the obvious way — `grep` succeeds when it finds the thing you
+the three invert if you write them the obvious way: `grep` succeeds when it finds the thing you
 do not want, and check 2's healthy behaviour is to *raise*:
 
 ```bash
@@ -431,7 +429,7 @@ diff <(sort staging.env.names) <(sort prod.env.names)
 ```
 
 Verified: written without the negation, check 1 exits 0 on a tree that *does* leak
-(`app/leak.py` calling `os.getenv`) and exits 1 on a clean tree — i.e. it fails healthy builds and
+(`app/leak.py` calling `os.getenv`) and exits 1 on a clean tree, i.e. it fails healthy builds and
 passes broken ones. Check 2 inverts the same way, because a correctly-configured app raises on an
 empty environment and a bare command turns that raise into a red build.
 
@@ -440,23 +438,23 @@ module still reads `os.environ` lazily on first use, so the app boots clean and 
 on the first request that touches that path. Pydantic reports all missing fields at once precisely
 so that a fresh deploy tells you everything wrong in one attempt.
 
-**Check 2 had a second way of quietly passing, and it is the reason the check is a script
-rather than a one-liner.** Written as `if env -i python -c "…"; then fail; fi`, the branch that
-means "passed" is simply *any non-zero exit* — and a typo'd import path, an uninstalled
+**Check 2 can pass silently on a broken setup, which is why it is a script rather than a
+one-liner.** Written as `if env -i python -c "…"; then fail; fi`, the branch that
+means "passed" is *any non-zero exit*, and a typo'd import path, an uninstalled
 dependency, and a missing interpreter (rc=127) all exit non-zero, indistinguishable from the
 `ValidationError` the check exists to assert. With `2>/dev/null` on the end, nobody could see
 which had happened. Reproduced: `from app.confgi import Settings` exits 1 and the check reports
-success. The script form asserts the exception by type and separates three outcomes — passed
-(exit 0), genuinely broken config (exit 1), and *could not run* (exit 2) — and keeps stderr, so
+success. The script form asserts the exception by type and separates three outcomes: passed
+(exit 0), broken config (exit 1), and *could not run* (exit 2), and keeps stderr, so
 a failure says which one it was.
 
 Check 2 also has a way of quietly passing when it should fail, and `_env_file=None` is the
 guard. `env -i` clears the *environment*, not the working directory, so
 `model_config`'s `env_file=".env"` still finds the developer `.env` sitting next to it and the
-command boots clean — reported as "empty environment handled" when nothing was tested. Verified
+command boots clean: reported as "empty environment handled" when nothing was tested. Verified
 on pydantic-settings 2.15: with a populated `.env` present the bare form printed the database
 URL; with `_env_file=None` the same command raised the expected three missing-field errors. The
-override keeps the check honest wherever it runs — including CI, where a `.env` restored from a
+override keeps the check honest wherever it runs, including CI, where a `.env` restored from a
 cache or written by a setup step would do the same thing.
 
 Check 3 is what makes staging predictive. The moment prod has a variable staging does not, staging
@@ -464,7 +462,7 @@ stopped testing prod.
 
 **Config or data? The deploy test.** Config is what varies between *deploys of the same code*.
 Anything that varies per customer, tenant, or user is data and belongs in the database. The tell is
-the question "does changing this require a deploy?" — if a non-engineer needs to change it, or it
+the question "does changing this require a deploy?": if a non-engineer needs to change it, or it
 differs between two customers on the same deployment, an environment variable is the wrong home and
 will be discovered as such the first time someone asks for a per-customer value.
 
@@ -476,7 +474,7 @@ will be discovered as such the first time someone asks for a per-customer value.
 | A value identical everywhere forever (a rounding rule) | A constant in the module that uses it | Making it configurable invents a variation nobody asked for |
 | A flag someone must flip without shipping | Database (or a flag service), not env | An env flag flip is a restart; if that is unacceptable, it is data |
 
-Short-lived deploy-scoped feature flags as environment booleans are fine and often the right call —
+Short-lived deploy-scoped feature flags as environment booleans are fine and often the right call:
 they are config because they change on the deploy boundary and get deleted after the rollout. A flag
 that outlives two releases has become configuration of behaviour, and belongs with the other data.
 
@@ -484,13 +482,13 @@ that outlives two releases has become configuration of behaviour, and belongs wi
 
 - **Secret rotation without a restart.** Settings are read once at boot, so rotating a credential
   means a rolling restart. That is usually fine and worth the simplicity. When it is not, you need a
-  secret manager with a refresh path and a code path that re-reads — accept that you have left the
+  secret manager with a refresh path and a code path that re-reads: accept that you have left the
   simple model, and keep the exception to the one credential that needs it.
 - **Too many variables.** Past a couple of dozen, per-environment drift becomes real and check 3
   starts failing for boring reasons. The answer is fewer variables, not better tooling: collapse
   host/port/user/password/database into one DSN, and delete the toggles for experiments that ended.
 - **Config that must agree across services.** Two deployables that must hold the same value have a
-  new class of bug — skewed config — that a monolith cannot have. Worth noting when you are pricing
+  new class of bug (skewed config) that a monolith cannot have. Worth noting when you are pricing
   a split; it is one of the costs that never appears in the proposal.
 - **Very large values.** Certificates, key material, or a policy document as an environment variable
   runs into per-variable size limits and unreadable diffs. Mount them as files and put the *path* in
@@ -500,7 +498,7 @@ that outlives two releases has become configuration of behaviour, and belongs wi
 
 Four steps, none of which requires a freeze:
 
-1. Create `app/features/` and move **one** feature — the one with the fewest inbound imports, which
+1. Create `app/features/` and move **one** feature: the one with the fewest inbound imports, which
    you find with a grep for its module names. Leave shims at the old paths that re-export from the
    new ones, so nothing else has to change in the same commit.
 2. Delete the shims for that feature when `grep -rn "old.path" app/` is clean. Do not start the
@@ -508,7 +506,7 @@ Four steps, none of which requires a freeze:
    than one unmoved one.
 3. Add the boundary test in warn mode with an **allowlist file** of the violations that exist today,
    one per line. New violations fail immediately; old ones are visible and counted.
-4. Make CI assert that the allowlist's line count never grows. This is the whole trick — an
+4. Make CI assert that the allowlist's line count never grows. This is the whole trick: an
    allowlist with no ratchet grows, and an allowlist that only shrinks converts a refactor into a
    monotone process that survives changing priorities.
 
@@ -529,7 +527,7 @@ moves are not (`full-stack-dev-skills:database-and-orm`).
 
 The column that matters is the third one, and the discipline is to write the *trigger* rather than
 the option: "Redis when measurements demand it" is only useful if the doc names the measurement.
-Replace each right-hand cell with the condition you would actually be able to observe.
+Replace each right-hand cell with the condition you would be able to observe.
 
 ## Rendering-split decision
 
@@ -538,7 +536,7 @@ Replace each right-hand cell with the condition you would actually be able to ob
 - Rich client state (editors, dashboards with live interactions, offline) → React SPA + JSON API.
 - Hybrid: server-rendered app with a React island mounted only on the complex page.
 
-Revisit when the UI's nature changes — not because a framework released a major version. The signal
+Revisit when the UI's nature changes, not because a framework released a major version. The signal
 that you chose wrong in the htmx direction is client state that has to be reconstructed from the DOM
 on every interaction; the signal you chose wrong in the SPA direction is a frontend that is mostly
 forms posting to endpoints that mostly do inserts, with a build pipeline and a duplicated validation

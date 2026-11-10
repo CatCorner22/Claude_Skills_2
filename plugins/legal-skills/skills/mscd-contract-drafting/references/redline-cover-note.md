@@ -14,7 +14,7 @@ Contents: §1 The four moves · §2 The cover note template · §3 The redline t
 
 | Move | In a news item | In a redline note |
 |---|---|---|
-| **The one thing** | the headline sentence | *What changed* — one sentence: scope of the edits and the one decision that matters most |
+| **The one thing** | the headline sentence | *What changed*: one sentence: scope of the edits and the one decision that matters most |
 | **Why it matters** | one sentence of consequence | the exposure the edits remove, or the decision the reader must make and what turns on it |
 | **Go deeper** | bullets, bold lead-ins, white space | the decision list, the verify list, what was not changed and why |
 | **Stop** | no padding | no restatement of the redline; the table carries the detail |
@@ -49,7 +49,7 @@ redline table already says.
 
 ## §3 The redline table
 
-Where tracked changes are not wanted, deliver a three-column table so the reader can accept or
+Where tracked changes are not wanted, deliver a table (original, MSCD version, why, with section and status columns) so the reader can accept or
 reject line by line:
 
 | § | Original | MSCD version | Why (rule) | Status |
@@ -80,7 +80,7 @@ Cover note:
 > backward, or whether the proviso was a condition on Supplier's duty or a separate right.
 >
 > **Needs your call (1):**
-> - § 4.1 `EFFORTS` — *best efforts* → *reasonable efforts*, defined. Adams's position is that the
+> - § 4.1 `EFFORTS`: *best efforts* → *reasonable efforts*, defined. Adams's position is that the
 >   gradations are not reliable; some courts read *best* as more demanding. Because this instrument
 >   is under negotiation, the change is proposed, not applied.
 >
@@ -99,7 +99,7 @@ Cover note:
   disagreements is `writing-skills:adams-smart-brevity` reference §3b.
 - **Risk-allocation and prescribed wording stay in the table, not in the applied edits.** The note
   says they were proposed alongside and why (courts construe them strictly; a rule may require the
-  words). Reformatting for readability — structure, white space, bold on a liability cap — is safe
+  words). Reformatting for readability (structure, white space, bold on a liability cap) is safe
   and is applied; excision is not.
 - **An instrument in force gets flags, not edits.** The note says so in the first line.
 - **Nothing in the note that is not in the redline, and nothing in the redline that the note
@@ -109,6 +109,6 @@ Cover note:
 ## §6 The client paragraph
 
 When the reader is a client rather than a lawyer, add one paragraph in the most accessible register
-that keeps the meaning exact — what the clause now says, what the client must do, what they may do,
+that keeps the meaning exact: what the clause now says, what the client must do, what they may do,
 and by when. `writing-skills:adams-plain-grade` owns that register; the cover note above stays for
 the lawyer.

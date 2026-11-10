@@ -378,22 +378,21 @@ the reciprocal boundary), a medical citation belongs to `medical-research-detect
 description has no headroom, so its seam is body-only — if F9's near-miss fails, that is the
 evidence for trimming it), and career coaching belongs to no skill here at all.
 
-**F6 and F7 test the seam in the direction that actually fails.** The risk for this skill is not
+**F6 tests the seam in the direction that actually fails.** The risk for this skill is not
 that it fires too widely — it is that a genotype question gets taken by
-`medical-research-detective` (any health question) or `fitness-nutrition-science` (anything about
-supplements). Both seams are currently stated in the **bodies** of those skills, and **the router
-reads only name and description**, so a body-only seam cannot route anything. F6 and F7 exist to
-produce the evidence before any description is trimmed to make room — the same discipline F2 states.
+`medical-research-detective` (any health question). That seam is currently stated in the
+**body** of that skill, and **the router reads only name and description**, so a body-only seam
+cannot route anything. F6 exists to produce the evidence before any description is trimmed to
+make room — the same discipline F2 states.
 
 | # | Prompt (paste verbatim) | Must load | Near-miss prompt | Must NOT load |
 |---|---|---|---|---|
 | F1 | `Someone sent me a clip claiming a supplement cuts heart attack risk by 40%, and the description links three papers. Do the papers actually say that?` | `deep-research-skills:video-source-audit` | `Summarize this 40-minute conference talk for me — I just want the main points.` | video-source-audit (plain summarization is a no-skill task) |
 | F2 | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. Is there one explanation that ties those together?` | `deep-research-skills:medical-research-detective` | `This health channel's video says the paper proved it. Does the paper say that?` | medical-research-detective (should be `video-source-audit`) |
-| F3 | `Is it the number of reps that builds muscle, or the total amount of work per week?` | `coding-agent-skills:fitness-nutrition-science` | `Run a paired t-test on these two columns and tell me whether the difference is significant.` | fitness-nutrition-science (should be `statistical-inference`) |
 | F4 | `I paid for one of those spit-in-a-tube ancestry tests a while back and downloaded the big text file it gave me. Can you work out what in it actually matters?` | `deep-research-skills:dna-raw-data-audit` | `I've had fatigue and numbness for months, I'm on metformin, and my B12 came back low. What could link these?` | dna-raw-data-audit (should be `medical-research-detective`) |
 | F5 | `A relative was found to carry a BRCA2 variant — can you check whether my own file shows it?` | `deep-research-skills:dna-raw-data-audit` | `This health channel's video says a study proved the supplement works. Did the study say that?` | dna-raw-data-audit (should be `video-source-audit`) |
 | F6 | `My doctor mentioned a gene result in passing and I want to understand what it means before my next appointment — I have the lab PDF and my own test file.` | `deep-research-skills:dna-raw-data-audit` | `My B12 is low, I'm tired all the time, and I take metformin — what's the mechanism?` | dna-raw-data-audit (should be `medical-research-detective`) |
-| F7 | `Should I be taking a different form of folate? Something about my results came up and the supplement shop says it matters.` | `deep-research-skills:dna-raw-data-audit` | `What's the evidence for creatine timing around training?` | dna-raw-data-audit (should be `fitness-nutrition-science`) |
+| F7 | `Should I be taking a different form of folate? Something about my results came up and the supplement shop says it matters.` | `deep-research-skills:dna-raw-data-audit` | `What's the evidence for creatine timing around training?` | dna-raw-data-audit (a plain evidence question with no genome involved is a no-skill task) |
 | F8 | `Here's the services agreement the other side sent over. Can you go through it and tell me where the wording is ambiguous or could be tightened, and give me suggested replacements I can paste into a markup?` | `legal-skills:mscd-contract-drafting` | `Tighten this email to the client so it reads clearly and gets to the point.` | mscd-contract-drafting (should be `adams-smart-brevity`) |
 | F9 | `An associate drafted this opposition brief with some AI help. Before it goes out, can you make sure every case in it actually exists and still says what we claim?` | `legal-skills:legal-citation-research` | `Can you check whether this journal article citation is real — Smith et al., Lancet 2019, on statins and dementia?` | legal-citation-research (should be `medical-research-detective`) |
 | F10 | `We let a salesperson go last Friday for missing targets. A month earlier she'd asked HR whether she should be getting paid for the extra hours. Her manager wants to send a release — anything we need to worry about?` | `legal-skills:employment-law-issues` | `Can you review my resume for a senior counsel role and suggest how to phrase my experience?` | employment-law-issues (no skill in this library owns career coaching) |
